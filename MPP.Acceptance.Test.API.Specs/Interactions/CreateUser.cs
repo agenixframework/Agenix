@@ -1,8 +1,11 @@
 ﻿using System;
 using Boa.Constrictor.RestSharp;
 using Boa.Constrictor.Screenplay;
+using MPP.Acceptance.Test.API.Specs.Drivers;
+using MPP.Acceptance.Test.API.Specs.Endpoints;
 using MPP.Acceptance.Test.API.Specs.Model;
 using MPP.Acceptance.Test.API.Specs.Steps;
+using MPP.Acceptance.Test.API.Specs.Support;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -19,24 +22,11 @@ namespace MPP.Acceptance.Test.API.Specs.Interactions
 
         public IRestResponse RequestAs(IActor actor)
         {
-            Console.WriteLine("CreateUser task Request...");
+            IRestResponse response = actor.Calls(Rest.Request(CreateUserRestRequest()));
 
-            var createUserRequest = CreateUserRequestFromRowObject(_createUserRowObject);
-            var isoJson = JsonConvert.SerializeObject(createUserRequest,
-                new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore});
+            ((MPPActor) actor).LogLastRequestAndResponse();
 
-            Console.WriteLine("CreateUser request serealiazed in String Json..." + isoJson);
-
-
-            var restRequest = new RestRequest("/mpp-user/users", Method.POST);
-            restRequest.AddHeader("Participant-Code", createUserRequest.ParticipantCode);
-            restRequest.AddHeader("Content-Language", "application/json");
-            restRequest.AddJsonBody(isoJson);
-
-            var restResponse = actor.Calls(Rest.Request(restRequest));
-            actor.Logger.Info("Current response" + restResponse.Content);
-
-            return restResponse;
+            return response;
         }
 
         public static CreateUser With(CreateUserRowObject createUserRowObject)
@@ -44,15 +34,26 @@ namespace MPP.Acceptance.Test.API.Specs.Interactions
             return new(createUserRowObject);
         }
 
-        private CreateUserRequest CreateUserRequestFromRowObject(CreateUserRowObject createUserRowObject)
+        private RestRequest CreateUserRestRequest()
         {
-            var createUser = new CreateUserRequest();
-            createUser.ParticipantCode = createUserRowObject.ParticipantCode;
-            createUser.ParticipantReferenceId = createUserRowObject.ParticipantReferenceId;
-            createUser.FullName = createUserRowObject.FullName;
-            createUser.UserName = createUserRowObject.UserName;
-            createUser.Email = createUserRowObject.PhoneNumber;
-            createUser.Password = createUserRowObject.Password;
+            var createUserRequest = CreateUserRequestFromRowObject(_createUserRowObject);
+
+            var createUserJson = JsonConvert.SerializeObject(createUserRequest,
+                new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore});
+
+            var restRequest = new RestRequest(Endpoint.Users.ToString(), Method.POST);
+            restRequest.AddHeader(ContentType.ContentTypeName, ContentType.Json.ToString());
+            restRequest.AddJsonBody(createUserJson);
+            return restRequest;
+        }
+
+        private static CreateUserRequest CreateUserRequestFromRowObject(CreateUserRowObject createUserRowObject)
+        {
+            var createUser = new CreateUserRequest
+            {
+                Name = createUserRowObject.Name,
+                Job = createUserRowObject.Job
+            };
 
             return createUser;
         }

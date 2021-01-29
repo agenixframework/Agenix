@@ -2,10 +2,14 @@
 
 Scenario: Create User
 
+This scenario covers the case when the operator is willing to create a user via https://reqres.in/api/users
+
 	Given the following user list
-	  | ParticipantCode    | ParticipantReferenceId     | UserName    | FullName   | Email         | PhoneNumber | Password   |
-      | <Participant Code> | <Participant Reference Id> | <User Name> | <FullName> | test@mail.com | 4568456454  | <Password> |
+	  | Name     | Job    | 
+      | morpheus | leader | 
 
-	  When When the operator attempts to create an user over API
+	  When the operator attempts to create an user over API
 
-	  Then the user should be created successfully
+	  Then the operator should see the http response code '201'
+
+	  And the user should be created successfully

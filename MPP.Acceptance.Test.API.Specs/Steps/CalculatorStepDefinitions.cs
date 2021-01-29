@@ -27,7 +27,7 @@ namespace MPP.Acceptance.Test.API.Specs.Steps
         public void GivenTheFirstNumberIs(int number)
         {
 
-            _mppActor.WhoCanCallRegistrationAPI().AttemptsTo(ExecuteSampleTask.With());  
+            _mppActor.WhoCanCallRegistrationApi().AttemptsTo(ExecuteSampleTask.With());  
         }
 
         [Given("the second number is (.*)")]

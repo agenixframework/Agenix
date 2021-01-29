@@ -6,8 +6,14 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
 {
     public interface IMPPActor
     {
-        public MPPActor WhoCanCallRegistrationAPI();
+        public MPPActor WhoCanCallRegistrationApi();
 
         public MPPActor IsAttemptingTo(ITask task);
+
+        public IRestResponse SeeLastReceivedResponse();
+
+        public void LogRequest(IRestRequest request, IRestResponse response);
+
+        public void LogLastRequestAndResponse();
     }
 }

@@ -70,12 +70,14 @@ namespace MPP.Acceptance.Test.API.Specs.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Create User", SourceLine=2)]
+        [TechTalk.SpecRun.ScenarioAttribute("Create User", Description="This scenario covers the case when the operator is willing to create a user via h" +
+            "ttps://reqres.in/api/users", SourceLine=2)]
         public virtual void CreateUser()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create User", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create User", "This scenario covers the case when the operator is willing to create a user via h" +
+                    "ttps://reqres.in/api/users", tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 3
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -97,29 +99,22 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                            "ParticipantCode",
-                            "ParticipantReferenceId",
-                            "UserName",
-                            "FullName",
-                            "Email",
-                            "PhoneNumber",
-                            "Password"});
+                            "Name",
+                            "Job"});
                 table1.AddRow(new string[] {
-                            "<Participant Code>",
-                            "<Participant Reference Id>",
-                            "<User Name>",
-                            "<FullName>",
-                            "test@mail.com",
-                            "4568456454",
-                            "<Password>"});
-#line 5
+                            "morpheus",
+                            "leader"});
+#line 7
  testRunner.Given("the following user list", ((string)(null)), table1, "Given ");
 #line hidden
-#line 9
-   testRunner.When("When the operator attempts to create an user over API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
 #line 11
-   testRunner.Then("the user should be created successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+   testRunner.When("the operator attempts to create an user over API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 13
+   testRunner.Then("the operator should see the http response code \'201\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 15
+   testRunner.And("the user should be created successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
