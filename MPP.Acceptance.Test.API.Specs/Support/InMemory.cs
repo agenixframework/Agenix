@@ -1,6 +1,6 @@
 ﻿namespace MPP.Acceptance.Test.API.Specs.Support
 {
-    enum Variables
+    public enum InMemory
     {
         CurrentCreateUserRequest,
         CurrentCreateUserResponse

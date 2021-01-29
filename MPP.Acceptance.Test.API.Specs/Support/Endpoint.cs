@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MPP.Acceptance.Test.API.Specs.Endpoints
+﻿namespace MPP.Acceptance.Test.API.Specs.Support
 {
     public sealed class Endpoint
     {
+        public static readonly Endpoint Users = new(1, "/api/users");
+        public static readonly Endpoint Register = new(2, "/api/register");
+        public static readonly Endpoint Login = new(2, "/api/login");
+        public static readonly Endpoint Unknown = new(2, "/api/unknown");
         private readonly string _name;
         private readonly int _value;
-
-        public static readonly Endpoint Users = new Endpoint(1, "/api/users");
-        public static readonly Endpoint Register = new Endpoint(2, "/api/register");
-        public static readonly Endpoint Login = new Endpoint(2, "/api/login");
-        public static readonly Endpoint Unknown = new Endpoint(2, "/api/unknown");
 
         private Endpoint(int value, string name)
         {

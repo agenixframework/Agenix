@@ -1,5 +1,5 @@
-﻿using Boa.Constrictor.RestSharp;
-using Boa.Constrictor.Screenplay;
+﻿using Boa.Constrictor.Screenplay;
+using MPP.Acceptance.Test.API.Specs.Support;
 using RestSharp;
 
 namespace MPP.Acceptance.Test.API.Specs.Drivers
@@ -15,5 +15,11 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
         public void LogRequest(IRestRequest request, IRestResponse response);
 
         public void LogLastRequestAndResponse();
+
+        public void Remembers(InMemory key, object value);
+
+        public void RememberLastReceivedResponse(InMemory key);
+
+        public T Recall<T>(InMemory memory);
     }
 }

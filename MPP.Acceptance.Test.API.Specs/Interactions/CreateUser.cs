@@ -1,8 +1,6 @@
-﻿using System;
-using Boa.Constrictor.RestSharp;
+﻿using Boa.Constrictor.RestSharp;
 using Boa.Constrictor.Screenplay;
 using MPP.Acceptance.Test.API.Specs.Drivers;
-using MPP.Acceptance.Test.API.Specs.Endpoints;
 using MPP.Acceptance.Test.API.Specs.Model;
 using MPP.Acceptance.Test.API.Specs.Steps;
 using MPP.Acceptance.Test.API.Specs.Support;
@@ -22,7 +20,7 @@ namespace MPP.Acceptance.Test.API.Specs.Interactions
 
         public IRestResponse RequestAs(IActor actor)
         {
-            IRestResponse response = actor.Calls(Rest.Request(CreateUserRestRequest()));
+            var response = actor.Calls(Rest.Request(CreateUserRestRequest()));
 
             ((MPPActor) actor).LogLastRequestAndResponse();
 

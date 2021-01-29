@@ -1,8 +1,10 @@
-﻿using Boa.Constrictor.Logging;
+﻿using System.IO;
+using System.Linq;
+using Boa.Constrictor.Logging;
 using Boa.Constrictor.RestSharp;
 using Boa.Constrictor.Screenplay;
-using System.IO;
-using System.Linq;
+using MPP.Acceptance.Test.API.Specs.Support;
+using MPP.Acceptance.Test.API.Specs.Support.Session;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -14,30 +16,27 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
 
         private CallRestApi _callRestApi;
 
-        public MPPActor(string name, ILogger logger, IEnvironmentConfigurationDriver environmentConfigurationDriver) : base(name, logger)
+        public MPPActor(string name, ILogger logger, IEnvironmentConfigurationDriver environmentConfigurationDriver) :
+            base(name, logger)
         {
             _environmentConfigurationDriver = environmentConfigurationDriver;
         }
 
-        public MPPActor(IEnvironmentConfigurationDriver environmentConfigurationDriver): base("MPPActor", new ConsoleLogger())
+        public MPPActor(IEnvironmentConfigurationDriver environmentConfigurationDriver) : base("MPPActor",
+            new ConsoleLogger())
         {
             _environmentConfigurationDriver = environmentConfigurationDriver;
         }
 
         public MPPActor IsAttemptingTo(ITask task)
         {
-            this.AttemptsTo(task);
+            AttemptsTo(task);
             return this;
         }
 
         public IRestResponse SeeLastReceivedResponse()
         {
             return _callRestApi.LastResponse;
-        }
-
-        public IRestRequest SeeLastSentRequest()
-        {
-            return _callRestApi.LastRequest;
         }
 
         public void LogRequest(IRestRequest request, IRestResponse response)
@@ -54,7 +53,7 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
                     type = parameter.Type.ToString()
                 }),
                 // ToString() here to have the method as a nice string otherwise it will just show the enum value
-                method = request.Method.ToString(),
+                method = request.Method.ToString()
             };
 
             var responseToLog = new
@@ -64,17 +63,17 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
                 headers = response.Headers,
                 // The Uri that actually responded (could be different from the requestUri if a redirection occurred)
                 responseUri = response.ResponseUri,
-                errorMessage = response.ErrorMessage,
+                errorMessage = response.ErrorMessage
             };
 
 
-            this.Logger.Info(string.Format("Request: {0}, Response: {1}", JsonConvert.SerializeObject(requestToLog),
+            Logger.Info(string.Format("Request: {0}, Response: {1}", JsonConvert.SerializeObject(requestToLog),
                 JsonConvert.SerializeObject(responseToLog)));
         }
 
         public void LogLastRequestAndResponse()
         {
-            LogRequest(this.SeeLastSentRequest(), this.SeeLastReceivedResponse());
+            LogRequest(SeeLastSentRequest(), SeeLastReceivedResponse());
         }
 
         public MPPActor WhoCanCallRegistrationApi()
@@ -82,12 +81,32 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
             return WhoCanCallApi(_environmentConfigurationDriver.RegistrationAPIUrl);
         }
 
+        public void Remembers(InMemory key, object value)
+        {
+            ObjectBag.SetSessionVariable(key).To(value);
+        }
+
+        public void RememberLastReceivedResponse(InMemory key)
+        {
+            Remembers(key, SeeLastReceivedResponse());
+        }
+
+        public T Recall<T>(InMemory memory)
+        {
+            return ObjectBag.SessionVariableCalled<T>(memory);
+        }
+
+        public IRestRequest SeeLastSentRequest()
+        {
+            return _callRestApi.LastRequest;
+        }
+
         private MPPActor WhoCanCallApi(string baseUrl)
         {
             var restSharpAbility = CallRestApi.At(baseUrl);
             restSharpAbility.DumpingRequestsTo(Directory.GetCurrentDirectory());
 
-            this.Can(restSharpAbility);
+            Can(restSharpAbility);
 
             _callRestApi = restSharpAbility;
 
