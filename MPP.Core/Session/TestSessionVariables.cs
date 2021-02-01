@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 
-namespace MPP.Acceptance.Test.API.Specs.Support.Session
+namespace MPP.Core.Session
 {
     internal class TestSessionVariables<TK, T> : ConcurrentDictionary<TK, T>, ISessionMap<TK, T>
     {

@@ -16,7 +16,7 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
 
         public void LogLastRequestAndResponse();
 
-        public void Remembers(InMemory key, object value);
+        public MPPActor.RememberVariableSetter Remembers(InMemory key);
 
         public void RememberLastReceivedResponse(InMemory key);
 

@@ -4,7 +4,7 @@ using Boa.Constrictor.Logging;
 using Boa.Constrictor.RestSharp;
 using Boa.Constrictor.Screenplay;
 using MPP.Acceptance.Test.API.Specs.Support;
-using MPP.Acceptance.Test.API.Specs.Support.Session;
+using MPP.Core.Session;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -81,14 +81,14 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
             return WhoCanCallApi(_environmentConfigurationDriver.RegistrationAPIUrl);
         }
 
-        public void Remembers(InMemory key, object value)
+        public RememberVariableSetter Remembers(InMemory key)
         {
-            ObjectBag.SetSessionVariable(key).To(value);
+            return new(key);
         }
 
         public void RememberLastReceivedResponse(InMemory key)
         {
-            Remembers(key, SeeLastReceivedResponse());
+            Remembers(key).That(SeeLastReceivedResponse());
         }
 
         public T Recall<T>(InMemory memory)
@@ -111,6 +111,21 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
             _callRestApi = restSharpAbility;
 
             return this;
+        }
+
+        public class RememberVariableSetter
+        {
+            private readonly object _key;
+
+            public RememberVariableSetter(object key)
+            {
+                _key = key;
+            }
+
+            public void That<T>(T value)
+            {
+                ObjectBag.SetSessionVariable(_key).To(value);
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MPP.Acceptance.Test.API.Specs.Support.Session
+namespace MPP.Core.Session
 {
     public interface ISessionMap<TK, TV> : IDictionary<TK, TV>
     {

@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace MPP.Acceptance.Test.API.Specs.Support.Session
+namespace MPP.Core.Session
 {
     public class ObjectBag
     {

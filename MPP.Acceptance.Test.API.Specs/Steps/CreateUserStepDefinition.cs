@@ -25,7 +25,7 @@ namespace MPP.Acceptance.Test.API.Specs.Steps
         [Given("the following user list")]
         public void GivenTheFollowingUserList(Table table)
         {
-            _actor.Remembers(InMemory.CurrentCreateUserRequest, table.CreateSet<CreateUserRowObject>());
+            _actor.Remembers(InMemory.CurrentCreateUserRequest).That(table.CreateSet<CreateUserRowObject>());
         }
 
 
@@ -36,7 +36,7 @@ namespace MPP.Acceptance.Test.API.Specs.Steps
 
             var response = _actor.WhoCanCallRegistrationApi().Calls(CreateUser.With(rows.First()));
 
-            _actor.Remembers(InMemory.CurrentCreateUserResponse, response);
+            _actor.Remembers(InMemory.CurrentCreateUserResponse).That(response);
         }
 
         [Then(@"the operator should see the http response code '(.*)'")]
