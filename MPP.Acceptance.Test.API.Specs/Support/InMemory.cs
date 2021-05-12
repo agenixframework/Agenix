@@ -3,6 +3,8 @@
     public enum InMemory
     {
         CurrentCreateUserRequest,
-        CurrentCreateUserResponse
+        CurrentCreateUserResponse,
+        CurrentRegisterUserRequest,
+        CurrentRegisterUserResponse
     }
 }
