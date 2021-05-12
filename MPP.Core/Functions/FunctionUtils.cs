@@ -90,7 +90,7 @@ namespace MPP.Core.Functions
 
                     var value = ResolveFunction(variableNameBuf.ToString(), context);
 
-                    strBuffer.Append(newString.Substring(startIndex, searchIndex));
+                    strBuffer.Append(newString.Substring(startIndex, searchIndex - startIndex));
 
                     if (enableQuoting)
                     {
@@ -127,9 +127,12 @@ namespace MPP.Core.Functions
             }
 
             var functionPrefix = functionExpression.Substring(0, functionExpression.IndexOf(':') + 1);
+            int startIndexString = functionExpression.IndexOf('(') + 1;
             var parameterString =
-                functionExpression.Substring(functionExpression.IndexOf('(') + 1, functionExpression.Length - 1);
-            var function = functionExpression.Substring(functionPrefix.Length, functionExpression.IndexOf('('));
+                functionExpression.Substring(startIndexString)
+                    .Substring(0, functionExpression.Substring(startIndexString).Length - 1);
+            var startFunctionString = functionExpression.Substring(functionExpression.IndexOf(':') + 1);
+            var function = startFunctionString.Substring(0, startFunctionString.IndexOf('('));
 
             var library = context.FunctionRegistry.GetLibraryForPrefix(functionPrefix);
 

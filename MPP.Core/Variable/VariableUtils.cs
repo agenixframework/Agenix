@@ -41,7 +41,7 @@ namespace MPP.Core.Variable
                         control++;
                     }
 
-                    if ((str[curIndex] == CoreSettings.VariablePrefix[0]) || (curIndex + 1 == str.Length))
+                    if ((str[curIndex] == CoreSettings.VariableSuffix[0]) || (curIndex + 1 == str.Length))
                     {
                         if (control == 0)
                         {
@@ -67,7 +67,7 @@ namespace MPP.Core.Variable
                     throw new NoSuchVariableException("Variable: " + variableNameBuf + " could not be found");
                 }
 
-                newStr.Append(str.Substring(startIndex, searchIndex));
+                newStr.Append(str.Substring(startIndex, searchIndex - startIndex));
 
                 if (enableQuoting)
                 {

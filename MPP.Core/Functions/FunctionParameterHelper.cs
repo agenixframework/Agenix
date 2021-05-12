@@ -81,7 +81,8 @@ namespace MPP.Core.Functions
 
             if (param.Length > 1 && param[0] == '\'' && param[^1] == '\'')
             {
-                return param.Substring(1, param.Length - 1);
+                return param.Substring(1, param.Length - 2);
+
             }
 
             return param;

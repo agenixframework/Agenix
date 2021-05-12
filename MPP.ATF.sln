@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MPP.Acceptance.Test.API.Spe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPP.Core", "MPP.Core\MPP.Core.csproj", "{BC320C83-93AE-4BC6-BF8E-FFA52CAEF780}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPP.Core.NUnitTestProject", "MPP.Core.NUnitTestProject\MPP.Core.NUnitTestProject.csproj", "{4E347B48-1379-4A9F-8BC6-7844FF72ED9B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BC320C83-93AE-4BC6-BF8E-FFA52CAEF780}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC320C83-93AE-4BC6-BF8E-FFA52CAEF780}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC320C83-93AE-4BC6-BF8E-FFA52CAEF780}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E347B48-1379-4A9F-8BC6-7844FF72ED9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E347B48-1379-4A9F-8BC6-7844FF72ED9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E347B48-1379-4A9F-8BC6-7844FF72ED9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E347B48-1379-4A9F-8BC6-7844FF72ED9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

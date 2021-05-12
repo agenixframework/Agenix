@@ -41,7 +41,7 @@ namespace MPP.Core.Functions
         /// <returns>The FunctionLibrary instance</returns>
         public FunctionLibrary GetLibraryForPrefix(string functionPrefix)
         {
-            var functionLibrary = _functionLibraries.First(f => f.Prefix.Equals(functionPrefix));
+            var functionLibrary = _functionLibraries.FirstOrDefault(f => f.Prefix.Equals(functionPrefix));
 
             return functionLibrary ??
                    throw new NoSuchFunctionLibraryException(
