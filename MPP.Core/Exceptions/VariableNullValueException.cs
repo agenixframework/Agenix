@@ -5,14 +5,14 @@ namespace MPP.Core.Exceptions
     public class VariableNullValueException : CoreSystemException
     {
         /// <summary>
-        /// Default constructor.
+        ///     Default constructor.
         /// </summary>
-        public VariableNullValueException() : base()
+        public VariableNullValueException()
         {
         }
 
         /// <summary>
-        /// Constructor using fields.
+        ///     Constructor using fields.
         /// </summary>
         /// <param name="message">the string representation of message</param>
         public VariableNullValueException(string message) : base(message)
@@ -20,7 +20,7 @@ namespace MPP.Core.Exceptions
         }
 
         /// <summary>
-        /// Constructor using fields.
+        ///     Constructor using fields.
         /// </summary>
         /// <param name="message">the string representation of message</param>
         /// <param name="cause">The Exception obj.</param>

@@ -4,18 +4,17 @@ using MPP.Core.Exceptions;
 namespace MPP.Core.Functions.Core
 {
     /// <summary>
-    /// Returns given string argument in upper case letters.
+    ///     Function concatenating multiple tokens to a single string. Tokens can be either static string values or dynamic
+    ///     variables or functions.
     /// </summary>
-    public class UpperCaseFunction : IFunction
+    public class ConcatFunction : IFunction
     {
         public string Execute(List<string> parameterList, TestContext testContext)
         {
             if (parameterList == null || parameterList.Count == 0)
-            {
                 throw new InvalidFunctionUsageException("Function parameters must not be empty");
-            }
 
-            return parameterList[0].ToUpper();
+            return string.Join("", parameterList);
         }
     }
 }

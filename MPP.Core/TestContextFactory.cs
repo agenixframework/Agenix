@@ -5,7 +5,7 @@ namespace MPP.Core
     public class TestContextFactory
     {
         /// <summary>
-        /// Gets a new instance of TestContext with default/ core function library initialized.
+        ///     Gets a new instance of TestContext with default/ core function library initialized.
         /// </summary>
         /// <returns>new instance of TestContext</returns>
         public TestContext GetObject()
@@ -19,7 +19,7 @@ namespace MPP.Core
         }
 
         /// <summary>
-        /// New instance of TestContextFactory
+        ///     New instance of TestContextFactory
         /// </summary>
         /// <returns>an instance of TestContextFactory</returns>
         public static TestContextFactory NewInstance()

@@ -105,13 +105,17 @@ namespace MPP.Core.NUnitTestProject.Functions
         public void TestWithNestedFunctions()
         {
             Assert.AreEqual(FunctionUtils.ResolveFunction("core:Concat(core:CurrentDate('yyyy-mm-dd'))", Context),
-                new CurrentDateFunction().Execute(new List<string> { "yyyy-mm-dd" }, Context));
+                new CurrentDateFunction().Execute(new List<string> {"yyyy-mm-dd"}, Context));
 
-            Assert.AreEqual(FunctionUtils.ResolveFunction("core:Concat('Now is: ', core:CurrentDate('yyyy-mm-dd'))", Context),
-                "Now is: " + new CurrentDateFunction().Execute(new List<string> { "yyyy-mm-dd" }, Context));
+            Assert.AreEqual(
+                FunctionUtils.ResolveFunction("core:Concat('Now is: ', core:CurrentDate('yyyy-mm-dd'))", Context),
+                "Now is: " + new CurrentDateFunction().Execute(new List<string> {"yyyy-mm-dd"}, Context));
 
-            Assert.AreEqual(FunctionUtils.ResolveFunction("core:Concat(core:CurrentDate('yyyy-mm-dd'),' ', core:Concat('Hello', ' Test Framework!'))", Context),
-                new CurrentDateFunction().Execute(new List<string> { "yyyy-mm-dd" }, Context) + " Hello Test Framework!");
+            Assert.AreEqual(
+                FunctionUtils.ResolveFunction(
+                    "core:Concat(core:CurrentDate('yyyy-mm-dd'),' ', core:Concat('Hello', ' Test Framework!'))",
+                    Context),
+                new CurrentDateFunction().Execute(new List<string> {"yyyy-mm-dd"}, Context) + " Hello Test Framework!");
         }
 
         [Test]
@@ -120,8 +124,11 @@ namespace MPP.Core.NUnitTestProject.Functions
             Context.SetVariable("greeting", "Hello");
             Context.SetVariable("dateFormat", "yyyy-mm-dd");
 
-            Assert.AreEqual(FunctionUtils.ResolveFunction("core:Concat(core:CurrentDate('${dateFormat}'),' ', core:Concat('${greeting}', ' TestFramework!'))", Context),
-                new CurrentDateFunction().Execute(new List<string> { "yyyy-mm-dd" }, Context) + " Hello TestFramework!");
+            Assert.AreEqual(
+                FunctionUtils.ResolveFunction(
+                    "core:Concat(core:CurrentDate('${dateFormat}'),' ', core:Concat('${greeting}', ' TestFramework!'))",
+                    Context),
+                new CurrentDateFunction().Execute(new List<string> {"yyyy-mm-dd"}, Context) + " Hello TestFramework!");
         }
 
         [Test]
@@ -130,16 +137,30 @@ namespace MPP.Core.NUnitTestProject.Functions
         {
             // check the default date format 'dd.MM.yyyy'
             Assert.AreEqual(FunctionUtils.ResolveFunction("core:CurrentDate()", Context),
-                new CurrentDateFunction().Execute(new List<string> { "dd.MM.yyyy" }, Context));
+                new CurrentDateFunction().Execute(new List<string> {"dd.MM.yyyy"}, Context));
 
             Assert.AreEqual(FunctionUtils.ResolveFunction("core:CurrentDate('MM/dd/yyyy')", Context),
-                new CurrentDateFunction().Execute(new List<string> { "MM/dd/yyyy" }, Context));
+                new CurrentDateFunction().Execute(new List<string> {"MM/dd/yyyy"}, Context));
 
             Assert.AreEqual(FunctionUtils.ResolveFunction("core:CurrentDate('MMMMM dd')", Context),
-                new CurrentDateFunction().Execute(new List<string> { "MMMMM dd" }, Context));
+                new CurrentDateFunction().Execute(new List<string> {"MMMMM dd"}, Context));
 
             Assert.AreEqual(FunctionUtils.ResolveFunction("core:CurrentDate('dddd, dd MMMMM yyyy')", Context),
-                new CurrentDateFunction().Execute(new List<string> { "dddd, dd MMMMM yyyy" }, Context));
+                new CurrentDateFunction().Execute(new List<string> {"dddd, dd MMMMM yyyy"}, Context));
+        }
+
+        [Test]
+        public void TestEncodeBase64Function()
+        {
+            Assert.AreEqual(FunctionUtils.ResolveFunction("core:EncodeBase64('foo')", Context),
+                new EncodeBase64Function().Execute(new List<string> { "foo" }, Context));
+        }
+
+        [Test]
+        public void TestDecodeBase64Function()
+        {
+            Assert.AreEqual(FunctionUtils.ResolveFunction("core:DecodeBase64('Zm9v')", Context),
+                new DecodeBase64Function().Execute(new List<string> { "Zm9v" }, Context));
         }
     }
 }

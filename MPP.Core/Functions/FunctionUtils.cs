@@ -6,19 +6,19 @@ using MPP.Core.Variable;
 namespace MPP.Core.Functions
 {
     /// <summary>
-    /// Utility class for functions.
+    ///     Utility class for functions.
     /// </summary>
     public sealed class FunctionUtils
     {
         /// <summary>
-        /// Prevent class instantiation.
+        ///     Prevent class instantiation.
         /// </summary>
         private FunctionUtils()
         {
         }
 
         /// <summary>
-        /// Search for functions in string and replace with respective function result.
+        ///     Search for functions in string and replace with respective function result.
         /// </summary>
         /// <param name="str">to parse</param>
         /// <param name="context">parsed string result</param>
@@ -29,7 +29,7 @@ namespace MPP.Core.Functions
         }
 
         /// <summary>
-        /// Search for functions in string and replace with respective function result.
+        ///     Search for functions in string and replace with respective function result.
         /// </summary>
         /// <param name="stringValue">to parse.</param>
         /// <param name="context">The test context object.</param>
@@ -38,12 +38,10 @@ namespace MPP.Core.Functions
         public static string ReplaceFunctionsInString(string stringValue, TestContext context, bool enableQuoting)
         {
             // make sure given string expression meets requirements for having a function
-            if (string.IsNullOrEmpty(stringValue) || (stringValue.IndexOf(':') < 0 || (stringValue.IndexOf('(') < 0) ||
-                                                      (stringValue.IndexOf(')') < 0)))
-            {
+            if (string.IsNullOrEmpty(stringValue) || stringValue.IndexOf(':') < 0 || stringValue.IndexOf('(') < 0 ||
+                stringValue.IndexOf(')') < 0)
                 // it is not a function, as it is defined as 'prefix:methodName(arguments)'
                 return stringValue;
-            }
 
             var newString = stringValue;
             var strBuffer = new StringBuilder();
@@ -51,7 +49,7 @@ namespace MPP.Core.Functions
             var isVarComplete = false;
             var variableNameBuf = new StringBuilder();
 
-            int startIndex = 0;
+            var startIndex = 0;
             int curIndex;
             int searchIndex;
 
@@ -60,28 +58,21 @@ namespace MPP.Core.Functions
                 startIndex = 0;
                 while ((searchIndex = newString.IndexOf(library.Prefix, startIndex, StringComparison.Ordinal)) != -1)
                 {
-                    int control = -1;
+                    var control = -1;
                     isVarComplete = false;
 
                     curIndex = searchIndex;
 
                     while (curIndex < newString.Length && !isVarComplete)
                     {
-                        if (newString.IndexOf('(', curIndex) == curIndex)
-                        {
-                            control++;
-                        }
+                        if (newString.IndexOf('(', curIndex) == curIndex) control++;
 
                         if (newString[curIndex] == ')' || curIndex == newString.Length - 1)
                         {
                             if (control == 0)
-                            {
                                 isVarComplete = true;
-                            }
                             else
-                            {
                                 control--;
-                            }
                         }
 
                         variableNameBuf.Append(newString[curIndex]);
@@ -93,13 +84,9 @@ namespace MPP.Core.Functions
                     strBuffer.Append(newString.Substring(startIndex, searchIndex - startIndex));
 
                     if (enableQuoting)
-                    {
                         strBuffer.Append("'" + value + "'");
-                    }
                     else
-                    {
                         strBuffer.Append(value);
-                    }
 
                     startIndex = curIndex;
 
@@ -122,12 +109,10 @@ namespace MPP.Core.Functions
 
             if (!functionExpression.Contains("(") || !functionExpression.EndsWith(")") ||
                 !functionExpression.Contains(":"))
-            {
                 throw new InvalidFunctionUsageException("Unable to resolve function: " + functionExpression);
-            }
 
             var functionPrefix = functionExpression.Substring(0, functionExpression.IndexOf(':') + 1);
-            int startIndexString = functionExpression.IndexOf('(') + 1;
+            var startIndexString = functionExpression.IndexOf('(') + 1;
             var parameterString =
                 functionExpression.Substring(startIndexString)
                     .Substring(0, functionExpression.Substring(startIndexString).Length - 1);

@@ -20,7 +20,7 @@ namespace MPP.Core.NUnitTestProject
         [TearDown]
         public void TearDown()
         {
-            ObjectBag.ClearCurrentSession();
+            Context.Clear();
         }
 
         protected TestContext CreateTestContext()

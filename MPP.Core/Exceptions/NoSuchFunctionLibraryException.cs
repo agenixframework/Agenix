@@ -3,19 +3,19 @@
 namespace MPP.Core.Exceptions
 {
     /// <summary>
-    /// In case no function library exists for a given prefix this exception is thrown.
+    ///     In case no function library exists for a given prefix this exception is thrown.
     /// </summary>
     public class NoSuchFunctionLibraryException : CoreSystemException
     {
         /// <summary>
-        /// Default constructor.
+        ///     Default constructor.
         /// </summary>
-        public NoSuchFunctionLibraryException() : base()
+        public NoSuchFunctionLibraryException()
         {
         }
 
         /// <summary>
-        /// Constructor using fields.
+        ///     Constructor using fields.
         /// </summary>
         /// <param name="message">the string representation of message</param>
         public NoSuchFunctionLibraryException(string message) : base(message)
@@ -23,7 +23,7 @@ namespace MPP.Core.Exceptions
         }
 
         /// <summary>
-        /// Constructor using fields.
+        ///     Constructor using fields.
         /// </summary>
         /// <param name="message">the string representation of message</param>
         /// <param name="cause">The Exception obj.</param>

@@ -10,9 +10,21 @@ namespace MPP.Core.Functions
 
         private readonly EscapeXmlFunction _escapeXmlFunction = new();
 
+        private readonly LowerCaseFunction _lowerCaseFunction = new();
+
         private readonly RandomUuidFunction _randomUuidFunction = new();
 
         private readonly UpperCaseFunction _upperCaseFunction = new();
+
+        private readonly RandomStringFunction _randomStringFunction = new();
+
+        private readonly RandomNumberFunction _randomNumberFunction = new();
+
+        private readonly EncodeBase64Function _encodeBase64Function = new();
+
+        private readonly DecodeBase64Function _decodeBase64Function = new();
+
+        private readonly TranslateFunction _translateFunction = new();
 
         /// <summary>
         ///     Creates a new instance of FunctionRegistry
@@ -36,6 +48,12 @@ namespace MPP.Core.Functions
             coreFunctionLibrary.Members.Add("UpperCase", _upperCaseFunction);
             coreFunctionLibrary.Members.Add("EscapeXml", _escapeXmlFunction);
             coreFunctionLibrary.Members.Add("CurrentDate", _currentDateFunction);
+            coreFunctionLibrary.Members.Add("LowerCase", _lowerCaseFunction);
+            coreFunctionLibrary.Members.Add("RandomString", _randomStringFunction);
+            coreFunctionLibrary.Members.Add("RandomNumber", _randomNumberFunction);
+            coreFunctionLibrary.Members.Add("EncodeBase64", _encodeBase64Function);
+            coreFunctionLibrary.Members.Add("DecodeBase64", _decodeBase64Function);
+            coreFunctionLibrary.Members.Add("Translate", _translateFunction);
 
             return coreFunctionLibrary;
         }

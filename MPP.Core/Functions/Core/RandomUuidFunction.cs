@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MPP.Core.Functions.Core
 {
     /// <summary>
-    /// Creates a random .NET UUID.
+    ///     Creates a random .NET UUID.
     /// </summary>
     public class RandomUuidFunction : IFunction
     {
         /// <summary>
-        /// Generates a new GUID
+        ///     Generates a new GUID
         /// </summary>
         /// <param name="parameterList"></param>
         /// <param name="testContext"></param>

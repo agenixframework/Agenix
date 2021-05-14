@@ -5,17 +5,17 @@ using MPP.Core.Exceptions;
 namespace MPP.Core.Functions
 {
     /// <summary>
-    ///  Function registry holding all available function libraries.
+    ///     Function registry holding all available function libraries.
     /// </summary>
     public class FunctionRegistry
     {
         /// <summary>
-        /// The list of libraries providing custom functions
+        ///     The list of libraries providing custom functions
         /// </summary>
         private List<FunctionLibrary> _functionLibraries = new();
 
         /// <summary>
-        /// The list of libraries providing custom functions
+        ///     The list of libraries providing custom functions
         /// </summary>
         public List<FunctionLibrary> FunctionLibraries
         {
@@ -24,7 +24,8 @@ namespace MPP.Core.Functions
         }
 
         /// <summary>
-        /// Check if variable expression is a custom function. Expression has to start with one of the registered function library prefix.
+        ///     Check if variable expression is a custom function. Expression has to start with one of the registered function
+        ///     library prefix.
         /// </summary>
         /// <param name="variableExpression">to be checked</param>
         /// <returns>flag (true/false)</returns>
@@ -35,7 +36,7 @@ namespace MPP.Core.Functions
         }
 
         /// <summary>
-        ///  Get library for function prefix.
+        ///     Get library for function prefix.
         /// </summary>
         /// <param name="functionPrefix"> to be searched for</param>
         /// <returns>The FunctionLibrary instance</returns>
