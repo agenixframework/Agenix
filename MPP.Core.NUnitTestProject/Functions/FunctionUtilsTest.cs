@@ -153,14 +153,14 @@ namespace MPP.Core.NUnitTestProject.Functions
         public void TestEncodeBase64Function()
         {
             Assert.AreEqual(FunctionUtils.ResolveFunction("core:EncodeBase64('foo')", Context),
-                new EncodeBase64Function().Execute(new List<string> { "foo" }, Context));
+                new EncodeBase64Function().Execute(new List<string> {"foo"}, Context));
         }
 
         [Test]
         public void TestDecodeBase64Function()
         {
             Assert.AreEqual(FunctionUtils.ResolveFunction("core:DecodeBase64('Zm9v')", Context),
-                new DecodeBase64Function().Execute(new List<string> { "Zm9v" }, Context));
+                new DecodeBase64Function().Execute(new List<string> {"Zm9v"}, Context));
         }
     }
 }

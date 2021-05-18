@@ -4,6 +4,7 @@ using System.Reflection;
 using MPP.Core.Exceptions;
 using MPP.Core.Functions;
 using MPP.Core.Session;
+using MPP.Core.Validation.Matcher;
 using MPP.Core.Variable;
 
 namespace MPP.Core
@@ -19,12 +20,23 @@ namespace MPP.Core
         private FunctionRegistry _functionRegistry = new();
 
         /// <summary>
+        /// ValidationMatcher Registry holding all available matchers
+        /// </summary>
+        private ValidationMatcherRegistry _validationMatcherRegistry = new();
+
+        /// <summary>
         ///     Function registry holding all available functions
         /// </summary>
         public FunctionRegistry FunctionRegistry
         {
             get => _functionRegistry;
             set => _functionRegistry = value;
+        }
+
+        public ValidationMatcherRegistry ValidationMatcherRegistry
+        {
+            get => _validationMatcherRegistry;
+            set => _validationMatcherRegistry = value;
         }
 
         /// <summary>

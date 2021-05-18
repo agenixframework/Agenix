@@ -78,7 +78,7 @@ namespace MPP.Core.Variable
         {
             if (variable.StartsWith(CoreSettings.VariablePrefix) && variable.EndsWith(CoreSettings.VariableSuffix))
                 return variable.Substring(CoreSettings.VariablePrefix.Length,
-                    variable.Length - CoreSettings.VariableSuffix.Length);
+                    variable.Length - CoreSettings.VariableSuffix.Length-2);
 
             return variable;
         }

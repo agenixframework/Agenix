@@ -12,7 +12,7 @@ namespace MPP.Core.NUnitTestProject.Functions
         [Test]
         public void TestFunction()
         {
-            Assert.AreEqual(_function.Execute(new List<string> { "Zm9v" }, Context), "foo");
+            Assert.AreEqual(_function.Execute(new List<string> {"Zm9v"}, Context), "foo");
         }
 
         [Test]

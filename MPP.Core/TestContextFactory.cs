@@ -1,4 +1,5 @@
 ﻿using MPP.Core.Functions;
+using MPP.Core.Validation.Matcher;
 
 namespace MPP.Core
 {
@@ -14,6 +15,9 @@ namespace MPP.Core
             var functionConfiguration = new FunctionConfiguration();
             context.FunctionRegistry = functionConfiguration.GetFunctionRegistry();
             context.FunctionRegistry.FunctionLibraries.Add(functionConfiguration.GetCoreFunctionLibrary());
+
+            var validationMatcherConfiguration = new ValidationMatcherConfiguration();
+            context.ValidationMatcherRegistry.AddValidationMatcherLibrary(validationMatcherConfiguration.ValidationMatcherLibrary);
 
             return context;
         }
