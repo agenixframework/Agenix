@@ -67,7 +67,7 @@ namespace MPP.Core.Validation.Matcher
         }
 
         /// <summary>
-        /// Does this library know a validationMatcher with the given name.
+        ///     Does this library know a validationMatcher with the given name.
         /// </summary>
         /// <param name="validationMatcherName">name to search for</param>
         /// <returns>boolean flag to mark existence.</returns>

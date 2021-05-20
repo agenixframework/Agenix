@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using MPP.Core.Exceptions;
 
 namespace MPP.Core.Validation.Matcher.Core
 {
     /// <summary>
-    ///     ValidationMatcher based on string.Equals(value, control, StringComparison.OrdinalIgnoreCase)
+    ///     ValidationMatcher based on String.ToLower().Contains()
     /// </summary>
-    public class EqualsIgnoreCaseValidationMatcher : IValidationMatcher
+    public class ContainsIgnoreCaseValidationMatcher : IValidationMatcher
     {
         public void Validate(string fieldName, string value, List<string> controlParameters, TestContext context)
         {
             var control = controlParameters[0];
-
-            if (!string.Equals(value, control, StringComparison.OrdinalIgnoreCase))
-                throw new ValidationException(TypeDescriptor.GetClassName(typeof(EqualsIgnoreCaseValidationMatcher))
+            if (!value.ToLower().Contains(control.ToLower()))
+                throw new ValidationException(TypeDescriptor.GetClassName(typeof(ContainsIgnoreCaseValidationMatcher))
                                               + " failed for field '" + fieldName
                                               + "'. Received value is '" + value
                                               + "', control value is '" + control + "'.");

@@ -45,7 +45,8 @@ namespace MPP.Core.Validation
                         return jsonPathResult != null ? 1 : 0;
                 case "KeySet":
                     if (jsonPathResult.GetType() == typeof(JObject))
-                        return string.Join(", ", ((JObject) jsonPathResult).Properties().Select(p => p.Name).ToHashSet());
+                        return string.Join(", ",
+                            ((JObject) jsonPathResult).Properties().Select(p => p.Name).ToHashSet());
                     else
                         return new HashSet<string>();
                 case "Values":

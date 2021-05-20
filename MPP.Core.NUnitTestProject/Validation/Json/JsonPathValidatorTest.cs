@@ -1,4 +1,5 @@
-﻿using MPP.Core.Validation.Json.Dsl;
+﻿using MPP.Core.Exceptions;
+using MPP.Core.Validation.Json.Dsl;
 using NUnit.Framework;
 
 namespace MPP.Core.NUnitTestProject.Validation.Json
@@ -37,6 +38,14 @@ namespace MPP.Core.NUnitTestProject.Validation.Json
         {
             JsonSupport.Json().JsonPath().Validate()
                 .Expression("$..element.KeySet()", "attributeA, attributeB, sub-element")
+                .Expression("$['root']['person'].KeySet()", "name")
+                .Expression("$.root.numbers.Size()", "4")
+                .Expression("$.root.person.Size()", "1")
+                .Expression("$.root.person.Exists()", "True")
+                .Expression("$.root.nullValue", "")
+                .Expression("$.root.nerds.Size()", "2")
+                .Expression("$..sub-element.Size()", "1")
+                .Expression("$.root.nerds.ToString()", "[{\"name\":\"Leonard\"},{\"name\":\"Sheldon\"}]")
                 .Build()
                 .Validate(_payload, Context);
         }
@@ -47,14 +56,137 @@ namespace MPP.Core.NUnitTestProject.Validation.Json
             JsonSupport.Json().JsonPath().Validate()
                 .Expression("$.root.element", "@Ignore()@")
                 .Expression("$.root.person.name", "@EqualsIgnoreCase('PENNY')@")
-                .Expression("$['root']['person'].KeySet()", "name")
-                .Expression("$.root.numbers.Size()", "4")
-                .Expression("$.root.person.Size()", "1")
-                .Expression("$.root.person.Exists()", "True")
-                .Expression("$.root.nullValue", "")
-                .Expression("$.root.nerds.Size()", "2")
-                .Expression("$..sub-element.Size()", "1")
-                .Expression("$.root.nerds.ToString()", "[{\"name\":\"Leonard\"},{\"name\":\"Sheldon\"}]")
+                .Expression("$..element.sub-element", "@ContainsIgnoreCase('-VALUE')@")
+                .Expression("$..sub-element", "@Contains('-value')@")
+                .Expression("$..['sub-element']", "@EndsWith('-value')@")
+                .Expression("$.root.number", "@LowerThan(11)@")
+                .Expression("$..number", "@GreaterThan(9)@")
+                .Expression("$..['number']", "@IsNumber()@")
+                .Expression("$..text", "@StartsWith('text-')@")
+                .Expression("$.root.text", "@StringLength(10)@")
+                .Build()
+                .Validate(_payload, Context);
+        }
+
+        [Test]
+        public void TestValidateMessageElementsWithJsonPathFunctionsNotSuccessful()
+        {
+            try
+            {
+                // element does not exist
+                JsonSupport.Json().JsonPath().Validate()
+                    .Expression("$.element.KeySet()", "attributeA, attributeB, attributeC")
+                    .Build()
+                    .Validate(_payload, Context);
+                Assert.Fail("Missing validation exception");
+            }
+            catch (CoreSystemException)
+            {
+            }
+
+            try
+            {
+                // element does not exist
+                JsonSupport.Json().JsonPath().Validate()
+                    .Expression("$.root.numbers.Size()", "5")
+                    .Build()
+                    .Validate(_payload, Context);
+                Assert.Fail("Missing validation exception");
+            }
+            catch (ValidationException)
+            {
+            }
+
+            try
+            {
+                // element does not exist
+                JsonSupport.Json().JsonPath().Validate()
+                    .Expression("$.root.person.Size()", "0")
+                    .Build()
+                    .Validate(_payload, Context);
+                Assert.Fail("Missing validation exception");
+            }
+            catch (ValidationException)
+            {
+            }
+
+            try
+            {
+                // element does not exist
+                JsonSupport.Json().JsonPath().Validate()
+                    .Expression("$.root.nullValue", "10")
+                    .Build()
+                    .Validate(_payload, Context);
+                Assert.Fail("Missing validation exception");
+            }
+            catch (ValidationException)
+            {
+            }
+        }
+
+        [Test]
+        public void TestValidateMessageElementsWithValidationMatcherNotSuccessful()
+        {
+            Assert.Throws<ValidationException>(() =>
+                JsonSupport.Json().JsonPath().Validate()
+                    .Expression("$..element.attributeA", "@StartsWith('attribute-')@")
+                    .Expression("$..element.attributeB", "@EndsWith('-value')@")
+                    .Expression("$..element.sub-element", "@Contains('FAIL')@")
+                    .Build()
+                    .Validate(_payload, Context)
+            );
+        }
+
+
+        [Test]
+        public void TestValidateMessageElementsWithJsonPathNotSuccessful()
+        {
+            Assert.Throws<ValidationException>(() =>
+                JsonSupport.Json().JsonPath().Validate()
+                    .Expression("$..element.sub-element", "false-value")
+                    .Build()
+                    .Validate(_payload, Context)
+            );
+        }
+
+        [Test]
+        public void TestValidateMessageElementsWithFullPathSuccessful()
+        {
+            JsonSupport.Json().JsonPath().Validate()
+                .Expression("$.root.element.sub-element", "text-value")
+                .Build()
+                .Validate(_payload, Context);
+        }
+
+        [Test]
+        public void TestValidateMessageElementsWithFullPathNotSuccessful()
+        {
+            Assert.Throws<ValidationException>(() =>
+                JsonSupport.Json().JsonPath().Validate()
+                    .Expression("$.root.element.sub-element", "false-value")
+                    .Build()
+                    .Validate(_payload, Context)
+            );
+        }
+
+        [Test]
+        public void TestValidateMessageElementsPathNotFound()
+        {
+            Assert.Throws<CoreSystemException>(() =>
+                JsonSupport.Json().JsonPath().Validate()
+                    .Expression("$.root.foo", "foo-value")
+                    .Build()
+                    .Validate(_payload, Context)
+            );
+        }
+
+        [Test]
+        public void TestValidateMessageElementsWithMixedNotationsSuccessful()
+        {
+            //mix of xpath and dot-notation
+            JsonSupport.Json().JsonPath().Validate()
+                .Expression("$..element.sub-element", "text-value")
+                .Expression("$.root.element.sub-element", "text-value")
                 .Build()
                 .Validate(_payload, Context);
         }

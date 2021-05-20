@@ -1,0 +1,22 @@
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using MPP.Core.Exceptions;
+
+namespace MPP.Core.Validation.Matcher.Core
+{
+    /// <summary>
+    ///     ValidationMatcher based on String.StartsWith()
+    /// </summary>
+    public class StartsWithValidationMatcher : IValidationMatcher
+    {
+        public void Validate(string fieldName, string value, List<string> controlParameters, TestContext context)
+        {
+            var control = controlParameters[0];
+            if (!value.StartsWith(control))
+                throw new ValidationException(TypeDescriptor.GetClassName(typeof(StartsWithValidationMatcher))
+                                              + " failed for field '" + fieldName
+                                              + "'. Received value is '" + value
+                                              + "', control value is '" + control + "'");
+        }
+    }
+}
