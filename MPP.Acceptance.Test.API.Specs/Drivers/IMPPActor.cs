@@ -18,8 +18,14 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
 
         public MPPActor.RememberVariableSetter Remembers(InMemory key);
 
+        public MPPActor.RememberVariableSetter Remembers(string key);
+
         public void RememberLastReceivedResponse(InMemory key);
 
         public T Recall<T>(InMemory memory);
+
+        public void Echo(string message);
+
+        public ITestContextDriver GeTestContextDriver();
     }
 }

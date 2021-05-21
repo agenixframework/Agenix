@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using MPP.Acceptance.Test.API.Specs.Drivers;
@@ -11,12 +12,12 @@ using TechTalk.SpecFlow.Assist;
 namespace MPP.Acceptance.Test.API.Specs.Steps
 {
     [Binding]
-    public sealed class CreateUserStepDefinition
+    public sealed class UserManagementStepDefinition
     {
         private readonly IMPPActor _actor;
         private readonly ScenarioContext _scenarioContext;
 
-        public CreateUserStepDefinition(ScenarioContext scenarioContext, IMPPActor actor)
+        public UserManagementStepDefinition(ScenarioContext scenarioContext, IMPPActor actor)
         {
             _scenarioContext = scenarioContext;
             _actor = actor;
@@ -28,7 +29,6 @@ namespace MPP.Acceptance.Test.API.Specs.Steps
             _actor.Remembers(InMemory.CurrentCreateUserRequest).That(table.CreateSet<CreateUserRowObject>());
         }
 
-
         [When("the operator attempts to create an user over API")]
         public void WhenTheOperatorAttemptsToCreateAnUserOverApi()
         {
@@ -36,18 +36,26 @@ namespace MPP.Acceptance.Test.API.Specs.Steps
 
             var response = _actor.WhoCanCallRegistrationApi().Calls(CreateUser.With(rows.First()));
 
-            _actor.Remembers(InMemory.CurrentCreateUserResponse).That(response);
+            _actor.Remembers(InMemory.CurrentReceivedResponses).That(response);
         }
+        
+        [When(@"the (operator|participant) attempts to retrieve the user details by Id ""(.*)"" over API")]
+        public void WhenTheOperatorAttemptsToRetrieveTheUserDetailsByIdOverApi(string actor, string userId)
+        {
+            var response = _actor.WhoCanCallRegistrationApi().AsksFor(UserDetails.ForId(userId));
+
+            _actor.Remembers(InMemory.CurrentReceivedResponses).That(response);
+        }
+
 
         [Then(@"the operator should see the http response code '(.*)'")]
         public void ThenTheOperatorShouldSeeTheHttpResponseCode(int statusCode)
         {
-            var response = _actor.Recall<IRestResponse>(InMemory.CurrentCreateUserResponse);
-
+            var response = _actor.Recall<IRestResponse>(InMemory.CurrentReceivedResponses);
+            
             response.IsSuccessful.Should().BeTrue();
             response.StatusCode.Should().Be(statusCode);
         }
-
 
         [Then("the user should be created successfully")]
         public void ThenTheUserShouldBeCreatedSuccessfully()

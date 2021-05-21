@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using Boa.Constrictor.Logging;
 using Boa.Constrictor.RestSharp;
@@ -14,18 +15,25 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
     {
         private readonly IEnvironmentConfigurationDriver _environmentConfigurationDriver;
 
+        private readonly ITestContextDriver _testContextDriver;
+
         private CallRestApi _callRestApi;
 
-        public MPPActor(string name, ILogger logger, IEnvironmentConfigurationDriver environmentConfigurationDriver) :
+
+        public MPPActor(string name, ILogger logger, IEnvironmentConfigurationDriver environmentConfigurationDriver,
+            ITestContextDriver testContextDriver) :
             base(name, logger)
         {
             _environmentConfigurationDriver = environmentConfigurationDriver;
+            _testContextDriver = testContextDriver;
         }
 
-        public MPPActor(IEnvironmentConfigurationDriver environmentConfigurationDriver) : base("MPPActor",
+        public MPPActor(IEnvironmentConfigurationDriver environmentConfigurationDriver,
+            ITestContextDriver testContextDriver) : base("MPPActor",
             new ConsoleLogger())
         {
             _environmentConfigurationDriver = environmentConfigurationDriver;
+            _testContextDriver = testContextDriver;
         }
 
         public MPPActor IsAttemptingTo(ITask task)
@@ -86,6 +94,11 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
             return new(key);
         }
 
+        public RememberVariableSetter Remembers(string key)
+        {
+            return new(key);
+        }
+
         public void RememberLastReceivedResponse(InMemory key)
         {
             Remembers(key).That(SeeLastReceivedResponse());
@@ -94,6 +107,16 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
         public T Recall<T>(InMemory memory)
         {
             return ObjectBag.SessionVariableCalled<T>(memory);
+        }
+
+        public void Echo(string message)
+        {
+            Console.WriteLine(GeTestContextDriver().GetTestContext.ReplaceDynamicContentInString(message));
+        }
+
+        public ITestContextDriver GeTestContextDriver()
+        {
+            return _testContextDriver;
         }
 
         public IRestRequest SeeLastSentRequest()

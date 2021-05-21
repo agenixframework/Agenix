@@ -10,7 +10,7 @@ namespace MPP.Core.Variable
             ExtractVariables(payload, context);
         }
 
-        void ExtractVariables(string payload, TestContext context);
+        void ExtractVariables(object payload, TestContext context);
 
          interface IBuilder<out T, out TB> where T : IVariableExtractor where TB : IMessageProcessor.IBuilder<T, TB>
         {

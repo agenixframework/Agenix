@@ -5,6 +5,8 @@
         CurrentCreateUserRequest,
         CurrentCreateUserResponse,
         CurrentRegisterUserRequest,
-        CurrentRegisterUserResponse
+        CurrentRegisterUserResponse,
+        CurrentReceivedResponses,
+        CurrentSentRequests
     }
 }

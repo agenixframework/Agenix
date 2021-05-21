@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MPP.Core.Exceptions;
 using MPP.Core.Message;
 using MPP.Core.Util;
@@ -32,13 +33,13 @@ namespace MPP.Core.Validation.Json
             _jsonPathExpressions = builder.JsonPathExpressions;
         }
 
-        public void ExtractVariables(string payload, TestContext context)
+        public void ExtractVariables(object payload, TestContext context)
         {
             if (_jsonPathExpressions == null || _jsonPathExpressions.Count == 0) return;
 
             try
             {
-                var readerContext = JObject.Parse(payload);
+                var readerContext = JObject.Parse(payload as string ?? string.Empty);
 
                 foreach (var (key, value) in _jsonPathExpressions)
                 {

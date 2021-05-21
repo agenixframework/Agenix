@@ -98,14 +98,14 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                             "Email",
                             "Password"});
-                table2.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "eve.holt@reqres.in",
                             "pistol"});
 #line 7
- testRunner.Given("the following user details", ((string)(null)), table2, "Given ");
+ testRunner.Given("the following user details", ((string)(null)), table13, "Given ");
 #line hidden
 #line 11
  testRunner.When("operator registers the user over API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");

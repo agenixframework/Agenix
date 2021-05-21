@@ -20,7 +20,7 @@ namespace MPP.Acceptance.Test.API.Specs.Interactions
 
         public IRestResponse RequestAs(IActor actor)
         {
-            var response = actor.Calls(Rest.Request(CreateUserRestRequest()));
+            var response = actor.Calls(Rest.Request(CreateUserRestRequest((MPPActor)actor)));
 
             ((MPPActor) actor).LogLastRequestAndResponse();
 
@@ -32,9 +32,9 @@ namespace MPP.Acceptance.Test.API.Specs.Interactions
             return new(createUserRowObject);
         }
 
-        private RestRequest CreateUserRestRequest()
+        private RestRequest CreateUserRestRequest(IMPPActor actor)
         {
-            var createUserRequest = CreateUserRequestFromRowObject(_createUserRowObject);
+            var createUserRequest = CreateUserRequestFromRowObject(_createUserRowObject, actor);
 
             var createUserJson = JsonConvert.SerializeObject(createUserRequest,
                 new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore});
@@ -45,12 +45,12 @@ namespace MPP.Acceptance.Test.API.Specs.Interactions
             return restRequest;
         }
 
-        private static CreateUserRequest CreateUserRequestFromRowObject(CreateUserRowObject createUserRowObject)
+        private static CreateUserRequest CreateUserRequestFromRowObject(CreateUserRowObject createUserRowObject, IMPPActor actor)
         {
             var createUser = new CreateUserRequest
             {
-                Name = createUserRowObject.Name,
-                Job = createUserRowObject.Job
+                Name = actor.GeTestContextDriver().GetTestContext.ReplaceDynamicContentInString(createUserRowObject.Name),
+                Job = actor.GeTestContextDriver().GetTestContext.ReplaceDynamicContentInString(createUserRowObject.Job)
             };
 
             return createUser;

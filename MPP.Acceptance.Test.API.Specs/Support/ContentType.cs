@@ -3,6 +3,7 @@
     internal class ContentType
     {
         public static readonly string ContentTypeName = "Content-Type";
+        public static readonly string AcceptName = "Accept";
         public static readonly ContentType Any = new(new[] { "*/*" });
         public static readonly ContentType Text = new(new[] { "text/plain" });
         public static readonly ContentType Json = new(new[] { "application/json", "application/javascript", "text/javascript", "text/json" });
