@@ -24,23 +24,23 @@ namespace MPP.Acceptance.Test.API.Specs.Steps
         [Given(@"the following user details")]
         public void GivenTheFollowingUserDetails(Table table)
         {
-            _actor.Remembers(InMemory.CurrentRegisterUserRequest).That(table.CreateSet<RegisterUserRowObject>());
+            _actor.Remembers(InMemory.CurrentSentRequests).That(table.CreateSet<RegisterUserRowObject>());
         }
 
         [When(@"operator registers the user over API")]
         public void WhenOperatorRegistersTheUserOverApi()
         {
-            var rows = _actor.Recall<IEnumerable<RegisterUserRowObject>>(InMemory.CurrentRegisterUserRequest);
+            var rows = _actor.Recall<IEnumerable<RegisterUserRowObject>>(InMemory.CurrentSentRequests);
 
             var response = _actor.WhoCanCallRegistrationApi().Calls(RegisterUser.With(rows.First()));
 
-            _actor.Remembers(InMemory.CurrentRegisterUserResponse).That(response);
+            _actor.Remembers(InMemory.CurrentReceivedResponses).That(response);
         }
 
         [Then(@"operator receives (.*) response code")]
         public void ThenOperatorReceivesResponseCode(int statusCode)
         {
-            var response = _actor.Recall<IRestResponse>(InMemory.CurrentRegisterUserResponse);
+            var response = _actor.Recall<IRestResponse>(InMemory.CurrentReceivedResponses);
             response.StatusCode.Should().Be(statusCode);
         }
 

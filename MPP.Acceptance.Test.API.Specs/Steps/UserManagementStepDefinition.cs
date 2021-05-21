@@ -26,13 +26,13 @@ namespace MPP.Acceptance.Test.API.Specs.Steps
         [Given("the following user list")]
         public void GivenTheFollowingUserList(Table table)
         {
-            _actor.Remembers(InMemory.CurrentCreateUserRequest).That(table.CreateSet<CreateUserRowObject>());
+            _actor.Remembers(InMemory.CurrentSentRequests).That(table.CreateSet<CreateUserRowObject>());
         }
 
         [When("the operator attempts to create an user over API")]
         public void WhenTheOperatorAttemptsToCreateAnUserOverApi()
         {
-            var rows = _actor.Recall<IEnumerable<CreateUserRowObject>>(InMemory.CurrentCreateUserRequest);
+            var rows = _actor.Recall<IEnumerable<CreateUserRowObject>>(InMemory.CurrentSentRequests);
 
             var response = _actor.WhoCanCallRegistrationApi().Calls(CreateUser.With(rows.First()));
 

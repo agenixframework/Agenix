@@ -2,10 +2,6 @@
 {
     public enum InMemory
     {
-        CurrentCreateUserRequest,
-        CurrentCreateUserResponse,
-        CurrentRegisterUserRequest,
-        CurrentRegisterUserResponse,
         CurrentReceivedResponses,
         CurrentSentRequests
     }

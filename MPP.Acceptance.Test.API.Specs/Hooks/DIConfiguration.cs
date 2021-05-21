@@ -5,6 +5,7 @@ using MPP.Acceptance.Test.API.Specs.Drivers;
 using MPP.Acceptance.Test.API.Specs.Drivers.Integrated;
 using MPP.Acceptance.Test.API.Specs.Support.Matchers;
 using MPP.Core;
+using MPP.Core.Session;
 using TechTalk.SpecFlow;
 using TechTalk.SpecRun;
 
@@ -19,7 +20,6 @@ namespace MPP.Acceptance.Test.API.Specs.Hooks
         {
             _testRunContext = testRunContext;
         }
-
 
         [BeforeScenario(Order = 1)]
         public void RegisterDependencies(IObjectContainer objectContainer)
@@ -42,6 +42,12 @@ namespace MPP.Acceptance.Test.API.Specs.Hooks
             objectContainer.RegisterInstanceAs(actor);
         }
 
+        [AfterScenario]
+        public void AfterScenario()
+        {
+            ObjectBag.ClearCurrentSession();
+        }
+
         /// <summary>
         ///     Register custom validation matchers
         /// </summary>
@@ -58,7 +64,6 @@ namespace MPP.Acceptance.Test.API.Specs.Hooks
                 .Add("HasItemsInAnyOrder", new HasItemsInAnyOrderMatcher());
             testContext.ValidationMatcherRegistry.GetLibraryForPrefix("").Members
                 .Add("EqualsTo", new EqualsToMatcher());
-
         }
     }
 }
