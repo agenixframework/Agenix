@@ -43,4 +43,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\shell_api_access_token\" />
+  </ItemGroup>
+
 </Project>

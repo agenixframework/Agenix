@@ -2,7 +2,11 @@
 {
     public interface IEnvironmentConfigurationDriver
     {
-        string RegistrationAPIUrl { get; }
+        string RegistrationApiUrl { get; }
+
+        string StationLocatorApiUrl { get; }
+
+        string ShellApiGatewayUrl { get; }
 
         string Environment { get; }
     }

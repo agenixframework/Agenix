@@ -45,7 +45,8 @@ namespace MPP.Core.Validation.Json
 
             try
             {
-                var readerContext = JObject.Parse(payload);
+                var readerContext = JToken.Parse(payload);
+                
 
                 foreach (var (key, value) in _jsonPathExpressions)
                 {

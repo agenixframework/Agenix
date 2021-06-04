@@ -8,6 +8,10 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
     {
         public MPPActor WhoCanCallRegistrationApi();
 
+        public MPPActor WhoCanCallShellApiGateway();
+
+        public MPPActor WhoCanCallStationLocatorApi();
+
         public MPPActor IsAttemptingTo(ITask task);
 
         public IRestResponse SeeLastReceivedResponse();

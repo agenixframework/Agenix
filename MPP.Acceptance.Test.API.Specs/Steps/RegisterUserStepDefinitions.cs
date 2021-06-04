@@ -3,6 +3,7 @@ using System.Linq;
 using FluentAssertions;
 using MPP.Acceptance.Test.API.Specs.Drivers;
 using MPP.Acceptance.Test.API.Specs.Interactions;
+using MPP.Acceptance.Test.API.Specs.Model;
 using MPP.Acceptance.Test.API.Specs.Support;
 using RestSharp;
 using TechTalk.SpecFlow;

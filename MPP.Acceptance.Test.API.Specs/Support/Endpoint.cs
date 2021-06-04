@@ -6,6 +6,8 @@
         public static readonly Endpoint Register = new(2, "/api/register");
         public static readonly Endpoint Login = new(2, "/api/login");
         public static readonly Endpoint Unknown = new(2, "/api/unknown");
+        public static readonly Endpoint StationLocator = new(2, "/api/stations");
+        public static readonly Endpoint ShellApiGatewayAccessToken = new(2, "/oauth/token");
         private readonly string _name;
         private readonly int _value;
 

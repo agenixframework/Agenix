@@ -18,7 +18,7 @@ namespace MPP.Core.Util
         {
             try
             {
-                var parser = JObject.Parse(payload);
+                var parser = JToken.Parse(payload);
                 return Evaluate(parser, jsonPathExpression);
             }
             catch (JsonReaderException e)
@@ -33,7 +33,7 @@ namespace MPP.Core.Util
         /// <param name="readerContext"></param>
         /// <param name="jsonPathExpression"></param>
         /// <returns></returns>
-        public static object Evaluate(JObject readerContext, string jsonPathExpression)
+        public static object Evaluate(JToken readerContext, string jsonPathExpression)
         {
             var expression = jsonPathExpression;
             string jsonPathFunction = null;
@@ -80,7 +80,7 @@ namespace MPP.Core.Util
         {
             try
             {
-                var parser = JObject.Parse(payload);
+                var parser = JToken.Parse(payload);
                 return EvaluateAsString(parser, jsonPathExpression);
             }
             catch (JsonReaderException e)
@@ -95,7 +95,7 @@ namespace MPP.Core.Util
         /// <param name="readerContext"></param>
         /// <param name="jsonPathExpression"></param>
         /// <returns></returns>
-        public static string EvaluateAsString(JObject readerContext, string jsonPathExpression)
+        public static string EvaluateAsString(JToken readerContext, string jsonPathExpression)
         {
             var jsonPathResults = Evaluate(readerContext, jsonPathExpression);
             var resultOfStrings = new List<string>();

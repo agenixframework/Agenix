@@ -86,8 +86,19 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
 
         public MPPActor WhoCanCallRegistrationApi()
         {
-            return WhoCanCallApi(_environmentConfigurationDriver.RegistrationAPIUrl);
+            return WhoCanCallApi(_environmentConfigurationDriver.RegistrationApiUrl);
         }
+
+        public MPPActor WhoCanCallShellApiGateway()
+        {
+            return WhoCanCallApi(_environmentConfigurationDriver.ShellApiGatewayUrl);
+        }
+
+        public MPPActor WhoCanCallStationLocatorApi()
+        {
+            return WhoCanCallApi(_environmentConfigurationDriver.StationLocatorApiUrl);
+        }
+
 
         public RememberVariableSetter Remembers(InMemory key)
         {
