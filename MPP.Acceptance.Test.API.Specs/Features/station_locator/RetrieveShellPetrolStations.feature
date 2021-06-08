@@ -1,7 +1,7 @@
 ﻿Feature: Retrieve Shell Petrol Stations
 	Retrieve the list of tank/ petrol stations from Station Locator Service.
 
-@shell-api-stub
+@shell-api-stub @ignore
 Scenario: Retrieve Shell Petrol Stations by mandatory query parameters
 	Given FleetPay mobile app attempts to retrieve the shell petrol stations over API using the query parameters:
 		| Lat       | Lon       | Radius |
