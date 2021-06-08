@@ -15,6 +15,7 @@ namespace MPP.Acceptance.Test.API.Specs.Support.Matchers
         public void Validate(string fieldName, string value, List<string> controlParameters, TestContext context)
         {
             var actualValues = value.Split(',', StringSplitOptions.TrimEntries).ToList();
+            actualValues = actualValues.Select(s => s.Replace("[", "").Replace("]","").Replace("\"","")).ToList();
             CollectionAssert.AreEquivalent(controlParameters, actualValues);
         }
     }

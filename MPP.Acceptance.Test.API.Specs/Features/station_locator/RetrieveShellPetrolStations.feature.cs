@@ -71,13 +71,11 @@ namespace MPP.Acceptance.Test.API.Specs.Features.Station_Locator
         }
         
         [TechTalk.SpecRun.ScenarioAttribute("Retrieve Shell Petrol Stations by mandatory query parameters", new string[] {
-                "shell-api-stub",
-                "ignore"}, SourceLine=4)]
+                "shell-api-stub"}, SourceLine=4)]
         public virtual void RetrieveShellPetrolStationsByMandatoryQueryParameters()
         {
             string[] tagsOfScenario = new string[] {
-                    "shell-api-stub",
-                    "ignore"};
+                    "shell-api-stub"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Retrieve Shell Petrol Stations by mandatory query parameters", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 5
@@ -135,6 +133,31 @@ this.ScenarioInitialize(scenarioInfo);
                 table20.AddRow(new string[] {
                             "$.[?(@.fullStationIdentifier == \'1\')].id",
                             "@EqualsTo(12170818)@"});
+                table20.AddRow(new string[] {
+                            "$.[?(@.fullStationIdentifier == \'1\')].lat",
+                            "@StartsWith(52)@"});
+                table20.AddRow(new string[] {
+                            "$.[?(@.fullStationIdentifier == \'1\')].lon",
+                            "@StartsWith(13)@"});
+                table20.AddRow(new string[] {
+                            "$.[?(@.fullStationIdentifier == \'1\')].name",
+                            "@EqualsTo(Zum Biotop)@"});
+                table20.AddRow(new string[] {
+                            "$.[?(@.fullStationIdentifier == \'1\')].telephone",
+                            "@EqualsTo(9611199089)@"});
+                table20.AddRow(new string[] {
+                            "$.[?(@.fullStationIdentifier == \'1\')].address",
+                            "@EqualsTo(Zum Biotop 19, 50127 Bergheim, Germany)@"});
+                table20.AddRow(new string[] {
+                            "$.[?(@.fullStationIdentifier == \'1\')].fuelTypes",
+                            "@HasItemsInAnyOrder(\'CNG\',\'DieselFit\',\'Fuelsave Midgrade Gasoline\',\'Kerosene\')@"});
+                table20.AddRow(new string[] {
+                            "$.[?(@.fullStationIdentifier == \'1\')].amenities",
+                            "@HasItemsInAnyOrder(\'Air & Water\',\'Credit card - American Express\',\'Disabled Faci" +
+                                "lities\',\'Shop\',\'Unamanned\',\'Mobile Payment\',\'Truck Only\')@"});
+                table20.AddRow(new string[] {
+                            "$.[?(@.fullStationIdentifier == \'1\')].openingHours",
+                            "@HasItemsInAnyOrder(\'Mon-Fri 10:00-19:00\',\'Sat-Sun 12:00-17:00\')@"});
 #line 14
  testRunner.And("the JSON response body is validated using the json path expressions with associat" +
                         "ed matchers:", ((string)(null)), table20, "And ");
