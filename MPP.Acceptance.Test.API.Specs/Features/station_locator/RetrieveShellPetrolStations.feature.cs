@@ -70,14 +70,14 @@ namespace MPP.Acceptance.Test.API.Specs.Features.Station_Locator
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Retrieve Shell Petrol Stations by mandatory query parameters", new string[] {
+        [TechTalk.SpecRun.ScenarioAttribute("Retrieve Shell Petrol Stations by only mandatory query parameters", new string[] {
                 "shell-api-stub"}, SourceLine=4)]
-        public virtual void RetrieveShellPetrolStationsByMandatoryQueryParameters()
+        public virtual void RetrieveShellPetrolStationsByOnlyMandatoryQueryParameters()
         {
             string[] tagsOfScenario = new string[] {
                     "shell-api-stub"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Retrieve Shell Petrol Stations by mandatory query parameters", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Retrieve Shell Petrol Stations by only mandatory query parameters", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -118,9 +118,17 @@ this.ScenarioInitialize(scenarioInfo);
                             "MatcherName"});
                 table19.AddRow(new string[] {
                             "$.Size()",
-                            "@GreaterThan(0)@"});
+                            "@EqualsTo(10)@"});
                 table19.AddRow(new string[] {
-                            "$.[?(@.fullStationIdentifier == \'1\')].KeySet()",
+                            "$.[?(@.id == \'12170821\')].KeySet()",
+                            "@HasItemsInAnyOrder(\'id\',\'name\',\'telephone\',\'address\',\'lat\',\'lon\',\'fuelTypes\',\'am" +
+                                "enities\',\'openingHours\',\'fullStationIdentifier\')@"});
+                table19.AddRow(new string[] {
+                            "$.[?(@.id == \'12170823\')].KeySet()",
+                            "@HasItemsInAnyOrder(\'id\',\'name\',\'telephone\',\'address\',\'lat\',\'lon\',\'fuelTypes\',\'am" +
+                                "enities\',\'openingHours\',\'fullStationIdentifier\')@"});
+                table19.AddRow(new string[] {
+                            "$.[?(@.id == \'12170825\')].KeySet()",
                             "@HasItemsInAnyOrder(\'id\',\'name\',\'telephone\',\'address\',\'lat\',\'lon\',\'fuelTypes\',\'am" +
                                 "enities\',\'openingHours\',\'fullStationIdentifier\')@"});
 #line 10
@@ -131,36 +139,213 @@ this.ScenarioInitialize(scenarioInfo);
                             "JsonPathExpression",
                             "MatcherName"});
                 table20.AddRow(new string[] {
-                            "$.[?(@.fullStationIdentifier == \'1\')].id",
-                            "@EqualsTo(12170818)@"});
+                            "$.[?(@.id == \'12170821\')].id",
+                            "@EqualsTo(12170821)@"});
                 table20.AddRow(new string[] {
-                            "$.[?(@.fullStationIdentifier == \'1\')].lat",
-                            "@StartsWith(52)@"});
+                            "$.[?(@.id == \'12170821\')].fullStationIdentifier",
+                            "@EqualsTo(4)@"});
                 table20.AddRow(new string[] {
-                            "$.[?(@.fullStationIdentifier == \'1\')].lon",
-                            "@StartsWith(13)@"});
+                            "$.[?(@.id == \'12170821\')].lat",
+                            "@StartsWith(53)@"});
                 table20.AddRow(new string[] {
-                            "$.[?(@.fullStationIdentifier == \'1\')].name",
-                            "@EqualsTo(Zum Biotop)@"});
+                            "$.[?(@.id == \'12170821\')].lon",
+                            "@StartsWith(12)@"});
                 table20.AddRow(new string[] {
-                            "$.[?(@.fullStationIdentifier == \'1\')].telephone",
-                            "@EqualsTo(9611199089)@"});
+                            "$.[?(@.id == \'12170821\')].name",
+                            "@EqualsTo(Dortmund)@"});
                 table20.AddRow(new string[] {
-                            "$.[?(@.fullStationIdentifier == \'1\')].address",
-                            "@EqualsTo(Zum Biotop 19, 50127 Bergheim, Germany)@"});
+                            "$.[?(@.id == \'12170821\')].telephone",
+                            "@EqualsTo(5615199022)@"});
                 table20.AddRow(new string[] {
-                            "$.[?(@.fullStationIdentifier == \'1\')].fuelTypes",
-                            "@HasItemsInAnyOrder(\'CNG\',\'DieselFit\',\'Fuelsave Midgrade Gasoline\',\'Kerosene\')@"});
+                            "$.[?(@.id == \'12170821\')].address",
+                            "@EqualsTo(Schützenstraße 2-4, 44147 Dortmund, Germany)@"});
                 table20.AddRow(new string[] {
-                            "$.[?(@.fullStationIdentifier == \'1\')].amenities",
-                            "@HasItemsInAnyOrder(\'Air & Water\',\'Credit card - American Express\',\'Disabled Faci" +
-                                "lities\',\'Shop\',\'Unamanned\',\'Mobile Payment\',\'Truck Only\')@"});
+                            "$.[?(@.id == \'12170821\')].fuelTypes",
+                            "@HasItemsInAnyOrder(\'Premium Gasoline\',\'Super Premium Gasoline\')@"});
                 table20.AddRow(new string[] {
-                            "$.[?(@.fullStationIdentifier == \'1\')].openingHours",
-                            "@HasItemsInAnyOrder(\'Mon-Fri 10:00-19:00\',\'Sat-Sun 12:00-17:00\')@"});
-#line 14
+                            "$.[?(@.id == \'12170821\')].amenities",
+                            "@HasItemsInAnyOrder(\'Unamanned\',\'CRT Shell Card Accepted\',\'Pay at pump\')@"});
+                table20.AddRow(new string[] {
+                            "$.[?(@.id == \'12170821\')].openingHours",
+                            "@HasItemsInAnyOrder(\'Mon-Fri 00:00-23:59\')@"});
+#line 16
  testRunner.And("the JSON response body is validated using the json path expressions with associat" +
                         "ed matchers:", ((string)(null)), table20, "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+                            "JsonPathExpression",
+                            "MatcherName"});
+                table21.AddRow(new string[] {
+                            "$.[?(@.id == \'12170823\')].id",
+                            "@EqualsTo(12170823)@"});
+                table21.AddRow(new string[] {
+                            "$.[?(@.id == \'12170823\')].fullStationIdentifier",
+                            "@EqualsTo(6)@"});
+                table21.AddRow(new string[] {
+                            "$.[?(@.id == \'12170823\')].lat",
+                            "@StartsWith(52)@"});
+                table21.AddRow(new string[] {
+                            "$.[?(@.id == \'12170823\')].lon",
+                            "@StartsWith(12)@"});
+                table21.AddRow(new string[] {
+                            "$.[?(@.id == \'12170823\')].name",
+                            "@EqualsTo(Mönchengladbach)@"});
+                table21.AddRow(new string[] {
+                            "$.[?(@.id == \'12170823\')].telephone",
+                            "@EqualsTo(8045399022)@"});
+                table21.AddRow(new string[] {
+                            "$.[?(@.id == \'12170823\')].address",
+                            "@EqualsTo(Reyerhütter Str. 26, 41065 Mönchengladbach, Germany)@"});
+                table21.AddRow(new string[] {
+                            "$.[?(@.id == \'12170823\')].fuelTypes",
+                            "@HasItemsInAnyOrder(\'DieselFit\',\'Premium Diesel\',\'Super Premium Gasoline\')@"});
+                table21.AddRow(new string[] {
+                            "$.[?(@.id == \'12170823\')].amenities",
+                            "@HasItemsInAnyOrder(\'Car Wash\',\'Shop\',\'Pay at pump\')@"});
+                table21.AddRow(new string[] {
+                            "$.[?(@.id == \'12170823\')].openingHours",
+                            "@HasItemsInAnyOrder(\'Mon-Fri 00:00-23:59\')@"});
+#line 28
+ testRunner.And("the JSON response body is validated using the json path expressions with associat" +
+                        "ed matchers:", ((string)(null)), table21, "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
+                            "JsonPathExpression",
+                            "MatcherName"});
+                table22.AddRow(new string[] {
+                            "$.[?(@.id == \'12170825\')].id",
+                            "@EqualsTo(12170825)@"});
+                table22.AddRow(new string[] {
+                            "$.[?(@.id == \'12170825\')].fullStationIdentifier",
+                            "@EqualsTo(6)@"});
+                table22.AddRow(new string[] {
+                            "$.[?(@.id == \'12170825\')].lat",
+                            "@StartsWith(51)@"});
+                table22.AddRow(new string[] {
+                            "$.[?(@.id == \'12170825\')].lon",
+                            "@StartsWith(13)@"});
+                table22.AddRow(new string[] {
+                            "$.[?(@.id == \'12170825\')].name",
+                            "@EqualsTo(Neusser)@"});
+                table22.AddRow(new string[] {
+                            "$.[?(@.id == \'12170825\')].telephone",
+                            "@EqualsTo(8045399022)@"});
+                table22.AddRow(new string[] {
+                            "$.[?(@.id == \'12170825\')].address",
+                            "@EqualsTo(Neusser Str. 55, 50181 Bedburg, Germany)@"});
+                table22.AddRow(new string[] {
+                            "$.[?(@.id == \'12170825\')].fuelTypes",
+                            "@HasItemsInAnyOrder(\'Fuelsave Midgrade Gasoline\',\'Premium Diesel\')@"});
+                table22.AddRow(new string[] {
+                            "$.[?(@.id == \'12170825\')].amenities",
+                            "@HasItemsInAnyOrder(\'Disabled Facilities\',\'Shop\',\'Truck Only\')@"});
+                table22.AddRow(new string[] {
+                            "$.[?(@.id == \'12170825\')].openingHours",
+                            "@HasItemsInAnyOrder(\'Mon-Fri 00:00-23:59\')@"});
+#line 40
+ testRunner.And("the JSON response body is validated using the json path expressions with associat" +
+                        "ed matchers:", ((string)(null)), table22, "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Retrieve Shell Petrol Stations by mandatory and optional query parameters", new string[] {
+                "shell-api-stub"}, SourceLine=53)]
+        public virtual void RetrieveShellPetrolStationsByMandatoryAndOptionalQueryParameters()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "shell-api-stub"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Retrieve Shell Petrol Stations by mandatory and optional query parameters", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 54
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+                TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Lat",
+                            "Lon",
+                            "Radius",
+                            "CountryCode",
+                            "UnmannedOnly",
+                            "TruckOnly"});
+                table23.AddRow(new string[] {
+                            "52.533501",
+                            "13.404813",
+                            "0.3",
+                            "DE",
+                            "true",
+                            "true"});
+#line 55
+ testRunner.Given("FleetPay mobile app attempts to retrieve the shell petrol stations over API using" +
+                        " the query parameters:", ((string)(null)), table23, "Given ");
+#line hidden
+#line 58
+ testRunner.Then("the response status should be \"200\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
+                            "JsonPathExpression",
+                            "MatcherName"});
+                table24.AddRow(new string[] {
+                            "$.Size()",
+                            "@EqualsTo(1)@"});
+                table24.AddRow(new string[] {
+                            "$.[?(@.fullStationIdentifier == \'1\')].KeySet()",
+                            "@HasItemsInAnyOrder(\'id\',\'name\',\'telephone\',\'address\',\'lat\',\'lon\',\'fuelTypes\',\'am" +
+                                "enities\',\'openingHours\',\'fullStationIdentifier\')@"});
+#line 59
+ testRunner.And("the JSON response body is validated using the json path expressions with associat" +
+                        "ed matchers:", ((string)(null)), table24, "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
+                            "JsonPathExpression",
+                            "MatcherName"});
+                table25.AddRow(new string[] {
+                            "$.[?(@.fullStationIdentifier == \'1\')].id",
+                            "@EqualsTo(12170818)@"});
+                table25.AddRow(new string[] {
+                            "$.[?(@.fullStationIdentifier == \'1\')].lat",
+                            "@StartsWith(52)@"});
+                table25.AddRow(new string[] {
+                            "$.[?(@.fullStationIdentifier == \'1\')].lon",
+                            "@StartsWith(13)@"});
+                table25.AddRow(new string[] {
+                            "$.[?(@.fullStationIdentifier == \'1\')].name",
+                            "@EqualsTo(Zum Biotop)@"});
+                table25.AddRow(new string[] {
+                            "$.[?(@.fullStationIdentifier == \'1\')].telephone",
+                            "@EqualsTo(9611199089)@"});
+                table25.AddRow(new string[] {
+                            "$.[?(@.fullStationIdentifier == \'1\')].address",
+                            "@EqualsTo(Zum Biotop 19, 50127 Bergheim, Germany)@"});
+                table25.AddRow(new string[] {
+                            "$.[?(@.fullStationIdentifier == \'1\')].fuelTypes",
+                            "@HasItemsInAnyOrder(\'CNG\',\'DieselFit\',\'Fuelsave Midgrade Gasoline\',\'Kerosene\')@"});
+                table25.AddRow(new string[] {
+                            "$.[?(@.fullStationIdentifier == \'1\')].amenities",
+                            "@HasItemsInAnyOrder(\'Disabled Facilities\',\'Shop\',\'Unamanned\',\'Truck Only\')@"});
+                table25.AddRow(new string[] {
+                            "$.[?(@.fullStationIdentifier == \'1\')].openingHours",
+                            "@HasItemsInAnyOrder(\'Mon-Fri 10:00-18:59\',\'Sat-Sun 12:00-16:59\')@"});
+#line 63
+ testRunner.And("the JSON response body is validated using the json path expressions with associat" +
+                        "ed matchers:", ((string)(null)), table25, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
