@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MPP.Core.Exceptions
+namespace FleetPay.Core.Exceptions
 {
     /// <summary>
     ///     Basic custom runtime/ system exception for all errors in Core

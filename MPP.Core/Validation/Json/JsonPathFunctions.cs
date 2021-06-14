@@ -4,7 +4,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace MPP.Core.Validation
+namespace FleetPay.Core.Validation.Json
 {
     /// <summary>
     ///     Custom JsonPath function support for size(), keySet() and toString() operations on Json objects and arrays.

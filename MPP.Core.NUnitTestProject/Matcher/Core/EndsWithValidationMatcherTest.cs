@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using MPP.Core.Exceptions;
-using MPP.Core.Validation.Matcher.Core;
+using FleetPay.Core.Exceptions;
+using FleetPay.Core.Validation.Matcher.Core;
 using NUnit.Framework;
 
-namespace MPP.Core.NUnitTestProject.Matcher.Core
+namespace FleetPay.Core.NUnitTestProject.Matcher.Core
 {
     public class EndsWithValidationMatcherTest : AbstractNUnitSetUp
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MPP.Core.Validation.Matcher
+namespace FleetPay.Core.Validation.Matcher
 {
     /// <summary>
     ///     Control expression parser for extracting the individual control values from a control expression.

@@ -1,4 +1,4 @@
-﻿namespace MPP.Acceptance.Test.API.Specs.Interactions.dsl
+﻿namespace FleetPay.Acceptance.Test.API.Specs.Interactions.dsl
 {
     public class GatewayAccessToken
     {

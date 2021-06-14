@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using MPP.Core.Exceptions;
-using MPP.Core.Message;
-using MPP.Core.Util;
-using MPP.Core.Variable;
+﻿using System.Collections.Generic;
+using FleetPay.Core.Exceptions;
+using FleetPay.Core.Message;
+using FleetPay.Core.Util;
+using FleetPay.Core.Variable;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace MPP.Core.Validation.Json
+namespace FleetPay.Core.Validation.Json
 {
     /// <summary>
     ///     Extractor implementation reads message elements via JSONPath expressions and saves the

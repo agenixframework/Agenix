@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
-using MPP.Core.Exceptions;
+using FleetPay.Core.Exceptions;
 
-namespace MPP.Core.Functions.Core
+namespace FleetPay.Core.Functions.Core
 {
     /// <summary>
     ///     Escapes XML fragment with escaped characters for '<', '>'

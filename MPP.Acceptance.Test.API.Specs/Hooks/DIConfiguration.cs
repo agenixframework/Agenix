@@ -1,18 +1,15 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using BoDi;
+using FleetPay.Acceptance.Test.API.Specs.Drivers;
+using FleetPay.Acceptance.Test.API.Specs.Drivers.Integrated;
+using FleetPay.Acceptance.Test.API.Specs.Support.Matchers;
+using FleetPay.Core;
+using FleetPay.Core.Session;
 using Microsoft.Extensions.Configuration;
-using MPP.Acceptance.Test.API.Specs.Drivers;
-using MPP.Acceptance.Test.API.Specs.Drivers.Integrated;
-using MPP.Acceptance.Test.API.Specs.Support;
-using MPP.Acceptance.Test.API.Specs.Support.Matchers;
-using MPP.Core;
-using MPP.Core.Exceptions;
-using MPP.Core.Session;
 using TechTalk.SpecFlow;
 using TechTalk.SpecRun;
 
-namespace MPP.Acceptance.Test.API.Specs.Hooks
+namespace FleetPay.Acceptance.Test.API.Specs.Hooks
 {
     [Binding]
     public sealed class DiConfiguration
@@ -42,7 +39,7 @@ namespace MPP.Acceptance.Test.API.Specs.Hooks
             objectContainer.RegisterTypeAs<IntegratedTestContext, ITestContextDriver>();
 
 
-            IMPPActor actor = new MPPActor(new IntegratedEnvironmentConfiguration(config),
+            IFleetPayActor actor = new FleetPayActor(new IntegratedEnvironmentConfiguration(config),
                 new IntegratedTestContext(testContext));
             objectContainer.RegisterInstanceAs(actor);
         }

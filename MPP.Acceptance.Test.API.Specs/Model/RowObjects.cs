@@ -1,4 +1,4 @@
-﻿namespace MPP.Acceptance.Test.API.Specs.Model
+﻿namespace FleetPay.Acceptance.Test.API.Specs.Model
 {
     public record CreateUserRowObject(string Name, string Job);
 

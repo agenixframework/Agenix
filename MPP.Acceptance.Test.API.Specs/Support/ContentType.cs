@@ -1,4 +1,4 @@
-﻿namespace MPP.Acceptance.Test.API.Specs.Support
+﻿namespace FleetPay.Acceptance.Test.API.Specs.Support
 {
     internal class ContentType
     {

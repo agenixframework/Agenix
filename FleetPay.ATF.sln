@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MPP.Acceptance.Test.API.Specs", "MPP.Acceptance.Test.API.Specs\MPP.Acceptance.Test.API.Specs.csproj", "{188E35A8-0832-4A59-977C-5428AFC3FFCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetPay.Acceptance.Test.API.Specs", "MPP.Acceptance.Test.API.Specs\FleetPay.Acceptance.Test.API.Specs.csproj", "{188E35A8-0832-4A59-977C-5428AFC3FFCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPP.Core", "MPP.Core\MPP.Core.csproj", "{BC320C83-93AE-4BC6-BF8E-FFA52CAEF780}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetPay.Core", "MPP.Core\FleetPay.Core.csproj", "{BC320C83-93AE-4BC6-BF8E-FFA52CAEF780}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPP.Core.NUnitTestProject", "MPP.Core.NUnitTestProject\MPP.Core.NUnitTestProject.csproj", "{4E347B48-1379-4A9F-8BC6-7844FF72ED9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetPay.Core.NUnitTestProject", "MPP.Core.NUnitTestProject\FleetPay.Core.NUnitTestProject.csproj", "{4E347B48-1379-4A9F-8BC6-7844FF72ED9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

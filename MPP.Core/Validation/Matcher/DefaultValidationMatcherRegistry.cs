@@ -1,4 +1,4 @@
-﻿namespace MPP.Core.Validation.Matcher
+﻿namespace FleetPay.Core.Validation.Matcher
 {
     /// <summary>
     ///     Default registry automatically adds default validation matcher library.

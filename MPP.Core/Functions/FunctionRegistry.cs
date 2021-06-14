@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using MPP.Core.Exceptions;
+using FleetPay.Core.Exceptions;
 
-namespace MPP.Core.Functions
+namespace FleetPay.Core.Functions
 {
     /// <summary>
     ///     Function registry holding all available function libraries.

@@ -1,8 +1,8 @@
 ﻿using System;
 using Boa.Constrictor.Screenplay;
-using MPP.Acceptance.Test.API.Specs.Drivers;
+using FleetPay.Acceptance.Test.API.Specs.Drivers;
 
-namespace MPP.Acceptance.Test.API.Specs.Interactions
+namespace FleetPay.Acceptance.Test.API.Specs.Interactions
 {
     public class ExecuteSampleTask : ITask
     {
@@ -14,7 +14,7 @@ namespace MPP.Acceptance.Test.API.Specs.Interactions
         {
             Console.WriteLine("Executing Sample Task");
 
-            ((IMPPActor) actor).IsAttemptingTo(ExecuteSampleTask2.With());
+            ((IFleetPayActor) actor).IsAttemptingTo(ExecuteSampleTask2.With());
         }
 
 

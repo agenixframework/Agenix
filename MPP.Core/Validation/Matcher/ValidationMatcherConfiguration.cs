@@ -1,4 +1,4 @@
-﻿namespace MPP.Core.Validation.Matcher
+﻿namespace FleetPay.Core.Validation.Matcher
 {
     public class ValidationMatcherConfiguration
     {

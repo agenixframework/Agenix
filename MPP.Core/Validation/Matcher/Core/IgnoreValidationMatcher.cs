@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MPP.Core.Validation.Matcher.Core
+namespace FleetPay.Core.Validation.Matcher.Core
 {
     public class IgnoreValidationMatcher : IValidationMatcher
     {

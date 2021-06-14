@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MPP.Core.Util
+namespace FleetPay.Core.Util
 {
     public static class DictionaryExtensions
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using MPP.Core.Functions;
-using MPP.Core.Functions.Core;
+using FleetPay.Core.Functions;
+using FleetPay.Core.Functions.Core;
 using NUnit.Framework;
 
-namespace MPP.Core.NUnitTestProject.Functions
+namespace FleetPay.Core.NUnitTestProject.Functions
 {
     public class CurrentDateFunctionTest : AbstractNUnitSetUp
     {

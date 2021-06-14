@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text;
-using MPP.Core.Exceptions;
-using MPP.Core.Variable;
+using FleetPay.Core.Exceptions;
+using FleetPay.Core.Variable;
 
-namespace MPP.Core.Functions
+namespace FleetPay.Core.Functions
 {
     /// <summary>
     ///     Utility class for functions.

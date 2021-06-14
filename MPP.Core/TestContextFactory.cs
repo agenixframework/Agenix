@@ -1,7 +1,7 @@
-﻿using MPP.Core.Functions;
-using MPP.Core.Validation.Matcher;
+﻿using FleetPay.Core.Functions;
+using FleetPay.Core.Validation.Matcher;
 
-namespace MPP.Core
+namespace FleetPay.Core
 {
     public class TestContextFactory
     {

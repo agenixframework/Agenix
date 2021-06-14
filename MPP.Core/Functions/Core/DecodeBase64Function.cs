@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using MPP.Core.Exceptions;
+using FleetPay.Core.Exceptions;
 
-namespace MPP.Core.Functions.Core
+namespace FleetPay.Core.Functions.Core
 {
     /// <summary>
     ///     Decodes base64 binary data to a character sequence.

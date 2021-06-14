@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
-using MPP.Core.Exceptions;
+using FleetPay.Core.Exceptions;
 
-namespace MPP.Core.Validation.Matcher.Core
+namespace FleetPay.Core.Validation.Matcher.Core
 {
     /// <summary>
     ///     ValidationMatcher ignores all new line characters in value and control value.

@@ -1,6 +1,6 @@
-﻿using MPP.Core.Message;
+﻿using FleetPay.Core.Message;
 
-namespace MPP.Core.Util
+namespace FleetPay.Core.Util
 {
     public class MessageUtils
     {

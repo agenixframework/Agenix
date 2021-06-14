@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MPP.Core.Session
+namespace FleetPay.Core.Session
 {
     public interface ISessionMap<TK, TV> : IDictionary<TK, TV>
     {

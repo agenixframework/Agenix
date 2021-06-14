@@ -1,4 +1,4 @@
-﻿namespace MPP.Core
+﻿namespace FleetPay.Core
 {
     public sealed class CoreSettings
     {

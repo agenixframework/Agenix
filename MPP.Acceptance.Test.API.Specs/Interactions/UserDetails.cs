@@ -1,10 +1,10 @@
 ﻿using Boa.Constrictor.RestSharp;
 using Boa.Constrictor.Screenplay;
-using MPP.Acceptance.Test.API.Specs.Drivers;
-using MPP.Acceptance.Test.API.Specs.Support;
+using FleetPay.Acceptance.Test.API.Specs.Drivers;
+using FleetPay.Acceptance.Test.API.Specs.Support;
 using RestSharp;
 
-namespace MPP.Acceptance.Test.API.Specs.Interactions
+namespace FleetPay.Acceptance.Test.API.Specs.Interactions
 {
     public class UserDetails : IQuestion<IRestResponse>
     {
@@ -17,7 +17,7 @@ namespace MPP.Acceptance.Test.API.Specs.Interactions
 
         public IRestResponse RequestAs(IActor actor)
         {
-            var resolvedResource = ((MPPActor) actor).GeTestContextDriver.GetTestContext
+            var resolvedResource = ((FleetPayActor) actor).GeTestContextDriver.GetTestContext
                 .ReplaceDynamicContentInString($"{Endpoint.Users}/{_userId}");
 
             var restRequest = new RestRequest(resolvedResource, Method.GET);
@@ -25,7 +25,7 @@ namespace MPP.Acceptance.Test.API.Specs.Interactions
 
             var response = actor.Calls(Rest.Request(restRequest));
 
-            ((MPPActor) actor).LogLastRequestAndResponse();
+            ((FleetPayActor) actor).LogLastRequestAndResponse();
 
             return response;
         }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MPP.Core.Exceptions;
+using FleetPay.Core.Exceptions;
 
-namespace MPP.Core.Functions.Core
+namespace FleetPay.Core.Functions.Core
 {
     /// <summary>
     ///     Function returning a random numeric value. Argument specifies the number of digits and padding bool flag

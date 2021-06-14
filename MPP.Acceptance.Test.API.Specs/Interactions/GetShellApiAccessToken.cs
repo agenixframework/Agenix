@@ -1,14 +1,14 @@
 ﻿using System.Net;
 using Boa.Constrictor.RestSharp;
 using Boa.Constrictor.Screenplay;
-using MPP.Acceptance.Test.API.Specs.Drivers;
-using MPP.Acceptance.Test.API.Specs.Model;
-using MPP.Acceptance.Test.API.Specs.Support;
+using FleetPay.Acceptance.Test.API.Specs.Drivers;
+using FleetPay.Acceptance.Test.API.Specs.Model;
+using FleetPay.Acceptance.Test.API.Specs.Support;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using RestSharp;
 
-namespace MPP.Acceptance.Test.API.Specs.Interactions
+namespace FleetPay.Acceptance.Test.API.Specs.Interactions
 {
     /// <summary>
     ///     To access the Shell services 3rd parties need to go via the Shell API Platform to access the API end points. All
@@ -52,7 +52,7 @@ namespace MPP.Acceptance.Test.API.Specs.Interactions
 
             var restResponse = actor.Calls(Rest.Request(restRequest));
 
-            ((MPPActor) actor).LogLastRequestAndResponse();
+            ((FleetPayActor) actor).LogLastRequestAndResponse();
 
             Assert.IsTrue(restResponse.StatusCode == HttpStatusCode.OK,
                 "Shell API Gateway access token could not be obtained, Actual Http Status Code: " +
@@ -61,4 +61,4 @@ namespace MPP.Acceptance.Test.API.Specs.Interactions
             return JsonConvert.DeserializeObject<AccessTokenResponse>(restResponse.Content);
         }
     }
-}
+} 

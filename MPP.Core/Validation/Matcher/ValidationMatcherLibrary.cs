@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using MPP.Core.Exceptions;
+using FleetPay.Core.Exceptions;
 
-namespace MPP.Core.Validation.Matcher
+namespace FleetPay.Core.Validation.Matcher
 {
     /// <summary>
     ///     Library holding a set of validation matchers. Each library defines a validation prefix as namespace, so

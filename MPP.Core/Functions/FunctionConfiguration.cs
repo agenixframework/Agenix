@@ -1,6 +1,6 @@
-﻿using MPP.Core.Functions.Core;
+﻿using FleetPay.Core.Functions.Core;
 
-namespace MPP.Core.Functions
+namespace FleetPay.Core.Functions
 {
     public class FunctionConfiguration
     {

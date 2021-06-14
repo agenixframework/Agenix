@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using MPP.Core.Exceptions;
+using FleetPay.Core.Exceptions;
 
-namespace MPP.Core.Functions.Core
+namespace FleetPay.Core.Functions.Core
 {
     /// <summary>
     ///     Returns given string argument in upper case letters.

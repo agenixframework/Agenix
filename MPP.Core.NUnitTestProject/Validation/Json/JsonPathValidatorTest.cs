@@ -1,8 +1,8 @@
-﻿using MPP.Core.Exceptions;
-using MPP.Core.Validation.Json.Dsl;
+﻿using FleetPay.Core.Exceptions;
+using FleetPay.Core.Validation.Json.Dsl;
 using NUnit.Framework;
 
-namespace MPP.Core.NUnitTestProject.Validation.Json
+namespace FleetPay.Core.NUnitTestProject.Validation.Json
 {
     public class JsonPathValidatorTest : AbstractNUnitSetUp
     {

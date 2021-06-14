@@ -1,12 +1,12 @@
 ﻿using Boa.Constrictor.RestSharp;
 using Boa.Constrictor.Screenplay;
-using MPP.Acceptance.Test.API.Specs.Drivers;
-using MPP.Acceptance.Test.API.Specs.Model;
-using MPP.Acceptance.Test.API.Specs.Support;
+using FleetPay.Acceptance.Test.API.Specs.Drivers;
+using FleetPay.Acceptance.Test.API.Specs.Model;
+using FleetPay.Acceptance.Test.API.Specs.Support;
 using Newtonsoft.Json;
 using RestSharp;
 
-namespace MPP.Acceptance.Test.API.Specs.Interactions
+namespace FleetPay.Acceptance.Test.API.Specs.Interactions
 {
     public class RegisterUser : IQuestion<IRestResponse>
     {
@@ -21,7 +21,7 @@ namespace MPP.Acceptance.Test.API.Specs.Interactions
         {
             var response = actor.Calls(Rest.Request(RegisterUserRestRequest()));
 
-            ((MPPActor) actor).LogLastRequestAndResponse();
+            ((FleetPayActor) actor).LogLastRequestAndResponse();
 
             return response;
         }

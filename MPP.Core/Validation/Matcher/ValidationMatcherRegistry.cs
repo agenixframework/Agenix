@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using MPP.Core.Exceptions;
+using FleetPay.Core.Exceptions;
 
-namespace MPP.Core.Validation.Matcher
+namespace FleetPay.Core.Validation.Matcher
 {
     /// <summary>
     ///     ValidationMatcher registry holding all available validation matcher libraries.

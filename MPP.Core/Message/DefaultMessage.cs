@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using MPP.Core.Exceptions;
-using MPP.Core.Util;
+using FleetPay.Core.Exceptions;
+using FleetPay.Core.Util;
 
-namespace MPP.Core.Message
+namespace FleetPay.Core.Message
 {
     /// <summary>
     ///     Default message implementation holds message payload and message headers. Also provides access methods for special

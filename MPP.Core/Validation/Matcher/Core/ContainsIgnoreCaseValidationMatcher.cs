@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using MPP.Core.Exceptions;
+using FleetPay.Core.Exceptions;
 
-namespace MPP.Core.Validation.Matcher.Core
+namespace FleetPay.Core.Validation.Matcher.Core
 {
     /// <summary>
     ///     ValidationMatcher based on String.ToLower().Contains()

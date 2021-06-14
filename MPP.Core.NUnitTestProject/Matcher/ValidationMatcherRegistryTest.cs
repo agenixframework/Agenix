@@ -1,9 +1,9 @@
-﻿using Moq;
-using MPP.Core.Exceptions;
-using MPP.Core.Validation.Matcher;
+﻿using FleetPay.Core.Exceptions;
+using FleetPay.Core.Validation.Matcher;
+using Moq;
 using NUnit.Framework;
 
-namespace MPP.Core.NUnitTestProject.Matcher
+namespace FleetPay.Core.NUnitTestProject.Matcher
 {
     public class ValidationMatcherRegistryTest : AbstractNUnitSetUp
     {

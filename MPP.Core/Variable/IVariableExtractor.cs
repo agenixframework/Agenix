@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using MPP.Core.Message;
+using FleetPay.Core.Message;
 
-namespace MPP.Core.Variable
+namespace FleetPay.Core.Variable
 {
     internal interface IVariableExtractor : IMessageProcessor
     {

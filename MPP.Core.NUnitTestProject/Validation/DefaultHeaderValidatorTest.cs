@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using MPP.Core.Exceptions;
-using MPP.Core.Validation;
+using FleetPay.Core.Exceptions;
+using FleetPay.Core.Validation;
 using NUnit.Framework;
 
-namespace MPP.Core.NUnitTestProject.Validation
+namespace FleetPay.Core.NUnitTestProject.Validation
 {
     public class DefaultHeaderValidatorTest : AbstractNUnitSetUp
     {

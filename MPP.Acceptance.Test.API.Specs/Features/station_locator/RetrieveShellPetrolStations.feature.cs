@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace MPP.Acceptance.Test.API.Specs.Features.Station_Locator
+namespace FleetPay.Acceptance.Test.API.Specs.Features.Station_Locator
 {
     using TechTalk.SpecFlow;
     using System;
@@ -71,11 +71,13 @@ namespace MPP.Acceptance.Test.API.Specs.Features.Station_Locator
         }
         
         [TechTalk.SpecRun.ScenarioAttribute("Retrieve Shell Petrol Stations by only mandatory query parameters", new string[] {
-                "shell-api-stub"}, SourceLine=4)]
+                "shell-api-stub",
+                "ignore"}, SourceLine=4)]
         public virtual void RetrieveShellPetrolStationsByOnlyMandatoryQueryParameters()
         {
             string[] tagsOfScenario = new string[] {
-                    "shell-api-stub"};
+                    "shell-api-stub",
+                    "ignore"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Retrieve Shell Petrol Stations by only mandatory query parameters", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 5
@@ -251,11 +253,13 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [TechTalk.SpecRun.ScenarioAttribute("Retrieve Shell Petrol Stations by mandatory and optional query parameters", new string[] {
-                "shell-api-stub"}, SourceLine=53)]
+                "shell-api-stub",
+                "ignore"}, SourceLine=53)]
         public virtual void RetrieveShellPetrolStationsByMandatoryAndOptionalQueryParameters()
         {
             string[] tagsOfScenario = new string[] {
-                    "shell-api-stub"};
+                    "shell-api-stub",
+                    "ignore"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Retrieve Shell Petrol Stations by mandatory and optional query parameters", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 54

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using MPP.Core.Exceptions;
+using FleetPay.Core.Exceptions;
 
-namespace MPP.Core.Functions
+namespace FleetPay.Core.Functions
 {
     /// <summary>
     ///     Library holding a set of functions. Each library defines a function prefix as namespace, so there will be no naming

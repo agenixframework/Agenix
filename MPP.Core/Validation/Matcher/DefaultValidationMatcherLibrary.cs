@@ -1,6 +1,6 @@
-﻿using MPP.Core.Validation.Matcher.Core;
+﻿using FleetPay.Core.Validation.Matcher.Core;
 
-namespace MPP.Core.Validation.Matcher
+namespace FleetPay.Core.Validation.Matcher
 {
     public class DefaultValidationMatcherLibrary : ValidationMatcherLibrary
     {

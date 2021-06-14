@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using MPP.Core.Exceptions;
+using FleetPay.Core.Exceptions;
 using static System.Double;
 
-namespace MPP.Core.Validation.Matcher.Core
+namespace FleetPay.Core.Validation.Matcher.Core
 {
     /// <summary>
     ///     ValidationMatcher based on Double > Double.

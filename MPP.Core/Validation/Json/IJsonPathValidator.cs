@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using MPP.Core.Message;
+using FleetPay.Core.Message;
 
-namespace MPP.Core.Validation.Json
+namespace FleetPay.Core.Validation.Json
 {
     internal interface IJsonPathValidator : IMessageProcessor
     {

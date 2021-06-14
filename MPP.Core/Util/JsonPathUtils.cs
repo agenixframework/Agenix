@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using MPP.Core.Exceptions;
-using MPP.Core.Validation;
+using FleetPay.Core.Exceptions;
+using FleetPay.Core.Validation.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace MPP.Core.Util
+namespace FleetPay.Core.Util
 {
     public class JsonPathUtils
     {

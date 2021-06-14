@@ -4,19 +4,20 @@ using System.Linq;
 using Boa.Constrictor.Logging;
 using Boa.Constrictor.RestSharp;
 using Boa.Constrictor.Screenplay;
-using MPP.Acceptance.Test.API.Specs.Support;
-using MPP.Core.Session;
+using FleetPay.Acceptance.Test.API.Specs.Support;
+using FleetPay.Core.Session;
 using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Authenticators;
 
-namespace MPP.Acceptance.Test.API.Specs.Drivers
+namespace FleetPay.Acceptance.Test.API.Specs.Drivers
 {
-    public class MPPActor : Actor, IMPPActor
+    public class FleetPayActor : Actor, IFleetPayActor
     {
         private CallRestApi _callRestApi;
 
-        public MPPActor(string name, ILogger logger, IEnvironmentConfigurationDriver environmentConfigurationDriver,
+        public FleetPayActor(string name, ILogger logger,
+            IEnvironmentConfigurationDriver environmentConfigurationDriver,
             ITestContextDriver testContextDriver) :
             base(name, logger)
         {
@@ -24,15 +25,15 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
             GeTestContextDriver = testContextDriver;
         }
 
-        public MPPActor(IEnvironmentConfigurationDriver environmentConfigurationDriver,
-            ITestContextDriver testContextDriver) : base("MPPActor",
+        public FleetPayActor(IEnvironmentConfigurationDriver environmentConfigurationDriver,
+            ITestContextDriver testContextDriver) : base("FleetPayActor",
             new ConsoleLogger())
         {
             GetEnvironmentConfigurationDriver = environmentConfigurationDriver;
             GeTestContextDriver = testContextDriver;
         }
 
-        public MPPActor IsAttemptingTo(ITask task)
+        public FleetPayActor IsAttemptingTo(ITask task)
         {
             AttemptsTo(task);
             return this;
@@ -80,13 +81,13 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
             LogRequest(SeeLastSentRequest(), SeeLastReceivedResponse());
         }
 
-        public MPPActor WhoCanCallRegistrationApi =>
+        public FleetPayActor WhoCanCallRegistrationApi =>
             WhoCanCallApi(GetEnvironmentConfigurationDriver.RegistrationApiUrl);
 
-        public MPPActor WhoCanCallShellApiGateway =>
+        public FleetPayActor WhoCanCallShellApiGateway =>
             WhoCanCallApi(GetEnvironmentConfigurationDriver.ShellApiGatewayUrl);
 
-        public MPPActor WhoCanCallStationLocatorApi =>
+        public FleetPayActor WhoCanCallStationLocatorApi =>
             WhoCanCallApi(GetEnvironmentConfigurationDriver.StationLocatorApiUrl);
 
         public RememberVariableSetter Remembers(InMemory key)
@@ -123,7 +124,7 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
             return _callRestApi.LastRequest;
         }
 
-        private MPPActor WhoCanCallApi(string baseUrl)
+        private FleetPayActor WhoCanCallApi(string baseUrl)
         {
             var restSharpAbility = CallRestApi.At(baseUrl);
             restSharpAbility.DumpingRequestsTo(Directory.GetCurrentDirectory());

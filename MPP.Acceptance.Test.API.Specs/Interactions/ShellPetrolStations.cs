@@ -1,11 +1,11 @@
 ﻿using Boa.Constrictor.RestSharp;
 using Boa.Constrictor.Screenplay;
-using MPP.Acceptance.Test.API.Specs.Drivers;
-using MPP.Acceptance.Test.API.Specs.Model;
-using MPP.Acceptance.Test.API.Specs.Support;
+using FleetPay.Acceptance.Test.API.Specs.Drivers;
+using FleetPay.Acceptance.Test.API.Specs.Model;
+using FleetPay.Acceptance.Test.API.Specs.Support;
 using RestSharp;
 
-namespace MPP.Acceptance.Test.API.Specs.Interactions
+namespace FleetPay.Acceptance.Test.API.Specs.Interactions
 {
     public class ShellPetrolStations : IQuestion<IRestResponse>
     {
@@ -18,10 +18,10 @@ namespace MPP.Acceptance.Test.API.Specs.Interactions
 
         public IRestResponse RequestAs(IActor actor)
         {
-            var response = actor.Calls(Rest.Request(StationLocatorFromRowObjectToRestRequest((MPPActor) actor,
+            var response = actor.Calls(Rest.Request(StationLocatorFromRowObjectToRestRequest((FleetPayActor) actor,
                 _shellStationRowObject)));
 
-            ((MPPActor) actor).LogLastRequestAndResponse();
+            ((FleetPayActor) actor).LogLastRequestAndResponse();
 
             return response;
         }
@@ -31,7 +31,7 @@ namespace MPP.Acceptance.Test.API.Specs.Interactions
             return new(shellStationRowObject);
         }
 
-        private static RestRequest StationLocatorFromRowObjectToRestRequest(IMPPActor actor,
+        private static RestRequest StationLocatorFromRowObjectToRestRequest(IFleetPayActor actor,
             ShellStationRowObject shellStation)
         {
             var restRequest = new RestRequest(Endpoint.StationLocator.ToString(), Method.GET);

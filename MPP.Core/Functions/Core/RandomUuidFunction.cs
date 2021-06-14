@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MPP.Core.Functions.Core
+namespace FleetPay.Core.Functions.Core
 {
     /// <summary>
     ///     Creates a random .NET UUID.

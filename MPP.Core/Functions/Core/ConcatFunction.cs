@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using MPP.Core.Exceptions;
+using FleetPay.Core.Exceptions;
 
-namespace MPP.Core.Functions.Core
+namespace FleetPay.Core.Functions.Core
 {
     /// <summary>
     ///     Function concatenating multiple tokens to a single string. Tokens can be either static string values or dynamic

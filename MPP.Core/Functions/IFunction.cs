@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MPP.Core.Functions
+namespace FleetPay.Core.Functions
 {
     /// <summary>
     ///     General function interface.

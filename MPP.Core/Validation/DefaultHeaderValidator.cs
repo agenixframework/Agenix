@@ -1,14 +1,17 @@
 ﻿using System;
-using MPP.Core.Exceptions;
-using MPP.Core.Validation.Matcher;
+using FleetPay.Core.Exceptions;
+using FleetPay.Core.Validation.Matcher;
 
-namespace MPP.Core.Validation
+namespace FleetPay.Core.Validation
 {
     public class DefaultHeaderValidator : IHeaderValidator
     {
         public void ValidateHeader(string headerName, object receivedValue, object controlValue, TestContext context)
         {
-            var expectedValue = context.ReplaceDynamicContentInString(controlValue == null ?string.Empty : string.Join(",", controlValue));
+            var expectedValue =
+                context.ReplaceDynamicContentInString(controlValue == null
+                    ? string.Empty
+                    : string.Join(",", controlValue));
 
             try
             {

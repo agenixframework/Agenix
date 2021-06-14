@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace MPP.Core.Session
+namespace FleetPay.Core.Session
 {
     public class ObjectBag
     {

@@ -1,20 +1,20 @@
 ﻿using System.Linq;
-using MPP.Acceptance.Test.API.Specs.Drivers;
-using MPP.Acceptance.Test.API.Specs.Interactions;
-using MPP.Acceptance.Test.API.Specs.Model;
-using MPP.Acceptance.Test.API.Specs.Support;
+using FleetPay.Acceptance.Test.API.Specs.Drivers;
+using FleetPay.Acceptance.Test.API.Specs.Interactions;
+using FleetPay.Acceptance.Test.API.Specs.Model;
+using FleetPay.Acceptance.Test.API.Specs.Support;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
-namespace MPP.Acceptance.Test.API.Specs.Steps
+namespace FleetPay.Acceptance.Test.API.Specs.Steps
 {
     [Binding]
     public sealed class StationLocatorStepDefinitions
     {
-        private readonly IMPPActor _actor;
+        private readonly IFleetPayActor _actor;
         private readonly ScenarioContext _scenarioContext;
 
-        public StationLocatorStepDefinitions(ScenarioContext scenarioContext, IMPPActor actor)
+        public StationLocatorStepDefinitions(ScenarioContext scenarioContext, IFleetPayActor actor)
         {
             _scenarioContext = scenarioContext;
             _actor = actor;

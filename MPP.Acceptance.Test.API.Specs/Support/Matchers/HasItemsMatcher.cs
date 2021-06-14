@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MPP.Core.Validation.Matcher;
+using FleetPay.Core.Validation.Matcher;
 using NUnit.Framework;
-using TestContext = MPP.Core.TestContext;
+using TestContext = FleetPay.Core.TestContext;
 
-namespace MPP.Acceptance.Test.API.Specs.Support.Matchers
+namespace FleetPay.Acceptance.Test.API.Specs.Support.Matchers
 {
     /// <summary>
     /// Asserts that expected and actual are exactly equal.  The collections must have the same count,

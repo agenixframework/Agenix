@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MPP.Core.Exceptions
+namespace FleetPay.Core.Exceptions
 {
     public class UnknownElementException : CoreSystemException
     {

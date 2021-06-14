@@ -1,7 +1,7 @@
-﻿using MPP.Core.Util;
+﻿using FleetPay.Core.Util;
 using NUnit.Framework;
 
-namespace MPP.Core.NUnitTestProject.Util
+namespace FleetPay.Core.NUnitTestProject.Util
 {
     public class JsonPathUtilsTest : AbstractNUnitSetUp
     {

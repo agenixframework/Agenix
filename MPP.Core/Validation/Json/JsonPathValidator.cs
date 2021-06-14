@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using MPP.Core.Exceptions;
-using MPP.Core.Message;
-using MPP.Core.Util;
-using MPP.Core.Validation.Matcher;
+using FleetPay.Core.Exceptions;
+using FleetPay.Core.Message;
+using FleetPay.Core.Util;
+using FleetPay.Core.Validation.Matcher;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace MPP.Core.Validation.Json
+namespace FleetPay.Core.Validation.Json
 {
     public class JsonPathValidator : IJsonPathValidator
     {
@@ -46,7 +46,7 @@ namespace MPP.Core.Validation.Json
             try
             {
                 var readerContext = JToken.Parse(payload);
-                
+
 
                 foreach (var (key, value) in _jsonPathExpressions)
                 {

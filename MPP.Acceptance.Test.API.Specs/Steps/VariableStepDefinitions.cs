@@ -1,15 +1,15 @@
 ﻿using System.Linq;
-using MPP.Acceptance.Test.API.Specs.Drivers;
+using FleetPay.Acceptance.Test.API.Specs.Drivers;
 using TechTalk.SpecFlow;
 
-namespace MPP.Acceptance.Test.API.Specs.Steps
+namespace FleetPay.Acceptance.Test.API.Specs.Steps
 {
     [Binding]
     internal class VariableStepDefinitions
     {
-        private readonly IMPPActor _actor;
+        private readonly IFleetPayActor _actor;
 
-        public VariableStepDefinitions(IMPPActor actor)
+        public VariableStepDefinitions(FleetPayActor actor)
         {
             _actor = actor;
         }
@@ -35,3 +35,4 @@ namespace MPP.Acceptance.Test.API.Specs.Steps
         }
     }
 }
+    

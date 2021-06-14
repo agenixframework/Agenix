@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using MPP.Core.Exceptions;
-using MPP.Core.Message;
-using MPP.Core.Variable;
+using FleetPay.Core.Exceptions;
+using FleetPay.Core.Message;
+using FleetPay.Core.Variable;
 
-namespace MPP.Core.Validation.Json
+namespace FleetPay.Core.Validation
 {
     /// <summary>
     ///     Variable extractor reading message headers and saves them to new test variables.

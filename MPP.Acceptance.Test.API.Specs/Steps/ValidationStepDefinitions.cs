@@ -1,22 +1,21 @@
 ﻿using System.Linq;
+using FleetPay.Acceptance.Test.API.Specs.Drivers;
+using FleetPay.Acceptance.Test.API.Specs.Support;
+using FleetPay.Core.Validation;
+using FleetPay.Core.Validation.Json.Dsl;
 using FluentAssertions;
-using MPP.Acceptance.Test.API.Specs.Drivers;
-using MPP.Acceptance.Test.API.Specs.Support;
-using MPP.Core.Validation;
-using MPP.Core.Validation.Json;
-using MPP.Core.Validation.Json.Dsl;
 using NUnit.Framework;
 using RestSharp;
 using TechTalk.SpecFlow;
 
-namespace MPP.Acceptance.Test.API.Specs.Steps
+namespace FleetPay.Acceptance.Test.API.Specs.Steps
 {
     [Binding]
     public sealed class ValidationStepDefinitions
     {
-        private readonly IMPPActor _actor;
+        private readonly IFleetPayActor _actor;
 
-        public ValidationStepDefinitions(IMPPActor actor)
+        public ValidationStepDefinitions(IFleetPayActor actor)
         {
             _actor = actor;
         }

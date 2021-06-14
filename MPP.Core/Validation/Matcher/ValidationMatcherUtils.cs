@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using MPP.Core.Exceptions;
-using MPP.Core.Functions;
-using MPP.Core.Variable;
+using FleetPay.Core.Exceptions;
+using FleetPay.Core.Functions;
+using FleetPay.Core.Variable;
 
-namespace MPP.Core.Validation.Matcher
+namespace FleetPay.Core.Validation.Matcher
 {
     /// <summary>
     ///     Utility class for validation matchers.

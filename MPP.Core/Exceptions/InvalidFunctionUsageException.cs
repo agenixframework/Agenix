@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MPP.Core.Exceptions
+namespace FleetPay.Core.Exceptions
 {
     /// <summary>
     ///     Use this exception in case a function is called with invalid parameters.

@@ -1,8 +1,8 @@
 ﻿using System;
+using FleetPay.Acceptance.Test.API.Specs.Support;
 using Microsoft.Extensions.Configuration;
-using MPP.Acceptance.Test.API.Specs.Support;
 
-namespace MPP.Acceptance.Test.API.Specs.Drivers.Integrated
+namespace FleetPay.Acceptance.Test.API.Specs.Drivers.Integrated
 {
     internal class IntegratedEnvironmentConfiguration : IEnvironmentConfigurationDriver
     {
@@ -26,7 +26,7 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers.Integrated
             GetConfigurationValue(Constants.AppSettingProperties.StationLocatorBasicAuthPasswordPropertyName);
 
         /// <summary>
-        /// Is station locator Basic Auth enabled?
+        ///     Is station locator Basic Auth enabled?
         /// </summary>
         public bool IsStationLocatorBasicAuthEnabled => Convert.ToBoolean(
             GetConfigurationValue(Constants.AppSettingProperties.IsStationLocatorBasicAuthEnabledPropertyName));

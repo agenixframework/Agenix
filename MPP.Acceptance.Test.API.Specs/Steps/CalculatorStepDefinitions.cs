@@ -1,32 +1,32 @@
-﻿using MPP.Acceptance.Test.API.Specs.Drivers;
-using MPP.Acceptance.Test.API.Specs.Interactions;
+﻿using FleetPay.Acceptance.Test.API.Specs.Drivers;
+using FleetPay.Acceptance.Test.API.Specs.Interactions;
 using TechTalk.SpecFlow;
 
-namespace MPP.Acceptance.Test.API.Specs.Steps
+namespace FleetPay.Acceptance.Test.API.Specs.Steps
 {
     [Binding]
     public sealed class CalculatorStepDefinitions
     {
         private readonly IEnvironmentConfigurationDriver _environmentConfigurationDriver;
 
-        private readonly IMPPActor _mppActor;
+        private readonly IFleetPayActor _fleetPayActor;
 
         // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
 
         private readonly ScenarioContext _scenarioContext;
 
         public CalculatorStepDefinitions(ScenarioContext scenarioContext,
-            IEnvironmentConfigurationDriver environmentConfigurationDriver, IMPPActor mppActor)
+            IEnvironmentConfigurationDriver environmentConfigurationDriver, IFleetPayActor fleetPayActor)
         {
             _scenarioContext = scenarioContext;
             _environmentConfigurationDriver = environmentConfigurationDriver;
-            _mppActor = mppActor;
+            _fleetPayActor = fleetPayActor;
         }
 
         [Given("the first number is (.*)")]
         public void GivenTheFirstNumberIs(int number)
         {
-            _mppActor.WhoCanCallRegistrationApi.AttemptsTo(ExecuteSampleTask.With());
+            _fleetPayActor.WhoCanCallRegistrationApi.AttemptsTo(ExecuteSampleTask.With());
         }
 
         [Given("the second number is (.*)")]

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MPP.Core.Exceptions
+namespace FleetPay.Core.Exceptions
 {
     /// <summary>
     ///     Throw this exception in case an unknown variable is read from test context.

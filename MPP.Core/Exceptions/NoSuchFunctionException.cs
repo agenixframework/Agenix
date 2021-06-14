@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MPP.Core.Exceptions
+namespace FleetPay.Core.Exceptions
 {
     /// <summary>
     ///     Unknown functions cause this exception.

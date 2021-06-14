@@ -1,7 +1,7 @@
-﻿using MPP.Core.Validation.Json.Dsl;
+﻿using FleetPay.Core.Validation.Json.Dsl;
 using NUnit.Framework;
 
-namespace MPP.Core.NUnitTestProject.Validation.Json
+namespace FleetPay.Core.NUnitTestProject.Validation.Json
 {
     public class JsonPathVariableExtractorTest : AbstractNUnitSetUp
     {

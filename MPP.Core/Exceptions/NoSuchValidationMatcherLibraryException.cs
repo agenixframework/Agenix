@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MPP.Core.Exceptions
+namespace FleetPay.Core.Exceptions
 {
     /// <summary>
     ///     In case no function library exists for a given prefix this exception is thrown.

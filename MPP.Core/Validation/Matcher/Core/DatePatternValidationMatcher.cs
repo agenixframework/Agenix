@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-using MPP.Core.Exceptions;
+using FleetPay.Core.Exceptions;
 
-namespace MPP.Core.Validation.Matcher.Core
+namespace FleetPay.Core.Validation.Matcher.Core
 {
     /// <summary>
     ///     ValidationMatcher checking for valid date format.

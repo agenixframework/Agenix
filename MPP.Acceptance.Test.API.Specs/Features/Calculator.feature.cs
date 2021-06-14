@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace MPP.Acceptance.Test.API.Specs.Features
+namespace FleetPay.Acceptance.Test.API.Specs.Features
 {
     using TechTalk.SpecFlow;
     using System;
@@ -22,7 +22,7 @@ namespace MPP.Acceptance.Test.API.Specs.Features
     [TechTalk.SpecRun.FeatureAttribute("Calculator", Description=@"![Calculator](https://specflow.org/wp-content/uploads/2020/09/calculator.png)
 Simple calculator for adding **two** numbers
 
-Link to a feature: [Calculator](MPP.Acceptance.Test.API.Specs/Features/Calculator.feature)
+Link to a feature: [Calculator](FleetPay.Acceptance.Test.API.Specs/Features/Calculator.feature)
 ***Further read***: **[Learn more about how to generate Living Documentation](https://docs.specflow.org/projects/specflow-livingdoc/en/latest/LivingDocGenerator/Generating-Documentation.html)**", SourceFile="Features\\Calculator.feature", SourceLine=0)]
     public partial class CalculatorFeature
     {
@@ -41,7 +41,7 @@ Link to a feature: [Calculator](MPP.Acceptance.Test.API.Specs/Features/Calculato
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Calculator", @"![Calculator](https://specflow.org/wp-content/uploads/2020/09/calculator.png)
 Simple calculator for adding **two** numbers
 
-Link to a feature: [Calculator](MPP.Acceptance.Test.API.Specs/Features/Calculator.feature)
+Link to a feature: [Calculator](FleetPay.Acceptance.Test.API.Specs/Features/Calculator.feature)
 ***Further read***: **[Learn more about how to generate Living Documentation](https://docs.specflow.org/projects/specflow-livingdoc/en/latest/LivingDocGenerator/Generating-Documentation.html)**", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }

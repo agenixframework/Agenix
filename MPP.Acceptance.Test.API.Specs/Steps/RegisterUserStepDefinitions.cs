@@ -1,22 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using FleetPay.Acceptance.Test.API.Specs.Drivers;
+using FleetPay.Acceptance.Test.API.Specs.Interactions;
+using FleetPay.Acceptance.Test.API.Specs.Model;
+using FleetPay.Acceptance.Test.API.Specs.Support;
 using FluentAssertions;
-using MPP.Acceptance.Test.API.Specs.Drivers;
-using MPP.Acceptance.Test.API.Specs.Interactions;
-using MPP.Acceptance.Test.API.Specs.Model;
-using MPP.Acceptance.Test.API.Specs.Support;
 using RestSharp;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
-namespace MPP.Acceptance.Test.API.Specs.Steps
+namespace FleetPay.Acceptance.Test.API.Specs.Steps
 {
     [Binding]
     public class RegisterUserStepDefinitions
     {
-        private readonly IMPPActor _actor;
+        private readonly IFleetPayActor _actor;
 
-        public RegisterUserStepDefinitions(IMPPActor actor)
+        public RegisterUserStepDefinitions(IFleetPayActor actor)
         {
             _actor = actor;
         }

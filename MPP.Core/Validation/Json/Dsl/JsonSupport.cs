@@ -1,4 +1,4 @@
-﻿namespace MPP.Core.Validation.Json.Dsl
+﻿namespace FleetPay.Core.Validation.Json.Dsl
 {
     public class JsonSupport
     {

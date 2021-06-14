@@ -1,7 +1,7 @@
 ﻿using System;
 using Boa.Constrictor.Screenplay;
 
-namespace MPP.Acceptance.Test.API.Specs.Interactions
+namespace FleetPay.Acceptance.Test.API.Specs.Interactions
 {
     public class ExecuteSampleTask2 : ITask
     {

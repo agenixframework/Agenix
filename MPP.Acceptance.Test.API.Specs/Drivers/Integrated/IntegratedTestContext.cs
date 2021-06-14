@@ -1,6 +1,6 @@
-﻿using MPP.Core;
+﻿using FleetPay.Core;
 
-namespace MPP.Acceptance.Test.API.Specs.Drivers.Integrated
+namespace FleetPay.Acceptance.Test.API.Specs.Drivers.Integrated
 {
     public class IntegratedTestContext : ITestContextDriver
     {

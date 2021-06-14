@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
+using FleetPay.Core.Validation.Matcher;
 using Moq;
-using MPP.Core.Validation.Matcher;
 using NUnit.Framework;
 
-namespace MPP.Core.NUnitTestProject.Matcher
+namespace FleetPay.Core.NUnitTestProject.Matcher
 {
     public class ValidationMatcherUtilsTest : AbstractNUnitSetUp
     {

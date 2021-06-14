@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace MPP.Core.Functions
+namespace FleetPay.Core.Functions
 {
     /// <summary>
     ///     Helper class parsing a parameter string and converting the tokens to a parameter list.

@@ -31,10 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MPP.Core\MPP.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -45,6 +41,10 @@
 
   <ItemGroup>
     <Folder Include="Features\shell_api_access_token\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MPP.Core\FleetPay.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using MPP.Core.Exceptions;
-using MPP.Core.Util;
+using FleetPay.Core.Exceptions;
+using FleetPay.Core.Util;
 
-namespace MPP.Core.Functions.Core
+namespace FleetPay.Core.Functions.Core
 {
     public class JsonPathFunction : IFunction
 

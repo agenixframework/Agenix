@@ -1,4 +1,4 @@
-﻿namespace MPP.Core.Message
+﻿namespace FleetPay.Core.Message
 {
     /// <summary>
     ///     Enumeration for message protocol types used in test cases.

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using MPP.Core.Exceptions;
+using FleetPay.Core.Exceptions;
 using static System.Console;
 
-namespace MPP.Core.Functions.Core
+namespace FleetPay.Core.Functions.Core
 {
     /// <summary>
     ///     Function returning the actual date as formatted string value. User specifies format string as argument.

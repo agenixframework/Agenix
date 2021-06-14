@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace MPP.Acceptance.Test.API.Specs.Model
+namespace FleetPay.Acceptance.Test.API.Specs.Model
 {
     [DataContract]
     public class AccessTokenResponse

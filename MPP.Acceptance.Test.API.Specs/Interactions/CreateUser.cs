@@ -1,12 +1,12 @@
 ﻿using Boa.Constrictor.RestSharp;
 using Boa.Constrictor.Screenplay;
-using MPP.Acceptance.Test.API.Specs.Drivers;
-using MPP.Acceptance.Test.API.Specs.Model;
-using MPP.Acceptance.Test.API.Specs.Support;
+using FleetPay.Acceptance.Test.API.Specs.Drivers;
+using FleetPay.Acceptance.Test.API.Specs.Model;
+using FleetPay.Acceptance.Test.API.Specs.Support;
 using Newtonsoft.Json;
 using RestSharp;
 
-namespace MPP.Acceptance.Test.API.Specs.Interactions
+namespace FleetPay.Acceptance.Test.API.Specs.Interactions
 {
     public class CreateUser : IQuestion<IRestResponse>
     {
@@ -19,9 +19,9 @@ namespace MPP.Acceptance.Test.API.Specs.Interactions
 
         public IRestResponse RequestAs(IActor actor)
         {
-            var response = actor.Calls(Rest.Request(CreateUserRestRequest((MPPActor) actor)));
+            var response = actor.Calls(Rest.Request(CreateUserRestRequest((FleetPayActor) actor)));
 
-            ((MPPActor) actor).LogLastRequestAndResponse();
+            ((FleetPayActor) actor).LogLastRequestAndResponse();
 
             return response;
         }
@@ -31,7 +31,7 @@ namespace MPP.Acceptance.Test.API.Specs.Interactions
             return new(createUserRowObject);
         }
 
-        private RestRequest CreateUserRestRequest(IMPPActor actor)
+        private RestRequest CreateUserRestRequest(IFleetPayActor actor)
         {
             var createUserRequest = CreateUserRequestFromRowObject(_createUserRowObject, actor);
 
@@ -45,7 +45,7 @@ namespace MPP.Acceptance.Test.API.Specs.Interactions
         }
 
         private static CreateUserRequest CreateUserRequestFromRowObject(CreateUserRowObject createUserRowObject,
-            IMPPActor actor)
+            IFleetPayActor actor)
         {
             var createUser = new CreateUserRequest
             {

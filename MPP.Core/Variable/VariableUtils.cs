@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text;
-using MPP.Core.Exceptions;
+using FleetPay.Core.Exceptions;
 
-namespace MPP.Core.Variable
+namespace FleetPay.Core.Variable
 {
     /// <summary>
     ///     Utility class manipulating test variables.

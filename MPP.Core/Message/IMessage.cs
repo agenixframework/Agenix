@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MPP.Core.Message
+namespace FleetPay.Core.Message
 {
     public interface IMessage
     {

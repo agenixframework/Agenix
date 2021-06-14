@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using MPP.Core.Exceptions;
+using FleetPay.Core.Exceptions;
 
-namespace MPP.Core.Validation.Matcher
+namespace FleetPay.Core.Validation.Matcher
 {
     /// <summary>
     ///     Default implementation of control expression parser.

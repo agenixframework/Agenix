@@ -1,9 +1,8 @@
-﻿using MPP.Core.Exceptions;
+﻿using System;
+using FleetPay.Core.Exceptions;
 using NUnit.Framework;
-using System;
-using MPP.Core.Session;
 
-namespace MPP.Core.NUnitTestProject
+namespace FleetPay.Core.NUnitTestProject
 {
     public class AbstractNUnitSetUp
     {

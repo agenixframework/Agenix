@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using MPP.Core.Exceptions;
-using MPP.Core.Functions;
-using MPP.Core.Session;
-using MPP.Core.Validation.Matcher;
-using MPP.Core.Variable;
+using FleetPay.Core.Exceptions;
+using FleetPay.Core.Functions;
+using FleetPay.Core.Session;
+using FleetPay.Core.Validation.Matcher;
+using FleetPay.Core.Variable;
 
-namespace MPP.Core
+namespace FleetPay.Core
 {
     /// <summary>
     ///     The test context provides utility methods for replacing dynamic content(variables and functions) in string
@@ -20,11 +20,6 @@ namespace MPP.Core
         private FunctionRegistry _functionRegistry = new();
 
         /// <summary>
-        /// ValidationMatcher Registry holding all available matchers
-        /// </summary>
-        private ValidationMatcherRegistry _validationMatcherRegistry = new();
-
-        /// <summary>
         ///     Function registry holding all available functions
         /// </summary>
         public FunctionRegistry FunctionRegistry
@@ -33,11 +28,10 @@ namespace MPP.Core
             set => _functionRegistry = value;
         }
 
-        public ValidationMatcherRegistry ValidationMatcherRegistry
-        {
-            get => _validationMatcherRegistry;
-            set => _validationMatcherRegistry = value;
-        }
+        /// <summary>
+        ///     ValidationMatcher Registry holding all available matchers
+        /// </summary>
+        public ValidationMatcherRegistry ValidationMatcherRegistry { get; set; } = new();
 
         /// <summary>
         ///     Checks if variables are present right now.

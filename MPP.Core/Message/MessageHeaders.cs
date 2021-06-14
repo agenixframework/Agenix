@@ -1,4 +1,4 @@
-﻿namespace MPP.Core.Message
+﻿namespace FleetPay.Core.Message
 {
     /// <summary>
     ///     Specific message headers.

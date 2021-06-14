@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace MPP.Acceptance.Test.API.Specs.Features
+namespace FleetPay.Acceptance.Test.API.Specs.Features
 {
     using TechTalk.SpecFlow;
     using System;
