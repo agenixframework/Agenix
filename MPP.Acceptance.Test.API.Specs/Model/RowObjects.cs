@@ -4,6 +4,5 @@
 
     public record RegisterUserRowObject(string Email, string Password);
 
-    public record ShellStationRowObject(string Lat, string Lon, string Radius, string CountryCode, string UnmannedOnly,
-        string TruckOnly);
+    public record ShellStationRowObject(string Lat, string Lon, string Radius, string CountryCode, string Amenities);
 }

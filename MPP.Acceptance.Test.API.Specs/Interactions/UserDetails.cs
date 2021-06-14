@@ -17,7 +17,7 @@ namespace MPP.Acceptance.Test.API.Specs.Interactions
 
         public IRestResponse RequestAs(IActor actor)
         {
-            var resolvedResource = ((MPPActor) actor).GeTestContextDriver().GetTestContext
+            var resolvedResource = ((MPPActor) actor).GeTestContextDriver.GetTestContext
                 .ReplaceDynamicContentInString($"{Endpoint.Users}/{_userId}");
 
             var restRequest = new RestRequest(resolvedResource, Method.GET);

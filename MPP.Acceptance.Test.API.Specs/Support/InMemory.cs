@@ -2,7 +2,7 @@
 {
     public enum InMemory
     {
-        CurrentReceivedResponses,
-        CurrentSentRequests
+        CURRENT_RECEIVED_RESPONSES,
+        CURRENT_SENT_REQUESTS
     }
 }

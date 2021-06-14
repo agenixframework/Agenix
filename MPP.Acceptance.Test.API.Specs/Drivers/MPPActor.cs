@@ -8,32 +8,28 @@ using MPP.Acceptance.Test.API.Specs.Support;
 using MPP.Core.Session;
 using Newtonsoft.Json;
 using RestSharp;
+using RestSharp.Authenticators;
 
 namespace MPP.Acceptance.Test.API.Specs.Drivers
 {
     public class MPPActor : Actor, IMPPActor
     {
-        private readonly IEnvironmentConfigurationDriver _environmentConfigurationDriver;
-
-        private readonly ITestContextDriver _testContextDriver;
-
         private CallRestApi _callRestApi;
-
 
         public MPPActor(string name, ILogger logger, IEnvironmentConfigurationDriver environmentConfigurationDriver,
             ITestContextDriver testContextDriver) :
             base(name, logger)
         {
-            _environmentConfigurationDriver = environmentConfigurationDriver;
-            _testContextDriver = testContextDriver;
+            GetEnvironmentConfigurationDriver = environmentConfigurationDriver;
+            GeTestContextDriver = testContextDriver;
         }
 
         public MPPActor(IEnvironmentConfigurationDriver environmentConfigurationDriver,
             ITestContextDriver testContextDriver) : base("MPPActor",
             new ConsoleLogger())
         {
-            _environmentConfigurationDriver = environmentConfigurationDriver;
-            _testContextDriver = testContextDriver;
+            GetEnvironmentConfigurationDriver = environmentConfigurationDriver;
+            GeTestContextDriver = testContextDriver;
         }
 
         public MPPActor IsAttemptingTo(ITask task)
@@ -75,8 +71,8 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
             };
 
 
-            Logger.Info(string.Format("Request: {0}, Response: {1}", JsonConvert.SerializeObject(requestToLog),
-                JsonConvert.SerializeObject(responseToLog)));
+            Logger.Info(
+                $"Request: {JsonConvert.SerializeObject(requestToLog)}, Response: {JsonConvert.SerializeObject(responseToLog)}");
         }
 
         public void LogLastRequestAndResponse()
@@ -84,21 +80,14 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
             LogRequest(SeeLastSentRequest(), SeeLastReceivedResponse());
         }
 
-        public MPPActor WhoCanCallRegistrationApi()
-        {
-            return WhoCanCallApi(_environmentConfigurationDriver.RegistrationApiUrl);
-        }
+        public MPPActor WhoCanCallRegistrationApi =>
+            WhoCanCallApi(GetEnvironmentConfigurationDriver.RegistrationApiUrl);
 
-        public MPPActor WhoCanCallShellApiGateway()
-        {
-            return WhoCanCallApi(_environmentConfigurationDriver.ShellApiGatewayUrl);
-        }
+        public MPPActor WhoCanCallShellApiGateway =>
+            WhoCanCallApi(GetEnvironmentConfigurationDriver.ShellApiGatewayUrl);
 
-        public MPPActor WhoCanCallStationLocatorApi()
-        {
-            return WhoCanCallApi(_environmentConfigurationDriver.StationLocatorApiUrl);
-        }
-
+        public MPPActor WhoCanCallStationLocatorApi =>
+            WhoCanCallApi(GetEnvironmentConfigurationDriver.StationLocatorApiUrl);
 
         public RememberVariableSetter Remembers(InMemory key)
         {
@@ -122,13 +111,12 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
 
         public void Echo(string message)
         {
-            Console.WriteLine(GeTestContextDriver().GetTestContext.ReplaceDynamicContentInString(message));
+            Console.WriteLine(GeTestContextDriver.GetTestContext.ReplaceDynamicContentInString(message));
         }
 
-        public ITestContextDriver GeTestContextDriver()
-        {
-            return _testContextDriver;
-        }
+        public ITestContextDriver GeTestContextDriver { get; }
+
+        public IEnvironmentConfigurationDriver GetEnvironmentConfigurationDriver { get; }
 
         public IRestRequest SeeLastSentRequest()
         {
@@ -139,6 +127,11 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
         {
             var restSharpAbility = CallRestApi.At(baseUrl);
             restSharpAbility.DumpingRequestsTo(Directory.GetCurrentDirectory());
+
+            if (GetEnvironmentConfigurationDriver.IsStationLocatorBasicAuthEnabled)
+                restSharpAbility.Client.Authenticator = new HttpBasicAuthenticator(
+                    GetEnvironmentConfigurationDriver.StationLocatorBasicAuthUsername,
+                    GetEnvironmentConfigurationDriver.StationLocatorBasicAuthPassword);
 
             Can(restSharpAbility);
 

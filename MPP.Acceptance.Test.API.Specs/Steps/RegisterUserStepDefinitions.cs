@@ -14,7 +14,6 @@ namespace MPP.Acceptance.Test.API.Specs.Steps
     [Binding]
     public class RegisterUserStepDefinitions
     {
-
         private readonly IMPPActor _actor;
 
         public RegisterUserStepDefinitions(IMPPActor actor)
@@ -25,30 +24,29 @@ namespace MPP.Acceptance.Test.API.Specs.Steps
         [Given(@"the following user details")]
         public void GivenTheFollowingUserDetails(Table table)
         {
-            _actor.Remembers(InMemory.CurrentSentRequests).That(table.CreateSet<RegisterUserRowObject>());
+            _actor.Remembers(InMemory.CURRENT_SENT_REQUESTS).That(table.CreateSet<RegisterUserRowObject>());
         }
 
         [When(@"operator registers the user over API")]
         public void WhenOperatorRegistersTheUserOverApi()
         {
-            var rows = _actor.Recall<IEnumerable<RegisterUserRowObject>>(InMemory.CurrentSentRequests);
+            var rows = _actor.Recall<IEnumerable<RegisterUserRowObject>>(InMemory.CURRENT_SENT_REQUESTS);
 
-            var response = _actor.WhoCanCallRegistrationApi().Calls(RegisterUser.With(rows.First()));
+            var response = _actor.WhoCanCallRegistrationApi.Calls(RegisterUser.With(rows.First()));
 
-            _actor.Remembers(InMemory.CurrentReceivedResponses).That(response);
+            _actor.Remembers(InMemory.CURRENT_RECEIVED_RESPONSES).That(response);
         }
 
         [Then(@"operator receives (.*) response code")]
         public void ThenOperatorReceivesResponseCode(int statusCode)
         {
-            var response = _actor.Recall<IRestResponse>(InMemory.CurrentReceivedResponses);
+            var response = _actor.Recall<IRestResponse>(InMemory.CURRENT_RECEIVED_RESPONSES);
             response.StatusCode.Should().Be(statusCode);
         }
 
         [Then(@"user is registered successfully")]
         public void ThenUserIsRegisteredSuccessfully()
         {
-
         }
     }
 }

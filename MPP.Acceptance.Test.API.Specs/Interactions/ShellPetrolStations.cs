@@ -39,28 +39,24 @@ namespace MPP.Acceptance.Test.API.Specs.Interactions
 
             if (shellStation.Lat != null)
                 restRequest.AddQueryParameter("lat",
-                    actor.GeTestContextDriver().GetTestContext.ReplaceDynamicContentInString(shellStation.Lat));
+                    actor.GeTestContextDriver.GetTestContext.ReplaceDynamicContentInString(shellStation.Lat));
 
             if (shellStation.Lon != null)
                 restRequest.AddQueryParameter("lon",
-                    actor.GeTestContextDriver().GetTestContext.ReplaceDynamicContentInString(shellStation.Lon));
+                    actor.GeTestContextDriver.GetTestContext.ReplaceDynamicContentInString(shellStation.Lon));
 
             if (shellStation.Radius != null)
                 restRequest.AddQueryParameter("radius",
-                    actor.GeTestContextDriver().GetTestContext.ReplaceDynamicContentInString(shellStation.Radius));
+                    actor.GeTestContextDriver.GetTestContext.ReplaceDynamicContentInString(shellStation.Radius));
 
             if (shellStation.CountryCode != null)
                 restRequest.AddQueryParameter("countryCode",
-                    actor.GeTestContextDriver().GetTestContext.ReplaceDynamicContentInString(shellStation.CountryCode));
+                    actor.GeTestContextDriver.GetTestContext.ReplaceDynamicContentInString(shellStation.CountryCode));
 
-            if (shellStation.UnmannedOnly != null)
-                restRequest.AddQueryParameter("unmannedOnly",
-                    actor.GeTestContextDriver().GetTestContext
-                        .ReplaceDynamicContentInString(shellStation.UnmannedOnly));
-
-            if (shellStation.TruckOnly != null)
-                restRequest.AddQueryParameter("truckOnly",
-                    actor.GeTestContextDriver().GetTestContext.ReplaceDynamicContentInString(shellStation.TruckOnly));
+            if (shellStation.Amenities != null)
+                restRequest.AddQueryParameter("amenities",
+                    actor.GeTestContextDriver.GetTestContext
+                        .ReplaceDynamicContentInString(shellStation.Amenities));
 
             return restRequest;
         }

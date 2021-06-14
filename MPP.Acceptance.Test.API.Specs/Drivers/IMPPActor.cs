@@ -6,11 +6,11 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
 {
     public interface IMPPActor
     {
-        public MPPActor WhoCanCallRegistrationApi();
+        public MPPActor WhoCanCallRegistrationApi { get; }
 
-        public MPPActor WhoCanCallShellApiGateway();
+        public MPPActor WhoCanCallShellApiGateway { get; }
 
-        public MPPActor WhoCanCallStationLocatorApi();
+        public MPPActor WhoCanCallStationLocatorApi { get; }
 
         public MPPActor IsAttemptingTo(ITask task);
 
@@ -30,6 +30,8 @@ namespace MPP.Acceptance.Test.API.Specs.Drivers
 
         public void Echo(string message);
 
-        public ITestContextDriver GeTestContextDriver();
+        public ITestContextDriver GeTestContextDriver { get; }
+
+        public IEnvironmentConfigurationDriver GetEnvironmentConfigurationDriver { get; }
     }
 }

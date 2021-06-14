@@ -8,6 +8,12 @@
 
         string ShellApiGatewayUrl { get; }
 
+        string StationLocatorBasicAuthUsername { get; }
+
+        string StationLocatorBasicAuthPassword { get; }
+
+        bool IsStationLocatorBasicAuthEnabled { get; }
+
         string Environment { get; }
     }
 }

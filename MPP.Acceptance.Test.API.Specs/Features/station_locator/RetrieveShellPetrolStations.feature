@@ -8,11 +8,11 @@ Scenario: Retrieve Shell Petrol Stations by only mandatory query parameters
 		| 52.533501 | 13.404813 | 0.3    |
 	Then the response status should be "200"
 	And the JSON response body is validated using the json path expressions with associated matchers:
-		| JsonPathExpression                 | MatcherName                                                                                                                        |
-		| $.Size()                           | @EqualsTo(10)@                                                                                                                     |
-		| $.[?(@.id == '12170821')].KeySet() | @HasItemsInAnyOrder('id','name','telephone','address','lat','lon','fuelTypes','amenities','openingHours','fullStationIdentifier')@ |
-		| $.[?(@.id == '12170823')].KeySet() | @HasItemsInAnyOrder('id','name','telephone','address','lat','lon','fuelTypes','amenities','openingHours','fullStationIdentifier')@ |
-		| $.[?(@.id == '12170825')].KeySet() | @HasItemsInAnyOrder('id','name','telephone','address','lat','lon','fuelTypes','amenities','openingHours','fullStationIdentifier')@ |
+		| JsonPathExpression                 | MatcherName                                                                                                                                                   |
+		| $.Size()                           | @EqualsTo(10)@                                                                                                                                                |
+		| $.[?(@.id == '12170821')].KeySet() | @HasItemsInAnyOrder('id','name','telephone','address','lat','lon','fuelTypes','amenities','openingHours','fullStationIdentifier','isTruckOnly','isUnmanned')@ |
+		| $.[?(@.id == '12170823')].KeySet() | @HasItemsInAnyOrder('id','name','telephone','address','lat','lon','fuelTypes','amenities','openingHours','fullStationIdentifier','isTruckOnly','isUnmanned')@ |
+		| $.[?(@.id == '12170825')].KeySet() | @HasItemsInAnyOrder('id','name','telephone','address','lat','lon','fuelTypes','amenities','openingHours','fullStationIdentifier','isTruckOnly','isUnmanned')@ |
 	And the JSON response body is validated using the json path expressions with associated matchers:
 		| JsonPathExpression                              | MatcherName                                                               |
 		| $.[?(@.id == '12170821')].id                    | @EqualsTo(12170821)@                                                      |
@@ -53,21 +53,21 @@ Scenario: Retrieve Shell Petrol Stations by only mandatory query parameters
 @shell-api-stub @ignore
 Scenario: Retrieve Shell Petrol Stations by mandatory and optional query parameters
 	Given FleetPay mobile app attempts to retrieve the shell petrol stations over API using the query parameters:
-		| Lat       | Lon       | Radius | CountryCode | UnmannedOnly | TruckOnly |
-		| 52.533501 | 13.404813 | 0.3    | DE          | true         | true      |
+		| Lat       | Lon       | Radius | CountryCode | Amenities |
+		| 52.533501 | 13.404813 | 0.3    | DE          | 24        |
 	Then the response status should be "200"
 	And the JSON response body is validated using the json path expressions with associated matchers:
-		| JsonPathExpression                             | MatcherName                                                                                                                        |
-		| $.Size()                                       | @EqualsTo(1)@                                                                                                                      |
-		| $.[?(@.fullStationIdentifier == '1')].KeySet() | @HasItemsInAnyOrder('id','name','telephone','address','lat','lon','fuelTypes','amenities','openingHours','fullStationIdentifier')@ |
+		| JsonPathExpression                             | MatcherName                                                                                                                                                   |
+		| $.Size()                                       | @EqualsTo(3)@                                                                                                                                                 |
+		| $.[?(@.fullStationIdentifier == '1')].KeySet() | @HasItemsInAnyOrder('id','name','telephone','address','lat','lon','fuelTypes','amenities','openingHours','fullStationIdentifier','isTruckOnly','isUnmanned')@ |
 	And the JSON response body is validated using the json path expressions with associated matchers:
-		| JsonPathExpression                                 | MatcherName                                                                     |
-		| $.[?(@.fullStationIdentifier == '1')].id           | @EqualsTo(12170818)@                                                            |
-		| $.[?(@.fullStationIdentifier == '1')].lat          | @StartsWith(52)@                                                                |
-		| $.[?(@.fullStationIdentifier == '1')].lon          | @StartsWith(13)@                                                                |
-		| $.[?(@.fullStationIdentifier == '1')].name         | @EqualsTo(Zum Biotop)@                                                          |
-		| $.[?(@.fullStationIdentifier == '1')].telephone    | @EqualsTo(9611199089)@                                                          |
-		| $.[?(@.fullStationIdentifier == '1')].address      | @EqualsTo(Zum Biotop 19, 50127 Bergheim, Germany)@                              |
-		| $.[?(@.fullStationIdentifier == '1')].fuelTypes    | @HasItemsInAnyOrder('CNG','DieselFit','Fuelsave Midgrade Gasoline','Kerosene')@ |
-		| $.[?(@.fullStationIdentifier == '1')].amenities    | @HasItemsInAnyOrder('Disabled Facilities','Shop','Unamanned','Truck Only')@     |
-		| $.[?(@.fullStationIdentifier == '1')].openingHours | @HasItemsInAnyOrder('Mon-Fri 10:00-18:59','Sat-Sun 12:00-16:59')@               |
+		| JsonPathExpression                    | MatcherName                                                                           |
+		| $.[?(@.id == '12170818')].amenities   | @HasItemsInAnyOrder('Disabled Facilities','Shop','Unamanned','Truck Only')@           |
+		| $.[?(@.id == '12170818')].isTruckOnly | True                                                                                  |
+		| $.[?(@.id == '12170818')].isUnmanned  | True                                                                                  |
+		| $.[?(@.id == '12170825')].amenities   | @HasItemsInAnyOrder('Disabled Facilities','Shop','Truck Only')@ |
+		| $.[?(@.id == '12170825')].isTruckOnly | True                                                                                  |
+		| $.[?(@.id == '12170825')].isUnmanned  | False                                                                                 |
+		| $.[?(@.id == '12170827')].amenities   | @HasItemsInAnyOrder('Disabled Facilities','Car Wash','Truck Only')@                   |
+		| $.[?(@.id == '12170827')].isTruckOnly | True                                                                                  |
+		| $.[?(@.id == '12170827')].isUnmanned  | False                                                                                 |

@@ -28,7 +28,7 @@ namespace MPP.Acceptance.Test.API.Specs.Steps
 
             CollectionAssert.IsNotEmpty(datTableRows, "The table rows are empty.");
 
-            var response = _actor.Recall<IRestResponse>(InMemory.CurrentReceivedResponses);
+            var response = _actor.Recall<IRestResponse>(InMemory.CURRENT_RECEIVED_RESPONSES);
             Assert.IsNotNull(response, "The last received http response is null!");
             Assert.IsNotNull(response.Content, "The http response body is null!");
             Assert.IsNotEmpty(response.Content, "The http response body is empty!");
@@ -38,7 +38,7 @@ namespace MPP.Acceptance.Test.API.Specs.Steps
                 .Extract()
                 .Expressions(datTableRows)
                 .Build()
-                .ExtractVariables(response.Content, _actor.GeTestContextDriver().GetTestContext);
+                .ExtractVariables(response.Content, _actor.GeTestContextDriver.GetTestContext);
         }
 
         [Then(@"the values are extracted into the variables from the JSON response headers:")]
@@ -48,7 +48,7 @@ namespace MPP.Acceptance.Test.API.Specs.Steps
 
             CollectionAssert.IsNotEmpty(headersWithAssociatedVariables, "The table rows are empty.");
 
-            var response = _actor.Recall<IRestResponse>(InMemory.CurrentReceivedResponses);
+            var response = _actor.Recall<IRestResponse>(InMemory.CURRENT_RECEIVED_RESPONSES);
             Assert.IsNotNull(response, "The last received http response is null!");
             Assert.IsNotNull(response.Headers, "The http headers body is null!");
             Assert.IsNotEmpty(response.Headers, "The http headers body is empty!");
@@ -61,7 +61,7 @@ namespace MPP.Acceptance.Test.API.Specs.Steps
             new HeaderVariableExtractor.Builder()
                 .Headers(headersWithAssociatedVariables)
                 .Build()
-                .ExtractVariables(actualResponseHeaders, _actor.GeTestContextDriver().GetTestContext);
+                .ExtractVariables(actualResponseHeaders, _actor.GeTestContextDriver.GetTestContext);
         }
 
         [Then(@"the JSON response headers are validated using matchers:")]
@@ -71,7 +71,7 @@ namespace MPP.Acceptance.Test.API.Specs.Steps
 
             CollectionAssert.IsNotEmpty(headersWithAssociatedVariables, "The table rows are empty.");
 
-            var response = _actor.Recall<IRestResponse>(InMemory.CurrentReceivedResponses);
+            var response = _actor.Recall<IRestResponse>(InMemory.CURRENT_RECEIVED_RESPONSES);
             Assert.IsNotNull(response, "The last received http response is null!");
             Assert.IsNotNull(response.Headers, "The http headers body is null!");
             Assert.IsNotEmpty(response.Headers, "The http headers body is empty!");
@@ -80,11 +80,9 @@ namespace MPP.Acceptance.Test.API.Specs.Steps
                 .Where(parameter => parameter.Value != null)
                 .ToDictionary(parameter => parameter.Name ?? string.Empty, parameter => parameter.Value.ToString());
 
-            foreach (var (key ,value) in headersWithAssociatedVariables)
-            {
+            foreach (var (key, value) in headersWithAssociatedVariables)
                 new DefaultHeaderValidator()
-                    .ValidateHeader(key, actualResponseHeaders[key], value, _actor.GeTestContextDriver().GetTestContext);
-            }
+                    .ValidateHeader(key, actualResponseHeaders[key], value, _actor.GeTestContextDriver.GetTestContext);
         }
 
         [Then(@"the JSON response body is validated using the json path expressions? with associated matchers?:")]
@@ -94,7 +92,7 @@ namespace MPP.Acceptance.Test.API.Specs.Steps
 
             CollectionAssert.IsNotEmpty(datTableRows, "The table rows are empty.");
 
-            var response = _actor.Recall<IRestResponse>(InMemory.CurrentReceivedResponses);
+            var response = _actor.Recall<IRestResponse>(InMemory.CURRENT_RECEIVED_RESPONSES);
             Assert.IsNotNull(response, "The last received http response is null!");
             Assert.IsNotNull(response.Content, "The http response body is null!");
             Assert.IsNotEmpty(response.Content, "The http response body is empty!");
@@ -104,13 +102,13 @@ namespace MPP.Acceptance.Test.API.Specs.Steps
                 .Validate()
                 .Expressions(datTableRows)
                 .Build()
-                .Validate(response.Content, _actor.GeTestContextDriver().GetTestContext);
+                .Validate(response.Content, _actor.GeTestContextDriver.GetTestContext);
         }
 
         [Then(@"the response status should be ""(\d+)""")]
         public void ThenTheResponseStatusShouldBe(int httpResponseCode)
         {
-            var response = _actor.Recall<IRestResponse>(InMemory.CurrentReceivedResponses);
+            var response = _actor.Recall<IRestResponse>(InMemory.CURRENT_RECEIVED_RESPONSES);
             Assert.IsNotNull(response, "The last received http response is null!");
 
             response.StatusCode.Should().Be(httpResponseCode);

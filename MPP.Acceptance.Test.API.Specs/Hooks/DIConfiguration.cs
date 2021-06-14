@@ -1,10 +1,13 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using BoDi;
 using Microsoft.Extensions.Configuration;
 using MPP.Acceptance.Test.API.Specs.Drivers;
 using MPP.Acceptance.Test.API.Specs.Drivers.Integrated;
+using MPP.Acceptance.Test.API.Specs.Support;
 using MPP.Acceptance.Test.API.Specs.Support.Matchers;
 using MPP.Core;
+using MPP.Core.Exceptions;
 using MPP.Core.Session;
 using TechTalk.SpecFlow;
 using TechTalk.SpecRun;
@@ -12,13 +15,15 @@ using TechTalk.SpecRun;
 namespace MPP.Acceptance.Test.API.Specs.Hooks
 {
     [Binding]
-    public sealed class DIConfiguration
+    public sealed class DiConfiguration
     {
+        private readonly ScenarioContext _scenarioContext;
         private readonly TestRunContext _testRunContext;
 
-        public DIConfiguration(TestRunContext testRunContext)
+        public DiConfiguration(TestRunContext testRunContext, ScenarioContext scenarioContext)
         {
             _testRunContext = testRunContext;
+            _scenarioContext = scenarioContext;
         }
 
         [BeforeScenario(Order = 1)]

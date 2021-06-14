@@ -122,15 +122,15 @@ this.ScenarioInitialize(scenarioInfo);
                 table19.AddRow(new string[] {
                             "$.[?(@.id == \'12170821\')].KeySet()",
                             "@HasItemsInAnyOrder(\'id\',\'name\',\'telephone\',\'address\',\'lat\',\'lon\',\'fuelTypes\',\'am" +
-                                "enities\',\'openingHours\',\'fullStationIdentifier\')@"});
+                                "enities\',\'openingHours\',\'fullStationIdentifier\',\'isTruckOnly\',\'isUnmanned\')@"});
                 table19.AddRow(new string[] {
                             "$.[?(@.id == \'12170823\')].KeySet()",
                             "@HasItemsInAnyOrder(\'id\',\'name\',\'telephone\',\'address\',\'lat\',\'lon\',\'fuelTypes\',\'am" +
-                                "enities\',\'openingHours\',\'fullStationIdentifier\')@"});
+                                "enities\',\'openingHours\',\'fullStationIdentifier\',\'isTruckOnly\',\'isUnmanned\')@"});
                 table19.AddRow(new string[] {
                             "$.[?(@.id == \'12170825\')].KeySet()",
                             "@HasItemsInAnyOrder(\'id\',\'name\',\'telephone\',\'address\',\'lat\',\'lon\',\'fuelTypes\',\'am" +
-                                "enities\',\'openingHours\',\'fullStationIdentifier\')@"});
+                                "enities\',\'openingHours\',\'fullStationIdentifier\',\'isTruckOnly\',\'isUnmanned\')@"});
 #line 10
  testRunner.And("the JSON response body is validated using the json path expressions with associat" +
                         "ed matchers:", ((string)(null)), table19, "And ");
@@ -283,15 +283,13 @@ this.ScenarioInitialize(scenarioInfo);
                             "Lon",
                             "Radius",
                             "CountryCode",
-                            "UnmannedOnly",
-                            "TruckOnly"});
+                            "Amenities"});
                 table23.AddRow(new string[] {
                             "52.533501",
                             "13.404813",
                             "0.3",
                             "DE",
-                            "true",
-                            "true"});
+                            "24"});
 #line 55
  testRunner.Given("FleetPay mobile app attempts to retrieve the shell petrol stations over API using" +
                         " the query parameters:", ((string)(null)), table23, "Given ");
@@ -304,11 +302,11 @@ this.ScenarioInitialize(scenarioInfo);
                             "MatcherName"});
                 table24.AddRow(new string[] {
                             "$.Size()",
-                            "@EqualsTo(1)@"});
+                            "@EqualsTo(3)@"});
                 table24.AddRow(new string[] {
                             "$.[?(@.fullStationIdentifier == \'1\')].KeySet()",
                             "@HasItemsInAnyOrder(\'id\',\'name\',\'telephone\',\'address\',\'lat\',\'lon\',\'fuelTypes\',\'am" +
-                                "enities\',\'openingHours\',\'fullStationIdentifier\')@"});
+                                "enities\',\'openingHours\',\'fullStationIdentifier\',\'isTruckOnly\',\'isUnmanned\')@"});
 #line 59
  testRunner.And("the JSON response body is validated using the json path expressions with associat" +
                         "ed matchers:", ((string)(null)), table24, "And ");
@@ -317,32 +315,32 @@ this.ScenarioInitialize(scenarioInfo);
                             "JsonPathExpression",
                             "MatcherName"});
                 table25.AddRow(new string[] {
-                            "$.[?(@.fullStationIdentifier == \'1\')].id",
-                            "@EqualsTo(12170818)@"});
-                table25.AddRow(new string[] {
-                            "$.[?(@.fullStationIdentifier == \'1\')].lat",
-                            "@StartsWith(52)@"});
-                table25.AddRow(new string[] {
-                            "$.[?(@.fullStationIdentifier == \'1\')].lon",
-                            "@StartsWith(13)@"});
-                table25.AddRow(new string[] {
-                            "$.[?(@.fullStationIdentifier == \'1\')].name",
-                            "@EqualsTo(Zum Biotop)@"});
-                table25.AddRow(new string[] {
-                            "$.[?(@.fullStationIdentifier == \'1\')].telephone",
-                            "@EqualsTo(9611199089)@"});
-                table25.AddRow(new string[] {
-                            "$.[?(@.fullStationIdentifier == \'1\')].address",
-                            "@EqualsTo(Zum Biotop 19, 50127 Bergheim, Germany)@"});
-                table25.AddRow(new string[] {
-                            "$.[?(@.fullStationIdentifier == \'1\')].fuelTypes",
-                            "@HasItemsInAnyOrder(\'CNG\',\'DieselFit\',\'Fuelsave Midgrade Gasoline\',\'Kerosene\')@"});
-                table25.AddRow(new string[] {
-                            "$.[?(@.fullStationIdentifier == \'1\')].amenities",
+                            "$.[?(@.id == \'12170818\')].amenities",
                             "@HasItemsInAnyOrder(\'Disabled Facilities\',\'Shop\',\'Unamanned\',\'Truck Only\')@"});
                 table25.AddRow(new string[] {
-                            "$.[?(@.fullStationIdentifier == \'1\')].openingHours",
-                            "@HasItemsInAnyOrder(\'Mon-Fri 10:00-18:59\',\'Sat-Sun 12:00-16:59\')@"});
+                            "$.[?(@.id == \'12170818\')].isTruckOnly",
+                            "True"});
+                table25.AddRow(new string[] {
+                            "$.[?(@.id == \'12170818\')].isUnmanned",
+                            "True"});
+                table25.AddRow(new string[] {
+                            "$.[?(@.id == \'12170825\')].amenities",
+                            "@HasItemsInAnyOrder(\'Disabled Facilities\',\'Shop\',\'Truck Only\')@"});
+                table25.AddRow(new string[] {
+                            "$.[?(@.id == \'12170825\')].isTruckOnly",
+                            "True"});
+                table25.AddRow(new string[] {
+                            "$.[?(@.id == \'12170825\')].isUnmanned",
+                            "False"});
+                table25.AddRow(new string[] {
+                            "$.[?(@.id == \'12170827\')].amenities",
+                            "@HasItemsInAnyOrder(\'Disabled Facilities\',\'Car Wash\',\'Truck Only\')@"});
+                table25.AddRow(new string[] {
+                            "$.[?(@.id == \'12170827\')].isTruckOnly",
+                            "True"});
+                table25.AddRow(new string[] {
+                            "$.[?(@.id == \'12170827\')].isUnmanned",
+                            "False"});
 #line 63
  testRunner.And("the JSON response body is validated using the json path expressions with associat" +
                         "ed matchers:", ((string)(null)), table25, "And ");
