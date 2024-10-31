@@ -2,32 +2,29 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
-using Agenix.Core;
-using Agenix.Core.Validation.Matcher;
 using Agenix.Core.Exceptions;
 
-namespace Agenix.Core.Validation.Matcher.Core
+namespace Agenix.Core.Validation.Matcher.Core;
+
+/// <summary>
+///     ValidationMatcher ignores all new line characters in value and control value.
+/// </summary>
+public class IgnoreNewLineValidationMatcher : IValidationMatcher
+
 {
-    /// <summary>
-    ///     ValidationMatcher ignores all new line characters in value and control value.
-    /// </summary>
-    public class IgnoreNewLineValidationMatcher : IValidationMatcher
-
+    public void Validate(string fieldName, string value, List<string> controlParameters, TestContext context)
     {
-        public void Validate(string fieldName, string value, List<string> controlParameters, TestContext context)
-        {
-            var control = controlParameters[0];
+        var control = controlParameters[0];
 
-            var normalizedValue = Regex.Replace(value, "\\r(\\n)?", "\n");
-            normalizedValue = Regex.Replace(normalizedValue, "\\n", "");
-            var normalizedControl = Regex.Replace(control, "\\r(\\n)?", "\n");
-            normalizedControl = Regex.Replace(normalizedControl, "\\n", "");
+        var normalizedValue = Regex.Replace(value, "\\r(\\n)?", "\n");
+        normalizedValue = Regex.Replace(normalizedValue, "\\n", "");
+        var normalizedControl = Regex.Replace(control, "\\r(\\n)?", "\n");
+        normalizedControl = Regex.Replace(normalizedControl, "\\n", "");
 
-            if (!string.Equals(normalizedValue, normalizedControl, StringComparison.OrdinalIgnoreCase))
-                throw new ValidationException(TypeDescriptor.GetClassName(typeof(IgnoreNewLineValidationMatcher))
-                                              + " failed for field '" + fieldName
-                                              + "'. Received value is '" + normalizedValue
-                                              + "', control value is '" + normalizedControl + "'.");
-        }
+        if (!string.Equals(normalizedValue, normalizedControl, StringComparison.OrdinalIgnoreCase))
+            throw new ValidationException(TypeDescriptor.GetClassName(typeof(IgnoreNewLineValidationMatcher))
+                                          + " failed for field '" + fieldName
+                                          + "'. Received value is '" + normalizedValue
+                                          + "', control value is '" + normalizedControl + "'.");
     }
 }

@@ -2,36 +2,34 @@
 using Agenix.Core.Exceptions;
 using NUnit.Framework;
 
-namespace Agenix.Core.NUnitTestProject
+namespace Agenix.Core.NUnitTestProject;
+
+public class AbstractNUnitSetUp
 {
-    public class AbstractNUnitSetUp
+    protected readonly TestContextFactory TestContextFactory = TestContextFactory.NewInstance();
+    protected TestContext Context;
+
+    [SetUp]
+    public void Setup()
     {
-        protected TestContext Context;
+        Context = CreateTestContext();
+    }
 
-        protected TestContextFactory TestContextFactory = TestContextFactory.NewInstance();
+    [TearDown]
+    public void TearDown()
+    {
+        Context.Clear();
+    }
 
-        [SetUp]
-        public void Setup()
+    protected TestContext CreateTestContext()
+    {
+        try
         {
-            Context = CreateTestContext();
+            return TestContextFactory.GetObject();
         }
-
-        [TearDown]
-        public void TearDown()
+        catch (Exception e)
         {
-            Context.Clear();
-        }
-
-        protected TestContext CreateTestContext()
-        {
-            try
-            {
-                return TestContextFactory.GetObject();
-            }
-            catch (Exception e)
-            {
-                throw new CoreSystemException("Failed to create test context", e);
-            }
+            throw new CoreSystemException("Failed to create test context", e);
         }
     }
 }

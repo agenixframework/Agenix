@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Agenix.Core.Validation.Matcher;
 
-namespace Agenix.Core.Validation.Matcher.Core
+namespace Agenix.Core.Validation.Matcher.Core;
+
+public class IgnoreValidationMatcher : IValidationMatcher
 {
-    public class IgnoreValidationMatcher : IValidationMatcher
+    public void Validate(string fieldName, string value, List<string> controlParameters, TestContext context)
     {
-        public void Validate(string fieldName, string value, List<string> controlParameters, TestContext context)
-        {
-            Console.WriteLine($"Ignoring value for field '{fieldName}'");
-        }
+        Console.WriteLine($"Ignoring value for field '{fieldName}'");
     }
 }

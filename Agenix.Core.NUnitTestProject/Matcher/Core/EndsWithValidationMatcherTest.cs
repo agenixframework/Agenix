@@ -4,41 +4,40 @@ using Agenix.Core.Validation.Matcher.Core;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
-namespace Agenix.Core.NUnitTestProject.Matcher.Core
+namespace Agenix.Core.NUnitTestProject.Matcher.Core;
+
+public class EndsWithValidationMatcherTest : AbstractNUnitSetUp
 {
-    public class EndsWithValidationMatcherTest : AbstractNUnitSetUp
+    private readonly EndsWithValidationMatcher _matcher = new();
+
+    [Test]
+    public void TestValidateSuccess()
     {
-        private readonly EndsWithValidationMatcher _matcher = new();
+        _matcher.Validate("field", "This is a test", new List<string> { "" }, Context);
+        _matcher.Validate("field", "This is a test", new List<string> { "t" }, Context);
+        _matcher.Validate("field", "This is a test", new List<string> { " test" }, Context);
+        _matcher.Validate("field", "This is a 0815test", new List<string> { " is a 0815test" }, Context);
+    }
 
-        [Test]
-        public void TestValidateSuccess()
+    [Test]
+    public void TestValidateError()
+    {
+        AssertException("field", "This is a test", new List<string> { "T" });
+        AssertException("field", "This is a test", new List<string> { " Test" });
+    }
+
+    private void AssertException(string fieldName, string value, List<string> control)
+    {
+        try
         {
-            _matcher.Validate("field", "This is a test", new List<string> { "" }, Context);
-            _matcher.Validate("field", "This is a test", new List<string> { "t" }, Context);
-            _matcher.Validate("field", "This is a test", new List<string> { " test" }, Context);
-            _matcher.Validate("field", "This is a 0815test", new List<string> { " is a 0815test" }, Context);
+            _matcher.Validate(fieldName, value, control, Context);
+            Assert.Fail("Expected exception not thrown!");
         }
-
-        [Test]
-        public void TestValidateError()
+        catch (ValidationException e)
         {
-            AssertException("field", "This is a test", new List<string> { "T" });
-            AssertException("field", "This is a test", new List<string> { " Test" });
-        }
-
-        private void AssertException(string fieldName, string value, List<string> control)
-        {
-            try
-            {
-                _matcher.Validate(fieldName, value, control, Context);
-                Assert.Fail("Expected exception not thrown!");
-            }
-            catch (ValidationException e)
-            {
-                ClassicAssert.IsTrue(e.GetMessage().Contains(fieldName));
-                ClassicAssert.IsTrue(e.GetMessage().Contains(control[0]));
-                ClassicAssert.IsTrue(e.GetMessage().Contains(value));
-            }
+            ClassicAssert.IsTrue(e.GetMessage().Contains(fieldName));
+            ClassicAssert.IsTrue(e.GetMessage().Contains(control[0]));
+            ClassicAssert.IsTrue(e.GetMessage().Contains(value));
         }
     }
 }

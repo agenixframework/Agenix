@@ -1,21 +1,19 @@
 ﻿using System.Collections.Generic;
-using Agenix.Core;
 using Agenix.Core.Exceptions;
 
-namespace Agenix.Core.Functions.Core
-{
-    /// <summary>
-    ///     Function concatenating multiple tokens to a single string. Tokens can be either static string values or dynamic
-    ///     variables or functions.
-    /// </summary>
-    public class ConcatFunction : IFunction
-    {
-        public string Execute(List<string> parameterList, TestContext testContext)
-        {
-            if (parameterList == null || parameterList.Count == 0)
-                throw new InvalidFunctionUsageException("Function parameters must not be empty");
+namespace Agenix.Core.Functions.Core;
 
-            return string.Join("", parameterList);
-        }
+/// <summary>
+///     Function concatenating multiple tokens to a single string. Tokens can be either static string values or dynamic
+///     variables or functions.
+/// </summary>
+public class ConcatFunction : IFunction
+{
+    public string Execute(List<string> parameterList, TestContext testContext)
+    {
+        if (parameterList == null || parameterList.Count == 0)
+            throw new InvalidFunctionUsageException("Function parameters must not be empty");
+
+        return string.Join("", parameterList);
     }
 }

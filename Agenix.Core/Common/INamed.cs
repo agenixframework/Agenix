@@ -1,14 +1,10 @@
+namespace Agenix.Core.Common;
 
-using System;
-
-namespace Agenix.Core.Common
+public interface INamed
 {
-    public interface INamed
-    {
-        /**
-         * Sets the component name.
-         * @param name
-         */
-        void SetName(string name);
-    }
+    /**
+     * Sets the component name.
+     * @param name
+     */
+    void SetName(string name);
 }

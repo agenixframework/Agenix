@@ -1,110 +1,107 @@
-
-
 using System;
-using Microsoft.Extensions.Logging;
+using log4net;
 
-namespace Agenix.Core.Actions
+namespace Agenix.Core.Actions;
+
+/**
+* Prints messages to the console/logger during test execution.
+*/
+public class EchoAction : AbstractTestAction
 {
     /**
-    * Prints messages to the console/logger during test execution.
-    */
-    public class EchoAction : AbstractTestAction
+     * Logger
+     */
+    private static readonly ILog _log = LogManager.GetLogger(typeof(EchoAction));
+
+    /**
+     * Log message
+     */
+    private readonly string Message;
+
+    /**
+     * Default constructor using the builder.
+     * @param builder
+     */
+    private EchoAction(Builder builder) : base("echo", builder)
     {
-        /** Log message */
-        private readonly string Message;
+        Message = builder._message;
+    }
 
-        /** Logger */
-        private static readonly ILogger logger = new LoggerFactory().CreateLogger<EchoAction>();
+    public override void DoExecute(TestContext context)
+    {
+        if (Message == null)
+            _log.Info($"Agenix test {DateTime.Now}");
+        else
+            _log.Info(context.LogModifier.Mask(context.ReplaceDynamicContentInString(Message)));
+    }
 
-        /**
-         * Default constructor using the builder.
-         * @param builder
-         */
-        private EchoAction(Builder builder) : base("echo", builder)
-        {
-            Message = builder._message;
-        }
+    /**
+     * Gets the message.
+     * @return the message
+     */
+    public string GetMessage()
+    {
+        return Message;
+    }
 
-        public override void DoExecute(TestContext context)
-        {
-            if (Message == null)
-            {
-                logger.LogInformation($"Agenix test {DateTime.Now}");
-            }
-            else
-            {
-                Console.WriteLine(context.ReplaceDynamicContentInString(Message));
-            }
-        }
-
-        /**
-         * Gets the message.
-         * @return the message
-         */
-        public string GetMessage()
-        {
-            return Message;
-        }
+    /**
+     * Action builder.
+     */
+    public sealed class Builder : AbstractTestActionBuilder<ITestAction, ITestActionBuilder<ITestAction>>
+    {
+        public string _message;
 
         /**
-         * Action builder.
+         * Fluent API action building entry method used in C# DSL.
+         * @return
          */
-        public sealed class Builder : AbstractTestActionBuilder<ITestAction, ITestActionBuilder<ITestAction>>
+        public static Builder Echo()
         {
-            public string _message;
+            return new Builder();
+        }
 
-            /**
-             * Fluent API action building entry method used in C# DSL.
-             * @return
-             */
-            public static Builder Echo()
-            {
-                return new Builder();
-            }
+        /**
+         * Fluent API action building entry method used in C# DSL.
+         * @param message
+         * @return
+         */
+        public static Builder Echo(string message)
+        {
+            Builder builder = new();
+            builder.Message(message);
+            return builder;
+        }
 
-            /**
-             * Fluent API action building entry method used in C# DSL.
-             * @param message
-             * @return
-             */
-            public static Builder Echo(string message)
-            {
-                Builder builder = new();
-                builder.Message(message);
-                return builder;
-            }
+        /**
+         * Fluent API action building entry method used in C# DSL.
+         * @return
+         */
+        public static Builder Print()
+        {
+            return new Builder();
+        }
 
-            /**
-             * Fluent API action building entry method used in C# DSL.
-             * @return
-             */
-            public static Builder Print()
-            {
-                return new Builder();
-            }
+        /**
+         * Fluent API action building entry method used in C# DSL.
+         * @param message
+         * @return
+         */
+        public static Builder Print(string message)
+        {
+            Builder builder = new();
+            builder.Message(message);
+            return builder;
+        }
 
-            /**
-             * Fluent API action building entry method used in C# DSL.
-             * @param message
-             * @return
-             */
-            public static Builder Print(string message)
-            {
-                Builder builder = new();
-                builder.Message(message);
-                return builder;
-            }
+        public Builder Message(string message)
+        {
+            _message = message;
+            return this;
+        }
 
-            public Builder Message(string message)
-            {
-                this._message = message;
-                return this;
-            }
-
-            public override EchoAction Build()
-            {
-                return new EchoAction(this);
-            }
+        public override EchoAction Build()
+        {
+            return new EchoAction(this);
         }
     }
 }

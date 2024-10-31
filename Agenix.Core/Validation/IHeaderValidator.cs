@@ -1,7 +1,6 @@
-﻿namespace Agenix.Core.Validation
+﻿namespace Agenix.Core.Validation;
+
+public interface IHeaderValidator
 {
-    public interface IHeaderValidator
-    {
-        void ValidateHeader(string name, object received, object control, TestContext context);
-    }
+    void ValidateHeader(string name, object received, object control, TestContext context);
 }
