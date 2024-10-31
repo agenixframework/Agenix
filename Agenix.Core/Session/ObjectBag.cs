@@ -1,54 +1,53 @@
 ﻿using System.Threading;
 
-namespace Agenix.Core.Session
+namespace Agenix.Core.Session;
+
+public class ObjectBag
 {
-    public class ObjectBag
+    private static readonly ThreadLocal<TestSessionVariables<object, object>> TestSessionThreadLocal = new();
+
+    public static ISessionMap<object, object> GetCurrentSession()
     {
-        private static readonly ThreadLocal<TestSessionVariables<object, object>> TestSessionThreadLocal = new();
+        return TestSessionThreadLocal.Value ??
+               (TestSessionThreadLocal.Value = new TestSessionVariables<object, object>());
+    }
 
-        public static ISessionMap<object, object> GetCurrentSession()
+    public static T SessionVariableCalled<T>(object key)
+    {
+        GetCurrentSession().TryGetValue(key, out var o);
+        return (T)o;
+    }
+
+    public static SessionVariableSetter SetSessionVariable(object key)
+    {
+        return new SessionVariableSetter(key);
+    }
+
+    public static void ClearCurrentSession()
+    {
+        GetCurrentSession().Clear();
+    }
+
+    public static bool HasASessionVariableCalled(object key)
+    {
+        return GetCurrentSession().ContainsKey(key);
+    }
+
+    public class SessionVariableSetter
+    {
+        private readonly object _key;
+
+        public SessionVariableSetter(object key)
         {
-            return TestSessionThreadLocal.Value ??
-                   (TestSessionThreadLocal.Value = new TestSessionVariables<object, object>());
+            _key = key;
         }
 
-        public static T SessionVariableCalled<T>(object key)
+        public void To<T>(T value)
         {
-            GetCurrentSession().TryGetValue(key, out var o);
-            return (T)o;
-        }
-
-        public static SessionVariableSetter SetSessionVariable(object key)
-        {
-            return new(key);
-        }
-
-        public static void ClearCurrentSession()
-        {
-            GetCurrentSession().Clear();
-        }
-
-        public static bool HasASessionVariableCalled(object key)
-        {
-            return GetCurrentSession().ContainsKey(key);
-        }
-
-        public class SessionVariableSetter
-        {
-            private readonly object _key;
-
-            public SessionVariableSetter(object key)
-            {
-                _key = key;
-            }
-
-            public void To<T>(T value)
-            {
-                if (value != null)
-                    GetCurrentSession().Add(_key, value);
-                else
-                    GetCurrentSession().Remove(_key);
-            }
+            if (value != null)
+                GetCurrentSession().Add(_key, value);
+            else
+                GetCurrentSession().Remove(_key);
         }
     }
 }

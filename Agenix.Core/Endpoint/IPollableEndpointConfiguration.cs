@@ -1,13 +1,12 @@
-﻿namespace Agenix.Core.Endpoint
+﻿namespace Agenix.Core.Endpoint;
+
+/// <summary>
+///     Extends endpoint configuration by adding polling interval settings.
+/// </summary>
+public interface IPollableEndpointConfiguration : IEndpointConfiguration
 {
     /// <summary>
-    ///     Extends endpoint configuration by adding polling interval settings.
+    ///     Gets/ Sets the polling interval used on this endpoint configuration.
     /// </summary>
-    public interface IPollableEndpointConfiguration : IEndpointConfiguration
-    {
-        /// <summary>
-        ///     Gets/ Sets the polling interval used on this endpoint configuration.
-        /// </summary>
-        long PollingInterval { get; set; }
-    }
+    long PollingInterval { get; set; }
 }

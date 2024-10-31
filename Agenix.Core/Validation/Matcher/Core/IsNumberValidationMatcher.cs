@@ -1,28 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Agenix.Core;
-using Agenix.Core.Validation.Matcher;
 using Agenix.Core.Exceptions;
 using static System.Double;
 
-namespace Agenix.Core.Validation.Matcher.Core
+namespace Agenix.Core.Validation.Matcher.Core;
+
+public class IsNumberValidationMatcher : IValidationMatcher
 {
-    public class IsNumberValidationMatcher : IValidationMatcher
+    public void Validate(string fieldName, string value, List<string> controlParameters, TestContext context)
     {
-        public void Validate(string fieldName, string value, List<string> controlParameters, TestContext context)
+        try
         {
-            try
-            {
-                Parse(value);
-            }
-            catch (Exception e)
-            {
-                throw new ValidationException(TypeDescriptor.GetClassName(typeof(GreaterThanValidationMatcher))
-                                              + " failed for field '" + fieldName
-                                              + "'. Received value is '" + value
-                                              + "', and is not a number", e);
-            }
+            Parse(value);
+        }
+        catch (Exception e)
+        {
+            throw new ValidationException(TypeDescriptor.GetClassName(typeof(GreaterThanValidationMatcher))
+                                          + " failed for field '" + fieldName
+                                          + "'. Received value is '" + value
+                                          + "', and is not a number", e);
         }
     }
 }

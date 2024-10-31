@@ -1,30 +1,29 @@
 ﻿using System;
 
-namespace Agenix.Core.Exceptions
+namespace Agenix.Core.Exceptions;
+
+/// <summary>
+///     Basic custom runtime/ system exception for all errors in Core
+/// </summary>
+public class CoreSystemException : SystemException
 {
     /// <summary>
-    ///     Basic custom runtime/ system exception for all errors in Core
+    ///     Default constructor.
     /// </summary>
-    public class CoreSystemException : SystemException
+    public CoreSystemException()
     {
-        /// <summary>
-        ///     Default constructor.
-        /// </summary>
-        public CoreSystemException()
-        {
-        }
+    }
 
-        public CoreSystemException(string message) : base(message)
-        {
-        }
+    public CoreSystemException(string message) : base(message)
+    {
+    }
 
-        public CoreSystemException(string message, Exception cause) : base(message, cause)
-        {
-        }
+    public CoreSystemException(string message, Exception cause) : base(message, cause)
+    {
+    }
 
-        public string GetMessage()
-        {
-            return base.Message;
-        }
+    public string GetMessage()
+    {
+        return base.Message;
     }
 }

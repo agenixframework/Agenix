@@ -1,52 +1,51 @@
 ﻿using System;
-using Agenix.Core.Validation.Matcher;
 using Agenix.Core.Exceptions;
+using Agenix.Core.Validation.Matcher;
 
-namespace Agenix.Core.Validation
+namespace Agenix.Core.Validation;
+
+public class DefaultHeaderValidator : IHeaderValidator
 {
-    public class DefaultHeaderValidator : IHeaderValidator
+    public void ValidateHeader(string headerName, object receivedValue, object controlValue, TestContext context)
     {
-        public void ValidateHeader(string headerName, object receivedValue, object controlValue, TestContext context)
+        var expectedValue =
+            context.ReplaceDynamicContentInString(controlValue == null
+                ? string.Empty
+                : string.Join(",", controlValue));
+
+        try
         {
-            var expectedValue =
-                context.ReplaceDynamicContentInString(controlValue == null
-                    ? string.Empty
-                    : string.Join(",", controlValue));
-
-            try
+            if (receivedValue != null)
             {
-                if (receivedValue != null)
-                {
-                    var actualValue = string.Join(",", receivedValue);
+                var actualValue = string.Join(",", receivedValue);
 
-                    if (ValidationMatcherUtils.IsValidationMatcherExpression(expectedValue))
-                    {
-                        ValidationMatcherUtils.ResolveValidationMatcher(headerName, actualValue, expectedValue,
-                            context);
-                        return;
-                    }
-
-                    if (!actualValue.Equals(expectedValue))
-                        throw new ValidationException("Values not equal for header element '"
-                                                      + headerName + "', expected '"
-                                                      + expectedValue + "' but was '"
-                                                      + receivedValue + "'");
-                }
-                else
+                if (ValidationMatcherUtils.IsValidationMatcherExpression(expectedValue))
                 {
-                    if (!string.IsNullOrEmpty(expectedValue))
-                        throw new ValidationException("Values not equal for header element '"
-                                                      + headerName + "', expected '"
-                                                      + expectedValue + "' but was '"
-                                                      + null + "'");
+                    ValidationMatcherUtils.ResolveValidationMatcher(headerName, actualValue, expectedValue,
+                        context);
+                    return;
                 }
+
+                if (!actualValue.Equals(expectedValue))
+                    throw new ValidationException("Values not equal for header element '"
+                                                  + headerName + "', expected '"
+                                                  + expectedValue + "' but was '"
+                                                  + receivedValue + "'");
             }
-            catch (Exception e)
+            else
             {
-                throw new ValidationException("Validation failed:", e);
+                if (!string.IsNullOrEmpty(expectedValue))
+                    throw new ValidationException("Values not equal for header element '"
+                                                  + headerName + "', expected '"
+                                                  + expectedValue + "' but was '"
+                                                  + null + "'");
             }
-
-            Console.WriteLine("Validating header element: " + headerName + "='" + expectedValue + "': OK.");
         }
+        catch (Exception e)
+        {
+            throw new ValidationException("Validation failed:", e);
+        }
+
+        Console.WriteLine("Validating header element: " + headerName + "='" + expectedValue + "': OK.");
     }
 }

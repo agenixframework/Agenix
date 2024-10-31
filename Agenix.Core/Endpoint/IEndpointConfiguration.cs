@@ -1,10 +1,9 @@
-﻿namespace Agenix.Core.Endpoint
+﻿namespace Agenix.Core.Endpoint;
+
+public interface IEndpointConfiguration
 {
-    public interface IEndpointConfiguration
-    {
-        /// <summary>
-        /// Gets/ Sets the timeout either for sending or receiving messages.
-        /// </summary>
-        long Timeout { get; set; }
-    }
+    /// <summary>
+    ///     Gets/ Sets the timeout either for sending or receiving messages.
+    /// </summary>
+    long Timeout { get; set; }
 }

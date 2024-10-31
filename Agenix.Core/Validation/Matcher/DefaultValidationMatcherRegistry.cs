@@ -1,18 +1,15 @@
-﻿using Agenix.Core.Validation.Matcher;
+﻿namespace Agenix.Core.Validation.Matcher;
 
-namespace Agenix.Core.Validation.Matcher
+/// <summary>
+///     Default registry automatically adds default validation matcher library.
+/// </summary>
+public class DefaultValidationMatcherRegistry : ValidationMatcherRegistry
 {
     /// <summary>
-    ///     Default registry automatically adds default validation matcher library.
+    ///     Constructor initializes with default validation matcher library.
     /// </summary>
-    public class DefaultValidationMatcherRegistry : ValidationMatcherRegistry
+    public DefaultValidationMatcherRegistry()
     {
-        /// <summary>
-        ///     Constructor initializes with default validation matcher library.
-        /// </summary>
-        public DefaultValidationMatcherRegistry()
-        {
-            AddValidationMatcherLibrary(new DefaultValidationMatcherLibrary());
-        }
+        AddValidationMatcherLibrary(new DefaultValidationMatcherLibrary());
     }
 }

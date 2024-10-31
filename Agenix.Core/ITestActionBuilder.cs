@@ -1,30 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Agenix.Core;
 
-namespace Agenix.Core
+/// <summary>
+///     Test action builder.
+/// </summary>
+/// <typeparam name="T"></typeparam>
+public interface ITestActionBuilder<out T> where T : ITestAction
 {
     /// <summary>
-    /// Test action builder.
+    ///     Builds new test action instance.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public interface ITestActionBuilder<T> where T : ITestAction
+    /// <returns>the built test action.</returns>
+    T Build();
+
+
+    public interface IDelegatingTestActionBuilder<out TU> : ITestActionBuilder<TU> where TU : ITestAction
     {
         /// <summary>
-        /// Builds new test action instance.
+        ///     Obtains the delegate test action builder.
         /// </summary>
-        /// <returns>the built test action.</returns>
-        T Build();
-
-
-        public interface IDelegatingTestActionBuilder<U> : ITestActionBuilder<U> where U : ITestAction
-        {
-            /// <summary>
-            /// Obtains the delegate test action builder.
-            /// </summary>
-            ITestActionBuilder<U> Delegate { get; }
-        }
+        ITestActionBuilder<TU> Delegate { get; }
     }
 }

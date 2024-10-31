@@ -1,29 +1,33 @@
-namespace Agenix.Core
+namespace Agenix.Core;
+
+/// <summary>
+///     The test context provides utility methods for replacing dynamic content(variables and functions) in string
+/// </summary>
+public interface ITestAction
 {
     /// <summary>
-    ///     The test context provides utility methods for replacing dynamic content(variables and functions) in string
+    ///     Name of test action injected as Spring bean name
     /// </summary>
-    public interface ITestAction
+    /// <returns>name as String</returns>
+    string Name => GetType().Name;
+
+    /// <summary>
+    ///     Main execution method doing all work
+    /// </summary>
+    void Execute(TestContext context);
+
+    /// <summary>
+    ///     Checks if this action is disabled.
+    /// </summary>
+    /// <param name="context">the current test context.</param>
+    /// <returns>true if action is marked disabled.</returns>
+    bool IsDisabled(TestContext context)
     {
-        /// <summary>
-        ///     Main execution method doing all work
-        /// </summary>
-        void Execute(TestContext context);
-
-        /// <summary>
-        /// Name of test action injected as Spring bean name
-        /// </summary>
-        /// <returns>name as String</returns>
-        string Name => GetType().Name;
-
-        /// <summary>
-        /// Checks if this action is disabled.
-        /// </summary>
-        /// <param name="context">the current test context.</param>
-        /// <returns>true if action is marked disabled.</returns>
-        bool IsDisabled(TestContext context)
-        {
-            return false;
-        }
+        return false;
     }
 }
+
+/// <summary>
+///     Delegate for creating an instance of an ITestAction based on a given TestContext.
+/// </summary>
+public delegate ITestAction TestAction(TestContext context);

@@ -1,43 +1,42 @@
 ﻿using Agenix.Core.Message;
 
-namespace Agenix.Core.Util
+namespace Agenix.Core.Util;
+
+public class MessageUtils
 {
-    public class MessageUtils
+    /// <summary>
+    ///     Prevent instantiation of utility class.
+    /// </summary>
+    private MessageUtils()
     {
-        /// <summary>
-        ///     Prevent instantiation of utility class.
-        /// </summary>
-        private MessageUtils()
-        {
-            // prevent instantiation
-        }
+        // prevent instantiation
+    }
 
-        /// <summary>
-        ///     Checks if given message payload is of type XML. If starts with '<' is considered valid XML.
-        /// </summary>
-        /// <param name="message">to check.</param>
-        /// <returns>true if message payload is XML, false otherwise.</returns>
-        public static bool HasXmlPayload(IMessage message)
-        {
-            if (message.Payload is not string) return false;
+    /// <summary>
+    ///     Checks if given message payload is of type XML. If starts with '<' is considered valid XML.
+    /// </summary>
+    /// <param name="message">to check.</param>
+    /// <returns>true if message payload is XML, false otherwise.</returns>
+    public static bool HasXmlPayload(IMessage message)
+    {
+        if (message.Payload is not string) return false;
 
-            var payload = message.GetPayload<string>().Trim();
+        var payload = message.GetPayload<string>().Trim();
 
-            return payload.StartsWith("<");
-        }
+        return payload.StartsWith("<");
+    }
 
-        /// <summary>
-        ///     Checks if message payload is of type Json. An empty payload is considered to be a valid Json payload.
-        /// </summary>
-        /// <param name="message">to check.</param>
-        /// <returns>true if payload is Json, false otherwise.</returns>
-        public static bool HasJsonPayload(IMessage message)
-        {
-            if (message.Payload is not string) return false;
+    /// <summary>
+    ///     Checks if message payload is of type Json. An empty payload is considered to be a valid Json payload.
+    /// </summary>
+    /// <param name="message">to check.</param>
+    /// <returns>true if payload is Json, false otherwise.</returns>
+    public static bool HasJsonPayload(IMessage message)
+    {
+        if (message.Payload is not string) return false;
 
-            var payload = message.GetPayload<string>().Trim();
+        var payload = message.GetPayload<string>().Trim();
 
-            return payload.Length == 0 || payload.StartsWith("{") || payload.StartsWith("[");
-        }
+        return payload.Length == 0 || payload.StartsWith("{") || payload.StartsWith("[");
     }
 }

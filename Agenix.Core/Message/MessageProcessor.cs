@@ -1,20 +1,15 @@
-﻿using Agenix.Core;
+﻿namespace Agenix.Core.Message;
 
-namespace Agenix.Core.Message
+internal interface IMessageProcessor : IMessageTransformer
 {
-    interface IMessageProcessor : IMessageTransformer
+    void Process(string payload, TestContext context);
+
+    interface IBuilder<out T, TB> where T : IMessageProcessor where TB : IBuilder<T, TB>
     {
-
-        void Process(string payload, TestContext context);
-
-        interface IBuilder<out T, TB> where T : IMessageProcessor where TB : IBuilder<T, TB>
-        {
-
-            /// <summary>
-            /// Builds new message processor instance.
-            /// </summary>
-            /// <returns></returns>
-            T Build();
-        }
+        /// <summary>
+        ///     Builds new message processor instance.
+        /// </summary>
+        /// <returns></returns>
+        T Build();
     }
 }

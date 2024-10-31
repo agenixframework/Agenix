@@ -1,29 +1,21 @@
 ﻿using System.Collections.Generic;
 
-namespace Agenix.Core.Util
+namespace Agenix.Core.Util;
+
+public static class DictionaryExtensions
 {
-    public static class DictionaryExtensions
+    public static void SafeDictionaryAdd(Dictionary<string, object> dict, string key, object view)
     {
-        public static void SafeDictionaryAdd(Dictionary<string, object> dict, string key, object view)
-        {
-            if (!dict.ContainsKey(key))
-                dict.Add(key, view);
-            else
-                dict[key] = view;
-        }
+        dict[key] = view;
+    }
 
-        public static IDictionary<TKey, TVal> Merge<TKey, TVal>(this IDictionary<TKey, TVal> dictA,
-            IDictionary<TKey, TVal> dictB)
-        {
-            IDictionary<TKey, TVal> output = new Dictionary<TKey, TVal>(dictA);
+    public static Dictionary<TKey, TVal> Merge<TKey, TVal>(this Dictionary<TKey, TVal> dictA,
+        Dictionary<TKey, TVal> dictB)
+    {
+        var output = new Dictionary<TKey, TVal>(dictA);
 
-            foreach (var (key, value) in dictB)
-                if (!output.ContainsKey(key))
-                    output.Add(key, value);
-                else
-                    output[key] = value;
+        foreach (var (key, value) in dictB) output[key] = value;
 
-            return output;
-        }
+        return output;
     }
 }

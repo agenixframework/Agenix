@@ -1,16 +1,13 @@
-﻿namespace Agenix.Core.Message
+﻿namespace Agenix.Core.Message;
+
+internal interface IMessageTransformer
 {
-    interface IMessageTransformer
+    interface IBuilder<out T, TB> where T : IMessageTransformer where TB : IBuilder<T, TB>
     {
-
-        interface IBuilder<out T, TB> where T : IMessageTransformer where TB : IBuilder<T, TB>
-        {
-
-            /// <summary>
-            /// Builds new message processor instance.
-            /// </summary>
-            /// <returns></returns>
-            T Build();
-        }
+        /// <summary>
+        ///     Builds new message processor instance.
+        /// </summary>
+        /// <returns></returns>
+        T Build();
     }
 }

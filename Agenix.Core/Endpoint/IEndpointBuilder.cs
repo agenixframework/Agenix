@@ -1,11 +1,14 @@
-﻿namespace Agenix.Core.Endpoint
+﻿using System;
+
+namespace Agenix.Core.Endpoint;
+
+public interface IEndpointBuilder<out T> where T : IEndpoint
 {
-    public interface IEndpointBuilder<out T> where T : IEndpoint
-    {
-        /// <summary>
-        ///     Builds the endpoint.
-        /// </summary>
-        /// <returns></returns>
-        T Build();
-    }
+    /// <summary>
+    ///     Builds the endpoint.
+    /// </summary>
+    /// <returns></returns>
+    T Build();
+
+    bool Supports(Type endpointType);
 }

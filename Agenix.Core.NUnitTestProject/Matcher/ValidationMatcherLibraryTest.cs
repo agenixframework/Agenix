@@ -4,47 +4,46 @@ using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
-namespace Agenix.Core.NUnitTestProject.Matcher
+namespace Agenix.Core.NUnitTestProject.Matcher;
+
+public class ValidationMatcherLibraryTest
 {
-    public class ValidationMatcherLibraryTest
+    private readonly Mock<IValidationMatcher> _matcher = new();
+    private readonly ValidationMatcherLibrary _validationMatcherLibrary = new();
+
+    [OneTimeSetUp]
+    public void TestFixtureSetUp()
     {
-        private readonly Mock<IValidationMatcher> _matcher = new();
-        private readonly ValidationMatcherLibrary _validationMatcherLibrary = new();
+        _validationMatcherLibrary.Name = "fooValidationMatcherLibrary";
+        _validationMatcherLibrary.Prefix = "foo:";
+        _validationMatcherLibrary.Members.Add("customMatcher", _matcher.Object);
+    }
 
-        [OneTimeSetUp]
-        public void TestFixtureSetUp()
+    [Test]
+    public void TestGetValidationMatcher()
+    {
+        ClassicAssert.IsNotNull(_validationMatcherLibrary.GetValidationMatcher("customMatcher"));
+    }
+
+    [Test]
+    public void TestKnowsValidationMatcher()
+    {
+        ClassicAssert.IsTrue(_validationMatcherLibrary.KnowsValidationMatcher("foo:customMatcher()"));
+        ClassicAssert.IsFalse(_validationMatcherLibrary.KnowsValidationMatcher("foo:unknownMatcher()"));
+    }
+
+    [Test]
+    public void TestUnknownValidationMatcher()
+    {
+        try
         {
-            _validationMatcherLibrary.Name = "fooValidationMatcherLibrary";
-            _validationMatcherLibrary.Prefix = "foo:";
-            _validationMatcherLibrary.Members.Add("customMatcher", _matcher.Object);
+            _validationMatcherLibrary.GetValidationMatcher("unknownMatcher");
         }
-
-        [Test]
-        public void TestGetValidationMatcher()
+        catch (NoSuchValidationMatcherException e)
         {
-            ClassicAssert.IsNotNull(_validationMatcherLibrary.GetValidationMatcher("customMatcher"));
-        }
-
-        [Test]
-        public void TestKnowsValidationMatcher()
-        {
-            ClassicAssert.IsTrue(_validationMatcherLibrary.KnowsValidationMatcher("foo:customMatcher()"));
-            ClassicAssert.IsFalse(_validationMatcherLibrary.KnowsValidationMatcher("foo:unknownMatcher()"));
-        }
-
-        [Test]
-        public void TestUnknownValidationMatcher()
-        {
-            try
-            {
-                _validationMatcherLibrary.GetValidationMatcher("unknownMatcher");
-            }
-            catch (NoSuchValidationMatcherException e)
-            {
-                ClassicAssert.IsTrue(e.GetMessage().Contains("unknownMatcher"));
-                ClassicAssert.IsTrue(e.GetMessage().Contains(_validationMatcherLibrary.Name));
-                ClassicAssert.IsTrue(e.GetMessage().Contains(_validationMatcherLibrary.Prefix));
-            }
+            ClassicAssert.IsTrue(e.GetMessage().Contains("unknownMatcher"));
+            ClassicAssert.IsTrue(e.GetMessage().Contains(_validationMatcherLibrary.Name));
+            ClassicAssert.IsTrue(e.GetMessage().Contains(_validationMatcherLibrary.Prefix));
         }
     }
 }
