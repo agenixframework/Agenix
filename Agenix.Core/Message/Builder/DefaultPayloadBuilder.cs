@@ -5,8 +5,6 @@
 /// </summary>
 public class DefaultPayloadBuilder(object payload) : IMessagePayloadBuilder
 {
-    private readonly object _payload = payload;
-
     /// <summary>
     ///     Builds the payload based on the provided context, replacing any dynamic content in a string payload.
     /// </summary>
@@ -28,6 +26,6 @@ public class DefaultPayloadBuilder(object payload) : IMessagePayloadBuilder
     /// <returns>The payload object.</returns>
     public object GetPayload()
     {
-        return _payload;
+        return payload;
     }
 }

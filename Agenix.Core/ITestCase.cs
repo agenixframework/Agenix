@@ -63,8 +63,6 @@ public interface ITestCase : ITestActionContainer, INamed, IDescribed
      */
     void SetPackageName(string packageName);
 
-    new string Name();
-
     /**
      * Sets the test result from outside.
      */

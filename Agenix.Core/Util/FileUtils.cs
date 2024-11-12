@@ -187,10 +187,10 @@ public class FileUtils
     }
 
     /// <summary>
-    ///     Gets the default charset. If set by Citrus system property (citrus.file.encoding) use
+    ///     Gets the default charset. If set by Agenix system property (agenix.file.encoding) use
     ///     this one otherwise use system default.
     /// </summary>
-    /// <returns>The default encoding to be used based on the Citrus system property or the system default.</returns>
+    /// <returns>The default encoding to be used based on the Agenix system property or the system default.</returns>
     public static Encoding GetDefaultCharset()
     {
         return Encoding.GetEncoding(CoreSettings.AgenixFileEncoding);

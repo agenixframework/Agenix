@@ -9,6 +9,9 @@ using log4net.Config;
 
 namespace Agenix.Core;
 
+/// <summary>
+///     The CoreSettings class provides various constants and settings for configuring the Agenix core library.
+/// </summary>
 public sealed class CoreSettings
 {
     /// <summary>
@@ -63,18 +66,89 @@ public sealed class CoreSettings
 
     public const string DefaultMessageTypeProp = "agenix.default.message.type";
     public const string DefaultMessageTypeEnv = "AGENIX_DEFAULT_MESSAGE_TYPE";
+
+    public const string ReportAutoClearProp = "agenix.report.auto.clear";
+    public const string ReportAutoClearEnv = "AGENIX_REPORT_AUTO_CLEAR";
+
+    public const string ReportIgnoreErrorsProp = "agenix.report.ignore.errors";
+    public const string ReportIgnoreErrorsEnv = "AGENIX_REPORT_IGNORE_ERRORS";
+
+    public const string ReportDirectoryProp = "agenix.report.directory";
+    public const string ReportDirectoryErrorsEnv = "AGENIX_REPORT_DIRECTORY";
+
+    public const string TestNameVariableProp = "agenix.test.name.variable";
+    public const string TestNameVariableEnv = "AGENIX_TEST_NAME_VARIABLE";
+
+    public const string TestNameSpaceVariableProp = "agenix.test.namespace.variable";
+    public const string TestNameSpaceVariableEnv = "AGENIX_TEST_NAMESPAE_VARIABLE";
     public static string LogModifierDefault = bool.TrueString;
     public static string PrettyPrintDefault = bool.TrueString;
+    public static string ReportAutoClearDefault = bool.TrueString;
+    public static string ReportIgnoreErrorsDefault = bool.TrueString;
+    public static string ReportDirectoryDefault = "agenix-reports";
+    public static string TestNameVariableDefault = "agenix.test.name";
+    public static string TestNameSpaceVariableDefault = "agenix.test.namespace";
 
-    public static string AgenixFileEncoding = GetPropertyEnvOrDefault(
+    /// <summary>
+    ///     Defines the default encoding used for Agenix file operations.
+    /// </summary>
+    public static readonly string AgenixFileEncoding = GetPropertyEnvOrDefault(
         AgenixFileEncodingProp,
         AgenixFileEncodingEnv,
         "UTF-8");
 
-    public static string DefaultMessageType = GetPropertyEnvOrDefault(
+    /// <summary>
+    ///     Default message type used for the application.
+    /// </summary>
+    public static readonly string DefaultMessageType = GetPropertyEnvOrDefault(
         DefaultMessageTypeProp,
         DefaultMessageTypeEnv,
         MessageType.JSON.ToString()
+    );
+
+    /// <summary>
+    ///     Specifies whether the report should be automatically cleared after processing.
+    /// </summary>
+    public static bool ReportAutoClear = bool.Parse(GetPropertyEnvOrDefault(
+        ReportAutoClearProp,
+        ReportAutoClearEnv,
+        ReportAutoClearDefault
+    ));
+
+    /// <summary>
+    ///     Determines whether errors should be ignored in the report generation process.
+    /// </summary>
+    public static bool ReportIgnoreErrors = bool.Parse(GetPropertyEnvOrDefault(
+        ReportIgnoreErrorsProp,
+        ReportIgnoreErrorsEnv,
+        ReportIgnoreErrorsDefault
+    ));
+
+    /// <summary>
+    ///     Directory where the report files are stored
+    /// </summary>
+    public static string ReportDirectory = GetPropertyEnvOrDefault(
+        ReportDirectoryProp,
+        ReportDirectoryErrorsEnv,
+        ReportDirectoryDefault
+    );
+
+    /// <summary>
+    ///     Represents the name of the test variable.
+    /// </summary>
+    public static string TestNameVariable = GetPropertyEnvOrDefault(
+        TestNameVariableProp,
+        TestNameVariableEnv,
+        TestNameVariableDefault
+    );
+
+    /// <summary>
+    ///     Specifies the default value for the test namespace variable configuration
+    /// </summary>
+    public static string TestNameSpaceVariable = GetPropertyEnvOrDefault(
+        TestNameSpaceVariableProp,
+        TestNameSpaceVariableEnv,
+        TestNameSpaceVariableDefault
     );
 
 

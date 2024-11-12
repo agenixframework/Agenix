@@ -8,6 +8,8 @@ using Agenix.Core.Exceptions;
 using Agenix.Core.Functions;
 using Agenix.Core.Log;
 using Agenix.Core.Message;
+using Agenix.Core.Report;
+using Agenix.Core.Util;
 using Agenix.Core.Validation.Matcher;
 using Agenix.Core.Variable;
 using log4net;
@@ -17,7 +19,7 @@ namespace Agenix.Core;
 /// <summary>
 ///     The test context provides utility methods for replacing dynamic content(variables and functions) in string
 /// </summary>
-public class TestContext
+public class TestContext : ITestActionListenerAware
 {
     /// <summary>
     ///     Logger.
@@ -28,6 +30,21 @@ public class TestContext
     ///     Local variables
     /// </summary>
     protected readonly IDictionary<string, object> _variables;
+
+    /// <summary>
+    ///     List of actions to run after each test.
+    /// </summary>
+    private List<IAfterTest> _afterTest = [];
+
+    /// <summary>
+    ///     List of actions to run before each test.
+    /// </summary>
+    private List<IBeforeTest> _beforeTest = [];
+
+    /// <summary>
+    ///     List of exceptions that actions raised during execution of forked operations.
+    /// </summary>
+    private readonly List<CoreSystemException> _exceptions = [];
 
     /// <summary>
     ///     Function registry holding all available functions
@@ -45,14 +62,41 @@ public class TestContext
     private ILogModifier _logModifier;
 
     /// <summary>
+    ///     List of message listeners to be informed on inbound and outbound message exchange
+    /// </summary>
+    private MessageListeners _messageListeners = new();
+
+    /// <summary>
     ///     Message store
     /// </summary>
     private IMessageStore _messageStore = new DefaultMessageStore();
 
     /// <summary>
+    ///     List of test action listeners to be informed on test action events.
+    /// </summary>
+    private TestActionListeners _testActionListeners = new();
+
+    /// <summary>
+    ///     List of test listeners to be informed on test events.
+    /// </summary>
+    private TestListeners _testListeners = new();
+
+    /// <summary>
+    ///     Type converter instance used for converting values between different types.
+    /// </summary>
+    private ITypeConverter _typeConverter = ITypeConverter.LookupDefault();
+
+    /// <summary>
     ///     Registered validation matchers
     /// </summary>
     private ValidationMatcherRegistry _validationMatcherRegistry = new();
+
+
+    /// <summary>
+    ///     A collection of active timers used within the test context.
+    /// </summary>
+    protected ConcurrentDictionary<string, IStopTimer> Timers = new();
+
 
     /// <summary>
     ///     Default constructor.
@@ -99,6 +143,144 @@ public class TestContext
     }
 
     /// <summary>
+    ///     Type converter.
+    /// </summary>
+    public ITypeConverter TypeConverter
+    {
+        get => _typeConverter;
+        set => _typeConverter = value;
+    }
+
+    /// <summary>
+    ///     Manages test event listeners and propagates test events to them.
+    /// </summary>
+    public TestListeners TestListeners
+    {
+        get => _testListeners;
+        set => _testListeners = value;
+    }
+
+    /// <summary>
+    ///     List of actions to be executed before each test.
+    /// </summary>
+    public List<IBeforeTest> BeforeTest
+    {
+        get => _beforeTest;
+        set => _beforeTest = value;
+    }
+
+    /// <summary>
+    ///     Gets or sets the collection of actions to be executed after the test.
+    /// </summary>
+    public List<IAfterTest> AfterTest
+    {
+        get => _afterTest;
+        set => _afterTest = value;
+    }
+
+    /// <summary>
+    ///     Manages and interacts with test action listeners.
+    /// </summary>
+    public TestActionListeners TestActionListeners
+    {
+        get => _testActionListeners;
+        set => _testActionListeners = value;
+    }
+
+    /// <summary>
+    ///     Manages the collection of message listeners.
+    /// </summary>
+    public MessageListeners MessageListeners
+    {
+        get => _messageListeners;
+        set => _messageListeners = value;
+    }
+
+    /// <summary>
+    ///     Adds a test action listener to the context.
+    /// </summary>
+    /// <param name="listener">The test action listener to be added.</param>
+    public void AddTestActionListener(ITestActionListener listener)
+    {
+        _testActionListeners.AddTestActionListener(listener);
+    }
+
+    /// <summary>
+    ///     Add new exception to the context marking the test as failed. This
+    ///     is usually used by actions to mark exceptions during forked operations.
+    /// </summary>
+    /// <param name="exception">The exception to add.</param>
+    public void AddException(CoreSystemException exception)
+    {
+        _exceptions.Add(exception);
+    }
+
+    /// <summary>
+    ///     Gets the value of the exceptions property.
+    /// </summary>
+    /// <returns>The list of exceptions.</returns>
+    public List<CoreSystemException> GetExceptions()
+    {
+        return _exceptions;
+    }
+
+    /// <summary>
+    ///     Gets exception collection state.
+    /// </summary>
+    /// <returns>True if there are exceptions, false otherwise.</returns>
+    public bool HasExceptions()
+    {
+        return _exceptions.Count != 0;
+    }
+
+    /// <summary>
+    ///     Registers a timer with the specified identifier.
+    /// </summary>
+    /// <param name="timerId">The unique identifier for the timer.</param>
+    /// <param name="timer">The timer instance to be registered.</param>
+    /// <exception cref="InvalidOperationException">Thrown when a timer with the specified identifier is already registered.</exception>
+    public void RegisterTimer(string timerId, IStopTimer timer)
+    {
+        if (!Timers.TryAdd(timerId, timer))
+            throw new InvalidOperationException("Timer already registered with this id");
+    }
+
+    /// <summary>
+    ///     Stops the timer associated with the specified timer ID.
+    /// </summary>
+    /// <param name="timerId">The ID of the timer to be stopped.</param>
+    /// <returns>True if the timer was successfully stopped; otherwise, false.</returns>
+    public bool StopTimer(string timerId)
+    {
+        if (!Timers.TryGetValue(timerId, out var timer)) return false;
+        timer.StopTimer();
+        return true;
+    }
+
+    /// <summary>
+    ///     Stops all active timers in the current context.
+    /// </summary>
+    public void StopTimers()
+    {
+        foreach (var timerId in Timers.Keys) StopTimer(timerId);
+    }
+
+    /// <summary>
+    ///     Determines if the test result indicates success and no exceptions have occurred.
+    /// </summary>
+    /// <param name="testResult">
+    ///     The test result to evaluate.
+    /// </param>
+    /// <returns>
+    ///     True if the test result indicates success and there are no exceptions, otherwise false.
+    /// </returns>
+    public bool IsSuccess(TestResult testResult)
+    {
+        return !HasExceptions() &&
+               (testResult?.IsSuccess() ?? false);
+    }
+
+    /// <summary>
     ///     Checks if variables are present right now.
     /// </summary>
     /// <returns>boolean flag to mark existence</returns>
@@ -123,6 +305,81 @@ public class TestContext
     public IDictionary<string, object> GetVariables()
     {
         return _variables;
+    }
+
+    /// <summary>
+    ///     Informs message listeners that an inbound message was received.
+    /// </summary>
+    /// <param name="receivedMessage">The received inbound message.</param>
+    public void OnInboundMessage(IMessage receivedMessage)
+    {
+        LogMessage("Receive", receivedMessage, MessageDirection.INBOUND);
+    }
+
+    /// <summary>
+    ///     Informs message listeners, if present, that a new outbound message is about to be sent.
+    /// </summary>
+    /// <param name="message">
+    ///     The outbound message that is about to be sent.
+    /// </param>
+    public void OnOutboundMessage(IMessage message)
+    {
+        LogMessage("Send", message, MessageDirection.OUTBOUND);
+    }
+
+    /// <summary>
+    ///     Logs the specified message operation with the given message and direction.
+    /// </summary>
+    /// <param name="operation">The operation being logged.</param>
+    /// <param name="message">The message to log.</param>
+    /// <param name="direction">The direction of the message.</param>
+    private void LogMessage(string operation, IMessage message, MessageDirection direction)
+    {
+        if (_messageListeners != null && _messageListeners.IsEmpty())
+            switch (direction)
+            {
+                case MessageDirection.OUTBOUND:
+                    _messageListeners.OnOutboundMessage(message, this);
+                    break;
+                case MessageDirection.INBOUND:
+                    _messageListeners.OnInboundMessage(message, this);
+                    break;
+                case MessageDirection.UNBOUND:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
+            }
+        else if (_log.IsDebugEnabled) _log.Debug($"{operation} message:\n{message?.ToString() ?? ""}");
+    }
+
+    /// <summary>
+    ///     Handles an error that occurs during test execution, logs it, and informs test listeners.
+    /// </summary>
+    /// <param name="testName">The name of the test where the error occurred.</param>
+    /// <param name="packageName">The package name of the test where the error occurred.</param>
+    /// <param name="message">The error message to be logged.</param>
+    /// <param name="cause">The exception that caused the error.</param>
+    /// <returns>A CoreSystemException representing the error.</returns>
+    public CoreSystemException HandleError(string testName, string packageName, string message, Exception cause)
+    {
+        // Create empty dummy test case for logging purpose
+        ITestCase dummyTest = new EmptyTestCase(testName, packageName);
+
+        var exception = new CoreSystemException(message, cause);
+
+        // inform test listeners with failed test
+        try
+        {
+            _testListeners.OnTestStart(dummyTest);
+            _testListeners.OnTestFailure(dummyTest, exception);
+            _testListeners.OnTestFinish(dummyTest);
+        }
+        catch (Exception e)
+        {
+            _log.Warn("Executing error handler listener failed!", e);
+        }
+
+        return exception;
     }
 
     /// <summary>
@@ -195,7 +452,7 @@ public class TestContext
     /// <returns>value of the variable</returns>
     public string GetVariable(string variableExpression)
     {
-        return GetVariable<string>(variableExpression);
+        return GetVariable<string>(variableExpression, typeof(string));
     }
 
     /// <summary>
@@ -203,10 +460,11 @@ public class TestContext
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="variableExpression"></param>
+    /// <param name="type"></param>
     /// <returns></returns>
-    public T GetVariable<T>(string variableExpression)
+    public T GetVariable<T>(string variableExpression, Type type)
     {
-        return (T)GetVariableObject(variableExpression);
+        return _typeConverter.ConvertIfNecessary<T>(GetVariableObject(variableExpression), type);
     }
 
     /// <summary>
@@ -229,7 +487,7 @@ public class TestContext
         if (_log.IsDebugEnabled)
             _log.Debug($"Setting variable: {VariableUtils.CutOffVariablesPrefix(variableName)} with value: '{value}'");
 
-        _variables.Add(VariableUtils.CutOffVariablesPrefix(variableName), value);
+        _variables[VariableUtils.CutOffVariablesPrefix(variableName)] = value;
     }
 
     /// <summary>
@@ -239,23 +497,13 @@ public class TestContext
     /// <param name="str">The string to parse for variable place holders.</param>
     /// <param name="enableQuoting">flag marking surrounding quotes should be added or not.</param>
     /// <returns>resulting string without any variable place holders.</returns>
-    public string ReplaceDynamicContentInString(string str, bool enableQuoting)
+    public string ReplaceDynamicContentInString(string str, bool enableQuoting = false)
     {
         if (str == null) return null;
         var result = VariableUtils.ReplaceVariablesInString(str, this, enableQuoting);
         result = FunctionUtils.ReplaceFunctionsInString(result, this, enableQuoting);
 
         return result;
-    }
-
-    /// <summary>
-    ///     Method replacing variable declarations and place holders as well as function expressions in a string
-    /// </summary>
-    /// <param name="str">The string to parse.</param>
-    /// <returns>resulting string without any variable place holders.</returns>
-    public string ReplaceDynamicContentInString(string str)
-    {
-        return ReplaceDynamicContentInString(str, false);
     }
 
     /// <summary>
@@ -511,11 +759,6 @@ public class TestContext
             // do nothing
         }
 
-        public string Name()
-        {
-            return testName;
-        }
-
         public void SetTestResult(TestResult testResult)
         {
             // do nothing
@@ -549,6 +792,11 @@ public class TestContext
         public void Fail(Exception throwable)
         {
             // do nothing
+        }
+
+        public string Name()
+        {
+            return testName;
         }
     }
 }

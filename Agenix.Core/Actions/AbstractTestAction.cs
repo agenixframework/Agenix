@@ -54,7 +54,7 @@ public abstract class AbstractTestAction : ITestAction, INamed, IDescribed
     ///     Do basic logging and delegate execution to subclass.
     /// </summary>
     /// <param name="context"></param>
-    public void Execute(TestContext context)
+    public virtual void Execute(TestContext context)
     {
         if (!IsDisabled(context)) DoExecute(context);
     }

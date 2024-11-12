@@ -30,4 +30,4 @@ public interface ITestAction
 /// <summary>
 ///     Delegate for creating an instance of an ITestAction based on a given TestContext.
 /// </summary>
-public delegate ITestAction TestAction(TestContext context);
+public delegate void TestAction(TestContext context);

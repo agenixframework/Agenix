@@ -9,9 +9,9 @@ namespace Agenix.Core.Validation.Json;
 /// <summary>
 ///     Custom JsonPath function support for size(), keySet() and toString() operations on Json objects and arrays.
 /// </summary>
-public class JsonPathFunctions
+public abstract class JsonPathFunctions
 {
-    private static readonly string[] FunctionNames = { "KeySet", "Size", "Values", "ToString", "Exists" };
+    private static readonly string[] FunctionNames = ["KeySet", "Size", "Values", "ToString", "Exists"];
 
     /// <summary>
     ///     Gets names of supported functions.
