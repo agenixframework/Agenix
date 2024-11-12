@@ -2,16 +2,11 @@
 
 namespace Agenix.Core.Util;
 
-public class MessageUtils
+/// <summary>
+///     Utility class for message-related operations.
+/// </summary>
+public static class MessageUtils
 {
-    /// <summary>
-    ///     Prevent instantiation of utility class.
-    /// </summary>
-    private MessageUtils()
-    {
-        // prevent instantiation
-    }
-
     /// <summary>
     ///     Checks if given message payload is of type XML. If starts with '<' is considered valid XML.
     /// </summary>
@@ -23,7 +18,7 @@ public class MessageUtils
 
         var payload = message.GetPayload<string>().Trim();
 
-        return payload.StartsWith("<");
+        return payload.StartsWith('<');
     }
 
     /// <summary>
@@ -37,6 +32,6 @@ public class MessageUtils
 
         var payload = message.GetPayload<string>().Trim();
 
-        return payload.Length == 0 || payload.StartsWith("{") || payload.StartsWith("[");
+        return payload.Length == 0 || payload.StartsWith('{') || payload.StartsWith('[');
     }
 }

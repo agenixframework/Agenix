@@ -8,7 +8,7 @@ namespace Agenix.Core;
 /**
  * * Class representing test results (failed, successful, skipped)
  */
-public sealed class TestResult
+public class TestResult
 {
     /**
      * Possible test results
@@ -18,6 +18,10 @@ public sealed class TestResult
         SUCCESS,
         FAILURE,
         SKIP
+    }
+
+    public TestResult()
+    {
     }
 
     /**

@@ -1,4 +1,5 @@
-﻿using Agenix.Core.Validation.Json.Dsl;
+﻿using Agenix.Core.Message;
+using Agenix.Core.Validation.Json;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
@@ -12,7 +13,7 @@ public class JsonPathVariableExtractorTest : AbstractNUnitSetUp
     [Test]
     public void TestExtractVariables()
     {
-        JsonSupport.Json().JsonPath().Extract()
+        var variableExtractor = new JsonPathVariableExtractor.Builder()
             .Expression("$.KeySet()", "keySet")
             .Expression("$['index']", "index")
             .Expression("$.numbers", "numbers")
@@ -24,8 +25,9 @@ public class JsonPathVariableExtractorTest : AbstractNUnitSetUp
             .Expression("$.Size()", "size")
             .Expression("$.*", "all")
             .Expression("$", "root")
-            .Build()
-            .ExtractVariables(_jsonPayload, Context);
+            .Build();
+
+        variableExtractor.ExtractVariables(new DefaultMessage(_jsonPayload), Context);
 
         ClassicAssert.IsNotNull(Context.GetVariable("keySet"));
         ClassicAssert.AreEqual("text, person, index, numbers, id", Context.GetVariable("keySet"));

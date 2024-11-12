@@ -44,7 +44,7 @@ public class BooleanExpressionParser
      * 
      * @param expression The expression to evaluate
      * @return boolean result
-     * @throws CitrusRuntimeException When unable to parse expression
+     * @throws CoreSystemException When unable to parse expression
      */
     public static bool Evaluate(string expression)
     {
@@ -266,7 +266,7 @@ public class BooleanExpressionParser
      * 
      * @param operator to validate
      * @return the operator itself.
-     * @throws CitrusRuntimeException When encountering an unknown operator
+     * @throws CoreSystemException When encountering an unknown operator
      */
     private static string ValidateOperator(string operatorValue)
     {
