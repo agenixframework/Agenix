@@ -62,8 +62,19 @@ public static class ReflectionHelper
     /// <return>The FieldInfo object representing the found field, or null if no matching field is found.</return>
     public static FieldInfo FindField(Type clazz, string name)
     {
-        var fields = clazz.GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-        return fields.FirstOrDefault(f => f.Name == name);
+        // Traverse the type hierarchy
+        while (clazz != null)
+        {
+            var fields = clazz.GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+            var field = fields.FirstOrDefault(f =>
+                string.Equals(f.Name, $"<{name}>k__BackingField", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(f.Name, name, StringComparison.OrdinalIgnoreCase));
+            if (field != null) return field;
+
+            clazz = clazz.BaseType; // Move to the base type
+        }
+
+        return null; // Field not found in the hierarchy
     }
 
     /// Finds a method on a given class type that matches the specified name and parameter types.
@@ -73,9 +84,29 @@ public static class ReflectionHelper
     /// <return>The MethodInfo object representing the found method, or null if no matching method is found.</return>
     public static MethodInfo FindMethod(Type clazz, string name, params Type[] paramTypes)
     {
-        var methods = clazz.GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-        return methods.FirstOrDefault(m =>
-            m.Name == name && m.GetParameters().Select(p => p.ParameterType).SequenceEqual(paramTypes));
+        while (clazz != null)
+        {
+            var methods = clazz.GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+            var possibleNames = new[]
+            {
+                name, // Original name
+                "Set" + char.ToUpper(name[0]) + name[1..], // SetCamelCase
+                "set_" + char.ToLower(name[0]) + name[1..] // set_snake_case
+            };
+
+            foreach (var possibleName in possibleNames)
+            {
+                var method = methods.FirstOrDefault(m =>
+                    string.Equals(m.Name, possibleName, StringComparison.OrdinalIgnoreCase) &&
+                    m.GetParameters().Select(p => p.ParameterType).SequenceEqual(paramTypes));
+
+                if (method != null) return method;
+            }
+
+            clazz = clazz.BaseType; // Move to the base type
+        }
+
+        return null; // Method not found in the hierarchy
     }
 
     /// Invokes a specified method on a given object instance with the provided arguments.

@@ -66,15 +66,11 @@ public abstract class TypeConversionUtils
         }
         catch (CoreSystemException e)
         {
-            //TODO: Implement referenc resolver
-            /*if ((context.GetReferenceResolver() != null) && context.GetReferenceResolver().IsResolvable(value))
+            if (context.GetReferenceResolver() != null && context.GetReferenceResolver().IsResolvable(value))
             {
-                object bean = context.GetReferenceResolver().resolve(value, typeof(T));
-                if (typeof(T).IsAssignableFrom(bean.GetType()))
-                {
-                    return (T)bean;
-                }
-            }*/
+                object bean = context.GetReferenceResolver().Resolve<T>(value);
+                if (typeof(T).IsAssignableFrom(bean.GetType())) return (T)bean;
+            }
 
             throw new CoreSystemException(
                 $"Unable to convert '{value}' to required type '{typeof(T).Name}' - also no bean of required type available in application context",

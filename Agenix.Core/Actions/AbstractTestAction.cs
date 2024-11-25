@@ -17,8 +17,14 @@ public abstract class AbstractTestAction : ITestAction, INamed, IDescribed
         Name = GetType().Name;
     }
 
+    public AbstractTestAction(string name, string description)
+    {
+        Name = name;
+        this.description = description;
+    }
+
     public AbstractTestAction(string name,
-        AbstractTestActionBuilder<ITestAction, ITestActionBuilder<ITestAction>> builder)
+        AbstractTestActionBuilder<ITestAction, dynamic> builder)
     {
         Name = builder.GetName() ?? name;
         description = builder.GetDescription();

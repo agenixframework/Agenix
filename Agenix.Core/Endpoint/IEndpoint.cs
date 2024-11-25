@@ -20,11 +20,11 @@ public interface IEndpoint : INamed
     ///     Creates a message producer for this endpoint for sending messages to this endpoint.
     /// </summary>
     /// <returns></returns>
-    extern IProducer CreateProducer();
+    IProducer CreateProducer();
 
     /// <summary>
     ///     Creates a message consumer for this endpoint. Consumer receives messages on this endpoint.
     /// </summary>
     /// <returns></returns>
-    extern IConsumer CreateConsumer();
+    IConsumer CreateConsumer();
 }

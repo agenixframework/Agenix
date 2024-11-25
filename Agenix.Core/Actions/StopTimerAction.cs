@@ -29,7 +29,7 @@ public class StopTimerAction(StopTimerAction.Builder builder) : AbstractTestActi
 
     /// The Builder class is used to build the StopTimerAction instances, which are actions
     /// that manage the stopping of timers in a given context.
-    public class Builder : AbstractTestActionBuilder<ITestAction, ITestActionBuilder<ITestAction>>
+    public class Builder : AbstractTestActionBuilder<ITestAction, dynamic>
     {
         public string TimerId { get; private set; }
 

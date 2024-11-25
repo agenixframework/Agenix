@@ -635,7 +635,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     /// <param name="testAction">The test action to be added to the final actions list.</param>
     public void AddFinalAction(ITestAction testAction)
     {
-        _finalActions.Add(new FuncITestActionBuilder(() => testAction));
+        _finalActions.Add(new FuncITestActionBuilder<ITestAction>(() => testAction));
     }
 
     /// <summary>

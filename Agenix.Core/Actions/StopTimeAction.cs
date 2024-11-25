@@ -73,7 +73,7 @@ public class StopTimeAction(StopTimeAction.Builder builder) : AbstractTestAction
     /// <summary>
     ///     Builder class for configuring and creating instances of StopTimeAction.
     /// </summary>
-    public sealed class Builder : AbstractTestActionBuilder<ITestAction, ITestActionBuilder<ITestAction>>
+    public sealed class Builder : AbstractTestActionBuilder<ITestAction, dynamic>
     {
         public string _id = DefaultTimeLineId;
         public string _suffix = DefaultTimeLineValueSuffix;

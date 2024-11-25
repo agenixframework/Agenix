@@ -2,6 +2,8 @@ using System.Collections.Generic;
 
 namespace Agenix.Core.Message;
 
+public delegate string MessageHeaderDataBuilder(TestContext context);
+
 /// <summary>
 ///     Interface representing a builder for message header data.
 /// </summary>

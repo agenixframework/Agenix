@@ -41,7 +41,6 @@ public interface IReferenceResolver : IReferenceRegistry
 
     /// Resolves a reference by its name and type.
     /// <param name="name">The name of the reference to resolve.</param>
-    /// <param name="type">The type of the reference to resolve.</param>
     /// <returns>The resolved reference object.</returns>
     T Resolve<T>(string name);
 

@@ -6,8 +6,14 @@ namespace Agenix.Core.NUnitTestProject;
 
 public class AbstractNUnitSetUp
 {
-    protected readonly TestContextFactory TestContextFactory = TestContextFactory.NewInstance();
+    protected readonly TestContextFactory TestContextFactory;
     protected TestContext Context;
+
+    public AbstractNUnitSetUp()
+    {
+        // Initialize the TestContextFactory using the method
+        TestContextFactory = CreateTestContextFactory();
+    }
 
     [SetUp]
     public void Setup()
@@ -19,6 +25,11 @@ public class AbstractNUnitSetUp
     public void TearDown()
     {
         Context.Clear();
+    }
+
+    protected virtual TestContextFactory CreateTestContextFactory()
+    {
+        return TestContextFactory.NewInstance();
     }
 
     protected TestContext CreateTestContext()

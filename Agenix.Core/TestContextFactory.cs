@@ -1,9 +1,13 @@
 ﻿using System.Collections.Generic;
 using Agenix.Core.Container;
+using Agenix.Core.Endpoint;
 using Agenix.Core.Functions;
 using Agenix.Core.Log;
+using Agenix.Core.Message;
 using Agenix.Core.Report;
+using Agenix.Core.Spi;
 using Agenix.Core.Util;
+using Agenix.Core.Validation;
 using Agenix.Core.Validation.Matcher;
 
 namespace Agenix.Core;
@@ -11,8 +15,13 @@ namespace Agenix.Core;
 /// <summary>
 ///     Factory class to create instances of TestContext with specified configurations.
 /// </summary>
-public class TestContextFactory
+public class TestContextFactory : IReferenceResolverAware
 {
+    /// <summary>
+    ///     Gets or sets the reference resolver.
+    /// </summary>
+    private IReferenceResolver _referenceResolver;
+
     /// <summary>
     ///     Gets or sets the function registry.
     /// </summary>
@@ -55,6 +64,16 @@ public class TestContextFactory
     private MessageListeners MessageListeners { get; set; }
 
     /// <summary>
+    ///     Gets or sets the message processors, responsible for managing and notifying message listeners.
+    /// </summary>
+    private MessageProcessors MessageProcessors { get; set; }
+
+    /// <summary>
+    ///     Gets or sets the message validator registry.
+    /// </summary>
+    private MessageValidatorRegistry MessageValidatorRegistry { get; set; }
+
+    /// <summary>
     ///     A list of actions to be executed prior to the test execution.
     /// </summary>
     public List<IBeforeTest> BeforeTest { get; set; } = [];
@@ -63,6 +82,22 @@ public class TestContextFactory
     ///     Collection of actions to be executed after a test completes.
     /// </summary>
     public List<IAfterTest> AfterTest { get; set; } = [];
+
+    /// <summary>
+    ///     Gets or sets the endpoint factory used for creating endpoint instances.
+    /// </summary>
+    private IEndpointFactory EndpointFactory { get; set; }
+
+    /// <summary>
+    ///     Sets the reference resolver for the TestContextFactory.
+    /// </summary>
+    /// <param name="referenceResolver">
+    ///     An instance of the IReferenceResolver interface used to resolve references.
+    /// </param>
+    public void SetReferenceResolver(IReferenceResolver referenceResolver)
+    {
+        _referenceResolver = referenceResolver;
+    }
 
     /// <summary>
     ///     Gets a new instance of TestContext with default/ core function library initialized.
@@ -77,11 +112,15 @@ public class TestContextFactory
             TestListeners = TestListeners,
             TestActionListeners = TestActionListeners,
             MessageListeners = MessageListeners,
+            MessageValidatorRegistry = MessageValidatorRegistry,
             BeforeTest = BeforeTest,
-            AfterTest = AfterTest
+            AfterTest = AfterTest,
+            MessageProcessors = MessageProcessors,
+            EndpointFactory = EndpointFactory
         };
 
         context.SetGlobalVariables(GlobalVariables);
+        context.SetReferenceResolver(_referenceResolver);
 
         if (LogModifier != null) context.LogModifier = LogModifier;
 
@@ -105,7 +144,11 @@ public class TestContextFactory
             TypeConverter = ITypeConverter.LookupDefault(),
             TestListeners = new TestListeners(),
             TestActionListeners = new TestActionListeners(),
-            MessageListeners = new MessageListeners()
+            MessageListeners = new MessageListeners(),
+            _referenceResolver = new SimpleReferenceResolver(),
+            MessageValidatorRegistry = new DefaultMessageValidatorRegistry(),
+            MessageProcessors = new MessageProcessors(),
+            EndpointFactory = new DefaultEndpointFactory()
         };
 
         return factory;
@@ -126,7 +169,10 @@ public class TestContextFactory
             MessageStore = context.MessageStore,
             TypeConverter = context.TypeConverter,
             TestListeners = context.TestListeners,
-            MessageListeners = context.MessageListeners
+            MessageListeners = context.MessageListeners,
+            MessageValidatorRegistry = context.MessageValidatorRegistry,
+            MessageProcessors = context.MessageProcessors,
+            EndpointFactory = context.EndpointFactory
         };
 
         foreach (var kvp in context.GetVariables()) result.GetVariables()[kvp.Key] = kvp.Value;
@@ -135,6 +181,17 @@ public class TestContextFactory
             .WithVariables(context.GetGlobalVariables())
             .Build());
 
+        result.SetReferenceResolver(context.GetReferenceResolver());
+
         return result;
+    }
+
+    /// <summary>
+    ///     Gets the current reference resolver.
+    /// </summary>
+    /// <returns>The current instance of IReferenceResolver</returns>
+    public IReferenceResolver GetReferenceResolver()
+    {
+        return _referenceResolver;
     }
 }

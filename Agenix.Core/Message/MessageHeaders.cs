@@ -8,7 +8,7 @@ public class MessageHeaders
     /// <summary>
     ///     Common header name prefix
     /// </summary>
-    public static readonly string Prefix = "core_";
+    public static readonly string Prefix = "agenix_";
 
     /// <summary>
     ///     Message related header prefix

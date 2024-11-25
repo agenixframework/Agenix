@@ -28,8 +28,7 @@ public class RepeatUntilTrue : AbstractIteratingActionContainer
     /// <summary>
     ///     Initiates the creation of a repeat-until loop and provides methods to configure it.
     /// </summary>
-    public class Builder : AbstractIteratingContainerBuilder<ITestActionContainer,
-        ITestActionContainerBuilder<ITestActionContainer>>
+    public class Builder : AbstractIteratingContainerBuilder<ITestActionContainer, dynamic>
     {
         // Fluent API action building entry method used in C# DSL.
         /// <summary>

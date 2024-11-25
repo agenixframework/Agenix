@@ -10,9 +10,9 @@ namespace Agenix.Core.Container;
 /// <typeparam name="T">Type that implements ITestActionContainer.</typeparam>
 /// <typeparam name="TS">Type that implements both ITestActionContainerBuilder and ITestActionBuilder.</typeparam>
 public abstract class AbstractTestContainerBuilder<T, TS> : AbstractTestActionBuilder<T, TS>,
-    ITestActionContainerBuilder<T>
+    ITestActionContainerBuilder<T, TS>
     where T : ITestActionContainer
-    where TS : ITestActionContainerBuilder<T>
+    where TS : class
 {
     protected readonly List<ITestActionBuilder<ITestAction>> _actions = [];
 
@@ -21,11 +21,11 @@ public abstract class AbstractTestContainerBuilder<T, TS> : AbstractTestActionBu
     /// </summary>
     /// <param name="actions">An array of actions to be added.</param>
     /// <returns>The current instance of the builder with the added actions.</returns>
-    public ITestActionContainerBuilder<T> Actions(params ITestAction[] actions)
+    public TS Actions(params ITestAction[] actions)
     {
         var actionBuilders = actions
             .Where(action => action is not NoopTestAction)
-            .Select(ITestActionBuilder<ITestAction> (action) => new FuncITestActionBuilder(() => action))
+            .Select(ITestActionBuilder<ITestAction> (action) => new FuncITestActionBuilder<ITestAction>(() => action))
             .ToArray();
 
         return Actions(actionBuilders);
@@ -34,7 +34,7 @@ public abstract class AbstractTestContainerBuilder<T, TS> : AbstractTestActionBu
     /// <summary>
     ///     Represents a collection of actions.
     /// </summary>
-    public ITestActionContainerBuilder<T> Actions(params ITestActionBuilder<ITestAction>[] actions)
+    public TS Actions(params ITestActionBuilder<ITestAction>[] actions)
     {
         for (var i = 0; i < actions.Length; i++)
         {

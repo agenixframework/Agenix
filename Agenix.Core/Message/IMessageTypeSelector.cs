@@ -1,5 +1,8 @@
 ﻿namespace Agenix.Core.Message;
 
+/// <summary>
+///     Provides functionality to determine if a message processor can handle a given message type.
+/// </summary>
 public interface IMessageTypeSelector
 {
     /// <summary>

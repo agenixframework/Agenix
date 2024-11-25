@@ -37,7 +37,7 @@ public abstract class AbstractIteratingActionContainer : AbstractActionContainer
     protected int index;
 
     public AbstractIteratingActionContainer(string name,
-        AbstractIteratingContainerBuilder<ITestActionContainer, ITestActionContainerBuilder<ITestActionContainer>>
+        AbstractIteratingContainerBuilder<ITestActionContainer, dynamic>
             builder) : base(name, builder)
     {
         condition = builder.GetCondition();

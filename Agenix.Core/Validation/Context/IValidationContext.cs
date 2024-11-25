@@ -12,7 +12,7 @@ public interface IValidationContext
     /// <typeparam name="TB">The type of the builder.</typeparam>
     public interface IBuilder<out T, TB>
         where T : IValidationContext
-        where TB : IBuilder<T, TB>
+        where TB : class
     {
         /// <summary>
         ///     Builds a new validation context instance.

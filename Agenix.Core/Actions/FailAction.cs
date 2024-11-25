@@ -40,7 +40,7 @@ public class FailAction(FailAction.Builder builder) : AbstractTestAction("fail",
     ///     This class allows for the configuration of a fail action, which is intended to interrupt test execution
     ///     with a generated error.
     /// </remarks>
-    public class Builder : AbstractTestActionBuilder<ITestAction, ITestActionBuilder<ITestAction>>
+    public class Builder : AbstractTestActionBuilder<ITestAction, dynamic>
     {
         public string message = "Generated error to interrupt test execution";
 

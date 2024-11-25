@@ -1,4 +1,5 @@
 using System;
+using Agenix.Core.Actions;
 
 namespace Agenix.Core;
 
@@ -27,5 +28,5 @@ public interface ITestActionRunner
     /// @param behavior
     /// @return TestActionBuilder
     /// /
-    ITestActionBuilder<T> ApplyBehavior<T>(TestBehavior behavior) where T : ITestAction;
+    ApplyTestBehaviorAction.Builder ApplyBehavior(TestBehavior behavior);
 }

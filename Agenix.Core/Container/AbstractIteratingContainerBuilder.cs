@@ -2,7 +2,7 @@ namespace Agenix.Core.Container;
 
 public abstract class AbstractIteratingContainerBuilder<T, TS> : AbstractTestContainerBuilder<T, TS>
     where T : ITestActionContainer
-    where TS : ITestActionContainerBuilder<ITestActionContainer>, ITestActionContainerBuilder<T>
+    where TS : class
 {
     protected string condition;
     protected IterationEvaluator.IteratingConditionExpression conditionExpression;
