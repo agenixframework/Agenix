@@ -26,7 +26,7 @@ public sealed class CoreSettings
     /// <summary>
     ///     Placeholder used in messages to ignore elements
     /// </summary>
-    public const string IgnorePlaceholder = "@ignore@";
+    public const string IgnorePlaceholder = "@Ignore@";
 
     /// <summary>
     ///     Prefix/suffix used to identify validation matchers
@@ -88,6 +88,19 @@ public sealed class CoreSettings
     public static string ReportDirectoryDefault = "agenix-reports";
     public static string TestNameVariableDefault = "agenix.test.name";
     public static string TestNameSpaceVariableDefault = "agenix.test.namespace";
+
+    private static readonly string MessageValidationStrictProp = "agenix.json.message.validation.strict";
+    private static readonly string MessageValidationStrictEnv = "AGENIX_JSON_MESSAGE_VALIDATION_STRICT";
+    private static readonly string MessageValidationStrictDefault = bool.TrueString;
+
+    /// <summary>
+    ///     Indicates if JSON message validation should be performed in strict mode.
+    /// </summary>
+    public static bool JsonMessageValidaitonStrict = bool.Parse(GetPropertyEnvOrDefault(
+        MessageValidationStrictProp,
+        MessageValidationStrictEnv,
+        MessageValidationStrictDefault
+    ));
 
     /// <summary>
     ///     Defines the default encoding used for Agenix file operations.

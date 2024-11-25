@@ -4,7 +4,7 @@ using Agenix.Core.Validation.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Agenix.Core.Util;
+namespace Agenix.Core.Json;
 
 public class JsonPathUtils
 {

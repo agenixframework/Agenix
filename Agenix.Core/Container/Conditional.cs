@@ -87,8 +87,7 @@ public class Conditional : AbstractActionContainer
 
     /// Builder class for constructing Conditional objects.
     /// Provides methods to set conditions and build the Conditional object.
-    public class Builder : AbstractTestContainerBuilder<ITestActionContainer,
-        ITestActionContainerBuilder<ITestActionContainer>>
+    public class Builder : AbstractTestContainerBuilder<ITestActionContainer, dynamic>
     {
         public string Condition { get; private set; }
         public ConditionEvaluator.ConditionExpression Expression { get; private set; }

@@ -46,7 +46,7 @@ public class DefaultMessage : IMessage
     ///     Constructs copy of given message.
     /// </summary>
     /// <param name="message">the message obj</param>
-    public DefaultMessage(IMessage message) : this(message, message.GetHeaders())
+    public DefaultMessage(IMessage message) : this(message.Payload, message.GetHeaders())
     {
         Name = message.Name;
         SetType(message.GetType());
@@ -62,6 +62,19 @@ public class DefaultMessage : IMessage
     }
 
     /// <summary>
+    ///     Default message implementation holds message payload and message headers.
+    ///     Also provides access methods for special header elements such as unique
+    ///     message id and creation timestamp.
+    /// </summary>
+    public DefaultMessage(IMessage message, bool forceAgenixHeaderUpdate = false) : this(message.Payload,
+        message.GetHeaders(), forceAgenixHeaderUpdate)
+    {
+        Name = message.Name;
+        SetType(message.GetType());
+        _headerData.AddRange(message.GetHeaderData());
+    }
+
+    /// <summary>
     ///     Default constructor using payload and headers.
     /// </summary>
     /// <param name="payload">the payload obj</param>
@@ -74,8 +87,8 @@ public class DefaultMessage : IMessage
 
         if (forceAgenixHeaderUpdate)
         {
-            _headers.Add(MessageHeaders.Id, Guid.NewGuid().ToString());
-            _headers.Add(MessageHeaders.Timestamp, Environment.TickCount);
+            _headers[MessageHeaders.Id] = Guid.NewGuid().ToString();
+            _headers[MessageHeaders.Timestamp] = Environment.TickCount;
         }
         else
         {
@@ -102,7 +115,7 @@ public class DefaultMessage : IMessage
 
     public object GetHeader(string headerName)
     {
-        return _headers[headerName];
+        return _headers.GetValueOrDefault(headerName);
     }
 
     public IMessage SetHeader(string headerName, object headerValue)
@@ -110,7 +123,7 @@ public class DefaultMessage : IMessage
         if (headerName.Equals(MessageHeaders.Id))
             throw new CoreSystemException("Not allowed to set reserved message header from message: " +
                                           MessageHeaders.Id);
-        _headers.Add(headerName, headerValue);
+        _headers[headerName] = headerValue;
         return this;
     }
 
@@ -168,15 +181,15 @@ public class DefaultMessage : IMessage
         return this;
     }
 
+    public int GetTimestamp()
+    {
+        return (int)GetHeader(MessageHeaders.Timestamp);
+    }
+
     public DefaultMessage SetType(MessageType type)
     {
         _type = type.ToString();
         return this;
-    }
-
-    public long GetTimestamp()
-    {
-        return (long)GetHeader(MessageHeaders.Timestamp);
     }
 
     public override string ToString()

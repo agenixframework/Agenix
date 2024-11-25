@@ -1,4 +1,6 @@
-﻿namespace Agenix.Core.Endpoint;
+﻿using Agenix.Core.Messaging;
+
+namespace Agenix.Core.Endpoint;
 
 /// <summary>
 ///     Abstract message endpoint handles send/receive timeout setting
@@ -19,7 +21,7 @@ public abstract class AbstractEndpoint(IEndpointConfiguration endpointConfigurat
     /// </summary>
     public string ProducerName => Name + ":producer";
 
-    public IEndpointConfiguration EndpointConfiguration { get; } = endpointConfiguration;
+    public virtual IEndpointConfiguration EndpointConfiguration { get; } = endpointConfiguration;
 
     /// <summary>
     ///     Gets/ Sets the endpoints producer name.
@@ -30,4 +32,16 @@ public abstract class AbstractEndpoint(IEndpointConfiguration endpointConfigurat
     {
         Name = name;
     }
+
+    /// <summary>
+    ///     Creates a message producer for this endpoint. Must be implemented by concrete subclasses.
+    /// </summary>
+    /// <returns>A message producer.</returns>
+    public abstract IProducer CreateProducer();
+
+    /// <summary>
+    ///     Creates a message consumer for this endpoint. Must be implemented by concrete subclasses.
+    /// </summary>
+    /// <returns>A message consumer.</returns>
+    public abstract IConsumer CreateConsumer();
 }

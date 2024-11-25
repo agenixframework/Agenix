@@ -45,8 +45,7 @@ public class Iterate : AbstractIteratingActionContainer
     /// This class provides methods to configure specific properties of the Iterate action, such as the step size for each iteration.
     /// The typical flow involves configuring the desired settings through method chaining and then building the action.
     /// /
-    public class Builder : AbstractIteratingContainerBuilder<ITestActionContainer,
-        ITestActionContainerBuilder<ITestActionContainer>>
+    public class Builder : AbstractIteratingContainerBuilder<ITestActionContainer, dynamic>
     {
         public int _step = 1;
 

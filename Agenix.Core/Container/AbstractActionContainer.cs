@@ -35,9 +35,8 @@ public abstract class AbstractActionContainer : AbstractTestAction, ITestActionC
     {
     }
 
-    protected AbstractActionContainer(string name,
-            AbstractTestContainerBuilder<ITestActionContainer, ITestActionContainerBuilder<ITestActionContainer>>
-                builder)
+    protected AbstractActionContainer(string name, AbstractTestContainerBuilder<ITestActionContainer, dynamic>
+            builder)
         //: base(name, builder)
     {
         actions = builder.GetActions();
@@ -82,7 +81,7 @@ public abstract class AbstractActionContainer : AbstractTestAction, ITestActionC
     public ITestActionContainer SetActions(List<ITestAction> toAdd)
     {
         actions = toAdd
-            .Select(ITestActionBuilder<ITestAction> (a) => new FuncITestActionBuilder(() => a))
+            .Select(ITestActionBuilder<ITestAction> (a) => new FuncITestActionBuilder<ITestAction>(() => a))
             .ToList();
         return this;
     }
@@ -114,7 +113,7 @@ public abstract class AbstractActionContainer : AbstractTestAction, ITestActionC
     {
         // Convert the input actions to a list of FuncITestActionBuilder
         var actionBuilders = toAdd
-            .Select(ITestActionBuilder<ITestAction> (a) => new FuncITestActionBuilder(() => a))
+            .Select(ITestActionBuilder<ITestAction> (a) => new FuncITestActionBuilder<ITestAction>(() => a))
             .ToList();
 
         actions.AddRange(actionBuilders);
@@ -128,7 +127,7 @@ public abstract class AbstractActionContainer : AbstractTestAction, ITestActionC
     /// <returns>The action container with the newly added test action.</returns>
     public ITestActionContainer AddTestAction(ITestAction action)
     {
-        actions.Add(new FuncITestActionBuilder(() => action));
+        actions.Add(new FuncITestActionBuilder<ITestAction>(() => action));
         return this;
     }
 

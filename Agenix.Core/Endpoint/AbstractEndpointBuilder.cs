@@ -11,9 +11,9 @@ public abstract class AbstractEndpointBuilder<T> : IEndpointBuilder<T> where T :
         return GetEndpoint();
     }
 
-    public bool Supports(Type endpointType)
+    public virtual bool Supports(Type endpointType)
     {
-        return GetEndpoint().GetType().Equals(endpointType);
+        return GetEndpoint().GetType() == endpointType;
     }
 
     /// <summary>
@@ -34,8 +34,7 @@ public abstract class AbstractEndpointBuilder<T> : IEndpointBuilder<T> where T :
     /// <exception cref="CoreSystemException"></exception>
     public AbstractEndpointBuilder<T> Initialize()
     {
-        var phase = GetEndpoint() as InitializingPhase;
-        if (phase != null)
+        if (GetEndpoint() is InitializingPhase phase)
             try
             {
                 phase.Initialize();

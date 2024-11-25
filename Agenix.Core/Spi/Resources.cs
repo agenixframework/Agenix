@@ -187,7 +187,7 @@ public class Resources
 
         public Uri GetUri()
         {
-            var assembly = Assembly.GetExecutingAssembly();
+            var assembly = Assembly.GetEntryAssembly();
             var resourceName = _location.Replace("\\", "/");
             var resourceUrl = assembly.GetManifestResourceStream(resourceName) != null
                 ? $"resource://{assembly.GetName().Name}/{resourceName}"

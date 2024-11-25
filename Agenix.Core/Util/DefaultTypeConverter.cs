@@ -223,19 +223,20 @@ public class DefaultTypeConverter(string encodingName) : ITypeConverter
     {
         if (type == typeof(string))
             return (T)(object)value;
-        if (type == typeof(int) || type == typeof(int))
+        if (type == typeof(int))
             return (T)(object)int.Parse(value);
-        if (type == typeof(short) || type == typeof(short))
+        if (type == typeof(short))
             return (T)(object)short.Parse(value);
-        if (type == typeof(byte) || type == typeof(byte))
+        if (type == typeof(byte))
             return (T)(object)byte.Parse(value);
-        if (type == typeof(long) || type == typeof(long))
+        if (type == typeof(long))
             return (T)(object)long.Parse(value);
-        if (type == typeof(bool) || type == typeof(bool))
+        if (type == typeof(bool))
             return (T)(object)bool.Parse(value);
-        if (type == typeof(float) || type == typeof(float))
+        if (type == typeof(float))
             return (T)(object)float.Parse(value);
-        if (type == typeof(double) || type == typeof(double)) return (T)(object)double.Parse(value);
+        if (type == typeof(double))
+            return (T)(object)double.Parse(value);
 
         throw new InvalidOperationException($"Unable to convert '{value}' to required type '{type.FullName}'");
     }

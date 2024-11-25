@@ -23,27 +23,53 @@
         <None Update="log4net.config">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
-        <None Update="ResourcesTest\FileWithContent.json">
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="ResourcesTest\FileWithContent.json"/>
+        <EmbeddedResource Include="ResourcesTest\FileWithContent.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="ResourcesTest\FileWithoutContent.txt">
+        </EmbeddedResource>
+        <None Remove="ResourcesTest\FileWithoutContent.txt"/>
+        <EmbeddedResource Include="ResourcesTest\FileWithoutContent.txt">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="ResourcesTest\validation\builder\button.png">
+        </EmbeddedResource>
+        <None Remove="ResourcesTest\validation\builder\button.png"/>
+        <EmbeddedResource Include="ResourcesTest\validation\builder\button.png">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="ResourcesTest\validation\builder\header-data-resource.txt">
+        </EmbeddedResource>
+        <None Remove="ResourcesTest\validation\builder\header-data-resource.txt"/>
+        <EmbeddedResource Include="ResourcesTest\validation\builder\header-data-resource.txt">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="ResourcesTest\validation\builder\payload-data-resource.txt">
+        </EmbeddedResource>
+        <None Remove="ResourcesTest\validation\builder\payload-data-resource.txt"/>
+        <EmbeddedResource Include="ResourcesTest\validation\builder\payload-data-resource.txt">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="ResourcesTest\validation\builder\variable-data-resource.txt">
+        </EmbeddedResource>
+        <None Remove="ResourcesTest\validation\builder\variable-data-resource.txt"/>
+        <EmbeddedResource Include="ResourcesTest\validation\builder\variable-data-resource.txt">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="ResourcesTest\validation\interceptor\foo.txt">
+        </EmbeddedResource>
+        <None Remove="ResourcesTest\validation\interceptor\foo.txt"/>
+        <EmbeddedResource Include="ResourcesTest\validation\interceptor\foo.txt">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
+        </EmbeddedResource>
+        <None Remove="ResourcesTest\actions\test-request-payload.xml"/>
+        <EmbeddedResource Include="ResourcesTest\actions\test-request-payload.xml">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="ResourcesTest\actions\test-request-payload-with-variables.xml"/>
+        <EmbeddedResource Include="ResourcesTest\actions\test-request-payload-with-variables.xml">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="ResourcesTest\actions\test-request-payload-with-functions.xml"/>
+        <EmbeddedResource Include="ResourcesTest\actions\test-request-payload-with-functions.xml">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="ResourcesTest\actions\test-request-iso-encoding.xml"/>
+        <EmbeddedResource Include="ResourcesTest\actions\test-request-iso-encoding.xml">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
     </ItemGroup>
 
 </Project>

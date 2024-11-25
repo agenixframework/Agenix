@@ -2,6 +2,9 @@
 
 namespace Agenix.Core.Messaging;
 
+/// <summary>
+///     Represents a message consumer capable of receiving messages.
+/// </summary>
 public interface IConsumer
 {
     /// <summary>

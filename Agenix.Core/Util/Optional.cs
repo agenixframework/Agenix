@@ -37,4 +37,15 @@ public class Optional<T>
     {
         return IsPresent ? _value : other;
     }
+
+    public T OrElseGet(Func<T> other)
+    {
+        return IsPresent ? _value : other();
+    }
+
+
+    public static Optional<T> From(T value)
+    {
+        return new Optional<T>(value);
+    }
 }

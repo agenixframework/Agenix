@@ -19,8 +19,7 @@ public class Sequence(Sequence.Builder builder) : AbstractActionContainer("seque
     }
 
     /// Builder class for constructing instances of the Sequence action.
-    public sealed class Builder : AbstractTestContainerBuilder<ITestActionContainer,
-        ITestActionContainerBuilder<ITestActionContainer>>
+    public sealed class Builder : AbstractTestContainerBuilder<ITestActionContainer, dynamic>
     {
         /**
          * Fluent API action building entry method used in C# DSL.

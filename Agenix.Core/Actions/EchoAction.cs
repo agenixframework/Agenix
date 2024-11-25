@@ -47,7 +47,7 @@ public class EchoAction : AbstractTestAction
     /**
      * Action builder.
      */
-    public sealed class Builder : AbstractTestActionBuilder<ITestAction, ITestActionBuilder<ITestAction>>
+    public sealed class Builder : AbstractTestActionBuilder<ITestAction, dynamic>
     {
         public string _message;
 

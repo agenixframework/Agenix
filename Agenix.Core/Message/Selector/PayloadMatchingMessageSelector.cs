@@ -1,0 +1,59 @@
+﻿using Agenix.Core.Exceptions;
+
+namespace Agenix.Core.Message.Selector;
+
+/// <summary>
+///     Message selector matches one or more header elements with the message header. Only in case all matching header
+///     elements are present in message header and its value matches the expected value the message is accepted.
+/// </summary>
+public class PayloadMatchingMessageSelector : AbstractMessageSelector
+{
+    /// <summary>
+    ///     Special selector identifying key for this message selector implementation
+    /// </summary>
+    public const string SelectorId = "payload";
+
+    /// <summary>
+    ///     Default constructor using fields.
+    /// </summary>
+    public PayloadMatchingMessageSelector(string selectKey, string matchingValue, TestContext context) : base(selectKey,
+        matchingValue, context)
+    {
+        if (!selectKey.Equals(SelectorId))
+            throw new CoreSystemException("Invalid usage of payload matching message selector - " +
+                                          $"usage restricted to key '{SelectorId}' but was '{selectKey}'");
+    }
+
+    public override bool Accept(IMessage message)
+    {
+        return Evaluate(GetPayloadAsString(message));
+    }
+
+    /// <summary>
+    ///     Message selector factory for this implementation.
+    /// </summary>
+    public class Factory : IMessageSelector.IMessageSelectorFactory
+    {
+        /// <summary>
+        ///     Checks if the provided key is supported by this message selector factory.
+        /// </summary>
+        /// <param name="key">The key to be checked for support.</param>
+        /// <returns>True if the key is supported, otherwise false.</returns>
+        public bool Supports(string key)
+        {
+            return key.Equals(SelectorId);
+        }
+
+        /// <summary>
+        ///     Creates an IMessageSelector based on the provided key and value.
+        /// </summary>
+        /// <param name="key">The selector key used to determine the appropriate message selector.</param>
+        /// <param name="value">The value associated with the selector key.</param>
+        /// <param name="context">The test context in which the message selector operates.</param>
+        /// <returns>A new instance of IMessageSelector, configured based on the provided key and value.</returns>
+        public IMessageSelector Create(string key, string value, TestContext context)
+        {
+            return new PayloadMatchingMessageSelector(key, value, context);
+        }
+    }
+}

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Text;
 using Agenix.Core.Log;
 
 namespace Agenix.Core.Message;
@@ -83,6 +84,14 @@ public interface IMessage
     IMessage SetType(string type);
 
     /// <summary>
+    ///     Retrieves the timestamp header value from the message.
+    /// </summary>
+    /// <returns>
+    ///     The timestamp value as a long data type.
+    /// </returns>
+    int GetTimestamp();
+
+    /// <summary>
     ///     Prints given message content (body, headers, headerData) to String representation.
     /// </summary>
     /// <param name="body"></param>
@@ -95,9 +104,19 @@ public interface IMessage
 
         if (headerData == null || headerData.Count == 0)
             return
-                $"{interfaceName} [id: {Id}, payload: {MessagePayloadUtils.PrettyPrint(body)}][headers: {new ReadOnlyDictionary<string, object>(headers)}]";
+                $"{interfaceName} [id: {Id}, payload: {MessagePayloadUtils.PrettyPrint(body)}][headers: {ToStringRepresentation(new ReadOnlyDictionary<string, object>(headers))}]";
         return
-            $"{interfaceName} [id: {Id}, payload: {MessagePayloadUtils.PrettyPrint(body)}][headers: {new ReadOnlyDictionary<string, object>(headers)}][header-data: {new ReadOnlyCollection<string>(headerData)}]";
+            $"{interfaceName} [id: {Id}, payload: {MessagePayloadUtils.PrettyPrint(body)}][headers: {ToStringRepresentation(new ReadOnlyDictionary<string, object>(headers))}][header-data: {string.Join(", ", new ReadOnlyCollection<string>(headerData))}]";
+    }
+
+    public static string ToStringRepresentation(ReadOnlyDictionary<string, object> dictionary)
+    {
+        var builder = new StringBuilder();
+        builder.Append('{');
+        foreach (var kvp in dictionary) builder.Append($"{kvp.Key}={kvp.Value}, ");
+        if (dictionary.Count > 0) builder.Length -= 2; // Remove the trailing ", "
+        builder.Append('}');
+        return builder.ToString();
     }
 
     /// <summary>
@@ -124,6 +143,8 @@ public interface IMessage
         if (logModifier is LogMessageModifierBase modifier)
             return Print(modifier.MaskBody(this), modifier.MaskHeaders(this), modifier.MaskHeaderData(this));
 
-        return Print(logModifier.Mask(GetPayload<string>().Trim()), GetHeaders(), GetHeaderData());
+        return logModifier != null
+            ? Print(logModifier.Mask(GetPayload<string>()?.Trim()), GetHeaders(), GetHeaderData())
+            : Print();
     }
 }

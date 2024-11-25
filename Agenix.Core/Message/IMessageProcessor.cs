@@ -1,10 +1,23 @@
-﻿namespace Agenix.Core.Message;
+﻿#nullable enable
+using System;
+using Agenix.Core.Exceptions;
+using Agenix.Core.Validation;
+using log4net;
+
+namespace Agenix.Core.Message;
+
+public delegate void MessageProcessor(IMessage message, TestContext context);
 
 /// <summary>
 ///     Defines the contract for processing messages within the given context.
 /// </summary>
 public interface IMessageProcessor : IMessageTransformer
 {
+    /// <summary>
+    ///     Logger.
+    /// </summary>
+    private static readonly ILog Log = LogManager.GetLogger(typeof(IMessageProcessor));
+
     /// <summary>
     ///     Processes the given message payload within the specified test context.
     /// </summary>
@@ -25,10 +38,39 @@ public interface IMessageProcessor : IMessageTransformer
     }
 
     /// <summary>
+    ///     Retrieves an instance of the specified message processor builder based on the provided validator.
+    /// </summary>
+    /// <param name="validator">The identifier of the message processor builder to retrieve.</param>
+    /// <typeparam name="T">The type of IMessageProcessor.</typeparam>
+    /// <typeparam name="TB">The type of the builder for the IMessageProcessor.</typeparam>
+    /// <returns>An instance of the message processor builder, or null if it fails to resolve.</returns>
+    public static IBuilder<T, TB>? Lookup<T, TB>(string validator)
+        where T : IMessageProcessor where TB : IBuilder<T, TB>
+    {
+        try
+        {
+            switch (validator)
+            {
+                case "json-path-message-processor-builder":
+                {
+                    var instance = (TB)Activator.CreateInstance(typeof(JsonPathMessageProcessor.Builder))!;
+                    return instance;
+                }
+            }
+        }
+        catch (CoreSystemException)
+        {
+            Log.Warn($"Failed to resolve message processor from resource '{validator}'");
+        }
+
+        return null;
+    }
+
+    /// <summary>
     ///     Interface IBuilder defines the contract for building instances of
     ///     IMessageProcessor implementations.
     /// </summary>
-    interface IBuilder<out T, TB> where T : IMessageProcessor where TB : IBuilder<T, TB>
+    new interface IBuilder<out T, TB> where T : IMessageProcessor where TB : IBuilder<T, TB>
     {
         /// <summary>
         ///     Builds new message processor instance.

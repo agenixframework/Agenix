@@ -1,0 +1,6 @@
+﻿namespace Agenix.Core.Messaging;
+
+/// Provides methods for producing and sending reply messages.
+public interface IReplyProducer : IProducer
+{
+}

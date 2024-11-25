@@ -1,4 +1,4 @@
-﻿using Agenix.Core.Util;
+﻿using Agenix.Core.Json;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 

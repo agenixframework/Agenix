@@ -6,7 +6,7 @@ namespace Agenix.Core;
 /// /
 public abstract class AbstractTestActionBuilder<T, TS> : ITestActionBuilder<T>
     where T : ITestAction
-    where TS : ITestActionBuilder<T>
+    where TS : class
 {
     private string description;
 
@@ -23,41 +23,33 @@ public abstract class AbstractTestActionBuilder<T, TS> : ITestActionBuilder<T>
     /// /
     public abstract T Build();
 
-    /**
-     * Sets the test action name.
-     * @param name the test action name.
-     * @return
-     */
+    /// Sets the test action name.
+    /// <param name="name">The test action name.</param>
+    /// <return>The builder instance with the updated name.</return>
     public TS Name(string name)
     {
         this.name = name;
         return self;
     }
 
-    /**
-     * Sets the description.
-     * @param description
-     * @return
-     */
+    /// Sets the description for the test action.
+    /// @param description the description of the test action.
+    /// @return The builder instance with the updated description.
     public TS Description(string description)
     {
         this.description = description;
         return self;
     }
 
-    /**
-     * Obtains the name.
-     * @return
-     */
+    /// Obtains the name of the test action.
+    /// @return The name of the test action.
     public string GetName()
     {
         return name;
     }
 
-    /**
-     * Obtains the description.
-     * @return
-     */
+    /// Obtains the description.
+    /// @return The description of the test action.
     public string GetDescription()
     {
         return description;

@@ -168,6 +168,17 @@ public abstract class ValidationUtils
         return baseMessage + ", expected '" + controlValue + "' to be in '" + actualValues + "'";
     }
 
+    /// Builds an error message indicating that a specific control value was expected to be found in a collection of actual values.
+    /// <param name="baseMessage">The base message to which the detailed error information will be appended.</param>
+    /// <param name="controlValue">The control value that was expected to be present in the collection.</param>
+    /// <param name="actualValues">The collection of actual values where the control value was expected to be found.</param>
+    /// <return>A string representing the constructed error message.</return>
+    public static string BuildValueToBeInCollectionErrorMessage(string baseMessage, object controlValue,
+        ICollection<string> actualValues)
+    {
+        return baseMessage + ", expected '" + controlValue + "' to be in '" + actualValues + "'";
+    }
+
     /// Returns an appropriate IValueMatcher for the given expected value within the provided context.
     /// <param name="expectedValue">The expected value for which a suitable value matcher is needed.</param>
     /// <param name="context">The context within which the value matching will be performed.</param>

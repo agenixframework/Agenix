@@ -4,12 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Agenix.Core.Container;
+using Agenix.Core.Endpoint;
 using Agenix.Core.Exceptions;
 using Agenix.Core.Functions;
 using Agenix.Core.Log;
 using Agenix.Core.Message;
 using Agenix.Core.Report;
+using Agenix.Core.Spi;
 using Agenix.Core.Util;
+using Agenix.Core.Validation;
 using Agenix.Core.Validation.Matcher;
 using Agenix.Core.Variable;
 using log4net;
@@ -19,12 +22,17 @@ namespace Agenix.Core;
 /// <summary>
 ///     The test context provides utility methods for replacing dynamic content(variables and functions) in string
 /// </summary>
-public class TestContext : ITestActionListenerAware
+public class TestContext : ITestActionListenerAware, IReferenceResolverAware
 {
     /// <summary>
     ///     Logger.
     /// </summary>
     private static readonly ILog _log = LogManager.GetLogger(typeof(DefaultFunctionLibrary));
+
+    /// <summary>
+    ///     List of exceptions that actions raised during execution of forked operations.
+    /// </summary>
+    private readonly List<CoreSystemException> _exceptions = [];
 
     /// <summary>
     ///     Local variables
@@ -42,9 +50,9 @@ public class TestContext : ITestActionListenerAware
     private List<IBeforeTest> _beforeTest = [];
 
     /// <summary>
-    ///     List of exceptions that actions raised during execution of forked operations.
+    ///     Endpoint factory creates endpoint instances
     /// </summary>
-    private readonly List<CoreSystemException> _exceptions = [];
+    private IEndpointFactory _endpointFactory;
 
     /// <summary>
     ///     Function registry holding all available functions
@@ -67,9 +75,24 @@ public class TestContext : ITestActionListenerAware
     private MessageListeners _messageListeners = new();
 
     /// <summary>
+    ///     List of global message processors
+    /// </summary>
+    private MessageProcessors _messageProcessors = new();
+
+    /// <summary>
     ///     Message store
     /// </summary>
     private IMessageStore _messageStore = new DefaultMessageStore();
+
+    /// <summary>
+    ///     Registered validation matchers
+    /// </summary>
+    private MessageValidatorRegistry _messageValidatorRegistry = new();
+
+    /// <summary>
+    ///     POCO reference resolver.
+    /// </summary>
+    private IReferenceResolver _referenceResolver;
 
     /// <summary>
     ///     List of test action listeners to be informed on test action events.
@@ -90,7 +113,6 @@ public class TestContext : ITestActionListenerAware
     ///     Registered validation matchers
     /// </summary>
     private ValidationMatcherRegistry _validationMatcherRegistry = new();
-
 
     /// <summary>
     ///     A collection of active timers used within the test context.
@@ -131,6 +153,33 @@ public class TestContext : ITestActionListenerAware
     {
         get => _validationMatcherRegistry;
         set => _validationMatcherRegistry = value;
+    }
+
+    /// <summary>
+    ///     Manages the collection of message processing strategies.
+    /// </summary>
+    public MessageProcessors MessageProcessors
+    {
+        get => _messageProcessors;
+        set => _messageProcessors = value;
+    }
+
+    /// <summary>
+    ///     Factory for creating and managing endpoints.
+    /// </summary>
+    public IEndpointFactory EndpointFactory
+    {
+        get => _endpointFactory;
+        set => _endpointFactory = value;
+    }
+
+    /// <summary>
+    ///     Provides a registry for message validators.
+    /// </summary>
+    public MessageValidatorRegistry MessageValidatorRegistry
+    {
+        get => _messageValidatorRegistry;
+        set => _messageValidatorRegistry = value;
     }
 
     /// <summary>
@@ -197,12 +246,41 @@ public class TestContext : ITestActionListenerAware
     }
 
     /// <summary>
+    ///     Sets the reference resolver to be used by the TestContext.
+    /// </summary>
+    /// <param name="referenceResolver">The reference resolver to set.</param>
+    public void SetReferenceResolver(IReferenceResolver referenceResolver)
+    {
+        _referenceResolver = referenceResolver;
+    }
+
+    /// <summary>
     ///     Adds a test action listener to the context.
     /// </summary>
     /// <param name="listener">The test action listener to be added.</param>
     public void AddTestActionListener(ITestActionListener listener)
     {
         _testActionListeners.AddTestActionListener(listener);
+    }
+
+
+    /// <summary>
+    ///     Retrieves a list of message processors that match the specified message direction.
+    /// </summary>
+    /// <param name="direction">The direction of the message processors to retrieve (INBOUND, OUTBOUND, or UNBOUND).</param>
+    /// <returns>A list of message processors that are either unbound or match the specified direction.</returns>
+    public List<IMessageProcessor> GetMessageProcessors(MessageDirection direction)
+    {
+        return _messageProcessors.GetMessageProcessors().Where(processor =>
+            {
+                var processorDirection = MessageDirection.UNBOUND;
+
+                if (processor is IMessageDirectionAware awareProcessor)
+                    processorDirection = awareProcessor.GetDirection();
+
+                return processorDirection == direction || processorDirection == MessageDirection.UNBOUND;
+            })
+            .ToList();
     }
 
     /// <summary>
@@ -640,6 +718,15 @@ public class TestContext : ITestActionListenerAware
         }
 
         _globalVariables = builder.Build();
+    }
+
+    /// <summary>
+    ///     Retrieves the current reference resolver instance.
+    /// </summary>
+    /// <returns>The current instance of IReferenceResolver.</returns>
+    public IReferenceResolver GetReferenceResolver()
+    {
+        return _referenceResolver;
     }
 
     /// <summary>

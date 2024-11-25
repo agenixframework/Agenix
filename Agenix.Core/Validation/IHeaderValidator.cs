@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Agenix.Core.Exceptions;
+using Agenix.Core.Util;
 using Agenix.Core.Validation.Context;
 using log4net;
 
@@ -42,7 +44,7 @@ public interface IHeaderValidator
     {
         if (_validators.Count != 0) return _validators;
         var resolvedValidators = new Dictionary<string, IHeaderValidator>
-            { { "default", new DefaultHeaderValidator() } };
+            { { "defaultHeaderValidator", new DefaultHeaderValidator() } };
         foreach (var kvp in resolvedValidators) _validators[kvp.Key] = kvp.Value;
 
         if (!_log.IsDebugEnabled) return _validators;
@@ -50,5 +52,23 @@ public interface IHeaderValidator
             foreach (var kvp in _validators) _log.Debug($"Found header validator '{kvp.Key}' as {kvp.Value.GetType()}");
         }
         return _validators;
+    }
+
+    public static Optional<IHeaderValidator> Lookup(string validator)
+    {
+        try
+        {
+            if (validator.Equals("default"))
+            {
+                var instance = new DefaultHeaderValidator();
+                return Optional<IHeaderValidator>.Of(instance);
+            }
+        }
+        catch (CoreSystemException)
+        {
+            _log.Warn($"Failed to resolve header validator from resource '{validator}'");
+        }
+
+        return Optional<IHeaderValidator>.Empty;
     }
 }
