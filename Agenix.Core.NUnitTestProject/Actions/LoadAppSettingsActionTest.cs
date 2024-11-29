@@ -15,7 +15,7 @@ public class LoadAppSettingsActionTest : AbstractNUnitSetUp
     {
         var assemblyLocation = Assembly.GetExecutingAssembly().Location;
         var testDirectory = Path.GetDirectoryName(assemblyLocation);
-        var filePath = "file:" + testDirectory + @"\ResourcesTest\app.config";
+        var filePath = "file:" + testDirectory + @"/ResourcesTest/app.config";
 
         var loadProperties = new LoadAppSettingsAction.Builder()
             .FilePath(filePath)
@@ -42,7 +42,7 @@ public class LoadAppSettingsActionTest : AbstractNUnitSetUp
     {
         var assemblyLocation = Assembly.GetExecutingAssembly().Location;
         var testDirectory = Path.GetDirectoryName(assemblyLocation);
-        var filePath = "file:" + testDirectory + @"\ResourcesTest\app-error.config";
+        var filePath = "file:" + testDirectory + @"/ResourcesTest/app-error.config";
 
         var loadProperties = new LoadAppSettingsAction.Builder()
             .FilePath(filePath)

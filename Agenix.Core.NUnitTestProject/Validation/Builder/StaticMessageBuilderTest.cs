@@ -86,7 +86,7 @@ public class StaticMessageBuilderTest : AbstractNUnitSetUp
     {
         var assemblyLocation = Assembly.GetExecutingAssembly().Location;
         var testDirectory = Path.GetDirectoryName(assemblyLocation);
-        var headerResource = "file:" + testDirectory + @"\ResourcesTest\validation\builder\payload-data-resource.txt";
+        var headerResource = "file:" + testDirectory + @"/ResourcesTest/validation/builder/payload-data-resource.txt";
 
         var testMessage = new DefaultMessage("TestMessage").SetHeader("header1", "value1");
         _staticMessageBuilder = new StaticMessageBuilder(testMessage);

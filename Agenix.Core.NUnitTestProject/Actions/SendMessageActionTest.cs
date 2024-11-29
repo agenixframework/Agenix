@@ -70,7 +70,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
         var assemblyLocation = Assembly.GetExecutingAssembly().Location;
         var testDirectory = Path.GetDirectoryName(assemblyLocation);
         var textPayloadResource =
-            "file:" + testDirectory + @"\ResourcesTest\actions\test-request-payload.xml";
+            "file:" + testDirectory + @"/ResourcesTest/actions/test-request-payload.xml";
         var messageBuilder = new DefaultMessageBuilder();
         messageBuilder.SetPayloadBuilder(new FileResourcePayloadBuilder(textPayloadResource));
 
@@ -137,7 +137,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
         var assemblyLocation = Assembly.GetExecutingAssembly().Location;
         var testDirectory = Path.GetDirectoryName(assemblyLocation);
         var textPayloadResource =
-            "file:" + testDirectory + @"\ResourcesTest\actions\test-request-payload-with-variables.xml";
+            "file:" + testDirectory + @"/ResourcesTest/actions/test-request-payload-with-variables.xml";
         var messageBuilder = new DefaultMessageBuilder();
         messageBuilder.SetPayloadBuilder(new FileResourcePayloadBuilder(textPayloadResource));
 
@@ -174,7 +174,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
         var assemblyLocation = Assembly.GetExecutingAssembly().Location;
         var testDirectory = Path.GetDirectoryName(assemblyLocation);
         var textPayloadResource =
-            "file:" + testDirectory + @"\ResourcesTest\actions\test-request-payload-with-functions.xml";
+            "file:" + testDirectory + @"/ResourcesTest/actions/test-request-payload-with-functions.xml";
         var messageBuilder = new DefaultMessageBuilder();
         messageBuilder.SetPayloadBuilder(new FileResourcePayloadBuilder(textPayloadResource));
 
@@ -524,7 +524,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
         var assemblyLocation = Assembly.GetExecutingAssembly().Location;
         var testDirectory = Path.GetDirectoryName(assemblyLocation);
         var textPayloadResource =
-            "file:" + testDirectory + @"\ResourcesTest\actions\test-request-iso-encoding.xml";
+            "file:" + testDirectory + @"/ResourcesTest/actions/test-request-iso-encoding.xml";
         var messageBuilder = new DefaultMessageBuilder();
         messageBuilder.SetPayloadBuilder(new FileResourcePayloadBuilder(textPayloadResource));
 

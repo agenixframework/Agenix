@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Agenix.Core.Message;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using static Agenix.Core.Validation.DefaultTextEqualsMessageValidator;
 
 namespace Agenix.Core.NUnitTestProject.Message;
 
@@ -27,7 +28,7 @@ public class DefaultMessageTest : AbstractNUnitSetUp
                                            "agenix_message_id={0}, agenix_message_timestamp={1}, operation=getCredentials, password=foo" +
                                            "}}]", message.Id, message.GetTimestamp());
 
-        ClassicAssert.AreEqual(expectedOutput, output);
+        ClassicAssert.AreEqual(NormalizeLineEndings(expectedOutput), NormalizeLineEndings(output));
     }
 
     [Test]
@@ -80,7 +81,7 @@ public class DefaultMessageTest : AbstractNUnitSetUp
             "IMESSAGE [id: {0}, payload: <credentials>\r\n  <password>****</password>\r\n</credentials>\r\n][headers: {{agenix_message_id={0}, agenix_message_timestamp={1}, operation=getCredentials, password=****}}]",
             message.Id, message.GetTimestamp());
 
-        ClassicAssert.AreEqual(expectedOutput, output);
+        ClassicAssert.AreEqual(NormalizeLineEndings(expectedOutput), NormalizeLineEndings(output));
     }
 
     [Test]
@@ -98,7 +99,7 @@ public class DefaultMessageTest : AbstractNUnitSetUp
             "IMESSAGE [id: {0}, payload: {{\r\n  \"credentials\": {{\r\n    \"password\": \"****\",\r\n    \"secretKey\": \"****\"\r\n  }}\r\n}}][headers: {{agenix_message_id={0}, agenix_message_timestamp={1}, operation=getCredentials, password=****, secretKey=****}}]",
             message.Id, message.GetTimestamp());
 
-        ClassicAssert.AreEqual(expectedOutput, output);
+        ClassicAssert.AreEqual(NormalizeLineEndings(expectedOutput), NormalizeLineEndings(output));
     }
 
     [Test]
