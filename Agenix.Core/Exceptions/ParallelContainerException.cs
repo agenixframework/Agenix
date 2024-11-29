@@ -9,8 +9,6 @@ namespace Agenix.Core.Exceptions;
 /// /
 public class ParallelContainerException(List<CoreSystemException> nestedExceptions) : CoreSystemException
 {
-    private static readonly long SerialVersionUid = 1L;
-
     public override string Message
     {
         get

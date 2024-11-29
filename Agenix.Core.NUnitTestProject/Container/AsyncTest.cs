@@ -83,15 +83,15 @@ public class AsyncTest : AbstractNUnitSetUp
         await WaitUtils.WaitForCompletion(container, Context);
 
         // Verify that each action was executed once
-        action1.Verify(a => a.Execute(It.IsAny<TestContext>()), Times.Once);
-        action2.Verify(a => a.Execute(It.IsAny<TestContext>()), Times.Once);
-        action3.Verify(a => a.Execute(It.IsAny<TestContext>()), Times.Once);
+        action1.Verify(a => a.Execute(Context), Times.Once);
+        action2.Verify(a => a.Execute(Context), Times.Once);
+        action3.Verify(a => a.Execute(Context), Times.Once);
 
         // Verify the success action was executed
-        _success.Verify(s => s.Execute(It.IsAny<TestContext>()), Times.Once);
+        _success.Verify(s => s.Execute(Context), Times.Once);
 
         // Verify that the error action was never executed
-        _error.Verify(e => e.Execute(It.IsAny<TestContext>()), Times.Never);
+        _error.Verify(e => e.Execute(Context), Times.Never);
     }
 
     [Test]
@@ -137,7 +137,7 @@ public class AsyncTest : AbstractNUnitSetUp
     public void TestWaitForFinishTimeout()
     {
         // Setup the action to simulate a delay
-        _action.Setup(a => a.Execute(It.IsAny<TestContext>()))
+        _action.Setup(a => a.Execute(Context))
             .Callback(() => Thread.Sleep(500));
 
         var container = new Async.Builder()
