@@ -4,12 +4,17 @@ namespace Agenix.Core.Container;
 // aborting condition evaluates to true.
 // Index is incremented each iteration and stored as test variable accessible in the nested test actions
 // as normal variable. Index starts with 1 by default.
-public class RepeatUntilTrue : AbstractIteratingActionContainer
+public class RepeatUntilTrue(RepeatUntilTrue.Builder builder) : AbstractIteratingActionContainer(
+    builder.GetName() ?? "repeat",
+    builder.GetDescription(),
+    builder.GetActions(),
+    builder.GetCondition(),
+    builder.GetConditionExpression(),
+    builder.GetIndexName(),
+    builder.GetIndex(),
+    builder.GetStart())
 {
     // Default constructor.
-    public RepeatUntilTrue(Builder builder) : base("repeat", builder)
-    {
-    }
 
     /// <summary>
     ///     Executes a single iteration of the repeat-until loop.
@@ -28,7 +33,7 @@ public class RepeatUntilTrue : AbstractIteratingActionContainer
     /// <summary>
     ///     Initiates the creation of a repeat-until loop and provides methods to configure it.
     /// </summary>
-    public class Builder : AbstractIteratingContainerBuilder<ITestActionContainer, dynamic>
+    public class Builder : AbstractIteratingContainerBuilder<RepeatUntilTrue, Builder>
     {
         // Fluent API action building entry method used in C# DSL.
         /// <summary>

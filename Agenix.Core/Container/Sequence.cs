@@ -4,9 +4,14 @@ namespace Agenix.Core.Container;
 
 /// Sequence container executing a set of nested test actions in a simple sequence.
 /// /
-public class Sequence(Sequence.Builder builder) : AbstractActionContainer("sequential", builder)
+public class Sequence(Sequence.Builder builder) : AbstractActionContainer(builder.GetName() ?? "sequential",
+    builder.GetDescription(), builder.GetActions())
 {
-    private static readonly ILog _log = LogManager.GetLogger(typeof(Sequence));
+    /// <summary>
+    ///     A logger instance for the Sequence class, used to record log messages
+    ///     related to the execution of a sequence of test actions.
+    /// </summary>
+    private static readonly ILog Log = LogManager.GetLogger(typeof(Sequence));
 
     /// Executes the sequence of nested test actions in the provided context.
     /// @param context The context in which the test actions are executed.
@@ -15,11 +20,11 @@ public class Sequence(Sequence.Builder builder) : AbstractActionContainer("seque
     {
         foreach (var actionBuilder in actions) ExecuteAction(actionBuilder.Build(), context);
 
-        _log.Debug("Action sequence finished successfully.");
+        Log.Debug("Action sequence finished successfully.");
     }
 
     /// Builder class for constructing instances of the Sequence action.
-    public sealed class Builder : AbstractTestContainerBuilder<ITestActionContainer, dynamic>
+    public sealed class Builder : AbstractTestContainerBuilder<Sequence, Builder>
     {
         /**
          * Fluent API action building entry method used in C# DSL.

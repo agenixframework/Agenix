@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml;
 using Agenix.Core.Exceptions;
 using Agenix.Core.Spi;
 using log4net;
@@ -321,5 +324,70 @@ public class FileUtils
         var ext = GetFileExtension(sourceFile);
         var name = GetFileName(sourceFile);
         return new TestSource(ext, name, sourceFile);
+    }
+
+    /// <summary>
+    ///     Loads properties from an XML file into the provided NameValueCollection.
+    /// </summary>
+    /// <param name="properties">The collection to populate with properties from the XML file.</param>
+    /// <param name="resourcePath">The path to the XML file from which to load properties.</param>
+    private static void LoadFromXml(NameValueCollection properties, string resourcePath)
+    {
+        var xmlDoc = new XmlDocument();
+
+        using (var stream = new FileStream(resourcePath, FileMode.Open, FileAccess.Read))
+        {
+            xmlDoc.Load(stream);
+        }
+
+        if (xmlDoc.DocumentElement != null)
+            foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes)
+                if (node is XmlElement element)
+                    properties[element.Name] = element.InnerText;
+    }
+
+    /// <summary>
+    ///     Loads settings from a .config file located at the specified config path
+    ///     and adds them to the provided NameValueCollection.
+    /// </summary>
+    /// <param name="settings">The NameValueCollection to which the settings will be added.</param>
+    /// <param name="resourcePath">The path of the settings file to load.</param>
+    private static void LoadFromConfigFile(NameValueCollection settings, string resourcePath)
+    {
+        var configMap = new ExeConfigurationFileMap { ExeConfigFilename = resourcePath };
+        var config = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
+
+        foreach (var key in config.AppSettings.Settings.AllKeys) settings[key] = config.AppSettings.Settings[key].Value;
+    }
+
+    /// <summary>
+    ///     Loads the settings from the specified config path into a NameValueCollection.
+    ///     Supports both XML and .config file formats.
+    /// </summary>
+    /// <param name="configPath">The path to the config file to load configuration settings from.</param>
+    /// <returns>A NameValueCollection containing the settings loaded from the config.</returns>
+    /// <exception cref="ArgumentException">Thrown when the resource path is null or empty.</exception>
+    /// <exception cref="InvalidOperationException">Thrown when the settings cannot be loaded from the config.</exception>
+    public static NameValueCollection LoadAsSettings(IResource resource)
+    {
+        var settings = new NameValueCollection();
+        var configPath = resource.GetLocation();
+
+        try
+        {
+            if (string.IsNullOrEmpty(configPath))
+                throw new ArgumentException("Config path must not be null or empty", nameof(configPath));
+
+            if (configPath.EndsWith(FILE_EXTENSION_XML, StringComparison.OrdinalIgnoreCase))
+                LoadFromXml(settings, configPath);
+            else
+                LoadFromConfigFile(settings, configPath);
+        }
+        catch (Exception e)
+        {
+            throw new InvalidOperationException("Failed to load configuration settings from an external .config", e);
+        }
+
+        return settings;
     }
 }

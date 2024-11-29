@@ -1,14 +1,14 @@
 ﻿namespace Agenix.Core.Container;
 
+/// Represents a sequence of actions that will execute a set of operations
+/// and ensures that a final operation is performed at the end.
 public class FinallySequence : Sequence
 {
-    /**
-     * Default constructor.
-     * 
-     * @param builder
-     */
+    /// Represents a sequence of actions that will execute a set of operations
+    /// and ensures that a final operation is performed at the end.
+    /// /
     public FinallySequence(Builder builder) : base(
-        (Sequence.Builder)new Sequence.Builder()
+        new Sequence.Builder()
             .Description(builder.GetDescription())
             .Name(builder.GetName())
             .Actions(builder.GetActions().ToArray())
@@ -20,10 +20,9 @@ public class FinallySequence : Sequence
     /// /
     public new class Builder : AbstractTestContainerBuilder<FinallySequence, dynamic>
     {
-        /**
-         * Fluent API action building entry method used in C# DSL.
-         * @return
-         */
+        /// Fluent API action building entry method used in C# DSL.
+        /// @return A new instance of the Builder class for constructing FinallySequence instances.
+        /// /
         public static Builder DoFinally()
         {
             return new Builder();

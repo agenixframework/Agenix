@@ -8,10 +8,9 @@ namespace Agenix.Core.Actions;
 */
 public class EchoAction : AbstractTestAction
 {
-    /**
-     * Logger
-     */
-    private static readonly ILog _log = LogManager.GetLogger(typeof(EchoAction));
+    /// Logger for EchoAction.
+    /// /
+    private static readonly ILog Log = LogManager.GetLogger(typeof(EchoAction));
 
     /**
      * Log message
@@ -29,10 +28,9 @@ public class EchoAction : AbstractTestAction
 
     public override void DoExecute(TestContext context)
     {
-        if (Message == null)
-            _log.Info($"Agenix test {DateTime.Now}");
-        else
-            _log.Info(context.LogModifier.Mask(context.ReplaceDynamicContentInString(Message)));
+        Log.Info(Message == null
+            ? $"Agenix test {DateTime.Now}"
+            : context.LogModifier.Mask(context.ReplaceDynamicContentInString(Message)));
     }
 
     /**

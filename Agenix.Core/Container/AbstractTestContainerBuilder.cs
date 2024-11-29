@@ -34,7 +34,7 @@ public abstract class AbstractTestContainerBuilder<T, TS> : AbstractTestActionBu
     /// <summary>
     ///     Represents a collection of actions.
     /// </summary>
-    public TS Actions(params ITestActionBuilder<ITestAction>[] actions)
+    public virtual TS Actions(params ITestActionBuilder<ITestAction>[] actions)
     {
         for (var i = 0; i < actions.Length; i++)
         {
@@ -76,6 +76,16 @@ public abstract class AbstractTestContainerBuilder<T, TS> : AbstractTestActionBu
     public List<ITestActionBuilder<ITestAction>> GetActions()
     {
         return _actions;
+    }
+
+    /// <summary>
+    ///     Adds a test action to the current container builder using a provided test action delegate.
+    /// </summary>
+    /// <param name="testAction">A delegate that defines the test action to be added.</param>
+    /// <returns>The current instance of the builder with the added test action.</returns>
+    public TS Actions(TestAction testAction)
+    {
+        return Actions(new DelegatingTestAction(testAction));
     }
 
     /// <summary>

@@ -6,9 +6,14 @@ using log4net;
 
 namespace Agenix.Core.Actions;
 
+/// <summary>
+///     Represents an abstract base class for asynchronous test actions.
+///     This class provides the basic structure for executing asynchronous operations
+///     within a test and handles the completion logic.
+/// </summary>
 public abstract class AbstractAsyncTestAction : AbstractTestAction, ICompletable
 {
-    private static readonly ILog _log = LogManager.GetLogger(typeof(AbstractAsyncTestAction));
+    private static readonly ILog Log = LogManager.GetLogger(typeof(AbstractAsyncTestAction));
     private Task _finished;
 
     /// Determines if the asynchronous test action is completed.
@@ -20,6 +25,9 @@ public abstract class AbstractAsyncTestAction : AbstractTestAction, ICompletable
         return (_finished?.IsCompleted ?? IsDisabled(context)) || IsDisabled(context);
     }
 
+    /// Executes the asynchronous test action within the provided test context.
+    /// This method sets up a task for the action completion logic and executes the asynchronous operation.
+    /// <param name="context">The test context which provides required execution details and tracks exceptions.</param>
     public override void DoExecute(TestContext context)
     {
         var tcs = new TaskCompletionSource<TestContext>();
@@ -45,7 +53,7 @@ public abstract class AbstractAsyncTestAction : AbstractTestAction, ICompletable
             }
             catch (Exception e)
             {
-                _log.Warn("Async test action execution raised error", e);
+                Log.Warn("Async test action execution raised error", e);
                 context.AddException(
                     (CoreSystemException)(e is CoreSystemException ? e : new CoreSystemException(e.Message)));
             }
@@ -62,7 +70,7 @@ public abstract class AbstractAsyncTestAction : AbstractTestAction, ICompletable
      * Optional validation step after async test action performed with success.
      * @param context
      */
-    public void OnSuccess(TestContext context)
+    public virtual void OnSuccess(TestContext context)
     {
     }
 
@@ -70,7 +78,7 @@ public abstract class AbstractAsyncTestAction : AbstractTestAction, ICompletable
      * Optional validation step after async test action performed with success.
      * @param context
      */
-    public void OnError(TestContext context, Exception error)
+    public virtual void OnError(TestContext context, Exception error)
     {
     }
 }

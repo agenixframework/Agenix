@@ -12,7 +12,7 @@ namespace Agenix.Core.Container;
 /// </summary>
 public abstract class AbstractTestBoundaryActionContainer : AbstractActionContainer
 {
-    private static readonly ILog log = LogManager.GetLogger("AbstractTestBoundaryActionContainer");
+    private static readonly ILog Log = LogManager.GetLogger("AbstractTestBoundaryActionContainer");
     private Dictionary<string, string> _env = new();
     private string _namePattern;
     private string _packageNamePattern;
@@ -35,20 +35,20 @@ public abstract class AbstractTestBoundaryActionContainer : AbstractActionContai
         if (!string.IsNullOrEmpty(_packageNamePattern))
             if (!Regex.IsMatch(packageName, _packageNamePattern))
             {
-                log.WarnFormat(baseErrorMessage, "test package", Name);
+                Log.WarnFormat(baseErrorMessage, "test package", Name);
                 return false;
             }
 
         if (!string.IsNullOrEmpty(_namePattern))
             if (!Regex.IsMatch(testName, SanitizePattern(_namePattern)))
             {
-                log.WarnFormat(baseErrorMessage, "test name", Name);
+                Log.WarnFormat(baseErrorMessage, "test name", Name);
                 return false;
             }
 
         if (!CheckTestGroups(includedGroups))
         {
-            log.WarnFormat(baseErrorMessage, "test groups", Name);
+            Log.WarnFormat(baseErrorMessage, "test groups", Name);
             return false;
         }
 
@@ -56,7 +56,7 @@ public abstract class AbstractTestBoundaryActionContainer : AbstractActionContai
                                  (!string.IsNullOrEmpty(envEntry.Value) && !ConfigurationManager
                                      .AppSettings[envEntry.Key].Equals(envEntry.Value))))
         {
-            log.WarnFormat(baseErrorMessage, "env properties", Name);
+            Log.WarnFormat(baseErrorMessage, "env properties", Name);
             return false;
         }
 
@@ -64,7 +64,7 @@ public abstract class AbstractTestBoundaryActionContainer : AbstractActionContai
                 .Where(systemProperty => Environment.GetEnvironmentVariable(systemProperty.Key) != null).Any(
                     systemProperty => !string.IsNullOrEmpty(systemProperty.Value) && !Environment
                         .GetEnvironmentVariable(systemProperty.Key)!.Equals(systemProperty.Value))) return true;
-        log.WarnFormat(baseErrorMessage, "system properties", Name);
+        Log.WarnFormat(baseErrorMessage, "system properties", Name);
         return false;
     }
 

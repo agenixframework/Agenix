@@ -16,7 +16,7 @@ public abstract class WaitUtils
     /**
      * Logger
      */
-    private static readonly ILog _log = LogManager.GetLogger(typeof(DefaultTestCase));
+    private static readonly ILog Log = LogManager.GetLogger(typeof(WaitUtils));
 
     /**
      * Prevent instantiation.
@@ -48,7 +48,7 @@ public abstract class WaitUtils
         {
             while (!container.IsDone(context))
             {
-                _log.Debug("Wait for test container to finish properly ...");
+                Log.Debug("Wait for test container to finish properly ...");
 
                 // Wait for a small duration or until the cancellation token is triggered
                 await Task.Delay(100, cancellationTokenSource.Token);

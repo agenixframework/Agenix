@@ -9,12 +9,16 @@ public class TestCaseRunnerFactory
     /**
      * The key for the default Agenix test case runner provider
      */
+#pragma warning disable CS0414 // Field is assigned but its value is never used
     private static readonly string Default = "default";
+#pragma warning restore CS0414 // Field is assigned but its value is never used
 
     /**
      * The key for a custom test case runner provider
      */
+#pragma warning disable CS0414 // Field is assigned but its value is never used
     private static readonly string Custom = "custom";
+#pragma warning restore CS0414 // Field is assigned but its value is never used
 
     private static readonly TestCaseRunnerFactory Instance = new();
 

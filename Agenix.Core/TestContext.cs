@@ -575,7 +575,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <param name="str">The string to parse for variable place holders.</param>
     /// <param name="enableQuoting">flag marking surrounding quotes should be added or not.</param>
     /// <returns>resulting string without any variable place holders.</returns>
-    public string ReplaceDynamicContentInString(string str, bool enableQuoting = false)
+    public virtual string ReplaceDynamicContentInString(string str, bool enableQuoting = false)
     {
         if (str == null) return null;
         var result = VariableUtils.ReplaceVariablesInString(str, this, enableQuoting);

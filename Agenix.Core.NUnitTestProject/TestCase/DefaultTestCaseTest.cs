@@ -245,7 +245,7 @@ public class DefaultTestCaseTest : AbstractNUnitSetUp
         return fixture.Duration;
     }
 
-    public class ConcreteAsyncTestAction : AbstractAsyncTestAction
+    private class ConcreteAsyncTestAction : AbstractAsyncTestAction
     {
         public Func<TestContext, Task> DoExecuteAsyncFunc { get; init; }
 

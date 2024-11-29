@@ -14,6 +14,11 @@ public class SequenceBeforeTest : AbstractTestBoundaryActionContainer, IBeforeTe
     /// </summary>
     private static readonly ILog Log = LogManager.GetLogger(typeof(SequenceAfterTest));
 
+    /// Executes a sequence of actions before a test is run.
+    /// <param name="context">
+    ///     The context in which the test actions are executed, providing state and environment information
+    ///     for the actions.
+    /// </param>
     public override void DoExecute(TestContext context)
     {
         if (actions == null || actions.Count == 0) return;
@@ -34,10 +39,9 @@ public class SequenceBeforeTest : AbstractTestBoundaryActionContainer, IBeforeTe
     /// </summary>
     public class Builder : AbstractTestBoundaryContainerBuilder<SequenceBeforeTest, Builder>
     {
-        /**
-         * Fluent API action building entry method used in C# DSL.
-         * @return
-         */
+        /// Fluent API action building entry method used in C# DSL.
+        /// @return A new instance of the Builder class for constructing SequenceBeforeTest instances.
+        /// /
         public static Builder BeforeTest()
         {
             return new Builder();
