@@ -12,7 +12,7 @@ namespace Agenix.Core.Container;
 /// </summary>
 public abstract class AbstractActionContainer : AbstractTestAction, ITestActionContainer, ICompletable
 {
-    private static readonly ILog _log = LogManager.GetLogger(typeof(AbstractActionContainer));
+    private static readonly ILog Log = LogManager.GetLogger(typeof(AbstractActionContainer));
 
     /// <summary>
     ///     List of all executed actions during container run.
@@ -35,9 +35,14 @@ public abstract class AbstractActionContainer : AbstractTestAction, ITestActionC
     {
     }
 
-    protected AbstractActionContainer(string name, AbstractTestContainerBuilder<ITestActionContainer, dynamic>
-            builder)
-        //: base(name, builder)
+    protected AbstractActionContainer(string name, string description, List<ITestActionBuilder<ITestAction>> actions)
+        : base(name, description)
+    {
+        this.actions = actions;
+    }
+
+    protected AbstractActionContainer(string name, AbstractTestContainerBuilder<ITestActionContainer, dynamic> builder)
+        : base(name, builder.GetDescription() ?? "")
     {
         actions = builder.GetActions();
     }
@@ -58,13 +63,13 @@ public abstract class AbstractActionContainer : AbstractTestAction, ITestActionC
         foreach (var action in new List<ITestAction>(_executedActions))
             if (action is ICompletable completable && !completable.IsDone(context))
             {
-                if (_log.IsDebugEnabled)
+                if (Log.IsDebugEnabled)
                 {
                     var actionName = string.IsNullOrWhiteSpace(action.Name)
                         ? action.GetType().Name
                         : action.Name;
 
-                    _log.Debug($"{actionName} not completed yet");
+                    Log.Debug($"{actionName} not completed yet");
                 }
 
                 return false;
@@ -90,7 +95,7 @@ public abstract class AbstractActionContainer : AbstractTestAction, ITestActionC
     ///     Retrieves the list of actions that have been added to the action container after building them.
     /// </summary>
     /// <returns>A list of built actions currently in the action container.</returns>
-    public List<ITestAction> GetActions()
+    public virtual List<ITestAction> GetActions()
     {
         return actions.Select(a => a.Build()).ToList();
     }
@@ -182,7 +187,7 @@ public abstract class AbstractActionContainer : AbstractTestAction, ITestActionC
     /// </summary>
     /// <param name="index">The zero-based index of the test action to retrieve.</param>
     /// <returns>The test action at the specified index.</returns>
-    public ITestAction GetTestAction(int index)
+    public virtual ITestAction GetTestAction(int index)
     {
         return index < _executedActions.Count ? _executedActions[index] : actions[index].Build();
     }

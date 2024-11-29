@@ -27,6 +27,9 @@
 
     <ItemGroup>
         <None Remove="ResourcesTest\FileWithContent.json"/>
+        <EmbeddedResource Include="ResourcesTest\app-error.config">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
         <EmbeddedResource Include="ResourcesTest\FileWithContent.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </EmbeddedResource>
@@ -68,6 +71,10 @@
         </EmbeddedResource>
         <None Remove="ResourcesTest\actions\test-request-iso-encoding.xml"/>
         <EmbeddedResource Include="ResourcesTest\actions\test-request-iso-encoding.xml">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="ResourcesTest\app.config"/>
+        <EmbeddedResource Include="ResourcesTest\app.config">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </EmbeddedResource>
     </ItemGroup>

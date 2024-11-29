@@ -6,15 +6,15 @@ namespace Agenix.Core.Container;
 /// /
 public class Iterate : AbstractIteratingActionContainer
 {
-    /**
-     * Index increment step
-     */
+    /// The increment step used to advance the loop index in each iteration.
+    /// /
     private readonly int _step;
 
-    /**
-     * Default constructor.
-     */
-    public Iterate(Builder builder) : base("iterate", builder)
+    /// Represents an action container that iterates over a set of actions.
+    /// /
+    public Iterate(Builder builder) : base(builder.GetName() ?? "iterate", builder.GetDescription(),
+        builder.GetActions(), builder.GetCondition(), builder.GetConditionExpression(), builder.GetIndexName(),
+        builder.GetIndex(), builder.GetStart())
     {
         _step = builder._step;
     }
@@ -45,7 +45,7 @@ public class Iterate : AbstractIteratingActionContainer
     /// This class provides methods to configure specific properties of the Iterate action, such as the step size for each iteration.
     /// The typical flow involves configuring the desired settings through method chaining and then building the action.
     /// /
-    public class Builder : AbstractIteratingContainerBuilder<ITestActionContainer, dynamic>
+    public class Builder : AbstractIteratingContainerBuilder<Iterate, Builder>
     {
         public int _step = 1;
 

@@ -9,20 +9,19 @@ namespace Agenix.Core.Container;
 /// /
 public class Conditional : AbstractActionContainer
 {
-    /**
-     * Logger
-     */
-    private static readonly ILog _log = LogManager.GetLogger(typeof(Conditional));
+    /// Represents a logger used for logging activities within the Conditional class.
+    /// /
+    private static readonly ILog Log = LogManager.GetLogger(typeof(Conditional));
 
-    /**
-     * Boolean condition expression string
-     */
+    /// Represents the condition expression string that determines if the
+    /// nested test actions should be executed within the Conditional class.
     private readonly string _condition;
 
     /**
      * Default constructor.
      */
-    public Conditional(Builder builder) : base("conditional", builder)
+    public Conditional(Builder builder) : base(builder.GetName() ?? "conditional", builder.GetDescription(),
+        builder.GetActions())
     {
         _condition = builder.Condition;
         ConditionExpression = builder.Expression;
@@ -41,12 +40,12 @@ public class Conditional : AbstractActionContainer
     {
         if (CheckCondition(context))
         {
-            _log.Debug($"Condition [{_condition}] evaluates to true, executing nested actions");
+            Log.Debug($"Condition [{_condition}] evaluates to true, executing nested actions");
             foreach (var actionBuilder in actions) ExecuteAction(actionBuilder.Build(), context);
         }
         else
         {
-            _log.Debug($"Condition [{_condition}] evaluates to false, not executing nested actions");
+            Log.Debug($"Condition [{_condition}] evaluates to false, not executing nested actions");
         }
     }
 
@@ -87,7 +86,7 @@ public class Conditional : AbstractActionContainer
 
     /// Builder class for constructing Conditional objects.
     /// Provides methods to set conditions and build the Conditional object.
-    public class Builder : AbstractTestContainerBuilder<ITestActionContainer, dynamic>
+    public class Builder : AbstractTestContainerBuilder<Conditional, Builder>
     {
         public string Condition { get; private set; }
         public ConditionEvaluator.ConditionExpression Expression { get; private set; }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Agenix.Core.Util;
 using Agenix.Core.Validation.Matcher;
@@ -9,43 +10,41 @@ namespace Agenix.Core.Container;
 /// It serves as a base for containers that need to execute a specific action iteratively
 /// with conditional checks.
 /// /
-public abstract class AbstractIteratingActionContainer : AbstractActionContainer
+public abstract class AbstractIteratingActionContainer(
+    string name,
+    string description,
+    List<ITestActionBuilder<ITestAction>> actions,
+    string condition,
+    IterationEvaluator.IteratingConditionExpression conditionExpression,
+    string indexName,
+    int index,
+    int start)
+    : AbstractActionContainer(name, description, actions)
 {
     /**
      * Boolean expression string
      */
-    protected readonly string condition;
+    protected readonly string condition = condition;
 
     /**
      * Optional condition expression evaluates to true or false
      */
-    protected readonly IterationEvaluator.IteratingConditionExpression conditionExpression;
+    protected readonly IterationEvaluator.IteratingConditionExpression conditionExpression = conditionExpression;
 
     /**
      * Name of index variable
      */
-    protected readonly string indexName;
+    protected readonly string indexName = indexName;
 
     /**
      * Cache start index for further container executions - e.g. in loop
      */
-    protected readonly int start;
+    protected readonly int start = start;
 
     /**
      * Looping index
      */
-    protected int index;
-
-    public AbstractIteratingActionContainer(string name,
-        AbstractIteratingContainerBuilder<ITestActionContainer, dynamic>
-            builder) : base(name, builder)
-    {
-        condition = builder.GetCondition();
-        conditionExpression = builder.GetConditionExpression();
-        indexName = builder.GetIndexName();
-        index = builder.GetIndex();
-        start = builder.GetStart();
-    }
+    protected int index = index;
 
     /// Executes actions in a loop starting from a specified index.
     /// <param name="context">TestContext holding variable information.</param>
