@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="log4net" Version="3.0.2"/>
+        <PackageReference Include="log4net" Version="3.0.3"/>
         <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="8.0.0"/>
         <PackageReference Include="Moq" Version="4.20.72"/>
         <PackageReference Include="NUnit" Version="4.2.2"/>
@@ -17,6 +17,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj"/>
+        <ProjectReference Include="..\Agenix.NUnit.Runtime\Agenix.NUnit.Runtime.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

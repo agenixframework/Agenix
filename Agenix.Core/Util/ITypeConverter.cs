@@ -76,15 +76,10 @@ public interface ITypeConverter
         if (converters.Count == 1)
         {
             var converterEntry = converters.First();
-            Console.WriteLine($"Using type converter '{converterEntry.Key}'");
             return converterEntry.Value;
         }
 
-        if (converters.TryGetValue(name, out var value))
-        {
-            Console.WriteLine($"Using type converter '{name}'");
-            return value;
-        }
+        if (converters.TryGetValue(name, out var value)) return value;
 
         if (!CoreSettings.TypeConverterDefault.Equals(name))
             Console.WriteLine($"Missing type converter for name '{name}' - using default type converter");

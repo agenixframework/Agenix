@@ -20,7 +20,7 @@ public class TestContextFactory : IReferenceResolverAware
     /// <summary>
     ///     Gets or sets the reference resolver.
     /// </summary>
-    private IReferenceResolver _referenceResolver;
+    public IReferenceResolver _referenceResolver;
 
     /// <summary>
     ///     Gets or sets the function registry.
@@ -50,28 +50,28 @@ public class TestContextFactory : IReferenceResolverAware
     /// <summary>
     ///     Gets or sets the test listeners responsible for spreading test events.
     /// </summary>
-    private TestListeners TestListeners { get; set; }
+    public TestListeners TestListeners { get; set; }
 
     /// <summary>
     ///     Gets or sets the TestActionListeners instance responsible for broadcasting test action events
     ///     to all registered test action listeners.
     /// </summary>
-    private TestActionListeners TestActionListeners { get; set; }
+    public TestActionListeners TestActionListeners { get; set; }
 
     /// <summary>
     ///     Gets or sets the collection of message listeners.
     /// </summary>
-    private MessageListeners MessageListeners { get; set; }
+    public MessageListeners MessageListeners { get; set; }
 
     /// <summary>
     ///     Gets or sets the message processors, responsible for managing and notifying message listeners.
     /// </summary>
-    private MessageProcessors MessageProcessors { get; set; }
+    public MessageProcessors MessageProcessors { get; set; }
 
     /// <summary>
     ///     Gets or sets the message validator registry.
     /// </summary>
-    private MessageValidatorRegistry MessageValidatorRegistry { get; set; }
+    public MessageValidatorRegistry MessageValidatorRegistry { get; set; }
 
     /// <summary>
     ///     A list of actions to be executed prior to the test execution.
@@ -86,7 +86,7 @@ public class TestContextFactory : IReferenceResolverAware
     /// <summary>
     ///     Gets or sets the endpoint factory used for creating endpoint instances.
     /// </summary>
-    private IEndpointFactory EndpointFactory { get; set; }
+    public IEndpointFactory EndpointFactory { get; set; }
 
     /// <summary>
     ///     Sets the reference resolver for the TestContextFactory.

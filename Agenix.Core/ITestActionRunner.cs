@@ -29,4 +29,9 @@ public interface ITestActionRunner
     /// @return TestActionBuilder
     /// /
     ApplyTestBehaviorAction.Builder ApplyBehavior(TestBehavior behavior);
+
+    /// Applies a specified test behavior using the given behavior interface.
+    /// <param name="behavior">The test behavior to be applied.</param>
+    /// <return>A builder for constructing the ApplyTestBehaviorAction with the specified behavior.</return>
+    ApplyTestBehaviorAction.Builder ApplyBehavior(ITestBehavior behavior);
 }

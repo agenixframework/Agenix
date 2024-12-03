@@ -9,6 +9,10 @@ using IValidationContext = Agenix.Core.Validation.Context.IValidationContext;
 
 namespace Agenix.Core.Validation;
 
+/// <summary>
+///     The MessageValidatorRegistry class is responsible for managing and retrieving message validators within a system.
+///     It provides mechanisms to find, add, and manage validators based on message types and payload criteria.
+/// </summary>
 public class MessageValidatorRegistry
 {
     private static readonly ILog Log = LogManager.GetLogger(typeof(MessageValidatorRegistry));

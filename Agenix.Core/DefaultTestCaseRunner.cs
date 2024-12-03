@@ -156,10 +156,18 @@ public class DefaultTestCaseRunner : ITestCaseRunner
 
         var action = builder.Build();
 
-        if (builder is FinallySequence.Builder finallySequenceBuilder)
+        switch (builder)
         {
-            foreach (var finalAction in finallySequenceBuilder.GetActions()) _testCase.AddFinalAction(finalAction);
-            return action;
+            case FinallySequence.Builder finallySequenceBuilder:
+            {
+                foreach (var finalAction in finallySequenceBuilder.GetActions()) _testCase.AddFinalAction(finalAction);
+                return action;
+            }
+            case FuncITestActionBuilder<FinallySequence.Builder> finallySequenceBuilder:
+            {
+                foreach (var finalAction in finallySequenceBuilder.Build().GetActions()) _testCase.AddFinalAction(finalAction);
+                return action;
+            }
         }
 
         _testCase.AddTestAction(action);
@@ -171,6 +179,16 @@ public class DefaultTestCaseRunner : ITestCaseRunner
     /// <param name="behavior">The test behavior to be applied.</param>
     /// <returns>A builder for creating an instance of ApplyTestBehaviorAction.</returns>
     public ApplyTestBehaviorAction.Builder ApplyBehavior(TestBehavior behavior)
+    {
+        return new ApplyTestBehaviorAction.Builder()
+            .Behavior(new DelegatingTestBehaviour(behavior))
+            .On(this);
+    }
+
+    /// Applies the specified test behavior to the current test case runner.
+    /// <param name="behavior">The test behavior to be applied.</param>
+    /// <returns>A builder for the ApplyTestBehaviorAction, allowing further configuration of the behavior application.</returns>
+    public ApplyTestBehaviorAction.Builder ApplyBehavior(ITestBehavior behavior)
     {
         return new ApplyTestBehaviorAction.Builder()
             .Behavior(behavior)

@@ -28,6 +28,11 @@ public interface IGherkinTestActionRunner : ITestActionRunner
         return Run(builder);
     }
 
+    T Given<T>(ITestActionBuilder<T> builder) where T : ITestAction
+    {
+        return Run(builder);
+    }
+
     /// Behavior driven style alias for run method.
     /// @param action The test action.
     /// @return The executed test action.
@@ -35,6 +40,11 @@ public interface IGherkinTestActionRunner : ITestActionRunner
     T When<T>(T action) where T : ITestAction
     {
         return When(() => action);
+    }
+
+    T When<T>(ITestActionBuilder<T> builder) where T : ITestAction
+    {
+        return Run(builder);
     }
 
     /// Behavior driven style alias for run method.
@@ -65,6 +75,11 @@ public interface IGherkinTestActionRunner : ITestActionRunner
         return Run(builder);
     }
 
+    T Then<T>(ITestActionBuilder<T> builder) where T : ITestAction
+    {
+        return Run(builder);
+    }
+
     /// Behavior driven style alias for run method.
     /// @param action The test action to be executed.
     /// @return The executed test action.
@@ -79,6 +94,11 @@ public interface IGherkinTestActionRunner : ITestActionRunner
     /// @return The executed test action.
     /// /
     T And<T>(Func<T> builder) where T : ITestAction
+    {
+        return Run(builder);
+    }
+
+    T And<T>(ITestActionBuilder<T> builder) where T : ITestAction
     {
         return Run(builder);
     }

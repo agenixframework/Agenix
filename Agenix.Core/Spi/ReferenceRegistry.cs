@@ -23,7 +23,7 @@ public class ReferenceRegistry : IReferenceRegistry
     /// @param defaultName The default name to use if the annotation does not provide a name.
     /// @return The name to use for binding in the registry.
     /// /
-    public static string GetName(BindToRegistry bindAnnotation, string defaultName)
+    public static string GetName(BindToRegistryAttribute bindAnnotation, string defaultName)
     {
         return !string.IsNullOrEmpty(bindAnnotation.Name) ? bindAnnotation.Name : defaultName;
     }

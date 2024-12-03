@@ -125,7 +125,7 @@ public class DefaultEndpointFactory : IEndpointFactory
             return endpoint;
         }
 
-        // Try to get builder from default Citrus modules
+        // Try to get builder from default Agenix modules
         var lookup = IEndpointBuilder<IEndpoint>.Lookup()
             .Values
             .FirstOrDefault(endpointBuilder => endpointBuilder.Supports(endpointType));

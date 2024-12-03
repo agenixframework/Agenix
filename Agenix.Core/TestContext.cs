@@ -856,6 +856,11 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
             return null;
         }
 
+        public bool IsIncremental()
+        {
+            return true;
+        }
+
         public void SetIncremental(bool incremental)
         {
             // do nothing

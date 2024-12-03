@@ -7,6 +7,8 @@ using NHamcrest;
 using NUnit.Framework;
 using Has = NHamcrest.Has;
 using Is = NHamcrest.Is;
+using NUnitIs = NUnit.Framework.Is;
+
 
 namespace Agenix.Core.NUnitTestProject.Validation.Json;
 
@@ -306,10 +308,10 @@ public class JsonPathMessageValidatorTest : AbstractNUnitSetUp
             switch (controlParameters[0])
             {
                 case "NullValue()":
-                    Assert.That(value, NUnit.Framework.Is.Null);
+                    Assert.That(value, NUnitIs.Null);
                     break;
                 case "NotNullValue()":
-                    Assert.That(value, NUnit.Framework.Is.Not.Null);
+                    Assert.That(value, NUnitIs.Not.Null);
                     break;
             }
         }

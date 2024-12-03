@@ -159,7 +159,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _messageEndpoint.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
         _configuration.Setup(c => c.Timeout).Returns(100L);
         _messageConsumer.Setup(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(new DefaultMessage("<TestRequest><Message>Hello Citrus!</Message></TestRequest>")
+            .Returns(new DefaultMessage("<TestRequest><Message>Hello Agenix!</Message></TestRequest>")
                 .SetHeader("operation", "foo"));
 
         _referenceResolver.Setup(r => r.Resolve<TestContext>()).Returns(_context);
@@ -675,7 +675,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _configuration.Setup(c => c.Timeout).Returns(100L);
         _messageConsumer.Setup(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
             .Returns(new DefaultMessage()
-                .AddHeaderData("<TestRequest><Message>Hello Citrus!</Message></TestRequest>")
+                .AddHeaderData("<TestRequest><Message>Hello Agenix!</Message></TestRequest>")
                 .SetHeader("operation", "foo"));
 
         _referenceResolver.Setup(r => r.Resolve<TestContext>()).Returns(_context);

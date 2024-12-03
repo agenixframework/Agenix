@@ -28,7 +28,7 @@ public abstract class AbstractMessageSelector(string selectKey, string matchingV
     public abstract bool Accept(IMessage message);
 
     /// <summary>
-    ///     Reads message payload as String either from message object directly or from nested Citrus message representation.
+    ///     Reads message payload as String either from message object directly or from nested Agenix message representation.
     /// </summary>
     /// <param name="message"></param>
     /// <returns></returns>
