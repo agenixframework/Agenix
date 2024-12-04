@@ -3,20 +3,15 @@
 /// <summary>
 ///     Represents an action that applies a test behavior using a specified runner.
 /// </summary>
-public class ApplyTestBehaviorAction : AbstractTestAction
+public class ApplyTestBehaviorAction(ApplyTestBehaviorAction.Builder builder)
+    : AbstractTestAction(builder.GetName() ?? "apply-behaviour", builder.GetDescription())
 {
-    private readonly TestBehavior _behavior;
-    private readonly ITestActionRunner _runner;
-
-    public ApplyTestBehaviorAction(Builder builder)
-    {
-        _runner = builder._runner;
-        _behavior = builder._behavior;
-    }
+    private readonly ITestBehavior _behavior = builder._behavior;
+    private readonly ITestActionRunner _runner = builder._runner;
 
     public override void DoExecute(TestContext context)
     {
-        _behavior.Invoke(_runner);
+        _behavior.Apply(_runner);
     }
 
     /// <summary>
@@ -24,7 +19,7 @@ public class ApplyTestBehaviorAction : AbstractTestAction
     /// </summary>
     public class Builder : AbstractTestActionBuilder<ApplyTestBehaviorAction, Builder>
     {
-        internal TestBehavior _behavior;
+        internal ITestBehavior _behavior;
         internal ITestActionRunner _runner;
 
         /// <summary>
@@ -41,10 +36,20 @@ public class ApplyTestBehaviorAction : AbstractTestAction
         /// </summary>
         /// <param name="behavior">The behavior to be applied to the builder.</param>
         /// <returns>A new instance of the Builder with the behavior set.</returns>
-        public static Builder Apply(TestBehavior behavior)
+        public static Builder Apply(ITestBehavior behavior)
         {
             var builder = new Builder { _behavior = behavior };
             return builder;
+        }
+
+        /// <summary>
+        ///     Creates a new instance of the Builder with the specified test behavior.
+        /// </summary>
+        /// <param name="behavior">The specific test behavior to be applied to the builder.</param>
+        /// <returns>A new instance of the Builder with the specified test behavior set.</returns>
+        public static Builder Apply(TestBehavior behavior)
+        {
+            return Apply(new DelegatingTestBehaviour(behavior));
         }
 
         /// <summary>
@@ -52,10 +57,20 @@ public class ApplyTestBehaviorAction : AbstractTestAction
         /// </summary>
         /// <param name="behavior">The behavior to be applied to the builder.</param>
         /// <returns>The builder instance with the behavior set.</returns>
-        public Builder Behavior(TestBehavior behavior)
+        public Builder Behavior(ITestBehavior behavior)
         {
             _behavior = behavior;
             return this;
+        }
+
+        /// <summary>
+        ///     Sets the specified behavior for the builder using the TestBehavior delegate.
+        /// </summary>
+        /// <param name="behavior">The TestBehavior delegate to be applied to the builder.</param>
+        /// <returns>The builder instance with the behavior set through a DelegatingTestBehaviour.</returns>
+        public Builder Behavior(TestBehavior behavior)
+        {
+            return Behavior(new DelegatingTestBehaviour(behavior));
         }
 
         /// <summary>

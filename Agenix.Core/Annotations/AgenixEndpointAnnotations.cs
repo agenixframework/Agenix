@@ -47,9 +47,9 @@ public abstract class AgenixEndpointAnnotations
                     var endpoint = context.EndpointFactory.Create(GetEndpointName(field), attribute, context);
                     ReflectionHelper.SetField(field, target, endpoint);
 
-                    if (field.IsDefined(typeof(BindToRegistry)))
+                    if (field.IsDefined(typeof(BindToRegistryAttribute)))
                     {
-                        var bindToRegistry = field.GetCustomAttribute<BindToRegistry>();
+                        var bindToRegistry = field.GetCustomAttribute<BindToRegistryAttribute>();
                         var referenceName = ReferenceRegistry.GetName(bindToRegistry, endpoint.Name);
                         context.GetReferenceResolver().Bind(referenceName, endpoint);
                     }
@@ -70,7 +70,9 @@ public abstract class AgenixEndpointAnnotations
             {
                 var resolvedEndpoint = referenceResolver.Resolve<dynamic>([endpointAnnotation.Name],
                     field.FieldType);
-                ReflectionHelper.SetField(field, target, resolvedEndpoint);
+
+                ReflectionHelper.SetField(field, target,
+                    resolvedEndpoint is { Count: > 0 } ? resolvedEndpoint[0] : resolvedEndpoint);
             }
             else if (referenceResolver.IsResolvable(field.Name))
             {
@@ -83,63 +85,10 @@ public abstract class AgenixEndpointAnnotations
                 ReflectionHelper.SetField(field, target, resolvedEndpoint);
             }
         });
-
-        /*var fields = target.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-        foreach (var field in fields)
-        {
-            if (!field.IsDefined(typeof(AgenixEndpointAttribute)) ||
-                !typeof(IEndpoint).IsAssignableFrom(field.FieldType)) continue;
-
-            Log.Debug($"Injecting Agenix endpoint on test class field '{field.Name}'");
-            var endpointAnnotation = field.GetCustomAttribute<AgenixEndpointAttribute>();
-
-            foreach (var attribute in field.GetCustomAttributes())
-            {
-                var annotationType = attribute.GetType();
-                if (annotationType.IsDefined(typeof(AgenixEndpointConfigAttribute)))
-                {
-                    var endpoint = context.EndpointFactory.Create(GetEndpointName(field), attribute, context);
-                    ReflectionHelper.SetField(field, target, endpoint);
-
-                    if (field.IsDefined(typeof(BindToRegistry)))
-                    {
-                        var bindToRegistry = field.GetCustomAttribute<BindToRegistry>();
-                        var referenceName = ReferenceRegistry.GetName(bindToRegistry, endpoint.Name);
-                        context.GetReferenceResolver().Bind(referenceName, endpoint);
-                    }
-
-                    return;
-                }
-            }
-
-            var referenceResolver = context.GetReferenceResolver();
-            if (endpointAnnotation.Properties.Length > 0)
-            {
-                var endpoint = context.EndpointFactory.Create(GetEndpointName(field), endpointAnnotation,
-                    field.FieldType, context);
-                ReflectionHelper.SetField(field, target, endpoint);
-            }
-            else if (!string.IsNullOrWhiteSpace(endpointAnnotation.Name) &&
-                     referenceResolver.IsResolvable(endpointAnnotation.Name))
-            {
-                var resolvedEndpoint = referenceResolver.Resolve<dynamic>([endpointAnnotation.Name],
-                    field.FieldType);
-                ReflectionHelper.SetField(field, target, resolvedEndpoint);
-            }
-            else if (referenceResolver.IsResolvable(field.Name))
-            {
-                var resolvedEndpoint = referenceResolver.Resolve<dynamic>([field.Name], field.FieldType);
-                ReflectionHelper.SetField(field, target, resolvedEndpoint);
-            }
-            else
-            {
-                var resolvedEndpoint = referenceResolver.Resolve<dynamic>();
-                ReflectionHelper.SetField(field, target, resolvedEndpoint);
-            }*/
     }
 
     /// <summary>
-    ///     Either reads CitrusEndpoint name property or constructs endpoint name from field name.
+    ///     Either reads AgenixEndpoint name property or constructs endpoint name from field name.
     /// </summary>
     /// <param name="field"></param>
     /// <returns></returns>

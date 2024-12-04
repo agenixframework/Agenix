@@ -81,17 +81,29 @@ public sealed class CoreSettings
 
     public const string TestNameSpaceVariableProp = "agenix.test.namespace.variable";
     public const string TestNameSpaceVariableEnv = "AGENIX_TEST_NAMESPAE_VARIABLE";
-    public static string LogModifierDefault = bool.TrueString;
-    public static string PrettyPrintDefault = bool.TrueString;
-    public static string ReportAutoClearDefault = bool.TrueString;
-    public static string ReportIgnoreErrorsDefault = bool.TrueString;
-    public static string ReportDirectoryDefault = "agenix-reports";
-    public static string TestNameVariableDefault = "agenix.test.name";
-    public static string TestNameSpaceVariableDefault = "agenix.test.namespace";
+
+    public const string DefaultConfigClassProp = "agenix.defalt.config.class";
+    public const string DefaultConfigClassEnv = "AGENIX_DEFAULT_CONFIG_CLASS";
+    public static readonly string LogModifierDefault = bool.TrueString;
+    public static readonly string PrettyPrintDefault = bool.TrueString;
+    public static readonly string ReportAutoClearDefault = bool.TrueString;
+    public static readonly string ReportIgnoreErrorsDefault = bool.TrueString;
+    public static readonly string ReportDirectoryDefault = "agenix-reports";
+    public static readonly string TestNameVariableDefault = "agenix.test.name";
+    public static readonly string TestNameSpaceVariableDefault = "agenix.test.namespace";
 
     private static readonly string MessageValidationStrictProp = "agenix.json.message.validation.strict";
     private static readonly string MessageValidationStrictEnv = "AGENIX_JSON_MESSAGE_VALIDATION_STRICT";
     private static readonly string MessageValidationStrictDefault = bool.TrueString;
+
+    /// <summary>
+    ///     Represents the default configuration class used in the application. This value is retrieved from either
+    ///     environment variables or configuration properties.
+    /// </summary>
+    public static string DefaultConfigClass = GetPropertyEnvOrDefault(
+        DefaultConfigClassProp,
+        DefaultConfigClassEnv,
+        null);
 
     /// <summary>
     ///     Indicates if JSON message validation should be performed in strict mode.

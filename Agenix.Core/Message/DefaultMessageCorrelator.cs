@@ -1,7 +1,7 @@
 ﻿namespace Agenix.Core.Message;
 
 /// <summary>
-///     Default message correlator implementation using the Citrus message id as correlation key.
+///     Default message correlator implementation using the Agenix message id as correlation key.
 /// </summary>
 public class DefaultMessageCorrelator : IMessageCorrelator
 {

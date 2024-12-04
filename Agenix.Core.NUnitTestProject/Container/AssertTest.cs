@@ -118,16 +118,16 @@ public class AssertTest : AbstractNUnitSetUp
         try
         {
             assertAction.Execute(Context);
-            Assert.Fail("Expected CitrusRuntimeException to be thrown, but it was not.");
+            Assert.Fail("Expected CoreRuntimeException to be thrown, but it was not.");
         }
         catch (CoreSystemException)
         {
-            // Test passes if CitrusRuntimeException is caught
+            // Test passes if CoreRuntimeException is caught
         }
         catch (Exception)
         {
             // Any other exception type, fail the test
-            Assert.Fail("Expected CitrusRuntimeException, but another exception was thrown.");
+            Assert.Fail("Expected CoreRuntimeException, but another exception was thrown.");
         }
     }
 }

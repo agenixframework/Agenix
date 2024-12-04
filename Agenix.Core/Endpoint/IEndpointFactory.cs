@@ -37,7 +37,7 @@ public interface IEndpointFactory
     ///     configuration properties.
     /// </summary>
     /// <param name="endpointName">The endpoint name.</param>
-    /// <param name="endpointConfig">The endpoint configuration as CitrusEndpoint.</param>
+    /// <param name="endpointConfig">The endpoint configuration as AgenixEndpoint.</param>
     /// <param name="endpointType">The type of the endpoint.</param>
     /// <param name="context">The test context.</param>
     /// <returns>The created endpoint.</returns>

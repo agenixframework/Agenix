@@ -76,10 +76,7 @@ public interface ITestCase : ITestActionContainer, INamed, IDescribed
     /**
      * Flags whether test case is incremental.
      */
-    bool IsIncremental()
-    {
-        return false;
-    }
+    bool IsIncremental();
 
     /**
      * Sets the test runner flag.

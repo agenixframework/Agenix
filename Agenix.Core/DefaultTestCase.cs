@@ -562,6 +562,11 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
         return TestResult;
     }
 
+    bool ITestCase.IsIncremental()
+    {
+        return IsIncremental;
+    }
+
     /// <summary>
     ///     Sets a flag indicating whether the test case is incremental.
     /// </summary>

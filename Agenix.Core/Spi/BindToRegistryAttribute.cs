@@ -7,7 +7,7 @@ namespace Agenix.Core.Spi;
 /// Class name, method name or field name.
 /// /
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Method)]
-public class BindToRegistry : Attribute
+public class BindToRegistryAttribute : Attribute
 {
     private string _name;
 
