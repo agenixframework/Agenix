@@ -28,6 +28,7 @@ public class NUnitAgenixSupportAttribute : System.Attribute, ITestAction
 
         if (test.IsSuite)
         {
+            agenixInstance.AgenixContext.ParseConfiguration(test.Fixture);
             agenixInstance.BeforeSuite(test.Name);
             return;
         }
@@ -35,12 +36,10 @@ public class NUnitAgenixSupportAttribute : System.Attribute, ITestAction
         var context = agenixInstance.AgenixContext.CreateTestContext();
         _delegate = CreateTestRunner(test.Name, test.FullName, test.Fixture?.GetType()!, context);
 
-        _delegate.Start();
-
         AgenixAnnotations.InjectAll(test.Fixture, agenixInstance, context);
         AgenixAnnotations.InjectTestRunner(test.Fixture, _delegate);
 
-        context.SetGlobalVariables(agenixInstance.AgenixContext.ContextFactory.GlobalVariables);
+        _delegate.Start();
     }
 
     /// Performs actions after the test execution is completed.
