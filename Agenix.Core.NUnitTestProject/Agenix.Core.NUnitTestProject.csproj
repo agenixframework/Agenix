@@ -13,11 +13,13 @@
         <PackageReference Include="NUnit" Version="4.2.2"/>
         <PackageReference Include="NUnit3TestAdapter" Version="4.6.0"/>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1"/>
+        <PackageReference Include="System.Data.SQLite" Version="1.0.119"/>
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj"/>
         <ProjectReference Include="..\Agenix.NUnit.Runtime\Agenix.NUnit.Runtime.csproj"/>
+        <ProjectReference Include="..\Agenix.Sql\Agenix.Sql.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -76,6 +78,38 @@
         </EmbeddedResource>
         <None Remove="ResourcesTest\app.config"/>
         <EmbeddedResource Include="ResourcesTest\app.config">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="ResourcesTest\Sql\Actions\test-query.sql"/>
+        <EmbeddedResource Include="ResourcesTest\Sql\Actions\test-query.sql">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="ResourcesTest\Sql\Actions\test-sql-query-statements.sql"/>
+        <EmbeddedResource Include="ResourcesTest\Sql\Actions\test-sql-query-statements.sql">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="ResourcesTest\Sql\Actions\test-sql-statements.sql"/>
+        <EmbeddedResource Include="ResourcesTest\Sql\Actions\test-sql-statements.sql">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="ResourcesTest\Sql\Actions\test-sql-with-variables.sql"/>
+        <EmbeddedResource Include="ResourcesTest\Sql\Actions\test-sql-with-variables.sql">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="ResourcesTest\Sql\Actions\Dsl\query-script.sql"/>
+        <EmbeddedResource Include="ResourcesTest\Sql\Actions\Dsl\query-script.sql">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="ResourcesTest\Sql\Integration\Actions\query-script.sql"/>
+        <EmbeddedResource Include="ResourcesTest\Sql\Integration\Actions\query-script.sql">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="ResourcesTest\Sql\Integration\Actions\script.sql"/>
+        <EmbeddedResource Include="ResourcesTest\Sql\Integration\Actions\script.sql">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="ResourcesTest\Sql\Integration\Actions\create-tables.sql"/>
+        <EmbeddedResource Include="ResourcesTest\Sql\Integration\Actions\create-tables.sql">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </EmbeddedResource>
     </ItemGroup>

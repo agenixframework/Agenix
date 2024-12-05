@@ -1,0 +1,22 @@
+﻿DROP TABLE IF EXISTS ORDERS;
+DROP TABLE IF EXISTS CUSTOMERS;
+DROP TABLE IF EXISTS ERRORS;
+CREATE TABLE ORDERS
+(
+    ORDER_ID        integer,
+    REQUEST_TAG     varchar(250),
+    CONVERSATION_ID varchar(250),
+    CREATION_DATE   varchar(250),
+    DESCRIPTION     varchar(250)
+);
+CREATE TABLE CUSTOMERS
+(
+    CUSTOMER_ID integer,
+    NAME        varchar(250),
+    DESCRIPTION varchar(250)
+);
+CREATE TABLE ERRORS
+(
+    ERROR_ID    integer,
+    DESCRIPTION varchar(250)
+);
