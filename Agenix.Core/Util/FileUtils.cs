@@ -196,7 +196,7 @@ public class FileUtils
     /// <returns>The default encoding to be used based on the Agenix system property or the system default.</returns>
     public static Encoding GetDefaultCharset()
     {
-        return Encoding.GetEncoding(CoreSettings.AgenixFileEncoding);
+        return Encoding.GetEncoding(CoreSettings.AgenixFileEncoding());
     }
 
     public static IResource GetFileResource(string filePath, TestContext context)

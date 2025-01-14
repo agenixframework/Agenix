@@ -24,19 +24,18 @@ public class NUnitAgenixSupportAttribute : System.Attribute, ITestAction
     /// </param>
     public void BeforeTest(ITest test)
     {
-        var agenixInstance = AgenixInstanceManager.GetOrDefault();
-
         if (test.IsSuite)
         {
-            agenixInstance.AgenixContext.ParseConfiguration(test.Fixture);
-            agenixInstance.BeforeSuite(test.Name);
+            AgenixInstanceManager.Reset();
+            AgenixInstanceManager.GetOrDefault().AgenixContext.ParseConfiguration(test.Fixture);
+            AgenixInstanceManager.GetOrDefault().BeforeSuite(test.Name);
             return;
         }
 
-        var context = agenixInstance.AgenixContext.CreateTestContext();
+        var context = AgenixInstanceManager.GetOrDefault().AgenixContext.CreateTestContext();
         _delegate = CreateTestRunner(test.Name, test.FullName, test.Fixture?.GetType()!, context);
 
-        AgenixAnnotations.InjectAll(test.Fixture, agenixInstance, context);
+        AgenixAnnotations.InjectAll(test.Fixture, AgenixInstanceManager.GetOrDefault(), context);
         AgenixAnnotations.InjectTestRunner(test.Fixture, _delegate);
 
         _delegate.Start();

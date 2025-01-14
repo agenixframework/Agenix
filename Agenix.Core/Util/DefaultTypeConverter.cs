@@ -18,7 +18,7 @@ public class DefaultTypeConverter(string encodingName) : ITypeConverter
 {
     private static readonly ILog _log = LogManager.GetLogger(typeof(DefaultTypeConverter));
 
-    public static DefaultTypeConverter INSTANCE = new(CoreSettings.AgenixFileEncoding);
+    public static DefaultTypeConverter INSTANCE = new(CoreSettings.AgenixFileEncoding());
 
     public T ConvertIfNecessary<T>(object target, Type type)
     {

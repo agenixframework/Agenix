@@ -10,6 +10,7 @@
         <PackageReference Include="log4net" Version="3.0.3"/>
         <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="8.0.0"/>
         <PackageReference Include="Moq" Version="4.20.72"/>
+        <PackageReference Include="Moq.AutoMock" Version="3.5.0" />
         <PackageReference Include="NUnit" Version="4.2.2"/>
         <PackageReference Include="NUnit3TestAdapter" Version="4.6.0"/>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1"/>
@@ -18,6 +19,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj"/>
+        <ProjectReference Include="..\Agenix.Http\Agenix.Http.csproj" />
         <ProjectReference Include="..\Agenix.NUnit.Runtime\Agenix.NUnit.Runtime.csproj"/>
         <ProjectReference Include="..\Agenix.Sql\Agenix.Sql.csproj"/>
     </ItemGroup>

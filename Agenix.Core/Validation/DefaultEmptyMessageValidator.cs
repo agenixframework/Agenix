@@ -24,7 +24,7 @@ public class DefaultEmptyMessageValidator : DefaultMessageValidator
     /// <param name="context">The context of the test in which validation is performed.</param>
     /// <param name="validationContext">The context for validation specifics.</param>
     /// <exception cref="ValidationException">Thrown when the validation of the received message fails.</exception>
-    public new void ValidateMessage(IMessage receivedMessage, IMessage controlMessage,
+    public override void ValidateMessage(IMessage receivedMessage, IMessage controlMessage,
         TestContext context, IValidationContext validationContext)
     {
         if (controlMessage?.Payload == null)

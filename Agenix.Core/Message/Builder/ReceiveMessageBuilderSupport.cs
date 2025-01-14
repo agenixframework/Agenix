@@ -125,7 +125,7 @@ public class ReceiveMessageBuilderSupport<T, TB, TS>(TB dlg) : MessageBuilderSup
     /// </summary>
     /// <param name="messageSelector">A dictionary containing message selectors.</param>
     /// <returns>The current instance of the message builder support.</returns>
-    public TS Selector(IDictionary<string, string> messageSelector)
+    public TS Selector(IDictionary<string, object> messageSelector)
     {
         _delegate.Selector(messageSelector);
         return _self;

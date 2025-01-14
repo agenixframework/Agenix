@@ -24,7 +24,7 @@ public class DefaultMessageBuilder : IMessageBuilder, IWithPayloadBuilder, IWith
     /// <param name="context">The test context that contains various variables and settings needed to build the message.</param>
     /// <param name="messageType">The type of the message being built.</param>
     /// <returns>The constructed message.</returns>
-    public IMessage Build(TestContext context, string messageType)
+    public virtual IMessage Build(TestContext context, string messageType)
     {
         var payload = BuildMessagePayload(context, messageType);
 

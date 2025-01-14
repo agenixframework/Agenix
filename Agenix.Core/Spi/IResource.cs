@@ -51,7 +51,7 @@ public interface IResource
      */
     TextReader GetReader()
     {
-        return GetReader(Encoding.GetEncoding(CoreSettings.AgenixFileEncoding));
+        return GetReader(Encoding.GetEncoding(CoreSettings.AgenixFileEncoding()));
     }
 
     /*

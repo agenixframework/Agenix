@@ -36,7 +36,7 @@ public class JsonTextMessageValidator : AbstractMessageValidator<JsonMessageVali
     ///     This flag utilizes the CoreSettings.JsonMessageValidationStrict property to determine
     ///     the strictness of validation for JSON messages within the context of JsonTextMessageValidator.
     /// </summary>
-    private bool _strict = CoreSettings.JsonMessageValidaitonStrict;
+    private bool _strict = CoreSettings.JsonMessageValidaitonStrict();
 
     /// Determines if the specified message type and message are supported by this validator.
     /// <param name="messageType">The type of the message to validate.</param>
@@ -49,7 +49,7 @@ public class JsonTextMessageValidator : AbstractMessageValidator<JsonMessageVali
                MessageUtils.HasJsonPayload(message);
     }
 
-    public new void ValidateMessage(IMessage receivedMessage, IMessage controlMessage, TestContext context,
+    public override void ValidateMessage(IMessage receivedMessage, IMessage controlMessage, TestContext context,
         JsonMessageValidationContext validationContext)
     {
         Log.Debug("Start JSON message validation ...");

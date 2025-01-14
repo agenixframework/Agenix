@@ -403,7 +403,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         runner.Run(new ReceiveMessageAction.Builder()
             .Endpoint(_messageEndpoint.Object)
             .Message()
-            .Body("<TestRequest><Message>Hello World!</Message>")
+            .Body("<TestRequest><Message>Hello World!</Message></TestRequest>")
             .Timeout(1000L)
             .Build());
 
@@ -1037,7 +1037,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
             .Returns(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
                 .SetHeader("operation", "sayHello"));
 
-        var messageSelector = new Dictionary<string, string>
+        var messageSelector = new Dictionary<string, object>
         {
             { "operation", "sayHello" }
         };

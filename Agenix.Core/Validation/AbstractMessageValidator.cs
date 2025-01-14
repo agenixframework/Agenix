@@ -40,7 +40,7 @@ public abstract class AbstractMessageValidator<T> : IMessageValidator<T> where T
     /// <param name="controlMessage"></param>
     /// <param name="context"></param>
     /// <param name="validationContext"></param>
-    public void ValidateMessage(IMessage receivedMessage, IMessage controlMessage, TestContext context,
+    public virtual void ValidateMessage(IMessage receivedMessage, IMessage controlMessage, TestContext context,
         T validationContext)
     {
     }

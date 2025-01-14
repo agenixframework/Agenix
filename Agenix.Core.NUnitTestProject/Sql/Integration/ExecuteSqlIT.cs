@@ -1,4 +1,7 @@
-﻿using Agenix.Core.Annotations;
+﻿using System;
+using System.Net.Http;
+using System.Net.Http.Json;
+using Agenix.Core.Annotations;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
 using Spring.Data.Core;
@@ -23,7 +26,7 @@ public class ExecuteSqlIT
         _runner.Given(global::Agenix.Sql.Actions.ExecuteSqlAction.Builder.Sql()
             .AdoTemplate(adoTemplate)
             .SqlResource(scriptSqlFile));
-
+            
         _runner.When(
             Query()
                 .AdoTemplate(adoTemplate)

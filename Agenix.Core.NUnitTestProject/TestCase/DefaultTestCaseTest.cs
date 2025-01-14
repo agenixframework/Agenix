@@ -153,8 +153,8 @@ public class DefaultTestCaseTest : AbstractNUnitSetUp
 
         _fixture.AddTestAction(Action(context =>
         {
-            Assert.That(context.GetVariables()[CoreSettings.TestNameVariable], Is.EqualTo("MyTestCase"));
-            Assert.That(context.GetVariables()[CoreSettings.TestNameSpaceVariable],
+            Assert.That(context.GetVariables()[CoreSettings.TestNameVariable()], Is.EqualTo("MyTestCase"));
+            Assert.That(context.GetVariables()[CoreSettings.TestNameSpaceVariable()],
                 Is.EqualTo(typeof(DefaultTestCase).Namespace));
             Assert.That(context.GetVariable("${name}"), Is.EqualTo("Agenix"));
             Assert.That(context.GetVariable("${framework}"), Is.EqualTo("Agenix"));

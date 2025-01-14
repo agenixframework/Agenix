@@ -32,28 +32,50 @@ public class WaitIT
         _server = new HttpListener();
         _server.Prefixes.Add($"http://localhost:{ServerPort}/test/");
         _server.Start();
-        _server.BeginGetContext(OnRequest, _server);
+        _server.BeginGetContext(OnRequest, null);
     }
 
     private void OnRequest(IAsyncResult result)
     {
-        if (!_server.IsListening)
+        if (result == null || !_server.IsListening)
             return;
 
-        var context = _server.EndGetContext(result);
-        context.Response.StatusCode = 200;
-        context.Response.Close();
+        try
+        {
+            var context = _server.EndGetContext(result);
+            context.Response.StatusCode = 200;
+            context.Response.Close();
 
-        _server.BeginGetContext(OnRequest, _server);
+            _server.BeginGetContext(OnRequest, null);
+        } catch (HttpListenerException ex)
+        {
+            Console.WriteLine($"HttpListener exception: {ex.Message}");
+        }
+        catch (ObjectDisposedException)
+        {
+            Console.WriteLine("Listener has been disposed.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Unhandled exception: {ex}");
+        }
+
     }
 
     [OneTimeTearDown]
     public void StopServer()
     {
-        if (_server is { IsListening: true })
+        try
         {
-            _server.Stop();
+            if (_server is { IsListening: true })
+            {
+                _server.Stop();
+            }
             _server.Close();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error stopping listener: {ex.Message}");
         }
     }
 
@@ -83,7 +105,7 @@ public class WaitIT
                     .Body("Wait for me")
                     .Header("Operation", "waitForMe")),
             Receive("direct:waitQueue")
-                .Selector(new Dictionary<string, string> { { "Operation", "waitForMe" } })
+                .Selector(new Dictionary<string, object> { { "Operation", "waitForMe" } })
                 .Message()
                 .Type(MessageType.PLAINTEXT)
                 .Name(messageName)

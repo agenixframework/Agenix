@@ -73,7 +73,7 @@ public class SendMessageAction : AbstractTestAction, ICompletable
     ///     The message type to send in this action - this information is needed to find proper
     ///     message construction processors for this message.
     /// </summary>
-    public string MessageType { get; }
+    public string MessageType { get; set; }
 
     /// <summary>
     ///     Determines whether the sending message action is completed.
@@ -201,7 +201,7 @@ public class SendMessageAction : AbstractTestAction, ICompletable
     /// <typeparam name="T">Type of the action being built.</typeparam>
     /// <typeparam name="TM">Builder support type for message construction.</typeparam>
     /// <typeparam name="TB">Builder type for the specific send message action.</typeparam>
-    public sealed class Builder : SendMessageActionBuilder<SendMessageAction, SendMessageActionBuilderSupport, Builder>
+    public class Builder : SendMessageActionBuilder<SendMessageAction, SendMessageActionBuilderSupport, Builder>
     {
         /// <summary>
         ///     Sends a message action to the specified endpoint.
@@ -290,6 +290,7 @@ public class SendMessageAction : AbstractTestAction, ICompletable
             ForkMode = forkMode;
             return self;
         }
+        
 
         /// <summary>
         ///     Builds the SendMessageAction by initializing the messageBuilderSupport if necessary.

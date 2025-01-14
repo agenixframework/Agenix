@@ -23,7 +23,7 @@ public class DefaultTextEqualsMessageValidator : DefaultMessageValidator
     private bool _normalizeLineEndings = true;
     private bool _trim = true;
 
-    public new void ValidateMessage(IMessage receivedMessage, IMessage controlMessage, TestContext context,
+    public override void ValidateMessage(IMessage receivedMessage, IMessage controlMessage, TestContext context,
         IValidationContext validationContext)
     {
         if (controlMessage?.Payload == null || string.IsNullOrEmpty(controlMessage.GetPayload<string>()))

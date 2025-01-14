@@ -170,11 +170,11 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
     {
         var context = Builder.DefaultContext().Build();
 
-        if (string.IsNullOrEmpty(CoreSettings.DefaultConfigClass)) return context;
+        if (string.IsNullOrEmpty(CoreSettings.DefaultConfigClass())) return context;
 
         try
         {
-            var configType = Type.GetType(CoreSettings.DefaultConfigClass);
+            var configType = Type.GetType(CoreSettings.DefaultConfigClass());
             if (configType == null) throw new TypeLoadException("Type not found.");
             context.ParseConfiguration(configType);
         }
@@ -192,9 +192,8 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
     /// <param name="configClass"></param>
     public void ParseConfiguration(Type configClass)
     {
-        if (ConfigurationClasses.Contains(configClass)) return;
+        if (!ConfigurationClasses.Add(configClass)) return;
 
-        ConfigurationClasses.Add(configClass);
         AgenixAnnotations.ParseConfiguration(configClass, this);
     }
 
@@ -204,9 +203,8 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
     /// <param name="configuration"></param>
     public void ParseConfiguration(object configuration)
     {
-        if (ConfigurationClasses.Contains(configuration.GetType())) return;
+        if (!ConfigurationClasses.Add(configuration.GetType())) return;
 
-        ConfigurationClasses.Add(configuration.GetType());
         AgenixAnnotations.ParseConfiguration(configuration, this);
     }
 

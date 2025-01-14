@@ -22,8 +22,17 @@ public abstract class AbstractEndpointComponent(string name) : IEndpointComponen
         try
         {
             var uri = new Uri(endpointUri);
-            var path = uri.GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+            string path;
 
+            if (endpointUri.StartsWith("http://") || endpointUri.StartsWith("https://"))
+            {
+                 path = uri.GetComponents(UriComponents.HostAndPort, UriFormat.Unescaped) + uri.GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+            }
+            else
+            {
+                 path = uri.GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+            }
+            
             if (path.StartsWith("//")) path = path[2..];
 
             if (path.Contains('?')) path = path[..path.IndexOf('?')];
