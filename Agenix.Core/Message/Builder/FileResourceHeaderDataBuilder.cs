@@ -21,7 +21,7 @@ public class FileResourceHeaderDataBuilder : IMessageHeaderDataBuilder
     public FileResourceHeaderDataBuilder(string resourcePath)
     {
         _resourcePath = resourcePath;
-        _charsetName = CoreSettings.AgenixFileEncoding;
+        _charsetName = CoreSettings.AgenixFileEncoding();
     }
 
     /// <summary>

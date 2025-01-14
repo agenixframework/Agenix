@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agenix.NUnit.Runtime", "Age
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agenix.Sql", "Agenix.Sql\Agenix.Sql.csproj", "{6948A112-6EF7-49C7-AA89-9E2362C5185A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agenix.Http", "Agenix.Http\Agenix.Http.csproj", "{EFE2B98B-EA22-44FE-9A31-AAB0886D141E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{6948A112-6EF7-49C7-AA89-9E2362C5185A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6948A112-6EF7-49C7-AA89-9E2362C5185A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6948A112-6EF7-49C7-AA89-9E2362C5185A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFE2B98B-EA22-44FE-9A31-AAB0886D141E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFE2B98B-EA22-44FE-9A31-AAB0886D141E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFE2B98B-EA22-44FE-9A31-AAB0886D141E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFE2B98B-EA22-44FE-9A31-AAB0886D141E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -43,7 +43,7 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
         return true;
     }
 
-    public new void ValidateMessage(IMessage receivedMessage, IMessage controlMessage, TestContext context,
+    public override void ValidateMessage(IMessage receivedMessage, IMessage controlMessage, TestContext context,
         HeaderValidationContext validationContext)
     {
         IDictionary<string, object> controlHeaders = controlMessage.GetHeaders();

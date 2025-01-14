@@ -18,7 +18,7 @@ public class BinaryBase64MessageValidator : PlainTextMessageValidator
     /// <param name="controlMessage">The control message to validate against.</param>
     /// <param name="context">The context in which the validation is occurring.</param>
     /// <param name="validationContext">The context containing validation-specific data.</param>
-    public new void ValidateMessage(IMessage receivedMessage, IMessage controlMessage, TestContext context,
+    public override void ValidateMessage(IMessage receivedMessage, IMessage controlMessage, TestContext context,
         IValidationContext validationContext)
     {
         if (receivedMessage.Payload is byte[] bytes) receivedMessage.Payload = Convert.ToBase64String(bytes);

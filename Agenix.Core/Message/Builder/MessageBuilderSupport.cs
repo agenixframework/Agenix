@@ -21,7 +21,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
 
     protected IMessageBuilder _messageBuilder = new DefaultMessageBuilder();
 
-    protected string _messageType = CoreSettings.DefaultMessageType;
+    protected string _messageType = CoreSettings.DefaultMessageType();
 
     /// <summary>
     ///     Provides base support for building messages, tying together
@@ -72,7 +72,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     /// </summary>
     /// <param name="controlMessage">The control message to assign.</param>
     /// <returns>Returns an instance of the current builder support class.</returns>
-    public TS From(IMessage controlMessage)
+    public virtual TS From(IMessage controlMessage)
     {
         _messageBuilder = StaticMessageBuilder.WithMessage(controlMessage);
         Type(controlMessage.GetType());
@@ -135,7 +135,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     /// <param name="payload">The string payload to be set for the message.</param>
     /// <returns>The updated instance of <typeparamref name="TS" /> to allow method chaining.</returns>
     /// <exception cref="CoreSystemException">Thrown if the message builder does not support setting a payload.</exception>
-    public TS Body(string payload)
+    public virtual TS Body(string payload)
     {
         Body(new DefaultPayloadBuilder(payload));
         return _self;
@@ -288,7 +288,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     /// <param name="name">The name to be set on the message.</param>
     /// <returns>The current instance of the message builder support.</returns>
     /// <exception cref="CoreSystemException">Thrown when the message builder does not support setting a name.</exception>
-    public TS Name(string name)
+    public virtual TS Name(string name)
     {
         if (_messageBuilder is INamed named)
             named.SetName(name);

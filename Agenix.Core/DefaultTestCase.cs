@@ -358,8 +358,8 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     private void InitializeTestParameters(Dictionary<string, object> parameters, TestContext context)
     {
         // Add default variables for test
-        context.SetVariable(CoreSettings.TestNameVariable, Name);
-        context.SetVariable(CoreSettings.TestNameSpaceVariable, PackageName);
+        context.SetVariable(CoreSettings.TestNameVariable(), Name);
+        context.SetVariable(CoreSettings.TestNameSpaceVariable(), PackageName);
 
         foreach (var paramEntry in parameters)
         {

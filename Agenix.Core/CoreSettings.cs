@@ -95,12 +95,16 @@ public sealed class CoreSettings
     private static readonly string MessageValidationStrictProp = "agenix.json.message.validation.strict";
     private static readonly string MessageValidationStrictEnv = "AGENIX_JSON_MESSAGE_VALIDATION_STRICT";
     private static readonly string MessageValidationStrictDefault = bool.TrueString;
+    
+    public static readonly string HttpMessageBuilderForceHeaderUpdateEnabledProp = "agenix.http.message.builder.force.header.update.enabled";
+    public static readonly string HttpMessageBuilderForceHeaderUpdateEnabledEnv = "AGENIX_HTTP_MESSAGE_BUILDER_FORCE_HEADER_UPDATE_ENABLED";
+    public static readonly string HttpMessageBuilderForceHeaderUpdateEnabledDefault = bool.TrueString;
 
     /// <summary>
     ///     Represents the default configuration class used in the application. This value is retrieved from either
     ///     environment variables or configuration properties.
     /// </summary>
-    public static string DefaultConfigClass = GetPropertyEnvOrDefault(
+    public static string DefaultConfigClass() => GetPropertyEnvOrDefault(
         DefaultConfigClassProp,
         DefaultConfigClassEnv,
         null);
@@ -108,7 +112,7 @@ public sealed class CoreSettings
     /// <summary>
     ///     Indicates if JSON message validation should be performed in strict mode.
     /// </summary>
-    public static bool JsonMessageValidaitonStrict = bool.Parse(GetPropertyEnvOrDefault(
+    public static bool JsonMessageValidaitonStrict() => bool.Parse(GetPropertyEnvOrDefault(
         MessageValidationStrictProp,
         MessageValidationStrictEnv,
         MessageValidationStrictDefault
@@ -117,7 +121,7 @@ public sealed class CoreSettings
     /// <summary>
     ///     Defines the default encoding used for Agenix file operations.
     /// </summary>
-    public static readonly string AgenixFileEncoding = GetPropertyEnvOrDefault(
+    public static string AgenixFileEncoding() => GetPropertyEnvOrDefault(
         AgenixFileEncodingProp,
         AgenixFileEncodingEnv,
         "UTF-8");
@@ -125,7 +129,7 @@ public sealed class CoreSettings
     /// <summary>
     ///     Default message type used for the application.
     /// </summary>
-    public static readonly string DefaultMessageType = GetPropertyEnvOrDefault(
+    public static string DefaultMessageType() => GetPropertyEnvOrDefault(
         DefaultMessageTypeProp,
         DefaultMessageTypeEnv,
         MessageType.JSON.ToString()
@@ -134,16 +138,26 @@ public sealed class CoreSettings
     /// <summary>
     ///     Specifies whether the report should be automatically cleared after processing.
     /// </summary>
-    public static bool ReportAutoClear = bool.Parse(GetPropertyEnvOrDefault(
+    public static bool ReportAutoClear() => bool.Parse(GetPropertyEnvOrDefault(
         ReportAutoClearProp,
         ReportAutoClearEnv,
         ReportAutoClearDefault
     ));
 
     /// <summary>
+    /// Indicates whether the HTTP message builder is configured to forcefully update
+    /// headers during the message building process.
+    /// </summary>
+    public static bool IsHttpMessageBuilderForceHeaderUpdateEnabled() => bool.Parse(GetPropertyEnvOrDefault(
+        HttpMessageBuilderForceHeaderUpdateEnabledProp,
+        HttpMessageBuilderForceHeaderUpdateEnabledEnv,
+        HttpMessageBuilderForceHeaderUpdateEnabledDefault
+        ));
+
+    /// <summary>
     ///     Determines whether errors should be ignored in the report generation process.
     /// </summary>
-    public static bool ReportIgnoreErrors = bool.Parse(GetPropertyEnvOrDefault(
+    public static bool ReportIgnoreErrors() => bool.Parse(GetPropertyEnvOrDefault(
         ReportIgnoreErrorsProp,
         ReportIgnoreErrorsEnv,
         ReportIgnoreErrorsDefault
@@ -152,7 +166,7 @@ public sealed class CoreSettings
     /// <summary>
     ///     Directory where the report files are stored
     /// </summary>
-    public static string ReportDirectory = GetPropertyEnvOrDefault(
+    public static string ReportDirectory() => GetPropertyEnvOrDefault(
         ReportDirectoryProp,
         ReportDirectoryErrorsEnv,
         ReportDirectoryDefault
@@ -161,7 +175,7 @@ public sealed class CoreSettings
     /// <summary>
     ///     Represents the name of the test variable.
     /// </summary>
-    public static string TestNameVariable = GetPropertyEnvOrDefault(
+    public static string TestNameVariable() => GetPropertyEnvOrDefault(
         TestNameVariableProp,
         TestNameVariableEnv,
         TestNameVariableDefault
@@ -170,7 +184,7 @@ public sealed class CoreSettings
     /// <summary>
     ///     Specifies the default value for the test namespace variable configuration
     /// </summary>
-    public static string TestNameSpaceVariable = GetPropertyEnvOrDefault(
+    public static string TestNameSpaceVariable() => GetPropertyEnvOrDefault(
         TestNameSpaceVariableProp,
         TestNameSpaceVariableEnv,
         TestNameSpaceVariableDefault

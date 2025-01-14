@@ -267,7 +267,7 @@ public class ReceiveMessageAction : AbstractTestAction
         throw new CoreSystemException("Neither endpoint nor endpoint uri is set properly!");
     }
 
-    public sealed class Builder : ReceiveMessageActionBuilder<ReceiveMessageAction, ReceiveMessageActionBuilderSupport,
+    public class Builder : ReceiveMessageActionBuilder<ReceiveMessageAction, ReceiveMessageActionBuilderSupport,
         Builder>
     {
         /// Fluent API action building entry method used C# DSL.
@@ -336,19 +336,18 @@ public class ReceiveMessageAction : AbstractTestAction
         where TM : ReceiveMessageBuilderSupport<T, TB, TM>
         where TB : ReceiveMessageActionBuilder<T, TM, TB>
     {
-        internal readonly Dictionary<string, object> _messageSelectors = new();
+        protected internal readonly Dictionary<string, object> _messageSelectors = new();
 
-        internal readonly List<string> _validatorNames = [];
+        protected readonly List<string> _validatorNames = [];
 
-        internal readonly List<IMessageValidator<IValidationContext>> _validators = [];
+        protected internal readonly List<IMessageValidator<IValidationContext>> _validators = [];
 
-        internal HeaderValidationContext _headerValidationContext;
+        protected HeaderValidationContext _headerValidationContext;
 
-        internal string _messageSelector;
+        protected internal string _messageSelector;
+        protected internal long _receiveTimeout;
 
-        internal long _receiveTimeout;
-
-        internal IValidationProcessor _validationProcessor;
+        protected internal IValidationProcessor _validationProcessor;
 
         public List<IValidationContext.IBuilder<IValidationContext, dynamic>> ValidationContexts { get; } = [];
 
@@ -475,7 +474,7 @@ public class ReceiveMessageAction : AbstractTestAction
         /// </summary>
         /// <param name="messageSelector">A dictionary containing message selectors.</param>
         /// <returns>The current instance of the builder.</returns>
-        public TB Selector(IDictionary<string, string> messageSelector)
+        public TB Selector(IDictionary<string, object> messageSelector)
         {
             foreach (var kvp in messageSelector) _messageSelectors[kvp.Key] = kvp.Value;
             return self;
@@ -661,7 +660,7 @@ public class ReceiveMessageAction : AbstractTestAction
         ///     Gets message payload String representation from configured message builder.
         /// </summary>
         /// <returns></returns>
-        protected Optional<string> GetMessagePayload()
+        protected virtual Optional<string> GetMessagePayload()
         {
             if (messageBuilderSupport == null) return Optional<string>.Empty;
 

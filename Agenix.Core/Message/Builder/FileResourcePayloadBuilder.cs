@@ -21,7 +21,7 @@ public class FileResourcePayloadBuilder : IMessagePayloadBuilder, IMessageTypeAw
     ///     Implements IMessagePayloadBuilder and IMessageTypeAware interfaces.
     /// </summary>
     public FileResourcePayloadBuilder(IResource resource)
-        : this(resource, CoreSettings.AgenixFileEncoding)
+        : this(resource, CoreSettings.AgenixFileEncoding())
     {
     }
 
@@ -41,7 +41,7 @@ public class FileResourcePayloadBuilder : IMessagePayloadBuilder, IMessageTypeAw
     ///     Implements IMessagePayloadBuilder and IMessageTypeAware interfaces.
     /// </summary>
     public FileResourcePayloadBuilder(string resourcePath)
-        : this(resourcePath, CoreSettings.AgenixFileEncoding)
+        : this(resourcePath, CoreSettings.AgenixFileEncoding())
     {
     }
 

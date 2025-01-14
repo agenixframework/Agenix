@@ -22,7 +22,7 @@ public class GzipBinaryBase64MessageValidator : BinaryBase64MessageValidator
     /// <param name="controlMessage">The control message used for validation comparison.</param>
     /// <param name="context">The test context containing metadata for the validation process.</param>
     /// <param name="validationContext">The validation context for additional validation configurations.</param>
-    public new void ValidateMessage(IMessage receivedMessage, IMessage controlMessage,
+    public override void ValidateMessage(IMessage receivedMessage, IMessage controlMessage,
         TestContext context, IValidationContext validationContext)
     {
         if (receivedMessage.Payload is byte[] bytes)

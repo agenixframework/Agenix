@@ -8,7 +8,7 @@ namespace Agenix.Core.Message.Builder;
 /// static messages with a given IMessage instance.
 public class StaticMessageBuilder : DefaultMessageBuilder
 {
-    private static readonly List<string> FilteredHeaders =
+    protected static readonly List<string> FilteredHeaders =
     [
         MessageHeaders.Id,
         MessageHeaders.Timestamp
@@ -75,7 +75,7 @@ public class StaticMessageBuilder : DefaultMessageBuilder
     /// Retrieves the current message.
     /// <return>Returns an instance of the current message.</return>
     /// /
-    public IMessage GetMessage()
+    public virtual IMessage GetMessage()
     {
         return _message;
     }

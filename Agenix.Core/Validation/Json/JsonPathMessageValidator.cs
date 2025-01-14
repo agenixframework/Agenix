@@ -44,7 +44,7 @@ public class JsonPathMessageValidator : AbstractMessageValidator<JsonPathMessage
     /// <param name="validationContext">The context containing JSONPath expressions and their expected values.</param>
     /// <exception cref="ValidationException">Thrown when the received message payload is empty or validation fails.</exception>
     /// <exception cref="CoreSystemException">Thrown when the received message payload cannot be parsed as JSON.</exception>
-    public new void ValidateMessage(IMessage receivedMessage, IMessage controlMessage, TestContext context,
+    public override void ValidateMessage(IMessage receivedMessage, IMessage controlMessage, TestContext context,
         JsonPathMessageValidationContext validationContext)
     {
         if (validationContext.GetJsonPathExpressions() == null ||

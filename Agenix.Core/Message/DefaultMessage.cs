@@ -118,7 +118,7 @@ public class DefaultMessage : IMessage
         return _headers.GetValueOrDefault(headerName);
     }
 
-    public IMessage SetHeader(string headerName, object headerValue)
+    public virtual IMessage SetHeader(string headerName, object headerValue)
     {
         if (headerName.Equals(MessageHeaders.Id))
             throw new CoreSystemException("Not allowed to set reserved message header from message: " +
@@ -136,7 +136,7 @@ public class DefaultMessage : IMessage
         _headers.Remove(headerName);
     }
 
-    public IMessage AddHeaderData(string headerData)
+    public virtual IMessage AddHeaderData(string headerData)
     {
         _headerData.Add(headerData);
         return this;
@@ -175,7 +175,7 @@ public class DefaultMessage : IMessage
 
     public IMessage SetType(string type)
     {
-        if (type != null) _headers.Add(MessageHeaders.MessageType, type);
+        if (type != null) _headers[MessageHeaders.MessageType] = type;
 
         _type = type;
         return this;

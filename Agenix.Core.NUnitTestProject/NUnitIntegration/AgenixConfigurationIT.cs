@@ -81,12 +81,6 @@ public class AgenixConfigurationIT
                 .Build();
         }
 
-        [BindToRegistry]
-        public DefaultTextEqualsMessageValidator PlaintextValidator()
-        {
-            return new DefaultTextEqualsMessageValidator();
-        }
-
         [BindToRegistry(Name = "TEST.direct.queue")]
         private IMessageQueue Queue()
         {

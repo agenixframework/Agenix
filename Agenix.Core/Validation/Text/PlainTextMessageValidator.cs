@@ -47,7 +47,7 @@ public class PlainTextMessageValidator : DefaultMessageValidator
     /// <param name="controlMessage">The control message containing the expected payload.</param>
     /// <param name="context">The test context containing dynamic content replacements.</param>
     /// <param name="validationContext">The validation context providing additional validation parameters.</param>
-    public new void ValidateMessage(IMessage receivedMessage, IMessage controlMessage, TestContext context,
+    public override void ValidateMessage(IMessage receivedMessage, IMessage controlMessage, TestContext context,
         IValidationContext validationContext)
     {
         if (controlMessage?.Payload == null)

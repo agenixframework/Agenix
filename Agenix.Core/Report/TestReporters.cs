@@ -18,7 +18,7 @@ public class TestReporters : ITestListener, ITestSuiteListener, ITestReporterAwa
     /**
      * Should clear test results for each test suite
      */
-    public bool AutoClear = CoreSettings.ReportAutoClear;
+    public bool AutoClear = CoreSettings.ReportAutoClear();
 
     /// Invoked when the execution of an individual test case starts.
     /// This method is called to notify that a specific test case has begun execution.
