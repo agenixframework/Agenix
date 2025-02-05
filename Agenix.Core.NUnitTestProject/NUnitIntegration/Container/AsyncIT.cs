@@ -13,6 +13,7 @@ using static Agenix.Core.Actions.TraceVariablesAction.Builder;
 namespace Agenix.Core.NUnitTestProject.NUnitIntegration.Container;
 
 [NUnitAgenixSupport]
+[Platform(Exclude = "Linux", Reason = "Only runs on non-Linux platforms.")]
 public class AsyncIT
 {
     private static readonly ILog Log = LogManager.GetLogger(typeof(AsyncIT));

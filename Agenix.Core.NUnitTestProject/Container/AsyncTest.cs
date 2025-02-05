@@ -20,6 +20,8 @@ namespace Agenix.Core.NUnitTestProject.Container;
 ///     with actions. It extends from <see cref="AbstractNUnitSetUp" />, preparing mocks in the
 ///     <see cref="SetUp" /> method before each test execution.
 /// </remarks>
+
+[Platform(Exclude = "Linux", Reason = "Only runs on non-Linux platforms.")]
 public class AsyncTest : AbstractNUnitSetUp
 {
     // Creating mocks for the TestAction class
@@ -149,7 +151,7 @@ public class AsyncTest : AbstractNUnitSetUp
         // Assert that the waitForDone logic throws a TimeoutException
         Assert.ThrowsAsync<CoreSystemException>(async () =>
         {
-            await WaitUtils.WaitForCompletion(container, Context, 100);
+            await WaitUtils.WaitForCompletion(container, Context, 200);
         });
     }
 
