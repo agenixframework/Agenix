@@ -1,4 +1,5 @@
 ﻿using Agenix.Core.Validation;
+using Agenix.Core.Validation.Matcher;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
@@ -14,15 +15,19 @@ public class HeaderValidatorTest
     public void TestLookup()
     {
         var validators = IHeaderValidator.Lookup();
-        ClassicAssert.AreEqual(1, validators.Count);
+        ClassicAssert.AreEqual(2, validators.Count);
         ClassicAssert.IsNotNull(validators["defaultHeaderValidator"]);
         ClassicAssert.AreEqual(validators["defaultHeaderValidator"].GetType(), typeof(DefaultHeaderValidator));
+        ClassicAssert.IsNotNull(validators["hamcrestHeaderValidator"]);
+        ClassicAssert.AreEqual(validators["hamcrestHeaderValidator"].GetType(), typeof(HamcrestHeaderValidator));
     }
 
     [Test]
     public void TestDefaultLookup()
     {
         var validator = IHeaderValidator.Lookup("default");
+        ClassicAssert.IsTrue(validator.IsPresent);
+        validator = IHeaderValidator.Lookup("hamcrest");
         ClassicAssert.IsTrue(validator.IsPresent);
     }
 }

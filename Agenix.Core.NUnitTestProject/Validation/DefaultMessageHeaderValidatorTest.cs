@@ -2,6 +2,7 @@
 using Agenix.Core.Message;
 using Agenix.Core.Validation;
 using Agenix.Core.Validation.Context;
+using NHamcrest;
 using NUnit.Framework;
 
 namespace Agenix.Core.NUnitTestProject.Validation;
@@ -99,6 +100,34 @@ public class DefaultMessageHeaderValidatorTest : AbstractNUnitSetUp
             .SetHeader("bar", "@EndsWith('_test')@");
 
         _validator.ValidateMessage(receivedMessage, controlMessage, Context, _validationContext);
+    }
+    
+    [Test]
+    public void TestValidateMessageHeadersHamcrestMatcherSupport()
+    {
+        var receivedMessage = new DefaultMessage("Hello World!")
+            .SetHeader("foo", "foo_test")
+            .SetHeader("additional", "additional")
+            .SetHeader("bar", "bar_test");
+        var controlMessage = new DefaultMessage("Hello World!")
+            .SetHeader("foo", Starts.With("foo"))
+            .SetHeader("bar", Ends.With("_test"));
+
+        _validator.ValidateMessage(receivedMessage, controlMessage, Context, _validationContext);
+    }
+    
+    [Test]
+    public void TestValidateHamcrestMatcherError()
+    {
+        var receivedMessage = new DefaultMessage("Hello World!")
+            .SetHeader("foo", "foo_test")
+            .SetHeader("bar", "bar_test");
+        var controlMessage = new DefaultMessage("Hello World!")
+            .SetHeader("foo", Starts.With("bar"))
+            .SetHeader("bar", Ends.With("_test"));
+
+        Assert.Throws<ValidationException>(() =>
+            _validator.ValidateMessage(receivedMessage, controlMessage, Context, _validationContext));
     }
 
     [Test]
