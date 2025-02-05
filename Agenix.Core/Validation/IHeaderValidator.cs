@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Agenix.Core.Exceptions;
 using Agenix.Core.Util;
 using Agenix.Core.Validation.Context;
+using Agenix.Core.Validation.Matcher;
 using log4net;
 
 namespace Agenix.Core.Validation;
@@ -44,7 +45,10 @@ public interface IHeaderValidator
     {
         if (_validators.Count != 0) return _validators;
         var resolvedValidators = new Dictionary<string, IHeaderValidator>
-            { { "defaultHeaderValidator", new DefaultHeaderValidator() } };
+        {
+            { "defaultHeaderValidator", new DefaultHeaderValidator() },
+            { "hamcrestHeaderValidator", new HamcrestHeaderValidator()}
+        };
         foreach (var kvp in resolvedValidators) _validators[kvp.Key] = kvp.Value;
 
         if (!_log.IsDebugEnabled) return _validators;
@@ -61,6 +65,12 @@ public interface IHeaderValidator
             if (validator.Equals("default"))
             {
                 var instance = new DefaultHeaderValidator();
+                return Optional<IHeaderValidator>.Of(instance);
+            }
+            
+            if (validator.Equals("hamcrest"))
+            {
+                var instance = new HamcrestHeaderValidator();
                 return Optional<IHeaderValidator>.Of(instance);
             }
         }
