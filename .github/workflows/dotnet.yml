@@ -26,4 +26,13 @@ jobs:
         run: dotnet build --no-restore
       
       - name: Test
-        run: dotnet test --no-build --verbosity normal
+        run: dotnet test --no-build --verbosity normal --logger "nunit;LogFileName=test-results.xml" || true
+        
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: NUnit Tests
+          path: "**/test-results.xml"
+          reporter: nunit
+          fail-on-error: true
