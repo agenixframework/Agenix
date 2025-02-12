@@ -1,9 +1,12 @@
 ﻿using Agenix.Core.Validation.Matcher.Core;
+using log4net;
 
 namespace Agenix.Core.Validation.Matcher;
 
 public class DefaultValidationMatcherLibrary : ValidationMatcherLibrary
 {
+    private static readonly ILog Log = LogManager.GetLogger(typeof(DefaultValidationMatcherLibrary));
+    
     /// <summary>
     ///     Default constructor adds default matcher implementations.
     /// </summary>
@@ -27,5 +30,23 @@ public class DefaultValidationMatcherLibrary : ValidationMatcherLibrary
         Members.Add("StringLength", new StringLengthValidationMatcher());
         Members.Add("Trim", new TrimValidationMatcher());
         Members.Add("TrimAllWhiteSpaces", new TrimAllWhitespacesValidationMatcher());
+        
+        LookupValidationMatchers();
+    }
+    
+    /// <summary>
+    /// Add custom matcher implementations loaded from resource path lookup.
+    /// </summary>
+    private void LookupValidationMatchers()
+    {
+        foreach (var (key, matcher) in IValidationMatcher.Lookup())
+        {
+            Members.Add(key, matcher);
+
+            if (Log.IsDebugEnabled)
+            {
+                Log.Debug($"Register message matcher '{key}' as {matcher.GetType()}");
+            }
+        }
     }
 }

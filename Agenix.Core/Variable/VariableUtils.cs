@@ -104,4 +104,37 @@ public sealed class VariableUtils
         return expression.StartsWith(CoreSettings.VariablePrefix) &&
                expression.EndsWith(CoreSettings.VariableSuffix);
     }
+    
+    /// <summary>
+    /// Cut off single quotes prefix and suffix.
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    public static string CutOffSingleQuotes(string input)
+    {
+        if (string.IsNullOrWhiteSpace(input)) return input;
+
+        if (input.Length >= 2 && input[0] == '\'' && input[^1] == '\'')
+        {
+            return input.Substring(1, input.Length - 2);
+        }
+
+        return input;
+    }
+    
+    /// <summary>
+    /// Cut off double quotes prefix and suffix.
+    /// </summary>
+    /// <param name="variable"></param>
+    /// <returns></returns>
+    public static string CutOffDoubleQuotes(string variable)
+    {
+        if (!string.IsNullOrWhiteSpace(variable) &&
+            variable.Length > 1 && variable[0] == '"' && variable[^1] == '"')
+        {
+            return variable.Substring(1, variable.Length - 2);
+        }
+
+        return variable;
+    }
 }

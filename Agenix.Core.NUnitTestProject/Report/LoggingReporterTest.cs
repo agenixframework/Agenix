@@ -10,6 +10,7 @@ using NUnit.Framework;
 
 namespace Agenix.Core.NUnitTestProject.Report;
 
+[Platform(Exclude = "MacOsX", Reason = "Only runs on non-Linux/ Unix platforms.")]
 public class LoggingReporterTest
 {
     private EchoAction _echo;

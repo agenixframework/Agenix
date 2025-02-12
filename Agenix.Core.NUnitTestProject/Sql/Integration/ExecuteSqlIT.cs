@@ -16,6 +16,7 @@ public class ExecuteSqlIT
 {
     [Test]
     public void ExecuteSqlAction()
+    
     {
         var adoTemplate = _context.GetReferenceResolver().Resolve<AdoTemplate>("AdoTemplate");
         var scriptSqlFile = _context.GetReferenceResolver().Resolve<string>("scriptSqlFile");

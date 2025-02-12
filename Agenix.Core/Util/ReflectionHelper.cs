@@ -86,28 +86,156 @@ public static class ReflectionHelper
     {
         while (clazz != null)
         {
-            var methods = clazz.GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+            var methods = clazz.GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance |
+                                           BindingFlags.Static);
+
+            // Possible method name variations (original, camelCase, and snake_case)
             var possibleNames = new[]
             {
                 name, // Original name
-                "Set" + char.ToUpper(name[0]) + name[1..], // SetCamelCase
-                "set_" + char.ToLower(name[0]) + name[1..] // set_snake_case
+                "Set" + char.ToUpper(name[0]) + name.Substring(1), // SetCamelCase
+                "set_" + char.ToLower(name[0]) + name.Substring(1) // set_snake_case
             };
 
+            // Iterating through all possible names
             foreach (var possibleName in possibleNames)
+            foreach (var method in methods.Where(m =>
+                         string.Equals(m.Name, possibleName, StringComparison.OrdinalIgnoreCase)))
             {
-                var method = methods.FirstOrDefault(m =>
-                    string.Equals(m.Name, possibleName, StringComparison.OrdinalIgnoreCase) &&
-                    m.GetParameters().Select(p => p.ParameterType).SequenceEqual(paramTypes));
 
-                if (method != null) return method;
+                // Handle generic methods
+                if (method.IsGenericMethodDefinition)
+                {
+                    var genericArguments = method.GetGenericArguments();
+                    if (genericArguments.Length == paramTypes.Length)
+                        try
+                        {
+                            // Construct the generic method to match the parameter types
+                            var constructedMethod = method.MakeGenericMethod(paramTypes);
+
+                            if (AreParametersCompatible(constructedMethod.GetParameters(), paramTypes))
+                                return constructedMethod;
+                        }
+                        catch
+                        {
+                            // If unable to construct the method, continue searching
+                        }
+                }
+                else
+                {
+                    // Handle non-generic methods
+                    if (AreParametersCompatible(method.GetParameters(), paramTypes)) return method;
+                }
             }
 
-            clazz = clazz.BaseType; // Move to the base type
+            // Move up the type hierarchy
+            clazz = clazz.BaseType;
         }
 
         return null; // Method not found in the hierarchy
     }
+    
+    /// <summary>
+    /// Determines if the provided parameter types are compatible with the method's parameters.
+    /// </summary>
+    private static bool AreParametersCompatible(ParameterInfo[] parameters, Type[] paramTypes)
+    {
+        if (parameters.Length == 0 && paramTypes.Length == 0) return true;
+
+        // Handle `params` parameter matching
+        if (parameters.Length > 0 && parameters.Last().GetCustomAttributes(typeof(ParamArrayAttribute), false).Any())
+        {
+            // Split into normal parameters and params parameter
+            var fixedParams = parameters.Take(parameters.Length - 1).ToArray();
+            var paramsParam = parameters.Last();
+
+            if (paramTypes.Length < fixedParams.Length) return false;
+
+            // Check fixed parameters
+            for (var i = 0; i < fixedParams.Length; i++)
+            {
+                if (!fixedParams[i].ParameterType.IsAssignableFrom(paramTypes[i])) return false;
+            }
+
+            // Check params parameter
+            var paramsType = paramsParam.ParameterType.GetElementType();
+            for (var i = fixedParams.Length; i < paramTypes.Length; i++)
+            {
+                if (!paramsType!.IsAssignableFrom(paramTypes[i])) return false;
+            }
+
+            return true;
+        }
+
+        // Standard parameter matching
+        if (parameters.Length != paramTypes.Length) return false;
+
+        for (var i = 0; i < parameters.Length; i++)
+        {
+            if (!parameters[i].ParameterType.IsAssignableFrom(paramTypes[i])) return false;
+        }
+
+        return true;
+    }
+    
+    private static bool AreParametersCompatible2(ParameterInfo[] parameters, Type[] paramTypes, MethodInfo method = null)
+{
+    if (parameters.Length == 0 && paramTypes.Length == 0) return true;
+
+    if (method != null && method.IsGenericMethodDefinition)
+    {
+        // Match generic parameters with their constraints
+        var genericArguments = method.GetGenericArguments();
+        for (int i = 0; i < genericArguments.Length; i++)
+        {
+            var constraints = genericArguments[i].GetGenericParameterConstraints();
+
+            // Ensure the provided type matches the generic constraints
+            if (constraints.Length > 0 && !constraints.All(constraint => constraint.IsAssignableFrom(paramTypes[i])))
+            {
+                return false;
+            }
+        }
+    }
+
+    // Handle normal parameter validation as before
+    return CheckParameterTypes(parameters, paramTypes);
+}
+
+private static bool CheckParameterTypes(ParameterInfo[] parameters, Type[] paramTypes)
+{
+    // Handle `params` parameter matching
+    if (parameters.Length > 0 &&
+        parameters.Last().GetCustomAttributes(typeof(ParamArrayAttribute), false).Any())
+    {
+        var fixedParams = parameters.Take(parameters.Length - 1).ToArray();
+        var paramsParam = parameters.Last();
+
+        if (paramTypes.Length < fixedParams.Length) return false;
+
+        // Check fixed parameters
+        if (fixedParams.Where((t, i) => !t.ParameterType.IsAssignableFrom(paramTypes[i])).Any())
+        {
+            return false;
+        }
+
+        // Check params parameter
+        var paramsType = paramsParam.ParameterType.GetElementType();
+        for (var i = fixedParams.Length; i < paramTypes.Length; i++)
+        {
+            if (!paramsType!.IsAssignableFrom(paramTypes[i])) return false;
+        }
+
+        return true;
+    }
+
+    // Standard parameter matching
+    if (parameters.Length != paramTypes.Length) return false;
+
+    return !parameters.Where((t, i) => !t.ParameterType.IsAssignableFrom(paramTypes[i])).Any();
+}
+
+
 
     /// Invokes a specified method on a given object instance with the provided arguments.
     /// <param name="method">The MethodInfo object representing the method to invoke.</param>

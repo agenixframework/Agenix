@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using Agenix.Core.Message;
@@ -102,8 +103,11 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
+    [Platform(Exclude = "MacOsX", Reason = "Only runs on non-Linux/ Unix platforms.")]
     public void TestMessageBuilderWithHeaderTypes()
     {
+        
+        Console.WriteLine(Environment.OSVersion.Platform);
         var headers = new Dictionary<string, object>
         {
             { "intValue", "{int}:5" },

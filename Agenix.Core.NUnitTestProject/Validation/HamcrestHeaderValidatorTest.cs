@@ -2,6 +2,7 @@
 using Agenix.Core.Exceptions;
 using Agenix.Core.Validation.Context;
 using Agenix.Core.Validation.Matcher;
+using Agenix.Core.Validation.Matcher.Hamcrest;
 using NUnit.Framework;
 using Is = NHamcrest.Is;
 

@@ -139,14 +139,14 @@ public class JsonPathMessageValidatorTest : AbstractNUnitSetUp
     [Test]
     public void TestValidateMessageElementsWithValidationMatcherSuccessful()
     {
-        Context.ValidationMatcherRegistry.GetLibraryForPrefix("").Members.Add("AssertThat", new NullValueMatcher());
+        Context.ValidationMatcherRegistry.GetLibraryForPrefix("").Members.Add("Assert", new NullValueMatcher());
         var validationExpressions = new Dictionary<string, object>
         {
             { "$..element.attributeA", "@StartsWith('attribute-')@" },
             { "$..element.attributeB", "@EndsWith('-value')@" },
             { "$..element.sub-element", "@EqualsIgnoreCase('TEXT-VALUE')@" },
             { "$.root.element.sub-element", "@Contains('ext-val')@" },
-            { "$.root.nullValue", "@AssertThat(NullValue())@" }
+            { "$.root.nullValue", "@Assert(NullValue())@" }
         };
 
         var validationContext = new JsonPathMessageValidationContext.Builder()
