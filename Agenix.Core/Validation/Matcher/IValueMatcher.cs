@@ -6,8 +6,8 @@ namespace Agenix.Core.Validation.Matcher;
 
 public interface IValueMatcher
 {
-    private static readonly IDictionary<string, IValueMatcher> _validators = new Dictionary<string, IValueMatcher>();
-    private static readonly ILog _log = LogManager.GetLogger(typeof(IValueMatcher));
+    private static readonly IDictionary<string, IValueMatcher> Validators = new Dictionary<string, IValueMatcher>();
+    private static readonly ILog Log = LogManager.GetLogger(typeof(IValueMatcher));
 
     /// <summary>
     ///     Value matcher verifies the match of given received and control values.
@@ -34,14 +34,14 @@ public interface IValueMatcher
     /// </returns>
     static IDictionary<string, IValueMatcher> Lookup()
     {
-        if (_validators.Count != 0) return _validators;
+        if (Validators.Count != 0) return Validators;
         var resolvedValidators = new Dictionary<string, IValueMatcher> { { "hamcrest", new HamcrestValueMatcher() } };
-        foreach (var kvp in resolvedValidators) _validators[kvp.Key] = kvp.Value;
+        foreach (var kvp in resolvedValidators) Validators[kvp.Key] = kvp.Value;
 
-        if (!_log.IsDebugEnabled) return _validators;
+        if (!Log.IsDebugEnabled) return Validators;
         {
-            foreach (var kvp in _validators) _log.Debug($"Found validator '{kvp.Key}' as {kvp.Value.GetType()}");
+            foreach (var kvp in Validators) Log.Debug($"Found validator '{kvp.Key}' as {kvp.Value.GetType()}");
         }
-        return _validators;
+        return Validators;
     }
 }
