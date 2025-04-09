@@ -1,0 +1,117 @@
+#region Imports
+
+using System;
+using System.Collections.Generic;
+using NUnit.Framework;
+using NUnit.Framework.Legacy;
+using Spring.Core.TypeResolution;
+
+#endregion
+
+namespace Agenix.Core.NUnitTestProject.TypeResolution;
+
+/// <summary>
+///     Unit tests for the GenericTypeResolver class.
+/// </summary>
+[TestFixture]
+public class GenericTypeResolverTests : TypeResolverTests
+{
+    protected override ITypeResolver GetTypeResolver()
+    {
+        return new GenericTypeResolver();
+    }
+
+    [Test]
+    public void ResolveLocalAssemblyGenericType()
+    {
+        var t = GetTypeResolver()
+            .Resolve("Agenix.Core.NUnitTestProject.TypeResolution.TestGenericObject< int, string>");
+        ClassicAssert.AreEqual(typeof(TestGenericObject<int, string>), t);
+    }
+
+    [Test]
+    public void ResolveLocalAssemblyGenericTypeDefinition()
+    {
+        // CLOVER:ON
+        var t = GetTypeResolver().Resolve("Agenix.Core.NUnitTestProject.TypeResolution.TestGenericObject< ,>");
+        // CLOVER:OFF
+        ClassicAssert.AreEqual(typeof(TestGenericObject<,>), t);
+    }
+
+    [Test]
+    public void ResolveLocalAssemblyGenericTypeOpen()
+    {
+        Assert.Throws<TypeLoadException>(() =>
+            GetTypeResolver().Resolve("Agenix.Core.NUnitTestProject.TypeResolution.TestGenericObject<int >"));
+    }
+
+    [Test]
+    public void ResolveGenericTypeWithAssemblyName()
+    {
+        var t = GetTypeResolver().Resolve("System.Collections.Generic.Stack<string>, System");
+        ClassicAssert.AreEqual(typeof(Stack<string>), t);
+    }
+
+    [Test]
+    public void ResolveGenericArrayType()
+    {
+        var t = GetTypeResolver().Resolve("System.Nullable<[System.Int32, mscorlib]>[,]");
+        ClassicAssert.AreEqual(typeof(int?[,]), t);
+        t = GetTypeResolver().Resolve("System.Nullable`1[int][,]");
+        ClassicAssert.AreEqual(typeof(int?[,]), t);
+    }
+
+    [Test]
+    public void ResolveGenericArrayTypeWithAssemblyName()
+    {
+        var t = GetTypeResolver().Resolve("System.Nullable<[System.Int32, mscorlib]>[,], mscorlib");
+        ClassicAssert.AreEqual(typeof(int?[,]), t);
+        t = GetTypeResolver().Resolve("System.Nullable<[System.Int32, mscorlib]>[,], mscorlib");
+        ClassicAssert.AreEqual(typeof(int?[,]), t);
+        t = GetTypeResolver().Resolve("System.Nullable`1[[System.Int32, mscorlib]][,], mscorlib");
+        ClassicAssert.AreEqual(typeof(int?[,]), t);
+    }
+
+    [Test]
+    public void ResolveAmbiguousGenericTypeWithAssemblyName()
+    {
+        Assert.Throws<TypeLoadException>(() =>
+            GetTypeResolver()
+                .Resolve(
+                    "Agenix.Core.NUnitTestProject.TypeResolution.TestGenericObject<System.Collections.Generic.Stack<int>, System, string>"));
+    }
+
+    [Test]
+    public void ResolveMalformedGenericType()
+    {
+        Assert.Throws<TypeLoadException>(() =>
+            GetTypeResolver().Resolve("Agenix.Core.NUnitTestProject.TypeResolution.TestGenericObject<int, <string>>"));
+    }
+
+    [Test]
+    public void ResolveNestedGenericTypeWithAssemblyName()
+    {
+        var t = GetTypeResolver()
+            .Resolve(
+                "System.Collections.Generic.Stack<Agenix.Core.NUnitTestProject.TypeResolution.TestGenericObject<int, string> >, System");
+        ClassicAssert.AreEqual(typeof(Stack<TestGenericObject<int, string>>), t);
+    }
+
+    [Test]
+    public void ResolveClrNotationStyleGenericTypeWithAssemblyName()
+    {
+        var t = GetTypeResolver()
+            .Resolve(
+                "System.Collections.Generic.Stack`1[ [Agenix.Core.NUnitTestProject.TypeResolution.TestGenericObject`2[int, string], Agenix.Core.NUnitTestProject] ], System");
+        ClassicAssert.AreEqual(typeof(Stack<TestGenericObject<int, string>>), t);
+    }
+
+    [Test]
+    public void ResolveNestedQuotedGenericTypeWithAssemblyName()
+    {
+        var t = GetTypeResolver()
+            .Resolve(
+                "System.Collections.Generic.Stack< [Agenix.Core.NUnitTestProject.TypeResolution.TestGenericObject<int, string>, Agenix.Core.NUnitTestProject] >, System");
+        ClassicAssert.AreEqual(typeof(Stack<TestGenericObject<int, string>>), t);
+    }
+}
