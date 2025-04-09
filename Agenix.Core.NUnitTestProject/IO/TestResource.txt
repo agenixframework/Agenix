@@ -1,0 +1,1 @@
+Agenix.Core.IO.TestResource.txt

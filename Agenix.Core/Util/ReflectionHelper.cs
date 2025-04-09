@@ -272,4 +272,12 @@ private static bool CheckParameterTypes(ParameterInfo[] parameters, Type[] param
     {
         return !f.IsPublic ? f.GetValue(instance) : null;
     }
+    
+    /// <summary>
+    /// Checks, if the specified type is a nullable
+    /// </summary>
+    public static bool IsNullableType(Type type)
+    {
+        return (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>));
+    }
 }
