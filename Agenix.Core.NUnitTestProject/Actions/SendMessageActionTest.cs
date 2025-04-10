@@ -67,10 +67,8 @@ public class SendMessageActionTest : AbstractNUnitSetUp
     [Test]
     public void TestSendMessageWithMessagePayloadResource()
     {
-        var assemblyLocation = Assembly.GetExecutingAssembly().Location;
-        var testDirectory = Path.GetDirectoryName(assemblyLocation);
         var textPayloadResource =
-            "file:" + testDirectory + @"/ResourcesTest/actions/test-request-payload.xml";
+            $"assembly://{Assembly.GetExecutingAssembly().GetName().Name}/{Assembly.GetExecutingAssembly().GetName().Name}.ResourcesTest.actions/test-request-payload.xml";
         var messageBuilder = new DefaultMessageBuilder();
         messageBuilder.SetPayloadBuilder(new FileResourcePayloadBuilder(textPayloadResource));
 
@@ -134,10 +132,8 @@ public class SendMessageActionTest : AbstractNUnitSetUp
     [Test]
     public void TestSendMessageWithMessagePayloadResourceVariablesSupport()
     {
-        var assemblyLocation = Assembly.GetExecutingAssembly().Location;
-        var testDirectory = Path.GetDirectoryName(assemblyLocation);
         var textPayloadResource =
-            "file:" + testDirectory + @"/ResourcesTest/actions/test-request-payload-with-variables.xml";
+            $"assembly://{Assembly.GetExecutingAssembly().GetName().Name}/{Assembly.GetExecutingAssembly().GetName().Name}.ResourcesTest.actions/test-request-payload-with-variables.xml";
         var messageBuilder = new DefaultMessageBuilder();
         messageBuilder.SetPayloadBuilder(new FileResourcePayloadBuilder(textPayloadResource));
 
@@ -171,10 +167,8 @@ public class SendMessageActionTest : AbstractNUnitSetUp
     [Test]
     public void TestSendMessageWithMessagePayloadResourceFunctionsSupport()
     {
-        var assemblyLocation = Assembly.GetExecutingAssembly().Location;
-        var testDirectory = Path.GetDirectoryName(assemblyLocation);
         var textPayloadResource =
-            "file:" + testDirectory + @"/ResourcesTest/actions/test-request-payload-with-functions.xml";
+            $"assembly://{Assembly.GetExecutingAssembly().GetName().Name}/{Assembly.GetExecutingAssembly().GetName().Name}.ResourcesTest.actions/test-request-payload-with-functions.xml";
         var messageBuilder = new DefaultMessageBuilder();
         messageBuilder.SetPayloadBuilder(new FileResourcePayloadBuilder(textPayloadResource));
 
@@ -521,10 +515,8 @@ public class SendMessageActionTest : AbstractNUnitSetUp
     [Test]
     public void TestSendMessageWithMessagePayloadResourceIsoEncoding()
     {
-        var assemblyLocation = Assembly.GetExecutingAssembly().Location;
-        var testDirectory = Path.GetDirectoryName(assemblyLocation);
         var textPayloadResource =
-            "file:" + testDirectory + @"/ResourcesTest/actions/test-request-iso-encoding.xml";
+            $"assembly://{Assembly.GetExecutingAssembly().GetName().Name}/{Assembly.GetExecutingAssembly().GetName().Name}.ResourcesTest.actions/test-request-iso-encoding.xml";
         var messageBuilder = new DefaultMessageBuilder();
         messageBuilder.SetPayloadBuilder(new FileResourcePayloadBuilder(textPayloadResource));
 

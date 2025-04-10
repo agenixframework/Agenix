@@ -59,10 +59,8 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
     [Test]
     public void TestMessageBuilderWithPayloadResource()
     {
-        var assemblyLocation = Assembly.GetExecutingAssembly().Location;
-        var testDirectory = Path.GetDirectoryName(assemblyLocation);
         var textPayloadResource =
-            "file:" + testDirectory + @"/ResourcesTest/validation/builder/payload-data-resource.txt";
+            $"assembly://{Assembly.GetExecutingAssembly().GetName().Name}/{Assembly.GetExecutingAssembly().GetName().Name}.ResourcesTest.validation.builder/payload-data-resource.txt";
 
         _messageBuilder = new DefaultMessageBuilder();
         _messageBuilder.SetPayloadBuilder(new FileResourcePayloadBuilder(textPayloadResource));
@@ -75,10 +73,8 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
     [Test]
     public void TestMessageBuilderWithPayloadResourceVariableSupport()
     {
-        var assemblyLocation = Assembly.GetExecutingAssembly().Location;
-        var testDirectory = Path.GetDirectoryName(assemblyLocation);
         var textPayloadResource =
-            "file:" + testDirectory + @"/ResourcesTest/validation/builder/variable-data-resource.txt";
+            $"assembly://{Assembly.GetExecutingAssembly().GetName().Name}/{Assembly.GetExecutingAssembly().GetName().Name}.ResourcesTest.validation.builder/variable-data-resource.txt";
 
         _messageBuilder = new DefaultMessageBuilder();
         _messageBuilder.SetPayloadBuilder(new FileResourcePayloadBuilder(textPayloadResource));
@@ -199,9 +195,8 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
     [Test]
     public void TestMessageBuilderWithHeaderResource()
     {
-        var assemblyLocation = Assembly.GetExecutingAssembly().Location;
-        var testDirectory = Path.GetDirectoryName(assemblyLocation);
-        var headerResource = "file:" + testDirectory + @"/ResourcesTest/validation/builder/header-data-resource.txt";
+        var headerResource = $"assembly://{Assembly.GetExecutingAssembly().GetName().Name}/{Assembly.GetExecutingAssembly().GetName().Name}" +
+                             $".ResourcesTest.validation.builder/header-data-resource.txt";
         _messageBuilder.AddHeaderBuilder(new FileResourceHeaderDataBuilder(headerResource));
 
         var resultingMessage = _messageBuilder.Build(Context, CoreSettings.DefaultMessageType());
@@ -214,9 +209,8 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
     [Test]
     public void TestMessageBuilderWithHeaderResourceVariableSupport()
     {
-        var assemblyLocation = Assembly.GetExecutingAssembly().Location;
-        var testDirectory = Path.GetDirectoryName(assemblyLocation);
-        var headerResource = "file:" + testDirectory + @"/ResourcesTest/validation/builder/variable-data-resource.txt";
+        var headerResource = $"assembly://{Assembly.GetExecutingAssembly().GetName().Name}/{Assembly.GetExecutingAssembly().GetName().Name}" +
+                             $".ResourcesTest.validation.builder/variable-data-resource.txt";
         _messageBuilder.AddHeaderBuilder(new FileResourceHeaderDataBuilder(headerResource));
         Context.SetVariable("placeholder", "header data");
 

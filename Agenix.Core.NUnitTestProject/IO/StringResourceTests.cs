@@ -30,7 +30,9 @@ namespace Agenix.Core.NUnitTestProject.IO
             ClassicAssert.AreEqual(enc, r.Encoding);
             ClassicAssert.AreEqual(string.Empty, r.Description);
 
+#pragma warning disable SYSLIB0001
             enc = new UTF7Encoding();
+#pragma warning restore SYSLIB0001
             r = new StringResource(FOO_CONTENT, enc, FOO_DESCRIPTION);    
             ClassicAssert.AreEqual(FOO_CONTENT, r.Content);
             ClassicAssert.AreEqual(enc, r.Encoding);
@@ -63,7 +65,9 @@ namespace Agenix.Core.NUnitTestProject.IO
         [Test]
         public void AcceptsNullContent()
         {
+#pragma warning disable SYSLIB0001
             Encoding utf7 = new UTF7Encoding();
+#pragma warning restore SYSLIB0001
             StringResource r = new StringResource(null, utf7);
             ClassicAssert.AreEqual(string.Empty, r.Content);
             Stream stm = r.InputStream;

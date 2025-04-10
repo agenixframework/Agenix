@@ -1,7 +1,6 @@
 using System.IO;
 using System.Text;
 using Agenix.Core.Exceptions;
-using Agenix.Core.Spi;
 using Agenix.Core.Util;
 
 namespace Agenix.Core.Message.Builder;
@@ -12,7 +11,7 @@ namespace Agenix.Core.Message.Builder;
 public class FileResourcePayloadBuilder : IMessagePayloadBuilder, IMessageTypeAware
 {
     private readonly string _charsetName;
-    private readonly IResource _resource;
+    private readonly IO.IResource _resource;
     private readonly string _resourcePath;
     private string _messageType;
 
@@ -20,7 +19,7 @@ public class FileResourcePayloadBuilder : IMessagePayloadBuilder, IMessageTypeAw
     ///     Class responsible for constructing message payloads using file resources or file paths.
     ///     Implements IMessagePayloadBuilder and IMessageTypeAware interfaces.
     /// </summary>
-    public FileResourcePayloadBuilder(IResource resource)
+    public FileResourcePayloadBuilder(IO.IResource resource)
         : this(resource, CoreSettings.AgenixFileEncoding())
     {
     }
@@ -29,7 +28,7 @@ public class FileResourcePayloadBuilder : IMessagePayloadBuilder, IMessageTypeAw
     ///     Class responsible for constructing message payloads using file resources or file paths.
     ///     Implements IMessagePayloadBuilder and IMessageTypeAware interfaces.
     /// </summary>
-    public FileResourcePayloadBuilder(IResource resource, string charset)
+    public FileResourcePayloadBuilder(IO.IResource resource, string charset)
     {
         _charsetName = charset;
         _resourcePath = null;
@@ -119,7 +118,7 @@ public class FileResourcePayloadBuilder : IMessagePayloadBuilder, IMessageTypeAw
     /// <param name="fileResource">The file resource to be read.</param>
     /// <param name="context">The test context that provides dynamic value resolution.</param>
     /// <return>The content of the file resource as a string.</return>
-    private string GetFileResourceContent(IResource fileResource, TestContext context)
+    private string GetFileResourceContent(IO.IResource fileResource, TestContext context)
     {
         try
         {

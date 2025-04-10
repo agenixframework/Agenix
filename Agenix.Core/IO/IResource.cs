@@ -2,6 +2,7 @@
 
 using System;
 using System.IO;
+using System.Text;
 
 #endregion
 
@@ -152,5 +153,47 @@ namespace Agenix.Core.IO
 		/// If the resource does not support the notion of a relative path.
 		/// </exception>
 		IResource CreateRelative(string relativePath);
+		/*
+		 * Returns a Reader that reads from the underlying resource using UTF-8 as charset.
+		 */
+		/// <summary>
+		/// Returns a <see cref="System.IO.TextReader"/> that reads from the underlying resource using UTF-8 encoding.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="System.IO.TextReader"/> instance for reading the resource's content using UTF-8 encoding.
+		/// </returns>
+		/// <exception cref="System.IO.IOException">
+		/// If an error occurs while accessing the resource.
+		/// </exception>
+		/// <exception cref="System.NotSupportedException">
+		/// If the resource cannot provide a reader.
+		/// </exception>
+		TextReader GetReader()
+		{
+			return GetReader(Encoding.GetEncoding(CoreSettings.AgenixFileEncoding()));
+		}
+
+		/*
+		 * Returns a Reader that reads from the underlying resource using the given Charset.
+		 */
+		/// <summary>
+		/// Returns a <see cref="System.IO.TextReader"/> to read from the underlying resource using the specified character encoding.
+		/// </summary>
+		/// <param name="charset">
+		/// The character encoding to use when creating the reader.
+		/// </param>
+		/// <returns>
+		/// A text reader for the resource.
+		/// </returns>
+		/// <exception cref="System.IO.IOException">
+		/// If an I/O error occurs while creating the reader.
+		/// </exception>
+		/// <exception cref="System.ArgumentNullException">
+		/// If the provided encoding is null.
+		/// </exception>
+		TextReader GetReader(Encoding charset)
+		{
+			return new StreamReader(InputStream, charset);
+		}
 	}
 }

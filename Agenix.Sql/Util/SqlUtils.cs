@@ -1,7 +1,11 @@
-﻿using System.Text;
+﻿#region Imports
+
+using System.Text;
 using Agenix.Core.Exceptions;
-using Agenix.Core.Spi;
+using Agenix.Core.IO;
 using log4net;
+
+#endregion
 
 namespace Agenix.Sql.Util;
 
@@ -54,9 +58,9 @@ public abstract class SqlUtils
 
         try
         {
-            if (Log.IsDebugEnabled) Log.Debug("Create statements from SQL file: " + sqlResource.GetFile().FullName);
+            if (Log.IsDebugEnabled) Log.Debug("Create statements from SQL file: " + sqlResource.File.FullName);
 
-            var inputStream = sqlResource.GetInputStream();
+            var inputStream = sqlResource.InputStream;
             var buffer = new StringBuilder();
 
 
@@ -107,9 +111,7 @@ public abstract class SqlUtils
     /// </returns>
     public static string GetStatementEndingCharacter(ILastScriptLineDecorator? lineDecorator)
     {
-        if (lineDecorator != null) return lineDecorator.GetStatementEndingCharacter();
-
-        return StmtEnding;
+        return lineDecorator != null ? lineDecorator.GetStatementEndingCharacter() : StmtEnding;
     }
 
     /// Line decorator for customizing the final lines of a SQL script.
@@ -126,11 +128,9 @@ public abstract class SqlUtils
         ///     If a line decorator is specified, it utilizes the character sequence provided by the decorator.
         ///     Otherwise, it returns the default sequence.
         /// </summary>
-        /// <param name="lineDecorator">
         ///     An instance of <see cref="ILastScriptLineDecorator" /> that may provide a custom statement ending character
         ///     sequence.
         ///     If null, the default sequence is used.
-        /// </param>
         /// <returns>
         ///     A string representing the SQL statement ending character sequence.
         /// </returns>

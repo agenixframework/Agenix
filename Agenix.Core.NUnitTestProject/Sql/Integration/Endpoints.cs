@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Reflection;
 using Agenix.Core.Actions;
 using Agenix.Core.Container;
@@ -43,14 +42,14 @@ public class Endpoints
 
     [BindToRegistry(Name = "queryScriptSqlFile")]
     private readonly string queryScriptSqlFile =
-        "file:" + testDirectory + @"/ResourcesTest/Sql/Integration/Actions/query-script.sql";
+        "file://" + testDirectory + @"/ResourcesTest/Sql/Integration/Actions/query-script.sql";
 
     [BindToRegistry(Name = "scriptSqlFile")]
     private readonly string scriptSqlFile =
-        "file:" + testDirectory + @"/ResourcesTest/Sql/Integration/Actions/script.sql";
+        "file://" + testDirectory + @"/ResourcesTest/Sql/Integration/Actions/script.sql";
 
     private readonly string createTablesScriptSqlFile =
-        "file:" + testDirectory + @"/ResourcesTest/Sql/Integration/Actions/create-tables.sql";
+        "file://" + testDirectory + @"/ResourcesTest/Sql/Integration/Actions/create-tables.sql";
 
     [BindToRegistry]
     private IBeforeTest BeforeTest()

@@ -9,16 +9,17 @@ using Agenix.Core.Message;
 using Agenix.Core.Message.Builder;
 using Agenix.Core.Messaging;
 using Agenix.Core.Report;
-using Agenix.Core.Spi;
 using Agenix.Core.Validation;
 using Agenix.Core.Validation.builder;
 using Agenix.Core.Validation.Context;
 using Agenix.Core.Validation.Json;
 using Agenix.Core.Variable;
+using Agenix.Core.Spi;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
+using IResource = Agenix.Core.IO.IResource;
 
 namespace Agenix.Core.NUnitTestProject.Actions.Dsl;
 
@@ -286,8 +287,8 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
             .Returns(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
                 .SetHeader("operation", "foo"));
 
-        _resource.Setup(r => r.Exists()).Returns(true);
-        _resource.Setup(r => r.GetInputStream())
+        _resource.Setup(r => r.Exists).Returns(true);
+        _resource.Setup(r => r.InputStream)
             .Returns(new MemoryStream("<TestRequest><Message>Hello World!</Message></TestRequest>"u8.ToArray()));
 
         // Create test case runner
@@ -742,11 +743,11 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
                 .SetHeader("operation", "bar")
                 .AddHeaderData("<Header><Name>operation</Name><Value>bar</Value></Header>"));
 
-        _resource.SetupSequence(r => r.Exists())
+        _resource.SetupSequence(r => r.Exists)
             .Returns(true)
             .Returns(true);
 
-        _resource.SetupSequence(r => r.GetInputStream())
+        _resource.SetupSequence(r => r.InputStream)
             .Returns(new MemoryStream("<Header><Name>operation</Name><Value>foo</Value></Header>"u8.ToArray()))
             .Returns(new MemoryStream("<Header><Name>operation</Name><Value>bar</Value></Header>"u8.ToArray()));
 
@@ -827,8 +828,8 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
                 .AddHeaderData("<Header><Name>operation</Name><Value>foo</Value></Header>")
                 .AddHeaderData("<Header><Name>operation</Name><Value>bar</Value></Header>"));
 
-        _resource.SetupSequence(r => r.Exists()).Returns(true).Returns(true).Returns(true).Returns(true);
-        _resource.SetupSequence(r => r.GetInputStream())
+        _resource.SetupSequence(r => r.Exists).Returns(true).Returns(true).Returns(true).Returns(true);
+        _resource.SetupSequence(r => r.InputStream)
             .Returns(new MemoryStream("<Header><Name>operation</Name><Value>foo</Value></Header>"u8.ToArray()))
             .Returns(new MemoryStream("<Header><Name>operation</Name><Value>bar</Value></Header>"u8.ToArray()))
             .Returns(new MemoryStream("<Header><Name>operation</Name><Value>foo</Value></Header>"u8.ToArray()))
