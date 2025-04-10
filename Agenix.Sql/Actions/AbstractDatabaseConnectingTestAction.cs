@@ -1,12 +1,15 @@
-﻿using System.Data;
+﻿#region Imports
+using System.Data;
 using Agenix.Core;
 using Agenix.Core.Common;
-using Agenix.Core.Spi;
+using Agenix.Core.IO;
+using Agenix.Core.Util;
 using Agenix.Sql.Util;
 using Spring.Data.Common;
 using Spring.Data.Core;
 using Spring.Transaction;
 using Spring.Transaction.Support;
+#endregion
 
 namespace Agenix.Sql.Actions;
 
@@ -137,8 +140,7 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
     /// /
     protected List<string> CreateStatementsFromFileResource(TestContext context)
     {
-        return SqlUtils.CreateStatementsFromFileResource(
-            Resources.FromFileSystem(context.ReplaceDynamicContentInString(SqlResourcePath)));
+        return SqlUtils.CreateStatementsFromFileResource(FileUtils.GetFileResource(SqlResourcePath, context));
     }
 
     /// Reads SQL statements from an external file resource. The file can contain multiple
@@ -150,7 +152,7 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
         SqlUtils.ILastScriptLineDecorator? lineDecorator)
     {
         return SqlUtils.CreateStatementsFromFileResource(
-            Resources.FromFileSystem(context.ReplaceDynamicContentInString(SqlResourcePath)), lineDecorator);
+            FileUtils.GetFileResource(SqlResourcePath, context), lineDecorator);
     }
 
     /// <summary>
@@ -259,11 +261,11 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
         /// <summary>
         ///     Sets the path for the SQL resource file in the test action builder.
         /// </summary>
-        /// <param name="filePath">The file path to the SQL resource to be set.</param>
+        /// <param name="resourceName">The file path to the SQL resource to be set.</param>
         /// <returns>The builder instance with the SQL resource path updated.</returns>
-        public S SqlResource(string filePath)
+        public S SqlResource(string resourceName)
         {
-            sqlResourcePath = filePath;
+            sqlResourcePath = resourceName;
             return self;
         }
     }

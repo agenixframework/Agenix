@@ -605,7 +605,7 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
 
         var assemblyLocation = Assembly.GetExecutingAssembly().Location;
         var testDirectory = Path.GetDirectoryName(assemblyLocation);
-        var filePath = "file:" + testDirectory + @"/ResourcesTest/Sql/Actions/test-sql-query-statements.sql";
+        var filePath = "file://" + testDirectory + @"/ResourcesTest/Sql/Actions/test-sql-query-statements.sql";
         _executeSqlQueryAction.SqlResource(filePath);
         _executeSqlQueryAction.Extract("ORDERTYPE", "orderType");
         _executeSqlQueryAction.Extract("STATUS", "status");

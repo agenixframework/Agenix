@@ -105,7 +105,6 @@ namespace Agenix.Core.IO
         /// <value>
         /// A description for this resource.
         /// </value>
-        /// <seealso cref="NHamcrest.Core.Description"/>
         public override string Description => $"config [{ConfigurationUtils.GetFileName(_configElement)}#{_sectionName}]";
 
         /// <summary>

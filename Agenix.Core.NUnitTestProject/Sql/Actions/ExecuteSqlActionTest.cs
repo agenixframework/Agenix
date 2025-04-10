@@ -74,7 +74,7 @@ public class ExecuteSqlActionTest : AbstractNUnitSetUp
 
         var assemblyLocation = Assembly.GetExecutingAssembly().Location;
         var testDirectory = Path.GetDirectoryName(assemblyLocation);
-        var filePath = "file:" + testDirectory + @"/ResourcesTest/Sql/Actions/test-sql-statements.sql";
+        var filePath = "file://" + testDirectory + @"/ResourcesTest/Sql/Actions/test-sql-statements.sql";
         _executeSqlAction.SqlResource(filePath);
 
         // Build and execute the SQL action
@@ -121,7 +121,7 @@ public class ExecuteSqlActionTest : AbstractNUnitSetUp
 
         var assemblyLocation = Assembly.GetExecutingAssembly().Location;
         var testDirectory = Path.GetDirectoryName(assemblyLocation);
-        var filePath = "file:" + testDirectory + @"/ResourcesTest/Sql/Actions/test-sql-with-variables.sql";
+        var filePath = "file://" + testDirectory + @"/ResourcesTest/Sql/Actions/test-sql-with-variables.sql";
         _executeSqlAction.SqlResource(filePath);
 
         // Execute the SQL action

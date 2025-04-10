@@ -2,6 +2,7 @@
 using Agenix.Core.Actions;
 using Agenix.Core.Container;
 using Agenix.Core.Endpoint;
+using Agenix.Core.IO;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Builder;
 using Agenix.Core.Messaging;

@@ -13,7 +13,7 @@ public class LoadAppSettingsAction(LoadAppSettingsAction.Builder builder) : Abst
     private static readonly ILog Log = LogManager.GetLogger(typeof(LoadAppSettingsAction));
 
     /// File resource path
-    private readonly string _filePath = builder._filePath;
+    private readonly string _filePath = builder._resourceName;
 
     /// Executes the action defined by the LoadAppSettingsAction.
     /// <param name="context">
@@ -23,7 +23,7 @@ public class LoadAppSettingsAction(LoadAppSettingsAction.Builder builder) : Abst
     {
         var resource = FileUtils.GetFileResource(_filePath, context);
 
-        if (Log.IsDebugEnabled) Log.Debug("Reading config file => " + FileUtils.GetFileName(resource.GetLocation()));
+        if (Log.IsDebugEnabled) Log.Debug("Reading config file => " + FileUtils.GetFileName(resource.Description));
 
         var settings = FileUtils.LoadAsSettings(resource);
 
@@ -51,14 +51,14 @@ public class LoadAppSettingsAction(LoadAppSettingsAction.Builder builder) : Abst
         foreach (var entry in context.ResolveDynamicValuesInMap(unresolved))
             context.SetVariable(entry.Key, entry.Value);
 
-        Log.Info($"Loaded config file => {FileUtils.GetFileName(resource.GetLocation())}");
+        Log.Info($"Loaded config file => {FileUtils.GetFileName(resource.Description)}");
     }
 
     /// Builder for creating and configuring LoadAppSettingsAction instances.
     /// /
     public sealed class Builder : AbstractTestActionBuilder<ITestAction, dynamic>
     {
-        internal string _filePath;
+        internal string _resourceName;
 
         /// Fluent API action building entry method used in C# DSL.
         /// @return
@@ -70,19 +70,23 @@ public class LoadAppSettingsAction(LoadAppSettingsAction.Builder builder) : Abst
 
         /// Fluent API action building entry method used in C# DSL.
         /// <return>The builder instance for configuring LoadAppSettingsAction.</return>
-        public static Builder Load(string filePath)
+        public static Builder Load(string resourceName)
         {
             var builder = new Builder();
-            builder.FilePath(filePath);
+            builder.ResourceName(resourceName);
             return builder;
         }
 
         /// Sets the file path for the LoadAppSettingsAction.
-        /// <param name="filePath">The file path to be used for loading the app settings.</param>
-        /// <return>The builder instance with the updated file path.</return>
-        public Builder FilePath(string filePath)
+        /// <param name="resourceName">
+        /// The file path to be used for loading the application settings, typically in the form of a string indicating the file location or resource path.
+        /// </param>
+        /// <return>
+        /// The builder instance with the specified file path set, enabling further configuration or building of the action.
+        /// </return>
+        public Builder ResourceName(string resourceName)
         {
-            _filePath = filePath;
+            _resourceName = resourceName;
             return this;
         }
 

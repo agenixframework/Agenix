@@ -33,7 +33,7 @@ public class FileCondition() : AbstractCondition("file-check")
 
         try
         {
-            return FileUtils.GetFileResource(context.ReplaceDynamicContentInString(_filePath), context).Exists();
+            return FileUtils.GetFileResource(context.ReplaceDynamicContentInString(_filePath), context).Exists;
         }
         catch (Exception e)
         {

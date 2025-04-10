@@ -146,7 +146,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     /// </summary>
     /// <param name="payloadResource">The resource containing the payload.</param>
     /// <returns>The instance of the message builder support with the updated body.</returns>
-    public TS Body(IResource payloadResource)
+    public TS Body(IO.IResource payloadResource)
     {
         return Body(payloadResource, FileUtils.GetDefaultCharset());
     }
@@ -158,7 +158,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     /// <param name="charset">The character encoding used to read the payload.</param>
     /// <returns>The builder instance with the updated payload.</returns>
     /// <exception cref="CoreSystemException">Thrown if there is an error reading the payload resource.</exception>
-    public TS Body(IResource payloadResource, Encoding charset)
+    public TS Body(IO.IResource payloadResource, Encoding charset)
     {
         try
         {
@@ -209,7 +209,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     /// </summary>
     /// <param name="resource">The resource containing the headers to be added.</param>
     /// <returns>An instance of the message builder support class.</returns>
-    public TS Header(IResource resource)
+    public TS Header(IO.IResource resource)
     {
         return Header(resource, FileUtils.GetDefaultCharset());
     }
@@ -223,7 +223,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     /// <exception cref="CoreSystemException">
     ///     Thrown if the message builder does not support adding header builders or if reading the resource fails.
     /// </exception>
-    public TS Header(IResource resource, Encoding charset)
+    public TS Header(IO.IResource resource, Encoding charset)
     {
         try
         {

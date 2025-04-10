@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Agenix.Core.Spi;
+using Agenix.Core.Util;
 using Agenix.Sql.Actions;
 using Moq;
 using NUnit.Framework;
@@ -51,10 +52,10 @@ public class ExecuteSqlQueryTestActionBuilderTest : AbstractNUnitSetUp
 
         var assemblyLocation = Assembly.GetExecutingAssembly().Location;
         var testDirectory = Path.GetDirectoryName(assemblyLocation);
-        var filePath = "file:" + testDirectory + @"/ResourcesTest/Sql/Actions/Dsl/query-script.sql";
+        var filePath = "file://" + testDirectory + @"/ResourcesTest/Sql/Actions/Dsl/query-script.sql";
 
         builder.Run(Query().AdoTemplate(_adoTemplate.Object)
-            .SqlResource(Resources.FromFileSystem(filePath))
+            .SqlResource(FileUtils.GetFileResource(filePath, Context))
             .Validate("NAME", "Leonard")
             .Validate("CNT_EPISODES", "100000")
             .Extract("NAME", "actorName")

@@ -121,4 +121,8 @@
         <EmbeddedResource Include="TestResource.txt" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Spi\" />
+    </ItemGroup>
+
 </Project>

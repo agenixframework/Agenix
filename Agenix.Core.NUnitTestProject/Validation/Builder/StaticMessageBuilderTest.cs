@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Builder;
@@ -84,9 +83,8 @@ public class StaticMessageBuilderTest : AbstractNUnitSetUp
     [Test]
     public void TestBuildMessageContentWithAdditionalHeaderResource()
     {
-        var assemblyLocation = Assembly.GetExecutingAssembly().Location;
-        var testDirectory = Path.GetDirectoryName(assemblyLocation);
-        var headerResource = "file:" + testDirectory + @"/ResourcesTest/validation/builder/payload-data-resource.txt";
+        var headerResource = $"assembly://{Assembly.GetExecutingAssembly().GetName().Name}/{Assembly.GetExecutingAssembly().GetName().Name}.ResourcesTest" +
+                             $".validation.builder/payload-data-resource.txt";
 
         var testMessage = new DefaultMessage("TestMessage").SetHeader("header1", "value1");
         _staticMessageBuilder = new StaticMessageBuilder(testMessage);

@@ -13,12 +13,11 @@ public class LoadAppSettingsActionTest : AbstractNUnitSetUp
     [Test]
     public void TestLoadProperties()
     {
-        var assemblyLocation = Assembly.GetExecutingAssembly().Location;
-        var testDirectory = Path.GetDirectoryName(assemblyLocation);
-        var filePath = "file:" + testDirectory + @"/ResourcesTest/app.config";
+        var resourceName =
+            $"assembly://{Assembly.GetExecutingAssembly().GetName().Name}/{Assembly.GetExecutingAssembly().GetName().Name}.ResourcesTest/app.config";
 
         var loadProperties = new LoadAppSettingsAction.Builder()
-            .FilePath(filePath)
+            .ResourceName(resourceName)
             .Build();
 
         loadProperties.Execute(Context);
@@ -40,12 +39,11 @@ public class LoadAppSettingsActionTest : AbstractNUnitSetUp
     [Test]
     public void TestUnknownVariableInLoadProperties()
     {
-        var assemblyLocation = Assembly.GetExecutingAssembly().Location;
-        var testDirectory = Path.GetDirectoryName(assemblyLocation);
-        var filePath = "file:" + testDirectory + @"/ResourcesTest/app-error.config";
+        var resourceName = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "ResourcesTest", "app-error.config");
+        resourceName = $"file://{resourceName.Replace("\\", "/")}";
 
         var loadProperties = new LoadAppSettingsAction.Builder()
-            .FilePath(filePath)
+            .ResourceName(resourceName)
             .Build();
 
         try
