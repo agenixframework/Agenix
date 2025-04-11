@@ -119,6 +119,10 @@
         <EmbeddedResource Include="IO\TestResource.txt" />
         <None Remove="TestResource.txt" />
         <EmbeddedResource Include="TestResource.txt" />
+        <None Remove="ResourcesTest\one.properties" />
+        <EmbeddedResource Include="ResourcesTest\one.properties" />
+        <None Remove="ResourcesTest\two.properties" />
+        <EmbeddedResource Include="ResourcesTest\two.properties" />
     </ItemGroup>
 
     <ItemGroup>
