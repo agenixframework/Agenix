@@ -14,4 +14,11 @@
         <PackageReference Include="System.Security.Permissions" Version="9.0.3" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Extension\agenix\header\validator\default" />
+      <EmbeddedResource Include="Extension\agenix\header\validator\default" />
+      <None Remove="Extension\agenix\header\validator\hamcrest" />
+      <EmbeddedResource Include="Extension\agenix\header\validator\hamcrest" />
+    </ItemGroup>
+
 </Project>

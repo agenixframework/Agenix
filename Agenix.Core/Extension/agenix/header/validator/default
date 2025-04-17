@@ -1,0 +1,2 @@
+name=defaultHeaderValidator
+type=Agenix.Core.Validation.DefaultHeaderValidator

@@ -33,6 +33,7 @@
 
     <ItemGroup>
         <None Remove="ResourcesTest\FileWithContent.json" />
+        <EmbeddedResource Include="Extension\mocks\params" />
         <EmbeddedResource Include="ResourcesTest\app-error.config">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </EmbeddedResource>
@@ -123,10 +124,15 @@
         <EmbeddedResource Include="ResourcesTest\one.properties" />
         <None Remove="ResourcesTest\two.properties" />
         <EmbeddedResource Include="ResourcesTest\two.properties" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Spi\" />
+        <None Remove="Extension\mocks\bar" />
+        <EmbeddedResource Include="Extension\mocks\bar" />
+        <None Remove="Extension\mocks\foo" />
+        <EmbeddedResource Include="Extension\mocks\foo" />
+        <None Remove="Extension\mocks\singletonFoo" />
+        <EmbeddedResource Include="Extension\mocks\singletonFoo" />
+        <None Remove="Extension\mocksWithParams\fooWithParams" />
+        <None Remove="Extension\all\mocks" />
+        <EmbeddedResource Include="Extension\all\mocks" />
     </ItemGroup>
 
 </Project>
