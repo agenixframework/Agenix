@@ -1,22 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using Agenix.Core.Exceptions;
+using Agenix.Core.Spi;
 using Agenix.Core.Util;
 using Agenix.Core.Validation.Context;
-using Agenix.Core.Validation.Matcher;
 using log4net;
 
 namespace Agenix.Core.Validation;
 
 public interface IHeaderValidator
 {
-    private static readonly ILog _log = LogManager.GetLogger(typeof(IHeaderValidator));
+    /// <summary>
+    ///     Logger instance used for capturing and managing logging information
+    ///     within the IHeaderValidator interface and its implementations.
+    /// </summary>
+    private static readonly ILog Log = LogManager.GetLogger(typeof(IHeaderValidator));
+
+    static readonly ResourcePathTypeResolver TypeResolver = new(ResourcePath);
 
     /// <summary>
     ///     Dictionary to store header validators.
     /// </summary>
-    private static readonly IDictionary<string, IHeaderValidator> _validators =
+    private static readonly IDictionary<string, IHeaderValidator> Validators =
         new Dictionary<string, IHeaderValidator>();
+
+    /// <summary>
+    ///     Represents the path used to identify and locate the resource associated with the HeaderValidator implementation.
+    /// </summary>
+    static string ResourcePath => "Extension/agenix/header/validator";
 
     /// <summary>
     ///     Validates the provided header information against control values within the context of a test.
@@ -38,45 +49,42 @@ public interface IHeaderValidator
     bool Supports(string headerName, Type type);
 
     /// <summary>
-    ///     Retrieves the dictionary of all registered header validators.
+    ///    Resolves all available validators from the resource path lookup.
+    /// Scans assemblies for validator meta-information and instantiates those validators.
     /// </summary>
     /// <returns>A dictionary containing the registered header validators.</returns>
     static IDictionary<string, IHeaderValidator> Lookup()
     {
-        if (_validators.Count != 0) return _validators;
-        var resolvedValidators = new Dictionary<string, IHeaderValidator>
-        {
-            { "defaultHeaderValidator", new DefaultHeaderValidator() },
-            { "hamcrestHeaderValidator", new HamcrestHeaderValidator()}
-        };
-        foreach (var kvp in resolvedValidators) _validators[kvp.Key] = kvp.Value;
+        if (Validators.Count != 0) return Validators;
+        
+        var resolvedValidators = TypeResolver.ResolveAll<dynamic>(ResourcePath, ITypeResolver.DEFAULT_TYPE_PROPERTY, "name");
 
-        if (!_log.IsDebugEnabled) return _validators;
+        foreach (var kvp in resolvedValidators) Validators[kvp.Key] = kvp.Value;
+
+        if (!Log.IsDebugEnabled) return Validators;
         {
-            foreach (var kvp in _validators) _log.Debug($"Found header validator '{kvp.Key}' as {kvp.Value.GetType()}");
+            foreach (var kvp in Validators) Log.Debug($"Found header validator '{kvp.Key}' as {kvp.Value.GetType()}");
         }
-        return _validators;
+        return Validators;
     }
 
+    /// <summary>
+    /// Resolves validator from resource path lookup with given validator resource name.
+    /// Scans assemblies for validator meta-information with the given name and returns instance of validator.
+    /// Returns optional instead of throwing an exception when no validator could be found.
+    /// </summary>
+    /// <param name="validator"></param>
+    /// <returns></returns>
     public static Optional<IHeaderValidator> Lookup(string validator)
     {
         try
         {
-            if (validator.Equals("default"))
-            {
-                var instance = new DefaultHeaderValidator();
-                return Optional<IHeaderValidator>.Of(instance);
-            }
-            
-            if (validator.Equals("hamcrest"))
-            {
-                var instance = new HamcrestHeaderValidator();
-                return Optional<IHeaderValidator>.Of(instance);
-            }
+            var instance = TypeResolver.Resolve<dynamic>(validator);
+            return Optional<IHeaderValidator>.Of(instance);
         }
         catch (CoreSystemException)
         {
-            _log.Warn($"Failed to resolve header validator from resource '{validator}'");
+            Log.Warn($"Failed to resolve header validator from resource '{validator}'");
         }
 
         return Optional<IHeaderValidator>.Empty;
