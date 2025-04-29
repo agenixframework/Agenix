@@ -10,7 +10,7 @@ using Agenix.Core.Message.Builder;
 using Agenix.Core.Messaging;
 using Agenix.Core.Report;
 using Agenix.Core.Validation;
-using Agenix.Core.Validation.builder;
+using Agenix.Core.Validation.Builder;
 using Agenix.Core.Validation.Context;
 using Agenix.Core.Validation.Json;
 using Agenix.Core.Variable;

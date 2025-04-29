@@ -27,7 +27,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog _log = LogManager.GetLogger(typeof(DefaultFunctionLibrary));
+    private static readonly ILog _log = LogManager.GetLogger(typeof(TestContext));
 
     /// <summary>
     ///     List of exceptions that actions raised during execution of forked operations.

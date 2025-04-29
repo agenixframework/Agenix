@@ -25,6 +25,9 @@ public class RepeatOnErrorUntilTrue(RepeatOnErrorUntilTrue.Builder builder) : Ab
     /// Specifies the auto sleep duration in milliseconds to wait between iterations.
     private readonly int _autoSleep = builder.AutoSlp;
 
+    /// Specifies the auto sleep duration in milliseconds to wait between iterations.
+    public int AutoSleep => _autoSleep;
+
     /// Executes the current iteration of actions within the context provided.
     /// The method will repeatedly attempt to execute its defined set of actions until a specified condition is met,
     /// or an exception is encountered. If an exception of type CoreSystemException is thrown during the execution

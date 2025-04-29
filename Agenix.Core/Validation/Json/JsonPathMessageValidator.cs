@@ -47,8 +47,8 @@ public class JsonPathMessageValidator : AbstractMessageValidator<JsonPathMessage
     public override void ValidateMessage(IMessage receivedMessage, IMessage controlMessage, TestContext context,
         JsonPathMessageValidationContext validationContext)
     {
-        if (validationContext.GetJsonPathExpressions() == null ||
-            validationContext.GetJsonPathExpressions().Count == 0) return;
+        if (validationContext.JsonPathExpressions == null ||
+            validationContext.JsonPathExpressions.Count == 0) return;
 
         if (string.IsNullOrWhiteSpace(receivedMessage.GetPayload<string>()))
             throw new ValidationException("Unable to validate message elements - receive message payload was empty");
@@ -59,7 +59,7 @@ public class JsonPathMessageValidator : AbstractMessageValidator<JsonPathMessage
         {
             var readerContext = JToken.Parse(receivedMessage.GetPayload<string>());
 
-            foreach (var (key, value) in validationContext.GetJsonPathExpressions())
+            foreach (var (key, value) in validationContext.JsonPathExpressions)
             {
                 var expectedValue = value;
 

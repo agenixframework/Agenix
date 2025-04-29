@@ -14,7 +14,6 @@ public class JsonPathMessageValidationContext(JsonPathMessageValidationContext.B
     : DefaultValidationContext
 {
     // Map holding jsonPath expressions as key and expected values as values
-    private readonly Dictionary<string, object> _jsonPathExpressions = builder._expressions;
 
     // Constructor using Fluent Builder
 
@@ -25,10 +24,7 @@ public class JsonPathMessageValidationContext(JsonPathMessageValidationContext.B
 
     // Get the control message elements that have to be present in
     // the received message. Message element values are compared as well.
-    public Dictionary<string, object> GetJsonPathExpressions()
-    {
-        return _jsonPathExpressions;
-    }
+    public Dictionary<string, object> JsonPathExpressions { get; } = builder._expressions;
 
     // Check whether the given path expression is a JSONPath expression
     public static bool IsJsonPathExpression(string pathExpression)
