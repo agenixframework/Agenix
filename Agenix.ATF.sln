@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agenix.Sql", "Agenix.Sql\Ag
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agenix.Http", "Agenix.Http\Agenix.Http.csproj", "{EFE2B98B-EA22-44FE-9A31-AAB0886D141E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agenix.Validation.NHamcrest", "Agenix.Validation.NHamcrest\Agenix.Validation.NHamcrest.csproj", "{A012F353-8887-4640-8B25-782BE90BF829}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agenix.Validation.NHamcrest.Tests", "Agenix.Validation.NHamcrest.Tests\Agenix.Validation.NHamcrest.Tests.csproj", "{E3702833-2A87-4CEF-A479-BE67B7C7D417}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{EFE2B98B-EA22-44FE-9A31-AAB0886D141E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFE2B98B-EA22-44FE-9A31-AAB0886D141E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFE2B98B-EA22-44FE-9A31-AAB0886D141E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A012F353-8887-4640-8B25-782BE90BF829}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A012F353-8887-4640-8B25-782BE90BF829}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A012F353-8887-4640-8B25-782BE90BF829}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A012F353-8887-4640-8B25-782BE90BF829}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3702833-2A87-4CEF-A479-BE67B7C7D417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3702833-2A87-4CEF-A479-BE67B7C7D417}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3702833-2A87-4CEF-A479-BE67B7C7D417}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3702833-2A87-4CEF-A479-BE67B7C7D417}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

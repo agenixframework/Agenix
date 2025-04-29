@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Agenix.Core.Validation.builder;
+using Agenix.Core.Validation.Builder;
 
 namespace Agenix.Core.Message.Builder;
 

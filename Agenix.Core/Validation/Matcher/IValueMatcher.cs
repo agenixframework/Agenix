@@ -1,13 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using Agenix.Core.Exceptions;
+using Agenix.Core.Spi;
+using Agenix.Core.Util;
 using log4net;
 
 namespace Agenix.Core.Validation.Matcher;
 
 public interface IValueMatcher
 {
+    /// <summary>
+    /// A static dictionary that holds the collection of available value matchers.
+    /// </summary>
+    /// <remarks>
+    /// The collection maps a string identifier to an implementation of the <c>IValueMatcher</c> interface.
+    /// It is used to retrieve or register value matcher instances within the application. This dictionary
+    /// stores all the known implementations that support value validation functionality.
+    /// </remarks>
     private static readonly IDictionary<string, IValueMatcher> Validators = new Dictionary<string, IValueMatcher>();
+
+    /// <summary>
+    /// A logger instance used to log operations and diagnostics within the <c>IValueMatcher</c> interface.
+    /// </summary>
+    /// <remarks>
+    /// This static logger is configured via the Log4Net framework and is used to record debug and
+    /// operational messages, aiding in identifying the state and behavior of value-matcher-related processes.
+    /// </remarks>
     private static readonly ILog Log = LogManager.GetLogger(typeof(IValueMatcher));
+    
+    /// <summary>
+    ///     Represents the path used to identify and locate the resource associated with the ValueMatcher implementation.
+    /// </summary>
+    static string ResourcePath => "Extension/agenix/value/matcher";
+
+    /// <summary>
+    /// A static instance of the <c>ResourcePathTypeResolver</c> used for resolving resource paths
+    /// and retrieving type-related information during runtime.
+    /// </summary>
+    /// <remarks>
+    /// This resolver provides methods to dynamically locate and instantiate types or resources
+    /// based on a specified resource path and configuration. It is used for tasks like
+    /// loading type implementations or validating types in context-specific scenarios.
+    /// </remarks>
+    static readonly ResourcePathTypeResolver TypeResolver = new(ResourcePath);
 
     /// <summary>
     ///     Value matcher verifies the match of given received and control values.
@@ -19,23 +54,24 @@ public interface IValueMatcher
     bool Validate(object received, object control, TestContext context);
 
     // <summary>
-    /// Filter supported value types
+    /// <summary>
+    /// Determines whether the specified control type is supported by the matcher.
     /// </summary>
-    /// <param name="controlType"></param>
-    /// <returns></returns>
+    /// <param name="controlType">The control type to be evaluated.</param>
+    /// <returns>True if the control type is supported; otherwise, false.</returns>
     bool Supports(Type controlType);
 
     /// <summary>
-    ///     Retrieves a dictionary of all registered value matchers.
+    ///    Resolves all available validators from the resource path lookup.
+    /// Scans assemblies for validator meta-information and instantiates those validators.
     /// </summary>
-    /// <returns>
-    ///     A dictionary where the keys are the names of the value matchers and the values are the corresponding
-    ///     IValueMatcher instances.
-    /// </returns>
+    /// <returns>A dictionary containing the registered header validators.</returns>
     static IDictionary<string, IValueMatcher> Lookup()
     {
         if (Validators.Count != 0) return Validators;
-        var resolvedValidators = new Dictionary<string, IValueMatcher> { { "hamcrest", new HamcrestValueMatcher() } };
+        
+        var resolvedValidators = TypeResolver.ResolveAll<dynamic>();
+
         foreach (var kvp in resolvedValidators) Validators[kvp.Key] = kvp.Value;
 
         if (!Log.IsDebugEnabled) return Validators;
@@ -43,5 +79,27 @@ public interface IValueMatcher
             foreach (var kvp in Validators) Log.Debug($"Found validator '{kvp.Key}' as {kvp.Value.GetType()}");
         }
         return Validators;
+    }
+
+    /// <summary>
+    /// Resolves validator from resource path lookup with given validator resource name.
+    /// Scans assemblies for validator meta-information with the given name and returns instance of validator.
+    /// Returns optional instead of throwing an exception when no validator could be found.
+    /// </summary>
+    /// <param name="validator"></param>
+    /// <returns></returns>
+    public static Optional<IValueMatcher> Lookup(string validator)
+    {
+        try
+        {
+            var instance = TypeResolver.Resolve<dynamic>(validator);
+            return Optional<IValueMatcher>.Of(instance);
+        }
+        catch (CoreSystemException)
+        {
+            Log.Warn($"Failed to resolve value matcher from resource '{validator}'");
+        }
+
+        return Optional<IValueMatcher>.Empty;
     }
 }

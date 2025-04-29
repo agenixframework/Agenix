@@ -46,6 +46,11 @@ public abstract class AbstractIteratingActionContainer(
      */
     protected int index = index;
 
+    /**
+     * Boolean expression string
+     */
+    public string Condition => condition;
+
     /// Executes actions in a loop starting from a specified index.
     /// <param name="context">TestContext holding variable information.</param>
     public override void DoExecute(TestContext context)

@@ -5,7 +5,7 @@ using Agenix.Core.Common;
 using Agenix.Core.Exceptions;
 using Agenix.Core.Spi;
 using Agenix.Core.Util;
-using Agenix.Core.Validation.builder;
+using Agenix.Core.Validation.Builder;
 using Agenix.Core.Variable;
 
 namespace Agenix.Core.Message.Builder;

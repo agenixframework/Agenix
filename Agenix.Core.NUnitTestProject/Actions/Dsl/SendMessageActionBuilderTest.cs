@@ -9,7 +9,7 @@ using Agenix.Core.Messaging;
 using Agenix.Core.Report;
 using Agenix.Core.Spi;
 using Agenix.Core.Validation;
-using Agenix.Core.Validation.builder;
+using Agenix.Core.Validation.Builder;
 using Agenix.Core.Validation.Context;
 using Moq;
 using NUnit.Framework;

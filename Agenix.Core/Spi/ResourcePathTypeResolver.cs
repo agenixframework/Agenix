@@ -194,10 +194,27 @@ public class ResourcePathTypeResolver : ITypeResolver
         // Normalize the search pattern to handle different separator formats
         var normalizedPattern = searchPattern.Replace('/', '.').Replace('\\', '.');
 
-        // Get all loaded assemblies in the current AppDomain
-        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+        var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
+        var loadedPaths = loadedAssemblies.Select(a => a.Location).ToArray();
 
-        foreach (var assembly in assemblies)
+        var referencedPaths = loadedAssemblies
+            .SelectMany(a => a.GetReferencedAssemblies())
+            .Where(name => loadedAssemblies.All(a => a.FullName != name.FullName))
+            .Select(name => {
+                try { 
+                    return Assembly.Load(name); 
+                } catch { 
+                    return null; 
+                }
+            })
+            .Where(a => a != null)
+            .ToList();
+
+        // Now all referenced assemblies should be loaded
+        var allAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+
+        foreach (var assembly in allAssemblies)
             try
             {
                 // Get all manifest resources from this assembly
@@ -300,12 +317,22 @@ public class ResourcePathTypeResolver : ITypeResolver
     private Properties ReadAsProperties(string resourcePath)
     {
         if (_resourceProperties.TryGetValue(resourcePath, out var properties)) return properties;
+    
         var path = GetFullResourcePath(resourcePath);
         var matchingProperties = LoadAllMatchingProperties(path);
-        properties = matchingProperties.Values.FirstOrDefault();
+    
+        // Create a new Properties instance to hold the merged properties
+        properties = new Properties();
+    
+        // Iterate through all matching properties and merge them
+        foreach (var entry in from prop in matchingProperties.Values where prop != null from DictionaryEntry entry in prop select entry)
+        {
+            properties.SetProperty(entry.Key.ToString(), entry.Value?.ToString());
+        }
+    
         _resourceProperties[resourcePath] = properties;
-
         return properties;
+
     }
 
     /// <summary>

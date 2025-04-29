@@ -30,7 +30,7 @@ public class Conditional : AbstractActionContainer
     /**
      * Optional condition expression evaluates to true or false
      */
-    private ConditionEvaluator.ConditionExpression ConditionExpression { get; }
+    public ConditionEvaluator.ConditionExpression ConditionExpression { get; }
 
     /// Executes the conditional logic within the given test context. If the condition evaluates to true,
     /// the nested test actions are executed.

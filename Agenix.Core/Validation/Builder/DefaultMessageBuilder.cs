@@ -5,7 +5,7 @@ using Agenix.Core.Common;
 using Agenix.Core.Exceptions;
 using Agenix.Core.Message;
 
-namespace Agenix.Core.Validation.builder;
+namespace Agenix.Core.Validation.Builder;
 
 /// <summary>
 ///     Default message builder delegates to given message header builders and message payload builder..

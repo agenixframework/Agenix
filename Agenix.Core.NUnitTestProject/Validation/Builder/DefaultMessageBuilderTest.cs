@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Builder;
-using Agenix.Core.Validation.builder;
+using Agenix.Core.Validation.Builder;
 using NUnit.Framework;
 
 namespace Agenix.Core.NUnitTestProject.Validation.Builder;
