@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using Agenix.Api;
+using Agenix.Api.Log;
+using Agenix.Api.Message;
 using Agenix.Core.Log;
 using Agenix.Core.Message;
 using Moq;
@@ -34,7 +37,7 @@ public class LogMessageModifierTest
 
         modifier = new MockLogModifier("key=masked");
         ClassicAssert.AreEqual(modifier.MaskHeaders(_message.Object),
-            new Dictionary<string, string> { { "key", CoreSettings.GetLogMaskValue() } });
+            new Dictionary<string, string> { { "key", AgenixSettings.GetLogMaskValue() } });
     }
 
     private class MockLogModifier(string result) : LogMessageModifierBase

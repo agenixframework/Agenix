@@ -1,4 +1,6 @@
-﻿namespace Agenix.Core.Endpoint.Builder;
+﻿using Agenix.Api.Endpoint;
+
+namespace Agenix.Core.Endpoint.Builder;
 
 /// <summary>
 ///     Provides a builder for both asynchronous and synchronous endpoints, enabling the construction of endpoints that

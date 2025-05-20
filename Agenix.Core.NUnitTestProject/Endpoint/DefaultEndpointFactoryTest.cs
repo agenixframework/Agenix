@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
-using Agenix.Core.Endpoint;
+using Agenix.Api.Endpoint;
+using Agenix.Api.Exceptions;
 using Agenix.Core.Endpoint.Direct;
-using Agenix.Core.Exceptions;
 using Agenix.Core.Spi;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.NUnitTestProject.Endpoint;
 
@@ -93,7 +94,7 @@ public class DefaultEndpointFactoryTest
         var factory = new DefaultEndpointFactory();
 
         // Act & Assert
-        var ex = Assert.Throws<CoreSystemException>(() => factory.Create("unknown:unknown", context));
+        var ex = Assert.Throws<AgenixSystemException>(() => factory.Create("unknown:unknown", context));
 
         Assert.That(ex, Is.Not.Null);
         ClassicAssert.IsTrue(ex.Message.StartsWith("Unable to create endpoint component"));
@@ -108,7 +109,7 @@ public class DefaultEndpointFactoryTest
         var factory = new DefaultEndpointFactory();
 
         // Act & Assert
-        var ex = Assert.Throws<CoreSystemException>(() => factory.Create("jms:", context));
+        var ex = Assert.Throws<AgenixSystemException>(() => factory.Create("jms:", context));
         Assert.That(ex, Is.Not.Null);
         ClassicAssert.IsTrue(ex.Message.StartsWith("Invalid endpoint uri"));
     }

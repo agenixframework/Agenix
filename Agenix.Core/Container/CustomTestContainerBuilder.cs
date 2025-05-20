@@ -1,4 +1,8 @@
-﻿namespace Agenix.Core.Container;
+﻿using Agenix.Api;
+using Agenix.Api.Container;
+using Agenix.Api.Context;
+
+namespace Agenix.Core.Container;
 
 /// <summary>
 ///     Represents a builder pattern class for creating instances of test action containers.

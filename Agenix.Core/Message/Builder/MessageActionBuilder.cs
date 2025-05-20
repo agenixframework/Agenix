@@ -1,23 +1,24 @@
 ﻿using System.Collections.Generic;
-using Agenix.Core.Endpoint;
+using Agenix.Api;
+using Agenix.Api.Endpoint;
+using Agenix.Api.Message;
+using Agenix.Api.Variable;
 using Agenix.Core.Spi;
-using Agenix.Core.Variable;
 
 namespace Agenix.Core.Message.Builder;
 
-/// Abstract class that provides a fluent API for building message-based actions
-/// with various configurations such as message processing, transformation,
-/// endpoint configuration, and more.
+/// Abstract class that provides a fluent API for constructing message-based actions.
+/// Facilitates advanced configurations such as message processing, transformation,
+/// endpoint assignment, and integration with variable extraction mechanisms.
 /// @param
 /// <T>
-///     the type of the test action
-///     @param
-///     <TM>
-///         the type of the message builder support
-///         @param
-///         <TB>
-///             the type of the message action builder
-///             /
+/// the type of the test action.
+/// @param
+/// <TM>
+/// the type of the message builder support.
+/// @param
+/// <TB>
+/// the type of the message action builder.
 public abstract class MessageActionBuilder<T, TM, TB> : AbstractTestActionBuilder<T, TB>, IReferenceResolverAware
     where T : ITestAction
     where TM : MessageBuilderSupport<T, TB, TM>

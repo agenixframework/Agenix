@@ -1,4 +1,6 @@
 ﻿using System;
+using Agenix.Api.Context;
+using Agenix.Api.Message.Correlation;
 using log4net;
 
 namespace Agenix.Core.Message.Correlation;

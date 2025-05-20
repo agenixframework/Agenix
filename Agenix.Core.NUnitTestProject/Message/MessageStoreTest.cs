@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using Agenix.Api;
+using Agenix.Api.Message;
+using Agenix.Api.Validation;
+using Agenix.Api.Validation.Context;
 using Agenix.Core.Endpoint.Direct;
 using Agenix.Core.Message;
-using Agenix.Core.Validation;
-using Agenix.Core.Validation.Context;
+using TestContext = Agenix.Api.Context.TestContext;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
@@ -86,6 +89,11 @@ public class MessageStoreTest
             List<IValidationContext> validationContexts)
         {
             ClassicAssert.AreEqual(receivedMessage.Payload, controlMessage.Payload);
+            foreach (var ctx in validationContexts)
+            {
+                ctx.UpdateStatus(ValidationStatus.PASSED);
+            }
+
         }
 
         public bool SupportsMessageType(string messageType, IMessage message)

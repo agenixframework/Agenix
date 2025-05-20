@@ -1,9 +1,10 @@
-﻿using Agenix.Core.Exceptions;
-using Agenix.Core.Message;
-using Agenix.Core.Validation;
-using Agenix.Core.Validation.Context;
+﻿using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
+using Agenix.Api.Validation;
+using Agenix.Api.Validation.Context;
 using Moq;
 using NUnit.Framework;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.NUnitTestProject.Validation;
 

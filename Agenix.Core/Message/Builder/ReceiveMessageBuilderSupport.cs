@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Agenix.Api.Message;
+using Agenix.Api.Validation;
+using Agenix.Api.Validation.Context;
+using Agenix.Api.Variable;
 using Agenix.Core.Actions;
 using Agenix.Core.Validation;
-using Agenix.Core.Validation.Context;
 using Agenix.Core.Variable;
 
 namespace Agenix.Core.Message.Builder;
@@ -13,7 +16,6 @@ namespace Agenix.Core.Message.Builder;
 /// <typeparam name="T">The type of the receive message action.</typeparam>
 /// <typeparam name="TB">The type of the receive message action builder.</typeparam>
 /// <typeparam name="TS">The type of the receive message builder support.</typeparam>
-/// <typeparam name="TV">The type of the validation context builder.</typeparam>
 public class ReceiveMessageBuilderSupport<T, TB, TS>(TB dlg) : MessageBuilderSupport<T, TB, TS>(dlg)
     where T : ReceiveMessageAction
     where TB : ReceiveMessageAction.ReceiveMessageActionBuilder<T, TS, TB>
@@ -121,7 +123,7 @@ public class ReceiveMessageBuilderSupport<T, TB, TS>(TB dlg) : MessageBuilderSup
     }
 
     /// <summary>
-    ///     Adds message selectors to the current message receiving action.
+    ///     Adds message selectors to the current message-receiving action.
     /// </summary>
     /// <param name="messageSelector">A dictionary containing message selectors.</param>
     /// <returns>The current instance of the message builder support.</returns>

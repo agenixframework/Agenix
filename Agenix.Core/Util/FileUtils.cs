@@ -8,7 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
-using Agenix.Core.Exceptions;
+using Agenix.Api;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.IO;
 using Agenix.Core.IO;
 using log4net;
 
@@ -33,7 +36,7 @@ public class FileUtils
     /// <param name="resource">The resource from which to read the content.</param>
     /// <returns>A string representation of the content read from the resource.</returns>
     /// <exception cref="Exception">Thrown when the resource does not exist.</exception>
-    public static string ReadToString(IO.IResource resource)
+    public static string ReadToString(IResource resource)
     {
         return ReadToString(resource, GetDefaultCharset());
     }
@@ -72,7 +75,7 @@ public class FileUtils
     /// <param name="encoding">The encoding to use for converting the resource's byte content to a string.</param>
     /// <returns>A string representation of the content read from the resource.</returns>
     /// <exception cref="Exception">Thrown when the resource does not exist.</exception>
-    public static string ReadToString(IO.IResource resource, Encoding encoding)
+    public static string ReadToString(IResource resource, Encoding encoding)
     {
         if (!resource.Exists)
             throw new Exception($"Failed to read resource {resource.Description} - does not exist");
@@ -105,7 +108,7 @@ public class FileUtils
     /// <param name="content">The content to be written to the file.</param>
     /// <param name="file">The path of the file where the content will be written.</param>
     /// <param name="charset">The encoding to be used when writing the content to the file.</param>
-    /// <exception cref="CoreSystemException">Thrown when there is an error writing to the file.</exception>
+    /// <exception cref="AgenixSystemException">Thrown when there is an error writing to the file.</exception>
     public static void WriteToFile(string content, string file, Encoding charset)
     {
         Log.Debug($"Writing file resource: {file} (encoding is {charset.EncodingName})");
@@ -122,7 +125,7 @@ public class FileUtils
         }
         catch (IOException e)
         {
-            throw new CoreSystemException("Failed to write file", e);
+            throw new AgenixSystemException("Failed to write file", e);
         }
     }
 
@@ -156,7 +159,7 @@ public class FileUtils
     /// <param name="content">The content to be written to the file.</param>
     /// <param name="file">The path of the file where the content will be written.</param>
     /// <param name="charset">The encoding to be used when writing the content to the file.</param>
-    /// <exception cref="CoreSystemException">Thrown when there is an error writing to the file.</exception>
+    /// <exception cref="AgenixSystemException">Thrown when there is an error writing to the file.</exception>
     public static void WriteToFile(string content, string file)
     {
         WriteToFile(content, file, GetDefaultCharset());
@@ -195,7 +198,7 @@ public class FileUtils
     /// <returns>The default encoding to be used based on the Agenix system property or the system default.</returns>
     public static Encoding GetDefaultCharset()
     {
-        return Encoding.GetEncoding(CoreSettings.AgenixFileEncoding());
+        return Encoding.GetEncoding(AgenixSettings.AgenixFileEncoding());
     }
 
     /// <summary>
@@ -205,7 +208,7 @@ public class FileUtils
     /// <param name="context">The TestContext instance used to resolve dynamic content in the provided file path.</param>
     /// <returns>An instance of IResource that represents the resolved file resource.</returns>
     /// <exception cref="Exception">Thrown if the resource cannot be found, resolved, or accessed.</exception>
-    public static IO.IResource GetFileResource(string resourceName, TestContext context)
+    public static IResource GetFileResource(string resourceName, TestContext context)
     {
         return GetFileResource(context.ReplaceDynamicContentInString(resourceName));
     }
@@ -215,13 +218,12 @@ public class FileUtils
     /// </summary>
     /// <param name="resourceName">The name of the resource to be retrieved.</param>
     /// <param name="context">The context used to resolve and replace dynamic content in the resource name.</param>
-    /// <returns>An instance of <see cref="IO.IResource"/> representing the requested resource.</returns>
-    public static IO.IResource GetFileResource(string resourceName)
+    /// <returns>An instance of <see cref="IResource"/> representing the requested resource.</returns>
+    public static IResource GetFileResource(string resourceName)
     {
         return new ConfigurableResourceLoader().GetResource(resourceName);
     }
-
-
+    
     /// <summary>
     /// Retrieves the file extension from the provided file path.
     /// </summary>
@@ -307,7 +309,7 @@ public class FileUtils
     ///     Thrown if unable to access the input stream of the resource or if reading
     ///     the resource fails.
     /// </exception>
-    public static byte[] CopyToByteArray(IO.IResource resource)
+    public static byte[] CopyToByteArray(IResource resource)
     {
         try
         {
@@ -348,7 +350,7 @@ public class FileUtils
         }
         catch (IOException e)
         {
-            throw new CoreSystemException("Failed to read input stream", e);
+            throw new AgenixSystemException("Failed to read input stream", e);
         }
     }
 
@@ -402,7 +404,7 @@ public class FileUtils
     /// <returns>A NameValueCollection containing the configuration settings.</returns>
     /// <exception cref="ArgumentException">Thrown when the resource path is null or empty.</exception>
     /// <exception cref="InvalidOperationException">Thrown when an error occurs while loading the settings from the resource.</exception>
-    public static NameValueCollection LoadAsSettings(IO.IResource resource)
+    public static NameValueCollection LoadAsSettings(IResource resource)
     {
         var settings = new NameValueCollection();
         // Create a temporary file to hold the stream content

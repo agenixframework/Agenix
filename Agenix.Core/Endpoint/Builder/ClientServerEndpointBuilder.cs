@@ -1,4 +1,6 @@
-﻿namespace Agenix.Core.Endpoint.Builder;
+﻿using Agenix.Api.Endpoint;
+
+namespace Agenix.Core.Endpoint.Builder;
 
 /// <summary>
 ///     Represents a builder that constructs client and server endpoints.

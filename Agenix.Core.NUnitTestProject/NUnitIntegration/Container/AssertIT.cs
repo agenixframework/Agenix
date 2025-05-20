@@ -1,6 +1,6 @@
 ﻿using System.IO;
-using Agenix.Core.Annotations;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Annotations;
+using Agenix.Api.Exceptions;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
 using static Agenix.Core.Actions.EchoAction.Builder;
@@ -23,17 +23,17 @@ public class AssertIT
     {
         _gherkin.Given(CreateVariable("failMessage", "Something went wrong!"));
 
-        _gherkin.Then(Assert().Exception(typeof(CoreSystemException)).When(Fail("Fail once")));
+        _gherkin.Then(Assert().Exception(typeof(AgenixSystemException)).When(Fail("Fail once")));
 
-        _gherkin.Then(Assert().Exception(typeof(CoreSystemException))
+        _gherkin.Then(Assert().Exception(typeof(AgenixSystemException))
             .Message("Fail again")
             .When(Fail("Fail again")));
 
-        _gherkin.Then(Assert().Exception(typeof(CoreSystemException))
+        _gherkin.Then(Assert().Exception(typeof(AgenixSystemException))
             .Message("${failMessage}")
             .When(Fail("${failMessage}")));
 
-        _gherkin.Then(Assert().Exception(typeof(CoreSystemException))
+        _gherkin.Then(Assert().Exception(typeof(AgenixSystemException))
             .Message("@Contains('wrong')@")
             .When(Fail("${failMessage}")));
 
@@ -42,16 +42,16 @@ public class AssertIT
                 .When(Fail("Fail another time"))));
 
         _gherkin.Then(Assert().Exception(typeof(ValidationException))
-            .When(Assert().Exception(typeof(CoreSystemException))
+            .When(Assert().Exception(typeof(AgenixSystemException))
                 .Message("Fail again")
                 .When(Fail("Fail with nice error message"))));
 
         _gherkin.Then(Assert().Exception(typeof(ValidationException))
-            .When(Assert().Exception(typeof(CoreSystemException))
+            .When(Assert().Exception(typeof(AgenixSystemException))
                 .Message("Fail again")
                 .When(Echo("Nothing fails here"))));
 
-        _gherkin.Then(Assert().Exception(typeof(CoreSystemException))
+        _gherkin.Then(Assert().Exception(typeof(AgenixSystemException))
             .Message("Unknown variable 'foo'")
             .When(Action(context => context.GetVariable("foo"))));
     }

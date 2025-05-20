@@ -1,8 +1,21 @@
 ﻿using System;
+using Agenix.Api;
+using Agenix.Api.Context;
 using log4net;
 
 namespace Agenix.Core.Condition;
 
+/// <summary>
+/// Represents a condition that executes a specified test action and determines
+/// if the condition is satisfied based on the result of the action execution.
+/// </summary>
+/// <remarks>
+/// The <c>ActionCondition</c> class extends <c>AbstractCondition</c> and operates
+/// on a provided <c>ITestAction</c>. This action is tested to determine if the
+/// condition is met. The class provides methods to set and retrieve the action,
+/// evaluate satisfaction, and manage success or error messages. It also allows
+/// retrieval and management of any exceptions caught during execution.
+/// </remarks>
 public class ActionCondition : AbstractCondition
 {
     /// <summary>

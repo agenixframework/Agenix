@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Agenix.Api.Context;
+using Agenix.Api.Message;
 
 namespace Agenix.Core.Message.Builder;
 
@@ -7,9 +9,6 @@ namespace Agenix.Core.Message.Builder;
 /// </summary>
 public class DefaultHeaderBuilder(Dictionary<string, object> headers) : IMessageHeaderBuilder
 {
-    /*
-     * Constructor using message headers.
-     */
     /// <summary>
     ///     Builds message headers by resolving dynamic values within the headers using the provided context.
     /// </summary>

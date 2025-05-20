@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Validation.Matcher;
 
 namespace Agenix.Core.Validation.Matcher.Core;
 
 /// <summary>
-///     ValidationMatcher trims leading and trailing whitespaces in value and control value.
+/// ValidationMatcher that removes all whitespaces from the input value and control value
+/// before performing validation to ensure they match.
 /// </summary>
 public class TrimAllWhitespacesValidationMatcher : IValidationMatcher
 {

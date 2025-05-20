@@ -1,0 +1,14 @@
+﻿namespace Agenix.Api.Message;
+
+/// <summary>
+///     Provides functionality to determine if a message processor can handle a given message type.
+/// </summary>
+public interface IMessageTypeSelector
+{
+    /// <summary>
+    ///     Checks if this message processor is capable of handling the given message type.
+    /// </summary>
+    /// <param name="messageType">The message type representation as string (e.g., XML, JSON, csv, plaintext).</param>
+    /// <returns>true if this component supports the message type.</returns>
+    bool SupportsMessageType(string messageType);
+}

@@ -1,10 +1,12 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Net.Mime;
+using Agenix.Api.Endpoint.Resolver;
+using Agenix.Api.Message;
+using Agenix.Api.Messaging;
 using Agenix.Core.Actions;
-using Agenix.Core.Endpoint.Resolver;
+using TestContext = Agenix.Api.Context.TestContext;
 using Agenix.Core.Message;
-using Agenix.Core.Messaging;
 using Agenix.Http.Actions;
 using Agenix.Http.Message;
 using Moq;

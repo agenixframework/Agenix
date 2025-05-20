@@ -1,7 +1,8 @@
 ﻿using System;
+using Agenix.Api;
+using Agenix.Api.Annotations;
+using Agenix.Api.Exceptions;
 using Agenix.Core.Actions;
-using Agenix.Core.Annotations;
-using Agenix.Core.Exceptions;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
 

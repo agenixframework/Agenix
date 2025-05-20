@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Validation.Matcher;
 
 namespace Agenix.Core.Validation.Matcher.Core;
 
 /// <summary>
-///     ValidationMatcher trims leading and trailing whitespaces in value and control value.
+/// Performs validation by trimming leading and trailing whitespaces from both the provided value and the control value for comparison.
+/// Throws a ValidationException if the trimmed values do not match.
 /// </summary>
 public class TrimValidationMatcher : IValidationMatcher
 {

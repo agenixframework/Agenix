@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Functions;
 
 namespace Agenix.Core.Functions.Core;
 
 /// <summary>
-///     Function returns given string argument in lower case.
+///     Function returns the given string argument in lower case.
 /// </summary>
 public class LowerCaseFunction : IFunction
 {

@@ -1,3 +1,5 @@
+using Agenix.Api;
+
 namespace Agenix.Core;
 
 /// Abstract base class for building test actions.

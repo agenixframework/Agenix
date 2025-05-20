@@ -1,23 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Agenix.Core.Endpoint;
-using Agenix.Core.Exceptions;
+using System.Reflection;
+using Agenix.Api;
+using Agenix.Api.Context;
+using Agenix.Api.Endpoint;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
+using Agenix.Api.Messaging;
+using Agenix.Api.Util;
+using Agenix.Api.Validation;
+using Agenix.Api.Validation.Context;
+using Agenix.Api.Variable;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Builder;
-using Agenix.Core.Messaging;
 using Agenix.Core.Spi;
 using Agenix.Core.Util;
 using Agenix.Core.Validation;
-using Agenix.Core.Validation.Context;
 using Agenix.Core.Validation.Json;
-using Agenix.Core.Variable;
+using Agenix.Core.Validation.Xml;
+using MsgType = Agenix.Api.Message.MessageType;
 using log4net;
 
 namespace Agenix.Core.Actions;
 
 /// <summary>
-///     This action receives messages from a service destination. Action uses a Endpoint to receive the message, this means
+///     This action receives messages from a service destination. Action uses a Endpoint to receive the message; this means
 ///     that this action is independent of any message transport. The received message is validated using a
 ///     MessageValidator supporting expected control message payload and header templates.
 /// </summary>
@@ -47,92 +55,106 @@ public class ReceiveMessageAction : AbstractTestAction
         MessageType = builder.GetMessageBuilderSupport().GetMessageType();
     }
 
-    /**
-     * Message endpoint
-     */
+    /// <summary>
+    ///     Represents the communication endpoint associated with the action.
+    /// </summary>
     public IEndpoint Endpoint { get; }
 
-    /**
-     * Build message selector with name value pairs
-     */
+    /// <summary>
+    ///     Represents a collection of message selectors used to filter and retrieve messages based on specific criteria.
+    /// </summary>
     public Dictionary<string, object> MessageSelectors { get; }
 
-    /**
-     * Select messages via message selector string
-     */
+    /// <summary>
+    ///     Gets the message selector used to filter messages based on specific criteria.
+    /// </summary>
     public string Selector { get; }
 
-    /**
-     * Message endpoint uri - either bean name or dynamic endpoint uri
-     */
+    /// <summary>
+    ///     Specifies the URI of the endpoint associated with the action.
+    /// </summary>
     public string EndpointUri { get; }
 
-    /**
-     * Receive timeout
-     */
+    /// <summary>
+    ///     Specifies the maximum duration, in milliseconds, to wait for a message to be received.
+    /// </summary>
     public long ReceiveTimeout { get; }
 
-    /**
-     * Builder constructing a control message
-     */
+    /// <summary>
+    ///     Provides functionality for constructing and managing message-related operations.
+    /// </summary>
     public IMessageBuilder MessageBuilder { get; }
 
-    /**
-     * MessageValidator responsible for message validation
-     */
+    /// <summary>
+    ///     A collection of validators for validating messages within a given validation context.
+    /// </summary>
     public List<IMessageValidator<IValidationContext>> Validators { get; }
 
-    /**
-     * Callback able to additionally validate received message
-     */
+    /// <summary>
+    ///     Validation processor used for processing and validating messages in the action.
+    /// </summary>
     public IValidationProcessor Processor { get; }
 
-    /**
-     * List of validation contexts for this receive action
-     */
+    /// <summary>
+    ///     A collection of validation contexts used during the validation process.
+    /// </summary>
     public List<IValidationContext> ValidationContexts { get; }
 
-    /**
-     * List of variable extractors responsible for creating variables from received message content
-     */
+    /// <summary>
+    ///     A collection of variable extractors used to extract and store variables from a received message into the test
+    ///     context.
+    /// </summary>
     public List<IVariableExtractor> VariableExtractors { get; }
 
-    /**
-     * List of processors that handle the received message
-     */
+    /// <summary>
+    ///     A collection of message processors used to perform custom processing operations
+    ///     on received messages during the action's execution.
+    /// </summary>
     public List<IMessageProcessor> Processors { get; }
 
-    /**
-     * List of processors that handle the control message builder
-     */
+    /// <summary>
+    ///     A collection of message processors specifically intended for handling control messages.
+    /// </summary>
     public List<IMessageProcessor> ControlMessageProcessors { get; }
 
-    /**
-     * The expected message type to arrive in this receive action - this information is needed to find a proper
-     * message validator for this message
-     */
-    public string MessageType { get; }
+    /// <summary>
+    ///     Represents the type of the message received in the action.
+    /// </summary>
+    public string MessageType { get; set; }
 
+    /// <summary>
+    ///     Sets the type of the message to the specified message type.
+    /// </summary>
+    /// <param name="messageType">
+    ///     The message type to be set, represented by an instance of the <see cref="MessageType" /> enumeration.
+    /// </param>
+    private void SetMessageType(MessageType messageType)
+    {
+        MessageType = messageType.ToString();
+    }
+
+    /// <summary>
+    ///     Executes the main logic for this test action, including receiving a message and validating it.
+    /// </summary>
+    /// <param name="context">
+    ///     The current test execution context which provides the environment and necessary data for the operation.
+    /// </param>
     public override void DoExecute(TestContext context)
     {
-        IMessage receivedMessage;
         var selector = MessageSelectorBuilder.Build(Selector, MessageSelectors, context);
 
-        // Receive message either selected or plain with message receiver
-        if (!string.IsNullOrEmpty(selector))
-            receivedMessage = ReceiveSelected(context, selector);
-        else
-            receivedMessage = Receive(context);
+        // Receive a message either selected or plain with the message receiver
+        var receivedMessage = !string.IsNullOrEmpty(selector) ? ReceiveSelected(context, selector) : Receive(context);
 
         if (receivedMessage == null)
-            throw new CoreSystemException("Failed to receive message - message is not available");
+            throw new AgenixSystemException("Failed to receive message - message is not available");
 
         // Validate the message
         ValidateMessage(receivedMessage, context);
     }
 
     /// <summary>
-    ///     Receives the message with respective message receiver implementation.
+    ///     Receives the message with the respective message receiver implementation.
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
@@ -194,35 +216,96 @@ public class ReceiveMessageAction : AbstractTestAction
         {
             if (Log.IsDebugEnabled) Log.Debug($"Control message:\n{controlMessage.Print(context)}");
 
-            if (Validators.Count != 0)
+            AssumeMessageType(StringUtils.HasText(controlMessage.GetPayload<string>()) ? controlMessage : message);
+
+            if (Validators is { Count: > 0 })
             {
                 foreach (var messageValidator in Validators)
-                    messageValidator.ValidateMessage(message, controlMessage, context, ValidationContexts);
-
-                if (Validators.All(v => v.GetType() != typeof(DefaultMessageHeaderValidator)))
                 {
-                    var defaultMessageHeaderValidator =
-                        context.MessageValidatorRegistry.GetDefaultMessageHeaderValidator();
-                    if (defaultMessageHeaderValidator != null)
-                        defaultMessageHeaderValidator.ValidateMessage(message, controlMessage, context,
-                            ValidationContexts);
+                    messageValidator.ValidateMessage(message, controlMessage, context, ValidationContexts);
+                }
+
+                if (Validators.AsParallel()
+                    .Select(v => v.GetType())
+                    .Any(type => typeof(DefaultMessageHeaderValidator).IsAssignableFrom(type))) return;
+                var defaultMessageHeaderValidator = context.MessageValidatorRegistry.GetDefaultMessageHeaderValidator();
+                if (defaultMessageHeaderValidator != null)
+                {
+                    defaultMessageHeaderValidator.ValidateMessage(message, controlMessage, context, ValidationContexts);
                 }
             }
             else
             {
-                var mustFindValidator = ValidationContexts.Any(ctx =>
-                        ctx is JsonPathMessageValidationContext
-                    // TODO: XpathMessageValidationContext
-                    //ctx is XpathMessageValidationContext ||
-                    //ctx is ScriptValidationContext
-                );
+                var mustFindValidator = ValidationContexts.Any(ctx => ctx.RequiresValidator);
 
-                var validators =
+                var activeValidators =
                     context.MessageValidatorRegistry.FindMessageValidators(MessageType, message, mustFindValidator);
 
-                foreach (var messageValidator in validators)
+                foreach (var messageValidator in activeValidators)
+                {
                     messageValidator.ValidateMessage(message, controlMessage, context, ValidationContexts);
+                }
+
+                if (AgenixSettings.IsPerformDefaultValidation() &&
+                    ValidationContexts.Any(validationContext => validationContext.Status == ValidationStatus.UNKNOWN))
+                {
+                    var defaultValidator = context.MessageValidatorRegistry.GetDefaultMessageValidator();
+                    if (!activeValidators.Any(validator => defaultValidator.GetType().IsInstanceOfType(validator)))
+                    {
+                        defaultValidator.ValidateMessage(message, controlMessage, context, ValidationContexts);
+                    }
+                }
             }
+            
+            var unknown = ValidationContexts
+                .Where(validationContext => validationContext.Status == ValidationStatus.UNKNOWN)
+                .ToList();
+            if (unknown.Count <= 0) return;
+            {
+                foreach (var validationContext in unknown)
+                {
+                    Log.Warn($"Found validation context that has not been processed: {validationContext.GetType().Name}");
+                }
+                throw new ValidationException(
+                    $"Incomplete message validation - total of {unknown.Count} validation context has not been processed");
+            }
+        }
+    }
+
+    /// <summary>
+    ///     Analyzes the message payload and infers the message type based on its content if the message type is not provided
+    ///     or mismatched.
+    ///     Adjusts the message type to match the detected payload type such as XML or JSON.
+    /// </summary>
+    /// <param name="message">
+    ///     The message instance that contains the payload to be examined, implementing the <see cref="IMessage" /> interface.
+    /// </param>
+    private void AssumeMessageType(IMessage message)
+    {
+        if (MessageTypeExtensions.IsBinary(MessageType) ||
+            MessageTypeExtensions.FormUrlEncoded.Equals(MessageType, StringComparison.OrdinalIgnoreCase))
+            return;
+
+        var payload = message.GetPayload<string>();
+        if (string.IsNullOrEmpty(payload)) return;
+        payload = payload.Trim();
+
+        if (MessagePayloadUtils.IsXml(payload)
+            && (string.IsNullOrEmpty(MessageType) || !MessageTypeExtensions.IsXml(MessageType)))
+        {
+            Log.Warn(
+                $"Detected XML message payload type, but non-XML message type '{MessageType}' configured! Assuming message type {Api.Message.MessageType.XML}");
+
+            SetMessageType(Api.Message.MessageType.XML);
+        }
+        else if (MessagePayloadUtils.IsJson(payload)
+                 && (string.IsNullOrEmpty(MessageType) || !MessageType.Equals(nameof(Api.Message.MessageType.JSON),
+                     StringComparison.OrdinalIgnoreCase)))
+        {
+            Log.Warn(
+                $"Detected JSON message payload type, but non-JSON message type '{MessageType}' configured! Assuming message type {Api.Message.MessageType.JSON}");
+
+            SetMessageType(Api.Message.MessageType.JSON);
         }
     }
 
@@ -257,14 +340,14 @@ public class ReceiveMessageAction : AbstractTestAction
     /// Retrieves the existing endpoint or creates a new one based on the endpoint URI.
     /// <param name="context">The test context containing necessary configurations and factories.</param>
     /// <return>The existing or newly created endpoint.</return>
-    /// <exception cref="CoreSystemException">Thrown when neither the endpoint nor the endpoint URI is set properly.</exception>
+    /// <exception cref="AgenixSystemException">Thrown when neither the endpoint nor the endpoint URI is set properly.</exception>
     public IEndpoint GetOrCreateEndpoint(TestContext context)
     {
         if (Endpoint != null) return Endpoint;
 
         if (!string.IsNullOrWhiteSpace(EndpointUri)) return context.EndpointFactory.Create(EndpointUri, context);
 
-        throw new CoreSystemException("Neither endpoint nor endpoint uri is set properly!");
+        throw new AgenixSystemException("Neither endpoint nor endpoint uri is set properly!");
     }
 
     public class Builder : ReceiveMessageActionBuilder<ReceiveMessageAction, ReceiveMessageActionBuilderSupport,
@@ -356,23 +439,21 @@ public class ReceiveMessageAction : AbstractTestAction
             messageBuilderSupport ??= GetMessageBuilderSupport();
 
             ReconcileValidationContexts();
+            
+            if (referenceResolver == null) return DoBuild();
+            if (_validationProcessor is IReferenceResolverAware referenceResolverAwareProcessor)
+                referenceResolverAwareProcessor.SetReferenceResolver(referenceResolver);
 
-            if (referenceResolver != null)
+            while (_validatorNames.Count > 0)
             {
-                if (_validationProcessor is IReferenceResolverAware referenceResolverAwareProcessor)
-                    referenceResolverAwareProcessor.SetReferenceResolver(referenceResolver);
+                var validatorName = _validatorNames[0];
+                _validatorNames.RemoveAt(0);
 
-                while (_validatorNames.Count > 0)
-                {
-                    var validatorName = _validatorNames[0];
-                    _validatorNames.RemoveAt(0);
-
-                    var validator = referenceResolver.Resolve(validatorName);
-                    if (validator is IHeaderValidator headerValidator)
-                        GetHeaderValidationContext().AddHeaderValidator(headerValidator);
-                    else
-                        _validators.Add((IMessageValidator<IValidationContext>)validator);
-                }
+                var validator = referenceResolver.Resolve(validatorName);
+                if (validator is IHeaderValidator headerValidator)
+                    GetHeaderValidationContext().AddHeaderValidator(headerValidator);
+                else
+                    _validators.Add((IMessageValidator<IValidationContext>)validator);
             }
 
             return DoBuild();
@@ -390,7 +471,7 @@ public class ReceiveMessageAction : AbstractTestAction
         }
 
         /// <summary>
-        ///     Adds a validation context to this message receiving action.
+        ///     Adds a validation context to this message-receiving action.
         /// </summary>
         /// <param name="validationContext">The validation context to add.</param>
         /// <typeparam name="B">The type of the validation context builder.</typeparam>
@@ -402,7 +483,7 @@ public class ReceiveMessageAction : AbstractTestAction
         }
 
         /// <summary>
-        ///     Adds a validation context to the message receiving action using the provided validation context.
+        ///     Adds a validation context to the message-receiving action using the provided validation context.
         /// </summary>
         /// <typeparam name="TFB">The type of the builder for the validation context.</typeparam>
         /// <param name="validationContext">An instance of the validation context.</param>
@@ -425,7 +506,7 @@ public class ReceiveMessageAction : AbstractTestAction
         }
 
         /// <summary>
-        ///     Adds a validation context to the message receiving action using an adapter that implements
+        ///     Adds a validation context to the message-receiving action using an adapter that implements
         ///     <see cref="IValidationContextAdapter" />.
         /// </summary>
         /// <param name="adapter">An instance of the adapter that can be adapted to a validation context.</param>
@@ -436,7 +517,7 @@ public class ReceiveMessageAction : AbstractTestAction
         }
 
         /// <summary>
-        ///     Adds a validation context to this message receiving action.
+        ///     Adds a validation context to this message-receiving action.
         /// </summary>
         /// <typeparam name="TFB">The type of the validation context builder.</typeparam>
         /// <param name="validationContexts">The list of validation contexts to be added.</param>
@@ -448,7 +529,7 @@ public class ReceiveMessageAction : AbstractTestAction
         }
 
         /// <summary>
-        ///     Adds one or more validation contexts to this message receiving action.
+        ///     Adds one or more validation contexts to this message-receiving action.
         /// </summary>
         /// <typeparam name="TFB">The type of the context builder.</typeparam>
         /// <param name="validationContexts">The validation contexts to be added.</param>
@@ -459,7 +540,7 @@ public class ReceiveMessageAction : AbstractTestAction
         }
 
         /// <summary>
-        ///     Specifies a message selector to be used during the message receiving action.
+        ///     Specifies a message selector to be used during the message-receiving action.
         /// </summary>
         /// <param name="messageSelector">The message selector string.</param>
         /// <returns>The builder instance.</returns>
@@ -470,7 +551,7 @@ public class ReceiveMessageAction : AbstractTestAction
         }
 
         /// <summary>
-        ///     Adds message selectors to the current message receiving action.
+        ///     Adds message selectors to the current message-receiving action.
         /// </summary>
         /// <param name="messageSelector">A dictionary containing message selectors.</param>
         /// <returns>The current instance of the builder.</returns>
@@ -481,7 +562,7 @@ public class ReceiveMessageAction : AbstractTestAction
         }
 
         /// <summary>
-        ///     Adds a custom validator to this message receiving action.
+        ///     Adds a custom validator to this message-receiving action.
         /// </summary>
         /// <param name="validator">An instance of IMessageValidator to be added.</param>
         /// <returns>Returns an instance of the action builder for method chaining.</returns>
@@ -492,7 +573,7 @@ public class ReceiveMessageAction : AbstractTestAction
         }
 
         /// <summary>
-        ///     Specifies one or more custom validators for the message receiving action.
+        ///     Specifies one or more custom validators for the message-receiving action.
         /// </summary>
         /// <param name="validators">A list of validator names to be added.</param>
         /// <returns>The updated action builder with the specified validators.</returns>
@@ -514,7 +595,7 @@ public class ReceiveMessageAction : AbstractTestAction
         }
 
         /// <summary>
-        ///     Adds a collection of message validators to this message receiving action.
+        ///     Adds a collection of message validators to this message-receiving action.
         /// </summary>
         /// <param name="validators">An array of validators to validate the received messages.</param>
         /// <returns>Returns the builder with the added validators.</returns>
@@ -607,57 +688,105 @@ public class ReceiveMessageAction : AbstractTestAction
         }
 
         /// <summary>
-        ///     Revisit configured validation context list and automatically add context based on message payload and path
-        ///     expression contexts if any. This method makes sure that validation contexts are configured. If no validation
-        ///     context has been set yet the method automatically adds proper validation contexts for Json and XML message
+        ///     Revisit configured a validation context list and automatically added context based on message payload and path
+        ///     expression contexts, if any. This method makes sure that validation contexts are configured. If no validation
+        ///     context has been set yet, the method automatically adds proper validation contexts for JSON and XML message
         ///     payloads. In case a path expression (JsonPath, XPath) context is set but no proper message validation context
-        ///     (Json, Xml) the method automatically adds the proper message validation context. Only when validation contexts are
-        ///     set properly according to the message type and content the message validation steps will execute later on.
+        ///     (Json, XML) the method automatically adds the proper message validation context. Only when validation contexts are
+        ///     set properly according to the message type and content, the message validation steps will execute later on.
         /// </summary>
         protected void ReconcileValidationContexts()
         {
             var validationContexts = GetValidationContexts();
-
-            if (!validationContexts.Any(c => c is HeaderValidationContext)) GetHeaderValidationContext();
-
-            if (validationContexts.All(c => c is HeaderValidationContext))
+            if (!validationContexts.Any(context => context is HeaderValidationContext))
             {
-                // TODO: XmlMessageValidationContext
-                //Validate(new XmlMessageValidationContext());
-                Validate(new JsonMessageValidationContext());
+                GetHeaderValidationContext();
             }
-            else if (validationContexts.Any(c => c is JsonPathMessageValidationContext) &&
-                     !validationContexts.Any(c => c is JsonMessageValidationContext))
+
+            if (!validationContexts.Any(context => context is IMessageValidationContext))
             {
-                Validate(new JsonMessageValidationContext());
+                InjectMessageValidationContext();
             }
-            else if ( /*!validationContexts.Any(c => c is XmlMessageValidationContext) &&*/
-                     !validationContexts.Any(c => c is JsonMessageValidationContext))
+        }
+        
+        /// <summary>
+        /// Determines and injects the appropriate message validation context based on the current message payload
+        /// or other available attributes in the message. If no validation context is explicitly defined,
+        /// it evaluates the message format (e.g., XML, JSON, or plaintext) or other metadata to set a default context.
+        /// </summary>
+        private void InjectMessageValidationContext()
+        {
+            // if still no JSON or XML message validation context is set, check the message payload and set the proper context
+            IValidationContext validationContext = null;
+            var payload = GetMessagePayload();
+            if (payload.IsPresent)
             {
-                // if still no Json or Xml message validation context is set, check the message payload and set the proper context
-                var payload = GetMessagePayload();
-                if (payload.IsPresent)
+                if (MessagePayloadUtils.IsXml(payload.Value))
+                    validationContext = new XmlMessageValidationContext();
+                else if (MessagePayloadUtils.IsJson(payload.Value))
+                    validationContext = new JsonMessageValidationContext();
+                else
+                    validationContext = new DefaultMessageValidationContext();
+            }
+
+            if (validationContext == null && messageBuilderSupport != null)
+                if (messageBuilderSupport.GetMessageBuilder().GetType().IsDefined(typeof(MessagePayloadAttribute)))
                 {
-                    if (MessagePayloadUtils.IsXml(payload.Value))
+                    var type = messageBuilderSupport.GetMessageBuilder().GetType().GetCustomAttribute<MessagePayloadAttribute>()!.Value;
+                    validationContext = type switch
                     {
-                        // TODO: XmlMessageValidationContext
-                        //Validate(new XmlMessageValidationContext());
-                    }
-                    else if (MessagePayloadUtils.IsJson(payload.Value))
+                        MsgType.XML or MsgType.XHTML => new XmlMessageValidationContext(),
+                        MsgType.JSON => new JsonMessageValidationContext(),
+                        MsgType.PLAINTEXT => new DefaultMessageValidationContext(),
+                        _ => validationContext
+                    };
+                }
+
+            if (validationContext == null)
+            {
+                var resource = GetMessageResource();
+                if (resource.IsPresent)
+                {
+                    var fileExt = FileUtils.GetFileExtension(resource.Value);
+                    validationContext = fileExt switch
                     {
-                        Validate(new JsonMessageValidationContext());
-                    }
+                        "xml" => new XmlMessageValidationContext(),
+                        "json" => new JsonMessageValidationContext(),
+                        _ => new DefaultMessageValidationContext()
+                    };
                 }
             }
 
-            validationContexts
-                .OfType<HeaderValidationContext>()
-                .ToList()
-                .ForEach(c => c.HeaderNameIgnoreCase = GetMessageBuilderSupport().HeaderIgnoreCase);
+            if (validationContext == null && messageBuilderSupport != null)
+            {
+                if (messageBuilderSupport.GetMessageBuilder() is StaticMessageBuilder)
+                    validationContext = new DefaultMessageValidationContext();
+                else if (messageBuilderSupport.GetMessageBuilder() is IWithPayloadBuilder payloadBuilder)
+                    if (payloadBuilder.GetPayloadBuilder() != null)
+                        validationContext = new DefaultMessageValidationContext();
+            }
+
+            if (validationContext != null) Validate(validationContext);
+        }
+        
+        /// <summary>
+        /// Gets a message resource file path from a configured message builder.
+        /// </summary>
+        /// <returns>Optional containing the resource path if available</returns>
+        protected Optional<string> GetMessageResource()
+        {
+            if (messageBuilderSupport?.GetMessageBuilder() is not IWithPayloadBuilder withPayloadBuilder)
+                return Optional<string>.Empty;
+            if (withPayloadBuilder.GetPayloadBuilder() is FileResourcePayloadBuilder filePayloadBuilder)
+            {
+                return Optional<string>.OfNullable(filePayloadBuilder.GetResourcePath());
+            }
+
+            return Optional<string>.Empty;
         }
 
         /// <summary>
-        ///     Gets message payload String representation from configured message builder.
+        ///     Gets message payload String representation from a configured message builder.
         /// </summary>
         /// <returns></returns>
         protected virtual Optional<string> GetMessagePayload()

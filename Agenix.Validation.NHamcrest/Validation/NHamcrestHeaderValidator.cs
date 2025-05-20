@@ -1,7 +1,8 @@
-﻿using Agenix.Core;
-using Agenix.Core.Exceptions;
+﻿using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Validation;
+using Agenix.Api.Validation.Context;
 using Agenix.Core.Validation;
-using Agenix.Core.Validation.Context;
 using log4net;
 using NHamcrest;
 using NHamcrest.Core;
@@ -13,7 +14,7 @@ public class NHamcrestHeaderValidator : IHeaderValidator
     /// Logger for HamcrestHeaderValidator.
     /// /
     private static readonly ILog Log = LogManager.GetLogger(typeof(NHamcrestHeaderValidator));
-    
+
     public void ValidateHeader(string headerName, object receivedValue, object controlValue, TestContext context,
         HeaderValidationContext validationContext)
     {
@@ -25,44 +26,48 @@ public class NHamcrestHeaderValidator : IHeaderValidator
                     .ToList();
 
 
-        if (controlValue != null)
+        try
         {
-            var controlType = controlValue.GetType();
-
-            // Find the IMatcher<T> interface implemented by control
-            var matcherInterface = controlType.GetInterfaces()
-                .FirstOrDefault(i =>
-                    i.IsGenericType &&
-                    i.GetGenericTypeDefinition() == typeof(IMatcher<>));
-
-            if (matcherInterface != null)
+            if (controlValue != null)
             {
-                var matchesMethod = matcherInterface.GetMethod("Matches");
-                if (matchesMethod != null)
+                var controlType = controlValue.GetType();
+
+                // Find the IMatcher<T> interface implemented by control
+                var matcherInterface = controlType.GetInterfaces()
+                    .FirstOrDefault(i =>
+                        i.IsGenericType &&
+                        i.GetGenericTypeDefinition() == typeof(IMatcher<>));
+
+                if (matcherInterface != null)
                 {
-                    if (!(bool)matchesMethod.Invoke(controlValue, [receivedValue])!)
-                    {
+                    var matchesMethod = matcherInterface.GetMethod("Matches");
+                    if (matchesMethod != null)
+                        if (!(bool)matchesMethod.Invoke(controlValue, [receivedValue])!)
+                            throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage(
+                                $"Header validation failed: Values not matching for header '{headerName}'",
+                                controlValue,
+                                receivedValue));
+                }
+                else
+                {
+                    var equalMatcher = new IsEqualMatcher<object>(controlValue); // Using NHamcrest's Is.EqualTo matcher
+                    if (!equalMatcher.Matches(receivedValue))
                         throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage(
-                            $"Header validation failed: Values not matching for header '{headerName}'", controlValue, receivedValue));
-                    }
+                            $"Header validation failed: Values not equal for header '{headerName}'", controlValue,
+                            receivedValue));
                 }
             }
-            else
-            {
-                var equalMatcher = new IsEqualMatcher<object>(controlValue); // Using NHamcrest's Is.EqualTo matcher
-                if (!equalMatcher.Matches(receivedValue))
-                {
-                    throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage(
-                        $"Header validation failed: Values not equal for header '{headerName}'", controlValue, receivedValue));
-                }
-            }
+
+
+            if (Log.IsDebugEnabled) Log.Debug($"Header validation: {headerName}='{controlValue}': OK");
+            validationContext.UpdateStatus(ValidationStatus.PASSED);
         }
-        
-         
-        if (Log.IsDebugEnabled)
+        catch (ValidationException e)
         {
-            Log.Debug($"Header validation: {headerName}='{controlValue}': OK");
+            validationContext.UpdateStatus(ValidationStatus.FAILED);
+            throw;
         }
+       
     }
 
     public bool Supports(string headerName, Type type)

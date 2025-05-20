@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using Agenix.Core.Common;
+using Agenix.Api.Common;
+using Agenix.Api.Context;
+using Agenix.Api.Endpoint;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
+using Agenix.Api.Variable;
 using Agenix.Core.Endpoint;
-using Agenix.Core.Exceptions;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Builder;
 using Agenix.Core.Variable;
@@ -12,8 +17,8 @@ using log4net;
 namespace Agenix.Core.Actions;
 
 /// <summary>
-///     This action sends a messages to a specified message endpoint. The action holds a reference to a Endpoint, which is
-///     capable of the message transport implementation. So action is independent of the message transport configuration.
+///     This action sends a message to a specified message endpoint. The action holds a reference to an Endpoint, which is
+///     capable of the message transport implementation. So the action is independent of the message transport configuration.
 /// </summary>
 public class SendMessageAction : AbstractTestAction, ICompletable
 {
@@ -21,7 +26,7 @@ public class SendMessageAction : AbstractTestAction, ICompletable
     ///     Logger.
     /// </summary>
     private static readonly ILog Log = LogManager.GetLogger(typeof(SendMessageAction));
-
+    
     /// <summary>
     ///     Represents the completion status of the action represented by a TaskCompletionSource.
     /// </summary>
@@ -32,6 +37,9 @@ public class SendMessageAction : AbstractTestAction, ICompletable
         ForkMode = builder.ForkMode;
         Endpoint = builder.GetEndpoint();
         EndpointUri = builder.GetEndpointUri();
+        IsSchemaValidation = builder.GetMessageBuilderSupport().IsSchemaValidation();
+        Schema = builder.GetMessageBuilderSupport().GetSchema;
+        SchemaRepository = builder.GetMessageBuilderSupport().GetSchemaRepository;
         VariableExtractors = builder.GetVariableExtractors();
         Processors = builder.GetMessageProcessors();
         MessageBuilder = builder.GetMessageBuilderSupport().GetMessageBuilder();
@@ -44,7 +52,7 @@ public class SendMessageAction : AbstractTestAction, ICompletable
     public IEndpoint Endpoint { get; }
 
     /// <summary>
-    ///     Indicates whether the message sending action should be forked, allowing other actions to proceed while waiting for
+    ///     Indicates whether the message-sending action should be forked, allowing other actions to proceed while waiting for
     ///     a synchronous response.
     /// </summary>
     public bool ForkMode { get; }
@@ -54,6 +62,24 @@ public class SendMessageAction : AbstractTestAction, ICompletable
     /// </summary>
     public string EndpointUri { get; }
 
+    /// <summary>
+    /// Indicates whether schema validation is enabled for the message. When set to true, the message schema
+    /// validation will be performed during the execution of the action.
+    /// </summary>
+    public bool IsSchemaValidation { get; }
+
+    /// <summary>
+    /// Represents the schema associated with the message for validation purposes.
+    /// This defines the structure and rules that the message should conform to
+    /// when being used in the action.
+    /// </summary>
+    public string Schema { get; }
+
+    /// <summary>
+    /// Represents the repository location or reference for schema validation.
+    /// </summary>
+    public string SchemaRepository { get; }
+    
     /// <summary>
     ///     List of variable extractors responsible for creating variables from received message content
     /// </summary>
@@ -109,14 +135,14 @@ public class SendMessageAction : AbstractTestAction, ICompletable
     /// </summary>
     /// <param name="context">the test context</param>
     /// <returns>the message endpoint</returns>
-    /// <exception cref="CoreSystemException"></exception>
+    /// <exception cref="AgenixSystemException"></exception>
     public IEndpoint GetOrCreateEndpoint(TestContext context)
     {
         if (Endpoint != null) return Endpoint;
 
         if (!string.IsNullOrWhiteSpace(EndpointUri)) return context.EndpointFactory.Create(EndpointUri, context);
 
-        throw new CoreSystemException("Neither endpoint nor endpoint uri is set properly!");
+        throw new AgenixSystemException("Neither endpoint nor endpoint uri is set properly!");
     }
 
     /// <summary>
@@ -167,14 +193,15 @@ public class SendMessageAction : AbstractTestAction, ICompletable
             {
                 try
                 {
+                    ValidateMessage(message, context);
                     messageEndpoint.CreateProducer().Send(message, context);
                 }
                 catch (Exception e)
                 {
-                    if (e is CoreSystemException runtimeEx)
+                    if (e is AgenixSystemException runtimeEx)
                         context.AddException(runtimeEx);
                     else
-                        context.AddException(new CoreSystemException(e.Message));
+                        context.AddException(new AgenixSystemException(e.Message));
                 }
                 finally
                 {
@@ -186,12 +213,25 @@ public class SendMessageAction : AbstractTestAction, ICompletable
         {
             try
             {
+                ValidateMessage(message, context);
                 messageEndpoint.CreateProducer().Send(message, context);
             }
             finally
             {
                 _finished.SetResult(context);
             }
+        }
+    }
+    
+    /// <summary>
+    /// Validate the message against registered schema validators.
+    /// </summary>
+    private void ValidateMessage(IMessage message, TestContext context)
+    {
+        foreach (var validator in context.MessageValidatorRegistry.SchemaValidators.Values
+                     .Where(validator => validator.CanValidate(message, IsSchemaValidation)))
+        {
+            validator.Validate(message, context, SchemaRepository, Schema);
         }
     }
 

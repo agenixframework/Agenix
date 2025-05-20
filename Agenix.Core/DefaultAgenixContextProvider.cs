@@ -1,4 +1,6 @@
-﻿namespace Agenix.Core;
+﻿using Agenix.Api;
+
+namespace Agenix.Core;
 
 /// Default implementation of AgenixContext provider. It facilitates the generation of
 /// AgenixContext instances according to a specified creation strategy. The provider

@@ -1,12 +1,13 @@
-﻿using Agenix.Core.Annotations;
-using Agenix.Core.Endpoint;
+﻿using Agenix.Api.Annotations;
+using Agenix.Api.Endpoint;
+using Agenix.Api.Message;
 using Agenix.Core.Endpoint.Direct;
 using Agenix.Core.Endpoint.Direct.Annotation;
-using Agenix.Core.Message;
 using Agenix.Core.Spi;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.NUnitTestProject.Endpoint.Direct.Annotation;
 

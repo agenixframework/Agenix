@@ -1,5 +1,7 @@
-﻿using Agenix.Core.Exceptions;
-using Agenix.Core.Validation.Matcher;
+﻿using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
+using Agenix.Api.Validation.Matcher;
 
 namespace Agenix.Core.Message.Selector;
 
@@ -16,19 +18,19 @@ public abstract class AbstractMessageSelector(string selectKey, string matchingV
     /// <summary>
     ///     Test Context
     /// </summary>
-    protected readonly TestContext _context = context;
+    protected readonly TestContext Context = context;
 
-    protected readonly string _matchingValue = matchingValue;
+    protected readonly string MatchingValue = matchingValue;
 
     /// <summary>
     ///     Key and value to evaluate selection with
     /// </summary>
-    protected readonly string _selectKey = selectKey;
+    protected readonly string SelectKey = selectKey;
 
     public abstract bool Accept(IMessage message);
 
     /// <summary>
-    ///     Reads message payload as String either from message object directly or from nested Agenix message representation.
+    ///     Reads message payload as String either from a message object directly or from nested Agenix message representation.
     /// </summary>
     /// <param name="message"></param>
     /// <returns></returns>
@@ -40,17 +42,17 @@ public abstract class AbstractMessageSelector(string selectKey, string matchingV
     }
 
     /// <summary>
-    ///     Evaluates given value to match this selectors matching condition. Automatically supports validation matcher
+    ///     Evaluates the given value to match this selector matching condition. Automatically supports validation matcher
     ///     expressions.
     /// </summary>
     /// <param name="value"></param>
     /// <returns></returns>
     protected bool Evaluate(string value)
     {
-        if (ValidationMatcherUtils.IsValidationMatcherExpression(_matchingValue))
+        if (ValidationMatcherUtils.IsValidationMatcherExpression(MatchingValue))
             try
             {
-                ValidationMatcherUtils.ResolveValidationMatcher(_selectKey, value, _matchingValue, _context);
+                ValidationMatcherUtils.ResolveValidationMatcher(SelectKey, value, MatchingValue, Context);
                 return true;
             }
             catch (ValidationException)
@@ -58,6 +60,6 @@ public abstract class AbstractMessageSelector(string selectKey, string matchingV
                 return false;
             }
 
-        return value.Equals(_matchingValue);
+        return value.Equals(MatchingValue);
     }
 }

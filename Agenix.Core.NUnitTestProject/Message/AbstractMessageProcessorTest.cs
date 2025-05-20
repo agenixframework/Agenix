@@ -1,7 +1,9 @@
 ﻿using System;
+using Agenix.Api.Message;
 using Agenix.Core.Message;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.NUnitTestProject.Message;
 
@@ -30,7 +32,7 @@ public class AbstractMessageProcessorTest : AbstractNUnitSetUp
             return string.Equals(messageType, MessageType.XML.ToString(), StringComparison.OrdinalIgnoreCase);
         }
 
-        protected override void ProcessMessage(IMessage message, TestContext context)
+        public override void ProcessMessage(IMessage message, TestContext context)
         {
             message.Payload = "Processed!";
         }

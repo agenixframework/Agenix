@@ -1,5 +1,5 @@
-﻿using Agenix.Core.Actions;
-using Agenix.Core.Exceptions;
+﻿using Agenix.Api.Exceptions;
+using Agenix.Core.Actions;
 using NUnit.Framework;
 
 namespace Agenix.Core.NUnitTestProject.Actions;
@@ -28,7 +28,7 @@ public class TraceVariablesActionTest : AbstractNUnitSetUp
     [Test]
     public void TestTraceUnknownVariable()
     {
-        Assert.Throws<CoreSystemException>(() =>
+        Assert.Throws<AgenixSystemException>(() =>
         {
             var trace = new TraceVariablesAction.Builder()
                 .Variable("myVariable")

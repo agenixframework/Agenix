@@ -1,6 +1,8 @@
-﻿using Agenix.Core.Message;
+﻿using Agenix.Api.Context;
+using Agenix.Api.Message;
+using Agenix.Api.Message.Correlation;
+using Agenix.Api.Messaging;
 using Agenix.Core.Message.Correlation;
-using Agenix.Core.Messaging;
 using Agenix.Core.Util;
 using log4net;
 

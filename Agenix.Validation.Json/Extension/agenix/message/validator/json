@@ -1,0 +1,2 @@
+name=defaultJsonMessageValidator
+type=Agenix.Validation.Json.Validation.JsonTextMessageValidator

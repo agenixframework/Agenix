@@ -1,4 +1,6 @@
-﻿namespace Agenix.Core.Message;
+﻿using Agenix.Api.Message;
+
+namespace Agenix.Core.Message;
 
 /// <summary>
 ///     A message selector that accepts all messages on the queue.

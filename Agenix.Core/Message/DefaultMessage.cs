@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
+using Agenix.Api.Util;
 using Agenix.Core.Util;
 
 namespace Agenix.Core.Message;
@@ -121,7 +123,7 @@ public class DefaultMessage : IMessage
     public virtual IMessage SetHeader(string headerName, object headerValue)
     {
         if (headerName.Equals(MessageHeaders.Id))
-            throw new CoreSystemException("Not allowed to set reserved message header from message: " +
+            throw new AgenixSystemException("Not allowed to set reserved message header from message: " +
                                           MessageHeaders.Id);
         _headers[headerName] = headerValue;
         return this;
@@ -130,7 +132,7 @@ public class DefaultMessage : IMessage
     public void RemoveHeader(string headerName)
     {
         if (headerName.Equals(MessageHeaders.Id))
-            throw new CoreSystemException("Not allowed to remove reserved message header from message: " +
+            throw new AgenixSystemException("Not allowed to remove reserved message header from message: " +
                                           MessageHeaders.Id);
 
         _headers.Remove(headerName);

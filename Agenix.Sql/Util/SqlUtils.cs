@@ -1,7 +1,8 @@
 ﻿#region Imports
 
 using System.Text;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Exceptions;
+using Agenix.Api.IO;
 using Agenix.Core.IO;
 using log4net;
 
@@ -90,7 +91,7 @@ public abstract class SqlUtils
         }
         catch (IOException e)
         {
-            throw new CoreSystemException("Resource could not be found - filename: " + sqlResource, e);
+            throw new AgenixSystemException("Resource could not be found - filename: " + sqlResource, e);
         }
 
         return stmts;

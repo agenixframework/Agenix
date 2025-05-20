@@ -1,4 +1,6 @@
 ﻿using System.Net;
+using Agenix.Api.Message;
+using Agenix.Api.Util;
 using Agenix.Core.Actions;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Builder;
@@ -11,7 +13,8 @@ namespace Agenix.Http.Actions;
 /// This class extends the capabilities of ReceiveMessageAction.Builder to provide specialized support
 /// for constructing HTTP response messages. It allows users to define message properties such as headers,
 /// payload, and metadata, which are tailored for handling HTTP interactions.
-public class HttpClientResponseActionBuilder : ReceiveMessageAction.ReceiveMessageActionBuilder<ReceiveMessageAction, HttpClientResponseActionBuilder.HttpMessageBuilderSupport, HttpClientResponseActionBuilder>
+public class HttpClientResponseActionBuilder : ReceiveMessageAction.ReceiveMessageActionBuilder<ReceiveMessageAction, 
+    HttpClientResponseActionBuilder.HttpMessageBuilderSupport, HttpClientResponseActionBuilder>
 {
     private readonly HttpMessage _httpMessage;
 

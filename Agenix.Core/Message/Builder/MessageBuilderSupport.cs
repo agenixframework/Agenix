@@ -1,8 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Agenix.Core.Common;
-using Agenix.Core.Exceptions;
+using Agenix.Api;
+using Agenix.Api.Common;
+using Agenix.Api.Exceptions;
+using Agenix.Api.IO;
+using Agenix.Api.Message;
+using Agenix.Api.Variable;
 using Agenix.Core.Spi;
 using Agenix.Core.Util;
 using Agenix.Core.Validation.Builder;
@@ -21,7 +25,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
 
     protected IMessageBuilder _messageBuilder = new DefaultMessageBuilder();
 
-    protected string _messageType = CoreSettings.DefaultMessageType();
+    protected string _messageType = AgenixSettings.DefaultMessageType();
 
     /// <summary>
     ///     Provides base support for building messages, tying together
@@ -118,13 +122,13 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     /// </summary>
     /// <param name="payloadBuilder">An instance of <see cref="IMessagePayloadBuilder" /> used to build the message payload.</param>
     /// <returns>The updated instance of <typeparamref name="TS" /> to allow method chaining.</returns>
-    /// <exception cref="CoreSystemException">Thrown if the message builder does not support setting a payload builder.</exception>
+    /// <exception cref="AgenixSystemException">Thrown if the message builder does not support setting a payload builder.</exception>
     public TS Body(IMessagePayloadBuilder payloadBuilder)
     {
         if (_messageBuilder is IWithPayloadBuilder withPayloadBuilder)
             withPayloadBuilder.SetPayloadBuilder(payloadBuilder);
         else
-            throw new CoreSystemException("Unable to set payload builder on message builder type: " +
+            throw new AgenixSystemException("Unable to set payload builder on message builder type: " +
                                           _messageBuilder.GetType());
         return _self;
     }
@@ -134,7 +138,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     /// </summary>
     /// <param name="payload">The string payload to be set for the message.</param>
     /// <returns>The updated instance of <typeparamref name="TS" /> to allow method chaining.</returns>
-    /// <exception cref="CoreSystemException">Thrown if the message builder does not support setting a payload.</exception>
+    /// <exception cref="AgenixSystemException">Thrown if the message builder does not support setting a payload.</exception>
     public virtual TS Body(string payload)
     {
         Body(new DefaultPayloadBuilder(payload));
@@ -146,7 +150,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     /// </summary>
     /// <param name="payloadResource">The resource containing the payload.</param>
     /// <returns>The instance of the message builder support with the updated body.</returns>
-    public TS Body(IO.IResource payloadResource)
+    public TS Body(IResource payloadResource)
     {
         return Body(payloadResource, FileUtils.GetDefaultCharset());
     }
@@ -157,8 +161,8 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     /// <param name="payloadResource">The resource containing the payload data.</param>
     /// <param name="charset">The character encoding used to read the payload.</param>
     /// <returns>The builder instance with the updated payload.</returns>
-    /// <exception cref="CoreSystemException">Thrown if there is an error reading the payload resource.</exception>
-    public TS Body(IO.IResource payloadResource, Encoding charset)
+    /// <exception cref="AgenixSystemException">Thrown if there is an error reading the payload resource.</exception>
+    public TS Body(IResource payloadResource, Encoding charset)
     {
         try
         {
@@ -166,7 +170,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
         }
         catch (IOException e)
         {
-            throw new CoreSystemException("Failed to read payload resource", e);
+            throw new AgenixSystemException("Failed to read payload resource", e);
         }
 
         return _self;
@@ -178,14 +182,14 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     /// <param name="name">The name of the header to be added.</param>
     /// <param name="value">The value of the header to be added.</param>
     /// <returns>An instance of the current message builder type.</returns>
-    /// <exception cref="CoreSystemException">Thrown when the message builder does not support adding headers.</exception>
+    /// <exception cref="AgenixSystemException">Thrown when the message builder does not support adding headers.</exception>
     public TS Header(string name, object value)
     {
         if (_messageBuilder is IWithHeaderBuilder withHeaderBuilder)
             withHeaderBuilder.AddHeaderBuilder(new DefaultHeaderBuilder(new Dictionary<string, object>
                 { { name, value } }));
         else
-            throw new CoreSystemException($"Unable to set message header on builder type: {_messageBuilder.GetType()}");
+            throw new AgenixSystemException($"Unable to set message header on builder type: {_messageBuilder.GetType()}");
         return _self;
     }
 
@@ -194,13 +198,13 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     /// </summary>
     /// <param name="headers">A dictionary containing the header names and their corresponding values.</param>
     /// <returns>The current instance of the message builder support.</returns>
-    /// <exception cref="CoreSystemException">Thrown when the message builder type does not support adding headers.</exception>
+    /// <exception cref="AgenixSystemException">Thrown when the message builder type does not support adding headers.</exception>
     public TS Headers(Dictionary<string, object> headers)
     {
         if (_messageBuilder is IWithHeaderBuilder withHeaderBuilder)
             withHeaderBuilder.AddHeaderBuilder(new DefaultHeaderBuilder(headers));
         else
-            throw new CoreSystemException($"Unable to set message header on builder type: {_messageBuilder.GetType()}");
+            throw new AgenixSystemException($"Unable to set message header on builder type: {_messageBuilder.GetType()}");
         return _self;
     }
 
@@ -209,7 +213,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     /// </summary>
     /// <param name="resource">The resource containing the headers to be added.</param>
     /// <returns>An instance of the message builder support class.</returns>
-    public TS Header(IO.IResource resource)
+    public TS Header(IResource resource)
     {
         return Header(resource, FileUtils.GetDefaultCharset());
     }
@@ -220,10 +224,10 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     /// <param name="resource">The resource from which the header data is read.</param>
     /// <param name="charset">The character encoding used to read the resource.</param>
     /// <returns>The current instance of the message builder support for method chaining.</returns>
-    /// <exception cref="CoreSystemException">
+    /// <exception cref="AgenixSystemException">
     ///     Thrown if the message builder does not support adding header builders or if reading the resource fails.
     /// </exception>
-    public TS Header(IO.IResource resource, Encoding charset)
+    public TS Header(IResource resource, Encoding charset)
     {
         try
         {
@@ -231,12 +235,12 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
                 withHeaderBuilder.AddHeaderBuilder(
                     new DefaultHeaderDataBuilder(FileUtils.ReadToString(resource, charset)));
             else
-                throw new CoreSystemException("Unable to set message header data on builder type: " +
+                throw new AgenixSystemException("Unable to set message header data on builder type: " +
                                               _messageBuilder.GetType());
         }
         catch (IOException e)
         {
-            throw new CoreSystemException("Failed to read header resource", e);
+            throw new AgenixSystemException("Failed to read header resource", e);
         }
 
         return _self;
@@ -252,7 +256,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
         if (_messageBuilder is IWithHeaderBuilder withHeaderBuilder)
             withHeaderBuilder.AddHeaderBuilder(headerDataBuilder);
         else
-            throw new CoreSystemException(
+            throw new AgenixSystemException(
                 $"Unable to set message header data on builder type: {_messageBuilder.GetType()}");
         return _self;
     }
@@ -287,13 +291,13 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     /// </summary>
     /// <param name="name">The name to be set on the message.</param>
     /// <returns>The current instance of the message builder support.</returns>
-    /// <exception cref="CoreSystemException">Thrown when the message builder does not support setting a name.</exception>
+    /// <exception cref="AgenixSystemException">Thrown when the message builder does not support setting a name.</exception>
     public virtual TS Name(string name)
     {
         if (_messageBuilder is INamed named)
             named.SetName(name);
         else
-            throw new CoreSystemException("Unable to set message name on builder type: " + _messageBuilder.GetType());
+            throw new AgenixSystemException("Unable to set message name on builder type: " + _messageBuilder.GetType());
         return _self;
     }
 

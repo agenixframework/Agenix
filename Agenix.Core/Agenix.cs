@@ -1,4 +1,7 @@
 ﻿using System;
+using Agenix.Api;
+using Agenix.Api.Context;
+using Agenix.Api.Report;
 using Agenix.Core.Report;
 
 namespace Agenix.Core;

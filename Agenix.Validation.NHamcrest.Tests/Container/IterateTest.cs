@@ -3,7 +3,7 @@ using Moq;
 using NUnit.Framework.Legacy;
 using static Agenix.Validation.NHamcrest.Container.NHamcrestConditionExpression;
 using Is = NHamcrest.Is;
-using ITestAction = Agenix.Core.ITestAction;
+using ITestAction = Agenix.Api.ITestAction;
 
 namespace Agenix.Validation.NHamcrest.Tests.Container;
 

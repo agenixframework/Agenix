@@ -1,5 +1,10 @@
 ﻿using System;
-using Agenix.Core.Common;
+using Agenix.Api;
+using Agenix.Api.Common;
+using Agenix.Api.Container;
+using Agenix.Api.Context;
+using Agenix.Api.Message;
+using Agenix.Api.Report;
 using Agenix.Core.Container;
 using Agenix.Core.Message;
 using log4net;
@@ -152,7 +157,7 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
         NewLine();
 
         var duration = FormatDurationString(testCase);
-        Error($"TEST FAILED {testCase.Name} <{testCase.GetPackageName()}>{duration} Nested exception is: ", cause);
+        Error($"TEST FAILED {testCase.Name} <{testCase.GetNamespaceName()}>{duration} Nested exception is: ", cause);
 
         Separator();
         NewLine();
@@ -183,7 +188,7 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
         {
             NewLine();
             Separator();
-            Debug($"STARTING TEST {test.Name} <{test.GetPackageName()}>");
+            Debug($"STARTING TEST {test.Name} <{test.GetNamespaceName()}>");
             NewLine();
         }
     }
@@ -206,7 +211,7 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
         NewLine();
 
         var duration = FormatDurationString(test);
-        Info($"TEST SUCCESS {test.Name} ({test.GetPackageName()}){duration}");
+        Info($"TEST SUCCESS {test.Name} ({test.GetNamespaceName()}){duration}");
 
         Separator();
         NewLine();

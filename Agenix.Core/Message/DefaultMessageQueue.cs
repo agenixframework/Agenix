@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Threading;
+using Agenix.Api.Message;
 using log4net;
 
 namespace Agenix.Core.Message;

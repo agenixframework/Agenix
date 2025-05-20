@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Agenix.Api.Exceptions;
 using Agenix.Core.Container;
-using Agenix.Core.Exceptions;
 using Agenix.Core.Util;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using ITestAction = Agenix.Api.ITestAction;
 
 namespace Agenix.Core.NUnitTestProject.Container;
 
@@ -106,7 +107,7 @@ public class AsyncTest : AbstractNUnitSetUp
         // Define a faulty action.
         var failAction = new Mock<ITestAction>();
         failAction.Setup(f => f.Execute(Context))
-            .Throws(new CoreSystemException("Generated error to interrupt test execution"));
+            .Throws(new AgenixSystemException("Generated error to interrupt test execution"));
 
         // Build the Async container including the failAction
         var container = new Async.Builder()
@@ -123,7 +124,7 @@ public class AsyncTest : AbstractNUnitSetUp
 
         // Check for exceptions in context
         ClassicAssert.AreEqual(1, Context.GetExceptions().Count);
-        ClassicAssert.IsInstanceOf<CoreSystemException>(Context.GetExceptions().First());
+        ClassicAssert.IsInstanceOf<AgenixSystemException>(Context.GetExceptions().First());
         ClassicAssert.AreEqual("Generated error to interrupt test execution", Context.GetExceptions().First().Message);
 
         // Verify execution order
@@ -149,7 +150,7 @@ public class AsyncTest : AbstractNUnitSetUp
         container.Execute(Context);
 
         // Assert that the waitForDone logic throws a TimeoutException
-        Assert.ThrowsAsync<CoreSystemException>(async () =>
+        Assert.ThrowsAsync<AgenixSystemException>(async () =>
         {
             await WaitUtils.WaitForCompletion(container, Context, 200);
         });
@@ -159,7 +160,7 @@ public class AsyncTest : AbstractNUnitSetUp
     public async Task TestWaitForFinishErrorAsync()
     {
         // Set up the action to throw an exception
-        _action.Setup(a => a.Execute(Context)).Throws(new CoreSystemException("FAILED!"));
+        _action.Setup(a => a.Execute(Context)).Throws(new AgenixSystemException("FAILED!"));
 
         var container = new Async.Builder()
             .Actions(_action.Object)
@@ -169,7 +170,7 @@ public class AsyncTest : AbstractNUnitSetUp
         {
             container.DoExecute(Context);
         }
-        catch (CoreSystemException)
+        catch (AgenixSystemException)
         {
             // Handle if immediate effects needed, such as logging, though typically the system would capture this.
         }
@@ -178,7 +179,7 @@ public class AsyncTest : AbstractNUnitSetUp
 
         // Assert that the appropriate exception was tracked within the context
         ClassicAssert.AreEqual(1, Context.GetExceptions().Count);
-        ClassicAssert.IsInstanceOf<CoreSystemException>(Context.GetExceptions().First());
+        ClassicAssert.IsInstanceOf<AgenixSystemException>(Context.GetExceptions().First());
         ClassicAssert.AreEqual("FAILED!", Context.GetExceptions().First().Message);
     }
 }

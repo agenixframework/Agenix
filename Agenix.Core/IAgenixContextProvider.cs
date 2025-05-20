@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Util;
 using Agenix.Core.Util;
 using log4net;
 
@@ -77,7 +78,7 @@ public interface IAgenixContextProvider
                 return Optional<IAgenixContextProvider>.Of(instance);
             }
         }
-        catch (CoreSystemException)
+        catch (AgenixSystemException)
         {
             Log.Warn($"Failed to resolve Agenix context provider from resource '{name}'");
         }

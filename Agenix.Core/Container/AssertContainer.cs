@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Agenix.Core.Exceptions;
+using Agenix.Api;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Validation.Matcher;
 using Agenix.Core.Validation.Matcher;
 using log4net;
 
@@ -107,7 +110,7 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
     public class Builder : AbstractExceptionContainerBuilder<AssertContainer, Builder>
     {
         internal ITestActionBuilder<ITestAction> _action;
-        internal Type _exception = typeof(CoreSystemException);
+        internal Type _exception = typeof(AgenixSystemException);
         internal string _message;
 
         /// Fluent API action building entry method used in C# DSL.
@@ -139,7 +142,7 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
         {
             _exception = Type.GetType(type);
             if (_exception == null)
-                throw new CoreSystemException($"Failed to instantiate exception class of type '{type}'");
+                throw new AgenixSystemException($"Failed to instantiate exception class of type '{type}'");
             return this;
         }
 

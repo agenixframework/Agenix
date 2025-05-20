@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Agenix.Core.Common;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Common;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
 using Agenix.Core.Message;
 
 namespace Agenix.Core.Validation.Builder;
@@ -48,7 +50,7 @@ public class DefaultMessageBuilder : IMessageBuilder, IWithPayloadBuilder, IWith
         }
         catch (Exception e)
         {
-            throw new CoreSystemException("Failed to build message content", e);
+            throw new AgenixSystemException("Failed to build message content", e);
         }
     }
 
@@ -126,7 +128,7 @@ public class DefaultMessageBuilder : IMessageBuilder, IWithPayloadBuilder, IWith
         }
         catch (Exception e)
         {
-            throw new CoreSystemException("Failed to build message content", e);
+            throw new AgenixSystemException("Failed to build message content", e);
         }
     }
 

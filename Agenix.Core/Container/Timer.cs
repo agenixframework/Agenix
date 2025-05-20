@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
 using Agenix.Core.Util;
 using log4net;
 
@@ -23,7 +24,7 @@ public class Timer(Timer.Builder builder)
     private System.Timers.Timer _timer;
 
     protected bool timerComplete;
-    protected CoreSystemException timerException;
+    protected AgenixSystemException timerException;
 
     /// <summary>
     ///     Determines whether the timer should run in a separate task.
@@ -50,7 +51,7 @@ public class Timer(Timer.Builder builder)
     /// </summary>
     public string TimerId { get; } = builder.timerId;
 
-    public CoreSystemException TimerException => timerException;
+    public AgenixSystemException TimerException => timerException;
 
     /// Stops the timer, ensuring it is disposed of properly, and marks the timer as complete.
     public void StopTimer()
@@ -150,10 +151,10 @@ public class Timer(Timer.Builder builder)
     /// <param name="context">The context of the test where the exception occurred.</param>
     private void HandleException(Exception e, TestContext context)
     {
-        if (e is CoreSystemException coreSystemException)
+        if (e is AgenixSystemException coreSystemException)
             timerException = coreSystemException;
         else
-            timerException = new CoreSystemException(e.Message, e);
+            timerException = new AgenixSystemException(e.Message, e);
         Log.Error($"Timer stopped as a result of nested action error ({e.Message})");
         StopTimer();
 

@@ -1,4 +1,15 @@
 ﻿using System.Collections.Generic;
+using Agenix.Api.Container;
+using Agenix.Api.Context;
+using Agenix.Api.Endpoint;
+using Agenix.Api.Functions;
+using Agenix.Api.Log;
+using Agenix.Api.Message;
+using Agenix.Api.Report;
+using Agenix.Api.Util;
+using Agenix.Api.Validation;
+using Agenix.Api.Validation.Matcher;
+using Agenix.Api.Variable;
 using Agenix.Core.Container;
 using Agenix.Core.Endpoint;
 using Agenix.Core.Functions;
@@ -89,6 +100,11 @@ public class TestContextFactory : IReferenceResolverAware
     public IEndpointFactory EndpointFactory { get; set; }
 
     /// <summary>
+    /// Gets or sets the registry for managing segment variable extractors.
+    /// </summary>
+    public SegmentVariableExtractorRegistry SegmentVariableExtractorRegistry { get; set; }
+
+    /// <summary>
     ///     Sets the reference resolver for the TestContextFactory.
     /// </summary>
     /// <param name="referenceResolver">
@@ -100,7 +116,7 @@ public class TestContextFactory : IReferenceResolverAware
     }
 
     /// <summary>
-    ///     Gets a new instance of TestContext with default/ core function library initialized.
+    ///     Gets a new instance of TestContext with a default/ core function library initialized.
     /// </summary>
     /// <returns>new instance of TestContext</returns>
     public TestContext GetObject()
@@ -116,7 +132,8 @@ public class TestContextFactory : IReferenceResolverAware
             BeforeTest = BeforeTest,
             AfterTest = AfterTest,
             MessageProcessors = MessageProcessors,
-            EndpointFactory = EndpointFactory
+            EndpointFactory = EndpointFactory,
+            SegmentVariableExtractorRegistry = SegmentVariableExtractorRegistry
         };
 
         context.SetGlobalVariables(GlobalVariables);
@@ -148,7 +165,8 @@ public class TestContextFactory : IReferenceResolverAware
             _referenceResolver = new SimpleReferenceResolver(),
             MessageValidatorRegistry = new DefaultMessageValidatorRegistry(),
             MessageProcessors = new MessageProcessors(),
-            EndpointFactory = new DefaultEndpointFactory()
+            EndpointFactory = new DefaultEndpointFactory(),
+            SegmentVariableExtractorRegistry = new SegmentVariableExtractorRegistry()
         };
 
         return factory;
@@ -181,7 +199,7 @@ public class TestContextFactory : IReferenceResolverAware
             .WithVariables(context.GetGlobalVariables())
             .Build());
 
-        result.SetReferenceResolver(context.GetReferenceResolver());
+        result.SetReferenceResolver(context.ReferenceResolver);
 
         return result;
     }
@@ -190,8 +208,5 @@ public class TestContextFactory : IReferenceResolverAware
     ///     Gets the current reference resolver.
     /// </summary>
     /// <returns>The current instance of IReferenceResolver</returns>
-    public IReferenceResolver GetReferenceResolver()
-    {
-        return _referenceResolver;
-    }
+    public IReferenceResolver ReferenceResolver => _referenceResolver;
 }

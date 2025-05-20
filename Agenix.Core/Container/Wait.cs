@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Agenix.Api;
+using Agenix.Api.Condition;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
 using Agenix.Core.Actions;
 using Agenix.Core.Condition;
-using Agenix.Core.Exceptions;
 using log4net;
 
 namespace Agenix.Core.Container;
@@ -79,7 +82,7 @@ public class Wait(Wait.Builder<ICondition> builder)
                 }
         }
 
-        throw new CoreSystemException(Condition.GetErrorMessage(context));
+        throw new AgenixSystemException(Condition.GetErrorMessage(context));
     }
 
 

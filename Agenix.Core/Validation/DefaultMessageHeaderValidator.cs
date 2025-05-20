@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Agenix.Api.Context;
+using Agenix.Api.Endpoint.Resolver;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
+using Agenix.Api.Validation;
+using Agenix.Api.Validation.Context;
 using Agenix.Core.Endpoint.Resolver;
-using Agenix.Core.Exceptions;
 using Agenix.Core.Message;
-using Agenix.Core.Validation.Context;
 using log4net;
 
 namespace Agenix.Core.Validation;
@@ -20,7 +24,7 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog _log = LogManager.GetLogger(typeof(DefaultMessageHeaderValidator));
+    private static readonly ILog Log = LogManager.GetLogger(typeof(DefaultMessageHeaderValidator));
 
     /// <summary>
     ///     A dictionary containing the set of default header validators located via resource path lookup.
@@ -43,6 +47,14 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
         return true;
     }
 
+    /// <summary>
+    /// Validates the headers of a received message against the headers of a control message
+    /// within the specified validation and test contexts.
+    /// </summary>
+    /// <param name="receivedMessage">The received message whose headers are being validated.</param>
+    /// <param name="controlMessage">The control message containing the expected header values.</param>
+    /// <param name="context">The test context providing additional test-related information.</param>
+    /// <param name="validationContext">The validation context specific to header validation.</param>
     public override void ValidateMessage(IMessage receivedMessage, IMessage controlMessage, TestContext context,
         HeaderValidationContext validationContext)
     {
@@ -51,7 +63,7 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
 
         if (controlHeaders == null || !controlHeaders.Any()) return;
 
-        _log.Debug("Start message header validation ...");
+        Log.Debug("Start message header validation ...");
 
         foreach (var (key, controlValue) in controlHeaders)
         {
@@ -74,11 +86,11 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
                                 {
                                     try
                                     {
-                                        return context.GetReferenceResolver().Resolve<IHeaderValidator>(beanName);
+                                        return context.ReferenceResolver.Resolve<IHeaderValidator>(beanName);
                                     }
-                                    catch (CoreSystemException)
+                                    catch (AgenixSystemException)
                                     {
-                                        _log.Warn($"Failed to resolve header validator for name: {beanName}");
+                                        Log.Warn($"Failed to resolve header validator for name: {beanName}");
                                         return null;
                                     }
                                 })
@@ -90,7 +102,7 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
             validator.ValidateHeader(headerName, value, controlValue, context, validationContext);
         }
 
-        _log.Debug("Message header validation successful: All values OK");
+        Log.Debug("Message header validation successful: All values OK");
     }
 
     /// <summary>
@@ -100,9 +112,17 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
     /// <returns>A list of distinct header validators available in the test context.</returns>
     private List<IHeaderValidator> GetHeaderValidators(TestContext context)
     {
-        // add validators from resource path lookup
+        // add validators from the resource path lookup
         var validatorMap = new Dictionary<string, IHeaderValidator>(_defaultValidators);
 
+       var validators = context.ReferenceResolver.ResolveAll<IHeaderValidator>();
+
+       if (validators != null && validators.Count > 0)
+       {
+           foreach (var validator in validators)
+               validatorMap.TryAdd(validator.Key, validator.Value);
+       }
+       
         return validatorMap.Values.Distinct().ToList();
     }
 
@@ -114,7 +134,7 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
     /// <param name="context">The context of the test, providing auxiliary functions and variables.</param>
     /// <param name="validationContext">The context for header validation, including settings such as case sensitivity.</param>
     /// <returns>The resolved header name, potentially found in a case-insensitive manner.</returns>
-    private string GetHeaderName(string name, IDictionary<string, object> receivedHeaders, TestContext context,
+    private static string GetHeaderName(string name, IDictionary<string, object> receivedHeaders, TestContext context,
         HeaderValidationContext validationContext)
     {
         var headerName = context.ResolveDynamicValue(name);
@@ -122,7 +142,7 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
         if (receivedHeaders.ContainsKey(headerName) || !validationContext.HeaderNameIgnoreCase) return headerName;
         var key = headerName;
 
-        _log.Debug($"Finding case insensitive header for key '{key}'");
+        Log.Debug($"Finding case insensitive header for key '{key}'");
 
         headerName = receivedHeaders
                          .AsParallel()
@@ -131,7 +151,7 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
                          .FirstOrDefault() ??
                      throw new ValidationException($"Validation failed: No matching header for key '{key}'");
 
-        _log.Debug($"Found matching case insensitive header name: {headerName}");
+        Log.Debug($"Found matching case insensitive header name: {headerName}");
 
         return headerName;
     }

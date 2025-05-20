@@ -1,4 +1,7 @@
-﻿namespace Agenix.Core;
+﻿using Agenix.Api;
+using Agenix.Api.Context;
+
+namespace Agenix.Core;
 
 /// <summary>
 ///     Executes test actions by delegating the execution work to another specified test action.

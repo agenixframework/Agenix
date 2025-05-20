@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Globalization;
 using System.Reflection;
+using Agenix.Api;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Report;
 using Agenix.Core.Actions;
-using Agenix.Core.Exceptions;
 using Agenix.Core.Report;
 using log4net;
 using Moq;
@@ -28,7 +30,7 @@ public class LoggingReporterTest
 
         _test = new DefaultTestCase();
         _test.SetName("SampleIT");
-        _test.SetPackageName("agenix.core");
+        _test.SetNamespaceName("agenix.core");
 
         _echo = new EchoAction.Builder().Build();
         _echo.SetDescription("Test echo action");
@@ -89,8 +91,8 @@ public class LoggingReporterTest
     [Test]
     public void TestLoggingReporterFailed()
     {
-        var nestedException = new CoreSystemException("I am the final boss.");
-        var cause = new CoreSystemException("Failed!", nestedException);
+        var nestedException = new AgenixSystemException("I am the final boss.");
+        var cause = new AgenixSystemException("Failed!", nestedException);
 
         _fixture.OnStart();
         _fixture.OnStartSuccess();
@@ -173,7 +175,7 @@ public class LoggingReporterTest
     [Test]
     public void TestLoggingReporterBeforeSuiteFailed()
     {
-        var exception = new CoreSystemException("Failed!");
+        var exception = new AgenixSystemException("Failed!");
 
         _fixture.OnStart();
         _fixture.OnStartFailure(exception);
@@ -195,7 +197,7 @@ public class LoggingReporterTest
         _fixture.OnTestFinish(_test);
         _fixture.OnTestSuccess(_test);
         _fixture.OnFinish();
-        _fixture.OnFinishFailure(new CoreSystemException("Failed!"));
+        _fixture.OnFinishFailure(new AgenixSystemException("Failed!"));
 
         var testResults = new TestResults();
         _fixture.Generate(testResults);

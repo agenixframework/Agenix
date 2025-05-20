@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
+using Agenix.Api.Variable;
 using Agenix.Core.Message;
 
 namespace Agenix.Core.Variable;
@@ -47,7 +50,7 @@ public class MessageHeaderVariableExtractor : IVariableExtractor
         foreach (var (headerElementName, value) in _headerMappings)
         {
             var targetVariableName = value?.ToString()
-                                     ?? throw new CoreSystemException(
+                                     ?? throw new AgenixSystemException(
                                          $"Variable name must be set for extractor on header '{headerElementName}'");
 
             if (message.GetHeader(headerElementName) == null)

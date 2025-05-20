@@ -1,5 +1,7 @@
 using System;
-using Agenix.Core.Exceptions;
+using Agenix.Api;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
 using log4net;
 
 namespace Agenix.Core.Actions;
@@ -48,7 +50,7 @@ public class StopTimeAction(StopTimeAction.Builder builder) : AbstractTestAction
         }
         catch (Exception e)
         {
-            throw new CoreSystemException(e.Message);
+            throw new AgenixSystemException(e.Message);
         }
     }
 

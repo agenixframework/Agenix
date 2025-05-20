@@ -1,10 +1,11 @@
 ﻿using System.Threading;
+using Agenix.Api.Exceptions;
 using Agenix.Core.Actions;
-using Agenix.Core.Exceptions;
 using log4net;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using ITestAction = Agenix.Api.ITestAction;
 using Timer = Agenix.Core.Container.Timer;
 
 namespace Agenix.Core.NUnitTestProject.Container;
@@ -67,7 +68,7 @@ public class TimerTest : AbstractNUnitSetUp
         var timer = CreateDefaultTimerWithNestedActionThatFails(false);
 
         // Act & Assert - Verify exception is thrown
-        Assert.Throws<CoreSystemException>(() => timer.Execute(Context));
+        Assert.Throws<AgenixSystemException>(() => timer.Execute(Context));
     }
 
     [Test]

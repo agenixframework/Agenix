@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using Agenix.Api.Exceptions;
 using Agenix.Core.Actions;
-using Agenix.Core.Exceptions;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
@@ -50,7 +50,7 @@ public class LoadAppSettingsActionTest : AbstractNUnitSetUp
         {
             loadProperties.Execute(Context);
         }
-        catch (CoreSystemException e)
+        catch (AgenixSystemException e)
         {
             ClassicAssert.AreEqual("Unknown variable 'unknownVar'", e.Message);
             return;

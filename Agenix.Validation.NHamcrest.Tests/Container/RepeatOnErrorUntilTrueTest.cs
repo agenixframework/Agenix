@@ -1,10 +1,10 @@
+using Agenix.Api.Exceptions;
 using Agenix.Core.Actions;
 using Agenix.Core.Container;
-using Agenix.Core.Exceptions;
 using Moq;
 using Is = NHamcrest.Is;
 using static Agenix.Validation.NHamcrest.Container.NHamcrestConditionExpression;
-using ITestAction = Agenix.Core.ITestAction;
+using ITestAction = Agenix.Api.ITestAction;
 
 namespace Agenix.Validation.NHamcrest.Tests.Container;
 
@@ -15,7 +15,7 @@ public class RepeatOnErrorUntilTrueTest : AbstractNUnitSetUp
     [Test]
     public void TestRepeatOnErrorNoSuccessHamcrestConditionExpression()
     {
-        Assert.Throws<CoreSystemException>(() =>
+        Assert.Throws<AgenixSystemException>(() =>
         {
             _action.Reset();
 

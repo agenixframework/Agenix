@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using Agenix.Api.Endpoint.Resolver;
+using Agenix.Api.Message;
 using Agenix.Core.Endpoint.Resolver;
 using Agenix.Core.Message;
 using Agenix.Http.Message;

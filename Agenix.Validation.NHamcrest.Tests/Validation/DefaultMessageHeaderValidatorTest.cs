@@ -1,7 +1,7 @@
-using Agenix.Core.Exceptions;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Validation.Context;
 using Agenix.Core.Message;
 using Agenix.Core.Validation;
-using Agenix.Core.Validation.Context;
 using NHamcrest;
 
 namespace Agenix.Validation.NHamcrest.Tests.Validation;

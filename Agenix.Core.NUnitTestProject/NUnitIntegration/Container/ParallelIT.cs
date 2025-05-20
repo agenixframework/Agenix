@@ -1,5 +1,5 @@
-﻿using Agenix.Core.Annotations;
-using Agenix.Core.Exceptions;
+﻿using Agenix.Api.Annotations;
+using Agenix.Api.Exceptions;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
 using static Agenix.Core.Container.Parallel.Builder;
@@ -34,7 +34,7 @@ public class ParallelIT
                 .Condition("i lt= 5").Index("i").Actions(Echo("10"))
         ));
 
-        _gherkin.When(Assert().Exception(typeof(CoreSystemException))
+        _gherkin.When(Assert().Exception(typeof(AgenixSystemException))
             .When(
                 Parallel().Actions(
                     Sleep().Milliseconds(150),

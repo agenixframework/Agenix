@@ -1,5 +1,5 @@
-﻿using Agenix.Core.Endpoint.Adapter.Mapping;
-using Agenix.Core.Exceptions;
+﻿using Agenix.Api.Exceptions;
+using Agenix.Core.Endpoint.Adapter.Mapping;
 using Agenix.Core.Message;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
@@ -27,7 +27,7 @@ public class HeaderMappingKeyExtractorTest
     {
         var extractor = new HeaderMappingKeyExtractor();
 
-        Assert.Throws<CoreSystemException>(() => extractor.ExtractMappingKey(new DefaultMessage("Foo")
+        Assert.Throws<AgenixSystemException>(() => extractor.ExtractMappingKey(new DefaultMessage("Foo")
             .SetHeader("Foo", "foo")
             .SetHeader("Bar", "bar")));
     }
@@ -37,7 +37,7 @@ public class HeaderMappingKeyExtractorTest
     {
         var extractor = new HeaderMappingKeyExtractor("UNKNOWN");
 
-        Assert.Throws<CoreSystemException>(() => extractor.ExtractMappingKey(new DefaultMessage("Foo")
+        Assert.Throws<AgenixSystemException>(() => extractor.ExtractMappingKey(new DefaultMessage("Foo")
             .SetHeader("Foo", "foo")
             .SetHeader("Bar", "bar")));
     }

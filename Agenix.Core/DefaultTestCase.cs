@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Agenix.Api;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
 using Agenix.Core.Container;
-using Agenix.Core.Exceptions;
 using Agenix.Core.Util;
 using log4net;
 
@@ -100,7 +102,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
 
         try
         {
-            CoreSystemException contextException = null;
+            AgenixSystemException contextException = null;
             if (TestResult == null)
             {
                 if (context.HasExceptions())
@@ -167,7 +169,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
             }
             catch (Exception e)
             {
-                throw new CoreSystemException("Before test failed with errors", e);
+                throw new AgenixSystemException("Before test failed with errors", e);
             }
     }
 
@@ -211,7 +213,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     public void SetParameters(string[] parameterNames, object[] parameterValues)
     {
         if (parameterNames.Length != parameterValues.Length)
-            throw new CoreSystemException(
+            throw new AgenixSystemException(
                 $"Invalid test parameter usage - received '{parameterNames.Length}' parameters with '{parameterValues.Length}' values");
 
         for (var i = 0; i < parameterNames.Length; i++)
@@ -358,8 +360,8 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     private void InitializeTestParameters(Dictionary<string, object> parameters, TestContext context)
     {
         // Add default variables for test
-        context.SetVariable(CoreSettings.TestNameVariable(), Name);
-        context.SetVariable(CoreSettings.TestNameSpaceVariable(), PackageName);
+        context.SetVariable(AgenixSettings.TestNameVariable(), Name);
+        context.SetVariable(AgenixSettings.TestNameSpaceVariable(), PackageName);
 
         foreach (var paramEntry in parameters)
         {
@@ -520,7 +522,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     ///     Retrieves the package name associated with the test case.
     /// </summary>
     /// <returns>The package name as a string.</returns>
-    public string GetPackageName()
+    public string GetNamespaceName()
     {
         return PackageName;
     }
@@ -529,7 +531,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     ///     Sets the package name for the test case.
     /// </summary>
     /// <param name="packageName">The name of the package to set.</param>
-    public void SetPackageName(string packageName)
+    public void SetNamespaceName(string packageName)
     {
         PackageName = packageName;
     }

@@ -1,0 +1,2 @@
+name=defaultPlaintextMessageValidator
+type=Agenix.Validation.Text.Validation.Text.PlainTextMessageValidator

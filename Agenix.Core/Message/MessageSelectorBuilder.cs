@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Agenix.Api.Context;
 
 namespace Agenix.Core.Message;
 
@@ -10,9 +11,8 @@ namespace Agenix.Core.Message;
 /// </summary>
 public class MessageSelectorBuilder
 {
-    /**
-     * Selector string
-     */
+    /// Holds the selector string used for constructing message selectors.
+    /// /
     private readonly string _selectorString;
 
     /// Constructor using fields.
@@ -39,21 +39,19 @@ public class MessageSelectorBuilder
             : "";
     }
 
-    /**
-     * Static builder method using a selector string.
-     * @param selectorString
-     * @return
-     */
+    /// Static builder method using a selector string.
+    /// <param name="selectorString">The selector string used to initialize the builder.</param>
+    /// <return>A new instance of MessageSelectorBuilder initialized with the given selector string.</return>
     public static MessageSelectorBuilder WithString(string selectorString)
     {
         return new MessageSelectorBuilder(selectorString);
     }
 
-    /**
-     * Static builder method using a key value map.
-     * @param valueMap
-     * @return
-     */
+    /// <summary>
+    /// Constructs a message selector builder from a key-value map.
+    /// </summary>
+    /// <param name="valueMap">A dictionary containing key-value pairs to construct the message selector.</param>
+    /// <return>A new instance of the <see cref="MessageSelectorBuilder"/> with the constructed selector string.</return>
     public static MessageSelectorBuilder FromKeyValueMap(Dictionary<string, object> valueMap)
     {
         var buf = new StringBuilder();
@@ -110,10 +108,10 @@ public class MessageSelectorBuilder
     }
 
     /// Escapes equals characters in Xpath node tests within the given selector expression.
-    /// This is necessary because Xpath expressions can contain equals characters in node tests,
+    /// This is necessary because Xpath expressions can contain equal characters in node tests,
     /// which need to be escaped before evaluating the message selector expression.
     /// @param selectorExpression The selector expression that may contain Xpath node tests.
-    /// @return The modified selector expression with equals characters in node tests escaped.
+    /// @return The modified selector expression with equal characters in node tests escaped.
     /// /
     private string EscapeEqualsFromXpathNodeTest(string selectorExpression)
     {
@@ -150,7 +148,7 @@ public class MessageSelectorBuilder
         return selectorBuilder.ToString();
     }
 
-    /// Parses expression string and replaces all equals character escapings with initial
+    /// Parses expression string and replaces all equals character escaping with initial
     /// equals character.
     /// @param expression The input expression with escaped equals characters.
     /// @return The expression with escaped equals characters replaced by the actual equals character.

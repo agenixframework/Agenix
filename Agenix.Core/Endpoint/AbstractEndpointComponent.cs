@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Context;
+using Agenix.Api.Endpoint;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Util;
 using Agenix.Core.Spi;
 using Agenix.Core.Util;
 
@@ -16,7 +19,7 @@ public abstract class AbstractEndpointComponent(string name) : IEndpointComponen
     /// <param name="endpointUri">The URI of the endpoint.</param>
     /// <param name="context">The context in which the endpoint is created.</param>
     /// <returns>The created endpoint.</returns>
-    /// <exception cref="CoreSystemException">Thrown when the endpoint URI is invalid.</exception>
+    /// <exception cref="AgenixSystemException">Thrown when the endpoint URI is invalid.</exception>
     public IEndpoint CreateEndpoint(string endpointUri, TestContext context)
     {
         try
@@ -49,7 +52,7 @@ public abstract class AbstractEndpointComponent(string name) : IEndpointComponen
 
             var referenceResolverAware = endpoint as IReferenceResolverAware;
             if (referenceResolverAware != null)
-                referenceResolverAware.SetReferenceResolver(context.GetReferenceResolver());
+                referenceResolverAware.SetReferenceResolver(context.ReferenceResolver);
 
             if (!string.IsNullOrEmpty(endpointName)) endpoint.SetName(endpointName);
 
@@ -57,7 +60,7 @@ public abstract class AbstractEndpointComponent(string name) : IEndpointComponen
         }
         catch (UriFormatException ex)
         {
-            throw new CoreSystemException($"Unable to parse endpoint URI '{endpointUri}'", ex);
+            throw new AgenixSystemException($"Unable to parse endpoint URI '{endpointUri}'", ex);
         }
     }
 
@@ -92,7 +95,7 @@ public abstract class AbstractEndpointComponent(string name) : IEndpointComponen
                 else if (parameterValue.Length == 2)
                     parameters[parameterValue[0]] = parameterValue[1];
                 else
-                    throw new CoreSystemException(
+                    throw new AgenixSystemException(
                         $"Invalid parameter key/value combination '{string.Join(", ", parameterValue)}'");
             }
         }
@@ -118,7 +121,7 @@ public abstract class AbstractEndpointComponent(string name) : IEndpointComponen
             var field = ReflectionHelper.FindField(endpointConfiguration.GetType(), parameterEntry.Key);
 
             if (field == null)
-                throw new CoreSystemException(
+                throw new AgenixSystemException(
                     $"Unable to find parameter field on endpoint configuration '{parameterEntry.Key}'");
 
             // Find the corresponding setter method
@@ -132,7 +135,7 @@ public abstract class AbstractEndpointComponent(string name) : IEndpointComponen
             }
 
             if (setter == null)
-                throw new CoreSystemException(
+                throw new AgenixSystemException(
                     $"Unable to find parameter setter on endpoint configuration '{setterName}'");
 
             // Convert the parameter value to the appropriate type and invoke the setter method

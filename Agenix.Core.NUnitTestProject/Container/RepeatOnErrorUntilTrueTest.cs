@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using Agenix.Api.Exceptions;
 using Agenix.Core.Actions;
 using Agenix.Core.Container;
-using Agenix.Core.Exceptions;
 using Moq;
 using NUnit.Framework;
+using ITestAction = Agenix.Api.ITestAction;
 
 namespace Agenix.Core.NUnitTestProject.Container;
 
@@ -44,7 +45,7 @@ public class RepeatOnErrorUntilTrueTest : AbstractNUnitSetUp
     [Test]
     public void TestRepeatOnErrorNoSuccess()
     {
-        Assert.Throws<CoreSystemException>(() =>
+        Assert.Throws<AgenixSystemException>(() =>
         {
             _action.Reset();
 
@@ -64,7 +65,7 @@ public class RepeatOnErrorUntilTrueTest : AbstractNUnitSetUp
     [Test]
     public void TestRepeatOnErrorNoSuccessConditionExpression()
     {
-        Assert.Throws<CoreSystemException>(() =>
+        Assert.Throws<AgenixSystemException>(() =>
         {
             _action.Reset();
 

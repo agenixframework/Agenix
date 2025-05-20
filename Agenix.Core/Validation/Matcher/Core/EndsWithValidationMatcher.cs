@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Validation.Matcher;
 
 namespace Agenix.Core.Validation.Matcher.Core;
 
 /// <summary>
-///     ValidationMatcher checking for valid date format.
+///     ValidationMatcher checking for a valid date format.
 /// </summary>
 public class EndsWithValidationMatcher : IValidationMatcher
 {

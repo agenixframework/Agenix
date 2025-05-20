@@ -1,3 +1,4 @@
+using Agenix.Api.Context;
 using log4net;
 
 namespace Agenix.Core.Container;
@@ -26,10 +27,9 @@ public class Sequence(Sequence.Builder builder) : AbstractActionContainer(builde
     /// Builder class for constructing instances of the Sequence action.
     public sealed class Builder : AbstractTestContainerBuilder<Sequence, Builder>
     {
-        /**
-         * Fluent API action building entry method used in C# DSL.
-         * @return
-         */
+        /// Initializes a builder for constructing a Sequence container.
+        /// A Sequence container ensures actions are executed in a sequential order.
+        /// <returns>A builder instance for creating a Sequence container.</returns>
         public static Builder Sequential()
         {
             return new Builder();

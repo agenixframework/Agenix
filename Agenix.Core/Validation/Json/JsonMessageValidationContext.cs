@@ -1,46 +1,42 @@
 ﻿using System.Collections.Generic;
-using Agenix.Core.Validation.Context;
+using Agenix.Api.Validation.Context;
 
 namespace Agenix.Core.Validation.Json;
 
 /// <summary>
 ///     Validation context holding JSON specific validation information.
 /// </summary>
-public class JsonMessageValidationContext : DefaultValidationContext
+public class JsonMessageValidationContext : DefaultMessageValidationContext, IValidationContext
 {
-    /// <summary>
-    ///     Set holding XPath expressions to identify the ignored message elements
-    /// </summary>
-    private readonly HashSet<string> _ignoreExpressions;
-
     // Default constructor
     public JsonMessageValidationContext() : this(new Builder())
     {
     }
 
-    /**
-     * Constructor using fluent builder.
-     * @param builder
-     */
-    public JsonMessageValidationContext(Builder builder)
+    /// Represents the validation context specific to JSON messages,
+    /// extending the behavior and properties from the default message validation context.
+    /// /
+    public JsonMessageValidationContext(Builder builder) : base(new DefaultMessageValidationContext.Builder()
+        .Ignore(builder.IgnoreExpressions)
+        .Schema(builder._schema)
+        .SchemaRepository(builder._schemaRepository)
+        .SchemaValidation(builder._schemaValidation))
     {
-        _ignoreExpressions = builder.IgnoreExpressions;
+        
     }
-
-    /// <summary>
-    ///     Set holding XPath expressions to identify the ignored message elements
-    /// </summary>
-    public HashSet<string> IgnoreExpressions => _ignoreExpressions;
-
-    public sealed class Builder : IValidationContext.IBuilder<JsonMessageValidationContext, Builder>
+    
+    /// Indicates whether a validation context requires a validator for processing.
+    /// This property overrides the default behavior defined in the IValidationContext interface,
+    /// explicitly returning true to signify that the context requires validation.
+    bool IValidationContext.RequiresValidator => true;
+    
+    public new sealed class Builder : IMessageValidationContext.Builder<JsonMessageValidationContext, Builder>
     {
-        internal readonly HashSet<string> IgnoreExpressions = [];
-
         /// <summary>
         ///     Creates a new instance of JsonMessageValidationContext using the builder's current state.
         /// </summary>
         /// <returns>A JsonMessageValidationContext instance.</returns>
-        public JsonMessageValidationContext Build()
+        public override JsonMessageValidationContext Build()
         {
             return new JsonMessageValidationContext(this);
         }
@@ -72,29 +68,6 @@ public class JsonMessageValidationContext : DefaultValidationContext
         public JsonPathMessageValidationContext.Builder Expression(string path, object expectedValue)
         {
             return new JsonPathMessageValidationContext.Builder().Expression(path, expectedValue);
-        }
-
-        /// <summary>
-        ///     Adds an ignore path expression for a message element.
-        /// </summary>
-        /// <param name="path">The path expression to be ignored.</param>
-        /// <returns>A builder for chaining method calls.</returns>
-        public Builder Ignore(string path)
-        {
-            IgnoreExpressions.Add(path);
-            return this;
-        }
-
-        /// <summary>
-        ///     Adds a JSON path to be ignored during validation.
-        /// </summary>
-        /// <param name="paths">The JSON path to be ignored</param>
-        /// <returns>A builder for chaining method calls.</returns>
-        public Builder Ignore(List<string> paths)
-        {
-            if (paths == null) return this;
-            foreach (var path in paths) IgnoreExpressions.Add(path);
-            return this;
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Reflection;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Exceptions;
 using Agenix.Sql.Actions;
 using Moq;
 using NUnit.Framework;
@@ -168,7 +168,7 @@ public class ExecuteSqlActionTest : AbstractNUnitSetUp
             .Throws(new Exception("Something went wrong!"));
 
         // Assert that an exception is thrown when executing
-        Assert.Throws<CoreSystemException>(() =>
+        Assert.Throws<AgenixSystemException>(() =>
         {
             var sqlAction = _executeSqlAction.Build();
             sqlAction.Execute(Context);
@@ -188,7 +188,7 @@ public class ExecuteSqlActionTest : AbstractNUnitSetUp
         _executeSqlAction.Statements(["statement"]);
 
         // Expect an exception when trying to execute with a null template
-        var exception = Assert.Throws<CoreSystemException>(() =>
+        var exception = Assert.Throws<AgenixSystemException>(() =>
         {
             var sqlAction = _executeSqlAction.Build();
             sqlAction.Execute(Context);

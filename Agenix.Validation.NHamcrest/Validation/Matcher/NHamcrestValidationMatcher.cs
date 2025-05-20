@@ -2,20 +2,20 @@
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using Agenix.Core;
-using Agenix.Core.Exceptions;
-using Agenix.Core.Util;
-using Agenix.Core.Validation.Matcher;
-using Agenix.Core.Variable;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Util;
+using Agenix.Api.Validation.Matcher;
+using Agenix.Api.Variable;
 using NHamcrest;
 
 namespace Agenix.Validation.NHamcrest.Validation.Matcher;
 
 /// <summary>
-/// HamcrestValidationMatcher performs validation by leveraging Hamcrest-style matchers
-/// to validate values against a specified control expression. It supports dynamic
-/// content replacement, extraction of control values, and advanced matching logic
-/// for various data types and scenarios.
+///     HamcrestValidationMatcher performs validation by leveraging Hamcrest-style matchers
+///     to validate values against a specified control expression. It supports dynamic
+///     content replacement, extraction of control values, and advanced matching logic
+///     for various data types and scenarios.
 /// </summary>
 public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpressionParser
 {
@@ -30,14 +30,18 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
 
     private readonly List<string> _matchers =
     [
-        "EqualTo", "EqualToIgnoringCase", "EqualToIgnoringWhiteSpace", "Not", "ContainsString", "ContainsStringIgnoringCase",
+        "EqualTo", "EqualToIgnoringCase", "EqualToIgnoringWhiteSpace", "Not", "ContainsString",
+        "ContainsStringIgnoringCase",
         "StartsWith", "StartsWithIgnoringCase", "EndsWith", "EndsWithIgnoringCase", "MatchesPattern"
     ];
 
     private readonly List<string> _noArgumentCollectionMatchers = ["Empty"];
 
     private readonly List<string> _noArgumentMatchers =
-        ["IsEmptyString", "IsEmptyOrNullString", "NullValue", "NotNullValue", "Anything", "BlankString", "BlankOrNullString"];
+    [
+        "IsEmptyString", "IsEmptyOrNullString", "NullValue", "NotNullValue", "Anything", "BlankString",
+        "BlankOrNullString"
+    ];
 
     private readonly List<string> _numericMatchers =
         ["GreaterThan", "GreaterThanOrEqualTo", "LessThan", "LessThanOrEqualTo", "CloseTo"];
@@ -45,29 +49,30 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
     private readonly List<string> _optionMatchers = ["IsOneOf", "IsIn"];
 
     /// <summary>
-    /// Extracts individual control values from a given control expression using
-    /// a specified delimiter.
+    ///     Extracts individual control values from a given control expression using
+    ///     a specified delimiter.
     /// </summary>
     /// <param name="controlExpression">The control expression to extract values from.</param>
     /// <param name="delimiter">The character used to separate values in the control expression.</param>
     /// <returns>A list of extracted control values.</returns>
     public List<string> ExtractControlValues(string controlExpression, char delimiter)
     {
-        if (controlExpression.StartsWith($"'") && controlExpression.Contains("',"))
+        if (controlExpression.StartsWith("'") && controlExpression.Contains("',"))
             return new DefaultControlExpressionParser().ExtractControlValues(controlExpression, delimiter);
 
         return [controlExpression];
     }
 
     /// <summary>
-    /// Validates a field's value against specified control parameters and matcher expressions within the given test context.
+    ///     Validates a field's value against specified control parameters and matcher expressions within the given test
+    ///     context.
     /// </summary>
     /// <param name="fieldName">The name of the field being validated.</param>
     /// <param name="value">The value of the field to validate.</param>
     /// <param name="controlParameters">A list of control parameters used for validation, including matcher expressions.</param>
     /// <param name="context">The test context in which the validation occurs.</param>
     /// <exception cref="ValidationException">
-    /// Thrown when the field value does not satisfy the specified matcher expression.
+    ///     Thrown when the field value does not satisfy the specified matcher expression.
     /// </exception>
     public void Validate(string fieldName, string value, List<string> controlParameters, TestContext context)
     {
@@ -106,13 +111,9 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
             else if (_numericMatchers.Contains(matcherName))
             {
                 if (matcherName == "CloseTo")
-                {
                     MatcherAssert.AssertThat(double.Parse(matcherValue), matcher);
-                }
                 else
-                {
                     MatcherAssert.AssertThat(new NumericComparable(matcherValue), matcher);
-                }
             }
             else if (_iterableMatchers.Contains(matcherName) && ContainsNumericMatcher(matcherExpression))
             {
@@ -131,7 +132,7 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
     }
 
     /// <summary>
-    /// Retrieves a matcher based on the provided matcher name, parameters, and testing context.
+    ///     Retrieves a matcher based on the provided matcher name, parameters, and testing context.
     /// </summary>
     /// <param name="matcherName">The name of the matcher to retrieve.</param>
     /// <param name="matcherParameter">An array of parameters required for the matcher.</param>
@@ -158,7 +159,7 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
             }
 
             // Check for missing matcher parameter
-            if (matcherParameter.Length == 0) throw new CoreSystemException("Missing matcher parameter");
+            if (matcherParameter.Length == 0) throw new AgenixSystemException("Missing matcher parameter");
 
             // Container matchers
             if (_containerMatchers.Contains(matcherName))
@@ -177,11 +178,13 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
                                 matcherExpression.LastIndexOf(')') - matcherExpression.IndexOf('(') - 1)
                             .ToString()
                             .Split(',');
-                        
+
                         // Get the matcher from the provided name and parameters
                         var nestedMatcher = GetMatcher(nestedMatcherName, nestedMatcherParameter, context);
-                        
-                        return matcherMethod?.Name == nameof(Matchers.Not) ? Matchers.Not(nestedMatcher) :
+
+                        return matcherMethod?.Name == nameof(Matchers.Not)
+                            ? Matchers.Not(nestedMatcher)
+                            :
                             // Handle specific type T
                             matcherMethod.Invoke(null, [nestedMatcher]);
                     }
@@ -255,7 +258,7 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
                             matcherParameter.Length > 1 ? double.Parse(matcherParameter[1]) : 0.0
                         ]);
 
-                matcherMethod = ReflectionHelper.FindMethod(typeof(Matchers), matcherName, typeof(System.IComparable));
+                matcherMethod = ReflectionHelper.FindMethod(typeof(Matchers), matcherName, typeof(IComparable));
 
                 if (matcherMethod != null)
                     return matcherMethod.Invoke(null, [matcherParameter[0]]);
@@ -304,7 +307,6 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
 
                 if (matcherMethod != null)
                 {
-
                     var isObjectArray = matcherMethod.GetParameters()[0].ParameterType == typeof(object[]);
                     var matcherParameterArray = isObjectArray
                         ? matcherParameter
@@ -324,10 +326,10 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
         }
         catch (TargetInvocationException e)
         {
-            throw new CoreSystemException("Failed to invoke matcher", e);
+            throw new AgenixSystemException("Failed to invoke matcher", e);
         }
 
-        throw new CoreSystemException($"Unsupported matcher: {matcherName}");
+        throw new AgenixSystemException($"Unsupported matcher: {matcherName}");
     }
 
     /// <summary>
@@ -351,7 +353,7 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
         if (value == "[]") return [];
 
         var arrayString = value;
-        if (arrayString.StartsWith($"[") && arrayString.EndsWith($"]")) arrayString = arrayString[1..^1];
+        if (arrayString.StartsWith("[") && arrayString.EndsWith("]")) arrayString = arrayString[1..^1];
 
         return arrayString.Split(',')
             .Select(element => element.Trim())
@@ -365,7 +367,7 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
     /// </summary>
     /// <param name="dictionaryString"></param>
     /// <returns></returns>
-    /// <exception cref="CoreSystemException"></exception>
+    /// <exception cref="AgenixSystemException"></exception>
     private Dictionary<string, object> GetDictionary(string dictionaryString)
     {
         var properties = new Dictionary<string, object>();
@@ -393,7 +395,7 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
         }
         catch (Exception ex)
         {
-            throw new CoreSystemException("Failed to reconstruct object of type map", ex);
+            throw new AgenixSystemException("Failed to reconstruct object of type map", ex);
         }
 
         return properties;
@@ -421,7 +423,7 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
      * the second parameter are treated as a single expression. They need to be treated
      * separately in a recursive call to this method, when the parameters for the
      * respective allOf() expression are extracted.
-     * 
+     *
      * @param rawExpression the full parameter expression of a container matcher
      */
     private string[] DetermineNestedMatcherParameters(string rawExpression)

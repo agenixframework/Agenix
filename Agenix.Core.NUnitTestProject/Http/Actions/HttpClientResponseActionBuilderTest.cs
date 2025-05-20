@@ -1,4 +1,5 @@
 using System.Net;
+using Agenix.Api.Message;
 using Agenix.Core.Message;
 using Agenix.Http.Actions;
 using Agenix.Http.Message;

@@ -1,10 +1,12 @@
-﻿using Agenix.Core.Exceptions;
+﻿using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
 
 namespace Agenix.Core.Message.Selector;
 
 /// <summary>
 ///     Message selector matches one or more header elements with the message header. Only in case all matching header
-///     elements are present in message header and its value matches the expected value the message is accepted.
+///     elements are present in message header, and its value matches the expected value, the message is accepted.
 /// </summary>
 public class PayloadMatchingMessageSelector : AbstractMessageSelector
 {
@@ -20,10 +22,15 @@ public class PayloadMatchingMessageSelector : AbstractMessageSelector
         matchingValue, context)
     {
         if (!selectKey.Equals(SelectorId))
-            throw new CoreSystemException("Invalid usage of payload matching message selector - " +
+            throw new AgenixSystemException("Invalid usage of payload matching message selector - " +
                                           $"usage restricted to key '{SelectorId}' but was '{selectKey}'");
     }
 
+    /// <summary>
+    /// Determines whether the given message satisfies the selection criteria.
+    /// </summary>
+    /// <param name="message">The message to evaluate against the selection criteria.</param>
+    /// <returns>A boolean value indicating whether the message matches the criteria.</returns>
     public override bool Accept(IMessage message)
     {
         return Evaluate(GetPayloadAsString(message));

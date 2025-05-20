@@ -1,4 +1,4 @@
-﻿using Agenix.Core.Exceptions;
+﻿using Agenix.Api.Exceptions;
 using Agenix.Core.Spi;
 using log4net;
 using NUnit.Framework;
@@ -37,7 +37,7 @@ public class AgenixContextTest
     {
         var context = AgenixContext.Create();
 
-        var ex = Assert.Throws<CoreSystemException>(() =>
+        var ex = Assert.Throws<AgenixSystemException>(() =>
             context.ParseConfiguration(typeof(NoDefaultConstructorConfig)));
 
         StringAssert.IsMatch("Missing default constructor on custom configuration class", ex.Message);

@@ -1,0 +1,2 @@
+async=Agenix.Core.Endpoint.Direct.Annotation.DirectEndpointConfigParser
+sync=Agenix.Core.Endpoint.Direct.Annotation.DirectSyncEndpointConfigParser

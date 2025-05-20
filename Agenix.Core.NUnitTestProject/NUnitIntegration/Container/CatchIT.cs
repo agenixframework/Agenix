@@ -1,5 +1,5 @@
-﻿using Agenix.Core.Annotations;
-using Agenix.Core.Exceptions;
+﻿using Agenix.Api.Annotations;
+using Agenix.Api.Exceptions;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
 using static Agenix.Core.Container.Catch.Builder;
@@ -19,10 +19,10 @@ public class CatchIT
     {
         _gherkin.When(CatchException().When(Fail("Fail!")));
 
-        _gherkin.When(CatchException().Exception(typeof(CoreSystemException)).When(Fail("Fail!")));
+        _gherkin.When(CatchException().Exception(typeof(AgenixSystemException)).When(Fail("Fail!")));
 
         _gherkin.When(CatchException()
-            .Exception(nameof(CoreSystemException))
+            .Exception(nameof(AgenixSystemException))
             .When(Fail("Fail!")));
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
+using Agenix.Api.Exceptions;
 using Agenix.Core.Actions;
-using Agenix.Core.Exceptions;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 using static Agenix.Core.Container.AssertContainer.Builder;
@@ -23,7 +23,7 @@ public class AssertTest : AbstractNUnitSetUp
     [Test]
     public void TestAssertException()
     {
-        var exceptionType = typeof(CoreSystemException);
+        var exceptionType = typeof(AgenixSystemException);
 
         var assertAction = Assert()
             .Actions(new FailAction.Builder())
@@ -39,7 +39,7 @@ public class AssertTest : AbstractNUnitSetUp
         var failActionBuilder = new FailAction.Builder()
             .Message("This went wrong!");
 
-        var exceptionType = typeof(CoreSystemException);
+        var exceptionType = typeof(AgenixSystemException);
 
         var assertAction = Assert()
             .Actions(failActionBuilder)
@@ -58,7 +58,7 @@ public class AssertTest : AbstractNUnitSetUp
         var failActionBuilder = new FailAction.Builder()
             .Message("This went wrong!");
 
-        var exceptionType = typeof(CoreSystemException);
+        var exceptionType = typeof(AgenixSystemException);
 
         var assertAction = Assert()
             .Actions(failActionBuilder)
@@ -75,7 +75,7 @@ public class AssertTest : AbstractNUnitSetUp
         var failActionBuilder = new FailAction.Builder()
             .Message("This went wrong!");
 
-        var exceptionType = typeof(CoreSystemException);
+        var exceptionType = typeof(AgenixSystemException);
 
         var assertAction = Assert()
             .Actions(failActionBuilder)
@@ -91,7 +91,7 @@ public class AssertTest : AbstractNUnitSetUp
     {
         var failActionBuilder = new FailAction.Builder().Message("This went wrong!");
 
-        var exceptionType = typeof(CoreSystemException);
+        var exceptionType = typeof(AgenixSystemException);
 
         var assertAction = Assert()
             .Actions(failActionBuilder)
@@ -108,7 +108,7 @@ public class AssertTest : AbstractNUnitSetUp
     [Test]
     public void TestMissingException()
     {
-        var exceptionType = typeof(CoreSystemException);
+        var exceptionType = typeof(AgenixSystemException);
 
         var assertAction = Assert()
             .Actions(new EchoAction.Builder())
@@ -120,7 +120,7 @@ public class AssertTest : AbstractNUnitSetUp
             assertAction.Execute(Context);
             Assert.Fail("Expected CoreRuntimeException to be thrown, but it was not.");
         }
-        catch (CoreSystemException)
+        catch (AgenixSystemException)
         {
             // Test passes if CoreRuntimeException is caught
         }

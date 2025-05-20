@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using Agenix.Api.Message.Correlation;
 
 namespace Agenix.Core.Message.Correlation;
 

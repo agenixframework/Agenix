@@ -2,6 +2,7 @@
 
 using System;
 using System.IO;
+using Agenix.Api.IO;
 using Agenix.Core.IO;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;

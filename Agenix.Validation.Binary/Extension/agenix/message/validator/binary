@@ -1,0 +1,2 @@
+name=defaultBinaryMessageValidator
+type=Agenix.Validation.Binary.Validation.BinaryMessageValidator

@@ -1,4 +1,5 @@
-﻿using Agenix.Core.Messaging;
+﻿using Agenix.Api.Endpoint;
+using Agenix.Api.Messaging;
 
 namespace Agenix.Core.Endpoint;
 

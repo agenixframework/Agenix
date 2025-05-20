@@ -1,5 +1,5 @@
 using System.Net;
-using Agenix.Core;
+using Agenix.Api.Context;
 
 namespace Agenix.Http.Message;
 

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using Agenix.Api;
+using Agenix.Api.Exceptions;
 using Agenix.Core.Actions;
-using Agenix.Core.Exceptions;
 using Agenix.Core.Functions.Core;
 using Moq;
+using TestContext = Agenix.Api.Context.TestContext;
 using NUnit.Framework;
 using static Agenix.Core.Actions.DefaultTestActionBuilder;
 
@@ -84,7 +86,7 @@ public class DefaultTestCaseTest : AbstractNUnitSetUp
                 }
                 catch (Exception e)
                 {
-                    throw new CoreSystemException(e.Message);
+                    throw new AgenixSystemException(e.Message);
                 }
 
                 return Task.CompletedTask;
@@ -121,7 +123,7 @@ public class DefaultTestCaseTest : AbstractNUnitSetUp
                 }
                 catch (Exception e)
                 {
-                    throw new CoreSystemException(e.Message);
+                    throw new AgenixSystemException(e.Message);
                 }
 
                 return Task.CompletedTask;
@@ -153,8 +155,8 @@ public class DefaultTestCaseTest : AbstractNUnitSetUp
 
         _fixture.AddTestAction(Action(context =>
         {
-            Assert.That(context.GetVariables()[CoreSettings.TestNameVariable()], Is.EqualTo("MyTestCase"));
-            Assert.That(context.GetVariables()[CoreSettings.TestNameSpaceVariable()],
+            Assert.That(context.GetVariables()[AgenixSettings.TestNameVariable()], Is.EqualTo("MyTestCase"));
+            Assert.That(context.GetVariables()[AgenixSettings.TestNameSpaceVariable()],
                 Is.EqualTo(typeof(DefaultTestCase).Namespace));
             Assert.That(context.GetVariable("${name}"), Is.EqualTo("Agenix"));
             Assert.That(context.GetVariable("${framework}"), Is.EqualTo("Agenix"));
@@ -194,7 +196,7 @@ public class DefaultTestCaseTest : AbstractNUnitSetUp
         _fixture.SetName("MyTestCase");
 
         _fixture.AddTestAction(Action(context =>
-            context.AddException(new CoreSystemException("This failed in forked action"))).Build());
+            context.AddException(new AgenixSystemException("This failed in forked action"))).Build());
 
         _fixture.AddTestAction(new EchoAction.Builder().Message("Everything is fine!").Build());
 
@@ -211,7 +213,7 @@ public class DefaultTestCaseTest : AbstractNUnitSetUp
         _fixture.SetName("MyTestCase");
 
         _fixture.AddTestAction(Action(context =>
-            context.AddException(new CoreSystemException("This failed in forked action"))).Build());
+            context.AddException(new AgenixSystemException("This failed in forked action"))).Build());
 
         _fixture.Execute(Context);
         var exception = Assert.Throws(typeof(TestCaseFailedException), () => { _fixture.Finish(Context); });

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using Agenix.Api;
+using Agenix.Api.Message;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Builder;
 using Agenix.Core.Validation.Builder;
@@ -26,7 +28,7 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
     [Test]
     public void TestMessageBuilder()
     {
-        var resultingMessage = _messageBuilder.Build(Context, CoreSettings.DefaultMessageType());
+        var resultingMessage = _messageBuilder.Build(Context, AgenixSettings.DefaultMessageType());
 
         Assert.That(resultingMessage.Payload, Is.EqualTo("TestMessagePayload"));
     }
@@ -37,7 +39,7 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
         _messageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("This ${placeholder} contains variables!"));
         Context.SetVariable("placeholder", "payload data");
 
-        var resultingMessage = _messageBuilder.Build(Context, CoreSettings.DefaultMessageType());
+        var resultingMessage = _messageBuilder.Build(Context, AgenixSettings.DefaultMessageType());
 
         Assert.That(resultingMessage.Payload, Is.EqualTo("This payload data contains variables!"));
     }
@@ -50,7 +52,7 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
         _messageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(_initialVariableTestPayload));
 
         //WHEN
-        var message = _messageBuilder.Build(Context, MessageType.JSON.ToString());
+        var message = _messageBuilder.Build(Context, nameof(MessageType.JSON));
 
         //THEN
         Assert.That(message.Payload, Is.EqualTo(resultingVariableTestPayload));
@@ -65,7 +67,7 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
         _messageBuilder = new DefaultMessageBuilder();
         _messageBuilder.SetPayloadBuilder(new FileResourcePayloadBuilder(textPayloadResource));
 
-        var resultingMessage = _messageBuilder.Build(Context, CoreSettings.DefaultMessageType());
+        var resultingMessage = _messageBuilder.Build(Context, AgenixSettings.DefaultMessageType());
 
         Assert.That(resultingMessage.Payload, Is.EqualTo("TestMessageData"));
     }
@@ -80,7 +82,7 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
         _messageBuilder.SetPayloadBuilder(new FileResourcePayloadBuilder(textPayloadResource));
         Context.SetVariable("placeholder", "payload data");
 
-        var resultingMessage = _messageBuilder.Build(Context, CoreSettings.DefaultMessageType());
+        var resultingMessage = _messageBuilder.Build(Context, AgenixSettings.DefaultMessageType());
 
         Assert.That(resultingMessage.Payload, Is.EqualTo("This payload data contains variables!"));
     }
@@ -91,7 +93,7 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
         var headers = new Dictionary<string, object> { { "operation", "unitTesting" } };
         _messageBuilder.AddHeaderBuilder(new DefaultHeaderBuilder(headers));
 
-        var resultingMessage = _messageBuilder.Build(Context, CoreSettings.DefaultMessageType());
+        var resultingMessage = _messageBuilder.Build(Context, AgenixSettings.DefaultMessageType());
 
         Assert.That(resultingMessage.Payload, Is.EqualTo("TestMessagePayload"));
         Assert.That(resultingMessage.GetHeader("operation"), Is.Not.Null);
@@ -116,7 +118,7 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
             { "stringValue", "{string}:5.0" }
         };
         _messageBuilder.AddHeaderBuilder(new DefaultHeaderBuilder(headers));
-        var resultingMessage = _messageBuilder.Build(Context, CoreSettings.DefaultMessageType());
+        var resultingMessage = _messageBuilder.Build(Context, AgenixSettings.DefaultMessageType());
 
         Assert.That(resultingMessage.Payload, Is.EqualTo("TestMessagePayload"));
         Assert.That(resultingMessage.GetHeader("intValue"), Is.Not.Null);
@@ -146,7 +148,7 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
 
         Context.SetVariable("operation", "unitTesting");
 
-        var resultingMessage = _messageBuilder.Build(Context, CoreSettings.DefaultMessageType());
+        var resultingMessage = _messageBuilder.Build(Context, AgenixSettings.DefaultMessageType());
 
         Assert.That(resultingMessage.Payload, Is.EqualTo("TestMessagePayload"));
         Assert.That(resultingMessage.GetHeader("operation"), Is.Not.Null);
@@ -158,7 +160,7 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
     {
         _messageBuilder.AddHeaderBuilder(new DefaultHeaderDataBuilder("MessageHeaderData"));
 
-        var resultingMessage = _messageBuilder.Build(Context, CoreSettings.DefaultMessageType());
+        var resultingMessage = _messageBuilder.Build(Context, AgenixSettings.DefaultMessageType());
 
         Assert.That(resultingMessage.Payload, Is.EqualTo("TestMessagePayload"));
         Assert.That(resultingMessage.GetHeaderData().Count, Is.EqualTo(1L));
@@ -171,7 +173,7 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
         _messageBuilder.AddHeaderBuilder(new DefaultHeaderDataBuilder("MessageHeaderData1"));
         _messageBuilder.AddHeaderBuilder(new DefaultHeaderDataBuilder("MessageHeaderData2"));
 
-        var resultingMessage = _messageBuilder.Build(Context, CoreSettings.DefaultMessageType());
+        var resultingMessage = _messageBuilder.Build(Context, AgenixSettings.DefaultMessageType());
 
         Assert.That(resultingMessage.Payload, Is.EqualTo("TestMessagePayload"));
         Assert.That(resultingMessage.GetHeaderData().Count, Is.EqualTo(2L));
@@ -185,7 +187,7 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
         _messageBuilder.AddHeaderBuilder(new DefaultHeaderDataBuilder("This ${placeholder} contains variables!"));
         Context.SetVariable("placeholder", "header data");
 
-        var resultingMessage = _messageBuilder.Build(Context, CoreSettings.DefaultMessageType());
+        var resultingMessage = _messageBuilder.Build(Context, AgenixSettings.DefaultMessageType());
 
         Assert.That(resultingMessage.Payload, Is.EqualTo("TestMessagePayload"));
         Assert.That(resultingMessage.GetHeaderData().Count, Is.EqualTo(1L));
@@ -199,7 +201,7 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
                              $".ResourcesTest.validation.builder/header-data-resource.txt";
         _messageBuilder.AddHeaderBuilder(new FileResourceHeaderDataBuilder(headerResource));
 
-        var resultingMessage = _messageBuilder.Build(Context, CoreSettings.DefaultMessageType());
+        var resultingMessage = _messageBuilder.Build(Context, AgenixSettings.DefaultMessageType());
 
         Assert.That(resultingMessage.Payload, Is.EqualTo("TestMessagePayload"));
         Assert.That(resultingMessage.GetHeaderData().Count, Is.EqualTo(1L));
@@ -214,7 +216,7 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
         _messageBuilder.AddHeaderBuilder(new FileResourceHeaderDataBuilder(headerResource));
         Context.SetVariable("placeholder", "header data");
 
-        var resultingMessage = _messageBuilder.Build(Context, CoreSettings.DefaultMessageType());
+        var resultingMessage = _messageBuilder.Build(Context, AgenixSettings.DefaultMessageType());
 
         Assert.That(resultingMessage.Payload, Is.EqualTo("TestMessagePayload"));
         Assert.That(resultingMessage.GetHeaderData().Count, Is.EqualTo(1L));

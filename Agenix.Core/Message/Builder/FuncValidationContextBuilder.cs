@@ -1,5 +1,5 @@
 ﻿using System;
-using Agenix.Core.Validation.Context;
+using Agenix.Api.Validation.Context;
 
 namespace Agenix.Core.Message.Builder;
 

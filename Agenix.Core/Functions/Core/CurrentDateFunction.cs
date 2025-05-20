@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Functions;
 using static System.Console;
 
 namespace Agenix.Core.Functions.Core;
@@ -23,7 +25,7 @@ public class CurrentDateFunction : IFunction
         catch (Exception e)
         {
             WriteLine("Error while formatting data value {0}", e);
-            throw new CoreSystemException(e.Message);
+            throw new AgenixSystemException(e.Message);
         }
     }
 

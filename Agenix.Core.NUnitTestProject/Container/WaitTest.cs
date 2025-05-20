@@ -1,10 +1,11 @@
 ﻿using System;
-using Agenix.Core.Condition;
+using Agenix.Api.Condition;
+using Agenix.Api.Exceptions;
 using Agenix.Core.Container;
-using Agenix.Core.Exceptions;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.NUnitTestProject.Container;
 
@@ -112,7 +113,7 @@ public class WaitTest
 
         StartTimer();
 
-        var exception = Assert.Throws<CoreSystemException>(() => testling.Execute(contextMock.Object));
+        var exception = Assert.Throws<AgenixSystemException>(() => testling.Execute(contextMock.Object));
         ClassicAssert.NotNull(exception, "Expected CoreSystemException to be thrown");
 
         StopTimer();
@@ -138,7 +139,7 @@ public class WaitTest
 
         StartTimer();
 
-        var exception = Assert.Throws<CoreSystemException>(() => testling.Execute(contextMock.Object));
+        var exception = Assert.Throws<AgenixSystemException>(() => testling.Execute(contextMock.Object));
         ClassicAssert.NotNull(exception, "Expected CoreSystemException to be thrown");
 
         StopTimer();

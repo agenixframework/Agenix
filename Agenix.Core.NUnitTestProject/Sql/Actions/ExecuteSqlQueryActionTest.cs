@@ -4,7 +4,8 @@ using System.Data;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using Agenix.Core.Exceptions;
+using Agenix.Api;
+using Agenix.Api.Exceptions;
 using Agenix.Sql.Actions;
 using Moq;
 using NUnit.Framework;
@@ -12,6 +13,7 @@ using NUnit.Framework.Legacy;
 using Spring.Data.Core;
 using Spring.Transaction;
 using Spring.Transaction.Support;
+
 
 namespace Agenix.Core.NUnitTestProject.Sql.Actions;
 
@@ -295,7 +297,7 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
         _executeSqlQueryAction.Statements([sql]);
         _executeSqlQueryAction.Extract("UNKNOWN_COLUMN", "orderStatus");
 
-        Assert.Throws<CoreSystemException>(() => { _executeSqlQueryAction.Build().Execute(Context); });
+        Assert.Throws<AgenixSystemException>(() => { _executeSqlQueryAction.Build().Execute(Context); });
     }
 
     [Test]
@@ -474,8 +476,8 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
                 It.IsAny<ExecuteSqlQueryAction.DictionaryRowMapper>())).Returns(resultList);
 
         _executeSqlQueryAction.Statements([sql]);
-        _executeSqlQueryAction.Validate("ORDERTYPE", "small", CoreSettings.IgnorePlaceholder, "big");
-        _executeSqlQueryAction.Validate("STATUS", CoreSettings.IgnorePlaceholder, "in_progress", "finished");
+        _executeSqlQueryAction.Validate("ORDERTYPE", "small", AgenixSettings.IgnorePlaceholder, "big");
+        _executeSqlQueryAction.Validate("STATUS", AgenixSettings.IgnorePlaceholder, "in_progress", "finished");
         _executeSqlQueryAction.Build().Execute(Context);
     }
 
@@ -514,7 +516,7 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
         _executeSqlQueryAction.Statements([sql]);
         _executeSqlQueryAction.Extract("STATUS", "orderStatus");
         _executeSqlQueryAction.Extract("ORDERTYPE", "orderType");
-        _executeSqlQueryAction.Validate("ORDERTYPE", "small", CoreSettings.IgnorePlaceholder, "big");
+        _executeSqlQueryAction.Validate("ORDERTYPE", "small", AgenixSettings.IgnorePlaceholder, "big");
         _executeSqlQueryAction.Validate("STATUS", "started", "in_progress", "finished");
         _executeSqlQueryAction.Build().Execute(Context);
 
@@ -694,7 +696,7 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
         _executeSqlQueryAction.Statements(["statement"]);
 
         // Assert that executing leads to an exception
-        var exception = Assert.Throws<CoreSystemException>(() => _executeSqlQueryAction.Build().Execute(Context));
+        var exception = Assert.Throws<AgenixSystemException>(() => _executeSqlQueryAction.Build().Execute(Context));
 
         ClassicAssert.AreEqual("No AdoTemplate configured for query execution!", exception.Message);
     }

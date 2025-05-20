@@ -1,4 +1,7 @@
-﻿namespace Agenix.Core;
+﻿using Agenix.Api;
+using Agenix.Api.Context;
+
+namespace Agenix.Core;
 
 /// <summary>
 ///     The TestCaseRunnerFactory class provides methods to create instances of ITestCaseRunner.

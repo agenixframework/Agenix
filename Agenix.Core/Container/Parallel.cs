@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Agenix.Core.Exceptions;
+using Agenix.Api;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
 using log4net;
 
 namespace Agenix.Core.Container;
@@ -21,7 +23,7 @@ public class Parallel(Parallel.Builder builder)
     /**
      * Collect exceptions in list
      */
-    private readonly List<CoreSystemException> _exceptions = [];
+    private readonly List<AgenixSystemException> _exceptions = [];
 
     /**
      * Store created threads in stack
@@ -59,7 +61,7 @@ public class Parallel(Parallel.Builder builder)
 
     /// Executes a given test action within a separate thread, handling any exceptions that may occur.
     /// /
-    private class ActionRunner(ITestAction action, TestContext context, Action<CoreSystemException> exceptionHandler)
+    private class ActionRunner(ITestAction action, TestContext context, Action<AgenixSystemException> exceptionHandler)
     {
         /// Test action to execute.
         private readonly ITestAction _action = action;
@@ -68,7 +70,7 @@ public class Parallel(Parallel.Builder builder)
         private readonly TestContext _context = context;
 
         /// Delegate responsible for handling instances of CoreSystemException.
-        private readonly Action<CoreSystemException> _exceptionHandler = exceptionHandler;
+        private readonly Action<AgenixSystemException> _exceptionHandler = exceptionHandler;
 
         /// Execute the test action, capturing any exceptions and logging errors.
         /// /
@@ -78,7 +80,7 @@ public class Parallel(Parallel.Builder builder)
             {
                 _action.Execute(_context);
             }
-            catch (CoreSystemException e)
+            catch (AgenixSystemException e)
             {
                 Log.Error("Parallel test action raised error", e);
                 _exceptionHandler(e);
@@ -86,7 +88,7 @@ public class Parallel(Parallel.Builder builder)
             catch (Exception e)
             {
                 Log.Error("Parallel test action raised error", e);
-                _exceptionHandler(new CoreSystemException(e.Message));
+                _exceptionHandler(new AgenixSystemException(e.Message));
             }
         }
     }

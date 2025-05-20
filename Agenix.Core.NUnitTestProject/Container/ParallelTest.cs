@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using Agenix.Api.Exceptions;
 using Agenix.Core.Actions;
 using Agenix.Core.Container;
-using Agenix.Core.Exceptions;
 using Moq;
 using NUnit.Framework;
+using ITestAction = Agenix.Api.ITestAction;
 
 namespace Agenix.Core.NUnitTestProject.Container;
 
@@ -81,7 +82,7 @@ public class ParallelTest : AbstractNUnitSetUp
 
         parallelAction.SetActions(actionList);
 
-        Assert.Throws<CoreSystemException>(() => parallelAction.Execute(Context));
+        Assert.Throws<AgenixSystemException>(() => parallelAction.Execute(Context));
     }
 
     [Test]
@@ -115,7 +116,7 @@ public class ParallelTest : AbstractNUnitSetUp
 
         parallelAction.SetActions(actionList);
 
-        Assert.Throws<CoreSystemException>(() => parallelAction.Execute(Context));
+        Assert.Throws<AgenixSystemException>(() => parallelAction.Execute(Context));
     }
 
     [Test]

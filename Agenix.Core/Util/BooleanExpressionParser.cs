@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Exceptions;
 using log4net;
 
 namespace Agenix.Core.Util;
@@ -101,7 +101,7 @@ public class BooleanExpressionParser
         }
         catch (InvalidOperationException e)
         {
-            throw new CoreSystemException(
+            throw new AgenixSystemException(
                 $"Unable to parse boolean expression '{expression}'. Maybe expression is incomplete!", e);
         }
 
@@ -271,7 +271,7 @@ public class BooleanExpressionParser
     private static string ValidateOperator(string operatorValue)
     {
         if (!Operators.Contains(operatorValue) && !BooleanOperators.Contains(operatorValue))
-            throw new CoreSystemException("Unknown operator '" + operatorValue + "'");
+            throw new AgenixSystemException("Unknown operator '" + operatorValue + "'");
         return operatorValue;
     }
 
@@ -305,7 +305,7 @@ public class BooleanExpressionParser
             "=" => (int.Parse(leftOperand) == int.Parse(rightOperand)).ToString(),
             "and" => (bool.Parse(leftOperand) && bool.Parse(rightOperand)).ToString(),
             "or" => (bool.Parse(leftOperand) || bool.Parse(rightOperand)).ToString(),
-            _ => throw new CoreSystemException("Unknown operator '" + operatorValue + "'")
+            _ => throw new AgenixSystemException("Unknown operator '" + operatorValue + "'")
         };
     }
 

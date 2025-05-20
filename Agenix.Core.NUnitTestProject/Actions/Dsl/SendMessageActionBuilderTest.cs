@@ -1,28 +1,30 @@
 ﻿using System.Collections.Generic;
+using Agenix.Api.Endpoint;
+using Agenix.Api.IO;
+using Agenix.Api.Message;
+using Agenix.Api.Messaging;
+using Agenix.Api.Report;
+using Agenix.Api.Validation;
+using Agenix.Api.Validation.Context;
 using Agenix.Core.Actions;
 using Agenix.Core.Container;
-using Agenix.Core.Endpoint;
-using Agenix.Core.IO;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Builder;
-using Agenix.Core.Messaging;
-using Agenix.Core.Report;
 using Agenix.Core.Spi;
-using Agenix.Core.Validation;
 using Agenix.Core.Validation.Builder;
-using Agenix.Core.Validation.Context;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using TestContext = Agenix.Api.Context.TestContext;
 using static Agenix.Core.Actions.SendMessageAction.Builder;
 
 namespace Agenix.Core.NUnitTestProject.Actions.Dsl;
 
 public class SendMessageActionBuilderTest : AbstractNUnitSetUp
 {
+    private readonly Mock<IReferenceResolver> _referenceResolver = new();
     private readonly IEndpoint messageEndpoint = new Mock<IEndpoint>().Object;
     private readonly IProducer messageProducer = new Mock<IProducer>().Object;
-    private readonly Mock<IReferenceResolver> _referenceResolver = new();
     private readonly IResource resource = new Mock<IResource>().Object;
 
     private readonly IMessageValidator<IValidationContext> validator =
@@ -159,7 +161,8 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
         ClassicAssert.AreEqual(2, messageBuilder.BuildMessageHeaders(Context).Count);
         ClassicAssert.AreEqual("new", messageBuilder.BuildMessageHeaders(Context)["additional"]);
         ClassicAssert.AreEqual("foo", messageBuilder.BuildMessageHeaders(Context)["operation"]);
-        ClassicAssert.AreEqual(message.GetHeader(MessageHeaders.Id), messageBuilder.GetMessage().GetHeader(MessageHeaders.Id));
+        ClassicAssert.AreEqual(message.GetHeader(MessageHeaders.Id),
+            messageBuilder.GetMessage().GetHeader(MessageHeaders.Id));
         ClassicAssert.AreEqual("foo", messageBuilder.GetMessage().GetHeader("operation"));
 
         var constructed = messageBuilder.Build(new TestContext(), MessageType.PLAINTEXT.ToString());
@@ -167,12 +170,12 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
         ClassicAssert.AreEqual("foo", constructed.GetHeader("operation"));
         ClassicAssert.AreEqual("new", constructed.GetHeader("additional"));
     }
-    
+
     [Test]
     public void TestSendBuilderWithPayloadBuilder()
     {
         MessagePayloadBuilder payloadBuilder = context => "<TestRequest><Message>Hello Agenix!</Message></TestRequest>";
-        
+
         Mock.Get(messageEndpoint).Reset();
         Mock.Get(messageProducer).Reset();
 
@@ -181,24 +184,25 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
             .Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
             .Callback((IMessage message, TestContext context) =>
             {
-                ClassicAssert.AreEqual(message.GetPayload<string>(), "<TestRequest><Message>Hello Agenix!</Message></TestRequest>");
+                ClassicAssert.AreEqual(message.GetPayload<string>(),
+                    "<TestRequest><Message>Hello Agenix!</Message></TestRequest>");
             });
-        
+
         _referenceResolver.Setup(r => r.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(r => r.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(r => r.ResolveAll<SequenceBeforeTest>())
             .Returns(new Dictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(r => r.ResolveAll<SequenceAfterTest>())
             .Returns(new Dictionary<string, SequenceAfterTest>());
-        
+
         Context.SetReferenceResolver(_referenceResolver.Object);
-        
+
         var runner = new DefaultTestCaseRunner(Context);
 
         runner.Run(Send(messageEndpoint)
             .Message()
             .Body(payloadBuilder));
-        
+
         var test = runner.GetTestCase();
         ClassicAssert.AreEqual(1, test.GetActionCount());
         ClassicAssert.AreEqual(typeof(SendMessageAction), test.GetActions()[0].GetType());
@@ -209,10 +213,11 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
         ClassicAssert.AreEqual(action.MessageBuilder.GetType(), typeof(DefaultMessageBuilder));
 
         var messageBuilder = (DefaultMessageBuilder)action.MessageBuilder;
-        ClassicAssert.AreEqual(messageBuilder.BuildMessagePayload(Context, action.MessageType), "<TestRequest><Message>Hello Agenix!</Message></TestRequest>");
+        ClassicAssert.AreEqual(messageBuilder.BuildMessagePayload(Context, action.MessageType),
+            "<TestRequest><Message>Hello Agenix!</Message></TestRequest>");
         ClassicAssert.AreEqual(messageBuilder.BuildMessageHeaders(Context).Count, 0L);
     }
-    
+
     [Test]
     public void TestSendBuilderWithPayloadData()
     {
@@ -224,14 +229,15 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
             .Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
             .Callback((IMessage message, TestContext context) =>
             {
-                ClassicAssert.AreEqual(message.GetPayload<string>(), "<TestRequest><Message>Hello Agenix!</Message></TestRequest>");
+                ClassicAssert.AreEqual(message.GetPayload<string>(),
+                    "<TestRequest><Message>Hello Agenix!</Message></TestRequest>");
             });
         var runner = new DefaultTestCaseRunner(Context);
 
         runner.Run(Send(messageEndpoint)
             .Message()
             .Body("<TestRequest><Message>Hello Agenix!</Message></TestRequest>"));
-        
+
         var test = runner.GetTestCase();
         ClassicAssert.AreEqual(1, test.GetActionCount());
         ClassicAssert.AreEqual(typeof(SendMessageAction), test.GetActions()[0].GetType());
@@ -239,11 +245,12 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
         var action = (SendMessageAction)test.GetActions()[0];
         ClassicAssert.AreEqual("send", action.Name);
         ClassicAssert.AreEqual(messageEndpoint, action.Endpoint);
-        
+
         ClassicAssert.AreEqual(action.MessageBuilder.GetType(), typeof(DefaultMessageBuilder));
 
         var messageBuilder = (DefaultMessageBuilder)action.MessageBuilder;
-        ClassicAssert.AreEqual(messageBuilder.BuildMessagePayload(Context, action.MessageType), "<TestRequest><Message>Hello Agenix!</Message></TestRequest>");
+        ClassicAssert.AreEqual(messageBuilder.BuildMessagePayload(Context, action.MessageType),
+            "<TestRequest><Message>Hello Agenix!</Message></TestRequest>");
         ClassicAssert.AreEqual(messageBuilder.BuildMessageHeaders(Context).Count, 0L);
     }
 }

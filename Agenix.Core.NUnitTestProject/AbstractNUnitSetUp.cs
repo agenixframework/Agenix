@@ -1,6 +1,7 @@
 ﻿using System;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Exceptions;
 using NUnit.Framework;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.NUnitTestProject;
 
@@ -40,7 +41,7 @@ public class AbstractNUnitSetUp
         }
         catch (Exception e)
         {
-            throw new CoreSystemException("Failed to create test context", e);
+            throw new AgenixSystemException("Failed to create test context", e);
         }
     }
 }

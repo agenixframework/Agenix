@@ -1,4 +1,6 @@
-﻿namespace Agenix.Core.Validation.Matcher;
+﻿using Agenix.Api.Validation.Matcher;
+
+namespace Agenix.Core.Validation.Matcher;
 
 /// <summary>
 ///     Default registry automatically adds default validation matcher library.

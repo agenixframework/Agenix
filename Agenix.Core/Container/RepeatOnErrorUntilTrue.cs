@@ -1,5 +1,6 @@
 ﻿using System.Threading;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
 using log4net;
 
 namespace Agenix.Core.Container;
@@ -33,11 +34,11 @@ public class RepeatOnErrorUntilTrue(RepeatOnErrorUntilTrue.Builder builder) : Ab
     /// or an exception is encountered. If an exception of type CoreSystemException is thrown during the execution
     /// of actions, the exception is logged, and the iteration is retried after a sleep delay.
     /// The retry process continues until the condition is satisfied. If all retries fail, the last encountered
-    /// exception is thrown.
+    /// exception has been thrown.
     /// <param name="context">The execution context in which actions are performed and conditions are evaluated.</param>
     protected override void ExecuteIteration(TestContext context)
     {
-        CoreSystemException exception = null;
+        AgenixSystemException exception = null;
 
         while (!CheckCondition(context))
             try
@@ -46,7 +47,7 @@ public class RepeatOnErrorUntilTrue(RepeatOnErrorUntilTrue.Builder builder) : Ab
                 ExecuteActions(context);
                 break;
             }
-            catch (CoreSystemException e)
+            catch (AgenixSystemException e)
             {
                 exception = e;
 

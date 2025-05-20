@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Agenix.Api;
 
 namespace Agenix.Core;
 
@@ -22,7 +23,7 @@ public class AgenixInstanceManager
      */
     protected static AgenixInstanceStrategy Strategy = AgenixInstanceStrategy.NEW;
 
-    /// Add instance processor.
+    /// Add an instance processor.
     /// <param name="processor">The processor to be added to the instance creation process.</param>
     /// /
     public static void AddInstanceProcessor(IAgenixInstanceProcessor processor)

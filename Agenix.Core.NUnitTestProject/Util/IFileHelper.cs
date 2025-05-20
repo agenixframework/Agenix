@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Exceptions;
 
 namespace Agenix.Core.NUnitTestProject.Util;
 
@@ -10,7 +10,7 @@ public interface IFileHelper
     ///     and modifies the extension to ".agenix.tmp". Deletes the file immediately after creation.
     /// </summary>
     /// <returns>A FileInfo object representing the created temporary file.</returns>
-    /// <exception cref="CoreSystemException">Thrown if there is an I/O error during temporary file creation.</exception>
+    /// <exception cref="AgenixSystemException">Thrown if there is an I/O error during temporary file creation.</exception>
     public static FileInfo CreateTmpFile()
     {
         FileInfo tempFile;
@@ -31,7 +31,7 @@ public interface IFileHelper
         }
         catch (IOException e)
         {
-            throw new CoreSystemException(e.Message, e);
+            throw new AgenixSystemException(e.Message, e);
         }
 
         return tempFile;

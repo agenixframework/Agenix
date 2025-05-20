@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
 using Agenix.Core.Endpoint.Direct;
-using Agenix.Core.Exceptions;
 using Agenix.Core.Message;
 using Agenix.Core.Spi;
+using TestContext = Agenix.Api.Context.TestContext;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
@@ -144,7 +146,7 @@ public class DirectEndpointConsumerTest
             endpoint.CreateConsumer().Receive("Operation = 'sayHello'", _context);
             Assert.Fail("Missing exception due to unsupported operation");
         }
-        catch (CoreSystemException e)
+        catch (AgenixSystemException e)
         {
             ClassicAssert.IsNotNull(e.Message);
         }

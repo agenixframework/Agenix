@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Agenix.Api.Message;
 using Agenix.Core.Message;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
-using static Agenix.Core.Validation.DefaultTextEqualsMessageValidator;
+using static Agenix.Api.Validation.DefaultTextEqualsMessageValidator;
 
 namespace Agenix.Core.NUnitTestProject.Message;
 

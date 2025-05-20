@@ -1,3 +1,5 @@
+using Agenix.Api;
+using Agenix.Api.Context;
 using log4net;
 
 namespace Agenix.Core.Actions;
@@ -35,7 +37,6 @@ public class StopTimerAction(StopTimerAction.Builder builder) : AbstractTestActi
 
         /// Stops a timer specified by the given ID within the provided context.
         /// If no ID is provided, all timers in the context are stopped.
-        /// <param name="context">The context within which the timer(s) are managed.</param>
         public static Builder StopTimer()
         {
             return new Builder();

@@ -1,3 +1,5 @@
+using Agenix.Api.Context;
+
 namespace Agenix.Core.Container;
 
 // Typical implementation of repeat iteration loop. Nested test actions are executed until
@@ -45,7 +47,7 @@ public class RepeatUntilTrue(RepeatUntilTrue.Builder builder) : AbstractIteratin
             return new Builder();
         }
 
-        // Adds a condition to this iterate container.
+        // Adds a condition to this iterated container.
         /// <summary>
         ///     Evaluates the specified condition expression within the context of a repeat-until loop.
         /// </summary>
@@ -57,7 +59,7 @@ public class RepeatUntilTrue(RepeatUntilTrue.Builder builder) : AbstractIteratin
             return this;
         }
 
-        // Adds a condition expression to this iterate container.
+        // Adds a condition expression to this iterated container.
         /// <summary>
         ///     Evaluates the specified condition expression within the context of a repeat-until loop.
         /// </summary>

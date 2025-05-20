@@ -1,7 +1,8 @@
-﻿using Agenix.Core.Endpoint;
+﻿using Agenix.Api.Endpoint;
 using Agenix.Core.Endpoint.Direct;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.NUnitTestProject.Endpoint.Direct;
 
@@ -20,7 +21,7 @@ public class DirectEndpointComponentTest
     {
         var component = new DirectEndpointComponent();
 
-        ClassicAssert.False(_context.GetReferenceResolver().IsResolvable("queueName"));
+        ClassicAssert.False(_context.ReferenceResolver.IsResolvable("queueName"));
         var endpoint = component.CreateEndpoint("direct:queueName", _context);
 
         ClassicAssert.IsInstanceOf<DirectEndpoint>(endpoint);
@@ -29,7 +30,7 @@ public class DirectEndpointComponentTest
 
         ClassicAssert.AreEqual("queueName", directEndpoint.EndpointConfiguration.GetQueueName());
         ClassicAssert.AreEqual(5000L, directEndpoint.EndpointConfiguration.Timeout);
-        ClassicAssert.True(_context.GetReferenceResolver().IsResolvable("queueName"));
+        ClassicAssert.True(_context.ReferenceResolver.IsResolvable("queueName"));
     }
 
     [Test]
@@ -37,7 +38,7 @@ public class DirectEndpointComponentTest
     {
         var component = new DirectEndpointComponent();
 
-        ClassicAssert.False(_context.GetReferenceResolver().IsResolvable("queueName"));
+        ClassicAssert.False(_context.ReferenceResolver.IsResolvable("queueName"));
         var endpoint = component.CreateEndpoint("direct:sync:queueName", _context);
 
         ClassicAssert.IsInstanceOf<DirectSyncEndpoint>(endpoint);
@@ -45,7 +46,7 @@ public class DirectEndpointComponentTest
         var directSyncEndpoint = (DirectSyncEndpoint)endpoint;
 
         ClassicAssert.AreEqual("queueName", directSyncEndpoint.EndpointConfiguration.GetQueueName());
-        ClassicAssert.True(_context.GetReferenceResolver().IsResolvable("queueName"));
+        ClassicAssert.True(_context.ReferenceResolver.IsResolvable("queueName"));
     }
 
     [Test]

@@ -1,4 +1,7 @@
-﻿namespace Agenix.Core.Actions;
+﻿using Agenix.Api;
+using Agenix.Api.Context;
+
+namespace Agenix.Core.Actions;
 
 /// <summary>
 ///     Represents an action that applies a test behavior using a specified runner.
@@ -17,7 +20,7 @@ public class ApplyTestBehaviorAction(ApplyTestBehaviorAction.Builder builder)
     /// <summary>
     ///     A builder class for creating instances of ApplyTestBehaviorAction.
     /// </summary>
-    public class Builder : AbstractTestActionBuilder<ApplyTestBehaviorAction, Builder>
+    public class Builder : AbstractTestActionBuilder<ApplyTestBehaviorAction, Builder>, ITestActionBuilder<ApplyTestBehaviorAction>
     {
         internal ITestBehavior _behavior;
         internal ITestActionRunner _runner;

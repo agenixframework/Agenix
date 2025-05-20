@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using Agenix.Core.Annotations;
-using Agenix.Core.Condition;
-using Agenix.Core.Message;
+using Agenix.Api.Annotations;
+using Agenix.Api.Condition;
+using Agenix.Api.Message;
 using Agenix.Core.NUnitTestProject.Util;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
@@ -12,7 +12,7 @@ using static Agenix.Core.Actions.SleepAction.Builder;
 using static Agenix.Core.Container.Sequence.Builder;
 using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
 using static Agenix.Core.Actions.SendMessageAction.Builder;
-using static Agenix.Core.Container.Wait.Builder<Agenix.Core.Condition.ICondition>;
+using static Agenix.Core.Container.Wait.Builder<Agenix.Api.Condition.ICondition>;
 
 namespace Agenix.Core.NUnitTestProject.NUnitIntegration.Container;
 

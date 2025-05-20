@@ -1,4 +1,6 @@
-﻿namespace Agenix.Core.Message;
+﻿using Agenix.Api.Message;
+
+namespace Agenix.Core.Message;
 
 /// <summary>
 ///     Default message correlator implementation using the Agenix message id as correlation key.

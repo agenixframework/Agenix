@@ -1,6 +1,8 @@
 ﻿using System.Threading;
+using Agenix.Api.Context;
+using Agenix.Api.Endpoint;
+using Agenix.Api.Exceptions;
 using Agenix.Core.Endpoint;
-using Agenix.Core.Exceptions;
 using log4net;
 
 namespace Agenix.Core.Message.Correlation;
@@ -79,7 +81,7 @@ public class PollingCorrelationManager<T> : DefaultCorrelationManager<T>
         }
 
         if (correlationKey == null)
-            throw new CoreSystemException($"Failed to get correlation key for '{correlationKeyName}'");
+            throw new AgenixSystemException($"Failed to get correlation key for '{correlationKeyName}'");
 
         return correlationKey;
     }

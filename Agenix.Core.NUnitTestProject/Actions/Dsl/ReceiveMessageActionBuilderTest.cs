@@ -1,25 +1,30 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Agenix.Api.Endpoint;
+using Agenix.Api.Message;
+using Agenix.Api.Messaging;
+using Agenix.Api.Report;
+using Agenix.Api.Validation;
+using Agenix.Api.Validation.Context;
+using Agenix.Api.Variable;
 using Agenix.Core.Actions;
 using Agenix.Core.Container;
 using Agenix.Core.Dsl;
 using Agenix.Core.Endpoint;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Builder;
-using Agenix.Core.Messaging;
-using Agenix.Core.Report;
+using Agenix.Core.Spi;
 using Agenix.Core.Validation;
 using Agenix.Core.Validation.Builder;
-using Agenix.Core.Validation.Context;
 using Agenix.Core.Validation.Json;
 using Agenix.Core.Variable;
-using Agenix.Core.Spi;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using TestContext = Agenix.Api.Context.TestContext;
 using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
-using IResource = Agenix.Core.IO.IResource;
+using IResource = Agenix.Api.IO.IResource;
 
 namespace Agenix.Core.NUnitTestProject.Actions.Dsl;
 
@@ -82,12 +87,10 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         var action = (ReceiveMessageAction)test.GetActions()[0];
         ClassicAssert.AreEqual("receive", action.Name);
 
-        ClassicAssert.AreEqual(MessageType.JSON.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.JSON), action.MessageType);
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
-        ClassicAssert.AreEqual(2, action.ValidationContexts.Count);
+        ClassicAssert.AreEqual(1, action.ValidationContexts.Count);
         ClassicAssert.IsTrue(action.ValidationContexts.Any(vc => vc is HeaderValidationContext));
-        //ClassicAssert.IsTrue(action.ValidationContexts.Any(vc => vc is XmlMessageValidationContext));
-        ClassicAssert.IsTrue(action.ValidationContexts.Any(vc => vc is JsonMessageValidationContext));
     }
 
     [Test]
@@ -105,7 +108,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _messageConsumer.Setup(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
             .Returns(new DefaultMessage("Foo").SetHeader("operation", "foo"));
 
-        // Create test case runner
+        // Create a test case runner
         var runner = new DefaultTestCaseRunner(_context);
         runner.Run(new ReceiveMessageAction.Builder()
             .Endpoint(_messageEndpoint.Object)
@@ -116,7 +119,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         // Get the executed test case
         var test = runner.GetTestCase();
 
-        // Assertions to verify the behavior of the receive action
+        // Assertions to verify the behavior of the reception action
         ClassicAssert.AreEqual(1, test.GetActionCount());
         ClassicAssert.IsInstanceOf<ReceiveMessageAction>(test.GetActions()[0]);
 
@@ -127,7 +130,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         ClassicAssert.AreEqual("receive", action.Name);
 
         // Action's message type should match the one set in the builder
-        ClassicAssert.AreEqual(MessageType.PLAINTEXT.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.PLAINTEXT), action.MessageType);
 
         // Action's endpoint should match the provided endpoint
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
@@ -137,8 +140,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Verifying the presence of specific validation context instances
         ClassicAssert.IsTrue(action.ValidationContexts.Any(vc => vc is HeaderValidationContext));
-        //Assert.IsTrue(action.ValidationContexts.Any(vc => vc is XmlMessageValidationContext));
-        ClassicAssert.IsTrue(action.ValidationContexts.Any(vc => vc is JsonMessageValidationContext));
+        ClassicAssert.IsTrue(action.ValidationContexts.Any(vc => vc is DefaultValidationContext));
 
         // Verify the message builder and content
         ClassicAssert.IsInstanceOf<StaticMessageBuilder>(action.MessageBuilder);
@@ -194,7 +196,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         ClassicAssert.AreEqual("receive", action.Name);
 
         // Action's message type should match the one set in the builder
-        ClassicAssert.AreEqual(MessageType.JSON.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.XML), action.MessageType);
 
         // Action's endpoint should match the provided endpoint
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
@@ -204,8 +206,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Verifying the presence of specific validation context instances
         ClassicAssert.IsTrue(action.ValidationContexts.Any(vc => vc is HeaderValidationContext));
-        //Assert.IsTrue(action.ValidationContexts.Any(vc => vc is XmlMessageValidationContext));
-        ClassicAssert.IsTrue(action.ValidationContexts.Any(vc => vc is JsonMessageValidationContext));
+        ClassicAssert.IsTrue(action.ValidationContexts.Any(vc => vc is DefaultValidationContext));
 
         // Verify the message builder and content
         ClassicAssert.IsInstanceOf<DefaultMessageBuilder>(action.MessageBuilder);
@@ -251,7 +252,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         ClassicAssert.AreEqual("receive", action.Name);
 
         // Action's message type should match the one set in the builder
-        ClassicAssert.AreEqual(MessageType.JSON.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.XML), action.MessageType);
 
         // Action's endpoint should match the provided endpoint
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
@@ -261,8 +262,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Verifying the presence of specific validation context instances
         ClassicAssert.IsTrue(action.ValidationContexts.Any(vc => vc is HeaderValidationContext));
-        //ClassicAssert.IsTrue(action.ValidationContexts.Any(vc => vc is XmlMessageValidationContext));
-        ClassicAssert.IsTrue(action.ValidationContexts.Any(vc => vc is JsonMessageValidationContext));
+        ClassicAssert.IsTrue(action.ValidationContexts.Any(vc => vc is DefaultValidationContext));
 
         // Verify the message builder and content
         ClassicAssert.IsInstanceOf<DefaultMessageBuilder>(action.MessageBuilder);
@@ -313,7 +313,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         ClassicAssert.AreEqual("receive", action.Name);
 
         // Action's message type should match the one set in the builder
-        ClassicAssert.AreEqual(MessageType.JSON.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.XML), action.MessageType);
 
         // Action's endpoint should match the provided endpoint
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
@@ -323,8 +323,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Verifying the presence of specific validation context instances
         ClassicAssert.IsTrue(action.ValidationContexts.Any(vc => vc is HeaderValidationContext));
-        //ClassicAssert.IsTrue(action.ValidationContexts.Any(vc => vc is XmlMessageValidationContext));
-        ClassicAssert.IsTrue(action.ValidationContexts.Any(vc => vc is JsonMessageValidationContext));
+        ClassicAssert.IsTrue(action.ValidationContexts.Any(vc => vc is DefaultValidationContext));
 
         // Verify the message builder and content
         ClassicAssert.IsInstanceOf<DefaultMessageBuilder>(action.MessageBuilder);
@@ -359,7 +358,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         _context.SetReferenceResolver(_referenceResolver.Object);
 
-        // Create test case runner
+        // Create a test case runner
         var runner = new DefaultTestCaseRunner(_context);
         runner.Run(Receive("fooMessageEndpoint")
             .Message()
@@ -382,7 +381,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         ClassicAssert.AreEqual("fooMessageEndpoint", action.EndpointUri);
 
         // Action's message type should match the one set in the builder
-        ClassicAssert.AreEqual(MessageType.JSON.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.XML), action.MessageType);
     }
 
     [Test]
@@ -481,7 +480,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         // Validate the properties of the first action
         ClassicAssert.AreEqual("receive", action.Name);
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
-        ClassicAssert.AreEqual(MessageType.JSON.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.XML), action.MessageType);
 
         ClassicAssert.IsInstanceOf<DefaultMessageBuilder>(action.MessageBuilder);
         ClassicAssert.AreEqual("<TestRequest><Message>Hello World!</Message></TestRequest>",
@@ -497,7 +496,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         // Validate the properties of the second action
         ClassicAssert.AreEqual("receive", action.Name);
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
-        ClassicAssert.AreEqual(MessageType.JSON.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.XML), action.MessageType);
 
         ClassicAssert.IsInstanceOf<DefaultMessageBuilder>(action.MessageBuilder);
         ClassicAssert.AreEqual("<TestRequest><Message>Hello World!</Message></TestRequest>",
@@ -556,7 +555,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         // Validate the properties of the first action
         ClassicAssert.AreEqual("receive", action.Name);
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
-        ClassicAssert.AreEqual(MessageType.JSON.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.XML), action.MessageType);
         ClassicAssert.IsInstanceOf<DefaultMessageBuilder>(action.MessageBuilder);
         ClassicAssert.AreEqual("<TestRequest><Message>Hello World!</Message></TestRequest>",
             ((DefaultMessageBuilder)action.MessageBuilder).BuildMessagePayload(_context, action.MessageType));
@@ -571,7 +570,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         // Validate the properties of the second action
         ClassicAssert.AreEqual("receive", action.Name);
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
-        ClassicAssert.AreEqual(MessageType.XML.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.XML), action.MessageType);
         ClassicAssert.IsInstanceOf<StaticMessageBuilder>(action.MessageBuilder);
         ClassicAssert.AreEqual("<TestRequest><Message>Hello World!</Message></TestRequest>",
             ((StaticMessageBuilder)action.MessageBuilder).GetMessage().Payload);
@@ -632,7 +631,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         // Validate the properties of the first action
         ClassicAssert.AreEqual("receive", action.Name);
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
-        ClassicAssert.AreEqual(MessageType.JSON.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.XML), action.MessageType);
         ClassicAssert.IsInstanceOf<DefaultMessageBuilder>(action.MessageBuilder);
         ClassicAssert.AreEqual("<TestRequest><Message>Hello World!</Message></TestRequest>",
             ((DefaultMessageBuilder)action.MessageBuilder).BuildMessagePayload(_context, action.MessageType));
@@ -707,12 +706,10 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Validate the properties of the action
         ClassicAssert.AreEqual("receive", action.Name);
-        ClassicAssert.AreEqual(MessageType.JSON.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.JSON), action.MessageType);
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
-        ClassicAssert.AreEqual(2, action.ValidationContexts.Count);
+        ClassicAssert.AreEqual(1, action.ValidationContexts.Count);
         ClassicAssert.IsTrue(action.ValidationContexts.Any(vc => vc is HeaderValidationContext));
-        //ClassicAssert.IsTrue(action.ValidationContexts.Any(vc => vc is XmlMessageValidationContext));
-        ClassicAssert.IsTrue(action.ValidationContexts.Any(vc => vc is JsonMessageValidationContext));
 
         ClassicAssert.IsInstanceOf<DefaultMessageBuilder>(action.MessageBuilder);
         ClassicAssert.AreEqual(1,
@@ -781,7 +778,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Validate the properties of the first action
         ClassicAssert.AreEqual("receive", action.Name);
-        ClassicAssert.AreEqual(MessageType.JSON.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.XML), action.MessageType);
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
         ClassicAssert.IsInstanceOf<DefaultMessageBuilder>(action.MessageBuilder);
         ClassicAssert.AreEqual("<TestRequest><Message>Hello World!</Message></TestRequest>",
@@ -796,7 +793,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Validate the properties of the second action
         ClassicAssert.AreEqual("receive", action.Name);
-        ClassicAssert.AreEqual(MessageType.XML.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.XML), action.MessageType);
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
         ClassicAssert.IsInstanceOf<StaticMessageBuilder>(action.MessageBuilder);
         ClassicAssert.AreEqual("<TestRequest><Message>Hello World!</Message></TestRequest>",
@@ -869,7 +866,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Validate the properties of the first action
         ClassicAssert.AreEqual("receive", action.Name);
-        ClassicAssert.AreEqual(MessageType.JSON.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.XML), action.MessageType);
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
         ClassicAssert.IsInstanceOf<DefaultMessageBuilder>(action.MessageBuilder);
         ClassicAssert.AreEqual("<TestRequest><Message>Hello World!</Message></TestRequest>",
@@ -1062,7 +1059,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Validate the properties of the action
         ClassicAssert.AreEqual("receive", action.Name);
-        ClassicAssert.AreEqual(MessageType.JSON.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.XML), action.MessageType);
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
 
         // Verify message selector map
@@ -1109,7 +1106,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Validate the properties of the action
         ClassicAssert.AreEqual("receive", action.Name);
-        ClassicAssert.AreEqual(MessageType.JSON.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.XML), action.MessageType);
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
 
         // Verify message selector and ensure map is empty
@@ -1175,7 +1172,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Validate the properties of the action
         ClassicAssert.AreEqual("receive", action.Name);
-        ClassicAssert.AreEqual(MessageType.JSON.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.XML), action.MessageType);
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
 
         // Verify variable extractor
@@ -1220,14 +1217,14 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         ClassicAssert.IsNotNull(_context.GetVariable("messageId"));
         ClassicAssert.AreEqual(received.Id, _context.GetVariable("messageId"));
 
-        // Get and validate executed test case
+        // Get and validate an executed test case
         var test = runner.GetTestCase();
         ClassicAssert.AreEqual(1, test.GetActionCount());
         ClassicAssert.IsInstanceOf<ReceiveMessageAction>(test.GetActions()[0]);
 
         var action = (ReceiveMessageAction)test.GetActions()[0];
         ClassicAssert.AreEqual("receive", action.Name);
-        ClassicAssert.AreEqual(MessageType.JSON.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.XML), action.MessageType);
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
 
         // Validate variable extractor

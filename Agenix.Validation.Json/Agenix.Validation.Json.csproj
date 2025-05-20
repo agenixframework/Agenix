@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+      <PackageReference Include="Newtonsoft.Json.Schema" Version="4.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Extension\agenix\message\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Extensions\agenix\message\validator\json" />
+      <EmbeddedResource Include="Extension\agenix\message\validator\json" />
+      <None Remove="Extensions\agenix\message\validator\json-path" />
+      <EmbeddedResource Include="Extension\agenix\message\validator\json-path" />
+      <None Remove="Extension\agenix\message\selector\json-path" />
+      <EmbeddedResource Include="Extension\agenix\message\selector\json-path" />
+      <None Remove="Extension\agenix\message\schemaValidator\json" />
+      <EmbeddedResource Include="Extension\agenix\message\schemaValidator\json" />
+      <None Remove="Extension\agenix\message\processor\jsonPath" />
+      <EmbeddedResource Include="Extension\agenix\message\processor\jsonPath" />
+      <None Remove="Extension\agenix\variable\extractor\jsonPath" />
+      <EmbeddedResource Include="Extension\agenix\variable\extractor\jsonPath" />
+      <None Remove="Extension\agenix\variable\extractor\segment\jsonPath" />
+      <EmbeddedResource Include="Extension\agenix\variable\extractor\segment\jsonPath" />
+      <None Remove="Extension\agenix\function\jsonPath" />
+      <EmbeddedResource Include="Extension\agenix\function\jsonPath" />
+    </ItemGroup>
+
+</Project>

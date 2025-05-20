@@ -1,8 +1,10 @@
 ﻿using System;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
 using Agenix.Core.Endpoint.Direct;
-using Agenix.Core.Exceptions;
 using Agenix.Core.Message;
 using Agenix.Core.Spi;
+using TestContext = Agenix.Api.Context.TestContext;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
@@ -77,7 +79,7 @@ public class DirectEndpointProducerTest
         {
             endpoint.CreateProducer().Send(message, _context);
         }
-        catch (CoreSystemException e)
+        catch (AgenixSystemException e)
         {
             ClassicAssert.IsTrue(e.Message.StartsWith("Failed to send message to queue: "));
             ClassicAssert.IsNotNull(e.InnerException);
@@ -86,6 +88,6 @@ public class DirectEndpointProducerTest
             return;
         }
 
-        Assert.Fail("Missing " + nameof(CoreSystemException) + " because no message was received");
+        Assert.Fail("Missing " + nameof(AgenixSystemException) + " because no message was received");
     }
 }

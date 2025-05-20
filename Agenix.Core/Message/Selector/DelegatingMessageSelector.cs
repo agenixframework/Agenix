@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
 
 namespace Agenix.Core.Message.Selector;
 
@@ -26,12 +28,12 @@ public class DelegatingMessageSelector : IMessageSelector
         _context = context;
         _matchingHeaders = MessageSelectorBuilder.WithString(selector).ToKeyValueDictionary();
 
-        if (_matchingHeaders.Count == 0) throw new CoreSystemException("Invalid empty message selector");
+        if (_matchingHeaders.Count == 0) throw new AgenixSystemException("Invalid empty message selector");
 
         _factories = [];
 
-        if (context.GetReferenceResolver() != null)
-            _factories.AddRange(context.GetReferenceResolver().ResolveAll<IMessageSelector.IMessageSelectorFactory>()
+        if (context.ReferenceResolver != null)
+            _factories.AddRange(context.ReferenceResolver.ResolveAll<IMessageSelector.IMessageSelectorFactory>()
                 .Values);
 
         _factories.AddRange(IMessageSelector.Lookup().Values);

@@ -1,8 +1,10 @@
-﻿using Agenix.Core.Annotations;
+﻿using Agenix.Api.Annotations;
+using Agenix.Api.Container;
 using Agenix.Core.Container;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
 using static Agenix.Core.Actions.EchoAction.Builder;
+using TestContext = Agenix.Api.Context.TestContext;
 using static Agenix.Core.Actions.CreateVariablesAction.Builder;
 
 namespace Agenix.Core.NUnitTestProject.NUnitIntegration.Container;

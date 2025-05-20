@@ -1,5 +1,5 @@
-﻿using Agenix.Core.Actions;
-using Agenix.Core.Exceptions;
+﻿using Agenix.Api.Exceptions;
+using Agenix.Core.Actions;
 using NUnit.Framework;
 
 namespace Agenix.Core.NUnitTestProject.Actions;
@@ -36,6 +36,6 @@ public class EchoActionTest : AbstractNUnitSetUp
     {
         var echo = new EchoAction.Builder().Message("${greeting} Agenix").Build();
 
-        Assert.Throws<CoreSystemException>(() => echo.Execute(Context));
+        Assert.Throws<AgenixSystemException>(() => echo.Execute(Context));
     }
 }

@@ -1,9 +1,10 @@
-﻿using Agenix.Core.Actions;
+﻿using Agenix.Api.Exceptions;
+using Agenix.Core.Actions;
 using Agenix.Core.Container;
-using Agenix.Core.Exceptions;
 using Moq;
 using NUnit.Framework;
 using static Agenix.Core.Container.Catch.Builder;
+using ITestAction = Agenix.Api.ITestAction;
 
 namespace Agenix.Core.NUnitTestProject.Container;
 
@@ -33,7 +34,7 @@ public class CatchTest : AbstractNUnitSetUp
     {
         var catchAction = CatchException()
             .Actions(new FailAction.Builder())
-            .Exception(typeof(CoreSystemException))
+            .Exception(typeof(AgenixSystemException))
             .Build();
 
         catchAction.Execute(Context);
@@ -44,7 +45,7 @@ public class CatchTest : AbstractNUnitSetUp
     {
         var catchAction = CatchException()
             .Actions(new EchoAction.Builder())
-            .Exception(typeof(CoreSystemException))
+            .Exception(typeof(AgenixSystemException))
             .Build();
 
         catchAction.Execute(Context);
@@ -59,7 +60,7 @@ public class CatchTest : AbstractNUnitSetUp
 
         var catchAction = new Catch.Builder()
             .Actions(new FailAction.Builder().Build(), actionMock.Object)
-            .Exception(typeof(CoreSystemException))
+            .Exception(typeof(AgenixSystemException))
             .Build();
 
         catchAction.Execute(Context);
@@ -76,7 +77,7 @@ public class CatchTest : AbstractNUnitSetUp
 
         var catchAction = new Catch.Builder()
             .Actions(actionMock.Object, new FailAction.Builder().Build(), actionMock.Object)
-            .Exception(typeof(CoreSystemException))
+            .Exception(typeof(AgenixSystemException))
             .Build();
 
         catchAction.Execute(Context);

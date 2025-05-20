@@ -1,4 +1,4 @@
-﻿using Agenix.Core.Exceptions;
+﻿using Agenix.Api.Exceptions;
 using Agenix.Core.Util;
 using NUnit.Framework;
 
@@ -68,14 +68,14 @@ public class BooleanExpressionParserTest
     [Test]
     public void TestExpressionParserWithUnknownOperator()
     {
-        var ex = Assert.Throws<CoreSystemException>(() => BooleanExpressionParser.Evaluate("wahr"));
+        var ex = Assert.Throws<AgenixSystemException>(() => BooleanExpressionParser.Evaluate("wahr"));
         Assert.That(ex.Message, Is.EqualTo("Unknown operator 'wahr'"));
     }
 
     [Test]
     public void TestExpressionParserWithBrokenExpression()
     {
-        var ex = Assert.Throws<CoreSystemException>(() => BooleanExpressionParser.Evaluate("1 = "));
+        var ex = Assert.Throws<AgenixSystemException>(() => BooleanExpressionParser.Evaluate("1 = "));
         Assert.That(ex.Message,
             Is.EqualTo("Unable to parse boolean expression '1 = '. Maybe expression is incomplete!"),
             "Unexpected exception message");
