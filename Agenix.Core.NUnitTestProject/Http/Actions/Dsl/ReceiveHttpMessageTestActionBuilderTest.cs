@@ -1,8 +1,11 @@
 ﻿using System.Net.Http;
+using Agenix.Api.Message;
+using Agenix.Api.Validation.Context;
 using Agenix.Core.Actions;
 using Agenix.Core.Message;
-using Agenix.Core.Validation.Context;
+using TestContext = Agenix.Api.Context.TestContext;
 using Agenix.Core.Validation.Json;
+using Agenix.Core.Validation.Xml;
 using Agenix.Http.Actions;
 using Agenix.Http.Client;
 using Agenix.Http.Message;
@@ -53,8 +56,7 @@ public class ReceiveHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
 
         ClassicAssert.AreEqual(action.ValidationContexts.Count, 2L);
         ClassicAssert.AreEqual(action.ValidationContexts[0].GetType(), typeof(HeaderValidationContext));
-        //ClassicAssert.AreEqual(action.ValidationContexts[1].GetType(), typeof(XmlMessageValidationContext));
-        ClassicAssert.AreEqual(action.ValidationContexts[1].GetType(), typeof(JsonMessageValidationContext));
+        ClassicAssert.AreEqual(action.ValidationContexts[1].GetType(), typeof(XmlMessageValidationContext));
 
         var messageBuilder = (HttpMessageBuilder)action.MessageBuilder;
         ClassicAssert.AreEqual(messageBuilder.BuildMessagePayload(Context, action.MessageType),

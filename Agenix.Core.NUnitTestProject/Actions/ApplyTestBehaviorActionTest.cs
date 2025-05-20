@@ -1,6 +1,8 @@
-﻿using Agenix.Core.Actions;
+﻿using Agenix.Api;
+using Agenix.Core.Actions;
 using Moq;
 using NUnit.Framework;
+using ITestAction = Agenix.Api.ITestAction;
 
 namespace Agenix.Core.NUnitTestProject.Actions;
 

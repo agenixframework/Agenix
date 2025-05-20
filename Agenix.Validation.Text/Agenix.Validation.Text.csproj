@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Agenix.Api\Agenix.Api.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Extension\agenix\message\validator\binary_base64" />
+      <EmbeddedResource Include="Extension\agenix\message\validator\binary_base64" />
+      <None Remove="Extension\agenix\message\validator\gzip_base64" />
+      <EmbeddedResource Include="Extension\agenix\message\validator\gzip_base64" />
+      <None Remove="Extension\agenix\message\validator\plaintext" />
+      <EmbeddedResource Include="Extension\agenix\message\validator\plaintext" />
+    </ItemGroup>
+
+</Project>

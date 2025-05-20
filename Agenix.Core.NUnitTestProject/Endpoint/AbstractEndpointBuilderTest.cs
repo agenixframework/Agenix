@@ -1,5 +1,6 @@
 ﻿using System;
-using Agenix.Core.Annotations;
+using Agenix.Api.Annotations;
+using Agenix.Api.Endpoint;
 using Agenix.Core.Endpoint;
 using Moq;
 using NUnit.Framework;
@@ -23,8 +24,8 @@ public class AbstractEndpointBuilderTest : AbstractNUnitSetUp
     protected override TestContextFactory CreateTestContextFactory()
     {
         var contextFactory = base.CreateTestContextFactory();
-        contextFactory.GetReferenceResolver().Bind("testBuilder", _endpointBuilder);
-        contextFactory.GetReferenceResolver().Bind("testPerson", _person);
+        contextFactory.ReferenceResolver.Bind("testBuilder", _endpointBuilder);
+        contextFactory.ReferenceResolver.Bind("testPerson", _person);
         return contextFactory;
     }
 

@@ -1,0 +1,2 @@
+name=defaultJsonSchemaValidator
+type=Agenix.Validation.Json.Validation.Schema.JsonSchemaValidation

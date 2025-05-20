@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using Agenix.Core.Common;
-using Agenix.Core.Exceptions;
+using Agenix.Api;
+using Agenix.Api.Annotations;
+using Agenix.Api.Common;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
 using Agenix.Core.Spi;
 using log4net;
 
@@ -31,7 +34,7 @@ public abstract class AgenixAnnotations
     }
 
     /// <summary>
-    ///     Creates new Agenix test context and injects all supported components and endpoints to target object using
+    ///     Creates a new Agenix test context and injects all supported components and endpoints to target object using
     ///     annotations.
     /// </summary>
     /// <param name="target">The object to which components and endpoints will be injected.</param>
@@ -83,8 +86,8 @@ public abstract class AgenixAnnotations
     /// </summary>
     /// <param name="testCase">The object whose fields will be injected with the <see cref="Agenix" /> instance.</param>
     /// <param name="agenixFramework">The <see cref="Agenix" /> instance to inject into the test case object's fields.</param>
-    /// <exception cref="CoreSystemException">Thrown when the injection into a test case field cannot be completed.</exception>
-    public static void InjectAgenixFramework(object testCase, Agenix agenixFramework)
+    /// <exception cref="AgenixSystemException">Thrown when the injection into a test case field cannot be completed.</exception>
+    public static void InjectAgenixFramework(object testCase, Core.Agenix agenixFramework)
     {
         var testCaseType = testCase.GetType();
 
@@ -100,7 +103,7 @@ public abstract class AgenixAnnotations
             }
             catch (Exception ex)
             {
-                throw new CoreSystemException($"Failed to inject Agenix framework for field {field.FieldType}", ex);
+                throw new AgenixSystemException($"Failed to inject Agenix framework for field {field.FieldType}", ex);
             }
     }
 
@@ -110,7 +113,7 @@ public abstract class AgenixAnnotations
     /// </summary>
     /// <param name="target">The object whose fields will be injected with the <see cref="AgenixContext" /> instance.</param>
     /// <param name="context">The <see cref="AgenixContext" /> instance to inject into the target object's fields.</param>
-    /// <exception cref="CoreSystemException">Thrown when the injection into a target field cannot be completed.</exception>
+    /// <exception cref="AgenixSystemException">Thrown when the injection into a target field cannot be completed.</exception>
     public static void InjectAgenixContext(object target, AgenixContext context)
     {
         var targetType = target.GetType();
@@ -127,7 +130,7 @@ public abstract class AgenixAnnotations
             }
             catch (Exception ex)
             {
-                throw new CoreSystemException($"Failed to inject Agenix context for field {field.FieldType}", ex);
+                throw new AgenixSystemException($"Failed to inject Agenix context for field {field.FieldType}", ex);
             }
     }
 
@@ -137,7 +140,7 @@ public abstract class AgenixAnnotations
     /// </summary>
     /// <param name="target">The object whose fields will be injected with the <see cref="TestContext" /> instance.</param>
     /// <param name="context">The <see cref="TestContext" /> instance to inject into the target object’s fields.</param>
-    /// <exception cref="CoreSystemException">Thrown when the injection into a target field cannot be completed.</exception>
+    /// <exception cref="AgenixSystemException">Thrown when the injection into a target field cannot be completed.</exception>
     public static void InjectTestContext(object target, TestContext context)
     {
         var targetType = target.GetType();
@@ -154,7 +157,7 @@ public abstract class AgenixAnnotations
             }
             catch (Exception ex)
             {
-                throw new CoreSystemException(
+                throw new AgenixSystemException(
                     $"Not able to provide an Agenix resource injection for type {field.FieldType}", ex);
             }
     }
@@ -165,7 +168,7 @@ public abstract class AgenixAnnotations
     /// </summary>
     /// <param name="target">The target object where the test runner instance will be injected.</param>
     /// <param name="runner">The instance of <see cref="ITestCaseRunner" /> to inject into the target fields.</param>
-    /// <exception cref="CoreSystemException">Thrown when the injection into a target field cannot be completed.</exception>
+    /// <exception cref="AgenixSystemException">Thrown when the injection into a target field cannot be completed.</exception>
     public static void InjectTestRunner(object target, ITestCaseRunner runner)
     {
         var targetType = target.GetType();
@@ -183,7 +186,7 @@ public abstract class AgenixAnnotations
             }
             catch (Exception ex)
             {
-                throw new CoreSystemException(
+                throw new AgenixSystemException(
                     $"Not able to provide an Agenix resource injection for type {field.FieldType}", ex);
             }
 
@@ -197,7 +200,7 @@ public abstract class AgenixAnnotations
     /// </summary>
     /// <param name="target">The target object where the test action runner instance will be injected.</param>
     /// <param name="runner">The instance of <see cref="ITestActionRunner" /> to inject into the target fields.</param>
-    /// <exception cref="CoreSystemException">Thrown when the injection into a target field cannot be completed.</exception>
+    /// <exception cref="AgenixSystemException">Thrown when the injection into a target field cannot be completed.</exception>
     public static void InjectTestActionRunner(object target, ITestActionRunner runner)
     {
         var targetType = target.GetType();
@@ -214,7 +217,7 @@ public abstract class AgenixAnnotations
             }
             catch (Exception ex)
             {
-                throw new CoreSystemException(
+                throw new AgenixSystemException(
                     $"Not able to provide an Agenix resource injection for type {field.FieldType}", ex);
             }
     }
@@ -225,7 +228,7 @@ public abstract class AgenixAnnotations
     /// </summary>
     /// <param name="target">The target object where the Gherkin test action runner instance will be injected.</param>
     /// <param name="runner">The instance of <see cref="IGherkinTestActionRunner" /> to inject into the target fields.</param>
-    /// <exception cref="CoreSystemException">Thrown when the injection into a target field cannot be completed.</exception>
+    /// <exception cref="AgenixSystemException">Thrown when the injection into a target field cannot be completed.</exception>
     public static void InjectGherkinTestActionRunner(object target, IGherkinTestActionRunner runner)
     {
         var targetType = target.GetType();
@@ -242,7 +245,7 @@ public abstract class AgenixAnnotations
             }
             catch (Exception ex)
             {
-                throw new CoreSystemException(
+                throw new AgenixSystemException(
                     $"Not able to provide an Agenix resource injection for type {field.FieldType}", ex);
             }
     }
@@ -253,7 +256,7 @@ public abstract class AgenixAnnotations
     /// </summary>
     /// <param name="configType">The type of the configuration to be parsed.</param>
     /// <param name="agenixContext">The context used for binding the parsed configuration.</param>
-    /// <exception cref="CoreSystemException">
+    /// <exception cref="AgenixSystemException">
     ///     Thrown when configuration instance creation fails or when issues occur accessing
     ///     the constructor.
     /// </exception>
@@ -263,22 +266,22 @@ public abstract class AgenixAnnotations
         {
             // Creating an instance of the config type using its default constructor
             var instance = Activator.CreateInstance(configType);
-            if (instance == null) throw new CoreSystemException("Instance creation failed for configuration class.");
+            if (instance == null) throw new AgenixSystemException("Instance creation failed for configuration class.");
 
             // Assuming there is a method similar to parseConfiguration that takes an object
             ParseConfiguration(instance, agenixContext);
         }
         catch (MissingMethodException ex)
         {
-            throw new CoreSystemException("Missing default constructor on custom configuration class", ex);
+            throw new AgenixSystemException("Missing default constructor on custom configuration class", ex);
         }
         catch (TargetInvocationException ex)
         {
-            throw new CoreSystemException("Exception occurred while invoking the default constructor", ex);
+            throw new AgenixSystemException("Exception occurred while invoking the default constructor", ex);
         }
         catch (MemberAccessException ex)
         {
-            throw new CoreSystemException("No access to the constructor of the custom configuration class", ex);
+            throw new AgenixSystemException("No access to the constructor of the custom configuration class", ex);
         }
     }
 
@@ -287,7 +290,7 @@ public abstract class AgenixAnnotations
     /// </summary>
     /// <param name="configuration"></param>
     /// <param name="agenixContext"></param>
-    /// <exception cref="CoreSystemException"></exception>
+    /// <exception cref="AgenixSystemException"></exception>
     public static void ParseConfiguration(object configuration, AgenixContext agenixContext)
     {
         var configType = configuration.GetType();
@@ -319,7 +322,7 @@ public abstract class AgenixAnnotations
             }
             catch (Exception ex) when (ex is TargetInvocationException or MethodAccessException)
             {
-                throw new CoreSystemException("Failed to invoke configuration method", ex);
+                throw new AgenixSystemException("Failed to invoke configuration method", ex);
             }
 
         // Handle fields with BindToRegistry attribute
@@ -345,7 +348,7 @@ public abstract class AgenixAnnotations
             }
             catch (FieldAccessException ex)
             {
-                throw new CoreSystemException("Failed to access configuration field", ex);
+                throw new AgenixSystemException("Failed to access configuration field", ex);
             }
     }
 }

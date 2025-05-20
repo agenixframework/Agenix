@@ -1,3 +1,6 @@
+using Agenix.Api;
+using Agenix.Api.Context;
+
 namespace Agenix.Core.Actions;
 
 /// Builder for creating default test actions.

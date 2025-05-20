@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Functions;
 
 namespace Agenix.Core.Functions.Core;
 
 /// <summary>
-///     Function searches for occurrences of a given character sequence and replaces all findings with given replacement
+///     Function searches for occurrences of a given character sequence and replaces all findings with a given replacement
 ///     string.
 /// </summary>
 public class TranslateFunction : IFunction
@@ -25,7 +27,6 @@ public class TranslateFunction : IFunction
         if (parameterList.Count > 2) replacement = parameterList[2];
 
         if (regex != null && replacement != null)
-            //resultString = resultString.Replace(regex, replacement);
             resultString = Regex.Replace(resultString, regex, replacement);
 
         return resultString;

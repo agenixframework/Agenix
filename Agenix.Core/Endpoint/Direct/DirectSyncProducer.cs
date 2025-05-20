@@ -1,8 +1,11 @@
 ﻿using System;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
+using Agenix.Api.Message.Correlation;
+using Agenix.Api.Messaging;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Correlation;
-using Agenix.Core.Messaging;
 using log4net;
 
 namespace Agenix.Core.Endpoint.Direct;
@@ -25,17 +28,17 @@ public class DirectSyncProducer : DirectProducer, IReplyConsumer
     /**
      * Endpoint configuration
      */
-    private readonly DirectSyncEndpointConfiguration endpointConfiguration;
+    private readonly DirectSyncEndpointConfiguration _endpointConfiguration;
 
     /**
-     * Reply channel store
+     * Reply to channel store
      */
     private ICorrelationManager<IMessage> _correlationManager;
 
     public DirectSyncProducer(string name, DirectSyncEndpointConfiguration endpointConfiguration) : base(name,
         endpointConfiguration)
     {
-        this.endpointConfiguration = endpointConfiguration;
+        this._endpointConfiguration = endpointConfiguration;
 
         _correlationManager =
             new PollingCorrelationManager<IMessage>(endpointConfiguration, "Reply message did not arrive yet");
@@ -58,7 +61,7 @@ public class DirectSyncProducer : DirectProducer, IReplyConsumer
     public IMessage Receive(TestContext context)
     {
         return Receive(_correlationManager.GetCorrelationKey(
-            endpointConfiguration.Correlator.GetCorrelationKeyName(Name), context), context);
+            _endpointConfiguration.Correlator.GetCorrelationKeyName(Name), context), context);
     }
 
     /// <summary>
@@ -70,22 +73,24 @@ public class DirectSyncProducer : DirectProducer, IReplyConsumer
     public IMessage Receive(TestContext context, long timeout)
     {
         return Receive(_correlationManager.GetCorrelationKey(
-            endpointConfiguration.Correlator.GetCorrelationKeyName(Name), context), context, timeout);
+            _endpointConfiguration.Correlator.GetCorrelationKeyName(Name), context), context, timeout);
     }
 
     /// <summary>
     ///     Receives a message based on the given context.
     /// </summary>
+    /// <param name="selector"></param>
     /// <param name="context">The context in which the message will be received.</param>
     /// <returns>The received message.</returns>
     public IMessage Receive(string selector, TestContext context)
     {
-        return Receive(selector, context, endpointConfiguration.Timeout);
+        return Receive(selector, context, _endpointConfiguration.Timeout);
     }
 
     /// <summary>
     ///     Receives a message based on the given context.
     /// </summary>
+    /// <param name="selector"></param>
     /// <param name="context">The context in which the message will be received.</param>
     /// <returns>The received message.</returns>
     public IMessage Receive(string selector, TestContext context, long timeout)
@@ -104,8 +109,8 @@ public class DirectSyncProducer : DirectProducer, IReplyConsumer
     /// <param name="context">The operational context in which the message is sent.</param>
     public override void Send(IMessage message, TestContext context)
     {
-        var correlationKeyName = endpointConfiguration.Correlator.GetCorrelationKeyName(Name);
-        var correlationKey = endpointConfiguration.Correlator.GetCorrelationKey(message);
+        var correlationKeyName = _endpointConfiguration.Correlator.GetCorrelationKeyName(Name);
+        var correlationKey = _endpointConfiguration.Correlator.GetCorrelationKey(message);
         _correlationManager.SaveCorrelationKey(correlationKeyName, correlationKey, context);
 
         var destinationQueueName = GetDestinationQueueName();
@@ -120,10 +125,10 @@ public class DirectSyncProducer : DirectProducer, IReplyConsumer
 
         var replyQueue = GetReplyQueue(message, context);
         GetDestinationQueue(context).Send(message);
-        var replyMessage = replyQueue.Receive(endpointConfiguration.Timeout);
+        var replyMessage = replyQueue.Receive(_endpointConfiguration.Timeout);
 
         if (replyMessage == null)
-            throw new ReplyMessageTimeoutException(endpointConfiguration.Timeout, destinationQueueName);
+            throw new ReplyMessageTimeoutException(_endpointConfiguration.Timeout, destinationQueueName);
 
         Log.Info("Received synchronous response from reply queue");
 
@@ -131,7 +136,7 @@ public class DirectSyncProducer : DirectProducer, IReplyConsumer
     }
 
     /// <summary>
-    ///     Reads reply queue from message header or creates a new temporary queue.
+    ///     Reads reply queue from the message header or creates a new temporary queue.
     /// </summary>
     /// <param name="message"></param>
     /// <param name="context"></param>

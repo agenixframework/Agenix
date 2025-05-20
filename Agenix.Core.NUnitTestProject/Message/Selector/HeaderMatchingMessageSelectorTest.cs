@@ -1,4 +1,5 @@
-﻿using Agenix.Core.Message;
+﻿using Agenix.Api.Message;
+using Agenix.Core.Message;
 using Agenix.Core.Message.Selector;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Validation.Context;
 using Agenix.Core.Validation;
-using Agenix.Core.Validation.Context;
 using NUnit.Framework;
 
 namespace Agenix.Core.NUnitTestProject.Validation;

@@ -3,6 +3,7 @@ using System.Net;
 using Agenix.Http.Message;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.NUnitTestProject.Http.Message;
 

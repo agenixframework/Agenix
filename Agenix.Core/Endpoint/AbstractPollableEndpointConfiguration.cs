@@ -1,4 +1,6 @@
-﻿namespace Agenix.Core.Endpoint;
+﻿using Agenix.Api.Endpoint;
+
+namespace Agenix.Core.Endpoint;
 
 /// <summary>
 ///     Abstract pollable endpoint configuration adds polling interval settings.

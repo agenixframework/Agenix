@@ -1,9 +1,10 @@
 using System.Net;
 using System.Text;
-using Agenix.Core.Endpoint.Resolver;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Endpoint.Resolver;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
+using Agenix.Api.Util;
 using Agenix.Core.Message;
-using Agenix.Core.Util;
 using HttpStatusCode = System.Net.HttpStatusCode;
 
 namespace Agenix.Http.Message;
@@ -103,10 +104,8 @@ public class HttpMessage : DefaultMessage
         SetHeader(HttpMessageHeaders.HttpStatusCode, (int)statusCode);
         var status = (HttpStatusCode)(int)statusCode;
         if (Enum.IsDefined(typeof(HttpStatusCode), (int)statusCode))
-        {
             SetHeader(HttpMessageHeaders.HttpReasonPhrase, status.ToString());
-        }
-       
+
         return this;
     }
 
@@ -184,7 +183,7 @@ public class HttpMessage : DefaultMessage
     /// <return>The altered HttpMessage with the newly added query parameter.</return>
     public HttpMessage QueryParam(string? name, string? value = null)
     {
-        if (!StringUtils.HasText(name)) throw new CoreSystemException("Invalid query param name - must not be empty!");
+        if (!StringUtils.HasText(name)) throw new AgenixSystemException("Invalid query param name - must not be empty!");
 
         AddQueryParam(name, value);
 
@@ -462,14 +461,14 @@ public class HttpMessage : DefaultMessage
     /// <param name="reader">The StringReader object from which the HTTP message data will be read.</param>
     /// <param name="message">The HttpMessage instance to be populated with data from the reader.</param>
     /// <returns>An HttpMessage object populated with headers and payload extracted from the reader.</returns>
-    /// <exception cref="CoreSystemException">Thrown when there is an invalid header syntax in the input data.</exception>
+    /// <exception cref="AgenixSystemException">Thrown when there is an invalid header syntax in the input data.</exception>
     private static HttpMessage ParseHttpMessage(StringReader reader, HttpMessage message)
     {
         string? line;
         while ((line = reader.ReadLine()) != null && StringUtils.HasText(line))
         {
             if (!line.Contains(':'))
-                throw new CoreSystemException(
+                throw new AgenixSystemException(
                     $"Invalid header syntax in line - expected 'key:value' but was '{line}'");
 
             var keyValue = line.Split(':');

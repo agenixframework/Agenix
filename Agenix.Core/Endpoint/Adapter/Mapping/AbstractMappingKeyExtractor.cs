@@ -1,4 +1,6 @@
-﻿using Agenix.Core.Message;
+﻿using Agenix.Api.Endpoint.Adapter.Mapping;
+using Agenix.Api.Message;
+using Agenix.Core.Message;
 
 namespace Agenix.Core.Endpoint.Adapter.Mapping;
 

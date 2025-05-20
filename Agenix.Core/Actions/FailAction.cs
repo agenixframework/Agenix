@@ -1,4 +1,6 @@
-using Agenix.Core.Exceptions;
+using Agenix.Api;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
 
 namespace Agenix.Core.Actions;
 
@@ -19,7 +21,7 @@ public class FailAction(FailAction.Builder builder) : AbstractTestAction("fail",
     /// <param name="context">The TestContext in which the FailAction is executed.</param>
     public override void DoExecute(TestContext context)
     {
-        throw new CoreSystemException(context.ReplaceDynamicContentInString(_message));
+        throw new AgenixSystemException(context.ReplaceDynamicContentInString(_message));
     }
 
     /// <summary>

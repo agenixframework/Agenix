@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Functions;
 using Agenix.Core.Functions;
 using Agenix.Core.Functions.Core;
 using NUnit.Framework;

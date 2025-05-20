@@ -1,10 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using Agenix.Api;
+using Agenix.Api.Annotations;
+using Agenix.Api.Common;
+using Agenix.Api.Container;
+using Agenix.Api.Context;
+using Agenix.Api.Endpoint;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Functions;
+using Agenix.Api.Log;
+using Agenix.Api.Message;
+using Agenix.Api.Report;
+using Agenix.Api.Util;
+using Agenix.Api.Validation;
+using Agenix.Api.Validation.Context;
+using Agenix.Api.Validation.Matcher;
+using Agenix.Api.Variable;
 using Agenix.Core.Annotations;
-using Agenix.Core.Common;
 using Agenix.Core.Container;
 using Agenix.Core.Endpoint;
-using Agenix.Core.Exceptions;
 using Agenix.Core.Functions;
 using Agenix.Core.Log;
 using Agenix.Core.Message;
@@ -12,7 +26,6 @@ using Agenix.Core.Report;
 using Agenix.Core.Spi;
 using Agenix.Core.Util;
 using Agenix.Core.Validation;
-using Agenix.Core.Validation.Context;
 using Agenix.Core.Validation.Matcher;
 
 namespace Agenix.Core;
@@ -165,22 +178,22 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
     /// </summary>
     /// <returns></returns>
     /// <exception cref="TypeLoadException"></exception>
-    /// <exception cref="CoreSystemException"></exception>
+    /// <exception cref="AgenixSystemException"></exception>
     public static AgenixContext Create()
     {
         var context = Builder.DefaultContext().Build();
 
-        if (string.IsNullOrEmpty(CoreSettings.DefaultConfigClass())) return context;
+        if (string.IsNullOrEmpty(AgenixSettings.DefaultConfigClass())) return context;
 
         try
         {
-            var configType = Type.GetType(CoreSettings.DefaultConfigClass());
+            var configType = Type.GetType(AgenixSettings.DefaultConfigClass());
             if (configType == null) throw new TypeLoadException("Type not found.");
             context.ParseConfiguration(configType);
         }
         catch (Exception ex) when (ex is TypeLoadException or NullReferenceException)
         {
-            throw new CoreSystemException("Failed to instantiate custom configuration class", ex);
+            throw new AgenixSystemException("Failed to instantiate custom configuration class", ex);
         }
 
         return context;

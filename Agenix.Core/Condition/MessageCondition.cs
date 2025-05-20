@@ -1,4 +1,6 @@
-﻿namespace Agenix.Core.Condition;
+﻿using Agenix.Api.Context;
+
+namespace Agenix.Core.Condition;
 
 /// Condition that verifies if a specific message is present in the test context message store. Messages are
 /// automatically stored when sending and receiving messages with corresponding test actions. This condition
@@ -7,9 +9,8 @@
 /// /
 public class MessageCondition : AbstractCondition
 {
-    /**
-     * Message that should be present in message store
-     */
+    /// The name of the message used to identify it within the message store.
+    /// /
     private string _messageName;
 
     /// Evaluates whether the condition is satisfied based on the provided test context.
@@ -35,7 +36,7 @@ public class MessageCondition : AbstractCondition
 
     /// Generates an error message indicating that the message condition has failed.
     /// <param name="context">The test context used to evaluate the message condition.</param>
-    /// <return>A string containing the formatted error message indicating the failure due to missing message in the store.</return>
+    /// <return>A string containing the formatted error message indicating the failure due to a missing message in the store.</return>
     public override string GetErrorMessage(TestContext context)
     {
         return

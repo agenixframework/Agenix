@@ -1,4 +1,6 @@
-﻿namespace Agenix.Core.Container;
+﻿using Agenix.Api.Context;
+
+namespace Agenix.Core.Container;
 
 /// <summary>
 ///     Represents an evaluator that determines the outcome of iterations based on specified conditions.

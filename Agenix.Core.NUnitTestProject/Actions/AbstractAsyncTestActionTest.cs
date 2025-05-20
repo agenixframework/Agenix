@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Agenix.Api.Exceptions;
 using Agenix.Core.Actions;
-using Agenix.Core.Exceptions;
 using log4net;
 using NUnit.Framework;
+using TestContext = Agenix.Api.Context.TestContext;
 using NUnit.Framework.Legacy;
 
 namespace Agenix.Core.NUnitTestProject.Actions;
@@ -38,7 +39,7 @@ public class AbstractAsyncTestActionTest : AbstractNUnitSetUp
         var action = new CustomAsyncTestActionError(result);
 
         // Execute the action
-        var exception = Assert.ThrowsAsync<CoreSystemException>(async () =>
+        var exception = Assert.ThrowsAsync<AgenixSystemException>(async () =>
             {
                 action.Execute(Context);
                 await TaskExtensions.TimeoutAfter(result.Task, TimeSpan.FromMilliseconds(1000));
@@ -63,7 +64,7 @@ public class AbstractAsyncTestActionTest : AbstractNUnitSetUp
     {
         public override Task DoExecuteAsync(TestContext context)
         {
-            return Task.Run(() => throw new CoreSystemException("Failed!"));
+            return Task.Run(() => throw new AgenixSystemException("Failed!"));
         }
 
         public override void OnSuccess(TestContext context)

@@ -1,7 +1,9 @@
-﻿using Agenix.Core.Message;
+﻿using Agenix.Api.Message;
+using Agenix.Core.Message;
 using Agenix.Core.Message.Selector;
 using Agenix.Core.Util;
 using NUnit.Framework;
+using TestContext = Agenix.Api.Context.TestContext;
 using NUnit.Framework.Legacy;
 
 namespace Agenix.Core.NUnitTestProject.Message;

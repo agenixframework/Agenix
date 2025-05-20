@@ -1,8 +1,10 @@
-﻿using Agenix.Core.Actions;
+﻿using Agenix.Api.Endpoint;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
+using Agenix.Api.Messaging;
+using Agenix.Core.Actions;
 using Agenix.Core.Endpoint;
-using Agenix.Core.Exceptions;
 using Agenix.Core.Message;
-using Agenix.Core.Messaging;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
@@ -79,7 +81,7 @@ public class ReceiveTimeoutActionTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert
-        var ex = Assert.Throws<CoreSystemException>(() => receiveTimeout.Execute(Context));
+        var ex = Assert.Throws<AgenixSystemException>(() => receiveTimeout.Execute(Context));
         Assert.That(ex, Is.Not.Null);
         ClassicAssert.AreEqual(
             "Message timeout validation failed! Received message while waiting for timeout on destination", ex.Message);

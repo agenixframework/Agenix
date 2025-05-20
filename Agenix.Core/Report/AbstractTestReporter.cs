@@ -1,4 +1,5 @@
 ﻿using System;
+using Agenix.Api.Report;
 using log4net;
 
 namespace Agenix.Core.Report;

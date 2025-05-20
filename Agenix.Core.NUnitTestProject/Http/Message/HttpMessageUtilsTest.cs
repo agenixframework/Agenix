@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net;
+using Agenix.Api.Message;
 using Agenix.Core.Message;
 using Agenix.Http.Message;
 using NUnit.Framework;

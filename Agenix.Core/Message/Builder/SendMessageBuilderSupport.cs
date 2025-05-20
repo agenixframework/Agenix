@@ -1,4 +1,5 @@
-﻿using Agenix.Core.Actions;
+﻿using Agenix.Api.Message;
+using Agenix.Core.Actions;
 
 namespace Agenix.Core.Message.Builder;
 
@@ -14,11 +15,15 @@ public class SendMessageBuilderSupport<T, TB, TS>(TB dlg) : MessageBuilderSuppor
     where TB : SendMessageAction.SendMessageActionBuilder<T, TS, TB>
     where TS : SendMessageBuilderSupport<T, TB, TS>
 {
+    protected bool _schemaValidation;
+    protected string  _schema;
+    protected string  _schemaRepository;
+    
     /// <summary>
     ///     Sets the fork mode for this send message builder support.
     /// </summary>
     /// <param name="forkMode">Specifies whether the fork mode should be enabled or disabled.</param>
-    /// <returns>The instance of the send message builder support with the updated fork mode.</returns>
+    /// <returns>The instance of the send message builder supports with the updated fork mode.</returns>
     public TS Fork(bool forkMode)
     {
         _delegate.Fork(forkMode);
@@ -38,11 +43,64 @@ public class SendMessageBuilderSupport<T, TB, TS>(TB dlg) : MessageBuilderSuppor
     /// <summary>
     ///     Applies the specified message processor to transform the send message action.
     /// </summary>
-    /// <param name="processor">The message processor to apply.</param>
-    /// <returns>The instance of the send message builder support with the applied transformation.</returns>
+    /// <param name="builder">The message processor to apply.</param>
+    /// <returns>The instance of the sent message builder supports with the applied transformation.</returns>
     public TS Transform<B>(IMessageProcessor.IBuilder<IMessageProcessor, B> builder)
         where B : IMessageProcessor.IBuilder<IMessageProcessor, B>
     {
         return Transform(builder.Build());
     }
+
+    /// <summary>
+    /// Enables or disables schema validation for the message.
+    /// </summary>
+    /// <param name="enabled">Specifies whether schema validation should be enabled or disabled.</param>
+    /// <returns>The instance of the sent message builder supports with the updated schema validation setting.</returns>
+    public TS SchemaValidation(bool enabled)
+    {
+        _schemaValidation = enabled;
+        return _self;
+    }
+
+    /// <summary>
+    /// Retrieves the current state of the schema validation flag.
+    /// </summary>
+    /// <returns>A boolean value indicating whether schema validation is enabled.</returns>
+    public bool IsSchemaValidation()
+    {
+        return _schemaValidation;
+    }
+
+    /// <summary>
+    /// Sets the schema instance name to be used for schema validation.
+    /// </summary>
+    /// <param name="schemaName">The name of the schema instance to use for validation.</param>
+    /// <returns>The instance of the send message builder support with the specified schema applied.</returns>
+    public TS Schema(string schemaName)
+    {
+        _schema = schemaName;
+        return _self;
+    }
+
+    /// Retrieves the schema associated with the send message action.
+    /// @return the schema as a string
+    /// /
+    public string GetSchema => _schema;
+
+    /// <summary>
+    /// Sets the schema repository to be used for validation during message processing.
+    /// </summary>
+    /// <param name="schemaRepository">The identifier or instance of the schema repository to use.</param>
+    /// <returns>The current instance of the send message builder support with the specified schema repository.</returns>
+    public TS SchemaRepository(string schemaRepository)
+    {
+        _schemaRepository = schemaRepository;
+        return _self;
+    }
+
+    /// <summary>
+    /// Retrieves the schema repository associated with the send message action.
+    /// </summary>
+    /// <returns>A string representing the schema repository.</returns>
+    public string GetSchemaRepository => _schemaRepository;
 }

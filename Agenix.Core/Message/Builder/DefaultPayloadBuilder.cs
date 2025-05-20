@@ -1,4 +1,7 @@
-﻿namespace Agenix.Core.Message.Builder;
+﻿using Agenix.Api.Context;
+using Agenix.Api.Message;
+
+namespace Agenix.Core.Message.Builder;
 
 /// <summary>
 ///     Represents a builder class that constructs message payloads with dynamic content using the provided context.
@@ -10,7 +13,7 @@ public class DefaultPayloadBuilder(object payload) : IMessagePayloadBuilder
     /// </summary>
     /// <param name="context">The context that provides methods for replacing dynamic content in a string.</param>
     /// <returns>The processed payload object.</returns>
-    public object BuildPayload(TestContext context)
+    public virtual object BuildPayload(TestContext context)
     {
         return payload switch
         {

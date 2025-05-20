@@ -1,4 +1,6 @@
-﻿namespace Agenix.Core.Container;
+﻿using Agenix.Api;
+
+namespace Agenix.Core.Container;
 
 /// <summary>
 ///     Represents an abstract builder for exception containers that handle specific action configurations

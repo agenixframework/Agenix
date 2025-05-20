@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Agenix.Validation.Binary\Agenix.Validation.Binary.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="log4net.config">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0" />
+      <PackageReference Include="NUnit" Version="4.3.2" />
+      <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
+    </ItemGroup>
+
+</Project>

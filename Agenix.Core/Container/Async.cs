@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Agenix.Api;
+using Agenix.Api.Context;
 using Agenix.Core.Actions;
 using log4net;
 

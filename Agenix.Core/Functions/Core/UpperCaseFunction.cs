@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Functions;
 
 namespace Agenix.Core.Functions.Core;
 
 /// <summary>
-///     Returns given string argument in upper case letters.
+///     Returns a given string argument in upper case letters.
 /// </summary>
 public class UpperCaseFunction : IFunction
 {

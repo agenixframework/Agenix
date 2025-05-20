@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using Agenix.Api.Endpoint.Resolver;
 using Agenix.Core.Endpoint;
 using Agenix.Core.Endpoint.Resolver;
 using Agenix.Core.Message;

@@ -3,6 +3,7 @@ using Agenix.Core.Actions;
 using Agenix.Core.Container;
 using Moq;
 using NUnit.Framework;
+using ITestAction = Agenix.Api.ITestAction;
 
 namespace Agenix.Core.NUnitTestProject.Container;
 

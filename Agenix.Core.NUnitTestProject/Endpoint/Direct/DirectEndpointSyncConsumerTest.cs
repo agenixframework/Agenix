@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
 using Agenix.Core.Endpoint.Direct;
-using Agenix.Core.Exceptions;
 using Agenix.Core.Message;
 using Agenix.Core.Spi;
+using TestContext = Agenix.Api.Context.TestContext;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
@@ -308,7 +310,7 @@ public class DirectEndpointSyncConsumerTest
             var channelSyncConsumer = (DirectSyncConsumer)endpoint.CreateConsumer();
             channelSyncConsumer.Send(message, _context);
         }
-        catch (CoreSystemException e)
+        catch (AgenixSystemException e)
         {
             StringAssert.StartsWith("Failed to get correlation key for", e.Message);
             return;
@@ -339,7 +341,7 @@ public class DirectEndpointSyncConsumerTest
             var channelSyncConsumer = (DirectSyncConsumer)endpoint.CreateConsumer();
             channelSyncConsumer.Send(message, _context);
         }
-        catch (CoreSystemException e)
+        catch (AgenixSystemException e)
         {
             StringAssert.StartsWith("Failed to get correlation key", e.Message);
             return;
@@ -365,7 +367,7 @@ public class DirectEndpointSyncConsumerTest
         var headers = new Dictionary<string, object>();
         var message = new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>", headers);
 
-        var ex = Assert.Throws<CoreSystemException>(() =>
+        var ex = Assert.Throws<AgenixSystemException>(() =>
         {
             var channelSyncConsumer = (DirectSyncConsumer)endpoint.CreateConsumer();
             channelSyncConsumer.Send(message, _context);
@@ -380,7 +382,7 @@ public class DirectEndpointSyncConsumerTest
         var endpoint = new DirectSyncEndpoint();
         var channelSyncConsumer = (DirectSyncConsumer)endpoint.CreateConsumer();
 
-        var ex = Assert.Throws<CoreSystemException>(() => { channelSyncConsumer.Send(null, _context); });
+        var ex = Assert.Throws<AgenixSystemException>(() => { channelSyncConsumer.Send(null, _context); });
 
         StringAssert.IsMatch("Cannot send empty message", ex.Message);
     }
@@ -393,9 +395,9 @@ public class DirectEndpointSyncConsumerTest
 
         var message = new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>");
 
-        replyQueue.Setup(rq => rq.Send(It.IsAny<IMessage>())).Throws(new CoreSystemException("Internal error!"));
+        replyQueue.Setup(rq => rq.Send(It.IsAny<IMessage>())).Throws(new AgenixSystemException("Internal error!"));
 
-        var ex = Assert.Throws<CoreSystemException>(() =>
+        var ex = Assert.Throws<AgenixSystemException>(() =>
         {
             var channelSyncConsumer = (DirectSyncConsumer)endpoint.CreateConsumer();
             channelSyncConsumer.SaveReplyMessageQueue(
@@ -404,7 +406,7 @@ public class DirectEndpointSyncConsumerTest
             channelSyncConsumer.Send(message, _context);
         });
 
-        ClassicAssert.AreEqual(typeof(CoreSystemException), ex.GetType());
+        ClassicAssert.AreEqual(typeof(AgenixSystemException), ex.GetType());
         ClassicAssert.AreEqual("Internal error!", ex.Message);
     }
 }

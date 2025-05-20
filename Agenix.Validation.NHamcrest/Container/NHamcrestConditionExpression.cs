@@ -1,4 +1,4 @@
-using Agenix.Core;
+using Agenix.Api.Context;
 using Agenix.Core.Container;
 using NHamcrest;
 
@@ -23,7 +23,7 @@ public class NHamcrestConditionExpression
     public NHamcrestConditionExpression(IMatcher<object> conditionMatcher) : this(conditionMatcher, null)
     {
     }
-    
+
     public NHamcrestConditionExpression(IMatcher<object> conditionMatcher, object value)
     {
         _conditionMatcher = conditionMatcher;
@@ -53,53 +53,11 @@ public class NHamcrestConditionExpression
         return new NHamcrestConditionExpression(WrapMatcher(conditionMatcher), value);
     }
 
-    
+
     // Helper method to wrap any IMatcher<T> into an IMatcher<object>
     private static IMatcher<object> WrapMatcher<T>(IMatcher<T> matcher)
     {
         return new MatcherWrapper<T>(matcher);
-    }
-
-    // Private class to wrap an IMatcher<T> as an IMatcher<object>
-    /// Wrapper class for an `IMatcher<T>` implementation, providing a way to treat it as an `IMatcher<object>`.
-    /// Enables seamless matching when types need to be converted from a specific generic type to `object`.
-    /// /
-    private class MatcherWrapper<T>(IMatcher<T> innerMatcher) : IMatcher<object>
-    {
-        /// <summary>
-        /// Determines if the specified object matches the wrapped Hamcrest matcher.
-        /// </summary>
-        /// <param name="item">The object to evaluate against the condition matcher.</param>
-        /// <returns>True if the object matches the condition; otherwise, false.</returns>
-        public bool Matches(object item)
-        {
-            if (item is T typedItem)
-            {
-                return innerMatcher.Matches(typedItem);
-            }
-            return false;
-        }
-
-        /// Describes the wrapped matcher to the given description. Useful for providing a textual or detailed
-        /// representation of the matcher's behavior or criteria.
-        /// @param description A description instance where the details of the matcher will be appended.
-        /// /
-        public void DescribeTo(IDescription description)
-        {
-            innerMatcher.DescribeTo(description);
-        }
-
-        public void DescribeMismatch(object item, IDescription mismatchDescription)
-        {
-            if (item is T typedItem)
-            {
-                innerMatcher.DescribeMismatch(typedItem, mismatchDescription);
-            }
-            else
-            {
-                mismatchDescription.AppendText("was ").AppendValue(item);
-            }
-        }
     }
 
 
@@ -124,5 +82,44 @@ public class NHamcrestConditionExpression
         return _conditionMatcher.Matches(_value is string
             ? context.ReplaceDynamicContentInString(_value.ToString())
             : _value);
+    }
+
+    // Private class to wrap an IMatcher<T> as an IMatcher<object>
+    /// Wrapper class for an `IMatcher
+    /// <T>
+    ///     ` implementation, providing a way to treat it as an `IMatcher
+    ///     <object>
+    ///         `.
+    ///         Enables seamless matching when types need to be converted from a specific generic type to `object`.
+    ///         /
+    private class MatcherWrapper<T>(IMatcher<T> innerMatcher) : IMatcher<object>
+    {
+        /// <summary>
+        ///     Determines if the specified object matches the wrapped Hamcrest matcher.
+        /// </summary>
+        /// <param name="item">The object to evaluate against the condition matcher.</param>
+        /// <returns>True if the object matches the condition; otherwise, false.</returns>
+        public bool Matches(object item)
+        {
+            if (item is T typedItem) return innerMatcher.Matches(typedItem);
+            return false;
+        }
+
+        /// Describes the wrapped matcher to the given description. Useful for providing a textual or detailed
+        /// representation of the matcher's behavior or criteria.
+        /// @param description A description instance where the details of the matcher will be appended.
+        /// /
+        public void DescribeTo(IDescription description)
+        {
+            innerMatcher.DescribeTo(description);
+        }
+
+        public void DescribeMismatch(object item, IDescription mismatchDescription)
+        {
+            if (item is T typedItem)
+                innerMatcher.DescribeMismatch(typedItem, mismatchDescription);
+            else
+                mismatchDescription.AppendText("was ").AppendValue(item);
+        }
     }
 }

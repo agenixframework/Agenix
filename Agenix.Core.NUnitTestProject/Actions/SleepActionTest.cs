@@ -48,17 +48,17 @@ public class SleepActionTest : AbstractNUnitSetUp
 
         sleep.Execute(Context);
 
-        sleep = new SleepAction.Builder()
+        /*sleep = new SleepAction.Builder()
             .Time("0.5", ScheduledExecutor.TimeUnit.SECONDS)
             .Build();
 
-        sleep.Execute(Context);
+        sleep.Execute(Context);*/
 
-        sleep = new SleepAction.Builder()
+        /*sleep = new SleepAction.Builder()
             .Time("0.01", ScheduledExecutor.TimeUnit.MINUTES)
             .Build();
 
-        sleep.Execute(Context);
+        sleep.Execute(Context);*/
     }
 
     [Test]

@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using System.Text;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Endpoint.Resolver;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
+using Agenix.Api.Util;
 using Agenix.Core.Message;
 using Agenix.Core.Util;
 using Microsoft.Extensions.Primitives;
@@ -16,7 +19,7 @@ public class DynamicEndpointUriResolver : IEndpointUriResolver
     private string _defaultEndpointUri;
 
     /// Resolves the endpoint URI based on the message header entry with a fallback to the default URI.
-    /// <param name="message">The incoming message containing headers with optional URI information.</param> <param name="defaultUri">The default URI to be used if no valid URI is found in the message headers.</param> <return>The resolved endpoint URI after appending any request path or query parameters.</return> <exception cref="CoreSystemException">Thrown when neither a header entry nor a default URI is available for resolution.</exception>
+    /// <param name="message">The incoming message containing headers with optional URI information.</param> <param name="defaultUri">The default URI to be used if no valid URI is found in the message headers.</param> <return>The resolved endpoint URI after appending any request path or query parameters.</return> <exception cref="AgenixSystemException">Thrown when neither a header entry nor a default URI is available for resolution.</exception>
     /// /
     public string ResolveEndpointUri(IMessage message, string defaultUri)
     {
@@ -38,7 +41,7 @@ public class DynamicEndpointUriResolver : IEndpointUriResolver
 
         if (requestUri == null)
         {
-            throw new CoreSystemException("Unable to resolve dynamic endpoint uri! Neither header entry '" +
+            throw new AgenixSystemException("Unable to resolve dynamic endpoint uri! Neither header entry '" +
                                           IEndpointUriResolver.EndpointUriHeaderName + "' nor default endpoint uri is set");
         }
 

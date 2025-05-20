@@ -1,8 +1,9 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Agenix.Core.Common;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Common;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
 using log4net;
 
 namespace Agenix.Core.Util;
@@ -60,7 +61,7 @@ public abstract class WaitUtils
         }
         catch (Exception ex) when (ex is TaskCanceledException or TimeoutException or OperationCanceledException)
         {
-            throw new CoreSystemException("Failed to wait for test container to finish properly", ex);
+            throw new AgenixSystemException("Failed to wait for test container to finish properly", ex);
         }
         finally
         {

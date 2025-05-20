@@ -1,5 +1,5 @@
+using Agenix.Api.Exceptions;
 using Agenix.Core.Actions;
-using Agenix.Core.Exceptions;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
@@ -16,7 +16,7 @@ public class FailActionTest : AbstractNUnitSetUp
         {
             fail.Execute(Context);
         }
-        catch (CoreSystemException e)
+        catch (AgenixSystemException e)
         {
             ClassicAssert.AreEqual("Generated error to interrupt test execution", e.Message);
             return;
@@ -35,7 +35,7 @@ public class FailActionTest : AbstractNUnitSetUp
         {
             fail.Execute(Context);
         }
-        catch (CoreSystemException e)
+        catch (AgenixSystemException e)
         {
             ClassicAssert.AreEqual("Failed because I said so", e.Message);
             return;
@@ -57,7 +57,7 @@ public class FailActionTest : AbstractNUnitSetUp
         {
             fail.Execute(Context);
         }
-        catch (CoreSystemException e)
+        catch (AgenixSystemException e)
         {
             ClassicAssert.AreEqual("Failed because I said so, period!", e.Message);
             return;

@@ -1,8 +1,10 @@
-﻿using Agenix.Core.Actions;
+﻿using Agenix.Api.Exceptions;
+using Agenix.Core.Actions;
 using Agenix.Core.Container;
-using Agenix.Core.Exceptions;
 using Moq;
 using NUnit.Framework;
+using TestContext = Agenix.Api.Context.TestContext;
+using ITestAction = Agenix.Api.ITestAction;
 
 namespace Agenix.Core.NUnitTestProject.Container;
 
@@ -109,7 +111,7 @@ public class ConditionalTest : AbstractNUnitSetUp
             .Actions(new FailAction.Builder().Build(), action1, action2, action3)
             .Build();
 
-        Assert.Throws<CoreSystemException>(() => { conditionalAction.Execute(Context); });
+        Assert.Throws<AgenixSystemException>(() => { conditionalAction.Execute(Context); });
     }
 
     [Test]
@@ -128,7 +130,7 @@ public class ConditionalTest : AbstractNUnitSetUp
             .Actions(action1, action2, action3, new FailAction.Builder().Build())
             .Build();
 
-        Assert.Throws<CoreSystemException>(() =>
+        Assert.Throws<AgenixSystemException>(() =>
         {
             conditionalAction.Execute(Context);
             Mock.Get(action1).Verify(a => a.Execute(Context));
@@ -153,7 +155,7 @@ public class ConditionalTest : AbstractNUnitSetUp
             .Actions(action1, new FailAction.Builder().Build(), action2, action3)
             .Build();
 
-        Assert.Throws<CoreSystemException>(() =>
+        Assert.Throws<AgenixSystemException>(() =>
         {
             conditionalAction.Execute(Context);
             Mock.Get(action1).Verify(a => a.Execute(Context));

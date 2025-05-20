@@ -1,5 +1,6 @@
 ﻿using System;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
 using log4net;
 
 namespace Agenix.Core.Container;
@@ -35,7 +36,7 @@ public class Catch(Catch.Builder builder)
                     continue;
                 }
 
-                throw new CoreSystemException(e.Message, e);
+                throw new AgenixSystemException(e.Message, e);
             }
     }
 
@@ -45,7 +46,7 @@ public class Catch(Catch.Builder builder)
     /// /
     public class Builder : AbstractExceptionContainerBuilder<Catch, Builder>
     {
-        internal string _exception = nameof(CoreSystemException);
+        internal string _exception = nameof(AgenixSystemException);
 
         /// Fluent API action building entry method used in C# DSL.
         /// @return A builder instance for configuring exception catching behavior.
@@ -55,7 +56,7 @@ public class Catch(Catch.Builder builder)
             return new Builder();
         }
 
-        /// Catch exception type during execution.
+        /// Catch an exception type during execution.
         /// @param exception The type of exception to catch during execution.
         /// @return A builder instance that allows further configuration.
         /// /

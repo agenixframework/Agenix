@@ -1,6 +1,6 @@
 ﻿using System.Data;
-using Agenix.Core;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
 using log4net;
 using Spring.Data.Common;
 using Spring.Transaction.Support;
@@ -40,13 +40,13 @@ public class ExecuteSqlAction : AbstractDatabaseConnectingTestAction
     ///     The test context in which the statements will be executed. This context may contain dynamic
     ///     content and configuration data required for execution.
     /// </param>
-    /// <exception cref="CoreSystemException">
+    /// <exception cref="AgenixSystemException">
     ///     Thrown when there is no AdoTemplate configured, or when an error occurs during
     ///     statement execution and errors are not set to be ignored.
     /// </exception>
     protected void ExecuteStatements(List<string> newStatements, TestContext context)
     {
-        if (AdoTemplate == null) throw new CoreSystemException("No AdoTemplate configured for sql execution!");
+        if (AdoTemplate == null) throw new AgenixSystemException("No AdoTemplate configured for sql execution!");
 
         foreach (var statement in newStatements)
             try
@@ -66,7 +66,7 @@ public class ExecuteSqlAction : AbstractDatabaseConnectingTestAction
                 if (_ignoreErrors)
                     Log.Error("Ignoring error while executing SQL statement: " + e.Message, e);
                 else
-                    throw new CoreSystemException(e.Message, e);
+                    throw new AgenixSystemException(e.Message, e);
             }
     }
 
@@ -75,7 +75,7 @@ public class ExecuteSqlAction : AbstractDatabaseConnectingTestAction
     ///     The test context that provides dynamic content and configuration settings necessary for executing
     ///     SQL statements.
     /// </param>
-    /// <exception cref="CoreSystemException">
+    /// <exception cref="AgenixSystemException">
     ///     Thrown if no transaction manager is configured and an error occurs during
     ///     execution without being set to be ignored, or if there is an issue related to SQL statement processing.
     /// </exception>

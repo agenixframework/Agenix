@@ -1,4 +1,6 @@
-﻿namespace Agenix.Core.Container;
+﻿using Agenix.Api.Context;
+
+namespace Agenix.Core.Container;
 
 /// <summary>
 ///     The <c>ConditionEvaluator</c> class is responsible for evaluating condition expressions against a given context.

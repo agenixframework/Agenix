@@ -1,3 +1,5 @@
+using Agenix.Api.Context;
+
 namespace Agenix.Core.Container;
 
 /// The Iterate class executes nested test actions in loops, continuing iteration as long as the looping condition evaluates to true.

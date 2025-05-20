@@ -1,4 +1,6 @@
-﻿using Agenix.Core.Annotations;
+﻿using Agenix.Api;
+using Agenix.Api.Annotations;
+using Agenix.Api.Variable;
 using Agenix.Core.Spi;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;

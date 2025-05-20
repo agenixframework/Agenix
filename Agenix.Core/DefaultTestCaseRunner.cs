@@ -1,4 +1,6 @@
 ﻿using System;
+using Agenix.Api;
+using Agenix.Api.Context;
 using Agenix.Core.Actions;
 using Agenix.Core.Container;
 using Agenix.Core.Spi;
@@ -76,9 +78,9 @@ public class DefaultTestCaseRunner : ITestCaseRunner
 
     /// Sets the name of the package for the test case.
     /// <param name="packageName">The name of the package to be set for the test case.</param>
-    public void SetPackageName(string packageName)
+    public void SetNamespaceName(string packageName)
     {
-        _testCase.SetPackageName(packageName);
+        _testCase.SetNamespaceName(packageName);
     }
 
     /// Sets the status of the test case.
@@ -150,7 +152,7 @@ public class DefaultTestCaseRunner : ITestCaseRunner
     public T Run<T>(ITestActionBuilder<T> builder) where T : ITestAction
     {
         if (builder is IReferenceResolverAware referenceResolverAwareBuilder)
-            referenceResolverAwareBuilder.SetReferenceResolver(Context.GetReferenceResolver());
+            referenceResolverAwareBuilder.SetReferenceResolver(Context.ReferenceResolver);
 
         if (builder is ApplyTestBehaviorAction.Builder applyTestBehaviorBuilder) applyTestBehaviorBuilder.On(this);
 
@@ -175,23 +177,21 @@ public class DefaultTestCaseRunner : ITestCaseRunner
         return action;
     }
 
-    /// Applies a specified test behavior to the current test case.
-    /// <param name="behavior">The test behavior to be applied.</param>
-    /// <returns>A builder for creating an instance of ApplyTestBehaviorAction.</returns>
-    public ApplyTestBehaviorAction.Builder ApplyBehavior(TestBehavior behavior)
-    {
-        return new ApplyTestBehaviorAction.Builder()
-            .Behavior(new DelegatingTestBehaviour(behavior))
-            .On(this);
-    }
-
-    /// Applies the specified test behavior to the current test case runner.
-    /// <param name="behavior">The test behavior to be applied.</param>
-    /// <returns>A builder for the ApplyTestBehaviorAction, allowing further configuration of the behavior application.</returns>
-    public ApplyTestBehaviorAction.Builder ApplyBehavior(ITestBehavior behavior)
+    
+    public ITestActionBuilder<ITestAction> ApplyBehavior(ITestBehavior behavior)
     {
         return new ApplyTestBehaviorAction.Builder()
             .Behavior(behavior)
+            .On(this);
+    }
+
+    /// Applies a specified test behavior to the current test case.
+    /// <param name="behavior">The test behavior to be applied.</param>
+    /// <returns>A builder for creating an instance of ApplyTestBehaviorAction.</returns>
+    public ITestActionBuilder<ITestAction> ApplyBehavior(TestBehavior behavior)
+    {
+        return new ApplyTestBehaviorAction.Builder()
+            .Behavior(new DelegatingTestBehaviour(behavior))
             .On(this);
     }
 

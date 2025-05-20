@@ -1,9 +1,12 @@
-﻿using Agenix.Core;
+﻿using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
+using Agenix.Api.Message.Correlation;
+using Agenix.Api.Messaging;
+using Agenix.Core;
 using Agenix.Core.Endpoint;
-using Agenix.Core.Exceptions;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Correlation;
-using Agenix.Core.Messaging;
 using Agenix.Http.Interceptor;
 using Agenix.Http.Message;
 using log4net;

@@ -1,8 +1,9 @@
 ﻿using System.Data;
 using System.Text;
-using Agenix.Core;
-using Agenix.Core.Exceptions;
-using Agenix.Core.Validation.Matcher;
+using Agenix.Api;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Validation.Matcher;
 using log4net;
 using Spring.Dao;
 using Spring.Data;
@@ -48,7 +49,7 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
     protected void ExecuteStatements(List<string> newStatements, List<Dictionary<string, object>> allResultRows,
         Dictionary<string, List<string>> columnValuesMap, TestContext context)
     {
-        if (AdoTemplate == null) throw new CoreSystemException("No AdoTemplate configured for query execution!");
+        if (AdoTemplate == null) throw new AgenixSystemException("No AdoTemplate configured for query execution!");
 
         foreach (var statement in newStatements)
         {
@@ -82,7 +83,7 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
     ///     An instance of <c>TestContext</c> where the variables will be set. The context is updated with
     ///     new variables based on the provided column values map.
     /// </param>
-    /// <exception cref="CoreSystemException">
+    /// <exception cref="AgenixSystemException">
     ///     Thrown when a column specified in the variable mapping configuration cannot be
     ///     found in the column values map.
     /// </exception>
@@ -96,7 +97,7 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
             else if (columnValuesMap.ContainsKey(columnName.ToUpper()))
                 context.SetVariable(variableEntry.Value, ConstructVariableValue(columnValuesMap[columnName.ToUpper()]));
             else
-                throw new CoreSystemException(
+                throw new AgenixSystemException(
                     $"Failed to create variables from database values! Unable to find column '{columnName}' in database result set");
         }
     }
@@ -204,7 +205,7 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
     ///     The context in which the validation is executed, providing environmental information and
     ///     utilities.
     /// </param>
-    /// <exception cref="CoreSystemException">
+    /// <exception cref="AgenixSystemException">
     ///     Thrown when the expected column is not found in the result set or when the number
     ///     of rows in a column does not match the expected count.
     /// </exception>
@@ -220,14 +221,14 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
             else if (columnValuesMap.ContainsKey(columnName.ToUpper()))
                 columnName = columnName.ToUpper();
             else if (!columnValuesMap.ContainsKey(columnName))
-                throw new CoreSystemException($"Could not find column '{columnName}' in SQL result set");
+                throw new AgenixSystemException($"Could not find column '{columnName}' in SQL result set");
 
             var resultColumnValues = columnValuesMap[columnName];
             var controlColumnValues = controlEntry.Value;
 
             // First, check the size of column values (representing the number of allResultRows in the result set)
             if (resultColumnValues.Count != controlColumnValues.Count)
-                throw new CoreSystemException(
+                throw new AgenixSystemException(
                     $"Validation failed for column: '{columnName}' expected rows count: {controlColumnValues.Count} but was {resultColumnValues.Count}");
 
             using var it = resultColumnValues.GetEnumerator();
@@ -247,12 +248,12 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
     ///     Does some simple validation on the SQL statement.
     /// </summary>
     /// <param name="statement"></param>
-    /// <exception cref="CoreSystemException"></exception>
+    /// <exception cref="AgenixSystemException"></exception>
     protected void ValidateSqlStatement(string statement)
     {
         var trimmedStatement = statement.ToLower().Trim();
         if (!(trimmedStatement.StartsWith("select") || trimmedStatement.StartsWith("with")))
-            throw new CoreSystemException($"Missing SELECT or WITH keyword in statement: {trimmedStatement}");
+            throw new AgenixSystemException($"Missing SELECT or WITH keyword in statement: {trimmedStatement}");
     }
 
     /// <summary>
@@ -273,7 +274,7 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
     protected void ValidateSingleValue(string columnName, string controlValue, string? resultValue, TestContext context)
     {
         // Check if value is ignored
-        if (controlValue.Equals(CoreSettings.IgnorePlaceholder))
+        if (controlValue.Equals(AgenixSettings.IgnorePlaceholder))
         {
             Log.Debug($"Ignoring column value '{columnName} (resultValue)'");
             return;
@@ -323,7 +324,7 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
     ///     Thrown when there is a failure in executing any SQL statement due to data access
     ///     issues.
     /// </exception>
-    /// <exception cref="CoreSystemException">
+    /// <exception cref="AgenixSystemException">
     ///     Thrown when a <see cref="DataAccessException" /> occurs, encapsulating it for
     ///     higher-level handling.
     /// </exception>
@@ -370,7 +371,7 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
         catch (DataAccessException e)
         {
             Log.Error("Failed to execute SQL statement", e);
-            throw new CoreSystemException(e.Message, e);
+            throw new AgenixSystemException(e.Message, e);
         }
     }
 

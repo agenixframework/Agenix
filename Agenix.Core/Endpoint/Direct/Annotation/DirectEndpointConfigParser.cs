@@ -1,5 +1,6 @@
 ﻿using System;
-using Agenix.Core.Config.Annotation;
+using Agenix.Api.Config.Annotation;
+using Agenix.Api.Message;
 using Agenix.Core.Message;
 using Agenix.Core.Spi;
 

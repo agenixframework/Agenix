@@ -1,6 +1,7 @@
-﻿using Agenix.Core;
-using Agenix.Core.Exceptions;
-using TestContext = Agenix.Core.TestContext;
+﻿using Agenix.Api.Exceptions;
+using Agenix.Api.Validation;
+using Agenix.Core;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Validation.NHamcrest.Tests;
 
@@ -29,7 +30,9 @@ public abstract class AbstractNUnitSetUp
 
     private TestContextFactory CreateTestContextFactory()
     {
-        return TestContextFactory.NewInstance();
+        var factory = TestContextFactory.NewInstance();
+        factory.MessageValidatorRegistry.AddMessageValidator("all", new DefaultTextEqualsMessageValidator());
+        return factory;
     }
 
     private TestContext CreateTestContext()
@@ -40,7 +43,7 @@ public abstract class AbstractNUnitSetUp
         }
         catch (Exception e)
         {
-            throw new CoreSystemException("Failed to create test context", e);
+            throw new AgenixSystemException("Failed to create test context", e);
         }
     }
 }

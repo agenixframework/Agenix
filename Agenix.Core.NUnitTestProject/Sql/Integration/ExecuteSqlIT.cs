@@ -1,9 +1,10 @@
-﻿using Agenix.Core.Annotations;
+﻿using Agenix.Api.Annotations;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
 using Spring.Data.Core;
 using static Agenix.Sql.Actions.ExecuteSqlQueryAction.Builder;
 using static Agenix.Core.Actions.CreateVariablesAction.Builder;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.NUnitTestProject.Sql.Integration;
 
@@ -15,9 +16,9 @@ public class ExecuteSqlIT
     public void ExecuteSqlAction()
 
     {
-        var adoTemplate = _context.GetReferenceResolver().Resolve<AdoTemplate>("AdoTemplate");
-        var scriptSqlFile = _context.GetReferenceResolver().Resolve<string>("scriptSqlFile");
-        var queryScriptSqlFile = _context.GetReferenceResolver().Resolve<string>("queryScriptSqlFile");
+        var adoTemplate = _context.ReferenceResolver.Resolve<AdoTemplate>("AdoTemplate");
+        var scriptSqlFile = _context.ReferenceResolver.Resolve<string>("scriptSqlFile");
+        var queryScriptSqlFile = _context.ReferenceResolver.Resolve<string>("queryScriptSqlFile");
 
         _runner.Given(CreateVariables().Variable("customerId", "1").Variable("rowsCount", "0"));
 

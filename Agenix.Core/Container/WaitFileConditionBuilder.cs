@@ -15,7 +15,7 @@ public class WaitFileConditionBuilder : WaitConditionBuilder<FileCondition, Wait
     {
     }
 
-    /// Wait for given file path.
+    /// Wait for a given file path.
     /// <param name="filePath">The path of the file to wait for</param>
     /// <return>This instance of WaitFileConditionBuilder for method chaining</return>
     /// /
@@ -25,7 +25,7 @@ public class WaitFileConditionBuilder : WaitConditionBuilder<FileCondition, Wait
         return self;
     }
 
-    /// Wait for given file resource.
+    /// Wait for a given file resource.
     /// @param file The file resource to wait on
     /// @return This instance of WaitFileConditionBuilder for method chaining
     /// /

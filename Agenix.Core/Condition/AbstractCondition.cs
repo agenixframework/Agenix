@@ -1,4 +1,7 @@
-﻿namespace Agenix.Core.Condition;
+﻿using Agenix.Api.Condition;
+using Agenix.Api.Context;
+
+namespace Agenix.Core.Condition;
 
 /// <summary>
 ///     Represents an abstract base class for defining specific conditions.

@@ -1,4 +1,5 @@
-﻿using Agenix.Core.Endpoint;
+﻿using Agenix.Api.Endpoint;
+using Agenix.Core.Endpoint;
 using Agenix.Core.Endpoint.Direct;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;

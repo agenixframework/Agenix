@@ -1,8 +1,12 @@
 ﻿using System.Collections.Generic;
+using Agenix.Api;
+using Agenix.Api.Context;
+using Agenix.Api.Endpoint;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
+using Agenix.Api.Messaging;
 using Agenix.Core.Endpoint;
-using Agenix.Core.Exceptions;
 using Agenix.Core.Message;
-using Agenix.Core.Messaging;
 using log4net;
 
 namespace Agenix.Core.Actions;
@@ -70,7 +74,7 @@ public class ReceiveTimeoutAction : AbstractTestAction
             {
                 if (Log.IsDebugEnabled) Log.Debug("Received message:\n" + receivedMessage.Print(context));
 
-                throw new CoreSystemException("Message timeout validation failed! " +
+                throw new AgenixSystemException("Message timeout validation failed! " +
                                               "Received message while waiting for timeout on destination");
             }
         }
@@ -82,7 +86,7 @@ public class ReceiveTimeoutAction : AbstractTestAction
     }
 
     /// Creates or gets the endpoint instance.
-    /// @param context Test context containing necessary configuration and endpoint factory.
+    /// @param context Test context containing the necessary configuration and endpoint factory.
     /// @return The created or retrieved endpoint instance.
     /// /
     public IEndpoint GetOrCreateEndpoint(TestContext context)
@@ -91,7 +95,7 @@ public class ReceiveTimeoutAction : AbstractTestAction
 
         if (!string.IsNullOrWhiteSpace(EndpointUri)) return context.EndpointFactory.Create(EndpointUri, context);
 
-        throw new CoreSystemException("Neither endpoint nor endpoint uri is set properly!");
+        throw new AgenixSystemException("Neither endpoint nor endpoint uri is set properly!");
     }
 
     /// The Builder class assists in the construction of ReceiveTimeoutAction instances using a fluent interface.

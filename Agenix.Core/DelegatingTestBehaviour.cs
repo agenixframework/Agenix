@@ -1,4 +1,6 @@
-﻿namespace Agenix.Core;
+﻿using Agenix.Api;
+
+namespace Agenix.Core;
 
 /// <summary>
 ///     Represents a test behavior that executes by delegating work to another specified test action.

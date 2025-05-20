@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using Agenix.Core.Annotations;
-using Agenix.Core.Endpoint;
+using Agenix.Api;
+using Agenix.Api.Annotations;
+using Agenix.Api.Endpoint;
+using Agenix.Api.Message;
+using Agenix.Api.Validation;
+using Agenix.Api.Validation.Context;
 using Agenix.Core.Endpoint.Direct;
 using Agenix.Core.Endpoint.Direct.Annotation;
 using Agenix.Core.Message;
 using Agenix.Core.Spi;
-using Agenix.Core.Validation;
-using Agenix.Core.Validation.Context;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using TestContext = Agenix.Api.Context.TestContext;
 using static Agenix.Core.Actions.SendMessageAction.Builder;
 using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
 
@@ -66,6 +69,10 @@ public class EndpointInjectionIT
             List<IValidationContext> validationContexts)
         {
             ClassicAssert.AreEqual(receivedMessage.GetPayload<string>(), controlMessage.GetPayload<string>());
+            foreach (var ctx in validationContexts)
+            {
+                ctx.UpdateStatus(ValidationStatus.PASSED);
+            }
         }
 
         public bool SupportsMessageType(string messageType, IMessage message)

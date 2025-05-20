@@ -1,5 +1,5 @@
-﻿using Agenix.Core;
-using Agenix.Core.Validation.Matcher;
+﻿using Agenix.Api.Context;
+using Agenix.Api.Validation;
 using NHamcrest;
 using NHamcrest.Core;
 
@@ -12,6 +12,20 @@ namespace Agenix.Validation.NHamcrest.Validation;
 public class NHamcrestValueMatcher : IValueMatcher
 {
     /// <summary>
+    ///     Filter supported value types
+    /// </summary>
+    /// <param name="controlType">The control type to be checked for support.</param>
+    /// <returns>True if the control type is supported, otherwise false.</returns>
+    public bool Supports(Type controlType)
+    {
+        var openGenericType = typeof(IMatcher<>);
+        var result = controlType.GetInterfaces()
+            .Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == openGenericType);
+
+        return result;
+    }
+
+    /// <summary>
     ///     Validates whether the received object matches the control object.
     /// </summary>
     /// <param name="received">The object to be validated.</param>
@@ -20,7 +34,7 @@ public class NHamcrestValueMatcher : IValueMatcher
     /// <returns>True if the received object matches the control, otherwise false.</returns>
     public bool Validate(object received, object control, TestContext context)
     {
-        // workaround to be able to test list of strings
+        // workaround to be able to test a list of strings
         if (received is string receivedAsString)
             if (receivedAsString.Contains(','))
                 received = receivedAsString.Split([','], StringSplitOptions.RemoveEmptyEntries)
@@ -47,19 +61,5 @@ public class NHamcrestValueMatcher : IValueMatcher
 
         var equalMatcher = new IsEqualMatcher<object>(control);
         return equalMatcher.Matches(received);
-    }
-
-    /// <summary>
-    ///     Filter supported value types
-    /// </summary>
-    /// <param name="controlType">The control type to be checked for support.</param>
-    /// <returns>True if the control type is supported, otherwise false.</returns>
-    public bool Supports(Type controlType)
-    {
-        var openGenericType = typeof(IMatcher<>);
-        var result = controlType.GetInterfaces()
-            .Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == openGenericType);
-
-        return result;
     }
 }

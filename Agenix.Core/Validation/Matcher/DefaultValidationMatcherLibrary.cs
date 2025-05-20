@@ -1,4 +1,5 @@
-﻿using Agenix.Core.Validation.Matcher.Core;
+﻿using Agenix.Api.Validation.Matcher;
+using Agenix.Core.Validation.Matcher.Core;
 using log4net;
 
 namespace Agenix.Core.Validation.Matcher;
@@ -35,7 +36,7 @@ public class DefaultValidationMatcherLibrary : ValidationMatcherLibrary
     }
     
     /// <summary>
-    /// Add custom matcher implementations loaded from resource path lookup.
+    /// Add custom matcher implementations loaded from the resource path lookup.
     /// </summary>
     private void LookupValidationMatchers()
     {

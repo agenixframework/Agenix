@@ -1,9 +1,11 @@
 ﻿using System.Linq;
 using System.Net;
 using System.Net.Http;
+using Agenix.Api.Message;
 using Agenix.Core.Message;
 using Agenix.Http.Client;
 using Agenix.Http.Message;
+using TestContext = Agenix.Api.Context.TestContext;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Functions;
 
 namespace Agenix.Core.Functions.Core;
 
@@ -90,7 +92,7 @@ public class RandomNumberFunction : IFunction
     {
         if (generated[0] != '0') return generated;
 
-        // find number > 0 as replacement to avoid leading zero numbers
+        // find number > 0 as a replacement to avoid leading zero numbers
         var replacement = 0;
         while (replacement == 0) replacement = _generator.Next(10);
 

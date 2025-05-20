@@ -1,4 +1,6 @@
-﻿namespace Agenix.Core.Endpoint.Builder;
+﻿using Agenix.Api.Endpoint;
+
+namespace Agenix.Core.Endpoint.Builder;
 
 /// <summary>
 ///     The AbstractEndpointBuilder class provides a base implementation for endpoint builders.

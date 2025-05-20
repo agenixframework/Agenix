@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Agenix.Api.Util;
 using Agenix.Core.Util;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;

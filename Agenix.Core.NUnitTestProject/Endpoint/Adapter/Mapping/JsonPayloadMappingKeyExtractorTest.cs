@@ -1,6 +1,7 @@
-﻿using Agenix.Core.Endpoint.Adapter.Mapping;
-using Agenix.Core.Exceptions;
+﻿using Agenix.Api.Exceptions;
+using Agenix.Core.Endpoint.Adapter.Mapping;
 using Agenix.Core.Message;
+using Agenix.Validation.Json.Endpoint.Adapter.Mapping;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
@@ -43,7 +44,7 @@ public class JsonPayloadMappingKeyExtractorTest
 
         extractor.SetJsonPathExpression("$.I_DO_NOT_EXIST");
 
-        Assert.Throws<CoreSystemException>(() => extractor.ExtractMappingKey(new DefaultMessage(
+        Assert.Throws<AgenixSystemException>(() => extractor.ExtractMappingKey(new DefaultMessage(
             "{ \"person\": {\"name\": \"Penny\"} }")));
     }
 }

@@ -1,6 +1,10 @@
 using System.IO;
 using System.Text;
-using Agenix.Core.Exceptions;
+using Agenix.Api;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.IO;
+using Agenix.Api.Message;
 using Agenix.Core.Util;
 
 namespace Agenix.Core.Message.Builder;
@@ -11,7 +15,7 @@ namespace Agenix.Core.Message.Builder;
 public class FileResourcePayloadBuilder : IMessagePayloadBuilder, IMessageTypeAware
 {
     private readonly string _charsetName;
-    private readonly IO.IResource _resource;
+    private readonly IResource _resource;
     private readonly string _resourcePath;
     private string _messageType;
 
@@ -19,8 +23,8 @@ public class FileResourcePayloadBuilder : IMessagePayloadBuilder, IMessageTypeAw
     ///     Class responsible for constructing message payloads using file resources or file paths.
     ///     Implements IMessagePayloadBuilder and IMessageTypeAware interfaces.
     /// </summary>
-    public FileResourcePayloadBuilder(IO.IResource resource)
-        : this(resource, CoreSettings.AgenixFileEncoding())
+    public FileResourcePayloadBuilder(IResource resource)
+        : this(resource, AgenixSettings.AgenixFileEncoding())
     {
     }
 
@@ -28,7 +32,7 @@ public class FileResourcePayloadBuilder : IMessagePayloadBuilder, IMessageTypeAw
     ///     Class responsible for constructing message payloads using file resources or file paths.
     ///     Implements IMessagePayloadBuilder and IMessageTypeAware interfaces.
     /// </summary>
-    public FileResourcePayloadBuilder(IO.IResource resource, string charset)
+    public FileResourcePayloadBuilder(IResource resource, string charset)
     {
         _charsetName = charset;
         _resourcePath = null;
@@ -40,7 +44,7 @@ public class FileResourcePayloadBuilder : IMessagePayloadBuilder, IMessageTypeAw
     ///     Implements IMessagePayloadBuilder and IMessageTypeAware interfaces.
     /// </summary>
     public FileResourcePayloadBuilder(string resourcePath)
-        : this(resourcePath, CoreSettings.AgenixFileEncoding())
+        : this(resourcePath, AgenixSettings.AgenixFileEncoding())
     {
     }
 
@@ -118,7 +122,7 @@ public class FileResourcePayloadBuilder : IMessagePayloadBuilder, IMessageTypeAw
     /// <param name="fileResource">The file resource to be read.</param>
     /// <param name="context">The test context that provides dynamic value resolution.</param>
     /// <return>The content of the file resource as a string.</return>
-    private string GetFileResourceContent(IO.IResource fileResource, TestContext context)
+    private string GetFileResourceContent(IResource fileResource, TestContext context)
     {
         try
         {
@@ -127,7 +131,19 @@ public class FileResourcePayloadBuilder : IMessagePayloadBuilder, IMessageTypeAw
         }
         catch (IOException e)
         {
-            throw new CoreSystemException("Failed to build message payload from file resource", e);
+            throw new AgenixSystemException("Failed to build message payload from file resource", e);
         }
+    }
+
+    /// <summary>
+    /// Retrieves the file path of the resource being used for constructing the payload.
+    /// If a resource is specified, its file's full path is returned; otherwise, the pre-defined resource path is provided.
+    /// </summary>
+    /// <returns>
+    /// The full file path of the resource if available, otherwise the predefined resource path.
+    /// </returns>
+    public string GetResourcePath()
+    {
+        return _resource != null ? _resource.File.FullName : _resourcePath;
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
-using Agenix.Core.Message;
+using Agenix.Api;
+using Agenix.Api.Message;
+using TestContext = Agenix.Api.Context.TestContext;
 using Agenix.Http.Message;
 using Moq;
 using NUnit.Framework;
@@ -43,7 +45,7 @@ public class HttpMessageBuilderTest
     public void TestDefaultMessageHeaderWithNoForceUpdate()
     {
         // Setup mock environment as needed
-        Environment.SetEnvironmentVariable(CoreSettings.HttpMessageBuilderForceHeaderUpdateEnabledEnv, "False");
+        Environment.SetEnvironmentVariable(AgenixSettings.HttpMessageBuilderForceHeaderUpdateEnabledEnv, "False");
 
         try
         {
@@ -65,8 +67,8 @@ public class HttpMessageBuilderTest
         finally
         {
             // Restore environment variable
-            Environment.SetEnvironmentVariable(CoreSettings.HttpMessageBuilderForceHeaderUpdateEnabledEnv,
-                CoreSettings.HttpMessageBuilderForceHeaderUpdateEnabledDefault);
+            Environment.SetEnvironmentVariable(AgenixSettings.HttpMessageBuilderForceHeaderUpdateEnabledEnv,
+                AgenixSettings.HttpMessageBuilderForceHeaderUpdateEnabledDefault);
         }
     }
 

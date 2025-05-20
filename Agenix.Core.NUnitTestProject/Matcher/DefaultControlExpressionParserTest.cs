@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Validation.Matcher;
 using Agenix.Core.Validation.Matcher;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
@@ -34,7 +35,7 @@ public class DefaultControlExpressionParserTest
     {
         IControlExpressionParser expressionParser = new DefaultControlExpressionParser();
 
-        Assert.Throws<CoreSystemException>(() => expressionParser.ExtractControlValues(controlExpression, '\0'));
+        Assert.Throws<AgenixSystemException>(() => expressionParser.ExtractControlValues(controlExpression, '\0'));
     }
 
     public static IEnumerable<TestCaseData> ValidControlExpressions()

@@ -1,19 +1,22 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
+using Agenix.Api.Endpoint;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
+using Agenix.Api.Messaging;
+using Agenix.Api.Validation;
+using Agenix.Api.Validation.Context;
 using Agenix.Core.Actions;
 using Agenix.Core.Endpoint;
-using Agenix.Core.Exceptions;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Builder;
-using Agenix.Core.Messaging;
 using Agenix.Core.Validation;
 using Agenix.Core.Validation.Builder;
-using Agenix.Core.Validation.Context;
 using Agenix.Core.Variable;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.NUnitTestProject.Actions;
 
@@ -330,7 +333,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
             .Message(messageBuilder)
             .Build();
 
-        Assert.Throws<CoreSystemException>(() => sendAction.Execute(Context), "Unknown variable 'myText'");
+        Assert.Throws<AgenixSystemException>(() => sendAction.Execute(Context), "Unknown variable 'myText'");
     }
 
     [Test]
@@ -358,7 +361,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
             .Message(messageBuilder)
             .Build();
 
-        var ex = Assert.Throws<CoreSystemException>(() => sendAction.Execute(Context));
+        var ex = Assert.Throws<AgenixSystemException>(() => sendAction.Execute(Context));
         Assert.That(ex.InnerException.Message, Is.EqualTo("Unknown variable 'myOperation'"));
     }
 

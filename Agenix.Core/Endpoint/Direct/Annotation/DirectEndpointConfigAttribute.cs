@@ -1,5 +1,5 @@
 ﻿using System;
-using Agenix.Core.Annotations;
+using Agenix.Api.Annotations;
 
 namespace Agenix.Core.Endpoint.Direct.Annotation;
 

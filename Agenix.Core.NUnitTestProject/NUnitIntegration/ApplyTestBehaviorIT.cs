@@ -1,4 +1,5 @@
-﻿using Agenix.Core.Annotations;
+﻿using Agenix.Api;
+using Agenix.Api.Annotations;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
 using static Agenix.Core.Actions.EchoAction.Builder;
@@ -20,7 +21,7 @@ public class ApplyTestBehaviorIT
     {
         _runner.Run(Apply(new SayHelloBehavior()).Name("Apply runner.Apply(...)"));
 
-        _runner.Run(_runner.ApplyBehavior(new SayHelloBehavior("Hi!")).Name("runner.ApplyBehavior(...)"));
+        _runner.Run(_runner.ApplyBehavior(new SayHelloBehavior("Hi!")));
     }
 
     [Test]

@@ -1,6 +1,7 @@
 ﻿using System;
-using Agenix.Core.Common;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Common;
+using Agenix.Api.Endpoint;
+using Agenix.Api.Exceptions;
 
 namespace Agenix.Core.Endpoint;
 
@@ -31,7 +32,7 @@ public abstract class AbstractEndpointBuilder<T> : IEndpointBuilder<T> where T :
     ///     Initializes the endpoint.
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="CoreSystemException"></exception>
+    /// <exception cref="AgenixSystemException"></exception>
     public AbstractEndpointBuilder<T> Initialize()
     {
         if (GetEndpoint() is InitializingPhase phase)
@@ -41,7 +42,7 @@ public abstract class AbstractEndpointBuilder<T> : IEndpointBuilder<T> where T :
             }
             catch (Exception e)
             {
-                throw new CoreSystemException("Failed to initialize server", e);
+                throw new AgenixSystemException("Failed to initialize server", e);
             }
 
         return this;

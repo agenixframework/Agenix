@@ -1,10 +1,16 @@
 ﻿using System.Collections.Generic;
+using Agenix.Api.Context;
+using Agenix.Api.Endpoint;
 using Agenix.Core.Message;
 
 namespace Agenix.Core.Endpoint.Direct;
 
 public class DirectEndpointComponent(string name = "direct") : AbstractEndpointComponent(name)
 {
+    public DirectEndpointComponent() : this("direct")
+    {
+    }
+
     /// <summary>
     ///     Creates an endpoint for the given resource path, parameters, and context.
     /// </summary>
@@ -32,8 +38,8 @@ public class DirectEndpointComponent(string name = "direct") : AbstractEndpointC
 
         endpoint.EndpointConfiguration.SetQueueName(queueName);
 
-        if (!context.GetReferenceResolver().IsResolvable(queueName))
-            context.GetReferenceResolver().Bind(queueName, new DefaultMessageQueue(queueName));
+        if (!context.ReferenceResolver.IsResolvable(queueName))
+            context.ReferenceResolver.Bind(queueName, new DefaultMessageQueue(queueName));
 
         EnrichEndpointConfiguration(endpoint.EndpointConfiguration, parameters, context);
 

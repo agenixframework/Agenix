@@ -1,9 +1,10 @@
-﻿using Agenix.Core;
+﻿using Agenix.Api;
+using Agenix.Core;
 using Agenix.Core.Annotations;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using ITestAction = NUnit.Framework.ITestAction;
-using TestContext = Agenix.Core.TestContext;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 
@@ -68,7 +69,7 @@ public class NUnitAgenixSupportAttribute : System.Attribute, ITestAction
         var testCaseRunner = TestCaseRunnerFactory.CreateRunner(new DefaultTestCase(), context);
         testCaseRunner.SetTestClass(testClass);
         testCaseRunner.SetName(testName);
-        testCaseRunner.SetPackageName(packageName);
+        testCaseRunner.SetNamespaceName(packageName);
 
         return testCaseRunner;
     }

@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using Agenix.Api.Context;
+using Agenix.Api.Message;
+using Agenix.Api.Validation;
 using Agenix.Core.Message;
 using Agenix.Core.Spi;
 
@@ -8,7 +11,7 @@ public abstract class AbstractValidationProcessor<T> : IValidationProcessor, IGe
     IReferenceResolverAware
 {
     /**
-     * POCO reference resolver injected before validation callback is called
+     * POCO reference resolver injected before the validation callback is called
      */
     protected IReferenceResolver ReferenceResolver;
 

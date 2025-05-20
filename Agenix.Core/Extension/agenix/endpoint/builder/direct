@@ -1,0 +1,4 @@
+async=Agenix.Core.Endpoint.Direct.DirectEndpointBuilder
+asynchronous=Agenix.Core.Endpoint.Direct.DirectEndpointBuilder
+sync=Agenix.Core.Endpoint.Direct.DirectSyncEndpointBuilder
+synchronous=Agenix.Core.Endpoint.Direct.DirectSyncEndpointBuilder

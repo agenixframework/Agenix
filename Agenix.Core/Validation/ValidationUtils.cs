@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Validation;
+using Agenix.Api.Validation.Matcher;
 using Agenix.Core.Validation.Matcher;
 
 namespace Agenix.Core.Validation;
@@ -42,7 +45,7 @@ public abstract class ValidationUtils
                 var converted = context.TypeConverter.ConvertIfNecessary<object>(actualValue, expectedValue.GetType());
 
                 if (converted == null)
-                    throw new CoreSystemException(
+                    throw new AgenixSystemException(
                         $"Failed to convert value '{actualValue}' to required type '{expectedValue.GetType()}'");
 
                 if (IsList(converted))
@@ -145,7 +148,7 @@ public abstract class ValidationUtils
     }
 
 
-    /// Constructs proper error message for a value that should be in a collection.
+    /// Constructs a proper error message for a value that should be in a collection.
     /// @param baseMessage the base error message.
     /// @param controlValue the expected value.
     /// @param actualValues where the controlValue should be present in.
@@ -156,7 +159,7 @@ public abstract class ValidationUtils
         return baseMessage + ", expected '" + controlValue + "' but was '" + actualValue + "'";
     }
 
-    /// Constructs proper error message for a value that should be in a collection.
+    /// Constructs a proper error message for a value that should be in a collection.
     /// @param baseMessage the base error message.
     /// @param controlValue the expected value.
     /// @param actualValues where the controlValue should be present in.
@@ -185,8 +188,8 @@ public abstract class ValidationUtils
     /// <returns>An instance of IValueMatcher that supports the type of the expected value, or null if no match is found.</returns>
     private static IValueMatcher GetValueMatcher(object expectedValue, TestContext context)
     {
-        // Add validators from resource path lookup
-        var allMatchers = new Dictionary<string, IValueMatcher>(DefaultValueMatchers);
+        // Add validators from the resource path lookup
+        var allMatchers = new Dictionary<string, IValueMatcher>(IValueMatcher.Lookup());
 
         // Find the first matcher that supports the expected value's type
         return allMatchers.Values

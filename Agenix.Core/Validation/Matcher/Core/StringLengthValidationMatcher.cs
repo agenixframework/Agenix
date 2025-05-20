@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Validation.Matcher;
 
 namespace Agenix.Core.Validation.Matcher.Core;
 
 /// <summary>
-///     ValidationMatcher checks string length of given field.
+/// Represents a validation matcher that verifies whether the length of a given string field
+/// matches the specified length defined in the control parameters.
 /// </summary>
 public class StringLengthValidationMatcher : IValidationMatcher
 {

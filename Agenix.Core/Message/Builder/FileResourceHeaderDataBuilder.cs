@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Agenix.Core.Exceptions;
+using Agenix.Api;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
 using Agenix.Core.Util;
 
 namespace Agenix.Core.Message.Builder;
@@ -15,13 +18,13 @@ public class FileResourceHeaderDataBuilder : IMessageHeaderDataBuilder
     private readonly string _resourcePath;
 
     /// <summary>
-    ///     Constructor using file resource path and default charset.
+    ///     Constructor using a file resource path and default charset.
     /// </summary>
     /// <param name="resourcePath"></param>
     public FileResourceHeaderDataBuilder(string resourcePath)
     {
         _resourcePath = resourcePath;
-        _charsetName = CoreSettings.AgenixFileEncoding();
+        _charsetName = AgenixSettings.AgenixFileEncoding();
     }
 
     /// <summary>
@@ -50,7 +53,7 @@ public class FileResourceHeaderDataBuilder : IMessageHeaderDataBuilder
         }
         catch (IOException e)
         {
-            throw new CoreSystemException("Failed to read message header data resource", e);
+            throw new AgenixSystemException("Failed to read message header data resource", e);
         }
     }
 

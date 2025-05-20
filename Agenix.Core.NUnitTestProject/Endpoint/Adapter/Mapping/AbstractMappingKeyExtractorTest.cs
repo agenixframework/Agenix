@@ -1,4 +1,5 @@
-﻿using Agenix.Core.Endpoint.Adapter.Mapping;
+﻿using Agenix.Api.Message;
+using Agenix.Core.Endpoint.Adapter.Mapping;
 using Agenix.Core.Message;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;

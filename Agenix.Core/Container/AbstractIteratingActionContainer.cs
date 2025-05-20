@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Agenix.Api;
+using Agenix.Api.Context;
+using Agenix.Api.Validation.Matcher;
 using Agenix.Core.Util;
 using Agenix.Core.Validation.Matcher;
 

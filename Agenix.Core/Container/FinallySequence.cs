@@ -1,4 +1,7 @@
-﻿namespace Agenix.Core.Container;
+﻿using Agenix.Api;
+using Agenix.Api.Context;
+
+namespace Agenix.Core.Container;
 
 /// Represents a sequence of actions that will execute a set of operations
 /// and ensures that a final operation is performed at the end.

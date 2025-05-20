@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
-using Agenix.Core.Exceptions;
+using Agenix.Api;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
 using Agenix.Core.Util;
 using log4net;
 
@@ -42,7 +44,7 @@ public class LoadAppSettingsAction(LoadAppSettingsAction.Builder builder) : Abst
             {
                 context.SetVariable(key, context.ReplaceDynamicContentInString(value));
             }
-            catch (CoreSystemException)
+            catch (AgenixSystemException)
             {
                 unresolved.Add(key, value);
             }

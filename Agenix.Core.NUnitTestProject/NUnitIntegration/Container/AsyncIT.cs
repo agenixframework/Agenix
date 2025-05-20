@@ -1,4 +1,4 @@
-﻿using Agenix.Core.Annotations;
+﻿using Agenix.Api.Annotations;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using log4net;
 using NUnit.Framework;

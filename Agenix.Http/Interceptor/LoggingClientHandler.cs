@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Text;
+using Agenix.Api.Report;
 using Agenix.Core;
 using Agenix.Core.Message;
 using Agenix.Core.Report;

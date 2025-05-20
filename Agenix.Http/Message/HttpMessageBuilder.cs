@@ -1,6 +1,7 @@
 using System.Net;
-using Agenix.Core;
-using Agenix.Core.Message;
+using Agenix.Api;
+using Agenix.Api.Context;
+using Agenix.Api.Message;
 using Agenix.Core.Message.Builder;
 
 namespace Agenix.Http.Message;
@@ -41,7 +42,7 @@ public class HttpMessageBuilder : StaticMessageBuilder
     public override IMessage Build(TestContext context, string messageType)
     {
         //Copy the initial message, so that it is not manipulated during the test.
-        var message = new HttpMessage(base.GetMessage(), CoreSettings.IsHttpMessageBuilderForceHeaderUpdateEnabled());
+        var message = new HttpMessage(base.GetMessage(), AgenixSettings.IsHttpMessageBuilderForceHeaderUpdateEnabled());
 
         var constructed = base.Build(context, messageType);
 
@@ -59,7 +60,7 @@ public class HttpMessageBuilder : StaticMessageBuilder
     /// <param name="to">The target message to which the headers should be set.</param>
     private void ReplaceHeaders(IMessage from, IMessage to)
     {
-        HashSet<string> headerKeys = new HashSet<string>(to.GetHeaders().Keys)
+        var headerKeys = new HashSet<string>(to.GetHeaders().Keys)
             .Where(key => !FilteredHeaders.Contains(key))
             .ToHashSet();
 

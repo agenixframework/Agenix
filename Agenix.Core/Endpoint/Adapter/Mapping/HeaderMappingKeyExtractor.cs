@@ -1,4 +1,5 @@
-﻿using Agenix.Core.Exceptions;
+﻿using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
 using Agenix.Core.Message;
 
 namespace Agenix.Core.Endpoint.Adapter.Mapping;
@@ -31,12 +32,12 @@ public class HeaderMappingKeyExtractor : AbstractMappingKeyExtractor
     /// </summary>
     /// <param name="request">The incoming message from which the header mapping key is to be extracted.</param>
     /// <returns>The extracted mapping key as a string.</returns>
-    /// <exception cref="CoreSystemException">Thrown when the specified header is not found in the request message.</exception>
+    /// <exception cref="AgenixSystemException">Thrown when the specified header is not found in the request message.</exception>
     protected override string GetMappingKey(IMessage request)
     {
         if (request.GetHeader(_headerName) != null) return request.GetHeader(_headerName)?.ToString();
 
-        throw new CoreSystemException($"Unable to find header '{_headerName}' in request message");
+        throw new AgenixSystemException($"Unable to find header '{_headerName}' in request message");
     }
 
     /// <summary>

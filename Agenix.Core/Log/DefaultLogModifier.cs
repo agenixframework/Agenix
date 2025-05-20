@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Agenix.Api;
+using Agenix.Api.Log;
 
 namespace Agenix.Core.Log;
 
@@ -10,8 +12,8 @@ namespace Agenix.Core.Log;
 /// </summary>
 public class DefaultLogModifier : LogMessageModifierBase
 {
-    private readonly HashSet<string> keywords = CoreSettings.GetLogMaskKeywords();
-    private readonly string logMaskValue = CoreSettings.GetLogMaskValue();
+    private readonly HashSet<string> keywords = AgenixSettings.GetLogMaskKeywords();
+    private readonly string logMaskValue = AgenixSettings.GetLogMaskValue();
     private readonly bool maskFormUrlEncoded = true;
     private Regex formUrlEncodedPattern;
     private Regex jsonPattern;
@@ -25,7 +27,7 @@ public class DefaultLogModifier : LogMessageModifierBase
 
     public override string Mask(string source)
     {
-        if (!CoreSettings.IsLogModifierEnabled() || source == null || source.Length == 0) return source;
+        if (!AgenixSettings.IsLogModifierEnabled() || source == null || source.Length == 0) return source;
 
         var xml = maskXml && source.StartsWith('<');
         var json = maskJson && !xml && (source.StartsWith('{') || source.StartsWith('['));

@@ -2,9 +2,9 @@
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Mime;
-using Agenix.Core;
-using Agenix.Core.Message;
-using Agenix.Core.Util;
+using Agenix.Api.Context;
+using Agenix.Api.Message;
+using Agenix.Api.Util;
 using Agenix.Http.Client;
 using Newtonsoft.Json;
 
@@ -76,7 +76,7 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
         TestContext context)
     {
         var responseHeaders = GetHeaders(externalMessage.Headers);
-        
+
         var httpMessage = new HttpMessage(ExtractMessageBody(externalMessage), responseHeaders);
         httpMessage.Status(externalMessage.StatusCode);
 
@@ -101,7 +101,7 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
     ///     A string representing the resolved value of the cookie, with dynamic content replaced if a context is
     ///     provided.
     /// </returns>
-    private static string ResolveCookieValue(TestContext context, Cookie cookie)
+    private static string ResolveCookieValue(TestContext? context, Cookie cookie)
     {
         return context == null ? cookie.Value : context.ReplaceDynamicContentInString(cookie.Value);
     }
@@ -182,7 +182,7 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
 
         return customHeaders;
     }
-    
+
     private Dictionary<string, object> GetHeaders(HttpHeaders httpHeaders)
     {
         var customHeaders = new Dictionary<string, object>();
@@ -259,7 +259,8 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
             : $"{endpointConfiguration.ContentType};charset={endpointConfiguration.Charset}";
     }
 
-    private MediaTypeHeaderValue ComposeMediaTypeHeaderValue(HttpMessage httpMessage, HttpEndpointConfiguration endpointConfiguration)
+    private MediaTypeHeaderValue ComposeMediaTypeHeaderValue(HttpMessage httpMessage,
+        HttpEndpointConfiguration endpointConfiguration)
     {
         if (StringUtils.HasText(httpMessage.GetContentType()))
         {
@@ -292,23 +293,27 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
     }
 
     /// <summary>
-    ///     Creates an <see cref="HttpRequestMessage" /> based on the provided HTTP headers, payload, method, and content type.
+    /// Creates an <see cref="HttpRequestMessage" /> with the specified HTTP headers, payload, HTTP method, and
+    /// endpoint configuration. Prepares a request to be sent to an HTTP endpoint.
     /// </summary>
     /// <param name="httpHeaders">
-    ///     The headers to be added to the HTTP request. These may be added either to the request headers
-    ///     or the content headers depending on their validity.
+    /// The collection of headers to be added to the HTTP request. Headers may include request-level
+    /// or content-level configurations depending on their type.
     /// </param>
-    /// <param name="payload">
-    ///     The payload to be included in the HTTP request. This can be a string, byte array, or any
-    ///     serializable object, processed based on the content type specified.
+    /// <param name="httpMessage">
+    /// The HTTP message that contains the payload data to be included in the request.
     /// </param>
-    /// <param name="method">The HTTP method to be used in the request, such as GET, POST, PUT, etc.</param>
-    /// <param name="contentType">
-    ///     The content type of the payload, determining how the payload is handled. Supports
-    ///     "text/plain", "application/octet-stream", and JSON for generic objects.
+    /// <param name="method">
+    /// The HTTP method that defines the action to be performed, such as GET, POST, or PUT. Defaults
+    /// to GET if null.
     /// </param>
-    /// <returns>An <see cref="HttpRequestMessage" /> configured with the specified headers, payload, method, and content type.</returns
-    private HttpRequestMessage CreateHttpRequest(HttpRequestHeaders httpHeaders, HttpMessage httpMessage, HttpMethod? method,
+    /// <param name="endpointConfiguration">
+    /// The configuration for the HTTP endpoint which may include authentication, base URL, and other
+    /// settings influencing the request construction.
+    /// </param>
+    /// <returns>An <see cref="HttpRequestMessage" /> that is fully configured and ready to be sent to the target endpoint.</returns>
+    private HttpRequestMessage CreateHttpRequest(HttpRequestHeaders httpHeaders, HttpMessage httpMessage,
+        HttpMethod? method,
         HttpEndpointConfiguration endpointConfiguration)
     {
         var payload = httpMessage.Payload;
@@ -319,7 +324,6 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
 
         // Set headers
         foreach (var header in httpHeaders)
-        {
             if (!httpRequestMessage.Headers.TryAddWithoutValidation(header.Key, header.Value.ToArray()))
             {
                 // If header can't be added to HttpRequestMessage.Headers, try adding to Content.Headers
@@ -327,8 +331,6 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
                 httpRequestMessage.Content.Headers.TryAddWithoutValidation(header.Key, header.Value.ToArray());
             }
 
-        }
-        
         if (!HttpMethodSupportsBody(method)) return httpRequestMessage;
 
 
@@ -339,7 +341,8 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
             if (payload is string stringPayload)
             {
                 httpRequestMessage.Content = new StringContent(stringPayload);
-                httpRequestMessage.Content.Headers.ContentType = ComposeMediaTypeHeaderValue(httpMessage, endpointConfiguration);
+                httpRequestMessage.Content.Headers.ContentType =
+                    ComposeMediaTypeHeaderValue(httpMessage, endpointConfiguration);
             }
             else if ((endpointConfiguration.ContentType.Contains(MediaTypeNames.Application.Octet,
                           StringComparison.OrdinalIgnoreCase) || endpointConfiguration.ContentType.Contains(
@@ -356,14 +359,16 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
                      && payload is byte[] bytePayload)
             {
                 httpRequestMessage.Content = new ByteArrayContent(bytePayload);
-                httpRequestMessage.Content.Headers.ContentType = ComposeMediaTypeHeaderValue(httpMessage, endpointConfiguration);
+                httpRequestMessage.Content.Headers.ContentType =
+                    ComposeMediaTypeHeaderValue(httpMessage, endpointConfiguration);
             }
             else
             {
                 // Default to JSON serialization for objects
                 var jsonPayload = JsonConvert.SerializeObject(payload);
                 httpRequestMessage.Content = new StringContent(jsonPayload);
-                httpRequestMessage.Content.Headers.ContentType = ComposeMediaTypeHeaderValue(httpMessage, endpointConfiguration);
+                httpRequestMessage.Content.Headers.ContentType =
+                    ComposeMediaTypeHeaderValue(httpMessage, endpointConfiguration);
             }
         }
 
@@ -380,7 +385,7 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
     /// </returns>
     private object ExtractMessageBody(HttpResponseMessage responseMessage)
     {
-        if (responseMessage.Content == null) return string.Empty;
+        if (responseMessage?.Content == null) return string.Empty;
 
         // Check the content type
         var contentType = responseMessage.Content.Headers.ContentType?.MediaType;

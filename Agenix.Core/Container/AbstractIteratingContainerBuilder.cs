@@ -1,3 +1,5 @@
+using Agenix.Api.Container;
+
 namespace Agenix.Core.Container;
 
 public abstract class AbstractIteratingContainerBuilder<T, TS> : AbstractTestContainerBuilder<T, TS>

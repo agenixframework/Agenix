@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Agenix.Core.Common;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Common;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
 using log4net;
 
 namespace Agenix.Core.Actions;
@@ -55,7 +56,7 @@ public abstract class AbstractAsyncTestAction : AbstractTestAction, ICompletable
             {
                 Log.Warn("Async test action execution raised error", e);
                 context.AddException(
-                    (CoreSystemException)(e is CoreSystemException ? e : new CoreSystemException(e.Message)));
+                    (AgenixSystemException)(e is AgenixSystemException ? e : new AgenixSystemException(e.Message)));
             }
             finally
             {

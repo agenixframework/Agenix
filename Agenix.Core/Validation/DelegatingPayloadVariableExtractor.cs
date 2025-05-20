@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Agenix.Core.Exceptions;
-using Agenix.Core.Message;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
+using Agenix.Api.Variable;
 using Agenix.Core.Validation.Json;
-using Agenix.Core.Variable;
 using log4net;
 
 namespace Agenix.Core.Validation;
@@ -53,9 +54,9 @@ public class DelegatingPayloadVariableExtractor : IVariableExtractor
     /// </summary>
     /// <param name="message">The message from which variables should be extracted.</param>
     /// <param name="context">The test context that provides path expressions and dynamic content replacement mechanisms.</param>
-    public void ExtractVariables(IMessage message, TestContext context)
+    public virtual void ExtractVariables(IMessage message, TestContext context)
     {
-        if (!PathExpressions.Any()) return;
+        if (PathExpressions.Count == 0) return;
 
         if (Log.IsDebugEnabled) Log.Debug("Reading path elements.");
 
@@ -73,10 +74,10 @@ public class DelegatingPayloadVariableExtractor : IVariableExtractor
                 xpathExpressions[path] = variable;
         }
 
-        if (jsonPathExpressions.Any())
+        if (jsonPathExpressions.Count != 0)
         {
             var jsonPathExtractor =
-                LookupVariableExtractor<IVariableExtractor, JsonPathVariableExtractor.Builder>("jsonPath", context);
+                LookupVariableExtractor<IVariableExtractor, Builder>("jsonPath", context);
 
             jsonPathExtractor
                 .Expressions(jsonPathExpressions)
@@ -111,7 +112,7 @@ public class DelegatingPayloadVariableExtractor : IVariableExtractor
     /// <returns>
     ///     An instance of IVariableExtractor.IBuilder corresponding to the specified type, if resolvable.
     /// </returns>
-    /// <exception cref="CoreSystemException">
+    /// <exception cref="AgenixSystemException">
     ///     Thrown if no appropriate implementation of the specified type can be found.
     /// </exception>
     private IVariableExtractor.IBuilder<T, TB> LookupVariableExtractor<T, TB>(string type, TestContext context)
@@ -120,15 +121,15 @@ public class DelegatingPayloadVariableExtractor : IVariableExtractor
         return IVariableExtractor.Lookup<T, TB>(type)
             .OrElseGet(() =>
             {
-                if (context.GetReferenceResolver().IsResolvable(type, typeof(IVariableExtractor.IBuilder<T, TB>)))
-                    return context.GetReferenceResolver().Resolve<IVariableExtractor.IBuilder<T, TB>>(type);
+                if (context.ReferenceResolver.IsResolvable(type, typeof(IVariableExtractor.IBuilder<T, TB>)))
+                    return context.ReferenceResolver.Resolve<IVariableExtractor.IBuilder<T, TB>>(type);
 
-                if (context.GetReferenceResolver().IsResolvable(type + "VariableExtractorBuilder",
+                if (context.ReferenceResolver.IsResolvable(type + "VariableExtractorBuilder",
                         typeof(IVariableExtractor.IBuilder<T, TB>)))
-                    return context.GetReferenceResolver()
+                    return context.ReferenceResolver
                         .Resolve<IVariableExtractor.IBuilder<T, TB>>(type + "VariableExtractorBuilder");
 
-                throw new CoreSystemException(
+                throw new AgenixSystemException(
                     $"Missing proper variable extractor implementation of type '{type}' - consider adding proper validation module to the project");
             });
     }
@@ -178,7 +179,7 @@ public class DelegatingPayloadVariableExtractor : IVariableExtractor
         /// <returns>
         ///     A new instance of <see cref="DelegatingPayloadVariableExtractor" />.
         /// </returns>
-        public DelegatingPayloadVariableExtractor Build()
+        public virtual DelegatingPayloadVariableExtractor Build()
         {
             return new DelegatingPayloadVariableExtractor(this);
         }

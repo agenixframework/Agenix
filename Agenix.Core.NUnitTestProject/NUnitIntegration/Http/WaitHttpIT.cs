@@ -1,12 +1,13 @@
 ﻿using System.Net.Http;
-using Agenix.Core.Annotations;
+using Agenix.Api.Annotations;
+using Agenix.Api.Condition;
 using Agenix.Core.Condition;
 using Agenix.Core.Spi;
 using Agenix.Http.Client;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
 using HttpClient = Agenix.Http.Client.HttpClient;
-using static Agenix.Core.Container.Wait.Builder<Agenix.Core.Condition.ICondition>;
+using static Agenix.Core.Container.Wait.Builder<Agenix.Api.Condition.ICondition>;
 using static Agenix.Core.Actions.SendMessageAction.Builder;
 using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
 

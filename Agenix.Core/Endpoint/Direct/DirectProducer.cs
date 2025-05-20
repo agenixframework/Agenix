@@ -1,7 +1,9 @@
 ﻿using System;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Message;
+using Agenix.Api.Messaging;
 using Agenix.Core.Message;
-using Agenix.Core.Messaging;
 using log4net;
 
 namespace Agenix.Core.Endpoint.Direct;
@@ -20,7 +22,7 @@ public class DirectProducer(string name, DirectEndpointConfiguration endpointCon
     /// Sends a message to the destination queue defined in the endpoint configuration.
     /// <param name="message">The message to be sent.</param>
     /// <param name="context">The current test context.</param>
-    /// <exception cref="CoreSystemException">Thrown when the message fails to send to the destination queue.</exception>
+    /// <exception cref="AgenixSystemException">Thrown when the message fails to send to the destination queue.</exception>
     public virtual void Send(IMessage message, TestContext context)
     {
         var destinationQueueName = GetDestinationQueueName();
@@ -34,7 +36,7 @@ public class DirectProducer(string name, DirectEndpointConfiguration endpointCon
         }
         catch (Exception e)
         {
-            throw new CoreSystemException($"Failed to send message to queue: '{destinationQueueName}'", e);
+            throw new AgenixSystemException($"Failed to send message to queue: '{destinationQueueName}'", e);
         }
 
         Log.Info($"Message was sent to queue: '{destinationQueueName}'");
@@ -43,7 +45,7 @@ public class DirectProducer(string name, DirectEndpointConfiguration endpointCon
     /// Retrieves the destination queue based on the endpoint configuration.
     /// <param name="context">The current test context.</param>
     /// <returns>The destination queue.</returns>
-    /// <exception cref="CoreSystemException">
+    /// <exception cref="AgenixSystemException">
     ///     Thrown when neither the queue nor the queue name is set in the endpoint
     ///     configuration.
     /// </exception>
@@ -57,12 +59,12 @@ public class DirectProducer(string name, DirectEndpointConfiguration endpointCon
 
         if (!string.IsNullOrWhiteSpace(queueName)) return ResolveQueueName(queueName, context);
 
-        throw new CoreSystemException("Neither queue name nor queue object is set - please specify destination queue");
+        throw new AgenixSystemException("Neither queue name nor queue object is set - please specify destination queue");
     }
 
     /// Retrieves the destination queue name based on the endpoint configuration.
     /// <returns>The name of the destination queue.</returns>
-    /// <exception cref="CoreSystemException">
+    /// <exception cref="AgenixSystemException">
     ///     Thrown when both the queue and the queue name are not set in the endpoint
     ///     configuration.
     /// </exception>
@@ -74,7 +76,7 @@ public class DirectProducer(string name, DirectEndpointConfiguration endpointCon
         var queueName = endpointConfiguration.GetQueueName();
         if (!string.IsNullOrWhiteSpace(queueName)) return queueName;
 
-        throw new CoreSystemException("Neither queue name nor queue object is set - please specify destination queue");
+        throw new AgenixSystemException("Neither queue name nor queue object is set - please specify destination queue");
     }
 
 
@@ -82,12 +84,12 @@ public class DirectProducer(string name, DirectEndpointConfiguration endpointCon
     /// <param name="queueName">The name of the queue to resolve.</param>
     /// <param name="context">The context containing the reference resolver.</param>
     /// <returns>The resolved IMessageQueue object.</returns>
-    /// <exception cref="CoreSystemException">Thrown when the reference resolver is missing in the context.</exception>
+    /// <exception cref="AgenixSystemException">Thrown when the reference resolver is missing in the context.</exception>
     protected IMessageQueue ResolveQueueName(string queueName, TestContext context)
     {
-        if (context.GetReferenceResolver() != null)
-            return context.GetReferenceResolver().Resolve<IMessageQueue>(queueName);
+        if (context.ReferenceResolver != null)
+            return context.ReferenceResolver.Resolve<IMessageQueue>(queueName);
 
-        throw new CoreSystemException("Unable to resolve message queue - missing proper reference resolver in context");
+        throw new AgenixSystemException("Unable to resolve message queue - missing proper reference resolver in context");
     }
 }

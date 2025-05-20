@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Agenix.Core.Exceptions;
+using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Api.Validation.Matcher;
 using static System.Double;
 
 namespace Agenix.Core.Validation.Matcher.Core;
 
 /// <summary>
-///     ValidationMatcher based on on Double < Double.
+/// Represents a validation matcher that asserts a provided numeric value is less than a specified control value.
 /// </summary>
 public class LowerThanValidationMatcher : IValidationMatcher
 {
