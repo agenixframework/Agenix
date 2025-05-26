@@ -6,16 +6,16 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using Agenix.Api.Exceptions;
-using Agenix.Core.Util;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Api.Util;
 
 public class DefaultTypeConverter(string encodingName) : ITypeConverter
 {
-    private static readonly ILog _log = LogManager.GetLogger(typeof(DefaultTypeConverter));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(DefaultTypeConverter));
 
-    public static DefaultTypeConverter INSTANCE = new(AgenixSettings.AgenixFileEncoding());
+    public static readonly DefaultTypeConverter Instance = new(AgenixSettings.AgenixFileEncoding());
 
     public T ConvertIfNecessary<T>(object target, Type type)
     {
@@ -62,7 +62,7 @@ public class DefaultTypeConverter(string encodingName) : ITypeConverter
         if (type.IsArray && type.GetElementType() == typeof(string))
         {
             var arrayString = AsNormalizedArrayString(target);
-            return (T)(object)arrayString.Split(",").ToArray();
+            return (T)(object)arrayString.Split(",");
         }
 
         if (type.IsGenericType && typeof(List<>).IsAssignableFrom(type.GetGenericTypeDefinition()) &&
@@ -180,8 +180,9 @@ public class DefaultTypeConverter(string encodingName) : ITypeConverter
             }
             catch (AgenixSystemException e)
             {
-                _log.Warn(
-                    $"WARN: Unable to convert String object to type '{type.FullName}' - try fallback strategies. Exception: {e.Message}");
+                Log.LogWarning(
+                    "WARN: Unable to convert String object to type '{TypeFullName}' - try fallback strategies. Exception: {EMessage}",
+                    type.FullName, e.Message);
             }
 
         if (target is IConvertible convertibleTarget)
@@ -207,8 +208,9 @@ public class DefaultTypeConverter(string encodingName) : ITypeConverter
         {
             if (type == typeof(string))
             {
-                _log.Warn(
-                    $"WARN: Using default toString representation because object type conversion failed with: {e.Message}");
+                Log.LogWarning(
+                    "WARN: Using default toString representation because object type conversion failed with: {EMessage}"
+                    , e.Message);
                 return (T)(object)target.ToString();
             }
 
@@ -272,7 +274,7 @@ public class DefaultTypeConverter(string encodingName) : ITypeConverter
     {
         if (type == typeof(string))
         {
-            _log.WarnFormat("Using default ToString() representation for object type {0}", target.GetType());
+            Log.LogWarning("Using default ToString() representation for object type {0}", target.GetType());
             return (T)(object)target.ToString();
         }
 

@@ -6,6 +6,7 @@ using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Messaging;
 using Agenix.Api.Util;
@@ -19,8 +20,8 @@ using Agenix.Core.Util;
 using Agenix.Core.Validation;
 using Agenix.Core.Validation.Json;
 using Agenix.Core.Validation.Xml;
+using Microsoft.Extensions.Logging;
 using MsgType = Agenix.Api.Message.MessageType;
-using log4net;
 
 namespace Agenix.Core.Actions;
 
@@ -34,7 +35,7 @@ public class ReceiveMessageAction : AbstractTestAction
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(ReceiveMessageAction));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(ReceiveMessageAction));
 
     public ReceiveMessageAction(
         ReceiveMessageActionBuilder<ReceiveMessageAction, ReceiveMessageActionBuilderSupport, Builder> builder)
@@ -175,7 +176,7 @@ public class ReceiveMessageAction : AbstractTestAction
     /// <returns></returns>
     private IMessage ReceiveSelected(TestContext context, string selectorString)
     {
-        if (Log.IsDebugEnabled) Log.Debug($"Setting message selector: '{selectorString}'");
+        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Setting message selector: '{SelectorString}'", selectorString);
 
         var messageEndpoint = GetOrCreateEndpoint(context);
         var consumer = messageEndpoint.CreateConsumer();
@@ -184,7 +185,7 @@ public class ReceiveMessageAction : AbstractTestAction
             return selectiveConsumer.Receive(context.ReplaceDynamicContentInString(selectorString), context,
                 ReceiveTimeout > 0 ? ReceiveTimeout : messageEndpoint.EndpointConfiguration.Timeout);
 
-        Log.Warn($"Unable to receive selectively with consumer implementation: '{consumer.GetType()}'");
+        Log.LogWarning("Unable to receive selectively with consumer implementation: '{Type}'", consumer.GetType());
         return Receive(context);
     }
 
@@ -197,7 +198,7 @@ public class ReceiveMessageAction : AbstractTestAction
     {
         foreach (var processor in Processors) processor.Process(message, context);
 
-        if (Log.IsDebugEnabled) Log.Debug($"Received message:\n{message.Print(context)}");
+        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Received message:\n{Print}", message.Print(context));
 
         // Extract variables from received message content
         foreach (var variableExtractor in VariableExtractors) variableExtractor.ExtractVariables(message, context);
@@ -214,25 +215,21 @@ public class ReceiveMessageAction : AbstractTestAction
         }
         else
         {
-            if (Log.IsDebugEnabled) Log.Debug($"Control message:\n{controlMessage.Print(context)}");
+            if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Control message:\n{Print}", controlMessage.Print(context));
 
             AssumeMessageType(StringUtils.HasText(controlMessage.GetPayload<string>()) ? controlMessage : message);
 
             if (Validators is { Count: > 0 })
             {
                 foreach (var messageValidator in Validators)
-                {
                     messageValidator.ValidateMessage(message, controlMessage, context, ValidationContexts);
-                }
 
                 if (Validators.AsParallel()
                     .Select(v => v.GetType())
                     .Any(type => typeof(DefaultMessageHeaderValidator).IsAssignableFrom(type))) return;
                 var defaultMessageHeaderValidator = context.MessageValidatorRegistry.GetDefaultMessageHeaderValidator();
                 if (defaultMessageHeaderValidator != null)
-                {
                     defaultMessageHeaderValidator.ValidateMessage(message, controlMessage, context, ValidationContexts);
-                }
             }
             else
             {
@@ -242,30 +239,25 @@ public class ReceiveMessageAction : AbstractTestAction
                     context.MessageValidatorRegistry.FindMessageValidators(MessageType, message, mustFindValidator);
 
                 foreach (var messageValidator in activeValidators)
-                {
                     messageValidator.ValidateMessage(message, controlMessage, context, ValidationContexts);
-                }
 
                 if (AgenixSettings.IsPerformDefaultValidation() &&
                     ValidationContexts.Any(validationContext => validationContext.Status == ValidationStatus.UNKNOWN))
                 {
                     var defaultValidator = context.MessageValidatorRegistry.GetDefaultMessageValidator();
                     if (!activeValidators.Any(validator => defaultValidator.GetType().IsInstanceOfType(validator)))
-                    {
                         defaultValidator.ValidateMessage(message, controlMessage, context, ValidationContexts);
-                    }
                 }
             }
-            
+
             var unknown = ValidationContexts
                 .Where(validationContext => validationContext.Status == ValidationStatus.UNKNOWN)
                 .ToList();
             if (unknown.Count <= 0) return;
             {
                 foreach (var validationContext in unknown)
-                {
-                    Log.Warn($"Found validation context that has not been processed: {validationContext.GetType().Name}");
-                }
+                    Log.LogWarning(
+                        "Found validation context that has not been processed: {S}", validationContext.GetType().Name);
                 throw new ValidationException(
                     $"Incomplete message validation - total of {unknown.Count} validation context has not been processed");
             }
@@ -293,19 +285,19 @@ public class ReceiveMessageAction : AbstractTestAction
         if (MessagePayloadUtils.IsXml(payload)
             && (string.IsNullOrEmpty(MessageType) || !MessageTypeExtensions.IsXml(MessageType)))
         {
-            Log.Warn(
-                $"Detected XML message payload type, but non-XML message type '{MessageType}' configured! Assuming message type {Api.Message.MessageType.XML}");
+            Log.LogWarning(
+                "Detected XML message payload type, but non-XML message type '{S}' configured! Assuming message type {Xml}", MessageType, MsgType.XML);
 
-            SetMessageType(Api.Message.MessageType.XML);
+            SetMessageType(MsgType.XML);
         }
         else if (MessagePayloadUtils.IsJson(payload)
-                 && (string.IsNullOrEmpty(MessageType) || !MessageType.Equals(nameof(Api.Message.MessageType.JSON),
+                 && (string.IsNullOrEmpty(MessageType) || !MessageType.Equals(nameof(MsgType.JSON),
                      StringComparison.OrdinalIgnoreCase)))
         {
-            Log.Warn(
-                $"Detected JSON message payload type, but non-JSON message type '{MessageType}' configured! Assuming message type {Api.Message.MessageType.JSON}");
+            Log.LogWarning(
+                "Detected JSON message payload type, but non-JSON message type '{S}' configured! Assuming message type {Json}", MessageType, MsgType.JSON);
 
-            SetMessageType(Api.Message.MessageType.JSON);
+            SetMessageType(MsgType.JSON);
         }
     }
 
@@ -439,7 +431,7 @@ public class ReceiveMessageAction : AbstractTestAction
             messageBuilderSupport ??= GetMessageBuilderSupport();
 
             ReconcileValidationContexts();
-            
+
             if (referenceResolver == null) return DoBuild();
             if (_validationProcessor is IReferenceResolverAware referenceResolverAwareProcessor)
                 referenceResolverAwareProcessor.SetReferenceResolver(referenceResolver);
@@ -698,21 +690,16 @@ public class ReceiveMessageAction : AbstractTestAction
         protected void ReconcileValidationContexts()
         {
             var validationContexts = GetValidationContexts();
-            if (!validationContexts.Any(context => context is HeaderValidationContext))
-            {
-                GetHeaderValidationContext();
-            }
+            if (!validationContexts.Any(context => context is HeaderValidationContext)) GetHeaderValidationContext();
 
             if (!validationContexts.Any(context => context is IMessageValidationContext))
-            {
                 InjectMessageValidationContext();
-            }
         }
-        
+
         /// <summary>
-        /// Determines and injects the appropriate message validation context based on the current message payload
-        /// or other available attributes in the message. If no validation context is explicitly defined,
-        /// it evaluates the message format (e.g., XML, JSON, or plaintext) or other metadata to set a default context.
+        ///     Determines and injects the appropriate message validation context based on the current message payload
+        ///     or other available attributes in the message. If no validation context is explicitly defined,
+        ///     it evaluates the message format (e.g., XML, JSON, or plaintext) or other metadata to set a default context.
         /// </summary>
         private void InjectMessageValidationContext()
         {
@@ -732,7 +719,8 @@ public class ReceiveMessageAction : AbstractTestAction
             if (validationContext == null && messageBuilderSupport != null)
                 if (messageBuilderSupport.GetMessageBuilder().GetType().IsDefined(typeof(MessagePayloadAttribute)))
                 {
-                    var type = messageBuilderSupport.GetMessageBuilder().GetType().GetCustomAttribute<MessagePayloadAttribute>()!.Value;
+                    var type = messageBuilderSupport.GetMessageBuilder().GetType()
+                        .GetCustomAttribute<MessagePayloadAttribute>()!.Value;
                     validationContext = type switch
                     {
                         MsgType.XML or MsgType.XHTML => new XmlMessageValidationContext(),
@@ -768,9 +756,9 @@ public class ReceiveMessageAction : AbstractTestAction
 
             if (validationContext != null) Validate(validationContext);
         }
-        
+
         /// <summary>
-        /// Gets a message resource file path from a configured message builder.
+        ///     Gets a message resource file path from a configured message builder.
         /// </summary>
         /// <returns>Optional containing the resource path if available</returns>
         protected Optional<string> GetMessageResource()
@@ -778,9 +766,7 @@ public class ReceiveMessageAction : AbstractTestAction
             if (messageBuilderSupport?.GetMessageBuilder() is not IWithPayloadBuilder withPayloadBuilder)
                 return Optional<string>.Empty;
             if (withPayloadBuilder.GetPayloadBuilder() is FileResourcePayloadBuilder filePayloadBuilder)
-            {
                 return Optional<string>.OfNullable(filePayloadBuilder.GetResourcePath());
-            }
 
             return Optional<string>.Empty;
         }

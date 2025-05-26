@@ -1,7 +1,8 @@
 ﻿using System.Collections.Concurrent;
 using System.Threading;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Message;
 
@@ -10,9 +11,9 @@ public class DefaultMessageQueue(string name) : IMessageQueue
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(DefaultMessageQueue));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(DefaultMessageQueue));
 
-    private static readonly ILog RetryLog = LogManager.GetLogger("agenix.retry");
+    private static readonly ILogger RetryLog = LogManager.GetLogger("agenix.retry");
 
     /// <summary>
     ///     Blocking in memory message store.
@@ -64,9 +65,9 @@ public class DefaultMessageQueue(string name) : IMessageQueue
         {
             timeLeft -= _pollingInterval;
 
-            if (RetryLog.IsDebugEnabled)
-                RetryLog.Debug("No message received with message selector - retrying in " +
-                               (timeLeft > 0 ? _pollingInterval : _pollingInterval + timeLeft) + "ms");
+            if (RetryLog.IsEnabled(LogLevel.Debug))
+                RetryLog.LogDebug("No message received with message selector - retrying in " +
+                                  (timeLeft > 0 ? _pollingInterval : _pollingInterval + timeLeft) + "ms");
 
             try
             {
@@ -74,7 +75,7 @@ public class DefaultMessageQueue(string name) : IMessageQueue
             }
             catch (ThreadInterruptedException e)
             {
-                RetryLog.Warn("Thread interrupted while waiting for retry", e);
+                RetryLog.LogWarning(e, "Thread interrupted while waiting for retry");
             }
 
             message = Receive(selector);
@@ -94,11 +95,11 @@ public class DefaultMessageQueue(string name) : IMessageQueue
             if (!selector.Accept(message)) continue;
             if (_queue.TryTake(out message))
             {
-                if (Log.IsDebugEnabled) Log.Debug($"Purged message '{message.Id}' from in memory queue");
+                if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug($"Purged message '{message.Id}' from in memory queue");
             }
             else
             {
-                Log.Warn($"Failed to purge message '{message.Id}' from in memory queue");
+                Log.LogWarning($"Failed to purge message '{message.Id}' from in memory queue");
             }
         }
     }

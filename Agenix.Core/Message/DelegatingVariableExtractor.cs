@@ -1,7 +1,6 @@
 ﻿using Agenix.Api.Context;
 using Agenix.Api.Message;
 using Agenix.Api.Variable;
-using Agenix.Core.Variable;
 
 namespace Agenix.Core.Message;
 
@@ -12,7 +11,7 @@ namespace Agenix.Core.Message;
 public class DelegatingVariableExtractor(VariableExtractor variableExtractor) : IVariableExtractor
 {
     /// <summary>
-    /// Extracts variables from a message and context using the provided variable extractor delegate.
+    ///     Extracts variables from a message and context using the provided variable extractor delegate.
     /// </summary>
     /// <param name="message">The message from which variables are to be extracted.</param>
     /// <param name="context">The context used during the variable extraction process.</param>
@@ -22,7 +21,7 @@ public class DelegatingVariableExtractor(VariableExtractor variableExtractor) : 
     }
 
     /// <summary>
-    /// Processes the given message within the provided test context by extracting variables.
+    ///     Processes the given message within the provided test context by extracting variables.
     /// </summary>
     /// <param name="message">The message to be processed.</param>
     /// <param name="context">The test context in which the message processing occurs.</param>

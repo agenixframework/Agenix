@@ -7,7 +7,7 @@ using Agenix.Api.Validation.Matcher;
 namespace Agenix.Core.Validation.Matcher.Core;
 
 /// <summary>
-/// Validates if a given string value starts with a specified control parameter using String.StartsWith().
+///     Validates if a given string value starts with a specified control parameter using String.StartsWith().
 /// </summary>
 public class StartsWithValidationMatcher : IValidationMatcher
 {

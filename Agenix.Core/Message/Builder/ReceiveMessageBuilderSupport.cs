@@ -5,8 +5,6 @@ using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
 using Agenix.Api.Variable;
 using Agenix.Core.Actions;
-using Agenix.Core.Validation;
-using Agenix.Core.Variable;
 
 namespace Agenix.Core.Message.Builder;
 

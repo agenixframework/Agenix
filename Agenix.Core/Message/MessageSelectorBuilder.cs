@@ -48,10 +48,10 @@ public class MessageSelectorBuilder
     }
 
     /// <summary>
-    /// Constructs a message selector builder from a key-value map.
+    ///     Constructs a message selector builder from a key-value map.
     /// </summary>
     /// <param name="valueMap">A dictionary containing key-value pairs to construct the message selector.</param>
-    /// <return>A new instance of the <see cref="MessageSelectorBuilder"/> with the constructed selector string.</return>
+    /// <return>A new instance of the <see cref="MessageSelectorBuilder" /> with the constructed selector string.</return>
     public static MessageSelectorBuilder FromKeyValueMap(Dictionary<string, object> valueMap)
     {
         var buf = new StringBuilder();

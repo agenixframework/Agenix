@@ -5,7 +5,8 @@ using System.Threading;
 using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Container;
 
@@ -18,7 +19,7 @@ public class Parallel(Parallel.Builder builder)
 {
     /// Static logger instance for the Parallel class.
     /// /
-    private static readonly ILog Log = LogManager.GetLogger(typeof(Parallel));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(Parallel));
 
     /**
      * Collect exceptions in list
@@ -48,7 +49,7 @@ public class Parallel(Parallel.Builder builder)
             }
             catch (ThreadInterruptedException e)
             {
-                Log.Error("Unable to join thread", e);
+                Log.LogError(e, "Unable to join thread");
             }
 
         if (_exceptions.Count > 0)
@@ -82,12 +83,12 @@ public class Parallel(Parallel.Builder builder)
             }
             catch (AgenixSystemException e)
             {
-                Log.Error("Parallel test action raised error", e);
+                Log.LogError(e, "Parallel test action raised error");
                 _exceptionHandler(e);
             }
             catch (Exception e)
             {
-                Log.Error("Parallel test action raised error", e);
+                Log.LogError(e, "Parallel test action raised error");
                 _exceptionHandler(new AgenixSystemException(e.Message));
             }
         }

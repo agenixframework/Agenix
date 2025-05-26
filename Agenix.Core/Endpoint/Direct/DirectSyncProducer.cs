@@ -1,12 +1,13 @@
 ﻿using System;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Message.Correlation;
 using Agenix.Api.Messaging;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Correlation;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Endpoint.Direct;
 
@@ -23,7 +24,7 @@ public class DirectSyncProducer : DirectProducer, IReplyConsumer
     ///     messages for the DirectSyncConsumer class, aiding in debugging,
     ///     monitoring, and maintenance of the application.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(DirectSyncProducer));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(DirectSyncProducer));
 
     /**
      * Endpoint configuration
@@ -38,7 +39,7 @@ public class DirectSyncProducer : DirectProducer, IReplyConsumer
     public DirectSyncProducer(string name, DirectSyncEndpointConfiguration endpointConfiguration) : base(name,
         endpointConfiguration)
     {
-        this._endpointConfiguration = endpointConfiguration;
+        _endpointConfiguration = endpointConfiguration;
 
         _correlationManager =
             new PollingCorrelationManager<IMessage>(endpointConfiguration, "Reply message did not arrive yet");
@@ -115,13 +116,13 @@ public class DirectSyncProducer : DirectProducer, IReplyConsumer
 
         var destinationQueueName = GetDestinationQueueName();
 
-        if (Log.IsDebugEnabled)
+        if (Log.IsEnabled(LogLevel.Debug))
         {
-            Log.Debug($"Sending message to queue: '{destinationQueueName}'");
-            Log.Debug($"Message to send is:\n{message}");
+            Log.LogDebug($"Sending message to queue: '{destinationQueueName}'");
+            Log.LogDebug($"Message to send is:\n{message}");
         }
 
-        Log.Info($"Message was sent to queue: '{destinationQueueName}'");
+        Log.LogInformation($"Message was sent to queue: '{destinationQueueName}'");
 
         var replyQueue = GetReplyQueue(message, context);
         GetDestinationQueue(context).Send(message);
@@ -130,7 +131,7 @@ public class DirectSyncProducer : DirectProducer, IReplyConsumer
         if (replyMessage == null)
             throw new ReplyMessageTimeoutException(_endpointConfiguration.Timeout, destinationQueueName);
 
-        Log.Info("Received synchronous response from reply queue");
+        Log.LogInformation("Received synchronous response from reply queue");
 
         _correlationManager.Store(correlationKey, replyMessage);
     }

@@ -2,7 +2,8 @@ using System;
 using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Actions;
 
@@ -15,7 +16,7 @@ public class StopTimeAction(StopTimeAction.Builder builder) : AbstractTestAction
     public const string DefaultTimeLineId = "AGENIX_TIMELINE";
     public const string DefaultTimeLineValueSuffix = "_VALUE";
 
-    private static readonly ILog _log = LogManager.GetLogger(typeof(StopTimerAction));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(StopTimerAction));
     private readonly string _id = builder._id;
     private readonly string _suffix = builder._suffix;
 
@@ -37,13 +38,13 @@ public class StopTimeAction(StopTimeAction.Builder builder) : AbstractTestAction
                 var time = DateTime.Now.Ticks - context.GetVariable<long>(timeLineId, typeof(long));
                 context.SetVariable(timeLineId + timeLineSuffix, time);
 
-                _log.Info(description != null
+                Log.LogInformation(description != null
                     ? $"TimeWatcher {timeLineId} after {time} ms ({description})"
                     : $"TimeWatcher {timeLineId} after {time} ms");
             }
             else
             {
-                _log.Info($"Starting TimeWatcher: {timeLineId}");
+                Log.LogInformation("Starting TimeWatcher: {TimeLineId}", timeLineId);
                 context.SetVariable(timeLineId, DateTime.Now.Ticks);
                 context.SetVariable(timeLineId + timeLineSuffix, 0L);
             }

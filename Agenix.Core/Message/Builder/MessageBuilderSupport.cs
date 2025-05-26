@@ -10,7 +10,6 @@ using Agenix.Api.Variable;
 using Agenix.Core.Spi;
 using Agenix.Core.Util;
 using Agenix.Core.Validation.Builder;
-using Agenix.Core.Variable;
 
 namespace Agenix.Core.Message.Builder;
 
@@ -129,7 +128,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
             withPayloadBuilder.SetPayloadBuilder(payloadBuilder);
         else
             throw new AgenixSystemException("Unable to set payload builder on message builder type: " +
-                                          _messageBuilder.GetType());
+                                            _messageBuilder.GetType());
         return _self;
     }
 
@@ -189,7 +188,8 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
             withHeaderBuilder.AddHeaderBuilder(new DefaultHeaderBuilder(new Dictionary<string, object>
                 { { name, value } }));
         else
-            throw new AgenixSystemException($"Unable to set message header on builder type: {_messageBuilder.GetType()}");
+            throw new AgenixSystemException(
+                $"Unable to set message header on builder type: {_messageBuilder.GetType()}");
         return _self;
     }
 
@@ -204,7 +204,8 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
         if (_messageBuilder is IWithHeaderBuilder withHeaderBuilder)
             withHeaderBuilder.AddHeaderBuilder(new DefaultHeaderBuilder(headers));
         else
-            throw new AgenixSystemException($"Unable to set message header on builder type: {_messageBuilder.GetType()}");
+            throw new AgenixSystemException(
+                $"Unable to set message header on builder type: {_messageBuilder.GetType()}");
         return _self;
     }
 
@@ -236,7 +237,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
                     new DefaultHeaderDataBuilder(FileUtils.ReadToString(resource, charset)));
             else
                 throw new AgenixSystemException("Unable to set message header data on builder type: " +
-                                              _messageBuilder.GetType());
+                                                _messageBuilder.GetType());
         }
         catch (IOException e)
         {

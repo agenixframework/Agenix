@@ -1,7 +1,8 @@
 using Agenix.Api.IO;
+using Agenix.Api.Log;
 using Agenix.Core.Repository;
 using Agenix.Validation.Json.Json.Schema;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Validation.Json.Json
 {
@@ -22,9 +23,9 @@ namespace Agenix.Validation.Json.Json
         {
             if (resource.File.Extension.EndsWith(".json"))
             {
-                if (Log.IsDebugEnabled)
+                if (Log.IsEnabled(LogLevel.Debug))
                 {
-                    Log.Debug($"Loading json schema resource '{resource.Description}'");
+                    Log.LogDebug($"Loading json schema resource '{resource.Description}'");
                 }
 
                 var simpleJsonSchema = new SimpleJsonSchema(resource);
@@ -33,7 +34,7 @@ namespace Agenix.Validation.Json.Json
             }
             else
             {
-                Log.Warn($"Skipped resource other than json schema for repository '{resource.Description}'");
+                Log.LogWarning($"Skipped resource other than json schema for repository '{resource.Description}'");
             }
         }
         
@@ -42,7 +43,7 @@ namespace Agenix.Validation.Json.Json
         /// <summary>
         /// Provides logging functionality for the <see cref="JsonSchemaRepository"/> class.
         /// </summary>
-        public static ILog Log { get; set; } = LogManager.GetLogger(typeof(JsonSchemaRepository));
+        public static ILogger Log { get; set; } = LogManager.GetLogger(typeof(JsonSchemaRepository));
 
         /// <summary>
         /// Adds a new JSON schema to the repository for validation purposes.

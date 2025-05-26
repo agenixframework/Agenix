@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
 using Agenix.Api.Context;
+using Agenix.Api.Log;
 using Agenix.Core.Util;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Condition;
 
@@ -14,7 +15,7 @@ public class FileCondition() : AbstractCondition("file-check")
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(FileCondition));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(FileCondition));
 
     private FileInfo _file;
 
@@ -28,7 +29,8 @@ public class FileCondition() : AbstractCondition("file-check")
     /// <return>True if the file exists and is not a directory; otherwise, false.</return>
     public override bool IsSatisfied(TestContext context)
     {
-        if (Log.IsDebugEnabled) Log.Debug($"Checking file path '{(_file != null ? _file.FullName : _filePath)}'");
+        if (Log.IsEnabled(LogLevel.Debug))
+            Log.LogDebug($"Checking file path '{(_file != null ? _file.FullName : _filePath)}'");
 
         if (_file != null) return _file.Exists && !_file.Attributes.HasFlag(FileAttributes.Directory);
 
@@ -38,7 +40,7 @@ public class FileCondition() : AbstractCondition("file-check")
         }
         catch (Exception e)
         {
-            Log.Warn($"Failed to access file resource '{e.Message}'");
+            Log.LogWarning($"Failed to access file resource '{e.Message}'");
             return false;
         }
     }

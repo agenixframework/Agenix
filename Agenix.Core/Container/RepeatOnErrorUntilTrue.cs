@@ -1,7 +1,8 @@
 ﻿using System.Threading;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Container;
 
@@ -21,7 +22,7 @@ public class RepeatOnErrorUntilTrue(RepeatOnErrorUntilTrue.Builder builder) : Ab
 {
     /// Static logger instance for the RepeatOnErrorUntilTrue class.
     /// /
-    private static readonly ILog Log = LogManager.GetLogger(typeof(RepeatOnErrorUntilTrue));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(RepeatOnErrorUntilTrue));
 
     /// Specifies the auto sleep duration in milliseconds to wait between iterations.
     private readonly int _autoSleep = builder.AutoSlp;
@@ -51,14 +52,15 @@ public class RepeatOnErrorUntilTrue(RepeatOnErrorUntilTrue.Builder builder) : Ab
             {
                 exception = e;
 
-                Log.Info($"Caught exception of type {e.GetType().Name} '{e.Message}' - performing retry #{index}");
+                Log.LogInformation(
+                    $"Caught exception of type {e.GetType().Name} '{e.Message}' - performing retry #{index}");
 
                 DoAutoSleep();
                 index++;
             }
 
         if (exception == null) return;
-        Log.Info($"All retries failed - raising exception {exception.GetType().Name}");
+        Log.LogInformation($"All retries failed - raising exception {exception.GetType().Name}");
         throw exception;
     }
 
@@ -70,7 +72,7 @@ public class RepeatOnErrorUntilTrue(RepeatOnErrorUntilTrue.Builder builder) : Ab
     private void DoAutoSleep()
     {
         if (_autoSleep <= 0) return;
-        Log.Info($"Sleeping {_autoSleep} milliseconds");
+        Log.LogInformation($"Sleeping {_autoSleep} milliseconds");
 
         try
         {
@@ -78,10 +80,10 @@ public class RepeatOnErrorUntilTrue(RepeatOnErrorUntilTrue.Builder builder) : Ab
         }
         catch (ThreadInterruptedException e)
         {
-            Log.Error("Error during doc generation", e);
+            Log.LogError(e, "Error during doc generation");
         }
 
-        Log.Info($"Returning after {_autoSleep} milliseconds");
+        Log.LogInformation("Returning after {I} milliseconds", _autoSleep);
     }
 
     /// Builder class for constructing instances of RepeatOnErrorUntilTrue.

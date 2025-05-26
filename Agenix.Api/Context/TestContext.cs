@@ -1,5 +1,4 @@
 ﻿using System.Collections.Concurrent;
-using System.Reflection;
 using Agenix.Api.Container;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Exceptions;
@@ -13,9 +12,8 @@ using Agenix.Api.Validation.Matcher;
 using Agenix.Api.Variable;
 using Agenix.Core;
 using Agenix.Core.Container;
-using Agenix.Core.Message;
 using Agenix.Core.Spi;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Api.Context;
 
@@ -27,7 +25,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog _log = LogManager.GetLogger(typeof(TestContext));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(TestContext));
 
     /// <summary>
     ///     List of exceptions that actions raised during execution of forked operations.
@@ -118,9 +116,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     ///     A collection of active timers used within the test context.
     /// </summary>
     protected ConcurrentDictionary<string, IStopTimer> Timers = new();
-    
-    private SegmentVariableExtractorRegistry _segmentVariableExtractorRegistry = new();
-    
+
     /// <summary>
     ///     Default constructor.
     /// </summary>
@@ -130,13 +126,9 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     }
 
     /// <summary>
-    /// Provides access to the registry for managing segment variable extractors.
+    ///     Provides access to the registry for managing segment variable extractors.
     /// </summary>
-    public SegmentVariableExtractorRegistry SegmentVariableExtractorRegistry
-    {
-        get => _segmentVariableExtractorRegistry;
-        set => _segmentVariableExtractorRegistry = value;
-    }
+    public SegmentVariableExtractorRegistry SegmentVariableExtractorRegistry { get; set; } = new();
 
     /// <summary>
     ///     Function registry holding all available functions
@@ -256,10 +248,16 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     }
 
     /// <summary>
+    ///     Retrieves the current reference resolver instance.
+    /// </summary>
+    /// <returns>The current instance of IReferenceResolver.</returns>
+    public IReferenceResolver ReferenceResolver => _referenceResolver;
+
+    /// <summary>
     ///     Sets the reference resolver to be used by the TestContext.
     /// </summary>
     /// <param name="referenceResolver">The reference resolver to set.</param>
-    public void  SetReferenceResolver(IReferenceResolver referenceResolver)
+    public void SetReferenceResolver(IReferenceResolver referenceResolver)
     {
         _referenceResolver = referenceResolver;
     }
@@ -437,7 +435,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
                 default:
                     throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
             }
-        else if (_log.IsDebugEnabled) _log.Debug($"{operation} message:\n{message?.ToString() ?? ""}");
+        else if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug($"{operation} message:\n{message?.ToString() ?? ""}");
     }
 
     /// <summary>
@@ -464,7 +462,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
         }
         catch (Exception e)
         {
-            _log.Warn("Executing error handler listener failed!", e);
+            Log.LogWarning("Executing error handler listener failed!", e);
         }
 
         return exception;
@@ -480,14 +478,17 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     {
         var variableName = VariableUtils.CutOffVariablesPrefix(variableExpression);
 
-        if (variableName.StartsWith(AgenixSettings.VariableEscape) && variableName.EndsWith(AgenixSettings.VariableEscape))
+        if (variableName.StartsWith(AgenixSettings.VariableEscape) &&
+            variableName.EndsWith(AgenixSettings.VariableEscape))
             return AgenixSettings.VariablePrefix + VariableUtils.CutOffVariablesEscaping(variableName) +
                    AgenixSettings.VariableSuffix;
 
-        return _variables.TryGetValue(variableName, out var o) ? o : 
-            VariableExpressionIterator.GetLastExpressionValue(variableName, this, _segmentVariableExtractorRegistry.SegmentValueExtractors);
+        return _variables.TryGetValue(variableName, out var o)
+            ? o
+            : VariableExpressionIterator.GetLastExpressionValue(variableName, this,
+                SegmentVariableExtractorRegistry.SegmentValueExtractors);
     }
-    
+
     /// <summary>
     ///     Gets the value for the given variable expression. Expression usually is the simple variable name, with optional
     ///     expression prefix/suffix.
@@ -513,7 +514,8 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     }
 
     /// <summary>
-    ///     Creates a new variable in this test context with the respective value. In case a variable already exists, the variable is
+    ///     Creates a new variable in this test context with the respective value. In case a variable already exists, the
+    ///     variable is
     ///     overwritten.
     /// </summary>
     /// <param name="variableName">The name of the new variable</param>
@@ -522,15 +524,16 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     {
         if (string.IsNullOrEmpty(variableName) || VariableUtils.CutOffVariablesPrefix(variableName).Length == 0)
             throw new AgenixSystemException("Can not create variable '" + variableName +
-                                          "', please define proper variable name");
+                                            "', please define proper variable name");
 
         if (value == null)
             throw new VariableNullValueException(
                 "Trying to set variable: " + VariableUtils.CutOffVariablesPrefix(variableName) +
                 ", but variable value is null");
 
-        if (_log.IsDebugEnabled)
-            _log.Debug($"Setting variable: {VariableUtils.CutOffVariablesPrefix(variableName)} with value: '{value}'");
+        if (Log.IsEnabled(LogLevel.Debug))
+            Log.LogDebug(
+                $"Setting variable: {VariableUtils.CutOffVariablesPrefix(variableName)} with value: '{value}'");
 
         _variables[VariableUtils.CutOffVariablesPrefix(variableName)] = value;
     }
@@ -550,7 +553,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
             result = VariableUtils.ReplaceVariablesInString(str, this, enableQuoting);
             result = FunctionUtils.ReplaceFunctionsInString(result, this, enableQuoting);
         }
-        
+
         return result;
     }
 
@@ -689,12 +692,6 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
 
         _globalVariables = builder.Build();
     }
-
-    /// <summary>
-    ///     Retrieves the current reference resolver instance.
-    /// </summary>
-    /// <returns>The current instance of IReferenceResolver.</returns>
-    public IReferenceResolver ReferenceResolver => _referenceResolver;
 
     /// <summary>
     ///     Empty test case implementation used as a test result when tests fail before execution.

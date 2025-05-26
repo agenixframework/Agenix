@@ -1,7 +1,8 @@
 ﻿using System.Threading;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Core.Actions;
-using log4net;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
@@ -18,7 +19,7 @@ public class TimerTest : AbstractNUnitSetUp
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(TimerTest));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(TimerTest));
 
     private Mock<ITestAction> _action;
 
@@ -165,7 +166,7 @@ public class TimerTest : AbstractNUnitSetUp
         }
         catch (ThreadInterruptedException e)
         {
-            Log.Error("Interrupted while waiting for forked timer", e);
+            Log.LogError(e, "Interrupted while waiting for forked timer");
         }
     }
 

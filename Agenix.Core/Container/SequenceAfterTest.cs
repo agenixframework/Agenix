@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using Agenix.Api.Container;
 using Agenix.Api.Context;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Container;
 
@@ -14,7 +15,7 @@ public class SequenceAfterTest : AbstractTestBoundaryActionContainer, IAfterTest
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(SequenceAfterTest));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(SequenceAfterTest));
 
     /// Executes the set of actions contained in the SequenceAfterTest after a test is completed.
     /// <param name="context">The context in which the actions are executed.</param>
@@ -22,12 +23,12 @@ public class SequenceAfterTest : AbstractTestBoundaryActionContainer, IAfterTest
     {
         if (actions is { Count: 0 }) return;
 
-        Log.Info("Entering after test block");
+        Log.LogInformation("Entering after test block");
 
-        if (Log.IsDebugEnabled)
+        if (Log.IsEnabled(LogLevel.Debug))
         {
-            Log.Debug("Executing " + actions.Count + " actions after test");
-            Log.Debug("");
+            Log.LogDebug("Executing " + actions.Count + " actions after test");
+            Log.LogDebug("");
         }
 
         foreach (var action in actions.Select(actionBuilder => actionBuilder.Build())) action.Execute(context);

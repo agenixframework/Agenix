@@ -1,7 +1,8 @@
 ﻿using System.Data;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 using Spring.Data.Common;
 using Spring.Transaction.Support;
 
@@ -11,14 +12,14 @@ public class ExecuteSqlAction : AbstractDatabaseConnectingTestAction
 {
     /// Logger for ExecuteSQLQueryAction.
     /// /
-    private static readonly ILog Log = LogManager.GetLogger(typeof(ExecuteSqlAction));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(ExecuteSqlAction));
 
     private readonly CommandType _commandType;
 
     ///// <summary>
-    /////     Boolean flag marking that possible SQL errors will be ignored.
+    ///// a Boolean flag marking that possible SQL errors will be ignored.
     ///// </summary>
-    ///// <returns>Returns true if errors will be ignored, false otherwise.</returns>
+    ///// <returns>Returns true if errors are ignored, false otherwise.</returns>
     private readonly bool _ignoreErrors;
 
     private ExecuteSqlAction(Builder builder) : base(builder.GetName() ?? "sql", builder.GetDescription(),
@@ -55,16 +56,16 @@ public class ExecuteSqlAction : AbstractDatabaseConnectingTestAction
                     ? statement.Trim()[..(statement.Trim().Length - 1)]
                     : statement.Trim());
 
-                if (Log.IsDebugEnabled) Log.Debug("Executing SQL statement: " + toExecute);
+                if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Executing SQL statement: " + toExecute);
 
                 AdoTemplate.ExecuteNonQuery(_commandType, toExecute);
 
-                Log.Info("SQL statement execution successful");
+                Log.LogInformation("SQL statement execution successful");
             }
             catch (Exception e)
             {
                 if (_ignoreErrors)
-                    Log.Error("Ignoring error while executing SQL statement: " + e.Message, e);
+                    Log.LogError("Ignoring error while executing SQL statement: " + e.Message, e);
                 else
                     throw new AgenixSystemException(e.Message, e);
             }
@@ -86,7 +87,7 @@ public class ExecuteSqlAction : AbstractDatabaseConnectingTestAction
 
         if (TransactionManager != null)
         {
-            Log.Debug($"Using transaction manager: {TransactionManager.GetType().Name}");
+            Log.LogDebug($"Using transaction manager: {TransactionManager.GetType().Name}");
 
             var transactionTemplate = new TransactionTemplate(TransactionManager)
             {

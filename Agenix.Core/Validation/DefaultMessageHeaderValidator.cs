@@ -5,12 +5,11 @@ using System.Linq;
 using Agenix.Api.Context;
 using Agenix.Api.Endpoint.Resolver;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
-using Agenix.Core.Endpoint.Resolver;
-using Agenix.Core.Message;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Validation;
 
@@ -24,7 +23,7 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(DefaultMessageHeaderValidator));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(DefaultMessageHeaderValidator));
 
     /// <summary>
     ///     A dictionary containing the set of default header validators located via resource path lookup.
@@ -48,8 +47,8 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
     }
 
     /// <summary>
-    /// Validates the headers of a received message against the headers of a control message
-    /// within the specified validation and test contexts.
+    ///     Validates the headers of a received message against the headers of a control message
+    ///     within the specified validation and test contexts.
     /// </summary>
     /// <param name="receivedMessage">The received message whose headers are being validated.</param>
     /// <param name="controlMessage">The control message containing the expected header values.</param>
@@ -63,7 +62,7 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
 
         if (controlHeaders == null || !controlHeaders.Any()) return;
 
-        Log.Debug("Start message header validation ...");
+        Log.LogDebug("Start message header validation ...");
 
         foreach (var (key, controlValue) in controlHeaders)
         {
@@ -90,7 +89,7 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
                                     }
                                     catch (AgenixSystemException)
                                     {
-                                        Log.Warn($"Failed to resolve header validator for name: {beanName}");
+                                        Log.LogWarning($"Failed to resolve header validator for name: {beanName}");
                                         return null;
                                     }
                                 })
@@ -102,7 +101,7 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
             validator.ValidateHeader(headerName, value, controlValue, context, validationContext);
         }
 
-        Log.Debug("Message header validation successful: All values OK");
+        Log.LogDebug("Message header validation successful: All values OK");
     }
 
     /// <summary>
@@ -115,14 +114,12 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
         // add validators from the resource path lookup
         var validatorMap = new Dictionary<string, IHeaderValidator>(_defaultValidators);
 
-       var validators = context.ReferenceResolver.ResolveAll<IHeaderValidator>();
+        var validators = context.ReferenceResolver.ResolveAll<IHeaderValidator>();
 
-       if (validators != null && validators.Count > 0)
-       {
-           foreach (var validator in validators)
-               validatorMap.TryAdd(validator.Key, validator.Value);
-       }
-       
+        if (validators != null && validators.Count > 0)
+            foreach (var validator in validators)
+                validatorMap.TryAdd(validator.Key, validator.Value);
+
         return validatorMap.Values.Distinct().ToList();
     }
 
@@ -142,7 +139,7 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
         if (receivedHeaders.ContainsKey(headerName) || !validationContext.HeaderNameIgnoreCase) return headerName;
         var key = headerName;
 
-        Log.Debug($"Finding case insensitive header for key '{key}'");
+        Log.LogDebug($"Finding case insensitive header for key '{key}'");
 
         headerName = receivedHeaders
                          .AsParallel()
@@ -151,7 +148,7 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
                          .FirstOrDefault() ??
                      throw new ValidationException($"Validation failed: No matching header for key '{key}'");
 
-        Log.Debug($"Found matching case insensitive header name: {headerName}");
+        Log.LogDebug($"Found matching case insensitive header name: {headerName}");
 
         return headerName;
     }

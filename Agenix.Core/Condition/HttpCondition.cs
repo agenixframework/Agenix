@@ -3,7 +3,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Condition;
 
@@ -16,7 +17,7 @@ public class HttpCondition() : AbstractCondition("http-check")
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(HttpCondition));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(HttpCondition));
 
     /// <summary>
     ///     Represents the expected HTTP response code used to validate
@@ -79,7 +80,7 @@ public class HttpCondition() : AbstractCondition("http-check")
     private int InvokeUrl(TestContext context)
     {
         var contextUrl = GetUrl(context);
-        if (Log.IsDebugEnabled) Log.Debug($"Probing Http request url '{contextUrl.ToString()}'");
+        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug($"Probing Http request url '{contextUrl.ToString()}'");
 
         var responseCode = -1;
 
@@ -91,16 +92,13 @@ public class HttpCondition() : AbstractCondition("http-check")
         {
             // HttpRequestException doesn't directly expose status codes like WebException did
             // We can extract it if it's available in the exception data
-            if (e.StatusCode.HasValue)
-            {
-                responseCode = (int)e.StatusCode.Value;
-            }
-            Log.Warn($"Could not access Http url '{contextUrl.ToString()}' - {e.Message}");
+            if (e.StatusCode.HasValue) responseCode = (int)e.StatusCode.Value;
+            Log.LogWarning($"Could not access Http url '{contextUrl.ToString()}' - {e.Message}");
         }
         catch (TaskCanceledException)
         {
             // Handle timeout
-            Log.Warn($"Request to '{contextUrl.ToString()}' timed out after {GetTimeout(context)}ms");
+            Log.LogWarning($"Request to '{contextUrl.ToString()}' timed out after {GetTimeout(context)}ms");
         }
 
         return responseCode;
@@ -109,9 +107,12 @@ public class HttpCondition() : AbstractCondition("http-check")
     /// Sends an HTTP request to a specified URL using the method and timeout defined in the context.
     /// Evaluates the HTTP response and returns the status code as an integer.
     /// <param name="url">The URI of the HTTP endpoint to which the request will be made.</param>
-    /// <param name="context">The test context containing the necessary parameters, such as method and timeout, for the HTTP request.</param>
+    /// <param name="context">
+    ///     The test context containing the necessary parameters, such as method and timeout, for the HTTP
+    ///     request.
+    /// </param>
     /// <return>
-    /// The response status code represented as an integer, corresponding to the HTTP response from the endpoint.
+    ///     The response status code represented as an integer, corresponding to the HTTP response from the endpoint.
     /// </return>
     private async Task<int> ExecuteHttpRequestAsync(Uri url, TestContext context)
     {
@@ -121,7 +122,7 @@ public class HttpCondition() : AbstractCondition("http-check")
         var method = context.ResolveDynamicValue(Method);
         using var requestMessage = new HttpRequestMessage(new HttpMethod(method), url);
         using var response = await httpClient.SendAsync(requestMessage);
-    
+
         return (int)response.StatusCode;
     }
 

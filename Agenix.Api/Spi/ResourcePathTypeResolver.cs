@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Concurrent;
 using System.Reflection;
 using Agenix.Api.IO;
+using Agenix.Api.Log;
 using Agenix.Api.TypeResolution;
 using Agenix.Api.Util;
-using log4net;
+using Microsoft.Extensions.Logging;
 using ITypeResolver = Agenix.Api.Spi.ITypeResolver;
 
 namespace Agenix.Core.Spi;
@@ -19,7 +20,7 @@ public class ResourcePathTypeResolver : ITypeResolver
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(ResourcePathTypeResolver));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(ResourcePathTypeResolver));
 
     /// <summary>
     ///     Read resource from assembly and load content as properties.
@@ -161,7 +162,7 @@ public class ResourcePathTypeResolver : ITypeResolver
         }
         catch (IOException e)
         {
-            Log.Warn($"Failed to resolve resources in '{fullPath}' => ", e);
+            Log.LogWarning(@"Failed to resolve resources in '{FullPath}' => ", fullPath, e);
         }
 
         return typeLookup;
@@ -216,7 +217,7 @@ public class ResourcePathTypeResolver : ITypeResolver
             catch (Exception ex)
             {
                 // Just log and continue if we can't load an assembly
-                Log.Warn($"Failed to load assembly from {file}: {ex.Message}");
+                Log.LogWarning("Failed to load assembly from {File}: {ExMessage}", file, ex.Message);
             }
 
         // Now get all loaded assemblies including those we just loaded
@@ -245,7 +246,9 @@ public class ResourcePathTypeResolver : ITypeResolver
             catch (Exception ex)
             {
                 // Some assemblies might throw exceptions when accessing their resources
-                Log.Warn($"Error accessing resources in assembly {assembly.FullName}: {ex.Message}");
+                Log.LogWarning(
+                    "Error accessing resources in assembly {AssemblyFullName}: {ExMessage}", assembly.FullName, ex
+                        .Message);
             }
 
         return result;
@@ -308,8 +311,9 @@ public class ResourcePathTypeResolver : ITypeResolver
                 }
                 catch (Exception ex)
                 {
-                    Log.Warn(
-                        $"Error loading resource {resourceName} from {assembly.GetName().Name}: {ex.Message}");
+                    Log.LogWarning(
+                        "Error loading resource {ResourceName} from {Name}: {ExMessage}", resourceName, assembly
+                            .GetName().Name, ex.Message);
                 }
         }
 

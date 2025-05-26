@@ -2,10 +2,11 @@
 using System.Linq;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Variable;
 using Agenix.Core.Validation.Json;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Validation;
 
@@ -21,7 +22,7 @@ public class DelegatingPayloadVariableExtractor : IVariableExtractor
     /// <summary>
     ///     A logger instance used for logging within the DelegatingPayloadVariableExtractor class.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(DelegatingPayloadVariableExtractor));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(DelegatingPayloadVariableExtractor));
 
     public DelegatingPayloadVariableExtractor() : this(new Builder())
     {
@@ -58,7 +59,7 @@ public class DelegatingPayloadVariableExtractor : IVariableExtractor
     {
         if (PathExpressions.Count == 0) return;
 
-        if (Log.IsDebugEnabled) Log.Debug("Reading path elements.");
+        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Reading path elements.");
 
         var jsonPathExpressions = new Dictionary<string, object>();
         var xpathExpressions = new Dictionary<string, object>();

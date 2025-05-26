@@ -4,7 +4,8 @@ using System.Threading.Tasks;
 using Agenix.Api.Common;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Util;
 
@@ -17,7 +18,7 @@ public abstract class WaitUtils
     /**
      * Logger
      */
-    private static readonly ILog Log = LogManager.GetLogger(typeof(WaitUtils));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(WaitUtils));
 
     /**
      * Prevent instantiation.
@@ -49,7 +50,7 @@ public abstract class WaitUtils
         {
             while (!container.IsDone(context))
             {
-                Log.Debug("Wait for test container to finish properly ...");
+                Log.LogDebug("Wait for test container to finish properly ...");
 
                 // Wait for a small duration or until the cancellation token is triggered
                 await Task.Delay(100, cancellationTokenSource.Token);

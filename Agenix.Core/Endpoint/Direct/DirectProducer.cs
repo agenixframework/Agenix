@@ -1,10 +1,10 @@
 ﻿using System;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Messaging;
-using Agenix.Core.Message;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Endpoint.Direct;
 
@@ -15,7 +15,7 @@ public class DirectProducer(string name, DirectEndpointConfiguration endpointCon
     /// <summary>
     ///     Represents a log instance used within the DirectProducer class for logging purposes.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(DirectProducer));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(DirectProducer));
 
     public string Name => name;
 
@@ -27,8 +27,8 @@ public class DirectProducer(string name, DirectEndpointConfiguration endpointCon
     {
         var destinationQueueName = GetDestinationQueueName();
 
-        Log.Debug($"Sending message to queue: '{destinationQueueName}'");
-        Log.Debug($"Message to send is:\n{message.Print(context)}");
+        Log.LogDebug($"Sending message to queue: '{destinationQueueName}'");
+        Log.LogDebug($"Message to send is:\n{message.Print(context)}");
 
         try
         {
@@ -39,7 +39,7 @@ public class DirectProducer(string name, DirectEndpointConfiguration endpointCon
             throw new AgenixSystemException($"Failed to send message to queue: '{destinationQueueName}'", e);
         }
 
-        Log.Info($"Message was sent to queue: '{destinationQueueName}'");
+        Log.LogInformation($"Message was sent to queue: '{destinationQueueName}'");
     }
 
     /// Retrieves the destination queue based on the endpoint configuration.
@@ -59,7 +59,8 @@ public class DirectProducer(string name, DirectEndpointConfiguration endpointCon
 
         if (!string.IsNullOrWhiteSpace(queueName)) return ResolveQueueName(queueName, context);
 
-        throw new AgenixSystemException("Neither queue name nor queue object is set - please specify destination queue");
+        throw new AgenixSystemException(
+            "Neither queue name nor queue object is set - please specify destination queue");
     }
 
     /// Retrieves the destination queue name based on the endpoint configuration.
@@ -76,7 +77,8 @@ public class DirectProducer(string name, DirectEndpointConfiguration endpointCon
         var queueName = endpointConfiguration.GetQueueName();
         if (!string.IsNullOrWhiteSpace(queueName)) return queueName;
 
-        throw new AgenixSystemException("Neither queue name nor queue object is set - please specify destination queue");
+        throw new AgenixSystemException(
+            "Neither queue name nor queue object is set - please specify destination queue");
     }
 
 
@@ -90,6 +92,7 @@ public class DirectProducer(string name, DirectEndpointConfiguration endpointCon
         if (context.ReferenceResolver != null)
             return context.ReferenceResolver.Resolve<IMessageQueue>(queueName);
 
-        throw new AgenixSystemException("Unable to resolve message queue - missing proper reference resolver in context");
+        throw new AgenixSystemException(
+            "Unable to resolve message queue - missing proper reference resolver in context");
     }
 }

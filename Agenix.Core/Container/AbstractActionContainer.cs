@@ -4,8 +4,9 @@ using Agenix.Api;
 using Agenix.Api.Common;
 using Agenix.Api.Container;
 using Agenix.Api.Context;
+using Agenix.Api.Log;
 using Agenix.Core.Actions;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Container;
 
@@ -15,7 +16,7 @@ namespace Agenix.Core.Container;
 /// </summary>
 public abstract class AbstractActionContainer : AbstractTestAction, ITestActionContainer, ICompletable
 {
-    private static readonly ILog Log = LogManager.GetLogger(typeof(AbstractActionContainer));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(AbstractActionContainer));
 
     /// <summary>
     ///     List of all executed actions during container run.
@@ -66,13 +67,13 @@ public abstract class AbstractActionContainer : AbstractTestAction, ITestActionC
         foreach (var action in new List<ITestAction>(_executedActions))
             if (action is ICompletable completable && !completable.IsDone(context))
             {
-                if (Log.IsDebugEnabled)
+                if (Log.IsEnabled(LogLevel.Debug))
                 {
                     var actionName = string.IsNullOrWhiteSpace(action.Name)
                         ? action.GetType().Name
                         : action.Name;
 
-                    Log.Debug($"{actionName} not completed yet");
+                    Log.LogDebug($"{actionName} not completed yet");
                 }
 
                 return false;

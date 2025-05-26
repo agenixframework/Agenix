@@ -28,7 +28,7 @@ public abstract class AbstractTestActionBuilder<T, TS> : ITestActionBuilder<T>
     /// Sets the test action name.
     /// <param name="name">The test action name.</param>
     /// <return>The builder instance with the updated name.</return>
-    public TS Name(string name)
+    public virtual TS Name(string name)
     {
         this.name = name;
         return self;
@@ -37,7 +37,7 @@ public abstract class AbstractTestActionBuilder<T, TS> : ITestActionBuilder<T>
     /// Sets the description for the test action.
     /// @param description the description of the test action.
     /// @return The builder instance with the updated description.
-    public TS Description(string description)
+    public virtual TS Description(string description)
     {
         this.description = description;
         return self;

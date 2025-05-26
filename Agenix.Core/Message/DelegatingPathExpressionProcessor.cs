@@ -94,7 +94,7 @@ public class DelegatingPathExpressionProcessor : IMessageProcessor
                 .Resolve<IMessageProcessor.IBuilder<T, TB>>(type + "MessageProcessorBuilder");
 
         throw new AgenixSystemException($"Missing proper message processor implementation of type '{type}' - " +
-                                      "consider adding proper module to the project");
+                                        "consider adding proper module to the project");
     }
 
     /// Fluent builder enabling the construction of the DelegatingPathExpressionProcessor with specific configurations.

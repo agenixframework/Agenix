@@ -1,15 +1,14 @@
 ﻿using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Message.Correlation;
 using Agenix.Api.Messaging;
-using Agenix.Core;
 using Agenix.Core.Endpoint;
-using Agenix.Core.Message;
 using Agenix.Core.Message.Correlation;
 using Agenix.Http.Interceptor;
 using Agenix.Http.Message;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Http.Client;
 
@@ -23,21 +22,22 @@ public class HttpClient : AbstractEndpoint, IProducer, IReplyConsumer
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(HttpClient));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(HttpClient));
 
     /// <summary>
     ///     Store of reply messages
     /// </summary>
     private ICorrelationManager<IMessage> _correlationManager;
-       
+
 
     public HttpClient(HttpEndpointConfiguration endpointConfiguration)
         : base(endpointConfiguration)
     {
         Name = nameof(HttpClient);
-        _correlationManager =new PollingCorrelationManager<IMessage>(endpointConfiguration, "Reply message did not arrive yet");
+        _correlationManager =
+            new PollingCorrelationManager<IMessage>(endpointConfiguration, "Reply message did not arrive yet");
     }
-    
+
     /// <summary>
     ///     Default constructor initializing endpoint configuration.
     /// </summary>
@@ -48,7 +48,8 @@ public class HttpClient : AbstractEndpoint, IProducer, IReplyConsumer
     /// <summary>
     ///     Represents the configuration specific to an endpoint within the HttpClient.
     /// </summary>
-    public override HttpEndpointConfiguration EndpointConfiguration => (HttpEndpointConfiguration) base.EndpointConfiguration;
+    public override HttpEndpointConfiguration EndpointConfiguration =>
+        (HttpEndpointConfiguration)base.EndpointConfiguration;
 
     public void Send(IMessage message, TestContext context)
     {
@@ -70,8 +71,8 @@ public class HttpClient : AbstractEndpoint, IProducer, IReplyConsumer
         var endpointUri = GetEndpointUri(httpMessage);
         context.SetVariable(MessageHeaders.MessageReplyTo + "_" + correlationKeyName, endpointUri);
 
-        Log.Info($"Sending HTTP message to: '{endpointUri}'");
-        Log.Debug($"Message to send:\n{httpMessage.GetPayload<string>()}");
+        Log.LogInformation("Sending HTTP message to: '{EndpointUri}'", endpointUri);
+        Log.LogDebug("Message to send:\n{GetPayload}", httpMessage.GetPayload<string>());
 
         var method = EndpointConfiguration.RequestMethod;
         if (httpMessage.GetRequestMethod() != null) method = httpMessage.GetRequestMethod();
@@ -85,14 +86,14 @@ public class HttpClient : AbstractEndpoint, IProducer, IReplyConsumer
             httpRequestMessage.Method = method!;
             var httpResponseMessage = EndpointConfiguration.HttpClient.Send(httpRequestMessage);
 
-            Log.Debug($"HTTP message was sent to endpoint: '{endpointUri}'");
+            Log.LogDebug("HTTP message was sent to endpoint: '{EndpointUri}'", endpointUri);
             _correlationManager.Store(correlationKey,
                 EndpointConfiguration.MessageConverter.ConvertInbound(httpResponseMessage, EndpointConfiguration,
                     context));
         }
         catch (Exception e)
         {
-            Log.Warn("Caught HTTP Client exception!", e);
+            Log.LogWarning(e, "Caught HTTP Client exception!");
         }
     }
 
@@ -198,6 +199,6 @@ public class HttpClient : AbstractEndpoint, IProducer, IReplyConsumer
     /// <returns>The correlation key name derived from the consumer name associated with the current endpoint.</returns>
     private string GetCorrelationKeyName()
     {
-        return EndpointConfiguration.Correlator.GetCorrelationKeyName(this.Name);
+        return EndpointConfiguration.Correlator.GetCorrelationKeyName(Name);
     }
 }

@@ -12,8 +12,8 @@ using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
 using Agenix.Api.IO;
-using Agenix.Core.IO;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -28,7 +28,7 @@ public class FileUtils
     public static readonly string FILE_EXTENSION_XML = ".xml";
     public static readonly string FILE_EXTENSION_YAML = ".yaml";
 
-    private static readonly ILog Log = LogManager.GetLogger(typeof(FileUtils));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(FileUtils));
 
     /// <summary>
     ///     Reads the content of the provided resource and converts it to a string using the default charset.
@@ -80,8 +80,8 @@ public class FileUtils
         if (!resource.Exists)
             throw new Exception($"Failed to read resource {resource.Description} - does not exist");
 
-        if (Log.IsDebugEnabled)
-            Log.Debug($"Reading file resource: '{resource.Description}' (encoding is '{encoding.WebName}')");
+        if (Log.IsEnabled(LogLevel.Debug))
+            Log.LogDebug($"Reading file resource: '{resource.Description}' (encoding is '{encoding.WebName}')");
 
         return ReadToString(resource.InputStream, encoding);
     }
@@ -111,7 +111,7 @@ public class FileUtils
     /// <exception cref="AgenixSystemException">Thrown when there is an error writing to the file.</exception>
     public static void WriteToFile(string content, string file, Encoding charset)
     {
-        Log.Debug($"Writing file resource: {file} (encoding is {charset.EncodingName})");
+        Log.LogDebug($"Writing file resource: {file} (encoding is {charset.EncodingName})");
 
         if (!File.Exists(file))
         {
@@ -138,7 +138,7 @@ public class FileUtils
     /// <exception cref="IOException">Thrown when there is an error during the file writing process.</exception>
     public static void WriteToFile(Stream inputStream, FileInfo fileInfo)
     {
-        if (Log.IsDebugEnabled) Log.Debug($"Writing file resource: '{fileInfo.Name}'");
+        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug($"Writing file resource: '{fileInfo.Name}'");
 
         if (fileInfo.Directory is { Exists: false }) fileInfo.Directory.Create();
 
@@ -443,7 +443,7 @@ public class FileUtils
                 {
                     // Log but don't throw error during cleanup
                     // Assuming Log is available in this class, based on the code snippet
-                    Log.Warn($"Failed to delete temporary configuration file: {tempFilePath}", ex);
+                    Log.LogWarning($"Failed to delete temporary configuration file: {tempFilePath}", ex);
                 }
             }
         }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Agenix.Api.Validation.Context;
+﻿using Agenix.Api.Validation.Context;
 
 namespace Agenix.Core.Validation.Json;
 
@@ -22,14 +21,13 @@ public class JsonMessageValidationContext : DefaultMessageValidationContext, IVa
         .SchemaRepository(builder._schemaRepository)
         .SchemaValidation(builder._schemaValidation))
     {
-        
     }
-    
+
     /// Indicates whether a validation context requires a validator for processing.
     /// This property overrides the default behavior defined in the IValidationContext interface,
     /// explicitly returning true to signify that the context requires validation.
     bool IValidationContext.RequiresValidator => true;
-    
+
     public new sealed class Builder : IMessageValidationContext.Builder<JsonMessageValidationContext, Builder>
     {
         /// <summary>

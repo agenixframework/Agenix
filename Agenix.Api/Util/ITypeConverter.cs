@@ -1,9 +1,20 @@
-﻿namespace Agenix.Api.Util;
+﻿using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
+namespace Agenix.Api.Util;
+
+/// <summary>
+/// Represents a service that provides type conversion operations.
+/// Allows objects to be converted to the desired type and supports lookup for converters.
+/// </summary>
 public interface ITypeConverter
 {
-    static string DEFAULT = "default";
+    const string Default = "default";
     static readonly Dictionary<string, ITypeConverter> Converters = [];
+    
+    /// Logger
+    /// /
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(ITypeConverter));
 
     /// <summary>
     ///     Resolves all available converters from the resource path lookup. Scans classpath for converter meta-information and
@@ -16,16 +27,16 @@ public interface ITypeConverter
         {
             /*converters = new ResourcePathTypeResolver().resolveAll(RESOURCE_PATH).ToDictionary(entry => entry.Key,
                                            entry => entry.Value);*/
-            if (Converters.Count == 0) Converters.Add(DEFAULT, DefaultTypeConverter.INSTANCE);
+            if (Converters.Count == 0) Converters.Add(Default, DefaultTypeConverter.Instance);
             Converters.ToList()
-                .ForEach(x => Console.WriteLine($"Found type converter '{x.Key}' as {x.Value.GetType()}"));
+                .ForEach(x => Log.LogDebug("Found type converter '{ObjKey}' as {Type}", x.Key, x.Value.GetType()));
         }
 
         return Converters;
     }
 
     /// <summary>
-    ///     Converts a target object to required type if necessary.
+    ///     Converts a target object to the required type if necessary.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="target"></param>
@@ -53,7 +64,7 @@ public interface ITypeConverter
     /// <returns>the type converter to use by default.</returns>
     public static ITypeConverter LookupDefault()
     {
-        return LookupDefault(DefaultTypeConverter.INSTANCE);
+        return LookupDefault(DefaultTypeConverter.Instance);
     }
 
     /// <summary>

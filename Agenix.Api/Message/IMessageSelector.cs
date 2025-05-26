@@ -1,7 +1,8 @@
 ﻿using System.Collections.Concurrent;
 using Agenix.Api.Context;
+using Agenix.Api.Log;
 using Agenix.Core.Spi;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Api.Message;
 
@@ -13,17 +14,18 @@ public delegate bool MessageSelector(IMessage message);
 public interface IMessageSelector
 {
     /// <summary>
-    /// Represents the logger instance used for logging messages within the message selector functionality.
-    /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(IMessageSelector));
-
-    /// <summary>
-    /// Path used to locate the resource for message selector functionality.
+    ///     Path used to locate the resource for message selector functionality.
     /// </summary>
     private const string ResourcePath = "Extension/agenix/message/selector";
 
     /// <summary>
-    /// Represents the type resolver used for mapping resource paths to types and properties in the message selector domain.
+    ///     Represents the logger instance used for logging messages within the message selector functionality.
+    /// </summary>
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(IMessageSelector));
+
+    /// <summary>
+    ///     Represents the type resolver used for mapping resource paths to types and properties in the message selector
+    ///     domain.
     /// </summary>
     private static readonly ResourcePathTypeResolver TypeResolver = new(ResourcePath);
 
@@ -31,7 +33,8 @@ public interface IMessageSelector
         _factories = new ConcurrentDictionary<string, IMessageSelectorFactory>();
 
     /// <summary>
-    ///     Checks weather this selector should accept a given message or not. When accepting the message, the selective consumer
+    ///     Checks weather this selector should accept a given message or not. When accepting the message, the selective
+    ///     consumer
     ///     is provided with the message; otherwise the message is skipped for this consumer.
     /// </summary>
     /// <param name="message">the message to check</param>
@@ -44,15 +47,15 @@ public interface IMessageSelector
     /// <returns>A dictionary containing message selector factories keyed by a selector type.</returns>
     public static IDictionary<string, IMessageSelectorFactory> Lookup()
     {
-        if(_factories.Count > 0) return _factories; 
-        
+        if (_factories.Count > 0) return _factories;
+
         _factories = new Dictionary<string, IMessageSelectorFactory>
-        ( 
+        (
             TypeResolver.ResolveAll<IMessageSelectorFactory>()
         );
 
-        if (!Log.IsDebugEnabled) return _factories;
-        foreach (var kvp in _factories) Log.Debug($"Found message selector '{kvp.Key}' as {kvp.Value.GetType()}");
+        if (!Log.IsEnabled(LogLevel.Debug)) return _factories;
+        foreach (var kvp in _factories) Log.LogDebug("Found message selector '{KvpKey}' as {Type}", kvp.Key, kvp.Value.GetType());
 
         return _factories;
     }

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Agenix.Api.Exceptions;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Util;
 
@@ -30,7 +31,7 @@ public class BooleanExpressionParser
     /**
     * Logger
     */
-    private static readonly ILog _log = LogManager.GetLogger(typeof(BooleanExpressionParser));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(BooleanExpressionParser));
 
     /**
     * Prevent instantiation.
@@ -96,8 +97,8 @@ public class BooleanExpressionParser
             }
 
             result = bool.Parse(EvaluateExpressionStack(operators, values));
-            if (_log.IsDebugEnabled)
-                _log.Debug($"Boolean expression {expression} evaluates to {result}");
+            if (Log.IsEnabled(LogLevel.Debug))
+                Log.LogDebug($"Boolean expression {expression} evaluates to {result}");
         }
         catch (InvalidOperationException e)
         {

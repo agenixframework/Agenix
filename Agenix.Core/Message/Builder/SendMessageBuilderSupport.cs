@@ -15,10 +15,21 @@ public class SendMessageBuilderSupport<T, TB, TS>(TB dlg) : MessageBuilderSuppor
     where TB : SendMessageAction.SendMessageActionBuilder<T, TS, TB>
     where TS : SendMessageBuilderSupport<T, TB, TS>
 {
+    protected string _schema;
+    protected string _schemaRepository;
     protected bool _schemaValidation;
-    protected string  _schema;
-    protected string  _schemaRepository;
-    
+
+    /// Retrieves the schema associated with the send message action.
+    /// @return the schema as a string
+    /// /
+    public string GetSchema => _schema;
+
+    /// <summary>
+    ///     Retrieves the schema repository associated with the send message action.
+    /// </summary>
+    /// <returns>A string representing the schema repository.</returns>
+    public string GetSchemaRepository => _schemaRepository;
+
     /// <summary>
     ///     Sets the fork mode for this send message builder support.
     /// </summary>
@@ -52,7 +63,7 @@ public class SendMessageBuilderSupport<T, TB, TS>(TB dlg) : MessageBuilderSuppor
     }
 
     /// <summary>
-    /// Enables or disables schema validation for the message.
+    ///     Enables or disables schema validation for the message.
     /// </summary>
     /// <param name="enabled">Specifies whether schema validation should be enabled or disabled.</param>
     /// <returns>The instance of the sent message builder supports with the updated schema validation setting.</returns>
@@ -63,7 +74,7 @@ public class SendMessageBuilderSupport<T, TB, TS>(TB dlg) : MessageBuilderSuppor
     }
 
     /// <summary>
-    /// Retrieves the current state of the schema validation flag.
+    ///     Retrieves the current state of the schema validation flag.
     /// </summary>
     /// <returns>A boolean value indicating whether schema validation is enabled.</returns>
     public bool IsSchemaValidation()
@@ -72,7 +83,7 @@ public class SendMessageBuilderSupport<T, TB, TS>(TB dlg) : MessageBuilderSuppor
     }
 
     /// <summary>
-    /// Sets the schema instance name to be used for schema validation.
+    ///     Sets the schema instance name to be used for schema validation.
     /// </summary>
     /// <param name="schemaName">The name of the schema instance to use for validation.</param>
     /// <returns>The instance of the send message builder support with the specified schema applied.</returns>
@@ -82,13 +93,8 @@ public class SendMessageBuilderSupport<T, TB, TS>(TB dlg) : MessageBuilderSuppor
         return _self;
     }
 
-    /// Retrieves the schema associated with the send message action.
-    /// @return the schema as a string
-    /// /
-    public string GetSchema => _schema;
-
     /// <summary>
-    /// Sets the schema repository to be used for validation during message processing.
+    ///     Sets the schema repository to be used for validation during message processing.
     /// </summary>
     /// <param name="schemaRepository">The identifier or instance of the schema repository to use.</param>
     /// <returns>The current instance of the send message builder support with the specified schema repository.</returns>
@@ -97,10 +103,4 @@ public class SendMessageBuilderSupport<T, TB, TS>(TB dlg) : MessageBuilderSuppor
         _schemaRepository = schemaRepository;
         return _self;
     }
-
-    /// <summary>
-    /// Retrieves the schema repository associated with the send message action.
-    /// </summary>
-    /// <returns>A string representing the schema repository.</returns>
-    public string GetSchemaRepository => _schemaRepository;
 }

@@ -3,8 +3,8 @@
 using System.Text;
 using Agenix.Api.Exceptions;
 using Agenix.Api.IO;
-using Agenix.Core.IO;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -18,7 +18,7 @@ public abstract class SqlUtils
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(SqlUtils));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(SqlUtils));
 
     /// <summary>
     ///     Constant representing the SQL comment delimiter.
@@ -59,7 +59,7 @@ public abstract class SqlUtils
 
         try
         {
-            if (Log.IsDebugEnabled) Log.Debug("Create statements from SQL file: " + sqlResource.File.FullName);
+            if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Create statements from SQL file: " + sqlResource.File.FullName);
 
             var inputStream = sqlResource.InputStream;
             var buffer = new StringBuilder();
@@ -76,7 +76,7 @@ public abstract class SqlUtils
 
                     var stmt = buffer.ToString().Trim();
 
-                    if (Log.IsDebugEnabled) Log.Debug("Found statement: " + stmt);
+                    if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Found statement: " + stmt);
 
                     stmts.Add(stmt);
                     buffer.Clear();

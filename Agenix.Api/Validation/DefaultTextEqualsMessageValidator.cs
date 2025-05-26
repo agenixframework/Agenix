@@ -1,8 +1,9 @@
 ﻿using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Validation.Context;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Api.Validation;
 
@@ -18,7 +19,7 @@ public class DefaultTextEqualsMessageValidator : DefaultMessageValidator
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog _log = LogManager.GetLogger(typeof(DefaultTextEqualsMessageValidator));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(DefaultTextEqualsMessageValidator));
 
     private bool _normalizeLineEndings = true;
     private bool _trim = true;
@@ -28,11 +29,11 @@ public class DefaultTextEqualsMessageValidator : DefaultMessageValidator
     {
         if (controlMessage?.Payload == null || string.IsNullOrEmpty(controlMessage.GetPayload<string>()))
         {
-            _log.Debug("Skip message payload validation as no control message was defined");
+            Log.LogDebug("Skip message payload validation as no control message was defined");
             return;
         }
 
-        _log.Debug("Start to verify message payload ...");
+        Log.LogDebug("Start to verify message payload ...");
 
         var controlPayload = controlMessage.GetPayload<string>();
         var receivedPayload = receivedMessage.GetPayload<string>();
@@ -107,15 +108,16 @@ public class DefaultTextEqualsMessageValidator : DefaultMessageValidator
     }
 
     /// <summary>
-    /// Searches for an appropriate validation context within the provided list, prioritizing message validation contexts.
-    /// If a message validation context is found, it is returned; if not, the base class implementation is invoked for a fallback.
+    ///     Searches for an appropriate validation context within the provided list, prioritizing message validation contexts.
+    ///     If a message validation context is found, it is returned; if not, the base class implementation is invoked for a
+    ///     fallback.
     /// </summary>
     /// <param name="validationContexts">
-    /// A list of validation contexts to search through for a suitable message validation context.
+    ///     A list of validation contexts to search through for a suitable message validation context.
     /// </param>
     /// <returns>
-    /// An instance of a message validation context if found within the list, or a fallback validation context provided by
-    /// the base implementation.
+    ///     An instance of a message validation context if found within the list, or a fallback validation context provided by
+    ///     the base implementation.
     /// </returns>
     public override IValidationContext FindValidationContext(List<IValidationContext> validationContexts)
     {

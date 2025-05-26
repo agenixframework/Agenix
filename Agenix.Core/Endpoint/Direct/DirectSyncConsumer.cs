@@ -1,10 +1,11 @@
 ﻿using Agenix.Api.Context;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Message.Correlation;
 using Agenix.Api.Messaging;
 using Agenix.Core.Message.Correlation;
 using Agenix.Core.Util;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Endpoint.Direct;
 
@@ -16,7 +17,7 @@ public class DirectSyncConsumer : DirectConsumer, IReplyProducer
     ///     messages for the DirectSyncConsumer class, aiding in debugging,
     ///     monitoring, and maintenance of the application.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(DirectSyncConsumer));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(DirectSyncConsumer));
 
     /**
      * Endpoint configuration
@@ -62,14 +63,14 @@ public class DirectSyncConsumer : DirectConsumer, IReplyProducer
         ObjectHelper.AssertNotNull(replyQueue,
             $"Failed to find reply channel for message correlation key: {correlationKey}");
 
-        if (Log.IsDebugEnabled)
+        if (Log.IsEnabled(LogLevel.Debug))
         {
-            Log.Debug($"Sending message to reply channel: '{replyQueue}'");
-            Log.Debug($"Message to send is:\n{message}");
+            Log.LogDebug($"Sending message to reply channel: '{replyQueue}'");
+            Log.LogDebug($"Message to send is:\n{message}");
         }
 
         replyQueue.Send(message);
-        Log.Info($"Message was sent to reply channel: '{replyQueue}'");
+        Log.LogInformation($"Message was sent to reply channel: '{replyQueue}'");
     }
 
     /// Receives a message from the specified message queue based on the selector and context provided.
@@ -110,8 +111,7 @@ public class DirectSyncConsumer : DirectConsumer, IReplyProducer
         }
         else
         {
-            Log.Warn(
-                "Unable to retrieve reply message channel for message \n{receivedMessage}\n - no reply channel found in message headers!");
+            Log.LogWarning("Unable to retrieve reply message channel for message \n{0}\n - no reply channel found in message headers!", receivedMessage);
         }
     }
 }

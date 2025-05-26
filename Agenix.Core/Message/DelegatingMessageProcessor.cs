@@ -10,7 +10,7 @@ namespace Agenix.Core.Message;
 public class DelegatingMessageProcessor(MessageProcessor messageProcessor) : IMessageProcessor
 {
     /// <summary>
-    /// Processes a message by delegating the processing work to another specified message processor.
+    ///     Processes a message by delegating the processing work to another specified message processor.
     /// </summary>
     /// <param name="message">The message object to be processed.</param>
     /// <param name="context">The test context in which the message is processed.</param>

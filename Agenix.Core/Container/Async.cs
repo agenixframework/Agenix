@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Agenix.Api;
 using Agenix.Api.Context;
+using Agenix.Api.Log;
 using Agenix.Core.Actions;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Container;
 
@@ -20,7 +21,7 @@ public class Async(Async.Builder builder)
 {
     /// Static logger instance for the Async class.
     /// /
-    private static readonly ILog Log = LogManager.GetLogger(typeof(Async));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(Async));
 
     private readonly List<ITestActionBuilder<ITestAction>> _errorActions = builder._errorActions;
     private readonly List<ITestActionBuilder<ITestAction>> _successActions = builder._successActions;
@@ -29,7 +30,7 @@ public class Async(Async.Builder builder)
     /// <param name="context">The context in which the test action is executed, providing runtime data and dependencies.</param>
     public override void DoExecute(TestContext context)
     {
-        Log.Debug("Async container forking action execution ...");
+        Log.LogDebug("Async container forking action execution ...");
 
         var asyncTestAction = new ExtendedAbstractAsyncTestAction(this);
 
@@ -69,14 +70,14 @@ public class Async(Async.Builder builder)
 
         public override void OnError(TestContext context, Exception error)
         {
-            Log.Info("Apply error actions after async container ...");
+            Log.LogInformation("Apply error actions after async container ...");
             foreach (var action in outerInstance._errorActions.Select(actionBuilder => actionBuilder.Build()))
                 action.Execute(context);
         }
 
         public override void OnSuccess(TestContext context)
         {
-            Log.Info("Apply success actions after async container ...");
+            Log.LogInformation("Apply success actions after async container ...");
             foreach (var action in outerInstance._successActions.Select(actionBuilder => actionBuilder.Build()))
                 action.Execute(context);
         }

@@ -4,7 +4,6 @@ using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Functions;
 using Agenix.Api.Util;
-using Agenix.Core.Util;
 using Microsoft.Extensions.Configuration;
 
 namespace Agenix.Core.Functions.Core;

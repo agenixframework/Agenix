@@ -4,16 +4,17 @@ using Agenix.Api.Annotations;
 using Agenix.Api.Config.Annotation;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Util;
-using Agenix.Core.Endpoint;
 using Agenix.Core.Spi;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Api.Endpoint;
 
 /// <summary>
 ///     Default endpoint factory implementation uses registered endpoint components in Spring application context to create
-///     endpoint from given endpoint uri. If the endpoint bean name is given, factory directly creates from the application context.
+///     endpoint from given endpoint uri. If the endpoint bean name is given, factory directly creates from the application
+///     context.
 ///     If endpoint uri is given factory tries to find proper endpoint component in application context and in default
 ///     endpoint component configuration. Default endpoint components are listed in property file reference where key is
 ///     the component name and value is the fully qualified class name of the implementing endpoint component class.
@@ -23,7 +24,7 @@ public class DefaultEndpointFactory : IEndpointFactory
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(DefaultEndpointFactory));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(DefaultEndpointFactory));
 
     /// <summary>
     ///     Endpoint cache for endpoint reuse
@@ -64,7 +65,8 @@ public class DefaultEndpointFactory : IEndpointFactory
 
         return _endpointCache.GetOrAdd(cachedEndpointName, _ =>
         {
-            if (Log.IsDebugEnabled) Log.Debug($"Creating new endpoint for uri '{cachedEndpointName}'");
+            if (Log.IsEnabled(LogLevel.Debug))
+                Log.LogDebug("Creating new endpoint for uri '{CachedEndpointName}'", cachedEndpointName);
 
             var endpoint = component.CreateEndpoint(endpointUri, context);
             return endpoint;

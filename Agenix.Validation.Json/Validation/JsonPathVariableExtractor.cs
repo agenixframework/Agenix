@@ -1,5 +1,6 @@
 ﻿using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
@@ -7,7 +8,7 @@ using Agenix.Api.Variable;
 using Agenix.Core.Message;
 using Agenix.Core.Validation;
 using Agenix.Validation.Json.Json;
-using log4net;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -22,7 +23,7 @@ public class JsonPathVariableExtractor : IVariableExtractor
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(JsonPathMessageValidator));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(JsonPathMessageValidator));
 
     /// <summary>
     ///     Map defines JSON path expressions and target variable names
@@ -41,6 +42,12 @@ public class JsonPathVariableExtractor : IVariableExtractor
     {
         _jsonPathExpressions = builder.JsonPathExpressions;
     }
+
+    /// <summary>
+    ///     Gets the JSONPath expressions.
+    /// </summary>
+    /// <returns></returns>
+    public IDictionary<string, object> JsonPathExpressions => _jsonPathExpressions;
 
     /// <summary>
     ///     Processes the given message within the provided test context.
@@ -62,7 +69,7 @@ public class JsonPathVariableExtractor : IVariableExtractor
         if (_jsonPathExpressions == null || _jsonPathExpressions.Count == 0) return;
 
 
-        if (Log.IsDebugEnabled) Log.Debug("Reading JSON elements with JSONPath");
+        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Reading JSON elements with JSONPath");
 
         try
         {
@@ -76,7 +83,7 @@ public class JsonPathVariableExtractor : IVariableExtractor
                                    ?? throw new AgenixSystemException(
                                        $"Variable name must be set on extractor path expression '{jsonPathExpression}'");
 
-                if (Log.IsDebugEnabled) Log.Debug("Evaluating JSONPath expression: " + jsonPathExpression);
+                if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Evaluating JSONPath expression: " + jsonPathExpression);
 
                 var jsonPathResult = JsonPathUtils.EvaluateAsString(readerContext, jsonPathExpression);
                 context.SetVariable(variableName, jsonPathResult);
@@ -87,12 +94,6 @@ public class JsonPathVariableExtractor : IVariableExtractor
             throw new AgenixSystemException("Failed to parse JSON text", e);
         }
     }
-
-    /// <summary>
-    ///     Gets the JSONPath expressions.
-    /// </summary>
-    /// <returns></returns>
-    public IDictionary<string, object> JsonPathExpressions => _jsonPathExpressions;
 
     /// <summary>
     ///     Fluent builder.
@@ -108,7 +109,7 @@ public class JsonPathVariableExtractor : IVariableExtractor
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Builder"/> class with the provided expressions.
+        ///     Initializes a new instance of the <see cref="Builder" /> class with the provided expressions.
         /// </summary>
         /// <param name="expressions">A dictionary containing the expressions to be added to the builder.</param>
         public Builder Expressions(IDictionary<string, object> expressions)
@@ -119,7 +120,7 @@ public class JsonPathVariableExtractor : IVariableExtractor
         }
 
         /// <summary>
-        /// Adds an expression and its associated value to the builder.
+        ///     Adds an expression and its associated value to the builder.
         /// </summary>
         /// <param name="expression">The string representation of the expression to be added.</param>
         /// <param name="value">The value associated with the expression.</param>
@@ -131,12 +132,12 @@ public class JsonPathVariableExtractor : IVariableExtractor
         }
 
         /// <summary>
-        /// Creates and returns an instance of <see cref="IMessageProcessor"/>
-        /// configured with the specified JSON path expressions.
+        ///     Creates and returns an instance of <see cref="IMessageProcessor" />
+        ///     configured with the specified JSON path expressions.
         /// </summary>
         /// <returns>
-        /// An instance of <see cref="IMessageProcessor"/> configured
-        /// for processing messages based on JSON path expressions.
+        ///     An instance of <see cref="IMessageProcessor" /> configured
+        ///     for processing messages based on JSON path expressions.
         /// </returns>
         public IMessageProcessor AsProcessor()
         {
@@ -146,7 +147,7 @@ public class JsonPathVariableExtractor : IVariableExtractor
         }
 
         /// <summary>
-        /// Converts the current context through the fluent builder into an instance of <see cref="IValidationContext" />.
+        ///     Converts the current context through the fluent builder into an instance of <see cref="IValidationContext" />.
         /// </summary>
         /// <returns>An instance of <see cref="IValidationContext" /> built using configured expressions.</returns>
         public IValidationContext AsValidationContext()

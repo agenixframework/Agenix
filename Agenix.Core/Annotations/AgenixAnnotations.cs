@@ -6,8 +6,9 @@ using Agenix.Api.Annotations;
 using Agenix.Api.Common;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Core.Spi;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Annotations;
 
@@ -16,7 +17,7 @@ namespace Agenix.Core.Annotations;
 /// </summary>
 public abstract class AgenixAnnotations
 {
-    private static readonly ILog Log = LogManager.GetLogger(typeof(AgenixAnnotations));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(AgenixAnnotations));
 
     private AgenixAnnotations()
     {
@@ -29,7 +30,7 @@ public abstract class AgenixAnnotations
     /// <param name="target">The target object to which components and endpoints are injected.</param>
     public static void InjectAll(object target)
     {
-        // Assuming Agenix class has a static method NewInstance simulating the factory method pattern
+        // Assuming Agenix class has a static method, NewInstance simulating the factory method pattern
         InjectAll(target, Agenix.NewInstance());
     }
 
@@ -98,7 +99,7 @@ public abstract class AgenixAnnotations
         foreach (var field in fields)
             try
             {
-                Log.Debug($"Injecting Agenix framework instance on test class field '{field.Name}'");
+                Log.LogDebug("Injecting Agenix framework instance on test class field '{FieldName}'", field.Name);
                 field.SetValue(testCase, agenixFramework);
             }
             catch (Exception ex)
@@ -125,7 +126,7 @@ public abstract class AgenixAnnotations
         foreach (var field in fields)
             try
             {
-                Log.Debug($"Injecting Agenix context instance on test class field '{field.Name}'");
+                Log.LogDebug("Injecting Agenix context instance on test class field '{FieldName}'", field.Name);
                 field.SetValue(target, context);
             }
             catch (Exception ex)
@@ -152,7 +153,7 @@ public abstract class AgenixAnnotations
         foreach (var field in fields)
             try
             {
-                Log.Debug($"Injecting test context instance on test class field '{field.Name}'");
+                Log.LogDebug("Injecting test context instance on test class field '{FieldName}'", field.Name);
                 field.SetValue(target, context);
             }
             catch (Exception ex)
@@ -181,7 +182,7 @@ public abstract class AgenixAnnotations
         foreach (var field in fields)
             try
             {
-                Log.Debug($"Injecting test runner instance on test class field '{field.Name}'");
+                Log.LogDebug($"Injecting test runner instance on test class field '{field.Name}'");
                 field.SetValue(target, runner);
             }
             catch (Exception ex)
@@ -212,7 +213,7 @@ public abstract class AgenixAnnotations
         foreach (var field in fields)
             try
             {
-                Log.Debug($"Injecting test action runner instance on test class field '{field.Name}'");
+                Log.LogDebug($"Injecting test action runner instance on test class field '{field.Name}'");
                 field.SetValue(target, runner);
             }
             catch (Exception ex)
@@ -240,7 +241,7 @@ public abstract class AgenixAnnotations
         foreach (var field in fields)
             try
             {
-                Log.Debug($"Injecting test action runner instance on test class field '{field.Name}'");
+                Log.LogDebug($"Injecting test action runner instance on test class field '{field.Name}'");
                 field.SetValue(target, runner);
             }
             catch (Exception ex)

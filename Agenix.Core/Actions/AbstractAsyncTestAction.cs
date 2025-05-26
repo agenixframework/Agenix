@@ -3,7 +3,8 @@ using System.Threading.Tasks;
 using Agenix.Api.Common;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Actions;
 
@@ -14,7 +15,7 @@ namespace Agenix.Core.Actions;
 /// </summary>
 public abstract class AbstractAsyncTestAction : AbstractTestAction, ICompletable
 {
-    private static readonly ILog Log = LogManager.GetLogger(typeof(AbstractAsyncTestAction));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(AbstractAsyncTestAction));
     private Task _finished;
 
     /// Determines if the asynchronous test action is completed.
@@ -54,7 +55,7 @@ public abstract class AbstractAsyncTestAction : AbstractTestAction, ICompletable
             }
             catch (Exception e)
             {
-                Log.Warn("Async test action execution raised error", e);
+                Log.LogWarning(e, "Async test action execution raised error");
                 context.AddException(
                     (AgenixSystemException)(e is AgenixSystemException ? e : new AgenixSystemException(e.Message)));
             }

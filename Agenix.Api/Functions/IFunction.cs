@@ -1,6 +1,7 @@
 ﻿using Agenix.Api.Context;
+using Agenix.Api.Log;
 using Agenix.Core.Spi;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Api.Functions;
 
@@ -12,20 +13,20 @@ public interface IFunction
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(IFunction));
-    
-    /// <summary>
-    /// Represents the resource path for function extensions.
-    /// </summary>
-    static string ResourcePath => "Extension/agenix/function";
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(IFunction));
 
     /// <summary>
-    /// Collection of function implementations.
+    ///     Collection of function implementations.
     /// </summary>
     private static readonly IDictionary<string, IFunction> Functions = new Dictionary<string, IFunction>();
 
     /// <summary>
-    /// Retrieves a collection of registered function implementations, resolving them if not already loaded.
+    ///     Represents the resource path for function extensions.
+    /// </summary>
+    static string ResourcePath => "Extension/agenix/function";
+
+    /// <summary>
+    ///     Retrieves a collection of registered function implementations, resolving them if not already loaded.
     /// </summary>
     /// <returns>A dictionary where the keys are function names and the values are the corresponding function implementations.</returns>
     static IDictionary<string, IFunction> Lookup()
@@ -36,9 +37,10 @@ public interface IFunction
 
         foreach (var kvp in resolvedFunctions) Functions[kvp.Key] = kvp.Value;
 
-        if (!Log.IsDebugEnabled) return Functions;
+        if (!Log.IsEnabled(LogLevel.Debug)) return Functions;
         {
-            foreach (var kvp in Functions) Log.Debug($"Found function '{kvp.Key}' as {kvp.Value.GetType()}");
+            foreach (var kvp in Functions)
+                Log.LogDebug("Found function '{KvpKey}' as {Type}", kvp.Key, kvp.Value.GetType());
         }
         return Functions;
     }

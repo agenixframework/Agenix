@@ -1,9 +1,10 @@
 ﻿using Agenix.Api.Annotations;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Spi;
 using Agenix.Api.Util;
 using Agenix.Core.Spi;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Api.Endpoint;
 
@@ -18,7 +19,7 @@ public interface IEndpointBuilder<out T> where T : IEndpoint
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(IEndpointBuilder<T>).Name);
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(IEndpointBuilder<T>).Name);
 
     /// <summary>
     /// Represents the resource path where endpoint builder configurations
@@ -60,8 +61,8 @@ public interface IEndpointBuilder<out T> where T : IEndpoint
             TypeResolver.ResolveAll<IEndpointBuilder<T>>("", ITypeResolver.TYPE_PROPERTY_WILDCARD)
         );
 
-        if (!Log.IsDebugEnabled) return validators;
-        foreach (var kvp in validators) Log.Debug($"Found endpoint builder '{kvp.Key}' as {kvp.Value.GetType().Name}");
+        if (!Log.IsEnabled(LogLevel.Debug)) return validators;
+        foreach (var kvp in validators) Log.LogDebug("Found endpoint builder '{KvpKey}' as {Name}", kvp.Key, kvp.Value.GetType().Name);
 
         return validators;
     }
@@ -92,7 +93,7 @@ public interface IEndpointBuilder<out T> where T : IEndpoint
         }
         catch (AgenixSystemException)
         {
-            Log.Warn($"Failed to resolve endpoint builder from resource '{builder}'");
+            Log.LogWarning("Failed to resolve endpoint builder from resource '{Builder}'", builder);
         }
 
         return Optional<IEndpointBuilder<T>>.Empty;

@@ -2,8 +2,9 @@
 using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Core.Util;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Actions;
 
@@ -12,7 +13,7 @@ public class LoadAppSettingsAction(LoadAppSettingsAction.Builder builder) : Abst
 {
     /// Logger for LoadAppSettingsAction.
     /// /
-    private static readonly ILog Log = LogManager.GetLogger(typeof(LoadAppSettingsAction));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(LoadAppSettingsAction));
 
     /// File resource path
     private readonly string _filePath = builder._resourceName;
@@ -25,7 +26,8 @@ public class LoadAppSettingsAction(LoadAppSettingsAction.Builder builder) : Abst
     {
         var resource = FileUtils.GetFileResource(_filePath, context);
 
-        if (Log.IsDebugEnabled) Log.Debug("Reading config file => " + FileUtils.GetFileName(resource.Description));
+        if (Log.IsEnabled(LogLevel.Debug))
+            Log.LogDebug("Reading config file => " + FileUtils.GetFileName(resource.Description));
 
         var settings = FileUtils.LoadAsSettings(resource);
 
@@ -35,10 +37,12 @@ public class LoadAppSettingsAction(LoadAppSettingsAction.Builder builder) : Abst
         {
             var value = settings[key];
 
-            if (Log.IsDebugEnabled) Log.Debug($"Loading setting: {key}={value} into variables");
+            if (Log.IsEnabled(LogLevel.Debug))
+                Log.LogDebug("Loading setting: {Key}={Value} into variables", key, value);
 
-            if (Log.IsDebugEnabled && context.GetVariables().ContainsKey(key))
-                Log.Debug($"Overwriting setting {key} old value: {context.GetVariable(key)} new value: {value}");
+            if (Log.IsEnabled(LogLevel.Debug) && context.GetVariables().ContainsKey(key))
+                Log.LogDebug("Overwriting setting {Key} old value: {GetVariable} new value: {Value}", key,
+                    context.GetVariable(key), value);
 
             try
             {
@@ -53,7 +57,7 @@ public class LoadAppSettingsAction(LoadAppSettingsAction.Builder builder) : Abst
         foreach (var entry in context.ResolveDynamicValuesInMap(unresolved))
             context.SetVariable(entry.Key, entry.Value);
 
-        Log.Info($"Loaded config file => {FileUtils.GetFileName(resource.Description)}");
+        Log.LogDebug("Loaded config file => {GetFileName}", FileUtils.GetFileName(resource.Description));
     }
 
     /// Builder for creating and configuring LoadAppSettingsAction instances.
@@ -81,10 +85,11 @@ public class LoadAppSettingsAction(LoadAppSettingsAction.Builder builder) : Abst
 
         /// Sets the file path for the LoadAppSettingsAction.
         /// <param name="resourceName">
-        /// The file path to be used for loading the application settings, typically in the form of a string indicating the file location or resource path.
+        ///     The file path to be used for loading the application settings, typically in the form of a string indicating the
+        ///     file location or resource path.
         /// </param>
         /// <return>
-        /// The builder instance with the specified file path set, enabling further configuration or building of the action.
+        ///     The builder instance with the specified file path set, enabling further configuration or building of the action.
         /// </return>
         public Builder ResourceName(string resourceName)
         {

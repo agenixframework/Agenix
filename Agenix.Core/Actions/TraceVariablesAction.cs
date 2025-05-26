@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Agenix.Api;
 using Agenix.Api.Context;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Actions;
 
@@ -13,7 +14,7 @@ public class TraceVariablesAction(TraceVariablesAction.Builder builder) : Abstra
 {
     /// Logger for SleepAction.
     /// /
-    private static readonly ILog Log = LogManager.GetLogger(typeof(TraceVariablesAction));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(TraceVariablesAction));
 
     /**
      * List of variable names
@@ -27,7 +28,7 @@ public class TraceVariablesAction(TraceVariablesAction.Builder builder) : Abstra
     /// <param name="context">The test context containing the variables</param>
     public override void DoExecute(TestContext context)
     {
-        Log.Info("Trace variables");
+        Log.LogInformation("Trace variables");
 
         IEnumerator<string> it;
         if (_variableNames != null && _variableNames.Count > 0)
@@ -40,7 +41,7 @@ public class TraceVariablesAction(TraceVariablesAction.Builder builder) : Abstra
             var key = it.Current;
             var value = context.GetVariable(key);
 
-            Log.Info("Variable " + context.LogModifier.Mask(key + " = " + value));
+            Log.LogInformation("Variable " + context.LogModifier.Mask(key + " = " + value));
         }
     }
 

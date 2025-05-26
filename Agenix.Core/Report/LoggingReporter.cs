@@ -3,14 +3,11 @@ using Agenix.Api;
 using Agenix.Api.Common;
 using Agenix.Api.Container;
 using Agenix.Api.Context;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Report;
-using Agenix.Core.Container;
-using Agenix.Core.Message;
-using log4net;
-using log4net.Appender;
-using log4net.Core;
-using log4net.Repository.Hierarchy;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Agenix.Core.Report;
 
@@ -28,41 +25,27 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
 {
     /// Logger
     /// /
-    private static ILog _logger = LogManager.GetLogger(typeof(LoggingReporter));
+    private static ILogger _logger = LogManager.GetLogger(typeof(LoggingReporter));
 
     /// Inbound message logger
-    private static ILog _inboundMessageLogger = LogManager.GetLogger("Logger.Message_IN");
+    private static ILogger _inboundMessageLogger = LogManager.GetLogger("Logger.Message_IN");
 
     /// The inbound message logger used when logging is enabled for inbound messages.
-    private static readonly ILog EnabledInboundMessageLogger = _inboundMessageLogger;
+    private static readonly ILogger EnabledInboundMessageLogger = _inboundMessageLogger;
 
     /// Outbound message logger
-    private static ILog _outboundMessageLogger = LogManager.GetLogger("Logger.Message_OUT");
+    private static ILogger _outboundMessageLogger = LogManager.GetLogger("Logger.Message_OUT");
 
     /// The logger used for outbound messages when the reporter is enabled.
-    private static readonly ILog EnabledOutboundMessageLogger = _outboundMessageLogger;
+    private static readonly ILogger EnabledOutboundMessageLogger = _outboundMessageLogger;
 
     /// The standard logger used when the reporter is enabled
-    private static readonly ILog EnabledLog = _logger;
+    private static readonly ILogger EnabledLog = _logger;
 
     private static bool _isInitialized;
 
-    private static readonly ILog NoOpLogger;
-
-
-    static LoggingReporter()
-    {
-        var hierarchy = (Hierarchy)LogManager.GetRepository();
-
-        // Create a NoOpAppender and add it to the root logger
-        var noOpAppender = new NoOpAppender();
-        noOpAppender.ActivateOptions();
-
-        hierarchy.Root.AddAppender(noOpAppender);
-        hierarchy.Configured = true;
-
-        NoOpLogger = LogManager.GetLogger("NoOpLogger");
-    }
+    private static readonly ILogger NoOpLogger = NullLogger.Instance;
+    
 
     /// <summary>
     ///     Handles an inbound message by logging its details using a debug logger.
@@ -74,7 +57,7 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
     /// </param>
     public void OnInboundMessage(IMessage message, TestContext context)
     {
-        _inboundMessageLogger.Debug(message.Print(context));
+        _inboundMessageLogger.LogDebug(message.Print(context));
     }
 
     /// <summary>
@@ -85,7 +68,7 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
     /// <param name="context">The context of the current test, providing additional execution details.</param>
     public void OnOutboundMessage(IMessage message, TestContext context)
     {
-        _outboundMessageLogger.Debug(message.Print(context));
+        _outboundMessageLogger.LogDebug(message.Print(context));
     }
 
     /// <summary>
@@ -95,7 +78,7 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
     /// <param name="testAction">The specific test action that is starting.</param>
     public void OnTestActionStart(ITestCase testCase, ITestAction testAction)
     {
-        if (IsDebugEnabled())
+        if (_logger.IsEnabled(LogLevel.Debug))
         {
             NewLine();
             Debug(testCase.IsIncremental()
@@ -119,7 +102,7 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
     /// <param name="testAction">The specific action within the test case that has finished execution.</param>
     public void OnTestActionFinish(ITestCase testCase, ITestAction testAction)
     {
-        if (IsDebugEnabled())
+        if (_logger.IsEnabled(LogLevel.Debug))
         {
             NewLine();
 
@@ -137,7 +120,7 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
     /// <param name="testAction">The test action that was skipped.</param>
     public void OnTestActionSkipped(ITestCase testCase, ITestAction testAction)
     {
-        if (IsDebugEnabled())
+        if (_logger.IsEnabled(LogLevel.Debug))
         {
             NewLine();
             Debug(testCase.IsIncremental()
@@ -169,7 +152,7 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
     /// <param name="test">The test case that was skipped.</param>
     public void OnTestSkipped(ITestCase test)
     {
-        if (IsDebugEnabled())
+        if (_logger.IsEnabled(LogLevel.Debug))
         {
             NewLine();
             Separator();
@@ -184,7 +167,7 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
     /// <param name="test">The test case that is starting.</param>
     public void OnTestStart(ITestCase test)
     {
-        if (IsDebugEnabled())
+        if (_logger.IsEnabled(LogLevel.Debug))
         {
             NewLine();
             Separator();
@@ -222,7 +205,7 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
     /// </summary>
     public void OnFinish()
     {
-        if (IsDebugEnabled())
+        if (_logger.IsEnabled(LogLevel.Debug))
         {
             NewLine();
             Separator();
@@ -245,7 +228,7 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
 
         Separator();
 
-        if (!IsDebugEnabled()) return;
+        if (!_logger.IsEnabled(LogLevel.Debug)) return;
         Debug("BEFORE TEST SUITE");
         NewLine();
     }
@@ -267,7 +250,7 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
     /// </summary>
     public void OnFinishSuccess()
     {
-        if (IsDebugEnabled())
+        if (_logger.IsEnabled(LogLevel.Debug))
         {
             NewLine();
             Debug("AFTER TEST SUITE: SUCCESS");
@@ -394,7 +377,7 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
     /// <returns>True if debug-level logging is enabled; otherwise, false.</returns>
     protected bool IsDebugEnabled()
     {
-        return _logger.IsDebugEnabled;
+        return _logger.IsEnabled(LogLevel.Debug);
     }
 
     /// <summary>
@@ -403,7 +386,7 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
     /// <param name="line">The message to log at the debug level.</param>
     protected void Debug(string line)
     {
-        if (IsDebugEnabled()) _logger.Debug(line);
+        if (_logger.IsEnabled(LogLevel.Debug)) _logger.LogDebug(line);
     }
 
     /// <summary>
@@ -413,7 +396,7 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
     /// <param name="cause">The exception associated with the error to log.</param>
     protected void Error(string line, Exception cause)
     {
-        _logger.Error(line, cause);
+        _logger.LogError(cause, line);
     }
 
     /// <summary>
@@ -422,7 +405,7 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
     /// <param name="line">The error message to log.</param>
     protected void Error(string line)
     {
-        _logger.Error(line);
+        _logger.LogError(line);
     }
 
     /// <summary>
@@ -431,7 +414,7 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
     /// <param name="line">The informational message to log.</param>
     protected void Info(string line)
     {
-        _logger.Info(line);
+        _logger.LogInformation(line);
     }
 
     /// <summary>
@@ -468,17 +451,5 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
             _outboundMessageLogger = NoOpLogger;
         }
     }
-
-    protected bool IsEnabled()
-    {
-        return _logger != NoOpLogger;
-    }
-
-    private class NoOpAppender : AppenderSkeleton
-    {
-        protected override void Append(LoggingEvent loggingEvent)
-        {
-            // No operation performed here, effectively discarding all log messages
-        }
-    }
+    
 }

@@ -1,32 +1,33 @@
 ﻿using Agenix.Api.Context;
-using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Util;
 using Agenix.Core.Spi;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Api.Endpoint;
 
 /// <summary>
 ///     Endpoint component registers with bean name in Spring application context and is then responsible to create proper
-///     endpoints dynamically from endpoint uri values. Creates an endpoint instance by parsing the dynamic endpoint uri with
+///     endpoints dynamically from endpoint uri values. Creates an endpoint instance by parsing the dynamic endpoint uri
+///     with
 ///     special properties and parameters. Creates a proper endpoint configuration instance on the fly.
 /// </summary>
 public interface IEndpointComponent
 {
     public static string EndpointName = "endpointName";
-    
+
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(IEndpointComponent));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(IEndpointComponent));
 
     /// <summary>
-    /// Path used to locate resources associated with the endpoint component.
+    ///     Path used to locate resources associated with the endpoint component.
     /// </summary>
     private static readonly string ResourcePath = "Extension/agenix/endpoint/component";
 
     /// <summary>
-    /// Resolver for dynamically loading and resolving resources based on a specified resource path.
+    ///     Resolver for dynamically loading and resolving resources based on a specified resource path.
     /// </summary>
     private static readonly ResourcePathTypeResolver TypeResolver = new(ResourcePath);
 
@@ -62,23 +63,23 @@ public interface IEndpointComponent
     {
         var components = TypeResolver.ResolveAll<IEndpointComponent>();
 
-        if (!Log.IsDebugEnabled) return components;
+        if (!Log.IsEnabled(LogLevel.Debug)) return components;
         foreach (var kvp in components)
-            Log.Debug($"Found endpoint component '{kvp.Key}' as {kvp.Value.GetType().Name}");
+            Log.LogDebug("Found endpoint component '{KvpKey}' as {Name}", kvp.Key, kvp.Value.GetType().Name);
 
         return components;
     }
 
     /// <summary>
-    /// Retrieves an <see cref="IEndpointComponent" /> instance based on the specified validator string.
-    /// If the validator is recognized, a corresponding <see cref="IEndpointComponent" /> instance is instantiated and
-    /// returned.
-    /// Otherwise, an empty <see cref="Optional{T}" /> is returned.
+    ///     Retrieves an <see cref="IEndpointComponent" /> instance based on the specified validator string.
+    ///     If the validator is recognized, a corresponding <see cref="IEndpointComponent" /> instance is instantiated and
+    ///     returned.
+    ///     Otherwise, an empty <see cref="Optional{T}" /> is returned.
     /// </summary>
     /// <param name="validator">The validator string used to look up the appropriate <see cref="Optional{T}" /> instance.</param>
     /// <returns>
-    /// An <see cref="Optional{T}" /> containing the <see cref="IEndpointComponent" /> instance if found, otherwise an
-    /// empty <see cref="Optional{T}" />.
+    ///     An <see cref="Optional{T}" /> containing the <see cref="IEndpointComponent" /> instance if found, otherwise an
+    ///     empty <see cref="Optional{T}" />.
     /// </returns>
     public static Optional<IEndpointComponent> Lookup(string validator)
     {
@@ -88,7 +89,7 @@ public interface IEndpointComponent
         }
         catch (TypeLoadException)
         {
-            Log.Warn($"Failed to resolve annotation config parser from resource '{validator}'");
+            Log.LogWarning("Failed to resolve annotation config parser from resource '{Validator}'", validator);
         }
 
         return Optional<IEndpointComponent>.Empty;

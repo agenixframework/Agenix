@@ -28,7 +28,7 @@ public static class JTokenConversionHelper
                 List<object> convertedList = [];
                 convertedList.AddRange(array.Select(ConvertToDynamic)
                     .Where(item => item != null)
-                    .Cast<object>()); 
+                    .Cast<object>());
 
                 return convertedList;
 

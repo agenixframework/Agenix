@@ -2,7 +2,8 @@
 
 using System.Globalization;
 using System.Reflection;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -94,7 +95,7 @@ public class AssemblyResource : AbstractResource
     private readonly string _fullResourceName;
     private readonly string _resourceNamespace;
     private readonly string _resourceAssemblyName;
-    private static readonly ILog Log = LogManager.GetLogger(typeof(AssemblyResource));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(AssemblyResource));
 
     #endregion
 
@@ -122,11 +123,11 @@ public class AssemblyResource : AbstractResource
             var stream = _assembly.GetManifestResourceStream(_resourceName);
             if (stream == null)
             {
-                Log.Error("Could not load resource with name = [" + _resourceName +
-                          "] from assembly + " + _assembly);
-                Log.Error("URI specified = [" + _fullResourceName +
-                          "] Agenix URI syntax is 'assembly://assemblyName/namespace/resourceName'.");
-                Log.Error(
+                Log.LogError("Could not load resource with name = [" + _resourceName +
+                             "] from assembly + " + _assembly);
+                Log.LogError("URI specified = [" + _fullResourceName +
+                             "] Agenix URI syntax is 'assembly://assemblyName/namespace/resourceName'.");
+                Log.LogError(
                     "Resource name often has the default namespace prefixed, e.g. 'assembly://MyAssembly/MyNamespace/MyNamespace.MyResource.txt'.");
             }
 
@@ -211,7 +212,6 @@ public class AssemblyResource : AbstractResource
     /// <value>
     ///     A description for this resource.
     /// </value>
-    /// <seealso cref="NHamcrest.Core.Description" />
     public override string Description =>
         string.Format(
             CultureInfo.InvariantCulture,

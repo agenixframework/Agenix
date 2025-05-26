@@ -8,8 +8,9 @@ using Agenix.Api.Validation.Matcher;
 namespace Agenix.Core.Validation.Matcher.Core;
 
 /// <summary>
-/// Performs validation by trimming leading and trailing whitespaces from both the provided value and the control value for comparison.
-/// Throws a ValidationException if the trimmed values do not match.
+///     Performs validation by trimming leading and trailing whitespaces from both the provided value and the control value
+///     for comparison.
+///     Throws a ValidationException if the trimmed values do not match.
 /// </summary>
 public class TrimValidationMatcher : IValidationMatcher
 {

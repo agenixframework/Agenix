@@ -1,5 +1,6 @@
 using Agenix.Api.Context;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Container;
 
@@ -12,7 +13,7 @@ public class Sequence(Sequence.Builder builder) : AbstractActionContainer(builde
     ///     A logger instance for the Sequence class, used to record log messages
     ///     related to the execution of a sequence of test actions.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(Sequence));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(Sequence));
 
     /// Executes the sequence of nested test actions in the provided context.
     /// @param context The context in which the test actions are executed.
@@ -21,7 +22,7 @@ public class Sequence(Sequence.Builder builder) : AbstractActionContainer(builde
     {
         foreach (var actionBuilder in actions) ExecuteAction(actionBuilder.Build(), context);
 
-        Log.Debug("Action sequence finished successfully.");
+        Log.LogDebug("Action sequence finished successfully.");
     }
 
     /// Builder class for constructing instances of the Sequence action.

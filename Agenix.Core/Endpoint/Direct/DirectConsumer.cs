@@ -1,10 +1,10 @@
 ﻿using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Messaging;
-using Agenix.Core.Message;
 using Agenix.Core.Message.Selector;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Endpoint.Direct;
 
@@ -18,7 +18,7 @@ public class DirectConsumer(string name, DirectEndpointConfiguration endpointCon
     /// <summary>
     ///     Represents a log instance used within the DirectConsumer class for logging purposes.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(DirectConsumer));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(DirectConsumer));
 
     /// Receives a message from the designated queue based on the provided selector and context within the specified timeout period.
     /// <param name="selector">The message selector used to filter messages.</param>
@@ -34,7 +34,7 @@ public class DirectConsumer(string name, DirectEndpointConfiguration endpointCon
             ? $"{GetDestinationQueueName()}({selector})"
             : GetDestinationQueueName();
 
-        if (Log.IsDebugEnabled) Log.Debug($"Receiving message from queue: '{destinationQueueName}'");
+        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug($"Receiving message from queue: '{destinationQueueName}'");
 
         IMessage message;
         if (!string.IsNullOrWhiteSpace(selector))
@@ -53,7 +53,7 @@ public class DirectConsumer(string name, DirectEndpointConfiguration endpointCon
 
         if (message == null) throw new MessageTimeoutException(timeout, destinationQueueName);
 
-        Log.Info($"Received message from queue: '{destinationQueueName}'");
+        Log.LogInformation($"Received message from queue: '{destinationQueueName}'");
         return message;
     }
 
@@ -74,7 +74,8 @@ public class DirectConsumer(string name, DirectEndpointConfiguration endpointCon
 
         if (!string.IsNullOrWhiteSpace(queueName)) return ResolveQueueName(queueName, context);
 
-        throw new AgenixSystemException("Neither queue name nor queue object is set - please specify destination queue");
+        throw new AgenixSystemException(
+            "Neither queue name nor queue object is set - please specify destination queue");
     }
 
     /// Retrieves the destination queue name based on the endpoint configuration.
@@ -91,7 +92,8 @@ public class DirectConsumer(string name, DirectEndpointConfiguration endpointCon
         var queueName = endpointConfiguration.GetQueueName();
         if (!string.IsNullOrWhiteSpace(queueName)) return queueName;
 
-        throw new AgenixSystemException("Neither queue name nor queue object is set - please specify destination queue");
+        throw new AgenixSystemException(
+            "Neither queue name nor queue object is set - please specify destination queue");
     }
 
     /// Resolves a queue name into an IMessageQueue object using the provided context.
@@ -104,6 +106,7 @@ public class DirectConsumer(string name, DirectEndpointConfiguration endpointCon
         if (context.ReferenceResolver != null)
             return context.ReferenceResolver.Resolve<IMessageQueue>(queueName);
 
-        throw new AgenixSystemException("Unable to resolve message queue - missing proper reference resolver in context");
+        throw new AgenixSystemException(
+            "Unable to resolve message queue - missing proper reference resolver in context");
     }
 }

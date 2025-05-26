@@ -1,13 +1,14 @@
-﻿using Agenix.Api.Validation.Matcher;
+﻿using Agenix.Api.Log;
+using Agenix.Api.Validation.Matcher;
 using Agenix.Core.Validation.Matcher.Core;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Validation.Matcher;
 
 public class DefaultValidationMatcherLibrary : ValidationMatcherLibrary
 {
-    private static readonly ILog Log = LogManager.GetLogger(typeof(DefaultValidationMatcherLibrary));
-    
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(DefaultValidationMatcherLibrary));
+
     /// <summary>
     ///     Default constructor adds default matcher implementations.
     /// </summary>
@@ -31,12 +32,12 @@ public class DefaultValidationMatcherLibrary : ValidationMatcherLibrary
         Members.Add("StringLength", new StringLengthValidationMatcher());
         Members.Add("Trim", new TrimValidationMatcher());
         Members.Add("TrimAllWhiteSpaces", new TrimAllWhitespacesValidationMatcher());
-        
+
         LookupValidationMatchers();
     }
-    
+
     /// <summary>
-    /// Add custom matcher implementations loaded from the resource path lookup.
+    ///     Add custom matcher implementations loaded from the resource path lookup.
     /// </summary>
     private void LookupValidationMatchers()
     {
@@ -44,10 +45,7 @@ public class DefaultValidationMatcherLibrary : ValidationMatcherLibrary
         {
             Members.Add(key, matcher);
 
-            if (Log.IsDebugEnabled)
-            {
-                Log.Debug($"Register message matcher '{key}' as {matcher.GetType()}");
-            }
+            if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Register message matcher '{Key}' as {Type}", key, matcher.GetType());
         }
     }
 }

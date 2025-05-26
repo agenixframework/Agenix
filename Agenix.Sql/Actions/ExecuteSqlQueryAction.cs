@@ -3,8 +3,9 @@ using System.Text;
 using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Validation.Matcher;
-using log4net;
+using Microsoft.Extensions.Logging;
 using Spring.Dao;
 using Spring.Data;
 using Spring.Data.Common;
@@ -29,7 +30,7 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
 {
     /// Logger for ExecuteSQLQueryAction.
     /// /
-    private static readonly ILog Log = LogManager.GetLogger(typeof(ExecuteSqlQueryAction));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(ExecuteSqlQueryAction));
 
     /// NULL value representation in SQL.
     private static readonly string NullValue = "NULL";
@@ -59,12 +60,12 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
                 ? statement.Trim()[..(statement.Trim().Length - 1)]
                 : statement.Trim());
 
-            Log.Debug($"Executing SQL query: {toExecute}");
+            Log.LogDebug($"Executing SQL query: {toExecute}");
 
             var results = AdoTemplate.QueryWithRowMapper(CommandType.Text, toExecute, new DictionaryRowMapper())
                 .Cast<Dictionary<string, object>>().ToList();
 
-            Log.Debug("SQL query execution successful");
+            Log.LogDebug("SQL query execution successful");
 
             allResultRows.AddRange(results);
             FillColumnValuesMap(results, columnValuesMap);
@@ -191,7 +192,7 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
         if (!_controlResultSet.Any()) return;
 
         PerformControlResultSetValidation(columnValuesMap, context);
-        Log.Debug("SQL query validation successful: All values OK");
+        Log.LogDebug("SQL query validation successful: All values OK");
     }
 
     /// <summary>
@@ -276,7 +277,7 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
         // Check if value is ignored
         if (controlValue.Equals(AgenixSettings.IgnorePlaceholder))
         {
-            Log.Debug($"Ignoring column value '{columnName} (resultValue)'");
+            Log.LogDebug($"Ignoring column value '{columnName} (resultValue)'");
             return;
         }
 
@@ -291,12 +292,12 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
             if (!IsAgenixNullValue(controlValue))
                 throw new ValidationException(
                     $"Validation failed for column: '{columnName}' found value: NULL expected value: {controlValue}");
-            Log.Debug($"Validating database value for column: '{columnName}' value as expected: NULL - value OK");
+            Log.LogDebug($"Validating database value for column: '{columnName}' value as expected: NULL - value OK");
             return;
         }
 
         if (resultValue.Equals(controlValue))
-            Log.Debug($"Validation successful for column: '{columnName}' expected value: {controlValue} - value OK");
+            Log.LogDebug($"Validation successful for column: '{columnName}' expected value: {controlValue} - value OK");
         else
             throw new ValidationException(
                 $"Validation failed for column: '{columnName}' found value: '{resultValue}' expected value: {(string.IsNullOrEmpty(controlValue) ? "NULL" : controlValue)}");
@@ -342,7 +343,7 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
 
             if (TransactionManager != null)
             {
-                Log.Debug($"Using transaction manager: {TransactionManager.GetType().Name}");
+                Log.LogDebug($"Using transaction manager: {TransactionManager.GetType().Name}");
 
                 var transactionTemplate = new TransactionTemplate(TransactionManager)
                 {
@@ -370,7 +371,7 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
         }
         catch (DataAccessException e)
         {
-            Log.Error("Failed to execute SQL statement", e);
+            Log.LogError(e, "Failed to execute SQL statement");
             throw new AgenixSystemException(e.Message, e);
         }
     }

@@ -1,27 +1,28 @@
 ﻿using Agenix.Api.Context;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Api.Message;
 
 /// <summary>
-/// The AbstractMessageProcessor is an abstract class that provides a base implementation
-/// for processing messages in defined directions with specific types.
-/// It implements the following interfaces:
-/// - IMessageProcessor: Extends the capability of message transformations.
-/// - IMessageDirectionAware: Enables awareness and management of message directionality
-/// (inbound, outbound, unbound).
-/// - IMessageTypeSelector: Supports type-based selection and filtering of messages.
-/// The class provides mechanisms for message direction handling, checking message
-/// compatibility based on type, and processing messages with contextual information.
-/// Subclasses can extend the functionality by providing their specific implementations
-/// for processing and type selection.
+///     The AbstractMessageProcessor is an abstract class that provides a base implementation
+///     for processing messages in defined directions with specific types.
+///     It implements the following interfaces:
+///     - IMessageProcessor: Extends the capability of message transformations.
+///     - IMessageDirectionAware: Enables awareness and management of message directionality
+///     (inbound, outbound, unbound).
+///     - IMessageTypeSelector: Supports type-based selection and filtering of messages.
+///     The class provides mechanisms for message direction handling, checking message
+///     compatibility based on type, and processing messages with contextual information.
+///     Subclasses can extend the functionality by providing their specific implementations
+///     for processing and type selection.
 /// </summary>
 public abstract class AbstractMessageProcessor : IMessageProcessor, IMessageDirectionAware, IMessageTypeSelector
 {
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(AbstractMessageProcessor));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(AbstractMessageProcessor));
 
     /// <summary>
     ///     Inbound/ Outbound direction
@@ -55,7 +56,7 @@ public abstract class AbstractMessageProcessor : IMessageProcessor, IMessageDire
         if (SupportsMessageType(message.GetType()))
             ProcessMessage(message, context);
         else
-            Log.Debug($"Message processor '{GetName()}' skipped for message type: {message.GetType()}");
+            Log.LogDebug("Message processor '{S}' skipped for message type: {GetType1}", GetName(), message.GetType());
     }
 
     /// <summary>
