@@ -136,11 +136,11 @@ public class FileResourcePayloadBuilder : IMessagePayloadBuilder, IMessageTypeAw
     }
 
     /// <summary>
-    /// Retrieves the file path of the resource being used for constructing the payload.
-    /// If a resource is specified, its file's full path is returned; otherwise, the pre-defined resource path is provided.
+    ///     Retrieves the file path of the resource being used for constructing the payload.
+    ///     If a resource is specified, its file's full path is returned; otherwise, the pre-defined resource path is provided.
     /// </summary>
     /// <returns>
-    /// The full file path of the resource if available, otherwise the predefined resource path.
+    ///     The full file path of the resource if available, otherwise the predefined resource path.
     /// </returns>
     public string GetResourcePath()
     {

@@ -9,8 +9,8 @@ using Agenix.Api.Validation.Matcher;
 namespace Agenix.Core.Validation.Matcher.Core;
 
 /// <summary>
-/// ValidationMatcher that removes all whitespaces from the input value and control value
-/// before performing validation to ensure they match.
+///     ValidationMatcher that removes all whitespaces from the input value and control value
+///     before performing validation to ensure they match.
 /// </summary>
 public class TrimAllWhitespacesValidationMatcher : IValidationMatcher
 {

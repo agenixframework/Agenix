@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Agenix.Api.Builder;
 using Agenix.Api.Message;
 using Agenix.Api.Validation.Context;
@@ -41,8 +40,9 @@ public class JsonPathMessageValidationContext(JsonPathMessageValidationContext.B
         }
 
         /// <summary>
-        /// Converts the current builder configuration into an instance of IMessageProcessor.
-        /// This method is used to produce a message processor based on the configured expressions and settings applied to the builder.
+        ///     Converts the current builder configuration into an instance of IMessageProcessor.
+        ///     This method is used to produce a message processor based on the configured expressions and settings applied to the
+        ///     builder.
         /// </summary>
         /// <returns>An instance of IMessageProcessor configured with the current builder's expressions.</returns>
         public IMessageProcessor AsProcessor()
@@ -53,8 +53,8 @@ public class JsonPathMessageValidationContext(JsonPathMessageValidationContext.B
         }
 
         /// <summary>
-        /// Converts the current builder configuration into an instance of IVariableExtractor.
-        /// This method is used to produce a variable extractor based on the expressions and settings applied to the builder.
+        ///     Converts the current builder configuration into an instance of IVariableExtractor.
+        ///     This method is used to produce a variable extractor based on the expressions and settings applied to the builder.
         /// </summary>
         /// <returns>An instance of IVariableExtractor configured with the current builder's expressions.</returns>
         public IVariableExtractor AsExtractor()
@@ -65,10 +65,13 @@ public class JsonPathMessageValidationContext(JsonPathMessageValidationContext.B
         }
 
         /// <summary>
-        /// Updates the internal collection of expressions with the specified key-value pairs.
-        /// This method is used to define or modify the expressions that can be used for validation or processing purposes.
+        ///     Updates the internal collection of expressions with the specified key-value pairs.
+        ///     This method is used to define or modify the expressions that can be used for validation or processing purposes.
         /// </summary>
-        /// <param name="expressions">A dictionary containing key-value pairs where keys represent expression names and values represent the associated expression objects.</param>
+        /// <param name="expressions">
+        ///     A dictionary containing key-value pairs where keys represent expression names and values
+        ///     represent the associated expression objects.
+        /// </param>
         /// <returns>The current instance of the builder, allowing for fluent configuration.</returns>
         public Builder Expressions(IDictionary<string, object> expressions)
         {
@@ -77,8 +80,8 @@ public class JsonPathMessageValidationContext(JsonPathMessageValidationContext.B
         }
 
         /// <summary>
-        /// Adds an expression and its associated value to the builder configuration.
-        /// This method is used to define expressions that will be incorporated into the validation context.
+        ///     Adds an expression and its associated value to the builder configuration.
+        ///     This method is used to define expressions that will be incorporated into the validation context.
         /// </summary>
         /// <param name="expression">The expression key to be added to the builder configuration.</param>
         /// <param name="value">The value associated with the provided expression key.</param>

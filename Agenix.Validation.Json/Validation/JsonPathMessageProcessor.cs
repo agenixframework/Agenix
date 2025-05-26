@@ -1,8 +1,9 @@
 ﻿using Agenix.Api.Builder;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
-using log4net;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -21,7 +22,7 @@ public class JsonPathMessageProcessor : AbstractMessageProcessor
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(JsonPathMessageProcessor));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(JsonPathMessageProcessor));
 
     /// <summary>
     ///     Optional ignoring element not found errors
@@ -45,6 +46,16 @@ public class JsonPathMessageProcessor : AbstractMessageProcessor
         _jsonPathExpressions = builder._expressions;
         _ignoreNotFound = builder._ignoreNotFound;
     }
+
+    /// <summary>
+    ///     Gets the JSONPath expressions used for processing messages and updating message payloads.
+    /// </summary>
+    /// <remarks>
+    ///     This property contains a collection of JSONPath expressions that are applied
+    ///     to messages during processing, facilitating modifications or validations
+    ///     based on the provided expressions.
+    /// </remarks>
+    public IDictionary<string, object> JsonPathExpressions => _jsonPathExpressions;
 
     /// <summary>
     ///     Processes the given message by applying JSONPath expressions and updating the message payload accordingly.
@@ -95,7 +106,8 @@ public class JsonPathMessageProcessor : AbstractMessageProcessor
                             $"Could not find element for expression: {jsonPathExpression}", ex);
                 }
 
-                if (Log.IsDebugEnabled) Log.Debug($"Element {jsonPathExpression} was set to value: {valueExpression}");
+                if (Log.IsEnabled(LogLevel.Debug))
+                    Log.LogDebug($"Element {jsonPathExpression} was set to value: {valueExpression}");
             }
 
             message.Payload = jsonData.ToString(Formatting.None);
@@ -205,14 +217,4 @@ public class JsonPathMessageProcessor : AbstractMessageProcessor
             return this;
         }
     }
-
-    /// <summary>
-    /// Gets the JSONPath expressions used for processing messages and updating message payloads.
-    /// </summary>
-    /// <remarks>
-    /// This property contains a collection of JSONPath expressions that are applied
-    /// to messages during processing, facilitating modifications or validations
-    /// based on the provided expressions.
-    /// </remarks>
-    public IDictionary<string, object> JsonPathExpressions => _jsonPathExpressions;
 }

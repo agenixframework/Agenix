@@ -1,5 +1,8 @@
-﻿using Agenix.Api;
+﻿using System;
+using Agenix.Api;
 using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
+using Agenix.Core.Spi;
 
 namespace Agenix.Core;
 
@@ -23,6 +26,14 @@ public class TestCaseRunnerFactory
     private static readonly string Custom = "custom";
 #pragma warning restore CS0414 // Field is assigned but its value is never used
 
+    /** Test runner resource lookup path */
+    private const string ResourcePath = "Extension/agenix/test/runner";
+
+    /// Resolves resource paths into types and properties based on a predefined or custom resource base path.
+    /// Used to map resource identifiers to corresponding types in the Agenix framework.
+    /// /
+    private readonly ResourcePathTypeResolver _typeResolver = new(ResourcePath);
+
     private static readonly TestCaseRunnerFactory Instance = new();
 
     private TestCaseRunnerFactory()
@@ -31,14 +42,33 @@ public class TestCaseRunnerFactory
     }
 
     /// <summary>
-    ///     Retrieves the default implementation of ITestCaseRunnerProvider.
+    /// Retrieves the default implementation of ITestCaseRunnerProvider.
     /// </summary>
     /// <returns>
-    ///     An instance of DefaultTestCaseRunner.DefaultTestCaseRunnerProvider used for running test cases.
+    /// An instance of ITestCaseRunnerProvider used for creating test case runners.
     /// </returns>
     private ITestCaseRunnerProvider LookupDefault()
     {
-        return new DefaultTestCaseRunner.DefaultTestCaseRunnerProvider();
+        return _typeResolver.Resolve<ITestCaseRunnerProvider>(Default);
+    }
+
+    /// <summary>
+    /// Attempts to resolve a custom implementation of ITestCaseRunnerProvider.
+    /// If the custom implementation cannot be resolved, defaults to the standard implementation.
+    /// </summary>
+    /// <returns>
+    /// An instance of ITestCaseRunnerProvider, either custom or default, used for creating test case runners.
+    /// </returns>
+    private ITestCaseRunnerProvider LookupCustomOrDefault()
+    {
+        try
+        {
+            return _typeResolver.Resolve<ITestCaseRunnerProvider>(Custom);
+        }
+        catch (Exception)
+        {
+            return LookupDefault();
+        }
     }
 
     /// <summary>
@@ -50,7 +80,7 @@ public class TestCaseRunnerFactory
     /// </returns>
     public static ITestCaseRunner CreateRunner(TestContext context)
     {
-        var testCaseRunnerProvider = Instance.LookupDefault();
+        var testCaseRunnerProvider = Instance.LookupCustomOrDefault();
         return testCaseRunnerProvider.CreateTestCaseRunner(context);
     }
 
@@ -62,7 +92,7 @@ public class TestCaseRunnerFactory
     /// <returns>An instance of ITestCaseRunner used to run the specified test case.</returns>
     public static ITestCaseRunner CreateRunner(ITestCase testCase, TestContext context)
     {
-        var testCaseRunnerProvider = Instance.LookupDefault();
+        var testCaseRunnerProvider = Instance.LookupCustomOrDefault();
         return testCaseRunnerProvider.CreateTestCaseRunner(testCase, context);
     }
 }

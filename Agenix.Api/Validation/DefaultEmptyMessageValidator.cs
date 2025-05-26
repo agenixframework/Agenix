@@ -1,8 +1,9 @@
 ﻿using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Validation.Context;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Api.Validation;
 
@@ -15,7 +16,7 @@ public class DefaultEmptyMessageValidator : DefaultMessageValidator
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog _log = LogManager.GetLogger(typeof(DefaultEmptyMessageValidator));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(DefaultEmptyMessageValidator));
 
     /// <summary>
     ///     Validates that the received message's payload is empty, based on the control message.
@@ -30,18 +31,18 @@ public class DefaultEmptyMessageValidator : DefaultMessageValidator
     {
         if (controlMessage?.Payload == null)
         {
-            _log.Debug("Skip message payload validation as no control message was defined");
+            Log.LogDebug("Skip message payload validation as no control message was defined");
             return;
         }
 
         if (!string.IsNullOrEmpty(controlMessage.GetPayload<string>()))
             throw new ValidationException("Empty message validation failed - control message is not empty!");
 
-        _log.Debug("Start to verify empty message payload ...");
+        Log.LogDebug("Start to verify empty message payload ...");
 
         if (!string.IsNullOrEmpty(receivedMessage.GetPayload<string>()))
             throw new ValidationException("Validation failed - received message content is not empty!");
 
-        _log.Info("Message payload is empty as expected: All values OK");
+        Log.LogInformation("Message payload is empty as expected: All values OK");
     }
 }

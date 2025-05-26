@@ -1,9 +1,10 @@
 ﻿using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
 using Agenix.Core.Validation;
-using log4net;
+using Microsoft.Extensions.Logging;
 using NHamcrest;
 using NHamcrest.Core;
 
@@ -13,7 +14,7 @@ public class NHamcrestHeaderValidator : IHeaderValidator
 {
     /// Logger for HamcrestHeaderValidator.
     /// /
-    private static readonly ILog Log = LogManager.GetLogger(typeof(NHamcrestHeaderValidator));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(NHamcrestHeaderValidator));
 
     public void ValidateHeader(string headerName, object receivedValue, object controlValue, TestContext context,
         HeaderValidationContext validationContext)
@@ -59,10 +60,10 @@ public class NHamcrestHeaderValidator : IHeaderValidator
             }
 
 
-            if (Log.IsDebugEnabled) Log.Debug($"Header validation: {headerName}='{controlValue}': OK");
+            if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug($"Header validation: {headerName}='{controlValue}': OK");
             validationContext.UpdateStatus(ValidationStatus.PASSED);
         }
-        catch (ValidationException e)
+        catch (ValidationException)
         {
             validationContext.UpdateStatus(ValidationStatus.FAILED);
             throw;

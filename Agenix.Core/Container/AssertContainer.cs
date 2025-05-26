@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Validation.Matcher;
-using Agenix.Core.Validation.Matcher;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Container;
 
@@ -17,7 +17,7 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
 {
     /// Static logger instance for the AssertException class.
     /// /
-    private static readonly ILog Log = LogManager.GetLogger(typeof(AssertContainer));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(AssertContainer));
 
     /// Represents a nested test action builder specifically for test actions.
     /// /
@@ -31,7 +31,8 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
 
     public override void DoExecute(TestContext context)
     {
-        if (Log.IsDebugEnabled) Log.Debug($"Assert container asserting exceptions of type {_exception.Name}");
+        if (Log.IsEnabled(LogLevel.Debug))
+            Log.LogDebug($"Assert container asserting exceptions of type {_exception.Name}");
 
         try
         {
@@ -39,7 +40,7 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
         }
         catch (Exception e)
         {
-            Log.Debug("Validating caught exception: {0}", e);
+            Log.LogDebug("Validating caught exception: {0}", e);
 
             if (!_exception.IsAssignableFrom(e.GetType()))
                 throw new ValidationException("Validation failed for asserted exception type - expected: '" +
@@ -54,9 +55,9 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
                                                   _message + "' but was: '" + e.Message + "'", e);
             }
 
-            Log.Debug($"Asserted exception is as expected ({e.GetType().Name}): {e.Message}");
+            Log.LogDebug($"Asserted exception is as expected ({e.GetType().Name}): {e.Message}");
 
-            Log.Debug("Assert exception validation successful: All values OK");
+            Log.LogDebug("Assert exception validation successful: All values OK");
 
             return;
         }

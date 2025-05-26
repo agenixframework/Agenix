@@ -1,6 +1,7 @@
 using Agenix.Api;
 using Agenix.Api.Context;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Actions;
 
@@ -8,7 +9,7 @@ namespace Agenix.Core.Actions;
 /// either a specific timer or all timers within a given context.
 public class StopTimerAction(StopTimerAction.Builder builder) : AbstractTestAction("stop-timer", builder)
 {
-    private static readonly ILog _log = LogManager.GetLogger(typeof(StopTimerAction));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(StopTimerAction));
 
     public string TimerId { get; } = builder.TimerId;
 
@@ -20,12 +21,12 @@ public class StopTimerAction(StopTimerAction.Builder builder) : AbstractTestActi
         if (TimerId != null)
         {
             var success = context.StopTimer(TimerId);
-            _log.Info($"Stopping timer {TimerId} - stop successful: {success}");
+            Log.LogInformation("Stopping timer {S} - stop successful: {Success}", TimerId, success);
         }
         else
         {
             context.StopTimers();
-            _log.Info("Stopping all timers");
+            Log.LogInformation("Stopping all timers");
         }
     }
 

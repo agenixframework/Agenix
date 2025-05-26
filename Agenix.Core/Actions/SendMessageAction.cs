@@ -6,27 +6,26 @@ using Agenix.Api.Common;
 using Agenix.Api.Context;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Variable;
-using Agenix.Core.Endpoint;
-using Agenix.Core.Message;
 using Agenix.Core.Message.Builder;
-using Agenix.Core.Variable;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Actions;
 
 /// <summary>
 ///     This action sends a message to a specified message endpoint. The action holds a reference to an Endpoint, which is
-///     capable of the message transport implementation. So the action is independent of the message transport configuration.
+///     capable of the message transport implementation. So the action is independent of the message transport
+///     configuration.
 /// </summary>
 public class SendMessageAction : AbstractTestAction, ICompletable
 {
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(SendMessageAction));
-    
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(SendMessageAction));
+
     /// <summary>
     ///     Represents the completion status of the action represented by a TaskCompletionSource.
     /// </summary>
@@ -63,23 +62,23 @@ public class SendMessageAction : AbstractTestAction, ICompletable
     public string EndpointUri { get; }
 
     /// <summary>
-    /// Indicates whether schema validation is enabled for the message. When set to true, the message schema
-    /// validation will be performed during the execution of the action.
+    ///     Indicates whether schema validation is enabled for the message. When set to true, the message schema
+    ///     validation will be performed during the execution of the action.
     /// </summary>
     public bool IsSchemaValidation { get; }
 
     /// <summary>
-    /// Represents the schema associated with the message for validation purposes.
-    /// This defines the structure and rules that the message should conform to
-    /// when being used in the action.
+    ///     Represents the schema associated with the message for validation purposes.
+    ///     This defines the structure and rules that the message should conform to
+    ///     when being used in the action.
     /// </summary>
     public string Schema { get; }
 
     /// <summary>
-    /// Represents the repository location or reference for schema validation.
+    ///     Represents the repository location or reference for schema validation.
     /// </summary>
     public string SchemaRepository { get; }
-    
+
     /// <summary>
     ///     List of variable extractors responsible for creating variables from received message content
     /// </summary>
@@ -169,10 +168,10 @@ public class SendMessageAction : AbstractTestAction, ICompletable
         _finished.Task.ContinueWith(task =>
         {
             if (task is { IsFaulted: true, Exception: not null })
-                Log.Warn("Failure in forked send action: " + task.Exception.Message);
+                Log.LogWarning("Failure in forked send action: " + task.Exception.Message);
             else
                 foreach (var ctxEx in context.GetExceptions())
-                    Log.Warn(ctxEx.Message);
+                    Log.LogWarning(ctxEx.Message);
         });
 
         // Extract variables from before sending message so we can save dynamic message ids
@@ -187,7 +186,7 @@ public class SendMessageAction : AbstractTestAction, ICompletable
 
         if (ForkMode)
         {
-            Log.Debug("Forking message sending action ...");
+            Log.LogDebug("Forking message sending action ...");
 
             Task.Run(() =>
             {
@@ -222,17 +221,15 @@ public class SendMessageAction : AbstractTestAction, ICompletable
             }
         }
     }
-    
+
     /// <summary>
-    /// Validate the message against registered schema validators.
+    ///     Validate the message against registered schema validators.
     /// </summary>
     private void ValidateMessage(IMessage message, TestContext context)
     {
         foreach (var validator in context.MessageValidatorRegistry.SchemaValidators.Values
                      .Where(validator => validator.CanValidate(message, IsSchemaValidation)))
-        {
             validator.Validate(message, context, SchemaRepository, Schema);
-        }
     }
 
     /// <summary>
@@ -330,7 +327,7 @@ public class SendMessageAction : AbstractTestAction, ICompletable
             ForkMode = forkMode;
             return self;
         }
-        
+
 
         /// <summary>
         ///     Builds the SendMessageAction by initializing the messageBuilderSupport if necessary.

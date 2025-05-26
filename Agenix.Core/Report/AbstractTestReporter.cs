@@ -1,6 +1,7 @@
 ﻿using System;
+using Agenix.Api.Log;
 using Agenix.Api.Report;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Report;
 
@@ -13,7 +14,7 @@ public abstract class AbstractTestReporter : ITestReporter
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog _log = LogManager.GetLogger(typeof(AbstractTestReporter));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(AbstractTestReporter));
 
     /// <summary>
     ///     Indicates whether errors should be ignored during test report creation.
@@ -36,7 +37,7 @@ public abstract class AbstractTestReporter : ITestReporter
         catch (Exception e)
         {
             if (IgnoreErrors)
-                _log.Error("Failed to create test report", e);
+                Log.LogError(e, "Failed to create test report");
             else
                 throw;
         }

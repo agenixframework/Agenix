@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Api;
 
@@ -11,7 +12,7 @@ public static class AgenixVersion
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(AgenixVersion));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(AgenixVersion));
 
     static AgenixVersion()
     {
@@ -29,11 +30,11 @@ public static class AgenixVersion
             var infoVersion = infoVersionAttribute?.InformationalVersion ?? "Info version not set";
 
             if (string.IsNullOrWhiteSpace(infoVersion) || infoVersion == Version)
-                Log.Warn("Agenix version has not been updated from the default yet");
+                Log.LogWarning("Agenix version has not been updated from the default yet");
         }
         catch (Exception e)
         {
-            Log.Warn("Unable to read Agenix version information", e);
+            Log.LogWarning("Unable to read Agenix version information", e);
             Version = "";
         }
     }

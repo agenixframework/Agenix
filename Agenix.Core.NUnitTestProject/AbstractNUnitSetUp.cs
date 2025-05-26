@@ -1,5 +1,7 @@
 ﻿using System;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 using TestContext = Agenix.Api.Context.TestContext;
 

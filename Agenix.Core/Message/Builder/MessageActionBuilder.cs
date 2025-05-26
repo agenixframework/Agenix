@@ -12,13 +12,13 @@ namespace Agenix.Core.Message.Builder;
 /// endpoint assignment, and integration with variable extraction mechanisms.
 /// @param
 /// <T>
-/// the type of the test action.
-/// @param
-/// <TM>
-/// the type of the message builder support.
-/// @param
-/// <TB>
-/// the type of the message action builder.
+///     the type of the test action.
+///     @param
+///     <TM>
+///         the type of the message builder support.
+///         @param
+///         <TB>
+///             the type of the message action builder.
 public abstract class MessageActionBuilder<T, TM, TB> : AbstractTestActionBuilder<T, TB>, IReferenceResolverAware
     where T : ITestAction
     where TM : MessageBuilderSupport<T, TB, TM>

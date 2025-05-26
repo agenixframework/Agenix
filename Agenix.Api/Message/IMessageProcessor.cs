@@ -1,8 +1,9 @@
 ﻿using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Util;
 using Agenix.Core.Spi;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Api.Message;
 
@@ -21,7 +22,7 @@ public interface IMessageProcessor : IMessageTransformer
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(IMessageProcessor));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(IMessageProcessor));
 
     /// <summary>
     ///     Type resolver used to locate and retrieve custom message processors by performing
@@ -64,7 +65,7 @@ public interface IMessageProcessor : IMessageTransformer
         }
         catch (AgenixSystemException)
         {
-            Log.Warn($"Failed to resolve message processor from resource '{ResourcePath}/{processor}'");
+            Log.LogWarning("Failed to resolve message processor from resource '{ExtensionAgenixMessageProcessor}/{Processor}'", ResourcePath, processor);
         }
 
         return Optional<IBuilder<T, TB>>.Empty;

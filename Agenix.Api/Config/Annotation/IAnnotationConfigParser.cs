@@ -1,9 +1,10 @@
 ﻿using Agenix.Api.Endpoint;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Spi;
 using Agenix.Api.Util;
 using Agenix.Core.Spi;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Api.Config.Annotation;
 
@@ -26,7 +27,7 @@ public interface IAnnotationConfigParser<in TAttribute, out TEndpoint> : IAnnota
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog
+    private static readonly ILogger
         Log = LogManager.GetLogger(typeof(IAnnotationConfigParser<TAttribute, TEndpoint>).Name);
 
     /// <summary>
@@ -57,9 +58,9 @@ public interface IAnnotationConfigParser<in TAttribute, out TEndpoint> : IAnnota
         );
             
 
-        if (!Log.IsDebugEnabled) return validators;
+        if (!Log.IsEnabled(LogLevel.Debug)) return validators;
         foreach (var kvp in validators)
-            Log.Debug($"Found annotation config parser '{kvp.Key}' as {kvp.Value.GetType().Name}");
+            Log.LogDebug("Found annotation config parser '{KvpKey}' as {Name}", kvp.Key, kvp.Value.GetType().Name);
 
         return validators;
     }
@@ -86,7 +87,7 @@ public interface IAnnotationConfigParser<in TAttribute, out TEndpoint> : IAnnota
         }
         catch (AgenixSystemException)
         {
-            Log.Warn($"Failed to resolve annotation config parser from resource '{parser}'");
+            Log.LogWarning("Failed to resolve annotation config parser from resource '{Parser}'", parser);
         }
 
         return Optional<IAnnotationConfigParser>.Empty;

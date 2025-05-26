@@ -1,9 +1,10 @@
 ﻿using System.Reflection;
 using Agenix.Api.Context;
 using Agenix.Api.Endpoint;
+using Agenix.Api.Log;
 using Agenix.Api.Util;
 using Agenix.Core.Spi;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Api.Annotations;
 
@@ -15,7 +16,7 @@ public abstract class AgenixEndpointAnnotations
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(AgenixEndpointAnnotations));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(AgenixEndpointAnnotations));
 
     /// <summary>
     ///     Prevent instantiation.
@@ -37,7 +38,7 @@ public abstract class AgenixEndpointAnnotations
             if (!field.IsDefined(typeof(AgenixEndpointAttribute)) ||
                 !typeof(IEndpoint).IsAssignableFrom(field.FieldType)) return;
 
-            Log.Debug($"Injecting Agenix endpoint on test class field '{field.Name}'");
+            Log.LogDebug("Injecting Agenix endpoint on test class field '{FieldName}'", field.Name);
             var endpointAnnotation = field.GetCustomAttribute<AgenixEndpointAttribute>();
 
             foreach (var attribute in field.GetCustomAttributes())

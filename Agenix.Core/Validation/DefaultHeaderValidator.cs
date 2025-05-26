@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
 using Agenix.Api.Validation.Matcher;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Validation;
 
@@ -20,7 +21,7 @@ public class DefaultHeaderValidator : IHeaderValidator
     ///     within the DefaultHeaderValidator class. Utilized primarily for debugging and
     ///     tracking header validation processes.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(IHeaderValidator));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(IHeaderValidator));
 
     /// <summary>
     ///     Set of default header validators located via resource path lookup.
@@ -84,7 +85,7 @@ public class DefaultHeaderValidator : IHeaderValidator
                     $"Values not equal for header element '{headerName}', expected '{expectedValue}' but was 'null'");
             }
 
-            Log.Debug($"Validating header element: {headerName}='{expectedValue}' : OK");
+            Log.LogDebug($"Validating header element: {headerName}='{expectedValue}' : OK");
             validationContext.UpdateStatus(ValidationStatus.PASSED);
         }
         catch (ValidationException)
@@ -177,7 +178,7 @@ public class DefaultHeaderValidator : IHeaderValidator
                     $"Values not equal for header element '{headerName}', expected '{string.Join(", ", expectedValues)}' but was 'null'");
             }
 
-            Log.Debug($"Validating header element: {headerName}='{string.Join(", ", expectedValues)}' : OK");
+            Log.LogDebug("Validating header element: {HeaderName}='{Join}' : OK", headerName, string.Join(", ", expectedValues));
             validationContext.UpdateStatus(ValidationStatus.PASSED);
         }
         catch (ValidationException)
@@ -289,10 +290,8 @@ public class DefaultHeaderValidator : IHeaderValidator
         var validators = context.ReferenceResolver.ResolveAll<IHeaderValidator>();
 
         if (validators != null && validators.Count > 0)
-        {
             foreach (var validator in validators)
                 allValidators.TryAdd(validator.Key, validator.Value);
-        }
 
         return allValidators.Values
             .Where(validator => validator is not DefaultHeaderValidator)

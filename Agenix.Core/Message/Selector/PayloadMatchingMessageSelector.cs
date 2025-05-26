@@ -23,11 +23,11 @@ public class PayloadMatchingMessageSelector : AbstractMessageSelector
     {
         if (!selectKey.Equals(SelectorId))
             throw new AgenixSystemException("Invalid usage of payload matching message selector - " +
-                                          $"usage restricted to key '{SelectorId}' but was '{selectKey}'");
+                                            $"usage restricted to key '{SelectorId}' but was '{selectKey}'");
     }
 
     /// <summary>
-    /// Determines whether the given message satisfies the selection criteria.
+    ///     Determines whether the given message satisfies the selection criteria.
     /// </summary>
     /// <param name="message">The message to evaluate against the selection criteria.</param>
     /// <returns>A boolean value indicating whether the message matches the criteria.</returns>

@@ -1,10 +1,11 @@
 ﻿using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Spi;
 using Agenix.Api.Util;
 using Agenix.Api.Validation.Context;
 using Agenix.Core.Spi;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Api.Validation;
 
@@ -18,7 +19,7 @@ public interface IHeaderValidator
     ///     Logger instance used for capturing and managing logging information
     ///     within the IHeaderValidator interface and its implementations.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(IHeaderValidator));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(IHeaderValidator));
 
     static readonly ResourcePathTypeResolver TypeResolver = new(ResourcePath);
 
@@ -65,9 +66,9 @@ public interface IHeaderValidator
 
         foreach (var kvp in resolvedValidators) Validators[kvp.Key] = kvp.Value;
 
-        if (!Log.IsDebugEnabled) return Validators;
+        if (!Log.IsEnabled(LogLevel.Debug)) return Validators;
         {
-            foreach (var kvp in Validators) Log.Debug($"Found header validator '{kvp.Key}' as {kvp.Value.GetType()}");
+            foreach (var kvp in Validators) Log.LogDebug("Found header validator '{KvpKey}' as {Type}", kvp.Key, kvp.Value.GetType());
         }
         return Validators;
     }
@@ -88,7 +89,7 @@ public interface IHeaderValidator
         }
         catch (AgenixSystemException)
         {
-            Log.Warn($"Failed to resolve header validator from resource '{validator}'");
+            Log.LogWarning("Failed to resolve header validator from resource '{Validator}'", validator);
         }
 
         return Optional<IHeaderValidator>.Empty;

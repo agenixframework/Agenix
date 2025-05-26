@@ -1,10 +1,11 @@
 ﻿using Agenix.Api.Builder;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Util;
 using Agenix.Core.Spi;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Api.Variable;
 
@@ -16,18 +17,18 @@ public delegate void VariableExtractor(IMessage message, TestContext context);
 public interface IVariableExtractor : IMessageProcessor
 {
     /// <summary>
-    ///     A logger instance used for logging within the IVariableExtractor interface.
-    /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(IVariableExtractor));
-
-    /// <summary>
-    /// Represents the resource lookup path used within the variable extractor operations.
+    ///     Represents the resource lookup path used within the variable extractor operations.
     /// </summary>
     private const string ResourcePath = "Extension/agenix/variable/extractor";
 
     /// <summary>
-    /// A type resolver that dynamically identifies and locates custom variable extractors
-    /// using a specific resource path within the system.
+    ///     A logger instance used for logging within the IVariableExtractor interface.
+    /// </summary>
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(IVariableExtractor));
+
+    /// <summary>
+    ///     A type resolver that dynamically identifies and locates custom variable extractors
+    ///     using a specific resource path within the system.
     /// </summary>
     private static readonly ResourcePathTypeResolver TypeResolver = new(ResourcePath);
 
@@ -64,7 +65,9 @@ public interface IVariableExtractor : IMessageProcessor
         }
         catch (AgenixSystemException)
         {
-            Log.Warn($"Failed to resolve variable extractor from resource '{ResourcePath}/{extractor}'");
+            Log.LogWarning(
+                "Failed to resolve variable extractor from resource '{ExtensionAgenixVariableExtractor}/{Extractor}'",
+                ResourcePath, extractor);
         }
 
         return Optional<IBuilder<T, TB>>.Empty;
@@ -76,7 +79,7 @@ public interface IVariableExtractor : IMessageProcessor
     /// </summary>
     /// <typeparam name="T">The type of the IVariableExtractor implementation being built.</typeparam>
     /// <typeparam name="TB">The type of the builder itself, implementing IMessageProcessor.IBuilder.</typeparam>
-    public new interface IBuilder<out T, TB> : IMessageProcessor.IBuilder<T, TB>,IWithExpressions<TB>
+    public new interface IBuilder<out T, TB> : IMessageProcessor.IBuilder<T, TB>, IWithExpressions<TB>
         where T : IVariableExtractor
         where TB : IBuilder<T, TB>
     {

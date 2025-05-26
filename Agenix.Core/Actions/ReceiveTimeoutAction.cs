@@ -3,11 +3,11 @@ using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Messaging;
-using Agenix.Core.Endpoint;
 using Agenix.Core.Message;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Actions;
 
@@ -19,7 +19,7 @@ public class ReceiveTimeoutAction : AbstractTestAction
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(ReceiveTimeoutAction));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(ReceiveTimeoutAction));
 
     public ReceiveTimeoutAction(Builder builder) : base("receive-timeout", builder)
     {
@@ -72,16 +72,16 @@ public class ReceiveTimeoutAction : AbstractTestAction
 
             if (receivedMessage != null)
             {
-                if (Log.IsDebugEnabled) Log.Debug("Received message:\n" + receivedMessage.Print(context));
+                if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Received message:\n" + receivedMessage.Print(context));
 
                 throw new AgenixSystemException("Message timeout validation failed! " +
-                                              "Received message while waiting for timeout on destination");
+                                                "Received message while waiting for timeout on destination");
             }
         }
         catch (ActionTimeoutException e)
         {
-            Log.Info("No messages received on destination. Message timeout validation OK!");
-            Log.Info(e.Message);
+            Log.LogInformation("No messages received on destination. Message timeout validation OK!");
+            Log.LogInformation(e.Message);
         }
     }
 

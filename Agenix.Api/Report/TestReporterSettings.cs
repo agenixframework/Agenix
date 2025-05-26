@@ -36,7 +36,7 @@ public static class TestReporterSettings
         return bool.Parse(GetPropertyEnvOrDefault(ReportIgnoreErrorsProperty, ReportIgnoreErrorsEnv, bool.TrueString));
     }
 
-    /// Get target report directory where to create files.
+    /// Get the target report directory where to create files.
     /// @return the directory path for report generation.
     /// /
     public static string GetReportDirectory()
@@ -46,12 +46,12 @@ public static class TestReporterSettings
     }
 
     /// <summary>
-    ///     Gets in the respective order, a system property, an environment variable or the default
+    ///     Gets in the respective order, a system property, an environment variable, or the default
     /// </summary>
     /// <param name="prop">the name of the system property to get</param>
     /// <param name="env">the name of the environment variable to get</param>
     /// <param name="def">the default value</param>
-    /// <returns>first value encountered, which is not null. May return null, if default value is null.</returns>
+    /// <returns>the first value encountered, which is not null. May return null if the default value is null.</returns>
     private static string GetPropertyEnvOrDefault(string prop, string env, string def)
     {
         return ConfigurationManager.AppSettings[prop] ??

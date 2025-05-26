@@ -9,7 +9,7 @@ using static System.Double;
 namespace Agenix.Core.Validation.Matcher.Core;
 
 /// <summary>
-/// Represents a validation matcher that asserts a provided numeric value is less than a specified control value.
+///     Represents a validation matcher that asserts a provided numeric value is less than a specified control value.
 /// </summary>
 public class LowerThanValidationMatcher : IValidationMatcher
 {

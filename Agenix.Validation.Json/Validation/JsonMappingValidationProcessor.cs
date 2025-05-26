@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Agenix.Api.Context;
+﻿using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Validation;
-using Agenix.Core.Message;
 using Agenix.Core.Spi;
 using Agenix.Core.Util;
-using log4net;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace Agenix.Core.Validation.Json;
@@ -25,7 +22,7 @@ public abstract class JsonMappingValidationProcessor<T>(JsonSerializer jsonSeria
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(JsonMappingValidationProcessor<T>).Name);
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(JsonMappingValidationProcessor<T>).Name);
 
     private JsonSerializer _jsonSerializer = jsonSerializer;
 
@@ -74,11 +71,11 @@ public abstract class JsonMappingValidationProcessor<T>(JsonSerializer jsonSeria
     /// <exception cref="AgenixSystemException">Thrown when validation of the JSON payload fails.</exception>
     public new void Validate(IMessage message, TestContext context)
     {
-        Log.Debug("Start JSON object validation ...");
+        Log.LogDebug("Start JSON object validation ...");
 
         Validate(ReadJson(message), message.GetHeaders(), context);
 
-        Log.Debug("JSON object validation successful: All values OK");
+        Log.LogDebug("JSON object validation successful: All values OK");
     }
 
     /// <summary>

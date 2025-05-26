@@ -23,6 +23,11 @@ public class FinallySequence : Sequence
     /// /
     public new class Builder : AbstractTestContainerBuilder<FinallySequence, dynamic>, ITestAction
     {
+        public void Execute(TestContext context)
+        {
+            DoBuild().Execute(context);
+        }
+
         /// Fluent API action building entry method used in C# DSL.
         /// @return A new instance of the Builder class for constructing FinallySequence instances.
         /// /
@@ -34,11 +39,6 @@ public class FinallySequence : Sequence
         protected override FinallySequence DoBuild()
         {
             return new FinallySequence(this);
-        }
-
-        public void Execute(TestContext context)
-        {
-            DoBuild().Execute(context);
         }
     }
 }

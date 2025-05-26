@@ -1,8 +1,9 @@
 ﻿using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Util;
 using Agenix.Api.Validation.Context;
-using log4net;
+using Microsoft.Extensions.Logging;
 using IValidationContext = Agenix.Api.Validation.Context.IValidationContext;
 
 namespace Agenix.Api.Validation;
@@ -13,7 +14,7 @@ namespace Agenix.Api.Validation;
 /// </summary>
 public class MessageValidatorRegistry
 {
-    private static readonly ILog Log = LogManager.GetLogger(typeof(MessageValidatorRegistry));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(MessageValidatorRegistry));
 
     /// <summary>
     ///     The default POCO id in Spring application context
@@ -86,16 +87,16 @@ public class MessageValidatorRegistry
         {
             if (mustFindValidator)
             {
-                Log.Warn(
-                    $"Unable to find proper message validator. Message type is '{messageType}' and message payload is '{message.GetPayload<string>()}'");
+                Log.LogWarning(
+                    "Unable to find proper message validator. Message type is '{MessageType}' and message payload is '{GetPayload}'", messageType, message.GetPayload<string>());
                 throw new AgenixSystemException("Failed to find proper message validator for message");
             }
 
-            Log.Warn("Unable to find proper message validator - fallback to default text equals validation.");
+            Log.LogWarning("Unable to find proper message validator - fallback to default text equals validation.");
             matchingValidators.Add(_defaultTextEqualsMessageValidator);
         }
 
-        if (Log.IsDebugEnabled) Log.Debug($"Found {matchingValidators.Count} message validators for message");
+        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Found {MatchingValidatorsCount} message validators for message", matchingValidators.Count);
 
         return matchingValidators;
     }
@@ -160,8 +161,8 @@ public class MessageValidatorRegistry
     /// <param name="messageValidator">The message validator instance to be added to the registry.</param>
     public void AddMessageValidator(string name, IMessageValidator<IValidationContext> messageValidator)
     {
-        if (_messageValidators.ContainsKey(name) && Log.IsDebugEnabled)
-            Log.Debug($"Overwriting message validator '{name}' in registry");
+        if (_messageValidators.ContainsKey(name) && Log.IsEnabled(LogLevel.Debug))
+            Log.LogDebug("Overwriting message validator '{Name}' in registry", name);
 
         _messageValidators[name] = messageValidator;
     }
@@ -173,8 +174,8 @@ public class MessageValidatorRegistry
     /// <param name="schemaValidator">The schema validator instance to be added or updated in the registry.</param>
     public void AddSchemeValidator(string name, ISchemaValidator<ISchemaValidationContext> schemaValidator)
     {
-        if (_schemeValidators.ContainsKey(name) && Log.IsDebugEnabled)
-            Log.Debug($"Overwriting scheme validator '{name}' in registry");
+        if (_schemeValidators.ContainsKey(name) && Log.IsEnabled(LogLevel.Debug))
+            Log.LogDebug("Overwriting scheme validator '{Name}' in registry", name);
 
         _schemeValidators[name] = schemaValidator;
     }

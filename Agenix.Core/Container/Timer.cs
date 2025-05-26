@@ -3,8 +3,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Core.Util;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Container;
 
@@ -18,7 +19,7 @@ public class Timer(Timer.Builder builder)
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(Timer));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(Timer));
 
     private static readonly AtomicLong nextSerialNumber = new();
     private System.Timers.Timer _timer;
@@ -92,7 +93,7 @@ public class Timer(Timer.Builder builder)
                 {
                     if (!timerComplete)
                     {
-                        Log.Debug($"Timer complete: {RepeatCount} iterations reached");
+                        Log.LogDebug($"Timer complete: {RepeatCount} iterations reached");
                         StopTimer();
                         timerComplete = true;
                     }
@@ -104,7 +105,7 @@ public class Timer(Timer.Builder builder)
                 {
                     indexCount++;
                     UpdateIndexCountInTestContext(context, indexCount);
-                    Log.Debug($"Timer event fired #{indexCount} - executing nested actions");
+                    Log.LogDebug($"Timer event fired #{indexCount} - executing nested actions");
 
                     foreach (var actionBuilder in actions) ExecuteAction(actionBuilder.Build(), context);
                 }
@@ -132,7 +133,7 @@ public class Timer(Timer.Builder builder)
             }
             catch (ThreadInterruptedException e)
             {
-                Log.Warn("Interrupted while waiting for timer to complete", e);
+                Log.LogWarning(e, "Interrupted while waiting for timer to complete");
             }
 
         if (TimerException != null) throw TimerException;
@@ -155,7 +156,7 @@ public class Timer(Timer.Builder builder)
             timerException = coreSystemException;
         else
             timerException = new AgenixSystemException(e.Message, e);
-        Log.Error($"Timer stopped as a result of nested action error ({e.Message})");
+        Log.LogError("Timer stopped as a result of nested action error ({EMessage})", e.Message);
         StopTimer();
 
         if (Fork) context.AddException(TimerException);

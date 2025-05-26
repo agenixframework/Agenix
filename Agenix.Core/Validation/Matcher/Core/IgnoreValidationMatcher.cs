@@ -6,9 +6,9 @@ using Agenix.Api.Validation.Matcher;
 namespace Agenix.Core.Validation.Matcher.Core;
 
 /// <summary>
-/// Represents a validation matcher that skips validation for a specified field.
-/// This matcher does not enforce any validation logic and effectively ignores
-/// the provided input data for the given field during the validation process.
+///     Represents a validation matcher that skips validation for a specified field.
+///     This matcher does not enforce any validation logic and effectively ignores
+///     the provided input data for the given field during the validation process.
 /// </summary>
 public class IgnoreValidationMatcher : IValidationMatcher
 {

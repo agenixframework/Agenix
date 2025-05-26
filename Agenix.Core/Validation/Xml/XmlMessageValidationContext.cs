@@ -5,8 +5,8 @@ using Agenix.Api.Validation.Xml;
 namespace Agenix.Core.Validation.Xml;
 
 /// <summary>
-/// Represents an XML validation context that encapsulates validation-related
-/// details required for the validation of XML messages.
+///     Represents an XML validation context that encapsulates validation-related
+///     details required for the validation of XML messages.
 /// </summary>
 public class XmlMessageValidationContext : DefaultMessageValidationContext
 {
@@ -20,7 +20,7 @@ public class XmlMessageValidationContext : DefaultMessageValidationContext
     private readonly IMessageValidationContext _delegateContext;
 
     /// <summary>
-    /// Contains namespace definitions used for resolving namespaces during the validation of XML messages.
+    ///     Contains namespace definitions used for resolving namespaces during the validation of XML messages.
     /// </summary>
     private readonly Dictionary<string, string> _namespaces;
 
@@ -34,7 +34,7 @@ public class XmlMessageValidationContext : DefaultMessageValidationContext
     /// Represents an XML validation context that encapsulates validation-related
     /// details required for the validation of XML messages.
     /// /
-    public XmlMessageValidationContext(XmlValidationContextBuilder<XmlMessageValidationContext, Builder> builder) 
+    public XmlMessageValidationContext(XmlValidationContextBuilder<XmlMessageValidationContext, Builder> builder)
         : base(new DefaultMessageValidationContext.Builder()
             .SchemaValidation(builder._schemaValidation)
             .Schema(builder._schema)
@@ -66,9 +66,9 @@ public class XmlMessageValidationContext : DefaultMessageValidationContext
     }
 
     /// <summary>
-    /// Provides an implementation for creating and customizing XML validation contexts
-    /// through a fluent API. This builder simplifies the process of constructing
-    /// and adapting message validation contexts for XML schemas and XPath checks.
+    ///     Provides an implementation for creating and customizing XML validation contexts
+    ///     through a fluent API. This builder simplifies the process of constructing
+    ///     and adapting message validation contexts for XML schemas and XPath checks.
     /// </summary>
     public new sealed class Builder : XmlValidationContextBuilder<XmlMessageValidationContext, Builder>
     {
@@ -81,26 +81,29 @@ public class XmlMessageValidationContext : DefaultMessageValidationContext
         }
 
         /// <summary>
-        /// Adapts the provided message validation context builder into an XML-specific message validation context builder.
+        ///     Adapts the provided message validation context builder into an XML-specific message validation context builder.
         /// </summary>
         /// <param name="messageValidationContext">
-        /// The builder of the source message validation context to be adapted.
+        ///     The builder of the source message validation context to be adapted.
         /// </param>
         /// <returns>
-        /// A new instance of the builder for the XML message validation context, incorporating properties from the given context.
+        ///     A new instance of the builder for the XML message validation context, incorporating properties from the given
+        ///     context.
         /// </returns>
         public static Builder Adapt(
-            IMessageValidationContext.Builder<IMessageValidationContext, DefaultMessageValidationContext.Builder> messageValidationContext)
+            IMessageValidationContext.Builder<IMessageValidationContext, DefaultMessageValidationContext.Builder>
+                messageValidationContext)
         {
             return Adapt(messageValidationContext.Build());
         }
 
         /// Adapts an existing message validation context to an XML message validation context, preserving all relevant properties.
         /// <param name="messageValidationContext">
-        /// The source message validation context to be adapted into an XML message validation context.
+        ///     The source message validation context to be adapted into an XML message validation context.
         /// </param>
         /// <returns>
-        /// A new instance of the XML message validation context that incorporates all relevant values from the provided message validation context.
+        ///     A new instance of the XML message validation context that incorporates all relevant values from the provided
+        ///     message validation context.
         /// </returns>
         public static Builder Adapt(IMessageValidationContext messageValidationContext)
         {
@@ -151,9 +154,9 @@ public class XmlMessageValidationContext : DefaultMessageValidationContext
     }
 
     /// <summary>
-    /// Provides a base fluent builder for constructing XML validation contexts.
-    /// This builder simplifies the process of configuring namespace mappings and delegates
-    /// essential validation behaviors to a customizable context.
+    ///     Provides a base fluent builder for constructing XML validation contexts.
+    ///     This builder simplifies the process of configuring namespace mappings and delegates
+    ///     essential validation behaviors to a customizable context.
     /// </summary>
     public abstract class XmlValidationContextBuilder<T, S> : IMessageValidationContext.Builder<T, S>,
         IXmlNamespaceAware

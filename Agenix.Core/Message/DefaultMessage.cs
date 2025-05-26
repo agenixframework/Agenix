@@ -124,7 +124,7 @@ public class DefaultMessage : IMessage
     {
         if (headerName.Equals(MessageHeaders.Id))
             throw new AgenixSystemException("Not allowed to set reserved message header from message: " +
-                                          MessageHeaders.Id);
+                                            MessageHeaders.Id);
         _headers[headerName] = headerValue;
         return this;
     }
@@ -133,7 +133,7 @@ public class DefaultMessage : IMessage
     {
         if (headerName.Equals(MessageHeaders.Id))
             throw new AgenixSystemException("Not allowed to remove reserved message header from message: " +
-                                          MessageHeaders.Id);
+                                            MessageHeaders.Id);
 
         _headers.Remove(headerName);
     }

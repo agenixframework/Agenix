@@ -4,8 +4,9 @@ using System.Threading;
 using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Core.Util;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Actions;
 
@@ -17,7 +18,7 @@ public class SleepAction(SleepAction.Builder builder) : AbstractTestAction("slee
 {
     /// Logger for SleepAction.
     /// /
-    private static readonly ILog Log = LogManager.GetLogger(typeof(SleepAction));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(SleepAction));
 
     public string Time { get; } = builder.time;
 
@@ -35,35 +36,34 @@ public class SleepAction(SleepAction.Builder builder) : AbstractTestAction("slee
         {
             TimeSpan parsedDuration;
             if (duration.IndexOf('.', StringComparison.Ordinal) > 0)
-            {
                 parsedDuration = TimeUnit switch
                 {
-                    ScheduledExecutor.TimeUnit.MILLISECONDS => TimeSpan.FromMilliseconds(Math.Round(double.Parse(duration, CultureInfo.InvariantCulture
+                    ScheduledExecutor.TimeUnit.MILLISECONDS => TimeSpan.FromMilliseconds(Math.Round(double.Parse(
+                        duration, CultureInfo.InvariantCulture
                     ))),
-                    ScheduledExecutor.TimeUnit.SECONDS => TimeSpan.FromSeconds(Math.Round(double.Parse(duration, CultureInfo.InvariantCulture))),
-                    ScheduledExecutor.TimeUnit.MINUTES => TimeSpan.FromMinutes(Math.Round(double.Parse(duration, CultureInfo.InvariantCulture))),
-                    _ => throw new AgenixSystemException("Unsupported time expression for sleep action - please use one of milliseconds, seconds, minutes")
+                    ScheduledExecutor.TimeUnit.SECONDS => TimeSpan.FromSeconds(
+                        Math.Round(double.Parse(duration, CultureInfo.InvariantCulture))),
+                    ScheduledExecutor.TimeUnit.MINUTES => TimeSpan.FromMinutes(
+                        Math.Round(double.Parse(duration, CultureInfo.InvariantCulture))),
+                    _ => throw new AgenixSystemException(
+                        "Unsupported time expression for sleep action - please use one of milliseconds, seconds, minutes")
                 };
-            }
             else
-            {
                 parsedDuration = TimeSpan.FromMilliseconds(
                     ConvertToMilliseconds(long.Parse(duration), TimeUnit));
-            }
 
-            Log.Info($"Sleeping {duration} {TimeUnit}");
+            Log.LogInformation($"Sleeping {duration} {TimeUnit}");
 
             Thread.Sleep(parsedDuration);
 
-            Log.Info($"Returning after {duration} {TimeUnit}");
+            Log.LogInformation($"Returning after {duration} {TimeUnit}");
         }
         catch (ThreadInterruptedException e)
         {
             throw new AgenixSystemException(e.Message);
         }
-
     }
-    
+
     private static long ConvertToMilliseconds(long value, ScheduledExecutor.TimeUnit sourceUnit)
     {
         return sourceUnit switch
@@ -75,7 +75,6 @@ public class SleepAction(SleepAction.Builder builder) : AbstractTestAction("slee
         };
     }
 
-    
 
     public sealed class Builder : AbstractTestActionBuilder<ITestAction, dynamic>
     {

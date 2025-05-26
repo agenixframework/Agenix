@@ -1,11 +1,11 @@
 ﻿using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
-using Agenix.Api.TypeResolution;
 using Agenix.Api.Util;
 using Agenix.Api.Validation.Context;
 using Agenix.Core.Spi;
-using log4net;
+using Microsoft.Extensions.Logging;
 using ITypeResolver = Agenix.Api.Spi.ITypeResolver;
 
 namespace Agenix.Api.Validation;
@@ -17,17 +17,17 @@ namespace Agenix.Api.Validation;
 public interface IMessageValidator<T> where T : IValidationContext
 {
     /// <summary>
-    ///     Logger.
-    /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(IMessageValidator<T>).Name);
-
-    /// <summary>
-    /// Path to the message validator resource lookup.
+    ///     Path to the message validator resource lookup.
     /// </summary>
     private const string ResourcePath = "Extension/agenix/message/validator";
 
     /// <summary>
-    /// Resolves types using a resource path lookup mechanism for identifying custom message validators.
+    ///     Logger.
+    /// </summary>
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(IMessageValidator<T>).Name);
+
+    /// <summary>
+    ///     Resolves types using a resource path lookup mechanism for identifying custom message validators.
     /// </summary>
     private static readonly ResourcePathTypeResolver TypeResolver = new(ResourcePath);
 
@@ -60,11 +60,13 @@ public interface IMessageValidator<T> where T : IValidationContext
     {
         var validators = new Dictionary<string, IMessageValidator<IValidationContext>>
         (
-            TypeResolver.ResolveAll<IMessageValidator<IValidationContext>>("", ITypeResolver.DEFAULT_TYPE_PROPERTY, null)
+            TypeResolver.ResolveAll<IMessageValidator<IValidationContext>>("", ITypeResolver.DEFAULT_TYPE_PROPERTY,
+                null)
         );
 
-        if (!Log.IsDebugEnabled) return validators;
-        foreach (var kvp in validators) Log.Debug($"Found message validator '{kvp.Key}' as {kvp.Value.GetType().Name}");
+        if (!Log.IsEnabled(LogLevel.Debug)) return validators;
+        foreach (var kvp in validators)
+            Log.LogDebug("Found message validator '{KvpKey}' as {Name}", kvp.Key, kvp.Value.GetType().Name);
 
         return validators;
     }
@@ -81,11 +83,12 @@ public interface IMessageValidator<T> where T : IValidationContext
     {
         try
         {
-            return Optional<IMessageValidator<IValidationContext>>.Of(TypeResolver.Resolve<IMessageValidator<IValidationContext>>(validator));
+            return Optional<IMessageValidator<IValidationContext>>.Of(
+                TypeResolver.Resolve<IMessageValidator<IValidationContext>>(validator));
         }
         catch (AgenixSystemException)
         {
-            Log.Warn($"Failed to resolve validator from resource '{validator}'");
+            Log.LogWarning($"Failed to resolve validator from resource '{validator}'");
         }
 
         return Optional<IMessageValidator<IValidationContext>>.Empty;

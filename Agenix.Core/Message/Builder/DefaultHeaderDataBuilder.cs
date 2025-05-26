@@ -2,12 +2,11 @@ using System.Collections.Generic;
 using Agenix.Api.Context;
 using Agenix.Api.Message;
 using Agenix.Api.Util;
-using Agenix.Core.Util;
 
 namespace Agenix.Core.Message.Builder;
 
 /// <summary>
-/// Provides functionality to build and manage message header data.
+///     Provides functionality to build and manage message header data.
 /// </summary>
 public class DefaultHeaderDataBuilder : IMessageHeaderDataBuilder
 {

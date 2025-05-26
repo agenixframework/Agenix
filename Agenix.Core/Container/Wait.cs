@@ -5,9 +5,10 @@ using Agenix.Api;
 using Agenix.Api.Condition;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Core.Actions;
 using Agenix.Core.Condition;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Container;
 
@@ -21,7 +22,7 @@ public class Wait(Wait.Builder<ICondition> builder)
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(Wait));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(Wait));
 
     public string Time { get; } = builder.time;
 
@@ -48,7 +49,7 @@ public class Wait(Wait.Builder<ICondition> builder)
         {
             timeLeft -= intervalMs;
 
-            if (Log.IsDebugEnabled) Log.Debug($"Waiting for condition {Condition.GetName()}");
+            if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug($"Waiting for condition {Condition.GetName()}");
 
             var task = Task.Run(callable);
             var checkStartTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
@@ -60,12 +61,12 @@ public class Wait(Wait.Builder<ICondition> builder)
             catch (AggregateException e) when (e.InnerException is TimeoutException ||
                                                e.InnerException is AggregateException)
             {
-                Log.Warn($"Condition check interrupted with '{e.InnerException.GetType().Name}'");
+                Log.LogWarning($"Condition check interrupted with '{e.InnerException.GetType().Name}'");
             }
 
             if (conditionSatisfied == true)
             {
-                Log.Info(Condition.GetSuccessMessage(context));
+                Log.LogInformation(Condition.GetSuccessMessage(context));
                 return;
             }
 
@@ -78,7 +79,7 @@ public class Wait(Wait.Builder<ICondition> builder)
                 }
                 catch (ThreadInterruptedException e)
                 {
-                    Log.Warn("Interrupted during wait!", e);
+                    Log.LogWarning(e, "Interrupted during wait!");
                 }
         }
 

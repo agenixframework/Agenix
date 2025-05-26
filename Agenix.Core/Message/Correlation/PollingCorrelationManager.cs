@@ -2,22 +2,23 @@
 using Agenix.Api.Context;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Exceptions;
-using Agenix.Core.Endpoint;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Message.Correlation;
 
 /// <summary>
-///     Extension of default correlation manager adds polling mechanism for find operation on object store. In case object
-///     is not found in store retry is automatically performed. Polling interval and overall retry timeout is usually
+///     Extension of the default correlation manager adds a polling mechanism for find operation on the object store. In
+///     case object
+///     is not found in store, retry is automatically performed. Polling interval and overall retry timeout is usually
 ///     defined in endpoint configuration.
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public class PollingCorrelationManager<T> : DefaultCorrelationManager<T>
 {
-    private static readonly ILog Log = LogManager.GetLogger("PollingCorrelationManager");
+    private static readonly ILogger Log = LogManager.GetLogger("PollingCorrelationManager");
 
-    private static readonly ILog RetryLog = LogManager.GetLogger("agenix.RetryLogger");
+    private static readonly ILogger RetryLog = LogManager.GetLogger("agenix.RetryLogger");
     private readonly IPollableEndpointConfiguration _endpointConfiguration;
     private readonly string _retryLogMessage;
 
@@ -51,7 +52,7 @@ public class PollingCorrelationManager<T> : DefaultCorrelationManager<T>
     /// <returns>The correlation key.</returns>
     public override string GetCorrelationKey(string correlationKeyName, TestContext context)
     {
-        if (Log.IsDebugEnabled) Log.Debug($"Get correlation key for '{correlationKeyName}'");
+        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug($"Get correlation key for '{correlationKeyName}'");
 
         string correlationKey = null;
         if (context.GetVariables().ContainsKey(correlationKeyName))
@@ -63,8 +64,8 @@ public class PollingCorrelationManager<T> : DefaultCorrelationManager<T>
         {
             timeLeft -= pollingInterval;
 
-            if (RetryLog.IsDebugEnabled)
-                RetryLog.Debug(
+            if (RetryLog.IsEnabled(LogLevel.Debug))
+                RetryLog.LogDebug(
                     $"Correlation key not available yet - retrying in {(timeLeft > 0 ? pollingInterval : pollingInterval + timeLeft)}ms");
 
             try
@@ -73,7 +74,7 @@ public class PollingCorrelationManager<T> : DefaultCorrelationManager<T>
             }
             catch (ThreadInterruptedException e)
             {
-                RetryLog.Warn("Thread interrupted while waiting for retry", e);
+                RetryLog.LogWarning(e, "Thread interrupted while waiting for retry");
             }
 
             if (context.GetVariables().ContainsKey(correlationKeyName))
@@ -103,8 +104,8 @@ public class PollingCorrelationManager<T> : DefaultCorrelationManager<T>
         {
             timeLeft -= pollingInterval;
 
-            if (RetryLog.IsDebugEnabled)
-                RetryLog.Debug(
+            if (RetryLog.IsEnabled(LogLevel.Debug))
+                RetryLog.LogDebug(
                     $"{_retryLogMessage} - retrying in {(timeLeft > 0 ? pollingInterval : pollingInterval + timeLeft)}ms");
 
             try
@@ -113,7 +114,7 @@ public class PollingCorrelationManager<T> : DefaultCorrelationManager<T>
             }
             catch (ThreadInterruptedException e)
             {
-                RetryLog.Warn("Thread interrupted while waiting for retry", e);
+                RetryLog.LogWarning(e, "Thread interrupted while waiting for retry");
             }
 
             stored = base.Find(correlationKey, timeLeft);

@@ -10,7 +10,7 @@ namespace Agenix.Core.NUnitTestProject.Util;
 
 public class DefaultTypeConverterTest
 {
-    private readonly DefaultTypeConverter _converter = DefaultTypeConverter.INSTANCE;
+    private readonly DefaultTypeConverter _converter = DefaultTypeConverter.Instance;
 
     [Test]
     public void TestConvertIfNecessary()

@@ -1,13 +1,14 @@
 ﻿using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
 using Agenix.Core.Util;
 using Agenix.Core.Validation.Json;
 using Agenix.Validation.Json.Validation.Schema;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Validation.Json.Validation;
 
@@ -16,7 +17,8 @@ namespace Agenix.Validation.Json.Validation;
 ///     differ as specified in JSON protocol. Tester defines an expected control JSON text with optional ignored entries.
 ///     JSONArray as well as nested JSONObjects are supported, too.
 ///     Validator offers two different modes to operate. By default, strict mode is set and the validator will also check
-///     the exact number of control object fields to match. No additional fields in the received JSON data structure will be
+///     the exact number of control object fields to match. No additional fields in the received JSON data structure will
+///     be
 ///     accepted. In soft mode validator allows additional fields in received JSON data structure, so the control JSON
 ///     object can be a partial subset.
 /// </summary>
@@ -26,7 +28,7 @@ public class JsonTextMessageValidator : AbstractMessageValidator<IMessageValidat
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(JsonTextMessageValidator));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(JsonTextMessageValidator));
 
     /// <summary>
     ///     Default is a static readonly provider that offers a default instance
@@ -36,16 +38,17 @@ public class JsonTextMessageValidator : AbstractMessageValidator<IMessageValidat
     private IProvider _elementValidatorProvider = new JsonElementValidator.DefaultProvider();
 
     /// <summary>
+    ///     Instance of the <see cref="JsonSchemaValidation" /> responsible for validating JSON structures against a defined
+    ///     schema.
+    /// </summary>
+    private JsonSchemaValidation _jsonSchemaValidation = new();
+
+    /// <summary>
     ///     Indicates whether the JSON message validation should be performed in strict mode.
     ///     This flag uses the CoreSettings.JsonMessageValidationStrict property to determine
     ///     the strictness of validation for JSON messages within the context of JsonTextMessageValidator.
     /// </summary>
     private bool _strict = AgenixSettings.JsonMessageValidationStrict();
-
-    /// <summary>
-    /// Instance of the <see cref="JsonSchemaValidation"/> responsible for validating JSON structures against a defined schema.
-    /// </summary>
-    private JsonSchemaValidation _jsonSchemaValidation = new();
 
     /// Determines if this validator supports the specified message type and message.
     /// <param name="messageType">The type of the message to validate.</param>
@@ -61,18 +64,17 @@ public class JsonTextMessageValidator : AbstractMessageValidator<IMessageValidat
     public override void ValidateMessage(IMessage receivedMessage, IMessage controlMessage, TestContext context,
         IMessageValidationContext validationContext)
     {
-        Log.Debug("Start JSON message validation ...");
-        
-        if (validationContext.IsSchemaValidationEnabled) {
+        Log.LogDebug("Start JSON message validation ...");
+
+        if (validationContext.IsSchemaValidationEnabled)
             _jsonSchemaValidation.Validate(receivedMessage, context, validationContext);
-        }
 
         var receivedJsonText = receivedMessage.GetPayload<string>();
         var controlJsonText = context.ReplaceDynamicContentInString(controlMessage.GetPayload<string>());
 
         if (string.IsNullOrWhiteSpace(controlJsonText))
         {
-            Log.Debug("Skip message payload validation as no control message was defined");
+            Log.LogDebug("Skip message payload validation as no control message was defined");
             return;
         }
 
@@ -83,7 +85,7 @@ public class JsonTextMessageValidator : AbstractMessageValidator<IMessageValidat
         _elementValidatorProvider.GetValidator(_strict, context, validationContext)
             .Validate(JsonElementValidatorItem<object>.ParseJson(receivedJsonText, controlJsonText));
 
-        Log.Debug("JSON message validation successful: All values OK");
+        Log.LogDebug("JSON message validation successful: All values OK");
     }
 
     /// Finds and returns the appropriate validation context from the provided list of validation contexts.
@@ -92,10 +94,9 @@ public class JsonTextMessageValidator : AbstractMessageValidator<IMessageValidat
     public override IMessageValidationContext FindValidationContext(List<IValidationContext> validationContexts)
     {
         if (validationContexts
-                .FirstOrDefault(x => x is JsonMessageValidationContext) is IMessageValidationContext jsonMessageValidationContext)
-        {
+                .FirstOrDefault(x => x is JsonMessageValidationContext) is IMessageValidationContext
+            jsonMessageValidationContext)
             return jsonMessageValidationContext;
-        }
 
         var defaultMessageValidationContext = validationContexts
                 .FirstOrDefault(x => x.GetType() == typeof(DefaultMessageValidationContext))
@@ -103,7 +104,7 @@ public class JsonTextMessageValidator : AbstractMessageValidator<IMessageValidat
 
         return defaultMessageValidationContext ?? base.FindValidationContext(validationContexts);
     }
-    
+
     /// Gets the type of the required validation context for this validator.
     protected override Type GetRequiredValidationContextType()
     {
@@ -150,7 +151,7 @@ public class JsonTextMessageValidator : AbstractMessageValidator<IMessageValidat
     }
 
     /// <summary>
-    /// Sets the JSON schema validation instance for this validator.
+    ///     Sets the JSON schema validation instance for this validator.
     /// </summary>
     /// <param name="jsonSchemaValidation">The JSON schema validation instance to set.</param>
     public void SetJsonSchemaValidation(JsonSchemaValidation jsonSchemaValidation)

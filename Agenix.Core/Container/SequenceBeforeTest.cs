@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using Agenix.Api.Container;
 using Agenix.Api.Context;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Container;
 
@@ -14,7 +15,7 @@ public class SequenceBeforeTest : AbstractTestBoundaryActionContainer, IBeforeTe
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(SequenceAfterTest));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(SequenceAfterTest));
 
     /// Executes a sequence of actions before a test is run.
     /// <param name="context">
@@ -25,12 +26,12 @@ public class SequenceBeforeTest : AbstractTestBoundaryActionContainer, IBeforeTe
     {
         if (actions == null || actions.Count == 0) return;
 
-        Log.Info("Entering before test block");
+        Log.LogInformation("Entering before test block");
 
-        if (Log.IsDebugEnabled)
+        if (Log.IsEnabled(LogLevel.Debug))
         {
-            Log.Debug("Executing " + actions.Count + " actions before test");
-            Log.Debug("");
+            Log.LogDebug("Executing " + actions.Count + " actions before test");
+            Log.LogDebug("");
         }
 
         foreach (var action in actions.Select(actionBuilder => actionBuilder.Build())) action.Execute(context);

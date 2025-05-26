@@ -1,7 +1,8 @@
 ﻿using System;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Container;
 
@@ -14,14 +15,14 @@ public class Catch(Catch.Builder builder)
 {
     /// Static logger instance for the Catch class.
     /// /
-    private static readonly ILog Log = LogManager.GetLogger(typeof(Catch));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(Catch));
 
     /// The type of exception that the Catch container is designed to catch.
     public string Exception { get; } = builder._exception;
 
     public override void DoExecute(TestContext context)
     {
-        if (Log.IsDebugEnabled) Log.Debug("Catch container catching exceptions of type " + Exception);
+        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Catch container catching exceptions of type " + Exception);
 
         foreach (var actionBuilder in actions)
             try
@@ -32,7 +33,7 @@ public class Catch(Catch.Builder builder)
             {
                 if (Exception != null && Exception.Equals(e.GetType().Name))
                 {
-                    Log.Info("Caught exception " + e.GetType() + ": " + e.Message);
+                    Log.LogInformation("Caught exception " + e.GetType() + ": " + e.Message);
                     continue;
                 }
 

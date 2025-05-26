@@ -1,10 +1,11 @@
 using System.Text;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Validation.Binary.Validation;
 
@@ -21,7 +22,7 @@ public class BinaryMessageValidator : DefaultMessageValidator
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(BinaryMessageValidator));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(BinaryMessageValidator));
 
     /// <summary>
     ///     Validates a received message against a control message using the provided validation context and test context.
@@ -35,7 +36,7 @@ public class BinaryMessageValidator : DefaultMessageValidator
     {
         using var receivedInput = receivedMessage.GetPayload<Stream>();
         using var controlInput = controlMessage.GetPayload<Stream>();
-        Log.Debug("Start binary message validation");
+        Log.LogDebug("Start binary message validation");
 
         var receivedBuffer = new byte[BufferSize];
         var controlBuffer = new byte[BufferSize];
@@ -51,7 +52,7 @@ public class BinaryMessageValidator : DefaultMessageValidator
             switch (n1)
             {
                 case -1 when n2 == -1:
-                    Log.Debug("Binary message validation successful: All values OK");
+                    Log.LogDebug("Binary message validation successful: All values OK");
                     return;
                 case -1:
                     throw new ValidationException("Received input stream reached end-of-stream - " +
@@ -78,7 +79,8 @@ public class BinaryMessageValidator : DefaultMessageValidator
                 var receivedStr = Encoding.UTF8.GetString(receivedResult.ToArray());
                 var controlStr = Encoding.UTF8.GetString(controlResult.ToArray());
 
-                Log.Info($"Received input stream is not equal - expected '{controlStr}', but was '{receivedStr}'");
+                Log.LogInformation(
+                    $"Received input stream is not equal - expected '{controlStr}', but was '{receivedStr}'");
 
                 var expectedPart = controlStr[Math.Max(0, controlStr.Length - Math.Min(25, controlStr.Length))..];
                 var actualPart = receivedStr[Math.Max(0, receivedStr.Length - Math.Min(25, receivedStr.Length))..];

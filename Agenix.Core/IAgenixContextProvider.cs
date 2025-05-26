@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Util;
-using Agenix.Core.Util;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core;
 
@@ -23,11 +23,11 @@ public delegate AgenixContext AgenixContextProvider();
 public interface IAgenixContextProvider
 {
     /// <summary>
-    ///     Log is a private static readonly instance of the log4net.ILog interface used for logging
+    ///     Log is a private static readonly instance of the log4net.ILogger interface used for logging
     ///     messages within the IAgenixContextProvider. It handles logging such as debug information
     ///     and warnings related to the context creation and provider lookup process.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(IAgenixContextProvider));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(IAgenixContextProvider));
 
     /// <summary>
     ///     Create Agenix context with this provider.
@@ -47,19 +47,19 @@ public interface IAgenixContextProvider
         switch (provider.Count)
         {
             case 0:
-                Log.Debug("Using default Agenix context provider");
+                Log.LogDebug("Using default Agenix context provider");
                 return new DefaultAgenixContextProvider();
             case > 1:
-                Log.Warn($"Found {provider.Count} Agenix context provider implementations. Please choose one of them.");
+                Log.LogWarning($"Found {provider.Count} Agenix context provider implementations. Please choose one of them.");
                 break;
         }
 
-        if (Log.IsDebugEnabled)
+        if (Log.IsEnabled(LogLevel.Debug))
             foreach (var entry in provider)
-                Log.Debug($"Found Agenix context provider '{entry.Key}' as {entry.Value.GetType()}");
+                Log.LogDebug($"Found Agenix context provider '{entry.Key}' as {entry.Value.GetType()}");
 
         var contextProvider = provider.Values.First();
-        Log.Debug($"Using Agenix context provider '{provider.Keys.First()}' as {contextProvider}");
+        Log.LogDebug($"Using Agenix context provider '{provider.Keys.First()}' as {contextProvider}");
         return contextProvider;
     }
 
@@ -80,7 +80,7 @@ public interface IAgenixContextProvider
         }
         catch (AgenixSystemException)
         {
-            Log.Warn($"Failed to resolve Agenix context provider from resource '{name}'");
+            Log.LogWarning($"Failed to resolve Agenix context provider from resource '{name}'");
         }
 
         return Optional<IAgenixContextProvider>.Empty;

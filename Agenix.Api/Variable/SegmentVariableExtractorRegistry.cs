@@ -1,9 +1,10 @@
 using System.Collections;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Util;
 using Agenix.Core.Spi;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Api.Variable;
 
@@ -22,7 +23,7 @@ public class SegmentVariableExtractorRegistry
     /// <summary>
     ///     Provides a logger instance for the SegmentVariableExtractorRegistry class.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(SegmentVariableExtractorRegistry));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(SegmentVariableExtractorRegistry));
 
     /// <summary>
     ///     Type resolver used to locate and instantiate custom segment variable extractors
@@ -67,7 +68,7 @@ public class SegmentVariableExtractorRegistry
         }
         catch (AgenixSystemException e)
         {
-            Log.Warn($"Failed to resolve segment variable extractor from resource '{ResourcePath}'");
+            Log.LogWarning($"Failed to resolve segment variable extractor from resource '{ResourcePath}'");
         }
 
         return new List<ISegmentVariableExtractor>();

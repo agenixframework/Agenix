@@ -20,10 +20,20 @@ public class ApplyTestBehaviorAction(ApplyTestBehaviorAction.Builder builder)
     /// <summary>
     ///     A builder class for creating instances of ApplyTestBehaviorAction.
     /// </summary>
-    public class Builder : AbstractTestActionBuilder<ApplyTestBehaviorAction, Builder>, ITestActionBuilder<ApplyTestBehaviorAction>
+    public class Builder : AbstractTestActionBuilder<ApplyTestBehaviorAction, Builder>,
+        ITestActionBuilder<ApplyTestBehaviorAction>
     {
         internal ITestBehavior _behavior;
         internal ITestActionRunner _runner;
+
+        /// <summary>
+        ///     Constructs an instance of <see cref="ApplyTestBehaviorAction" /> using the current state of the builder.
+        /// </summary>
+        /// <returns>An instance of <see cref="ApplyTestBehaviorAction" />.</returns>
+        public override ApplyTestBehaviorAction Build()
+        {
+            return new ApplyTestBehaviorAction(this);
+        }
 
         /// <summary>
         ///     Creates a new instance of the Builder.
@@ -85,15 +95,6 @@ public class ApplyTestBehaviorAction(ApplyTestBehaviorAction.Builder builder)
         {
             _runner = runner;
             return this;
-        }
-
-        /// <summary>
-        ///     Constructs an instance of <see cref="ApplyTestBehaviorAction" /> using the current state of the builder.
-        /// </summary>
-        /// <returns>An instance of <see cref="ApplyTestBehaviorAction" />.</returns>
-        public override ApplyTestBehaviorAction Build()
-        {
-            return new ApplyTestBehaviorAction(this);
         }
     }
 }

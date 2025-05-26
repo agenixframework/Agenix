@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Agenix.Api;
 using Agenix.Api.Context;
-using log4net;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Actions;
 
@@ -13,7 +14,7 @@ public class CreateVariablesAction : AbstractTestAction
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(CreateVariablesAction));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(CreateVariablesAction));
 
     private CreateVariablesAction(Builder builder) : base("create-variables", builder)
     {
@@ -37,10 +38,10 @@ public class CreateVariablesAction : AbstractTestAction
             var value = entry.Value;
 
 
-            //check if value is variable or function (and resolve it if yes)
+            //check if the value is variable or function (and resolve it if yes)
             value = context.ReplaceDynamicContentInString(value);
 
-            Log.Info("Setting variable: " + key + " to value: " + value);
+            Log.LogInformation("Setting variable: " + key + " to value: " + value);
 
             context.SetVariable(key, value);
         }

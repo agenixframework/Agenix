@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Core.Actions;
-using log4net;
+using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 using TestContext = Agenix.Api.Context.TestContext;
 using NUnit.Framework.Legacy;
@@ -17,7 +18,7 @@ public class AbstractAsyncTestActionTest : AbstractNUnitSetUp
     /// <summary>
     ///     Logger.
     /// </summary>
-    private static readonly ILog Log = LogManager.GetLogger(typeof(AbstractAsyncTestActionTest));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(AbstractAsyncTestActionTest));
 
     [Test]
     public async Task TestOnSuccess()
@@ -82,7 +83,7 @@ public class AbstractAsyncTestActionTest : AbstractNUnitSetUp
     {
         public override Task DoExecuteAsync(TestContext context)
         {
-            return Task.Run(() => { Log.Info("Success!"); });
+            return Task.Run(() => { Log.LogInformation("Success!"); });
         }
 
         public override void OnSuccess(TestContext context)

@@ -5,9 +5,10 @@ using System.Linq;
 using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Core.Container;
 using Agenix.Core.Util;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core;
 
@@ -44,7 +45,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
             }
             catch (Exception e)
             {
-                _log.Warn("After test failed with errors", e);
+                Log.LogWarning(e, "After test failed with errors");
             }
     }
 
@@ -187,7 +188,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
 
         try
         {
-            _log.Debug("Initializing test case");
+            Log.LogDebug("Initializing test case");
 
             DebugVariables("Global", context);
             InitializeTestParameters(_parameters, context);
@@ -252,7 +253,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     {
         if (_finalActions.Count != 0)
         {
-            _log.Debug("Entering finally block in test case");
+            Log.LogDebug("Entering finally block in test case");
 
             /* walk through the finally-chain and execute the actions in there */
             foreach (var action in _finalActions.Select(actionBuilder => actionBuilder.Build()))
@@ -345,9 +346,9 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     private static void DebugVariables(string scope, TestContext context)
     {
         /* Debug print global variables */
-        if (!context.HasVariables() || !_log.IsDebugEnabled) return;
-        _log.Debug($"{scope} variables:");
-        foreach (var entry in context.GetVariables()) _log.Debug($"{entry.Key} = {entry.Value}");
+        if (!context.HasVariables() || !Log.IsEnabled(LogLevel.Debug)) return;
+        Log.LogDebug("{Scope} variables:", scope);
+        foreach (var entry in context.GetVariables()) Log.LogDebug("{EntryKey} = {EntryValue}", entry.Key, entry.Value);
     }
 
     /// <summary>
@@ -365,7 +366,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
 
         foreach (var paramEntry in parameters)
         {
-            _log.Debug($"Initializing test parameter '{paramEntry.Key}' as variable");
+            Log.LogDebug("Initializing test parameter '{ParamEntryKey}' as variable", paramEntry.Key);
             context.SetVariable(paramEntry.Key, paramEntry.Value);
         }
     }
@@ -437,7 +438,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
 
     #region Members
 
-    private static readonly ILog _log = LogManager.GetLogger(typeof(DefaultTestCase));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(DefaultTestCase));
 
     private readonly ITestResultInstanceProvider _defaultTestResultInstanceProvider =
         new DefaultTestResultInstanceProvider();

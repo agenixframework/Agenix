@@ -1,9 +1,9 @@
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Validation.Matcher;
 using Agenix.Core.Util;
-using Agenix.Core.Validation.Matcher;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Container;
 
@@ -13,7 +13,7 @@ public class Conditional : AbstractActionContainer
 {
     /// Represents a logger used for logging activities within the Conditional class.
     /// /
-    private static readonly ILog Log = LogManager.GetLogger(typeof(Conditional));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(Conditional));
 
     /// Represents the condition expression string that determines if the
     /// nested test actions should be executed within the Conditional class.
@@ -42,12 +42,12 @@ public class Conditional : AbstractActionContainer
     {
         if (CheckCondition(context))
         {
-            Log.Debug($"Condition [{_condition}] evaluates to true, executing nested actions");
+            Log.LogDebug($"Condition [{_condition}] evaluates to true, executing nested actions");
             foreach (var actionBuilder in actions) ExecuteAction(actionBuilder.Build(), context);
         }
         else
         {
-            Log.Debug($"Condition [{_condition}] evaluates to false, not executing nested actions");
+            Log.LogDebug($"Condition [{_condition}] evaluates to false, not executing nested actions");
         }
     }
 

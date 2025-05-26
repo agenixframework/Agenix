@@ -4,11 +4,12 @@ using System.Text.RegularExpressions;
 using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
 using Agenix.Api.Validation.Matcher;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Validation.Text.Validation.Text;
 
@@ -24,7 +25,7 @@ public class PlainTextMessageValidator : DefaultMessageValidator
     public const string IgnoreWhitespaceProperty = "agenix.plaintext.validation.ignore.whitespace";
     public const string IgnoreWhitespaceEnv = "AGENIX_PLAINTEXT_VALIDATION_IGNORE_WHITESPACE";
 
-    private static readonly ILog Log = LogManager.GetLogger(typeof(PlainTextMessageValidator));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(PlainTextMessageValidator));
 
     /// <summary>
     ///     Gets the value of ignoreWhitespace.
@@ -54,11 +55,11 @@ public class PlainTextMessageValidator : DefaultMessageValidator
     {
         if (controlMessage?.Payload == null)
         {
-            Log.Debug("Skip message payload validation as no control message was defined");
+            Log.LogDebug("Skip message payload validation as no control message was defined");
             return;
         }
 
-        Log.Debug("Start text message validation");
+        Log.LogDebug("Start text message validation");
 
         try
         {
@@ -82,7 +83,7 @@ public class PlainTextMessageValidator : DefaultMessageValidator
             throw new ValidationException("Failed to validate text content", e);
         }
 
-        Log.Debug("Text validation successful: All values OK");
+        Log.LogDebug("Text validation successful: All values OK");
     }
 
     /// <summary>
@@ -176,7 +177,7 @@ public class PlainTextMessageValidator : DefaultMessageValidator
     {
         if (string.IsNullOrWhiteSpace(controlMessagePayload))
         {
-            Log.Debug("Skip message payload validation as no control message was defined");
+            Log.LogDebug("Skip message payload validation as no control message was defined");
             return;
         }
 
