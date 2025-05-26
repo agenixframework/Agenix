@@ -40,38 +40,7 @@ public class HttpMessageBuilderTest
             builtMessage.GetHeader(MessageHeaders.Timestamp));
         ClassicAssert.AreEqual(MessageType.XML.ToString(), builtMessage.GetType());
     }
-
-    [Test]
-    public void TestDefaultMessageHeaderWithNoForceUpdate()
-    {
-        // Setup mock environment as needed
-        Environment.SetEnvironmentVariable(AgenixSettings.HttpMessageBuilderForceHeaderUpdateEnabledEnv, "False");
-
-        try
-        {
-            // GIVEN
-            var builder = GetBuilder();
-
-            // WHEN
-            var builtMessage = builder.Build(new TestContext(), MessageType.XML.ToString());
-
-            // THEN
-            ClassicAssert.AreEqual(3, builtMessage.GetHeaders().Count);
-            ClassicAssert.NotNull(_message.GetHeader(MessageHeaders.Id));
-            ClassicAssert.NotNull(_message.GetHeader(MessageHeaders.Timestamp));
-            ClassicAssert.AreEqual(_message.GetHeader(MessageHeaders.Id), builtMessage.GetHeader(MessageHeaders.Id));
-            ClassicAssert.AreEqual(_message.GetHeader(MessageHeaders.Timestamp),
-                builtMessage.GetHeader(MessageHeaders.Timestamp));
-            ClassicAssert.AreEqual(MessageType.XML.ToString(), builtMessage.GetType());
-        }
-        finally
-        {
-            // Restore environment variable
-            Environment.SetEnvironmentVariable(AgenixSettings.HttpMessageBuilderForceHeaderUpdateEnabledEnv,
-                AgenixSettings.HttpMessageBuilderForceHeaderUpdateEnabledDefault);
-        }
-    }
-
+    
     [Test]
     public void TestHeaderVariableSubstitution()
     {

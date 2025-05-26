@@ -140,4 +140,11 @@
       <Folder Include="Validation\Text\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="agenix-application.json" />
+      <Content Include="agenix-application.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>

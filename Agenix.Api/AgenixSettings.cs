@@ -1,5 +1,12 @@
 ﻿using System.Configuration;
+using System.Reflection;
+using System.Xml.Linq;
+using Agenix.Api.Log;
 using Agenix.Api.Message;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
+using Formatting = Newtonsoft.Json.Formatting;
 
 namespace Agenix.Api;
 
@@ -8,6 +15,47 @@ namespace Agenix.Api;
 /// </summary>
 public sealed class AgenixSettings
 {
+    
+    /// <summary>
+    ///     Logger.
+    /// </summary>
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(AgenixSettings));
+    
+    private static ConfigurationFormat _activeFormat = ConfigurationFormat.NONE;
+    private static string? _activeConfigPath;
+    private static IConfiguration? _configuration;
+
+    /// <summary>
+    /// Specifies the configuration file format used for loading and managing settings.
+    /// </summary>
+    /// <remarks>
+    /// Represents the supported types of configuration formats:
+    /// - NONE: No specific format is used.
+    /// - JSON: Indicates that the configuration is in JSON format.
+    /// - XML: Indicates that the configuration is in XML format.
+    /// - INI: Indicates that the configuration is in INI format.
+    /// This enum is used in conjunction with configuration-building functionalities to
+    /// determine the appropriate file loading behavior based on file format.
+    /// </remarks>
+    private enum ConfigurationFormat
+    {
+        NONE,
+        JSON,
+        XML,
+        INI
+    }
+
+    /// <summary>
+    /// Provides a centralized configuration management utility for the Agenix application framework.
+    /// This class contains constants, defaults, and methods to manage, retrieve, and modify
+    /// configuration properties, including logging, validation, and encoding settings.
+    /// </summary>
+    static AgenixSettings()
+    {
+        DetectAndLoadConfiguration();
+    }
+
+    
     /// <summary>
     ///     Prefix/sufix used to identify variable expressions
     /// </summary>
@@ -33,78 +81,43 @@ public sealed class AgenixSettings
     ///     Default logger modifier keywords
     /// </summary>
     public const string LogMaskKeywordsProp = "agenix.logger.mask.keywords";
-
-    public const string LogMaskKeywordsEnv = "AGENIX_LOG_MASK_KEYWORDS";
     public const string LogMaskKeywordsDefault = "password,secret,secretKey";
 
     /// <summary>
     ///     Default logger modifier mask value
     /// </summary>
     public const string LogMaskValueProp = "agenix.logger.mask.value";
-
-    public const string LogMaskValueEnv = "AGENIX_LOG_MASK_VALUE";
     public const string LogMaskValueDefault = "****";
 
     public const string LogModifierProp = "agenix.logger.modifier";
-    public const string LogModifierEnv = "AGENIX_LOG_MODIFIER";
-
     public const string PrettyPrintProp = "agenix.message.pretty.print";
-    public const string PrettyPrintEnv = "AGENIX_MESSAGE_PRETTY_PRINT";
-
     public const string TypeConverterProp = "agenix.type.converter";
-    public const string TypeConverterEnv = "AGENIX_TYPE_CONVERTER";
     public const string TypeConverterDefault = "default";
 
     public const string AgenixFileEncodingProp = "agenix.file.encoding";
-    public const string AgenixFileEncodingEnv = "AGENIX_FILE_ENCODING";
-
     public const string DefaultMessageTypeProp = "agenix.default.message.type";
-    public const string DefaultMessageTypeEnv = "AGENIX_DEFAULT_MESSAGE_TYPE";
-
     public const string ReportAutoClearProp = "agenix.report.auto.clear";
-    public const string ReportAutoClearEnv = "AGENIX_REPORT_AUTO_CLEAR";
-
     public const string ReportIgnoreErrorsProp = "agenix.report.ignore.errors";
-    public const string ReportIgnoreErrorsEnv = "AGENIX_REPORT_IGNORE_ERRORS";
-
     public const string ReportDirectoryProp = "agenix.report.directory";
-    public const string ReportDirectoryErrorsEnv = "AGENIX_REPORT_DIRECTORY";
-
     public const string TestNameVariableProp = "agenix.test.name.variable";
-    public const string TestNameVariableEnv = "AGENIX_TEST_NAME_VARIABLE";
-
     public const string TestNameSpaceVariableProp = "agenix.test.namespace.variable";
-    public const string TestNameSpaceVariableEnv = "AGENIX_TEST_NAMESPAE_VARIABLE";
-
     public const string DefaultConfigClassProp = "agenix.defalt.config.class";
-    public const string DefaultConfigClassEnv = "AGENIX_DEFAULT_CONFIG_CLASS";
     public const string ReportDirectoryDefault = "agenix-reports";
     public const string TestNameVariableDefault = "agenix.test.name";
     public const string TestNameSpaceVariableDefault = "agenix.test.namespace";
 
     private const string MessageValidationStrictProp = "agenix.json.message.validation.strict";
-    private const string MessageValidationStrictEnv = "AGENIX_JSON_MESSAGE_VALIDATION_STRICT";
-
     public const string HttpMessageBuilderForceHeaderUpdateEnabledProp =
         "agenix.http.message.builder.force.header.update.enabled";
-
-    public const string HttpMessageBuilderForceHeaderUpdateEnabledEnv =
-        "AGENIX_HTTP_MESSAGE_BUILDER_FORCE_HEADER_UPDATE_ENABLED";
-
     public const string OutboundSchemaValidationEnabledProp = "agenix.validation.outbound.schema.enabled";
-    public const string OutboundSchemaValidationEnabledEnv = "AGENIX_VALIDATION_OUTBOUND_SCHEMA_ENABLED";
-
     public const string OutboundJsonSchemaValidationEnabledProp = "agenix.validation.outbound.json.schema.enabled";
-    public const string OutboundJsonSchemaValidationEnabledEnv = "AGENIX_VALIDATION_OUTBOUND_JSON_SCHEMA_ENABLED";
-
     public const string OutboundXmlSchemaValidationEnabledProp = "agenix.validation.outbound.xml.schema.enabled";
-    public const string OutboundXmlSchemaValidationEnabledEnv = "AGENIX_VALIDATION_OUTBOUND_XML_SCHEMA_ENABLED";
+    private const string ApplicationPropertyFileProperty = "agenix-application";
 
     //  
     // Flag to enable/disable fallback to default text equals validation
     //
     public const string PerformDefaultValidationProp = "agenix.perform.default.validation";
-    public const string PerformDefaultValidationEnv = "AGENIX_PERFORM_DEFAULT_VALIDATION";
     public static readonly string LogModifierDefault = bool.TrueString;
     public static readonly string PrettyPrintDefault = bool.TrueString;
     public static readonly string ReportAutoClearDefault = bool.TrueString;
@@ -122,10 +135,7 @@ public sealed class AgenixSettings
     /// </summary>
     public static string DefaultConfigClass()
     {
-        return GetPropertyEnvOrDefault(
-            DefaultConfigClassProp,
-            DefaultConfigClassEnv,
-            null);
+        return GetProperty(DefaultConfigClassProp, null);
     }
 
     /// <summary>
@@ -133,11 +143,7 @@ public sealed class AgenixSettings
     /// </summary>
     public static bool JsonMessageValidationStrict()
     {
-        return bool.Parse(GetPropertyEnvOrDefault(
-            MessageValidationStrictProp,
-            MessageValidationStrictEnv,
-            MessageValidationStrictDefault
-        ));
+        return bool.Parse(GetProperty(MessageValidationStrictProp, MessageValidationStrictDefault));
     }
 
     /// <summary>
@@ -145,22 +151,378 @@ public sealed class AgenixSettings
     /// </summary>
     public static string AgenixFileEncoding()
     {
-        return GetPropertyEnvOrDefault(
-            AgenixFileEncodingProp,
-            AgenixFileEncodingEnv,
-            "UTF-8");
+        return GetProperty(AgenixFileEncodingProp, "UTF-8");
     }
+
+    /// <summary>
+    /// Retrieves the file name of the default Agenix application property file. If no specific property is configured,
+    /// defaults to "agenix-application.json".
+    /// </summary>
+    /// <returns>
+    /// The name of the Agenix application property file.
+    /// </returns>
+    public static string GetAgenixApplicationPropertyFile()
+    {
+        return GetProperty(ApplicationPropertyFileProperty, "agenix-application");
+    }
+    
+    // Add a method to reload configuration
+    public static void ReloadConfiguration()
+    {
+        Log.LogInformation("Reloading configuration...");
+        DetectAndLoadConfiguration();
+    }
+
+    /// <summary>
+    /// Represents a collection of supported configuration formats,
+    /// their file extensions, and associated load actions.
+    /// </summary>
+    private static readonly (ConfigurationFormat Format, string Extension, Func<IConfigurationBuilder, string, IConfigurationBuilder> Action)[] Formats = 
+    {
+        (Format: ConfigurationFormat.JSON, Extension: ".json", 
+            Action: (b, p) => b.AddJsonFile(p, optional: true, reloadOnChange: true)),
+    
+        (Format: ConfigurationFormat.XML, Extension: ".xml", 
+            Action: (b, p) => b.AddXmlFile(p, optional: true, reloadOnChange: true)),
+    
+        (Format: ConfigurationFormat.INI, Extension: ".ini", 
+            Action: (b, p) => b.AddIniFile(p, optional: true, reloadOnChange: true))
+    };
+
+
+    /// <summary>
+    /// Detects the appropriate configuration file format (e.g., JSON, XML, INI) and loads the corresponding configuration
+    /// settings into the application. If no configuration file is found, defaults to using environment variables only.
+    /// </summary>
+    private static void DetectAndLoadConfiguration()
+    {
+        var assemblyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "";
+        var configBuilder = new ConfigurationBuilder()
+            .SetBasePath(assemblyLocation);
+        
+        foreach (var (format, extension, addAction) in Formats)
+        {
+            var configPath = Path.Combine(assemblyLocation, $"{ApplicationPropertyFileProperty}{extension}");
+            if (!File.Exists(configPath)) continue;
+            _activeFormat = format;
+            _activeConfigPath = configPath;
+            Log.LogInformation("Using configuration file: {ConfigPath}", configPath);
+                
+            // Add the configuration file to the builder
+            addAction(configBuilder, configPath);
+
+            // Add Environment Variables as fallback
+            configBuilder.AddEnvironmentVariables();
+
+            // Build the configuration
+            _configuration = configBuilder.Build();
+
+            // Load initial values into the ConfigurationManager if needed
+            LoadConfigurationIntoAppSettings();
+                
+            break;
+        }
+
+        if (_activeFormat == ConfigurationFormat.NONE)
+        {
+            Log.LogWarning("No configuration file found. Using environment variables only.");
+            _configuration = new ConfigurationBuilder()
+                .AddEnvironmentVariables()
+                .Build();
+        }
+    }
+
+
+    /// <summary>
+    /// Loads configuration values from the current configuration source into the application's AppSettings structure.
+    /// This method iterates over all key-value pairs in the active configuration, validating that each value is not null or empty,
+    /// and then assigns it to the application's property system using the appropriate setter.
+    /// Any errors encountered during this process are logged for troubleshooting.
+    /// </summary>
+    private static void LoadConfigurationIntoAppSettings()
+    {
+        try
+        {
+            foreach (var kvp in _configuration.AsEnumerable()
+                         .Where(x => !string.IsNullOrEmpty(x.Value)))
+            {
+                if (Log.IsEnabled(LogLevel.Trace))
+                {
+                    Log.LogTrace("Loading configuration: {Key}={Value}", kvp.Key, kvp.Value);
+                }
+                
+                SetProperty(kvp.Key, kvp.Value);
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.LogError(ex, "Error loading configuration into AppSettings");
+        }
+    }
+
+    /// <summary>
+    /// Sets a configuration property based on the specified key and value. The setting behavior is determined by the
+    /// currently active configuration format (e.g., JSON, XML, Ini).
+    /// </summary>
+    /// <param name="key">
+    /// The key identifying the configuration property to be set.
+    /// </param>
+    /// <param name="value">
+    /// The value to assign to the configuration property identified by the key.
+    /// </param>
+    public static void SetProperty(string key, string value)
+    {
+        switch (_activeFormat)
+        {
+            case ConfigurationFormat.JSON:
+                SetJsonProperty(key, value);
+                break;
+            case ConfigurationFormat.XML:
+                SetXmlProperty(key, value);
+                break;
+            case ConfigurationFormat.INI:
+                SetIniProperty(key, value);
+                break;
+            case ConfigurationFormat.NONE:
+            default:
+                SetAppConfigProperty(key, value);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Sets or updates a property in a JSON configuration file. Supports nested properties
+    /// using dot-separated keys.
+    /// </summary>
+    /// <param name="key">The key of the property to set or update, using dot notation for nested properties.</param>
+    /// <param name="value">The value to assign to the specified property.</param>
+    private static void SetJsonProperty(string key, string value)
+    {
+        try
+        {
+            var json = File.Exists(_activeConfigPath) 
+                ? JObject.Parse(File.ReadAllText(_activeConfigPath)) 
+                : new JObject();
+
+            // Handle nested properties
+            var parts = key.Split('.');
+            var current = json;
+            
+            for (var i = 0; i < parts.Length - 1; i++)
+            {
+                if (current?[parts[i]] == null || current[parts[i]] is not { Type: JTokenType.Object })
+                {
+                    current[parts[i]] = new JObject();
+                }
+                current = (JObject)current[parts[i]];
+            }
+
+            current[parts[^1]] = value;
+
+            File.WriteAllText(_activeConfigPath, json.ToString((Formatting.Indented)));
+            Log.LogTrace("Updated JSON property {Key}={Value}", key, value);
+        }
+        catch (Exception ex)
+        {
+            Log.LogError(ex, "Failed to set JSON property {Key}", key);
+            throw;
+        }
+    }
+
+    /// <summary>
+    /// Updates or adds a property in the XML configuration file for the application.
+    /// </summary>
+    /// <param name="key">
+    /// The key of the property to update or add in the XML configuration file.
+    /// </param>
+    /// <param name="value">
+    /// The value to be set for the specified property key in the XML configuration file.
+    /// </param>
+    /// <exception cref="Exception">
+    /// Thrown if the XML configuration file cannot be updated or saved.
+    /// </exception>
+    private static void SetXmlProperty(string key, string value)
+    {
+        try
+        {
+            XDocument doc;
+            if (File.Exists(_activeConfigPath))
+            {
+                doc = XDocument.Load(_activeConfigPath);
+            }
+            else
+            {
+                doc = new XDocument(
+                    new XElement("configuration",
+                        new XElement("appSettings"))
+                );
+            }
+
+            var appSettings = doc.Root?.Element("appSettings");
+            if (appSettings == null)
+            {
+                doc.Root?.Add(new XElement("appSettings"));
+                appSettings = doc.Root?.Element("appSettings");
+            }
+
+            var setting = appSettings?.Elements("add")
+                .FirstOrDefault(e => e.Attribute("key")?.Value == key);
+
+            if (setting == null)
+            {
+                appSettings?.Add(
+                    new XElement("add",
+                        new XAttribute("key", key),
+                        new XAttribute("value", value))
+                );
+            }
+            else
+            {
+                setting.Attribute("value")!.Value = value;
+            }
+
+            doc.Save(_activeConfigPath);
+            Log.LogTrace("Updated XML property {Key}={Value}", key, value);
+        }
+        catch (Exception ex)
+        {
+            Log.LogError(ex, "Failed to set XML property {Key}", key);
+            throw;
+        }
+    }
+
+    /// <summary>
+    /// Updates a property within an INI configuration file. If the specified section or property does not exist,
+    /// it will be created. The function operates on the active configuration path defined for the application.
+    /// </summary>
+    /// <param name="key">
+    /// The full key of the property to update or create. Keys can include section names
+    /// separated by a period, with the portion before the first period representing the section name.
+    /// If no section is provided, the "Default" section is used.
+    /// </param>
+    /// <param name="value">
+    /// The value to assign to the specified key within the configuration file.
+    /// </param>
+    /// <exception cref="IOException">
+    /// Thrown if there is an issue reading or writing to the configuration file.
+    /// </exception>
+    /// <exception cref="UnauthorizedAccessException">
+    /// Thrown if the application lacks the necessary permissions to access the configuration file.
+    /// </exception>
+    /// <exception cref="Exception">
+    /// Thrown for any other errors occurring during the update process, including logging the failure.
+    /// </exception>
+    private static void SetIniProperty(string key, string value)
+    {
+        try
+        {
+            var lines = File.Exists(_activeConfigPath)
+                ? File.ReadAllLines(_activeConfigPath).ToList()
+                : [];
+
+            var sections = key.Split('.');
+            var section = sections.Length > 1 ? sections[0] : "Default";
+            var propertyKey = sections.Length > 1 ? string.Join(".", sections.Skip(1)) : key;
+
+            var sectionIndex = lines.FindIndex(l => l.Trim() == $"[{section}]");
+            var propertyLine = $"{propertyKey}={value}";
+
+            if (sectionIndex == -1)
+            {
+                // Add a new section
+                if (lines.Count > 0) lines.Add("");
+                lines.Add($"[{section}]");
+                lines.Add(propertyLine);
+            }
+            else
+            {
+                // Find property in the section
+                var nextSectionIndex = lines.FindIndex(sectionIndex + 1, 
+                    l => l.StartsWith('[') && l.EndsWith(']'));
+                if (nextSectionIndex == -1) nextSectionIndex = lines.Count;
+
+                var propertyIndex = lines.FindIndex(sectionIndex + 1, nextSectionIndex - sectionIndex - 1,
+                    l => l.StartsWith($"{propertyKey}="));
+
+                if (propertyIndex == -1)
+                {
+                    lines.Insert(sectionIndex + 1, propertyLine);
+                }
+                else
+                {
+                    lines[propertyIndex] = propertyLine;
+                }
+            }
+
+            File.WriteAllLines(_activeConfigPath, lines);
+            Log.LogTrace("Updated INI property {Key}={Value}", key, value);
+        }
+        catch (Exception ex)
+        {
+            Log.LogError(ex, "Failed to set INI property {Key}", key);
+            throw;
+        }
+    }
+
+    /// <summary>
+    /// Updates or adds a key-value pair in the application's app.config file.
+    /// This method ensures that the configuration settings are saved and refreshed
+    /// to allow changes to take effect.
+    /// </summary>
+    /// <param name="key">The key of the configuration property to be added or updated.</param>
+    /// <param name="value">The value to be associated with the specified key.</param>
+    /// <exception cref="Exception">Thrown if the operation fails to update the app.config file.</exception>
+    private static void SetAppConfigProperty(string key, string value)
+    {
+        try
+        {
+            var config = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            
+            if (config.AppSettings.Settings[key] == null)
+            {
+                config.AppSettings.Settings.Add(key, value);
+            }
+            else
+            {
+                config.AppSettings.Settings[key].Value = value;
+            }
+            
+            config.Save(ConfigurationSaveMode.Modified);
+            System.Configuration.ConfigurationManager.RefreshSection("appSettings");
+
+            if (Log.IsEnabled(LogLevel.Trace))
+            {
+                Log.LogTrace("Updated {config.FilePath} property {Key}={Value}", config.FilePath, key, value);
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.LogError(ex, "Failed to set app.config property {Key}", key);
+            throw;
+        }
+    }
+
+    
+    // Add a method to get all configuration entries
+    /// <summary>
+    /// Retrieves all configuration properties from the current configuration source, including their keys and values.
+    /// </summary>
+    /// <returns>
+    /// An enumerable collection of key-value pairs representing the configuration properties.
+    /// If no configuration source is available, returns an empty collection.
+    /// </returns>
+    public static IEnumerable<KeyValuePair<string, string?>> GetAllProperties()
+    {
+        return _configuration?.AsEnumerable() ?? [];
+    }
+
 
     /// <summary>
     ///     Default message type used for the application.
     /// </summary>
     public static string DefaultMessageType()
     {
-        return GetPropertyEnvOrDefault(
-            DefaultMessageTypeProp,
-            DefaultMessageTypeEnv,
-            nameof(MessageType.JSON)
-        );
+        return GetProperty(DefaultMessageTypeProp, nameof(MessageType.JSON));
     }
 
     /// <summary>
@@ -168,11 +530,7 @@ public sealed class AgenixSettings
     /// </summary>
     public static bool ReportAutoClear()
     {
-        return bool.Parse(GetPropertyEnvOrDefault(
-            ReportAutoClearProp,
-            ReportAutoClearEnv,
-            ReportAutoClearDefault
-        ));
+        return bool.Parse(GetProperty(ReportAutoClearProp, ReportAutoClearDefault));
     }
 
     /// <summary>
@@ -181,9 +539,8 @@ public sealed class AgenixSettings
     /// </summary>
     public static bool IsHttpMessageBuilderForceHeaderUpdateEnabled()
     {
-        return bool.Parse(GetPropertyEnvOrDefault(
+        return bool.Parse(GetProperty(
             HttpMessageBuilderForceHeaderUpdateEnabledProp,
-            HttpMessageBuilderForceHeaderUpdateEnabledEnv,
             HttpMessageBuilderForceHeaderUpdateEnabledDefault
         ));
     }
@@ -193,11 +550,7 @@ public sealed class AgenixSettings
     /// </summary>
     public static bool ReportIgnoreErrors()
     {
-        return bool.Parse(GetPropertyEnvOrDefault(
-            ReportIgnoreErrorsProp,
-            ReportIgnoreErrorsEnv,
-            ReportIgnoreErrorsDefault
-        ));
+        return bool.Parse(GetProperty(ReportIgnoreErrorsProp, ReportIgnoreErrorsDefault));
     }
 
     /// <summary>
@@ -205,10 +558,7 @@ public sealed class AgenixSettings
     /// </summary>
     public static string ReportDirectory()
     {
-        return GetPropertyEnvOrDefault(
-            ReportDirectoryProp,
-            ReportDirectoryErrorsEnv,
-            ReportDirectoryDefault
+        return GetProperty(ReportDirectoryProp, ReportDirectoryDefault
         );
     }
 
@@ -217,11 +567,7 @@ public sealed class AgenixSettings
     /// </summary>
     public static string TestNameVariable()
     {
-        return GetPropertyEnvOrDefault(
-            TestNameVariableProp,
-            TestNameVariableEnv,
-            TestNameVariableDefault
-        );
+        return GetProperty(TestNameVariableProp, TestNameVariableDefault);
     }
 
     /// <summary>
@@ -229,11 +575,7 @@ public sealed class AgenixSettings
     /// </summary>
     public static string TestNameSpaceVariable()
     {
-        return GetPropertyEnvOrDefault(
-            TestNameSpaceVariableProp,
-            TestNameSpaceVariableEnv,
-            TestNameSpaceVariableDefault
-        );
+        return GetProperty(TestNameSpaceVariableProp, TestNameSpaceVariableDefault);
     }
 
 
@@ -243,9 +585,8 @@ public sealed class AgenixSettings
     /// <returns>the set of mask keywords</returns>
     public static HashSet<string> GetLogMaskKeywords()
     {
-        return GetPropertyEnvOrDefault(
+        return GetProperty(
                 LogMaskKeywordsProp,
-                LogMaskKeywordsEnv,
                 LogMaskKeywordsDefault)
             .Split(',')
             .Select(keyword => keyword.Trim())
@@ -258,7 +599,7 @@ public sealed class AgenixSettings
     /// <returns></returns>
     public static string GetLogMaskValue()
     {
-        return GetPropertyEnvOrDefault(LogMaskValueProp, LogMaskValueEnv, LogMaskValueDefault);
+        return GetProperty(LogMaskValueProp, LogMaskValueDefault);
     }
 
     /// <summary>
@@ -267,7 +608,7 @@ public sealed class AgenixSettings
     /// <returns></returns>
     public static string GetTypeConverter()
     {
-        return GetPropertyEnvOrDefault(TypeConverterProp, TypeConverterEnv, TypeConverterDefault);
+        return GetProperty(TypeConverterProp, TypeConverterDefault);
     }
 
     /// <summary>
@@ -279,20 +620,44 @@ public sealed class AgenixSettings
     /// <returns>the first value encountered, which is not null. May return null, if default value is null.</returns>
     private static string GetPropertyEnvOrDefault(string prop, string env, string def)
     {
-        return ConfigurationManager.AppSettings[prop] ??
+        return System.Configuration.ConfigurationManager.AppSettings[prop] ??
                Environment.GetEnvironmentVariable(env) ??
                def;
     }
+    
+    public static string GetProperty(string key, string defaultValue = "")
+    {
+        var value = _configuration?[key] ?? 
+                    GetPropertyEnvOrDefault(key, ToEnvironmentVariableName(key), defaultValue);
 
+        if (Log.IsEnabled(LogLevel.Trace))
+        {
+            Log.LogTrace("Getting property {Key}={Value}", key, value);
+        }
+        
+        return value;
+    }
+
+    /// <summary>
+    /// Converts a given property key to its corresponding environment variable name.
+    /// The conversion involves replacing dot notation with underscores and transforming
+    /// the string to uppercase.
+    /// </summary>
+    /// <param name="key">The property key to be converted into environment variable name format.</param>
+    /// <returns>The transformed environment variable name that corresponds to the given property key.</returns>
+    private static string ToEnvironmentVariableName(string key)
+    {
+        return key.ToUpperInvariant().Replace(".", "_");
+    }
+    
     /// <summary>
     ///     Gets the logger modifier enabled/ disabled setting.
     /// </summary>
     /// <returns></returns>
     public static bool IsLogModifierEnabled()
     {
-        var propertyValue = GetPropertyEnvOrDefault(
+        var propertyValue = GetProperty(
             LogModifierProp,
-            LogModifierEnv,
             LogModifierDefault);
 
         return bool.Parse(propertyValue);
@@ -307,9 +672,8 @@ public sealed class AgenixSettings
     /// </returns>
     public static bool IsPerformDefaultValidation()
     {
-        var propertyValue = GetPropertyEnvOrDefault(
+        var propertyValue = GetProperty(
             PerformDefaultValidationProp,
-            PerformDefaultValidationEnv,
             PerformDefaultValidationDefault);
 
         return bool.Parse(propertyValue);
@@ -321,9 +685,8 @@ public sealed class AgenixSettings
     /// <returns></returns>
     public static bool IsPrettyPrintEnabled()
     {
-        var propertyValue = GetPropertyEnvOrDefault(
+        var propertyValue = GetProperty(
             PrettyPrintProp,
-            PrettyPrintEnv,
             PrettyPrintDefault);
 
         return bool.Parse(propertyValue);
@@ -338,9 +701,8 @@ public sealed class AgenixSettings
     /// </returns>
     public static bool IsOutboundSchemaValidationEnabled()
     {
-        var propertyValue = GetPropertyEnvOrDefault(
+        var propertyValue = GetProperty(
             OutboundSchemaValidationEnabledProp,
-            OutboundSchemaValidationEnabledEnv,
             OutboundSchemaValidationEnabledDefault);
 
         return bool.Parse(propertyValue);
@@ -356,9 +718,8 @@ public sealed class AgenixSettings
     /// </returns>
     public static bool IsOutboundJsonSchemaValidationEnabled()
     {
-        var propertyValue = GetPropertyEnvOrDefault(
+        var propertyValue = GetProperty(
             OutboundJsonSchemaValidationEnabledProp,
-            OutboundJsonSchemaValidationEnabledEnv,
             OutboundJsonSchemaValidationEnabledDefault);
 
         return bool.Parse(propertyValue);
@@ -374,9 +735,8 @@ public sealed class AgenixSettings
     /// </returns>
     public static bool IsOutboundXmlSchemaValidationEnabled()
     {
-        var propertyValue = GetPropertyEnvOrDefault(
+        var propertyValue = GetProperty(
             OutboundXmlSchemaValidationEnabledProp,
-            OutboundXmlSchemaValidationEnabledEnv,
             OutboundXmlSchemaValidationEnabledDefault);
 
         return bool.Parse(propertyValue);
