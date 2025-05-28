@@ -1,4 +1,30 @@
-﻿using System.Collections.Generic;
+﻿#region License
+
+// MIT License
+//
+// Copyright (c) 2025 Agenix
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+#endregion
+
+using System.Collections.Generic;
 using Agenix.Api.Container;
 using Agenix.Api.Context;
 using Agenix.Api.Endpoint;
@@ -6,18 +32,13 @@ using Agenix.Api.Functions;
 using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Report;
+using Agenix.Api.Spi;
 using Agenix.Api.Util;
 using Agenix.Api.Validation;
 using Agenix.Api.Validation.Matcher;
 using Agenix.Api.Variable;
-using Agenix.Core.Container;
-using Agenix.Core.Endpoint;
 using Agenix.Core.Functions;
 using Agenix.Core.Log;
-using Agenix.Core.Message;
-using Agenix.Core.Report;
-using Agenix.Core.Spi;
-using Agenix.Core.Util;
 using Agenix.Core.Validation;
 using Agenix.Core.Validation.Matcher;
 
@@ -100,9 +121,15 @@ public class TestContextFactory : IReferenceResolverAware
     public IEndpointFactory EndpointFactory { get; set; }
 
     /// <summary>
-    /// Gets or sets the registry for managing segment variable extractors.
+    ///     Gets or sets the registry for managing segment variable extractors.
     /// </summary>
     public SegmentVariableExtractorRegistry SegmentVariableExtractorRegistry { get; set; }
+
+    /// <summary>
+    ///     Gets the current reference resolver.
+    /// </summary>
+    /// <returns>The current instance of IReferenceResolver</returns>
+    public IReferenceResolver ReferenceResolver => _referenceResolver;
 
     /// <summary>
     ///     Sets the reference resolver for the TestContextFactory.
@@ -203,10 +230,4 @@ public class TestContextFactory : IReferenceResolverAware
 
         return result;
     }
-
-    /// <summary>
-    ///     Gets the current reference resolver.
-    /// </summary>
-    /// <returns>The current instance of IReferenceResolver</returns>
-    public IReferenceResolver ReferenceResolver => _referenceResolver;
 }

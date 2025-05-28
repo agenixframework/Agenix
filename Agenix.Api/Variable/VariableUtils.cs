@@ -1,4 +1,30 @@
-﻿using System.Text;
+﻿#region License
+
+// MIT License
+//
+// Copyright (c) 2025 Agenix
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+#endregion
+
+using System.Text;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
 
@@ -17,13 +43,16 @@ public sealed class VariableUtils
     }
 
     /// <summary>
-    /// Replaces variables in the given string based on the provided context and quoting configuration.
+    ///     Replaces variables in the given string based on the provided context and quoting configuration.
     /// </summary>
     /// <param name="str">The input string containing variables to be replaced.</param>
     /// <param name="context">The context used to resolve variable values.</param>
     /// <param name="enableQuoting">Determines whether the resolved variable values should be quoted.</param>
     /// <returns>The processed string with variables replaced by their resolved values.</returns>
-    /// <exception cref="NoSuchVariableException">Thrown when a variable referenced in the input string cannot be resolved in the provided context.</exception>
+    /// <exception cref="NoSuchVariableException">
+    ///     Thrown when a variable referenced in the input string cannot be resolved in
+    ///     the provided context.
+    /// </exception>
     public static string ReplaceVariablesInString(string str, TestContext context, bool enableQuoting)
     {
         var newStr = new StringBuilder();
@@ -83,11 +112,12 @@ public sealed class VariableUtils
     }
 
     /// <summary>
-    /// Removes the prefix and suffix from a variable name if they are defined by the application settings.
+    ///     Removes the prefix and suffix from a variable name if they are defined by the application settings.
     /// </summary>
     /// <param name="variable">The variable name from which to remove the prefix and suffix.</param>
     /// <returns>
-    /// The variable name without the prefix and suffix if both are present; otherwise, returns the original variable name unchanged.
+    ///     The variable name without the prefix and suffix if both are present; otherwise, returns the original variable name
+    ///     unchanged.
     /// </returns>
     public static string CutOffVariablesPrefix(string variable)
     {
@@ -99,19 +129,19 @@ public sealed class VariableUtils
     }
 
     /// <summary>
-    /// Removes the variable escape sequences defined in <see cref="AgenixSettings.VariableEscape"/>
-    /// from the beginning and end of the provided variable name, if present.
+    ///     Removes the variable escape sequences defined in <see cref="AgenixSettings.VariableEscape" />
+    ///     from the beginning and end of the provided variable name, if present.
     /// </summary>
     /// <param name="variable">The variable name to process.</param>
     /// <returns>
-    /// The variable name with the escape sequences removed if they are present;
-    /// otherwise, returns the original variable name unchanged.
+    ///     The variable name with the escape sequences removed if they are present;
+    ///     otherwise, returns the original variable name unchanged.
     /// </returns>
     public static string CutOffVariablesEscaping(string variable)
     {
         if (variable.StartsWith(AgenixSettings.VariableEscape) && variable.EndsWith(AgenixSettings.VariableEscape))
             return variable.Substring(AgenixSettings.VariableEscape.Length,
-                variable.Length - (2 * AgenixSettings.VariableEscape.Length));
+                variable.Length - 2 * AgenixSettings.VariableEscape.Length);
 
         return variable;
     }
@@ -129,9 +159,9 @@ public sealed class VariableUtils
         return expression.StartsWith(AgenixSettings.VariablePrefix) &&
                expression.EndsWith(AgenixSettings.VariableSuffix);
     }
-    
+
     /// <summary>
-    /// Cut off single quotes prefix and suffix.
+    ///     Cut off single quotes prefix and suffix.
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
@@ -139,16 +169,13 @@ public sealed class VariableUtils
     {
         if (string.IsNullOrWhiteSpace(input)) return input;
 
-        if (input.Length >= 2 && input[0] == '\'' && input[^1] == '\'')
-        {
-            return input.Substring(1, input.Length - 2);
-        }
+        if (input.Length >= 2 && input[0] == '\'' && input[^1] == '\'') return input.Substring(1, input.Length - 2);
 
         return input;
     }
-    
+
     /// <summary>
-    /// Cut off double quotes prefix and suffix.
+    ///     Cut off double quotes prefix and suffix.
     /// </summary>
     /// <param name="variable"></param>
     /// <returns></returns>
@@ -156,9 +183,7 @@ public sealed class VariableUtils
     {
         if (!string.IsNullOrWhiteSpace(variable) &&
             variable.Length > 1 && variable[0] == '"' && variable[^1] == '"')
-        {
             return variable.Substring(1, variable.Length - 2);
-        }
 
         return variable;
     }

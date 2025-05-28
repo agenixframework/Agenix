@@ -20,7 +20,7 @@ using Newtonsoft.Json.Serialization;
 using NUnit.Framework;
 using TestContext = Agenix.Api.Context.TestContext;
 using static Agenix.Core.Actions.SendMessageAction.Builder;
-using IReferenceResolver = Agenix.Core.Spi.IReferenceResolver;
+using IReferenceResolver = Agenix.Api.Spi.IReferenceResolver;
 
 namespace Agenix.Validation.Json.Tests.Actions.Dsl;
 

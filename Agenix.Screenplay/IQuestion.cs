@@ -1,11 +1,36 @@
+#region License
+
+// MIT License
+//
+// Copyright (c) 2025 Agenix
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+#endregion
+
 using System.Globalization;
 using Agenix.Screenplay.Questions.Converters;
 
 namespace Agenix.Screenplay;
 
-
 /// <summary>
-/// Represents a question within the screenplay pattern that can define how an actor retrieves information.
+///     Represents a question within the screenplay pattern that can define how an actor retrieves information.
 /// </summary>
 /// <typeparam name="ANSWER">The type of answer that the question provides.</typeparam>
 public interface IQuestion<ANSWER>
@@ -13,14 +38,14 @@ public interface IQuestion<ANSWER>
     string Subject => string.Empty;
 
     /// <summary>
-    /// Provides the answer to the question for the given actor.
+    ///     Provides the answer to the question for the given actor.
     /// </summary>
     /// <param name="actor">The actor who will respond to the question.</param>
     /// <returns>The answer to the question as determined by the actor.</returns>
     ANSWER AnsweredBy(Actor actor);
 
     /// <summary>
-    /// Creates a QuestionBuilder instance with the specified subject.
+    ///     Creates a QuestionBuilder instance with the specified subject.
     /// </summary>
     /// <param name="subject">The subject for the question being created.</param>
     /// <returns>A QuestionBuilder instance to construct questions related to the specified subject.</returns>
@@ -30,7 +55,7 @@ public interface IQuestion<ANSWER>
     }
 
     /// <summary>
-    /// Converts the answer of the current question into a boolean value.
+    ///     Converts the answer of the current question into a boolean value.
     /// </summary>
     /// <returns>An IQuestion where the answer is parsed as a boolean.</returns>
     IQuestion<bool> AsBoolean()
@@ -41,7 +66,7 @@ public interface IQuestion<ANSWER>
 
 
     /// <summary>
-    /// Negates the result of a boolean question.
+    ///     Negates the result of a boolean question.
     /// </summary>
     /// <param name="question">The boolean question whose result will be negated.</param>
     /// <returns>An IQuestion that represents the negation of the original question's answer.</returns>
@@ -51,7 +76,7 @@ public interface IQuestion<ANSWER>
     }
 
     /// <summary>
-    /// Converts the answer of the current question into a string value.
+    ///     Converts the answer of the current question into a string value.
     /// </summary>
     /// <returns>An IQuestion where the answer is represented as a string.</returns>
     IQuestion<string> AsString()
@@ -60,7 +85,7 @@ public interface IQuestion<ANSWER>
     }
 
     /// <summary>
-    /// Converts the answer of the current question into an integer value.
+    ///     Converts the answer of the current question into an integer value.
     /// </summary>
     /// <returns>An IQuestion where the answer is parsed as an integer.</returns>
     IQuestion<int> AsInteger()
@@ -70,7 +95,7 @@ public interface IQuestion<ANSWER>
     }
 
     /// <summary>
-    /// Converts the answer of the current question into a double value.
+    ///     Converts the answer of the current question into a double value.
     /// </summary>
     /// <returns>An IQuestion where the answer is parsed as a double.</returns>
     IQuestion<double> AsDouble()
@@ -80,7 +105,7 @@ public interface IQuestion<ANSWER>
     }
 
     /// <summary>
-    /// Converts the answer of the current question into a float value.
+    ///     Converts the answer of the current question into a float value.
     /// </summary>
     /// <returns>An IQuestion where the answer is parsed as a float.</returns>
     IQuestion<float> AsFloat()
@@ -90,7 +115,7 @@ public interface IQuestion<ANSWER>
     }
 
     /// <summary>
-    /// Converts the answer of the current question into a long value.
+    ///     Converts the answer of the current question into a long value.
     /// </summary>
     /// <returns>An IQuestion where the answer is parsed as a long.</returns>
     IQuestion<long> AsLong()
@@ -100,7 +125,7 @@ public interface IQuestion<ANSWER>
     }
 
     /// <summary>
-    /// Converts the answer of the current question into a decimal value.
+    ///     Converts the answer of the current question into a decimal value.
     /// </summary>
     /// <returns>An IQuestion where the answer is parsed as a decimal.</returns>
     IQuestion<decimal> AsDecimal()
@@ -110,7 +135,7 @@ public interface IQuestion<ANSWER>
     }
 
     /// <summary>
-    /// Converts the answer of the current question into a DateTime value.
+    ///     Converts the answer of the current question into a DateTime value.
     /// </summary>
     /// <returns>An IQuestion where the answer is parsed as a DateTime.</returns>
     IQuestion<DateTime> AsDate()
@@ -120,13 +145,13 @@ public interface IQuestion<ANSWER>
     }
 
     /// <summary>
-    /// Converts the answer to a DateTime object based on the specified date format.
+    ///     Converts the answer to a DateTime object based on the specified date format.
     /// </summary>
     /// <param name="format">The date format to use for parsing the answer.</param>
     /// <returns>A question that provides the parsed DateTime answer.</returns>
     IQuestion<DateTime> AsDate(string format)
     {
-        return About(Subject).AnsweredBy(actor => 
+        return About(Subject).AnsweredBy(actor =>
             DateTime.ParseExact(
                 AnsweredBy(actor).ToString(),
                 format,
@@ -135,7 +160,7 @@ public interface IQuestion<ANSWER>
     }
 
     /// <summary>
-    /// Converts the answer of the current question into an enumerated value of the specified type.
+    ///     Converts the answer of the current question into an enumerated value of the specified type.
     /// </summary>
     /// <typeparam name="T">The enum type to which the answer will be converted.</typeparam>
     /// <returns>An IQuestion where the answer is parsed as the specified enum type.</returns>
@@ -144,9 +169,9 @@ public interface IQuestion<ANSWER>
         return About(Subject).AnsweredBy(actor =>
             Enum.Parse<T>(AnsweredBy(actor).ToString(), true));
     }
-    
+
     /// <summary>
-    /// Convert the answer to a question into another form using an arbitrary function.
+    ///     Convert the answer to a question into another form using an arbitrary function.
     /// </summary>
     /// <typeparam name="T">The target type of the transformation</typeparam>
     /// <param name="transformer">The function to transform the answer</param>
@@ -157,7 +182,7 @@ public interface IQuestion<ANSWER>
     }
 
     /// <summary>
-    /// Convert all the matching answers to a question into another form using an arbitrary function.
+    ///     Convert all the matching answers to a question into another form using an arbitrary function.
     /// </summary>
     /// <typeparam name="T">The target type for each transformed element</typeparam>
     /// <param name="transformer">The function to transform each string value</param>
@@ -168,9 +193,9 @@ public interface IQuestion<ANSWER>
             .Select(transformer)
             .ToList();
     }
-    
+
     /// <summary>
-    /// Returns a new question with the specified text as a subject.
+    ///     Returns a new question with the specified text as a subject.
     /// </summary>
     /// <param name="description">The description to use as the subject</param>
     /// <returns>A new question with the same behavior but different description</returns>
@@ -180,16 +205,16 @@ public interface IQuestion<ANSWER>
     }
 
     /// <summary>
-    /// Converts the answer to a specified type using a default converter.
+    ///     Converts the answer to a specified type using a default converter.
     /// </summary>
     /// <returns>A new question that converts its answer to the specified type</returns>
     IQuestion<T> As<T>()
     {
-        return QuestionExtensions.As<ANSWER,T>(this);
+        return QuestionExtensions.As<ANSWER, T>(this);
     }
 
     /// <summary>
-    /// Converts the answer of the current question into a list of the specified type.
+    ///     Converts the answer of the current question into a list of the specified type.
     /// </summary>
     /// <param name="type">The target type of the elements in the resulting list.</param>
     /// <typeparam name="T">The type of the elements in the resulting list.</typeparam>
@@ -200,7 +225,7 @@ public interface IQuestion<ANSWER>
     }
 
     /// <summary>
-    /// Converts the answer of the current question into a collection of the specified target type.
+    ///     Converts the answer of the current question into a collection of the specified target type.
     /// </summary>
     /// <typeparam name="T">The target type of the elements in the resulting collection.</typeparam>
     /// <param name="type">The .NET type representing the target collection's item type.</param>
@@ -209,9 +234,9 @@ public interface IQuestion<ANSWER>
     {
         return new CollectionConvertingQuestion<ANSWER, T>(this, type);
     }
-    
+
     /// <summary>
-    /// Provides extension methods for the <see cref="IQuestion{T}"/> interface.
+    ///     Provides extension methods for the <see cref="IQuestion{T}" /> interface.
     /// </summary>
     public static class QuestionExtensions
     {
@@ -231,7 +256,7 @@ public interface IQuestion<ANSWER>
     }
 
     /// <summary>
-    /// Represents a question that converts the result of a source question into a list of a specified target type.
+    ///     Represents a question that converts the result of a source question into a list of a specified target type.
     /// </summary>
     /// <typeparam name="TSource">The type of the source question's answer.</typeparam>
     /// <typeparam name="TTarget">The desired type of the elements in the converted list.</typeparam>
@@ -257,7 +282,7 @@ public interface IQuestion<ANSWER>
     }
 
     /// <summary>
-    /// Represents a question that converts a source question's answer into a collection of a specified target type.
+    ///     Represents a question that converts a source question's answer into a collection of a specified target type.
     /// </summary>
     /// <typeparam name="TSource">The type of the source question's answer.</typeparam>
     /// <typeparam name="TTarget">The target type into which each element in the source collection is converted.</typeparam>

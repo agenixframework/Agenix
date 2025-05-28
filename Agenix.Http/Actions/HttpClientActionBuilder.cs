@@ -1,9 +1,33 @@
-﻿using System.Net;
+﻿#region License
+
+// MIT License
+//
+// Copyright (c) 2025 Agenix
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+#endregion
+
+using System.Net;
 using Agenix.Api;
 using Agenix.Api.Endpoint;
-using Agenix.Core;
-using Agenix.Core.Endpoint;
-using Agenix.Core.Spi;
+using Agenix.Api.Spi;
 using Agenix.Core.Util;
 
 namespace Agenix.Http.Actions;
@@ -55,8 +79,9 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
     {
         return new HttpClientReceiveActionBuilder(_httpClient, _httpClientUri, referenceResolver, _delegate);
     }
-    
-    public HttpClientSendActionBuilder Send() {
+
+    public HttpClientSendActionBuilder Send()
+    {
         return new HttpClientSendActionBuilder(_httpClient, _httpClientUri, referenceResolver, _delegate);
     }
 
@@ -67,11 +92,11 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
     }
 
     /// <summary>
-    /// Configures actions for receiving HTTP responses from an HTTP client or URI.
+    ///     Configures actions for receiving HTTP responses from an HTTP client or URI.
     /// </summary>
     /// <remarks>
-    /// This builder allows for detailed configuration of how HTTP responses are handled
-    /// when interacting with an HTTP client or endpoint.
+    ///     This builder allows for detailed configuration of how HTTP responses are handled
+    ///     when interacting with an HTTP client or endpoint.
     /// </remarks>
     public sealed class HttpClientReceiveActionBuilder(
         IEndpoint? httpClient,
@@ -126,13 +151,13 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
             return builder;
         }
     }
-    
+
     /// <summary>
-    /// Builder class providing fluent interface methods for constructing and sending HTTP requests.
+    ///     Builder class providing fluent interface methods for constructing and sending HTTP requests.
     /// </summary>
     /// <remarks>
-    /// Supports various HTTP methods such as GET, POST, PUT, DELETE, HEAD, OPTIONS, TRACE, and PATCH.
-    /// Allows sending requests with or without specified paths.
+    ///     Supports various HTTP methods such as GET, POST, PUT, DELETE, HEAD, OPTIONS, TRACE, and PATCH.
+    ///     Allows sending requests with or without specified paths.
     /// </remarks>
     public sealed class HttpClientSendActionBuilder(
         IEndpoint? httpClient,
@@ -144,35 +169,28 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
         /// This method sets up the necessary configurations including the HTTP method, endpoint, resolver, and path
         /// for the HTTP client request and returns a builder instance for further customization.
         /// <param name="method">
-        /// The HTTP method for the request, e.g., GET, POST, PUT, etc.
+        ///     The HTTP method for the request, e.g., GET, POST, PUT, etc.
         /// </param>
         /// <param name="path">
-        /// The optional path for the HTTP request. Can be null or empty if a path is not required.
+        ///     The optional path for the HTTP request. Can be null or empty if a path is not required.
         /// </param>
         /// <returns>
-        /// An instance of HttpClientRequestActionBuilder configured with the specified HTTP method and path.
-        /// This allows further chaining and customization of the HTTP request action.
+        ///     An instance of HttpClientRequestActionBuilder configured with the specified HTTP method and path.
+        ///     This allows further chaining and customization of the HTTP request action.
         /// </returns>
         private HttpClientRequestActionBuilder Request(HttpMethod method, string? path)
         {
             var builder = new HttpClientRequestActionBuilder();
             if (httpClient != null)
-            {
                 builder.Endpoint(httpClient);
-            }
             else
-            {
                 builder.Endpoint(httpClientUri);
-            }
 
             builder.Name("http:send-request");
             builder.WithReferenceResolver(referenceResolver);
             builder.Method(method);
 
-            if (!string.IsNullOrWhiteSpace(path))
-            {
-                builder.Path(path);
-            }
+            if (!string.IsNullOrWhiteSpace(path)) builder.Path(path);
 
             newDelegate = builder;
             return builder;
@@ -181,7 +199,7 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
         /// Initiates the process of sending an HTTP GET request to the server.
         /// This method creates a new HTTP GET request without a predefined path and prepares it for further configuration or execution.
         /// <returns>
-        /// A new instance of HttpClientRequestActionBuilder configured for an HTTP GET request.
+        ///     A new instance of HttpClientRequestActionBuilder configured for an HTTP GET request.
         /// </returns>
         public HttpClientRequestActionBuilder Get()
         {
@@ -191,12 +209,12 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
         /// Sends an HTTP GET request to the specified path as a server client.
         /// This method uses the GET HTTP method to send requests to the server.
         /// <param name="path">
-        /// The specific path for the HTTP GET request. This can include query parameters or other details
-        /// relevant to the resource being accessed on the server.
+        ///     The specific path for the HTTP GET request. This can include query parameters or other details
+        ///     relevant to the resource being accessed on the server.
         /// </param>
         /// <returns>
-        /// An instance of HttpClientRequestActionBuilder that allows for additional configuration
-        /// of the request or the ability to send the constructed request.
+        ///     An instance of HttpClientRequestActionBuilder that allows for additional configuration
+        ///     of the request or the ability to send the constructed request.
         /// </returns>
         public HttpClientRequestActionBuilder Get(string path)
         {
@@ -207,7 +225,7 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
         /// This method constructs an HTTP POST request without specifying a path
         /// and returns a builder for further customization or execution of the request.
         /// <returns>
-        /// An instance of HttpClientRequestActionBuilder configured for sending an HTTP POST request.
+        ///     An instance of HttpClientRequestActionBuilder configured for sending an HTTP POST request.
         /// </returns>
         public HttpClientRequestActionBuilder Post()
         {
@@ -217,11 +235,11 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
         /// Sends an HTTP POST request to the specified path as a client to the server.
         /// This method constructs the request using the POST HTTP method and includes the given relative path for the resource.
         /// <param name="path">
-        /// The relative path of the resource to which the POST request is sent.
+        ///     The relative path of the resource to which the POST request is sent.
         /// </param>
         /// <returns>
-        /// A new instance of HttpClientRequestActionBuilder configured to send the POST request to the specified path.
-        /// This allows further customization of the request before execution.
+        ///     A new instance of HttpClientRequestActionBuilder configured to send the POST request to the specified path.
+        ///     This allows further customization of the request before execution.
         /// </returns>
         public HttpClientRequestActionBuilder Post(string path)
         {
@@ -232,7 +250,7 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
         /// This method prepares a PUT request without specifying a path. The request is constructed
         /// using the HTTP client and configuration defined in the builder.
         /// <returns>
-        /// A new instance of HttpClientRequestActionBuilder to further customize and finalize the HTTP PUT request.
+        ///     A new instance of HttpClientRequestActionBuilder to further customize and finalize the HTTP PUT request.
         /// </returns>
         public HttpClientRequestActionBuilder Put()
         {
@@ -243,11 +261,12 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
         /// This method constructs a PUT request using the provided path and prepares it
         /// for further configuration or execution within the HTTP client action builder.
         /// <param name="path">
-        /// The URI path to which the HTTP PUT request will be sent. This path can be relative to the base URI of the HTTP client.
+        ///     The URI path to which the HTTP PUT request will be sent. This path can be relative to the base URI of the HTTP
+        ///     client.
         /// </param>
         /// <returns>
-        /// A new instance of HttpClientRequestActionBuilder configured for an HTTP PUT request
-        /// to the specified path. Allows for further customization of the request before sending.
+        ///     A new instance of HttpClientRequestActionBuilder configured for an HTTP PUT request
+        ///     to the specified path. Allows for further customization of the request before sending.
         /// </returns>
         public HttpClientRequestActionBuilder Put(string path)
         {
@@ -257,7 +276,7 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
         /// Sends an HTTP DELETE request to the server as a client.
         /// This method initializes a DELETE request without specifying a path.
         /// <returns>
-        /// A new instance of HttpClientRequestActionBuilder configured for sending an HTTP DELETE request.
+        ///     A new instance of HttpClientRequestActionBuilder configured for sending an HTTP DELETE request.
         /// </returns>
         public HttpClientRequestActionBuilder Delete()
         {
@@ -266,10 +285,12 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
 
         /// Sends an HTTP DELETE request to the specified path as the client to the server.
         /// <param name="path">
-        /// The relative or absolute path to which the DELETE request is sent. This path is appended to the base URI of the HTTP client.
+        ///     The relative or absolute path to which the DELETE request is sent. This path is appended to the base URI of the
+        ///     HTTP client.
         /// </param>
         /// <returns>
-        /// A new instance of HttpClientRequestActionBuilder that allows further configuration or the execution of the HTTP DELETE request.
+        ///     A new instance of HttpClientRequestActionBuilder that allows further configuration or the execution of the HTTP
+        ///     DELETE request.
         /// </returns>
         public HttpClientRequestActionBuilder Delete(string path)
         {
@@ -279,8 +300,8 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
         /// Sends an HTTP HEAD request to the server without specifying a path.
         /// This method constructs an HTTP request with the HEAD method and sends it to the server.
         /// <returns>
-        /// The current instance of HttpClientRequestActionBuilder configured to send an HTTP HEAD request,
-        /// allowing for further customization or execution of the request.
+        ///     The current instance of HttpClientRequestActionBuilder configured to send an HTTP HEAD request,
+        ///     allowing for further customization or execution of the request.
         /// </returns>
         public HttpClientRequestActionBuilder Head()
         {
@@ -290,10 +311,10 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
         /// Sends an HTTP HEAD request with the specified path to the server.
         /// Allows for fluent configuration of the HTTP request using the returned builder.
         /// <param name="path">
-        /// The relative path to be appended to the base URI for the HTTP HEAD request.
+        ///     The relative path to be appended to the base URI for the HTTP HEAD request.
         /// </param>
         /// <returns>
-        /// An instance of HttpClientRequestActionBuilder, enabling further configuration of the HTTP request.
+        ///     An instance of HttpClientRequestActionBuilder, enabling further configuration of the HTTP request.
         /// </returns>
         public HttpClientRequestActionBuilder Head(string path)
         {
@@ -304,8 +325,8 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
         /// This method constructs and prepares an HTTP OPTIONS request without
         /// any specific path, allowing for server-wide OPTIONS queries.
         /// <returns>
-        /// The current instance of HttpClientRequestActionBuilder configured
-        /// to send an OPTIONS request, enabling additional setup before execution.
+        ///     The current instance of HttpClientRequestActionBuilder configured
+        ///     to send an OPTIONS request, enabling additional setup before execution.
         /// </returns>
         public HttpClientRequestActionBuilder Options()
         {
@@ -315,10 +336,11 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
         /// Sends an HTTP OPTIONS request to the specified path.
         /// This method allows the client to query the server for communication options available.
         /// <param name="path">
-        /// The relative path to send the OPTIONS request to. This path is appended to the base URI of the HTTP client.
+        ///     The relative path to send the OPTIONS request to. This path is appended to the base URI of the HTTP client.
         /// </param>
         /// <returns>
-        /// An instance of HttpClientRequestActionBuilder configured for an OPTIONS request. This allows further customization and execution of the request.
+        ///     An instance of HttpClientRequestActionBuilder configured for an OPTIONS request. This allows further customization
+        ///     and execution of the request.
         /// </returns>
         public HttpClientRequestActionBuilder Options(string path)
         {
@@ -330,8 +352,8 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
         /// about the connection between the client and the server. TRACE requests are processed by the server and
         /// the response returns the exact content that was received.
         /// <returns>
-        /// The current instance of HttpClientRequestActionBuilder configured for sending a TRACE request.
-        /// This allows for further customization or direct invocation of the request
+        ///     The current instance of HttpClientRequestActionBuilder configured for sending a TRACE request.
+        ///     This allows for further customization or direct invocation of the request
         /// </returns>
         public HttpClientRequestActionBuilder Trace()
         {
@@ -341,10 +363,10 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
         /// Sends an HTTP TRACE request to the server with the specified path.
         /// The TRACE method allows the client to see what is being received at the other end of the request chain, useful for testing or diagnostic purposes.
         /// <param name="path">
-        /// The resource path to which the TRACE request will be sent. This is appended to the base URI of the HTTP client.
+        ///     The resource path to which the TRACE request will be sent. This is appended to the base URI of the HTTP client.
         /// </param>
         /// <returns>
-        /// An instance of HttpClientRequestActionBuilder to enable further configuration of the TRACE request.
+        ///     An instance of HttpClientRequestActionBuilder to enable further configuration of the TRACE request.
         /// </returns>
         public HttpClientRequestActionBuilder Trace(string path)
         {
@@ -355,7 +377,7 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
         /// The method builds the request and returns an instance of the HttpClientRequestActionBuilder
         /// for further configuration and execution of the HTTP PATCH request.
         /// <returns>
-        /// An instance of HttpClientRequestActionBuilder configured for an HTTP PATCH request.
+        ///     An instance of HttpClientRequestActionBuilder configured for an HTTP PATCH request.
         /// </returns>
         public HttpClientRequestActionBuilder Patch()
         {
@@ -365,10 +387,10 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
         /// Sends an HTTP PATCH request to the specified path.
         /// This method constructs a PATCH request by resolving the given path and preparing it as part of the HTTP client's request flow.
         /// <param name="path">
-        /// The relative or absolute path for the PATCH request. This is used to determine the target endpoint of the request.
+        ///     The relative or absolute path for the PATCH request. This is used to determine the target endpoint of the request.
         /// </param>
         /// <returns>
-        /// An instance of HttpClientRequestActionBuilder configured for sending the PATCH request.
+        ///     An instance of HttpClientRequestActionBuilder configured for sending the PATCH request.
         /// </returns>
         public HttpClientRequestActionBuilder Patch(string path)
         {

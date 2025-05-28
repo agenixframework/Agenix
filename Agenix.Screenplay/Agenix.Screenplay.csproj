@@ -4,15 +4,18 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Copyright>Copyright (c) 2025 Andrei Suruceanu</Copyright>
+        <Authors>Andrei Suruceanu</Authors>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="NUnit" Version="4.3.2" />
-      <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
+        <PackageReference Include="NUnit" Version="4.3.2"/>
+        <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Agenix.Api\Agenix.Api.csproj" />
+        <ProjectReference Include="..\Agenix.Api\Agenix.Api.csproj"/>
     </ItemGroup>
 
 </Project>

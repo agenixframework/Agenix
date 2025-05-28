@@ -1,4 +1,6 @@
-﻿namespace Agenix.Core.Endpoint;
+﻿using Agenix.Api.Endpoint;
+
+namespace Agenix.Core.Endpoint;
 
 /// <summary>
 ///     Abstract endpoint configuration provides basic properties such as message listeners.

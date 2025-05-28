@@ -2,8 +2,8 @@
 using Agenix.Api;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Message;
+using Agenix.Api.Spi;
 using Agenix.Api.Variable;
-using Agenix.Core.Spi;
 
 namespace Agenix.Core.Message.Builder;
 

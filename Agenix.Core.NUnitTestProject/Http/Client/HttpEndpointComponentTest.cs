@@ -1,5 +1,5 @@
 ﻿using System.Net.Http;
-using Agenix.Core.Spi;
+using Agenix.Api.Spi;
 using Agenix.Http.Client;
 using Moq;
 using NUnit.Framework;

@@ -1,7 +1,7 @@
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
+using Agenix.Api.Spi;
 using Agenix.Api.Validation.Context;
-using Agenix.Core.Spi;
 using Agenix.Validation.Json.Json;
 using Agenix.Validation.Json.Json.Schema;
 using Microsoft.Extensions.Logging;

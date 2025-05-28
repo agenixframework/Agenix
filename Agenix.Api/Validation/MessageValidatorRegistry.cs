@@ -1,4 +1,30 @@
-﻿using Agenix.Api.Exceptions;
+﻿#region License
+
+// MIT License
+//
+// Copyright (c) 2025 Agenix
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+#endregion
+
+using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Util;
@@ -34,18 +60,40 @@ public class MessageValidatorRegistry
     private IMessageValidator<IValidationContext> _defaultMessageHeaderValidator;
 
     /// <summary>
-    /// A private collection that holds registered message validators mapped by their unique names.
+    ///     A private collection that holds registered message validators mapped by their unique names.
     /// </summary>
     private IDictionary<string, IMessageValidator<IValidationContext>> _messageValidators =
         new Dictionary<string, IMessageValidator<IValidationContext>>();
 
     /// <summary>
-    /// A collection that maintains mappings of schema validator names to their
-    /// corresponding implementations of <see cref="ISchemaValidator{T}" />.
-    /// It is used for validating schemas within the context of message validation.
+    ///     A collection that maintains mappings of schema validator names to their
+    ///     corresponding implementations of <see cref="ISchemaValidator{T}" />.
+    ///     It is used for validating schemas within the context of message validation.
     /// </summary>
     private IDictionary<string, ISchemaValidator<ISchemaValidationContext>> _schemeValidators =
         new Dictionary<string, ISchemaValidator<ISchemaValidationContext>>();
+
+
+    /// <summary>
+    ///     A property that provides access to a collection of message validators, represented as a dictionary
+    ///     where the key is a string and the value is an implementation of <see cref="IMessageValidator{T}" />.
+    ///     This property allows for the retrieval or replacement of the current set of validators.
+    /// </summary>
+    public IDictionary<string, IMessageValidator<IValidationContext>> MessageValidators
+    {
+        get => _messageValidators;
+        set => _messageValidators = value;
+    }
+
+
+    /// <summary>
+    ///     Gets or sets all schema validators.
+    /// </summary>
+    public IDictionary<string, ISchemaValidator<ISchemaValidationContext>> SchemaValidators
+    {
+        get => _schemeValidators;
+        set => _schemeValidators = value;
+    }
 
     /// <summary>
     ///     Finds message validators for a given message type and message.
@@ -88,7 +136,8 @@ public class MessageValidatorRegistry
             if (mustFindValidator)
             {
                 Log.LogWarning(
-                    "Unable to find proper message validator. Message type is '{MessageType}' and message payload is '{GetPayload}'", messageType, message.GetPayload<string>());
+                    "Unable to find proper message validator. Message type is '{MessageType}' and message payload is '{GetPayload}'",
+                    messageType, message.GetPayload<string>());
                 throw new AgenixSystemException("Failed to find proper message validator for message");
             }
 
@@ -96,7 +145,8 @@ public class MessageValidatorRegistry
             matchingValidators.Add(_defaultTextEqualsMessageValidator);
         }
 
-        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Found {MatchingValidatorsCount} message validators for message", matchingValidators.Count);
+        if (Log.IsEnabled(LogLevel.Debug))
+            Log.LogDebug("Found {MatchingValidatorsCount} message validators for message", matchingValidators.Count);
 
         return matchingValidators;
     }
@@ -115,15 +165,16 @@ public class MessageValidatorRegistry
     }
 
     /// <summary>
-    /// Finds schema validators that support a specific message type and message payload.
+    ///     Finds schema validators that support a specific message type and message payload.
     /// </summary>
     /// <param name="messageType">The type of the message for which schema validators are being searched.</param>
     /// <param name="message">The message instance used as part of schema validation criteria.</param>
     /// <returns>
-    /// A list of schema validators that support the specified message type and message. Returns an empty list if no
-    /// applicable validators are found.
+    ///     A list of schema validators that support the specified message type and message. Returns an empty list if no
+    ///     applicable validators are found.
     /// </returns>
-    private List<ISchemaValidator<ISchemaValidationContext>> FindFallbackSchemaValidators(string messageType, IMessage message)
+    private List<ISchemaValidator<ISchemaValidationContext>> FindFallbackSchemaValidators(string messageType,
+        IMessage message)
     {
         return _schemeValidators.Values.Where(validator => validator.SupportsMessageType(messageType, message))
             .ToList();
@@ -168,7 +219,7 @@ public class MessageValidatorRegistry
     }
 
     /// <summary>
-    /// Adds a schema validator to the registry or updates an existing one with the specified name.
+    ///     Adds a schema validator to the registry or updates an existing one with the specified name.
     /// </summary>
     /// <param name="name">The unique name of the schema validator to add or update in the registry.</param>
     /// <param name="schemaValidator">The schema validator instance to be added or updated in the registry.</param>
@@ -180,23 +231,11 @@ public class MessageValidatorRegistry
         _schemeValidators[name] = schemaValidator;
     }
 
-
     /// <summary>
-    /// A property that provides access to a collection of message validators, represented as a dictionary
-    /// where the key is a string and the value is an implementation of <see cref="IMessageValidator{T}" />.
-    /// This property allows for the retrieval or replacement of the current set of validators.
-    /// </summary>
-    public IDictionary<string, IMessageValidator<IValidationContext>> MessageValidators
-    {
-        get => _messageValidators;
-        set => _messageValidators = value;
-    }
-
-    /// <summary>
-    /// Retrieves the default message validator instance used for validating messages within the system.
+    ///     Retrieves the default message validator instance used for validating messages within the system.
     /// </summary>
     /// <returns>
-    /// The default implementation of the IMessageValidator interface for validating messages.
+    ///     The default implementation of the IMessageValidator interface for validating messages.
     /// </returns>
     public IMessageValidator<IValidationContext> GetDefaultMessageValidator()
     {
@@ -246,17 +285,18 @@ public class MessageValidatorRegistry
     }
 
     /// <summary>
-    /// Finds schema validators for a given message type and message.
+    ///     Finds schema validators for a given message type and message.
     /// </summary>
     /// <param name="messageType">The type of the message to find schema validators for.</param>
     /// <param name="message">The message instance to be validated.</param>
     /// <returns>
-    /// A list of schema validators that support the specified message type and message.
-    /// If no specific schema validators are found, fallback validators may be returned based on the message payload.
+    ///     A list of schema validators that support the specified message type and message.
+    ///     If no specific schema validators are found, fallback validators may be returned based on the message payload.
     /// </returns>
     public List<ISchemaValidator<ISchemaValidationContext>> FindSchemaValidators(string messageType, IMessage message)
     {
-        var matchingSchemaValidators = _schemeValidators.Values.Where(validator => validator.SupportsMessageType(messageType, message)).ToList();
+        var matchingSchemaValidators = _schemeValidators.Values
+            .Where(validator => validator.SupportsMessageType(messageType, message)).ToList();
 
         if (matchingSchemaValidators.Count != 0) return matchingSchemaValidators;
         // try to find fallback message validator for given message payload
@@ -265,38 +305,24 @@ public class MessageValidatorRegistry
         payload = payload.Trim();
 
         if (IsXmlPredicate.Instance.Test(payload) && messageType != nameof(MessageType.XML))
-        {
             matchingSchemaValidators = FindFallbackSchemaValidators(nameof(MessageType.XML), message);
-        }
         else if (IsJsonPredicate.Instance.Test(payload) && messageType != nameof(MessageType.JSON))
-        {
             matchingSchemaValidators = FindFallbackSchemaValidators(nameof(MessageType.JSON), message);
-        }
 
         return matchingSchemaValidators;
     }
 
     /// <summary>
-    /// Finds a schema validator corresponding to the provided name.
+    ///     Finds a schema validator corresponding to the provided name.
     /// </summary>
     /// <param name="name">The name of the schema validator to retrieve.</param>
     /// <returns>
-    /// An optional containing the schema validator if found; otherwise, an empty optional.
+    ///     An optional containing the schema validator if found; otherwise, an empty optional.
     /// </returns>
     public Optional<ISchemaValidator<ISchemaValidationContext>> FindSchemaValidator(string name)
     {
         return _schemeValidators.TryGetValue(name, out var validator)
             ? Optional<ISchemaValidator<ISchemaValidationContext>>.Of(validator)
             : Optional<ISchemaValidator<ISchemaValidationContext>>.Empty;
-    }
-    
-    
-    /// <summary>
-    /// Gets or sets all schema validators.
-    /// </summary>
-    public IDictionary<string, ISchemaValidator<ISchemaValidationContext>> SchemaValidators
-    {
-        get => _schemeValidators;
-        set => _schemeValidators = value;
     }
 }

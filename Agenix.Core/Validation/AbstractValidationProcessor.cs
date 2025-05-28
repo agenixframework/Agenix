@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Agenix.Api.Context;
 using Agenix.Api.Message;
+using Agenix.Api.Spi;
 using Agenix.Api.Validation;
-using Agenix.Core.Spi;
 
 namespace Agenix.Core.Validation;
 

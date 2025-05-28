@@ -4,7 +4,6 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Agenix.Core.Spi;
 using Agenix.Core.Util;
 using Agenix.Sql.Actions;
 using Moq;

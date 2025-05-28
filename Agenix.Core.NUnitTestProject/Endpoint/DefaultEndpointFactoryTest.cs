@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Spi;
 using Agenix.Core.Endpoint.Direct;
-using Agenix.Core.Spi;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;

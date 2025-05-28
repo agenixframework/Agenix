@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Message;
+using Agenix.Api.Spi;
 using Agenix.Core.Endpoint.Direct;
 using Agenix.Core.Message;
 using TestContext = Agenix.Api.Context.TestContext;
-using Agenix.Core.Spi;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;

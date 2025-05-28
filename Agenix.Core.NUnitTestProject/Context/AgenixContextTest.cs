@@ -1,5 +1,5 @@
 ﻿using Agenix.Api.Exceptions;
-using Agenix.Core.Spi;
+using Agenix.Api.Spi;
 using log4net;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;

@@ -2,8 +2,8 @@
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
 using Agenix.Api.Message;
+using Agenix.Api.Spi;
 using Agenix.Api.Validation;
-using Agenix.Core.Spi;
 using Agenix.Core.Util;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;

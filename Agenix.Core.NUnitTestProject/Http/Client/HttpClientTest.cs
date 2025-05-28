@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Mime;
+using Agenix.Api.Message;
 using Agenix.Core.Endpoint.Resolver;
 using Agenix.Core.Message;
 using Agenix.Http.Client;

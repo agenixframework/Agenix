@@ -1,5 +1,5 @@
 using Agenix.Api.Exceptions;
-using Agenix.Core.Spi;
+using Agenix.Api.Spi;
 using Agenix.Core.Validation.Json;
 using Agenix.Validation.Json.Json;
 using Agenix.Validation.Json.Json.Schema;

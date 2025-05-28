@@ -1,3 +1,29 @@
+#region License
+
+// MIT License
+//
+// Copyright (c) 2025 Agenix
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+#endregion
+
 using System.Configuration;
 
 namespace Agenix.Screenplay.Cast;
@@ -20,9 +46,9 @@ public static class OnStage
     private const string A_New_Actor = "An actor";
 
     /// <summary>
-    /// Represents an asynchronous local variable used to manage the stage within the OnStage context.
-    /// This variable encapsulates the current <see cref="Stage"/> instance and facilitates state isolation
-    /// in asynchronous operations.
+    ///     Represents an asynchronous local variable used to manage the stage within the OnStage context.
+    ///     This variable encapsulates the current <see cref="Stage" /> instance and facilitates state isolation
+    ///     in asynchronous operations.
     /// </summary>
     private static readonly AsyncLocal<Stage> Stage = new();
 
@@ -74,7 +100,7 @@ public static class OnStage
     }
 
     /// <summary>
-    /// Determines whether there is an actor currently present on the stage.
+    ///     Determines whether there is an actor currently present on the stage.
     /// </summary>
     /// <returns>A boolean value indicating if an actor is on the stage.</returns>
     private static bool AnActorIsOnStage()
@@ -138,10 +164,10 @@ public static class OnStage
     }
 
     /// <summary>
-    /// Retrieves a collection of configured pronouns available for use.
+    ///     Retrieves a collection of configured pronouns available for use.
     /// </summary>
     /// <returns>
-    /// An enumerable collection of strings representing pronouns.
+    ///     An enumerable collection of strings representing pronouns.
     /// </returns>
     private static IEnumerable<string> GetPronouns()
     {

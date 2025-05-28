@@ -6,8 +6,8 @@ using Agenix.Api.Common;
 using Agenix.Api.Exceptions;
 using Agenix.Api.IO;
 using Agenix.Api.Message;
+using Agenix.Api.Spi;
 using Agenix.Api.Variable;
-using Agenix.Core.Spi;
 using Agenix.Core.Util;
 using Agenix.Core.Validation.Builder;
 

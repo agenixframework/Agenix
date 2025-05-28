@@ -1,4 +1,30 @@
-﻿using System.Collections;
+﻿#region License
+
+// MIT License
+//
+// Copyright (c) 2025 Agenix
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+#endregion
+
+using System.Collections;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Mime;
@@ -293,23 +319,23 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
     }
 
     /// <summary>
-    /// Creates an <see cref="HttpRequestMessage" /> with the specified HTTP headers, payload, HTTP method, and
-    /// endpoint configuration. Prepares a request to be sent to an HTTP endpoint.
+    ///     Creates an <see cref="HttpRequestMessage" /> with the specified HTTP headers, payload, HTTP method, and
+    ///     endpoint configuration. Prepares a request to be sent to an HTTP endpoint.
     /// </summary>
     /// <param name="httpHeaders">
-    /// The collection of headers to be added to the HTTP request. Headers may include request-level
-    /// or content-level configurations depending on their type.
+    ///     The collection of headers to be added to the HTTP request. Headers may include request-level
+    ///     or content-level configurations depending on their type.
     /// </param>
     /// <param name="httpMessage">
-    /// The HTTP message that contains the payload data to be included in the request.
+    ///     The HTTP message that contains the payload data to be included in the request.
     /// </param>
     /// <param name="method">
-    /// The HTTP method that defines the action to be performed, such as GET, POST, or PUT. Defaults
-    /// to GET if null.
+    ///     The HTTP method that defines the action to be performed, such as GET, POST, or PUT. Defaults
+    ///     to GET if null.
     /// </param>
     /// <param name="endpointConfiguration">
-    /// The configuration for the HTTP endpoint which may include authentication, base URL, and other
-    /// settings influencing the request construction.
+    ///     The configuration for the HTTP endpoint which may include authentication, base URL, and other
+    ///     settings influencing the request construction.
     /// </param>
     /// <returns>An <see cref="HttpRequestMessage" /> that is fully configured and ready to be sent to the target endpoint.</returns>
     private HttpRequestMessage CreateHttpRequest(HttpRequestHeaders httpHeaders, HttpMessage httpMessage,

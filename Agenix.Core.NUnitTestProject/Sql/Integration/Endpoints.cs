@@ -1,9 +1,9 @@
 ﻿using System.IO;
 using System.Reflection;
 using Agenix.Api.Container;
+using Agenix.Api.Spi;
 using Agenix.Core.Actions;
 using Agenix.Core.Container;
-using Agenix.Core.Spi;
 using Agenix.Sql.Actions;
 using Spring.Data.Common;
 using Spring.Data.Core;

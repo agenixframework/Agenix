@@ -27,7 +27,7 @@ using Newtonsoft.Json.Serialization;
 using NHamcrest;
 using NHamcrest.Core;
 using NUnit.Framework;
-using IReferenceResolver = Agenix.Core.Spi.IReferenceResolver;
+using IReferenceResolver = Agenix.Api.Spi.IReferenceResolver;
 using TestContext = Agenix.Api.Context.TestContext;
 using Contains = NHamcrest.Contains;
 using IsNull = NHamcrest.Is;
