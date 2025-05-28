@@ -5,7 +5,7 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agenix.Core", "Agenix.Core\Agenix.Core.csproj", "{BC320C83-93AE-4BC6-BF8E-FFA52CAEF780}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agenix.Core.NUnitTestProject", "Agenix.Core.NUnitTestProject\Agenix.Core.NUnitTestProject.csproj", "{4E347B48-1379-4A9F-8BC6-7844FF72ED9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agenix.Core.Tests", "Agenix.Core.Tests\Agenix.Core.Tests.csproj", "{4E347B48-1379-4A9F-8BC6-7844FF72ED9B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agenix.NUnit.Runtime", "Agenix.NUnit.Runtime\Agenix.NUnit.Runtime.csproj", "{CA7C0603-EA56-45A0-A37E-52DE4758C966}"
 EndProject
