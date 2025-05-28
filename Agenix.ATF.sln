@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agenix.Screenplay", "Agenix
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agenix.ReqrollPlugin.Tests", "Agenix.ReqrollPlugin.Tests\Agenix.ReqrollPlugin.Tests.csproj", "{5B58A4D1-9AE6-4B31-9513-6A5D3D3AA72B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agenix.Screenplay.Tests", "Agenix.Screenplay.Tests\Agenix.Screenplay.Tests.csproj", "{CBDA4A24-A853-44F0-82F3-36D16A19EBA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,10 @@ Global
 		{5B58A4D1-9AE6-4B31-9513-6A5D3D3AA72B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B58A4D1-9AE6-4B31-9513-6A5D3D3AA72B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B58A4D1-9AE6-4B31-9513-6A5D3D3AA72B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBDA4A24-A853-44F0-82F3-36D16A19EBA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBDA4A24-A853-44F0-82F3-36D16A19EBA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBDA4A24-A853-44F0-82F3-36D16A19EBA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBDA4A24-A853-44F0-82F3-36D16A19EBA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
