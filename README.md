@@ -102,7 +102,6 @@ cd Agenix.ATF
 | **Agenix.Validation.Json.Tests** | JSON validation module testing | • Schema validation tests<br>• JSON comparison tests |
 | **Agenix.Validation.NHamcrest.Tests** | Hamcrest matcher testing | • Matcher behavior tests<br>• Assertion tests |
 | **Agenix.Validation.Text.Tests** | Text validation module testing | • Text comparison tests<br>• Pattern matching tests |
-| **Agenix.Acceptance.Test.API.Specs** | End-to-end API acceptance testing | • API workflow tests<br>• Full integration tests<br>• Acceptance criteria validation |
 
 ### 📋 Configuration & Support Files
 
