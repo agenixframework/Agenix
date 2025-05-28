@@ -4,19 +4,22 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Copyright>Copyright (c) 2025 Andrei Suruceanu</Copyright>
+        <Authors>Andrei Suruceanu</Authors>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Agenix.Api\Agenix.Api.csproj" />
+        <ProjectReference Include="..\Agenix.Api\Agenix.Api.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="Extension\agenix\message\validator\binary_base64" />
-      <EmbeddedResource Include="Extension\agenix\message\validator\binary_base64" />
-      <None Remove="Extension\agenix\message\validator\gzip_base64" />
-      <EmbeddedResource Include="Extension\agenix\message\validator\gzip_base64" />
-      <None Remove="Extension\agenix\message\validator\plaintext" />
-      <EmbeddedResource Include="Extension\agenix\message\validator\plaintext" />
+        <None Remove="Extension\agenix\message\validator\binary_base64"/>
+        <EmbeddedResource Include="Extension\agenix\message\validator\binary_base64"/>
+        <None Remove="Extension\agenix\message\validator\gzip_base64"/>
+        <EmbeddedResource Include="Extension\agenix\message\validator\gzip_base64"/>
+        <None Remove="Extension\agenix\message\validator\plaintext"/>
+        <EmbeddedResource Include="Extension\agenix\message\validator\plaintext"/>
     </ItemGroup>
 
 </Project>

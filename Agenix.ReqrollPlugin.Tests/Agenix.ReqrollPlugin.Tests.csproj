@@ -5,6 +5,9 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <RootNamespace>Agenix.Reqroll.Plugin.Tests</RootNamespace>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Copyright>Copyright (c) 2025 Andrei Suruceanu</Copyright>
+        <Authors>Andrei Suruceanu</Authors>
     </PropertyGroup>
 
     <ItemGroup>

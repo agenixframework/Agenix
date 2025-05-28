@@ -1,4 +1,31 @@
 #region Imports
+
+#region License
+
+// MIT License
+//
+// Copyright (c) 2025 Agenix
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+#endregion
+
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -183,7 +210,8 @@ public class FileUtils
         {
             var dir = dirs.Pop();
 
-            files.AddRange(Directory.GetFiles(dir).Where(file => fileNamePatterns.Any(pattern => Regex.IsMatch(file, pattern))));
+            files.AddRange(Directory.GetFiles(dir)
+                .Where(file => fileNamePatterns.Any(pattern => Regex.IsMatch(file, pattern))));
 
             foreach (var subDir in Directory.GetDirectories(dir)) dirs.Push(subDir);
         }
@@ -202,7 +230,7 @@ public class FileUtils
     }
 
     /// <summary>
-    /// Retrieves a file resource based on the provided file path after replacing any dynamic content within the path.
+    ///     Retrieves a file resource based on the provided file path after replacing any dynamic content within the path.
     /// </summary>
     /// <param name="resourceName">The file path of the resource, which may contain placeholders for dynamic content.</param>
     /// <param name="context">The TestContext instance used to resolve dynamic content in the provided file path.</param>
@@ -214,28 +242,31 @@ public class FileUtils
     }
 
     /// <summary>
-    /// Retrieves a file resource based on the provided resource name and context.
+    ///     Retrieves a file resource based on the provided resource name and context.
     /// </summary>
     /// <param name="resourceName">The name of the resource to be retrieved.</param>
     /// <param name="context">The context used to resolve and replace dynamic content in the resource name.</param>
-    /// <returns>An instance of <see cref="IResource"/> representing the requested resource.</returns>
+    /// <returns>An instance of <see cref="IResource" /> representing the requested resource.</returns>
     public static IResource GetFileResource(string resourceName)
     {
         return new ConfigurableResourceLoader().GetResource(resourceName);
     }
-    
+
     /// <summary>
-    /// Retrieves the file extension from the provided file path.
+    ///     Retrieves the file extension from the provided file path.
     /// </summary>
     /// <param name="path">The full path or name of the file.</param>
-    /// <returns>The file extension, including the leading period, or an empty string if the file path does not contain an extension.</returns>
+    /// <returns>
+    ///     The file extension, including the leading period, or an empty string if the file path does not contain an
+    ///     extension.
+    /// </returns>
     public static string GetFileExtension(string path)
     {
         return Path.GetExtension(path);
     }
 
     /// <summary>
-    /// Retrieves the file name and extension from the specified path.
+    ///     Retrieves the file name and extension from the specified path.
     /// </summary>
     /// <param name="path">The full path of the file.</param>
     /// <returns>The file name and extension as a string.</returns>
@@ -245,7 +276,7 @@ public class FileUtils
     }
 
     /// <summary>
-    /// Retrieves the base name (file name without extension) from the given file name.
+    ///     Retrieves the base name (file name without extension) from the given file name.
     /// </summary>
     /// <param name="fileName">The full file name, including the extension.</param>
     /// <returns>The base name of the file without its extension.</returns>
@@ -255,7 +286,7 @@ public class FileUtils
     }
 
     /// <summary>
-    /// Retrieves the base path of a specified file by extracting its directory path.
+    ///     Retrieves the base path of a specified file by extracting its directory path.
     /// </summary>
     /// <param name="filePath">The full path to the file whose base path is to be determined.</param>
     /// <returns>The base path of the specified file.</returns>
@@ -382,7 +413,8 @@ public class FileUtils
     }
 
     /// <summary>
-    /// Loads settings from a configuration file located at the specified resource path and populates the provided NameValueCollection.
+    ///     Loads settings from a configuration file located at the specified resource path and populates the provided
+    ///     NameValueCollection.
     /// </summary>
     /// <param name="settings">The NameValueCollection to populate with settings from the configuration file.</param>
     /// <param name="resourcePath">The file path to the configuration file to be loaded.</param>
@@ -398,7 +430,7 @@ public class FileUtils
     }
 
     /// <summary>
-    /// Loads configuration settings from the provided resource into a NameValueCollection.
+    ///     Loads configuration settings from the provided resource into a NameValueCollection.
     /// </summary>
     /// <param name="resource">The resource to load configuration settings from.</param>
     /// <returns>A NameValueCollection containing the configuration settings.</returns>
@@ -417,7 +449,7 @@ public class FileUtils
             {
                 resource.InputStream.CopyTo(fileStream);
             }
-            
+
             if (string.IsNullOrEmpty(tempFilePath))
                 throw new ArgumentException("Config path must not be null or empty", nameof(tempFilePath));
 
@@ -434,7 +466,6 @@ public class FileUtils
         {
             // Clean up the temporary file
             if (File.Exists(tempFilePath))
-            {
                 try
                 {
                     File.Delete(tempFilePath);
@@ -445,7 +476,6 @@ public class FileUtils
                     // Assuming Log is available in this class, based on the code snippet
                     Log.LogWarning($"Failed to delete temporary configuration file: {tempFilePath}", ex);
                 }
-            }
         }
 
 

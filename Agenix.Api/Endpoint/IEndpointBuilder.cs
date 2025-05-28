@@ -1,18 +1,43 @@
-﻿using Agenix.Api.Annotations;
+﻿#region License
+
+// MIT License
+//
+// Copyright (c) 2025 Agenix
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+#endregion
+
+using Agenix.Api.Annotations;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
 using Agenix.Api.Spi;
 using Agenix.Api.Util;
-using Agenix.Core.Spi;
 using Microsoft.Extensions.Logging;
 
 namespace Agenix.Api.Endpoint;
 
 /// <summary>
-/// Defines the contract for an endpoint builder that includes methods to build and manage endpoints.
+///     Defines the contract for an endpoint builder that includes methods to build and manage endpoints.
 /// </summary>
 /// <typeparam name="T">
-/// The type of endpoint being constructed, constrained to implement the <see cref="IEndpoint"/> interface.
+///     The type of endpoint being constructed, constrained to implement the <see cref="IEndpoint" /> interface.
 /// </typeparam>
 public interface IEndpointBuilder<out T> where T : IEndpoint
 {
@@ -22,16 +47,16 @@ public interface IEndpointBuilder<out T> where T : IEndpoint
     private static readonly ILogger Log = LogManager.GetLogger(typeof(IEndpointBuilder<T>).Name);
 
     /// <summary>
-    /// Represents the resource path where endpoint builder configurations
-    /// and metadata are located.
-    /// </summary>
-    static string ResourcePath => "Extension/agenix/endpoint/builder";
-
-    /// <summary>
-    /// Resolver for associating resource paths with types. Used to interpret and map
-    /// resource paths to associated types or properties within the endpoint builder context.
+    ///     Resolver for associating resource paths with types. Used to interpret and map
+    ///     resource paths to associated types or properties within the endpoint builder context.
     /// </summary>
     private static readonly ResourcePathTypeResolver TypeResolver = new(ResourcePath);
+
+    /// <summary>
+    ///     Represents the resource path where endpoint builder configurations
+    ///     and metadata are located.
+    /// </summary>
+    static string ResourcePath => "Extension/agenix/endpoint/builder";
 
     /// <summary>
     ///     Builds the endpoint.
@@ -40,13 +65,13 @@ public interface IEndpointBuilder<out T> where T : IEndpoint
     T Build();
 
     /// <summary>
-    /// Determines whether the specified endpoint type is supported by the builder.
+    ///     Determines whether the specified endpoint type is supported by the builder.
     /// </summary>
     /// <param name="endpointType">
-    /// The type of the endpoint to check for support.
+    ///     The type of the endpoint to check for support.
     /// </param>
     /// <returns>
-    /// True if the specified endpoint type is supported; otherwise, false.
+    ///     True if the specified endpoint type is supported; otherwise, false.
     /// </returns>
     bool Supports(Type endpointType);
 
@@ -62,17 +87,18 @@ public interface IEndpointBuilder<out T> where T : IEndpoint
         );
 
         if (!Log.IsEnabled(LogLevel.Debug)) return validators;
-        foreach (var kvp in validators) Log.LogDebug("Found endpoint builder '{KvpKey}' as {Name}", kvp.Key, kvp.Value.GetType().Name);
+        foreach (var kvp in validators)
+            Log.LogDebug("Found endpoint builder '{KvpKey}' as {Name}", kvp.Key, kvp.Value.GetType().Name);
 
         return validators;
     }
 
     /// <summary>
-    /// Performs a lookup for all available endpoint builders in the system.
+    ///     Performs a lookup for all available endpoint builders in the system.
     /// </summary>
     /// <returns>
-    /// A dictionary containing the endpoint builder names as keys and their respective
-    /// <see cref="IEndpointBuilder{T}" /> implementations as values.
+    ///     A dictionary containing the endpoint builder names as keys and their respective
+    ///     <see cref="IEndpointBuilder{T}" /> implementations as values.
     /// </returns>
     public static Optional<IEndpointBuilder<T>> Lookup(string builder)
     {
@@ -82,7 +108,8 @@ public interface IEndpointBuilder<out T> where T : IEndpoint
             if (builder.Contains('.'))
             {
                 var separatorIndex = builder.LastIndexOf('.');
-                instance = TypeResolver.Resolve<IEndpointBuilder<T>>(builder[..separatorIndex], builder[(separatorIndex + 1)..]);
+                instance = TypeResolver.Resolve<IEndpointBuilder<T>>(builder[..separatorIndex],
+                    builder[(separatorIndex + 1)..]);
             }
             else
             {

@@ -1,10 +1,36 @@
+#region License
+
+// MIT License
+//
+// Copyright (c) 2025 Agenix
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+#endregion
+
 namespace Agenix.Screenplay;
 
 /// <summary>
-/// Represents the ability to associate specific data or answers with a memory key,
-/// enabling an actor in a screenplay-style interaction to retain and recall information.
-/// Provides fluent methods for defining and storing memory associations, supporting
-/// agent-based interactions and assertions within the screenplay framework.
+///     Represents the ability to associate specific data or answers with a memory key,
+///     enabling an actor in a screenplay-style interaction to retain and recall information.
+///     Provides fluent methods for defining and storing memory associations, supporting
+///     agent-based interactions and assertions within the screenplay framework.
 /// </summary>
 public abstract class RememberThat : IPerformable
 {
@@ -24,9 +50,9 @@ public abstract class RememberThat : IPerformable
     }
 
     /// <summary>
-    /// Represents the ability to associate an answer obtained from a question
-    /// with a specific memory key, enabling an actor to remember the result for later use.
-    /// This class supports fluent memory management for screenplay-style interactions.
+    ///     Represents the ability to associate an answer obtained from a question
+    ///     with a specific memory key, enabling an actor to remember the result for later use.
+    ///     This class supports fluent memory management for screenplay-style interactions.
     /// </summary>
     public class WithQuestion(string memoryKey, IQuestion<dynamic> question) : RememberThat
     {
@@ -37,24 +63,24 @@ public abstract class RememberThat : IPerformable
     }
 
     /// <summary>
-    /// Represents a builder for creating memory associations by specifying a memory key
-    /// and associating it with a value or a question. This class is part of the agent-based
-    /// testing framework to enable fluent actions using memory concepts.
+    ///     Represents a builder for creating memory associations by specifying a memory key
+    ///     and associating it with a value or a question. This class is part of the agent-based
+    ///     testing framework to enable fluent actions using memory concepts.
     /// </summary>
     public class MemoryBuilder(string memoryKey)
     {
         /// <summary>
-        /// Associates the provided value with the memory key specified during the creation
-        /// of the <see cref="MemoryBuilder"/> instance. This defines a memory association
-        /// that can later be used by the agent-based testing framework.
+        ///     Associates the provided value with the memory key specified during the creation
+        ///     of the <see cref="MemoryBuilder" /> instance. This defines a memory association
+        ///     that can later be used by the agent-based testing framework.
         /// </summary>
         /// <param name="value">
-        /// The value to be associated with the memory key. This value represents the data
-        /// to be remembered for later usage or assertions.
+        ///     The value to be associated with the memory key. This value represents the data
+        ///     to be remembered for later usage or assertions.
         /// </param>
         /// <returns>
-        /// A <see cref="RememberThat"/> instance configured with the specified memory key
-        /// and value.
+        ///     A <see cref="RememberThat" /> instance configured with the specified memory key
+        ///     and value.
         /// </returns>
         public RememberThat Is(object value)
         {
@@ -63,17 +89,17 @@ public abstract class RememberThat : IPerformable
         }
 
         /// <summary>
-        /// Creates a memory association by linking the specified memory key with a question.
-        /// This enables the agent-based testing framework to resolve the question dynamically
-        /// during execution.
+        ///     Creates a memory association by linking the specified memory key with a question.
+        ///     This enables the agent-based testing framework to resolve the question dynamically
+        ///     during execution.
         /// </summary>
         /// <param name="value">
-        /// The question to be associated with the memory key. This question is used to
-        /// retrieve or compute the value dynamically at runtime.
+        ///     The question to be associated with the memory key. This question is used to
+        ///     retrieve or compute the value dynamically at runtime.
         /// </param>
         /// <returns>
-        /// A <see cref="RememberThat"/> instance configured with the specified memory key
-        /// and the provided question.
+        ///     A <see cref="RememberThat" /> instance configured with the specified memory key
+        ///     and the provided question.
         /// </returns>
         public RememberThat IsAnsweredBy(IQuestion<dynamic> value)
         {

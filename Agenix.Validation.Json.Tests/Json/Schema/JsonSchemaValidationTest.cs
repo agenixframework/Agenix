@@ -1,8 +1,8 @@
 using Agenix.Api.Message;
+using Agenix.Api.Spi;
 using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
 using Agenix.Core.Message;
-using Agenix.Core.Spi;
 using Agenix.Core.Util;
 using Agenix.Core.Validation.Json;
 using Agenix.Validation.Json.Json;

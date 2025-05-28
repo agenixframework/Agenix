@@ -1,3 +1,29 @@
+#region License
+
+// MIT License
+//
+// Copyright (c) 2025 Agenix
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+#endregion
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +68,7 @@ public class BooleanExpressionParser
 
     /**
      * Perform evaluation of boolean expression string.
-     * 
+     *
      * @param expression The expression to evaluate
      * @return boolean result
      * @throws CoreSystemException When unable to parse expression
@@ -112,7 +138,7 @@ public class BooleanExpressionParser
     /**
      * This method takes stacks of operators and values and evaluates possible expressions
      * This is done by popping one operator and two values, applying the operator to the values and pushing the result back onto the value stack
-     * 
+     *
      * @param operators Operators to apply
      * @param values    Values
      * @return The final result popped of the values stack
@@ -132,7 +158,7 @@ public class BooleanExpressionParser
 
     /**
      * Evaluates a sub expression within a pair of parentheses and pushes its result onto the stack of values
-     * 
+     *
      * @param operators Stack of operators
      * @param values    Stack of values
      */
@@ -151,7 +177,7 @@ public class BooleanExpressionParser
     /**
      * This method reads digit characters from a given string, starting at a given index.
      * It will read till the end of the string or up until it encounters a non-digit character
-     * 
+     *
      * @param expression The string to parse
      * @param startIndex The start index from where to parse
      * @return The parsed substring
@@ -178,7 +204,7 @@ public class BooleanExpressionParser
      * It will read till the end of the string or up until it encounters
      * - a digit
      * - a separator token
-     * 
+     *
      * @param expression The string to parse
      * @param startIndex The start index from where to parse
      * @return The parsed substring
@@ -202,7 +228,7 @@ public class BooleanExpressionParser
 
     /**
      * Checks whether a string can be interpreted as a boolean value.
-     * 
+     *
      * @param possibleBoolean The possible boolean value as string
      * @return Either true or false
      */
@@ -215,7 +241,7 @@ public class BooleanExpressionParser
      * Checks whether a String is a Boolean value and replaces it with its Integer representation
      * "true" -> "1"
      * "false" -> "0"
-     * 
+     *
      * @param possibleBooleanString "true" or "false"
      * @return "1" or "0"
      */
@@ -234,7 +260,7 @@ public class BooleanExpressionParser
      * "1" -> "true"
      * "0" -> "false"
      * otherwise -> value
-     * 
+     *
      * @param value "1", "0" or other string
      * @return "true", "false" or the input value
      */
@@ -250,7 +276,7 @@ public class BooleanExpressionParser
 
     /**
      * Checks whether a given character is a known separator token or no
-     * 
+     *
      * @param possibleSeparatorChar The character to check
      * @return True in case its a separator, false otherwise
      */
@@ -264,7 +290,7 @@ public class BooleanExpressionParser
 
     /**
      * Check if operator is known to this class.
-     * 
+     *
      * @param operator to validate
      * @return the operator itself.
      * @throws CoreSystemException When encountering an unknown operator
@@ -278,7 +304,7 @@ public class BooleanExpressionParser
 
     /**
      * Returns the amount of characters to move the cursor after parsing a token
-     * 
+     *
      * @param lastToken Last parsed token
      * @return Amount of characters to move forward
      */
@@ -289,7 +315,7 @@ public class BooleanExpressionParser
 
     /**
      * Evaluates a boolean expression to a String representation (true/false).
-     * 
+     *
      * @param operatorValue     The operator to apply on operands
      * @param rightOperand The right hand side of the expression
      * @param leftOperand  The left hand side of the expression

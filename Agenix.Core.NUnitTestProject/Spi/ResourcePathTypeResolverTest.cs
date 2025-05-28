@@ -1,6 +1,5 @@
 using Agenix.Api.Spi;
 using Agenix.Core.NUnitTestProject.Spi.mocks;
-using Agenix.Core.Spi;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 

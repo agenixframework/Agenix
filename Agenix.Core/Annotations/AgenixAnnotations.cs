@@ -7,7 +7,7 @@ using Agenix.Api.Common;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
-using Agenix.Core.Spi;
+using Agenix.Api.Spi;
 using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Annotations;
@@ -88,7 +88,7 @@ public abstract class AgenixAnnotations
     /// <param name="testCase">The object whose fields will be injected with the <see cref="Agenix" /> instance.</param>
     /// <param name="agenixFramework">The <see cref="Agenix" /> instance to inject into the test case object's fields.</param>
     /// <exception cref="AgenixSystemException">Thrown when the injection into a test case field cannot be completed.</exception>
-    public static void InjectAgenixFramework(object testCase, Core.Agenix agenixFramework)
+    public static void InjectAgenixFramework(object testCase, Agenix agenixFramework)
     {
         var testCaseType = testCase.GetType();
 

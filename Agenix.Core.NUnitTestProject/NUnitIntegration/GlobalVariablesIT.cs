@@ -1,7 +1,7 @@
 ﻿using Agenix.Api;
 using Agenix.Api.Annotations;
+using Agenix.Api.Spi;
 using Agenix.Api.Variable;
-using Agenix.Core.Spi;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
 using static Agenix.Core.Actions.EchoAction.Builder;

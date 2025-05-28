@@ -1,4 +1,30 @@
-﻿using Agenix.Api.Exceptions;
+﻿#region License
+
+// MIT License
+//
+// Copyright (c) 2025 Agenix
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+#endregion
+
+using Agenix.Api.Exceptions;
 using NHamcrest;
 using NHamcrest.Core;
 
@@ -11,18 +37,18 @@ namespace Agenix.Validation.NHamcrest.Validation.Matcher;
 ///     the condition is not met.
 ///     Key Features:
 ///     - Supports assertions for values using matchers (`IMatcher')
-///         `).
-///         - Allows specifying a reason/message to provide context to assertion failures.
-///         - Throws `AssertionError` with detailed messages when conditions are not met.
-///         Typical Usage:
-///         - Assert boolean conditions or validate that a value satisfies a specific matcher.
-///         - Used most commonly in unit testing frameworks such as NHamcrest.
-///         Example Usage:
-///         MatcherAssert.AssertThat(10, Is.GreaterThan(5));                // Asserts a condition.
-///         MatcherAssert.AssertThat("Value must be 10", value, Is.EqualTo(10)); // Asserts with a reason.
-///         MatcherAssert.AssertThat("Expression should evaluate true", true);  // Boolean assertion.
-///         Exception Thrown:
-///         - AssertionError: Thrown when an assertion fails, providing a clear and descriptive error message.
+///     `).
+///     - Allows specifying a reason/message to provide context to assertion failures.
+///     - Throws `AssertionError` with detailed messages when conditions are not met.
+///     Typical Usage:
+///     - Assert boolean conditions or validate that a value satisfies a specific matcher.
+///     - Used most commonly in unit testing frameworks such as NHamcrest.
+///     Example Usage:
+///     MatcherAssert.AssertThat(10, Is.GreaterThan(5));                // Asserts a condition.
+///     MatcherAssert.AssertThat("Value must be 10", value, Is.EqualTo(10)); // Asserts with a reason.
+///     MatcherAssert.AssertThat("Expression should evaluate true", true);  // Boolean assertion.
+///     Exception Thrown:
+///     - AssertionError: Thrown when an assertion fails, providing a clear and descriptive error message.
 /// </summary>
 public static class MatcherAssert
 {

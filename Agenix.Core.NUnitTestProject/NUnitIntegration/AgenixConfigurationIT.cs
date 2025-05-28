@@ -2,10 +2,10 @@
 using Agenix.Api.Annotations;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Message;
+using Agenix.Api.Spi;
 using Agenix.Core.Endpoint;
 using Agenix.Core.Endpoint.Direct;
 using Agenix.Core.Message;
-using Agenix.Core.Spi;
 using Agenix.Core.Validation;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;

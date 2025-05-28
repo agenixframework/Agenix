@@ -1,9 +1,9 @@
 ﻿using System;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Message;
+using Agenix.Api.Spi;
 using Agenix.Core.Endpoint.Direct;
 using Agenix.Core.Message;
-using Agenix.Core.Spi;
 using TestContext = Agenix.Api.Context.TestContext;
 using Moq;
 using NUnit.Framework;

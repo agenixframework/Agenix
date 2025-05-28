@@ -5,9 +5,8 @@ using System.Text;
 using Agenix.Api.Context;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Exceptions;
+using Agenix.Api.Spi;
 using Agenix.Api.Util;
-using Agenix.Core.Spi;
-using Agenix.Core.Util;
 
 namespace Agenix.Core.Endpoint;
 
@@ -28,14 +27,11 @@ public abstract class AbstractEndpointComponent(string name) : IEndpointComponen
             string path;
 
             if (endpointUri.StartsWith("http://") || endpointUri.StartsWith("https://"))
-            {
-                 path = uri.GetComponents(UriComponents.HostAndPort, UriFormat.Unescaped) + uri.GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
-            }
+                path = uri.GetComponents(UriComponents.HostAndPort, UriFormat.Unescaped) +
+                       uri.GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
             else
-            {
-                 path = uri.GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
-            }
-            
+                path = uri.GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+
             if (path.StartsWith("//")) path = path[2..];
 
             if (path.Contains('?')) path = path[..path.IndexOf('?')];

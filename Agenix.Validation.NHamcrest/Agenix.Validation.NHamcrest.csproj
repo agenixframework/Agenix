@@ -4,23 +4,26 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Copyright>Copyright (c) 2025 Andrei Suruceanu</Copyright>
+        <Authors>Andrei Suruceanu</Authors>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj" />
+        <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="NHamcrest" Version="4.0.0" />
+        <PackageReference Include="NHamcrest" Version="4.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="Extension\agenix\header\validator\nhamcrest" />
-      <EmbeddedResource Include="Extension\agenix\header\validator\nhamcrest" />
-      <None Remove="Extension\agenix\validation\matcher\assertThat" />
-      <EmbeddedResource Include="Extension\agenix\validation\matcher\assertThat" />
-      <None Remove="Extension\agenix\value\matcher\nhamcrest" />
-      <EmbeddedResource Include="Extension\agenix\value\matcher\nhamcrest" />
+        <None Remove="Extension\agenix\header\validator\nhamcrest"/>
+        <EmbeddedResource Include="Extension\agenix\header\validator\nhamcrest"/>
+        <None Remove="Extension\agenix\validation\matcher\assertThat"/>
+        <EmbeddedResource Include="Extension\agenix\validation\matcher\assertThat"/>
+        <None Remove="Extension\agenix\value\matcher\nhamcrest"/>
+        <EmbeddedResource Include="Extension\agenix\value\matcher\nhamcrest"/>
     </ItemGroup>
 
 </Project>

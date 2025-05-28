@@ -1,8 +1,33 @@
-﻿using System;
+﻿#region License
+
+// MIT License
+//
+// Copyright (c) 2025 Agenix
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+#endregion
+
+using System;
 using Agenix.Api;
 using Agenix.Api.Context;
-using Agenix.Api.Exceptions;
-using Agenix.Core.Spi;
+using Agenix.Api.Spi;
 
 namespace Agenix.Core;
 
@@ -12,6 +37,11 @@ namespace Agenix.Core;
 /// </summary>
 public class TestCaseRunnerFactory
 {
+    /**
+     * Test runner resource lookup path
+     */
+    private const string ResourcePath = "Extension/agenix/test/runner";
+
     /**
      * The key for the default Agenix test case runner provider
      */
@@ -26,15 +56,12 @@ public class TestCaseRunnerFactory
     private static readonly string Custom = "custom";
 #pragma warning restore CS0414 // Field is assigned but its value is never used
 
-    /** Test runner resource lookup path */
-    private const string ResourcePath = "Extension/agenix/test/runner";
+    private static readonly TestCaseRunnerFactory Instance = new();
 
     /// Resolves resource paths into types and properties based on a predefined or custom resource base path.
     /// Used to map resource identifiers to corresponding types in the Agenix framework.
     /// /
     private readonly ResourcePathTypeResolver _typeResolver = new(ResourcePath);
-
-    private static readonly TestCaseRunnerFactory Instance = new();
 
     private TestCaseRunnerFactory()
     {
@@ -42,10 +69,10 @@ public class TestCaseRunnerFactory
     }
 
     /// <summary>
-    /// Retrieves the default implementation of ITestCaseRunnerProvider.
+    ///     Retrieves the default implementation of ITestCaseRunnerProvider.
     /// </summary>
     /// <returns>
-    /// An instance of ITestCaseRunnerProvider used for creating test case runners.
+    ///     An instance of ITestCaseRunnerProvider used for creating test case runners.
     /// </returns>
     private ITestCaseRunnerProvider LookupDefault()
     {
@@ -53,11 +80,11 @@ public class TestCaseRunnerFactory
     }
 
     /// <summary>
-    /// Attempts to resolve a custom implementation of ITestCaseRunnerProvider.
-    /// If the custom implementation cannot be resolved, defaults to the standard implementation.
+    ///     Attempts to resolve a custom implementation of ITestCaseRunnerProvider.
+    ///     If the custom implementation cannot be resolved, defaults to the standard implementation.
     /// </summary>
     /// <returns>
-    /// An instance of ITestCaseRunnerProvider, either custom or default, used for creating test case runners.
+    ///     An instance of ITestCaseRunnerProvider, either custom or default, used for creating test case runners.
     /// </returns>
     private ITestCaseRunnerProvider LookupCustomOrDefault()
     {

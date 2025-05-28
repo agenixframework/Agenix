@@ -1,6 +1,7 @@
 using Agenix.Api.Endpoint;
 using Agenix.Api.Message;
 using Agenix.Api.Messaging;
+using Agenix.Api.Spi;
 using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
 using Agenix.Core;
@@ -8,7 +9,6 @@ using Agenix.Core.Actions;
 using Agenix.Core.Endpoint;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Builder;
-using Agenix.Core.Spi;
 using Agenix.Core.Validation;
 using Agenix.Core.Validation.Builder;
 using Agenix.Validation.Json.Validation;

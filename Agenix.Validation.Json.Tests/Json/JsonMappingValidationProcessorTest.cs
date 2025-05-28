@@ -1,6 +1,6 @@
 ﻿using Agenix.Api.Message;
+using Agenix.Api.Spi;
 using Agenix.Core.Message;
-using Agenix.Core.Spi;
 using Agenix.Core.Validation.Json;
 using Newtonsoft.Json;
 using NUnit.Framework;

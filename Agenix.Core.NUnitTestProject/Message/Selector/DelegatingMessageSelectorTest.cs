@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Agenix.Api.Message;
+using Agenix.Api.Spi;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Selector;
-using Agenix.Core.Spi;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;

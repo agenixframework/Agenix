@@ -1,10 +1,34 @@
-﻿using System.Net;
+﻿#region License
+
+// MIT License
+//
+// Copyright (c) 2025 Agenix
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+#endregion
+
+using System.Net;
 using Agenix.Api.Message;
 using Agenix.Api.Util;
 using Agenix.Core.Actions;
-using Agenix.Core.Message;
 using Agenix.Core.Message.Builder;
-using Agenix.Core.Util;
 using Agenix.Http.Message;
 
 namespace Agenix.Http.Actions;
@@ -13,12 +37,12 @@ namespace Agenix.Http.Actions;
 /// This class extends the capabilities of ReceiveMessageAction.Builder to provide specialized support
 /// for constructing HTTP response messages. It allows users to define message properties such as headers,
 /// payload, and metadata, which are tailored for handling HTTP interactions.
-public class HttpClientResponseActionBuilder : ReceiveMessageAction.ReceiveMessageActionBuilder<ReceiveMessageAction, 
+public class HttpClientResponseActionBuilder : ReceiveMessageAction.ReceiveMessageActionBuilder<ReceiveMessageAction,
     HttpClientResponseActionBuilder.HttpMessageBuilderSupport, HttpClientResponseActionBuilder>
 {
     private readonly HttpMessage _httpMessage;
 
-    public  HttpClientResponseActionBuilder()
+    public HttpClientResponseActionBuilder()
     {
         _httpMessage = new HttpMessage();
         Message(new HttpMessageBuilder(_httpMessage)).HeaderIgnoreCase = true;
@@ -70,7 +94,7 @@ public class HttpClientResponseActionBuilder : ReceiveMessageAction.ReceiveMessa
         ControlMessageProcessors = builder.GetMessageBuilderSupport().ControlMessageProcessors;
         MessageType = builder.GetMessageBuilderSupport().GetMessageType();
     }*/
-    
+
     protected override ReceiveMessageAction DoBuild()
     {
         var builder = new ReceiveMessageAction.Builder();
@@ -83,29 +107,18 @@ public class HttpClientResponseActionBuilder : ReceiveMessageAction.ReceiveMessa
         builder.Selector(_messageSelectors);
         builder.Validators(_validators);
         builder.Validate(ValidationContexts);
-        
-        if (_validationProcessor != null)
-        {
-            builder.Process(_validationProcessor);
-        }
-        
-        foreach (var extractor in GetVariableExtractors())
-        {
-            builder.Process(extractor);
-        }
-        
-        foreach (var processor in GetMessageProcessors())
-        {
-            builder.Process(processor);
-        }
+
+        if (_validationProcessor != null) builder.Process(_validationProcessor);
+
+        foreach (var extractor in GetVariableExtractors()) builder.Process(extractor);
+
+        foreach (var processor in GetMessageProcessors()) builder.Process(processor);
 
         builder.GetMessageBuilderSupport().From(GetMessageBuilderSupport().GetMessageBuilder());
         builder.GetMessageBuilderSupport().Type(GetMessageBuilderSupport().GetMessageType());
-        
+
         foreach (var controlMessageProcessor in GetMessageBuilderSupport().ControlMessageProcessors)
-        {
             builder.GetMessageBuilderSupport().ControlMessageProcessors.Add(controlMessageProcessor);
-        }
 
         return new ReceiveMessageAction(builder);
     }
@@ -113,11 +126,13 @@ public class HttpClientResponseActionBuilder : ReceiveMessageAction.ReceiveMessa
     /// Provides support for building HTTP messages within the context of the ReceiveMessageAction.
     /// This class serves as a helper for configuring various properties of an HTTP message, including
     /// the name, payload, status, and associated metadata required for HTTP message handling.
-    public class HttpMessageBuilderSupport(HttpMessage httpMessage, HttpClientResponseActionBuilder dlg) : ReceiveMessageBuilderSupport<ReceiveMessageAction, HttpClientResponseActionBuilder, HttpMessageBuilderSupport>(dlg)
+    public class HttpMessageBuilderSupport(HttpMessage httpMessage, HttpClientResponseActionBuilder dlg)
+        : ReceiveMessageBuilderSupport<ReceiveMessageAction, HttpClientResponseActionBuilder,
+            HttpMessageBuilderSupport>(dlg)
     {
         private readonly HttpMessage httpMessage = httpMessage;
-        
-        
+
+
         /// Sets the name of the HTTP message and returns the current builder instance for method chaining.
         /// This method updates the `Name` property of the associated HTTP message and invokes the base implementation.
         /// <param name="name">The name to be assigned to the HTTP message.</param>

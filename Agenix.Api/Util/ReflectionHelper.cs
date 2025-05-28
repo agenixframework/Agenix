@@ -1,3 +1,29 @@
+#region License
+
+// MIT License
+//
+// Copyright (c) 2025 Agenix
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+#endregion
+
 using System.Reflection;
 
 namespace Agenix.Api.Util;
@@ -99,8 +125,6 @@ public static class ReflectionHelper
             foreach (var possibleName in possibleNames)
             foreach (var method in methods.Where(m =>
                          string.Equals(m.Name, possibleName, StringComparison.OrdinalIgnoreCase)))
-            {
-
                 // Handle generic methods
                 if (method.IsGenericMethodDefinition)
                 {
@@ -124,7 +148,6 @@ public static class ReflectionHelper
                     // Handle non-generic methods
                     if (AreParametersCompatible(method.GetParameters(), paramTypes)) return method;
                 }
-            }
 
             // Move up the type hierarchy
             clazz = clazz.BaseType;
@@ -132,9 +155,9 @@ public static class ReflectionHelper
 
         return null; // Method not found in the hierarchy
     }
-    
+
     /// <summary>
-    /// Determines if the provided parameter types are compatible with the method's parameters.
+    ///     Determines if the provided parameter types are compatible with the method's parameters.
     /// </summary>
     private static bool AreParametersCompatible(ParameterInfo[] parameters, Type[] paramTypes)
     {
@@ -151,16 +174,14 @@ public static class ReflectionHelper
 
             // Check fixed parameters
             for (var i = 0; i < fixedParams.Length; i++)
-            {
-                if (!fixedParams[i].ParameterType.IsAssignableFrom(paramTypes[i])) return false;
-            }
+                if (!fixedParams[i].ParameterType.IsAssignableFrom(paramTypes[i]))
+                    return false;
 
             // Check params parameter
             var paramsType = paramsParam.ParameterType.GetElementType();
             for (var i = fixedParams.Length; i < paramTypes.Length; i++)
-            {
-                if (!paramsType!.IsAssignableFrom(paramTypes[i])) return false;
-            }
+                if (!paramsType!.IsAssignableFrom(paramTypes[i]))
+                    return false;
 
             return true;
         }
@@ -169,70 +190,63 @@ public static class ReflectionHelper
         if (parameters.Length != paramTypes.Length) return false;
 
         for (var i = 0; i < parameters.Length; i++)
-        {
-            if (!parameters[i].ParameterType.IsAssignableFrom(paramTypes[i])) return false;
-        }
+            if (!parameters[i].ParameterType.IsAssignableFrom(paramTypes[i]))
+                return false;
 
         return true;
     }
-    
-    private static bool AreParametersCompatible2(ParameterInfo[] parameters, Type[] paramTypes, MethodInfo method = null)
-{
-    if (parameters.Length == 0 && paramTypes.Length == 0) return true;
 
-    if (method != null && method.IsGenericMethodDefinition)
+    private static bool AreParametersCompatible2(ParameterInfo[] parameters, Type[] paramTypes,
+        MethodInfo method = null)
     {
-        // Match generic parameters with their constraints
-        var genericArguments = method.GetGenericArguments();
-        for (int i = 0; i < genericArguments.Length; i++)
-        {
-            var constraints = genericArguments[i].GetGenericParameterConstraints();
+        if (parameters.Length == 0 && paramTypes.Length == 0) return true;
 
-            // Ensure the provided type matches the generic constraints
-            if (constraints.Length > 0 && !constraints.All(constraint => constraint.IsAssignableFrom(paramTypes[i])))
+        if (method != null && method.IsGenericMethodDefinition)
+        {
+            // Match generic parameters with their constraints
+            var genericArguments = method.GetGenericArguments();
+            for (var i = 0; i < genericArguments.Length; i++)
             {
-                return false;
+                var constraints = genericArguments[i].GetGenericParameterConstraints();
+
+                // Ensure the provided type matches the generic constraints
+                if (constraints.Length > 0 &&
+                    !constraints.All(constraint => constraint.IsAssignableFrom(paramTypes[i]))) return false;
             }
         }
+
+        // Handle normal parameter validation as before
+        return CheckParameterTypes(parameters, paramTypes);
     }
 
-    // Handle normal parameter validation as before
-    return CheckParameterTypes(parameters, paramTypes);
-}
-
-private static bool CheckParameterTypes(ParameterInfo[] parameters, Type[] paramTypes)
-{
-    // Handle `params` parameter matching
-    if (parameters.Length > 0 &&
-        parameters.Last().GetCustomAttributes(typeof(ParamArrayAttribute), false).Any())
+    private static bool CheckParameterTypes(ParameterInfo[] parameters, Type[] paramTypes)
     {
-        var fixedParams = parameters.Take(parameters.Length - 1).ToArray();
-        var paramsParam = parameters.Last();
-
-        if (paramTypes.Length < fixedParams.Length) return false;
-
-        // Check fixed parameters
-        if (fixedParams.Where((t, i) => !t.ParameterType.IsAssignableFrom(paramTypes[i])).Any())
+        // Handle `params` parameter matching
+        if (parameters.Length > 0 &&
+            parameters.Last().GetCustomAttributes(typeof(ParamArrayAttribute), false).Any())
         {
-            return false;
+            var fixedParams = parameters.Take(parameters.Length - 1).ToArray();
+            var paramsParam = parameters.Last();
+
+            if (paramTypes.Length < fixedParams.Length) return false;
+
+            // Check fixed parameters
+            if (fixedParams.Where((t, i) => !t.ParameterType.IsAssignableFrom(paramTypes[i])).Any()) return false;
+
+            // Check params parameter
+            var paramsType = paramsParam.ParameterType.GetElementType();
+            for (var i = fixedParams.Length; i < paramTypes.Length; i++)
+                if (!paramsType!.IsAssignableFrom(paramTypes[i]))
+                    return false;
+
+            return true;
         }
 
-        // Check params parameter
-        var paramsType = paramsParam.ParameterType.GetElementType();
-        for (var i = fixedParams.Length; i < paramTypes.Length; i++)
-        {
-            if (!paramsType!.IsAssignableFrom(paramTypes[i])) return false;
-        }
+        // Standard parameter matching
+        if (parameters.Length != paramTypes.Length) return false;
 
-        return true;
+        return !parameters.Where((t, i) => !t.ParameterType.IsAssignableFrom(paramTypes[i])).Any();
     }
-
-    // Standard parameter matching
-    if (parameters.Length != paramTypes.Length) return false;
-
-    return !parameters.Where((t, i) => !t.ParameterType.IsAssignableFrom(paramTypes[i])).Any();
-}
-
 
 
     /// Invokes a specified method on a given object instance with the provided arguments.
@@ -253,7 +267,7 @@ private static bool CheckParameterTypes(ParameterInfo[] parameters, Type[] param
     }
 
     /// <summary>
-    /// Sets a field value using reflection, handling accessibility modifiers.
+    ///     Sets a field value using reflection, handling accessibility modifiers.
     /// </summary>
     /// <param name="field">The field to set</param>
     /// <param name="instance">The object instance on which to set the field</param>
@@ -263,11 +277,9 @@ private static bool CheckParameterTypes(ParameterInfo[] parameters, Type[] param
         try
         {
             if (!field.IsPublic)
-            {
-                field = field.DeclaringType.GetField(field.Name, 
+                field = field.DeclaringType.GetField(field.Name,
                     BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
-            }
-        
+
             field?.SetValue(instance, value);
         }
         catch (Exception ex)
@@ -279,7 +291,7 @@ private static bool CheckParameterTypes(ParameterInfo[] parameters, Type[] param
 
 
     /// <summary>
-    /// Gets a field value using reflection, handling accessibility modifiers.
+    ///     Gets a field value using reflection, handling accessibility modifiers.
     /// </summary>
     /// <param name="field">The field to get</param>
     /// <param name="instance">The object instance from which to get the field</param>
@@ -291,9 +303,9 @@ private static bool CheckParameterTypes(ParameterInfo[] parameters, Type[] param
             if (!field.IsPublic || !field.DeclaringType.IsPublic || field.IsInitOnly)
             {
                 // Get a more accessible version of the field
-                BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic;
+                var flags = BindingFlags.Public | BindingFlags.NonPublic;
                 flags |= field.IsStatic ? BindingFlags.Static : BindingFlags.Instance;
-            
+
                 field = field.DeclaringType.GetField(field.Name, flags);
             }
         }
@@ -311,12 +323,12 @@ private static bool CheckParameterTypes(ParameterInfo[] parameters, Type[] param
             return null;
         }
     }
-    
+
     /// <summary>
-    /// Checks, if the specified type is a nullable
+    ///     Checks, if the specified type is a nullable
     /// </summary>
     public static bool IsNullableType(Type type)
     {
-        return (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>));
+        return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
     }
 }

@@ -2,10 +2,10 @@
 using Agenix.Api.Endpoint;
 using Agenix.Api.Endpoint.Resolver;
 using Agenix.Api.Message;
+using Agenix.Api.Spi;
 using Agenix.Core.Endpoint.Direct;
 using Agenix.Core.Endpoint.Direct.Annotation;
 using Agenix.Core.Message;
-using Agenix.Core.Spi;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;

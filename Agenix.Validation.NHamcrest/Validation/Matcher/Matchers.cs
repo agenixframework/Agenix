@@ -1,12 +1,38 @@
-﻿using NHamcrest;
+﻿#region License
+
+// MIT License
+//
+// Copyright (c) 2025 Agenix
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+#endregion
+
+using NHamcrest;
 using NHamcrest.Core;
 
 namespace Agenix.Validation.NHamcrest.Validation.Matcher;
 
 /// <summary>
-/// Provides utility methods to create and compose matchers for performing assertions and validation logic.
-/// This class contains static methods to facilitate common matching scenarios such as equality checks,
-/// pattern matching, substring checks, and logical operations on matchers.
+///     Provides utility methods to create and compose matchers for performing assertions and validation logic.
+///     This class contains static methods to facilitate common matching scenarios such as equality checks,
+///     pattern matching, substring checks, and logical operations on matchers.
 /// </summary>
 public class Matchers
 {
@@ -19,7 +45,7 @@ public class Matchers
     {
         return Is.EqualTo(value);
     }
-    
+
     public static IMatcher<string> EqualToIgnoringCase(string expected)
     {
         return new EqualToIgnoringCaseMatcher(expected);
@@ -64,28 +90,28 @@ public class Matchers
     {
         return Ends.With(prefix).CaseInsensitive();
     }
-    
+
     public static IMatcher<string> MatchesPattern(string pattern)
     {
         return new MatchesPatternMatcher(pattern);
     }
-    
+
     public static IMatcher<T> AnyOf<T>(IEnumerable<IMatcher<T>> matchers)
     {
         return new AnyOfMatcher<T>(matchers);
     }
-    
+
     /// <summary>
-    /// Creates a matcher that matches when the examined object is found within
-    /// the specified collection.
-    /// For example: <c>Assert.That("foo", IsIn.IsIn(new List<string> { "bar", "foo" }));</c>
+    ///     Creates a matcher that matches when the examined object is found within
+    ///     the specified collection.
+    ///     For example: <c>Assert.That("foo", IsIn.IsIn(new List<string> { "bar", "foo" }));</c>
     /// </summary>
     /// <remarks>
-    /// This method is deprecated. Use <see cref="In{T}(ICollection{T})"/> instead.
+    ///     This method is deprecated. Use <see cref="In{T}(ICollection{T})" /> instead.
     /// </remarks>
     /// <typeparam name="T">The type of the matcher.</typeparam>
     /// <param name="collection">
-    /// The collection in which matching items must be found.
+    ///     The collection in which matching items must be found.
     /// </param>
     /// <returns>Returns the matcher.</returns>
     [Obsolete("Use In(ICollection<T>) instead.")]
@@ -93,11 +119,11 @@ public class Matchers
     {
         return In(collection);
     }
-    
+
     /// <summary>
-    /// Creates a matcher that matches when the examined object is found within 
-    /// the specified collection.
-    /// For example: <c>Assert.That("foo", IsIn.In(new List<string> { "bar", "foo" }));</c>
+    ///     Creates a matcher that matches when the examined object is found within
+    ///     the specified collection.
+    ///     For example: <c>Assert.That("foo", IsIn.In(new List<string> { "bar", "foo" }));</c>
     /// </summary>
     /// <typeparam name="T">The type of the matcher.</typeparam>
     /// <param name="collection">The collection in which matching items must be found.</param>
@@ -106,15 +132,15 @@ public class Matchers
     {
         return new IsIn<T>(collection);
     }
-    
+
     /// <summary>
-    /// Creates a matcher that matches when the examined object is found within the
-    /// specified array.
-    /// For example:
-    /// <c>Assert.That("foo", IsIn.IsIn(new[] { "bar", "foo" }));</c>
+    ///     Creates a matcher that matches when the examined object is found within the
+    ///     specified array.
+    ///     For example:
+    ///     <c>Assert.That("foo", IsIn.IsIn(new[] { "bar", "foo" }));</c>
     /// </summary>
     /// <remarks>
-    /// This method is deprecated. Use <see cref="In{T}(T[])" /> instead.
+    ///     This method is deprecated. Use <see cref="In{T}(T[])" /> instead.
     /// </remarks>
     /// <typeparam name="T">The type of the matcher.</typeparam>
     /// <param name="elements">The array in which matching items must be found.</param>
@@ -124,12 +150,12 @@ public class Matchers
     {
         return In(elements);
     }
-    
+
     /// <summary>
-    /// Creates a matcher that matches when the examined object is found within 
-    /// the specified array.
-    /// For example: 
-    /// <c>Assert.That("foo", IsIn.In(new[] { "bar", "foo" }));</c>
+    ///     Creates a matcher that matches when the examined object is found within
+    ///     the specified array.
+    ///     For example:
+    ///     <c>Assert.That("foo", IsIn.In(new[] { "bar", "foo" }));</c>
     /// </summary>
     /// <typeparam name="T">The type of the matcher.</typeparam>
     /// <param name="elements">The array in which matching items must be found.</param>
@@ -138,15 +164,15 @@ public class Matchers
     {
         return new IsIn<T>(elements);
     }
-    
+
     /// <summary>
-    /// Creates a matcher that matches when the examined object is equal to one of the
-    /// specified elements.
-    /// For example:
-    /// <c>Assert.That("foo", IsIn.IsOneOf("bar", "foo"));</c>
+    ///     Creates a matcher that matches when the examined object is equal to one of the
+    ///     specified elements.
+    ///     For example:
+    ///     <c>Assert.That("foo", IsIn.IsOneOf("bar", "foo"));</c>
     /// </summary>
     /// <remarks>
-    /// This method is deprecated. Use <see cref="OneOf{T}(T[])"/> instead.
+    ///     This method is deprecated. Use <see cref="OneOf{T}(T[])" /> instead.
     /// </remarks>
     /// <typeparam name="T">The type of the matcher.</typeparam>
     /// <param name="elements">The elements amongst which matching items will be found.</param>
@@ -158,10 +184,10 @@ public class Matchers
     }
 
     /// <summary>
-    /// Creates a matcher that matches when the examined object is equal to one of the
-    /// specified elements.
-    /// For example:
-    /// <c>Assert.That("foo", IsIn.OneOf("bar", "foo"));</c>
+    ///     Creates a matcher that matches when the examined object is equal to one of the
+    ///     specified elements.
+    ///     For example:
+    ///     <c>Assert.That("foo", IsIn.OneOf("bar", "foo"));</c>
     /// </summary>
     /// <typeparam name="T">The type of the matcher.</typeparam>
     /// <param name="elements">The elements amongst which matching items will be found.</param>
@@ -172,7 +198,7 @@ public class Matchers
     }
 
     /// <summary>
-    /// Creates a matcher that matches when the examined object is null.
+    ///     Creates a matcher that matches when the examined object is null.
     /// </summary>
     /// <returns>Returns a matcher that matches null values.</returns>
     public static IMatcher<object> NullValue()
@@ -181,10 +207,11 @@ public class Matchers
     }
 
     /// <summary>
-    /// Creates a matcher that checks if the examined object is not null.
+    ///     Creates a matcher that checks if the examined object is not null.
     /// </summary>
     /// <returns>Returns a matcher that evaluates to true if the examined object is not null.</returns>
-    public static IMatcher<object> NotNullValue() {
+    public static IMatcher<object> NotNullValue()
+    {
         return Is.NotNull();
     }
 
@@ -196,7 +223,7 @@ public class Matchers
     {
         return Is.EqualTo(string.Empty);
     }
-    
+
     /// <summary>
     ///     Creates a matcher of type <see cref="string" /> that matches when the examined string is null or has zero length.
     /// </summary>
@@ -205,34 +232,32 @@ public class Matchers
     {
         return Matches.AnyOf(Is.Null(), IsEmptyString());
     }
-    
+
     /// <summary>
-    /// Returns a matcher for a blank string (zero or more whitespace characters).
+    ///     Returns a matcher for a blank string (zero or more whitespace characters).
     /// </summary>
-    /// <returns>An instance of <see cref="IsBlankString"/>.</returns>
+    /// <returns>An instance of <see cref="IsBlankString" />.</returns>
     public static IsBlankString BlankString()
     {
         return IsBlankString.BlankInstance;
     }
 
     /// <summary>
-    /// Returns a matcher that checks if a string is either null or a blank string.
+    ///     Returns a matcher that checks if a string is either null or a blank string.
     /// </summary>
     /// <returns>A matcher to validate strings that are null or consist only of whitespace.</returns>
     public static IMatcher<string> BlankOrNullString()
     {
         return IsBlankString.NullOrBlankInstance;
     }
-    
+
     public static IMatcher<IEnumerable<dynamic>> Empty()
     {
         return new IsEmptyCollection<dynamic>();
     }
-    
+
     public static IMatcher<T> GreaterThan<T>(T value) where T : IComparable<T>
     {
-        return (IMatcher<T>) new IsGreaterThan<T>(value);
+        return new IsGreaterThan<T>(value);
     }
-
-
 }
