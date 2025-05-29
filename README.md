@@ -1,6 +1,6 @@
 <div align="center">
 <!-- Logo -->
-  <img src=".assets/logos/agenix-logo.png" alt="Agenix Framework Logo" width="300"/>
+  <img src=".assets/logos/agenix-logo-social.png" alt="Agenix Framework Logo" width="1280"/>
 
   <!-- Title -->
   <h1>🧪 Agenix Test Automation Framework</h1>
