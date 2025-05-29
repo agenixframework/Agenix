@@ -4,9 +4,14 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Copyright>Copyright (c) 2025 Andrei Suruceanu</Copyright>
-        <Authors>Andrei Suruceanu</Authors>
+
+        <!-- NuGet Package-Specific Properties -->
+        <PackageId>Agenix.Screenplay</PackageId>
+        <Title>Agenix Screenplay Pattern</Title>
+        <Description>Screenplay pattern implementation for the Agenix framework. Enables writing readable, maintainable, and scalable automated tests using the Actor-Task-Ability pattern for better test organization and reusability.</Description>
+        <PackageTags>testing;screenplay;automation;framework;agenix;pattern;actor;task;ability;readable</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
     </PropertyGroup>
 
     <ItemGroup>

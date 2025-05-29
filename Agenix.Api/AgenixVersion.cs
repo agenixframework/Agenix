@@ -60,7 +60,7 @@ public static class AgenixVersion
         }
         catch (Exception e)
         {
-            Log.LogWarning("Unable to read Agenix version information", e);
+            Log.LogWarning(e, "Unable to read Agenix version information");
             Version = "";
         }
     }

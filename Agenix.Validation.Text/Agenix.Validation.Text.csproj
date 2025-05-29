@@ -4,9 +4,14 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Copyright>Copyright (c) 2025 Andrei Suruceanu</Copyright>
-        <Authors>Andrei Suruceanu</Authors>
+
+        <!-- NuGet Package-Specific Properties -->
+        <PackageId>Agenix.Validation.Text</PackageId>
+        <Title>Agenix Text Validation</Title>
+        <Description>Text validation and assertion tools for the Agenix framework. Enables pattern matching, string comparison, and text-based validation in automated test scenarios with support for various text formats and encodings.</Description>
+        <PackageTags>testing;text;validation;automation;framework;agenix;string;pattern;assertion;regex</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
     </PropertyGroup>
 
     <ItemGroup>

@@ -6,8 +6,9 @@
         <Nullable>enable</Nullable>
         <RootNamespace>Agenix.Reqroll.Plugin.Tests</RootNamespace>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Copyright>Copyright (c) 2025 Andrei Suruceanu</Copyright>
+        <Copyright>Copyright (c) 2025 Agenix</Copyright>
         <Authors>Andrei Suruceanu</Authors>
+        <IsPackable>false</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>

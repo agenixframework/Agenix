@@ -4,9 +4,14 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Copyright>Copyright (c) 2025 Andrei Suruceanu</Copyright>
-        <Authors>Andrei Suruceanu</Authors>
+
+        <!-- NuGet Package-Specific Properties -->
+        <PackageId>Agenix.Validation.Binary</PackageId>
+        <Title>Agenix Binary Validation</Title>
+        <Description>Binary data validation components for the Agenix framework. Provides tools for validating binary files, byte arrays, and binary content in automated tests, supporting various binary formats and comparison operations.</Description>
+        <PackageTags>testing;binary;validation;automation;framework;agenix;bytes;files;comparison;data</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
     </PropertyGroup>
 
     <ItemGroup>

@@ -1,4 +1,30 @@
-# Agenix Framework
+<div align="center">
+<!-- Logo -->
+  <img src=".assets/logos/agenix-logo.png" alt="Agenix Framework Logo" width="300"/>
+
+  <!-- Title -->
+  <h1>🧪 Agenix Test Automation Framework</h1>
+
+  <!-- Tagline -->
+  <p><strong>Test the Pieces.Verify the Whole.</strong></p>
+  <p><em>Intelligent integration testing framework for modern applications</em></p>
+
+  <!-- Badges -->
+  <p>
+    <a href="https://github.com/asuruceanu/Agenix/actions">
+      <img src="https://github.com/asuruceanu/Agenix/workflows/dotnet.yml/badge.svg" alt="CI Status"/>
+    </a>
+    <a href="https://www.nuget.org/packages/Agenix.Core/">
+      <img src="https://img.shields.io/nuget/v/Agenix.Core.svg" alt="NuGet Version"/>
+    </a>
+    <a href="https://github.com/asuruceanu/agenix/blob/master/LICENSE">
+      <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"/>
+    </a>
+  </p>
+
+
+</div>
+
 
 **Agenix** is a comprehensive test automation framework built with **C# .NET 8.0** that enables the creation of fully automated end-to-end use case tests for enterprise SOA applications. Designed with modern testing patterns and practices, Agenix provides a robust foundation for testing complex distributed systems, APIs, databases, and user workflows.
 
