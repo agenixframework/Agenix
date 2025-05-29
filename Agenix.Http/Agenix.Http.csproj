@@ -4,9 +4,13 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Copyright>Copyright (c) 2025 Andrei Suruceanu</Copyright>
-        <Authors>Andrei Suruceanu</Authors>
+
+        <!-- NuGet Package-Specific Properties -->
+        <PackageId>Agenix.Http</PackageId>
+        <Title>Agenix HTTP Testing Tools</Title>
+        <Description>HTTP client testing tools and utilities for the Agenix framework. Simplifies HTTP request/response testing, validation, and API endpoint verification in automated test scenarios.</Description>
+        <PackageTags>rest-testing;api-testing;automation;framework;agenix</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>

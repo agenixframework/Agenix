@@ -4,9 +4,14 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Copyright>Copyright (c) 2025 Andrei Suruceanu</Copyright>
-        <Authors>Andrei Suruceanu</Authors>
+
+        <!-- NuGet Package-Specific Properties -->
+        <PackageId>Agenix.Sql</PackageId>
+        <Title>Agenix SQL Database Testing</Title>
+        <Description>Database testing and validation components for the Agenix framework. Enables automated testing of SQL databases, data validation, and database state verification in test automation workflows.</Description>
+        <PackageTags>testing;sql;database;automation;framework;agenix;data;validation;db</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
     </PropertyGroup>
 
     <ItemGroup>

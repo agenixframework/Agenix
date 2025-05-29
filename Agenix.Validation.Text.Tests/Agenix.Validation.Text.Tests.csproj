@@ -5,8 +5,10 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Copyright>Copyright (c) 2025 Andrei Suruceanu</Copyright>
+        <Copyright>Copyright (c) 2025 Agenix</Copyright>
         <Authors>Andrei Suruceanu</Authors>
+        <!-- Test projects are not packaged -->
+        <IsPackable>false</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>

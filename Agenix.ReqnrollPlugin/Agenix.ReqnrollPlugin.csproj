@@ -3,9 +3,14 @@
     <PropertyGroup>
         <RootNamespace>Agenix.ReqnrollPlugin</RootNamespace>
         <TargetFramework>net8.0</TargetFramework>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Copyright>Copyright (c) 2025 Andrei Suruceanu</Copyright>
-        <Authors>Andrei Suruceanu</Authors>
+
+        <!-- NuGet Package-Specific Properties -->
+        <PackageId>Agenix.ReqnrollPlugin</PackageId>
+        <Title>Agenix Reqnroll Plugin</Title>
+        <Description>Reqnroll plugin for the Agenix framework. Integrates Agenix automation capabilities with Reqnroll BDD testing, enabling behavior-driven development with powerful automation features and enhanced step definitions.</Description>
+        <PackageTags>testing;reqnroll;bdd;automation;framework;agenix;plugin;behavior;cucumber;gherkin</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
     </PropertyGroup>
 
     <ItemGroup>

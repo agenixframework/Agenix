@@ -4,9 +4,14 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Copyright>Copyright (c) 2025 Andrei Suruceanu</Copyright>
-        <Authors>Andrei Suruceanu</Authors>
+
+        <!-- NuGet Package-Specific Properties -->
+        <PackageId>Agenix.Validation.NHamcrest</PackageId>
+        <Title>Agenix NHamcrest Integration</Title>
+        <Description>NHamcrest matcher integration for the Agenix framework. Extends Agenix validation capabilities with fluent, expressive matchers from NHamcrest, enabling more readable and maintainable test assertions.</Description>
+        <PackageTags>testing;nhamcrest;validation;automation;framework;agenix;matchers;fluent;assertions;readable</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
     </PropertyGroup>
 
     <ItemGroup>

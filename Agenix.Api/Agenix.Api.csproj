@@ -4,9 +4,14 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Copyright>Copyright (c) 2025 Andrei Suruceanu</Copyright>
-        <Authors>Andrei Suruceanu</Authors>
+
+        <!-- NuGet Package-Specific Properties -->
+        <PackageId>Agenix.Api</PackageId>
+        <Title>Agenix API Library</Title>
+        <Description>API testing capabilities for the Agenix testing framework</Description>
+        <PackageTags>testing;api;automation;framework;agenix</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
     </PropertyGroup>
 
     <ItemGroup>

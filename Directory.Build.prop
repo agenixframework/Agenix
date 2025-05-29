@@ -1,0 +1,66 @@
+<Project>
+  <!-- Shared properties for all projects in the solution -->
+  <PropertyGroup>
+    <!-- License Information -->
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageIconUrl>https://raw.githubusercontent.com/asuruceanu/agenix/master/.assets/icons/icon.png</PackageIconUrl>
+    <Copyright>Copyright (c) 2025 Agenix</Copyright>
+
+    <!-- Author Information -->
+    <Authors>Andrei Suruceanu</Authors>
+
+    <!-- Repository Information -->
+    <RepositoryUrl>https://github.com/asuruceanu/Agenix.ATF</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/asuruceanu/Agenix.ATF</PackageProjectUrl>
+    <PackageOwners>andy.suruceanu@gmail.com</PackageOwners>
+
+    <!-- Package Settings -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+
+    <!-- Optional NuGet Enhancements -->
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+
+    <!-- Symbol Packages for Better Debugging -->
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <!-- Source Link for Debugging -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+
+    <VersionPrefix>0.0.1</VersionPrefix>
+    <FileVersion>$(VersionPrefix)</FileVersion>
+    <AssemblyVersion>$(VersionPrefix)</AssemblyVersion>
+  </PropertyGroup>
+
+  <!-- Include LICENSE file in packages -->
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)LICENSE" Pack="true" PackagePath="" Visible="false" />
+    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="" Visible="false" Condition="Exists('$(MSBuildThisFileDirectory)README.md')" />
+  </ItemGroup>
+
+  <!-- Source Link Package Reference -->
+    <ItemGroup>
+      <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+    </ItemGroup>
+
+    <!-- Include Icons in All Packages -->
+      <ItemGroup>
+        <!-- Main package icon (required by NuGet) -->
+        <None Include="$(MSBuildThisFileDirectory).assets/icons/icon.png" Pack="true" PackagePath="" Link="icon.png" />
+
+        <!-- Additional icon sizes -->
+        <None Include="$(MSBuildThisFileDirectory).assets/icons/icon-16.png" Pack="true" PackagePath="icons/" Link="icons/icon-16.png" />
+        <None Include="$(MSBuildThisFileDirectory).assets/icons/icon-32.png" Pack="true" PackagePath="icons/" Link="icons/icon-32.png" />
+        <None Include="$(MSBuildThisFileDirectory).assets/icons/icon-64.png" Pack="true" PackagePath="icons/" Link="icons/icon-64.png" />
+        <None Include="$(MSBuildThisFileDirectory).assets/icons/icon-128.png" Pack="true" PackagePath="icons/" Link="icons/icon-128.png" />
+        <None Include="$(MSBuildThisFileDirectory).assets/icons/icon.svg" Pack="true" PackagePath="icons/" Link="icons/icon.svg" />
+      </ItemGroup>
+
+
+</Project>

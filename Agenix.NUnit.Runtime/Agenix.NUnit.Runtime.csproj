@@ -4,9 +4,14 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Copyright>Copyright (c) 2025 Andrei Suruceanu</Copyright>
-        <Authors>Andrei Suruceanu</Authors>
+
+        <!-- NuGet Package-Specific Properties -->
+        <PackageId>Agenix.NUnit.Runtime</PackageId>
+        <Title>Agenix NUnit 4.* Runtime Integration</Title>
+        <Description>NUnit runtime integration for the Agenix framework. Provides seamless integration between Agenix testing capabilities and NUnit test execution, enabling enhanced test reporting and framework interoperability.</Description>
+        <PackageTags>testing;nunit;runtime;automation;framework;agenix;integration;execution;reporting</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
     </PropertyGroup>
 
     <ItemGroup>
