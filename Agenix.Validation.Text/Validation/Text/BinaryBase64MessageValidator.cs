@@ -47,7 +47,10 @@ public class BinaryBase64MessageValidator : PlainTextMessageValidator
     public override void ValidateMessage(IMessage receivedMessage, IMessage controlMessage, TestContext context,
         IValidationContext validationContext)
     {
-        if (receivedMessage.Payload is byte[] bytes) receivedMessage.Payload = Convert.ToBase64String(bytes);
+        if (receivedMessage.Payload is byte[] bytes)
+        {
+            receivedMessage.Payload = Convert.ToBase64String(bytes);
+        }
 
         base.ValidateMessage(receivedMessage, controlMessage, context, validationContext);
     }

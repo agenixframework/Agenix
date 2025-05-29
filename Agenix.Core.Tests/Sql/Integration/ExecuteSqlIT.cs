@@ -10,6 +10,7 @@ namespace Agenix.Core.Tests.Sql.Integration;
 
 [NUnitAgenixSupport]
 [AgenixConfiguration(Classes = [typeof(Endpoints)])]
+[Platform(Exclude = "MacOSX", Reason = "Unable to load shared library 'SQLite.Interop.dll' or one of its dependencies")]
 public class ExecuteSqlIT
 {
     [Test]

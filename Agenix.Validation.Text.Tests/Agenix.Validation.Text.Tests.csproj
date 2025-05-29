@@ -9,6 +9,7 @@
         <Authors>Andrei Suruceanu</Authors>
         <!-- Test projects are not packaged -->
         <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
     </PropertyGroup>
 
     <ItemGroup>

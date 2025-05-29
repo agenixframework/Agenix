@@ -17,7 +17,6 @@
     <PackageOwners>andy.suruceanu@gmail.com</PackageOwners>
 
     <!-- Package Settings -->
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
 
@@ -36,7 +35,37 @@
     <VersionPrefix>0.0.1</VersionPrefix>
     <FileVersion>$(VersionPrefix)</FileVersion>
     <AssemblyVersion>$(VersionPrefix)</AssemblyVersion>
+
+    <!-- Build Properties -->
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+
   </PropertyGroup>
+
+  <!-- Source Projects -->
+    <PropertyGroup Condition="!$(MSBuildProjectName.EndsWith('.Tests'))">
+      <GenerateDocumentationFile>true</GenerateDocumentationFile>
+      <IsPackable>true</IsPackable>
+    </PropertyGroup>
+
+    <!-- Test Projects -->
+    <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
+      <IsPackable>false</IsPackable>
+      <IsTestProject>true</IsTestProject>
+    </PropertyGroup>
+
+    <!-- Common Package References for Tests -->
+    <ItemGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0" />
+      <PackageReference Include="NUnit" Version="4.3.2" />
+      <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
+      <PackageReference Include="NSubstitute" Version="5.3.0" />
+      <PackageReference Include="coverlet.collector" Version="6.0.0">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
 
   <!-- Include LICENSE file in packages -->
   <ItemGroup>

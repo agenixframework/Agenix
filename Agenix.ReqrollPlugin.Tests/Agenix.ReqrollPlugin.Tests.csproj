@@ -9,6 +9,7 @@
         <Copyright>Copyright (c) 2025 Agenix</Copyright>
         <Authors>Andrei Suruceanu</Authors>
         <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
     </PropertyGroup>
 
     <ItemGroup>

@@ -1,0 +1,247 @@
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ master, develop ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.assets/**'
+  pull_request:
+    branches: [ master, develop ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.assets/**'
+  workflow_dispatch:  # Allow manual triggering
+
+env:
+  DOTNET_VERSION: '8.0.x'
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  # ===== CODE QUALITY CHECKS =====
+  code-quality:
+    name: 🔍 Code Quality
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for better analysis
+
+      - name: 🔧 Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: 📦 Restore dependencies
+        run: dotnet restore
+
+      - name: 🔍 Code formatting check
+        run: dotnet format --verify-no-changes --verbosity diagnostic
+        continue-on-error: true  # temporarily
+
+      - name: 🛡️ Security scan
+        run: dotnet list package --vulnerable --include-transitive
+        continue-on-error: true
+
+  # ===== BUILD & TEST MATRIX =====
+  build-and-test:
+    name: 🏗️ Build & Test
+    runs-on: ${{ matrix.os }}
+    needs: code-quality
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            artifact-name: linux
+            shell: bash
+          - os: windows-latest
+            artifact-name: windows
+            shell: bash  # 🔧 CHANGED: Force bash on Windows
+          - os: macos-latest
+            artifact-name: macos
+            shell: bash
+    defaults:
+      run:
+        shell: ${{ matrix.shell }}
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: 📦 Restore dependencies
+        run: dotnet restore
+
+      - name: 🏗️ Build solution
+        run: dotnet build --configuration Release --no-restore
+
+      - name: 🔍 List test projects
+        run: |
+          echo "Found test projects:"
+          find . -name "*Tests.csproj" -type f | sort
+
+      - name: 🧪 Run all unit tests
+        run: |
+          # Run tests for each test project individually to get detailed results
+          for test_project in $(find . -name "*Tests.csproj" -type f | sort); do
+            project_name=$(basename "$test_project" .csproj)
+            echo "Running tests for: $project_name"
+
+            dotnet test "$test_project" \
+              --configuration Release \
+              --no-build \
+              --verbosity normal \
+              --logger "trx;LogFileName=test-results-$project_name-${{ matrix.artifact-name }}.trx" \
+              --logger "console;verbosity=detailed" \
+              --collect:"XPlat Code Coverage" \
+              --results-directory ./TestResults \
+              --settings .runsettings || exit 1
+
+            echo "Completed tests for: $project_name"
+            echo "----------------------------------------"
+          done
+
+      - name: 📊 Generate code coverage report
+        if: matrix.os == 'ubuntu-latest'
+        uses: danielpalme/ReportGenerator-GitHub-Action@5.2.0
+        with:
+          reports: 'TestResults/**/coverage.cobertura.xml'
+          targetdir: 'coveragereport'
+          reporttypes: 'Html;Cobertura;TextSummary'
+
+      - name: 📈 Upload coverage to Codecov
+        if: matrix.os == 'ubuntu-latest'
+        uses: codecov/codecov-action@v3
+        with:
+          files: TestResults/**/coverage.cobertura.xml
+          fail_ci_if_error: false
+          verbose: true
+
+      - name: 📋 Publish test results
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: 🧪 Test Results (${{ matrix.artifact-name }})
+          path: "TestResults/test-results-*-${{ matrix.artifact-name }}.trx"
+          reporter: dotnet-trx
+          fail-on-error: true
+
+      - name: 📦 Build packages (for validation)
+        if: matrix.os == 'ubuntu-latest'
+        run: dotnet pack --configuration Release --no-build --output ./artifacts
+
+      - name: 🔼 Upload build artifacts
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            ./artifacts/*.nupkg
+            ./coveragereport/**
+          retention-days: 30
+
+  # ===== DOCUMENTATION =====
+  documentation:
+    name: 📚 Documentation
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: 📦 Install DocFX
+        run: dotnet tool install -g docfx
+
+      - name: 📚 Generate documentation
+        run: |
+          # Create basic docfx.json if it doesn't exist
+          if [ ! -f "docfx.json" ]; then
+            echo "Creating basic docfx.json..."
+            cat > docfx.json << 'EOF'
+          {
+            "metadata": [
+              {
+                "src": [
+                  {
+                    "files": ["**/*.csproj"],
+                    "exclude": ["**/bin/**", "**/obj/**", "**/*.Tests/**"]
+                  }
+                ],
+                "dest": "api"
+              }
+            ],
+            "build": {
+              "content": [
+                {
+                  "files": ["api/**.yml"],
+                  "dest": "api"
+                },
+                {
+                  "files": ["README.md"]
+                }
+              ],
+              "resource": [
+                {
+                  "files": [".assets/**"]
+                }
+              ],
+              "dest": "_site"
+            }
+          }
+          EOF
+          fi
+
+          # Generate API documentation
+          docfx metadata docfx.json
+          docfx build docfx.json
+        continue-on-error: true
+
+      - name: 🚀 Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: success()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+
+  # ===== SUMMARY REPORT =====
+  summary:
+    name: 📊 Build Summary
+    runs-on: ubuntu-latest
+    needs: [code-quality, build-and-test]
+    if: always()
+
+    steps:
+      - name: 📊 Generate summary
+        run: |
+          echo "## 🚀 Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Job | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Code Quality | ${{ needs.code-quality.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Build & Test | ${{ needs.build-and-test.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📈 Key Metrics" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch**: \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit**: \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Trigger**: \`${{ github.event_name }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Actor**: @${{ github.actor }}" >> $GITHUB_STEP_SUMMARY

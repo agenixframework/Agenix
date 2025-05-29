@@ -51,6 +51,7 @@ public class GzipBinaryBase64MessageValidator : BinaryBase64MessageValidator
         TestContext context, IValidationContext validationContext)
     {
         if (receivedMessage.Payload is byte[] bytes)
+        {
             try
             {
                 using var gzipInputStream = new GZipStream(new MemoryStream(bytes),
@@ -63,6 +64,7 @@ public class GzipBinaryBase64MessageValidator : BinaryBase64MessageValidator
             {
                 throw new Exception("Failed to validate gzipped message", e);
             }
+        }
 
         base.ValidateMessage(receivedMessage, controlMessage, context, validationContext);
     }
