@@ -121,7 +121,10 @@ public class PlainTextMessageValidator : DefaultMessageValidator
     /// <returns></returns>
     private static string ProcessIgnoreStatements(string control, string result)
     {
-        if (control.Equals(AgenixSettings.IgnorePlaceholder)) return control;
+        if (control.Equals(AgenixSettings.IgnorePlaceholder))
+        {
+            return control;
+        }
 
         var whitespacePattern = new Regex(@"\W");
         var ignorePattern = new Regex(@"@Ignore\(?(\d*)\)?@");
@@ -134,7 +137,10 @@ public class PlainTextMessageValidator : DefaultMessageValidator
             if (ignoreMatcher.Groups.Count > 1 && !string.IsNullOrWhiteSpace(ignoreMatcher.Groups[1].Value))
             {
                 var end = ignoreMatcher.Index + int.Parse(ignoreMatcher.Groups[1].Value);
-                if (end > result.Length) end = result.Length;
+                if (end > result.Length)
+                {
+                    end = result.Length;
+                }
 
                 actualValue = ignoreMatcher.Index > result.Length
                     ? ""
@@ -144,7 +150,10 @@ public class PlainTextMessageValidator : DefaultMessageValidator
             {
                 actualValue = result[ignoreMatcher.Index..];
                 var whitespaceMatcher = whitespacePattern.Match(actualValue);
-                if (whitespaceMatcher.Success) actualValue = actualValue[..whitespaceMatcher.Index];
+                if (whitespaceMatcher.Success)
+                {
+                    actualValue = actualValue[..whitespaceMatcher.Index];
+                }
             }
 
             control = ignorePattern.Replace(control, actualValue, 1);
@@ -164,7 +173,10 @@ public class PlainTextMessageValidator : DefaultMessageValidator
     /// <returns></returns>
     private static string ProcessVariableStatements(string control, string result, TestContext context)
     {
-        if (control.Equals(AgenixSettings.IgnorePlaceholder)) return control;
+        if (control.Equals(AgenixSettings.IgnorePlaceholder))
+        {
+            return control;
+        }
 
         var whitespacePattern = new Regex(@"[^a-zA-Z_0-9\-\.]");
         var variablePattern = new Regex(@"@Variable\(?\'?([a-zA-Z_0-9\-\.]*)\'?\)?@");
@@ -174,7 +186,10 @@ public class PlainTextMessageValidator : DefaultMessageValidator
         {
             var actualValue = result[variableMatcher.Index..];
             var whitespaceMatcher = whitespacePattern.Match(actualValue);
-            if (whitespaceMatcher.Success) actualValue = actualValue[..whitespaceMatcher.Index];
+            if (whitespaceMatcher.Success)
+            {
+                actualValue = actualValue[..whitespaceMatcher.Index];
+            }
 
             control = variablePattern.Replace(control, actualValue, 1);
             context.SetVariable(variableMatcher.Groups[1].Value, actualValue);
@@ -208,14 +223,19 @@ public class PlainTextMessageValidator : DefaultMessageValidator
         }
 
         if (string.IsNullOrWhiteSpace(receivedMessagePayload))
+        {
             throw new ValidationException("Validation failed - expected message contents, but received empty message!");
+        }
 
         if (!receivedMessagePayload.Equals(controlMessagePayload))
         {
             if (Regex.Replace(receivedMessagePayload, @"\s", "")
                 .Equals(Regex.Replace(controlMessagePayload, @"\s", "")))
+            {
                 throw new ValidationException(
                     $"Text values not equal (only whitespaces!), expected '{controlMessagePayload}' but was '{receivedMessagePayload}'");
+            }
+
             throw new ValidationException(
                 $"Text values not equal, expected '{controlMessagePayload}' but was '{receivedMessagePayload}'");
         }
@@ -234,9 +254,14 @@ public class PlainTextMessageValidator : DefaultMessageValidator
             var result = new StringBuilder();
             var lastWasSpace = true;
             foreach (var c in payload)
+            {
                 if (char.IsWhiteSpace(c))
                 {
-                    if (!lastWasSpace) result.Append(' ');
+                    if (!lastWasSpace)
+                    {
+                        result.Append(' ');
+                    }
+
                     lastWasSpace = true;
                 }
                 else
@@ -244,6 +269,7 @@ public class PlainTextMessageValidator : DefaultMessageValidator
                     result.Append(c);
                     lastWasSpace = false;
                 }
+            }
 
             return result.ToString().Trim();
         }
