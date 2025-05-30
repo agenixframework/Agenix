@@ -78,17 +78,19 @@ public abstract class WaitUtils
             {
                 Log.LogDebug("Wait for test container to finish properly ...");
 
-                // Wait for a small duration or until the cancellation token is triggered
+                // This will throw TaskCanceledException when timeout occurs
                 await Task.Delay(100, cancellationTokenSource.Token);
-
-                // Check if timeout has occurred
-                if (cancellationTokenSource.Token.IsCancellationRequested)
-                    throw new TimeoutException("Failed to wait for the test container to finish properly");
             }
         }
-        catch (Exception ex) when (ex is TaskCanceledException or TimeoutException or OperationCanceledException)
+        catch (TaskCanceledException) when (cancellationTokenSource.Token.IsCancellationRequested)
         {
-            throw new AgenixSystemException("Failed to wait for test container to finish properly", ex);
+            // Timeout occurred
+            throw new AgenixSystemException("Failed to wait for the test container to finish properly - timeout exceeded");
+        }
+        catch (OperationCanceledException) when (cancellationTokenSource.Token.IsCancellationRequested)
+        {
+            // Timeout occurred
+            throw new AgenixSystemException("Failed to wait for the test container to finish properly - operation cancelled");
         }
         finally
         {
