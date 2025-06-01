@@ -69,7 +69,10 @@ public class Conditional : AbstractActionContainer
         if (CheckCondition(context))
         {
             Log.LogDebug($"Condition [{_condition}] evaluates to true, executing nested actions");
-            foreach (var actionBuilder in actions) ExecuteAction(actionBuilder.Build(), context);
+            foreach (var actionBuilder in actions)
+            {
+                ExecuteAction(actionBuilder.Build(), context);
+            }
         }
         else
         {
@@ -84,11 +87,14 @@ public class Conditional : AbstractActionContainer
     private bool CheckCondition(TestContext context)
     {
         if (ConditionExpression != null)
+        {
             return ConditionExpression.Invoke(context);
+        }
 
         // replace dynamic content with each iteration
         var conditionString = context.ReplaceDynamicContentInString(_condition);
         if (ValidationMatcherUtils.IsValidationMatcherExpression(conditionString))
+        {
             try
             {
                 ValidationMatcherUtils.ResolveValidationMatcher("iteratingCondition", "", conditionString, context);
@@ -98,6 +104,7 @@ public class Conditional : AbstractActionContainer
             {
                 return false;
             }
+        }
 
         return BooleanExpressionParser.Evaluate(conditionString);
     }

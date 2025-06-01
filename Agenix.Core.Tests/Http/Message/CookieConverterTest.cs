@@ -31,7 +31,9 @@ public class CookieConverterTest
         _httpResponseHeaders.TryAddWithoutValidation("Set-Cookie", new List<string> { "foo=bar" });
         var responseMessage = new HttpResponseMessage();
         foreach (var header in _httpResponseHeaders)
+        {
             responseMessage.Headers.TryAddWithoutValidation(header.Key, header.Value);
+        }
 
         // WHEN
         var cookies = _cookieConverter.ConvertCookies(responseMessage);
@@ -48,7 +50,9 @@ public class CookieConverterTest
         _httpResponseHeaders.TryAddWithoutValidation("Set-Cookie", new List<string> { "foo=bar;HttpOnly" });
         var responseMessage = new HttpResponseMessage();
         foreach (var header in _httpResponseHeaders)
+        {
             responseMessage.Headers.TryAddWithoutValidation(header.Key, header.Value);
+        }
 
         // WHEN
         var cookies = _cookieConverter.ConvertCookies(responseMessage);
@@ -65,7 +69,9 @@ public class CookieConverterTest
         _httpResponseHeaders.TryAddWithoutValidation("Set-Cookie", new List<string> { "foo=bar;Comment=wtf" });
         var responseMessage = new HttpResponseMessage();
         foreach (var header in _httpResponseHeaders)
+        {
             responseMessage.Headers.TryAddWithoutValidation(header.Key, header.Value);
+        }
 
         // WHEN
         var cookies = _cookieConverter.ConvertCookies(responseMessage);
@@ -81,7 +87,9 @@ public class CookieConverterTest
         _httpResponseHeaders.TryAddWithoutValidation("Set-Cookie", new List<string> { "foo=bar;Domain=whatever" });
         var responseMessage = new HttpResponseMessage();
         foreach (var header in _httpResponseHeaders)
+        {
             responseMessage.Headers.TryAddWithoutValidation(header.Key, header.Value);
+        }
 
         // WHEN
         var cookies = _cookieConverter.ConvertCookies(responseMessage);
@@ -97,7 +105,9 @@ public class CookieConverterTest
         _httpResponseHeaders.TryAddWithoutValidation("Set-Cookie", new List<string> { "foo=bar;Max-Age=42" });
         var responseMessage = new HttpResponseMessage();
         foreach (var header in _httpResponseHeaders)
+        {
             responseMessage.Headers.TryAddWithoutValidation(header.Key, header.Value);
+        }
 
         // WHEN
         var cookies = _cookieConverter.ConvertCookies(responseMessage);
@@ -114,7 +124,9 @@ public class CookieConverterTest
         _httpResponseHeaders.TryAddWithoutValidation("Set-Cookie", new List<string> { "foo=bar;Path=foobar" });
         var responseMessage = new HttpResponseMessage();
         foreach (var header in _httpResponseHeaders)
+        {
             responseMessage.Headers.TryAddWithoutValidation(header.Key, header.Value);
+        }
 
         // WHEN
         var cookies = _cookieConverter.ConvertCookies(responseMessage);
@@ -130,7 +142,9 @@ public class CookieConverterTest
         _httpResponseHeaders.TryAddWithoutValidation("Set-Cookie", new List<string> { "foo=bar;Secure" });
         var responseMessage = new HttpResponseMessage();
         foreach (var header in _httpResponseHeaders)
+        {
             responseMessage.Headers.TryAddWithoutValidation(header.Key, header.Value);
+        }
 
         // WHEN
         var cookies = _cookieConverter.ConvertCookies(responseMessage);
@@ -146,7 +160,9 @@ public class CookieConverterTest
         _httpResponseHeaders.TryAddWithoutValidation("Set-Cookie", new List<string> { "foo=bar;Version=1" });
         var responseMessage = new HttpResponseMessage();
         foreach (var header in _httpResponseHeaders)
+        {
             responseMessage.Headers.TryAddWithoutValidation(header.Key, header.Value);
+        }
 
         // WHEN
         var cookies = _cookieConverter.ConvertCookies(responseMessage);
@@ -162,7 +178,9 @@ public class CookieConverterTest
         _httpResponseHeaders.TryAddWithoutValidation("Set-Cookie", new List<string> { "foo=bar;HttpOnly" });
         var responseMessage = new HttpResponseMessage();
         foreach (var header in _httpResponseHeaders)
+        {
             responseMessage.Headers.TryAddWithoutValidation(header.Key, header.Value);
+        }
 
         // WHEN
         var cookies = _cookieConverter.ConvertCookies(responseMessage);

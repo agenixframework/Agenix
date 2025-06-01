@@ -1,37 +1,39 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <RootNamespace>Agenix.Reqroll.Plugin.Tests</RootNamespace>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Copyright>Copyright (c) 2025 Agenix</Copyright>
-        <Authors>Andrei Suruceanu</Authors>
-        <IsPackable>false</IsPackable>
-        <IsTestProject>true</IsTestProject>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Agenix.Reqroll.Plugin.Tests</RootNamespace>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright (c) 2025 Agenix</Copyright>
+    <Authors>Andrei Suruceanu</Authors>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Agenix.ReqnrollPlugin\Agenix.ReqnrollPlugin.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Agenix.ReqnrollPlugin\Agenix.ReqnrollPlugin.csproj"/>
+  </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="8.0.0" />
-      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0" />
-      <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
-      <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
-      <PackageReference Include="Reqnroll.NUnit" Version="2.4.1" />
-      <PackageReference Include="Reqnroll.Tools.MsBuild.Generation" Version="2.4.1" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="8.0.0"/>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0"/>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NUnit3TestAdapter" Version="5.0.0"/>
+    <PackageReference Include="Reqnroll.NUnit" Version="2.4.1"/>
+    <PackageReference Include="Reqnroll.Tools.MsBuild.Generation" Version="2.4.1"/>
+    <PackageReference Include="System.Formats.Asn1" Version="8.0.1"/>
+    <PackageReference Include="System.Text.Json" Version="8.0.5"/>
+  </ItemGroup>
 
-    <ItemGroup>
-      <None Update="log4net.config">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
+  <ItemGroup>
+    <None Update="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 </Project>

@@ -21,7 +21,6 @@ namespace Agenix.Core.Tests.Container;
 ///     with actions. It extends from <see cref="AbstractNUnitSetUp" />, preparing mocks in the
 ///     <see cref="SetUp" /> method before each test execution.
 /// </remarks>
-
 [Platform(Exclude = "Linux", Reason = "Only runs on non-Linux platforms.")]
 public class AsyncTest : AbstractNUnitSetUp
 {

@@ -166,9 +166,15 @@ public class TestContextFactory : IReferenceResolverAware
         context.SetGlobalVariables(GlobalVariables);
         context.SetReferenceResolver(_referenceResolver);
 
-        if (LogModifier != null) context.LogModifier = LogModifier;
+        if (LogModifier != null)
+        {
+            context.LogModifier = LogModifier;
+        }
 
-        if (TypeConverter != null) context.TypeConverter = TypeConverter;
+        if (TypeConverter != null)
+        {
+            context.TypeConverter = TypeConverter;
+        }
 
         return context;
     }
@@ -220,7 +226,10 @@ public class TestContextFactory : IReferenceResolverAware
             EndpointFactory = context.EndpointFactory
         };
 
-        foreach (var kvp in context.GetVariables()) result.GetVariables()[kvp.Key] = kvp.Value;
+        foreach (var kvp in context.GetVariables())
+        {
+            result.GetVariables()[kvp.Key] = kvp.Value;
+        }
 
         result.SetGlobalVariables(new GlobalVariables.Builder()
             .WithVariables(context.GetGlobalVariables())

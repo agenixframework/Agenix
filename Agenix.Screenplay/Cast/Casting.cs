@@ -82,10 +82,17 @@ public class Casting
     /// <returns>An <see cref="Actor" /> instance corresponding to the specified name, with the provided abilities.</returns>
     public Actor ActorNamed(string actorName, params IAbility[] abilities)
     {
-        if (_actors.TryGetValue(actorName, out var named)) return named;
+        if (_actors.TryGetValue(actorName, out var named))
+        {
+            return named;
+        }
+
         var newActor = Actor.Named(actorName);
 
-        foreach (var doSomething in abilities) newActor.Can(doSomething);
+        foreach (var doSomething in abilities)
+        {
+            newActor.Can(doSomething);
+        }
 
         AssignGeneralAbilitiesTo(newActor);
 
@@ -109,7 +116,11 @@ public class Casting
     /// </summary>
     public void DismissAll()
     {
-        foreach (var actor in _actors.Values) actor.WrapUp();
+        foreach (var actor in _actors.Values)
+        {
+            actor.WrapUp();
+        }
+
         _actors.Clear();
     }
 
@@ -120,8 +131,14 @@ public class Casting
     /// <param name="newActor">The actor to whom the standard abilities and providers will be assigned.</param>
     protected void AssignGeneralAbilitiesTo(Actor newActor)
     {
-        foreach (var ability in _standardAbilities) newActor.WhoCan(ability);
+        foreach (var ability in _standardAbilities)
+        {
+            newActor.WhoCan(ability);
+        }
 
-        foreach (var provider in _abilityProviders) provider(newActor);
+        foreach (var provider in _abilityProviders)
+        {
+            provider(newActor);
+        }
     }
 }

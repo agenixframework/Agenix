@@ -5,10 +5,10 @@ using Agenix.Api.Message;
 using Agenix.Core.Message;
 using Agenix.Http.Client;
 using Agenix.Http.Message;
-using TestContext = Agenix.Api.Context.TestContext;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.Tests.Http.Message;
 
@@ -355,10 +355,7 @@ public class HttpMessageConverterTest
     [Test]
     public void TestHttpEntityMessageBodyIsPreservedOnInbound()
     {
-        var httpResponseMessage = new HttpResponseMessage
-        {
-            Content = new StringContent(_payload)
-        };
+        var httpResponseMessage = new HttpResponseMessage { Content = new StringContent(_payload) };
 
         // WHEN
         var httpMessage = _messageConverter.ConvertInbound(httpResponseMessage, _endpointConfiguration, _testContext);
@@ -370,10 +367,7 @@ public class HttpMessageConverterTest
     [Test]
     public void TestHttpEntityDefaultMessageBodyIsSetOnInbound()
     {
-        var httpResponseMessage = new HttpResponseMessage
-        {
-            Content = new StringContent("")
-        };
+        var httpResponseMessage = new HttpResponseMessage { Content = new StringContent("") };
 
         // WHEN
         var httpMessage = _messageConverter.ConvertInbound(httpResponseMessage, _endpointConfiguration, _testContext);
@@ -485,10 +479,7 @@ public class HttpMessageConverterTest
     [Test]
     public void TestCookiesPreservedOnConfigurationOnInbound()
     {
-        var cookie = new Cookie
-        {
-            Name = "foo"
-        };
+        var cookie = new Cookie { Name = "foo" };
 
         var httpResponseMessage = new HttpResponseMessage();
         httpResponseMessage.Content = new StringContent("foobar");

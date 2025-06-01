@@ -45,9 +45,11 @@ public class TrimValidationMatcher : IValidationMatcher
         var control = controlParameters[0];
 
         if (!string.Equals(value.Trim(), control.Trim(), StringComparison.OrdinalIgnoreCase))
+        {
             throw new ValidationException(TypeDescriptor.GetClassName(typeof(TrimValidationMatcher))
                                           + " failed for field '" + fieldName
                                           + "'. Received value is '" + value.Trim()
                                           + "', control value is '" + control.Trim() + "'.");
+        }
     }
 }

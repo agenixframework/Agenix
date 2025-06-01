@@ -48,8 +48,10 @@ public class PayloadMatchingMessageSelector : AbstractMessageSelector
         matchingValue, context)
     {
         if (!selectKey.Equals(SelectorId))
+        {
             throw new AgenixSystemException("Invalid usage of payload matching message selector - " +
                                             $"usage restricted to key '{SelectorId}' but was '{selectKey}'");
+        }
     }
 
     /// <summary>

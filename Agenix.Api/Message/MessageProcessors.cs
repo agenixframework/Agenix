@@ -62,9 +62,12 @@ public class MessageProcessors
     public void AddMessageProcessor(IMessageProcessor processor)
     {
         if (processor is IScoped scopedProcessor && !scopedProcessor.IsGlobalScope())
+        {
             throw new AgenixSystemException(
                 "Unable to add non-global scoped processor to global message processors - " +
                 "either declare processor as global scope or explicitly add it to test actions instead");
+        }
+
         _messageProcessors.Add(processor);
     }
 }

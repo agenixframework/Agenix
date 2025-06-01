@@ -46,7 +46,10 @@ public class TestActionListeners : ITestActionListenerAware
     /// <param name="testAction">The test action that has finished.</param>
     public void OnTestActionFinish(ITestCase testCase, ITestAction testAction)
     {
-        foreach (var listener in _testActionListeners) listener.OnTestActionFinish(testCase, testAction);
+        foreach (var listener in _testActionListeners)
+        {
+            listener.OnTestActionFinish(testCase, testAction);
+        }
     }
 
     /// Notifies all registered listeners that a test action has been skipped.
@@ -54,7 +57,10 @@ public class TestActionListeners : ITestActionListenerAware
     /// <param name="testAction">The test action that has been skipped.</param>
     public void OnTestActionSkipped(ITestCase testCase, ITestAction testAction)
     {
-        foreach (var listener in _testActionListeners) listener.OnTestActionSkipped(testCase, testAction);
+        foreach (var listener in _testActionListeners)
+        {
+            listener.OnTestActionSkipped(testCase, testAction);
+        }
     }
 
     /// Notifies all registered listeners that a test action has started.
@@ -62,7 +68,10 @@ public class TestActionListeners : ITestActionListenerAware
     /// <param name="testAction">The test action that has started.</param>
     public void OnTestActionStart(ITestCase testCase, ITestAction testAction)
     {
-        foreach (var listener in _testActionListeners) listener.OnTestActionStart(testCase, testAction);
+        foreach (var listener in _testActionListeners)
+        {
+            listener.OnTestActionStart(testCase, testAction);
+        }
     }
 
     /// Obtains the TestActionListeners.

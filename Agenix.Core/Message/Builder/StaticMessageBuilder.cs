@@ -57,7 +57,10 @@ public class StaticMessageBuilder : DefaultMessageBuilder
     /// <return>Returns the constructed message payload object.</return>
     public override object BuildMessagePayload(TestContext context, string messageType)
     {
-        if (GetPayloadBuilder() == null) SetPayloadBuilder(new DefaultPayloadBuilder(_message.Payload));
+        if (GetPayloadBuilder() == null)
+        {
+            SetPayloadBuilder(new DefaultPayloadBuilder(_message.Payload));
+        }
 
         return base.BuildMessagePayload(context, messageType);
     }
@@ -76,7 +79,10 @@ public class StaticMessageBuilder : DefaultMessageBuilder
         var defaultHeaderBuilder = new DefaultHeaderBuilder(filteredHeaders);
         var additionalHeaders = defaultHeaderBuilder.BuilderHeaders(context);
 
-        foreach (var header in additionalHeaders) headers[header.Key] = header.Value;
+        foreach (var header in additionalHeaders)
+        {
+            headers[header.Key] = header.Value;
+        }
 
         return headers;
     }

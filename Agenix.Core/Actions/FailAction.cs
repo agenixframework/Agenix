@@ -101,10 +101,7 @@ public class FailAction(FailAction.Builder builder) : AbstractTestAction("fail",
         /// </returns>
         public static Builder Fail(string message)
         {
-            var builder = new Builder
-            {
-                message = message
-            };
+            var builder = new Builder { message = message };
             return builder;
         }
 

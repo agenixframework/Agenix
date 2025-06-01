@@ -49,7 +49,11 @@ public class HeaderMatchingMessageSelector(string selectKey, string matchingValu
     /// <returns>True if the header matches the expected values, otherwise false.</returns>
     private bool MatchHeader(IDictionary<string, object> messageHeaders)
     {
-        if (!messageHeaders.TryGetValue(SelectKey, out var value)) return false;
+        if (!messageHeaders.TryGetValue(SelectKey, out var value))
+        {
+            return false;
+        }
+
         var valueAsString = value?.ToString();
         return Evaluate(valueAsString);
     }
@@ -64,9 +68,15 @@ public class HeaderMatchingMessageSelector(string selectKey, string matchingValu
         var messageHeaders = message.GetHeaders();
 
         var nestedMessageHeaders = new Dictionary<string, object>();
-        if (message.Payload is IMessage nestedMessage) nestedMessageHeaders = nestedMessage.GetHeaders();
+        if (message.Payload is IMessage nestedMessage)
+        {
+            nestedMessageHeaders = nestedMessage.GetHeaders();
+        }
 
-        if (nestedMessageHeaders.ContainsKey(SelectKey)) return MatchHeader(nestedMessageHeaders);
+        if (nestedMessageHeaders.ContainsKey(SelectKey))
+        {
+            return MatchHeader(nestedMessageHeaders);
+        }
 
         return messageHeaders.ContainsKey(SelectKey) && MatchHeader(messageHeaders);
     }

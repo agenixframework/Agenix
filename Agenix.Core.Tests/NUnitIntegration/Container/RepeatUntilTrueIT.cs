@@ -1,10 +1,10 @@
 ﻿using Agenix.Api.Annotations;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
-
 using static Agenix.Core.Container.RepeatUntilTrue.Builder;
 using static Agenix.Core.Actions.CreateVariablesAction.Builder;
 using static Agenix.Core.Actions.EchoAction.Builder;
+
 namespace Agenix.Core.Tests.NUnitIntegration.Container;
 
 [NUnitAgenixSupport]

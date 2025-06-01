@@ -18,7 +18,11 @@ public class TestObject
 
     public void AddPeriodicElement(string name, string element)
     {
-        if (periodicTable == null) periodicTable = new Hashtable();
+        if (periodicTable == null)
+        {
+            periodicTable = new Hashtable();
+        }
+
         periodicTable.Add(name, element);
     }
 }

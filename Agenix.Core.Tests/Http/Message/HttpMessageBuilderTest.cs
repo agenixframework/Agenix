@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
-using Agenix.Api;
 using Agenix.Api.Message;
-using TestContext = Agenix.Api.Context.TestContext;
 using Agenix.Http.Message;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.Tests.Http.Message;
 
@@ -80,10 +79,7 @@ public class HttpMessageBuilderTest
         // GIVEN
         var cookieEnricher = new CookieEnricher();
         var testContextMock = new TestContext();
-        var templateCookie = new Cookie
-        {
-            Name = "foo"
-        };
+        var templateCookie = new Cookie { Name = "foo" };
         _message.SetCookies([templateCookie]);
 
 

@@ -72,7 +72,10 @@ public class DefaultMessageQueue(string name) : IMessageQueue
         foreach (var o in array)
         {
             var message = o;
-            if (selector.Invoke(message) && _queue.TryTake(out message)) return message;
+            if (selector.Invoke(message) && _queue.TryTake(out message))
+            {
+                return message;
+            }
         }
 
         return null;
@@ -92,8 +95,10 @@ public class DefaultMessageQueue(string name) : IMessageQueue
             timeLeft -= _pollingInterval;
 
             if (RetryLog.IsEnabled(LogLevel.Debug))
+            {
                 RetryLog.LogDebug("No message received with message selector - retrying in " +
                                   (timeLeft > 0 ? _pollingInterval : _pollingInterval + timeLeft) + "ms");
+            }
 
             try
             {
@@ -118,10 +123,17 @@ public class DefaultMessageQueue(string name) : IMessageQueue
         foreach (var o in array)
         {
             var message = o;
-            if (!selector.Accept(message)) continue;
+            if (!selector.Accept(message))
+            {
+                continue;
+            }
+
             if (_queue.TryTake(out message))
             {
-                if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug($"Purged message '{message.Id}' from in memory queue");
+                if (Log.IsEnabled(LogLevel.Debug))
+                {
+                    Log.LogDebug($"Purged message '{message.Id}' from in memory queue");
+                }
             }
             else
             {

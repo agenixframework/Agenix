@@ -120,10 +120,15 @@ public class DefaultMessage : IMessage
         }
         else
         {
-            if (!_headers.ContainsKey(MessageHeaders.Id)) _headers.Add(MessageHeaders.Id, Guid.NewGuid().ToString());
+            if (!_headers.ContainsKey(MessageHeaders.Id))
+            {
+                _headers.Add(MessageHeaders.Id, Guid.NewGuid().ToString());
+            }
 
             if (!_headers.ContainsKey(MessageHeaders.Timestamp))
+            {
                 _headers.Add(MessageHeaders.Timestamp, Environment.TickCount);
+            }
         }
     }
 
@@ -149,8 +154,11 @@ public class DefaultMessage : IMessage
     public virtual IMessage SetHeader(string headerName, object headerValue)
     {
         if (headerName.Equals(MessageHeaders.Id))
+        {
             throw new AgenixSystemException("Not allowed to set reserved message header from message: " +
                                             MessageHeaders.Id);
+        }
+
         _headers[headerName] = headerValue;
         return this;
     }
@@ -158,8 +166,10 @@ public class DefaultMessage : IMessage
     public void RemoveHeader(string headerName)
     {
         if (headerName.Equals(MessageHeaders.Id))
+        {
             throw new AgenixSystemException("Not allowed to remove reserved message header from message: " +
                                             MessageHeaders.Id);
+        }
 
         _headers.Remove(headerName);
     }
@@ -187,15 +197,27 @@ public class DefaultMessage : IMessage
 
     public new string GetType()
     {
-        if (_type != null) return _type;
+        if (_type != null)
+        {
+            return _type;
+        }
+
         if (MessageUtils.HasJsonPayload(this))
+        {
             _type = MessageType.JSON.ToString();
+        }
         else if (MessageUtils.HasXmlPayload(this))
+        {
             _type = MessageType.XML.ToString();
+        }
         else if (Payload is string)
+        {
             _type = MessageType.PLAINTEXT.ToString();
+        }
         else
+        {
             _type = MessageType.UNSPECIFIED.ToString();
+        }
 
         return _type;
     }
@@ -203,7 +225,10 @@ public class DefaultMessage : IMessage
 
     public IMessage SetType(string type)
     {
-        if (type != null) _headers[MessageHeaders.MessageType] = type;
+        if (type != null)
+        {
+            _headers[MessageHeaders.MessageType] = type;
+        }
 
         _type = type;
         return this;
@@ -223,8 +248,11 @@ public class DefaultMessage : IMessage
     public override string ToString()
     {
         if (_headerData == null || _headerData.Count == 0)
+        {
             return TypeDescriptor.GetClassName(typeof(DefaultMessage))?.ToUpper() + " [id: " + Id + ", payload: " +
                    GetPayload<string>() + "][headers: " + string.Join(",", _headers) + "]";
+        }
+
         return TypeDescriptor.GetClassName(typeof(DefaultMessage))?.ToUpper() + " [id: " + Id + ", payload: " +
                GetPayload<string>() + "][headers: " + string.Join(",", _headers) + "][header-data: " +
                string.Join(",", _headerData);

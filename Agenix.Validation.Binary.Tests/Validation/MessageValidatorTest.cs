@@ -7,9 +7,9 @@ using NUnit.Framework;
 namespace Agenix.Validation.Binary.Tests.Validation;
 
 /// <summary>
-/// A test suite for validating the functionality and behavior of message validators.
-/// This class is designed to verify the correct lookup and configuration of message validators
-/// in the Agenix application, ensuring their proper registration and implementation.
+///     A test suite for validating the functionality and behavior of message validators.
+///     This class is designed to verify the correct lookup and configuration of message validators
+///     in the Agenix application, ensuring their proper registration and implementation.
 /// </summary>
 public class MessageValidatorTest
 {

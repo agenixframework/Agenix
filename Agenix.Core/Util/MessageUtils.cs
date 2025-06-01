@@ -40,7 +40,10 @@ public static class MessageUtils
     /// <returns>true if message payload is XML, false otherwise.</returns>
     public static bool HasXmlPayload(IMessage message)
     {
-        if (message.Payload is not string) return false;
+        if (message.Payload is not string)
+        {
+            return false;
+        }
 
         var payload = message.GetPayload<string>().Trim();
 
@@ -54,7 +57,10 @@ public static class MessageUtils
     /// <returns>true if payload is Json, false otherwise.</returns>
     public static bool HasJsonPayload(IMessage message)
     {
-        if (message.Payload is not string) return false;
+        if (message.Payload is not string)
+        {
+            return false;
+        }
 
         var payload = message.GetPayload<string>().Trim();
 

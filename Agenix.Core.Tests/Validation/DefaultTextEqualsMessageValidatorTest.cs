@@ -68,17 +68,10 @@ public class DefaultTextEqualsMessageValidatorTest : AbstractNUnitSetUp
     {
         return new object[][]
         {
-            [null, null],
-            ["", null],
-            [null, ""],
-            ["Hello World!", "Hello World!"],
-            ["Hello World!  ", "Hello World!"],
-            ["Hello World!", "Hello World!  "],
-            ["Hello World!\n", "Hello World!"],
-            ["Hello World!\n", "Hello World!\n"],
-            ["\nHello World!", "\nHello World!"],
-            ["Hello\nWorld!\n", "Hello\nWorld!\n"],
-            ["Hello\r\nWorld!\r\n", "Hello\nWorld!\n"],
+            [null, null], ["", null], [null, ""], ["Hello World!", "Hello World!"], ["Hello World!  ", "Hello World!"],
+            ["Hello World!", "Hello World!  "], ["Hello World!\n", "Hello World!"],
+            ["Hello World!\n", "Hello World!\n"], ["\nHello World!", "\nHello World!"],
+            ["Hello\nWorld!\n", "Hello\nWorld!\n"], ["Hello\r\nWorld!\r\n", "Hello\nWorld!\n"],
             ["Hello World!", null], // empty control message
             ["Hello World!", ""], // no control message
             ["Hello World!"u8.ToArray(), ""] // no control message
@@ -97,12 +90,8 @@ public class DefaultTextEqualsMessageValidatorTest : AbstractNUnitSetUp
     {
         return new object[][]
         {
-            [null, "Hello World!"],
-            ["", "Hello World!"],
-            ["Hello  World!", "Hello World!"],
-            ["Hello World!", "Hello  World!"],
-            ["Hello\nWorld!", "Hello World!"],
-            ["Hello World!", "Hello\nWorld!"],
+            [null, "Hello World!"], ["", "Hello World!"], ["Hello  World!", "Hello World!"],
+            ["Hello World!", "Hello  World!"], ["Hello\nWorld!", "Hello World!"], ["Hello World!", "Hello\nWorld!"],
             ["Hello!", "Hi!"]
         };
     }

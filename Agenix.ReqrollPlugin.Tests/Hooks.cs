@@ -1,4 +1,5 @@
 ﻿#region License
+
 // MIT License
 //
 // Copyright (c) 2025 Agenix
@@ -20,6 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using Agenix.Api;
@@ -30,105 +32,104 @@ using Microsoft.Extensions.Logging;
 using Reqnroll;
 using Reqnroll.UnitTestProvider;
 
-namespace Agenix.Reqroll.Plugin.Tests
+namespace Agenix.Reqroll.Plugin.Tests;
+
+[Binding]
+public sealed class Hooks
 {
-    [Binding]
-    public sealed class Hooks
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(Hooks));
+
+    private readonly IUnitTestRuntimeProvider _unitTestRuntimeProvider;
+
+    [AgenixResource] private ITestCaseRunner _testCaseRunner;
+
+    public Hooks(IUnitTestRuntimeProvider unitTestRuntimeProvider)
     {
-        private static readonly ILogger Log = LogManager.GetLogger(typeof(Hooks));
+        _unitTestRuntimeProvider = unitTestRuntimeProvider;
+    }
 
-        private IUnitTestRuntimeProvider _unitTestRuntimeProvider;
+    [BeforeTestRun(Order = int.MinValue)]
+    public static void BeforeTestRun()
+    {
+        ConfigureLogging();
+    }
 
-        [AgenixResource] private ITestCaseRunner _testCaseRunner;
-
-        public Hooks(IUnitTestRuntimeProvider unitTestRuntimeProvider)
+    /// <summary>
+    ///     Configures and initializes the global logging system with standard settings
+    /// </summary>
+    /// <param name="configPath">Path to the log4net configuration file</param>
+    /// <param name="minimumLevel">Minimum log level to capture</param>
+    private static void ConfigureLogging(string configPath = "log4net.config", LogLevel minimumLevel = LogLevel.Debug)
+    {
+        // Create a new LoggerFactory
+        var factory = LoggerFactory.Create(builder =>
         {
-            _unitTestRuntimeProvider = unitTestRuntimeProvider;
-        }
+            // Set the minimum log level
+            builder.SetMinimumLevel(minimumLevel);
 
-        [BeforeTestRun(Order = int.MinValue)]
-        public static void BeforeTestRun()
-        {
-            ConfigureLogging();
-        }
+            // Add log4net provider
+            builder.AddLog4Net(configPath);
+        });
 
-        /// <summary>
-        /// Configures and initializes the global logging system with standard settings
-        /// </summary>
-        /// <param name="configPath">Path to the log4net configuration file</param>
-        /// <param name="minimumLevel">Minimum log level to capture</param>
-        private static void ConfigureLogging(string configPath = "log4net.config", LogLevel minimumLevel = LogLevel.Debug)
-        {
-            // Create a new LoggerFactory
-            var factory = LoggerFactory.Create(builder =>
-            {
-                // Set the minimum log level
-                builder.SetMinimumLevel(minimumLevel);
+        // Set the LogManager's LoggerFactory property
+        LogManager.LoggerFactory = factory;
+    }
 
-                // Add log4net provider
-                builder.AddLog4Net(configPath);
-            });
+    [AfterTestRun]
+    public static void AfterTestRun()
+    {
+        // all scenarios should not be affected (uncomment it to test)
+        //throw new Exception("AfterTestRun fail exception.");
+    }
 
-            // Set the LogManager's LoggerFactory property
-            LogManager.LoggerFactory = factory;
-        }
+    [BeforeFeature("feature_should_fail_before")]
+    public static void BeforeFeatureShouldFail()
+    {
+        throw new Exception("This feature should fail before.");
+    }
 
-        [AfterTestRun]
-        public static void AfterTestRun()
-        {
-            // all scenarios should not be affected (uncomment it to test)
-            //throw new Exception("AfterTestRun fail exception.");
-        }
+    [AfterFeature("feature_should_fail_after")]
+    public static void AfterFeatureShouldFail()
+    {
+        throw new Exception("This feature should fail after.");
+    }
 
-        [BeforeFeature("feature_should_fail_before")]
-        public static void BeforeFeatureShouldFail()
-        {
-            throw new Exception("This feature should fail before.");
-        }
+    [BeforeScenario]
+    public void BeforeScenario()
+    {
+        _testCaseRunner.Run(EchoAction.Builder.Echo("Before scenario from hooks.")
+            .Name("Print the message action")
+            .Description("Wise words from the wise man"));
+    }
 
-        [AfterFeature("feature_should_fail_after")]
-        public static void AfterFeatureShouldFail()
-        {
-            throw new Exception("This feature should fail after.");
-        }
+    [BeforeScenario("scenario_should_fail_before")]
+    public void BeforeScenarioShouldFail()
+    {
+        throw new Exception("This scenario should fail before.");
+    }
 
-        [BeforeScenario]
-        public void BeforeScenario()
-        {
-            _testCaseRunner.Run(EchoAction.Builder.Echo("Before scenario from hooks.")
-                .Name("Print the message action")
-                .Description("Wise words from the wise man"));
-        }
+    [BeforeScenario("scenario_should_ignore_before_runtime")]
+    public void BeforeScenarioShouldIgnore()
+    {
+        //_unitTestRuntimeProvider.TestIgnore("This scenario should be ignored at runtime.");
+        _unitTestRuntimeProvider.TestInconclusive("This scenario should be ignored at runtime.");
+    }
 
-        [BeforeScenario("scenario_should_fail_before")]
-        public void BeforeScenarioShouldFail()
-        {
-            throw new Exception("This scenario should fail before.");
-        }
+    [AfterScenario("scenario_should_fail_after")]
+    public void AfterScenarioShouldFail()
+    {
+        throw new Exception("This scenario should fail after.");
+    }
 
-        [BeforeScenario("scenario_should_ignore_before_runtime")]
-        public void BeforeScenarioShouldIgnore()
-        {
-            //_unitTestRuntimeProvider.TestIgnore("This scenario should be ignored at runtime.");
-            _unitTestRuntimeProvider.TestInconclusive("This scenario should be ignored at runtime.");
-        }
+    [BeforeStep("step_should_fail_before")]
+    public void BeforeStepShouldFail()
+    {
+        throw new Exception("This step should fail before.");
+    }
 
-        [AfterScenario("scenario_should_fail_after")]
-        public void AfterScenarioShouldFail()
-        {
-            throw new Exception("This scenario should fail after.");
-        }
-
-        [BeforeStep("step_should_fail_before")]
-        public void BeforeStepShouldFail()
-        {
-            throw new Exception("This step should fail before.");
-        }
-
-        [AfterStep("step_should_fail_after")]
-        public void AfterStepShouldFail()
-        {
-            throw new Exception("This step should fail after.");
-        }
+    [AfterStep("step_should_fail_after")]
+    public void AfterStepShouldFail()
+    {
+        throw new Exception("This step should fail after.");
     }
 }

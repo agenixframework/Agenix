@@ -68,7 +68,10 @@ public class Actor : IPerformsTasks
     /// <param name="otherActor">The actor to brief</param>
     public void Brief(Actor otherActor)
     {
-        foreach (var item in _notepad) otherActor._notepad.Add(item.Key, item.Value);
+        foreach (var item in _notepad)
+        {
+            otherActor._notepad.Add(item.Key, item.Value);
+        }
     }
 
     /// <summary>
@@ -101,7 +104,10 @@ public class Actor : IPerformsTasks
     /// <returns>The current instance of the <see cref="Actor" /> class for chaining further actions.</returns>
     public Actor Can<T>(T doSomething) where T : IAbility
     {
-        if (doSomething is IRefersToActor refersToActor) refersToActor.AsActor<T>(this);
+        if (doSomething is IRefersToActor refersToActor)
+        {
+            refersToActor.AsActor<T>(this);
+        }
 
         _abilities[doSomething.GetType()] = doSomething;
 
@@ -124,7 +130,10 @@ public class Actor : IPerformsTasks
     /// <returns>The requested ability or null if not found</returns>
     public T AbilityTo<T>() where T : class, IAbility
     {
-        if (_abilities.TryGetValue(typeof(T), out var ability)) return ability as T;
+        if (_abilities.TryGetValue(typeof(T), out var ability))
+        {
+            return ability as T;
+        }
 
         return GetAbilityThatExtends<T>();
     }
@@ -281,7 +290,10 @@ public class Actor : IPerformsTasks
     /// </summary>
     public void WrapUp()
     {
-        foreach (var teardown in GetTeardowns()) teardown.TearDown();
+        foreach (var teardown in GetTeardowns())
+        {
+            teardown.TearDown();
+        }
     }
 
     /// <summary>
@@ -295,7 +307,10 @@ public class Actor : IPerformsTasks
 
     public void AttemptsTo(ErrorHandlingMode mode, params IPerformable[] tasks)
     {
-        foreach (var task in tasks) PerformTask(InstrumentedTask.Of(task));
+        foreach (var task in tasks)
+        {
+            PerformTask(InstrumentedTask.Of(task));
+        }
     }
 
     private void PerformTask<T>(T todo) where T : IPerformable

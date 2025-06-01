@@ -136,7 +136,11 @@ public class Properties : Hashtable
                 if (!isContinuation)
                 {
                     var keyvalue = SplitLine(line);
-                    if (keyvalue == null) continue;
+                    if (keyvalue == null)
+                    {
+                        continue;
+                    }
+
                     key = keyvalue[0];
                     value = keyvalue[1];
 
@@ -174,15 +178,20 @@ public class Properties : Hashtable
     /// <returns>The string with all leading whitespace removed.</returns>
     private static string RemoveLeadingWhitespace(string line)
     {
-        if (line == null) return null;
+        if (line == null)
+        {
+            return null;
+        }
 
         var trimmed = string.Empty;
         for (var i = 0; i < line.Length; i++)
+        {
             if (Whitespace.IndexOf(line[i]) == -1)
             {
                 trimmed = line.Substring(i);
                 break;
             }
+        }
 
         return trimmed;
     }
@@ -200,6 +209,7 @@ public class Properties : Hashtable
         var index = 0;
         var len = line.Length;
         for (; index < len; index++)
+        {
             if (WhitespaceWithSeparators.IndexOf(line[index]) != -1)
             {
                 if (line[index - 1].Equals('\\'))
@@ -214,6 +224,7 @@ public class Properties : Hashtable
                     break;
                 }
             }
+        }
 
         // got key, now find the start of the value
         // first ignore leading whitespace and initial separator
@@ -276,7 +287,10 @@ public class Properties : Hashtable
     {
         using (var sw = new StreamWriter(stream))
         {
-            foreach (DictionaryEntry de in this) sw.WriteLine(de.Key + "=" + de.Value);
+            foreach (DictionaryEntry de in this)
+            {
+                sw.WriteLine(de.Key + "=" + de.Value);
+            }
         }
     }
 
@@ -301,7 +315,10 @@ public class Properties : Hashtable
         {
             sw.WriteLine(header);
 
-            foreach (DictionaryEntry de in this) sw.WriteLine(de.Key + "=" + de.Value);
+            foreach (DictionaryEntry de in this)
+            {
+                sw.WriteLine(de.Key + "=" + de.Value);
+            }
         }
     }
 

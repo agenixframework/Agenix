@@ -60,18 +60,22 @@ public abstract class AbstractTestBoundaryActionContainer : AbstractActionContai
             "Skip before test container because of {0} restrictions - do not execute container '{1}'";
 
         if (!string.IsNullOrEmpty(_packageNamePattern))
+        {
             if (!Regex.IsMatch(packageName, _packageNamePattern))
             {
                 Log.LogWarning(baseErrorMessage, "test package", Name);
                 return false;
             }
+        }
 
         if (!string.IsNullOrEmpty(_namePattern))
+        {
             if (!Regex.IsMatch(testName, SanitizePattern(_namePattern)))
             {
                 Log.LogWarning(baseErrorMessage, "test name", Name);
                 return false;
             }
+        }
 
         if (!CheckTestGroups(includedGroups))
         {
@@ -90,7 +94,11 @@ public abstract class AbstractTestBoundaryActionContainer : AbstractActionContai
         if (!_systemProperties
                 .Where(systemProperty => Environment.GetEnvironmentVariable(systemProperty.Key) != null)
                 .Any(systemProperty => !string.IsNullOrEmpty(systemProperty.Value) && !Environment
-                    .GetEnvironmentVariable(systemProperty.Key)!.Equals(systemProperty.Value))) return true;
+                    .GetEnvironmentVariable(systemProperty.Key)!.Equals(systemProperty.Value)))
+        {
+            return true;
+        }
+
         Log.LogWarning(baseErrorMessage, "system properties", Name);
         return false;
     }
@@ -103,9 +111,15 @@ public abstract class AbstractTestBoundaryActionContainer : AbstractActionContai
     /// <returns>Returns the sanitized version of the input pattern as a string.</returns>
     private string SanitizePattern(string pattern)
     {
-        if (pattern.StartsWith('*')) return "." + pattern;
+        if (pattern.StartsWith('*'))
+        {
+            return "." + pattern;
+        }
 
-        if (pattern.EndsWith('*') && pattern[^2] != '.') return pattern[..^1] + ".*";
+        if (pattern.EndsWith('*') && pattern[^2] != '.')
+        {
+            return pattern[..^1] + ".*";
+        }
 
         return pattern;
     }
@@ -117,7 +131,10 @@ public abstract class AbstractTestBoundaryActionContainer : AbstractActionContai
     /// <returns>Returns <c>true</c> if any of the included groups match the test groups; otherwise, <c>false</c>.</returns>
     private bool CheckTestGroups(string[] includedGroups)
     {
-        if (_testGroups.Count == 0) return true;
+        if (_testGroups.Count == 0)
+        {
+            return true;
+        }
 
         return includedGroups != null && includedGroups.Any(includedGroup => _testGroups.Contains(includedGroup));
     }

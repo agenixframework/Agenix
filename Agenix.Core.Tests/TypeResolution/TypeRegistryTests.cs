@@ -1,7 +1,6 @@
 #region Imports
 
 using System;
-using Agenix.Core.Tests.TypeResolution;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 using Spring.Core.TypeResolution;

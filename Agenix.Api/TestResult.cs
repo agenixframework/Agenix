@@ -195,7 +195,10 @@ public class TestResult
 
     public TestResult WithParameters(Dictionary<string, object> parameters)
     {
-        foreach (var param in parameters) Parameters[param.Key] = param.Value;
+        foreach (var param in parameters)
+        {
+            Parameters[param.Key] = param.Value;
+        }
 
         return this;
     }
@@ -220,9 +223,11 @@ public class TestResult
             .Append("testName=").Append(TestName);
 
         if (Parameters.Count > 0)
+        {
             stringBuilder.Append(", parameters=[")
                 .Append(string.Join(", ", Parameters.Select(kvp => $"{kvp.Key}={kvp.Value}")))
                 .Append(']');
+        }
 
         stringBuilder.Append(", result=").Append(Result);
 

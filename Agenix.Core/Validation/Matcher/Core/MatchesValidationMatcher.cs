@@ -65,9 +65,11 @@ public class MatchesValidationMatcher : IValidationMatcher
         }
 
         if (!success)
+        {
             throw new ValidationException(TypeDescriptor.GetClassName(typeof(MatchesValidationMatcher))
                                           + " failed for field '" + fieldName
                                           + "'. Received value is '" + value
                                           + "', control value is '" + control + "'");
+        }
     }
 }

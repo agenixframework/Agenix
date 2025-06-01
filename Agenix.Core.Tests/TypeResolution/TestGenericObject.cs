@@ -11,10 +11,6 @@ namespace Agenix.Core.Tests.TypeResolution;
 /// </summary>
 public class TestGenericObject<T, U>
 {
-    #region Fields
-
-    #endregion
-
     #region Properties
 
     public int ID { get; set; }

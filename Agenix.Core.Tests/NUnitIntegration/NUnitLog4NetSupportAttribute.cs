@@ -51,7 +51,9 @@ public class NUnitLog4NetSupportAttribute : Attribute, ITestAction
     public void BeforeTest(ITest test)
     {
         if (test.IsSuite)
+        {
             ConfigureLogging(_configPath, _minimumLevel);
+        }
     }
 
     /// <summary>

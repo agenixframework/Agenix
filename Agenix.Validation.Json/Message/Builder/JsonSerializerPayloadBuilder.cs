@@ -1,4 +1,5 @@
 ﻿#region License
+
 // MIT License
 //
 // Copyright (c) 2025 Agenix
@@ -20,6 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using Agenix.Api.Context;
@@ -34,7 +36,6 @@ namespace Agenix.Validation.Json.Message.Builder;
 ///     Provides functionality for building message payloads using object mapping,
 ///     allowing customization with a specified JSON serializer or a serializer name.
 /// </summary>
-///
 [MessagePayload(MessageType.JSON)]
 public class JsonSerializerPayloadBuilder : DefaultPayloadBuilder
 {
@@ -73,14 +74,23 @@ public class JsonSerializerPayloadBuilder : DefaultPayloadBuilder
 
     public override object BuildPayload(TestContext context)
     {
-        if (GetPayload() == null || GetPayload() is string) return base.BuildPayload(context);
+        if (GetPayload() == null || GetPayload() is string)
+        {
+            return base.BuildPayload(context);
+        }
 
-        if (_jsonSerializer != null) return BuildPayload(_jsonSerializer, GetPayload(), context);
+        if (_jsonSerializer != null)
+        {
+            return BuildPayload(_jsonSerializer, GetPayload(), context);
+        }
 
         if (_serializerName != null)
         {
             if (!context.ReferenceResolver.IsResolvable(_serializerName))
+            {
                 throw new AgenixSystemException($"Unable to find proper json serializer for name '{_serializerName}'");
+            }
+
             var jsonSerializer = context.ReferenceResolver.Resolve<JsonSerializer>(_serializerName);
             return BuildPayload(jsonSerializer, GetPayload(), context);
         }

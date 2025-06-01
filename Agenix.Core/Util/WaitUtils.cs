@@ -68,7 +68,10 @@ public abstract class WaitUtils
         TestContext context,
         long timeout = 10000L)
     {
-        if (container.IsDone(context)) return;
+        if (container.IsDone(context))
+        {
+            return;
+        }
 
         using var cancellationTokenSource = new CancellationTokenSource((int)timeout);
 
@@ -85,12 +88,14 @@ public abstract class WaitUtils
         catch (TaskCanceledException) when (cancellationTokenSource.Token.IsCancellationRequested)
         {
             // Timeout occurred
-            throw new AgenixSystemException("Failed to wait for the test container to finish properly - timeout exceeded");
+            throw new AgenixSystemException(
+                "Failed to wait for the test container to finish properly - timeout exceeded");
         }
         catch (OperationCanceledException) when (cancellationTokenSource.Token.IsCancellationRequested)
         {
             // Timeout occurred
-            throw new AgenixSystemException("Failed to wait for the test container to finish properly - operation cancelled");
+            throw new AgenixSystemException(
+                "Failed to wait for the test container to finish properly - operation cancelled");
         }
         finally
         {

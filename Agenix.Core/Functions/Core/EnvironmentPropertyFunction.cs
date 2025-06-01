@@ -59,7 +59,9 @@ public class EnvironmentPropertyFunction : IFunction
     public string Execute(List<string> parameterList, TestContext context)
     {
         if (parameterList == null || parameterList.Count == 0)
+        {
             throw new InvalidFunctionUsageException("Invalid function parameters - must set environment property name");
+        }
 
         var propertyName = parameterList[0];
 

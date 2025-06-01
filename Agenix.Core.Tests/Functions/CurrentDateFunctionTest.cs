@@ -1,6 +1,5 @@
 ﻿using System;
 using Agenix.Api.Functions;
-using Agenix.Core.Functions;
 using Agenix.Core.Functions.Core;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;

@@ -46,9 +46,11 @@ public class TrimAllWhitespacesValidationMatcher : IValidationMatcher
         var sValue = string.Concat(value.Where(c => !char.IsWhiteSpace(c)));
 
         if (!string.Equals(sValue, sControl, StringComparison.OrdinalIgnoreCase))
+        {
             throw new ValidationException(TypeDescriptor.GetClassName(typeof(TrimValidationMatcher))
                                           + " failed for field '" + fieldName
                                           + "'. Received value is '" + sValue
                                           + "', control value is '" + sControl + "'.");
+        }
     }
 }

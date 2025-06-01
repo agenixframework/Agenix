@@ -73,16 +73,25 @@ public interface IMessageSelector
     /// <returns>A dictionary containing message selector factories keyed by a selector type.</returns>
     public static IDictionary<string, IMessageSelectorFactory> Lookup()
     {
-        if (_factories.Count > 0) return _factories;
+        if (_factories.Count > 0)
+        {
+            return _factories;
+        }
 
         _factories = new Dictionary<string, IMessageSelectorFactory>
         (
             TypeResolver.ResolveAll<IMessageSelectorFactory>()
         );
 
-        if (!Log.IsEnabled(LogLevel.Debug)) return _factories;
+        if (!Log.IsEnabled(LogLevel.Debug))
+        {
+            return _factories;
+        }
+
         foreach (var kvp in _factories)
+        {
             Log.LogDebug("Found message selector '{KvpKey}' as {Type}", kvp.Key, kvp.Value.GetType());
+        }
 
         return _factories;
     }

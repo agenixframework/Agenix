@@ -234,21 +234,9 @@ public class TestContextTest : AbstractNUnitSetUp
         Context.SetVariable("container", new DataContainer(new DataContainer("nested")));
 
         // Setup array of nested data containers
-        var subContainerArray = new DataContainer[]
-        {
-            new("A"),
-            new("B"),
-            new("C"),
-            new("D")
-        };
+        var subContainerArray = new DataContainer[] { new("A"), new("B"), new("C"), new("D") };
 
-        var containerArray = new DataContainer[]
-        {
-            new("0"),
-            new("1"),
-            new("2"),
-            new(subContainerArray)
-        };
+        var containerArray = new DataContainer[] { new("0"), new("1"), new("2"), new(subContainerArray) };
 
         Context.SetVariable("containerArray", containerArray);
 
@@ -382,11 +370,7 @@ public class TestContextTest : AbstractNUnitSetUp
     public void TestAddVariables()
     {
         // Arrange
-        var vars = new Dictionary<string, object>
-        {
-            { "${test1}", "123" },
-            { "${test2}", "" }
-        };
+        var vars = new Dictionary<string, object> { { "${test1}", "123" }, { "${test2}", "" } };
 
         // Act
         Context.AddVariables(vars);

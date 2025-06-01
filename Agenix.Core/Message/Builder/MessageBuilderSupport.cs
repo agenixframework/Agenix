@@ -125,10 +125,15 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     public TS Body(IMessagePayloadBuilder payloadBuilder)
     {
         if (_messageBuilder is IWithPayloadBuilder withPayloadBuilder)
+        {
             withPayloadBuilder.SetPayloadBuilder(payloadBuilder);
+        }
         else
+        {
             throw new AgenixSystemException("Unable to set payload builder on message builder type: " +
                                             _messageBuilder.GetType());
+        }
+
         return _self;
     }
 
@@ -185,11 +190,18 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     public TS Header(string name, object value)
     {
         if (_messageBuilder is IWithHeaderBuilder withHeaderBuilder)
+        {
             withHeaderBuilder.AddHeaderBuilder(new DefaultHeaderBuilder(new Dictionary<string, object>
-                { { name, value } }));
+            {
+                { name, value }
+            }));
+        }
         else
+        {
             throw new AgenixSystemException(
                 $"Unable to set message header on builder type: {_messageBuilder.GetType()}");
+        }
+
         return _self;
     }
 
@@ -202,10 +214,15 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     public TS Headers(Dictionary<string, object> headers)
     {
         if (_messageBuilder is IWithHeaderBuilder withHeaderBuilder)
+        {
             withHeaderBuilder.AddHeaderBuilder(new DefaultHeaderBuilder(headers));
+        }
         else
+        {
             throw new AgenixSystemException(
                 $"Unable to set message header on builder type: {_messageBuilder.GetType()}");
+        }
+
         return _self;
     }
 
@@ -233,11 +250,15 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
         try
         {
             if (_messageBuilder is IWithHeaderBuilder withHeaderBuilder)
+            {
                 withHeaderBuilder.AddHeaderBuilder(
                     new DefaultHeaderDataBuilder(FileUtils.ReadToString(resource, charset)));
+            }
             else
+            {
                 throw new AgenixSystemException("Unable to set message header data on builder type: " +
                                                 _messageBuilder.GetType());
+            }
         }
         catch (IOException e)
         {
@@ -255,10 +276,15 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     public TS Header(IMessageHeaderDataBuilder headerDataBuilder)
     {
         if (_messageBuilder is IWithHeaderBuilder withHeaderBuilder)
+        {
             withHeaderBuilder.AddHeaderBuilder(headerDataBuilder);
+        }
         else
+        {
             throw new AgenixSystemException(
                 $"Unable to set message header data on builder type: {_messageBuilder.GetType()}");
+        }
+
         return _self;
     }
 
@@ -296,9 +322,14 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     public virtual TS Name(string name)
     {
         if (_messageBuilder is INamed named)
+        {
             named.SetName(name);
+        }
         else
+        {
             throw new AgenixSystemException("Unable to set message name on builder type: " + _messageBuilder.GetType());
+        }
+
         return _self;
     }
 

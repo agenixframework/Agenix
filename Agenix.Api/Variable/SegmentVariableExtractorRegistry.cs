@@ -113,7 +113,10 @@ public class SegmentVariableExtractorRegistry
         {
             var matchedValue = DoExtractValue(testContext, obj, matcher);
 
-            if (matchedValue == null) HandleMatchFailure(matcher);
+            if (matchedValue == null)
+            {
+                HandleMatchFailure(matcher);
+            }
 
             return matchedValue;
         }
@@ -134,11 +137,15 @@ public class SegmentVariableExtractorRegistry
             else
             {
                 if (matcher.SegmentIndex == 1)
+                {
                     exceptionMessage = $"Unknown variable for first segment '{matcher.SegmentExpression}' " +
                                        $"of variable expression '{matcher.VariableExpression}'";
+                }
                 else
+                {
                     exceptionMessage = $"Unknown segment-value for segment '{matcher.SegmentExpression}' " +
                                        $"of variable expression '{matcher.VariableExpression}'";
+                }
             }
 
             throw new AgenixSystemException(exceptionMessage);
@@ -158,7 +165,11 @@ public class SegmentVariableExtractorRegistry
         {
             var extractedValue = DoExtractIndexedValue(testContext, obj, matcher);
 
-            if (matcher.SegmentIndex != -1) extractedValue = GetIndexedElement(matcher, extractedValue);
+            if (matcher.SegmentIndex != -1)
+            {
+                extractedValue = GetIndexedElement(matcher, extractedValue);
+            }
+
             return extractedValue;
         }
 
@@ -172,7 +183,10 @@ public class SegmentVariableExtractorRegistry
         /// </exception>
         private object GetIndexedElement(VariableExpressionSegmentMatcher matcher, object indexedValue)
         {
-            if (indexedValue.GetType().IsArray) return ((Array)indexedValue).GetValue(matcher.SegmentIndex);
+            if (indexedValue.GetType().IsArray)
+            {
+                return ((Array)indexedValue).GetValue(matcher.SegmentIndex);
+            }
 
             throw new AgenixSystemException(
                 $"Expected an instance of Array type. Cannot retrieve indexed property {matcher.SegmentExpression} from {indexedValue.GetType().Name}");
@@ -208,8 +222,10 @@ public class SegmentVariableExtractorRegistry
         {
             var field = ReflectionHelper.FindField(parentObject.GetType(), matcher.SegmentExpression);
             if (field == null)
+            {
                 throw new AgenixSystemException(
                     $"Failed to get variable - unknown field '{matcher.SegmentExpression}' on type {parentObject.GetType().Name}");
+            }
 
             return ReflectionHelper.GetField(field, parentObject);
         }
@@ -236,7 +252,11 @@ public class SegmentVariableExtractorRegistry
             VariableExpressionSegmentMatcher matcher)
         {
             object? matchedValue = null;
-            if (parentObject is IDictionary map) matchedValue = map[matcher.SegmentExpression];
+            if (parentObject is IDictionary map)
+            {
+                matchedValue = map[matcher.SegmentExpression];
+            }
+
             return matchedValue;
         }
 

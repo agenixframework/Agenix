@@ -39,7 +39,8 @@ public class LoadAppSettingsActionTest : AbstractNUnitSetUp
     [Test]
     public void TestUnknownVariableInLoadProperties()
     {
-        var resourceName = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "ResourcesTest", "app-error.config");
+        var resourceName = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+            "ResourcesTest", "app-error.config");
         resourceName = $"file://{resourceName.Replace("\\", "/")}";
 
         var loadProperties = new LoadAppSettingsAction.Builder()

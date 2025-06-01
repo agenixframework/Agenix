@@ -43,44 +43,65 @@ public class TestSuiteListeners : ITestSuiteListenerAware
     /// <param name="testSuiteListener">The test suite listener to be added.</param>
     public void AddTestSuiteListener(ITestSuiteListener testSuiteListener)
     {
-        if (!_testSuiteListeners.Contains(testSuiteListener)) _testSuiteListeners.Add(testSuiteListener);
+        if (!_testSuiteListeners.Contains(testSuiteListener))
+        {
+            _testSuiteListeners.Add(testSuiteListener);
+        }
     }
 
     /// Invoked after the test suite has finished.
     public void OnFinish()
     {
-        foreach (var listener in _testSuiteListeners) listener.OnFinish();
+        foreach (var listener in _testSuiteListeners)
+        {
+            listener.OnFinish();
+        }
     }
 
     /// Invoked after the test suite has failed to finish.
     /// <param name="cause">The exception cause of the failure.</param>
     public void OnFinishFailure(Exception cause)
     {
-        foreach (var listener in _testSuiteListeners) listener.OnFinishFailure(cause);
+        foreach (var listener in _testSuiteListeners)
+        {
+            listener.OnFinishFailure(cause);
+        }
     }
 
     /// Invoked after the test suite has successfully finished.
     public void OnFinishSuccess()
     {
-        foreach (var listener in _testSuiteListeners) listener.OnFinishSuccess();
+        foreach (var listener in _testSuiteListeners)
+        {
+            listener.OnFinishSuccess();
+        }
     }
 
     /// Invoked when the test suite starts.
     public void OnStart()
     {
-        foreach (var listener in _testSuiteListeners) listener.OnStart();
+        foreach (var listener in _testSuiteListeners)
+        {
+            listener.OnStart();
+        }
     }
 
     /// Invoked after the test suite has failed to start.
     /// <param name="cause">The exception cause of the failure.</param>
     public void OnStartFailure(Exception cause)
     {
-        foreach (var listener in _testSuiteListeners) listener.OnStartFailure(cause);
+        foreach (var listener in _testSuiteListeners)
+        {
+            listener.OnStartFailure(cause);
+        }
     }
 
     /// Invoked after the test suite has successfully started.
     public void OnStartSuccess()
     {
-        foreach (var listener in _testSuiteListeners) listener.OnStartSuccess();
+        foreach (var listener in _testSuiteListeners)
+        {
+            listener.OnStartSuccess();
+        }
     }
 }

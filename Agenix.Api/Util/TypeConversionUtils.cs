@@ -99,7 +99,10 @@ public abstract class TypeConversionUtils
             if (context.ReferenceResolver != null && context.ReferenceResolver.IsResolvable(value))
             {
                 object bean = context.ReferenceResolver.Resolve<T>(value);
-                if (typeof(T).IsAssignableFrom(bean.GetType())) return (T)bean;
+                if (typeof(T).IsAssignableFrom(bean.GetType()))
+                {
+                    return (T)bean;
+                }
             }
 
             throw new AgenixSystemException(

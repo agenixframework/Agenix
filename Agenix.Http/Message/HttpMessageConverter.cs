@@ -68,7 +68,9 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
         var httpHeaders = CreateHttpHeaders(httpMessage);
 
         foreach (var cookie in httpMessage.GetCookies())
+        {
             httpHeaders.Add("Cookie", cookie.Name + "=" + ResolveCookieValue(context, cookie));
+        }
 
         var method = DetermineRequestMethod(endpointConfiguration, httpMessage);
 
@@ -110,7 +112,9 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
         SetHttpMessageVersion(externalMessage, httpMessage);
 
         if (endpointConfiguration.HandleCookies)
+        {
             httpMessage.SetCookies(cookieConverter.ConvertCookies(externalMessage));
+        }
 
         return httpMessage;
     }
@@ -149,6 +153,7 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
         var convertedHeaders = new Dictionary<string, object>();
 
         foreach (var header in headers)
+        {
             if (header.Value is IEnumerable enumerable and not string)
             {
                 // Convert each element to a string and join them with commas
@@ -159,6 +164,7 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
             {
                 convertedHeaders[header.Key] = header.Value;
             }
+        }
 
         return convertedHeaders;
     }
@@ -178,11 +184,15 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
 
         var messageHeaders = httpMessage.GetHeaders();
         foreach (var header in messageHeaders)
+        {
             if (!header.Key.Equals("Content-Type", StringComparison.OrdinalIgnoreCase) &&
                 !header.Key.StartsWith(MessageHeaders.Prefix) &&
                 !MessageHeaderUtils.IsSpringInternalHeader(header.Key) &&
                 !httpHeaders.TryGetValues(header.Key, out _))
+            {
                 httpHeaders.Add(header.Key, header.Value.ToString());
+            }
+        }
 
         return httpHeaders;
     }
@@ -204,7 +214,10 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
     {
         var customHeaders = new Dictionary<string, object>();
 
-        foreach (var header in httpHeaders) customHeaders[header.Key] = string.Join(",", header.Value);
+        foreach (var header in httpHeaders)
+        {
+            customHeaders[header.Key] = string.Join(",", header.Value);
+        }
 
         return customHeaders;
     }
@@ -213,7 +226,10 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
     {
         var customHeaders = new Dictionary<string, object>();
 
-        foreach (var header in httpHeaders) customHeaders[header.Key] = string.Join(",", header.Value);
+        foreach (var header in httpHeaders)
+        {
+            customHeaders[header.Key] = string.Join(",", header.Value);
+        }
 
         return customHeaders;
     }
@@ -237,7 +253,10 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
     {
         var method = endpointConfiguration.RequestMethod;
 
-        if (httpMessage.GetRequestMethod() != null) method = httpMessage.GetRequestMethod();
+        if (httpMessage.GetRequestMethod() != null)
+        {
+            method = httpMessage.GetRequestMethod();
+        }
 
         return method;
     }
@@ -252,7 +271,10 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
     /// </returns>
     private HttpMessage ConvertOutboundMessage(IMessage message)
     {
-        if (message is HttpMessage httpMessage) return httpMessage;
+        if (message is HttpMessage httpMessage)
+        {
+            return httpMessage;
+        }
 
         return new HttpMessage(message);
     }
@@ -297,10 +319,7 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
             {
                 var mediaType = contentType[..charsetIndex].TrimEnd(';').Trim();
                 var charset = contentType[(charsetIndex + 8)..];
-                return new MediaTypeHeaderValue(mediaType)
-                {
-                    CharSet = charset
-                };
+                return new MediaTypeHeaderValue(mediaType) { CharSet = charset };
             }
             else
             {
@@ -310,10 +329,12 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
         }
 
         if (StringUtils.HasText(endpointConfiguration.Charset))
+        {
             return new MediaTypeHeaderValue(endpointConfiguration.ContentType)
             {
                 CharSet = endpointConfiguration.Charset
             };
+        }
 
         return new MediaTypeHeaderValue(endpointConfiguration.ContentType);
     }
@@ -343,21 +364,23 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
         HttpEndpointConfiguration endpointConfiguration)
     {
         var payload = httpMessage.Payload;
-        var httpRequestMessage = new HttpRequestMessage
-        {
-            Method = method ?? HttpMethod.Get
-        };
+        var httpRequestMessage = new HttpRequestMessage { Method = method ?? HttpMethod.Get };
 
         // Set headers
         foreach (var header in httpHeaders)
+        {
             if (!httpRequestMessage.Headers.TryAddWithoutValidation(header.Key, header.Value.ToArray()))
             {
                 // If header can't be added to HttpRequestMessage.Headers, try adding to Content.Headers
                 httpRequestMessage.Content ??= new StringContent(string.Empty);
                 httpRequestMessage.Content.Headers.TryAddWithoutValidation(header.Key, header.Value.ToArray());
             }
+        }
 
-        if (!HttpMethodSupportsBody(method)) return httpRequestMessage;
+        if (!HttpMethodSupportsBody(method))
+        {
+            return httpRequestMessage;
+        }
 
 
         // Set content if payload is provided
@@ -411,7 +434,10 @@ public class HttpMessageConverter(CookieConverter cookieConverter)
     /// </returns>
     private object ExtractMessageBody(HttpResponseMessage responseMessage)
     {
-        if (responseMessage?.Content == null) return string.Empty;
+        if (responseMessage?.Content == null)
+        {
+            return string.Empty;
+        }
 
         // Check the content type
         var contentType = responseMessage.Content.Headers.ContentType?.MediaType;

@@ -84,13 +84,23 @@ public abstract class AbstractActionContainer : AbstractTestAction, ITestActionC
     /// <return>True if all actions are completed; otherwise, false.</return>
     public virtual bool IsDone(TestContext context)
     {
-        if (actions.Count == 0 || IsDisabled(context)) return true;
+        if (actions.Count == 0 || IsDisabled(context))
+        {
+            return true;
+        }
 
-        if (_activeAction == null && _executedActions.Count == 0) return true;
+        if (_activeAction == null && _executedActions.Count == 0)
+        {
+            return true;
+        }
 
-        if (!_executedActions.Contains(_activeAction)) return false;
+        if (!_executedActions.Contains(_activeAction))
+        {
+            return false;
+        }
 
         foreach (var action in new List<ITestAction>(_executedActions))
+        {
             if (action is ICompletable completable && !completable.IsDone(context))
             {
                 if (Log.IsEnabled(LogLevel.Debug))
@@ -104,6 +114,7 @@ public abstract class AbstractActionContainer : AbstractTestAction, ITestActionC
 
                 return false;
             }
+        }
 
         return true;
     }

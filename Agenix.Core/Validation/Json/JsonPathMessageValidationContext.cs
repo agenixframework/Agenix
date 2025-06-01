@@ -101,7 +101,11 @@ public class JsonPathMessageValidationContext(JsonPathMessageValidationContext.B
         /// <returns>The current instance of the builder, allowing for fluent configuration.</returns>
         public Builder Expressions(IDictionary<string, object> expressions)
         {
-            foreach (var kvp in expressions) _expressions[kvp.Key] = kvp.Value;
+            foreach (var kvp in expressions)
+            {
+                _expressions[kvp.Key] = kvp.Value;
+            }
+
             return this;
         }
 

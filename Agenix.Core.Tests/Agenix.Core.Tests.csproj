@@ -1,154 +1,159 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <IsPackable>false</IsPackable>
-        <IsTestProject>true</IsTestProject>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Copyright>Copyright (c) 2025 Agenix</Copyright>
-        <Authors>Andrei Suruceanu</Authors>
-        <RootNamespace>Agenix.Core.Tests</RootNamespace>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright (c) 2025 Agenix</Copyright>
+    <Authors>Andrei Suruceanu</Authors>
+    <RootNamespace>Agenix.Core.Tests</RootNamespace>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="FakeItEasy" Version="8.3.0" />
-        <PackageReference Include="log4net" Version="3.1.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="8.0.0"/>
-        <PackageReference Include="Moq" Version="4.20.72" />
-        <PackageReference Include="Moq.AutoMock" Version="3.5.0" />
-        <PackageReference Include="NUnit" Version="4.2.2" />
-        <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
-        <PackageReference Include="System.Data.SQLite" Version="1.0.119"/>
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FakeItEasy" Version="8.3.0"/>
+    <PackageReference Include="log4net" Version="3.1.0"/>
+    <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="8.0.0"/>
+    <PackageReference Include="Moq" Version="4.20.72"/>
+    <PackageReference Include="Moq.AutoMock" Version="3.5.0"/>
+    <PackageReference Include="NUnit" Version="4.2.2"/>
+    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0"/>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1"/>
+    <PackageReference Include="System.Data.SQLite" Version="1.0.119"/>
+    <PackageReference Include="System.Formats.Asn1" Version="8.0.1"/>
+    <PackageReference Include="System.Text.Json" Version="8.0.5"/>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6"/>
+    <PackageReference Include="System.Net.Http" Version="4.3.4"/>
+    <PackageReference Include="System.Security.Cryptography.X509Certificates" Version="4.3.2"/>
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj" />
-        <ProjectReference Include="..\Agenix.Http\Agenix.Http.csproj" />
-        <ProjectReference Include="..\Agenix.NUnit.Runtime\Agenix.NUnit.Runtime.csproj" />
-        <ProjectReference Include="..\Agenix.Sql\Agenix.Sql.csproj" />
-        <ProjectReference Include="..\Agenix.Validation.Json\Agenix.Validation.Json.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj"/>
+    <ProjectReference Include="..\Agenix.Http\Agenix.Http.csproj"/>
+    <ProjectReference Include="..\Agenix.NUnit.Runtime\Agenix.NUnit.Runtime.csproj"/>
+    <ProjectReference Include="..\Agenix.Sql\Agenix.Sql.csproj"/>
+    <ProjectReference Include="..\Agenix.Validation.Json\Agenix.Validation.Json.csproj"/>
+  </ItemGroup>
 
-    <ItemGroup>
-        <None Update="log4net.config">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-    </ItemGroup>
+  <ItemGroup>
+    <None Update="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
-    <ItemGroup>
-        <None Remove="ResourcesTest\FileWithContent.json" />
-        <EmbeddedResource Include="Extension\mocks\params" />
-        <EmbeddedResource Include="ResourcesTest\app-error.config">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <EmbeddedResource Include="ResourcesTest\FileWithContent.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <None Remove="ResourcesTest\FileWithoutContent.txt" />
-        <EmbeddedResource Include="ResourcesTest\FileWithoutContent.txt">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <None Remove="ResourcesTest\validation\builder\button.png" />
-        <EmbeddedResource Include="ResourcesTest\validation\builder\button.png">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <None Remove="ResourcesTest\validation\builder\header-data-resource.txt" />
-        <EmbeddedResource Include="ResourcesTest\validation\builder\header-data-resource.txt">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <None Remove="ResourcesTest\validation\builder\payload-data-resource.txt" />
-        <EmbeddedResource Include="ResourcesTest\validation\builder\payload-data-resource.txt">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <None Remove="ResourcesTest\validation\builder\variable-data-resource.txt" />
-        <EmbeddedResource Include="ResourcesTest\validation\builder\variable-data-resource.txt">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <None Remove="ResourcesTest\validation\interceptor\foo.txt" />
-        <EmbeddedResource Include="ResourcesTest\validation\interceptor\foo.txt">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <None Remove="ResourcesTest\actions\test-request-payload.xml" />
-        <EmbeddedResource Include="ResourcesTest\actions\test-request-payload.xml">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <None Remove="ResourcesTest\actions\test-request-payload-with-variables.xml" />
-        <EmbeddedResource Include="ResourcesTest\actions\test-request-payload-with-variables.xml">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <None Remove="ResourcesTest\actions\test-request-payload-with-functions.xml" />
-        <EmbeddedResource Include="ResourcesTest\actions\test-request-payload-with-functions.xml">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <None Remove="ResourcesTest\actions\test-request-iso-encoding.xml" />
-        <EmbeddedResource Include="ResourcesTest\actions\test-request-iso-encoding.xml">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <None Remove="ResourcesTest\app.config" />
-        <EmbeddedResource Include="ResourcesTest\app.config">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <None Remove="ResourcesTest\Sql\Actions\test-query.sql" />
-        <EmbeddedResource Include="ResourcesTest\Sql\Actions\test-query.sql">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <None Remove="ResourcesTest\Sql\Actions\test-sql-query-statements.sql" />
-        <EmbeddedResource Include="ResourcesTest\Sql\Actions\test-sql-query-statements.sql">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <None Remove="ResourcesTest\Sql\Actions\test-sql-statements.sql" />
-        <EmbeddedResource Include="ResourcesTest\Sql\Actions\test-sql-statements.sql">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <None Remove="ResourcesTest\Sql\Actions\test-sql-with-variables.sql" />
-        <EmbeddedResource Include="ResourcesTest\Sql\Actions\test-sql-with-variables.sql">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <None Remove="ResourcesTest\Sql\Actions\Dsl\query-script.sql" />
-        <EmbeddedResource Include="ResourcesTest\Sql\Actions\Dsl\query-script.sql">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <None Remove="ResourcesTest\Sql\Integration\Actions\query-script.sql" />
-        <EmbeddedResource Include="ResourcesTest\Sql\Integration\Actions\query-script.sql">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <None Remove="ResourcesTest\Sql\Integration\Actions\script.sql" />
-        <EmbeddedResource Include="ResourcesTest\Sql\Integration\Actions\script.sql">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <None Remove="ResourcesTest\Sql\Integration\Actions\create-tables.sql" />
-        <EmbeddedResource Include="ResourcesTest\Sql\Integration\Actions\create-tables.sql">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <None Remove="IO\TestResource.txt" />
-        <EmbeddedResource Include="IO\TestResource.txt" />
-        <None Remove="TestResource.txt" />
-        <EmbeddedResource Include="TestResource.txt" />
-        <None Remove="ResourcesTest\one.properties" />
-        <EmbeddedResource Include="ResourcesTest\one.properties" />
-        <None Remove="ResourcesTest\two.properties" />
-        <EmbeddedResource Include="ResourcesTest\two.properties" />
-        <None Remove="Extension\mocks\bar" />
-        <EmbeddedResource Include="Extension\mocks\bar" />
-        <None Remove="Extension\mocks\foo" />
-        <EmbeddedResource Include="Extension\mocks\foo" />
-        <None Remove="Extension\mocks\singletonFoo" />
-        <EmbeddedResource Include="Extension\mocks\singletonFoo" />
-        <None Remove="Extension\mocksWithParams\fooWithParams" />
-        <None Remove="Extension\all\mocks" />
-        <EmbeddedResource Include="Extension\all\mocks" />
-    </ItemGroup>
+  <ItemGroup>
+    <None Remove="ResourcesTest\FileWithContent.json"/>
+    <EmbeddedResource Include="Extension\mocks\params"/>
+    <EmbeddedResource Include="ResourcesTest\app-error.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourcesTest\FileWithContent.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="ResourcesTest\FileWithoutContent.txt"/>
+    <EmbeddedResource Include="ResourcesTest\FileWithoutContent.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="ResourcesTest\validation\builder\button.png"/>
+    <EmbeddedResource Include="ResourcesTest\validation\builder\button.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="ResourcesTest\validation\builder\header-data-resource.txt"/>
+    <EmbeddedResource Include="ResourcesTest\validation\builder\header-data-resource.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="ResourcesTest\validation\builder\payload-data-resource.txt"/>
+    <EmbeddedResource Include="ResourcesTest\validation\builder\payload-data-resource.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="ResourcesTest\validation\builder\variable-data-resource.txt"/>
+    <EmbeddedResource Include="ResourcesTest\validation\builder\variable-data-resource.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="ResourcesTest\validation\interceptor\foo.txt"/>
+    <EmbeddedResource Include="ResourcesTest\validation\interceptor\foo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="ResourcesTest\actions\test-request-payload.xml"/>
+    <EmbeddedResource Include="ResourcesTest\actions\test-request-payload.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="ResourcesTest\actions\test-request-payload-with-variables.xml"/>
+    <EmbeddedResource Include="ResourcesTest\actions\test-request-payload-with-variables.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="ResourcesTest\actions\test-request-payload-with-functions.xml"/>
+    <EmbeddedResource Include="ResourcesTest\actions\test-request-payload-with-functions.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="ResourcesTest\actions\test-request-iso-encoding.xml"/>
+    <EmbeddedResource Include="ResourcesTest\actions\test-request-iso-encoding.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="ResourcesTest\app.config"/>
+    <EmbeddedResource Include="ResourcesTest\app.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="ResourcesTest\Sql\Actions\test-query.sql"/>
+    <EmbeddedResource Include="ResourcesTest\Sql\Actions\test-query.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="ResourcesTest\Sql\Actions\test-sql-query-statements.sql"/>
+    <EmbeddedResource Include="ResourcesTest\Sql\Actions\test-sql-query-statements.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="ResourcesTest\Sql\Actions\test-sql-statements.sql"/>
+    <EmbeddedResource Include="ResourcesTest\Sql\Actions\test-sql-statements.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="ResourcesTest\Sql\Actions\test-sql-with-variables.sql"/>
+    <EmbeddedResource Include="ResourcesTest\Sql\Actions\test-sql-with-variables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="ResourcesTest\Sql\Actions\Dsl\query-script.sql"/>
+    <EmbeddedResource Include="ResourcesTest\Sql\Actions\Dsl\query-script.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="ResourcesTest\Sql\Integration\Actions\query-script.sql"/>
+    <EmbeddedResource Include="ResourcesTest\Sql\Integration\Actions\query-script.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="ResourcesTest\Sql\Integration\Actions\script.sql"/>
+    <EmbeddedResource Include="ResourcesTest\Sql\Integration\Actions\script.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="ResourcesTest\Sql\Integration\Actions\create-tables.sql"/>
+    <EmbeddedResource Include="ResourcesTest\Sql\Integration\Actions\create-tables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="IO\TestResource.txt"/>
+    <EmbeddedResource Include="IO\TestResource.txt"/>
+    <None Remove="TestResource.txt"/>
+    <EmbeddedResource Include="TestResource.txt"/>
+    <None Remove="ResourcesTest\one.properties"/>
+    <EmbeddedResource Include="ResourcesTest\one.properties"/>
+    <None Remove="ResourcesTest\two.properties"/>
+    <EmbeddedResource Include="ResourcesTest\two.properties"/>
+    <None Remove="Extension\mocks\bar"/>
+    <EmbeddedResource Include="Extension\mocks\bar"/>
+    <None Remove="Extension\mocks\foo"/>
+    <EmbeddedResource Include="Extension\mocks\foo"/>
+    <None Remove="Extension\mocks\singletonFoo"/>
+    <EmbeddedResource Include="Extension\mocks\singletonFoo"/>
+    <None Remove="Extension\mocksWithParams\fooWithParams"/>
+    <None Remove="Extension\all\mocks"/>
+    <EmbeddedResource Include="Extension\all\mocks"/>
+  </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Validation\Text\" />
-    </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Validation\Text\"/>
+  </ItemGroup>
 
-    <ItemGroup>
-      <None Remove="agenix-application.json" />
-      <Content Include="agenix-application.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-    </ItemGroup>
+  <ItemGroup>
+    <None Remove="agenix-application.json"/>
+    <Content Include="agenix-application.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
 </Project>

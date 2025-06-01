@@ -25,12 +25,7 @@ public class CookieEnricherTest
     public void TestCookiesArePreserved()
     {
         // GIVEN
-        var cookie = new Cookie("foo", "bar")
-        {
-            Domain = "domain",
-            HttpOnly = true,
-            Secure = true
-        };
+        var cookie = new Cookie("foo", "bar") { Domain = "domain", HttpOnly = true, Secure = true };
         var cookies = new List<Cookie> { cookie };
 
         var cookieEnricher = new CookieEnricher();
@@ -88,10 +83,7 @@ public class CookieEnricherTest
     public void TestPathVariablesAreReplaced()
     {
         // GIVEN
-        var cookie = new Cookie("foo", "value")
-        {
-            Path = "/path/to/${variable}"
-        };
+        var cookie = new Cookie("foo", "value") { Path = "/path/to/${variable}" };
         var cookies = new List<Cookie> { cookie };
 
         _testContextMock.SetVariable("variable", "foobar");
@@ -110,10 +102,7 @@ public class CookieEnricherTest
     public void TestDomainVariablesAreReplaced()
     {
         // GIVEN
-        var cookie = new Cookie("foo", "value")
-        {
-            Domain = "${variable}"
-        };
+        var cookie = new Cookie("foo", "value") { Domain = "${variable}" };
         var cookies = new List<Cookie> { cookie };
 
         _testContextMock.SetVariable("variable", "localhost");

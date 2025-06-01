@@ -43,9 +43,11 @@ public class
         var controlValue = controlParameters[0];
 
         if (!value.EndsWith(controlValue))
+        {
             throw new ValidationException(TypeDescriptor.GetClassName(typeof(EndsWithValidationMatcher))
                                           + " failed for field '" + fieldName
                                           + "'. Received value is '" + value
                                           + "', control value is '" + controlValue + "'.");
+        }
     }
 }

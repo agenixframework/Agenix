@@ -59,7 +59,10 @@ public class ReplyMessageTimeoutException : MessageTimeoutException
     {
         get
         {
-            if (Timeout <= 0 && Endpoint == null) return "Failed to receive synchronous reply message.";
+            if (Timeout <= 0 && Endpoint == null)
+            {
+                return "Failed to receive synchronous reply message.";
+            }
 
             return $"Failed to receive synchronous reply message on endpoint: '{Endpoint}'";
         }

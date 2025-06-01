@@ -40,11 +40,15 @@ public class EscapeXmlFunction : IFunction
     public string Execute(List<string> parameterList, TestContext testContext)
     {
         if (parameterList == null || parameterList.Count == 0)
+        {
             throw new InvalidFunctionUsageException("Function parameters must not be empty");
+        }
 
         if (parameterList.Count != 1)
+        {
             throw new InvalidFunctionUsageException(
                 "Invalid function parameter usage! Expected single parameter but found: " + parameterList.Count);
+        }
 
         var doc = new XmlDocument();
         XmlNode node = doc.CreateElement("root");

@@ -93,7 +93,11 @@ public static class DynamicConstructorBuilder
 
         // Call base constructor
         il.Emit(OpCodes.Ldarg_0); // Load "this"
-        for (var i = 0; i < parameters.Length; i++) il.Emit(OpCodes.Ldarg, i + 1); // Load parameter
+        for (var i = 0; i < parameters.Length; i++)
+        {
+            il.Emit(OpCodes.Ldarg, i + 1); // Load parameter
+        }
+
         il.Emit(OpCodes.Call, originalCtor);
         il.Emit(OpCodes.Ret);
 

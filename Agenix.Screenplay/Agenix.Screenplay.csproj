@@ -1,26 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
 
-        <!-- NuGet Package-Specific Properties -->
-        <PackageId>Agenix.Screenplay</PackageId>
-        <Title>Agenix Screenplay Pattern</Title>
-        <Description>Screenplay pattern implementation for the Agenix framework. Enables writing readable, maintainable, and scalable automated tests using the Actor-Task-Ability pattern for better test organization and reusability.</Description>
-        <PackageTags>testing;screenplay;automation;framework;agenix;pattern;actor;task;ability;readable</PackageTags>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <!-- NuGet Package-Specific Properties -->
+    <PackageId>Agenix.Screenplay</PackageId>
+    <Title>Agenix Screenplay Pattern</Title>
+    <Description>Screenplay pattern implementation for the Agenix framework. Enables writing readable, maintainable, and scalable automated tests using the Actor-Task-Ability pattern for better test organization and reusability.</Description>
+    <PackageTags>testing;screenplay;automation;framework;agenix;pattern;actor;task;ability;readable</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
-    </PropertyGroup>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="NUnit" Version="4.3.2"/>
-        <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0"/>
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="4.3.2"/>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0"/>
+    <PackageReference Include="System.Formats.Asn1" Version="8.0.1"/>
+    <PackageReference Include="System.Text.Json" Version="8.0.5"/>
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Agenix.Api\Agenix.Api.csproj"/>
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Agenix.Api\Agenix.Api.csproj"/>
+  </ItemGroup>
 
 </Project>

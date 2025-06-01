@@ -72,7 +72,9 @@ public class DefaultValidationMatcherLibrary : ValidationMatcherLibrary
             Members.Add(key, matcher);
 
             if (Log.IsEnabled(LogLevel.Debug))
+            {
                 Log.LogDebug("Register message matcher '{Key}' as {Type}", key, matcher.GetType());
+            }
         }
     }
 }

@@ -99,7 +99,10 @@ public abstract class AbstractIteratingActionContainer(
     {
         context.SetVariable(indexName, index.ToString());
 
-        foreach (var actionBuilder in actions) ExecuteAction(actionBuilder.Build(), context);
+        foreach (var actionBuilder in actions)
+        {
+            ExecuteAction(actionBuilder.Build(), context);
+        }
     }
 
     /// Check aborting condition.
@@ -108,7 +111,10 @@ public abstract class AbstractIteratingActionContainer(
     /// /
     protected bool CheckCondition(TestContext context)
     {
-        if (conditionExpression != null) return conditionExpression.Invoke(index, context);
+        if (conditionExpression != null)
+        {
+            return conditionExpression.Invoke(index, context);
+        }
 
         // replace dynamic content with each iteration
         var conditionString = condition;
@@ -117,6 +123,7 @@ public abstract class AbstractIteratingActionContainer(
         conditionString = temp.ReplaceDynamicContentInString(conditionString);
 
         if (ValidationMatcherUtils.IsValidationMatcherExpression(conditionString))
+        {
             try
             {
                 ValidationMatcherUtils.ResolveValidationMatcher("iteratingCondition", index.ToString(), conditionString,
@@ -127,9 +134,12 @@ public abstract class AbstractIteratingActionContainer(
             {
                 return false;
             }
+        }
 
         if (conditionString.Contains(indexName))
+        {
             conditionString = Regex.Replace(conditionString, indexName, index.ToString());
+        }
 
         return BooleanExpressionParser.Evaluate(conditionString);
     }

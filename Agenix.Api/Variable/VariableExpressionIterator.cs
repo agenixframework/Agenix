@@ -75,9 +75,13 @@ public class VariableExpressionIterator : IEnumerator<VariableExpressionIterator
         _matcher = new VariableExpressionSegmentMatcher(variableExpression);
 
         if (_matcher.NextMatch())
+        {
             _nextSegment = CreateSegmentValue(testContext.GetVariables());
+        }
         else
+        {
             throw new AgenixSystemException($"Cannot match a segment on variableExpression: {variableExpression}");
+        }
     }
 
     /// Advances the iterator to the next element in the collection.
@@ -143,7 +147,10 @@ public class VariableExpressionIterator : IEnumerator<VariableExpressionIterator
     {
         VariableSegment segment = null;
         var iterator = new VariableExpressionIterator(variableExpression, testContext, extractors);
-        while (iterator.MoveNext()) segment = iterator.Current;
+        while (iterator.MoveNext())
+        {
+            segment = iterator.Current;
+        }
 
         return segment != null ? segment.SegmentValue : null;
     }

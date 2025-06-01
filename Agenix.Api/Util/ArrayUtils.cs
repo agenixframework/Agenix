@@ -84,9 +84,13 @@ public sealed class ArrayUtils
     /// <returns>True if arrays are the same, false otherwise.</returns>
     public static bool AreEqual(Array a, Array b)
     {
-        if (a == null && b == null) return true;
+        if (a == null && b == null)
+        {
+            return true;
+        }
 
         if (a != null && b != null)
+        {
             if (a.Length == b.Length)
             {
                 for (var i = 0; i < a.Length; i++)
@@ -96,7 +100,10 @@ public sealed class ArrayUtils
 
                     if (elemA is Array && elemB is Array)
                     {
-                        if (!AreEqual(elemA as Array, elemB as Array)) return false;
+                        if (!AreEqual(elemA as Array, elemB as Array))
+                        {
+                            return false;
+                        }
                     }
                     else if (!Equals(elemA, elemB))
                     {
@@ -106,6 +113,7 @@ public sealed class ArrayUtils
 
                 return true;
             }
+        }
 
         return false;
     }
@@ -128,17 +136,23 @@ public sealed class ArrayUtils
         var hashCode = 0;
 
         if (array != null)
+        {
             for (var i = 0; i < array.Length; i++)
             {
                 var el = array.GetValue(i);
                 if (el != null)
                 {
                     if (el is Array)
+                    {
                         hashCode += 17 * GetHashCode(el as Array);
+                    }
                     else
+                    {
                         hashCode += 13 * el.GetHashCode();
+                    }
                 }
             }
+        }
 
         return hashCode;
     }
@@ -154,7 +168,10 @@ public sealed class ArrayUtils
     /// </returns>
     public static string ToString(Array array)
     {
-        if (array == null) return "null";
+        if (array == null)
+        {
+            return "null";
+        }
 
         var sb = new StringBuilder();
         sb.Append('{');
@@ -164,7 +181,10 @@ public sealed class ArrayUtils
             var val = array.GetValue(i);
             sb.Append(val == null ? "null" : val.ToString());
 
-            if (i < array.Length - 1) sb.Append(", ");
+            if (i < array.Length - 1)
+            {
+                sb.Append(", ");
+            }
         }
 
         sb.Append('}');
@@ -182,19 +202,33 @@ public sealed class ArrayUtils
     /// </remarks>
     public static Array Concat(Array first, Array second)
     {
-        if (first == null) return second;
-        if (second == null) return first;
+        if (first == null)
+        {
+            return second;
+        }
+
+        if (second == null)
+        {
+            return first;
+        }
 
         Type resultElementType;
         var firstElementType = first.GetType().GetElementType();
         var secondElementType = second.GetType().GetElementType();
         if (firstElementType.IsAssignableFrom(secondElementType))
+        {
             resultElementType = firstElementType;
+        }
         else if (secondElementType.IsAssignableFrom(firstElementType))
+        {
             resultElementType = secondElementType;
+        }
         else
+        {
             throw new ArgumentException(
                 $"Array element types '{firstElementType}' and '{secondElementType}' are not compatible");
+        }
+
         var result = Array.CreateInstance(resultElementType, first.Length + second.Length);
         Array.Copy(first, result, first.Length);
         Array.Copy(second, 0, result, first.Length, second.Length);

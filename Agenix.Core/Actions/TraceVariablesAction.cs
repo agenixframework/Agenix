@@ -58,9 +58,13 @@ public class TraceVariablesAction(TraceVariablesAction.Builder builder) : Abstra
 
         IEnumerator<string> it;
         if (_variableNames != null && _variableNames.Count > 0)
+        {
             it = _variableNames.GetEnumerator();
+        }
         else
+        {
             it = context.GetVariables().Keys.GetEnumerator();
+        }
 
         while (it.MoveNext())
         {
@@ -131,7 +135,11 @@ public class TraceVariablesAction(TraceVariablesAction.Builder builder) : Abstra
         /// /
         public Builder Variables(params string[] variables)
         {
-            foreach (var variable in variables) Variable(variable);
+            foreach (var variable in variables)
+            {
+                Variable(variable);
+            }
+
             return this;
         }
 

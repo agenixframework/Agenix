@@ -58,7 +58,10 @@ public class MessageSelectorBuilder
     public static string Build(string messageSelector, Dictionary<string, object> messageSelectorMap,
         TestContext context)
     {
-        if (!string.IsNullOrEmpty(messageSelector)) return context.ReplaceDynamicContentInString(messageSelector);
+        if (!string.IsNullOrEmpty(messageSelector))
+        {
+            return context.ReplaceDynamicContentInString(messageSelector);
+        }
 
         return messageSelectorMap is { Count: > 0 }
             ? FromKeyValueMap(context.ResolveDynamicValuesInMap(messageSelectorMap)).Build()
@@ -146,7 +149,9 @@ public class MessageSelectorBuilder
 
         // check presence of Xpath node test first
         if (!selectorExpression.Contains(nodeTestStart) || !selectorExpression.Contains(nodeTestEnd))
+        {
             return selectorExpression; //no Xpath node test return initial value - nothing to escape
+        }
 
         var selectorBuilder = new StringBuilder();
         var nodeTestStartIndex = selectorExpression.IndexOf(nodeTestStart, StringComparison.Ordinal);
@@ -154,12 +159,19 @@ public class MessageSelectorBuilder
         var escape = false;
         for (var i = 0; i < selectorExpression.Length; i++)
         {
-            if (i == nodeTestStartIndex) escape = true;
+            if (i == nodeTestStartIndex)
+            {
+                escape = true;
+            }
 
             if (escape && selectorExpression[i] == '=')
+            {
                 selectorBuilder.Append("@equals@");
+            }
             else
+            {
                 selectorBuilder.Append(selectorExpression[i]);
+            }
 
             if (i == nodeTestEndIndex)
             {

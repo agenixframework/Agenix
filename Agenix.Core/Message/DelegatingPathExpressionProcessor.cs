@@ -62,7 +62,10 @@ public class DelegatingPathExpressionProcessor : IMessageProcessor
 
     public void Process(IMessage message, TestContext context)
     {
-        if (_pathExpressions.Count == 0) return;
+        if (_pathExpressions.Count == 0)
+        {
+            return;
+        }
 
         var jsonPathExpressions = new Dictionary<string, object>();
         var xpathExpressions = new Dictionary<string, object>();
@@ -73,9 +76,13 @@ public class DelegatingPathExpressionProcessor : IMessageProcessor
             var variable = pathExpression.Value;
 
             if (JsonPathMessageValidationContext.IsJsonPathExpression(path))
+            {
                 jsonPathExpressions.Add(path, variable);
+            }
             else
+            {
                 xpathExpressions.Add(path, variable);
+            }
         }
 
         if (jsonPathExpressions.Count > 0)
@@ -83,16 +90,26 @@ public class DelegatingPathExpressionProcessor : IMessageProcessor
             var jsonPathProcessor = LookupMessageProcessor<IMessageProcessor, Builder>("jsonPath", context);
 
             if (jsonPathProcessor is IWithExpressions<Builder> expressions)
+            {
                 expressions.Expressions(jsonPathExpressions);
+            }
+
             jsonPathProcessor.Build()
                 .Process(message, context);
         }
 
-        if (xpathExpressions.Count <= 0) return;
+        if (xpathExpressions.Count <= 0)
+        {
+            return;
+        }
+
         {
             var xpathProcessor = LookupMessageProcessor<IMessageProcessor, Builder>("xpath", context);
 
-            if (xpathProcessor is IWithExpressions<Builder> expressions) expressions.Expressions(xpathExpressions);
+            if (xpathProcessor is IWithExpressions<Builder> expressions)
+            {
+                expressions.Expressions(xpathExpressions);
+            }
 
             xpathProcessor.Build()
                 .Process(message, context);
@@ -109,15 +126,22 @@ public class DelegatingPathExpressionProcessor : IMessageProcessor
         where T : IMessageProcessor where TB : IMessageProcessor.IBuilder<T, TB>
     {
         var lookup = IMessageProcessor.Lookup<T, TB>(type);
-        if (lookup.IsPresent) return lookup.Value;
+        if (lookup.IsPresent)
+        {
+            return lookup.Value;
+        }
 
         if (context.ReferenceResolver.IsResolvable(type, typeof(IMessageProcessor.IBuilder<T, TB>)))
+        {
             return context.ReferenceResolver.Resolve<IMessageProcessor.IBuilder<T, TB>>(type);
+        }
 
         if (context.ReferenceResolver
             .IsResolvable(type + "MessageProcessorBuilder", typeof(IMessageProcessor.IBuilder<T, TB>)))
+        {
             return context.ReferenceResolver
                 .Resolve<IMessageProcessor.IBuilder<T, TB>>(type + "MessageProcessorBuilder");
+        }
 
         throw new AgenixSystemException($"Missing proper message processor implementation of type '{type}' - " +
                                         "consider adding proper module to the project");
@@ -149,7 +173,11 @@ public class DelegatingPathExpressionProcessor : IMessageProcessor
         /// <returns>The current instance of the builder with updated expressions.</returns>
         public Builder Expressions(IDictionary<string, object> expressions)
         {
-            foreach (var entry in expressions) PathExpressions[entry.Key] = entry.Value;
+            foreach (var entry in expressions)
+            {
+                PathExpressions[entry.Key] = entry.Value;
+            }
+
             return this;
         }
 

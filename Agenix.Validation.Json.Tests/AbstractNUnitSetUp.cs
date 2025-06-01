@@ -9,10 +9,10 @@ namespace Agenix.Validation.Json.Tests;
 
 public abstract class AbstractNUnitSetUp
 {
-    protected TestContextFactory TestContextFactory;
     protected TestContext Context;
+    protected TestContextFactory TestContextFactory;
 
-    
+
     [SetUp]
     public void Setup()
     {

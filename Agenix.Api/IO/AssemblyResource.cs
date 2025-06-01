@@ -83,10 +83,17 @@ public class AssemblyResource : AbstractResource
     {
         var info = GetResourceNameWithoutProtocol(resourceName).Split('/');
         if (info.Length != 3)
+        {
             throw new UriFormatException(
                 $"Invalid resource name. Name has to be in 'assembly:<assemblyName>/<namespace>/<resourceName>' format:{resourceName}");
+        }
+
         _assembly = Assembly.Load(info[0]);
-        if (_assembly == null) throw new FileNotFoundException("Unable to load assembly [" + info[0] + "]");
+        if (_assembly == null)
+        {
+            throw new FileNotFoundException("Unable to load assembly [" + info[0] + "]");
+        }
+
         _fullResourceName = resourceName;
         _resourceAssemblyName = info[0];
         _resourceNamespace = info[1];
@@ -176,7 +183,11 @@ public class AssemblyResource : AbstractResource
     {
         get
         {
-            if (_resources != null) return Array.BinarySearch(_resources, _resourceName) >= 0;
+            if (_resources != null)
+            {
+                return Array.BinarySearch(_resources, _resourceName) >= 0;
+            }
+
             _resources = _assembly.GetManifestResourceNames();
             Array.Sort(_resources);
             return Array.BinarySearch(_resources, _resourceName) >= 0;

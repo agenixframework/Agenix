@@ -3,8 +3,8 @@ using Agenix.Core.Message;
 using Agenix.Core.Message.Selector;
 using Agenix.Core.Util;
 using NUnit.Framework;
-using TestContext = Agenix.Api.Context.TestContext;
 using NUnit.Framework.Legacy;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.Tests.Message;
 

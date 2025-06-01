@@ -100,10 +100,13 @@ public sealed class ObjectUtils
         AssertUtils.ArgumentNotNull(typeName, "typeName");
         var resolvedType = assembly.GetType(typeName, false, false);
         if (resolvedType == null)
+        {
             throw new FatalReflectionException(
                 string.Format(
                     CultureInfo.InvariantCulture, "Cannot load type named [{0}] from assembly [{1}].", typeName,
                     assembly));
+        }
+
         return InstantiateType(resolvedType);
     }
 
@@ -149,10 +152,13 @@ public sealed class ObjectUtils
         IsInstantiable(type);
         var constructor = type.GetConstructor(Type.EmptyTypes);
         if (constructor == null)
+        {
             throw new FatalReflectionException(
                 string.Format(
                     CultureInfo.InvariantCulture,
                     "Cannot instantiate a class that does not have a public no-argument constructor [{0}].", type));
+        }
+
         return constructor;
     }
 
@@ -164,17 +170,25 @@ public sealed class ObjectUtils
     public static void IsInstantiable(Type type)
     {
         if (type.IsInterface)
+        {
             throw new FatalReflectionException(
                 string.Format(
                     CultureInfo.InvariantCulture, "Cannot instantiate an interface [{0}].", type));
+        }
+
         if (type.IsAbstract)
+        {
             throw new FatalReflectionException(
                 string.Format(
                     CultureInfo.InvariantCulture, "Cannot instantiate an abstract class [{0}].", type));
+        }
+
         if (type.ContainsGenericParameters)
+        {
             throw new FatalReflectionException(
                 string.Format(
                     CultureInfo.InvariantCulture, "Cannot instantiate an open generic type [{0}].", type));
+        }
     }
 
     /// <summary>
@@ -206,19 +220,28 @@ public sealed class ObjectUtils
         AssertUtils.ArgumentNotNull(constructor, "constructor");
 
         if (constructor.DeclaringType.IsInterface)
+        {
             throw new FatalReflectionException(
                 string.Format(
                     CultureInfo.InvariantCulture, "Cannot instantiate an interface [{0}].", constructor.DeclaringType));
+        }
+
         if (constructor.DeclaringType.IsAbstract)
+        {
             throw new FatalReflectionException(
                 string.Format(
                     CultureInfo.InvariantCulture, "Cannot instantiate an abstract class [{0}].",
                     constructor.DeclaringType));
+        }
+
         if (constructor.DeclaringType.ContainsGenericParameters)
+        {
             throw new FatalReflectionException(
                 string.Format(
                     CultureInfo.InvariantCulture, "Cannot instantiate an open generic type [{0}].",
                     constructor.DeclaringType));
+        }
+
         try
         {
             // replaced with SafeConstructor() to avoid nasty "TargetInvocationException"s in NET >= 2.0
@@ -255,9 +278,15 @@ public sealed class ObjectUtils
     public static bool IsAssignable(Type type, object obj)
     {
         AssertUtils.ArgumentNotNull(type, "type");
-        if (!type.IsPrimitive && obj == null) return true;
+        if (!type.IsPrimitive && obj == null)
+        {
+            return true;
+        }
 
-        if (type.IsInstanceOfType(obj)) return true;
+        if (type.IsInstanceOfType(obj))
+        {
+            return true;
+        }
 
         return (type.IsPrimitive &&
                 type == typeof(bool) && obj is bool) ||
@@ -414,16 +443,27 @@ public sealed class ObjectUtils
     /// </exception>
     public static object EnumerateElementAtIndex(IEnumerator enumerator, int index)
     {
-        if (index < 0) throw new ArgumentOutOfRangeException();
+        if (index < 0)
+        {
+            throw new ArgumentOutOfRangeException();
+        }
+
         object element = null;
         var i = 0;
         while (enumerator.MoveNext())
         {
             element = enumerator.Current;
-            if (++i > index) break;
+            if (++i > index)
+            {
+                break;
+            }
         }
 
-        if (i < index) throw new ArgumentOutOfRangeException();
+        if (i < index)
+        {
+            throw new ArgumentOutOfRangeException();
+        }
+
         return element;
     }
 
@@ -478,7 +518,11 @@ public sealed class ObjectUtils
     /// </returns>
     public static string IdentityToString(object obj)
     {
-        if (obj == null) return string.Empty;
+        if (obj == null)
+        {
+            return string.Empty;
+        }
+
         return obj.GetType().FullName + "@" + GetIdentityHexString(obj);
     }
 

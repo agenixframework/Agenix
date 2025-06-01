@@ -51,7 +51,10 @@ public class DefaultCorrelationManager<T> : ICorrelationManager<T>
     /// <param name="context">The context in which the correlation key will be saved.</param>
     public void SaveCorrelationKey(string correlationKeyName, string correlationKey, TestContext context)
     {
-        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug($"Saving correlation key for '{correlationKeyName}'");
+        if (Log.IsEnabled(LogLevel.Debug))
+        {
+            Log.LogDebug($"Saving correlation key for '{correlationKeyName}'");
+        }
 
         context.SetVariable(correlationKeyName, correlationKey);
     }
@@ -65,9 +68,15 @@ public class DefaultCorrelationManager<T> : ICorrelationManager<T>
     /// <exception cref="Exception">Thrown if the correlation key could not be found in the context.</exception>
     public virtual string GetCorrelationKey(string correlationKeyName, TestContext context)
     {
-        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug($"Get correlation key for '{correlationKeyName}'");
+        if (Log.IsEnabled(LogLevel.Debug))
+        {
+            Log.LogDebug($"Get correlation key for '{correlationKeyName}'");
+        }
 
-        if (context.GetVariables().ContainsKey(correlationKeyName)) return context.GetVariable(correlationKeyName);
+        if (context.GetVariables().ContainsKey(correlationKeyName))
+        {
+            return context.GetVariable(correlationKeyName);
+        }
 
         throw new Exception($"Failed to get correlation key for '{correlationKeyName}'");
     }
@@ -85,7 +94,10 @@ public class DefaultCorrelationManager<T> : ICorrelationManager<T>
             return;
         }
 
-        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug($"Saving correlated object for '{correlationKey}'");
+        if (Log.IsEnabled(LogLevel.Debug))
+        {
+            Log.LogDebug($"Saving correlated object for '{correlationKey}'");
+        }
 
         _objectStore.Add(correlationKey, obj);
     }
@@ -98,7 +110,10 @@ public class DefaultCorrelationManager<T> : ICorrelationManager<T>
     /// <returns>The object associated with the specified correlation key, or the default value if not found.</returns>
     public virtual T Find(string correlationKey, long timeout)
     {
-        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug($"Finding correlated object for '{correlationKey}'");
+        if (Log.IsEnabled(LogLevel.Debug))
+        {
+            Log.LogDebug($"Finding correlated object for '{correlationKey}'");
+        }
 
         return _objectStore.Remove(correlationKey);
     }

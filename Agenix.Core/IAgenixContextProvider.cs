@@ -82,8 +82,12 @@ public interface IAgenixContextProvider
         }
 
         if (Log.IsEnabled(LogLevel.Debug))
+        {
             foreach (var entry in provider)
+            {
                 Log.LogDebug($"Found Agenix context provider '{entry.Key}' as {entry.Value.GetType()}");
+            }
+        }
 
         var contextProvider = provider.Values.First();
         Log.LogDebug($"Using Agenix context provider '{provider.Keys.First()}' as {contextProvider}");

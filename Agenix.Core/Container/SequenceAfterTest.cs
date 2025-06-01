@@ -47,7 +47,10 @@ public class SequenceAfterTest : AbstractTestBoundaryActionContainer, IAfterTest
     /// <param name="context">The context in which the actions are executed.</param>
     public override void DoExecute(TestContext context)
     {
-        if (actions is { Count: 0 }) return;
+        if (actions is { Count: 0 })
+        {
+            return;
+        }
 
         Log.LogInformation("Entering after test block");
 
@@ -57,7 +60,10 @@ public class SequenceAfterTest : AbstractTestBoundaryActionContainer, IAfterTest
             Log.LogDebug("");
         }
 
-        foreach (var action in actions.Select(actionBuilder => actionBuilder.Build())) action.Execute(context);
+        foreach (var action in actions.Select(actionBuilder => actionBuilder.Build()))
+        {
+            action.Execute(context);
+        }
     }
 
     /// The Builder class is a concrete implementation of the AbstractTestBoundaryContainerBuilder used for constructing instances

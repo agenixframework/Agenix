@@ -83,9 +83,15 @@ public interface IAnnotationConfigParser<in TAttribute, out TEndpoint> : IAnnota
         );
 
 
-        if (!Log.IsEnabled(LogLevel.Debug)) return validators;
+        if (!Log.IsEnabled(LogLevel.Debug))
+        {
+            return validators;
+        }
+
         foreach (var kvp in validators)
+        {
             Log.LogDebug("Found annotation config parser '{KvpKey}' as {Name}", kvp.Key, kvp.Value.GetType().Name);
+        }
 
         return validators;
     }

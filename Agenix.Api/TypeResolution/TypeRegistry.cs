@@ -205,7 +205,9 @@ public sealed class TypeRegistry
         var type = TypeResolutionUtils.ResolveType(typeName);
 
         if (type.IsGenericTypeDefinition)
+        {
             alias += "`" + type.GetGenericArguments().Length;
+        }
 
         RegisterType(alias, type);
     }

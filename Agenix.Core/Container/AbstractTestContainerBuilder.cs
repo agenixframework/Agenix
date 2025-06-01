@@ -68,12 +68,19 @@ public abstract class AbstractTestContainerBuilder<T, TS> : AbstractTestActionBu
         {
             var current = actions[i];
 
-            if (current.Build() is NoopTestAction) continue;
+            if (current.Build() is NoopTestAction)
+            {
+                continue;
+            }
 
             if (_actions.Count == i)
+            {
                 _actions.Add(current);
+            }
             else if (!ResolveActionBuilder(_actions[i]).Equals(ResolveActionBuilder(current)))
+            {
                 _actions.Insert(i, current);
+            }
         }
 
         return self;
@@ -124,7 +131,10 @@ public abstract class AbstractTestContainerBuilder<T, TS> : AbstractTestActionBu
     private ITestActionBuilder<ITestAction> ResolveActionBuilder(ITestActionBuilder<ITestAction> builder)
     {
         if (builder is ITestActionBuilder<ITestAction>.IDelegatingTestActionBuilder<ITestAction> delegatingBuilder)
+        {
             return ResolveActionBuilder(delegatingBuilder.Delegate);
+        }
+
         return builder;
     }
 

@@ -49,11 +49,7 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
         var sql = DbStmt1;
         _adoTemplate.Reset();
 
-        var resultMap = new Dictionary<string, object>
-        {
-            { "ORDERTYPE", "small" },
-            { "STATUS", "in_progress" }
-        };
+        var resultMap = new Dictionary<string, object> { { "ORDERTYPE", "small" }, { "STATUS", "in_progress" } };
 
         _adoTemplate
             .Setup(j => j.QueryWithRowMapper(It.IsAny<CommandType>(), It.IsAny<string>(),
@@ -84,11 +80,7 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
             .Returns(transactionStatusMock.Object);
 
         // Prepare result map
-        var resultMap = new Dictionary<string, object>
-        {
-            { "ORDERTYPE", "small" },
-            { "STATUS", "in_progress" }
-        };
+        var resultMap = new Dictionary<string, object> { { "ORDERTYPE", "small" }, { "STATUS", "in_progress" } };
 
         // Setup JDBC template mock
         _adoTemplate
@@ -119,11 +111,7 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
         var sql = DbStmt1;
         _adoTemplate.Reset();
 
-        var resultMap = new Dictionary<string, object>
-        {
-            { "ordertype", "small" },
-            { "status", "in_progress" }
-        };
+        var resultMap = new Dictionary<string, object> { { "ordertype", "small" }, { "status", "in_progress" } };
 
         _adoTemplate
             .Setup(j => j.QueryWithRowMapper(It.IsAny<CommandType>(), It.IsAny<string>(),
@@ -149,31 +137,19 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
         var sql3 = DbStmt3;
         _adoTemplate.Reset();
 
-        var resultMap1 = new Dictionary<string, object>
-        {
-            { "ORDERTYPE", "small" },
-            { "STATUS", "in_progress" }
-        };
+        var resultMap1 = new Dictionary<string, object> { { "ORDERTYPE", "small" }, { "STATUS", "in_progress" } };
         _adoTemplate
             .Setup(j => j.QueryWithRowMapper(It.IsAny<CommandType>(), sql1,
                 It.IsAny<ExecuteSqlQueryAction.DictionaryRowMapper>()))
             .Returns(new List<Dictionary<string, object>> { resultMap1 });
 
-        var resultMap2 = new Dictionary<string, object>
-        {
-            { "NAME", "Mickey Mouse" },
-            { "HEIGHT", "0,3" }
-        };
+        var resultMap2 = new Dictionary<string, object> { { "NAME", "Mickey Mouse" }, { "HEIGHT", "0,3" } };
         _adoTemplate
             .Setup(j => j.QueryWithRowMapper(It.IsAny<CommandType>(), sql2,
                 It.IsAny<ExecuteSqlQueryAction.DictionaryRowMapper>()))
             .Returns(new List<Dictionary<string, object>> { resultMap2 });
 
-        var resultMap3 = new Dictionary<string, object>
-        {
-            { "ID", "1234" },
-            { "FRAMEWORK_NAME", "agenix" }
-        };
+        var resultMap3 = new Dictionary<string, object> { { "ID", "1234" }, { "FRAMEWORK_NAME", "agenix" } };
         _adoTemplate
             .Setup(j => j.QueryWithRowMapper(It.IsAny<CommandType>(), sql3,
                 It.IsAny<ExecuteSqlQueryAction.DictionaryRowMapper>()))
@@ -210,11 +186,7 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
         var sql = DbStmt1;
         _adoTemplate.Reset();
 
-        var resultMap = new Dictionary<string, object>
-        {
-            { "ORDERTYPE", "small" },
-            { "STATUS", null }
-        };
+        var resultMap = new Dictionary<string, object> { { "ORDERTYPE", "small" }, { "STATUS", null } };
 
         _adoTemplate
             .Setup(j => j.QueryWithRowMapper(It.IsAny<CommandType>(), sql,
@@ -233,11 +205,7 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
         var sql = "select ORDERTYPE, STATUS from orders where ID = ${orderId}";
         _adoTemplate.Reset();
 
-        var resultMap = new Dictionary<string, object>
-        {
-            { "ORDERTYPE", "small" },
-            { "STATUS", "in_progress" }
-        };
+        var resultMap = new Dictionary<string, object> { { "ORDERTYPE", "small" }, { "STATUS", "in_progress" } };
 
         _adoTemplate
             .Setup(j => j.QueryWithRowMapper(It.IsAny<CommandType>(), DbStmt1,
@@ -254,11 +222,7 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
         var sql = DbStmt1;
         _adoTemplate.Reset();
 
-        var resultMap = new Dictionary<string, object>
-        {
-            { "ordertype", "small" },
-            { "status", "in_progress" }
-        };
+        var resultMap = new Dictionary<string, object> { { "ordertype", "small" }, { "status", "in_progress" } };
 
         _adoTemplate
             .Setup(j => j.QueryWithRowMapper(It.IsAny<CommandType>(), sql,
@@ -282,11 +246,7 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
         var sql = DbStmt1;
         _adoTemplate.Reset();
 
-        var resultMap = new Dictionary<string, object>
-        {
-            { "ORDERTYPE", "small" },
-            { "STATUS", "in_progress" }
-        };
+        var resultMap = new Dictionary<string, object> { { "ORDERTYPE", "small" }, { "STATUS", "in_progress" } };
 
         _adoTemplate
             .Setup(j => j.QueryWithRowMapper(It.IsAny<CommandType>(), sql,
@@ -305,11 +265,7 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
         var sql = DbStmt1;
         _adoTemplate.Reset();
 
-        var resultMap = new Dictionary<string, object>
-        {
-            { "ORDERTYPE", "small" },
-            { "STATUS", "in_progress" }
-        };
+        var resultMap = new Dictionary<string, object> { { "ORDERTYPE", "small" }, { "STATUS", "in_progress" } };
 
         _adoTemplate
             .Setup(j => j.QueryWithRowMapper(It.IsAny<CommandType>(), sql,
@@ -328,11 +284,7 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
         var sql = DbStmt1;
         _adoTemplate.Reset();
 
-        var resultMap = new Dictionary<string, object>
-        {
-            { "ordertype", "small" },
-            { "status", "in_progress" }
-        };
+        var resultMap = new Dictionary<string, object> { { "ordertype", "small" }, { "status", "in_progress" } };
 
         _adoTemplate
             .Setup(j => j.QueryWithRowMapper(It.IsAny<CommandType>(), sql,
@@ -351,11 +303,7 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
         var sql = "select ORDERTYPE AS TYPE, STATUS AS STATE from orders where ID=5";
         _adoTemplate.Reset();
 
-        var resultMap = new Dictionary<string, object>
-        {
-            { "TYPE", "small" },
-            { "STATE", "in_progress" }
-        };
+        var resultMap = new Dictionary<string, object> { { "TYPE", "small" }, { "STATE", "in_progress" } };
 
         _adoTemplate
             .Setup(j => j.QueryWithRowMapper(It.IsAny<CommandType>(), sql,
@@ -374,11 +322,7 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
         var sql = DbStmt1;
         _adoTemplate.Reset();
 
-        var resultMap = new Dictionary<string, object>
-        {
-            { "ORDERTYPE", "small" },
-            { "STATUS", "in_progress" }
-        };
+        var resultMap = new Dictionary<string, object> { { "ORDERTYPE", "small" }, { "STATUS", "in_progress" } };
 
         _adoTemplate
             .Setup(j => j.QueryWithRowMapper(It.IsAny<CommandType>(), sql,
@@ -412,21 +356,9 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
 
         var resultList = new List<Dictionary<string, object>>();
 
-        var resultRow1 = new Dictionary<string, object>
-        {
-            { "ORDERTYPE", "small" },
-            { "STATUS", "started" }
-        };
-        var resultRow2 = new Dictionary<string, object>
-        {
-            { "ORDERTYPE", "medium" },
-            { "STATUS", "in_progress" }
-        };
-        var resultRow3 = new Dictionary<string, object>
-        {
-            { "ORDERTYPE", "big" },
-            { "STATUS", "finished" }
-        };
+        var resultRow1 = new Dictionary<string, object> { { "ORDERTYPE", "small" }, { "STATUS", "started" } };
+        var resultRow2 = new Dictionary<string, object> { { "ORDERTYPE", "medium" }, { "STATUS", "in_progress" } };
+        var resultRow3 = new Dictionary<string, object> { { "ORDERTYPE", "big" }, { "STATUS", "finished" } };
 
         resultList.Add(resultRow1);
         resultList.Add(resultRow2);
@@ -450,21 +382,9 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
 
         var resultList = new List<Dictionary<string, object>>();
 
-        var resultRow1 = new Dictionary<string, object>
-        {
-            { "ORDERTYPE", "small" },
-            { "STATUS", "started" }
-        };
-        var resultRow2 = new Dictionary<string, object>
-        {
-            { "ORDERTYPE", "medium" },
-            { "STATUS", "in_progress" }
-        };
-        var resultRow3 = new Dictionary<string, object>
-        {
-            { "ORDERTYPE", "big" },
-            { "STATUS", "finished" }
-        };
+        var resultRow1 = new Dictionary<string, object> { { "ORDERTYPE", "small" }, { "STATUS", "started" } };
+        var resultRow2 = new Dictionary<string, object> { { "ORDERTYPE", "medium" }, { "STATUS", "in_progress" } };
+        var resultRow3 = new Dictionary<string, object> { { "ORDERTYPE", "big" }, { "STATUS", "finished" } };
 
         resultList.Add(resultRow1);
         resultList.Add(resultRow2);
@@ -488,21 +408,9 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
 
         var resultList = new List<Dictionary<string, object>>();
 
-        var resultRow1 = new Dictionary<string, object>
-        {
-            { "ORDERTYPE", "small" },
-            { "STATUS", "started" }
-        };
-        var resultRow2 = new Dictionary<string, object>
-        {
-            { "ORDERTYPE", null },
-            { "STATUS", "in_progress" }
-        };
-        var resultRow3 = new Dictionary<string, object>
-        {
-            { "ORDERTYPE", "big" },
-            { "STATUS", "finished" }
-        };
+        var resultRow1 = new Dictionary<string, object> { { "ORDERTYPE", "small" }, { "STATUS", "started" } };
+        var resultRow2 = new Dictionary<string, object> { { "ORDERTYPE", null }, { "STATUS", "in_progress" } };
+        var resultRow3 = new Dictionary<string, object> { { "ORDERTYPE", "big" }, { "STATUS", "finished" } };
 
         resultList.Add(resultRow1);
         resultList.Add(resultRow2);
@@ -532,22 +440,14 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
         var sql2 = DbStmt2;
         _adoTemplate.Reset();
 
-        var resultMap1 = new Dictionary<string, object>
-        {
-            { "ORDERTYPE", "small" },
-            { "STATUS", "in_progress" }
-        };
+        var resultMap1 = new Dictionary<string, object> { { "ORDERTYPE", "small" }, { "STATUS", "in_progress" } };
 
         _adoTemplate
             .Setup(j => j.QueryWithRowMapper(It.IsAny<CommandType>(), sql1,
                 It.IsAny<ExecuteSqlQueryAction.DictionaryRowMapper>()))
             .Returns(new List<Dictionary<string, object>> { resultMap1 });
 
-        var resultMap2 = new Dictionary<string, object>
-        {
-            { "NAME", "Mickey Mouse" },
-            { "HEIGHT", "0,3" }
-        };
+        var resultMap2 = new Dictionary<string, object> { { "NAME", "Mickey Mouse" }, { "HEIGHT", "0,3" } };
 
         _adoTemplate
             .Setup(j => j.QueryWithRowMapper(It.IsAny<CommandType>(), sql2,
@@ -584,17 +484,9 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
     {
         _adoTemplate.Reset();
 
-        var resultMap1 = new Dictionary<string, object>
-        {
-            { "ORDERTYPE", "small" },
-            { "STATUS", "in_progress" }
-        };
+        var resultMap1 = new Dictionary<string, object> { { "ORDERTYPE", "small" }, { "STATUS", "in_progress" } };
 
-        var resultMap2 = new Dictionary<string, object>
-        {
-            { "NAME", "Mickey Mouse" },
-            { "HEIGHT", "0,3" }
-        };
+        var resultMap2 = new Dictionary<string, object> { { "NAME", "Mickey Mouse" }, { "HEIGHT", "0,3" } };
 
         _adoTemplate
             .Setup(j => j.QueryWithRowMapper(It.IsAny<CommandType>(), It.IsAny<string>(),
@@ -632,8 +524,7 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
         // Mock result set
         var resultMap = new Dictionary<string, object>
         {
-            { "ORDERTYPE", "testVariableValue" },
-            { "STATUS", "in_progress" }
+            { "ORDERTYPE", "testVariableValue" }, { "STATUS", "in_progress" }
         };
 
         _adoTemplate
@@ -662,8 +553,7 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
         // Mock result set
         var resultMap = new Dictionary<string, object>
         {
-            { "ORDERTYPE", "small" },
-            { "BINARY_DATA", "some_binary_data"u8.ToArray() }
+            { "ORDERTYPE", "small" }, { "BINARY_DATA", "some_binary_data"u8.ToArray() }
         };
 
         _adoTemplate

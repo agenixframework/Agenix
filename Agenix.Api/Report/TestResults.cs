@@ -56,7 +56,10 @@ public class TestResults
     /// <param name="callback">The action to apply to each test result.</param>
     public void DoWithResults(Action<TestResult> callback)
     {
-        foreach (var result in _results) callback(result);
+        foreach (var result in _results)
+        {
+            callback(result);
+        }
     }
 
     public int GetSuccess()
@@ -69,7 +72,9 @@ public class TestResults
     public string GetSuccessPercentageFormatted()
     {
         if (_results.Count == 0 || GetSuccess() == 0)
+        {
             return ZeroPercentage;
+        }
 
         return ((double)GetSuccess() / (GetFailed() + GetSuccess()) * 100).ToString("0.0");
     }
@@ -86,7 +91,9 @@ public class TestResults
     public string GetFailedPercentageFormatted()
     {
         if (_results.Count == 0 || GetFailed() == 0)
+        {
             return ZeroPercentage;
+        }
 
         return ((double)GetFailed() / (GetFailed() + GetSuccess()) * 100).ToString("0.0");
     }
@@ -126,17 +133,10 @@ public class TestResults
     /// <return>A NumberFormatInfo instance with decimal and group separators set to "." and "," respectively.</return>
     private NumberFormatInfo GetNewDecimalFormat()
     {
-        var numberFormat = new NumberFormatInfo
-        {
-            NumberDecimalSeparator = ".",
-            NumberGroupSeparator = ","
-        };
+        var numberFormat = new NumberFormatInfo { NumberDecimalSeparator = ".", NumberGroupSeparator = "," };
 
         // Set custom format for zero and one decimal place
-        var specificCulture = new CultureInfo("en-US")
-        {
-            NumberFormat = numberFormat
-        };
+        var specificCulture = new CultureInfo("en-US") { NumberFormat = numberFormat };
 
         return numberFormat;
     }

@@ -67,7 +67,9 @@ public sealed class FunctionUtils
         if (string.IsNullOrEmpty(stringValue) || stringValue.IndexOf(':') < 0 || stringValue.IndexOf('(') < 0 ||
             stringValue.IndexOf(')') < 0)
             // it is not a function, as it is defined as 'prefix:methodName(arguments)'
+        {
             return stringValue;
+        }
 
         var newString = stringValue;
         var strBuffer = new StringBuilder();
@@ -91,14 +93,21 @@ public sealed class FunctionUtils
 
                 while (curIndex < newString.Length && !isVarComplete)
                 {
-                    if (newString.IndexOf('(', curIndex) == curIndex) control++;
+                    if (newString.IndexOf('(', curIndex) == curIndex)
+                    {
+                        control++;
+                    }
 
                     if (newString[curIndex] == ')' || curIndex == newString.Length - 1)
                     {
                         if (control == 0)
+                        {
                             isVarComplete = true;
+                        }
                         else
+                        {
                             control--;
+                        }
                     }
 
                     variableNameBuf.Append(newString[curIndex]);
@@ -110,9 +119,13 @@ public sealed class FunctionUtils
                 strBuffer.Append(newString.Substring(startIndex, searchIndex - startIndex));
 
                 if (enableQuoting)
+                {
                     strBuffer.Append("'" + value + "'");
+                }
                 else
+                {
                     strBuffer.Append(value);
+                }
 
                 startIndex = curIndex;
 
@@ -147,7 +160,9 @@ public sealed class FunctionUtils
 
         if (!functionExpression.Contains('(') || !functionExpression.EndsWith(")") ||
             !functionExpression.Contains(':'))
+        {
             throw new InvalidFunctionUsageException("Unable to resolve function: " + functionExpression);
+        }
 
         var functionPrefix = functionExpression.Substring(0, functionExpression.IndexOf(':') + 1);
         var startIndexString = functionExpression.IndexOf('(') + 1;

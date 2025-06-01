@@ -114,22 +114,32 @@ public class MessageValidatorRegistry
 
         if (IsEmptyOrDefault(matchingValidators))
             // Try to find fallback message validator for given message payload
+        {
             if (message.Payload is string payload && !string.IsNullOrWhiteSpace(payload))
             {
                 payload = payload.Trim();
 
                 if (MessagePayloadUtils.IsXml(payload) &&
                     !messageType.Equals(nameof(MessageType.XML), StringComparison.OrdinalIgnoreCase))
+                {
                     matchingValidators = FindFallbackMessageValidators(nameof(MessageType.XML), message);
+                }
                 else if (MessagePayloadUtils.IsJson(payload) &&
                          !messageType.Equals(nameof(MessageType.JSON), StringComparison.OrdinalIgnoreCase))
+                {
                     matchingValidators = FindFallbackMessageValidators(nameof(MessageType.JSON), message);
+                }
                 else if (!messageType.Equals(nameof(MessageType.PLAINTEXT), StringComparison.OrdinalIgnoreCase))
+                {
                     matchingValidators = FindFallbackMessageValidators(nameof(MessageType.PLAINTEXT), message);
+                }
             }
+        }
 
         if (IsEmptyOrDefault(matchingValidators) && string.IsNullOrWhiteSpace(message.GetPayload<string>()))
+        {
             matchingValidators.Add(_defaultEmptyMessageValidator);
+        }
 
         if (IsEmptyOrDefault(matchingValidators))
         {
@@ -146,7 +156,9 @@ public class MessageValidatorRegistry
         }
 
         if (Log.IsEnabled(LogLevel.Debug))
+        {
             Log.LogDebug("Found {MatchingValidatorsCount} message validators for message", matchingValidators.Count);
+        }
 
         return matchingValidators;
     }
@@ -213,7 +225,9 @@ public class MessageValidatorRegistry
     public void AddMessageValidator(string name, IMessageValidator<IValidationContext> messageValidator)
     {
         if (_messageValidators.ContainsKey(name) && Log.IsEnabled(LogLevel.Debug))
+        {
             Log.LogDebug("Overwriting message validator '{Name}' in registry", name);
+        }
 
         _messageValidators[name] = messageValidator;
     }
@@ -226,7 +240,9 @@ public class MessageValidatorRegistry
     public void AddSchemeValidator(string name, ISchemaValidator<ISchemaValidationContext> schemaValidator)
     {
         if (_schemeValidators.ContainsKey(name) && Log.IsEnabled(LogLevel.Debug))
+        {
             Log.LogDebug("Overwriting scheme validator '{Name}' in registry", name);
+        }
 
         _schemeValidators[name] = schemaValidator;
     }
@@ -298,16 +314,27 @@ public class MessageValidatorRegistry
         var matchingSchemaValidators = _schemeValidators.Values
             .Where(validator => validator.SupportsMessageType(messageType, message)).ToList();
 
-        if (matchingSchemaValidators.Count != 0) return matchingSchemaValidators;
+        if (matchingSchemaValidators.Count != 0)
+        {
+            return matchingSchemaValidators;
+        }
+
         // try to find fallback message validator for given message payload
         if (message.Payload is not string payload || string.IsNullOrWhiteSpace(payload))
+        {
             return matchingSchemaValidators;
+        }
+
         payload = payload.Trim();
 
         if (IsXmlPredicate.Instance.Test(payload) && messageType != nameof(MessageType.XML))
+        {
             matchingSchemaValidators = FindFallbackSchemaValidators(nameof(MessageType.XML), message);
+        }
         else if (IsJsonPredicate.Instance.Test(payload) && messageType != nameof(MessageType.JSON))
+        {
             matchingSchemaValidators = FindFallbackSchemaValidators(nameof(MessageType.JSON), message);
+        }
 
         return matchingSchemaValidators;
     }

@@ -85,14 +85,27 @@ public interface IValidationMatcher
 
     static IDictionary<string, IValidationMatcher> Lookup()
     {
-        if (Validators.Count != 0) return Validators;
-        var resolvedValidators = TypeResolver.ResolveAll<dynamic>();
-        foreach (var kvp in resolvedValidators) Validators[kvp.Key] = kvp.Value;
+        if (Validators.Count != 0)
+        {
+            return Validators;
+        }
 
-        if (!Log.IsEnabled(LogLevel.Debug)) return Validators;
+        var resolvedValidators = TypeResolver.ResolveAll<dynamic>();
+        foreach (var kvp in resolvedValidators)
+        {
+            Validators[kvp.Key] = kvp.Value;
+        }
+
+        if (!Log.IsEnabled(LogLevel.Debug))
+        {
+            return Validators;
+        }
+
         {
             foreach (var kvp in Validators)
+            {
                 Log.LogDebug("Found validation matcher '{KvpKey}' as {Type}", kvp.Key, kvp.Value.GetType());
+            }
         }
         return Validators;
     }

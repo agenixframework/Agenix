@@ -68,6 +68,7 @@ public class RepeatOnErrorUntilTrue(RepeatOnErrorUntilTrue.Builder builder) : Ab
         AgenixSystemException exception = null;
 
         while (!CheckCondition(context))
+        {
             try
             {
                 exception = null;
@@ -84,8 +85,13 @@ public class RepeatOnErrorUntilTrue(RepeatOnErrorUntilTrue.Builder builder) : Ab
                 DoAutoSleep();
                 index++;
             }
+        }
 
-        if (exception == null) return;
+        if (exception == null)
+        {
+            return;
+        }
+
         Log.LogInformation($"All retries failed - raising exception {exception.GetType().Name}");
         throw exception;
     }
@@ -97,7 +103,11 @@ public class RepeatOnErrorUntilTrue(RepeatOnErrorUntilTrue.Builder builder) : Ab
     /// /
     private void DoAutoSleep()
     {
-        if (_autoSleep <= 0) return;
+        if (_autoSleep <= 0)
+        {
+            return;
+        }
+
         Log.LogInformation($"Sleeping {_autoSleep} milliseconds");
 
         try

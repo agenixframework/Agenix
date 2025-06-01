@@ -60,7 +60,10 @@ public class HeaderMappingKeyExtractor : AbstractMappingKeyExtractor
     /// <exception cref="AgenixSystemException">Thrown when the specified header is not found in the request message.</exception>
     protected override string GetMappingKey(IMessage request)
     {
-        if (request.GetHeader(_headerName) != null) return request.GetHeader(_headerName)?.ToString();
+        if (request.GetHeader(_headerName) != null)
+        {
+            return request.GetHeader(_headerName)?.ToString();
+        }
 
         throw new AgenixSystemException($"Unable to find header '{_headerName}' in request message");
     }

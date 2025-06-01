@@ -49,7 +49,10 @@ public class CompositePerformable : IPerformable
     /// <param name="actor">The actor that will execute each performable in the composite list.</param>
     public void PerformAs<T>(T actor) where T : Actor
     {
-        foreach (var todo in _todoList) actor.AttemptsTo(todo);
+        foreach (var todo in _todoList)
+        {
+            actor.AttemptsTo(todo);
+        }
     }
 
     /// <summary>
@@ -82,7 +85,10 @@ public class CompositePerformable : IPerformable
     /// </returns>
     private static List<IPerformable> Flattened(IPerformable performable)
     {
-        if (performable is CompositePerformable composite) return composite._todoList;
+        if (performable is CompositePerformable composite)
+        {
+            return composite._todoList;
+        }
 
         return [performable];
     }

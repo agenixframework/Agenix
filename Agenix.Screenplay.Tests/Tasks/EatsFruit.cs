@@ -12,7 +12,7 @@ public class EatsFruit : IPerformable
     {
         this.fruit = fruit;
     }
-    
+
     public void PerformAs<T>(T actor) where T : Actor
     {
     }
@@ -20,6 +20,5 @@ public class EatsFruit : IPerformable
     public static EatsFruit Loudly()
     {
         return new EatsFruit("peach");
-
     }
 }

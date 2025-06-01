@@ -55,7 +55,11 @@ public class TypeResolver : ITypeResolver
     /// </exception>
     public virtual Type Resolve(string typeName)
     {
-        if (StringUtils.IsNullOrEmpty(typeName)) throw BuildTypeLoadException(typeName);
+        if (StringUtils.IsNullOrEmpty(typeName))
+        {
+            throw BuildTypeLoadException(typeName);
+        }
+
         var typeInfo = new TypeAssemblyHolder(typeName);
         Type type;
         try
@@ -66,11 +70,19 @@ public class TypeResolver : ITypeResolver
         }
         catch (Exception ex)
         {
-            if (ex is TypeLoadException) throw;
+            if (ex is TypeLoadException)
+            {
+                throw;
+            }
+
             throw BuildTypeLoadException(typeName, ex);
         }
 
-        if (type == null) throw BuildTypeLoadException(typeName);
+        if (type == null)
+        {
+            throw BuildTypeLoadException(typeName);
+        }
+
         return type;
     }
 
@@ -109,7 +121,11 @@ public class TypeResolver : ITypeResolver
 #else
         var assembly = Assembly.LoadWithPartialName(typeInfo.AssemblyName);
 #endif
-        if (assembly != null) type = assembly.GetType(typeInfo.TypeName, true, true);
+        if (assembly != null)
+        {
+            type = assembly.GetType(typeInfo.TypeName, true, true);
+        }
+
         return type;
     }
 
@@ -131,7 +147,10 @@ public class TypeResolver : ITypeResolver
         foreach (var assembly in assemblies)
         {
             type = assembly.GetType(typeInfo.TypeName, false, false);
-            if (type != null) break;
+            if (type != null)
+            {
+                break;
+            }
         }
 
         return type;

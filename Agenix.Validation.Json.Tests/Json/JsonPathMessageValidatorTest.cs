@@ -61,21 +61,21 @@ public class JsonPathMessageValidatorTest : AbstractNUnitSetUp
 
         _validator.ValidateMessage(_message, new DefaultMessage(), Context, validationContext);
 
-         validationContext = new JsonPathMessageValidationContext.Builder()
-             .Expression("$..sub-element", Starts.With("text"))
-             .Build();
-        
-         _validator.ValidateMessage(_message, new DefaultMessage(), Context, validationContext);
-        
-         validationContext = new JsonPathMessageValidationContext.Builder()
-             .Expression("$..name", Has.Item(Is.EqualTo("Penny")))
-             .Build();
-         _validator.ValidateMessage(_message, new DefaultMessage(), Context, validationContext);
-        
-         validationContext = new JsonPathMessageValidationContext.Builder()
-             .Expression("$..name", Has.Items(Is.EqualTo("Leonard"), Is.EqualTo("Sheldon"), Is.EqualTo("Penny")))
+        validationContext = new JsonPathMessageValidationContext.Builder()
+            .Expression("$..sub-element", Starts.With("text"))
             .Build();
-         _validator.ValidateMessage(_message, new DefaultMessage(), Context, validationContext);
+
+        _validator.ValidateMessage(_message, new DefaultMessage(), Context, validationContext);
+
+        validationContext = new JsonPathMessageValidationContext.Builder()
+            .Expression("$..name", Has.Item(Is.EqualTo("Penny")))
+            .Build();
+        _validator.ValidateMessage(_message, new DefaultMessage(), Context, validationContext);
+
+        validationContext = new JsonPathMessageValidationContext.Builder()
+            .Expression("$..name", Has.Items(Is.EqualTo("Leonard"), Is.EqualTo("Sheldon"), Is.EqualTo("Penny")))
+            .Build();
+        _validator.ValidateMessage(_message, new DefaultMessage(), Context, validationContext);
     }
 
 
@@ -92,16 +92,16 @@ public class JsonPathMessageValidatorTest : AbstractNUnitSetUp
             .Build();
         _validator.ValidateMessage(_message, new DefaultMessage(), Context, validationContext);
 
-         validationContext = new JsonPathMessageValidationContext.Builder()
-             .Expression("$.root.element.KeySet()",
-                 Has.Items(Is.EqualTo("attributeA"), Is.EqualTo("sub-element"), Is.EqualTo("attributeB")))
-             .Build();
-         _validator.ValidateMessage(_message, new DefaultMessage(), Context, validationContext);
+        validationContext = new JsonPathMessageValidationContext.Builder()
+            .Expression("$.root.element.KeySet()",
+                Has.Items(Is.EqualTo("attributeA"), Is.EqualTo("sub-element"), Is.EqualTo("attributeB")))
+            .Build();
+        _validator.ValidateMessage(_message, new DefaultMessage(), Context, validationContext);
 
-         validationContext = new JsonPathMessageValidationContext.Builder()
-             .Expression("$['root']['person'].KeySet()", Is.EqualTo("name"))
-             .Build();
-         _validator.ValidateMessage(_message, new DefaultMessage(), Context, validationContext);
+        validationContext = new JsonPathMessageValidationContext.Builder()
+            .Expression("$['root']['person'].KeySet()", Is.EqualTo("name"))
+            .Build();
+        _validator.ValidateMessage(_message, new DefaultMessage(), Context, validationContext);
 
         validationContext = new JsonPathMessageValidationContext.Builder()
             .Expression("$.root.numbers.Size()", 4)
@@ -304,22 +304,20 @@ public class JsonPathMessageValidatorTest : AbstractNUnitSetUp
             .Build();
         _validator.ValidateMessage(_message, new DefaultMessage(), Context, validationContext);
     }
-    
+
     [Test]
     public void ShouldFindProperValidationContext()
     {
         var validationContexts = new List<IValidationContext>
         {
-            new HeaderValidationContext(),
-            new JsonMessageValidationContext(),
-            new XmlMessageValidationContext(),
+            new HeaderValidationContext(), new JsonMessageValidationContext(), new XmlMessageValidationContext()
         };
 
-        Assert.That(_validator.FindValidationContext(validationContexts), NUnit.Framework.Is.Null);
+        Assert.That(_validator.FindValidationContext(validationContexts), NUnitIs.Null);
 
         validationContexts.Add(new JsonPathMessageValidationContext());
 
-        Assert.That(_validator.FindValidationContext(validationContexts), NUnit.Framework.Is.Not.Null);
+        Assert.That(_validator.FindValidationContext(validationContexts), NUnitIs.Not.Null);
     }
 
 

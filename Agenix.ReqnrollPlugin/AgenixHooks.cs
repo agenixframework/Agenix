@@ -62,7 +62,10 @@ public class AgenixHooks
             var eventArg = new RunStartedEventArgs(_agenix.AgenixContext);
             AgenixAddIn.OnBeforeRunStarted(typeof(AgenixHooks), eventArg);
 
-            if (!eventArg.Canceled) AgenixAddIn.OnAfterRunStarted(null, new RunStartedEventArgs(_agenix.AgenixContext));
+            if (!eventArg.Canceled)
+            {
+                AgenixAddIn.OnAfterRunStarted(null, new RunStartedEventArgs(_agenix.AgenixContext));
+            }
         }
         catch (Exception exp)
         {
@@ -176,8 +179,10 @@ public class AgenixHooks
                         || testErrorException.FullName.Equals(
                             "Microsoft.VisualStudio.TestTools.UnitTesting.AssertInconclusiveException")
                         || testErrorException.FullName.Equals("Xunit.SkipException"))
+                    {
                         currentTestCaseRunner.GetTestCase().Fail(
                             new AgenixSystemException(GetScenarioStatusMessage(scenarioContext)));
+                    }
                 }
 
                 var eventArg = new TestCaseFinishedEventArgs(currentTestCaseRunner, featureContext, scenarioContext);

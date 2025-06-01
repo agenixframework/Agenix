@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Agenix.Api;
 using Agenix.Api.Report;
-using Agenix.Core.Report;
 using Moq;
 using NUnit.Framework;
 

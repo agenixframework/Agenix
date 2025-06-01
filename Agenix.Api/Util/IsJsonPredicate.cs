@@ -50,7 +50,10 @@ public class IsJsonPredicate
     /// <returns>True if the string is a valid JSON or an empty string, otherwise false.</returns>
     public bool Test(string toTest)
     {
-        if (toTest != null) toTest = toTest.Trim();
+        if (toTest != null)
+        {
+            toTest = toTest.Trim();
+        }
 
         return toTest != null && (toTest.Length == 0 || toTest.StartsWith('{') || toTest.StartsWith('['));
     }

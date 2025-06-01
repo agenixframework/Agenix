@@ -1,4 +1,5 @@
 ﻿#region License
+
 // MIT License
 //
 // Copyright (c) 2025 Agenix
@@ -20,6 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using Agenix.Api.Context;
@@ -77,10 +79,15 @@ public class JsonPathMessageValidator : AbstractMessageValidator<JsonPathMessage
         JsonPathMessageValidationContext validationContext)
     {
         if (validationContext.JsonPathExpressions == null ||
-            validationContext.JsonPathExpressions.Count == 0) return;
+            validationContext.JsonPathExpressions.Count == 0)
+        {
+            return;
+        }
 
         if (string.IsNullOrWhiteSpace(receivedMessage.GetPayload<string>()))
+        {
             throw new ValidationException("Unable to validate message elements - receive message payload was empty");
+        }
 
         Log.LogDebug("Start JSONPath element validation ...");
 
@@ -94,7 +101,10 @@ public class JsonPathMessageValidator : AbstractMessageValidator<JsonPathMessage
 
                 if (expectedValue is string)
                     //check if the expected value is variable or function (and resolve it, if yes)
+                {
                     expectedValue = context.ReplaceDynamicContentInString(expectedValue.ToString());
+                }
+
                 var jsonPathExpression = context.ReplaceDynamicContentInString(key);
                 var jsonPathResult = JsonPathUtils.EvaluateAsString(readerContext, jsonPathExpression);
                 //do the validation of actual and expected value for an element
@@ -139,14 +149,24 @@ public class JsonPathMessageValidator : AbstractMessageValidator<JsonPathMessage
                 .Select(context => context.JsonPathExpressions)
                 .Aggregate(new Dictionary<string, object>(), (collect, map) =>
                 {
-                    foreach (var item in map) collect[item.Key] = item.Value;
+                    foreach (var item in map)
+                    {
+                        collect[item.Key] = item.Value;
+                    }
+
                     return collect;
                 });
 
 
-            if (jsonPathExpressions.Count == 0) return base.FindValidationContext(validationContexts);
+            if (jsonPathExpressions.Count == 0)
+            {
+                return base.FindValidationContext(validationContexts);
+            }
+
             foreach (var expression in jsonPathExpressions)
+            {
                 jsonPathMessageValidationContext.JsonPathExpressions[expression.Key] = expression.Value;
+            }
 
             // Update the status of other validation contexts to optional as validation is performed by this single context
             jsonPathMessageValidationContexts

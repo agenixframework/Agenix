@@ -146,11 +146,20 @@ public class SendMessageAction : AbstractTestAction, ICompletable
     {
         var message = MessageBuilder.Build(context, messageType);
 
-        if (message.Payload == null) return message;
-        foreach (var processor in context.GetMessageProcessors(MessageDirection.OUTBOUND))
-            processor.Process(message, context);
+        if (message.Payload == null)
+        {
+            return message;
+        }
 
-        foreach (var processor in Processors) processor.Process(message, context);
+        foreach (var processor in context.GetMessageProcessors(MessageDirection.OUTBOUND))
+        {
+            processor.Process(message, context);
+        }
+
+        foreach (var processor in Processors)
+        {
+            processor.Process(message, context);
+        }
 
         return message;
     }
@@ -163,9 +172,15 @@ public class SendMessageAction : AbstractTestAction, ICompletable
     /// <exception cref="AgenixSystemException"></exception>
     public IEndpoint GetOrCreateEndpoint(TestContext context)
     {
-        if (Endpoint != null) return Endpoint;
+        if (Endpoint != null)
+        {
+            return Endpoint;
+        }
 
-        if (!string.IsNullOrWhiteSpace(EndpointUri)) return context.EndpointFactory.Create(EndpointUri, context);
+        if (!string.IsNullOrWhiteSpace(EndpointUri))
+        {
+            return context.EndpointFactory.Create(EndpointUri, context);
+        }
 
         throw new AgenixSystemException("Neither endpoint nor endpoint uri is set properly!");
     }
@@ -194,14 +209,23 @@ public class SendMessageAction : AbstractTestAction, ICompletable
         _finished.Task.ContinueWith(task =>
         {
             if (task is { IsFaulted: true, Exception: not null })
+            {
                 Log.LogWarning("Failure in forked send action: " + task.Exception.Message);
+            }
             else
+            {
                 foreach (var ctxEx in context.GetExceptions())
+                {
                     Log.LogWarning(ctxEx.Message);
+                }
+            }
         });
 
         // Extract variables from before sending message so we can save dynamic message ids
-        foreach (var variableExtractor in VariableExtractors) variableExtractor.ExtractVariables(message, context);
+        foreach (var variableExtractor in VariableExtractors)
+        {
+            variableExtractor.ExtractVariables(message, context);
+        }
 
         var messageEndpoint = GetOrCreateEndpoint(context);
 
@@ -224,9 +248,13 @@ public class SendMessageAction : AbstractTestAction, ICompletable
                 catch (Exception e)
                 {
                     if (e is AgenixSystemException runtimeEx)
+                    {
                         context.AddException(runtimeEx);
+                    }
                     else
+                    {
                         context.AddException(new AgenixSystemException(e.Message));
+                    }
                 }
                 finally
                 {
@@ -255,7 +283,9 @@ public class SendMessageAction : AbstractTestAction, ICompletable
     {
         foreach (var validator in context.MessageValidatorRegistry.SchemaValidators.Values
                      .Where(validator => validator.CanValidate(message, IsSchemaValidation)))
+        {
             validator.Validate(message, context, SchemaRepository, Schema);
+        }
     }
 
     /// <summary>
@@ -309,7 +339,11 @@ public class SendMessageAction : AbstractTestAction, ICompletable
         /// <returns>A SendMessageActionBuilderSupport instance associated with the current builder.</returns>
         public override SendMessageActionBuilderSupport GetMessageBuilderSupport()
         {
-            if (messageBuilderSupport == null) messageBuilderSupport = new SendMessageActionBuilderSupport(self);
+            if (messageBuilderSupport == null)
+            {
+                messageBuilderSupport = new SendMessageActionBuilderSupport(self);
+            }
+
             return base.GetMessageBuilderSupport();
         }
 
@@ -361,7 +395,10 @@ public class SendMessageAction : AbstractTestAction, ICompletable
         /// <returns>The constructed SendMessageAction instance.</returns>
         public override T Build()
         {
-            if (messageBuilderSupport == null) messageBuilderSupport = GetMessageBuilderSupport();
+            if (messageBuilderSupport == null)
+            {
+                messageBuilderSupport = GetMessageBuilderSupport();
+            }
 
             return DoBuild();
         }

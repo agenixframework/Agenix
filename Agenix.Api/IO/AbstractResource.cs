@@ -566,16 +566,23 @@ public abstract class AbstractResource : IResource
         if (ConfigurableResourceLoader.HasProtocol(resourceName))
         {
             var resource = loader.GetResource(resourceName);
-            if (resource != null) return resource;
+            if (resource != null)
+            {
+                return resource;
+            }
         }
 
         if (!SupportsRelativeResources)
+        {
             throw new NotSupportedException(GetType().Name +
                                             " does not support relative resources. Please use fully qualified resource name.");
+        }
 
         var fullResourceName = new StringBuilder(256);
         if (Protocol != null && Protocol != string.Empty)
+        {
             fullResourceName.Append(Protocol).Append(ConfigurableResourceLoader.ProtocolSeparator);
+        }
 
         if (!IsRelativeResource(resourceName))
         {
@@ -598,7 +605,11 @@ public abstract class AbstractResource : IResource
             }
 
             fullResourceName.Append(RootLocation.TrimEnd('\\', '/'));
-            if (resourcePath != null && resourcePath != string.Empty) fullResourceName.Append('/').Append(resourcePath);
+            if (resourcePath != null && resourcePath != string.Empty)
+            {
+                fullResourceName.Append('/').Append(resourcePath);
+            }
+
             fullResourceName.Append('/').Append(targetResource);
         }
 
@@ -608,7 +619,10 @@ public abstract class AbstractResource : IResource
         {
             // give derived resource classes a chance to create an instance on their own
             var resultResource = CreateResourceInstance(resultResourceName);
-            if (resultResource != null) return resultResource;
+            if (resultResource != null)
+            {
+                return resultResource;
+            }
         }
 
         // create resource instance using default loader
@@ -630,28 +644,53 @@ public abstract class AbstractResource : IResource
         {
             var pathElements = ResourcePath.Split(PathSeparatorChars);
             var upWalks = UpWalks(relativePath);
-            if (upWalks > pathElements.Length) throw new UriFormatException("Too many back levels.");
+            if (upWalks > pathElements.Length)
+            {
+                throw new UriFormatException("Too many back levels.");
+            }
+
             var separator = PathSeparatorChars[0];
-            for (var i = 0; i < pathElements.Length - upWalks; i++) path.Append(pathElements[i]).Append(separator);
+            for (var i = 0; i < pathElements.Length - upWalks; i++)
+            {
+                path.Append(pathElements[i]).Append(separator);
+            }
+
             var relativeParts = relativePath.Split('/', '\\');
-            for (var i = upWalks; i < relativeParts.Length - 1; i++) path.Append(relativeParts[i]).Append(separator);
-            if (path.Length > 0) path.Length -= 1;
+            for (var i = upWalks; i < relativeParts.Length - 1; i++)
+            {
+                path.Append(relativeParts[i]).Append(separator);
+            }
+
+            if (path.Length > 0)
+            {
+                path.Length -= 1;
+            }
+
             return path.ToString();
         }
 
         if (relativePath.StartsWith("/")) // relative to root
         {
-            if (relativePath.Length > 1) return relativePath.Substring(1, relativePath.Length - 2);
+            if (relativePath.Length > 1)
+            {
+                return relativePath.Substring(1, relativePath.Length - 2);
+            }
 
             return null;
         }
 
         // relative to current namespace...
         if (ResourcePath != null && ResourcePath != string.Empty)
+        {
             path.Append(ResourcePath.TrimEnd(PathSeparatorChars)).Append(PathSeparatorChars[0]);
+        }
+
         if (relativePath.StartsWith("./"))
         {
-            if (relativePath.Length > 2) path.Append(relativePath.Substring(2, relativePath.Length - 3));
+            if (relativePath.Length > 2)
+            {
+                path.Append(relativePath.Substring(2, relativePath.Length - 3));
+            }
         }
         else
         {
@@ -665,7 +704,11 @@ public abstract class AbstractResource : IResource
     {
         var parts = path.Split('/', '\\');
         var count = 0;
-        for (; count < parts.Length && parts[count].Equals(".."); count++) ;
+        for (; count < parts.Length && parts[count].Equals(".."); count++)
+        {
+            ;
+        }
+
         return count;
     }
 

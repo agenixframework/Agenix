@@ -118,10 +118,13 @@ public sealed class Agenix : ITestListenerAware, ITestSuiteListenerAware, ITestR
         AgenixContext.SuiteListeners.OnStart();
 
         foreach (var sequenceBeforeSuite in AgenixContext.BeforeSuites)
+        {
             try
             {
                 if (sequenceBeforeSuite.ShouldExecute(suiteName, testGroups))
+                {
                     sequenceBeforeSuite.Execute(AgenixContext.CreateTestContext());
+                }
             }
             catch (Exception e)
             {
@@ -130,6 +133,7 @@ public sealed class Agenix : ITestListenerAware, ITestSuiteListenerAware, ITestR
 
                 throw new Exception("Before suite failed with errors", e);
             }
+        }
 
         AgenixContext.SuiteListeners.OnStartSuccess();
     }
@@ -145,16 +149,20 @@ public sealed class Agenix : ITestListenerAware, ITestSuiteListenerAware, ITestR
         AgenixContext.SuiteListeners.OnFinish();
 
         foreach (var sequenceAfterSuite in AgenixContext.AfterSuites)
+        {
             try
             {
                 if (sequenceAfterSuite.ShouldExecute(suiteName, testGroups))
+                {
                     sequenceAfterSuite.Execute(AgenixContext.CreateTestContext());
+                }
             }
             catch (Exception e)
             {
                 AgenixContext.SuiteListeners.OnFinishFailure(e);
                 throw new Exception("After suite failed with errors", e);
             }
+        }
 
         AgenixContext.SuiteListeners.OnFinishSuccess();
     }

@@ -105,7 +105,11 @@ public static class MessageHeaderUtils
             headers[SEQUENCE_SIZE] = Convert.ToInt32(size);
         }
 
-        if (!headers.TryGetValue(PRIORITY, out var value2)) return;
+        if (!headers.TryGetValue(PRIORITY, out var value2))
+        {
+            return;
+        }
+
         {
             var size = value2.ToString();
             headers[PRIORITY] = Convert.ToInt32(size);

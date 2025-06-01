@@ -70,7 +70,8 @@ public delegate void PropertySetterDelegate(object target, object value, params 
 /// </summary>
 /// <param name="target">the target instance when calling an instance method</param>
 /// <param name="args">arguments to be passed to the method</param>
-/// <returns>the value return by the method.
+/// <returns>
+///     the value return by the method.
 ///     <value>null</value>
 ///     when calling a void method
 /// </returns>
@@ -263,7 +264,9 @@ public sealed class DynamicReflectionManager
         IDictionary outArgs)
     {
         if (!IsOutputOrRefArgument(argInfo))
+        {
             return;
+        }
 
         var argType = argInfo.ParameterType.GetElementType();
 
@@ -286,14 +289,20 @@ public sealed class DynamicReflectionManager
         IDictionary outArgs)
     {
         if (!IsOutputOrRefArgument(argInfo))
+        {
             return;
+        }
 
         var argType = argInfo.ParameterType.GetElementType();
 
         il.Emit(LdArgOpCodes[paramsArrayPosition]);
         il.Emit(OpCodes.Ldc_I4, argInfo.Position);
         il.Emit(OpCodes.Ldloc, (LocalBuilder)outArgs[argInfo.Position]);
-        if (argType.IsValueType) il.Emit(OpCodes.Box, argType);
+        if (argType.IsValueType)
+        {
+            il.Emit(OpCodes.Box, argType);
+        }
+
         il.Emit(OpCodes.Stelem_Ref);
     }
 
@@ -301,9 +310,13 @@ public sealed class DynamicReflectionManager
         IDictionary outArgs)
     {
         if (IsOutputOrRefArgument(argInfo))
+        {
             il.Emit(OpCodes.Ldloca_S, (LocalBuilder)outArgs[argInfo.Position]);
+        }
         else
+        {
             PushParamsArgumentValue(il, paramsArrayPosition, argInfo.ParameterType, argInfo.Position);
+        }
     }
 
     private static void PushParamsArgumentValue(ILGenerator il, int paramsArrayPosition, Type argumentType,
@@ -340,8 +353,14 @@ public sealed class DynamicReflectionManager
     private static void EmitMethodReturn(ILGenerator il, Type returnValueType)
     {
         if (returnValueType == typeof(void))
+        {
             il.Emit(OpCodes.Ldnull);
-        else if (returnValueType.IsValueType) il.Emit(OpCodes.Box, returnValueType);
+        }
+        else if (returnValueType.IsValueType)
+        {
+            il.Emit(OpCodes.Box, returnValueType);
+        }
+
         il.Emit(OpCodes.Ret);
     }
 
@@ -367,22 +386,34 @@ public sealed class DynamicReflectionManager
     {
         if (value == null)
         {
-            if (ReflectionHelper.IsNullableType(targetType)) return null;
+            if (ReflectionHelper.IsNullableType(targetType))
+            {
+                return null;
+            }
+
             throw new InvalidCastException(
                 $"Cannot convert NULL at position {argIndex} to argument type {targetType.FullName}");
         }
 
         var valueType = value.GetType();
 
-        if (ReflectionHelper.IsNullableType(targetType)) targetType = Nullable.GetUnderlyingType(targetType);
+        if (ReflectionHelper.IsNullableType(targetType))
+        {
+            targetType = Nullable.GetUnderlyingType(targetType);
+        }
 
         // no conversion necessary?
-        if (valueType == targetType) return value;
+        if (valueType == targetType)
+        {
+            return value;
+        }
 
         if (!valueType.IsValueType)
             // we're facing a reftype/valuetype mix that never can convert
+        {
             throw new InvalidCastException(
                 $"Cannot convert value '{value}' of type {valueType.FullName} at position {argIndex} to argument type {targetType.FullName}");
+        }
 
         // we're dealing only with ValueType's now - try to convert them
         try
@@ -430,9 +461,14 @@ public sealed class DynamicReflectionManager
         if (value is bool booleanValue)
         {
             if (booleanValue)
+            {
                 il.Emit(OpCodes.Ldc_I4_1);
+            }
             else
+            {
                 il.Emit(OpCodes.Ldc_I4_0);
+            }
+
             return;
         }
 
@@ -522,7 +558,11 @@ public sealed class DynamicReflectionManager
             il.Emit(OpCodes.Ldfld, fieldInfo);
         }
 
-        if (fieldInfo.FieldType.IsValueType) il.Emit(OpCodes.Box, fieldInfo.FieldType);
+        if (fieldInfo.FieldType.IsValueType)
+        {
+            il.Emit(OpCodes.Box, fieldInfo.FieldType);
+        }
+
         il.Emit(OpCodes.Ret);
     }
 
@@ -532,18 +572,30 @@ public sealed class DynamicReflectionManager
             && !fieldInfo.IsInitOnly
             && !(fieldInfo.DeclaringType.IsValueType && !fieldInfo.IsStatic))
         {
-            if (!fieldInfo.IsStatic) EmitTarget(il, fieldInfo.DeclaringType, isInstanceMethod);
+            if (!fieldInfo.IsStatic)
+            {
+                EmitTarget(il, fieldInfo.DeclaringType, isInstanceMethod);
+            }
 
             il.Emit(OpCodes.Ldarg_1);
             if (fieldInfo.FieldType.IsValueType)
+            {
                 EmitUnbox(il, fieldInfo.FieldType);
+            }
             else
+            {
                 il.Emit(OpCodes.Castclass, fieldInfo.FieldType);
+            }
 
             if (fieldInfo.IsStatic)
+            {
                 il.Emit(OpCodes.Stsfld, fieldInfo);
+            }
             else
+            {
                 il.Emit(OpCodes.Stfld, fieldInfo);
+            }
+
             il.Emit(OpCodes.Ret);
         }
         else
@@ -583,25 +635,42 @@ public sealed class DynamicReflectionManager
             const int paramsArrayPosition = 2;
             IDictionary outArgs = new Hashtable();
             var args = propertyInfo.GetIndexParameters(); // get indexParameters here!
-            foreach (var p in args) SetupOutputArgument(il, paramsArrayPosition, p, outArgs);
+            foreach (var p in args)
+            {
+                SetupOutputArgument(il, paramsArrayPosition, p, outArgs);
+            }
 
             // load target
-            if (!method.IsStatic) EmitTarget(il, method.DeclaringType, isInstanceMethod);
+            if (!method.IsStatic)
+            {
+                EmitTarget(il, method.DeclaringType, isInstanceMethod);
+            }
 
             // load indexer arguments
-            for (var i = 0; i < args.Length; i++) SetupMethodArgument(il, paramsArrayPosition, args[i], outArgs);
+            for (var i = 0; i < args.Length; i++)
+            {
+                SetupMethodArgument(il, paramsArrayPosition, args[i], outArgs);
+            }
 
             // load value
             il.Emit(OpCodes.Ldarg_1);
             if (propertyInfo.PropertyType.IsValueType)
+            {
                 EmitUnbox(il, propertyInfo.PropertyType);
+            }
             else
+            {
                 il.Emit(OpCodes.Castclass, propertyInfo.PropertyType);
+            }
 
             // call setter
             EmitCall(il, method);
 
-            foreach (var p in args) ProcessOutputArgument(il, paramsArrayPosition, p, outArgs);
+            foreach (var p in args)
+            {
+                ProcessOutputArgument(il, paramsArrayPosition, p, outArgs);
+            }
+
             il.Emit(OpCodes.Ret);
         }
         else
@@ -619,15 +688,27 @@ public sealed class DynamicReflectionManager
         var paramsArrayPosition = isInstanceMethod ? 2 : 1;
         var args = method.GetParameters();
         IDictionary outArgs = new Hashtable();
-        foreach (var p in args) SetupOutputArgument(il, paramsArrayPosition, p, outArgs);
+        foreach (var p in args)
+        {
+            SetupOutputArgument(il, paramsArrayPosition, p, outArgs);
+        }
 
-        if (!method.IsStatic) EmitTarget(il, method.DeclaringType, isInstanceMethod);
+        if (!method.IsStatic)
+        {
+            EmitTarget(il, method.DeclaringType, isInstanceMethod);
+        }
 
-        foreach (var p in args) SetupMethodArgument(il, paramsArrayPosition, p, outArgs);
+        foreach (var p in args)
+        {
+            SetupMethodArgument(il, paramsArrayPosition, p, outArgs);
+        }
 
         EmitCall(il, method);
 
-        foreach (var t in args) ProcessOutputArgument(il, paramsArrayPosition, t, outArgs);
+        foreach (var t in args)
+        {
+            ProcessOutputArgument(il, paramsArrayPosition, t, outArgs);
+        }
 
         EmitMethodReturn(il, method.ReturnType);
     }
@@ -638,13 +719,22 @@ public sealed class DynamicReflectionManager
         var args = constructor.GetParameters();
 
         IDictionary outArgs = new Hashtable();
-        foreach (var p in args) SetupOutputArgument(il, paramsArrayPosition, p, outArgs);
+        foreach (var p in args)
+        {
+            SetupOutputArgument(il, paramsArrayPosition, p, outArgs);
+        }
 
-        foreach (var p in args) SetupMethodArgument(il, paramsArrayPosition, p, null);
+        foreach (var p in args)
+        {
+            SetupMethodArgument(il, paramsArrayPosition, p, null);
+        }
 
         il.Emit(OpCodes.Newobj, constructor);
 
-        foreach (var p in args) ProcessOutputArgument(il, paramsArrayPosition, p, outArgs);
+        foreach (var p in args)
+        {
+            ProcessOutputArgument(il, paramsArrayPosition, p, outArgs);
+        }
 
         EmitMethodReturn(il, constructor.DeclaringType);
     }

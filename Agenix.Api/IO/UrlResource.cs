@@ -88,11 +88,18 @@ public class UrlResource : AbstractResource
     /// </param>
     public UrlResource(string resourceName) : base(resourceName)
     {
-        if (resourceName.StartsWith("file:///")) resourceName = resourceName["file:///".Length..];
+        if (resourceName.StartsWith("file:///"))
+        {
+            resourceName = resourceName["file:///".Length..];
+        }
 
         _uri = new Uri(resourceName);
         _rootLocation = _uri.Host;
-        if (!_uri.IsDefaultPort) _rootLocation += ":" + _uri.Port;
+        if (!_uri.IsDefaultPort)
+        {
+            _rootLocation += ":" + _uri.Port;
+        }
+
         _resourcePath = _uri.AbsolutePath;
         var n = _resourcePath.LastIndexOf('/');
         _resourcePath = n > 0 ? _resourcePath.Substring(1, n - 1) : null;
@@ -149,7 +156,11 @@ public class UrlResource : AbstractResource
     {
         get
         {
-            if (_uri.IsFile) return new FileInfo(_uri.AbsolutePath);
+            if (_uri.IsFile)
+            {
+                return new FileInfo(_uri.AbsolutePath);
+            }
+
             throw new FileNotFoundException(Description +
                                             " cannot be resolved to absolute file path - " +
                                             "resource does not use 'file:' protocol.");

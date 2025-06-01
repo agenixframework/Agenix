@@ -46,11 +46,20 @@ public class CookieEnricher
         {
             var enrichedCookie = new Cookie(cookie.Name, cookie.Value);
 
-            if (cookie.Value != null) enrichedCookie.Value = context.ReplaceDynamicContentInString(cookie.Value);
+            if (cookie.Value != null)
+            {
+                enrichedCookie.Value = context.ReplaceDynamicContentInString(cookie.Value);
+            }
 
-            if (cookie.Path != null) enrichedCookie.Path = context.ReplaceDynamicContentInString(cookie.Path);
+            if (cookie.Path != null)
+            {
+                enrichedCookie.Path = context.ReplaceDynamicContentInString(cookie.Path);
+            }
 
-            if (cookie.Domain != null) enrichedCookie.Domain = context.ReplaceDynamicContentInString(cookie.Domain);
+            if (cookie.Domain != null)
+            {
+                enrichedCookie.Domain = context.ReplaceDynamicContentInString(cookie.Domain);
+            }
 
             enrichedCookie.HttpOnly = cookie.HttpOnly;
             enrichedCookie.Secure = cookie.Secure;

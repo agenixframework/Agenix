@@ -176,13 +176,19 @@ public class ResourcePathTypeResolver : ITypeResolver
                 var resourceType = resourceProps.GetProperty(property);
 
                 if (property.Equals(ITypeResolver.TYPE_PROPERTY_WILDCARD))
+                {
                     foreach (DictionaryEntry prop in resourceProps)
+                    {
                         typeLookup.Add(resourceName + "." + prop.Key, prop.Value.ToString());
+                    }
+                }
                 else
+                {
                     typeLookup.Add(
                         keyProperty != null
                             ? ResolveProperty(fullPath + "/" + resourceName, keyProperty)
                             : resourceName, resourceType);
+                }
             }
         }
         catch (IOException e)
@@ -225,13 +231,16 @@ public class ResourcePathTypeResolver : ITypeResolver
         // First load assemblies from the current directory
         var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
         foreach (var file in Directory.GetFiles(baseDirectory, "*.dll"))
+        {
             try
             {
                 var assemblyName = Path.GetFileNameWithoutExtension(file);
 
                 // Skip if already loaded
                 if (loadedAssemblyNames.Contains(assemblyName))
+                {
                     continue;
+                }
 
                 // Try to load the assembly
                 var assembly = Assembly.LoadFrom(file);
@@ -244,17 +253,21 @@ public class ResourcePathTypeResolver : ITypeResolver
                 // Just log and continue if we can't load an assembly
                 Log.LogWarning("Failed to load assembly from {File}: {ExMessage}", file, ex.Message);
             }
+        }
 
         // Now get all loaded assemblies including those we just loaded
         var allAssemblies = AppDomain.CurrentDomain.GetAssemblies();
 
         // Now process all assemblies to find matching resources
         foreach (var assembly in allAssemblies)
+        {
             try
             {
                 // Skip dynamic assemblies that don't have a location
                 if (assembly.IsDynamic || string.IsNullOrEmpty(assembly.Location))
+                {
                     continue;
+                }
 
                 // Get all manifest resources from this assembly
                 var resources = assembly.GetManifestResourceNames();
@@ -266,7 +279,9 @@ public class ResourcePathTypeResolver : ITypeResolver
 
                 // If we found matching resources, add them to our result dictionary
                 if (matchingResources.Count > 0)
+                {
                     result[assembly] = matchingResources;
+                }
             }
             catch (Exception ex)
             {
@@ -275,6 +290,7 @@ public class ResourcePathTypeResolver : ITypeResolver
                     "Error accessing resources in assembly {AssemblyFullName}: {ExMessage}", assembly.FullName, ex
                         .Message);
             }
+        }
 
         return result;
     }
@@ -294,7 +310,9 @@ public class ResourcePathTypeResolver : ITypeResolver
         var lastDotIndex = resourcePath.LastIndexOf('.');
         if (lastDotIndex < 0)
             // No dots found, use the whole path as namespace and leave filename empty
+        {
             return $"assembly://{assemblyName}/{resourcePath}/";
+        }
 
         var namespacePrefix = resourcePath[..lastDotIndex];
         var filename = resourcePath[(lastDotIndex + 1)..];
@@ -318,6 +336,7 @@ public class ResourcePathTypeResolver : ITypeResolver
             var resources = assemblyEntry.Value;
 
             foreach (var resourceName in resources)
+            {
                 try
                 {
                     // Convert to Agenix resource URI
@@ -340,6 +359,7 @@ public class ResourcePathTypeResolver : ITypeResolver
                         "Error loading resource {ResourceName} from {Name}: {ExMessage}", resourceName, assembly
                             .GetName().Name, ex.Message);
                 }
+            }
         }
 
         return result;
@@ -358,7 +378,10 @@ public class ResourcePathTypeResolver : ITypeResolver
     /// </returns>
     private Properties ReadAsProperties(string resourcePath)
     {
-        if (_resourceProperties.TryGetValue(resourcePath, out var properties)) return properties;
+        if (_resourceProperties.TryGetValue(resourcePath, out var properties))
+        {
+            return properties;
+        }
 
         var path = GetFullResourcePath(resourcePath);
         var matchingProperties = LoadAllMatchingProperties(path);
@@ -370,7 +393,10 @@ public class ResourcePathTypeResolver : ITypeResolver
         foreach (var entry in from prop in matchingProperties.Values
                  where prop != null
                  from DictionaryEntry entry in prop
-                 select entry) properties.SetProperty(entry.Key.ToString(), entry.Value?.ToString());
+                 select entry)
+        {
+            properties.SetProperty(entry.Key.ToString(), entry.Value?.ToString());
+        }
 
         _resourceProperties[resourcePath] = properties;
         return properties;
@@ -381,7 +407,10 @@ public class ResourcePathTypeResolver : ITypeResolver
     /// </summary>
     private string GetFullResourcePath(string resourcePath)
     {
-        if (string.IsNullOrEmpty(resourcePath)) return ResourceBasePath;
+        if (string.IsNullOrEmpty(resourcePath))
+        {
+            return ResourceBasePath;
+        }
 
         return !resourcePath.StartsWith(ResourceBasePath) ? $"{ResourceBasePath}/{resourcePath}" : resourcePath;
     }

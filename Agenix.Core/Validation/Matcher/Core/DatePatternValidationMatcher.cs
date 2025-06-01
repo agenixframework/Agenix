@@ -56,9 +56,11 @@ public class DatePatternValidationMatcher : IValidationMatcher
         }
 
         if (!isValidDate)
+        {
             throw new ValidationException(TypeDescriptor.GetClassName(typeof(DatePatternValidationMatcher))
                                           + " failed for field '" + fieldName + "'" +
                                           ". Received invalid date format for value '" + value
                                           + "', expected date format is '" + control + "'");
+        }
     }
 }

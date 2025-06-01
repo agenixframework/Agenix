@@ -102,8 +102,10 @@ public class DefaultHeaderValidator : IHeaderValidator
                 }
 
                 if (!receivedValueString.Equals(expectedValue))
+                {
                     throw new ValidationException(
                         $"Values not equal for header element '{headerName}', expected '{expectedValue}' but was '{receivedValue}'");
+                }
             }
             else if (!string.IsNullOrWhiteSpace(expectedValue))
             {
@@ -191,12 +193,16 @@ public class DefaultHeaderValidator : IHeaderValidator
                          let validated = ValidateExpected(headerName, context, receivedValueString, expectedValuesCopy)
                          where !validated
                          select receivedValueString)
+                {
                     throw new ValidationException(
                         $"Values not equal for header element '{headerName}', expected '{string.Join(", ", expectedValues)}' but was '{receivedValueString}'");
+                }
 
                 if (expectedValuesCopy.Any())
+                {
                     throw new ValidationException(
                         $"Values not equal for header element '{headerName}', expected '{string.Join(", ", expectedValues)}' but was '{string.Join(", ", receivedValues)}'");
+                }
             }
             else if (expectedValues.Any())
             {
@@ -256,7 +262,10 @@ public class DefaultHeaderValidator : IHeaderValidator
     private static bool IsMatcherValidation(string headerName, string receivedValueString,
         string expectedValue, TestContext context)
     {
-        if (!ValidationMatcherUtils.IsValidationMatcherExpression(expectedValue)) return false;
+        if (!ValidationMatcherUtils.IsValidationMatcherExpression(expectedValue))
+        {
+            return false;
+        }
 
         try
         {
@@ -294,7 +303,10 @@ public class DefaultHeaderValidator : IHeaderValidator
     /// </returns>
     private static List<string> ToList(object value)
     {
-        if (value == null) return [];
+        if (value == null)
+        {
+            return [];
+        }
 
         return value as List<string> ?? [value.ToString()];
     }
@@ -317,8 +329,12 @@ public class DefaultHeaderValidator : IHeaderValidator
         var validators = context.ReferenceResolver.ResolveAll<IHeaderValidator>();
 
         if (validators != null && validators.Count > 0)
+        {
             foreach (var validator in validators)
+            {
                 allValidators.TryAdd(validator.Key, validator.Value);
+            }
+        }
 
         return allValidators.Values
             .Where(validator => validator is not DefaultHeaderValidator)

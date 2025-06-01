@@ -69,13 +69,16 @@ public class HttpEndpointComponent : AbstractEndpointComponent
         {
             EndpointConfiguration =
             {
-                RequestUrl = Scheme + resourcePath + GetParameterString(parameters, typeof(HttpEndpointConfiguration))
+                RequestUrl = Scheme + resourcePath +
+                             GetParameterString(parameters, typeof(HttpEndpointConfiguration))
             }
         };
 
 
         if (parameters.Remove("requestMethod", out var value))
+        {
             client.EndpointConfiguration.RequestMethod = HttpMethod.Parse(value);
+        }
 
 
         EnrichEndpointConfiguration(

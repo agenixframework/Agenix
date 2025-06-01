@@ -85,10 +85,6 @@ public class ConfigurableResourceLoader : IResourceLoader
     /// </summary>
     public const string ProtocolSeparator = "://";
 
-    #region Fields
-
-    #endregion
-
     /// <summary>
     ///     Creates a new instance of the
     ///     <see cref="ConfigurableResourceLoader" /> class.
@@ -146,7 +142,9 @@ public class ConfigurableResourceLoader : IResourceLoader
 
         var handler = ResourceHandlerRegistry.GetResourceHandler(protocol);
         if (handler == null)
+        {
             throw new UriFormatException("Resource handler for the '" + protocol + "' protocol is not defined.");
+        }
 
         return (IResource)handler.Invoke([resourceName]);
     }
@@ -181,7 +179,11 @@ public class ConfigurableResourceLoader : IResourceLoader
     /// </returns>
     internal static string GetProtocol(string resourceName)
     {
-        if (resourceName == null) return null;
+        if (resourceName == null)
+        {
+            return null;
+        }
+
         var pos = resourceName.IndexOf(ProtocolSeparator, StringComparison.Ordinal);
         return pos == -1 ? null : resourceName[..pos];
     }

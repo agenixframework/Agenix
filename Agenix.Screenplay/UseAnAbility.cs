@@ -66,8 +66,11 @@ public class UseAnAbility
         var ability = _actor.GetAbilityThatExtends<T>();
 
         if (ability == null)
+        {
             throw new NoMatchingAbilityException(
                 $"{_actor} does not have an Ability that extends {typeof(T).Name}");
+        }
+
         return ability;
     }
 }

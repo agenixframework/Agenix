@@ -76,12 +76,21 @@ public interface ISchemaValidator<in T> where T : ISchemaValidationContext
         var resolvedSchemas =
             TypeResolver.ResolveAll<ISchemaValidator<T>>("", ITypeResolver.DEFAULT_TYPE_PROPERTY, "name");
 
-        foreach (var kvp in resolvedSchemas) resolvedSchemas[kvp.Key] = kvp.Value;
+        foreach (var kvp in resolvedSchemas)
+        {
+            resolvedSchemas[kvp.Key] = kvp.Value;
+        }
 
-        if (!Log.IsEnabled(LogLevel.Debug)) return resolvedSchemas;
+        if (!Log.IsEnabled(LogLevel.Debug))
+        {
+            return resolvedSchemas;
+        }
+
         {
             foreach (var kvp in resolvedSchemas)
+            {
                 Log.LogDebug($"Found schema validator '{kvp.Key}' as {kvp.Value.GetType()}");
+            }
         }
         return resolvedSchemas;
     }

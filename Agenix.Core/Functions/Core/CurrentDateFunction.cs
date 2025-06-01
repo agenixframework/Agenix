@@ -42,7 +42,10 @@ public class CurrentDateFunction : IFunction
 {
     public string Execute(List<string> parameterList, TestContext testContext)
     {
-        if (parameterList == null || parameterList.Count == 0) return GetDefaultCurrentDate();
+        if (parameterList == null || parameterList.Count == 0)
+        {
+            return GetDefaultCurrentDate();
+        }
 
         try
         {

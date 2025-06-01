@@ -59,7 +59,9 @@ public class Stage
     public Actor TheActorInTheSpotlight()
     {
         if (_actorInTheSpotlight == null)
+        {
             throw new ArgumentNullException(nameof(_actorInTheSpotlight), "No actor is currently in the spotlight");
+        }
 
         return _actorInTheSpotlight;
     }
