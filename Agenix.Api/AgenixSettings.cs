@@ -214,28 +214,39 @@ public sealed class AgenixSettings
         {
             var configPath = Path.Combine(assemblyLocation, $"{ApplicationPropertyFileProperty}{extension}");
             if (!File.Exists(configPath)) continue;
-            _activeFormat = format;
-            _activeConfigPath = configPath;
-            Log.LogInformation("Using configuration file: {ConfigPath}", configPath);
 
-            // Add the configuration file to the builder
-            addAction(configBuilder, configPath);
+            try
+            {
+                _activeFormat = format;
+                _activeConfigPath = configPath;
+                Log.LogInformation("Using configuration file: {ConfigPath}", configPath);
 
-            // Add Environment Variables as fallback
-            configBuilder.AddEnvironmentVariables();
+                // Add the configuration file to the builder
+                addAction(configBuilder, configPath);
 
-            // Build the configuration
-            _configuration = configBuilder.Build();
+                // Add Environment Variables as fallback
+                configBuilder.AddEnvironmentVariables();
 
-            // Load initial values into the ConfigurationManager if needed
-            LoadConfigurationIntoAppSettings();
+                // Build the configuration with duplicate key handling
+                _configuration = configBuilder.Build();
 
-            break;
+                // Load initial values into the ConfigurationManager if needed
+                LoadConfigurationIntoAppSettings();
+
+                break;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError(ex, "Failed to load configuration from {ConfigPath}, trying next format", configPath);
+                _activeFormat = ConfigurationFormat.NONE;
+                _activeConfigPath = null;
+                continue;
+            }
         }
 
         if (_activeFormat == ConfigurationFormat.NONE)
         {
-            Log.LogWarning("No configuration file found. Using environment variables only.");
+            Log.LogWarning("No configuration file found or all failed to load. Using environment variables only.");
             _configuration = new ConfigurationBuilder()
                 .AddEnvironmentVariables()
                 .Build();
@@ -254,13 +265,29 @@ public sealed class AgenixSettings
     {
         try
         {
+            var processedKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
             foreach (var kvp in _configuration.AsEnumerable()
                          .Where(x => !string.IsNullOrEmpty(x.Value)))
             {
+                // Skip duplicate keys to prevent FormatException
+                if (!processedKeys.Add(kvp.Key))
+                {
+                    Log.LogWarning("Duplicate configuration key '{Key}' found, skipping", kvp.Key);
+                    continue;
+                }
+
                 if (Log.IsEnabled(LogLevel.Trace))
                     Log.LogTrace("Loading configuration: {Key}={Value}", kvp.Key, kvp.Value);
 
-                SetProperty(kvp.Key, kvp.Value);
+                try
+                {
+                    SetProperty(kvp.Key, kvp.Value);
+                }
+                catch (Exception ex)
+                {
+                    Log.LogError(ex, "Failed to set property {Key}, skipping", kvp.Key);
+                }
             }
         }
         catch (Exception ex)
@@ -574,12 +601,48 @@ public sealed class AgenixSettings
     /// <returns>the set of mask keywords</returns>
     public static HashSet<string> GetLogMaskKeywords()
     {
-        return GetProperty(
-                LogMaskKeywordsProp,
-                LogMaskKeywordsDefault)
-            .Split(',')
-            .Select(keyword => keyword.Trim())
-            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+        try
+        {
+            var propertyValue = GetProperty(LogMaskKeywordsProp, LogMaskKeywordsDefault);
+
+            // Handle null or empty values gracefully
+            if (string.IsNullOrWhiteSpace(propertyValue))
+            {
+                return new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            }
+
+            // Create HashSet directly to avoid duplicate key issues
+            var hashSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+            var keywords = propertyValue
+                .Split(',')
+                .Select(keyword => keyword.Trim())
+                .Where(keyword => !string.IsNullOrWhiteSpace(keyword));
+
+            foreach (var keyword in keywords)
+            {
+                // HashSet.Add() handles duplicates naturally without throwing
+                hashSet.Add(keyword);
+            }
+
+            return hashSet;
+        }
+        catch (Exception ex)
+        {
+            Log.LogError(ex, "Error processing log mask keywords, using default values");
+
+            // Return a safe default set in case of any error
+            var defaultHashSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var keyword in LogMaskKeywordsDefault.Split(','))
+            {
+                var trimmedKeyword = keyword.Trim();
+                if (!string.IsNullOrWhiteSpace(trimmedKeyword))
+                {
+                    defaultHashSet.Add(trimmedKeyword);
+                }
+            }
+            return defaultHashSet;
+        }
     }
 
     /// <summary>
@@ -616,12 +679,20 @@ public sealed class AgenixSettings
 
     public static string GetProperty(string key, string defaultValue = "")
     {
-        var value = _configuration?[key] ??
-                    GetPropertyEnvOrDefault(key, ToEnvironmentVariableName(key), defaultValue);
+        try
+        {
+            var value = _configuration?[key] ??
+                        GetPropertyEnvOrDefault(key, ToEnvironmentVariableName(key), defaultValue);
 
-        if (Log.IsEnabled(LogLevel.Trace)) Log.LogTrace("Getting property {Key}={Value}", key, value);
+            if (Log.IsEnabled(LogLevel.Trace)) Log.LogTrace("Getting property {Key}={Value}", key, value);
 
-        return value;
+            return value;
+        }
+        catch (Exception ex)
+        {
+            Log.LogError(ex, "Error retrieving property {Key}, using default value {DefaultValue}", key, defaultValue);
+            return defaultValue;
+        }
     }
 
     /// <summary>

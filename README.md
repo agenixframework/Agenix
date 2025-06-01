@@ -12,7 +12,7 @@
   <!-- Badges -->
   <p>
     <a href="https://github.com/asuruceanu/Agenix/actions">
-      <img src="https://github.com/asuruceanu/Agenix/actions/workflows/dotnet.yml/badge.svg" alt="CI Status"/>
+      <img src="https://github.com/asuruceanu/Agenix/actions/workflows/dotnet-pr-check.yml/badge.svg" alt="CI Status"/>
     </a>
     <a href="https://www.nuget.org/packages/Agenix.Core/">
       <img src="https://img.shields.io/nuget/v/Agenix.Core.svg" alt="NuGet Version"/>

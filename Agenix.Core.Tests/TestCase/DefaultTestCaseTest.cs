@@ -136,7 +136,7 @@ public class DefaultTestCaseTest : AbstractNUnitSetUp
         var exception = Assert.Throws(typeof(TestCaseFailedException), () => { _fixture.Finish(Context); });
 
         Debug.Assert(exception != null, nameof(exception) + " != null");
-        Assert.That(exception.Message, Is.EqualTo("Failed to wait for test container to finish properly"));
+        Assert.That(exception.Message, Is.EqualTo("Failed to wait for the test container to finish properly - timeout exceeded"));
     }
 
     [Test]
