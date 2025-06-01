@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class DefaultMessageBuilder </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class DefaultMessageBuilder ">
+    
+    <meta name="description" content="Default message builder delegates to given message header builders and message payload builder.. Implements IMessageBuilder, IWithPayloadBuilder, IWithHeaderBuilder, and INamed interfaces.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder">
+
+
+
+  <h1 id="Agenix_Core_Validation_Builder_DefaultMessageBuilder" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder" class="text-break">Class DefaultMessageBuilder</h1>
+  <div class="markdown level0 summary"><p>Default message builder delegates to given message header builders and message payload builder..
+Implements IMessageBuilder, IWithPayloadBuilder, IWithHeaderBuilder, and INamed interfaces.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">DefaultMessageBuilder</span></div>
+      <div class="level2"><a class="xref" href="Agenix.Core.Message.Builder.StaticMessageBuilder.html">StaticMessageBuilder</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.Message.IMessageBuilder.html">IMessageBuilder</a></div>
+    <div><a class="xref" href="Agenix.Api.Message.IWithPayloadBuilder.html">IWithPayloadBuilder</a></div>
+    <div><a class="xref" href="Agenix.Api.Message.IWithHeaderBuilder.html">IWithHeaderBuilder</a></div>
+    <div><a class="xref" href="Agenix.Api.Common.INamed.html">INamed</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Core.html">Core</a>.<a class="xref" href="Agenix.Core.Validation.html">Validation</a>.<a class="xref" href="Agenix.Core.Validation.Builder.html">Builder</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Core.dll</h6>
+  <h5 id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class DefaultMessageBuilder : IMessageBuilder, IWithPayloadBuilder, IWithHeaderBuilder, INamed</code></pre>
+  </div>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_Builder_DefaultMessageBuilder_AddHeaderBuilder_Agenix_Api_Message_IMessageHeaderBuilder_.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.Builder.DefaultMessageBuilder.AddHeaderBuilder(Agenix.Api.Message.IMessageHeaderBuilder)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Builder/DefaultMessageBuilder.cs/#L88">View Source</a>
+  </span>
+  <a id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_AddHeaderBuilder_" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder.AddHeaderBuilder*"></a>
+  <h4 id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_AddHeaderBuilder_Agenix_Api_Message_IMessageHeaderBuilder_" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder.AddHeaderBuilder(Agenix.Api.Message.IMessageHeaderBuilder)">AddHeaderBuilder(IMessageHeaderBuilder)</h4>
+  <div class="markdown level1 summary"><p>Add message header builder.
+@param builder</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddHeaderBuilder(IMessageHeaderBuilder builder)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessageHeaderBuilder.html">IMessageHeaderBuilder</a></td>
+        <td><span class="parametername">builder</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_Builder_DefaultMessageBuilder_Build_Agenix_Api_Context_TestContext_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.Builder.DefaultMessageBuilder.Build(Agenix.Api.Context.TestContext%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Builder/DefaultMessageBuilder.cs/#L55">View Source</a>
+  </span>
+  <a id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_Build_" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder.Build*"></a>
+  <h4 id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_Build_Agenix_Api_Context_TestContext_System_String_" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder.Build(Agenix.Api.Context.TestContext,System.String)">Build(TestContext, string)</h4>
+  <div class="markdown level1 summary"><p>Builds the message based on the provided test context and message type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual IMessage Build(TestContext context, string messageType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The test context that contains various variables and settings needed to build the message.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">messageType</span></td>
+        <td><p>The type of the message being built.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></td>
+        <td><p>The constructed message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_Builder_DefaultMessageBuilder_BuildMessageHeaderData_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.Builder.DefaultMessageBuilder.BuildMessageHeaderData(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Builder/DefaultMessageBuilder.cs/#L166">View Source</a>
+  </span>
+  <a id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_BuildMessageHeaderData_" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder.BuildMessageHeaderData*"></a>
+  <h4 id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_BuildMessageHeaderData_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder.BuildMessageHeaderData(Agenix.Api.Context.TestContext)">BuildMessageHeaderData(TestContext)</h4>
+  <div class="markdown level1 summary"><p>Builds the message header data based on the provided test context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual List&lt;string&gt; BuildMessageHeaderData(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The test context that contains various variables and settings needed to build the header data.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><p>A list of header data strings built from the provided context.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_Builder_DefaultMessageBuilder_BuildMessageHeaders_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.Builder.DefaultMessageBuilder.BuildMessageHeaders(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Builder/DefaultMessageBuilder.cs/#L133">View Source</a>
+  </span>
+  <a id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_BuildMessageHeaders_" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder.BuildMessageHeaders*"></a>
+  <h4 id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_BuildMessageHeaders_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder.BuildMessageHeaders(Agenix.Api.Context.TestContext)">BuildMessageHeaders(TestContext)</h4>
+  <div class="markdown level1 summary"><p>Builds the message headers based on the provided test context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Dictionary&lt;string, object&gt; BuildMessageHeaders(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The test context containing necessary variables and settings for building the headers.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td><p>The constructed dictionary of message headers with their corresponding values.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_Builder_DefaultMessageBuilder_BuildMessagePayload_Agenix_Api_Context_TestContext_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.Builder.DefaultMessageBuilder.BuildMessagePayload(Agenix.Api.Context.TestContext%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Builder/DefaultMessageBuilder.cs/#L114">View Source</a>
+  </span>
+  <a id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_BuildMessagePayload_" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder.BuildMessagePayload*"></a>
+  <h4 id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_BuildMessagePayload_Agenix_Api_Context_TestContext_System_String_" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder.BuildMessagePayload(Agenix.Api.Context.TestContext,System.String)">BuildMessagePayload(TestContext, string)</h4>
+  <div class="markdown level1 summary"><p>Builds the message payload based on the provided test context and message type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual object BuildMessagePayload(TestContext context, string messageType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The test context that contains various variables and settings needed to build the payload.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">messageType</span></td>
+        <td><p>The type of the message for which the payload is being built.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><p>The built message payload. If no payload builder is set, an empty string is returned.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_Builder_DefaultMessageBuilder_GetHeaderBuilders.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.Builder.DefaultMessageBuilder.GetHeaderBuilders%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Builder/DefaultMessageBuilder.cs/#L93">View Source</a>
+  </span>
+  <a id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_GetHeaderBuilders_" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder.GetHeaderBuilders*"></a>
+  <h4 id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_GetHeaderBuilders" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder.GetHeaderBuilders">GetHeaderBuilders()</h4>
+  <div class="markdown level1 summary"><p>Gets the list of header builders.
+@return</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;IMessageHeaderBuilder&gt; GetHeaderBuilders()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Api.Message.IMessageHeaderBuilder.html">IMessageHeaderBuilder</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_Builder_DefaultMessageBuilder_GetName.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.Builder.DefaultMessageBuilder.GetName%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Builder/DefaultMessageBuilder.cs/#L177">View Source</a>
+  </span>
+  <a id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_GetName_" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder.GetName*"></a>
+  <h4 id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_GetName" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder.GetName">GetName()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetName()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_Builder_DefaultMessageBuilder_GetPayloadBuilder.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.Builder.DefaultMessageBuilder.GetPayloadBuilder%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Builder/DefaultMessageBuilder.cs/#L103">View Source</a>
+  </span>
+  <a id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_GetPayloadBuilder_" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder.GetPayloadBuilder*"></a>
+  <h4 id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_GetPayloadBuilder" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder.GetPayloadBuilder">GetPayloadBuilder()</h4>
+  <div class="markdown level1 summary"><p>Gets the message payload builder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IMessagePayloadBuilder GetPayloadBuilder()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessagePayloadBuilder.html">IMessagePayloadBuilder</a></td>
+        <td><p>The current message payload builder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_Builder_DefaultMessageBuilder_SetName_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.Builder.DefaultMessageBuilder.SetName(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Builder/DefaultMessageBuilder.cs/#L83">View Source</a>
+  </span>
+  <a id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_SetName_" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder.SetName*"></a>
+  <h4 id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_SetName_System_String_" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder.SetName(System.String)">SetName(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the name of the component.
+@param name The name to be assigned to the component.
+/</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetName(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_Builder_DefaultMessageBuilder_SetPayloadBuilder_Agenix_Api_Message_IMessagePayloadBuilder_.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.Builder.DefaultMessageBuilder.SetPayloadBuilder(Agenix.Api.Message.IMessagePayloadBuilder)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Builder/DefaultMessageBuilder.cs/#L98">View Source</a>
+  </span>
+  <a id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_SetPayloadBuilder_" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder.SetPayloadBuilder*"></a>
+  <h4 id="Agenix_Core_Validation_Builder_DefaultMessageBuilder_SetPayloadBuilder_Agenix_Api_Message_IMessagePayloadBuilder_" data-uid="Agenix.Core.Validation.Builder.DefaultMessageBuilder.SetPayloadBuilder(Agenix.Api.Message.IMessagePayloadBuilder)">SetPayloadBuilder(IMessagePayloadBuilder)</h4>
+  <div class="markdown level1 summary"><p>Sets the payload builder for the message.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetPayloadBuilder(IMessagePayloadBuilder builder)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessagePayloadBuilder.html">IMessagePayloadBuilder</a></td>
+        <td><span class="parametername">builder</span></td>
+        <td><p>The message payload builder to be set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.Message.IMessageBuilder.html">IMessageBuilder</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Message.IWithPayloadBuilder.html">IWithPayloadBuilder</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Message.IWithHeaderBuilder.html">IWithHeaderBuilder</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.INamed.html">INamed</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_Builder_DefaultMessageBuilder.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.Builder.DefaultMessageBuilder%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Builder/DefaultMessageBuilder.cs/#L42" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

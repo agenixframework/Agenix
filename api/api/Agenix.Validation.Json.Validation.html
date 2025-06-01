@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Namespace Agenix.Validation.Json.Validation </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Namespace Agenix.Validation.Json.Validation ">
+    
+    
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Validation.Json.Validation">
+
+  <h1 id="Agenix_Validation_Json_Validation" data-uid="Agenix.Validation.Json.Validation" class="text-break">Namespace Agenix.Validation.Json.Validation</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">
+Classes
+</h3>
+      <h4><a class="xref" href="Agenix.Validation.Json.Validation.JTokenConversionHelper.html">JTokenConversionHelper</a></h4>
+      <section><p>Provides helper methods for converting JTokens to dynamic objects.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Json.Validation.JsonElementValidator.html">JsonElementValidator</a></h4>
+      <section><p>JsonElementValidator is responsible for validating JSON elements against expected structures and values.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Json.Validation.JsonElementValidator.DefaultProvider.html">JsonElementValidator.DefaultProvider</a></h4>
+      <section><p>DefaultProvider implements the IProvider interface and is responsible for providing instances of
+JsonElementValidator
+based on given configuration parameters.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Json.Validation.JsonElementValidatorItem-1.html">JsonElementValidatorItem&lt;T&gt;</a></h4>
+      <section><p>Wraps all needed data to validate an actual json with an expected json-template.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Json.Validation.JsonPathFunctions.html">JsonPathFunctions</a></h4>
+      <section><p>Custom JsonPath function support for size(), keySet() and toString() operations on Json objects and arrays.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Json.Validation.JsonPathMessageProcessor.html">JsonPathMessageProcessor</a></h4>
+      <section><p>A processor that handles messages based on JSONPath expressions.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Json.Validation.JsonPathMessageProcessor.Builder.html">JsonPathMessageProcessor.Builder</a></h4>
+      <section><p>The Builder class for constructing instances of the JsonPathMessageProcessor.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Json.Validation.JsonPathMessageValidator.html">JsonPathMessageValidator</a></h4>
+      <section><p>Message validator evaluates a set of JSONPath expressions on the message payload and checks that values are as
+expected.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.html">JsonPathVariableExtractor</a></h4>
+      <section><p>Extractor implementation reads message elements via JSONPath expressions and saves the
+values as new test variables. JObject and JArray items will be saved as string representation.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder.html">JsonPathVariableExtractor.Builder</a></h4>
+      <section><p>Fluent builder.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Json.Validation.JsonTextMessageValidator.html">JsonTextMessageValidator</a></h4>
+      <section><p>This message validator implementation is able to validate two JSON text objects. The order of JSON entries can
+differ as specified in JSON protocol. Tester defines an expected control JSON text with optional ignored entries.
+JSONArray as well as nested JSONObjects are supported, too.
+Validator offers two different modes to operate. By default, strict mode is set and the validator will also check
+the exact number of control object fields to match. No additional fields in the received JSON data structure will
+be
+accepted. In soft mode validator allows additional fields in received JSON data structure, so the control JSON
+object can be a partial subset.</p>
+</section>
+    <h3 id="interfaces">
+Interfaces
+</h3>
+      <h4><a class="xref" href="Agenix.Validation.Json.Validation.IProvider.html">IProvider</a></h4>
+      <section><p>Defines a provider interface for creating instances of JsonElementValidator.</p>
+</section>
+
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

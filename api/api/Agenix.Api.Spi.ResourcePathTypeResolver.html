@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class ResourcePathTypeResolver </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class ResourcePathTypeResolver ">
+    
+    <meta name="description" content="Provides functionality for resolving resource paths into types and properties using a predefined or custom resource base path. This class is specifically designed to interpret resource paths and map them to corresponding types or properties as needed.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver">
+
+
+
+  <h1 id="Agenix_Api_Spi_ResourcePathTypeResolver" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver" class="text-break">Class ResourcePathTypeResolver</h1>
+  <div class="markdown level0 summary"><p>Provides functionality for resolving resource paths into types and properties using a predefined
+or custom resource base path. This class is specifically designed to interpret resource paths
+and map them to corresponding types or properties as needed.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">ResourcePathTypeResolver</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.Spi.ITypeResolver.html">ITypeResolver</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Api.html">Api</a>.<a class="xref" href="Agenix.Api.Spi.html">Spi</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Api.dll</h6>
+  <h5 id="Agenix_Api_Spi_ResourcePathTypeResolver_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ResourcePathTypeResolver : ITypeResolver</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Spi_ResourcePathTypeResolver__ctor.md&amp;value=---%0Auid%3A%20Agenix.Api.Spi.ResourcePathTypeResolver.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Spi/ResourcePathTypeResolver.cs/#L64">View Source</a>
+  </span>
+  <a id="Agenix_Api_Spi_ResourcePathTypeResolver__ctor_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.#ctor*"></a>
+  <h4 id="Agenix_Api_Spi_ResourcePathTypeResolver__ctor" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.#ctor">ResourcePathTypeResolver()</h4>
+  <div class="markdown level1 summary"><p>Default constructor using an Extension resource base path.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResourcePathTypeResolver()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Spi_ResourcePathTypeResolver__ctor_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Spi.ResourcePathTypeResolver.%23ctor(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Spi/ResourcePathTypeResolver.cs/#L71">View Source</a>
+  </span>
+  <a id="Agenix_Api_Spi_ResourcePathTypeResolver__ctor_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.#ctor*"></a>
+  <h4 id="Agenix_Api_Spi_ResourcePathTypeResolver__ctor_System_String_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.#ctor(System.String)">ResourcePathTypeResolver(string)</h4>
+  <div class="markdown level1 summary"><p>Default constructor initializes with given resource path.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResourcePathTypeResolver(string resourceBasePath)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">resourceBasePath</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Spi_ResourcePathTypeResolver_ResourceBasePath.md&amp;value=---%0Auid%3A%20Agenix.Api.Spi.ResourcePathTypeResolver.ResourceBasePath%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Spi/ResourcePathTypeResolver.cs/#L81">View Source</a>
+  </span>
+  <a id="Agenix_Api_Spi_ResourcePathTypeResolver_ResourceBasePath_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.ResourceBasePath*"></a>
+  <h4 id="Agenix_Api_Spi_ResourcePathTypeResolver_ResourceBasePath" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.ResourceBasePath">ResourceBasePath</h4>
+  <div class="markdown level1 summary"><p>Base path for resources.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ResourceBasePath { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Spi_ResourcePathTypeResolver_ConvertToAgenixResourceUri_System_Reflection_Assembly_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Spi.ResourcePathTypeResolver.ConvertToAgenixResourceUri(System.Reflection.Assembly%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Spi/ResourcePathTypeResolver.cs/#L288">View Source</a>
+  </span>
+  <a id="Agenix_Api_Spi_ResourcePathTypeResolver_ConvertToAgenixResourceUri_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.ConvertToAgenixResourceUri*"></a>
+  <h4 id="Agenix_Api_Spi_ResourcePathTypeResolver_ConvertToAgenixResourceUri_System_Reflection_Assembly_System_String_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.ConvertToAgenixResourceUri(System.Reflection.Assembly,System.String)">ConvertToAgenixResourceUri(Assembly, string)</h4>
+  <div class="markdown level1 summary"><p>Converts a manifest resource name to Agenix AssemblyResource URI format</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ConvertToAgenixResourceUri(Assembly assembly, string resourceName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.assembly">Assembly</a></td>
+        <td><span class="parametername">assembly</span></td>
+        <td><p>The assembly containing the resource</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">resourceName</span></td>
+        <td><p>The full resource name</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>Agenix compatible resource URI</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Spi_ResourcePathTypeResolver_FindAllMatchingResources_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Spi.ResourcePathTypeResolver.FindAllMatchingResources(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Spi/ResourcePathTypeResolver.cs/#L213">View Source</a>
+  </span>
+  <a id="Agenix_Api_Spi_ResourcePathTypeResolver_FindAllMatchingResources_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.FindAllMatchingResources*"></a>
+  <h4 id="Agenix_Api_Spi_ResourcePathTypeResolver_FindAllMatchingResources_System_String_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.FindAllMatchingResources(System.String)">FindAllMatchingResources(string)</h4>
+  <div class="markdown level1 summary"><p>Finds all manifest resources across loaded assemblies that match a specified path pattern.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Dictionary&lt;Assembly, List&lt;string&gt;&gt; FindAllMatchingResources(string searchPattern)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">searchPattern</span></td>
+        <td><p>Pattern to search for in resource names (e.g., &quot;Extension.mocks.foo&quot;)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.assembly">Assembly</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</td>
+        <td><p>Dictionary of matching resources grouped by assembly</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Spi_ResourcePathTypeResolver_LoadAllMatchingProperties_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Spi.ResourcePathTypeResolver.LoadAllMatchingProperties(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Spi/ResourcePathTypeResolver.cs/#L310">View Source</a>
+  </span>
+  <a id="Agenix_Api_Spi_ResourcePathTypeResolver_LoadAllMatchingProperties_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.LoadAllMatchingProperties*"></a>
+  <h4 id="Agenix_Api_Spi_ResourcePathTypeResolver_LoadAllMatchingProperties_System_String_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.LoadAllMatchingProperties(System.String)">LoadAllMatchingProperties(string)</h4>
+  <div class="markdown level1 summary"><p>Gets all properties from matching resources across all loaded assemblies</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Dictionary&lt;string, Properties&gt; LoadAllMatchingProperties(string searchPattern)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">searchPattern</span></td>
+        <td><p>Pattern to search for in resource names</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Agenix.Api.Util.Properties.html">Properties</a>&gt;</td>
+        <td><p>Dictionary of property collections by resource URI</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Spi_ResourcePathTypeResolver_ResolveAll__1.md&amp;value=---%0Auid%3A%20Agenix.Api.Spi.ResourcePathTypeResolver.ResolveAll%60%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Spi/ResourcePathTypeResolver.cs/#L395">View Source</a>
+  </span>
+  <a id="Agenix_Api_Spi_ResourcePathTypeResolver_ResolveAll_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.ResolveAll*"></a>
+  <h4 id="Agenix_Api_Spi_ResourcePathTypeResolver_ResolveAll__1" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.ResolveAll``1">ResolveAll&lt;T&gt;()</h4>
+  <div class="markdown level1 summary"><p>Load all resources and create new instance of given type. The type information is read by
+the given property in the resource file. The keys in the resulting map represent the resource file names.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, T&gt; ResolveAll&lt;T&gt;()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Spi_ResourcePathTypeResolver_ResolveAll__1_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Spi.ResourcePathTypeResolver.ResolveAll%60%601(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Spi/ResourcePathTypeResolver.cs/#L408">View Source</a>
+  </span>
+  <a id="Agenix_Api_Spi_ResourcePathTypeResolver_ResolveAll_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.ResolveAll*"></a>
+  <h4 id="Agenix_Api_Spi_ResourcePathTypeResolver_ResolveAll__1_System_String_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.ResolveAll``1(System.String)">ResolveAll&lt;T&gt;(string)</h4>
+  <div class="markdown level1 summary"><p>Load all resources in a given resource path and create new instance of a given type. The given property reads the
+type information
+in the resource file. The keys in the resulting map represent the resource file names.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, T&gt; ResolveAll&lt;T&gt;(string resourcePath)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">resourcePath</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Spi_ResourcePathTypeResolver_ResolveAll__1_System_String_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Spi.ResourcePathTypeResolver.ResolveAll%60%601(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Spi/ResourcePathTypeResolver.cs/#L422">View Source</a>
+  </span>
+  <a id="Agenix_Api_Spi_ResourcePathTypeResolver_ResolveAll_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.ResolveAll*"></a>
+  <h4 id="Agenix_Api_Spi_ResourcePathTypeResolver_ResolveAll__1_System_String_System_String_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.ResolveAll``1(System.String,System.String)">ResolveAll&lt;T&gt;(string, string)</h4>
+  <div class="markdown level1 summary"><p>Load all resources in a given resource path and create new instance of a given type. The given property reads the
+type information
+in the resource file. The keys in the resulting map represent the resource file names.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, T&gt; ResolveAll&lt;T&gt;(string resourcePath, string property)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">resourcePath</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">property</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Spi_ResourcePathTypeResolver_ResolveAll__1_System_String_System_String_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Spi.ResourcePathTypeResolver.ResolveAll%60%601(System.String%2CSystem.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Spi/ResourcePathTypeResolver.cs/#L124">View Source</a>
+  </span>
+  <a id="Agenix_Api_Spi_ResourcePathTypeResolver_ResolveAll_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.ResolveAll*"></a>
+  <h4 id="Agenix_Api_Spi_ResourcePathTypeResolver_ResolveAll__1_System_String_System_String_System_String_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.ResolveAll``1(System.String,System.String,System.String)">ResolveAll&lt;T&gt;(string, string, string)</h4>
+  <div class="markdown level1 summary"><p>Resolves all resources specified by the given parameters into a dictionary.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, T&gt; ResolveAll&lt;T&gt;(string resourcePath, string property, string keyProperty)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">resourcePath</span></td>
+        <td><p>The path to the resource containing mappings.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">property</span></td>
+        <td><p>The property indicating the type information for the resources.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">keyProperty</span></td>
+        <td><p>The property used as a key for identifying resources in the dictionary.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, T&gt;</td>
+        <td><p>A dictionary containing resource keys mapped to resolved instances of type <code class="typeparamref">T</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type of instances to resolve from the resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Spi_ResourcePathTypeResolver_ResolveProperty_System_String_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Spi.ResourcePathTypeResolver.ResolveProperty(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Spi/ResourcePathTypeResolver.cs/#L89">View Source</a>
+  </span>
+  <a id="Agenix_Api_Spi_ResourcePathTypeResolver_ResolveProperty_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.ResolveProperty*"></a>
+  <h4 id="Agenix_Api_Spi_ResourcePathTypeResolver_ResolveProperty_System_String_System_String_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.ResolveProperty(System.String,System.String)">ResolveProperty(string, string)</h4>
+  <div class="markdown level1 summary"><p>Resolves the value of a specific property from the given resource path.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ResolveProperty(string resourcePath, string property)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">resourcePath</span></td>
+        <td><p>The path to the resource containing the properties.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">property</span></td>
+        <td><p>The name of the property to resolve.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The value of the specified property as a string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Spi_ResourcePathTypeResolver_Resolve__1_System_String_System_Object___.md&amp;value=---%0Auid%3A%20Agenix.Api.Spi.ResourcePathTypeResolver.Resolve%60%601(System.String%2CSystem.Object%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Spi/ResourcePathTypeResolver.cs/#L150">View Source</a>
+  </span>
+  <a id="Agenix_Api_Spi_ResourcePathTypeResolver_Resolve_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.Resolve*"></a>
+  <h4 id="Agenix_Api_Spi_ResourcePathTypeResolver_Resolve__1_System_String_System_Object___" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.Resolve``1(System.String,System.Object[])">Resolve&lt;T&gt;(string, params object[])</h4>
+  <div class="markdown level1 summary"><p>Load default type information from given resource path property file and create new instance of given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T Resolve&lt;T&gt;(string resourcePath, params object[] initargs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">resourcePath</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</td>
+        <td><span class="parametername">initargs</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Spi_ResourcePathTypeResolver_Resolve__1_System_String_System_String_System_Object___.md&amp;value=---%0Auid%3A%20Agenix.Api.Spi.ResourcePathTypeResolver.Resolve%60%601(System.String%2CSystem.String%2CSystem.Object%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Spi/ResourcePathTypeResolver.cs/#L102">View Source</a>
+  </span>
+  <a id="Agenix_Api_Spi_ResourcePathTypeResolver_Resolve_" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.Resolve*"></a>
+  <h4 id="Agenix_Api_Spi_ResourcePathTypeResolver_Resolve__1_System_String_System_String_System_Object___" data-uid="Agenix.Api.Spi.ResourcePathTypeResolver.Resolve``1(System.String,System.String,System.Object[])">Resolve&lt;T&gt;(string, string, params object[])</h4>
+  <div class="markdown level1 summary"><p>Resolves a type using the specified resource path and property, with optional initialization arguments.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T Resolve&lt;T&gt;(string resourcePath, string property, params object[] initargs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">resourcePath</span></td>
+        <td><p>The path of the resource containing the type definition.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">property</span></td>
+        <td><p>The property name used to resolve the type.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</td>
+        <td><span class="parametername">initargs</span></td>
+        <td><p>Optional initialization arguments for the resolved type.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><p>An instance of the resolved type <code class="typeparamref">T</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type to be resolved.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.Spi.ITypeResolver.html">ITypeResolver</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Spi_ResourcePathTypeResolver.md&amp;value=---%0Auid%3A%20Agenix.Api.Spi.ResourcePathTypeResolver%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Spi/ResourcePathTypeResolver.cs/#L43" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

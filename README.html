@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>&#129514; Agenix Test Automation Framework </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="&#129514; Agenix Test Automation Framework ">
+    
+    
+      <link rel="shortcut icon" href="favicon.ico">
+      <link rel="stylesheet" href="styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="styles/docfx.css">
+      <link rel="stylesheet" href="styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+<div align="center">
+<!-- Logo -->
+  <img src=".assets/logos/agenix-logo-social.png" alt="Agenix Framework Logo" width="1280">
+  <!-- Title -->
+  <h1>🧪 Agenix Test Automation Framework</h1>
+  <!-- Tagline -->
+  <p><strong>Test the Pieces.Verify the Whole.</strong></p>
+  <p><em>Intelligent integration testing framework for modern applications</em></p>
+  <!-- Badges -->
+  <p>
+    <a href="https://github.com/asuruceanu/Agenix/actions">
+      <img src="https://github.com/asuruceanu/Agenix/actions/workflows/dotnet-pr-check.yml/badge.svg" alt="CI Status">
+    </a>
+    <a href="https://www.nuget.org/packages/Agenix.Core/">
+      <img src="https://img.shields.io/nuget/v/Agenix.Core.svg" alt="NuGet Version">
+    </a>
+    <a href="https://github.com/asuruceanu/agenix/blob/master/LICENSE">
+      <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License">
+    </a>
+  </p>
+</div>
+<p><strong>Agenix</strong> is a comprehensive test automation framework built with <strong>C# .NET 8.0</strong> that enables the creation of fully automated end-to-end use case tests for enterprise SOA applications. Designed with modern testing patterns and practices, Agenix provides a robust foundation for testing complex distributed systems, APIs, databases, and user workflows.</p>
+<h2 id="key-features">Key Features</h2>
+<ul>
+<li><strong>🎭 Screenplay Pattern</strong>: Actor-based testing with fluent, readable test scenarios using Tasks, Questions, and Abilities</li>
+<li><strong>🌐 Multi-Protocol Support</strong>: Built-in support for HTTP/REST APIs, SQL databases, and web services</li>
+<li><strong>🔧 Framework Integration</strong>: Seamless integration with NUnit and Reqnroll (SpecFlow successor) for BDD testing</li>
+<li><strong>✅ Rich Validation</strong>: Comprehensive validation capabilities for JSON, text, binary data, and custom formats</li>
+<li><strong>🏗️ Modular Architecture</strong>: Clean separation of concerns with extensible, plugin-based design</li>
+<li><strong>📊 Advanced Reporting</strong>: Detailed test execution reports with contextual information</li>
+<li><strong>🔄 Enterprise Ready</strong>: Built for complex SOA environments with session management and context handling</li>
+</ul>
+<h2 id="what-makes-agenix-different">What Makes Agenix Different</h2>
+<p>Unlike traditional testing frameworks, Agenix focuses on <strong>business-readable test automation</strong> that bridges the gap between technical implementation and business requirements. The framework's Screenplay pattern allows you to write tests that read like natural language while maintaining the full power of programmatic test automation.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#module-overview">Module overview</a></li>
+<li><a href="#development-guidelines">Development Guidelines</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+<h2 id="overview">Overview</h2>
+<p>Agenix.ATF is a comprehensive test framework built on .NET 8.0, designed to provide robust testing capabilities with modern testing patterns and practices.</p>
+<h3 id="technologies-used">Technologies Used</h3>
+<ul>
+<li><strong>.NET 8.0</strong> - Target framework</li>
+<li><strong>C# 12.0</strong> - Programming language</li>
+<li><strong>NUnit 3.x-4.x</strong> - Testing framework</li>
+<li><strong>NSubstitute</strong> - Mocking library</li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Before you begin, ensure you have the following installed:</p>
+<ul>
+<li><a href="https://dotnet.microsoft.com/download/dotnet/8.0">.NET 8.0 SDK</a> or later</li>
+<li><a href="https://www.jetbrains.com/rider/">JetBrains Rider</a> (recommended) or Visual Studio 2022+</li>
+<li>Git for version control</li>
+</ul>
+<h2 id="getting-started">Getting Started</h2>
+<h3 id="1-clone-the-repository">1. Clone the Repository</h3>
+<pre><code class="lang-bash">git clone &lt;repository-url&gt;
+cd Agenix.ATF
+</code></pre>
+<h2 id="module-overview">Module Overview</h2>
+<h3 id="-core-framework-modules">🏗️ Core Framework Modules</h3>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Description</th>
+<th>Key Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Agenix.Api</strong></td>
+<td>Core interfaces and contracts for the testing framework</td>
+<td>• API definitions<br>• Interface contracts<br>• Common types<br>• Exception definitions</td>
+</tr>
+<tr>
+<td><strong>Agenix.Core</strong></td>
+<td>Main implementation of the framework logic</td>
+<td>• Test execution engine<br>• Context management<br>• Action builders<br>• Session handling</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-protocol--communication-modules">🌐 Protocol &amp; Communication Modules</h3>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Description</th>
+<th>Key Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Agenix.Http</strong></td>
+<td>HTTP client testing capabilities and utilities</td>
+<td>• HTTP request/response handling<br>• REST API testing<br>• Web service integration<br>• HTTP validation</td>
+</tr>
+<tr>
+<td><strong>Agenix.Sql</strong></td>
+<td>Database testing and SQL execution utilities</td>
+<td>• Database connectivity<br>• SQL query execution<br>• Data validation<br>• Transaction management</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-testing-pattern-implementations">🎭 Testing Pattern Implementations</h3>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Description</th>
+<th>Key Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Agenix.Screenplay</strong></td>
+<td>Screenplay pattern implementation for readable tests</td>
+<td>• Actor-based testing<br>• Task and Question abstractions<br>• Ability pattern<br>• Fluent test scenarios</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-framework-integration-modules">🔌 Framework Integration Modules</h3>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Description</th>
+<th>Key Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Agenix.NUnit.Runtime</strong></td>
+<td>NUnit test framework integration</td>
+<td>• NUnit test execution<br>• Custom attributes<br>• Test lifecycle management<br>• Result reporting</td>
+</tr>
+<tr>
+<td><strong>Agenix.ReqnrollPlugin</strong></td>
+<td>Reqnroll (SpecFlow successor) BDD integration</td>
+<td>• Gherkin syntax support<br>• Step definitions<br>• Feature file parsing<br>• BDD test execution</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-validation--assertion-modules">✅ Validation &amp; Assertion Modules</h3>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Description</th>
+<th>Key Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Agenix.Validation.Binary</strong></td>
+<td>Binary file and data validation</td>
+<td>• Binary file comparison<br>• Byte array validation<br>• File format verification<br>• Checksum validation</td>
+</tr>
+<tr>
+<td><strong>Agenix.Validation.Json</strong></td>
+<td>JSON schema and content validation</td>
+<td>• JSON schema validation<br>• Content comparison<br>• Path-based assertions<br>• Structure verification</td>
+</tr>
+<tr>
+<td><strong>Agenix.Validation.NHamcrest</strong></td>
+<td>Hamcrest-style matcher library</td>
+<td>• Fluent assertion syntax<br>• Custom matchers<br>• Readable error messages<br>• Composable assertions</td>
+</tr>
+<tr>
+<td><strong>Agenix.Validation.Text</strong></td>
+<td>Text content and format validation</td>
+<td>• String comparison<br>• Pattern matching<br>• Format validation<br>• Text transformation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-test-project-modules">🧪 Test Project Modules</h3>
+<table>
+<thead>
+<tr>
+<th>Test Project</th>
+<th>Purpose</th>
+<th>Test Types</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Agenix.Core.NUnitTestProject</strong></td>
+<td>Core framework functionality testing</td>
+<td>• Unit tests<br>• Integration tests<br>• Framework behavior validation</td>
+</tr>
+<tr>
+<td><strong>Agenix.Screenplay.Tests</strong></td>
+<td>Screenplay pattern feature validation</td>
+<td>• Actor behavior tests<br>• Task execution tests<br>• Question answering tests</td>
+</tr>
+<tr>
+<td><strong>Agenix.ReqnrollPlugin.Tests</strong></td>
+<td>BDD plugin functionality testing</td>
+<td>• Step definition tests<br>• Feature parsing tests<br>• Plugin integration tests</td>
+</tr>
+<tr>
+<td><strong>Agenix.Validation.Binary.Tests</strong></td>
+<td>Binary validation module testing</td>
+<td>• Binary comparison tests<br>• File validation tests</td>
+</tr>
+<tr>
+<td><strong>Agenix.Validation.Json.Tests</strong></td>
+<td>JSON validation module testing</td>
+<td>• Schema validation tests<br>• JSON comparison tests</td>
+</tr>
+<tr>
+<td><strong>Agenix.Validation.NHamcrest.Tests</strong></td>
+<td>Hamcrest matcher testing</td>
+<td>• Matcher behavior tests<br>• Assertion tests</td>
+</tr>
+<tr>
+<td><strong>Agenix.Validation.Text.Tests</strong></td>
+<td>Text validation module testing</td>
+<td>• Text comparison tests<br>• Pattern matching tests</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-configuration--support-files">📋 Configuration &amp; Support Files</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Purpose</th>
+<th>Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Solution Configuration</strong></td>
+<td>Project organization and build settings</td>
+<td>• Multi-project solution<br>• Shared build configuration<br>• Dependency management</td>
+</tr>
+<tr>
+<td><strong>IDE Settings</strong></td>
+<td>Development environment standardization</td>
+<td>• Code style enforcement<br>• License header automation<br>• Shared formatting rules</td>
+</tr>
+<tr>
+<td><strong>Templates</strong></td>
+<td>Code generation and standardization</td>
+<td>• License header templates<br>• File templates<br>• Coding standards</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-framework-capabilities">🎯 Framework Capabilities</h3>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>Supported Modules</th>
+<th>Use Cases</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>API Testing</strong></td>
+<td>Http, Core, Validation.Json</td>
+<td>REST API validation, HTTP workflows</td>
+</tr>
+<tr>
+<td><strong>Database Testing</strong></td>
+<td>Sql, Core, Validation.Text</td>
+<td>Data validation, SQL execution</td>
+</tr>
+<tr>
+<td><strong>BDD Testing</strong></td>
+<td>ReqnrollPlugin, Screenplay</td>
+<td>Behavior-driven development</td>
+</tr>
+<tr>
+<td><strong>Unit Testing</strong></td>
+<td>NUnit.Runtime, Core</td>
+<td>Component testing, mocking</td>
+</tr>
+<tr>
+<td><strong>Integration Testing</strong></td>
+<td>All modules</td>
+<td>End-to-end workflows</td>
+</tr>
+<tr>
+<td><strong>Data Validation</strong></td>
+<td>All Validation.* modules</td>
+<td>Content verification, format checking</td>
+</tr>
+</tbody>
+</table>
+<h2 id="development-guidelines">Development Guidelines</h2>
+<h3 id="-prerequisites">🛠️ Prerequisites</h3>
+<ul>
+<li><strong>.NET 8.0 SDK</strong> or later</li>
+<li><strong>JetBrains Rider</strong> or <strong>Visual Studio 2022</strong> (recommended IDEs)</li>
+<li><strong>Git</strong> for version control</li>
+<li><strong>NuGet</strong> package manager</li>
+</ul>
+<h3 id="-coding-standards">📝 Coding Standards</h3>
+<h4 id="naming-conventions"><strong>Naming Conventions</strong></h4>
+<ul>
+<li><strong>Classes</strong>: PascalCase (<code>CustomerService</code>, <code>HttpRequestBuilder</code>)</li>
+<li><strong>Methods</strong>: PascalCase (<code>PerformAs</code>, <code>AnsweredBy</code>)</li>
+<li><strong>Properties</strong>: PascalCase (<code>Name</code>, <code>RequestUrl</code>)</li>
+<li><strong>Fields</strong>: camelCase with underscore prefix for private (<code>_httpClient</code>, <code>_connectionString</code>)</li>
+<li><strong>Constants</strong>: PascalCase (<code>MaxRetryCount</code>, <code>DefaultTimeout</code>)</li>
+<li><strong>Interfaces</strong>: PascalCase with 'I' prefix (<code>IPerformable</code>, <code>IQuestion&lt;T&gt;</code>)</li>
+</ul>
+<h4 id="code-style"><strong>Code Style</strong></h4>
+<ul>
+<li><strong>File scoped namespaces</strong> for new files</li>
+<li><strong>Primary constructors</strong> where appropriate (C# 12 feature)</li>
+<li><strong>Expression-bodied members</strong> for simple implementations</li>
+<li><strong>Nullable reference types</strong> enabled</li>
+<li><strong>XML documentation</strong> for public APIs</li>
+</ul>
+<h3 id="-testing-guidelines">🧪 Testing Guidelines</h3>
+<h4 id="test-structure"><strong>Test Structure</strong></h4>
+<ul>
+<li><strong>Arrange-Act-Assert</strong> pattern for unit tests</li>
+<li><strong>Given-When-Then</strong> structure for BDD scenarios</li>
+<li><strong>Descriptive test names</strong> that explain the scenario</li>
+</ul>
+<h4 id="test-categories"><strong>Test Categories</strong></h4>
+<ul>
+<li><strong>Unit Tests</strong>: Fast, isolated, test single components</li>
+<li><strong>Integration Tests</strong>: Test component interactions</li>
+<li><strong>Acceptance Tests</strong>: End-to-end business scenarios using Screenplay pattern</li>
+</ul>
+<h3 id="-development-workflow">🔧 Development Workflow</h3>
+<h4 id="branch-strategy"><strong>Branch Strategy</strong></h4>
+<ol>
+<li><strong>main</strong>: Production-ready code</li>
+<li><strong>develop</strong>: Integration branch for features</li>
+<li><strong>feature/</strong>: Individual feature development</li>
+<li><strong>bugfix/</strong>: Bug fixes</li>
+<li><strong>release/</strong>: Release preparation</li>
+</ol>
+<h4 id="commit-guidelines"><strong>Commit Guidelines</strong></h4>
+<ul>
+<li>Use <strong>conventional commits</strong> format:
+<pre><code>type(scope): description
+
+feat(screenplay): add question chaining support
+fix(http): resolve timeout issue in HttpClient
+docs(readme): update installation instructions
+test(validation): add binary comparison tests
+</code></pre>
+</li>
+</ul>
+<h3 id="-dependencies">📦 Dependencies</h3>
+<h4 id="core-dependencies"><strong>Core Dependencies</strong></h4>
+<ul>
+<li><strong>NUnit 4.x</strong>: Primary testing framework</li>
+<li><strong>NSubstitute/Moq</strong>: Mocking library</li>
+<li><strong>Newtonsoft.Json</strong>: JSON processing</li>
+<li><strong>System.Net.Http</strong>: HTTP client operations</li>
+</ul>
+<h4 id="adding-new-dependencies"><strong>Adding New Dependencies</strong></h4>
+<ol>
+<li>Evaluate necessity and alternatives</li>
+<li>Check license compatibility</li>
+<li>Add to appropriate project only</li>
+<li>Update documentation</li>
+</ol>
+<h3 id="-building-and-testing">🚀 Building and Testing</h3>
+<h4 id="local-development"><strong>Local Development</strong></h4>
+<pre><code class="lang-console"># Restore packages
+dotnet restore
+
+# Build solution
+dotnet build
+
+# Run all tests
+dotnet test
+
+# Run specific test project
+dotnet test Agenix.Screenplay.Tests
+</code></pre>
+<h4 id="ide-configuration"><strong>IDE Configuration</strong></h4>
+<ul>
+<li><strong>EditorConfig</strong> settings are enforced</li>
+<li><strong>ReSharper/Rider</strong> settings in <code>.sln.DotSettings</code></li>
+<li><strong>License headers</strong> automatically applied using templates</li>
+</ul>
+<h3 id="-pull-request-guidelines">📋 Pull Request Guidelines</h3>
+<h4 id="before-submitting"><strong>Before Submitting</strong></h4>
+<ul>
+<li>[ ] All tests pass locally</li>
+<li>[ ] Code follows established conventions</li>
+<li>[ ] XML documentation added for public APIs</li>
+<li>[ ] License headers present in new files</li>
+<li>[ ] Breaking changes documented</li>
+</ul>
+<h4 id="pr-description-should-include"><strong>PR Description Should Include</strong></h4>
+<ul>
+<li><strong>What</strong>: Brief description of changes</li>
+<li><strong>Why</strong>: Reason for the change</li>
+<li><strong>How</strong>: Technical approach used</li>
+<li><strong>Testing</strong>: How the change was tested</li>
+<li><strong>Breaking Changes</strong>: Any breaking changes</li>
+</ul>
+<h3 id="-issue-reporting">🐛 Issue Reporting</h3>
+<p>When reporting issues, please include:</p>
+<ul>
+<li><strong>Framework version</strong></li>
+<li><strong>Target framework</strong> (.NET version)</li>
+<li><strong>Minimal reproduction case</strong></li>
+<li><strong>Expected vs actual behavior</strong></li>
+<li><strong>Environment details</strong> (OS, IDE, etc.)</li>
+</ul>
+<h3 id="-security-considerations">🔒 Security Considerations</h3>
+<ul>
+<li><strong>No hardcoded credentials</strong> in code or tests</li>
+<li><strong>Sensitive data</strong> should use configuration or environment variables</li>
+<li><strong>Dependencies</strong> regularly updated for security patches</li>
+<li><strong>Test data</strong> should not contain real customer information</li>
+</ul>
+<h2 id="license">License</h2>
+<p>MIT License</p>
+<p>Copyright (c) 2025 Agenix</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</p>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/README.md/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

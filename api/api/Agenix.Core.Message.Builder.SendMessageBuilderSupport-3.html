@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class SendMessageBuilderSupport&lt;T, TB, TS&gt; </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class SendMessageBuilderSupport&lt;T, TB, TS&gt; ">
+    
+    <meta name="description" content="Supports the construction of SendMessageAction instances by providing additional methods for configuring specific settings such as fork mode and message processors.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3">
+
+
+
+  <h1 id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3" class="text-break">Class SendMessageBuilderSupport&lt;T, TB, TS&gt;</h1>
+  <div class="markdown level0 summary"><p>Supports the construction of SendMessageAction instances by providing additional methods
+for configuring specific settings such as fork mode and message processors.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html">MessageBuilderSupport</a>&lt;T, TB, TS&gt;</div>
+    <div class="level2"><span class="xref">SendMessageBuilderSupport&lt;T, TB, TS&gt;</span></div>
+      <div class="level3"><a class="xref" href="Agenix.Core.Actions.SendMessageAction.SendMessageActionBuilderSupport.html">SendMessageAction.SendMessageActionBuilderSupport</a></div>
+      <div class="level3"><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.HttpMessageBuilderSupport.html">HttpClientRequestActionBuilder.HttpMessageBuilderSupport</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder</a>&lt;T&gt;</div>
+    <div><a class="xref" href="Agenix.Api.Spi.IReferenceResolverAware.html">IReferenceResolverAware</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3__delegate">MessageBuilderSupport&lt;T, TB, TS&gt;._delegate</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3__self">MessageBuilderSupport&lt;T, TB, TS&gt;._self</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3__messageBuilder">MessageBuilderSupport&lt;T, TB, TS&gt;._messageBuilder</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3__messageType">MessageBuilderSupport&lt;T, TB, TS&gt;._messageType</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_SetReferenceResolver_Agenix_Api_Spi_IReferenceResolver_">MessageBuilderSupport&lt;T, TB, TS&gt;.SetReferenceResolver(IReferenceResolver)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Build">MessageBuilderSupport&lt;T, TB, TS&gt;.Build()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_From_Agenix_Api_Message_IMessageBuilder_">MessageBuilderSupport&lt;T, TB, TS&gt;.From(IMessageBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_From_Agenix_Api_Message_IMessage_">MessageBuilderSupport&lt;T, TB, TS&gt;.From(IMessage)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Type_System_String_">MessageBuilderSupport&lt;T, TB, TS&gt;.Type(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Type_Agenix_Api_Message_MessageType_">MessageBuilderSupport&lt;T, TB, TS&gt;.Type(MessageType)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_Agenix_Api_Message_MessagePayloadBuilder_">MessageBuilderSupport&lt;T, TB, TS&gt;.Body(MessagePayloadBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_Agenix_Api_Message_IMessagePayloadBuilder_">MessageBuilderSupport&lt;T, TB, TS&gt;.Body(IMessagePayloadBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_System_String_">MessageBuilderSupport&lt;T, TB, TS&gt;.Body(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_Agenix_Api_IO_IResource_">MessageBuilderSupport&lt;T, TB, TS&gt;.Body(IResource)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_Agenix_Api_IO_IResource_System_Text_Encoding_">MessageBuilderSupport&lt;T, TB, TS&gt;.Body(IResource, Encoding)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_System_String_System_Object_">MessageBuilderSupport&lt;T, TB, TS&gt;.Header(string, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Headers_System_Collections_Generic_Dictionary_System_String_System_Object__">MessageBuilderSupport&lt;T, TB, TS&gt;.Headers(Dictionary&lt;string, object&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_Agenix_Api_IO_IResource_">MessageBuilderSupport&lt;T, TB, TS&gt;.Header(IResource)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_Agenix_Api_IO_IResource_System_Text_Encoding_">MessageBuilderSupport&lt;T, TB, TS&gt;.Header(IResource, Encoding)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_Agenix_Api_Message_IMessageHeaderDataBuilder_">MessageBuilderSupport&lt;T, TB, TS&gt;.Header(IMessageHeaderDataBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_Agenix_Api_Message_MessageHeaderDataBuilder_">MessageBuilderSupport&lt;T, TB, TS&gt;.Header(MessageHeaderDataBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_System_String_">MessageBuilderSupport&lt;T, TB, TS&gt;.Header(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Name_System_String_">MessageBuilderSupport&lt;T, TB, TS&gt;.Name(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Process_Agenix_Api_Message_IMessageProcessor_">MessageBuilderSupport&lt;T, TB, TS&gt;.Process(IMessageProcessor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Process__1_Agenix_Api_Message_IMessageProcessor_IBuilder_Agenix_Api_Message_IMessageProcessor___0__">MessageBuilderSupport&lt;T, TB, TS&gt;.Process&lt;B&gt;(IMessageProcessor.IBuilder&lt;IMessageProcessor, B&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Process_Agenix_Api_Message_IMessageProcessorAdapter_">MessageBuilderSupport&lt;T, TB, TS&gt;.Process(IMessageProcessorAdapter)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Extract_Agenix_Api_Variable_IVariableExtractor_">MessageBuilderSupport&lt;T, TB, TS&gt;.Extract(IVariableExtractor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Extract_Agenix_Api_Message_IVariableExtractorAdapter_">MessageBuilderSupport&lt;T, TB, TS&gt;.Extract(IVariableExtractorAdapter)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Extract__1_Agenix_Api_Variable_IVariableExtractor_IBuilder_Agenix_Api_Variable_IVariableExtractor___0__">MessageBuilderSupport&lt;T, TB, TS&gt;.Extract&lt;B&gt;(IVariableExtractor.IBuilder&lt;IVariableExtractor, B&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_WithReferenceResolver_Agenix_Api_Spi_IReferenceResolver_">MessageBuilderSupport&lt;T, TB, TS&gt;.WithReferenceResolver(IReferenceResolver)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_GetMessageBuilder">MessageBuilderSupport&lt;T, TB, TS&gt;.GetMessageBuilder()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_GetMessageType">MessageBuilderSupport&lt;T, TB, TS&gt;.GetMessageType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Core.html">Core</a>.<a class="xref" href="Agenix.Core.Message.html">Message</a>.<a class="xref" href="Agenix.Core.Message.Builder.html">Builder</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Core.dll</h6>
+  <h5 id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class SendMessageBuilderSupport&lt;T, TB, TS&gt; : MessageBuilderSupport&lt;T, TB, TS&gt;, ITestActionBuilder&lt;T&gt;, IReferenceResolverAware where T : SendMessageAction where TB : SendMessageAction.SendMessageActionBuilder&lt;T, TS, TB&gt; where TS : SendMessageBuilderSupport&lt;T, TB, TS&gt;</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>Type of SendMessageAction.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TB</span></td>
+        <td><p>Type of SendMessageActionBuilder for building SendMessageAction.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TS</span></td>
+        <td><p>Type of the derived SendMessageBuilderSupport.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_SendMessageBuilderSupport_3__ctor__1_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.SendMessageBuilderSupport%603.%23ctor(%601)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/SendMessageBuilderSupport.cs/#L39">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3__ctor_" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3.#ctor*"></a>
+  <h4 id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3__ctor__1_" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3.#ctor(`1)">SendMessageBuilderSupport(TB)</h4>
+  <div class="markdown level1 summary"><p>Supports the construction of SendMessageAction instances by providing additional methods
+for configuring specific settings such as fork mode and message processors.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SendMessageBuilderSupport(TB dlg)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td><span class="parametername">dlg</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_SendMessageBuilderSupport_3__schema.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.SendMessageBuilderSupport%603._schema%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/SendMessageBuilderSupport.cs/#L44">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3__schema" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3._schema">_schema</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected string _schema</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_SendMessageBuilderSupport_3__schemaRepository.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.SendMessageBuilderSupport%603._schemaRepository%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/SendMessageBuilderSupport.cs/#L45">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3__schemaRepository" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3._schemaRepository">_schemaRepository</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected string _schemaRepository</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_SendMessageBuilderSupport_3__schemaValidation.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.SendMessageBuilderSupport%603._schemaValidation%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/SendMessageBuilderSupport.cs/#L46">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3__schemaValidation" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3._schemaValidation">_schemaValidation</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected bool _schemaValidation</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_GetSchema.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.SendMessageBuilderSupport%603.GetSchema%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/SendMessageBuilderSupport.cs/#L51">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_GetSchema_" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3.GetSchema*"></a>
+  <h4 id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_GetSchema" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3.GetSchema">GetSchema</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetSchema { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_GetSchemaRepository.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.SendMessageBuilderSupport%603.GetSchemaRepository%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/SendMessageBuilderSupport.cs/#L57">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_GetSchemaRepository_" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3.GetSchemaRepository*"></a>
+  <h4 id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_GetSchemaRepository" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3.GetSchemaRepository">GetSchemaRepository</h4>
+  <div class="markdown level1 summary"><p>Retrieves the schema repository associated with the send message action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetSchemaRepository { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>A string representing the schema repository.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_Fork_System_Boolean_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.SendMessageBuilderSupport%603.Fork(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/SendMessageBuilderSupport.cs/#L64">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_Fork_" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3.Fork*"></a>
+  <h4 id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_Fork_System_Boolean_" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3.Fork(System.Boolean)">Fork(bool)</h4>
+  <div class="markdown level1 summary"><p>Sets the fork mode for this send message builder support.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Fork(bool forkMode)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">forkMode</span></td>
+        <td><p>Specifies whether the fork mode should be enabled or disabled.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The instance of the send message builder supports with the updated fork mode.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_IsSchemaValidation.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.SendMessageBuilderSupport%603.IsSchemaValidation%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/SendMessageBuilderSupport.cs/#L106">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_IsSchemaValidation_" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3.IsSchemaValidation*"></a>
+  <h4 id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_IsSchemaValidation" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3.IsSchemaValidation">IsSchemaValidation()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the current state of the schema validation flag.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsSchemaValidation()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>A boolean value indicating whether schema validation is enabled.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_Schema_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.SendMessageBuilderSupport%603.Schema(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/SendMessageBuilderSupport.cs/#L116">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_Schema_" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3.Schema*"></a>
+  <h4 id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_Schema_System_String_" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3.Schema(System.String)">Schema(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the schema instance name to be used for schema validation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Schema(string schemaName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">schemaName</span></td>
+        <td><p>The name of the schema instance to use for validation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The instance of the send message builder support with the specified schema applied.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_SchemaRepository_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.SendMessageBuilderSupport%603.SchemaRepository(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/SendMessageBuilderSupport.cs/#L127">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_SchemaRepository_" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3.SchemaRepository*"></a>
+  <h4 id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_SchemaRepository_System_String_" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3.SchemaRepository(System.String)">SchemaRepository(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the schema repository to be used for validation during message processing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS SchemaRepository(string schemaRepository)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">schemaRepository</span></td>
+        <td><p>The identifier or instance of the schema repository to use.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The current instance of the send message builder support with the specified schema repository.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_SchemaValidation_System_Boolean_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.SendMessageBuilderSupport%603.SchemaValidation(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/SendMessageBuilderSupport.cs/#L96">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_SchemaValidation_" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3.SchemaValidation*"></a>
+  <h4 id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_SchemaValidation_System_Boolean_" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3.SchemaValidation(System.Boolean)">SchemaValidation(bool)</h4>
+  <div class="markdown level1 summary"><p>Enables or disables schema validation for the message.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS SchemaValidation(bool enabled)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">enabled</span></td>
+        <td><p>Specifies whether schema validation should be enabled or disabled.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The instance of the sent message builder supports with the updated schema validation setting.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_Transform_Agenix_Api_Message_IMessageProcessor_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.SendMessageBuilderSupport%603.Transform(Agenix.Api.Message.IMessageProcessor)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/SendMessageBuilderSupport.cs/#L75">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_Transform_" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3.Transform*"></a>
+  <h4 id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_Transform_Agenix_Api_Message_IMessageProcessor_" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3.Transform(Agenix.Api.Message.IMessageProcessor)">Transform(IMessageProcessor)</h4>
+  <div class="markdown level1 summary"><p>Adds message processor on the message to be sent.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Transform(IMessageProcessor processor)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessageProcessor.html">IMessageProcessor</a></td>
+        <td><span class="parametername">processor</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The modified send message action builder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_Transform__1_Agenix_Api_Message_IMessageProcessor_IBuilder_Agenix_Api_Message_IMessageProcessor___0__.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.SendMessageBuilderSupport%603.Transform%60%601(Agenix.Api.Message.IMessageProcessor.IBuilder%7BAgenix.Api.Message.IMessageProcessor%2C%60%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/SendMessageBuilderSupport.cs/#L85">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_Transform_" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3.Transform*"></a>
+  <h4 id="Agenix_Core_Message_Builder_SendMessageBuilderSupport_3_Transform__1_Agenix_Api_Message_IMessageProcessor_IBuilder_Agenix_Api_Message_IMessageProcessor___0__" data-uid="Agenix.Core.Message.Builder.SendMessageBuilderSupport`3.Transform``1(Agenix.Api.Message.IMessageProcessor.IBuilder{Agenix.Api.Message.IMessageProcessor,``0})">Transform&lt;B&gt;(IBuilder&lt;IMessageProcessor, B&gt;)</h4>
+  <div class="markdown level1 summary"><p>Applies the specified message processor to transform the send message action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Transform&lt;B&gt;(IMessageProcessor.IBuilder&lt;IMessageProcessor, B&gt; builder) where B : IMessageProcessor.IBuilder&lt;IMessageProcessor, B&gt;</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessageProcessor.html">IMessageProcessor</a>.<a class="xref" href="Agenix.Api.Message.IMessageProcessor.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Message.IMessageProcessor.html">IMessageProcessor</a>, B&gt;</td>
+        <td><span class="parametername">builder</span></td>
+        <td><p>The message processor to apply.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The instance of the sent message builder supports with the applied transformation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">B</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Spi.IReferenceResolverAware.html">IReferenceResolverAware</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_SendMessageBuilderSupport_3.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.SendMessageBuilderSupport%603%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/SendMessageBuilderSupport.cs/#L39" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

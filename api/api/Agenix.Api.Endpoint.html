@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Namespace Agenix.Api.Endpoint </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Namespace Agenix.Api.Endpoint ">
+    
+    
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Api.Endpoint">
+
+  <h1 id="Agenix_Api_Endpoint" data-uid="Agenix.Api.Endpoint" class="text-break">Namespace Agenix.Api.Endpoint</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">
+Classes
+</h3>
+      <h4><a class="xref" href="Agenix.Api.Endpoint.DefaultEndpointFactory.html">DefaultEndpointFactory</a></h4>
+      <section><p>Default endpoint factory implementation uses registered endpoint components in Spring application context to create
+endpoint from given endpoint uri. If the endpoint bean name is given, factory directly creates from the application
+context.
+If endpoint uri is given factory tries to find proper endpoint component in application context and in default
+endpoint component configuration. Default endpoint components are listed in property file reference where key is
+the component name and value is the fully qualified class name of the implementing endpoint component class.</p>
+</section>
+    <h3 id="interfaces">
+Interfaces
+</h3>
+      <h4><a class="xref" href="Agenix.Api.Endpoint.IEndpoint.html">IEndpoint</a></h4>
+      <section><p>Represents an endpoint for messaging processes that includes configurations,
+and provides capabilities to produce and consume messages.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Endpoint.IEndpointBuilder-1.html">IEndpointBuilder&lt;T&gt;</a></h4>
+      <section><p>Defines the contract for an endpoint builder that includes methods to build and manage endpoints.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Endpoint.IEndpointComponent.html">IEndpointComponent</a></h4>
+      <section><p>Endpoint component registers with bean name in Spring application context and is then responsible to create proper
+endpoints dynamically from endpoint uri values. Creates an endpoint instance by parsing the dynamic endpoint uri
+with
+special properties and parameters. Creates a proper endpoint configuration instance on the fly.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Endpoint.IEndpointConfiguration.html">IEndpointConfiguration</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Endpoint.IEndpointFactory.html">IEndpointFactory</a></h4>
+      <section><p>Endpoint factory tries to get an endpoint instance by parsing an endpoint uri. Uri can have parameters that get
+passed
+to the endpoint configuration. If Spring application context is given searches for matching endpoint component bean
+and delegates to a component for endpoint creation.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Endpoint.IPollableEndpointConfiguration.html">IPollableEndpointConfiguration</a></h4>
+      <section><p>Extends endpoint configuration by adding polling interval settings.</p>
+</section>
+
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

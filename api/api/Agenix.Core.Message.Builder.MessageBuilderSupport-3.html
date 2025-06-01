@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class MessageBuilderSupport&lt;T, TB, TS&gt; </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class MessageBuilderSupport&lt;T, TB, TS&gt; ">
+    
+    
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3">
+
+
+
+  <h1 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3" class="text-break">Class MessageBuilderSupport&lt;T, TB, TS&gt;</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">MessageBuilderSupport&lt;T, TB, TS&gt;</span></div>
+      <div class="level2"><a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html">ReceiveMessageBuilderSupport&lt;T, TB, TS&gt;</a></div>
+      <div class="level2"><a class="xref" href="Agenix.Core.Message.Builder.SendMessageBuilderSupport-3.html">SendMessageBuilderSupport&lt;T, TB, TS&gt;</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder</a>&lt;T&gt;</div>
+    <div><a class="xref" href="Agenix.Api.Spi.IReferenceResolverAware.html">IReferenceResolverAware</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Core.html">Core</a>.<a class="xref" href="Agenix.Core.Message.html">Message</a>.<a class="xref" href="Agenix.Core.Message.Builder.html">Builder</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Core.dll</h6>
+  <h5 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class MessageBuilderSupport&lt;T, TB, TS&gt; : ITestActionBuilder&lt;T&gt;, IReferenceResolverAware where T : ITestAction where TB : MessageActionBuilder&lt;T, TS, TB&gt; where TS : MessageBuilderSupport&lt;T, TB, TS&gt;</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TB</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TS</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3__ctor__1_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.%23ctor(%601)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L36">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3__ctor_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.#ctor*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3__ctor__1_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.#ctor(`1)">MessageBuilderSupport(TB)</h4>
+  <div class="markdown level1 summary"><p>Provides base support for building messages, tying together
+various components of the message construction process.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected MessageBuilderSupport(TB dlg)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td><span class="parametername">dlg</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3__delegate.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603._delegate%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L21">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3__delegate" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3._delegate">_delegate</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly TB _delegate</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3__messageBuilder.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603._messageBuilder%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L25">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3__messageBuilder" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3._messageBuilder">_messageBuilder</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected IMessageBuilder _messageBuilder</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessageBuilder.html">IMessageBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3__messageType.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603._messageType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L27">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3__messageType" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3._messageType">_messageType</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected string _messageType</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3__self.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603._self%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L23">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3__self" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3._self">_self</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly TS _self</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_Agenix_Api_IO_IResource_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Body(Agenix.Api.IO.IResource)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L152">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Body*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_Agenix_Api_IO_IResource_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Body(Agenix.Api.IO.IResource)">Body(IResource)</h4>
+  <div class="markdown level1 summary"><p>Sets the body of the message using the content from the specified resource.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Body(IResource payloadResource)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a></td>
+        <td><span class="parametername">payloadResource</span></td>
+        <td><p>The resource containing the payload.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The instance of the message builder support with the updated body.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_Agenix_Api_IO_IResource_System_Text_Encoding_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Body(Agenix.Api.IO.IResource%2CSystem.Text.Encoding)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L164">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Body*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_Agenix_Api_IO_IResource_System_Text_Encoding_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Body(Agenix.Api.IO.IResource,System.Text.Encoding)">Body(IResource, Encoding)</h4>
+  <div class="markdown level1 summary"><p>Sets the body of the message using the provided payload resource and character encoding.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Body(IResource payloadResource, Encoding charset)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a></td>
+        <td><span class="parametername">payloadResource</span></td>
+        <td><p>The resource containing the payload data.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.encoding">Encoding</a></td>
+        <td><span class="parametername">charset</span></td>
+        <td><p>The character encoding used to read the payload.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The builder instance with the updated payload.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Exceptions.AgenixSystemException.html">AgenixSystemException</a></td>
+        <td><p>Thrown if there is an error reading the payload resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_Agenix_Api_Message_IMessagePayloadBuilder_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Body(Agenix.Api.Message.IMessagePayloadBuilder)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L125">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Body*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_Agenix_Api_Message_IMessagePayloadBuilder_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Body(Agenix.Api.Message.IMessagePayloadBuilder)">Body(IMessagePayloadBuilder)</h4>
+  <div class="markdown level1 summary"><p>Associates a payload builder with the current message builder, enabling custom payload construction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Body(IMessagePayloadBuilder payloadBuilder)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessagePayloadBuilder.html">IMessagePayloadBuilder</a></td>
+        <td><span class="parametername">payloadBuilder</span></td>
+        <td><p>An instance of <a class="xref" href="Agenix.Api.Message.IMessagePayloadBuilder.html">IMessagePayloadBuilder</a> used to build the message payload.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The updated instance of <code class="typeparamref">TS</code> to allow method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Exceptions.AgenixSystemException.html">AgenixSystemException</a></td>
+        <td><p>Thrown if the message builder does not support setting a payload builder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_Agenix_Api_Message_MessagePayloadBuilder_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Body(Agenix.Api.Message.MessagePayloadBuilder)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L113">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Body*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_Agenix_Api_Message_MessagePayloadBuilder_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Body(Agenix.Api.Message.MessagePayloadBuilder)">Body(MessagePayloadBuilder)</h4>
+  <div class="markdown level1 summary"><p>Sets the body of the message using the provided message payload builder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Body(MessagePayloadBuilder messagePayloadBuilder)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.MessagePayloadBuilder.html">MessagePayloadBuilder</a></td>
+        <td><span class="parametername">messagePayloadBuilder</span></td>
+        <td><p>The payload builder to use for constructing the message body.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The current instance of the message builder support class with the body set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Body(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L141">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Body*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_System_String_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Body(System.String)">Body(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the payload of the message to the specified string value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual TS Body(string payload)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">payload</span></td>
+        <td><p>The string payload to be set for the message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The updated instance of <code class="typeparamref">TS</code> to allow method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Exceptions.AgenixSystemException.html">AgenixSystemException</a></td>
+        <td><p>Thrown if the message builder does not support setting a payload.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Build.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Build%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L57">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Build_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Build*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Build" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Build">Build()</h4>
+  <div class="markdown level1 summary"><p>Completes the building process and constructs the final test action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T Build()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><p>The constructed test action of type T.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Extract_Agenix_Api_Message_IVariableExtractorAdapter_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Extract(Agenix.Api.Message.IVariableExtractorAdapter)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L353">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Extract_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Extract*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Extract_Agenix_Api_Message_IVariableExtractorAdapter_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Extract(Agenix.Api.Message.IVariableExtractorAdapter)">Extract(IVariableExtractorAdapter)</h4>
+  <div class="markdown level1 summary"><p>Configures the current message builder to extract variables
+using the specified variable extractor adapter.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Extract(IVariableExtractorAdapter adapter)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IVariableExtractorAdapter.html">IVariableExtractorAdapter</a></td>
+        <td><span class="parametername">adapter</span></td>
+        <td><p>The adapter used to convert to a variable extractor.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The current message builder with the applied extraction settings.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Extract_Agenix_Api_Variable_IVariableExtractor_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Extract(Agenix.Api.Variable.IVariableExtractor)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L342">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Extract_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Extract*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Extract_Agenix_Api_Variable_IVariableExtractor_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Extract(Agenix.Api.Variable.IVariableExtractor)">Extract(IVariableExtractor)</h4>
+  <div class="markdown level1 summary"><p>Allows for embedding a variable extractor into the message processing pipeline.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Extract(IVariableExtractor extractor)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Variable.IVariableExtractor.html">IVariableExtractor</a></td>
+        <td><span class="parametername">extractor</span></td>
+        <td><p>The variable extractor to be used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The current instance of the message builder support for chaining purposes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Extract__1_Agenix_Api_Variable_IVariableExtractor_IBuilder_Agenix_Api_Variable_IVariableExtractor___0__.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Extract%60%601(Agenix.Api.Variable.IVariableExtractor.IBuilder%7BAgenix.Api.Variable.IVariableExtractor%2C%60%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L363">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Extract_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Extract*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Extract__1_Agenix_Api_Variable_IVariableExtractor_IBuilder_Agenix_Api_Variable_IVariableExtractor___0__" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Extract``1(Agenix.Api.Variable.IVariableExtractor.IBuilder{Agenix.Api.Variable.IVariableExtractor,``0})">Extract&lt;B&gt;(IBuilder&lt;IVariableExtractor, B&gt;)</h4>
+  <div class="markdown level1 summary"><p>Extracts variables using the provided variable extractor builder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Extract&lt;B&gt;(IVariableExtractor.IBuilder&lt;IVariableExtractor, B&gt; builder) where B : IVariableExtractor.IBuilder&lt;IVariableExtractor, B&gt;</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Variable.IVariableExtractor.html">IVariableExtractor</a>.<a class="xref" href="Agenix.Api.Variable.IVariableExtractor.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Variable.IVariableExtractor.html">IVariableExtractor</a>, B&gt;</td>
+        <td><span class="parametername">builder</span></td>
+        <td><p>The variable extractor builder used to build the variable extractor.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The current instance of the message builder support.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">B</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_From_Agenix_Api_Message_IMessage_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.From(Agenix.Api.Message.IMessage)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L78">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_From_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.From*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_From_Agenix_Api_Message_IMessage_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.From(Agenix.Api.Message.IMessage)">From(IMessage)</h4>
+  <div class="markdown level1 summary"><p>Assigns the provided control message to the internal message builder and sets the message type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual TS From(IMessage controlMessage)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></td>
+        <td><span class="parametername">controlMessage</span></td>
+        <td><p>The control message to assign.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>Returns an instance of the current builder support class.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_From_Agenix_Api_Message_IMessageBuilder_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.From(Agenix.Api.Message.IMessageBuilder)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L67">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_From_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.From*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_From_Agenix_Api_Message_IMessageBuilder_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.From(Agenix.Api.Message.IMessageBuilder)">From(IMessageBuilder)</h4>
+  <div class="markdown level1 summary"><p>Sets a custom message builder for the message construction process.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS From(IMessageBuilder messageBuilder)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessageBuilder.html">IMessageBuilder</a></td>
+        <td><span class="parametername">messageBuilder</span></td>
+        <td><p>The custom <a class="xref" href="Agenix.Api.Message.IMessageBuilder.html">IMessageBuilder</a> to use for building messages.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The current instance of the message builder support.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_GetMessageBuilder.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.GetMessageBuilder%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L384">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_GetMessageBuilder_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.GetMessageBuilder*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_GetMessageBuilder" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.GetMessageBuilder">GetMessageBuilder()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the current message builder used for constructing messages.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IMessageBuilder GetMessageBuilder()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessageBuilder.html">IMessageBuilder</a></td>
+        <td><p>The <a class="xref" href="Agenix.Api.Message.IMessageBuilder.html">IMessageBuilder</a> instance that is used for message building.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_GetMessageType.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.GetMessageType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L393">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_GetMessageType_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.GetMessageType*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_GetMessageType" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.GetMessageType">GetMessageType()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the message type that is currently set in the message builder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetMessageType()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The type of the message as a string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_Agenix_Api_IO_IResource_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Header(Agenix.Api.IO.IResource)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L217">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Header*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_Agenix_Api_IO_IResource_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Header(Agenix.Api.IO.IResource)">Header(IResource)</h4>
+  <div class="markdown level1 summary"><p>Adds headers to the message from the provided resource.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Header(IResource resource)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a></td>
+        <td><span class="parametername">resource</span></td>
+        <td><p>The resource containing the headers to be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>An instance of the message builder support class.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_Agenix_Api_IO_IResource_System_Text_Encoding_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Header(Agenix.Api.IO.IResource%2CSystem.Text.Encoding)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L231">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Header*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_Agenix_Api_IO_IResource_System_Text_Encoding_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Header(Agenix.Api.IO.IResource,System.Text.Encoding)">Header(IResource, Encoding)</h4>
+  <div class="markdown level1 summary"><p>Sets the header for the message using the data read from the specified resource and charset.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Header(IResource resource, Encoding charset)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a></td>
+        <td><span class="parametername">resource</span></td>
+        <td><p>The resource from which the header data is read.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.encoding">Encoding</a></td>
+        <td><span class="parametername">charset</span></td>
+        <td><p>The character encoding used to read the resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The current instance of the message builder support for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Exceptions.AgenixSystemException.html">AgenixSystemException</a></td>
+        <td><p>Thrown if the message builder does not support adding header builders or if reading the resource fails.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_Agenix_Api_Message_IMessageHeaderDataBuilder_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Header(Agenix.Api.Message.IMessageHeaderDataBuilder)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L255">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Header*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_Agenix_Api_Message_IMessageHeaderDataBuilder_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Header(Agenix.Api.Message.IMessageHeaderDataBuilder)">Header(IMessageHeaderDataBuilder)</h4>
+  <div class="markdown level1 summary"><p>Sets the header data for the message using the specified header data builder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Header(IMessageHeaderDataBuilder headerDataBuilder)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessageHeaderDataBuilder.html">IMessageHeaderDataBuilder</a></td>
+        <td><span class="parametername">headerDataBuilder</span></td>
+        <td><p>The builder to construct the header data.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The current instance of the message builder support.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_Agenix_Api_Message_MessageHeaderDataBuilder_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Header(Agenix.Api.Message.MessageHeaderDataBuilder)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L274">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Header*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_Agenix_Api_Message_MessageHeaderDataBuilder_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Header(Agenix.Api.Message.MessageHeaderDataBuilder)">Header(MessageHeaderDataBuilder)</h4>
+  <div class="markdown level1 summary"><p>Provides base support for building messages, tying together
+various components of the message construction process.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Header(MessageHeaderDataBuilder headerDataBuilder)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.MessageHeaderDataBuilder.html">MessageHeaderDataBuilder</a></td>
+        <td><span class="parametername">headerDataBuilder</span></td>
+        <td><p>The message header data builder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>Returns an instance of the derived message builder support</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Header(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L284">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Header*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_System_String_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Header(System.String)">Header(string)</h4>
+  <div class="markdown level1 summary"><p>Sets a header for the message using the provided string data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Header(string data)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">data</span></td>
+        <td><p>The header data to set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The current instance of the message builder support.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Header(System.String%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L185">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Header*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_System_String_System_Object_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Header(System.String,System.Object)">Header(string, object)</h4>
+  <div class="markdown level1 summary"><p>Adds a header to the message being built.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Header(string name, object value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the header to be added.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The value of the header to be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>An instance of the current message builder type.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Exceptions.AgenixSystemException.html">AgenixSystemException</a></td>
+        <td><p>Thrown when the message builder does not support adding headers.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Headers_System_Collections_Generic_Dictionary_System_String_System_Object__.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Headers(System.Collections.Generic.Dictionary%7BSystem.String%2CSystem.Object%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L202">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Headers_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Headers*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Headers_System_Collections_Generic_Dictionary_System_String_System_Object__" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Headers(System.Collections.Generic.Dictionary{System.String,System.Object})">Headers(Dictionary&lt;string, object&gt;)</h4>
+  <div class="markdown level1 summary"><p>Sets multiple headers for the message being built by the builder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Headers(Dictionary&lt;string, object&gt; headers)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td><span class="parametername">headers</span></td>
+        <td><p>A dictionary containing the header names and their corresponding values.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The current instance of the message builder support.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Exceptions.AgenixSystemException.html">AgenixSystemException</a></td>
+        <td><p>Thrown when the message builder type does not support adding headers.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Name_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Name(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L296">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Name_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Name*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Name_System_String_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Name(System.String)">Name(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the name of the message using the provided name string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual TS Name(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name to be set on the message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The current instance of the message builder support.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Exceptions.AgenixSystemException.html">AgenixSystemException</a></td>
+        <td><p>Thrown when the message builder does not support setting a name.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Process_Agenix_Api_Message_IMessageProcessor_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Process(Agenix.Api.Message.IMessageProcessor)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L310">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Process_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Process*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Process_Agenix_Api_Message_IMessageProcessor_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Process(Agenix.Api.Message.IMessageProcessor)">Process(IMessageProcessor)</h4>
+  <div class="markdown level1 summary"><p>Adds a processor to handle the message processing logic.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual TS Process(IMessageProcessor processor)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessageProcessor.html">IMessageProcessor</a></td>
+        <td><span class="parametername">processor</span></td>
+        <td><p>The processor responsible for handling the message processing.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The updated instance of the message builder support.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Process_Agenix_Api_Message_IMessageProcessorAdapter_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Process(Agenix.Api.Message.IMessageProcessorAdapter)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L332">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Process_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Process*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Process_Agenix_Api_Message_IMessageProcessorAdapter_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Process(Agenix.Api.Message.IMessageProcessorAdapter)">Process(IMessageProcessorAdapter)</h4>
+  <div class="markdown level1 summary"><p>Processes the specified message processor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Process(IMessageProcessorAdapter adapter)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessageProcessorAdapter.html">IMessageProcessorAdapter</a></td>
+        <td><span class="parametername">adapter</span></td>
+        <td><p>The message processor to process.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The current instance of TS to allow for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Process__1_Agenix_Api_Message_IMessageProcessor_IBuilder_Agenix_Api_Message_IMessageProcessor___0__.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Process%60%601(Agenix.Api.Message.IMessageProcessor.IBuilder%7BAgenix.Api.Message.IMessageProcessor%2C%60%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L321">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Process_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Process*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Process__1_Agenix_Api_Message_IMessageProcessor_IBuilder_Agenix_Api_Message_IMessageProcessor___0__" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Process``1(Agenix.Api.Message.IMessageProcessor.IBuilder{Agenix.Api.Message.IMessageProcessor,``0})">Process&lt;B&gt;(IBuilder&lt;IMessageProcessor, B&gt;)</h4>
+  <div class="markdown level1 summary"><p>Processes a message using the specified message processor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Process&lt;B&gt;(IMessageProcessor.IBuilder&lt;IMessageProcessor, B&gt; builder) where B : IMessageProcessor.IBuilder&lt;IMessageProcessor, B&gt;</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessageProcessor.html">IMessageProcessor</a>.<a class="xref" href="Agenix.Api.Message.IMessageProcessor.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Message.IMessageProcessor.html">IMessageProcessor</a>, B&gt;</td>
+        <td><span class="parametername">builder</span></td>
+        <td><p>The message processor to use for processing the message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>A reference to this instance with the processing applied.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">B</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_SetReferenceResolver_Agenix_Api_Spi_IReferenceResolver_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.SetReferenceResolver(Agenix.Api.Spi.IReferenceResolver)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L47">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_SetReferenceResolver_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.SetReferenceResolver*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_SetReferenceResolver_Agenix_Api_Spi_IReferenceResolver_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.SetReferenceResolver(Agenix.Api.Spi.IReferenceResolver)">SetReferenceResolver(IReferenceResolver)</h4>
+  <div class="markdown level1 summary"><p>Sets the reference resolver for the message builder support, ensuring that any needed references can be resolved at
+runtime.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetReferenceResolver(IReferenceResolver referenceResolver)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Spi.IReferenceResolver.html">IReferenceResolver</a></td>
+        <td><span class="parametername">referenceResolver</span></td>
+        <td><p>The reference resolver to be set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Type_Agenix_Api_Message_MessageType_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Type(Agenix.Api.Message.MessageType)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L102">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Type_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Type*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Type_Agenix_Api_Message_MessageType_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Type(Agenix.Api.Message.MessageType)">Type(MessageType)</h4>
+  <div class="markdown level1 summary"><p>Sets the type of the message to be built.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Type(MessageType messageType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.MessageType.html">MessageType</a></td>
+        <td><span class="parametername">messageType</span></td>
+        <td><p>The type of the message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>Returns an instance of the message builder support class.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_Type_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.Type(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L91">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Type_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Type*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_Type_System_String_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.Type(System.String)">Type(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the type of the message to be built.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS Type(string messageType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">messageType</span></td>
+        <td><p>The type of the message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3_WithReferenceResolver_Agenix_Api_Spi_IReferenceResolver_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603.WithReferenceResolver(Agenix.Api.Spi.IReferenceResolver)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L374">View Source</a>
+  </span>
+  <a id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_WithReferenceResolver_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.WithReferenceResolver*"></a>
+  <h4 id="Agenix_Core_Message_Builder_MessageBuilderSupport_3_WithReferenceResolver_Agenix_Api_Spi_IReferenceResolver_" data-uid="Agenix.Core.Message.Builder.MessageBuilderSupport`3.WithReferenceResolver(Agenix.Api.Spi.IReferenceResolver)">WithReferenceResolver(IReferenceResolver)</h4>
+  <div class="markdown level1 summary"><p>Associates the given reference resolver with the message builder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TS WithReferenceResolver(IReferenceResolver referenceResolver)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Spi.IReferenceResolver.html">IReferenceResolver</a></td>
+        <td><span class="parametername">referenceResolver</span></td>
+        <td><p>The reference resolver to be associated.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TS</span></td>
+        <td><p>The current instance of the message builder support for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Spi.IReferenceResolverAware.html">IReferenceResolverAware</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_MessageBuilderSupport_3.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.MessageBuilderSupport%603%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/MessageBuilderSupport.cs/#L16" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

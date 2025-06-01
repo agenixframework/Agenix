@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class HttpMessage </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class HttpMessage ">
+    
+    
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Http.Message.HttpMessage">
+
+
+
+  <h1 id="Agenix_Http_Message_HttpMessage" data-uid="Agenix.Http.Message.HttpMessage" class="text-break">Class HttpMessage</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Core.Message.DefaultMessage.html">DefaultMessage</a></div>
+    <div class="level2"><span class="xref">HttpMessage</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_Id">DefaultMessage.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_Name">DefaultMessage.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_Payload">DefaultMessage.Payload</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_GetHeader_System_String_">DefaultMessage.GetHeader(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_RemoveHeader_System_String_">DefaultMessage.RemoveHeader(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_GetHeaderData">DefaultMessage.GetHeaderData()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_GetHeaders">DefaultMessage.GetHeaders()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_GetPayload__1">DefaultMessage.GetPayload&lt;TX&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_GetType">DefaultMessage.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_SetType_System_String_">DefaultMessage.SetType(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_GetTimestamp">DefaultMessage.GetTimestamp()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_SetType_Agenix_Api_Message_MessageType_">DefaultMessage.SetType(MessageType)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_ToString">DefaultMessage.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Http.html">Http</a>.<a class="xref" href="Agenix.Http.Message.html">Message</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Http.dll</h6>
+  <h5 id="Agenix_Http_Message_HttpMessage_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class HttpMessage : DefaultMessage, IMessage</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage__ctor.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L59">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage__ctor_" data-uid="Agenix.Http.Message.HttpMessage.#ctor*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage__ctor" data-uid="Agenix.Http.Message.HttpMessage.#ctor">HttpMessage()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMessage()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage__ctor_Agenix_Api_Message_IMessage_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.%23ctor(Agenix.Api.Message.IMessage)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L67">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage__ctor_" data-uid="Agenix.Http.Message.HttpMessage.#ctor*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage__ctor_Agenix_Api_Message_IMessage_" data-uid="Agenix.Http.Message.HttpMessage.#ctor(Agenix.Api.Message.IMessage)">HttpMessage(IMessage)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMessage(IMessage message)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></td>
+        <td><span class="parametername">message</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage__ctor_Agenix_Api_Message_IMessage_System_Boolean_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.%23ctor(Agenix.Api.Message.IMessage%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L75">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage__ctor_" data-uid="Agenix.Http.Message.HttpMessage.#ctor*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage__ctor_Agenix_Api_Message_IMessage_System_Boolean_" data-uid="Agenix.Http.Message.HttpMessage.#ctor(Agenix.Api.Message.IMessage,System.Boolean)">HttpMessage(IMessage, bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMessage(IMessage message, bool forceAgenixHeaderUpdate)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></td>
+        <td><span class="parametername">message</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">forceAgenixHeaderUpdate</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage__ctor_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.%23ctor(System.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L84">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage__ctor_" data-uid="Agenix.Http.Message.HttpMessage.#ctor*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage__ctor_System_Object_" data-uid="Agenix.Http.Message.HttpMessage.#ctor(System.Object)">HttpMessage(object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMessage(object payload)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">payload</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage__ctor_System_Object_System_Collections_Generic_Dictionary_System_String_System_Object__.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.%23ctor(System.Object%2CSystem.Collections.Generic.Dictionary%7BSystem.String%2CSystem.Object%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L93">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage__ctor_" data-uid="Agenix.Http.Message.HttpMessage.#ctor*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage__ctor_System_Object_System_Collections_Generic_Dictionary_System_String_System_Object__" data-uid="Agenix.Http.Message.HttpMessage.#ctor(System.Object,System.Collections.Generic.Dictionary{System.String,System.Object})">HttpMessage(object, Dictionary&lt;string, object&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMessage(object payload, Dictionary&lt;string, object&gt; headers)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">payload</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td><span class="parametername">headers</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_Accept_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.Accept(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L170">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_Accept_" data-uid="Agenix.Http.Message.HttpMessage.Accept*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_Accept_System_String_" data-uid="Agenix.Http.Message.HttpMessage.Accept(System.String)">Accept(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMessage Accept(string accept)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">accept</span></td>
+        <td><p>The accept header value to set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_AddHeaderData_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.AddHeaderData(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L260">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_AddHeaderData_" data-uid="Agenix.Http.Message.HttpMessage.AddHeaderData*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_AddHeaderData_System_String_" data-uid="Agenix.Http.Message.HttpMessage.AddHeaderData(System.String)">AddHeaderData(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override HttpMessage AddHeaderData(string headerData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">headerData</span></td>
+        <td><p>The header data to include in the HTTP message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td><p>Returns the updated HttpMessage instance with the specified header data.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_AddHeaderData_System_String_">DefaultMessage.AddHeaderData(string)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_ContentType_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.ContentType(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L161">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_ContentType_" data-uid="Agenix.Http.Message.HttpMessage.ContentType*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_ContentType_System_String_" data-uid="Agenix.Http.Message.HttpMessage.ContentType(System.String)">ContentType(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMessage ContentType(string contentType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">contentType</span></td>
+        <td><p>The content type header value to use</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_ContextPath_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.ContextPath(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L179">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_ContextPath_" data-uid="Agenix.Http.Message.HttpMessage.ContextPath*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_ContextPath_System_String_" data-uid="Agenix.Http.Message.HttpMessage.ContextPath(System.String)">ContextPath(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMessage ContextPath(string contextPath)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">contextPath</span></td>
+        <td><p>The context path header value to use</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_Cookie_System_Net_Cookie_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.Cookie(System.Net.Cookie)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L402">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_Cookie_" data-uid="Agenix.Http.Message.HttpMessage.Cookie*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_Cookie_System_Net_Cookie_" data-uid="Agenix.Http.Message.HttpMessage.Cookie(System.Net.Cookie)">Cookie(Cookie)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMessage Cookie(Cookie cookie)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.cookie">Cookie</a></td>
+        <td><span class="parametername">cookie</span></td>
+        <td><p>The Cookie to be added or updated in the HTTP message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_FromRequestData_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.FromRequestData(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L418">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_FromRequestData_" data-uid="Agenix.Http.Message.HttpMessage.FromRequestData*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_FromRequestData_System_String_" data-uid="Agenix.Http.Message.HttpMessage.FromRequestData(System.String)">FromRequestData(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static HttpMessage FromRequestData(string requestData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">requestData</span></td>
+        <td><p>The request dump to parse.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_FromResponseData_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.FromResponseData(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L437">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_FromResponseData_" data-uid="Agenix.Http.Message.HttpMessage.FromResponseData*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_FromResponseData_System_String_" data-uid="Agenix.Http.Message.HttpMessage.FromResponseData(System.String)">FromResponseData(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static HttpMessage FromResponseData(string responseData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">responseData</span></td>
+        <td><p>The response dump to parse</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_GetAccept.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.GetAccept%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L304">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_GetAccept_" data-uid="Agenix.Http.Message.HttpMessage.GetAccept*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_GetAccept" data-uid="Agenix.Http.Message.HttpMessage.GetAccept">GetAccept()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetAccept()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_GetContentType.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.GetContentType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L295">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_GetContentType_" data-uid="Agenix.Http.Message.HttpMessage.GetContentType*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_GetContentType" data-uid="Agenix.Http.Message.HttpMessage.GetContentType">GetContentType()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetContentType()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_GetContextPath.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.GetContextPath%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L286">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_GetContextPath_" data-uid="Agenix.Http.Message.HttpMessage.GetContextPath*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_GetContextPath" data-uid="Agenix.Http.Message.HttpMessage.GetContextPath">GetContextPath()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetContextPath()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The context path as a string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_GetCookies.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.GetCookies%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L373">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_GetCookies_" data-uid="Agenix.Http.Message.HttpMessage.GetCookies*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_GetCookies" data-uid="Agenix.Http.Message.HttpMessage.GetCookies">GetCookies()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Cookie&gt; GetCookies()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.cookie">Cookie</a>&gt;</td>
+        <td><p>The list of cookies for this message</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_GetPath.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.GetPath%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L364">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_GetPath_" data-uid="Agenix.Http.Message.HttpMessage.GetPath*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_GetPath" data-uid="Agenix.Http.Message.HttpMessage.GetPath">GetPath()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetPath()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The request path of the message</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_GetQueryParamString.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.GetQueryParamString%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L323">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_GetQueryParamString_" data-uid="Agenix.Http.Message.HttpMessage.GetQueryParamString*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_GetQueryParamString" data-uid="Agenix.Http.Message.HttpMessage.GetQueryParamString">GetQueryParamString()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetQueryParamString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_GetQueryParams.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.GetQueryParams%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L316">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_GetQueryParams_" data-uid="Agenix.Http.Message.HttpMessage.GetQueryParams*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_GetQueryParams" data-uid="Agenix.Http.Message.HttpMessage.GetQueryParams">GetQueryParams()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, LinkedList&lt;string&gt;&gt; GetQueryParams()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.linkedlist-1">LinkedList</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_GetReasonPhrase.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.GetReasonPhrase%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L346">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_GetReasonPhrase_" data-uid="Agenix.Http.Message.HttpMessage.GetReasonPhrase*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_GetReasonPhrase" data-uid="Agenix.Http.Message.HttpMessage.GetReasonPhrase">GetReasonPhrase()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetReasonPhrase()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_GetRequestMethod.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.GetRequestMethod%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L267">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_GetRequestMethod_" data-uid="Agenix.Http.Message.HttpMessage.GetRequestMethod*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_GetRequestMethod" data-uid="Agenix.Http.Message.HttpMessage.GetRequestMethod">GetRequestMethod()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMethod? GetRequestMethod()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpmethod">HttpMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_GetStatusCode.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.GetStatusCode%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L330">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_GetStatusCode_" data-uid="Agenix.Http.Message.HttpMessage.GetStatusCode*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_GetStatusCode" data-uid="Agenix.Http.Message.HttpMessage.GetStatusCode">GetStatusCode()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpStatusCode? GetStatusCode()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.httpstatuscode">HttpStatusCode</a>?</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_GetUri.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.GetUri%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L277">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_GetUri_" data-uid="Agenix.Http.Message.HttpMessage.GetUri*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_GetUri" data-uid="Agenix.Http.Message.HttpMessage.GetUri">GetUri()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetUri()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_GetVersion.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.GetVersion%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L355">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_GetVersion_" data-uid="Agenix.Http.Message.HttpMessage.GetVersion*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_GetVersion" data-uid="Agenix.Http.Message.HttpMessage.GetVersion">GetVersion()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetVersion()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_Header_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.Header(System.String%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L242">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_Header_" data-uid="Agenix.Http.Message.HttpMessage.Header*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_Header_System_String_System_Object_" data-uid="Agenix.Http.Message.HttpMessage.Header(System.String,System.Object)">Header(string, object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMessage Header(string headerName, object headerValue)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">headerName</span></td>
+        <td><p>The name of the header.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">headerValue</span></td>
+        <td><p>The value of the header.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_Method_System_Net_Http_HttpMethod_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.Method(System.Net.Http.HttpMethod)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L110">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_Method_" data-uid="Agenix.Http.Message.HttpMessage.Method*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_Method_System_Net_Http_HttpMethod_" data-uid="Agenix.Http.Message.HttpMessage.Method(System.Net.Http.HttpMethod)">Method(HttpMethod)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMessage Method(HttpMethod method)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpmethod">HttpMethod</a></td>
+        <td><span class="parametername">method</span></td>
+        <td><p>The HTTP method to set as the request method header.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_Path_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.Path(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L231">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_Path_" data-uid="Agenix.Http.Message.HttpMessage.Path*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_Path_System_String_" data-uid="Agenix.Http.Message.HttpMessage.Path(System.String)">Path(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMessage Path(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The part of the path to add.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_QueryParam_System_String_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.QueryParam(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L210">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_QueryParam_" data-uid="Agenix.Http.Message.HttpMessage.QueryParam*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_QueryParam_System_String_System_String_" data-uid="Agenix.Http.Message.HttpMessage.QueryParam(System.String,System.String)">QueryParam(string?, string?)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMessage QueryParam(string? name, string? value = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the request query parameter. Must not be empty or null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The value of the request query parameter. Can be null if no value is specified.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_QueryParams_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.QueryParams(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L191">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_QueryParams_" data-uid="Agenix.Http.Message.HttpMessage.QueryParams*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_QueryParams_System_String_" data-uid="Agenix.Http.Message.HttpMessage.QueryParams(System.String)">QueryParams(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMessage QueryParams(string queryParamString)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">queryParamString</span></td>
+        <td><p>The query parameter string to be processed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_ReasonPhrase_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.ReasonPhrase(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L141">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_ReasonPhrase_" data-uid="Agenix.Http.Message.HttpMessage.ReasonPhrase*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_ReasonPhrase_System_String_" data-uid="Agenix.Http.Message.HttpMessage.ReasonPhrase(System.String)">ReasonPhrase(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMessage ReasonPhrase(string reasonPhrase)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">reasonPhrase</span></td>
+        <td><p>The reason phrase header value to use</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_SetCookies_System_Net_Cookie___.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.SetCookies(System.Net.Cookie%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L390">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_SetCookies_" data-uid="Agenix.Http.Message.HttpMessage.SetCookies*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_SetCookies_System_Net_Cookie___" data-uid="Agenix.Http.Message.HttpMessage.SetCookies(System.Net.Cookie[])">SetCookies(Cookie[]?)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetCookies(Cookie[]? cookies)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.cookie">Cookie</a>[]</td>
+        <td><span class="parametername">cookies</span></td>
+        <td><p>The cookies to set, provided as an array of Cookie objects. If null, the cookies collection is
+cleared.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_SetHeader_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.SetHeader(System.String%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L252">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_SetHeader_" data-uid="Agenix.Http.Message.HttpMessage.SetHeader*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_SetHeader_System_String_System_Object_" data-uid="Agenix.Http.Message.HttpMessage.SetHeader(System.String,System.Object)">SetHeader(string, object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override HttpMessage SetHeader(string headerName, object headerValue)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">headerName</span></td>
+        <td><p>The name of the header to set in the HTTP message.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">headerValue</span></td>
+        <td><p>The value to assign to the specified header.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_SetHeader_System_String_System_Object_">DefaultMessage.SetHeader(string, object)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_Status_System_Net_HttpStatusCode_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.Status(System.Net.HttpStatusCode)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L128">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_Status_" data-uid="Agenix.Http.Message.HttpMessage.Status*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_Status_System_Net_HttpStatusCode_" data-uid="Agenix.Http.Message.HttpMessage.Status(System.Net.HttpStatusCode)">Status(HttpStatusCode)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual HttpMessage Status(HttpStatusCode statusCode)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.httpstatuscode">HttpStatusCode</a></td>
+        <td><span class="parametername">statusCode</span></td>
+        <td><p>The status code to set in the HTTP message header.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td><p>The modified HttpMessage with the updated status code and reason phrase headers.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_Uri_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.Uri(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L151">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_Uri_" data-uid="Agenix.Http.Message.HttpMessage.Uri*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_Uri_System_String_" data-uid="Agenix.Http.Message.HttpMessage.Uri(System.String)">Uri(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMessage Uri(string requestUri)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">requestUri</span></td>
+        <td><p>The URI string to be set as the request URI header.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td><p>The modified instance of HttpMessage with the updated URI headers.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage_Version_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage.Version(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L119">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessage_Version_" data-uid="Agenix.Http.Message.HttpMessage.Version*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessage_Version_System_String_" data-uid="Agenix.Http.Message.HttpMessage.Version(System.String)">Version(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMessage Version(string version)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">version</span></td>
+        <td><p>The HTTP version header value to use.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td><p>The modified HttpMessage with the updated HTTP version header.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessage.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessage%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessage.cs/#L42" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class ActionCondition </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class ActionCondition ">
+    
+    <meta name="description" content="Represents a condition that executes a specified test action and determines if the condition is satisfied based on the result of the action execution.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Core.Condition.ActionCondition">
+
+
+
+  <h1 id="Agenix_Core_Condition_ActionCondition" data-uid="Agenix.Core.Condition.ActionCondition" class="text-break">Class ActionCondition</h1>
+  <div class="markdown level0 summary"><p>Represents a condition that executes a specified test action and determines
+if the condition is satisfied based on the result of the action execution.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Core.Condition.AbstractCondition.html">AbstractCondition</a></div>
+    <div class="level2"><span class="xref">ActionCondition</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.Condition.ICondition.html">ICondition</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Core.Condition.AbstractCondition.html#Agenix_Core_Condition_AbstractCondition_GetName">AbstractCondition.GetName()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Core.html">Core</a>.<a class="xref" href="Agenix.Core.Condition.html">Condition</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Core.dll</h6>
+  <h5 id="Agenix_Core_Condition_ActionCondition_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ActionCondition : AbstractCondition, ICondition</code></pre>
+  </div>
+  <h5 id="Agenix_Core_Condition_ActionCondition_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The <code>ActionCondition</code> class extends <code>AbstractCondition</code> and operates
+on a provided <code>ITestAction</code>. This action is tested to determine if the
+condition is met. The class provides methods to set and retrieve the action,
+evaluate satisfaction, and manage success or error messages. It also allows
+retrieval and management of any exceptions caught during execution.</p>
+</div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Condition_ActionCondition__ctor.md&amp;value=---%0Auid%3A%20Agenix.Core.Condition.ActionCondition.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Condition/ActionCondition.cs/#L63">View Source</a>
+  </span>
+  <a id="Agenix_Core_Condition_ActionCondition__ctor_" data-uid="Agenix.Core.Condition.ActionCondition.#ctor*"></a>
+  <h4 id="Agenix_Core_Condition_ActionCondition__ctor" data-uid="Agenix.Core.Condition.ActionCondition.#ctor">ActionCondition()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ActionCondition()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Condition_ActionCondition__ctor_Agenix_Api_ITestAction_.md&amp;value=---%0Auid%3A%20Agenix.Core.Condition.ActionCondition.%23ctor(Agenix.Api.ITestAction)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Condition/ActionCondition.cs/#L73">View Source</a>
+  </span>
+  <a id="Agenix_Core_Condition_ActionCondition__ctor_" data-uid="Agenix.Core.Condition.ActionCondition.#ctor*"></a>
+  <h4 id="Agenix_Core_Condition_ActionCondition__ctor_Agenix_Api_ITestAction_" data-uid="Agenix.Core.Condition.ActionCondition.#ctor(Agenix.Api.ITestAction)">ActionCondition(ITestAction)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ActionCondition(ITestAction action)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></td>
+        <td><span class="parametername">action</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Condition_ActionCondition_GetAction.md&amp;value=---%0Auid%3A%20Agenix.Core.Condition.ActionCondition.GetAction%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Condition/ActionCondition.cs/#L136">View Source</a>
+  </span>
+  <a id="Agenix_Core_Condition_ActionCondition_GetAction_" data-uid="Agenix.Core.Condition.ActionCondition.GetAction*"></a>
+  <h4 id="Agenix_Core_Condition_ActionCondition_GetAction" data-uid="Agenix.Core.Condition.ActionCondition.GetAction">GetAction()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITestAction GetAction()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></td>
+        <td><p>The test action currently set in the condition.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Condition_ActionCondition_GetCaughtException.md&amp;value=---%0Auid%3A%20Agenix.Core.Condition.ActionCondition.GetCaughtException%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Condition/ActionCondition.cs/#L150">View Source</a>
+  </span>
+  <a id="Agenix_Core_Condition_ActionCondition_GetCaughtException_" data-uid="Agenix.Core.Condition.ActionCondition.GetCaughtException*"></a>
+  <h4 id="Agenix_Core_Condition_ActionCondition_GetCaughtException" data-uid="Agenix.Core.Condition.ActionCondition.GetCaughtException">GetCaughtException()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Exception GetCaughtException()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Condition_ActionCondition_GetErrorMessage_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Condition.ActionCondition.GetErrorMessage(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Condition/ActionCondition.cs/#L120">View Source</a>
+  </span>
+  <a id="Agenix_Core_Condition_ActionCondition_GetErrorMessage_" data-uid="Agenix.Core.Condition.ActionCondition.GetErrorMessage*"></a>
+  <h4 id="Agenix_Core_Condition_ActionCondition_GetErrorMessage_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.Condition.ActionCondition.GetErrorMessage(Agenix.Api.Context.TestContext)">GetErrorMessage(TestContext)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string GetErrorMessage(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context in which the test action was executed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Condition.AbstractCondition.html#Agenix_Core_Condition_AbstractCondition_GetErrorMessage_Agenix_Api_Context_TestContext_">AbstractCondition.GetErrorMessage(TestContext)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Condition_ActionCondition_GetSuccessMessage_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Condition.ActionCondition.GetSuccessMessage(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Condition/ActionCondition.cs/#L109">View Source</a>
+  </span>
+  <a id="Agenix_Core_Condition_ActionCondition_GetSuccessMessage_" data-uid="Agenix.Core.Condition.ActionCondition.GetSuccessMessage*"></a>
+  <h4 id="Agenix_Core_Condition_ActionCondition_GetSuccessMessage_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.Condition.ActionCondition.GetSuccessMessage(Agenix.Api.Context.TestContext)">GetSuccessMessage(TestContext)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string GetSuccessMessage(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The TestContext within which the test action is performed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Condition.AbstractCondition.html#Agenix_Core_Condition_AbstractCondition_GetSuccessMessage_Agenix_Api_Context_TestContext_">AbstractCondition.GetSuccessMessage(TestContext)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Condition_ActionCondition_IsSatisfied_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Condition.ActionCondition.IsSatisfied(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Condition/ActionCondition.cs/#L86">View Source</a>
+  </span>
+  <a id="Agenix_Core_Condition_ActionCondition_IsSatisfied_" data-uid="Agenix.Core.Condition.ActionCondition.IsSatisfied*"></a>
+  <h4 id="Agenix_Core_Condition_ActionCondition_IsSatisfied_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.Condition.ActionCondition.IsSatisfied(Agenix.Api.Context.TestContext)">IsSatisfied(TestContext)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool IsSatisfied(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context in which the test action is executed, providing necessary data and state.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>True if the test action executes successfully without exceptions, indicating the condition is satisfied;
+otherwise, false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Condition.AbstractCondition.html#Agenix_Core_Condition_AbstractCondition_IsSatisfied_Agenix_Api_Context_TestContext_">AbstractCondition.IsSatisfied(TestContext)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Condition_ActionCondition_SetAction_Agenix_Api_ITestAction_.md&amp;value=---%0Auid%3A%20Agenix.Core.Condition.ActionCondition.SetAction(Agenix.Api.ITestAction)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Condition/ActionCondition.cs/#L143">View Source</a>
+  </span>
+  <a id="Agenix_Core_Condition_ActionCondition_SetAction_" data-uid="Agenix.Core.Condition.ActionCondition.SetAction*"></a>
+  <h4 id="Agenix_Core_Condition_ActionCondition_SetAction_Agenix_Api_ITestAction_" data-uid="Agenix.Core.Condition.ActionCondition.SetAction(Agenix.Api.ITestAction)">SetAction(ITestAction)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetAction(ITestAction action)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></td>
+        <td><span class="parametername">action</span></td>
+        <td><p>The test action to be set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Condition_ActionCondition_SetCaughtException_System_Exception_.md&amp;value=---%0Auid%3A%20Agenix.Core.Condition.ActionCondition.SetCaughtException(System.Exception)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Condition/ActionCondition.cs/#L161">View Source</a>
+  </span>
+  <a id="Agenix_Core_Condition_ActionCondition_SetCaughtException_" data-uid="Agenix.Core.Condition.ActionCondition.SetCaughtException*"></a>
+  <h4 id="Agenix_Core_Condition_ActionCondition_SetCaughtException_System_Exception_" data-uid="Agenix.Core.Condition.ActionCondition.SetCaughtException(System.Exception)">SetCaughtException(Exception)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetCaughtException(Exception caughtException)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a></td>
+        <td><span class="parametername">caughtException</span></td>
+        <td><p>The exception to set, representing any error or issue encountered during the test action
+execution.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Condition_ActionCondition_ToString.md&amp;value=---%0Auid%3A%20Agenix.Core.Condition.ActionCondition.ToString%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Condition/ActionCondition.cs/#L166">View Source</a>
+  </span>
+  <a id="Agenix_Core_Condition_ActionCondition_ToString_" data-uid="Agenix.Core.Condition.ActionCondition.ToString*"></a>
+  <h4 id="Agenix_Core_Condition_ActionCondition_ToString" data-uid="Agenix.Core.Condition.ActionCondition.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>Returns a string that represents the current object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>A string that represents the current object.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.Condition.ICondition.html">ICondition</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Condition_ActionCondition.md&amp;value=---%0Auid%3A%20Agenix.Core.Condition.ActionCondition%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Condition/ActionCondition.cs/#L46" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

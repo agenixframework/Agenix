@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class TestReporters </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class TestReporters ">
+    
+    
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Api.Report.TestReporters">
+
+
+
+  <h1 id="Agenix_Api_Report_TestReporters" data-uid="Agenix.Api.Report.TestReporters" class="text-break">Class TestReporters</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">TestReporters</span></div>
+      <div class="level2"><a class="xref" href="Agenix.Core.Report.DefaultTestReporters.html">DefaultTestReporters</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.Report.ITestListener.html">ITestListener</a></div>
+    <div><a class="xref" href="Agenix.Api.Report.ITestSuiteListener.html">ITestSuiteListener</a></div>
+    <div><a class="xref" href="Agenix.Api.Report.ITestReporterAware.html">ITestReporterAware</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Api.html">Api</a>.<a class="xref" href="Agenix.Api.Report.html">Report</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Api.dll</h6>
+  <h5 id="Agenix_Api_Report_TestReporters_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TestReporters : ITestListener, ITestSuiteListener, ITestReporterAware</code></pre>
+  </div>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Report_TestReporters_AutoClear.md&amp;value=---%0Auid%3A%20Agenix.Api.Report.TestReporters.AutoClear%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Report/TestReporters.cs/#L44">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_Report_TestReporters_AutoClear" data-uid="Agenix.Api.Report.TestReporters.AutoClear">AutoClear</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool AutoClear</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Report_TestReporters_AddTestReporter_Agenix_Api_Report_ITestReporter_.md&amp;value=---%0Auid%3A%20Agenix.Api.Report.TestReporters.AddTestReporter(Agenix.Api.Report.ITestReporter)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Report/TestReporters.cs/#L92">View Source</a>
+  </span>
+  <a id="Agenix_Api_Report_TestReporters_AddTestReporter_" data-uid="Agenix.Api.Report.TestReporters.AddTestReporter*"></a>
+  <h4 id="Agenix_Api_Report_TestReporters_AddTestReporter_Agenix_Api_Report_ITestReporter_" data-uid="Agenix.Api.Report.TestReporters.AddTestReporter(Agenix.Api.Report.ITestReporter)">AddTestReporter(ITestReporter)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddTestReporter(ITestReporter testReporter)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Report.ITestReporter.html">ITestReporter</a></td>
+        <td><span class="parametername">testReporter</span></td>
+        <td><p>The test reporter to be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Report_TestReporters_GenerateReports.md&amp;value=---%0Auid%3A%20Agenix.Api.Report.TestReporters.GenerateReports%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Report/TestReporters.cs/#L175">View Source</a>
+  </span>
+  <a id="Agenix_Api_Report_TestReporters_GenerateReports_" data-uid="Agenix.Api.Report.TestReporters.GenerateReports*"></a>
+  <h4 id="Agenix_Api_Report_TestReporters_GenerateReports" data-uid="Agenix.Api.Report.TestReporters.GenerateReports">GenerateReports()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GenerateReports()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Report_TestReporters_GetTestReporters.md&amp;value=---%0Auid%3A%20Agenix.Api.Report.TestReporters.GetTestReporters%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Report/TestReporters.cs/#L145">View Source</a>
+  </span>
+  <a id="Agenix_Api_Report_TestReporters_GetTestReporters_" data-uid="Agenix.Api.Report.TestReporters.GetTestReporters*"></a>
+  <h4 id="Agenix_Api_Report_TestReporters_GetTestReporters" data-uid="Agenix.Api.Report.TestReporters.GetTestReporters">GetTestReporters()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;ITestReporter&gt; GetTestReporters()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Api.Report.ITestReporter.html">ITestReporter</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Report_TestReporters_GetTestResults.md&amp;value=---%0Auid%3A%20Agenix.Api.Report.TestReporters.GetTestResults%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Report/TestReporters.cs/#L167">View Source</a>
+  </span>
+  <a id="Agenix_Api_Report_TestReporters_GetTestResults_" data-uid="Agenix.Api.Report.TestReporters.GetTestResults*"></a>
+  <h4 id="Agenix_Api_Report_TestReporters_GetTestResults" data-uid="Agenix.Api.Report.TestReporters.GetTestResults">GetTestResults()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TestResults GetTestResults()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Report.TestResults.html">TestResults</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Report_TestReporters_IsAutoClear.md&amp;value=---%0Auid%3A%20Agenix.Api.Report.TestReporters.IsAutoClear%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Report/TestReporters.cs/#L152">View Source</a>
+  </span>
+  <a id="Agenix_Api_Report_TestReporters_IsAutoClear_" data-uid="Agenix.Api.Report.TestReporters.IsAutoClear*"></a>
+  <h4 id="Agenix_Api_Report_TestReporters_IsAutoClear" data-uid="Agenix.Api.Report.TestReporters.IsAutoClear">IsAutoClear()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsAutoClear()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Report_TestReporters_OnFinish.md&amp;value=---%0Auid%3A%20Agenix.Api.Report.TestReporters.OnFinish%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Report/TestReporters.cs/#L124">View Source</a>
+  </span>
+  <a id="Agenix_Api_Report_TestReporters_OnFinish_" data-uid="Agenix.Api.Report.TestReporters.OnFinish*"></a>
+  <h4 id="Agenix_Api_Report_TestReporters_OnFinish" data-uid="Agenix.Api.Report.TestReporters.OnFinish">OnFinish()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnFinish()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Report_TestReporters_OnFinishFailure_System_Exception_.md&amp;value=---%0Auid%3A%20Agenix.Api.Report.TestReporters.OnFinishFailure(System.Exception)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Report/TestReporters.cs/#L109">View Source</a>
+  </span>
+  <a id="Agenix_Api_Report_TestReporters_OnFinishFailure_" data-uid="Agenix.Api.Report.TestReporters.OnFinishFailure*"></a>
+  <h4 id="Agenix_Api_Report_TestReporters_OnFinishFailure_System_Exception_" data-uid="Agenix.Api.Report.TestReporters.OnFinishFailure(System.Exception)">OnFinishFailure(Exception)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnFinishFailure(Exception cause)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a></td>
+        <td><span class="parametername">cause</span></td>
+        <td><p>The exception that caused the failure.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Report_TestReporters_OnFinishSuccess.md&amp;value=---%0Auid%3A%20Agenix.Api.Report.TestReporters.OnFinishSuccess%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Report/TestReporters.cs/#L117">View Source</a>
+  </span>
+  <a id="Agenix_Api_Report_TestReporters_OnFinishSuccess_" data-uid="Agenix.Api.Report.TestReporters.OnFinishSuccess*"></a>
+  <h4 id="Agenix_Api_Report_TestReporters_OnFinishSuccess" data-uid="Agenix.Api.Report.TestReporters.OnFinishSuccess">OnFinishSuccess()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnFinishSuccess()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Report_TestReporters_OnStart.md&amp;value=---%0Auid%3A%20Agenix.Api.Report.TestReporters.OnStart%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Report/TestReporters.cs/#L100">View Source</a>
+  </span>
+  <a id="Agenix_Api_Report_TestReporters_OnStart_" data-uid="Agenix.Api.Report.TestReporters.OnStart*"></a>
+  <h4 id="Agenix_Api_Report_TestReporters_OnStart" data-uid="Agenix.Api.Report.TestReporters.OnStart">OnStart()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnStart()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Report_TestReporters_OnStartFailure_System_Exception_.md&amp;value=---%0Auid%3A%20Agenix.Api.Report.TestReporters.OnStartFailure(System.Exception)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Report/TestReporters.cs/#L131">View Source</a>
+  </span>
+  <a id="Agenix_Api_Report_TestReporters_OnStartFailure_" data-uid="Agenix.Api.Report.TestReporters.OnStartFailure*"></a>
+  <h4 id="Agenix_Api_Report_TestReporters_OnStartFailure_System_Exception_" data-uid="Agenix.Api.Report.TestReporters.OnStartFailure(System.Exception)">OnStartFailure(Exception)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnStartFailure(Exception cause)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a></td>
+        <td><span class="parametername">cause</span></td>
+        <td><p>The exception that triggered the start failure.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Report_TestReporters_OnStartSuccess.md&amp;value=---%0Auid%3A%20Agenix.Api.Report.TestReporters.OnStartSuccess%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Report/TestReporters.cs/#L138">View Source</a>
+  </span>
+  <a id="Agenix_Api_Report_TestReporters_OnStartSuccess_" data-uid="Agenix.Api.Report.TestReporters.OnStartSuccess*"></a>
+  <h4 id="Agenix_Api_Report_TestReporters_OnStartSuccess" data-uid="Agenix.Api.Report.TestReporters.OnStartSuccess">OnStartSuccess()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnStartSuccess()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Report_TestReporters_OnTestFailure_Agenix_Api_ITestCase_System_Exception_.md&amp;value=---%0Auid%3A%20Agenix.Api.Report.TestReporters.OnTestFailure(Agenix.Api.ITestCase%2CSystem.Exception)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Report/TestReporters.cs/#L77">View Source</a>
+  </span>
+  <a id="Agenix_Api_Report_TestReporters_OnTestFailure_" data-uid="Agenix.Api.Report.TestReporters.OnTestFailure*"></a>
+  <h4 id="Agenix_Api_Report_TestReporters_OnTestFailure_Agenix_Api_ITestCase_System_Exception_" data-uid="Agenix.Api.Report.TestReporters.OnTestFailure(Agenix.Api.ITestCase,System.Exception)">OnTestFailure(ITestCase, Exception)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnTestFailure(ITestCase test, Exception cause)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestCase.html">ITestCase</a></td>
+        <td><span class="parametername">test</span></td>
+        <td><p>The test case that failed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a></td>
+        <td><span class="parametername">cause</span></td>
+        <td><p>The exception that caused the failure.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Report_TestReporters_OnTestFinish_Agenix_Api_ITestCase_.md&amp;value=---%0Auid%3A%20Agenix.Api.Report.TestReporters.OnTestFinish(Agenix.Api.ITestCase)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Report/TestReporters.cs/#L60">View Source</a>
+  </span>
+  <a id="Agenix_Api_Report_TestReporters_OnTestFinish_" data-uid="Agenix.Api.Report.TestReporters.OnTestFinish*"></a>
+  <h4 id="Agenix_Api_Report_TestReporters_OnTestFinish_Agenix_Api_ITestCase_" data-uid="Agenix.Api.Report.TestReporters.OnTestFinish(Agenix.Api.ITestCase)">OnTestFinish(ITestCase)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnTestFinish(ITestCase test)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestCase.html">ITestCase</a></td>
+        <td><span class="parametername">test</span></td>
+        <td><p>The test case that has finished executing.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Report_TestReporters_OnTestSkipped_Agenix_Api_ITestCase_.md&amp;value=---%0Auid%3A%20Agenix.Api.Report.TestReporters.OnTestSkipped(Agenix.Api.ITestCase)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Report/TestReporters.cs/#L86">View Source</a>
+  </span>
+  <a id="Agenix_Api_Report_TestReporters_OnTestSkipped_" data-uid="Agenix.Api.Report.TestReporters.OnTestSkipped*"></a>
+  <h4 id="Agenix_Api_Report_TestReporters_OnTestSkipped_Agenix_Api_ITestCase_" data-uid="Agenix.Api.Report.TestReporters.OnTestSkipped(Agenix.Api.ITestCase)">OnTestSkipped(ITestCase)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnTestSkipped(ITestCase test)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestCase.html">ITestCase</a></td>
+        <td><span class="parametername">test</span></td>
+        <td><p>The test case that was skipped.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Report_TestReporters_OnTestStart_Agenix_Api_ITestCase_.md&amp;value=---%0Auid%3A%20Agenix.Api.Report.TestReporters.OnTestStart(Agenix.Api.ITestCase)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Report/TestReporters.cs/#L51">View Source</a>
+  </span>
+  <a id="Agenix_Api_Report_TestReporters_OnTestStart_" data-uid="Agenix.Api.Report.TestReporters.OnTestStart*"></a>
+  <h4 id="Agenix_Api_Report_TestReporters_OnTestStart_Agenix_Api_ITestCase_" data-uid="Agenix.Api.Report.TestReporters.OnTestStart(Agenix.Api.ITestCase)">OnTestStart(ITestCase)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnTestStart(ITestCase test)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestCase.html">ITestCase</a></td>
+        <td><span class="parametername">test</span></td>
+        <td><p>The test case that is starting.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Report_TestReporters_OnTestSuccess_Agenix_Api_ITestCase_.md&amp;value=---%0Auid%3A%20Agenix.Api.Report.TestReporters.OnTestSuccess(Agenix.Api.ITestCase)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Report/TestReporters.cs/#L69">View Source</a>
+  </span>
+  <a id="Agenix_Api_Report_TestReporters_OnTestSuccess_" data-uid="Agenix.Api.Report.TestReporters.OnTestSuccess*"></a>
+  <h4 id="Agenix_Api_Report_TestReporters_OnTestSuccess_Agenix_Api_ITestCase_" data-uid="Agenix.Api.Report.TestReporters.OnTestSuccess(Agenix.Api.ITestCase)">OnTestSuccess(ITestCase)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnTestSuccess(ITestCase test)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestCase.html">ITestCase</a></td>
+        <td><span class="parametername">test</span></td>
+        <td><p>The test case that has been successfully completed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Report_TestReporters_SetAutoClear_System_Boolean_.md&amp;value=---%0Auid%3A%20Agenix.Api.Report.TestReporters.SetAutoClear(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Report/TestReporters.cs/#L159">View Source</a>
+  </span>
+  <a id="Agenix_Api_Report_TestReporters_SetAutoClear_" data-uid="Agenix.Api.Report.TestReporters.SetAutoClear*"></a>
+  <h4 id="Agenix_Api_Report_TestReporters_SetAutoClear_System_Boolean_" data-uid="Agenix.Api.Report.TestReporters.SetAutoClear(System.Boolean)">SetAutoClear(bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetAutoClear(bool autoClear)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">autoClear</span></td>
+        <td><p>If true, previous test results will be cleared for each test suite.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.Report.ITestListener.html">ITestListener</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Report.ITestSuiteListener.html">ITestSuiteListener</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Report.ITestReporterAware.html">ITestReporterAware</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Report_TestReporters.md&amp;value=---%0Auid%3A%20Agenix.Api.Report.TestReporters%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Report/TestReporters.cs/#L31" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

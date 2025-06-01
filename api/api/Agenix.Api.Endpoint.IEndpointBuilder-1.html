@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Interface IEndpointBuilder&lt;T&gt; </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Interface IEndpointBuilder&lt;T&gt; ">
+    
+    <meta name="description" content="Defines the contract for an endpoint builder that includes methods to build and manage endpoints.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Api.Endpoint.IEndpointBuilder`1">
+
+
+
+  <h1 id="Agenix_Api_Endpoint_IEndpointBuilder_1" data-uid="Agenix.Api.Endpoint.IEndpointBuilder`1" class="text-break">Interface IEndpointBuilder&lt;T&gt;</h1>
+  <div class="markdown level0 summary"><p>Defines the contract for an endpoint builder that includes methods to build and manage endpoints.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Api.html">Api</a>.<a class="xref" href="Agenix.Api.Endpoint.html">Endpoint</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Api.dll</h6>
+  <h5 id="Agenix_Api_Endpoint_IEndpointBuilder_1_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IEndpointBuilder&lt;out T&gt; where T : IEndpoint</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type of endpoint being constructed, constrained to implement the <a class="xref" href="Agenix.Api.Endpoint.IEndpoint.html">IEndpoint</a> interface.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Endpoint_IEndpointBuilder_1_ResourcePath.md&amp;value=---%0Auid%3A%20Agenix.Api.Endpoint.IEndpointBuilder%601.ResourcePath%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Endpoint/IEndpointBuilder.cs/#L59">View Source</a>
+  </span>
+  <a id="Agenix_Api_Endpoint_IEndpointBuilder_1_ResourcePath_" data-uid="Agenix.Api.Endpoint.IEndpointBuilder`1.ResourcePath*"></a>
+  <h4 id="Agenix_Api_Endpoint_IEndpointBuilder_1_ResourcePath" data-uid="Agenix.Api.Endpoint.IEndpointBuilder`1.ResourcePath">ResourcePath</h4>
+  <div class="markdown level1 summary"><p>Represents the resource path where endpoint builder configurations
+and metadata are located.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ResourcePath { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Endpoint_IEndpointBuilder_1_Build.md&amp;value=---%0Auid%3A%20Agenix.Api.Endpoint.IEndpointBuilder%601.Build%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Endpoint/IEndpointBuilder.cs/#L65">View Source</a>
+  </span>
+  <a id="Agenix_Api_Endpoint_IEndpointBuilder_1_Build_" data-uid="Agenix.Api.Endpoint.IEndpointBuilder`1.Build*"></a>
+  <h4 id="Agenix_Api_Endpoint_IEndpointBuilder_1_Build" data-uid="Agenix.Api.Endpoint.IEndpointBuilder`1.Build">Build()</h4>
+  <div class="markdown level1 summary"><p>Builds the endpoint.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">T Build()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Endpoint_IEndpointBuilder_1_Build_Agenix_Api_Annotations_AgenixEndpointAttribute_Agenix_Api_Spi_IReferenceResolver_.md&amp;value=---%0Auid%3A%20Agenix.Api.Endpoint.IEndpointBuilder%601.Build(Agenix.Api.Annotations.AgenixEndpointAttribute%2CAgenix.Api.Spi.IReferenceResolver)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Endpoint/IEndpointBuilder.cs/#L144">View Source</a>
+  </span>
+  <a id="Agenix_Api_Endpoint_IEndpointBuilder_1_Build_" data-uid="Agenix.Api.Endpoint.IEndpointBuilder`1.Build*"></a>
+  <h4 id="Agenix_Api_Endpoint_IEndpointBuilder_1_Build_Agenix_Api_Annotations_AgenixEndpointAttribute_Agenix_Api_Spi_IReferenceResolver_" data-uid="Agenix.Api.Endpoint.IEndpointBuilder`1.Build(Agenix.Api.Annotations.AgenixEndpointAttribute,Agenix.Api.Spi.IReferenceResolver)">Build(AgenixEndpointAttribute, IReferenceResolver)</h4>
+  <div class="markdown level1 summary"><p>Builds an endpoint instance with properties set from the given annotation and reference resolver.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">T Build(AgenixEndpointAttribute endpointAnnotation, IReferenceResolver referenceResolver)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Annotations.AgenixEndpointAttribute.html">AgenixEndpointAttribute</a></td>
+        <td><span class="parametername">endpointAnnotation</span></td>
+        <td><p>An instance of <a class="xref" href="Agenix.Api.Annotations.AgenixEndpointAttribute.html">AgenixEndpointAttribute</a> containing the endpoint
+configuration.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Spi.IReferenceResolver.html">IReferenceResolver</a></td>
+        <td><span class="parametername">referenceResolver</span></td>
+        <td><p>An instance of <a class="xref" href="Agenix.Api.Spi.IReferenceResolver.html">IReferenceResolver</a> used for resolving references in the
+endpoint properties.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><p>An instance of <a class="xref" href="Agenix.Api.Endpoint.IEndpoint.html">IEndpoint</a> with properties set according to the given annotation and reference
+resolver.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Endpoint_IEndpointBuilder_1_Lookup.md&amp;value=---%0Auid%3A%20Agenix.Api.Endpoint.IEndpointBuilder%601.Lookup%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Endpoint/IEndpointBuilder.cs/#L82">View Source</a>
+  </span>
+  <a id="Agenix_Api_Endpoint_IEndpointBuilder_1_Lookup_" data-uid="Agenix.Api.Endpoint.IEndpointBuilder`1.Lookup*"></a>
+  <h4 id="Agenix_Api_Endpoint_IEndpointBuilder_1_Lookup" data-uid="Agenix.Api.Endpoint.IEndpointBuilder`1.Lookup">Lookup()</h4>
+  <div class="markdown level1 summary"><p>Retrieves a dictionary of endpoint builders, with endpoint names as keys and endpoint builders as values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Dictionary&lt;string, IEndpointBuilder&lt;out T&gt;&gt; Lookup()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Agenix.Api.Endpoint.IEndpointBuilder-1.html">IEndpointBuilder</a>&lt;T&gt;&gt;</td>
+        <td><p>A dictionary containing mappings of endpoint names to their corresponding builders.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Endpoint_IEndpointBuilder_1_Lookup_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Endpoint.IEndpointBuilder%601.Lookup(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Endpoint/IEndpointBuilder.cs/#L103">View Source</a>
+  </span>
+  <a id="Agenix_Api_Endpoint_IEndpointBuilder_1_Lookup_" data-uid="Agenix.Api.Endpoint.IEndpointBuilder`1.Lookup*"></a>
+  <h4 id="Agenix_Api_Endpoint_IEndpointBuilder_1_Lookup_System_String_" data-uid="Agenix.Api.Endpoint.IEndpointBuilder`1.Lookup(System.String)">Lookup(string)</h4>
+  <div class="markdown level1 summary"><p>Performs a lookup for all available endpoint builders in the system.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Optional&lt;IEndpointBuilder&lt;out T&gt;&gt; Lookup(string builder)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">builder</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Util.Optional-1.html">Optional</a>&lt;<a class="xref" href="Agenix.Api.Endpoint.IEndpointBuilder-1.html">IEndpointBuilder</a>&lt;T&gt;&gt;</td>
+        <td><p>A dictionary containing the endpoint builder names as keys and their respective
+<a class="xref" href="Agenix.Api.Endpoint.IEndpointBuilder-1.html">IEndpointBuilder&lt;T&gt;</a> implementations as values.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Endpoint_IEndpointBuilder_1_Supports_System_Type_.md&amp;value=---%0Auid%3A%20Agenix.Api.Endpoint.IEndpointBuilder%601.Supports(System.Type)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Endpoint/IEndpointBuilder.cs/#L76">View Source</a>
+  </span>
+  <a id="Agenix_Api_Endpoint_IEndpointBuilder_1_Supports_" data-uid="Agenix.Api.Endpoint.IEndpointBuilder`1.Supports*"></a>
+  <h4 id="Agenix_Api_Endpoint_IEndpointBuilder_1_Supports_System_Type_" data-uid="Agenix.Api.Endpoint.IEndpointBuilder`1.Supports(System.Type)">Supports(Type)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified endpoint type is supported by the builder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool Supports(Type endpointType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">endpointType</span></td>
+        <td><p>The type of the endpoint to check for support.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>True if the specified endpoint type is supported; otherwise, false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Endpoint_IEndpointBuilder_1.md&amp;value=---%0Auid%3A%20Agenix.Api.Endpoint.IEndpointBuilder%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Endpoint/IEndpointBuilder.cs/#L42" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

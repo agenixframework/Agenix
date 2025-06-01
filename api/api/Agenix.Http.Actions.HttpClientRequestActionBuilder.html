@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class HttpClientRequestActionBuilder </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class HttpClientRequestActionBuilder ">
+    
+    
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Http.Actions.HttpClientRequestActionBuilder">
+
+
+
+  <h1 id="Agenix_Http_Actions_HttpClientRequestActionBuilder" data-uid="Agenix.Http.Actions.HttpClientRequestActionBuilder" class="text-break">Class HttpClientRequestActionBuilder</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html">AbstractTestActionBuilder</a>&lt;<a class="xref" href="Agenix.Core.Actions.SendMessageAction.html">SendMessageAction</a>, <a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a>&gt;</div>
+    <div class="level2"><a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html">MessageActionBuilder</a>&lt;<a class="xref" href="Agenix.Core.Actions.SendMessageAction.html">SendMessageAction</a>, <a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a>.<a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.HttpMessageBuilderSupport.html">HttpMessageBuilderSupport</a>, <a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a>&gt;</div>
+    <div class="level3"><a class="xref" href="Agenix.Core.Actions.SendMessageAction.html">SendMessageAction</a>.<a class="xref" href="Agenix.Core.Actions.SendMessageAction.SendMessageActionBuilder-3.html">SendMessageActionBuilder</a>&lt;<a class="xref" href="Agenix.Core.Actions.SendMessageAction.html">SendMessageAction</a>, <a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a>.<a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.HttpMessageBuilderSupport.html">HttpMessageBuilderSupport</a>, <a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a>&gt;</div>
+    <div class="level4"><span class="xref">HttpClientRequestActionBuilder</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder</a>&lt;<a class="xref" href="Agenix.Core.Actions.SendMessageAction.html">SendMessageAction</a>&gt;</div>
+    <div><a class="xref" href="Agenix.Api.Spi.IReferenceResolverAware.html">IReferenceResolverAware</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.SendMessageAction.SendMessageActionBuilder-3.html#Agenix_Core_Actions_SendMessageAction_SendMessageActionBuilder_3_ForkMode">SendMessageAction.SendMessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.ForkMode</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.SendMessageAction.SendMessageActionBuilder-3.html#Agenix_Core_Actions_SendMessageAction_SendMessageActionBuilder_3_Fork_System_Boolean_">SendMessageAction.SendMessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.Fork(bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.SendMessageAction.SendMessageActionBuilder-3.html#Agenix_Core_Actions_SendMessageAction_SendMessageActionBuilder_3_Build">SendMessageAction.SendMessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.Build()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_messageProcessors">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.messageProcessors</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_variableExtractors">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.variableExtractors</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3__endpoint">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;._endpoint</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3__endpointUri">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;._endpointUri</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_messageBuilderSupport">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.messageBuilderSupport</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_referenceResolver">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.referenceResolver</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_SetReferenceResolver_Agenix_Api_Spi_IReferenceResolver_">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.SetReferenceResolver(IReferenceResolver)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Message_Agenix_Api_Message_IMessageBuilder_">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.Message(IMessageBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Message_Agenix_Api_Message_IMessage_">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.Message(IMessage)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Transform_Agenix_Api_Message_IMessageProcessor_">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.Transform(IMessageProcessor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Transform_Agenix_Api_Message_IMessageProcessorAdapter_">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.Transform(IMessageProcessorAdapter)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Transform_Agenix_Api_Message_MessageProcessorAdapter_">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.Transform(MessageProcessorAdapter)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Transform__1_Agenix_Api_Message_IMessageProcessor_IBuilder_Agenix_Api_Message_IMessageProcessor___0__">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.Transform&lt;B&gt;(IMessageProcessor.IBuilder&lt;IMessageProcessor, B&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Process__1_Agenix_Api_Message_IMessageProcessor_IBuilder_Agenix_Api_Message_IMessageProcessor___0__">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.Process&lt;B&gt;(IMessageProcessor.IBuilder&lt;IMessageProcessor, B&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Process_Agenix_Api_Message_IMessageProcessorAdapter_">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.Process(IMessageProcessorAdapter)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Process_Agenix_Api_Message_IMessageProcessor_">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.Process(IMessageProcessor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_WithReferenceResolver_Agenix_Api_Spi_IReferenceResolver_">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.WithReferenceResolver(IReferenceResolver)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Endpoint_Agenix_Api_Endpoint_IEndpoint_">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.Endpoint(IEndpoint)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Endpoint_System_String_">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.Endpoint(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Message">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.Message()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_GetMessageBuilderSupport">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.GetMessageBuilderSupport()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_GetEndpoint">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.GetEndpoint()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_GetEndpointUri">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.GetEndpointUri()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_GetVariableExtractors">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.GetVariableExtractors()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_GetMessageProcessors">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.GetMessageProcessors()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_DoBuild">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.DoBuild()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html#Agenix_Core_AbstractTestActionBuilder_2_self">AbstractTestActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder&gt;.self</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html#Agenix_Core_AbstractTestActionBuilder_2_Build">AbstractTestActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder&gt;.Build()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html#Agenix_Core_AbstractTestActionBuilder_2_Name_System_String_">AbstractTestActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder&gt;.Name(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html#Agenix_Core_AbstractTestActionBuilder_2_Description_System_String_">AbstractTestActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder&gt;.Description(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html#Agenix_Core_AbstractTestActionBuilder_2_GetName">AbstractTestActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder&gt;.GetName()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html#Agenix_Core_AbstractTestActionBuilder_2_GetDescription">AbstractTestActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder&gt;.GetDescription()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Http.html">Http</a>.<a class="xref" href="Agenix.Http.Actions.html">Actions</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Http.dll</h6>
+  <h5 id="Agenix_Http_Actions_HttpClientRequestActionBuilder_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class HttpClientRequestActionBuilder : SendMessageAction.SendMessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;, ITestActionBuilder&lt;SendMessageAction&gt;, IReferenceResolverAware</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientRequestActionBuilder__ctor.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientRequestActionBuilder.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientRequestActionBuilder.cs/#L44">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientRequestActionBuilder__ctor_" data-uid="Agenix.Http.Actions.HttpClientRequestActionBuilder.#ctor*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientRequestActionBuilder__ctor" data-uid="Agenix.Http.Actions.HttpClientRequestActionBuilder.#ctor">HttpClientRequestActionBuilder()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientRequestActionBuilder__ctor_Agenix_Api_Message_IMessageBuilder_Agenix_Http_Message_HttpMessage_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientRequestActionBuilder.%23ctor(Agenix.Api.Message.IMessageBuilder%2CAgenix.Http.Message.HttpMessage)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientRequestActionBuilder.cs/#L50">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientRequestActionBuilder__ctor_" data-uid="Agenix.Http.Actions.HttpClientRequestActionBuilder.#ctor*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientRequestActionBuilder__ctor_Agenix_Api_Message_IMessageBuilder_Agenix_Http_Message_HttpMessage_" data-uid="Agenix.Http.Actions.HttpClientRequestActionBuilder.#ctor(Agenix.Api.Message.IMessageBuilder,Agenix.Http.Message.HttpMessage)">HttpClientRequestActionBuilder(IMessageBuilder, HttpMessage)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder(IMessageBuilder messageBuilder, HttpMessage httpMessage)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessageBuilder.html">IMessageBuilder</a></td>
+        <td><span class="parametername">messageBuilder</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td><span class="parametername">httpMessage</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientRequestActionBuilder_DoBuild.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientRequestActionBuilder.DoBuild%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientRequestActionBuilder.cs/#L111">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientRequestActionBuilder_DoBuild_" data-uid="Agenix.Http.Actions.HttpClientRequestActionBuilder.DoBuild*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientRequestActionBuilder_DoBuild" data-uid="Agenix.Http.Actions.HttpClientRequestActionBuilder.DoBuild">DoBuild()</h4>
+  <div class="markdown level1 summary"><p>Build method implemented by subclasses.
+@return
+/</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override SendMessageAction DoBuild()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Core.Actions.SendMessageAction.html">SendMessageAction</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_DoBuild">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.DoBuild()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientRequestActionBuilder_GetMessageBuilderSupport.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientRequestActionBuilder.GetMessageBuilderSupport%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientRequestActionBuilder.cs/#L58">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientRequestActionBuilder_GetMessageBuilderSupport_" data-uid="Agenix.Http.Actions.HttpClientRequestActionBuilder.GetMessageBuilderSupport*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientRequestActionBuilder_GetMessageBuilderSupport" data-uid="Agenix.Http.Actions.HttpClientRequestActionBuilder.GetMessageBuilderSupport">GetMessageBuilderSupport()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override HttpClientRequestActionBuilder.HttpMessageBuilderSupport GetMessageBuilderSupport()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a>.<a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.HttpMessageBuilderSupport.html">HttpMessageBuilderSupport</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_GetMessageBuilderSupport">MessageActionBuilder&lt;SendMessageAction, HttpClientRequestActionBuilder.HttpMessageBuilderSupport, HttpClientRequestActionBuilder&gt;.GetMessageBuilderSupport()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientRequestActionBuilder_Method_System_Net_Http_HttpMethod_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientRequestActionBuilder.Method(System.Net.Http.HttpMethod)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientRequestActionBuilder.cs/#L77">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientRequestActionBuilder_Method_" data-uid="Agenix.Http.Actions.HttpClientRequestActionBuilder.Method*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientRequestActionBuilder_Method_System_Net_Http_HttpMethod_" data-uid="Agenix.Http.Actions.HttpClientRequestActionBuilder.Method(System.Net.Http.HttpMethod)">Method(HttpMethod)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder Method(HttpMethod method)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpmethod">HttpMethod</a></td>
+        <td><span class="parametername">method</span></td>
+        <td><p>The HTTP method to set as the request method.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientRequestActionBuilder_Path_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientRequestActionBuilder.Path(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientRequestActionBuilder.cs/#L68">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientRequestActionBuilder_Path_" data-uid="Agenix.Http.Actions.HttpClientRequestActionBuilder.Path*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientRequestActionBuilder_Path_System_String_" data-uid="Agenix.Http.Actions.HttpClientRequestActionBuilder.Path(System.String)">Path(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder Path(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The part of the path to add to the request URI.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientRequestActionBuilder_QueryParam_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientRequestActionBuilder.QueryParam(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientRequestActionBuilder.cs/#L95">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientRequestActionBuilder_QueryParam_" data-uid="Agenix.Http.Actions.HttpClientRequestActionBuilder.QueryParam*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientRequestActionBuilder_QueryParam_System_String_" data-uid="Agenix.Http.Actions.HttpClientRequestActionBuilder.QueryParam(System.String)">QueryParam(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder QueryParam(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the query parameter to add. It must not be null or empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientRequestActionBuilder_QueryParam_System_String_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientRequestActionBuilder.QueryParam(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientRequestActionBuilder.cs/#L105">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientRequestActionBuilder_QueryParam_" data-uid="Agenix.Http.Actions.HttpClientRequestActionBuilder.QueryParam*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientRequestActionBuilder_QueryParam_System_String_System_String_" data-uid="Agenix.Http.Actions.HttpClientRequestActionBuilder.QueryParam(System.String,System.String)">QueryParam(string, string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder QueryParam(string name, string value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the query parameter to add. Must not be null or empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The value of the query parameter to add. Can be null if no value is specified.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientRequestActionBuilder_Uri_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientRequestActionBuilder.Uri(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientRequestActionBuilder.cs/#L86">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientRequestActionBuilder_Uri_" data-uid="Agenix.Http.Actions.HttpClientRequestActionBuilder.Uri*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientRequestActionBuilder_Uri_System_String_" data-uid="Agenix.Http.Actions.HttpClientRequestActionBuilder.Uri(System.String)">Uri(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder Uri(string uri)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">uri</span></td>
+        <td><p>The URI to set for the HTTP request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Spi.IReferenceResolverAware.html">IReferenceResolverAware</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientRequestActionBuilder.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientRequestActionBuilder%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientRequestActionBuilder.cs/#L39" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

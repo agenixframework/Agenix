@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class BaseConsequence&lt;T&gt; </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class BaseConsequence&lt;T&gt; ">
+    
+    <meta name="description" content="Abstract base class representing a consequence that can be evaluated in the context of the Screenplay pattern.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1">
+
+
+
+  <h1 id="Agenix_Screenplay_Consequence_BaseConsequence_1" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1" class="text-break">Class BaseConsequence&lt;T&gt;</h1>
+  <div class="markdown level0 summary"><p>Abstract base class representing a consequence that can be evaluated in the context of the Screenplay pattern.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">BaseConsequence&lt;T&gt;</span></div>
+      <div class="level2"><a class="xref" href="Agenix.Screenplay.Consequence.BooleanQuestionConsequence-1.html">BooleanQuestionConsequence&lt;T&gt;</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Screenplay.IConsequence-1.html">IConsequence</a>&lt;T&gt;</div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Screenplay.html">Screenplay</a>.<a class="xref" href="Agenix.Screenplay.Consequence.html">Consequence</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Screenplay.dll</h6>
+  <h5 id="Agenix_Screenplay_Consequence_BaseConsequence_1_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class BaseConsequence&lt;T&gt; : IConsequence&lt;T&gt;</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type associated with the consequence.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Consequence_BaseConsequence_1_Explanation.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Consequence.BaseConsequence%601.Explanation%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Consequence/BaseConsequence.cs/#L41">View Source</a>
+  </span>
+  <h4 id="Agenix_Screenplay_Consequence_BaseConsequence_1_Explanation" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.Explanation">Explanation</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Optional&lt;string&gt; Explanation</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Util.Optional-1.html">Optional</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Consequence_BaseConsequence_1_SubjectText.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Consequence.BaseConsequence%601.SubjectText%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Consequence/BaseConsequence.cs/#L42">View Source</a>
+  </span>
+  <h4 id="Agenix_Screenplay_Consequence_BaseConsequence_1_SubjectText" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.SubjectText">SubjectText</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Optional&lt;string&gt; SubjectText</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Util.Optional-1.html">Optional</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Consequence_BaseConsequence_1_AddRecordedInputValuesTo_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Consequence.BaseConsequence%601.AddRecordedInputValuesTo(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Consequence/BaseConsequence.cs/#L157">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Consequence_BaseConsequence_1_AddRecordedInputValuesTo_" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.AddRecordedInputValuesTo*"></a>
+  <h4 id="Agenix_Screenplay_Consequence_BaseConsequence_1_AddRecordedInputValuesTo_System_String_" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.AddRecordedInputValuesTo(System.String)">AddRecordedInputValuesTo(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected string AddRecordedInputValuesTo(string message)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">message</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Consequence_BaseConsequence_1_After_Agenix_Screenplay_IPerformable___.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Consequence.BaseConsequence%601.After(Agenix.Screenplay.IPerformable%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Consequence/BaseConsequence.cs/#L95">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Consequence_BaseConsequence_1_After_" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.After*"></a>
+  <h4 id="Agenix_Screenplay_Consequence_BaseConsequence_1_After_Agenix_Screenplay_IPerformable___" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.After(Agenix.Screenplay.IPerformable[])">After(params IPerformable[])</h4>
+  <div class="markdown level1 summary"><p>Evaluate the consequence only after performing the specified tasks.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IConsequence&lt;T&gt; After(params IPerformable[] actions)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Screenplay.IPerformable.html">IPerformable</a>[]</td>
+        <td><span class="parametername">actions</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Screenplay.IConsequence-1.html">IConsequence</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Consequence_BaseConsequence_1_Because_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Consequence.BaseConsequence%601.Because(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Consequence/BaseConsequence.cs/#L89">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Consequence_BaseConsequence_1_Because_" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.Because*"></a>
+  <h4 id="Agenix_Screenplay_Consequence_BaseConsequence_1_Because_System_String_" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.Because(System.String)">Because(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual IConsequence&lt;T&gt; Because(string explanation)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">explanation</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Screenplay.IConsequence-1.html">IConsequence</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Consequence_BaseConsequence_1_ErrorFrom_System_Exception_.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Consequence.BaseConsequence%601.ErrorFrom(System.Exception)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Consequence/BaseConsequence.cs/#L110">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Consequence_BaseConsequence_1_ErrorFrom_" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.ErrorFrom*"></a>
+  <h4 id="Agenix_Screenplay_Consequence_BaseConsequence_1_ErrorFrom_System_Exception_" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.ErrorFrom(System.Exception)">ErrorFrom(Exception)</h4>
+  <div class="markdown level1 summary"><p>Processes the given exception and determines the type of error.
+If the exception is an assertion error or a recognized system error, it may return the exception itself.
+Otherwise, it returns null.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Exception ErrorFrom(Exception actualError)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a></td>
+        <td><span class="parametername">actualError</span></td>
+        <td><p>The exception to process and evaluate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Consequence_BaseConsequence_1_EvaluateFor_Agenix_Screenplay_Actor_.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Consequence.BaseConsequence%601.EvaluateFor(Agenix.Screenplay.Actor)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Consequence/BaseConsequence.cs/#L44">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Consequence_BaseConsequence_1_EvaluateFor_" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.EvaluateFor*"></a>
+  <h4 id="Agenix_Screenplay_Consequence_BaseConsequence_1_EvaluateFor_Agenix_Screenplay_Actor_" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.EvaluateFor(Agenix.Screenplay.Actor)">EvaluateFor(Actor)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract void EvaluateFor(Actor actor)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Screenplay.Actor.html">Actor</a></td>
+        <td><span class="parametername">actor</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Consequence_BaseConsequence_1_InputValues.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Consequence.BaseConsequence%601.InputValues%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Consequence/BaseConsequence.cs/#L149">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Consequence_BaseConsequence_1_InputValues_" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.InputValues*"></a>
+  <h4 id="Agenix_Screenplay_Consequence_BaseConsequence_1_InputValues" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.InputValues">InputValues()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected string InputValues()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Consequence_BaseConsequence_1_OrComplainWith_System_Type_.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Consequence.BaseConsequence%601.OrComplainWith(System.Type)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Consequence/BaseConsequence.cs/#L54">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Consequence_BaseConsequence_1_OrComplainWith_" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.OrComplainWith*"></a>
+  <h4 id="Agenix_Screenplay_Consequence_BaseConsequence_1_OrComplainWith_System_Type_" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.OrComplainWith(System.Type)">OrComplainWith(Type)</h4>
+  <div class="markdown level1 summary"><p>Specifies an alternative complaint type to use when the consequence is evaluated to an error.
+This allows customization of the type of exception or complaint to be thrown in case of failure.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual IConsequence&lt;T&gt; OrComplainWith(Type complaintType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">complaintType</span></td>
+        <td><p>The type of complaint or exception to be used when the consequence fails.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Screenplay.IConsequence-1.html">IConsequence</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Consequence_BaseConsequence_1_OrComplainWith_System_Type_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Consequence.BaseConsequence%601.OrComplainWith(System.Type%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Consequence/BaseConsequence.cs/#L68">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Consequence_BaseConsequence_1_OrComplainWith_" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.OrComplainWith*"></a>
+  <h4 id="Agenix_Screenplay_Consequence_BaseConsequence_1_OrComplainWith_System_Type_System_String_" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.OrComplainWith(System.Type,System.String)">OrComplainWith(Type, string)</h4>
+  <div class="markdown level1 summary"><p>Specifies the type of complaint and optional details for the consequence.
+This method provides flexibility to customize the complaint triggered upon evaluation failure.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual IConsequence&lt;T&gt; OrComplainWith(Type complaintType, string complaintDetails)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">complaintType</span></td>
+        <td><p>The type of the complaint to be used, typically represented as an exception type.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">complaintDetails</span></td>
+        <td><p>Optional detailed message or additional information associated with the complaint.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Screenplay.IConsequence-1.html">IConsequence</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Consequence_BaseConsequence_1_PerformSetupActionsAs_Agenix_Screenplay_Actor_.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Consequence.BaseConsequence%601.PerformSetupActionsAs(Agenix.Screenplay.Actor)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Consequence/BaseConsequence.cs/#L163">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Consequence_BaseConsequence_1_PerformSetupActionsAs_" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.PerformSetupActionsAs*"></a>
+  <h4 id="Agenix_Screenplay_Consequence_BaseConsequence_1_PerformSetupActionsAs_Agenix_Screenplay_Actor_" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.PerformSetupActionsAs(Agenix.Screenplay.Actor)">PerformSetupActionsAs(Actor)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void PerformSetupActionsAs(Actor actor)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Screenplay.Actor.html">Actor</a></td>
+        <td><span class="parametername">actor</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Consequence_BaseConsequence_1_ThrowComplaintTypeErrorIfSpecified_System_Exception_.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Consequence.BaseConsequence%601.ThrowComplaintTypeErrorIfSpecified(System.Exception)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Consequence/BaseConsequence.cs/#L144">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Consequence_BaseConsequence_1_ThrowComplaintTypeErrorIfSpecified_" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.ThrowComplaintTypeErrorIfSpecified*"></a>
+  <h4 id="Agenix_Screenplay_Consequence_BaseConsequence_1_ThrowComplaintTypeErrorIfSpecified_System_Exception_" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.ThrowComplaintTypeErrorIfSpecified(System.Exception)">ThrowComplaintTypeErrorIfSpecified(Exception)</h4>
+  <div class="markdown level1 summary"><p>Throws a complaint-specific exception if a complaint type has been specified.
+Uses the provided exception as the cause of the complaint.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void ThrowComplaintTypeErrorIfSpecified(Exception actualError)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a></td>
+        <td><span class="parametername">actualError</span></td>
+        <td><p>The exception to include as the underlying cause of the complaint.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Consequence_BaseConsequence_1_WhenAttemptingTo_Agenix_Screenplay_IPerformable_.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Consequence.BaseConsequence%601.WhenAttemptingTo(Agenix.Screenplay.IPerformable)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Consequence/BaseConsequence.cs/#L83">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Consequence_BaseConsequence_1_WhenAttemptingTo_" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.WhenAttemptingTo*"></a>
+  <h4 id="Agenix_Screenplay_Consequence_BaseConsequence_1_WhenAttemptingTo_Agenix_Screenplay_IPerformable_" data-uid="Agenix.Screenplay.Consequence.BaseConsequence`1.WhenAttemptingTo(Agenix.Screenplay.IPerformable)">WhenAttemptingTo(IPerformable)</h4>
+  <div class="markdown level1 summary"><p>Adds a specified performable action to the setup actions for the consequence.
+This action will be performed in the context of the Screenplay pattern when evaluating the consequence.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual IConsequence&lt;T&gt; WhenAttemptingTo(IPerformable performable)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Screenplay.IPerformable.html">IPerformable</a></td>
+        <td><span class="parametername">performable</span></td>
+        <td><p>The performable action to be executed during the setup phase of the consequence.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Screenplay.IConsequence-1.html">IConsequence</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Screenplay.IConsequence-1.html">IConsequence&lt;T&gt;</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Consequence_BaseConsequence_1.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Consequence.BaseConsequence%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Consequence/BaseConsequence.cs/#L36" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

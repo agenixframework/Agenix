@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class Matchers </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class Matchers ">
+    
+    <meta name="description" content="Provides utility methods to create and compose matchers for performing assertions and validation logic. This class contains static methods to facilitate common matching scenarios such as equality checks, pattern matching, substring checks, and logical operations on matchers.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers">
+
+
+
+  <h1 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers" class="text-break">Class Matchers</h1>
+  <div class="markdown level0 summary"><p>Provides utility methods to create and compose matchers for performing assertions and validation logic.
+This class contains static methods to facilitate common matching scenarios such as equality checks,
+pattern matching, substring checks, and logical operations on matchers.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">Matchers</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Validation.html">Validation</a>.<a class="xref" href="Agenix.Validation.NHamcrest.html">NHamcrest</a>.<a class="xref" href="Agenix.Validation.NHamcrest.Validation.html">Validation</a>.<a class="xref" href="Agenix.Validation.NHamcrest.Validation.Matcher.html">Matcher</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Validation.NHamcrest.dll</h6>
+  <h5 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class Matchers</code></pre>
+  </div>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_AnyOf__1_System_Collections_Generic_IEnumerable_NHamcrest_IMatcher___0___.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.AnyOf%60%601(System.Collections.Generic.IEnumerable%7BNHamcrest.IMatcher%7B%60%600%7D%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L99">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_AnyOf_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.AnyOf*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_AnyOf__1_System_Collections_Generic_IEnumerable_NHamcrest_IMatcher___0___" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.AnyOf``1(System.Collections.Generic.IEnumerable{NHamcrest.IMatcher{``0}})">AnyOf&lt;T&gt;(IEnumerable&lt;IMatcher&lt;T&gt;&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;T&gt; AnyOf&lt;T&gt;(IEnumerable&lt;IMatcher&lt;T&gt;&gt; matchers)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<span class="xref">IMatcher</span>&lt;T&gt;&gt;</td>
+        <td><span class="parametername">matchers</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_BlankOrNullString.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.BlankOrNullString%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L249">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_BlankOrNullString_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.BlankOrNullString*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_BlankOrNullString" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.BlankOrNullString">BlankOrNullString()</h4>
+  <div class="markdown level1 summary"><p>Returns a matcher that checks if a string is either null or a blank string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;string&gt; BlankOrNullString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><p>A matcher to validate strings that are null or consist only of whitespace.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_BlankString.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.BlankString%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L240">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_BlankString_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.BlankString*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_BlankString" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.BlankString">BlankString()</h4>
+  <div class="markdown level1 summary"><p>Returns a matcher for a blank string (zero or more whitespace characters).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IsBlankString BlankString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Validation.NHamcrest.Validation.Matcher.IsBlankString.html">IsBlankString</a></td>
+        <td><p>An instance of <a class="xref" href="Agenix.Validation.NHamcrest.Validation.Matcher.IsBlankString.html">IsBlankString</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_ContainsString_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.ContainsString(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L64">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_ContainsString_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.ContainsString*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_ContainsString_System_String_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.ContainsString(System.String)">ContainsString(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;string&gt; ContainsString(string substring)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">substring</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_ContainsStringIgnoringCase_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.ContainsStringIgnoringCase(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L69">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_ContainsStringIgnoringCase_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.ContainsStringIgnoringCase*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_ContainsStringIgnoringCase_System_String_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.ContainsStringIgnoringCase(System.String)">ContainsStringIgnoringCase(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;string&gt; ContainsStringIgnoringCase(string substring)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">substring</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_DescribedAs__1_System_String_NHamcrest_IMatcher___0__System_Object___.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.DescribedAs%60%601(System.String%2CNHamcrest.IMatcher%7B%60%600%7D%2CSystem.Object%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L39">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_DescribedAs_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.DescribedAs*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_DescribedAs__1_System_String_NHamcrest_IMatcher___0__System_Object___" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.DescribedAs``1(System.String,NHamcrest.IMatcher{``0},System.Object[])">DescribedAs&lt;T&gt;(string, IMatcher&lt;T&gt;, params object[])</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;T&gt; DescribedAs&lt;T&gt;(string description, IMatcher&lt;T&gt; matcher, params object[] values)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">description</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;T&gt;</td>
+        <td><span class="parametername">matcher</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</td>
+        <td><span class="parametername">values</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_Empty.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.Empty%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L254">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_Empty_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.Empty*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_Empty" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.Empty">Empty()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;IEnumerable&lt;dynamic&gt;&gt; Empty()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<span class="xref">dynamic</span>&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_EndsWith_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.EndsWith(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L84">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_EndsWith_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.EndsWith*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_EndsWith_System_String_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.EndsWith(System.String)">EndsWith(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;string&gt; EndsWith(string prefix)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">prefix</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_EndsWithIgnoringCase_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.EndsWithIgnoringCase(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L89">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_EndsWithIgnoringCase_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.EndsWithIgnoringCase*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_EndsWithIgnoringCase_System_String_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.EndsWithIgnoringCase(System.String)">EndsWithIgnoringCase(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;string&gt; EndsWithIgnoringCase(string prefix)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">prefix</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_EqualToIgnoringCase_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.EqualToIgnoringCase(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L49">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_EqualToIgnoringCase_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.EqualToIgnoringCase*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_EqualToIgnoringCase_System_String_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.EqualToIgnoringCase(System.String)">EqualToIgnoringCase(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;string&gt; EqualToIgnoringCase(string expected)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">expected</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_EqualToIgnoringWhiteSpace_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.EqualToIgnoringWhiteSpace(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L54">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_EqualToIgnoringWhiteSpace_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.EqualToIgnoringWhiteSpace*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_EqualToIgnoringWhiteSpace_System_String_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.EqualToIgnoringWhiteSpace(System.String)">EqualToIgnoringWhiteSpace(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;string&gt; EqualToIgnoringWhiteSpace(string expected)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">expected</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_EqualTo__1___0_.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.EqualTo%60%601(%60%600)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L44">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_EqualTo_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.EqualTo*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_EqualTo__1___0_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.EqualTo``1(``0)">EqualTo&lt;T&gt;(T)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;T&gt; EqualTo&lt;T&gt;(T value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_GreaterThan__1___0_.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.GreaterThan%60%601(%60%600)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L259">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_GreaterThan_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.GreaterThan*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_GreaterThan__1___0_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.GreaterThan``1(``0)">GreaterThan&lt;T&gt;(T)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;T&gt; GreaterThan&lt;T&gt;(T value) where T : IComparable&lt;T&gt;</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_In__1_System_Collections_Generic_ICollection___0__.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.In%60%601(System.Collections.Generic.ICollection%7B%60%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L131">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_In_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.In*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_In__1_System_Collections_Generic_ICollection___0__" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.In``1(System.Collections.Generic.ICollection{``0})">In&lt;T&gt;(ICollection&lt;T&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;T&gt; In&lt;T&gt;(ICollection&lt;T&gt; collection)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;T&gt;</td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_In__1___0___.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.In%60%601(%60%600%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L163">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_In_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.In*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_In__1___0___" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.In``1(``0[])">In&lt;T&gt;(params T[])</h4>
+  <div class="markdown level1 summary"><p>Creates a matcher that matches when the examined object is found within
+the specified array.
+For example:
+<code>Assert.That(&quot;foo&quot;, IsIn.In(new[] { &quot;bar&quot;, &quot;foo&quot; }));</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;T&gt; In&lt;T&gt;(params T[] elements)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>T[]</td>
+        <td><span class="parametername">elements</span></td>
+        <td><p>The array in which matching items must be found.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;T&gt;</td>
+        <td><p>Returns the matcher.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type of the matcher.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_IsEmptyOrNullString.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.IsEmptyOrNullString%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L231">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_IsEmptyOrNullString_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.IsEmptyOrNullString*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_IsEmptyOrNullString" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.IsEmptyOrNullString">IsEmptyOrNullString()</h4>
+  <div class="markdown level1 summary"><p>Creates a matcher of type <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a> that matches when the examined string is null or has zero length.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;string&gt; IsEmptyOrNullString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><p>The matcher instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_IsEmptyString.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.IsEmptyString%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L222">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_IsEmptyString_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.IsEmptyString*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_IsEmptyString" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.IsEmptyString">IsEmptyString()</h4>
+  <div class="markdown level1 summary"><p>Creates a matcher of type <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a> that matches when the examined string has zero length.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;string&gt; IsEmptyString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><p>The matcher instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_IsIn__1_System_Collections_Generic_ICollection___0__.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.IsIn%60%601(System.Collections.Generic.ICollection%7B%60%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L117">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_IsIn_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.IsIn*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_IsIn__1_System_Collections_Generic_ICollection___0__" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.IsIn``1(System.Collections.Generic.ICollection{``0})">IsIn&lt;T&gt;(ICollection&lt;T&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use In(ICollection&lt;T&gt;) instead.&quot;)]
+public static IMatcher&lt;T&gt; IsIn&lt;T&gt;(ICollection&lt;T&gt; collection)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;T&gt;</td>
+        <td><span class="parametername">collection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_IsIn__1___0___.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.IsIn%60%601(%60%600%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L148">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_IsIn_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.IsIn*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_IsIn__1___0___" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.IsIn``1(``0[])">IsIn&lt;T&gt;(params T[])</h4>
+  <div class="markdown level1 summary"><p>Creates a matcher that matches when the examined object is found within the
+specified array.
+For example:
+<code>Assert.That(&quot;foo&quot;, IsIn.IsIn(new[] { &quot;bar&quot;, &quot;foo&quot; }));</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use In(T[]) instead.&quot;)]
+public static IMatcher&lt;T&gt; IsIn&lt;T&gt;(params T[] elements)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>T[]</td>
+        <td><span class="parametername">elements</span></td>
+        <td><p>The array in which matching items must be found.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;T&gt;</td>
+        <td><p>Returns the matcher.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type of the matcher.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_IsIn__1___0____remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method is deprecated. Use <a class="xref" href="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.html#Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_In__1___0___">In&lt;T&gt;(params T[])</a> instead.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_IsOneOf__1___0___.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.IsOneOf%60%601(%60%600%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L180">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_IsOneOf_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.IsOneOf*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_IsOneOf__1___0___" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.IsOneOf``1(``0[])">IsOneOf&lt;T&gt;(params T[])</h4>
+  <div class="markdown level1 summary"><p>Creates a matcher that matches when the examined object is equal to one of the
+specified elements.
+For example:
+<code>Assert.That(&quot;foo&quot;, IsIn.IsOneOf(&quot;bar&quot;, &quot;foo&quot;));</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use OneOf(T[]) instead.&quot;)]
+public static IMatcher&lt;T&gt; IsOneOf&lt;T&gt;(params T[] elements)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>T[]</td>
+        <td><span class="parametername">elements</span></td>
+        <td><p>The elements amongst which matching items will be found.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;T&gt;</td>
+        <td><p>Returns the matcher.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type of the matcher.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_IsOneOf__1___0____remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method is deprecated. Use <a class="xref" href="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.html#Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_OneOf__1___0___">OneOf&lt;T&gt;(params T[])</a> instead.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_MatchesPattern_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.MatchesPattern(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L94">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_MatchesPattern_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.MatchesPattern*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_MatchesPattern_System_String_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.MatchesPattern(System.String)">MatchesPattern(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;string&gt; MatchesPattern(string pattern)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">pattern</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_NotNullValue.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.NotNullValue%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L213">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_NotNullValue_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.NotNullValue*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_NotNullValue" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.NotNullValue">NotNullValue()</h4>
+  <div class="markdown level1 summary"><p>Creates a matcher that checks if the examined object is not null.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;object&gt; NotNullValue()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td><p>Returns a matcher that evaluates to true if the examined object is not null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_Not__1_NHamcrest_IMatcher___0__.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.Not%60%601(NHamcrest.IMatcher%7B%60%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L59">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_Not_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.Not*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_Not__1_NHamcrest_IMatcher___0__" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.Not``1(NHamcrest.IMatcher{``0})">Not&lt;T&gt;(IMatcher&lt;T&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;T&gt; Not&lt;T&gt;(IMatcher&lt;T&gt; matcher)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;T&gt;</td>
+        <td><span class="parametername">matcher</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_NullValue.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.NullValue%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L204">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_NullValue_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.NullValue*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_NullValue" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.NullValue">NullValue()</h4>
+  <div class="markdown level1 summary"><p>Creates a matcher that matches when the examined object is null.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;object&gt; NullValue()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td><p>Returns a matcher that matches null values.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_OneOf__1___0___.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.OneOf%60%601(%60%600%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L195">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_OneOf_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.OneOf*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_OneOf__1___0___" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.OneOf``1(``0[])">OneOf&lt;T&gt;(params T[])</h4>
+  <div class="markdown level1 summary"><p>Creates a matcher that matches when the examined object is equal to one of the
+specified elements.
+For example:
+<code>Assert.That(&quot;foo&quot;, IsIn.OneOf(&quot;bar&quot;, &quot;foo&quot;));</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;T&gt; OneOf&lt;T&gt;(params T[] elements)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>T[]</td>
+        <td><span class="parametername">elements</span></td>
+        <td><p>The elements amongst which matching items will be found.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;T&gt;</td>
+        <td><p>Returns the matcher.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type of the matcher.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_StartsWith_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.StartsWith(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L74">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_StartsWith_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.StartsWith*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_StartsWith_System_String_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.StartsWith(System.String)">StartsWith(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;string&gt; StartsWith(string prefix)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">prefix</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_StartsWithIgnoringCase_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.StartsWithIgnoringCase(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L79">View Source</a>
+  </span>
+  <a id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_StartsWithIgnoringCase_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.StartsWithIgnoringCase*"></a>
+  <h4 id="Agenix_Validation_NHamcrest_Validation_Matcher_Matchers_StartsWithIgnoringCase_System_String_" data-uid="Agenix.Validation.NHamcrest.Validation.Matcher.Matchers.StartsWithIgnoringCase(System.String)">StartsWithIgnoringCase(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMatcher&lt;string&gt; StartsWithIgnoringCase(string prefix)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">prefix</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IMatcher</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_NHamcrest_Validation_Matcher_Matchers.md&amp;value=---%0Auid%3A%20Agenix.Validation.NHamcrest.Validation.Matcher.Matchers%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.NHamcrest/Validation/Matcher/Matchers.cs/#L37" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

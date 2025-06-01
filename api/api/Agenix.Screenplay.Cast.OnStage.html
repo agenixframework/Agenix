@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class OnStage </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class OnStage ">
+    
+    <meta name="description" content="The stage is used to keep track of the actors taking part in a Screenplay test. It is useful if you don&#39;t keep track of the actors explicitly but just refer to them by name, as is often done in SpecFlow/ ReqnRoll scenarios. Actors can be referred to by name (which must be unique for a given actor) or a pronoun. The default pronouns are &amp;quot;he&amp;quot;,&amp;quot;she&amp;quot;,&amp;quot;they&amp;quot; and &amp;quot;it&amp;quot;, and they are used interchangeably - any pronoun will always refer to the last named actor who performed some action. Pronouns can be configured using the screenplay.pronouns configuration setting, e.g., screenplay.pronouns = il,elle The current stage is kept as an AsyncLocal object, so if you have multiple threads in the same Screenplay test, you need to propagate the stage to each new thread using the SetTheStage() method.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Screenplay.Cast.OnStage">
+
+
+
+  <h1 id="Agenix_Screenplay_Cast_OnStage" data-uid="Agenix.Screenplay.Cast.OnStage" class="text-break">Class OnStage</h1>
+  <div class="markdown level0 summary"><p>The stage is used to keep track of the actors taking part in a Screenplay test.
+It is useful if you don't keep track of the actors explicitly but just refer to them by name, as is often done
+in SpecFlow/ ReqnRoll scenarios.
+Actors can be referred to by name (which must be unique for a given actor) or a pronoun.
+The default pronouns are &quot;he&quot;,&quot;she&quot;,&quot;they&quot; and &quot;it&quot;, and they are used interchangeably - any pronoun will always
+refer to the last named actor who performed some action.
+Pronouns can be configured using the screenplay.pronouns configuration setting, e.g.,
+screenplay.pronouns = il,elle
+The current stage is kept as an AsyncLocal object, so if you have multiple threads in the same Screenplay test,
+you need to propagate the stage to each new thread using the SetTheStage() method.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">OnStage</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Screenplay.html">Screenplay</a>.<a class="xref" href="Agenix.Screenplay.Cast.html">Cast</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Screenplay.dll</h6>
+  <h5 id="Agenix_Screenplay_Cast_OnStage_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class OnStage</code></pre>
+  </div>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Cast_OnStage_ANewActor.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Cast.OnStage.ANewActor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Cast/OnStage.cs/#L115">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Cast_OnStage_ANewActor_" data-uid="Agenix.Screenplay.Cast.OnStage.ANewActor*"></a>
+  <h4 id="Agenix_Screenplay_Cast_OnStage_ANewActor" data-uid="Agenix.Screenplay.Cast.OnStage.ANewActor">ANewActor()</h4>
+  <div class="markdown level1 summary"><p>Create a new actor whose name is not yet known.
+The next time the TheActorCalled() method is used, this name will be assigned to this actor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Actor ANewActor()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Screenplay.Actor.html">Actor</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Cast_OnStage_DrawTheCurtain.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Cast.OnStage.DrawTheCurtain%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Cast/OnStage.cs/#L161">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Cast_OnStage_DrawTheCurtain_" data-uid="Agenix.Screenplay.Cast.OnStage.DrawTheCurtain*"></a>
+  <h4 id="Agenix_Screenplay_Cast_OnStage_DrawTheCurtain" data-uid="Agenix.Screenplay.Cast.OnStage.DrawTheCurtain">DrawTheCurtain()</h4>
+  <div class="markdown level1 summary"><p>Perform any cleanup actions on each actor on the stage.
+This calls the WrapUp() method if defined on each actor on the stage.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void DrawTheCurtain()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Cast_OnStage_GetStage.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Cast.OnStage.GetStage%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Cast/OnStage.cs/#L149">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Cast_OnStage_GetStage_" data-uid="Agenix.Screenplay.Cast.OnStage.GetStage*"></a>
+  <h4 id="Agenix_Screenplay_Cast_OnStage_GetStage" data-uid="Agenix.Screenplay.Cast.OnStage.GetStage">GetStage()</h4>
+  <div class="markdown level1 summary"><p>Get the current stage. Rarely needed for non-internal use, except when running tasks in parallel.
+In that case, you will need to call OnStage.SetTheStage(stage) in each parallel thread if you use
+OnStage methods such as TheActorInTheSpotlight()</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Stage GetStage()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Screenplay.Cast.Stage.html">Stage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Cast_OnStage_SetTheStage_Agenix_Screenplay_Cast_Casting_.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Cast.OnStage.SetTheStage(Agenix.Screenplay.Cast.Casting)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Cast/OnStage.cs/#L58">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Cast_OnStage_SetTheStage_" data-uid="Agenix.Screenplay.Cast.OnStage.SetTheStage*"></a>
+  <h4 id="Agenix_Screenplay_Cast_OnStage_SetTheStage_Agenix_Screenplay_Cast_Casting_" data-uid="Agenix.Screenplay.Cast.OnStage.SetTheStage(Agenix.Screenplay.Cast.Casting)">SetTheStage(Casting)</h4>
+  <div class="markdown level1 summary"><p>Set the stage before calling the actors</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Stage SetTheStage(Casting cast)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Screenplay.Cast.Casting.html">Casting</a></td>
+        <td><span class="parametername">cast</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Screenplay.Cast.Stage.html">Stage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Cast_OnStage_SetTheStage_Agenix_Screenplay_Cast_Stage_.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Cast.OnStage.SetTheStage(Agenix.Screenplay.Cast.Stage)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Cast/OnStage.cs/#L76">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Cast_OnStage_SetTheStage_" data-uid="Agenix.Screenplay.Cast.OnStage.SetTheStage*"></a>
+  <h4 id="Agenix_Screenplay_Cast_OnStage_SetTheStage_Agenix_Screenplay_Cast_Stage_" data-uid="Agenix.Screenplay.Cast.OnStage.SetTheStage(Agenix.Screenplay.Cast.Stage)">SetTheStage(Stage)</h4>
+  <div class="markdown level1 summary"><p>Set the stage to a specific stage object.
+This is rarely needed but sometimes comes in handy when running tasks in parallel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Stage SetTheStage(Stage stage)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Screenplay.Cast.Stage.html">Stage</a></td>
+        <td><span class="parametername">stage</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Screenplay.Cast.Stage.html">Stage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Cast_OnStage_TheActor_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Cast.OnStage.TheActor(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Cast/OnStage.cs/#L123">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Cast_OnStage_TheActor_" data-uid="Agenix.Screenplay.Cast.OnStage.TheActor*"></a>
+  <h4 id="Agenix_Screenplay_Cast_OnStage_TheActor_System_String_" data-uid="Agenix.Screenplay.Cast.OnStage.TheActor(System.String)">TheActor(string)</h4>
+  <div class="markdown level1 summary"><p>A shorter version of &quot;TheActorCalled()&quot;</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Actor TheActor(string actorName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">actorName</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Screenplay.Actor.html">Actor</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Cast_OnStage_TheActorCalled_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Cast.OnStage.TheActorCalled(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Cast/OnStage.cs/#L86">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Cast_OnStage_TheActorCalled_" data-uid="Agenix.Screenplay.Cast.OnStage.TheActorCalled*"></a>
+  <h4 id="Agenix_Screenplay_Cast_OnStage_TheActorCalled_System_String_" data-uid="Agenix.Screenplay.Cast.OnStage.TheActorCalled(System.String)">TheActorCalled(string)</h4>
+  <div class="markdown level1 summary"><p>Returns an actor with a given name, creating a new actor if the actor is not already on stage.
+If a pronoun is used (e.g &quot;she creates a new account&quot;) then the current actor in the spotlight will be used.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Actor TheActorCalled(string requiredActor)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">requiredActor</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Screenplay.Actor.html">Actor</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Cast_OnStage_TheActorInTheSpotlight.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Cast.OnStage.TheActorInTheSpotlight%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Cast/OnStage.cs/#L131">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Cast_OnStage_TheActorInTheSpotlight_" data-uid="Agenix.Screenplay.Cast.OnStage.TheActorInTheSpotlight*"></a>
+  <h4 id="Agenix_Screenplay_Cast_OnStage_TheActorInTheSpotlight" data-uid="Agenix.Screenplay.Cast.OnStage.TheActorInTheSpotlight">TheActorInTheSpotlight()</h4>
+  <div class="markdown level1 summary"><p>The actor in the spotlight is the last actor on the stage who has performed any activity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Actor TheActorInTheSpotlight()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Screenplay.Actor.html">Actor</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Cast_OnStage_TheStageIsSet.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Cast.OnStage.TheStageIsSet%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Cast/OnStage.cs/#L67">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Cast_OnStage_TheStageIsSet_" data-uid="Agenix.Screenplay.Cast.OnStage.TheStageIsSet*"></a>
+  <h4 id="Agenix_Screenplay_Cast_OnStage_TheStageIsSet" data-uid="Agenix.Screenplay.Cast.OnStage.TheStageIsSet">TheStageIsSet()</h4>
+  <div class="markdown level1 summary"><p>Check whether the stage has already been set.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TheStageIsSet()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Cast_OnStage_WithCurrentActor_Agenix_Screenplay_IPerformable___.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Cast.OnStage.WithCurrentActor(Agenix.Screenplay.IPerformable%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Cast/OnStage.cs/#L139">View Source</a>
+  </span>
+  <a id="Agenix_Screenplay_Cast_OnStage_WithCurrentActor_" data-uid="Agenix.Screenplay.Cast.OnStage.WithCurrentActor*"></a>
+  <h4 id="Agenix_Screenplay_Cast_OnStage_WithCurrentActor_Agenix_Screenplay_IPerformable___" data-uid="Agenix.Screenplay.Cast.OnStage.WithCurrentActor(Agenix.Screenplay.IPerformable[])">WithCurrentActor(params IPerformable[])</h4>
+  <div class="markdown level1 summary"><p>A shorter version of &quot;TheActorInTheSpotlight().AttemptsTo(...)&quot;</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void WithCurrentActor(params IPerformable[] performTasks)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Screenplay.IPerformable.html">IPerformable</a>[]</td>
+        <td><span class="parametername">performTasks</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Screenplay_Cast_OnStage.md&amp;value=---%0Auid%3A%20Agenix.Screenplay.Cast.OnStage%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Screenplay/Cast/OnStage.cs/#L43" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

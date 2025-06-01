@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Namespace Agenix.Api.IO </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Namespace Agenix.Api.IO ">
+    
+    
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Api.IO">
+
+  <h1 id="Agenix_Api_IO" data-uid="Agenix.Api.IO" class="text-break">Namespace Agenix.Api.IO</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">
+Classes
+</h3>
+      <h4><a class="xref" href="Agenix.Api.IO.AbstractResource.html">AbstractResource</a></h4>
+      <section><p>Convenience base class for <a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a>
+implementations, pre-implementing typical behavior.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.IO.AssemblyResource.html">AssemblyResource</a></h4>
+      <section><p>An <a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a> implementation for
+resources stored within assemblies.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.IO.ConfigSectionResource.html">ConfigSectionResource</a></h4>
+      <section><p>Used when retrieving information from the standard .NET configuration
+files (App.config / Web.config).</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.IO.ConfigurableResourceLoader.html">ConfigurableResourceLoader</a></h4>
+      <section><p>Configurable implementation of the
+<a class="xref" href="Agenix.Api.IO.IResourceLoader.html">IResourceLoader</a> interface.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.IO.FileSystemResource.html">FileSystemResource</a></h4>
+      <section><p>A <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.file">File</a> backed resource.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.IO.InputStreamResource.html">InputStreamResource</a></h4>
+      <section><p><a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a> adapter implementation for a
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a>.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.IO.ResourceHandlerRegistry.html">ResourceHandlerRegistry</a></h4>
+      <section><p>Registry class that allows users to register and retrieve protocol handlers.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.IO.StringResource.html">StringResource</a></h4>
+      <section><p>A <a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a> adapter implementation encapsulating a simple string.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.IO.UrlResource.html">UrlResource</a></h4>
+      <section><p>A <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a> backed resource
+on top of <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.webrequest">WebRequest</a></p>
+</section>
+    <h3 id="interfaces">
+Interfaces
+</h3>
+      <h4><a class="xref" href="Agenix.Api.IO.IInputStreamSource.html">IInputStreamSource</a></h4>
+      <section><p>Simple interface for objects that are sources for
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a>s.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a></h4>
+      <section><p>The central abstraction for Agenix access to resources such as
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a>s.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.IO.IResourceLoader.html">IResourceLoader</a></h4>
+      <section><p>Describes an object that can load
+<a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a>s.</p>
+</section>
+
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

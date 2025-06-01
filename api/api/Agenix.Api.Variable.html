@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Namespace Agenix.Api.Variable </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Namespace Agenix.Api.Variable ">
+    
+    
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Api.Variable">
+
+  <h1 id="Agenix_Api_Variable" data-uid="Agenix.Api.Variable" class="text-break">Namespace Agenix.Api.Variable</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">
+Classes
+</h3>
+      <h4><a class="xref" href="Agenix.Api.Variable.GlobalVariables.html">GlobalVariables</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Variable.GlobalVariables.Builder.html">GlobalVariables.Builder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Variable.SegmentVariableExtractorRegistry.html">SegmentVariableExtractorRegistry</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Variable.SegmentVariableExtractorRegistry.AbstractSegmentVariableExtractor.html">SegmentVariableExtractorRegistry.AbstractSegmentVariableExtractor</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Variable.SegmentVariableExtractorRegistry.IndexedSegmentVariableExtractor.html">SegmentVariableExtractorRegistry.IndexedSegmentVariableExtractor</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Variable.SegmentVariableExtractorRegistry.MapVariableExtractor.html">SegmentVariableExtractorRegistry.MapVariableExtractor</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Variable.SegmentVariableExtractorRegistry.ObjectFieldValueExtractor.html">SegmentVariableExtractorRegistry.ObjectFieldValueExtractor</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Variable.VariableExpressionIterator.html">VariableExpressionIterator</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Variable.VariableExpressionIterator.VariableSegment.html">VariableExpressionIterator.VariableSegment</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Variable.VariableExpressionSegmentMatcher.html">VariableExpressionSegmentMatcher</a></h4>
+      <section><p>Matcher that matches segments of variable expressions. The matcher is capable of matching the following segments:</p>
+<ul>
+<li>indexed variables/properties segments of the form: 'var[1]'</li>
+<li>jsonPath segments of the form: 'jsonPath($.person.name)'</li>
+<li>xpath segments of the form: 'xpath(//person/name)'
+Note that jsonPath and xpath segments must terminate the expression, i.e. they cannot be followed by further
+expressions.
+If a variable expression is used to access a variable from the test context it must start with a variable segment
+which
+extracts the first variable from the test context.
+Sample valid variable expressions:</li>
+<li>var1</li>
+<li>var1.var2</li>
+<li>var1[1]</li>
+<li>var1[1].var2[2]</li>
+<li>var1[1].var2[2].var3</li>
+<li>var1.jsonPath($.person.name)</li>
+<li>var1[1].jsonPath($.person.name)</li>
+<li>var1.xpath(//title[@lang='en'])</li>
+<li>var1[1].xpath(//title[@lang='en'])</li>
+</ul>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Variable.VariableUtils.html">VariableUtils</a></h4>
+      <section><p>Utility class manipulating test variables.</p>
+</section>
+    <h3 id="interfaces">
+Interfaces
+</h3>
+      <h4><a class="xref" href="Agenix.Api.Variable.ISegmentVariableExtractor.html">ISegmentVariableExtractor</a></h4>
+      <section><p>Class extracting values of segments of VariableExpressions.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Variable.IVariableExtractor.html">IVariableExtractor</a></h4>
+      <section><p>Defines a contract for extracting variables from messages and updating test contexts accordingly.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Variable.IVariableExtractor.IBuilder-2.html">IVariableExtractor.IBuilder&lt;T, TB&gt;</a></h4>
+      <section><p>Provides a contract for building instances of implementations that adhere to the IVariableExtractor and
+IMessageProcessor interfaces.</p>
+</section>
+    <h3 id="delegates">
+Delegates
+</h3>
+      <h4><a class="xref" href="Agenix.Api.Variable.VariableExtractor.html">VariableExtractor</a></h4>
+      <section></section>
+
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

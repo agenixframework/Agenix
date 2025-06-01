@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Namespace Agenix.Core </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Namespace Agenix.Core ">
+    
+    
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Core">
+
+  <h1 id="Agenix_Core" data-uid="Agenix.Core" class="text-break">Namespace Agenix.Core</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">
+Classes
+</h3>
+      <h4><a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html">AbstractTestActionBuilder&lt;T, TS&gt;</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Agenix.html">Agenix</a></h4>
+      <section><p>Represents the core class within the Agenix framework, responsible for managing and providing access to the Agenix
+context.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.AgenixContext.html">AgenixContext</a></h4>
+      <section><p>Default Agenix context implementation holds basic components used in Agenix.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.AgenixContext.Builder.html">AgenixContext.Builder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.AgenixInstanceManager.html">AgenixInstanceManager</a></h4>
+      <section><p>Instance creation manager creates new Agenix instances or always a singleton based on instance creation strategy.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.DefaultAgenixContextProvider.html">DefaultAgenixContextProvider</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.DefaultTestCase.html">DefaultTestCase</a></h4>
+      <section><p>Default implementation of a test case that includes actions and supports test grouping, test parameters, and
+completes test results with duration.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.DefaultTestCaseRunner.html">DefaultTestCaseRunner</a></h4>
+      <section><p>Default implementation of the ITestCaseRunner interface, providing methods
+to manage and execute test cases.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.DefaultTestCaseRunner.DefaultTestCaseRunnerProvider.html">DefaultTestCaseRunner.DefaultTestCaseRunnerProvider</a></h4>
+      <section><p>Provides methods to create instances of ITestCaseRunner, specifically DefaultTestCaseRunner,
+with different configurations including test context and test case.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.DelegatingTestAction.html">DelegatingTestAction</a></h4>
+      <section><p>Executes test actions by delegating the execution work to another specified test action.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.DelegatingTestBehaviour.html">DelegatingTestBehaviour</a></h4>
+      <section><p>Represents a test behavior that executes by delegating work to another specified test action.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.FuncITestActionBuilder-1.html">FuncITestActionBuilder&lt;T&gt;</a></h4>
+      <section><p>A builder class that creates instances of ITestAction using a provided function delegate.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.TestCaseMetaInfo.html">TestCaseMetaInfo</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.TestCaseRunnerFactory.html">TestCaseRunnerFactory</a></h4>
+      <section><p>The TestCaseRunnerFactory class provides methods to create instances of ITestCaseRunner.
+It includes functionality to create test case runners based on a given TestContext or TestCase.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.TestContextFactory.html">TestContextFactory</a></h4>
+      <section><p>Factory class to create instances of TestContext with specified configurations.</p>
+</section>
+    <h3 id="interfaces">
+Interfaces
+</h3>
+      <h4><a class="xref" href="Agenix.Core.IAgenixContextProvider.html">IAgenixContextProvider</a></h4>
+      <section><p>Provides an interface for creating and managing Agenix contexts. This interface defines methods
+for creating contexts and locating an Agenix context provider. It is primarily used to manage the
+lifecycle and configuration of Agenix-related services.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.IAgenixInstanceProcessor.html">IAgenixInstanceProcessor</a></h4>
+      <section><p>Agenix instance processor takes part in instance creation process.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.IGherkinTestActionRunner.html">IGherkinTestActionRunner</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.IScoped.html">IScoped</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.ITestResultInstanceProvider.html">ITestResultInstanceProvider</a></h4>
+      <section><p>Provides methods to create instances of TestResult for different outcomes of a test case.
+Implementors may decide to create TestResults with specific parameters derived from the TestCase.</p>
+</section>
+    <h3 id="enums">
+Enums
+</h3>
+      <h4><a class="xref" href="Agenix.Core.TestCaseMetaInfo.Status.html">TestCaseMetaInfo.Status</a></h4>
+      <section></section>
+    <h3 id="delegates">
+Delegates
+</h3>
+      <h4><a class="xref" href="Agenix.Core.AgenixContextProvider.html">AgenixContextProvider</a></h4>
+      <section><p>AgenixContextProvider is a delegate that defines a method signature for
+creating instances of AgenixContext. It is used as a type for methods that
+provide or configure an AgenixContext within the application, facilitating
+context creation and management processes.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.AgenixInstanceProcessorDelegate.html">AgenixInstanceProcessorDelegate</a></h4>
+      <section><p>Represents a delegate for processing an Agenix instance during its creation process.</p>
+</section>
+
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

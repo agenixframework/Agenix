@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class HttpClientActionBuilder </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class HttpClientActionBuilder ">
+    
+    <meta name="description" content="Action executes http client operations such as sending requests and receiving responses.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Http.Actions.HttpClientActionBuilder">
+
+
+
+  <h1 id="Agenix_Http_Actions_HttpClientActionBuilder" data-uid="Agenix.Http.Actions.HttpClientActionBuilder" class="text-break">Class HttpClientActionBuilder</h1>
+  <div class="markdown level0 summary"><p>Action executes http client operations such as sending requests and receiving responses.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Api.Spi.AbstractReferenceResolverAwareTestActionBuilder-1.html">AbstractReferenceResolverAwareTestActionBuilder</a>&lt;<a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>&gt;</div>
+    <div class="level2"><span class="xref">HttpClientActionBuilder</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder</a>&lt;<a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>&gt;.<span class="xref">IDelegatingTestActionBuilder</span>&lt;<a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>&gt;</div>
+    <div><a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder</a>&lt;<a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>&gt;</div>
+    <div><a class="xref" href="Agenix.Api.Spi.IReferenceResolverAware.html">IReferenceResolverAware</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Api.Spi.AbstractReferenceResolverAwareTestActionBuilder-1.html#Agenix_Api_Spi_AbstractReferenceResolverAwareTestActionBuilder_1__delegate">AbstractReferenceResolverAwareTestActionBuilder&lt;ITestAction&gt;._delegate</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Api.Spi.AbstractReferenceResolverAwareTestActionBuilder-1.html#Agenix_Api_Spi_AbstractReferenceResolverAwareTestActionBuilder_1_referenceResolver">AbstractReferenceResolverAwareTestActionBuilder&lt;ITestAction&gt;.referenceResolver</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Api.Spi.AbstractReferenceResolverAwareTestActionBuilder-1.html#Agenix_Api_Spi_AbstractReferenceResolverAwareTestActionBuilder_1_SetReferenceResolver_Agenix_Api_Spi_IReferenceResolver_">AbstractReferenceResolverAwareTestActionBuilder&lt;ITestAction&gt;.SetReferenceResolver(IReferenceResolver)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Api.Spi.AbstractReferenceResolverAwareTestActionBuilder-1.html#Agenix_Api_Spi_AbstractReferenceResolverAwareTestActionBuilder_1_Delegate">AbstractReferenceResolverAwareTestActionBuilder&lt;ITestAction&gt;.Delegate</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Http.html">Http</a>.<a class="xref" href="Agenix.Http.Actions.html">Actions</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Http.dll</h6>
+  <h5 id="Agenix_Http_Actions_HttpClientActionBuilder_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionBuilder&lt;ITestAction&gt;, ITestActionBuilder&lt;ITestAction&gt;.IDelegatingTestActionBuilder&lt;ITestAction&gt;, ITestActionBuilder&lt;ITestAction&gt;, IReferenceResolverAware</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder__ctor_Agenix_Api_Endpoint_IEndpoint_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.%23ctor(Agenix.Api.Endpoint.IEndpoint)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L45">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder__ctor_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.#ctor*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder__ctor_Agenix_Api_Endpoint_IEndpoint_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.#ctor(Agenix.Api.Endpoint.IEndpoint)">HttpClientActionBuilder(IEndpoint)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientActionBuilder(IEndpoint httpClient)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Endpoint.IEndpoint.html">IEndpoint</a></td>
+        <td><span class="parametername">httpClient</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder__ctor_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.%23ctor(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L50">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder__ctor_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.#ctor*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder__ctor_System_String_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.#ctor(System.String)">HttpClientActionBuilder(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientActionBuilder(string httpClientUri)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">httpClientUri</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_Build.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.Build%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L88">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_Build_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.Build*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_Build" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.Build">Build()</h4>
+  <div class="markdown level1 summary"><p>Builds a new test action instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override ITestAction Build()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></td>
+        <td><p>the built test action.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Agenix.Api.Spi.AbstractReferenceResolverAwareTestActionBuilder&lt;Agenix.Api.ITestAction&gt;.Build()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_Receive.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.Receive%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L78">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_Receive_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.Receive*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_Receive" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.Receive">Receive()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientActionBuilder.HttpClientReceiveActionBuilder Receive()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientActionBuilder.html">HttpClientActionBuilder</a>.<a class="xref" href="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientReceiveActionBuilder.html">HttpClientReceiveActionBuilder</a></td>
+        <td><p>An instance of HttpClientReceiveActionBuilder configured with the current HTTP client and context,
+allowing the user to define receive-specific actions.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_Send.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.Send%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L83">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_Send_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.Send*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_Send" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.Send">Send()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientActionBuilder.HttpClientSendActionBuilder Send()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientActionBuilder.html">HttpClientActionBuilder</a>.<a class="xref" href="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.html">HttpClientSendActionBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_WithReferenceResolver_Agenix_Api_Spi_IReferenceResolver_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.WithReferenceResolver(Agenix.Api.Spi.IReferenceResolver)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L65">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_WithReferenceResolver_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.WithReferenceResolver*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_WithReferenceResolver_Agenix_Api_Spi_IReferenceResolver_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.WithReferenceResolver(Agenix.Api.Spi.IReferenceResolver)">WithReferenceResolver(IReferenceResolver)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientActionBuilder WithReferenceResolver(IReferenceResolver newReferenceResolver)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Spi.IReferenceResolver.html">IReferenceResolver</a></td>
+        <td><span class="parametername">newReferenceResolver</span></td>
+        <td><p>The reference resolver to be used for resolving references in the HTTP client action builder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientActionBuilder.html">HttpClientActionBuilder</a></td>
+        <td><p>The current instance of HttpClientActionBuilder with the updated reference resolver, allowing for further
+configuration.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.ITestActionBuilder-1.IDelegatingTestActionBuilder-1.html">ITestActionBuilder&lt;T&gt;.IDelegatingTestActionBuilder&lt;TU&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Spi.IReferenceResolverAware.html">IReferenceResolverAware</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L38" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

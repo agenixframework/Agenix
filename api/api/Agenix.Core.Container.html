@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Namespace Agenix.Core.Container </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Namespace Agenix.Core.Container ">
+    
+    
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Core.Container">
+
+  <h1 id="Agenix_Core_Container" data-uid="Agenix.Core.Container" class="text-break">Namespace Agenix.Core.Container</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">
+Classes
+</h3>
+      <h4><a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html">AbstractActionContainer</a></h4>
+      <section><p>AbstractActionContainer is an abstract base class that provides common functionality for action containers.
+It facilitates the management and execution of a list of nested actions and supports action lifecycle operations.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.Container.AbstractExceptionContainerBuilder-2.html">AbstractExceptionContainerBuilder&lt;T, S&gt;</a></h4>
+      <section><p>Represents an abstract builder for exception containers that handle specific action configurations
+prior to their execution within the framework. This class provides methods to add actions or action builders
+to the container before execution.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.Container.AbstractIteratingActionContainer.html">AbstractIteratingActionContainer</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.AbstractIteratingContainerBuilder-2.html">AbstractIteratingContainerBuilder&lt;T, TS&gt;</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.AbstractTestBoundaryActionContainer.html">AbstractTestBoundaryActionContainer</a></h4>
+      <section><p>Represents an abstract container for boundary action tests, inheriting from <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html">AbstractActionContainer</a>.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.Container.AbstractTestBoundaryContainerBuilder-2.html">AbstractTestBoundaryContainerBuilder&lt;T, S&gt;</a></h4>
+      <section><p>AbstractTestBoundaryContainerBuilder is an abstract class that facilitates building test boundary action containers
+with specific conditions and properties. This builder pattern allows users to specify conditions on test names,
+test groups, namespaces, system properties, and environment variables, ensuring that the before-test logic
+runs only when these conditions match.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.Container.AbstractTestContainerBuilder-2.html">AbstractTestContainerBuilder&lt;T, TS&gt;</a></h4>
+      <section><p>Abstract base class providing a builder structure for test action containers.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.Container.AssertContainer.html">AssertContainer</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.AssertContainer.Builder.html">AssertContainer.Builder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.Async.html">Async</a></h4>
+      <section><p>Represents an asynchronous action container that manages the execution
+of a set of actions asynchronously in a test context. It handles both
+the primary action execution and the retrieval of success or error
+actions configured within the container.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.Container.Async.Builder.html">Async.Builder</a></h4>
+      <section><p>Builder class for constructing instances of the Async action container.
+It provides methods to define success and error actions, allowing these
+actions to be specified either individually or in bulk. The builder follows
+a fluent API pattern to enable chaining and facilitate flexible configuration.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.Container.Catch.html">Catch</a></h4>
+      <section><p>Action catches possible exceptions in nested test actions.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.Container.Catch.Builder.html">Catch.Builder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.ConditionEvaluator.html">ConditionEvaluator</a></h4>
+      <section><p>The <code>ConditionEvaluator</code> class is responsible for evaluating condition expressions against a given context.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.Container.Conditional.html">Conditional</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.Conditional.Builder.html">Conditional.Builder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.CustomTestContainerBuilder-1.html">CustomTestContainerBuilder&lt;T&gt;</a></h4>
+      <section><p>Represents a builder pattern class for creating instances of test action containers.
+This class extends the <a class="xref" href="Agenix.Core.Container.AbstractTestContainerBuilder-2.html">AbstractTestContainerBuilder&lt;T, TS&gt;</a> and implements
+the <a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a> interface.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.Container.FinallySequence.html">FinallySequence</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.FinallySequence.Builder.html">FinallySequence.Builder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.Iterate.html">Iterate</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.Iterate.Builder.html">Iterate.Builder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.IterationEvaluator.html">IterationEvaluator</a></h4>
+      <section><p>Represents an evaluator that determines the outcome of iterations based on specified conditions.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.Container.Parallel.html">Parallel</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.Parallel.Builder.html">Parallel.Builder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.RepeatOnErrorUntilTrue.html">RepeatOnErrorUntilTrue</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.RepeatOnErrorUntilTrue.Builder.html">RepeatOnErrorUntilTrue.Builder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.RepeatUntilTrue.html">RepeatUntilTrue</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.RepeatUntilTrue.Builder.html">RepeatUntilTrue.Builder</a></h4>
+      <section><p>Initiates the creation of a repeat-until loop and provides methods to configure it.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.Container.Sequence.html">Sequence</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.Sequence.Builder.html">Sequence.Builder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.SequenceAfterTest.html">SequenceAfterTest</a></h4>
+      <section><p>Sequence of test actions executed after a test case. Container execution can be restricted according to test name ,
+namespace and test groups.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.Container.SequenceAfterTest.Builder.html">SequenceAfterTest.Builder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.SequenceBeforeTest.html">SequenceBeforeTest</a></h4>
+      <section><p>Sequence of test actions executed before a test case. Container execution can be restricted according to test
+name,namespace and test groups.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.Container.SequenceBeforeTest.Builder.html">SequenceBeforeTest.Builder</a></h4>
+      <section><p>Builder class for constructing instances of SequenceBeforeTest.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.Container.Timer.html">Timer</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.Timer.Builder.html">Timer.Builder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.Wait.html">Wait</a></h4>
+      <section><p>Pause the test execution until the condition is met or the wait time has been exceeded.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.Container.Wait.Builder-1.html">Wait.Builder&lt;C&gt;</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.WaitActionConditionBuilder.html">WaitActionConditionBuilder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.WaitConditionBuilder-2.html">WaitConditionBuilder&lt;T, S&gt;</a></h4>
+      <section><p>An abstract builder class responsible for creating instances of a Wait action
+with configurable conditions and intervals.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.Container.WaitFileConditionBuilder.html">WaitFileConditionBuilder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.WaitHttpConditionBuilder.html">WaitHttpConditionBuilder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Core.Container.WaitMessageConditionBuilder.html">WaitMessageConditionBuilder</a></h4>
+      <section></section>
+    <h3 id="interfaces">
+Interfaces
+</h3>
+      <h4><a class="xref" href="Agenix.Core.Container.ITestActionContainerBuilder-2.html">ITestActionContainerBuilder&lt;T, S&gt;</a></h4>
+      <section><p>Interface for building test action containers.</p>
+</section>
+    <h3 id="delegates">
+Delegates
+</h3>
+      <h4><a class="xref" href="Agenix.Core.Container.ConditionEvaluator.ConditionExpression.html">ConditionEvaluator.ConditionExpression</a></h4>
+      <section><p>Represents a delegate that defines a condition expression for evaluation.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Core.Container.IterationEvaluator.IteratingConditionExpression.html">IterationEvaluator.IteratingConditionExpression</a></h4>
+      <section><p>Delegate that defines the condition used for evaluating each iteration.
+Accepts an index and a <a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a> and returns a boolean indicating whether the condition is met.</p>
+</section>
+
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

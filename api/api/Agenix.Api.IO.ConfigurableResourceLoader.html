@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class ConfigurableResourceLoader </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class ConfigurableResourceLoader ">
+    
+    <meta name="description" content="Configurable implementation of the  interface.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Api.IO.ConfigurableResourceLoader">
+
+
+
+  <h1 id="Agenix_Api_IO_ConfigurableResourceLoader" data-uid="Agenix.Api.IO.ConfigurableResourceLoader" class="text-break">Class ConfigurableResourceLoader</h1>
+  <div class="markdown level0 summary"><p>Configurable implementation of the
+<a class="xref" href="Agenix.Api.IO.IResourceLoader.html">IResourceLoader</a> interface.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">ConfigurableResourceLoader</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.IO.IResourceLoader.html">IResourceLoader</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Api.html">Api</a>.<a class="xref" href="Agenix.Api.IO.html">IO</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Api.dll</h6>
+  <h5 id="Agenix_Api_IO_ConfigurableResourceLoader_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ConfigurableResourceLoader : IResourceLoader</code></pre>
+  </div>
+  <h5 id="Agenix_Api_IO_ConfigurableResourceLoader_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+    This <a class="xref" href="Agenix.Api.IO.IResourceLoader.html">IResourceLoader</a> implementation
+    supports the configuration of resource access protocols and the
+    corresponding .NET types that know how to handle those protocols.
+</p>
+<p>
+    Basic protocol-to-resource type mappings are also defined by this class,
+    while others can be added either internally, by application contexts
+    extending this class, or externally, by the end user configuring the
+    context.
+</p>
+<p>
+    Only one resource type can be defined for each protocol, but multiple
+    protocols can map to the same resource type (for example, the
+    <code>"http"</code> and <code>"ftp"</code> protocols both map to the
+    <a class="xref" href="Agenix.Api.IO.UrlResource.html">UrlResource</a> type. The protocols that are
+    mapped by default can be found in the following list.
+</p>
+<p>
+    <ul><li>assembly</li><li>config</li><li>file</li><li>http</li><li>https</li></ul>
+
+</div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_ConfigurableResourceLoader__ctor.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.ConfigurableResourceLoader.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/ConfigurableResourceLoader.cs/#L96">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_ConfigurableResourceLoader__ctor_" data-uid="Agenix.Api.IO.ConfigurableResourceLoader.#ctor*"></a>
+  <h4 id="Agenix_Api_IO_ConfigurableResourceLoader__ctor" data-uid="Agenix.Api.IO.ConfigurableResourceLoader.#ctor">ConfigurableResourceLoader()</h4>
+  <div class="markdown level1 summary"><p>Creates a new instance of the
+<a class="xref" href="Agenix.Api.IO.ConfigurableResourceLoader.html">ConfigurableResourceLoader</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConfigurableResourceLoader()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_ConfigurableResourceLoader__ctor_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.ConfigurableResourceLoader.%23ctor(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/ConfigurableResourceLoader.cs/#L104">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_ConfigurableResourceLoader__ctor_" data-uid="Agenix.Api.IO.ConfigurableResourceLoader.#ctor*"></a>
+  <h4 id="Agenix_Api_IO_ConfigurableResourceLoader__ctor_System_String_" data-uid="Agenix.Api.IO.ConfigurableResourceLoader.#ctor(System.String)">ConfigurableResourceLoader(string)</h4>
+  <div class="markdown level1 summary"><p>Creates a new instance of the
+<a class="xref" href="Agenix.Api.IO.ConfigurableResourceLoader.html">ConfigurableResourceLoader</a> class using the specified default protocol for unqualified resources.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConfigurableResourceLoader(string defaultProtocol)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">defaultProtocol</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_ConfigurableResourceLoader_ProtocolSeparator.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.ConfigurableResourceLoader.ProtocolSeparator%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/ConfigurableResourceLoader.cs/#L86">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_IO_ConfigurableResourceLoader_ProtocolSeparator" data-uid="Agenix.Api.IO.ConfigurableResourceLoader.ProtocolSeparator">ProtocolSeparator</h4>
+  <div class="markdown level1 summary"><p>The separator between the protocol name and the resource name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string ProtocolSeparator = &quot;://&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_ConfigurableResourceLoader_DefaultResourceProtocol.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.ConfigurableResourceLoader.DefaultResourceProtocol%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/ConfigurableResourceLoader.cs/#L118">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_ConfigurableResourceLoader_DefaultResourceProtocol_" data-uid="Agenix.Api.IO.ConfigurableResourceLoader.DefaultResourceProtocol*"></a>
+  <h4 id="Agenix_Api_IO_ConfigurableResourceLoader_DefaultResourceProtocol" data-uid="Agenix.Api.IO.ConfigurableResourceLoader.DefaultResourceProtocol">DefaultResourceProtocol</h4>
+  <div class="markdown level1 summary"><p>The default protocol to use for unqualified resources.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string DefaultResourceProtocol { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_IO_ConfigurableResourceLoader_DefaultResourceProtocol_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    The initial value is <code>"file"</code>.
+</p>
+</div>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_ConfigurableResourceLoader_GetResource_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.ConfigurableResourceLoader.GetResource(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/ConfigurableResourceLoader.cs/#L138">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_ConfigurableResourceLoader_GetResource_" data-uid="Agenix.Api.IO.ConfigurableResourceLoader.GetResource*"></a>
+  <h4 id="Agenix_Api_IO_ConfigurableResourceLoader_GetResource_System_String_" data-uid="Agenix.Api.IO.ConfigurableResourceLoader.GetResource(System.String)">GetResource(string)</h4>
+  <div class="markdown level1 summary"><p>Returns a <a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a> that has been
+mapped to the protocol of the supplied <code class="paramref">resourceName</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IResource GetResource(string resourceName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">resourceName</span></td>
+        <td><p>The name of the resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a></td>
+        <td><p>A new <a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a> instance for the
+supplied <code class="paramref">resourceName</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uriformatexception">UriFormatException</a></td>
+        <td><p>If a <a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>
+mapping does not exist for the supplied <code class="paramref">resourceName</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a></td>
+        <td><p>In the case of any errors arising from the instantiation of the
+returned <a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a> instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_IO_ConfigurableResourceLoader_GetResource_System_String__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Agenix.Api.IO.ResourceHandlerRegistry.html#Agenix_Api_IO_ResourceHandlerRegistry_RegisterResourceHandler_System_String_System_Type_">RegisterResourceHandler</a>(<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>)</div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_ConfigurableResourceLoader_HasProtocol_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.ConfigurableResourceLoader.HasProtocol(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/ConfigurableResourceLoader.cs/#L166">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_ConfigurableResourceLoader_HasProtocol_" data-uid="Agenix.Api.IO.ConfigurableResourceLoader.HasProtocol*"></a>
+  <h4 id="Agenix_Api_IO_ConfigurableResourceLoader_HasProtocol_System_String_" data-uid="Agenix.Api.IO.ConfigurableResourceLoader.HasProtocol(System.String)">HasProtocol(string)</h4>
+  <div class="markdown level1 summary"><p>Checks that the supplied <code class="paramref">resourceName</code> starts
+with one of the protocol names currently mapped by this
+<a class="xref" href="Agenix.Api.IO.ConfigurableResourceLoader.html">ConfigurableResourceLoader</a> instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool HasProtocol(string resourceName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">resourceName</span></td>
+        <td><p>The name of the resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the supplied
+<code class="paramref">resourceName</code> starts with one of the known
+protocols; <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a> if not, or if the supplied
+<code class="paramref">resourceName</code> is itself <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.IO.IResourceLoader.html">IResourceLoader</a>
+  </div>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a></div>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_ConfigurableResourceLoader.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.ConfigurableResourceLoader%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/ConfigurableResourceLoader.cs/#L81" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

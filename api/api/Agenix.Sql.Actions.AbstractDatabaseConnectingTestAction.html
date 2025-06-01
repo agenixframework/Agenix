@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class AbstractDatabaseConnectingTestAction </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class AbstractDatabaseConnectingTestAction ">
+    
+    <meta name="description" content="An abstract class for executing database-related test actions with transactional support.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction">
+
+
+
+  <h1 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction" class="text-break">Class AbstractDatabaseConnectingTestAction</h1>
+  <div class="markdown level0 summary"><p>An abstract class for executing database-related test actions with transactional support.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">DaoSupport</span></div>
+    <div class="level2"><span class="xref">AdoDaoSupport</span></div>
+    <div class="level3"><span class="xref">AbstractDatabaseConnectingTestAction</span></div>
+      <div class="level4"><a class="xref" href="Agenix.Sql.Actions.ExecuteSqlAction.html">ExecuteSqlAction</a></div>
+      <div class="level4"><a class="xref" href="Agenix.Sql.Actions.ExecuteSqlQueryAction.html">ExecuteSqlQueryAction</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">IInitializingObject</span></div>
+    <div><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></div>
+    <div><a class="xref" href="Agenix.Api.Common.INamed.html">INamed</a></div>
+    <div><a class="xref" href="Agenix.Api.Common.IDescribed.html">IDescribed</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">AdoDaoSupport.CheckDaoConfig()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.data.idbconnection">AdoDaoSupport.DisposeConnection(IDbConnection, IDbProvider)</a>
+    </div>
+    <div>
+      <span class="xref">AdoDaoSupport.CreateAdoTemplate(IDbProvider)</span>
+    </div>
+    <div>
+      <span class="xref">AdoDaoSupport.CreateDbParametersBuilder()</span>
+    </div>
+    <div>
+      <span class="xref">AdoDaoSupport.CreateDbParameters()</span>
+    </div>
+    <div>
+      <span class="xref">AdoDaoSupport.DbProvider</span>
+    </div>
+    <div>
+      <span class="xref">AdoDaoSupport.AdoTemplate</span>
+    </div>
+    <div>
+      <span class="xref">AdoDaoSupport.Connection</span>
+    </div>
+    <div>
+      <span class="xref">AdoDaoSupport.ExceptionTranslator</span>
+    </div>
+    <div>
+      <span class="xref">DaoSupport.log</span>
+    </div>
+    <div>
+      <span class="xref">DaoSupport.InitDao()</span>
+    </div>
+    <div>
+      <span class="xref">DaoSupport.AfterPropertiesSet()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Sql.html">Sql</a>.<a class="xref" href="Agenix.Sql.Actions.html">Actions</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Sql.dll</h6>
+  <h5 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, IInitializingObject, ITestAction, INamed, IDescribed</code></pre>
+  </div>
+  <h5 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>This class provides the necessary setup for connecting to a database and executing
+SQL statements within a specified transaction context. It requires a subclass to
+implement the execution logic through the DoExecute method.</p>
+</div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction__ctor_System_String_System_String_Spring_Data_Common_IDbProvider_Spring_Data_Core_AdoTemplate_System_String_System_String_Spring_Transaction_IPlatformTransactionManager_System_String_System_Collections_Generic_List_System_String__.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.%23ctor(System.String%2CSystem.String%2CSpring.Data.Common.IDbProvider%2CSpring.Data.Core.AdoTemplate%2CSystem.String%2CSystem.String%2CSpring.Transaction.IPlatformTransactionManager%2CSystem.String%2CSystem.Collections.Generic.List%7BSystem.String%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/AbstractDatabaseConnectingTestAction.cs/#L81">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction__ctor_" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.#ctor*"></a>
+  <h4 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction__ctor_System_String_System_String_Spring_Data_Common_IDbProvider_Spring_Data_Core_AdoTemplate_System_String_System_String_Spring_Transaction_IPlatformTransactionManager_System_String_System_Collections_Generic_List_System_String__" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.#ctor(System.String,System.String,Spring.Data.Common.IDbProvider,Spring.Data.Core.AdoTemplate,System.String,System.String,Spring.Transaction.IPlatformTransactionManager,System.String,System.Collections.Generic.List{System.String})">AbstractDatabaseConnectingTestAction(string, string, IDbProvider?, AdoTemplate?, string?, string, IPlatformTransactionManager?, string, List&lt;string&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected AbstractDatabaseConnectingTestAction(string name, string description, IDbProvider? dbProvider, AdoTemplate? adoTemplate, string? sqlResourcePath, string transactionIsolationLevel, IPlatformTransactionManager? transactionManager, string transactionTimeout, List&lt;string&gt; statements)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">description</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">IDbProvider</span></td>
+        <td><span class="parametername">dbProvider</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">AdoTemplate</span></td>
+        <td><span class="parametername">adoTemplate</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">sqlResourcePath</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">transactionIsolationLevel</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">IPlatformTransactionManager</span></td>
+        <td><span class="parametername">transactionManager</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">transactionTimeout</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><span class="parametername">statements</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_sqlResourcePath.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.sqlResourcePath%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/AbstractDatabaseConnectingTestAction.cs/#L59">View Source</a>
+  </span>
+  <h4 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_sqlResourcePath" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.sqlResourcePath">sqlResourcePath</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly string? sqlResourcePath</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_statements.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.statements%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/AbstractDatabaseConnectingTestAction.cs/#L64">View Source</a>
+  </span>
+  <h4 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_statements" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.statements">statements</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly List&lt;string&gt; statements</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_transactionIsolationLevel.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.transactionIsolationLevel%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/AbstractDatabaseConnectingTestAction.cs/#L66">View Source</a>
+  </span>
+  <h4 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_transactionIsolationLevel" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.transactionIsolationLevel">transactionIsolationLevel</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly string? transactionIsolationLevel</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_transactionManager.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.transactionManager%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/AbstractDatabaseConnectingTestAction.cs/#L68">View Source</a>
+  </span>
+  <h4 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_transactionManager" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.transactionManager">transactionManager</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly IPlatformTransactionManager? transactionManager</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IPlatformTransactionManager</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_transactionTimeout.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.transactionTimeout%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/AbstractDatabaseConnectingTestAction.cs/#L69">View Source</a>
+  </span>
+  <h4 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_transactionTimeout" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.transactionTimeout">transactionTimeout</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly string? transactionTimeout</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_Name.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.Name%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/AbstractDatabaseConnectingTestAction.cs/#L163">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_Name_" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.Name*"></a>
+  <h4 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_Name" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.Name">Name</h4>
+  <div class="markdown level1 summary"><p>Retrieves the name of the current test action instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Name { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The name of the current instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_SqlResourcePath.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.SqlResourcePath%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/AbstractDatabaseConnectingTestAction.cs/#L106">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_SqlResourcePath_" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.SqlResourcePath*"></a>
+  <h4 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_SqlResourcePath" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.SqlResourcePath">SqlResourcePath</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? SqlResourcePath { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_Statements.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.Statements%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/AbstractDatabaseConnectingTestAction.cs/#L110">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_Statements_" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.Statements*"></a>
+  <h4 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_Statements" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.Statements">Statements</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;string&gt; Statements { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_TransactionIsolationLevel.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.TransactionIsolationLevel%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/AbstractDatabaseConnectingTestAction.cs/#L117">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_TransactionIsolationLevel_" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.TransactionIsolationLevel*"></a>
+  <h4 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_TransactionIsolationLevel" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.TransactionIsolationLevel">TransactionIsolationLevel</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? TransactionIsolationLevel { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_TransactionManager.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.TransactionManager%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/AbstractDatabaseConnectingTestAction.cs/#L115">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_TransactionManager_" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.TransactionManager*"></a>
+  <h4 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_TransactionManager" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.TransactionManager">TransactionManager</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IPlatformTransactionManager? TransactionManager { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IPlatformTransactionManager</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_TransactionTimeout.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.TransactionTimeout%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/AbstractDatabaseConnectingTestAction.cs/#L119">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_TransactionTimeout_" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.TransactionTimeout*"></a>
+  <h4 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_TransactionTimeout" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.TransactionTimeout">TransactionTimeout</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? TransactionTimeout { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_CreateStatementsFromFileResource_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.CreateStatementsFromFileResource(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/AbstractDatabaseConnectingTestAction.cs/#L171">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_CreateStatementsFromFileResource_" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.CreateStatementsFromFileResource*"></a>
+  <h4 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_CreateStatementsFromFileResource_Agenix_Api_Context_TestContext_" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.CreateStatementsFromFileResource(Agenix.Api.Context.TestContext)">CreateStatementsFromFileResource(TestContext)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;string&gt; CreateStatementsFromFileResource(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_CreateStatementsFromFileResource_Agenix_Api_Context_TestContext_Agenix_Sql_Util_SqlUtils_ILastScriptLineDecorator_.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.CreateStatementsFromFileResource(Agenix.Api.Context.TestContext%2CAgenix.Sql.Util.SqlUtils.ILastScriptLineDecorator)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/AbstractDatabaseConnectingTestAction.cs/#L181">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_CreateStatementsFromFileResource_" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.CreateStatementsFromFileResource*"></a>
+  <h4 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_CreateStatementsFromFileResource_Agenix_Api_Context_TestContext_Agenix_Sql_Util_SqlUtils_ILastScriptLineDecorator_" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.CreateStatementsFromFileResource(Agenix.Api.Context.TestContext,Agenix.Sql.Util.SqlUtils.ILastScriptLineDecorator)">CreateStatementsFromFileResource(TestContext, ILastScriptLineDecorator?)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;string&gt; CreateStatementsFromFileResource(TestContext context, SqlUtils.ILastScriptLineDecorator? lineDecorator)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The current test context used for resource path processing.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Sql.Util.SqlUtils.html">SqlUtils</a>.<a class="xref" href="Agenix.Sql.Util.SqlUtils.ILastScriptLineDecorator.html">ILastScriptLineDecorator</a></td>
+        <td><span class="parametername">lineDecorator</span></td>
+        <td><p>The decorator used for processing the last line of the SQL script.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_DoExecute_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.DoExecute(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/AbstractDatabaseConnectingTestAction.cs/#L192">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_DoExecute_" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.DoExecute*"></a>
+  <h4 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_DoExecute_Agenix_Api_Context_TestContext_" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.DoExecute(Agenix.Api.Context.TestContext)">DoExecute(TestContext)</h4>
+  <div class="markdown level1 summary"><p>Subclasses may add custom execution logic here.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract void DoExecute(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_Execute_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.Execute(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/AbstractDatabaseConnectingTestAction.cs/#L154">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_Execute_" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.Execute*"></a>
+  <h4 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_Execute_Agenix_Api_Context_TestContext_" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.Execute(Agenix.Api.Context.TestContext)">Execute(TestContext)</h4>
+  <div class="markdown level1 summary"><p>Do basic logging and delegate execution to subclass.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Execute(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The test context</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_GetDescription.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.GetDescription%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/AbstractDatabaseConnectingTestAction.cs/#L136">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_GetDescription_" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.GetDescription*"></a>
+  <h4 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_GetDescription" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.GetDescription">GetDescription()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the description associated with the test action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetDescription()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The description of the test action.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_SetDescription_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.SetDescription(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/AbstractDatabaseConnectingTestAction.cs/#L126">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_SetDescription_" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.SetDescription*"></a>
+  <h4 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_SetDescription_System_String_" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.SetDescription(System.String)">SetDescription(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the description for the current action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITestAction SetDescription(string newDescription)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">newDescription</span></td>
+        <td><p>The new description to set for the action.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></td>
+        <td><p>The updated instance of the action with the new description.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_SetName_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.SetName(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/AbstractDatabaseConnectingTestAction.cs/#L145">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_SetName_" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.SetName*"></a>
+  <h4 id="Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_SetName_System_String_" data-uid="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.SetName(System.String)">SetName(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the name for the current instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetName(string newName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">newName</span></td>
+        <td><p>The new name to be assigned.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">Spring.Objects.Factory.IInitializingObject</span>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.INamed.html">INamed</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.IDescribed.html">IDescribed</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/AbstractDatabaseConnectingTestAction.cs/#L54" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

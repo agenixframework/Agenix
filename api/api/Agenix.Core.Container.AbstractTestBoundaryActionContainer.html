@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class AbstractTestBoundaryActionContainer </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class AbstractTestBoundaryActionContainer ">
+    
+    <meta name="description" content="Represents an abstract container for boundary action tests, inheriting from .">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer">
+
+
+
+  <h1 id="Agenix_Core_Container_AbstractTestBoundaryActionContainer" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer" class="text-break">Class AbstractTestBoundaryActionContainer</h1>
+  <div class="markdown level0 summary"><p>Represents an abstract container for boundary action tests, inheriting from <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html">AbstractActionContainer</a>.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html">AbstractTestAction</a></div>
+    <div class="level2"><a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html">AbstractActionContainer</a></div>
+    <div class="level3"><span class="xref">AbstractTestBoundaryActionContainer</span></div>
+      <div class="level4"><a class="xref" href="Agenix.Core.Container.SequenceAfterTest.html">SequenceAfterTest</a></div>
+      <div class="level4"><a class="xref" href="Agenix.Core.Container.SequenceBeforeTest.html">SequenceBeforeTest</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.Common.INamed.html">INamed</a></div>
+    <div><a class="xref" href="Agenix.Api.Common.IDescribed.html">IDescribed</a></div>
+    <div><a class="xref" href="Agenix.Api.Container.ITestActionContainer.html">ITestActionContainer</a></div>
+    <div><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></div>
+    <div><a class="xref" href="Agenix.Api.Common.ICompletable.html">ICompletable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_actions">AbstractActionContainer.actions</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_IsDone_Agenix_Api_Context_TestContext_">AbstractActionContainer.IsDone(TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_SetActions_System_Collections_Generic_List_Agenix_Api_ITestAction__">AbstractActionContainer.SetActions(List&lt;ITestAction&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_GetActions">AbstractActionContainer.GetActions()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_GetActionCount">AbstractActionContainer.GetActionCount()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_AddTestActions_Agenix_Api_ITestAction___">AbstractActionContainer.AddTestActions(params ITestAction[])</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_AddTestAction_Agenix_Api_ITestAction_">AbstractActionContainer.AddTestAction(ITestAction)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_GetActionIndex_Agenix_Api_ITestAction_">AbstractActionContainer.GetActionIndex(ITestAction)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_SetActiveAction_Agenix_Api_ITestAction_">AbstractActionContainer.SetActiveAction(ITestAction)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_SetExecutedAction_Agenix_Api_ITestAction_">AbstractActionContainer.SetExecutedAction(ITestAction)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_GetActiveAction">AbstractActionContainer.GetActiveAction()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_GetExecutedActions">AbstractActionContainer.GetExecutedActions()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_GetTestAction_System_Int32_">AbstractActionContainer.GetTestAction(int)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_ExecuteAction_Agenix_Api_ITestAction_Agenix_Api_Context_TestContext_">AbstractActionContainer.ExecuteAction(ITestAction, TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_AddTestAction_Agenix_Api_ITestActionBuilder_Agenix_Api_ITestAction__">AbstractActionContainer.AddTestAction(ITestActionBuilder&lt;ITestAction&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_description">AbstractTestAction.description</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_GetDescription">AbstractTestAction.GetDescription()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_SetDescription_System_String_">AbstractTestAction.SetDescription(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_SetName_System_String_">AbstractTestAction.SetName(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_Name">AbstractTestAction.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_IsDisabled_Agenix_Api_Context_TestContext_">AbstractTestAction.IsDisabled(TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_Execute_Agenix_Api_Context_TestContext_">AbstractTestAction.Execute(TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_DoExecute_Agenix_Api_Context_TestContext_">AbstractTestAction.DoExecute(TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Core.html">Core</a>.<a class="xref" href="Agenix.Core.Container.html">Container</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Core.dll</h6>
+  <h5 id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class AbstractTestBoundaryActionContainer : AbstractActionContainer, INamed, IDescribed, ITestActionContainer, ITestAction, ICompletable</code></pre>
+  </div>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractTestBoundaryActionContainer_GetEnv.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractTestBoundaryActionContainer.GetEnv%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractTestBoundaryActionContainer.cs/#L184">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_GetEnv_" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.GetEnv*"></a>
+  <h4 id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_GetEnv" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.GetEnv">GetEnv()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the current environment properties for the test action container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, string&gt; GetEnv()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><p>A dictionary containing the environment properties.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractTestBoundaryActionContainer_GetNamePattern.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractTestBoundaryActionContainer.GetNamePattern%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractTestBoundaryActionContainer.cs/#L147">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_GetNamePattern_" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.GetNamePattern*"></a>
+  <h4 id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_GetNamePattern" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.GetNamePattern">GetNamePattern()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the name pattern used for test execution criteria.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetNamePattern()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>Returns the name pattern as a string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractTestBoundaryActionContainer_GetPackageNamePattern.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractTestBoundaryActionContainer.GetPackageNamePattern%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractTestBoundaryActionContainer.cs/#L166">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_GetPackageNamePattern_" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.GetPackageNamePattern*"></a>
+  <h4 id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_GetPackageNamePattern" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.GetPackageNamePattern">GetPackageNamePattern()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the package name pattern used for test execution criteria.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetPackageNamePattern()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>Returns the package name pattern as a string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractTestBoundaryActionContainer_GetSystemProperties.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractTestBoundaryActionContainer.GetSystemProperties%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractTestBoundaryActionContainer.cs/#L205">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_GetSystemProperties_" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.GetSystemProperties*"></a>
+  <h4 id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_GetSystemProperties" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.GetSystemProperties">GetSystemProperties()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the system properties that are set for the test container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, string&gt; GetSystemProperties()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><p>A dictionary containing the system properties where the key is the property name
+and the value is the property value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractTestBoundaryActionContainer_GetTestGroups.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractTestBoundaryActionContainer.GetTestGroups%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractTestBoundaryActionContainer.cs/#L129">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_GetTestGroups_" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.GetTestGroups*"></a>
+  <h4 id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_GetTestGroups" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.GetTestGroups">GetTestGroups()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the list of test groups associated with the current test execution context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;string&gt; GetTestGroups()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><p>Returns a list of strings representing the test groups.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractTestBoundaryActionContainer_SetEnv_System_Collections_Generic_Dictionary_System_String_System_String__.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractTestBoundaryActionContainer.SetEnv(System.Collections.Generic.Dictionary%7BSystem.String%2CSystem.String%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractTestBoundaryActionContainer.cs/#L193">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_SetEnv_" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.SetEnv*"></a>
+  <h4 id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_SetEnv_System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.SetEnv(System.Collections.Generic.Dictionary{System.String,System.String})">SetEnv(Dictionary&lt;string, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Sets the environment variables for the test boundary action container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetEnv(Dictionary&lt;string, string&gt; env)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><span class="parametername">env</span></td>
+        <td><p>A dictionary containing the environment variables to be set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractTestBoundaryActionContainer_SetNamePattern_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractTestBoundaryActionContainer.SetNamePattern(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractTestBoundaryActionContainer.cs/#L157">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_SetNamePattern_" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.SetNamePattern*"></a>
+  <h4 id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_SetNamePattern_System_String_" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.SetNamePattern(System.String)">SetNamePattern(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the name pattern for the test container. This pattern can be used for identifying relevant tests
+based on the name criteria during the execution.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetNamePattern(string pattern)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">pattern</span></td>
+        <td><p>The name pattern to be set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractTestBoundaryActionContainer_SetPackageNamePattern_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractTestBoundaryActionContainer.SetPackageNamePattern(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractTestBoundaryActionContainer.cs/#L175">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_SetPackageNamePattern_" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.SetPackageNamePattern*"></a>
+  <h4 id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_SetPackageNamePattern_System_String_" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.SetPackageNamePattern(System.String)">SetPackageNamePattern(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the pattern used to match package names during test execution.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetPackageNamePattern(string packageNamePattern)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">packageNamePattern</span></td>
+        <td><p>The pattern to be used for matching package names.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractTestBoundaryActionContainer_SetSystemProperties_System_Collections_Generic_Dictionary_System_String_System_String__.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractTestBoundaryActionContainer.SetSystemProperties(System.Collections.Generic.Dictionary%7BSystem.String%2CSystem.String%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractTestBoundaryActionContainer.cs/#L214">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_SetSystemProperties_" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.SetSystemProperties*"></a>
+  <h4 id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_SetSystemProperties_System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.SetSystemProperties(System.Collections.Generic.Dictionary{System.String,System.String})">SetSystemProperties(Dictionary&lt;string, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Sets the system properties for the test container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetSystemProperties(Dictionary&lt;string, string&gt; systemProperties)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><span class="parametername">systemProperties</span></td>
+        <td><p>A dictionary containing key-value pairs of system properties to be set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractTestBoundaryActionContainer_SetTestGroups_System_Collections_Generic_List_System_String__.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractTestBoundaryActionContainer.SetTestGroups(System.Collections.Generic.List%7BSystem.String%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractTestBoundaryActionContainer.cs/#L138">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_SetTestGroups_" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.SetTestGroups*"></a>
+  <h4 id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_SetTestGroups_System_Collections_Generic_List_System_String__" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.SetTestGroups(System.Collections.Generic.List{System.String})">SetTestGroups(List&lt;string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Sets the test groups associated with the current test execution context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetTestGroups(List&lt;string&gt; groups)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><span class="parametername">groups</span></td>
+        <td><p>A list of strings representing the test groups to be set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractTestBoundaryActionContainer_ShouldExecute_System_String_System_String_System_String___.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractTestBoundaryActionContainer.ShouldExecute(System.String%2CSystem.String%2CSystem.String%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractTestBoundaryActionContainer.cs/#L57">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_ShouldExecute_" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.ShouldExecute*"></a>
+  <h4 id="Agenix_Core_Container_AbstractTestBoundaryActionContainer_ShouldExecute_System_String_System_String_System_String___" data-uid="Agenix.Core.Container.AbstractTestBoundaryActionContainer.ShouldExecute(System.String,System.String,System.String[])">ShouldExecute(string, string, string[])</h4>
+  <div class="markdown level1 summary"><p>Determines whether the test should execute based on various criteria such as
+test name, package name, included groups, environment properties, and system properties.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ShouldExecute(string testName, string packageName, string[] includedGroups)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">testName</span></td>
+        <td><p>The name of the test to be executed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">packageName</span></td>
+        <td><p>The package name where the test is located.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td><span class="parametername">includedGroups</span></td>
+        <td><p>An array of groups that the test belongs to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>Returns <code>true</code> if the test should execute; otherwise, <code>false</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.INamed.html">INamed</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.IDescribed.html">IDescribed</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Container.ITestActionContainer.html">ITestActionContainer</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.ICompletable.html">ICompletable</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractTestBoundaryActionContainer.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractTestBoundaryActionContainer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractTestBoundaryActionContainer.cs/#L40" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

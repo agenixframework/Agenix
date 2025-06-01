@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class XmlMessageValidationContext </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class XmlMessageValidationContext ">
+    
+    <meta name="description" content="Represents an XML validation context that encapsulates validation-related details required for the validation of XML messages.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Core.Validation.Xml.XmlMessageValidationContext">
+
+
+
+  <h1 id="Agenix_Core_Validation_Xml_XmlMessageValidationContext" data-uid="Agenix.Core.Validation.Xml.XmlMessageValidationContext" class="text-break">Class XmlMessageValidationContext</h1>
+  <div class="markdown level0 summary"><p>Represents an XML validation context that encapsulates validation-related
+details required for the validation of XML messages.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Api.Validation.Context.DefaultValidationContext.html">DefaultValidationContext</a></div>
+    <div class="level2"><a class="xref" href="Agenix.Api.Validation.Context.DefaultMessageValidationContext.html">DefaultMessageValidationContext</a></div>
+    <div class="level3"><span class="xref">XmlMessageValidationContext</span></div>
+      <div class="level4"><a class="xref" href="Agenix.Core.Validation.Xml.XpathMessageValidationContext.html">XpathMessageValidationContext</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.Validation.Context.IMessageValidationContext.html">IMessageValidationContext</a></div>
+    <div><a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a></div>
+    <div><a class="xref" href="Agenix.Api.Validation.Context.ISchemaValidationContext.html">ISchemaValidationContext</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Api.Validation.Context.DefaultMessageValidationContext.html#Agenix_Api_Validation_Context_DefaultMessageValidationContext_IgnoreExpressions">DefaultMessageValidationContext.IgnoreExpressions</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Api.Validation.Context.DefaultMessageValidationContext.html#Agenix_Api_Validation_Context_DefaultMessageValidationContext_IsSchemaValidationEnabled">DefaultMessageValidationContext.IsSchemaValidationEnabled</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Api.Validation.Context.DefaultMessageValidationContext.html#Agenix_Api_Validation_Context_DefaultMessageValidationContext_SchemaRepository">DefaultMessageValidationContext.SchemaRepository</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Api.Validation.Context.DefaultMessageValidationContext.html#Agenix_Api_Validation_Context_DefaultMessageValidationContext_Schema">DefaultMessageValidationContext.Schema</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Api.Validation.Context.DefaultValidationContext.html#Agenix_Api_Validation_Context_DefaultValidationContext_Status">DefaultValidationContext.Status</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Core.html">Core</a>.<a class="xref" href="Agenix.Core.Validation.html">Validation</a>.<a class="xref" href="Agenix.Core.Validation.Xml.html">Xml</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Core.dll</h6>
+  <h5 id="Agenix_Core_Validation_Xml_XmlMessageValidationContext_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class XmlMessageValidationContext : DefaultMessageValidationContext, IMessageValidationContext, IValidationContext, ISchemaValidationContext</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_Xml_XmlMessageValidationContext__ctor.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.Xml.XmlMessageValidationContext.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Xml/XmlMessageValidationContext.cs/#L56">View Source</a>
+  </span>
+  <a id="Agenix_Core_Validation_Xml_XmlMessageValidationContext__ctor_" data-uid="Agenix.Core.Validation.Xml.XmlMessageValidationContext.#ctor*"></a>
+  <h4 id="Agenix_Core_Validation_Xml_XmlMessageValidationContext__ctor" data-uid="Agenix.Core.Validation.Xml.XmlMessageValidationContext.#ctor">XmlMessageValidationContext()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlMessageValidationContext()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_Xml_XmlMessageValidationContext__ctor_Agenix_Core_Validation_Xml_XmlMessageValidationContext_XmlValidationContextBuilder_Agenix_Core_Validation_Xml_XmlMessageValidationContext_Agenix_Core_Validation_Xml_XmlMessageValidationContext_Builder__.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.Xml.XmlMessageValidationContext.%23ctor(Agenix.Core.Validation.Xml.XmlMessageValidationContext.XmlValidationContextBuilder%7BAgenix.Core.Validation.Xml.XmlMessageValidationContext%2CAgenix.Core.Validation.Xml.XmlMessageValidationContext.Builder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Xml/XmlMessageValidationContext.cs/#L63">View Source</a>
+  </span>
+  <a id="Agenix_Core_Validation_Xml_XmlMessageValidationContext__ctor_" data-uid="Agenix.Core.Validation.Xml.XmlMessageValidationContext.#ctor*"></a>
+  <h4 id="Agenix_Core_Validation_Xml_XmlMessageValidationContext__ctor_Agenix_Core_Validation_Xml_XmlMessageValidationContext_XmlValidationContextBuilder_Agenix_Core_Validation_Xml_XmlMessageValidationContext_Agenix_Core_Validation_Xml_XmlMessageValidationContext_Builder__" data-uid="Agenix.Core.Validation.Xml.XmlMessageValidationContext.#ctor(Agenix.Core.Validation.Xml.XmlMessageValidationContext.XmlValidationContextBuilder{Agenix.Core.Validation.Xml.XmlMessageValidationContext,Agenix.Core.Validation.Xml.XmlMessageValidationContext.Builder})">XmlMessageValidationContext(XmlValidationContextBuilder&lt;XmlMessageValidationContext, Builder&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlMessageValidationContext(XmlMessageValidationContext.XmlValidationContextBuilder&lt;XmlMessageValidationContext, XmlMessageValidationContext.Builder&gt; builder)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Core.Validation.Xml.XmlMessageValidationContext.html">XmlMessageValidationContext</a>.<a class="xref" href="Agenix.Core.Validation.Xml.XmlMessageValidationContext.XmlValidationContextBuilder-2.html">XmlValidationContextBuilder</a>&lt;<a class="xref" href="Agenix.Core.Validation.Xml.XmlMessageValidationContext.html">XmlMessageValidationContext</a>, <a class="xref" href="Agenix.Core.Validation.Xml.XmlMessageValidationContext.html">XmlMessageValidationContext</a>.<a class="xref" href="Agenix.Core.Validation.Xml.XmlMessageValidationContext.Builder.html">Builder</a>&gt;</td>
+        <td><span class="parametername">builder</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_Xml_XmlMessageValidationContext_ControlNamespaces.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.Xml.XmlMessageValidationContext.ControlNamespaces%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Xml/XmlMessageValidationContext.cs/#L81">View Source</a>
+  </span>
+  <a id="Agenix_Core_Validation_Xml_XmlMessageValidationContext_ControlNamespaces_" data-uid="Agenix.Core.Validation.Xml.XmlMessageValidationContext.ControlNamespaces*"></a>
+  <h4 id="Agenix_Core_Validation_Xml_XmlMessageValidationContext_ControlNamespaces" data-uid="Agenix.Core.Validation.Xml.XmlMessageValidationContext.ControlNamespaces">ControlNamespaces</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, string&gt; ControlNamespaces { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_Xml_XmlMessageValidationContext_Namespaces.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.Xml.XmlMessageValidationContext.Namespaces%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Xml/XmlMessageValidationContext.cs/#L78">View Source</a>
+  </span>
+  <a id="Agenix_Core_Validation_Xml_XmlMessageValidationContext_Namespaces_" data-uid="Agenix.Core.Validation.Xml.XmlMessageValidationContext.Namespaces*"></a>
+  <h4 id="Agenix_Core_Validation_Xml_XmlMessageValidationContext_Namespaces" data-uid="Agenix.Core.Validation.Xml.XmlMessageValidationContext.Namespaces">Namespaces</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, string&gt; Namespaces { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_Xml_XmlMessageValidationContext_UpdateStatus_Agenix_Api_Validation_Context_ValidationStatus_.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.Xml.XmlMessageValidationContext.UpdateStatus(Agenix.Api.Validation.Context.ValidationStatus)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Xml/XmlMessageValidationContext.cs/#L87">View Source</a>
+  </span>
+  <a id="Agenix_Core_Validation_Xml_XmlMessageValidationContext_UpdateStatus_" data-uid="Agenix.Core.Validation.Xml.XmlMessageValidationContext.UpdateStatus*"></a>
+  <h4 id="Agenix_Core_Validation_Xml_XmlMessageValidationContext_UpdateStatus_Agenix_Api_Validation_Context_ValidationStatus_" data-uid="Agenix.Core.Validation.Xml.XmlMessageValidationContext.UpdateStatus(Agenix.Api.Validation.Context.ValidationStatus)">UpdateStatus(ValidationStatus)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void UpdateStatus(ValidationStatus status)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Validation.Context.ValidationStatus.html">ValidationStatus</a></td>
+        <td><span class="parametername">status</span></td>
+        <td><p>The validation status to update.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Api.Validation.Context.DefaultValidationContext.html#Agenix_Api_Validation_Context_DefaultValidationContext_UpdateStatus_Agenix_Api_Validation_Context_ValidationStatus_">DefaultValidationContext.UpdateStatus(ValidationStatus)</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.Validation.Context.IMessageValidationContext.html">IMessageValidationContext</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Validation.Context.ISchemaValidationContext.html">ISchemaValidationContext</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_Xml_XmlMessageValidationContext.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.Xml.XmlMessageValidationContext%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Xml/XmlMessageValidationContext.cs/#L37" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class DefaultTestCase </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class DefaultTestCase ">
+    
+    <meta name="description" content="Default implementation of a test case that includes actions and supports test grouping, test parameters, and completes test results with duration.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Core.DefaultTestCase">
+
+
+
+  <h1 id="Agenix_Core_DefaultTestCase" data-uid="Agenix.Core.DefaultTestCase" class="text-break">Class DefaultTestCase</h1>
+  <div class="markdown level0 summary"><p>Default implementation of a test case that includes actions and supports test grouping, test parameters, and
+completes test results with duration.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html">AbstractTestAction</a></div>
+    <div class="level2"><a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html">AbstractActionContainer</a></div>
+    <div class="level3"><span class="xref">DefaultTestCase</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.Common.ICompletable.html">ICompletable</a></div>
+    <div><a class="xref" href="Agenix.Api.ITestCase.html">ITestCase</a></div>
+    <div><a class="xref" href="Agenix.Api.Container.ITestActionContainer.html">ITestActionContainer</a></div>
+    <div><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></div>
+    <div><a class="xref" href="Agenix.Api.Common.INamed.html">INamed</a></div>
+    <div><a class="xref" href="Agenix.Api.Common.IDescribed.html">IDescribed</a></div>
+    <div><a class="xref" href="Agenix.Api.ITestGroupAware.html">ITestGroupAware</a></div>
+    <div><a class="xref" href="Agenix.Api.ITestParameterAware.html">ITestParameterAware</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_actions">AbstractActionContainer.actions</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_IsDone_Agenix_Api_Context_TestContext_">AbstractActionContainer.IsDone(TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_SetActions_System_Collections_Generic_List_Agenix_Api_ITestAction__">AbstractActionContainer.SetActions(List&lt;ITestAction&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_GetActions">AbstractActionContainer.GetActions()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_GetActionCount">AbstractActionContainer.GetActionCount()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_AddTestActions_Agenix_Api_ITestAction___">AbstractActionContainer.AddTestActions(params ITestAction[])</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_AddTestAction_Agenix_Api_ITestAction_">AbstractActionContainer.AddTestAction(ITestAction)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_GetActionIndex_Agenix_Api_ITestAction_">AbstractActionContainer.GetActionIndex(ITestAction)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_SetActiveAction_Agenix_Api_ITestAction_">AbstractActionContainer.SetActiveAction(ITestAction)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_SetExecutedAction_Agenix_Api_ITestAction_">AbstractActionContainer.SetExecutedAction(ITestAction)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_GetActiveAction">AbstractActionContainer.GetActiveAction()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_GetExecutedActions">AbstractActionContainer.GetExecutedActions()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_GetTestAction_System_Int32_">AbstractActionContainer.GetTestAction(int)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_AddTestAction_Agenix_Api_ITestActionBuilder_Agenix_Api_ITestAction__">AbstractActionContainer.AddTestAction(ITestActionBuilder&lt;ITestAction&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_description">AbstractTestAction.description</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_GetDescription">AbstractTestAction.GetDescription()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_SetDescription_System_String_">AbstractTestAction.SetDescription(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_SetName_System_String_">AbstractTestAction.SetName(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_Name">AbstractTestAction.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_IsDisabled_Agenix_Api_Context_TestContext_">AbstractTestAction.IsDisabled(TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_Execute_Agenix_Api_Context_TestContext_">AbstractTestAction.Execute(TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Core.html">Core</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Core.dll</h6>
+  <h5 id="Agenix_Core_DefaultTestCase_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class DefaultTestCase : AbstractActionContainer, ICompletable, ITestCase, ITestActionContainer, ITestAction, INamed, IDescribed, ITestGroupAware, ITestParameterAware</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase__ctor.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L479">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase__ctor_" data-uid="Agenix.Core.DefaultTestCase.#ctor*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase__ctor" data-uid="Agenix.Core.DefaultTestCase.#ctor">DefaultTestCase()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DefaultTestCase()</code></pre>
+  </div>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_Groups.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.Groups%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L489">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_Groups_" data-uid="Agenix.Core.DefaultTestCase.Groups*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_Groups" data-uid="Agenix.Core.DefaultTestCase.Groups">Groups</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string[] Groups { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_IsIncremental.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.IsIncremental%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L491">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_IsIncremental_" data-uid="Agenix.Core.DefaultTestCase.IsIncremental*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_IsIncremental" data-uid="Agenix.Core.DefaultTestCase.IsIncremental">IsIncremental</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsIncremental { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_PackageName.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.PackageName%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L493">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_PackageName_" data-uid="Agenix.Core.DefaultTestCase.PackageName*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_PackageName" data-uid="Agenix.Core.DefaultTestCase.PackageName">PackageName</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string PackageName { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_Parameters.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.Parameters%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L495">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_Parameters_" data-uid="Agenix.Core.DefaultTestCase.Parameters*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_Parameters" data-uid="Agenix.Core.DefaultTestCase.Parameters">Parameters</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, object&gt; Parameters { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_TestClass.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.TestClass%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L497">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_TestClass_" data-uid="Agenix.Core.DefaultTestCase.TestClass*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_TestClass" data-uid="Agenix.Core.DefaultTestCase.TestClass">TestClass</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Type TestClass { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_TestResult.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.TestResult%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L499">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_TestResult_" data-uid="Agenix.Core.DefaultTestCase.TestResult*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_TestResult" data-uid="Agenix.Core.DefaultTestCase.TestResult">TestResult</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TestResult TestResult { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.TestResult.html">TestResult</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_Timeout.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.Timeout%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L476">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_Timeout_" data-uid="Agenix.Core.DefaultTestCase.Timeout*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_Timeout" data-uid="Agenix.Core.DefaultTestCase.Timeout">Timeout</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Timeout { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_AddFinalAction_Agenix_Api_ITestAction_.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.AddFinalAction(Agenix.Api.ITestAction)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L670">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_AddFinalAction_" data-uid="Agenix.Core.DefaultTestCase.AddFinalAction*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_AddFinalAction_Agenix_Api_ITestAction_" data-uid="Agenix.Core.DefaultTestCase.AddFinalAction(Agenix.Api.ITestAction)">AddFinalAction(ITestAction)</h4>
+  <div class="markdown level1 summary"><p>Adds a specified test action to the list of final actions to be executed.
+Final actions are typically run at the end of the test execution process.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddFinalAction(ITestAction testAction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></td>
+        <td><span class="parametername">testAction</span></td>
+        <td><p>The test action to be added to the final actions list.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_AddFinalAction_Agenix_Api_ITestActionBuilder_Agenix_Api_ITestAction__.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.AddFinalAction(Agenix.Api.ITestActionBuilder%7BAgenix.Api.ITestAction%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L660">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_AddFinalAction_" data-uid="Agenix.Core.DefaultTestCase.AddFinalAction*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_AddFinalAction_Agenix_Api_ITestActionBuilder_Agenix_Api_ITestAction__" data-uid="Agenix.Core.DefaultTestCase.AddFinalAction(Agenix.Api.ITestActionBuilder{Agenix.Api.ITestAction})">AddFinalAction(ITestActionBuilder&lt;ITestAction&gt;)</h4>
+  <div class="markdown level1 summary"><p>Adds a final action to the list of final actions for the test case.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddFinalAction(ITestActionBuilder&lt;ITestAction&gt; testAction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder</a>&lt;<a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>&gt;</td>
+        <td><span class="parametername">testAction</span></td>
+        <td><p>The action builder for the action to be added as a final action.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_AfterTest_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.AfterTest(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L65">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_AfterTest_" data-uid="Agenix.Core.DefaultTestCase.AfterTest*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_AfterTest_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.DefaultTestCase.AfterTest(Agenix.Api.Context.TestContext)">AfterTest(TestContext)</h4>
+  <div class="markdown level1 summary"><p>Executes a sequence of actions defined to run after the test is completed.
+This method evaluates each action in the context's AfterTest list and executes them if they meet the criteria
+specified by the ShouldExecute method.
+Any exceptions encountered during the execution of these actions are logged as warnings.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void AfterTest(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context that provides information and actions related to the test that has been executed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_BeforeTest_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.BeforeTest(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L188">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_BeforeTest_" data-uid="Agenix.Core.DefaultTestCase.BeforeTest*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_BeforeTest_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.DefaultTestCase.BeforeTest(Agenix.Api.Context.TestContext)">BeforeTest(TestContext)</h4>
+  <div class="markdown level1 summary"><p>Executes the sequence of actions defined to run before the test.
+This method initiates the timer and processes each action in the context's BeforeTest list,
+executing them if they meet the criteria specified by the ShouldExecute method.
+Any exceptions that occur during the execution of these actions are caught and wrapped in a CoreSystemException.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void BeforeTest(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context containing information and actions pertinent to the test being executed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_DoExecute_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.DoExecute(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L335">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_DoExecute_" data-uid="Agenix.Core.DefaultTestCase.DoExecute*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_DoExecute_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.DefaultTestCase.DoExecute(Agenix.Api.Context.TestContext)">DoExecute(TestContext)</h4>
+  <div class="markdown level1 summary"><p>Executes the test case actions within the provided TestContext.
+Handles the lifecycle of the test case, including starting and stopping timers,
+and creates the appropriate test result based on the execution outcome.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void DoExecute(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context in which the test case is executed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_DoExecute_Agenix_Api_Context_TestContext_">AbstractTestAction.DoExecute(TestContext)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_ExecuteAction_Agenix_Api_ITestAction_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.ExecuteAction(Agenix.Api.ITestAction%2CAgenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L85">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_ExecuteAction_" data-uid="Agenix.Core.DefaultTestCase.ExecuteAction*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_ExecuteAction_Agenix_Api_ITestAction_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.DefaultTestCase.ExecuteAction(Agenix.Api.ITestAction,Agenix.Api.Context.TestContext)">ExecuteAction(ITestAction, TestContext)</h4>
+  <div class="markdown level1 summary"><p>Executes the provided test action within the given test context.
+If the context contains exceptions, the first exception is thrown before any action execution.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ExecuteAction(ITestAction action, TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></td>
+        <td><span class="parametername">action</span></td>
+        <td><p>The test action to be executed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context in which the test action is executed, containing state and listener information.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Exceptions.TestCaseFailedException.html">TestCaseFailedException</a></td>
+        <td><p>Thrown when an exception occurs during the test action execution.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_Fail_System_Exception_.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.Fail(System.Exception)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L52">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_Fail_" data-uid="Agenix.Core.DefaultTestCase.Fail*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_Fail_System_Exception_" data-uid="Agenix.Core.DefaultTestCase.Fail(System.Exception)">Fail(Exception)</h4>
+  <div class="markdown level1 summary"><p>Sets the test result to failed due to the provided exception and completes the test result with the duration.
+This method marks the test as failed and also tracks the test duration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Fail(Exception throwable)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a></td>
+        <td><span class="parametername">throwable</span></td>
+        <td><p>The exception that caused the test to fail.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_Finish_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.Finish(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L126">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_Finish_" data-uid="Agenix.Core.DefaultTestCase.Finish*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_Finish_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.DefaultTestCase.Finish(Agenix.Api.Context.TestContext)">Finish(TestContext)</h4>
+  <div class="markdown level1 summary"><p>Finalizes the test case execution, updates the test result based on the context,
+handles any exceptions that occurred, and completes the test result with the duration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Finish(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the test, containing necessary information for execution and results tracking.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_GetActionBuilders.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.GetActionBuilders%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L505">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_GetActionBuilders_" data-uid="Agenix.Core.DefaultTestCase.GetActionBuilders*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_GetActionBuilders" data-uid="Agenix.Core.DefaultTestCase.GetActionBuilders">GetActionBuilders()</h4>
+  <div class="markdown level1 summary"><p>Retrieves a list of action builders associated with the current test case.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;ITestActionBuilder&lt;ITestAction&gt;&gt; GetActionBuilders()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder</a>&lt;<a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>&gt;&gt;</td>
+        <td><p>A list of action builders that are used to build test actions.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_GetFinalActions.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.GetFinalActions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L514">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_GetFinalActions_" data-uid="Agenix.Core.DefaultTestCase.GetFinalActions*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_GetFinalActions" data-uid="Agenix.Core.DefaultTestCase.GetFinalActions">GetFinalActions()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the final actions for the test case by building them using their respective builders.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;ITestAction&gt; GetFinalActions()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_GetGroups.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.GetGroups%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L641">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_GetGroups_" data-uid="Agenix.Core.DefaultTestCase.GetGroups*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_GetGroups" data-uid="Agenix.Core.DefaultTestCase.GetGroups">GetGroups()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the groups associated with the test case.
+This method returns the array of group names assigned to the test case.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string[] GetGroups()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_GetMetaInfo.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.GetMetaInfo%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L524">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_GetMetaInfo_" data-uid="Agenix.Core.DefaultTestCase.GetMetaInfo*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_GetMetaInfo" data-uid="Agenix.Core.DefaultTestCase.GetMetaInfo">GetMetaInfo()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the meta-information associated with this test case.
+The meta-information includes details about the test status, description, and other relevant metadata.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TestCaseMetaInfo GetMetaInfo()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Core.TestCaseMetaInfo.html">TestCaseMetaInfo</a></td>
+        <td><p>The <a class="xref" href="Agenix.Core.TestCaseMetaInfo.html">TestCaseMetaInfo</a> object containing meta-information of the test case.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_GetNamespaceName.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.GetNamespaceName%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L552">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_GetNamespaceName_" data-uid="Agenix.Core.DefaultTestCase.GetNamespaceName*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_GetNamespaceName" data-uid="Agenix.Core.DefaultTestCase.GetNamespaceName">GetNamespaceName()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the package name associated with the test case.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetNamespaceName()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The package name as a string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_GetParameters.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.GetParameters%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L579">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_GetParameters_" data-uid="Agenix.Core.DefaultTestCase.GetParameters*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_GetParameters" data-uid="Agenix.Core.DefaultTestCase.GetParameters">GetParameters()</h4>
+  <div class="markdown level1 summary"><p>Retrieves a dictionary of parameters associated with the test case.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, object&gt; GetParameters()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td><p>A dictionary where the keys are parameter names and the values are parameter values.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_GetTestClass.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.GetTestClass%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L533">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_GetTestClass_" data-uid="Agenix.Core.DefaultTestCase.GetTestClass*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_GetTestClass" data-uid="Agenix.Core.DefaultTestCase.GetTestClass">GetTestClass()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the Type of the test class associated with the test case.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Type GetTestClass()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><p>The Type of the test class.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_GetTestGroups.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.GetTestGroups%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L631">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_GetTestGroups_" data-uid="Agenix.Core.DefaultTestCase.GetTestGroups*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_GetTestGroups" data-uid="Agenix.Core.DefaultTestCase.GetTestGroups">GetTestGroups()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the groups associated with this test case.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string[] GetTestGroups()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td><p>An array of strings representing the groups to which this test case belongs.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_GetTestResult.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.GetTestResult%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L589">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_GetTestResult_" data-uid="Agenix.Core.DefaultTestCase.GetTestResult*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_GetTestResult" data-uid="Agenix.Core.DefaultTestCase.GetTestResult">GetTestResult()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the current TestResult instance.
+This method returns the TestResult associated with the current test case.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TestResult GetTestResult()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.TestResult.html">TestResult</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_GetVariableDefinitions.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.GetVariableDefinitions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L612">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_GetVariableDefinitions_" data-uid="Agenix.Core.DefaultTestCase.GetVariableDefinitions*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_GetVariableDefinitions" data-uid="Agenix.Core.DefaultTestCase.GetVariableDefinitions">GetVariableDefinitions()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the dictionary containing variable definitions for the test case.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, object&gt; GetVariableDefinitions()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td><p>A dictionary with variable names as keys and their corresponding values as dictionary values.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_SetGroups_System_String___.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.SetGroups(System.String%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L651">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_SetGroups_" data-uid="Agenix.Core.DefaultTestCase.SetGroups*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_SetGroups_System_String___" data-uid="Agenix.Core.DefaultTestCase.SetGroups(System.String[])">SetGroups(string[])</h4>
+  <div class="markdown level1 summary"><p>Sets the groups associated with the test case.
+This allows the test case to be categorized into multiple groups.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetGroups(string[] groups)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td><span class="parametername">groups</span></td>
+        <td><p>An array of group names to be associated with the test case.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_SetIncremental_System_Boolean_.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.SetIncremental(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L603">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_SetIncremental_" data-uid="Agenix.Core.DefaultTestCase.SetIncremental*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_SetIncremental_System_Boolean_" data-uid="Agenix.Core.DefaultTestCase.SetIncremental(System.Boolean)">SetIncremental(bool)</h4>
+  <div class="markdown level1 summary"><p>Sets a flag indicating whether the test case is incremental.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetIncremental(bool incremental)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">incremental</span></td>
+        <td><p>True if the test case should be incremental, otherwise false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_SetNamespaceName_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.SetNamespaceName(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L561">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_SetNamespaceName_" data-uid="Agenix.Core.DefaultTestCase.SetNamespaceName*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_SetNamespaceName_System_String_" data-uid="Agenix.Core.DefaultTestCase.SetNamespaceName(System.String)">SetNamespaceName(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the package name for the test case.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetNamespaceName(string packageName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">packageName</span></td>
+        <td><p>The name of the package to set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_SetParameters_System_String___System_Object___.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.SetParameters(System.String%5B%5D%2CSystem.Object%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L240">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_SetParameters_" data-uid="Agenix.Core.DefaultTestCase.SetParameters*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_SetParameters_System_String___System_Object___" data-uid="Agenix.Core.DefaultTestCase.SetParameters(System.String[],System.Object[])">SetParameters(string[], object[])</h4>
+  <div class="markdown level1 summary"><p>Sets the parameters for the test case.
+Ensures that the number of parameter names matches the number of parameter values.
+If the parameter names and values count do not match, an exception is thrown.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetParameters(string[] parameterNames, object[] parameterValues)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td><span class="parametername">parameterNames</span></td>
+        <td><p>Array containing the names of the parameters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</td>
+        <td><span class="parametername">parameterValues</span></td>
+        <td><p>Array containing the values of the parameters.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_SetTestClass_System_Type_.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.SetTestClass(System.Type)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L543">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_SetTestClass_" data-uid="Agenix.Core.DefaultTestCase.SetTestClass*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_SetTestClass_System_Type_" data-uid="Agenix.Core.DefaultTestCase.SetTestClass(System.Type)">SetTestClass(Type)</h4>
+  <div class="markdown level1 summary"><p>Sets the type of the test class to be executed.
+This method assigns the specified type to the internal test class field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetTestClass(Type type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The Type of the test class.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_SetTestResult_Agenix_Api_TestResult_.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.SetTestResult(Agenix.Api.TestResult)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L570">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_SetTestResult_" data-uid="Agenix.Core.DefaultTestCase.SetTestResult*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_SetTestResult_Agenix_Api_TestResult_" data-uid="Agenix.Core.DefaultTestCase.SetTestResult(Agenix.Api.TestResult)">SetTestResult(TestResult)</h4>
+  <div class="markdown level1 summary"><p>Sets the provided test result for the current test case.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetTestResult(TestResult testResult)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.TestResult.html">TestResult</a></td>
+        <td><span class="parametername">testResult</span></td>
+        <td><p>The test result to set for the test case.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_SetVariableDefinitions_System_Collections_Generic_Dictionary_System_String_System_Object__.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.SetVariableDefinitions(System.Collections.Generic.Dictionary%7BSystem.String%2CSystem.Object%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L622">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_SetVariableDefinitions_" data-uid="Agenix.Core.DefaultTestCase.SetVariableDefinitions*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_SetVariableDefinitions_System_Collections_Generic_Dictionary_System_String_System_Object__" data-uid="Agenix.Core.DefaultTestCase.SetVariableDefinitions(System.Collections.Generic.Dictionary{System.String,System.Object})">SetVariableDefinitions(Dictionary&lt;string, object&gt;)</h4>
+  <div class="markdown level1 summary"><p>Sets the variable definitions for the test case. This method allows defining variables
+that can be used and manipulated within the test case, enabling more dynamic and flexible test scenarios.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetVariableDefinitions(Dictionary&lt;string, object&gt; variableDefinitions)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td><span class="parametername">variableDefinitions</span></td>
+        <td><p>A dictionary containing variable names and their corresponding values.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase_Start_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase.Start(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L211">View Source</a>
+  </span>
+  <a id="Agenix_Core_DefaultTestCase_Start_" data-uid="Agenix.Core.DefaultTestCase.Start*"></a>
+  <h4 id="Agenix_Core_DefaultTestCase_Start_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.DefaultTestCase.Start(Agenix.Api.Context.TestContext)">Start(TestContext)</h4>
+  <div class="markdown level1 summary"><p>Starts the test case execution.
+This method triggers the initialization of the test case, logs debug information,
+initializes test parameters and variables, and calls the BeforeTest method.
+If an exception occurs during initialization, the test result is set to failed
+and a TestCaseFailedException is thrown.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Start(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The test context that holds information about the test case execution.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.ICompletable.html">ICompletable</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.ITestCase.html">ITestCase</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Container.ITestActionContainer.html">ITestActionContainer</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.INamed.html">INamed</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.IDescribed.html">IDescribed</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.ITestGroupAware.html">ITestGroupAware</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.ITestParameterAware.html">ITestParameterAware</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_DefaultTestCase.md&amp;value=---%0Auid%3A%20Agenix.Core.DefaultTestCase%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/DefaultTestCase.cs/#L45" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

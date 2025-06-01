@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class ExecuteSqlQueryAction </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class ExecuteSqlQueryAction ">
+    
+    <meta name="description" content="Action executes SQL queries and offers result set validation. The class enables you to query data result sets from a database. Validation will happen on column basis inside the result set.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Sql.Actions.ExecuteSqlQueryAction">
+
+
+
+  <h1 id="Agenix_Sql_Actions_ExecuteSqlQueryAction" data-uid="Agenix.Sql.Actions.ExecuteSqlQueryAction" class="text-break">Class ExecuteSqlQueryAction</h1>
+  <div class="markdown level0 summary"><p>Action executes SQL queries and offers result set validation. The class enables you to query data result sets from
+a database. Validation will happen on column basis inside the result set.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">DaoSupport</span></div>
+    <div class="level2"><span class="xref">AdoDaoSupport</span></div>
+    <div class="level3"><a class="xref" href="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.html">AbstractDatabaseConnectingTestAction</a></div>
+    <div class="level4"><span class="xref">ExecuteSqlQueryAction</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">IInitializingObject</span></div>
+    <div><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></div>
+    <div><a class="xref" href="Agenix.Api.Common.INamed.html">INamed</a></div>
+    <div><a class="xref" href="Agenix.Api.Common.IDescribed.html">IDescribed</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.html#Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_sqlResourcePath">AbstractDatabaseConnectingTestAction.sqlResourcePath</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.html#Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_statements">AbstractDatabaseConnectingTestAction.statements</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.html#Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_transactionIsolationLevel">AbstractDatabaseConnectingTestAction.transactionIsolationLevel</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.html#Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_transactionManager">AbstractDatabaseConnectingTestAction.transactionManager</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.html#Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_transactionTimeout">AbstractDatabaseConnectingTestAction.transactionTimeout</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.html#Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_SqlResourcePath">AbstractDatabaseConnectingTestAction.SqlResourcePath</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.html#Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_Statements">AbstractDatabaseConnectingTestAction.Statements</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.html#Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_TransactionManager">AbstractDatabaseConnectingTestAction.TransactionManager</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.html#Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_TransactionIsolationLevel">AbstractDatabaseConnectingTestAction.TransactionIsolationLevel</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.html#Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_TransactionTimeout">AbstractDatabaseConnectingTestAction.TransactionTimeout</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.html#Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_SetDescription_System_String_">AbstractDatabaseConnectingTestAction.SetDescription(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.html#Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_GetDescription">AbstractDatabaseConnectingTestAction.GetDescription()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.html#Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_SetName_System_String_">AbstractDatabaseConnectingTestAction.SetName(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.html#Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_Execute_Agenix_Api_Context_TestContext_">AbstractDatabaseConnectingTestAction.Execute(TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.html#Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_Name">AbstractDatabaseConnectingTestAction.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.html#Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_CreateStatementsFromFileResource_Agenix_Api_Context_TestContext_">AbstractDatabaseConnectingTestAction.CreateStatementsFromFileResource(TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.html#Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_CreateStatementsFromFileResource_Agenix_Api_Context_TestContext_Agenix_Sql_Util_SqlUtils_ILastScriptLineDecorator_">AbstractDatabaseConnectingTestAction.CreateStatementsFromFileResource(TestContext, SqlUtils.ILastScriptLineDecorator)</a>
+    </div>
+    <div>
+      <span class="xref">AdoDaoSupport.CheckDaoConfig()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.data.idbconnection">AdoDaoSupport.DisposeConnection(IDbConnection, IDbProvider)</a>
+    </div>
+    <div>
+      <span class="xref">AdoDaoSupport.CreateAdoTemplate(IDbProvider)</span>
+    </div>
+    <div>
+      <span class="xref">AdoDaoSupport.CreateDbParametersBuilder()</span>
+    </div>
+    <div>
+      <span class="xref">AdoDaoSupport.CreateDbParameters()</span>
+    </div>
+    <div>
+      <span class="xref">AdoDaoSupport.DbProvider</span>
+    </div>
+    <div>
+      <span class="xref">AdoDaoSupport.AdoTemplate</span>
+    </div>
+    <div>
+      <span class="xref">AdoDaoSupport.Connection</span>
+    </div>
+    <div>
+      <span class="xref">AdoDaoSupport.ExceptionTranslator</span>
+    </div>
+    <div>
+      <span class="xref">DaoSupport.log</span>
+    </div>
+    <div>
+      <span class="xref">DaoSupport.InitDao()</span>
+    </div>
+    <div>
+      <span class="xref">DaoSupport.AfterPropertiesSet()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Sql.html">Sql</a>.<a class="xref" href="Agenix.Sql.Actions.html">Actions</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Sql.dll</h6>
+  <h5 id="Agenix_Sql_Actions_ExecuteSqlQueryAction_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ExecuteSqlQueryAction : AbstractDatabaseConnectingTestAction, IInitializingObject, ITestAction, INamed, IDescribed</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_ExecuteSqlQueryAction__ctor_Agenix_Sql_Actions_ExecuteSqlQueryAction_Builder_.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.ExecuteSqlQueryAction.%23ctor(Agenix.Sql.Actions.ExecuteSqlQueryAction.Builder)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/ExecuteSqlQueryAction.cs/#L47">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_ExecuteSqlQueryAction__ctor_" data-uid="Agenix.Sql.Actions.ExecuteSqlQueryAction.#ctor*"></a>
+  <h4 id="Agenix_Sql_Actions_ExecuteSqlQueryAction__ctor_Agenix_Sql_Actions_ExecuteSqlQueryAction_Builder_" data-uid="Agenix.Sql.Actions.ExecuteSqlQueryAction.#ctor(Agenix.Sql.Actions.ExecuteSqlQueryAction.Builder)">ExecuteSqlQueryAction(Builder)</h4>
+  <div class="markdown level1 summary"><p>Action executes SQL queries and offers result set validation. The class enables you to query data result sets from
+a database. Validation will happen on column basis inside the result set.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Sql.Actions.ExecuteSqlQueryAction.html">ExecuteSqlQueryAction</a>.<a class="xref" href="Agenix.Sql.Actions.ExecuteSqlQueryAction.Builder.html">Builder</a></td>
+        <td><span class="parametername">builder</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_ExecuteSqlQueryAction__controlResultSet.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.ExecuteSqlQueryAction._controlResultSet%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/ExecuteSqlQueryAction.cs/#L65">View Source</a>
+  </span>
+  <h4 id="Agenix_Sql_Actions_ExecuteSqlQueryAction__controlResultSet" data-uid="Agenix.Sql.Actions.ExecuteSqlQueryAction._controlResultSet">_controlResultSet</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly Dictionary&lt;string, List&lt;string&gt;&gt; _controlResultSet</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_ExecuteSqlQueryAction_ControlResultSet.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.ExecuteSqlQueryAction.ControlResultSet%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/ExecuteSqlQueryAction.cs/#L71">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_ExecuteSqlQueryAction_ControlResultSet_" data-uid="Agenix.Sql.Actions.ExecuteSqlQueryAction.ControlResultSet*"></a>
+  <h4 id="Agenix_Sql_Actions_ExecuteSqlQueryAction_ControlResultSet" data-uid="Agenix.Sql.Actions.ExecuteSqlQueryAction.ControlResultSet">ControlResultSet</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, List&lt;string&gt;&gt; ControlResultSet { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_ExecuteSqlQueryAction_ExtractVariables.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.ExecuteSqlQueryAction.ExtractVariables%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/ExecuteSqlQueryAction.cs/#L74">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_ExecuteSqlQueryAction_ExtractVariables_" data-uid="Agenix.Sql.Actions.ExecuteSqlQueryAction.ExtractVariables*"></a>
+  <h4 id="Agenix_Sql_Actions_ExecuteSqlQueryAction_ExtractVariables" data-uid="Agenix.Sql.Actions.ExecuteSqlQueryAction.ExtractVariables">ExtractVariables</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, string&gt; ExtractVariables { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_ExecuteSqlQueryAction_DoExecute_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.ExecuteSqlQueryAction.DoExecute(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/ExecuteSqlQueryAction.cs/#L358">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_ExecuteSqlQueryAction_DoExecute_" data-uid="Agenix.Sql.Actions.ExecuteSqlQueryAction.DoExecute*"></a>
+  <h4 id="Agenix_Sql_Actions_ExecuteSqlQueryAction_DoExecute_Agenix_Api_Context_TestContext_" data-uid="Agenix.Sql.Actions.ExecuteSqlQueryAction.DoExecute(Agenix.Api.Context.TestContext)">DoExecute(TestContext)</h4>
+  <div class="markdown level1 summary"><p>Executes the SQL statements defined for the test action within the given context. This method determines the source
+of SQL statements,
+executes them, performs necessary validations on the result set, and populates the test context with any resulting
+variables.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void DoExecute(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The test context providing data and configuration needed to execute the SQL statements.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Sql.Actions.AbstractDatabaseConnectingTestAction.html#Agenix_Sql_Actions_AbstractDatabaseConnectingTestAction_DoExecute_Agenix_Api_Context_TestContext_">AbstractDatabaseConnectingTestAction.DoExecute(TestContext)</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DataAccessException</span></td>
+        <td><p>Thrown when there is a failure in executing any SQL statement due to data access
+issues.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Exceptions.AgenixSystemException.html">AgenixSystemException</a></td>
+        <td><p>Thrown when a <span class="xref">Spring.Dao.DataAccessException</span> occurs, encapsulating it for
+higher-level handling.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_ExecuteSqlQueryAction_ExecuteStatements_System_Collections_Generic_List_System_String__System_Collections_Generic_List_System_Collections_Generic_Dictionary_System_String_System_Object___System_Collections_Generic_Dictionary_System_String_System_Collections_Generic_List_System_String___Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.ExecuteSqlQueryAction.ExecuteStatements(System.Collections.Generic.List%7BSystem.String%7D%2CSystem.Collections.Generic.List%7BSystem.Collections.Generic.Dictionary%7BSystem.String%2CSystem.Object%7D%7D%2CSystem.Collections.Generic.Dictionary%7BSystem.String%2CSystem.Collections.Generic.List%7BSystem.String%7D%7D%2CAgenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/ExecuteSqlQueryAction.cs/#L76">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_ExecuteSqlQueryAction_ExecuteStatements_" data-uid="Agenix.Sql.Actions.ExecuteSqlQueryAction.ExecuteStatements*"></a>
+  <h4 id="Agenix_Sql_Actions_ExecuteSqlQueryAction_ExecuteStatements_System_Collections_Generic_List_System_String__System_Collections_Generic_List_System_Collections_Generic_Dictionary_System_String_System_Object___System_Collections_Generic_Dictionary_System_String_System_Collections_Generic_List_System_String___Agenix_Api_Context_TestContext_" data-uid="Agenix.Sql.Actions.ExecuteSqlQueryAction.ExecuteStatements(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.Collections.Generic.Dictionary{System.String,System.Object}},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},Agenix.Api.Context.TestContext)">ExecuteStatements(List&lt;string&gt;, List&lt;Dictionary&lt;string, object&gt;&gt;, Dictionary&lt;string, List&lt;string&gt;&gt;, TestContext)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void ExecuteStatements(List&lt;string&gt; newStatements, List&lt;Dictionary&lt;string, object&gt;&gt; allResultRows, Dictionary&lt;string, List&lt;string&gt;&gt; columnValuesMap, TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><span class="parametername">newStatements</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</td>
+        <td><span class="parametername">allResultRows</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</td>
+        <td><span class="parametername">columnValuesMap</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_ExecuteSqlQueryAction_ValidateSingleValue_System_String_System_String_System_String_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.ExecuteSqlQueryAction.ValidateSingleValue(System.String%2CSystem.String%2CSystem.String%2CAgenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/ExecuteSqlQueryAction.cs/#L301">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_ExecuteSqlQueryAction_ValidateSingleValue_" data-uid="Agenix.Sql.Actions.ExecuteSqlQueryAction.ValidateSingleValue*"></a>
+  <h4 id="Agenix_Sql_Actions_ExecuteSqlQueryAction_ValidateSingleValue_System_String_System_String_System_String_Agenix_Api_Context_TestContext_" data-uid="Agenix.Sql.Actions.ExecuteSqlQueryAction.ValidateSingleValue(System.String,System.String,System.String,Agenix.Api.Context.TestContext)">ValidateSingleValue(string, string, string?, TestContext)</h4>
+  <div class="markdown level1 summary"><p>Validates a single value from a database query result set against a specified control value.
+This method checks if the control value is ignored, a matcher expression, or if it matches the expected value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void ValidateSingleValue(string columnName, string controlValue, string? resultValue, TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">columnName</span></td>
+        <td><p>The name of the column being validated.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">controlValue</span></td>
+        <td><p>The expected value to validate against the result value, or a predefined placeholder.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">resultValue</span></td>
+        <td><p>The actual value obtained from the database query result set, which can be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context within which the validation is being executed, providing access to the test
+environment.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Exceptions.ValidationException.html">ValidationException</a></td>
+        <td><p>Thrown if the validation fails due to a mismatch between the control and result
+values.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_ExecuteSqlQueryAction_ValidateSqlStatement_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.ExecuteSqlQueryAction.ValidateSqlStatement(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/ExecuteSqlQueryAction.cs/#L279">View Source</a>
+  </span>
+  <a id="Agenix_Sql_Actions_ExecuteSqlQueryAction_ValidateSqlStatement_" data-uid="Agenix.Sql.Actions.ExecuteSqlQueryAction.ValidateSqlStatement*"></a>
+  <h4 id="Agenix_Sql_Actions_ExecuteSqlQueryAction_ValidateSqlStatement_System_String_" data-uid="Agenix.Sql.Actions.ExecuteSqlQueryAction.ValidateSqlStatement(System.String)">ValidateSqlStatement(string)</h4>
+  <div class="markdown level1 summary"><p>Does some simple validation on the SQL statement.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void ValidateSqlStatement(string statement)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">statement</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Exceptions.AgenixSystemException.html">AgenixSystemException</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">Spring.Objects.Factory.IInitializingObject</span>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.INamed.html">INamed</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.IDescribed.html">IDescribed</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Sql_Actions_ExecuteSqlQueryAction.md&amp;value=---%0Auid%3A%20Agenix.Sql.Actions.ExecuteSqlQueryAction%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Sql/Actions/ExecuteSqlQueryAction.cs/#L47" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

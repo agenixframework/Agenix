@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class ReceiveMessageAction.ReceiveMessageActionBuilder&lt;T, TM, TB&gt; </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class ReceiveMessageAction.ReceiveMessageActionBuilder&lt;T, TM, TB&gt; ">
+    
+    <meta name="description" content="Builder for constructing  instances. This builder provides methods to set various configurations such as validators, selectors, and timeouts for receiving messages. It is designed to support a fluent interface, enabling method chaining to configure and build the action.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3">
+
+
+
+  <h1 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3" class="text-break">Class ReceiveMessageAction.ReceiveMessageActionBuilder&lt;T, TM, TB&gt;</h1>
+  <div class="markdown level0 summary"><p>Builder for constructing <a class="xref" href="Agenix.Core.Actions.ReceiveMessageAction.html">ReceiveMessageAction</a> instances. This builder provides methods to set
+various configurations such as validators, selectors, and timeouts for receiving messages. It is designed to
+support
+a fluent interface, enabling method chaining to configure and build the action.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html">AbstractTestActionBuilder</a>&lt;T, TB&gt;</div>
+    <div class="level2"><a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html">MessageActionBuilder</a>&lt;T, TM, TB&gt;</div>
+    <div class="level3"><span class="xref">ReceiveMessageAction.ReceiveMessageActionBuilder&lt;T, TM, TB&gt;</span></div>
+      <div class="level4"><a class="xref" href="Agenix.Core.Actions.ReceiveMessageAction.Builder.html">ReceiveMessageAction.Builder</a></div>
+      <div class="level4"><a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.html">HttpClientResponseActionBuilder</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder</a>&lt;T&gt;</div>
+    <div><a class="xref" href="Agenix.Api.Spi.IReferenceResolverAware.html">IReferenceResolverAware</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_messageProcessors">MessageActionBuilder&lt;T, TM, TB&gt;.messageProcessors</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_variableExtractors">MessageActionBuilder&lt;T, TM, TB&gt;.variableExtractors</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3__endpoint">MessageActionBuilder&lt;T, TM, TB&gt;._endpoint</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3__endpointUri">MessageActionBuilder&lt;T, TM, TB&gt;._endpointUri</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_messageBuilderSupport">MessageActionBuilder&lt;T, TM, TB&gt;.messageBuilderSupport</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_referenceResolver">MessageActionBuilder&lt;T, TM, TB&gt;.referenceResolver</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_SetReferenceResolver_Agenix_Api_Spi_IReferenceResolver_">MessageActionBuilder&lt;T, TM, TB&gt;.SetReferenceResolver(IReferenceResolver)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Message_Agenix_Api_Message_IMessageBuilder_">MessageActionBuilder&lt;T, TM, TB&gt;.Message(IMessageBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Message_Agenix_Api_Message_IMessage_">MessageActionBuilder&lt;T, TM, TB&gt;.Message(IMessage)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Transform_Agenix_Api_Message_IMessageProcessor_">MessageActionBuilder&lt;T, TM, TB&gt;.Transform(IMessageProcessor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Transform_Agenix_Api_Message_IMessageProcessorAdapter_">MessageActionBuilder&lt;T, TM, TB&gt;.Transform(IMessageProcessorAdapter)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Transform_Agenix_Api_Message_MessageProcessorAdapter_">MessageActionBuilder&lt;T, TM, TB&gt;.Transform(MessageProcessorAdapter)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Transform__1_Agenix_Api_Message_IMessageProcessor_IBuilder_Agenix_Api_Message_IMessageProcessor___0__">MessageActionBuilder&lt;T, TM, TB&gt;.Transform&lt;B&gt;(IMessageProcessor.IBuilder&lt;IMessageProcessor, B&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Process__1_Agenix_Api_Message_IMessageProcessor_IBuilder_Agenix_Api_Message_IMessageProcessor___0__">MessageActionBuilder&lt;T, TM, TB&gt;.Process&lt;B&gt;(IMessageProcessor.IBuilder&lt;IMessageProcessor, B&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Process_Agenix_Api_Message_IMessageProcessorAdapter_">MessageActionBuilder&lt;T, TM, TB&gt;.Process(IMessageProcessorAdapter)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Process_Agenix_Api_Message_IMessageProcessor_">MessageActionBuilder&lt;T, TM, TB&gt;.Process(IMessageProcessor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_WithReferenceResolver_Agenix_Api_Spi_IReferenceResolver_">MessageActionBuilder&lt;T, TM, TB&gt;.WithReferenceResolver(IReferenceResolver)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Endpoint_Agenix_Api_Endpoint_IEndpoint_">MessageActionBuilder&lt;T, TM, TB&gt;.Endpoint(IEndpoint)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Endpoint_System_String_">MessageActionBuilder&lt;T, TM, TB&gt;.Endpoint(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Message">MessageActionBuilder&lt;T, TM, TB&gt;.Message()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_GetMessageBuilderSupport">MessageActionBuilder&lt;T, TM, TB&gt;.GetMessageBuilderSupport()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_GetEndpoint">MessageActionBuilder&lt;T, TM, TB&gt;.GetEndpoint()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_GetEndpointUri">MessageActionBuilder&lt;T, TM, TB&gt;.GetEndpointUri()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_GetVariableExtractors">MessageActionBuilder&lt;T, TM, TB&gt;.GetVariableExtractors()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_GetMessageProcessors">MessageActionBuilder&lt;T, TM, TB&gt;.GetMessageProcessors()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_DoBuild">MessageActionBuilder&lt;T, TM, TB&gt;.DoBuild()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html#Agenix_Core_AbstractTestActionBuilder_2_self">AbstractTestActionBuilder&lt;T, TB&gt;.self</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html#Agenix_Core_AbstractTestActionBuilder_2_Build">AbstractTestActionBuilder&lt;T, TB&gt;.Build()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html#Agenix_Core_AbstractTestActionBuilder_2_Name_System_String_">AbstractTestActionBuilder&lt;T, TB&gt;.Name(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html#Agenix_Core_AbstractTestActionBuilder_2_Description_System_String_">AbstractTestActionBuilder&lt;T, TB&gt;.Description(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html#Agenix_Core_AbstractTestActionBuilder_2_GetName">AbstractTestActionBuilder&lt;T, TB&gt;.GetName()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html#Agenix_Core_AbstractTestActionBuilder_2_GetDescription">AbstractTestActionBuilder&lt;T, TB&gt;.GetDescription()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Core.html">Core</a>.<a class="xref" href="Agenix.Core.Actions.html">Actions</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Core.dll</h6>
+  <h5 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class ReceiveMessageAction.ReceiveMessageActionBuilder&lt;T, TM, TB&gt; : MessageActionBuilder&lt;T, TM, TB&gt;, ITestActionBuilder&lt;T&gt;, IReferenceResolverAware where T : ReceiveMessageAction where TM : ReceiveMessageBuilderSupport&lt;T, TB, TM&gt; where TB : ReceiveMessageAction.ReceiveMessageActionBuilder&lt;T, TM, TB&gt;</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TM</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TB</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3__headerValidationContext.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603._headerValidationContext%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L448">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3__headerValidationContext" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3._headerValidationContext">_headerValidationContext</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected HeaderValidationContext _headerValidationContext</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Validation.Context.HeaderValidationContext.html">HeaderValidationContext</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3__messageSelector.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603._messageSelector%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L450">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3__messageSelector" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3._messageSelector">_messageSelector</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected string _messageSelector</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3__messageSelectors.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603._messageSelectors%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L442">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3__messageSelectors" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3._messageSelectors">_messageSelectors</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly Dictionary&lt;string, object&gt; _messageSelectors</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3__receiveTimeout.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603._receiveTimeout%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L451">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3__receiveTimeout" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3._receiveTimeout">_receiveTimeout</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected long _receiveTimeout</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3__validationProcessor.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603._validationProcessor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L453">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3__validationProcessor" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3._validationProcessor">_validationProcessor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected IValidationProcessor _validationProcessor</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Validation.IValidationProcessor.html">IValidationProcessor</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3__validatorNames.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603._validatorNames%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L444">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3__validatorNames" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3._validatorNames">_validatorNames</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly List&lt;string&gt; _validatorNames</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3__validators.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603._validators%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L446">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3__validators" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3._validators">_validators</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly List&lt;IMessageValidator&lt;IValidationContext&gt;&gt; _validators</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Api.Validation.IMessageValidator-1.html">IMessageValidator</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_ValidationContexts.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.ValidationContexts%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L455">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_ValidationContexts_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.ValidationContexts*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_ValidationContexts" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.ValidationContexts">ValidationContexts</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;IValidationContext.IBuilder&lt;IValidationContext, dynamic&gt;&gt; ValidationContexts { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>, <span class="xref">dynamic</span>&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Build.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.Build%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L457">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Build_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Build*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Build" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Build">Build()</h4>
+  <div class="markdown level1 summary"><p>Builds the test action.
+@return The build instance of the test action.
+/</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override T Build()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html#Agenix_Core_AbstractTestActionBuilder_2_Build">AbstractTestActionBuilder&lt;T, TB&gt;.Build()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_GetHeaderValidationContext.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.GetHeaderValidationContext%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L654">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_GetHeaderValidationContext_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.GetHeaderValidationContext*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_GetHeaderValidationContext" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.GetHeaderValidationContext">GetHeaderValidationContext()</h4>
+  <div class="markdown level1 summary"><p>Retrieves or creates the header validation context and adds it to the list of validation contexts.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HeaderValidationContext GetHeaderValidationContext()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Validation.Context.HeaderValidationContext.html">HeaderValidationContext</a></td>
+        <td><p>The header validation context.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_GetMessagePayload.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.GetMessagePayload%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L806">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_GetMessagePayload_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.GetMessagePayload*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_GetMessagePayload" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.GetMessagePayload">GetMessagePayload()</h4>
+  <div class="markdown level1 summary"><p>Gets message payload String representation from a configured message builder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual Optional&lt;string&gt; GetMessagePayload()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Util.Optional-1.html">Optional</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_GetMessageResource.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.GetMessageResource%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L792">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_GetMessageResource_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.GetMessageResource*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_GetMessageResource" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.GetMessageResource">GetMessageResource()</h4>
+  <div class="markdown level1 summary"><p>Gets a message resource file path from a configured message builder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Optional&lt;string&gt; GetMessageResource()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Util.Optional-1.html">Optional</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><p>Optional containing the resource path if available</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_GetValidationContexts.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.GetValidationContexts%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L668">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_GetValidationContexts_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.GetValidationContexts*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_GetValidationContexts" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.GetValidationContexts">GetValidationContexts()</h4>
+  <div class="markdown level1 summary"><p>Retrieves a list of validation contexts by building them from their respective builders.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;IValidationContext&gt; GetValidationContexts()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>&gt;</td>
+        <td><p>A list of <a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a> objects.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Process_Agenix_Api_Message_IMessageProcessor_.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.Process(Agenix.Api.Message.IMessageProcessor)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L692">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Process_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Process*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Process_Agenix_Api_Message_IMessageProcessor_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Process(Agenix.Api.Message.IMessageProcessor)">Process(IMessageProcessor)</h4>
+  <div class="markdown level1 summary"><p>Processes the provided message processor and adds it to the appropriate list based on its type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override TB Process(IMessageProcessor processor)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessageProcessor.html">IMessageProcessor</a></td>
+        <td><span class="parametername">processor</span></td>
+        <td><p>The <a class="xref" href="Agenix.Api.Message.IMessageProcessor.html">IMessageProcessor</a> to be processed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td><p>The current builder instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Process_Agenix_Api_Message_IMessageProcessor_">MessageActionBuilder&lt;T, TM, TB&gt;.Process(IMessageProcessor)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_ReconcileValidationContexts.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.ReconcileValidationContexts%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L718">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_ReconcileValidationContexts_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.ReconcileValidationContexts*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_ReconcileValidationContexts" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.ReconcileValidationContexts">ReconcileValidationContexts()</h4>
+  <div class="markdown level1 summary"><p>Revisit configured a validation context list and automatically added context based on message payload and path
+expression contexts, if any. This method makes sure that validation contexts are configured. If no validation
+context has been set yet, the method automatically adds proper validation contexts for JSON and XML message
+payloads. In case a path expression (JsonPath, XPath) context is set but no proper message validation context
+(Json, XML) the method automatically adds the proper message validation context. Only when validation contexts are
+set properly according to the message type and content, the message validation steps will execute later on.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void ReconcileValidationContexts()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Selector_System_Collections_Generic_IDictionary_System_String_System_Object__.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.Selector(System.Collections.Generic.IDictionary%7BSystem.String%2CSystem.Object%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L578">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Selector_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Selector*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Selector_System_Collections_Generic_IDictionary_System_String_System_Object__" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Selector(System.Collections.Generic.IDictionary{System.String,System.Object})">Selector(IDictionary&lt;string, object&gt;)</h4>
+  <div class="markdown level1 summary"><p>Adds message selectors to the current message-receiving action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TB Selector(IDictionary&lt;string, object&gt; messageSelector)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td><span class="parametername">messageSelector</span></td>
+        <td><p>A dictionary containing message selectors.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td><p>The current instance of the builder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Selector_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.Selector(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L567">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Selector_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Selector*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Selector_System_String_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Selector(System.String)">Selector(string)</h4>
+  <div class="markdown level1 summary"><p>Specifies a message selector to be used during the message-receiving action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TB Selector(string messageSelector)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">messageSelector</span></td>
+        <td><p>The message selector string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td><p>The builder instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Timeout_System_Int64_.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.Timeout(System.Int64)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L487">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Timeout_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Timeout*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Timeout_System_Int64_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Timeout(System.Int64)">Timeout(long)</h4>
+  <div class="markdown level1 summary"><p>Adds a custom timeout to this message receiving action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TB Timeout(long receiveTimeout)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">receiveTimeout</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_Agenix_Api_Validation_Context_IValidationContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.Validate(Agenix.Api.Validation.Context.IValidationContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L511">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validate*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_Agenix_Api_Validation_Context_IValidationContext_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validate(Agenix.Api.Validation.Context.IValidationContext)">Validate(IValidationContext)</h4>
+  <div class="markdown level1 summary"><p>Adds a validation context to the message-receiving action using the provided validation context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TB Validate(IValidationContext validationContext)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a></td>
+        <td><span class="parametername">validationContext</span></td>
+        <td><p>An instance of the validation context.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td><p>The builder instance with the added validation context.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_System_Object__.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.Validate(Agenix.Api.Validation.Context.IValidationContext.IBuilder%7BAgenix.Api.Validation.Context.IValidationContext%2CSystem.Object%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L499">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validate*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_System_Object__" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validate(Agenix.Api.Validation.Context.IValidationContext.IBuilder{Agenix.Api.Validation.Context.IValidationContext,System.Object})">Validate(IBuilder&lt;IValidationContext, dynamic&gt;)</h4>
+  <div class="markdown level1 summary"><p>Adds a validation context to this message-receiving action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TB Validate(IValidationContext.IBuilder&lt;IValidationContext, dynamic&gt; validationContext)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>, <span class="xref">dynamic</span>&gt;</td>
+        <td><span class="parametername">validationContext</span></td>
+        <td><p>The validation context to add.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td><p>The current builder instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_System_Object____.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.Validate(Agenix.Api.Validation.Context.IValidationContext.IBuilder%7BAgenix.Api.Validation.Context.IValidationContext%2CSystem.Object%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L557">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validate*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_System_Object____" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validate(Agenix.Api.Validation.Context.IValidationContext.IBuilder{Agenix.Api.Validation.Context.IValidationContext,System.Object}[])">Validate(params IBuilder&lt;IValidationContext, dynamic&gt;[])</h4>
+  <div class="markdown level1 summary"><p>Adds one or more validation contexts to this message-receiving action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TB Validate(params IValidationContext.IBuilder&lt;IValidationContext, dynamic&gt;[] validationContexts)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>, <span class="xref">dynamic</span>&gt;[]</td>
+        <td><span class="parametername">validationContexts</span></td>
+        <td><p>The validation contexts to be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td><p>Updated message action builder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_Agenix_Api_Validation_IValidationContextAdapter_.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.Validate(Agenix.Api.Validation.IValidationContextAdapter)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L534">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validate*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_Agenix_Api_Validation_IValidationContextAdapter_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validate(Agenix.Api.Validation.IValidationContextAdapter)">Validate(IValidationContextAdapter)</h4>
+  <div class="markdown level1 summary"><p>Adds a validation context to the message-receiving action using an adapter that implements
+<a class="xref" href="Agenix.Api.Validation.IValidationContextAdapter.html">IValidationContextAdapter</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TB Validate(IValidationContextAdapter adapter)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Validation.IValidationContextAdapter.html">IValidationContextAdapter</a></td>
+        <td><span class="parametername">adapter</span></td>
+        <td><p>An instance of the adapter that can be adapted to a validation context.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td><p>The builder instance with the added validation context.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_Agenix_Api_Validation_IValidationProcessor_.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.Validate(Agenix.Api.Validation.IValidationProcessor)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L675">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validate*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_Agenix_Api_Validation_IValidationProcessor_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validate(Agenix.Api.Validation.IValidationProcessor)">Validate(IValidationProcessor)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TB Validate(IValidationProcessor processor)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Validation.IValidationProcessor.html">IValidationProcessor</a></td>
+        <td><span class="parametername">processor</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_Agenix_Api_Validation_ValidationProcessor_.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.Validate(Agenix.Api.Validation.ValidationProcessor)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L681">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validate*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_Agenix_Api_Validation_ValidationProcessor_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validate(Agenix.Api.Validation.ValidationProcessor)">Validate(ValidationProcessor)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TB Validate(ValidationProcessor processor)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Validation.ValidationProcessor.html">ValidationProcessor</a></td>
+        <td><span class="parametername">processor</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_System_Collections_Generic_List_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_System_Object___.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.Validate(System.Collections.Generic.List%7BAgenix.Api.Validation.Context.IValidationContext.IBuilder%7BAgenix.Api.Validation.Context.IValidationContext%2CSystem.Object%7D%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L545">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validate*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_System_Collections_Generic_List_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_System_Object___" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validate(System.Collections.Generic.List{Agenix.Api.Validation.Context.IValidationContext.IBuilder{Agenix.Api.Validation.Context.IValidationContext,System.Object}})">Validate(List&lt;IBuilder&lt;IValidationContext, dynamic&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Adds a validation context to this message-receiving action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TB Validate(List&lt;IValidationContext.IBuilder&lt;IValidationContext, dynamic&gt;&gt; validationContexts)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>, <span class="xref">dynamic</span>&gt;&gt;</td>
+        <td><span class="parametername">validationContexts</span></td>
+        <td><p>The list of validation contexts to be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td><p>The builder instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_System_Func_Agenix_Api_Validation_Context_IValidationContext__.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.Validate(System.Func%7BAgenix.Api.Validation.Context.IValidationContext%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L522">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validate*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validate_System_Func_Agenix_Api_Validation_Context_IValidationContext__" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validate(System.Func{Agenix.Api.Validation.Context.IValidationContext})">Validate(Func&lt;IValidationContext&gt;)</h4>
+  <div class="markdown level1 summary"><p>Validates the message action using the provided validation context factory.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TB Validate(Func&lt;IValidationContext&gt; validationContextFactory)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>&gt;</td>
+        <td><span class="parametername">validationContextFactory</span></td>
+        <td><p>A factory function to create the validation context.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td><p>An instance of the action builder for chaining further configurations.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validator_Agenix_Api_Validation_IHeaderValidator___.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.Validator(Agenix.Api.Validation.IHeaderValidator%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L643">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validator_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validator*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validator_Agenix_Api_Validation_IHeaderValidator___" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validator(Agenix.Api.Validation.IHeaderValidator[])">Validator(params IHeaderValidator[])</h4>
+  <div class="markdown level1 summary"><p>Adds header validators to the message receiving action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TB Validator(params IHeaderValidator[] validators)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Validation.IHeaderValidator.html">IHeaderValidator</a>[]</td>
+        <td><span class="parametername">validators</span></td>
+        <td><p>An array of header validators to be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td><p>The builder instance with the added validators.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validator_Agenix_Api_Validation_IMessageValidator_Agenix_Api_Validation_Context_IValidationContext__.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.Validator(Agenix.Api.Validation.IMessageValidator%7BAgenix.Api.Validation.Context.IValidationContext%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L589">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validator_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validator*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validator_Agenix_Api_Validation_IMessageValidator_Agenix_Api_Validation_Context_IValidationContext__" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validator(Agenix.Api.Validation.IMessageValidator{Agenix.Api.Validation.Context.IValidationContext})">Validator(IMessageValidator&lt;IValidationContext&gt;)</h4>
+  <div class="markdown level1 summary"><p>Adds a custom validator to this message-receiving action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TB Validator(IMessageValidator&lt;IValidationContext&gt; validator)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Validation.IMessageValidator-1.html">IMessageValidator</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>&gt;</td>
+        <td><span class="parametername">validator</span></td>
+        <td><p>An instance of IMessageValidator to be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td><p>Returns an instance of the action builder for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validator_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.Validator(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L611">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validator_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validator*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validator_System_String_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validator(System.String)">Validator(string)</h4>
+  <div class="markdown level1 summary"><p>Adds a validator to the message receiving action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TB Validator(string validatorName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">validatorName</span></td>
+        <td><p>The name of the validator to add.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td><p>The builder instance for chaining further configurations.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validators_Agenix_Api_Validation_IMessageValidator_Agenix_Api_Validation_Context_IValidationContext____.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.Validators(Agenix.Api.Validation.IMessageValidator%7BAgenix.Api.Validation.Context.IValidationContext%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L622">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validators_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validators*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validators_Agenix_Api_Validation_IMessageValidator_Agenix_Api_Validation_Context_IValidationContext____" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validators(Agenix.Api.Validation.IMessageValidator{Agenix.Api.Validation.Context.IValidationContext}[])">Validators(params IMessageValidator&lt;IValidationContext&gt;[])</h4>
+  <div class="markdown level1 summary"><p>Adds a collection of message validators to this message-receiving action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TB Validators(params IMessageValidator&lt;IValidationContext&gt;[] validators)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Validation.IMessageValidator-1.html">IMessageValidator</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>&gt;[]</td>
+        <td><span class="parametername">validators</span></td>
+        <td><p>An array of validators to validate the received messages.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td><p>Returns the builder with the added validators.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validators_System_Collections_Generic_List_Agenix_Api_Validation_IMessageValidator_Agenix_Api_Validation_Context_IValidationContext___.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.Validators(System.Collections.Generic.List%7BAgenix.Api.Validation.IMessageValidator%7BAgenix.Api.Validation.Context.IValidationContext%7D%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L632">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validators_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validators*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validators_System_Collections_Generic_List_Agenix_Api_Validation_IMessageValidator_Agenix_Api_Validation_Context_IValidationContext___" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validators(System.Collections.Generic.List{Agenix.Api.Validation.IMessageValidator{Agenix.Api.Validation.Context.IValidationContext}})">Validators(List&lt;IMessageValidator&lt;IValidationContext&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Adds a list of message validators to the ReceiveMessageActionBuilder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TB Validators(List&lt;IMessageValidator&lt;IValidationContext&gt;&gt; validators)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Api.Validation.IMessageValidator-1.html">IMessageValidator</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>&gt;&gt;</td>
+        <td><span class="parametername">validators</span></td>
+        <td><p>A list of IMessageValidator instances to add.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td><p>The builder instance with the specified validators added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validators_System_String___.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603.Validators(System.String%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L600">View Source</a>
+  </span>
+  <a id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validators_" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validators*"></a>
+  <h4 id="Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3_Validators_System_String___" data-uid="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder`3.Validators(System.String[])">Validators(params string[])</h4>
+  <div class="markdown level1 summary"><p>Specifies one or more custom validators for the message-receiving action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TB Validators(params string[] validators)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td><span class="parametername">validators</span></td>
+        <td><p>A list of validator names to be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TB</span></td>
+        <td><p>The updated action builder with the specified validators.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Spi.IReferenceResolverAware.html">IReferenceResolverAware</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Actions_ReceiveMessageAction_ReceiveMessageActionBuilder_3.md&amp;value=---%0Auid%3A%20Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilder%603%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Actions/ReceiveMessageAction.cs/#L437" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

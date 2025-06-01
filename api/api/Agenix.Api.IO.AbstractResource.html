@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class AbstractResource </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class AbstractResource ">
+    
+    <meta name="description" content="Convenience base class for  implementations, pre-implementing typical behavior.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Api.IO.AbstractResource">
+
+
+
+  <h1 id="Agenix_Api_IO_AbstractResource" data-uid="Agenix.Api.IO.AbstractResource" class="text-break">Class AbstractResource</h1>
+  <div class="markdown level0 summary"><p>Convenience base class for <a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a>
+implementations, pre-implementing typical behavior.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">AbstractResource</span></div>
+      <div class="level2"><a class="xref" href="Agenix.Api.IO.AssemblyResource.html">AssemblyResource</a></div>
+      <div class="level2"><a class="xref" href="Agenix.Api.IO.ConfigSectionResource.html">ConfigSectionResource</a></div>
+      <div class="level2"><a class="xref" href="Agenix.Api.IO.FileSystemResource.html">FileSystemResource</a></div>
+      <div class="level2"><a class="xref" href="Agenix.Api.IO.InputStreamResource.html">InputStreamResource</a></div>
+      <div class="level2"><a class="xref" href="Agenix.Api.IO.StringResource.html">StringResource</a></div>
+      <div class="level2"><a class="xref" href="Agenix.Api.IO.UrlResource.html">UrlResource</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a></div>
+    <div><a class="xref" href="Agenix.Api.IO.IInputStreamSource.html">IInputStreamSource</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Api.html">Api</a>.<a class="xref" href="Agenix.Api.IO.html">IO</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Api.dll</h6>
+  <h5 id="Agenix_Api_IO_AbstractResource_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class AbstractResource : IResource, IInputStreamSource</code></pre>
+  </div>
+  <h5 id="Agenix_Api_IO_AbstractResource_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+    The <a class="xref" href="Agenix.Api.IO.AbstractResource.html#Agenix_Api_IO_AbstractResource_Exists">Exists</a> method will
+    check whether a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.fileinfo">FileInfo</a> or
+    <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a> can be opened;
+    <a class="xref" href="Agenix.Api.IO.AbstractResource.html#Agenix_Api_IO_AbstractResource_IsOpen">IsOpen</a> will always return
+    <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>;
+    <a class="xref" href="Agenix.Api.IO.AbstractResource.html#Agenix_Api_IO_AbstractResource_Uri">Uri</a> and
+    <a class="xref" href="Agenix.Api.IO.AbstractResource.html#Agenix_Api_IO_AbstractResource_File">File</a> throw an exception;
+    and <a class="xref" href="Agenix.Api.IO.AbstractResource.html#Agenix_Api_IO_AbstractResource_ToString">ToString()</a> will
+    return the value of the
+    <a class="xref" href="Agenix.Api.IO.IResource.html#Agenix_Api_IO_IResource_Description">Description</a> property.
+</p>
+</div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource__ctor.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L88">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource__ctor_" data-uid="Agenix.Api.IO.AbstractResource.#ctor*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource__ctor" data-uid="Agenix.Api.IO.AbstractResource.#ctor">AbstractResource()</h4>
+  <div class="markdown level1 summary"><p>Creates a new instance of the
+<a class="xref" href="Agenix.Api.IO.AbstractResource.html">AbstractResource</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected AbstractResource()</code></pre>
+  </div>
+  <h5 id="Agenix_Api_IO_AbstractResource__ctor_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    This is an <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/abstract">abstract</a> class, and as such exposes no
+    public constructors.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource__ctor_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.%23ctor(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L109">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource__ctor_" data-uid="Agenix.Api.IO.AbstractResource.#ctor*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource__ctor_System_String_" data-uid="Agenix.Api.IO.AbstractResource.#ctor(System.String)">AbstractResource(string)</h4>
+  <div class="markdown level1 summary"><p>Creates a new instance of the
+<a class="xref" href="Agenix.Api.IO.AbstractResource.html">AbstractResource</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected AbstractResource(string resourceName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">resourceName</span></td>
+        <td><p>A string representation of the resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_IO_AbstractResource__ctor_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    This is an <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/abstract">abstract</a> class, and as such exposes no
+    public constructors.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>If the supplied <code class="paramref">resourceName</code> is
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> or contains only whitespace character(s).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_DefaultBasePathPlaceHolder.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.DefaultBasePathPlaceHolder%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L72">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_IO_AbstractResource_DefaultBasePathPlaceHolder" data-uid="Agenix.Api.IO.AbstractResource.DefaultBasePathPlaceHolder">DefaultBasePathPlaceHolder</h4>
+  <div class="markdown level1 summary"><p>The default special character that denotes the base (home, or root)
+path.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected const string DefaultBasePathPlaceHolder = &quot;~&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_IO_AbstractResource_DefaultBasePathPlaceHolder_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    Will be resolved (by those <a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a>
+    implementations that support it) to the home (or root) path for
+    the specific <a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a> implementation.
+</p>
+<p>
+    For example, in the case of a web application this will (probably)
+    resolve to the virtual directory of said web application.
+</p>
+</div>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_BasePathPlaceHolder.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.BasePathPlaceHolder%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L136">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_BasePathPlaceHolder_" data-uid="Agenix.Api.IO.AbstractResource.BasePathPlaceHolder*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_BasePathPlaceHolder" data-uid="Agenix.Api.IO.AbstractResource.BasePathPlaceHolder">BasePathPlaceHolder</h4>
+  <div class="markdown level1 summary"><p>The special character that denotes the base (home, or root)
+path.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string BasePathPlaceHolder { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_IO_AbstractResource_BasePathPlaceHolder_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    Will be resolved (by those <a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a>
+    implementations that support it) to the home (or root) path for
+    the specific <a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a> implementation.
+</p>
+<p>
+    For example, in the case of a web application this will (probably)
+    resolve to the virtual directory of said web application.
+</p>
+</div>
+  <h5 id="Agenix_Api_IO_AbstractResource_BasePathPlaceHolder_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Agenix.Api.IO.AbstractResource.html#Agenix_Api_IO_AbstractResource_DefaultBasePathPlaceHolder">DefaultBasePathPlaceHolder</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_Description.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.Description%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L157">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_Description_" data-uid="Agenix.Api.IO.AbstractResource.Description*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_Description" data-uid="Agenix.Api.IO.AbstractResource.Description">Description</h4>
+  <div class="markdown level1 summary"><p>Returns a description for this resource.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract string Description { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>A description for this resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_IO_AbstractResource_Description_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Agenix.Api.IO.IResource.html#Agenix_Api_IO_IResource_Description">Description</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_Exists.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.Exists%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L240">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_Exists_" data-uid="Agenix.Api.IO.AbstractResource.Exists*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_Exists" data-uid="Agenix.Api.IO.AbstractResource.Exists">Exists</h4>
+  <div class="markdown level1 summary"><p>Does this resource actually exist in physical form?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool Exists { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if this resource actually exists in physical
+form (for example on a filesystem).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_IO_AbstractResource_Exists_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    This implementation checks whether a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.fileinfo">FileInfo</a>
+    can be opened, falling back to whether a
+    <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a> can be opened.
+</p>
+<p>
+    This will cover both directories and content resources.
+</p>
+<p>
+    This implementation will also return <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a> if
+    permission to the (file's) path is denied.
+</p>
+</div>
+  <h5 id="Agenix_Api_IO_AbstractResource_Exists_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Agenix.Api.IO.IResource.html#Agenix_Api_IO_IResource_Exists">Exists</a></div>
+      <div><a class="xref" href="Agenix.Api.IO.IResource.html#Agenix_Api_IO_IResource_File">File</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_File.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.File%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L213">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_File_" data-uid="Agenix.Api.IO.AbstractResource.File*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_File" data-uid="Agenix.Api.IO.AbstractResource.File">File</h4>
+  <div class="markdown level1 summary"><p>Returns a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.fileinfo">FileInfo</a> handle for this resource.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual FileInfo File { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.fileinfo">FileInfo</a></td>
+        <td><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.fileinfo">FileInfo</a> handle for this resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_IO_AbstractResource_File_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    This, the default implementation, always throws a
+    <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.filenotfoundexception">FileNotFoundException</a>, assuming that the
+    resource cannot be resolved to an absolute file path.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.filenotfoundexception">FileNotFoundException</a></td>
+        <td><p>This implementation <b>always</b> throws a
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.filenotfoundexception">FileNotFoundException</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_InputStream.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.InputStream%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L148">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_InputStream_" data-uid="Agenix.Api.IO.AbstractResource.InputStream*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_InputStream" data-uid="Agenix.Api.IO.AbstractResource.InputStream">InputStream</h4>
+  <div class="markdown level1 summary"><p>Return an <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a> for this resource.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract Stream InputStream { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></td>
+        <td><p>An <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>If the stream could not be opened.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_IO_AbstractResource_InputStream_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Agenix.Api.IO.IInputStreamSource.html#Agenix_Api_IO_IInputStreamSource_InputStream">InputStream</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_IsOpen.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.IsOpen%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L188">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_IsOpen_" data-uid="Agenix.Api.IO.AbstractResource.IsOpen*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_IsOpen" data-uid="Agenix.Api.IO.AbstractResource.IsOpen">IsOpen</h4>
+  <div class="markdown level1 summary"><p>Does this resource represent a handle with an open stream?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool IsOpen { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if this resource represents a handle with an
+open stream.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_IO_AbstractResource_IsOpen_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    This, the default implementation, always returns
+    <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+</p>
+</div>
+  <h5 id="Agenix_Api_IO_AbstractResource_IsOpen_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Agenix.Api.IO.IResource.html#Agenix_Api_IO_IResource_IsOpen">IsOpen</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_PathSeparatorChars.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.PathSeparatorChars%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L489">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_PathSeparatorChars_" data-uid="Agenix.Api.IO.AbstractResource.PathSeparatorChars*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_PathSeparatorChars" data-uid="Agenix.Api.IO.AbstractResource.PathSeparatorChars">PathSeparatorChars</h4>
+  <div class="markdown level1 summary"><p>Gets those characters that are valid path separators for the
+resource type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual char[] PathSeparatorChars { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.char">char</a>[]</td>
+        <td><p>Those characters that are valid path separators for the resource
+type.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_IO_AbstractResource_PathSeparatorChars_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    An example value of this property would be the
+    <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.path.directoryseparatorchar">DirectorySeparatorChar</a> and
+    <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.path.altdirectoryseparatorchar">AltDirectorySeparatorChar</a> values for a
+    filesystem based resource.
+</p>
+<p>
+    Any derived classes that override this method are expected to
+    return a new array for each access of this property.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></td>
+        <td><p>This, the default implementation, <b>always</b> throws a
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_Protocol.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.Protocol%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L172">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_Protocol_" data-uid="Agenix.Api.IO.AbstractResource.Protocol*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_Protocol" data-uid="Agenix.Api.IO.AbstractResource.Protocol">Protocol</h4>
+  <div class="markdown level1 summary"><p>Returns the protocol associated with this resource (if any).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Protocol { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The protocol associated with this resource (if any).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_IO_AbstractResource_Protocol_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    The value of this property may be <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> if no
+    protocol is associated with the resource type (for example if the
+    resource is a memory stream).
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_ResourcePath.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.ResourcePath%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L463">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_ResourcePath_" data-uid="Agenix.Api.IO.AbstractResource.ResourcePath*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_ResourcePath" data-uid="Agenix.Api.IO.AbstractResource.ResourcePath">ResourcePath</h4>
+  <div class="markdown level1 summary"><p>Gets the current path of the resource.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual string ResourcePath { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The current path of the resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_IO_AbstractResource_ResourcePath_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    An example value of this property would be the name of the
+    directory containing a filesystem based resource.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></td>
+        <td><p>This, the default implementation, <b>always</b> throws a
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_RootLocation.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.RootLocation%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L445">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_RootLocation_" data-uid="Agenix.Api.IO.AbstractResource.RootLocation*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_RootLocation" data-uid="Agenix.Api.IO.AbstractResource.RootLocation">RootLocation</h4>
+  <div class="markdown level1 summary"><p>Gets the root location of the resource.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual string RootLocation { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The root location of the resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_IO_AbstractResource_RootLocation_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    Where root resource can be taken to mean that part of the resource
+    descriptor that doesn't change when a relative resource is looked
+    up. Examples of such a root location would include a drive letter,
+    a web server name, an assembly name, etc.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></td>
+        <td><p>This, the default implementation, <b>always</b> throws a
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_SupportsRelativeResources.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.SupportsRelativeResources%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L425">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_SupportsRelativeResources_" data-uid="Agenix.Api.IO.AbstractResource.SupportsRelativeResources*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_SupportsRelativeResources" data-uid="Agenix.Api.IO.AbstractResource.SupportsRelativeResources">SupportsRelativeResources</h4>
+  <div class="markdown level1 summary"><p>Does this <a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a> support relative
+resource retrieval?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual bool SupportsRelativeResources { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if this
+<a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a> supports relative resource
+retrieval.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_IO_AbstractResource_SupportsRelativeResources_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    This property is generally to be consulted prior to attempting
+    to attempting to access a resource that is relative to this
+    resource (via a call to
+    <a class="xref" href="Agenix.Api.IO.IResource.html#Agenix_Api_IO_IResource_CreateRelative_System_String_">CreateRelative(string)</a>).
+</p>
+<p>
+    This, the default implementation, always returns
+    <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_Uri.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.Uri%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L194">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_Uri_" data-uid="Agenix.Api.IO.AbstractResource.Uri*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_Uri" data-uid="Agenix.Api.IO.AbstractResource.Uri">Uri</h4>
+  <div class="markdown level1 summary"><p>Returns the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a> handle for this resource.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Uri Uri { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_IO_AbstractResource_Uri_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Agenix.Api.IO.IResource.html#Agenix_Api_IO_IResource_Uri">Uri</a></div>
+  </div>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_CreateRelative_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.CreateRelative(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L559">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_CreateRelative_" data-uid="Agenix.Api.IO.AbstractResource.CreateRelative*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_CreateRelative_System_String_" data-uid="Agenix.Api.IO.AbstractResource.CreateRelative(System.String)">CreateRelative(string)</h4>
+  <div class="markdown level1 summary"><p>Creates a new resource that is relative to this resource based on the
+supplied <code class="paramref">resourceName</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual IResource CreateRelative(string resourceName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">resourceName</span></td>
+        <td><p>The name of the resource to create.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a></td>
+        <td><p>The relative resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_IO_AbstractResource_CreateRelative_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    This method can accept either a fully qualified resource name or a
+    relative resource name as it's parameter.
+</p>
+<p>
+    A fully qualified resource is one that has a protocol prefix and
+    all elements of the resource name. All other resources are treated
+    as relative to this resource, and the following rules are used to
+    locate a relative resource:
+</p>
+<ul><li>
+        If the <code class="paramref">resourceName</code> starts with <code>'..'</code>,
+        the current resource path is navigated backwards before the
+        <code class="paramref">resourceName</code> is concatenated to the current
+        <a class="xref" href="Agenix.Api.IO.AbstractResource.html#Agenix_Api_IO_AbstractResource_ResourcePath">ResourcePath</a> of
+        this resource.
+    </li><li>
+        If the <code class="paramref">resourceName</code> starts with '/', the
+        current resource path is ignored and a new resource name is
+        appended to the
+        <a class="xref" href="Agenix.Api.IO.AbstractResource.html#Agenix_Api_IO_AbstractResource_RootLocation">RootLocation</a> of
+        this resource.
+    </li><li>
+        If the <code class="paramref">resourceName</code> starts with '.' or a
+        letter, a new path is appended to the current
+        <a class="xref" href="Agenix.Api.IO.AbstractResource.html#Agenix_Api_IO_AbstractResource_ResourcePath">ResourcePath</a> of
+        this resource.
+    </li></ul>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uriformatexception">UriFormatException</a></td>
+        <td><p>If the process of resolving the relative resource yielded an
+invalid URI.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></td>
+        <td><p>If this resource does not support the resolution of relative
+resources (as determined by the value of the
+<a class="xref" href="Agenix.Api.IO.AbstractResource.html#Agenix_Api_IO_AbstractResource_SupportsRelativeResources">SupportsRelativeResources</a>
+property).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_IO_AbstractResource_CreateRelative_System_String__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Agenix.Api.IO.AbstractResource.html#Agenix_Api_IO_AbstractResource_ResourcePath">ResourcePath</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_CreateResourceInstance_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.CreateResourceInstance(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L391">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_CreateResourceInstance_" data-uid="Agenix.Api.IO.AbstractResource.CreateResourceInstance*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_CreateResourceInstance_System_String_" data-uid="Agenix.Api.IO.AbstractResource.CreateResourceInstance(System.String)">CreateResourceInstance(string)</h4>
+  <div class="markdown level1 summary"><p>Factory Method. Create a new instance of the current resource type using the given resourceName</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IResource CreateResourceInstance(string resourceName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">resourceName</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.Equals(System.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L362">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_Equals_" data-uid="Agenix.Api.IO.AbstractResource.Equals*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_Equals_System_Object_" data-uid="Agenix.Api.IO.AbstractResource.Equals(System.Object)">Equals(object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a> is
+equal to the current <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">obj</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a></div>
+  <h5 id="Agenix_Api_IO_AbstractResource_Equals_System_Object__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    This implementation compares <a class="xref" href="Agenix.Api.IO.AbstractResource.html#Agenix_Api_IO_AbstractResource_Description">Description</a> values.
+</p>
+</div>
+  <h5 id="Agenix_Api_IO_AbstractResource_Equals_System_Object__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Agenix.Api.IO.IResource.html#Agenix_Api_IO_IResource_Description">Description</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_GetHashCode.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.GetHashCode%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L379">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_GetHashCode_" data-uid="Agenix.Api.IO.AbstractResource.GetHashCode*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_GetHashCode" data-uid="Agenix.Api.IO.AbstractResource.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"><p>Serves as a hash function for a particular type, suitable for use
+in hashing algorithms and data structures like a hash table.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a></div>
+  <h5 id="Agenix_Api_IO_AbstractResource_GetHashCode_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    This implementation returns the hashcode of the
+    <a class="xref" href="Agenix.Api.IO.AbstractResource.html#Agenix_Api_IO_AbstractResource_Description">Description</a> property.
+</p>
+</div>
+  <h5 id="Agenix_Api_IO_AbstractResource_GetHashCode_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Agenix.Api.IO.IResource.html#Agenix_Api_IO_IResource_Description">Description</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_GetResourceLoader.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.GetResourceLoader%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L399">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_GetResourceLoader_" data-uid="Agenix.Api.IO.AbstractResource.GetResourceLoader*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_GetResourceLoader" data-uid="Agenix.Api.IO.AbstractResource.GetResourceLoader">GetResourceLoader()</h4>
+  <div class="markdown level1 summary"><p>The ResourceLoader to be used for resolving relative resources</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IResourceLoader GetResourceLoader()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.IO.IResourceLoader.html">IResourceLoader</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_GetResourceNameWithoutProtocol_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.GetResourceNameWithoutProtocol(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L291">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_GetResourceNameWithoutProtocol_" data-uid="Agenix.Api.IO.AbstractResource.GetResourceNameWithoutProtocol*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_GetResourceNameWithoutProtocol_System_String_" data-uid="Agenix.Api.IO.AbstractResource.GetResourceNameWithoutProtocol(System.String)">GetResourceNameWithoutProtocol(string)</h4>
+  <div class="markdown level1 summary"><p>Strips any protocol name from the supplied
+<code class="paramref">resourceName</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected static string GetResourceNameWithoutProtocol(string resourceName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">resourceName</span></td>
+        <td><p>The name of the resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The name of the resource without the protocol name.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_IO_AbstractResource_GetResourceNameWithoutProtocol_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    If the supplied <code class="paramref">resourceName</code> does not
+    have any protocol associated with it, then the supplied
+    <code class="paramref">resourceName</code> will be returned as-is.
+</p>
+</div>
+  <h5 id="Agenix_Api_IO_AbstractResource_GetResourceNameWithoutProtocol_System_String__examples">Examples</h5>
+  <pre><code class="lang-C#">GetResourceNameWithoutProtocol("http://www.mycompany.com/resource.txt");
+	// returns www.mycompany.com/resource.txt</code></pre>
+
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_IsRelativeResource_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.IsRelativeResource(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L501">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_IsRelativeResource_" data-uid="Agenix.Api.IO.AbstractResource.IsRelativeResource*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_IsRelativeResource_System_String_" data-uid="Agenix.Api.IO.AbstractResource.IsRelativeResource(System.String)">IsRelativeResource(string)</h4>
+  <div class="markdown level1 summary"><p>Does the supplied <code class="paramref">resourceName</code> relative ?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual bool IsRelativeResource(string resourceName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">resourceName</span></td>
+        <td><p>The name of the resource to test.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if resource name is relative;
+otherwise <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_ResolveBasePathPlaceHolder_System_String_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.ResolveBasePathPlaceHolder(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L336">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_ResolveBasePathPlaceHolder_" data-uid="Agenix.Api.IO.AbstractResource.ResolveBasePathPlaceHolder*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_ResolveBasePathPlaceHolder_System_String_System_String_" data-uid="Agenix.Api.IO.AbstractResource.ResolveBasePathPlaceHolder(System.String,System.String)">ResolveBasePathPlaceHolder(string, string)</h4>
+  <div class="markdown level1 summary"><p>Resolves the presence of the
+<code class="paramref">basePathPlaceHolder</code> value
+in the supplied <code class="paramref">resourceName</code> into a path.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual string ResolveBasePathPlaceHolder(string resourceName, string basePathPlaceHolder)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">resourceName</span></td>
+        <td><p>The name of the resource.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">basePathPlaceHolder</span></td>
+        <td><p>The string that is a placeholder for a base path.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The name of the resource with any <code class="paramref">basePathPlaceHolder</code>
+value having been resolved into an actual path.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_IO_AbstractResource_ResolveBasePathPlaceHolder_System_String_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    The default implementation simply returns the supplied
+    <code class="paramref">resourceName</code> as is.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_ResolveResourceNameWithoutProtocol_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.ResolveResourceNameWithoutProtocol(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L309">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_ResolveResourceNameWithoutProtocol_" data-uid="Agenix.Api.IO.AbstractResource.ResolveResourceNameWithoutProtocol*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_ResolveResourceNameWithoutProtocol_System_String_" data-uid="Agenix.Api.IO.AbstractResource.ResolveResourceNameWithoutProtocol(System.String)">ResolveResourceNameWithoutProtocol(string)</h4>
+  <div class="markdown level1 summary"><p>Resolves the supplied <code class="paramref">resourceName</code> to its value
+sans any leading protocol.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual string ResolveResourceNameWithoutProtocol(string resourceName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">resourceName</span></td>
+        <td><p>The name of the resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The name of the resource without the protocol name.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource_ToString.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource.ToString%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L347">View Source</a>
+  </span>
+  <a id="Agenix_Api_IO_AbstractResource_ToString_" data-uid="Agenix.Api.IO.AbstractResource.ToString*"></a>
+  <h4 id="Agenix_Api_IO_AbstractResource_ToString" data-uid="Agenix.Api.IO.AbstractResource.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>This implementation returns the
+<a class="xref" href="Agenix.Api.IO.AbstractResource.html#Agenix_Api_IO_AbstractResource_Description">Description</a> of this resource.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a></div>
+  <h5 id="Agenix_Api_IO_AbstractResource_ToString_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Agenix.Api.IO.IResource.html#Agenix_Api_IO_IResource_Description">Description</a></div>
+  </div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.IO.IInputStreamSource.html">IInputStreamSource</a>
+  </div>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a></div>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_IO_AbstractResource.md&amp;value=---%0Auid%3A%20Agenix.Api.IO.AbstractResource%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/IO/AbstractResource.cs/#L55" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,2691 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class TypeRegistry </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class TypeRegistry ">
+    
+    <meta name="description" content="Provides access to a central registry of aliased s.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Api.TypeResolution.TypeRegistry">
+
+
+
+  <h1 id="Agenix_Api_TypeResolution_TypeRegistry" data-uid="Agenix.Api.TypeResolution.TypeRegistry" class="text-break">Class TypeRegistry</h1>
+  <div class="markdown level0 summary"><p>Provides access to a central registry of aliased <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">TypeRegistry</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Api.html">Api</a>.<a class="xref" href="Agenix.Api.TypeResolution.html">TypeResolution</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Api.dll</h6>
+  <h5 id="Agenix_Api_TypeResolution_TypeRegistry_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class TypeRegistry</code></pre>
+  </div>
+  <h5 id="Agenix_Api_TypeResolution_TypeRegistry_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+    Simplifies configuration by allowing aliases to be used instead of
+    fully qualified type names.
+</p>
+<p>
+    Comes 'pre-loaded' with a number of convenience alias' for the more
+    common types; an example would be the '<code>int</code>' (or '<code>Integer</code>'
+    for Visual Basic.NET developers) alias for the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>
+    type.
+</p>
+</div>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_BoolAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.BoolAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L507">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_BoolAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.BoolAlias">BoolAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'bool' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string BoolAlias = &quot;bool&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_BoolAliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.BoolAliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L512">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_BoolAliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.BoolAliasVB">BoolAliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'Boolean' type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string BoolAliasVB = &quot;Boolean&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_BoolArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.BoolArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L517">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_BoolArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.BoolArrayAlias">BoolArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'bool[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string BoolArrayAlias = &quot;bool[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_BoolArrayAliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.BoolArrayAliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L522">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_BoolArrayAliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.BoolArrayAliasVB">BoolArrayAliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'Boolean()' array type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string BoolArrayAliasVB = &quot;Boolean()&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_CharAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.CharAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L347">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_CharAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.CharAlias">CharAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'char' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string CharAlias = &quot;char&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_CharAliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.CharAliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L352">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_CharAliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.CharAliasVB">CharAliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'Char' type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string CharAliasVB = &quot;Char&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_CharArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.CharArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L357">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_CharArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.CharArrayAlias">CharArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'char[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string CharArrayAlias = &quot;char[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_CharArrayAliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.CharArrayAliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L362">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_CharArrayAliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.CharArrayAliasVB">CharArrayAliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'Char()' array type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string CharArrayAliasVB = &quot;Char()&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_DateAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.DateAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L482">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_DateAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.DateAlias">DateAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'DateTime' type (C# style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DateAlias = &quot;date&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_DateAliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.DateAliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L487">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_DateAliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.DateAliasVB">DateAliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'DateTime' type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DateAliasVB = &quot;Date&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_DateTimeAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.DateTimeAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L477">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_DateTimeAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.DateTimeAlias">DateTimeAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'DateTime' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DateTimeAlias = &quot;DateTime&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_DateTimeArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.DateTimeArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L492">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_DateTimeArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.DateTimeArrayAlias">DateTimeArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'DateTime[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DateTimeArrayAlias = &quot;DateTime[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_DateTimeArrayAliasCSharp.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.DateTimeArrayAliasCSharp%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L497">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_DateTimeArrayAliasCSharp" data-uid="Agenix.Api.TypeResolution.TypeRegistry.DateTimeArrayAliasCSharp">DateTimeArrayAliasCSharp</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'DateTime[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DateTimeArrayAliasCSharp = &quot;date[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_DateTimeArrayAliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.DateTimeArrayAliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L502">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_DateTimeArrayAliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.DateTimeArrayAliasVB">DateTimeArrayAliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'DateTime()' array type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DateTimeArrayAliasVB = &quot;DateTime()&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_DecimalAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.DecimalAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L327">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_DecimalAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.DecimalAlias">DecimalAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'decimal' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DecimalAlias = &quot;decimal&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_DecimalAliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.DecimalAliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L332">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_DecimalAliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.DecimalAliasVB">DecimalAliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'Decimal' type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DecimalAliasVB = &quot;Decimal&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_DecimalArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.DecimalArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L337">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_DecimalArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.DecimalArrayAlias">DecimalArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'decimal[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DecimalArrayAlias = &quot;decimal[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_DecimalArrayAliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.DecimalArrayAliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L342">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_DecimalArrayAliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.DecimalArrayAliasVB">DecimalArrayAliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'Decimal()' array type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DecimalArrayAliasVB = &quot;Decimal()&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_DoubleAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.DoubleAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L437">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_DoubleAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.DoubleAlias">DoubleAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'double' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DoubleAlias = &quot;double&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_DoubleAliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.DoubleAliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L442">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_DoubleAliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.DoubleAliasVB">DoubleAliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'Double' type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DoubleAliasVB = &quot;Double&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_DoubleArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.DoubleArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L447">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_DoubleArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.DoubleArrayAlias">DoubleArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'double[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DoubleArrayAlias = &quot;double[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_DoubleArrayAliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.DoubleArrayAliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L452">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_DoubleArrayAliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.DoubleArrayAliasVB">DoubleArrayAliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'Double()' array type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DoubleArrayAliasVB = &quot;Double()&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_FloatAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.FloatAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L457">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_FloatAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.FloatAlias">FloatAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'float' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string FloatAlias = &quot;float&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_FloatArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.FloatArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L467">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_FloatArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.FloatArrayAlias">FloatArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'float[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string FloatArrayAlias = &quot;float[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_Int16Alias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.Int16Alias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L387">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_Int16Alias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.Int16Alias">Int16Alias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'short' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string Int16Alias = &quot;short&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_Int16AliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.Int16AliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L392">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_Int16AliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.Int16AliasVB">Int16AliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'Short' type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string Int16AliasVB = &quot;Short&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_Int16ArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.Int16ArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L397">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_Int16ArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.Int16ArrayAlias">Int16ArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'short[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string Int16ArrayAlias = &quot;short[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_Int16ArrayAliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.Int16ArrayAliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L402">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_Int16ArrayAliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.Int16ArrayAliasVB">Int16ArrayAliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'Short()' array type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string Int16ArrayAliasVB = &quot;Short()&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_Int32Alias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.Int32Alias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L307">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_Int32Alias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.Int32Alias">Int32Alias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'int' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string Int32Alias = &quot;int&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_Int32AliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.Int32AliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L312">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_Int32AliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.Int32AliasVB">Int32AliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'Integer' type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string Int32AliasVB = &quot;Integer&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_Int32ArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.Int32ArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L317">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_Int32ArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.Int32ArrayAlias">Int32ArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'int[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string Int32ArrayAlias = &quot;int[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_Int32ArrayAliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.Int32ArrayAliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L322">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_Int32ArrayAliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.Int32ArrayAliasVB">Int32ArrayAliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'Integer()' array type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string Int32ArrayAliasVB = &quot;Integer()&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_Int64Alias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.Int64Alias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L367">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_Int64Alias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.Int64Alias">Int64Alias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'long' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string Int64Alias = &quot;long&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_Int64AliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.Int64AliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L372">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_Int64AliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.Int64AliasVB">Int64AliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'Long' type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string Int64AliasVB = &quot;Long&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_Int64ArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.Int64ArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L377">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_Int64ArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.Int64ArrayAlias">Int64ArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'long[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string Int64ArrayAlias = &quot;long[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_Int64ArrayAliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.Int64ArrayAliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L382">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_Int64ArrayAliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.Int64ArrayAliasVB">Int64ArrayAliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'Long()' array type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string Int64ArrayAliasVB = &quot;Long()&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableBoolAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableBoolAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L667">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableBoolAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableBoolAlias">NullableBoolAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'bool?' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableBoolAlias = &quot;bool?&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableBoolArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableBoolArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L672">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableBoolArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableBoolArrayAlias">NullableBoolArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'bool?[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableBoolArrayAlias = &quot;bool?[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableCharAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableCharAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L587">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableCharAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableCharAlias">NullableCharAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'char?' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableCharAlias = &quot;char?&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableCharArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableCharArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L592">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableCharArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableCharArrayAlias">NullableCharArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'char?[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableCharArrayAlias = &quot;char?[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableDecimalAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableDecimalAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L577">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableDecimalAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableDecimalAlias">NullableDecimalAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'decimal?' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableDecimalAlias = &quot;decimal?&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableDecimalArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableDecimalArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L582">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableDecimalArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableDecimalArrayAlias">NullableDecimalArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'decimal?[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableDecimalArrayAlias = &quot;decimal?[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableDoubleAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableDoubleAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L647">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableDoubleAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableDoubleAlias">NullableDoubleAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'double?' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableDoubleAlias = &quot;double?&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableDoubleArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableDoubleArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L652">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableDoubleArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableDoubleArrayAlias">NullableDoubleArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'double?[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableDoubleArrayAlias = &quot;double?[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableFloatAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableFloatAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L657">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableFloatAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableFloatAlias">NullableFloatAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'float?' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableFloatAlias = &quot;float?&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableFloatArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableFloatArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L662">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableFloatArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableFloatArrayAlias">NullableFloatArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'float?[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableFloatArrayAlias = &quot;float?[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableInt16Alias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableInt16Alias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L607">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableInt16Alias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableInt16Alias">NullableInt16Alias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'short?' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableInt16Alias = &quot;short?&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableInt16ArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableInt16ArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L612">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableInt16ArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableInt16ArrayAlias">NullableInt16ArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'short?[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableInt16ArrayAlias = &quot;short?[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableInt32Alias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableInt32Alias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L567">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableInt32Alias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableInt32Alias">NullableInt32Alias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'int?' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableInt32Alias = &quot;int?&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableInt32ArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableInt32ArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L572">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableInt32ArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableInt32ArrayAlias">NullableInt32ArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'int?[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableInt32ArrayAlias = &quot;int?[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableInt64Alias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableInt64Alias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L597">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableInt64Alias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableInt64Alias">NullableInt64Alias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'long?' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableInt64Alias = &quot;long?&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableInt64ArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableInt64ArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L602">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableInt64ArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableInt64ArrayAlias">NullableInt64ArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'long?[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableInt64ArrayAlias = &quot;long?[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableUInt16Alias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableUInt16Alias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L637">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableUInt16Alias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableUInt16Alias">NullableUInt16Alias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'unsigned short?' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableUInt16Alias = &quot;ushort?&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableUInt16ArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableUInt16ArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L642">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableUInt16ArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableUInt16ArrayAlias">NullableUInt16ArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'ushort?[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableUInt16ArrayAlias = &quot;ushort?[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableUInt32Alias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableUInt32Alias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L617">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableUInt32Alias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableUInt32Alias">NullableUInt32Alias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'unsigned int?' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableUInt32Alias = &quot;uint?&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableUInt32ArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableUInt32ArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L632">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableUInt32ArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableUInt32ArrayAlias">NullableUInt32ArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'uint?[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableUInt32ArrayAlias = &quot;uint?[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableUInt64Alias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableUInt64Alias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L622">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableUInt64Alias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableUInt64Alias">NullableUInt64Alias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'unsigned long?' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableUInt64Alias = &quot;ulong?&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_NullableUInt64ArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.NullableUInt64ArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L627">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_NullableUInt64ArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.NullableUInt64ArrayAlias">NullableUInt64ArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'ulong?[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NullableUInt64ArrayAlias = &quot;ulong?[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_ObjectAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.ObjectAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L547">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_ObjectAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.ObjectAlias">ObjectAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'object' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string ObjectAlias = &quot;object&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_ObjectAliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.ObjectAliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L552">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_ObjectAliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.ObjectAliasVB">ObjectAliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'object' type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string ObjectAliasVB = &quot;Object&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_ObjectArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.ObjectArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L557">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_ObjectArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.ObjectArrayAlias">ObjectArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'object[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string ObjectArrayAlias = &quot;object[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_ObjectArrayAliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.ObjectArrayAliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L562">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_ObjectArrayAliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.ObjectArrayAliasVB">ObjectArrayAliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'object[]' array type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string ObjectArrayAliasVB = &quot;Object()&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_SingleAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.SingleAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L462">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_SingleAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.SingleAlias">SingleAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'Single' type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string SingleAlias = &quot;Single&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_SingleArrayAliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.SingleArrayAliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L472">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_SingleArrayAliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.SingleArrayAliasVB">SingleArrayAliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'Single()' array type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string SingleArrayAliasVB = &quot;Single()&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_StringAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.StringAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L527">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_StringAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.StringAlias">StringAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'string' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string StringAlias = &quot;string&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_StringAliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.StringAliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L532">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_StringAliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.StringAliasVB">StringAliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'string' type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string StringAliasVB = &quot;String&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_StringArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.StringArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L537">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_StringArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.StringArrayAlias">StringArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'string[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string StringArrayAlias = &quot;string[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_StringArrayAliasVB.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.StringArrayAliasVB%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L542">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_StringArrayAliasVB" data-uid="Agenix.Api.TypeResolution.TypeRegistry.StringArrayAliasVB">StringArrayAliasVB</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'string[]' array type (Visual Basic.NET style).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string StringArrayAliasVB = &quot;String()&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_UInt16Alias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.UInt16Alias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L427">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_UInt16Alias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.UInt16Alias">UInt16Alias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'unsigned short' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string UInt16Alias = &quot;ushort&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_UInt16ArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.UInt16ArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L432">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_UInt16ArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.UInt16ArrayAlias">UInt16ArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'ushort[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string UInt16ArrayAlias = &quot;ushort[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_UInt32Alias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.UInt32Alias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L407">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_UInt32Alias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.UInt32Alias">UInt32Alias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'unsigned int' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string UInt32Alias = &quot;uint&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_UInt32ArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.UInt32ArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L422">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_UInt32ArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.UInt32ArrayAlias">UInt32ArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'uint[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string UInt32ArrayAlias = &quot;uint[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_UInt64Alias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.UInt64Alias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L412">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_UInt64Alias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.UInt64Alias">UInt64Alias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'unsigned long' type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string UInt64Alias = &quot;ulong&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_UInt64ArrayAlias.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.UInt64ArrayAlias%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L417">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_UInt64ArrayAlias" data-uid="Agenix.Api.TypeResolution.TypeRegistry.UInt64ArrayAlias">UInt64ArrayAlias</h4>
+  <div class="markdown level1 summary"><p>The alias around the 'ulong[]' array type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string UInt64ArrayAlias = &quot;ulong[]&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_ContainsAlias_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.ContainsAlias(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L292">View Source</a>
+  </span>
+  <a id="Agenix_Api_TypeResolution_TypeRegistry_ContainsAlias_" data-uid="Agenix.Api.TypeResolution.TypeRegistry.ContainsAlias*"></a>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_ContainsAlias_System_String_" data-uid="Agenix.Api.TypeResolution.TypeRegistry.ContainsAlias(System.String)">ContainsAlias(string)</h4>
+  <div class="markdown level1 summary"><p>Returns a flag specifying whether <b>TypeRegistry</b> contains
+specified alias or not.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool ContainsAlias(string alias)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">alias</span></td>
+        <td><p>Alias to check.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p><code>true</code> if the specified type alias is registered,
+<code>false</code> otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_RegisterType_System_String_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.RegisterType(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L200">View Source</a>
+  </span>
+  <a id="Agenix_Api_TypeResolution_TypeRegistry_RegisterType_" data-uid="Agenix.Api.TypeResolution.TypeRegistry.RegisterType*"></a>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_RegisterType_System_String_System_String_" data-uid="Agenix.Api.TypeResolution.TypeRegistry.RegisterType(System.String,System.String)">RegisterType(string, string)</h4>
+  <div class="markdown level1 summary"><p>Registers an alias for the specified <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RegisterType(string alias, string typeName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">alias</span></td>
+        <td><p>A string that will be used as an alias for the specified
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">typeName</span></td>
+        <td><p>The (possibly partially assembly qualified) name of the
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> to register the alias for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_TypeResolution_TypeRegistry_RegisterType_System_String_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    This overload does eager resolution of the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>
+    referred to by the <code class="paramref">typeName</code> parameter. It will throw a
+    <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.typeloadexception">TypeLoadException</a> if the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> referred
+    to by the <code class="paramref">typeName</code> parameter cannot be resolved.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>If either of the supplied parameters is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> or
+contains only whitespace character(s).</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.typeloadexception">TypeLoadException</a></td>
+        <td><p>If the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> referred to by the supplied
+<code class="paramref">typeName</code> cannot be loaded.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_RegisterType_System_String_System_Type_.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.RegisterType(System.String%2CSystem.Type)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L247">View Source</a>
+  </span>
+  <a id="Agenix_Api_TypeResolution_TypeRegistry_RegisterType_" data-uid="Agenix.Api.TypeResolution.TypeRegistry.RegisterType*"></a>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_RegisterType_System_String_System_Type_" data-uid="Agenix.Api.TypeResolution.TypeRegistry.RegisterType(System.String,System.Type)">RegisterType(string, Type)</h4>
+  <div class="markdown level1 summary"><p>Registers an alias for the supplied <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RegisterType(string alias, Type type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">alias</span></td>
+        <td><p>The alias for the supplied <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> to register the supplied <code class="paramref">alias</code> under.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>If the supplied <code class="paramref">type</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>; or if
+the supplied <code class="paramref">alias</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> or
+contains only whitespace character(s).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_RegisterType_System_Type_.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.RegisterType(System.Type)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L223">View Source</a>
+  </span>
+  <a id="Agenix_Api_TypeResolution_TypeRegistry_RegisterType_" data-uid="Agenix.Api.TypeResolution.TypeRegistry.RegisterType*"></a>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_RegisterType_System_Type_" data-uid="Agenix.Api.TypeResolution.TypeRegistry.RegisterType(System.Type)">RegisterType(Type)</h4>
+  <div class="markdown level1 summary"><p>Registers short type name as an alias for
+the supplied <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RegisterType(Type type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> to register.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>If the supplied <code class="paramref">type</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry_ResolveType_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry.ResolveType(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L273">View Source</a>
+  </span>
+  <a id="Agenix_Api_TypeResolution_TypeRegistry_ResolveType_" data-uid="Agenix.Api.TypeResolution.TypeRegistry.ResolveType*"></a>
+  <h4 id="Agenix_Api_TypeResolution_TypeRegistry_ResolveType_System_String_" data-uid="Agenix.Api.TypeResolution.TypeRegistry.ResolveType(System.String)">ResolveType(string)</h4>
+  <div class="markdown level1 summary"><p>Resolves the supplied <code class="paramref">alias</code> to a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Type ResolveType(string alias)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">alias</span></td>
+        <td><p>The alias to resolve.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> the supplied <code class="paramref">alias</code> was
+associated with, or <see lang="null"></see> if no <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>
+was previously registered for the supplied <code class="paramref">alias</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>If the supplied <code class="paramref">alias</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> or
+contains only whitespace character(s).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_TypeResolution_TypeRegistry.md&amp;value=---%0Auid%3A%20Agenix.Api.TypeResolution.TypeRegistry%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/TypeResolution/TypeRegistry.cs/#L50" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

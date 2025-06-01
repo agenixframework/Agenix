@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class Agenix </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class Agenix ">
+    
+    <meta name="description" content="Represents the core class within the Agenix framework, responsible for managing and providing access to the Agenix context.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Core.Agenix">
+
+
+
+  <h1 id="Agenix_Core_Agenix" data-uid="Agenix.Core.Agenix" class="text-break">Class Agenix</h1>
+  <div class="markdown level0 summary"><p>Represents the core class within the Agenix framework, responsible for managing and providing access to the Agenix
+context.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">Agenix</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.Report.ITestListenerAware.html">ITestListenerAware</a></div>
+    <div><a class="xref" href="Agenix.Api.Report.ITestSuiteListenerAware.html">ITestSuiteListenerAware</a></div>
+    <div><a class="xref" href="Agenix.Api.Report.ITestReporterAware.html">ITestReporterAware</a></div>
+    <div><a class="xref" href="Agenix.Api.Report.IMessageListenerAware.html">IMessageListenerAware</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Core.html">Core</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Core.dll</h6>
+  <h5 id="Agenix_Core_Agenix_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class Agenix : ITestListenerAware, ITestSuiteListenerAware, ITestReporterAware, IMessageListenerAware</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Agenix__ctor_Agenix_Core_AgenixContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Agenix.%23ctor(Agenix.Core.AgenixContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Agenix.cs/#L44">View Source</a>
+  </span>
+  <a id="Agenix_Core_Agenix__ctor_" data-uid="Agenix.Core.Agenix.#ctor*"></a>
+  <h4 id="Agenix_Core_Agenix__ctor_Agenix_Core_AgenixContext_" data-uid="Agenix.Core.Agenix.#ctor(Agenix.Core.AgenixContext)">Agenix(AgenixContext)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Agenix(AgenixContext agenixContext)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Core.AgenixContext.html">AgenixContext</a></td>
+        <td><span class="parametername">agenixContext</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Agenix_AgenixContext.md&amp;value=---%0Auid%3A%20Agenix.Core.Agenix.AgenixContext%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Agenix.cs/#L56">View Source</a>
+  </span>
+  <a id="Agenix_Core_Agenix_AgenixContext_" data-uid="Agenix.Core.Agenix.AgenixContext*"></a>
+  <h4 id="Agenix_Core_Agenix_AgenixContext" data-uid="Agenix.Core.Agenix.AgenixContext">AgenixContext</h4>
+  <div class="markdown level1 summary"><p>Provides access to the Agenix context, encapsulating various listeners, factories, registries, and configurations
+used
+for managing and executing tests within the Agenix framework. The AgenixContext is central to the setup and
+lifecycle of
+test execution, allowing customization and extension through various hooks and components.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AgenixContext AgenixContext { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Core.AgenixContext.html">AgenixContext</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Agenix_AddMessageListener_Agenix_Api_Report_IMessageListener_.md&amp;value=---%0Auid%3A%20Agenix.Core.Agenix.AddMessageListener(Agenix.Api.Report.IMessageListener)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Agenix.cs/#L60">View Source</a>
+  </span>
+  <a id="Agenix_Core_Agenix_AddMessageListener_" data-uid="Agenix.Core.Agenix.AddMessageListener*"></a>
+  <h4 id="Agenix_Core_Agenix_AddMessageListener_Agenix_Api_Report_IMessageListener_" data-uid="Agenix.Core.Agenix.AddMessageListener(Agenix.Api.Report.IMessageListener)">AddMessageListener(IMessageListener)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddMessageListener(IMessageListener listener)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Report.IMessageListener.html">IMessageListener</a></td>
+        <td><span class="parametername">listener</span></td>
+        <td><p>The message listener to be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Agenix_AddTestListener_Agenix_Api_Report_ITestListener_.md&amp;value=---%0Auid%3A%20Agenix.Core.Agenix.AddTestListener(Agenix.Api.Report.ITestListener)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Agenix.cs/#L68">View Source</a>
+  </span>
+  <a id="Agenix_Core_Agenix_AddTestListener_" data-uid="Agenix.Core.Agenix.AddTestListener*"></a>
+  <h4 id="Agenix_Core_Agenix_AddTestListener_Agenix_Api_Report_ITestListener_" data-uid="Agenix.Core.Agenix.AddTestListener(Agenix.Api.Report.ITestListener)">AddTestListener(ITestListener)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddTestListener(ITestListener testListener)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Report.ITestListener.html">ITestListener</a></td>
+        <td><span class="parametername">testListener</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Agenix_AddTestReporter_Agenix_Api_Report_ITestReporter_.md&amp;value=---%0Auid%3A%20Agenix.Core.Agenix.AddTestReporter(Agenix.Api.Report.ITestReporter)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Agenix.cs/#L77">View Source</a>
+  </span>
+  <a id="Agenix_Core_Agenix_AddTestReporter_" data-uid="Agenix.Core.Agenix.AddTestReporter*"></a>
+  <h4 id="Agenix_Core_Agenix_AddTestReporter_Agenix_Api_Report_ITestReporter_" data-uid="Agenix.Core.Agenix.AddTestReporter(Agenix.Api.Report.ITestReporter)">AddTestReporter(ITestReporter)</h4>
+  <div class="markdown level1 summary"><p>Adds a test reporter to the Agenix context, allowing it to handle and generate reports for test results.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddTestReporter(ITestReporter testReporter)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Report.ITestReporter.html">ITestReporter</a></td>
+        <td><span class="parametername">testReporter</span></td>
+        <td><p>The test reporter to be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Agenix_AddTestSuiteListener_Agenix_Api_Report_ITestSuiteListener_.md&amp;value=---%0Auid%3A%20Agenix.Core.Agenix.AddTestSuiteListener(Agenix.Api.Report.ITestSuiteListener)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Agenix.cs/#L88">View Source</a>
+  </span>
+  <a id="Agenix_Core_Agenix_AddTestSuiteListener_" data-uid="Agenix.Core.Agenix.AddTestSuiteListener*"></a>
+  <h4 id="Agenix_Core_Agenix_AddTestSuiteListener_Agenix_Api_Report_ITestSuiteListener_" data-uid="Agenix.Core.Agenix.AddTestSuiteListener(Agenix.Api.Report.ITestSuiteListener)">AddTestSuiteListener(ITestSuiteListener)</h4>
+  <div class="markdown level1 summary"><p>Registers a test suite listener to receive notifications of events regarding a test suite lifecycle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddTestSuiteListener(ITestSuiteListener suiteListener)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Report.ITestSuiteListener.html">ITestSuiteListener</a></td>
+        <td><span class="parametername">suiteListener</span></td>
+        <td><p>The listener that will be added to receive test suite lifecycle events.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Agenix_AfterSuite_System_String_System_String___.md&amp;value=---%0Auid%3A%20Agenix.Core.Agenix.AfterSuite(System.String%2CSystem.String%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Agenix.cs/#L143">View Source</a>
+  </span>
+  <a id="Agenix_Core_Agenix_AfterSuite_" data-uid="Agenix.Core.Agenix.AfterSuite*"></a>
+  <h4 id="Agenix_Core_Agenix_AfterSuite_System_String_System_String___" data-uid="Agenix.Core.Agenix.AfterSuite(System.String,System.String[])">AfterSuite(string, params string[])</h4>
+  <div class="markdown level1 summary"><p>Finalizes the test suite execution by executing all registered
+after-suite sequences and notifying the suite listeners about the completion.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AfterSuite(string suiteName, params string[] testGroups)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">suiteName</span></td>
+        <td><p>The name of the test suite.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td><span class="parametername">testGroups</span></td>
+        <td><p>The test groups associated with the test suite.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Agenix_BeforeSuite_System_String_System_String___.md&amp;value=---%0Auid%3A%20Agenix.Core.Agenix.BeforeSuite(System.String%2CSystem.String%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Agenix.cs/#L116">View Source</a>
+  </span>
+  <a id="Agenix_Core_Agenix_BeforeSuite_" data-uid="Agenix.Core.Agenix.BeforeSuite*"></a>
+  <h4 id="Agenix_Core_Agenix_BeforeSuite_System_String_System_String___" data-uid="Agenix.Core.Agenix.BeforeSuite(System.String,System.String[])">BeforeSuite(string, params string[])</h4>
+  <div class="markdown level1 summary"><p>Executes the required actions before a test suite begins running, validating applicable conditions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void BeforeSuite(string suiteName, params string[] testGroups)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">suiteName</span></td>
+        <td><p>The name of the test suite that is about to start.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td><span class="parametername">testGroups</span></td>
+        <td><p>An optional list of test groups to be considered for execution before the suite begins.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a></td>
+        <td><p>Thrown if any of the before suite actions fail with errors.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Agenix_Close.md&amp;value=---%0Auid%3A%20Agenix.Core.Agenix.Close%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Agenix.cs/#L186">View Source</a>
+  </span>
+  <a id="Agenix_Core_Agenix_Close_" data-uid="Agenix.Core.Agenix.Close*"></a>
+  <h4 id="Agenix_Core_Agenix_Close" data-uid="Agenix.Core.Agenix.Close">Close()</h4>
+  <div class="markdown level1 summary"><p>Closing Agenix and its context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Close()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Agenix_GetVersion.md&amp;value=---%0Auid%3A%20Agenix.Core.Agenix.GetVersion%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Agenix.cs/#L194">View Source</a>
+  </span>
+  <a id="Agenix_Core_Agenix_GetVersion_" data-uid="Agenix.Core.Agenix.GetVersion*"></a>
+  <h4 id="Agenix_Core_Agenix_GetVersion" data-uid="Agenix.Core.Agenix.GetVersion">GetVersion()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string GetVersion()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Agenix_NewInstance.md&amp;value=---%0Auid%3A%20Agenix.Core.Agenix.NewInstance%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Agenix.cs/#L96">View Source</a>
+  </span>
+  <a id="Agenix_Core_Agenix_NewInstance_" data-uid="Agenix.Core.Agenix.NewInstance*"></a>
+  <h4 id="Agenix_Core_Agenix_NewInstance" data-uid="Agenix.Core.Agenix.NewInstance">NewInstance()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Agenix NewInstance()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Core.Agenix.html">Agenix</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Agenix_NewInstance_Agenix_Core_IAgenixContextProvider_.md&amp;value=---%0Auid%3A%20Agenix.Core.Agenix.NewInstance(Agenix.Core.IAgenixContextProvider)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Agenix.cs/#L105">View Source</a>
+  </span>
+  <a id="Agenix_Core_Agenix_NewInstance_" data-uid="Agenix.Core.Agenix.NewInstance*"></a>
+  <h4 id="Agenix_Core_Agenix_NewInstance_Agenix_Core_IAgenixContextProvider_" data-uid="Agenix.Core.Agenix.NewInstance(Agenix.Core.IAgenixContextProvider)">NewInstance(IAgenixContextProvider)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Agenix NewInstance(IAgenixContextProvider contextProvider)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Core.IAgenixContextProvider.html">IAgenixContextProvider</a></td>
+        <td><span class="parametername">contextProvider</span></td>
+        <td><p>The context provider to be used for creating the Agenix instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Core.Agenix.html">Agenix</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Agenix_Run_Agenix_Api_ITestAction_.md&amp;value=---%0Auid%3A%20Agenix.Core.Agenix.Run(Agenix.Api.ITestAction)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Agenix.cs/#L165">View Source</a>
+  </span>
+  <a id="Agenix_Core_Agenix_Run_" data-uid="Agenix.Core.Agenix.Run*"></a>
+  <h4 id="Agenix_Core_Agenix_Run_Agenix_Api_ITestAction_" data-uid="Agenix.Core.Agenix.Run(Agenix.Api.ITestAction)">Run(ITestAction)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Run(ITestAction action)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></td>
+        <td><span class="parametername">action</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Agenix_Run_Agenix_Api_ITestAction_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Agenix.Run(Agenix.Api.ITestAction%2CAgenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Agenix.cs/#L178">View Source</a>
+  </span>
+  <a id="Agenix_Core_Agenix_Run_" data-uid="Agenix.Core.Agenix.Run*"></a>
+  <h4 id="Agenix_Core_Agenix_Run_Agenix_Api_ITestAction_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.Agenix.Run(Agenix.Api.ITestAction,Agenix.Api.Context.TestContext)">Run(ITestAction, TestContext)</h4>
+  <div class="markdown level1 summary"><p>Executes a test action within the specified test context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Run(ITestAction action, TestContext testContext)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></td>
+        <td><span class="parametername">action</span></td>
+        <td><p>The test action to be executed, which can represent a single test or a complete test case.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">testContext</span></td>
+        <td><p>The context in which the test action will operate, providing necessary dependencies and
+utilities.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.Report.ITestListenerAware.html">ITestListenerAware</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Report.ITestSuiteListenerAware.html">ITestSuiteListenerAware</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Report.ITestReporterAware.html">ITestReporterAware</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Report.IMessageListenerAware.html">IMessageListenerAware</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Agenix.md&amp;value=---%0Auid%3A%20Agenix.Core.Agenix%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Agenix.cs/#L38" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

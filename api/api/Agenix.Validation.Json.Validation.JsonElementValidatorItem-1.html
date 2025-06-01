@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class JsonElementValidatorItem&lt;T&gt; </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class JsonElementValidatorItem&lt;T&gt; ">
+    
+    <meta name="description" content="Wraps all needed data to validate an actual json with an expected json-template.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1">
+
+
+
+  <h1 id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1" class="text-break">Class JsonElementValidatorItem&lt;T&gt;</h1>
+  <div class="markdown level0 summary"><p>Wraps all needed data to validate an actual json with an expected json-template.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">JsonElementValidatorItem&lt;T&gt;</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Validation.html">Validation</a>.<a class="xref" href="Agenix.Validation.Json.html">Json</a>.<a class="xref" href="Agenix.Validation.Json.Validation.html">Validation</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Validation.Json.dll</h6>
+  <h5 id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class JsonElementValidatorItem&lt;T&gt;</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>the type of the actual and expected json</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonElementValidatorItem_1__ctor_System_Int32__0__0_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonElementValidatorItem%601.%23ctor(System.Int32%2C%600%2C%600)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonElementValidatorItem.cs/#L45">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1__ctor_" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.#ctor*"></a>
+  <h4 id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1__ctor_System_Int32__0__0_" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.#ctor(System.Int32,`0,`0)">JsonElementValidatorItem(int, T, T)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonElementValidatorItem(int index, T actual, T expected)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">index</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">actual</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">expected</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonElementValidatorItem_1__ctor_System_String__0__0_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonElementValidatorItem%601.%23ctor(System.String%2C%600%2C%600)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonElementValidatorItem.cs/#L53">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1__ctor_" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.#ctor*"></a>
+  <h4 id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1__ctor_System_String__0__0_" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.#ctor(System.String,`0,`0)">JsonElementValidatorItem(string, T, T)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonElementValidatorItem(string name, T actual, T expected)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">actual</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">expected</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonElementValidatorItem_1__actual.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonElementValidatorItem%601._actual%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonElementValidatorItem.cs/#L39">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1__actual" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1._actual">_actual</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly T _actual</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonElementValidatorItem_1__expected.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonElementValidatorItem%601._expected%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonElementValidatorItem.cs/#L40">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1__expected" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1._expected">_expected</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly T _expected</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_ActualAsStringOrNull.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonElementValidatorItem%601.ActualAsStringOrNull%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonElementValidatorItem.cs/#L175">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_ActualAsStringOrNull_" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.ActualAsStringOrNull*"></a>
+  <h4 id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_ActualAsStringOrNull" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.ActualAsStringOrNull">ActualAsStringOrNull()</h4>
+  <div class="markdown level1 summary"><p>Converts the actual value to a string if it is not null.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? ActualAsStringOrNull()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>A string representation of the actual value, or null if the actual value is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_Child_System_Int32_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonElementValidatorItem%601.Child(System.Int32%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonElementValidatorItem.cs/#L155">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_Child_" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.Child*"></a>
+  <h4 id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_Child_System_Int32_System_Object_" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.Child(System.Int32,System.Object)">Child(int, object)</h4>
+  <div class="markdown level1 summary"><p>Creates a new JsonElementValidatorItem instance for a specified child element of the expected JSON array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonElementValidatorItem&lt;object&gt; Child(int expectedIndex, object other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">expectedIndex</span></td>
+        <td><p>The index of the expected element in the JSON array.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">other</span></td>
+        <td><p>The object to be used for the actual value of the new JsonElementValidatorItem instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Validation.Json.Validation.JsonElementValidatorItem-1.html">JsonElementValidatorItem</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td><p>A new instance of JsonElementValidatorItem containing the specified child element.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Exceptions.ValidationException.html">ValidationException</a></td>
+        <td><p>Thrown when the types of the actual and expected values do not match the specified type parameter.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_EnsureType__1.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonElementValidatorItem%601.EnsureType%60%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonElementValidatorItem.cs/#L131">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_EnsureType_" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.EnsureType*"></a>
+  <h4 id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_EnsureType__1" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.EnsureType``1">EnsureType&lt;TU&gt;()</h4>
+  <div class="markdown level1 summary"><p>Ensures that the actual and expected properties are of the specified type <code>TU</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonElementValidatorItem&lt;TU&gt; EnsureType&lt;TU&gt;() where TU : JToken</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Validation.Json.Validation.JsonElementValidatorItem-1.html">JsonElementValidatorItem</a>&lt;TU&gt;</td>
+        <td><p>A new instance of <code>JsonElementValidatorItem&lt;TU&gt;</code> if the types are as expected.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TU</span></td>
+        <td><p>The expected type for the actual and expected properties.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></td>
+        <td><p>Thrown if the actual or expected properties are not of the specified type <code>TU</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_ExpectedAsStringOrNull.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonElementValidatorItem%601.ExpectedAsStringOrNull%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonElementValidatorItem.cs/#L186">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_ExpectedAsStringOrNull_" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.ExpectedAsStringOrNull*"></a>
+  <h4 id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_ExpectedAsStringOrNull" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.ExpectedAsStringOrNull">ExpectedAsStringOrNull()</h4>
+  <div class="markdown level1 summary"><p>Converts the expected value to a string or returns null if the expected value is null.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? ExpectedAsStringOrNull()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The expected value as a string, or null if the expected value is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_GetJsonPath.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonElementValidatorItem%601.GetJsonPath%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonElementValidatorItem.cs/#L232">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_GetJsonPath_" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.GetJsonPath*"></a>
+  <h4 id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_GetJsonPath" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.GetJsonPath">GetJsonPath()</h4>
+  <div class="markdown level1 summary"><p>The JSON path as a string from the root to this item, i.e., $['books'][1]['name']</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetJsonPath()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_GetName.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonElementValidatorItem%601.GetName%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonElementValidatorItem.cs/#L209">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_GetName_" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.GetName*"></a>
+  <h4 id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_GetName" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.GetName">GetName()</h4>
+  <div class="markdown level1 summary"><p>Returns the name or index of the current JsonElementValidatorItem.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetName()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>A string representing the name if specified, the index if specified, or the default root symbol &quot;$&quot;.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_GetRoot.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonElementValidatorItem%601.GetRoot%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonElementValidatorItem.cs/#L223">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_GetRoot_" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.GetRoot*"></a>
+  <h4 id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_GetRoot" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.GetRoot">GetRoot()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the root JsonElementValidatorItem object in the hierarchy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonElementValidatorItem&lt;T&gt; GetRoot()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Validation.Json.Validation.JsonElementValidatorItem-1.html">JsonElementValidatorItem</a>&lt;T&gt;</td>
+        <td><p>The root JsonElementValidatorItem object if the current object has a parent;
+otherwise, returns the current JsonElementValidatorItem object.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_IsPathIgnoredBy_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonElementValidatorItem%601.IsPathIgnoredBy(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonElementValidatorItem.cs/#L246">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_IsPathIgnoredBy_" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.IsPathIgnoredBy*"></a>
+  <h4 id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_IsPathIgnoredBy_System_String_" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.IsPathIgnoredBy(System.String)">IsPathIgnoredBy(string)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified JSON path is ignored by the current JsonElementValidatorItem object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsPathIgnoredBy(string jsonPathExpression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">jsonPathExpression</span></td>
+        <td><p>The JSON path expression to evaluate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>true if the specified JSON path is ignored; otherwise, false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_IsPathIgnoredBy_System_String_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonElementValidatorItem%601.IsPathIgnoredBy(System.String%2CSystem.String%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonElementValidatorItem.cs/#L262">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_IsPathIgnoredBy_" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.IsPathIgnoredBy*"></a>
+  <h4 id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_IsPathIgnoredBy_System_String_System_String_System_Object_" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.IsPathIgnoredBy(System.String,System.String,System.Object)">IsPathIgnoredBy(string, string, object)</h4>
+  <div class="markdown level1 summary"><p>Determines if the specified JSON path expression should ignore the given current path in the JSON object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsPathIgnoredBy(string jsonPathExpression, string currentPath, object json)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">jsonPathExpression</span></td>
+        <td><p>The JSON path expression to evaluate.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">currentPath</span></td>
+        <td><p>The current JSON path to check against the expression.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">json</span></td>
+        <td><p>The JSON object to evaluate the expression within.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>True if the current path matches any paths derived from the JSON path expression within the JSON object; otherwise,
+false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_Parent_Agenix_Validation_Json_Validation_JsonElementValidatorItem__0__.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonElementValidatorItem%601.Parent(Agenix.Validation.Json.Validation.JsonElementValidatorItem%7B%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonElementValidatorItem.cs/#L191">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_Parent_" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.Parent*"></a>
+  <h4 id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_Parent_Agenix_Validation_Json_Validation_JsonElementValidatorItem__0__" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.Parent(Agenix.Validation.Json.Validation.JsonElementValidatorItem{`0})">Parent(JsonElementValidatorItem&lt;T&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonElementValidatorItem&lt;T&gt; Parent(JsonElementValidatorItem&lt;T&gt; parent)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Validation.Json.Validation.JsonElementValidatorItem-1.html">JsonElementValidatorItem</a>&lt;T&gt;</td>
+        <td><span class="parametername">parent</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Validation.Json.Validation.JsonElementValidatorItem-1.html">JsonElementValidatorItem</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_Parent__1_Agenix_Validation_Json_Validation_JsonElementValidatorItem___0__.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonElementValidatorItem%601.Parent%60%601(Agenix.Validation.Json.Validation.JsonElementValidatorItem%7B%60%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonElementValidatorItem.cs/#L197">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_Parent_" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.Parent*"></a>
+  <h4 id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_Parent__1_Agenix_Validation_Json_Validation_JsonElementValidatorItem___0__" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.Parent``1(Agenix.Validation.Json.Validation.JsonElementValidatorItem{``0})">Parent&lt;U&gt;(JsonElementValidatorItem&lt;U&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonElementValidatorItem&lt;T&gt; Parent&lt;U&gt;(JsonElementValidatorItem&lt;U&gt; parent)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Validation.Json.Validation.JsonElementValidatorItem-1.html">JsonElementValidatorItem</a>&lt;U&gt;</td>
+        <td><span class="parametername">parent</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Validation.Json.Validation.JsonElementValidatorItem-1.html">JsonElementValidatorItem</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">U</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_ParseJson_System_String_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonElementValidatorItem%601.ParseJson(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonElementValidatorItem.cs/#L70">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_ParseJson_" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.ParseJson*"></a>
+  <h4 id="Agenix_Validation_Json_Validation_JsonElementValidatorItem_1_ParseJson_System_String_System_String_" data-uid="Agenix.Validation.Json.Validation.JsonElementValidatorItem`1.ParseJson(System.String,System.String)">ParseJson(string, string)</h4>
+  <div class="markdown level1 summary"><p>Parses the provided actual and expected JSON strings into JsonElementValidatorItem objects.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static JsonElementValidatorItem&lt;object&gt; ParseJson(string actualJson, string expectedJson)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">actualJson</span></td>
+        <td><p>The actual JSON string to parse.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">expectedJson</span></td>
+        <td><p>The expected JSON string to parse.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Validation.Json.Validation.JsonElementValidatorItem-1.html">JsonElementValidatorItem</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td><p>A JsonElementValidatorItem instance containing the parsed JSON objects from both actual and expected JSON strings.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">JsonReaderException</span></td>
+        <td><p>Thrown when parsing the JSON string fails.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonElementValidatorItem_1.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonElementValidatorItem%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonElementValidatorItem.cs/#L37" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

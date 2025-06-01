@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class AbstractActionContainer </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class AbstractActionContainer ">
+    
+    <meta name="description" content="AbstractActionContainer is an abstract base class that provides common functionality for action containers. It facilitates the management and execution of a list of nested actions and supports action lifecycle operations.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Core.Container.AbstractActionContainer">
+
+
+
+  <h1 id="Agenix_Core_Container_AbstractActionContainer" data-uid="Agenix.Core.Container.AbstractActionContainer" class="text-break">Class AbstractActionContainer</h1>
+  <div class="markdown level0 summary"><p>AbstractActionContainer is an abstract base class that provides common functionality for action containers.
+It facilitates the management and execution of a list of nested actions and supports action lifecycle operations.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html">AbstractTestAction</a></div>
+    <div class="level2"><span class="xref">AbstractActionContainer</span></div>
+      <div class="level3"><a class="xref" href="Agenix.Core.Container.AbstractIteratingActionContainer.html">AbstractIteratingActionContainer</a></div>
+      <div class="level3"><a class="xref" href="Agenix.Core.Container.AbstractTestBoundaryActionContainer.html">AbstractTestBoundaryActionContainer</a></div>
+      <div class="level3"><a class="xref" href="Agenix.Core.Container.AssertContainer.html">AssertContainer</a></div>
+      <div class="level3"><a class="xref" href="Agenix.Core.Container.Async.html">Async</a></div>
+      <div class="level3"><a class="xref" href="Agenix.Core.Container.Catch.html">Catch</a></div>
+      <div class="level3"><a class="xref" href="Agenix.Core.Container.Conditional.html">Conditional</a></div>
+      <div class="level3"><a class="xref" href="Agenix.Core.Container.Parallel.html">Parallel</a></div>
+      <div class="level3"><a class="xref" href="Agenix.Core.Container.Sequence.html">Sequence</a></div>
+      <div class="level3"><a class="xref" href="Agenix.Core.Container.Timer.html">Timer</a></div>
+      <div class="level3"><a class="xref" href="Agenix.Core.DefaultTestCase.html">DefaultTestCase</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.Common.INamed.html">INamed</a></div>
+    <div><a class="xref" href="Agenix.Api.Common.IDescribed.html">IDescribed</a></div>
+    <div><a class="xref" href="Agenix.Api.Container.ITestActionContainer.html">ITestActionContainer</a></div>
+    <div><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></div>
+    <div><a class="xref" href="Agenix.Api.Common.ICompletable.html">ICompletable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_description">AbstractTestAction.description</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_GetDescription">AbstractTestAction.GetDescription()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_SetDescription_System_String_">AbstractTestAction.SetDescription(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_SetName_System_String_">AbstractTestAction.SetName(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_Name">AbstractTestAction.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_IsDisabled_Agenix_Api_Context_TestContext_">AbstractTestAction.IsDisabled(TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_Execute_Agenix_Api_Context_TestContext_">AbstractTestAction.Execute(TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_DoExecute_Agenix_Api_Context_TestContext_">AbstractTestAction.DoExecute(TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Core.html">Core</a>.<a class="xref" href="Agenix.Core.Container.html">Container</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Core.dll</h6>
+  <h5 id="Agenix_Core_Container_AbstractActionContainer_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class AbstractActionContainer : AbstractTestAction, INamed, IDescribed, ITestActionContainer, ITestAction, ICompletable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractActionContainer__ctor.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractActionContainer.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractActionContainer.cs/#L64">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractActionContainer__ctor_" data-uid="Agenix.Core.Container.AbstractActionContainer.#ctor*"></a>
+  <h4 id="Agenix_Core_Container_AbstractActionContainer__ctor" data-uid="Agenix.Core.Container.AbstractActionContainer.#ctor">AbstractActionContainer()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected AbstractActionContainer()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractActionContainer__ctor_System_String_Agenix_Core_Container_AbstractTestContainerBuilder_Agenix_Api_Container_ITestActionContainer_System_Object__.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractActionContainer.%23ctor(System.String%2CAgenix.Core.Container.AbstractTestContainerBuilder%7BAgenix.Api.Container.ITestActionContainer%2CSystem.Object%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractActionContainer.cs/#L74">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractActionContainer__ctor_" data-uid="Agenix.Core.Container.AbstractActionContainer.#ctor*"></a>
+  <h4 id="Agenix_Core_Container_AbstractActionContainer__ctor_System_String_Agenix_Core_Container_AbstractTestContainerBuilder_Agenix_Api_Container_ITestActionContainer_System_Object__" data-uid="Agenix.Core.Container.AbstractActionContainer.#ctor(System.String,Agenix.Core.Container.AbstractTestContainerBuilder{Agenix.Api.Container.ITestActionContainer,System.Object})">AbstractActionContainer(string, AbstractTestContainerBuilder&lt;ITestActionContainer, dynamic&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected AbstractActionContainer(string name, AbstractTestContainerBuilder&lt;ITestActionContainer, dynamic&gt; builder)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Core.Container.AbstractTestContainerBuilder-2.html">AbstractTestContainerBuilder</a>&lt;<a class="xref" href="Agenix.Api.Container.ITestActionContainer.html">ITestActionContainer</a>, <span class="xref">dynamic</span>&gt;</td>
+        <td><span class="parametername">builder</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractActionContainer__ctor_System_String_System_String_System_Collections_Generic_List_Agenix_Api_ITestActionBuilder_Agenix_Api_ITestAction___.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractActionContainer.%23ctor(System.String%2CSystem.String%2CSystem.Collections.Generic.List%7BAgenix.Api.ITestActionBuilder%7BAgenix.Api.ITestAction%7D%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractActionContainer.cs/#L68">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractActionContainer__ctor_" data-uid="Agenix.Core.Container.AbstractActionContainer.#ctor*"></a>
+  <h4 id="Agenix_Core_Container_AbstractActionContainer__ctor_System_String_System_String_System_Collections_Generic_List_Agenix_Api_ITestActionBuilder_Agenix_Api_ITestAction___" data-uid="Agenix.Core.Container.AbstractActionContainer.#ctor(System.String,System.String,System.Collections.Generic.List{Agenix.Api.ITestActionBuilder{Agenix.Api.ITestAction}})">AbstractActionContainer(string, string, List&lt;ITestActionBuilder&lt;ITestAction&gt;&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected AbstractActionContainer(string name, string description, List&lt;ITestActionBuilder&lt;ITestAction&gt;&gt; actions)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">description</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder</a>&lt;<a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>&gt;&gt;</td>
+        <td><span class="parametername">actions</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractActionContainer_actions.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractActionContainer.actions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractActionContainer.cs/#L61">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Container_AbstractActionContainer_actions" data-uid="Agenix.Core.Container.AbstractActionContainer.actions">actions</h4>
+  <div class="markdown level1 summary"><p>List of nested actions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;ITestActionBuilder&lt;ITestAction&gt;&gt; actions</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder</a>&lt;<a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractActionContainer_AddTestAction_Agenix_Api_ITestAction_.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractActionContainer.AddTestAction(Agenix.Api.ITestAction)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractActionContainer.cs/#L163">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractActionContainer_AddTestAction_" data-uid="Agenix.Core.Container.AbstractActionContainer.AddTestAction*"></a>
+  <h4 id="Agenix_Core_Container_AbstractActionContainer_AddTestAction_Agenix_Api_ITestAction_" data-uid="Agenix.Core.Container.AbstractActionContainer.AddTestAction(Agenix.Api.ITestAction)">AddTestAction(ITestAction)</h4>
+  <div class="markdown level1 summary"><p>Adds a single test action to the action container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITestActionContainer AddTestAction(ITestAction action)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></td>
+        <td><span class="parametername">action</span></td>
+        <td><p>The test action to be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Container.ITestActionContainer.html">ITestActionContainer</a></td>
+        <td><p>The action container with the newly added test action.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractActionContainer_AddTestAction_Agenix_Api_ITestActionBuilder_Agenix_Api_ITestAction__.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractActionContainer.AddTestAction(Agenix.Api.ITestActionBuilder%7BAgenix.Api.ITestAction%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractActionContainer.cs/#L248">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractActionContainer_AddTestAction_" data-uid="Agenix.Core.Container.AbstractActionContainer.AddTestAction*"></a>
+  <h4 id="Agenix_Core_Container_AbstractActionContainer_AddTestAction_Agenix_Api_ITestActionBuilder_Agenix_Api_ITestAction__" data-uid="Agenix.Core.Container.AbstractActionContainer.AddTestAction(Agenix.Api.ITestActionBuilder{Agenix.Api.ITestAction})">AddTestAction(ITestActionBuilder&lt;ITestAction&gt;)</h4>
+  <div class="markdown level1 summary"><p>Adds a test action built by the specified action builder to the action container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AbstractActionContainer AddTestAction(ITestActionBuilder&lt;ITestAction&gt; action)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder</a>&lt;<a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>&gt;</td>
+        <td><span class="parametername">action</span></td>
+        <td><p>The action builder that constructs the test action to be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html">AbstractActionContainer</a></td>
+        <td><p>The action container with the newly added test action.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractActionContainer_AddTestActions_Agenix_Api_ITestAction___.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractActionContainer.AddTestActions(Agenix.Api.ITestAction%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractActionContainer.cs/#L147">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractActionContainer_AddTestActions_" data-uid="Agenix.Core.Container.AbstractActionContainer.AddTestActions*"></a>
+  <h4 id="Agenix_Core_Container_AbstractActionContainer_AddTestActions_Agenix_Api_ITestAction___" data-uid="Agenix.Core.Container.AbstractActionContainer.AddTestActions(Agenix.Api.ITestAction[])">AddTestActions(params ITestAction[])</h4>
+  <div class="markdown level1 summary"><p>Adds multiple test actions to the action container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITestActionContainer AddTestActions(params ITestAction[] toAdd)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>[]</td>
+        <td><span class="parametername">toAdd</span></td>
+        <td><p>An array of test actions to be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Container.ITestActionContainer.html">ITestActionContainer</a></td>
+        <td><p>The action container with the newly added test actions.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractActionContainer_ExecuteAction_Agenix_Api_ITestAction_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractActionContainer.ExecuteAction(Agenix.Api.ITestAction%2CAgenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractActionContainer.cs/#L230">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractActionContainer_ExecuteAction_" data-uid="Agenix.Core.Container.AbstractActionContainer.ExecuteAction*"></a>
+  <h4 id="Agenix_Core_Container_AbstractActionContainer_ExecuteAction_Agenix_Api_ITestAction_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.Container.AbstractActionContainer.ExecuteAction(Agenix.Api.ITestAction,Agenix.Api.Context.TestContext)">ExecuteAction(ITestAction, TestContext)</h4>
+  <div class="markdown level1 summary"><p>Executes the specified action in the given test context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void ExecuteAction(ITestAction action, TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></td>
+        <td><span class="parametername">action</span></td>
+        <td><p>The action to be executed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context in which the action should be executed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractActionContainer_GetActionCount.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractActionContainer.GetActionCount%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractActionContainer.cs/#L137">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractActionContainer_GetActionCount_" data-uid="Agenix.Core.Container.AbstractActionContainer.GetActionCount*"></a>
+  <h4 id="Agenix_Core_Container_AbstractActionContainer_GetActionCount" data-uid="Agenix.Core.Container.AbstractActionContainer.GetActionCount">GetActionCount()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the total count of actions in the action container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long GetActionCount()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><p>The number of actions currently in the action container.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractActionContainer_GetActionIndex_Agenix_Api_ITestAction_.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractActionContainer.GetActionIndex(Agenix.Api.ITestAction)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractActionContainer.cs/#L174">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractActionContainer_GetActionIndex_" data-uid="Agenix.Core.Container.AbstractActionContainer.GetActionIndex*"></a>
+  <h4 id="Agenix_Core_Container_AbstractActionContainer_GetActionIndex_Agenix_Api_ITestAction_" data-uid="Agenix.Core.Container.AbstractActionContainer.GetActionIndex(Agenix.Api.ITestAction)">GetActionIndex(ITestAction)</h4>
+  <div class="markdown level1 summary"><p>Retrieves the index of the specified test action within the list of executed actions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetActionIndex(ITestAction action)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></td>
+        <td><span class="parametername">action</span></td>
+        <td><p>The test action whose index is to be found.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><p>The index of the specified test action if found; otherwise, -1.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractActionContainer_GetActions.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractActionContainer.GetActions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractActionContainer.cs/#L128">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractActionContainer_GetActions_" data-uid="Agenix.Core.Container.AbstractActionContainer.GetActions*"></a>
+  <h4 id="Agenix_Core_Container_AbstractActionContainer_GetActions" data-uid="Agenix.Core.Container.AbstractActionContainer.GetActions">GetActions()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the list of actions that have been added to the action container after building them.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual List&lt;ITestAction&gt; GetActions()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>&gt;</td>
+        <td><p>A list of built actions currently in the action container.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractActionContainer_GetActiveAction.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractActionContainer.GetActiveAction%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractActionContainer.cs/#L201">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractActionContainer_GetActiveAction_" data-uid="Agenix.Core.Container.AbstractActionContainer.GetActiveAction*"></a>
+  <h4 id="Agenix_Core_Container_AbstractActionContainer_GetActiveAction" data-uid="Agenix.Core.Container.AbstractActionContainer.GetActiveAction">GetActiveAction()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the currently active test action within the action container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITestAction GetActiveAction()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></td>
+        <td><p>The active test action.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractActionContainer_GetExecutedActions.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractActionContainer.GetExecutedActions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractActionContainer.cs/#L210">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractActionContainer_GetExecutedActions_" data-uid="Agenix.Core.Container.AbstractActionContainer.GetExecutedActions*"></a>
+  <h4 id="Agenix_Core_Container_AbstractActionContainer_GetExecutedActions" data-uid="Agenix.Core.Container.AbstractActionContainer.GetExecutedActions">GetExecutedActions()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the list of executed actions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;ITestAction&gt; GetExecutedActions()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>&gt;</td>
+        <td><p>A list of executed test actions.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractActionContainer_GetTestAction_System_Int32_.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractActionContainer.GetTestAction(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractActionContainer.cs/#L220">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractActionContainer_GetTestAction_" data-uid="Agenix.Core.Container.AbstractActionContainer.GetTestAction*"></a>
+  <h4 id="Agenix_Core_Container_AbstractActionContainer_GetTestAction_System_Int32_" data-uid="Agenix.Core.Container.AbstractActionContainer.GetTestAction(System.Int32)">GetTestAction(int)</h4>
+  <div class="markdown level1 summary"><p>Retrieves the test action at the specified index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ITestAction GetTestAction(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The zero-based index of the test action to retrieve.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></td>
+        <td><p>The test action at the specified index.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractActionContainer_IsDone_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractActionContainer.IsDone(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractActionContainer.cs/#L85">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractActionContainer_IsDone_" data-uid="Agenix.Core.Container.AbstractActionContainer.IsDone*"></a>
+  <h4 id="Agenix_Core_Container_AbstractActionContainer_IsDone_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.Container.AbstractActionContainer.IsDone(Agenix.Api.Context.TestContext)">IsDone(TestContext)</h4>
+  <div class="markdown level1 summary"><p>Checks if all actions in the container are completed within the given test context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool IsDone(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The test context to verify the completion status of actions.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractActionContainer_SetActions_System_Collections_Generic_List_Agenix_Api_ITestAction__.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractActionContainer.SetActions(System.Collections.Generic.List%7BAgenix.Api.ITestAction%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractActionContainer.cs/#L116">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractActionContainer_SetActions_" data-uid="Agenix.Core.Container.AbstractActionContainer.SetActions*"></a>
+  <h4 id="Agenix_Core_Container_AbstractActionContainer_SetActions_System_Collections_Generic_List_Agenix_Api_ITestAction__" data-uid="Agenix.Core.Container.AbstractActionContainer.SetActions(System.Collections.Generic.List{Agenix.Api.ITestAction})">SetActions(List&lt;ITestAction&gt;)</h4>
+  <div class="markdown level1 summary"><p>Sets the list of actions in the action container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITestActionContainer SetActions(List&lt;ITestAction&gt; toAdd)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>&gt;</td>
+        <td><span class="parametername">toAdd</span></td>
+        <td><p>The list of actions to be set in the container.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Container.ITestActionContainer.html">ITestActionContainer</a></td>
+        <td><p>The current instance of the action container.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractActionContainer_SetActiveAction_Agenix_Api_ITestAction_.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractActionContainer.SetActiveAction(Agenix.Api.ITestAction)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractActionContainer.cs/#L183">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractActionContainer_SetActiveAction_" data-uid="Agenix.Core.Container.AbstractActionContainer.SetActiveAction*"></a>
+  <h4 id="Agenix_Core_Container_AbstractActionContainer_SetActiveAction_Agenix_Api_ITestAction_" data-uid="Agenix.Core.Container.AbstractActionContainer.SetActiveAction(Agenix.Api.ITestAction)">SetActiveAction(ITestAction)</h4>
+  <div class="markdown level1 summary"><p>Sets the specified action as the active action in the action container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetActiveAction(ITestAction action)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></td>
+        <td><span class="parametername">action</span></td>
+        <td><p>The action to be set as the active action.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractActionContainer_SetExecutedAction_Agenix_Api_ITestAction_.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractActionContainer.SetExecutedAction(Agenix.Api.ITestAction)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractActionContainer.cs/#L192">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractActionContainer_SetExecutedAction_" data-uid="Agenix.Core.Container.AbstractActionContainer.SetExecutedAction*"></a>
+  <h4 id="Agenix_Core_Container_AbstractActionContainer_SetExecutedAction_Agenix_Api_ITestAction_" data-uid="Agenix.Core.Container.AbstractActionContainer.SetExecutedAction(Agenix.Api.ITestAction)">SetExecutedAction(ITestAction)</h4>
+  <div class="markdown level1 summary"><p>Adds the specified action to the list of executed actions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetExecutedAction(ITestAction action)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></td>
+        <td><span class="parametername">action</span></td>
+        <td><p>The action that has been executed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.INamed.html">INamed</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.IDescribed.html">IDescribed</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Container.ITestActionContainer.html">ITestActionContainer</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.ICompletable.html">ICompletable</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractActionContainer.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractActionContainer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractActionContainer.cs/#L43" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

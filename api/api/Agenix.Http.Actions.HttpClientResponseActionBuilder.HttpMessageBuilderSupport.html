@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class HttpClientResponseActionBuilder.HttpMessageBuilderSupport </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class HttpClientResponseActionBuilder.HttpMessageBuilderSupport ">
+    
+    
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport">
+
+
+
+  <h1 id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport" class="text-break">Class HttpClientResponseActionBuilder.HttpMessageBuilderSupport</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html">MessageBuilderSupport</a>&lt;<a class="xref" href="Agenix.Core.Actions.ReceiveMessageAction.html">ReceiveMessageAction</a>, <a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.html">HttpClientResponseActionBuilder</a>, <a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.html">HttpClientResponseActionBuilder</a>.<a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.html">HttpMessageBuilderSupport</a>&gt;</div>
+    <div class="level2"><a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html">ReceiveMessageBuilderSupport</a>&lt;<a class="xref" href="Agenix.Core.Actions.ReceiveMessageAction.html">ReceiveMessageAction</a>, <a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.html">HttpClientResponseActionBuilder</a>, <a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.html">HttpClientResponseActionBuilder</a>.<a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.html">HttpMessageBuilderSupport</a>&gt;</div>
+    <div class="level3"><span class="xref">HttpClientResponseActionBuilder.HttpMessageBuilderSupport</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder</a>&lt;<a class="xref" href="Agenix.Core.Actions.ReceiveMessageAction.html">ReceiveMessageAction</a>&gt;</div>
+    <div><a class="xref" href="Agenix.Api.Spi.IReferenceResolverAware.html">IReferenceResolverAware</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_ControlMessageProcessors">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.ControlMessageProcessors</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_HeaderIgnoreCase">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.HeaderIgnoreCase</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Timeout_System_Int64_">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Timeout(long)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_HeaderNameIgnoreCase_System_Boolean_">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.HeaderNameIgnoreCase(bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_System_Object__">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Validate(IValidationContext.IBuilder&lt;IValidationContext, dynamic&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_Context_IValidationContext_">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Validate(IValidationContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_IValidationContextAdapter_">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Validate(IValidationContextAdapter)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_System_Collections_Generic_List_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_System_Object___">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Validate(List&lt;IValidationContext.IBuilder&lt;IValidationContext, dynamic&gt;&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_System_Object____">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Validate(params IValidationContext.IBuilder&lt;IValidationContext, dynamic&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Selector_System_String_">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Selector(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Selector_System_Collections_Generic_IDictionary_System_String_System_Object__">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Selector(IDictionary&lt;string, object&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validator_Agenix_Api_Validation_IMessageValidator_Agenix_Api_Validation_Context_IValidationContext__">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Validator(IMessageValidator&lt;IValidationContext&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validators_Agenix_Api_Validation_IMessageValidator_Agenix_Api_Validation_Context_IValidationContext____">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Validators(params IMessageValidator&lt;IValidationContext&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validators_System_Collections_Generic_List_Agenix_Api_Validation_IMessageValidator_Agenix_Api_Validation_Context_IValidationContext___">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Validators(List&lt;IMessageValidator&lt;IValidationContext&gt;&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validator_System_String_">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Validator(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validator_Agenix_Api_Validation_IHeaderValidator_">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Validator(IHeaderValidator)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_IValidationProcessor_">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Validate(IValidationProcessor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_ValidationProcessor_">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Validate(ValidationProcessor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Process_Agenix_Api_Message_IMessageProcessor_">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Process(IMessageProcessor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Process_Agenix_Api_Message_MessageProcessor_">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Process(MessageProcessor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport-3.html#Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Process_Agenix_Api_Variable_VariableExtractor_">ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Process(VariableExtractor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3__delegate">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;._delegate</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3__self">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;._self</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3__messageBuilder">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;._messageBuilder</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3__messageType">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;._messageType</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_SetReferenceResolver_Agenix_Api_Spi_IReferenceResolver_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.SetReferenceResolver(IReferenceResolver)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Build">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Build()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_From_Agenix_Api_Message_IMessageBuilder_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.From(IMessageBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_From_Agenix_Api_Message_IMessage_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.From(IMessage)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Type_System_String_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Type(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Type_Agenix_Api_Message_MessageType_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Type(MessageType)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_Agenix_Api_Message_MessagePayloadBuilder_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Body(MessagePayloadBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_Agenix_Api_Message_IMessagePayloadBuilder_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Body(IMessagePayloadBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_System_String_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Body(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_Agenix_Api_IO_IResource_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Body(IResource)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_Agenix_Api_IO_IResource_System_Text_Encoding_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Body(IResource, Encoding)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_System_String_System_Object_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Header(string, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Headers_System_Collections_Generic_Dictionary_System_String_System_Object__">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Headers(Dictionary&lt;string, object&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_Agenix_Api_IO_IResource_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Header(IResource)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_Agenix_Api_IO_IResource_System_Text_Encoding_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Header(IResource, Encoding)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_Agenix_Api_Message_IMessageHeaderDataBuilder_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Header(IMessageHeaderDataBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_Agenix_Api_Message_MessageHeaderDataBuilder_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Header(MessageHeaderDataBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Header_System_String_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Header(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Name_System_String_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Name(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Process__1_Agenix_Api_Message_IMessageProcessor_IBuilder_Agenix_Api_Message_IMessageProcessor___0__">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Process&lt;B&gt;(IMessageProcessor.IBuilder&lt;IMessageProcessor, B&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Process_Agenix_Api_Message_IMessageProcessorAdapter_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Process(IMessageProcessorAdapter)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Extract_Agenix_Api_Variable_IVariableExtractor_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Extract(IVariableExtractor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Extract_Agenix_Api_Message_IVariableExtractorAdapter_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Extract(IVariableExtractorAdapter)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Extract__1_Agenix_Api_Variable_IVariableExtractor_IBuilder_Agenix_Api_Variable_IVariableExtractor___0__">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Extract&lt;B&gt;(IVariableExtractor.IBuilder&lt;IVariableExtractor, B&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_WithReferenceResolver_Agenix_Api_Spi_IReferenceResolver_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.WithReferenceResolver(IReferenceResolver)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_GetMessageBuilder">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.GetMessageBuilder()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_GetMessageType">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.GetMessageType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Http.html">Http</a>.<a class="xref" href="Agenix.Http.Actions.html">Actions</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Http.dll</h6>
+  <h5 id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class HttpClientResponseActionBuilder.HttpMessageBuilderSupport : ReceiveMessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;, ITestActionBuilder&lt;ReceiveMessageAction&gt;, IReferenceResolverAware</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport__ctor_Agenix_Http_Message_HttpMessage_Agenix_Http_Actions_HttpClientResponseActionBuilder_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.%23ctor(Agenix.Http.Message.HttpMessage%2CAgenix.Http.Actions.HttpClientResponseActionBuilder)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientResponseActionBuilder.cs/#L129">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport__ctor_" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.#ctor*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport__ctor_Agenix_Http_Message_HttpMessage_Agenix_Http_Actions_HttpClientResponseActionBuilder_" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.#ctor(Agenix.Http.Message.HttpMessage,Agenix.Http.Actions.HttpClientResponseActionBuilder)">HttpMessageBuilderSupport(HttpMessage, HttpClientResponseActionBuilder)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMessageBuilderSupport(HttpMessage httpMessage, HttpClientResponseActionBuilder dlg)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td><span class="parametername">httpMessage</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.html">HttpClientResponseActionBuilder</a></td>
+        <td><span class="parametername">dlg</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_Body_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.Body(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientResponseActionBuilder.cs/#L150">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_Body_" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.Body*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_Body_System_String_" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.Body(System.String)">Body(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override HttpClientResponseActionBuilder.HttpMessageBuilderSupport Body(string payload)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">payload</span></td>
+        <td><p>The payload to be assigned to the HTTP message body.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.html">HttpClientResponseActionBuilder</a>.<a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.html">HttpMessageBuilderSupport</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Body_System_String_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Body(string)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_ContentType_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.ContentType(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientResponseActionBuilder.cs/#L210">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_ContentType_" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.ContentType*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_ContentType_System_String_" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.ContentType(System.String)">ContentType(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientResponseActionBuilder.HttpMessageBuilderSupport ContentType(string contentType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">contentType</span></td>
+        <td><p>The content type value to be assigned to the HTTP message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.html">HttpClientResponseActionBuilder</a>.<a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.html">HttpMessageBuilderSupport</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_Cookie_System_Net_Cookie_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.Cookie(System.Net.Cookie)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientResponseActionBuilder.cs/#L220">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_Cookie_" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.Cookie*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_Cookie_System_Net_Cookie_" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.Cookie(System.Net.Cookie)">Cookie(Cookie)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientResponseActionBuilder.HttpMessageBuilderSupport Cookie(Cookie cookie)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.cookie">Cookie</a></td>
+        <td><span class="parametername">cookie</span></td>
+        <td><p>The Cookie object to be added or updated in the HTTP message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.html">HttpClientResponseActionBuilder</a>.<a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.html">HttpMessageBuilderSupport</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_From_Agenix_Api_Message_IMessage_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.From(Agenix.Api.Message.IMessage)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientResponseActionBuilder.cs/#L160">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_From_" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.From*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_From_Agenix_Api_Message_IMessage_" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.From(Agenix.Api.Message.IMessage)">From(IMessage)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override HttpClientResponseActionBuilder.HttpMessageBuilderSupport From(IMessage controlMessage)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></td>
+        <td><span class="parametername">controlMessage</span></td>
+        <td><p>The source message from which properties will be copied.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.html">HttpClientResponseActionBuilder</a>.<a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.html">HttpMessageBuilderSupport</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_From_Agenix_Api_Message_IMessage_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.From(IMessage)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_Name_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.Name(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientResponseActionBuilder.cs/#L140">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_Name_" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.Name*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_Name_System_String_" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.Name(System.String)">Name(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override HttpClientResponseActionBuilder.HttpMessageBuilderSupport Name(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name to be assigned to the HTTP message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.html">HttpClientResponseActionBuilder</a>.<a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.html">HttpMessageBuilderSupport</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Name_System_String_">MessageBuilderSupport&lt;ReceiveMessageAction, HttpClientResponseActionBuilder, HttpClientResponseActionBuilder.HttpMessageBuilderSupport&gt;.Name(string)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_ReasonPhrase_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.ReasonPhrase(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientResponseActionBuilder.cs/#L190">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_ReasonPhrase_" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.ReasonPhrase*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_ReasonPhrase_System_String_" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.ReasonPhrase(System.String)">ReasonPhrase(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientResponseActionBuilder.HttpMessageBuilderSupport ReasonPhrase(string reasonPhrase)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">reasonPhrase</span></td>
+        <td><p>The reason phrase to be assigned to the HTTP message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.html">HttpClientResponseActionBuilder</a>.<a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.html">HttpMessageBuilderSupport</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_Status_System_Net_HttpStatusCode_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.Status(System.Net.HttpStatusCode)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientResponseActionBuilder.cs/#L170">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_Status_" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.Status*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_Status_System_Net_HttpStatusCode_" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.Status(System.Net.HttpStatusCode)">Status(HttpStatusCode)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientResponseActionBuilder.HttpMessageBuilderSupport Status(HttpStatusCode httpStatusCode)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.httpstatuscode">HttpStatusCode</a></td>
+        <td><span class="parametername">httpStatusCode</span></td>
+        <td><p>The HTTP status code to be assigned to the message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.html">HttpClientResponseActionBuilder</a>.<a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.html">HttpMessageBuilderSupport</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_StatusCode_System_Int32_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.StatusCode(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientResponseActionBuilder.cs/#L180">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_StatusCode_" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.StatusCode*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_StatusCode_System_Int32_" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.StatusCode(System.Int32)">StatusCode(int)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientResponseActionBuilder.HttpMessageBuilderSupport StatusCode(int statusCode)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">statusCode</span></td>
+        <td><p>The integer value of the status code to be assigned to the HTTP message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.html">HttpClientResponseActionBuilder</a>.<a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.html">HttpMessageBuilderSupport</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_Version_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.Version(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientResponseActionBuilder.cs/#L200">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_Version_" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.Version*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport_Version_System_String_" data-uid="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.Version(System.String)">Version(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientResponseActionBuilder.HttpMessageBuilderSupport Version(string version)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">version</span></td>
+        <td><p>The HTTP version to be assigned to the message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.html">HttpClientResponseActionBuilder</a>.<a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.html">HttpMessageBuilderSupport</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Spi.IReferenceResolverAware.html">IReferenceResolverAware</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientResponseActionBuilder_HttpMessageBuilderSupport.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientResponseActionBuilder.cs/#L129" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

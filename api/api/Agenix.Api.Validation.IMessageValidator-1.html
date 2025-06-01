@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Interface IMessageValidator&lt;T&gt; </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Interface IMessageValidator&lt;T&gt; ">
+    
+    <meta name="description" content="Interface for validating messages against control messages using predefined validation contexts.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Api.Validation.IMessageValidator`1">
+
+
+
+  <h1 id="Agenix_Api_Validation_IMessageValidator_1" data-uid="Agenix.Api.Validation.IMessageValidator`1" class="text-break">Interface IMessageValidator&lt;T&gt;</h1>
+  <div class="markdown level0 summary"><p>Interface for validating messages against control messages using predefined validation contexts.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Api.html">Api</a>.<a class="xref" href="Agenix.Api.Validation.html">Validation</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Api.dll</h6>
+  <h5 id="Agenix_Api_Validation_IMessageValidator_1_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IMessageValidator&lt;T&gt; where T : IValidationContext</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>Type of the validation context that implements IValidationContext.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_IMessageValidator_1_Lookup.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.IMessageValidator%601.Lookup%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/IMessageValidator.cs/#L85">View Source</a>
+  </span>
+  <a id="Agenix_Api_Validation_IMessageValidator_1_Lookup_" data-uid="Agenix.Api.Validation.IMessageValidator`1.Lookup*"></a>
+  <h4 id="Agenix_Api_Validation_IMessageValidator_1_Lookup" data-uid="Agenix.Api.Validation.IMessageValidator`1.Lookup">Lookup()</h4>
+  <div class="markdown level1 summary"><p>Retrieves a dictionary of message validators mapped by string keys.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Dictionary&lt;string, IMessageValidator&lt;IValidationContext&gt;&gt; Lookup()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Agenix.Api.Validation.IMessageValidator-1.html">IMessageValidator</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>&gt;&gt;</td>
+        <td><p>A dictionary mapping string identifiers to corresponding IMessageValidator instances of type IValidationContext.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_IMessageValidator_1_Lookup_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.IMessageValidator%601.Lookup(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/IMessageValidator.cs/#L108">View Source</a>
+  </span>
+  <a id="Agenix_Api_Validation_IMessageValidator_1_Lookup_" data-uid="Agenix.Api.Validation.IMessageValidator`1.Lookup*"></a>
+  <h4 id="Agenix_Api_Validation_IMessageValidator_1_Lookup_System_String_" data-uid="Agenix.Api.Validation.IMessageValidator`1.Lookup(System.String)">Lookup(string)</h4>
+  <div class="markdown level1 summary"><p>Attempts to look up and retrieve an instance of a message validator based on the given validator name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Optional&lt;IMessageValidator&lt;IValidationContext&gt;&gt; Lookup(string validator)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">validator</span></td>
+        <td><p>The name of the validator to be retrieved.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Util.Optional-1.html">Optional</a>&lt;<a class="xref" href="Agenix.Api.Validation.IMessageValidator-1.html">IMessageValidator</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>&gt;&gt;</td>
+        <td><p>An Optional containing the message validator if found, or an empty Optional if the validator name is not
+recognized.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_IMessageValidator_1_SupportsMessageType_System_String_Agenix_Api_Message_IMessage_.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.IMessageValidator%601.SupportsMessageType(System.String%2CAgenix.Api.Message.IMessage)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/IMessageValidator.cs/#L77">View Source</a>
+  </span>
+  <a id="Agenix_Api_Validation_IMessageValidator_1_SupportsMessageType_" data-uid="Agenix.Api.Validation.IMessageValidator`1.SupportsMessageType*"></a>
+  <h4 id="Agenix_Api_Validation_IMessageValidator_1_SupportsMessageType_System_String_Agenix_Api_Message_IMessage_" data-uid="Agenix.Api.Validation.IMessageValidator`1.SupportsMessageType(System.String,Agenix.Api.Message.IMessage)">SupportsMessageType(string, IMessage)</h4>
+  <div class="markdown level1 summary"><p>Determines if the message validator supports a given message type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool SupportsMessageType(string messageType, IMessage message)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">messageType</span></td>
+        <td><p>The type of the message to check.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></td>
+        <td><span class="parametername">message</span></td>
+        <td><p>The message instance to be validated.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>Returns true if the validator supports the message type; otherwise, false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_IMessageValidator_1_ValidateMessage_Agenix_Api_Message_IMessage_Agenix_Api_Message_IMessage_Agenix_Api_Context_TestContext_System_Collections_Generic_List_Agenix_Api_Validation_Context_IValidationContext__.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.IMessageValidator%601.ValidateMessage(Agenix.Api.Message.IMessage%2CAgenix.Api.Message.IMessage%2CAgenix.Api.Context.TestContext%2CSystem.Collections.Generic.List%7BAgenix.Api.Validation.Context.IValidationContext%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/IMessageValidator.cs/#L68">View Source</a>
+  </span>
+  <a id="Agenix_Api_Validation_IMessageValidator_1_ValidateMessage_" data-uid="Agenix.Api.Validation.IMessageValidator`1.ValidateMessage*"></a>
+  <h4 id="Agenix_Api_Validation_IMessageValidator_1_ValidateMessage_Agenix_Api_Message_IMessage_Agenix_Api_Message_IMessage_Agenix_Api_Context_TestContext_System_Collections_Generic_List_Agenix_Api_Validation_Context_IValidationContext__" data-uid="Agenix.Api.Validation.IMessageValidator`1.ValidateMessage(Agenix.Api.Message.IMessage,Agenix.Api.Message.IMessage,Agenix.Api.Context.TestContext,System.Collections.Generic.List{Agenix.Api.Validation.Context.IValidationContext})">ValidateMessage(IMessage, IMessage, TestContext, List&lt;IValidationContext&gt;)</h4>
+  <div class="markdown level1 summary"><p>Validates the received message against the control message using the provided context and a list of validation
+contexts.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void ValidateMessage(IMessage receivedMessage, IMessage controlMessage, TestContext context, List&lt;IValidationContext&gt; validationContexts)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></td>
+        <td><span class="parametername">receivedMessage</span></td>
+        <td><p>The message that has been received and needs to be validated.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></td>
+        <td><span class="parametername">controlMessage</span></td>
+        <td><p>The control message to validate against.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The test context that holds specific settings and configurations for the validation.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>&gt;</td>
+        <td><span class="parametername">validationContexts</span></td>
+        <td><p>A list of validation contexts to apply during the validation process.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_IMessageValidator_1.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.IMessageValidator%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/IMessageValidator.cs/#L43" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

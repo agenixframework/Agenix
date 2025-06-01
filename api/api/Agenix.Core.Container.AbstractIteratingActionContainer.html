@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class AbstractIteratingActionContainer </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class AbstractIteratingActionContainer ">
+    
+    
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer">
+
+
+
+  <h1 id="Agenix_Core_Container_AbstractIteratingActionContainer" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer" class="text-break">Class AbstractIteratingActionContainer</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html">AbstractTestAction</a></div>
+    <div class="level2"><a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html">AbstractActionContainer</a></div>
+    <div class="level3"><span class="xref">AbstractIteratingActionContainer</span></div>
+      <div class="level4"><a class="xref" href="Agenix.Core.Container.Iterate.html">Iterate</a></div>
+      <div class="level4"><a class="xref" href="Agenix.Core.Container.RepeatOnErrorUntilTrue.html">RepeatOnErrorUntilTrue</a></div>
+      <div class="level4"><a class="xref" href="Agenix.Core.Container.RepeatUntilTrue.html">RepeatUntilTrue</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.Common.INamed.html">INamed</a></div>
+    <div><a class="xref" href="Agenix.Api.Common.IDescribed.html">IDescribed</a></div>
+    <div><a class="xref" href="Agenix.Api.Container.ITestActionContainer.html">ITestActionContainer</a></div>
+    <div><a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a></div>
+    <div><a class="xref" href="Agenix.Api.Common.ICompletable.html">ICompletable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_actions">AbstractActionContainer.actions</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_SetActions_System_Collections_Generic_List_Agenix_Api_ITestAction__">AbstractActionContainer.SetActions(List&lt;ITestAction&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_GetActions">AbstractActionContainer.GetActions()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_GetActionCount">AbstractActionContainer.GetActionCount()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_AddTestActions_Agenix_Api_ITestAction___">AbstractActionContainer.AddTestActions(params ITestAction[])</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_AddTestAction_Agenix_Api_ITestAction_">AbstractActionContainer.AddTestAction(ITestAction)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_GetActionIndex_Agenix_Api_ITestAction_">AbstractActionContainer.GetActionIndex(ITestAction)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_SetActiveAction_Agenix_Api_ITestAction_">AbstractActionContainer.SetActiveAction(ITestAction)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_SetExecutedAction_Agenix_Api_ITestAction_">AbstractActionContainer.SetExecutedAction(ITestAction)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_GetActiveAction">AbstractActionContainer.GetActiveAction()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_GetExecutedActions">AbstractActionContainer.GetExecutedActions()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_GetTestAction_System_Int32_">AbstractActionContainer.GetTestAction(int)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_ExecuteAction_Agenix_Api_ITestAction_Agenix_Api_Context_TestContext_">AbstractActionContainer.ExecuteAction(ITestAction, TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_AddTestAction_Agenix_Api_ITestActionBuilder_Agenix_Api_ITestAction__">AbstractActionContainer.AddTestAction(ITestActionBuilder&lt;ITestAction&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_description">AbstractTestAction.description</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_GetDescription">AbstractTestAction.GetDescription()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_SetDescription_System_String_">AbstractTestAction.SetDescription(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_SetName_System_String_">AbstractTestAction.SetName(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_Name">AbstractTestAction.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_IsDisabled_Agenix_Api_Context_TestContext_">AbstractTestAction.IsDisabled(TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_Execute_Agenix_Api_Context_TestContext_">AbstractTestAction.Execute(TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Core.html">Core</a>.<a class="xref" href="Agenix.Core.Container.html">Container</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Core.dll</h6>
+  <h5 id="Agenix_Core_Container_AbstractIteratingActionContainer_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class AbstractIteratingActionContainer : AbstractActionContainer, INamed, IDescribed, ITestActionContainer, ITestAction, ICompletable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractIteratingActionContainer__ctor_System_String_System_String_System_Collections_Generic_List_Agenix_Api_ITestActionBuilder_Agenix_Api_ITestAction___System_String_Agenix_Core_Container_IterationEvaluator_IteratingConditionExpression_System_String_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractIteratingActionContainer.%23ctor(System.String%2CSystem.String%2CSystem.Collections.Generic.List%7BAgenix.Api.ITestActionBuilder%7BAgenix.Api.ITestAction%7D%7D%2CSystem.String%2CAgenix.Core.Container.IterationEvaluator.IteratingConditionExpression%2CSystem.String%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractIteratingActionContainer.cs/#L41">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractIteratingActionContainer__ctor_" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.#ctor*"></a>
+  <h4 id="Agenix_Core_Container_AbstractIteratingActionContainer__ctor_System_String_System_String_System_Collections_Generic_List_Agenix_Api_ITestActionBuilder_Agenix_Api_ITestAction___System_String_Agenix_Core_Container_IterationEvaluator_IteratingConditionExpression_System_String_System_Int32_System_Int32_" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.#ctor(System.String,System.String,System.Collections.Generic.List{Agenix.Api.ITestActionBuilder{Agenix.Api.ITestAction}},System.String,Agenix.Core.Container.IterationEvaluator.IteratingConditionExpression,System.String,System.Int32,System.Int32)">AbstractIteratingActionContainer(string, string, List&lt;ITestActionBuilder&lt;ITestAction&gt;&gt;, string, IteratingConditionExpression, string, int, int)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected AbstractIteratingActionContainer(string name, string description, List&lt;ITestActionBuilder&lt;ITestAction&gt;&gt; actions, string condition, IterationEvaluator.IteratingConditionExpression conditionExpression, string indexName, int index, int start)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">description</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder</a>&lt;<a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>&gt;&gt;</td>
+        <td><span class="parametername">actions</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">condition</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Core.Container.IterationEvaluator.html">IterationEvaluator</a>.<a class="xref" href="Agenix.Core.Container.IterationEvaluator.IteratingConditionExpression.html">IteratingConditionExpression</a></td>
+        <td><span class="parametername">conditionExpression</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">indexName</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">index</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">start</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractIteratingActionContainer_condition.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractIteratingActionContainer.condition%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractIteratingActionContainer.cs/#L55">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Container_AbstractIteratingActionContainer_condition" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.condition">condition</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly string condition</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractIteratingActionContainer_conditionExpression.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractIteratingActionContainer.conditionExpression%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractIteratingActionContainer.cs/#L60">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Container_AbstractIteratingActionContainer_conditionExpression" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.conditionExpression">conditionExpression</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly IterationEvaluator.IteratingConditionExpression conditionExpression</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Core.Container.IterationEvaluator.html">IterationEvaluator</a>.<a class="xref" href="Agenix.Core.Container.IterationEvaluator.IteratingConditionExpression.html">IteratingConditionExpression</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractIteratingActionContainer_index.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractIteratingActionContainer.index%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractIteratingActionContainer.cs/#L75">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Container_AbstractIteratingActionContainer_index" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.index">index</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected int index</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractIteratingActionContainer_indexName.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractIteratingActionContainer.indexName%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractIteratingActionContainer.cs/#L65">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Container_AbstractIteratingActionContainer_indexName" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.indexName">indexName</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly string indexName</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractIteratingActionContainer_start.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractIteratingActionContainer.start%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractIteratingActionContainer.cs/#L70">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Container_AbstractIteratingActionContainer_start" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.start">start</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly int start</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractIteratingActionContainer_Condition.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractIteratingActionContainer.Condition%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractIteratingActionContainer.cs/#L80">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractIteratingActionContainer_Condition_" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.Condition*"></a>
+  <h4 id="Agenix_Core_Container_AbstractIteratingActionContainer_Condition" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.Condition">Condition</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Condition { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractIteratingActionContainer_CheckCondition_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractIteratingActionContainer.CheckCondition(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractIteratingActionContainer.cs/#L109">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractIteratingActionContainer_CheckCondition_" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.CheckCondition*"></a>
+  <h4 id="Agenix_Core_Container_AbstractIteratingActionContainer_CheckCondition_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.CheckCondition(Agenix.Api.Context.TestContext)">CheckCondition(TestContext)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected bool CheckCondition(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractIteratingActionContainer_DoExecute_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractIteratingActionContainer.DoExecute(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractIteratingActionContainer.cs/#L84">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractIteratingActionContainer_DoExecute_" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.DoExecute*"></a>
+  <h4 id="Agenix_Core_Container_AbstractIteratingActionContainer_DoExecute_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.DoExecute(Agenix.Api.Context.TestContext)">DoExecute(TestContext)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void DoExecute(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>TestContext holding variable information.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Actions.AbstractTestAction.html#Agenix_Core_Actions_AbstractTestAction_DoExecute_Agenix_Api_Context_TestContext_">AbstractTestAction.DoExecute(TestContext)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractIteratingActionContainer_ExecuteActions_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractIteratingActionContainer.ExecuteActions(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractIteratingActionContainer.cs/#L98">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractIteratingActionContainer_ExecuteActions_" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.ExecuteActions*"></a>
+  <h4 id="Agenix_Core_Container_AbstractIteratingActionContainer_ExecuteActions_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.ExecuteActions(Agenix.Api.Context.TestContext)">ExecuteActions(TestContext)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void ExecuteActions(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractIteratingActionContainer_ExecuteIteration_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractIteratingActionContainer.ExecuteIteration(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractIteratingActionContainer.cs/#L93">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractIteratingActionContainer_ExecuteIteration_" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.ExecuteIteration*"></a>
+  <h4 id="Agenix_Core_Container_AbstractIteratingActionContainer_ExecuteIteration_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.ExecuteIteration(Agenix.Api.Context.TestContext)">ExecuteIteration(TestContext)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected abstract void ExecuteIteration(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractIteratingActionContainer_GetConditionExpression.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractIteratingActionContainer.GetConditionExpression%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractIteratingActionContainer.cs/#L149">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractIteratingActionContainer_GetConditionExpression_" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.GetConditionExpression*"></a>
+  <h4 id="Agenix_Core_Container_AbstractIteratingActionContainer_GetConditionExpression" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.GetConditionExpression">GetConditionExpression()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IterationEvaluator.IteratingConditionExpression GetConditionExpression()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Core.Container.IterationEvaluator.html">IterationEvaluator</a>.<a class="xref" href="Agenix.Core.Container.IterationEvaluator.IteratingConditionExpression.html">IteratingConditionExpression</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractIteratingActionContainer_GetIndex.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractIteratingActionContainer.GetIndex%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractIteratingActionContainer.cs/#L165">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractIteratingActionContainer_GetIndex_" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.GetIndex*"></a>
+  <h4 id="Agenix_Core_Container_AbstractIteratingActionContainer_GetIndex" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.GetIndex">GetIndex()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetIndex()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractIteratingActionContainer_GetIndexName.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractIteratingActionContainer.GetIndexName%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractIteratingActionContainer.cs/#L157">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractIteratingActionContainer_GetIndexName_" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.GetIndexName*"></a>
+  <h4 id="Agenix_Core_Container_AbstractIteratingActionContainer_GetIndexName" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.GetIndexName">GetIndexName()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetIndexName()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractIteratingActionContainer_GetStart.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractIteratingActionContainer.GetStart%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractIteratingActionContainer.cs/#L173">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractIteratingActionContainer_GetStart_" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.GetStart*"></a>
+  <h4 id="Agenix_Core_Container_AbstractIteratingActionContainer_GetStart" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.GetStart">GetStart()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetStart()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractIteratingActionContainer_IsDone_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractIteratingActionContainer.IsDone(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractIteratingActionContainer.cs/#L141">View Source</a>
+  </span>
+  <a id="Agenix_Core_Container_AbstractIteratingActionContainer_IsDone_" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.IsDone*"></a>
+  <h4 id="Agenix_Core_Container_AbstractIteratingActionContainer_IsDone_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.Container.AbstractIteratingActionContainer.IsDone(Agenix.Api.Context.TestContext)">IsDone(TestContext)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool IsDone(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Container.AbstractActionContainer.html#Agenix_Core_Container_AbstractActionContainer_IsDone_Agenix_Api_Context_TestContext_">AbstractActionContainer.IsDone(TestContext)</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.INamed.html">INamed</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.IDescribed.html">IDescribed</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Container.ITestActionContainer.html">ITestActionContainer</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.ICompletable.html">ICompletable</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Container_AbstractIteratingActionContainer.md&amp;value=---%0Auid%3A%20Agenix.Core.Container.AbstractIteratingActionContainer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Container/AbstractIteratingActionContainer.cs/#L41" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

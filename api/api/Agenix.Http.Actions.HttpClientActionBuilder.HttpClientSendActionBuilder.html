@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class HttpClientActionBuilder.HttpClientSendActionBuilder </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class HttpClientActionBuilder.HttpClientSendActionBuilder ">
+    
+    <meta name="description" content="Builder class providing fluent interface methods for constructing and sending HTTP requests.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder">
+
+
+
+  <h1 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder" class="text-break">Class HttpClientActionBuilder.HttpClientSendActionBuilder</h1>
+  <div class="markdown level0 summary"><p>Builder class providing fluent interface methods for constructing and sending HTTP requests.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">HttpClientActionBuilder.HttpClientSendActionBuilder</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Http.html">Http</a>.<a class="xref" href="Agenix.Http.Actions.html">Actions</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Http.dll</h6>
+  <h5 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class HttpClientActionBuilder.HttpClientSendActionBuilder</code></pre>
+  </div>
+  <h5 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Supports various HTTP methods such as GET, POST, PUT, DELETE, HEAD, OPTIONS, TRACE, and PATCH.
+Allows sending requests with or without specified paths.</p>
+</div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder__ctor_Agenix_Api_Endpoint_IEndpoint_System_String_Agenix_Api_Spi_IReferenceResolver_Agenix_Api_ITestActionBuilder_Agenix_Api_ITestAction__.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.%23ctor(Agenix.Api.Endpoint.IEndpoint%2CSystem.String%2CAgenix.Api.Spi.IReferenceResolver%2CAgenix.Api.ITestActionBuilder%7BAgenix.Api.ITestAction%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L162">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder__ctor_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.#ctor*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder__ctor_Agenix_Api_Endpoint_IEndpoint_System_String_Agenix_Api_Spi_IReferenceResolver_Agenix_Api_ITestActionBuilder_Agenix_Api_ITestAction__" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.#ctor(Agenix.Api.Endpoint.IEndpoint,System.String,Agenix.Api.Spi.IReferenceResolver,Agenix.Api.ITestActionBuilder{Agenix.Api.ITestAction})">HttpClientSendActionBuilder(IEndpoint?, string?, IReferenceResolver, ITestActionBuilder&lt;ITestAction&gt;)</h4>
+  <div class="markdown level1 summary"><p>Builder class providing fluent interface methods for constructing and sending HTTP requests.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientSendActionBuilder(IEndpoint? httpClient, string? httpClientUri, IReferenceResolver referenceResolver, ITestActionBuilder&lt;ITestAction&gt; newDelegate)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Endpoint.IEndpoint.html">IEndpoint</a></td>
+        <td><span class="parametername">httpClient</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">httpClientUri</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Spi.IReferenceResolver.html">IReferenceResolver</a></td>
+        <td><span class="parametername">referenceResolver</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder</a>&lt;<a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>&gt;</td>
+        <td><span class="parametername">newDelegate</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder__ctor_Agenix_Api_Endpoint_IEndpoint_System_String_Agenix_Api_Spi_IReferenceResolver_Agenix_Api_ITestActionBuilder_Agenix_Api_ITestAction___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Supports various HTTP methods such as GET, POST, PUT, DELETE, HEAD, OPTIONS, TRACE, and PATCH.
+Allows sending requests with or without specified paths.</p>
+</div>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Delete.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Delete%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L281">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Delete_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Delete*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Delete" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Delete">Delete()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder Delete()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td><p>A new instance of HttpClientRequestActionBuilder configured for sending an HTTP DELETE request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Delete_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Delete(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L295">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Delete_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Delete*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Delete_System_String_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Delete(System.String)">Delete(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder Delete(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The relative or absolute path to which the DELETE request is sent. This path is appended to the base URI of the
+HTTP client.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td><p>A new instance of HttpClientRequestActionBuilder that allows further configuration or the execution of the HTTP
+DELETE request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Get.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Get%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L204">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Get_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Get*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Get" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Get">Get()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder Get()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td><p>A new instance of HttpClientRequestActionBuilder configured for an HTTP GET request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Get_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Get(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L219">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Get_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Get*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Get_System_String_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Get(System.String)">Get(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder Get(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The specific path for the HTTP GET request. This can include query parameters or other details
+relevant to the resource being accessed on the server.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td><p>An instance of HttpClientRequestActionBuilder that allows for additional configuration
+of the request or the ability to send the constructed request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Head.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Head%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L306">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Head_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Head*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Head" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Head">Head()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder Head()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td><p>The current instance of HttpClientRequestActionBuilder configured to send an HTTP HEAD request,
+allowing for further customization or execution of the request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Head_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Head(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L319">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Head_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Head*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Head_System_String_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Head(System.String)">Head(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder Head(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The relative path to be appended to the base URI for the HTTP HEAD request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td><p>An instance of HttpClientRequestActionBuilder, enabling further configuration of the HTTP request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Options.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Options%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L331">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Options_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Options*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Options" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Options">Options()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder Options()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td><p>The current instance of HttpClientRequestActionBuilder configured
+to send an OPTIONS request, enabling additional setup before execution.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Options_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Options(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L345">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Options_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Options*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Options_System_String_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Options(System.String)">Options(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder Options(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The relative path to send the OPTIONS request to. This path is appended to the base URI of the HTTP client.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td><p>An instance of HttpClientRequestActionBuilder configured for an OPTIONS request. This allows further customization
+and execution of the request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Patch.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Patch%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L382">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Patch_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Patch*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Patch" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Patch">Patch()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder Patch()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td><p>An instance of HttpClientRequestActionBuilder configured for an HTTP PATCH request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Patch_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Patch(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L395">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Patch_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Patch*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Patch_System_String_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Patch(System.String)">Patch(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder Patch(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The relative or absolute path for the PATCH request. This is used to determine the target endpoint of the request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td><p>An instance of HttpClientRequestActionBuilder configured for sending the PATCH request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Post.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Post%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L230">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Post_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Post*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Post" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Post">Post()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder Post()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td><p>An instance of HttpClientRequestActionBuilder configured for sending an HTTP POST request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Post_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Post(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L244">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Post_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Post*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Post_System_String_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Post(System.String)">Post(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder Post(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The relative path of the resource to which the POST request is sent.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td><p>A new instance of HttpClientRequestActionBuilder configured to send the POST request to the specified path.
+This allows further customization of the request before execution.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Put.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Put%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L255">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Put_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Put*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Put" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Put">Put()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder Put()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td><p>A new instance of HttpClientRequestActionBuilder to further customize and finalize the HTTP PUT request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Put_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Put(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L271">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Put_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Put*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Put_System_String_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Put(System.String)">Put(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder Put(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The URI path to which the HTTP PUT request will be sent. This path can be relative to the base URI of the HTTP
+client.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td><p>A new instance of HttpClientRequestActionBuilder configured for an HTTP PUT request
+to the specified path. Allows for further customization of the request before sending.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Trace.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Trace%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L358">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Trace_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Trace*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Trace" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Trace">Trace()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder Trace()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td><p>The current instance of HttpClientRequestActionBuilder configured for sending a TRACE request.
+This allows for further customization or direct invocation of the request</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Trace_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Trace(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L371">View Source</a>
+  </span>
+  <a id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Trace_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Trace*"></a>
+  <h4 id="Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder_Trace_System_String_" data-uid="Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder.Trace(System.String)">Trace(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientRequestActionBuilder Trace(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The resource path to which the TRACE request will be sent. This is appended to the base URI of the HTTP client.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Actions.HttpClientRequestActionBuilder.html">HttpClientRequestActionBuilder</a></td>
+        <td><p>An instance of HttpClientRequestActionBuilder to enable further configuration of the TRACE request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Actions_HttpClientActionBuilder_HttpClientSendActionBuilder.md&amp;value=---%0Auid%3A%20Agenix.Http.Actions.HttpClientActionBuilder.HttpClientSendActionBuilder%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Actions/HttpClientActionBuilder.cs/#L162" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

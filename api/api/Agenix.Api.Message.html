@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Namespace Agenix.Api.Message </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Namespace Agenix.Api.Message ">
+    
+    
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Api.Message">
+
+  <h1 id="Agenix_Api_Message" data-uid="Agenix.Api.Message" class="text-break">Namespace Agenix.Api.Message</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">
+Classes
+</h3>
+      <h4><a class="xref" href="Agenix.Api.Message.AbstractMessageProcessor.html">AbstractMessageProcessor</a></h4>
+      <section><p>The AbstractMessageProcessor is an abstract class that provides a base implementation
+for processing messages in defined directions with specific types.
+It implements the following interfaces:</p>
+<ul>
+<li>IMessageProcessor: Extends the capability of message transformations.</li>
+<li>IMessageDirectionAware: Enables awareness and management of message directionality
+(inbound, outbound, unbound).</li>
+<li>IMessageTypeSelector: Supports type-based selection and filtering of messages.
+The class provides mechanisms for message direction handling, checking message
+compatibility based on type, and processing messages with contextual information.
+Subclasses can extend the functionality by providing their specific implementations
+for processing and type selection.</li>
+</ul>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.DefaultMessageStore.html">DefaultMessageStore</a></h4>
+      <section><p>Represents the default implementation of a message store that uses a concurrent dictionary
+to store and retrieve messages identified by unique string keys.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.MessageHeaderTypeExtensions.html">MessageHeaderTypeExtensions</a></h4>
+      <section><p>Provides extension methods for handling message header types.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.MessageHeaderUtils.html">MessageHeaderUtils</a></h4>
+      <section><p>Provides utility methods for handling message headers in the Agenix.Core.Message namespace.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.MessageHeaders.html">MessageHeaders</a></h4>
+      <section><p>Specific message headers.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.MessagePayloadAttribute.html">MessagePayloadAttribute</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Message.MessagePayloadUtils.html">MessagePayloadUtils</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Message.MessageProcessors.html">MessageProcessors</a></h4>
+      <section><p>Provides operations to manage and process a collection of message processors.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.MessageTypeExtensions.html">MessageTypeExtensions</a></h4>
+      <section><p>Provides extension methods for the MessageType enumeration.</p>
+</section>
+    <h3 id="interfaces">
+Interfaces
+</h3>
+      <h4><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></h4>
+      <section><p>Represents a generic message structure that contains an identifier, name, payload, headers,
+and provides methods for managing headers and accessing payload information.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.IMessageBuilder.html">IMessageBuilder</a></h4>
+      <section><p>Interface representing a builder for constructing messages.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.IMessageConverter-3.html">IMessageConverter&lt;I, O, C&gt;</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Message.IMessageCorrelator.html">IMessageCorrelator</a></h4>
+      <section><p>Message correlator interface for synchronous reply messages. Correlator uses a specific header entry in messages in
+order to construct a unique message correlation ke</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.IMessageDirectionAware.html">IMessageDirectionAware</a></h4>
+      <section><p>Provides functionality to determine the direction of messages for a processor.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.IMessageHeaderBuilder.html">IMessageHeaderBuilder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Message.IMessageHeaderDataBuilder.html">IMessageHeaderDataBuilder</a></h4>
+      <section><p>Interface representing a builder for message header data.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.IMessagePayloadBuilder.html">IMessagePayloadBuilder</a></h4>
+      <section><p>Provides an interface for building message payloads using a test context.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.IMessagePayloadBuilder.IBuilder-2.html">IMessagePayloadBuilder.IBuilder&lt;T, TB&gt;</a></h4>
+      <section><p>Provides an interface for building message payloads using a test context.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.IMessageProcessor.html">IMessageProcessor</a></h4>
+      <section><p>Defines the contract for processing messages within the given context.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.IMessageProcessor.IBuilder-2.html">IMessageProcessor.IBuilder&lt;T, TB&gt;</a></h4>
+      <section><p>Interface IBuilder defines the contract for building instances of
+IMessageProcessor implementations.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.IMessageProcessorAdapter.html">IMessageProcessorAdapter</a></h4>
+      <section><p>Adapter interface marks that a class is able to act as a message processor.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.IMessageQueue.html">IMessageQueue</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Message.IMessageSelector.html">IMessageSelector</a></h4>
+      <section><p>Interface for selecting messages based on specific criteria.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.IMessageSelector.IMessageSelectorFactory.html">IMessageSelector.IMessageSelectorFactory</a></h4>
+      <section><p>Factory capable of creating a message selector from key value pairs.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.IMessageStore.html">IMessageStore</a></h4>
+      <section><p>Defines a contract for managing messages, allowing retrieval, storage, and construction
+of message names based on contextual components.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.IMessageTransformer.html">IMessageTransformer</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Message.IMessageTransformer.IBuilder-2.html">IMessageTransformer.IBuilder&lt;T, TB&gt;</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Message.IMessageTypeAware.html">IMessageTypeAware</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Message.IMessageTypeSelector.html">IMessageTypeSelector</a></h4>
+      <section><p>Provides functionality to determine if a message processor can handle a given message type.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.IVariableExtractorAdapter.html">IVariableExtractorAdapter</a></h4>
+      <section><p>Adapter interface marks that a class is able to act as a variable extractor.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.IWithHeaderBuilder.html">IWithHeaderBuilder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Message.IWithPayloadBuilder.html">IWithPayloadBuilder</a></h4>
+      <section><p>Provides methods to set and get a message payload builder.</p>
+</section>
+    <h3 id="enums">
+Enums
+</h3>
+      <h4><a class="xref" href="Agenix.Api.Message.MessageDirection.html">MessageDirection</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Message.MessageHeaderType.html">MessageHeaderType</a></h4>
+      <section><p>Represents the various types of message headers.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.MessageType.html">MessageType</a></h4>
+      <section><p>Enumeration for message protocol types used in test cases.</p>
+</section>
+    <h3 id="delegates">
+Delegates
+</h3>
+      <h4><a class="xref" href="Agenix.Api.Message.MessageBuilder.html">MessageBuilder</a></h4>
+      <section><p>Define a delegate for creating <a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a> objects based on the provided
+<a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a> and message type.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Api.Message.MessageHeaderDataBuilder.html">MessageHeaderDataBuilder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Message.MessagePayloadBuilder.html">MessagePayloadBuilder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Message.MessageProcessor.html">MessageProcessor</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Message.MessageProcessorAdapter.html">MessageProcessorAdapter</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Message.MessageSelector.html">MessageSelector</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Api.Message.VariableExtractorAdapter.html">VariableExtractorAdapter</a></h4>
+      <section></section>
+
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class DirectSyncConsumer </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class DirectSyncConsumer ">
+    
+    
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Core.Endpoint.Direct.DirectSyncConsumer">
+
+
+
+  <h1 id="Agenix_Core_Endpoint_Direct_DirectSyncConsumer" data-uid="Agenix.Core.Endpoint.Direct.DirectSyncConsumer" class="text-break">Class DirectSyncConsumer</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Api.Messaging.AbstractMessageConsumer.html">AbstractMessageConsumer</a></div>
+    <div class="level2"><a class="xref" href="Agenix.Api.Messaging.AbstractSelectiveMessageConsumer.html">AbstractSelectiveMessageConsumer</a></div>
+    <div class="level3"><a class="xref" href="Agenix.Core.Endpoint.Direct.DirectConsumer.html">DirectConsumer</a></div>
+    <div class="level4"><span class="xref">DirectSyncConsumer</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.Messaging.ISelectiveConsumer.html">ISelectiveConsumer</a></div>
+    <div><a class="xref" href="Agenix.Api.Messaging.IConsumer.html">IConsumer</a></div>
+    <div><a class="xref" href="Agenix.Api.Messaging.IReplyProducer.html">IReplyProducer</a></div>
+    <div><a class="xref" href="Agenix.Api.Messaging.IProducer.html">IProducer</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Core.Endpoint.Direct.DirectConsumer.html#Agenix_Core_Endpoint_Direct_DirectConsumer_GetDestinationQueue_Agenix_Api_Context_TestContext_">DirectConsumer.GetDestinationQueue(TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Endpoint.Direct.DirectConsumer.html#Agenix_Core_Endpoint_Direct_DirectConsumer_GetDestinationQueueName">DirectConsumer.GetDestinationQueueName()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Endpoint.Direct.DirectConsumer.html#Agenix_Core_Endpoint_Direct_DirectConsumer_ResolveQueueName_System_String_Agenix_Api_Context_TestContext_">DirectConsumer.ResolveQueueName(string, TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Api.Messaging.AbstractSelectiveMessageConsumer.html#Agenix_Api_Messaging_AbstractSelectiveMessageConsumer_Receive_System_String_Agenix_Api_Context_TestContext_">AbstractSelectiveMessageConsumer.Receive(string, TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Api.Messaging.AbstractSelectiveMessageConsumer.html#Agenix_Api_Messaging_AbstractSelectiveMessageConsumer_Receive_Agenix_Api_Context_TestContext_System_Int64_">AbstractSelectiveMessageConsumer.Receive(TestContext, long)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Api.Messaging.AbstractMessageConsumer.html#Agenix_Api_Messaging_AbstractMessageConsumer_Name">AbstractMessageConsumer.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Api.Messaging.AbstractMessageConsumer.html#Agenix_Api_Messaging_AbstractMessageConsumer_Receive_Agenix_Api_Context_TestContext_">AbstractMessageConsumer.Receive(TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Core.html">Core</a>.<a class="xref" href="Agenix.Core.Endpoint.html">Endpoint</a>.<a class="xref" href="Agenix.Core.Endpoint.Direct.html">Direct</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Core.dll</h6>
+  <h5 id="Agenix_Core_Endpoint_Direct_DirectSyncConsumer_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class DirectSyncConsumer : DirectConsumer, ISelectiveConsumer, IConsumer, IReplyProducer, IProducer</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Endpoint_Direct_DirectSyncConsumer__ctor_System_String_Agenix_Core_Endpoint_Direct_DirectSyncEndpointConfiguration_.md&amp;value=---%0Auid%3A%20Agenix.Core.Endpoint.Direct.DirectSyncConsumer.%23ctor(System.String%2CAgenix.Core.Endpoint.Direct.DirectSyncEndpointConfiguration)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Endpoint/Direct/DirectSyncConsumer.cs/#L58">View Source</a>
+  </span>
+  <a id="Agenix_Core_Endpoint_Direct_DirectSyncConsumer__ctor_" data-uid="Agenix.Core.Endpoint.Direct.DirectSyncConsumer.#ctor*"></a>
+  <h4 id="Agenix_Core_Endpoint_Direct_DirectSyncConsumer__ctor_System_String_Agenix_Core_Endpoint_Direct_DirectSyncEndpointConfiguration_" data-uid="Agenix.Core.Endpoint.Direct.DirectSyncConsumer.#ctor(System.String,Agenix.Core.Endpoint.Direct.DirectSyncEndpointConfiguration)">DirectSyncConsumer(string, DirectSyncEndpointConfiguration)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DirectSyncConsumer(string name, DirectSyncEndpointConfiguration endpointConfiguration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Core.Endpoint.Direct.DirectSyncEndpointConfiguration.html">DirectSyncEndpointConfiguration</a></td>
+        <td><span class="parametername">endpointConfiguration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Endpoint_Direct_DirectSyncConsumer_CorrelationManager.md&amp;value=---%0Auid%3A%20Agenix.Core.Endpoint.Direct.DirectSyncConsumer.CorrelationManager%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Endpoint/Direct/DirectSyncConsumer.cs/#L70">View Source</a>
+  </span>
+  <a id="Agenix_Core_Endpoint_Direct_DirectSyncConsumer_CorrelationManager_" data-uid="Agenix.Core.Endpoint.Direct.DirectSyncConsumer.CorrelationManager*"></a>
+  <h4 id="Agenix_Core_Endpoint_Direct_DirectSyncConsumer_CorrelationManager" data-uid="Agenix.Core.Endpoint.Direct.DirectSyncConsumer.CorrelationManager">CorrelationManager</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICorrelationManager&lt;IMessageQueue&gt; CorrelationManager { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.Correlation.ICorrelationManager-1.html">ICorrelationManager</a>&lt;<a class="xref" href="Agenix.Api.Message.IMessageQueue.html">IMessageQueue</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Endpoint_Direct_DirectSyncConsumer_Receive_System_String_Agenix_Api_Context_TestContext_System_Int64_.md&amp;value=---%0Auid%3A%20Agenix.Core.Endpoint.Direct.DirectSyncConsumer.Receive(System.String%2CAgenix.Api.Context.TestContext%2CSystem.Int64)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Endpoint/Direct/DirectSyncConsumer.cs/#L110">View Source</a>
+  </span>
+  <a id="Agenix_Core_Endpoint_Direct_DirectSyncConsumer_Receive_" data-uid="Agenix.Core.Endpoint.Direct.DirectSyncConsumer.Receive*"></a>
+  <h4 id="Agenix_Core_Endpoint_Direct_DirectSyncConsumer_Receive_System_String_Agenix_Api_Context_TestContext_System_Int64_" data-uid="Agenix.Core.Endpoint.Direct.DirectSyncConsumer.Receive(System.String,Agenix.Api.Context.TestContext,System.Int64)">Receive(string, TestContext, long)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override IMessage Receive(string selector, TestContext context, long timeout)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">selector</span></td>
+        <td><p>The selector that determines which messages to receive.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context in which the message is being processed, containing state and configuration
+information.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">timeout</span></td>
+        <td><p>The maximum time in milliseconds to wait for a message before timing out.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Endpoint.Direct.DirectConsumer.html#Agenix_Core_Endpoint_Direct_DirectConsumer_Receive_System_String_Agenix_Api_Context_TestContext_System_Int64_">DirectConsumer.Receive(string, TestContext, long)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Endpoint_Direct_DirectSyncConsumer_SaveReplyMessageQueue_Agenix_Api_Message_IMessage_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Endpoint.Direct.DirectSyncConsumer.SaveReplyMessageQueue(Agenix.Api.Message.IMessage%2CAgenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Endpoint/Direct/DirectSyncConsumer.cs/#L121">View Source</a>
+  </span>
+  <a id="Agenix_Core_Endpoint_Direct_DirectSyncConsumer_SaveReplyMessageQueue_" data-uid="Agenix.Core.Endpoint.Direct.DirectSyncConsumer.SaveReplyMessageQueue*"></a>
+  <h4 id="Agenix_Core_Endpoint_Direct_DirectSyncConsumer_SaveReplyMessageQueue_Agenix_Api_Message_IMessage_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.Endpoint.Direct.DirectSyncConsumer.SaveReplyMessageQueue(Agenix.Api.Message.IMessage,Agenix.Api.Context.TestContext)">SaveReplyMessageQueue(IMessage, TestContext)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SaveReplyMessageQueue(IMessage receivedMessage, TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></td>
+        <td><span class="parametername">receivedMessage</span></td>
+        <td><p>The received message that may contain the reply queue information.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context in which the message is processed, including configuration and state.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Endpoint_Direct_DirectSyncConsumer_Send_Agenix_Api_Message_IMessage_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Endpoint.Direct.DirectSyncConsumer.Send(Agenix.Api.Message.IMessage%2CAgenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Endpoint/Direct/DirectSyncConsumer.cs/#L82">View Source</a>
+  </span>
+  <a id="Agenix_Core_Endpoint_Direct_DirectSyncConsumer_Send_" data-uid="Agenix.Core.Endpoint.Direct.DirectSyncConsumer.Send*"></a>
+  <h4 id="Agenix_Core_Endpoint_Direct_DirectSyncConsumer_Send_Agenix_Api_Message_IMessage_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.Endpoint.Direct.DirectSyncConsumer.Send(Agenix.Api.Message.IMessage,Agenix.Api.Context.TestContext)">Send(IMessage, TestContext)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Send(IMessage message, TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></td>
+        <td><span class="parametername">message</span></td>
+        <td><p>The message to be sent.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context in which the message is being processed, containing state and configuration
+information.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.Messaging.ISelectiveConsumer.html">ISelectiveConsumer</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Messaging.IConsumer.html">IConsumer</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Messaging.IReplyProducer.html">IReplyProducer</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Messaging.IProducer.html">IProducer</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Endpoint_Direct_DirectSyncConsumer.md&amp;value=---%0Auid%3A%20Agenix.Core.Endpoint.Direct.DirectSyncConsumer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Endpoint/Direct/DirectSyncConsumer.cs/#L38" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

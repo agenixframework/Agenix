@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class HttpMessageBuilder </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class HttpMessageBuilder ">
+    
+    
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Http.Message.HttpMessageBuilder">
+
+
+
+  <h1 id="Agenix_Http_Message_HttpMessageBuilder" data-uid="Agenix.Http.Message.HttpMessageBuilder" class="text-break">Class HttpMessageBuilder</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Core.Validation.Builder.DefaultMessageBuilder.html">DefaultMessageBuilder</a></div>
+    <div class="level2"><a class="xref" href="Agenix.Core.Message.Builder.StaticMessageBuilder.html">StaticMessageBuilder</a></div>
+    <div class="level3"><span class="xref">HttpMessageBuilder</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.Message.IMessageBuilder.html">IMessageBuilder</a></div>
+    <div><a class="xref" href="Agenix.Api.Message.IWithPayloadBuilder.html">IWithPayloadBuilder</a></div>
+    <div><a class="xref" href="Agenix.Api.Message.IWithHeaderBuilder.html">IWithHeaderBuilder</a></div>
+    <div><a class="xref" href="Agenix.Api.Common.INamed.html">INamed</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.StaticMessageBuilder.html#Agenix_Core_Message_Builder_StaticMessageBuilder_FilteredHeaders">StaticMessageBuilder.FilteredHeaders</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.StaticMessageBuilder.html#Agenix_Core_Message_Builder_StaticMessageBuilder_BuildMessagePayload_Agenix_Api_Context_TestContext_System_String_">StaticMessageBuilder.BuildMessagePayload(TestContext, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.StaticMessageBuilder.html#Agenix_Core_Message_Builder_StaticMessageBuilder_BuildMessageHeaders_Agenix_Api_Context_TestContext_">StaticMessageBuilder.BuildMessageHeaders(TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.StaticMessageBuilder.html#Agenix_Core_Message_Builder_StaticMessageBuilder_BuildMessageHeaderData_Agenix_Api_Context_TestContext_">StaticMessageBuilder.BuildMessageHeaderData(TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.StaticMessageBuilder.html#Agenix_Core_Message_Builder_StaticMessageBuilder_WithMessage_Agenix_Api_Message_IMessage_">StaticMessageBuilder.WithMessage(IMessage)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Validation.Builder.DefaultMessageBuilder.html#Agenix_Core_Validation_Builder_DefaultMessageBuilder_SetName_System_String_">DefaultMessageBuilder.SetName(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Validation.Builder.DefaultMessageBuilder.html#Agenix_Core_Validation_Builder_DefaultMessageBuilder_AddHeaderBuilder_Agenix_Api_Message_IMessageHeaderBuilder_">DefaultMessageBuilder.AddHeaderBuilder(IMessageHeaderBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Validation.Builder.DefaultMessageBuilder.html#Agenix_Core_Validation_Builder_DefaultMessageBuilder_GetHeaderBuilders">DefaultMessageBuilder.GetHeaderBuilders()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Validation.Builder.DefaultMessageBuilder.html#Agenix_Core_Validation_Builder_DefaultMessageBuilder_SetPayloadBuilder_Agenix_Api_Message_IMessagePayloadBuilder_">DefaultMessageBuilder.SetPayloadBuilder(IMessagePayloadBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Validation.Builder.DefaultMessageBuilder.html#Agenix_Core_Validation_Builder_DefaultMessageBuilder_GetPayloadBuilder">DefaultMessageBuilder.GetPayloadBuilder()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Validation.Builder.DefaultMessageBuilder.html#Agenix_Core_Validation_Builder_DefaultMessageBuilder_GetName">DefaultMessageBuilder.GetName()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Http.html">Http</a>.<a class="xref" href="Agenix.Http.Message.html">Message</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Http.dll</h6>
+  <h5 id="Agenix_Http_Message_HttpMessageBuilder_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class HttpMessageBuilder : StaticMessageBuilder, IMessageBuilder, IWithPayloadBuilder, IWithHeaderBuilder, INamed</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessageBuilder__ctor_Agenix_Http_Message_HttpMessage_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessageBuilder.%23ctor(Agenix.Http.Message.HttpMessage)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessageBuilder.cs/#L42">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessageBuilder__ctor_" data-uid="Agenix.Http.Message.HttpMessageBuilder.#ctor*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessageBuilder__ctor_Agenix_Http_Message_HttpMessage_" data-uid="Agenix.Http.Message.HttpMessageBuilder.#ctor(Agenix.Http.Message.HttpMessage)">HttpMessageBuilder(HttpMessage)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMessageBuilder(HttpMessage message)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td><span class="parametername">message</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessageBuilder__ctor_Agenix_Http_Message_HttpMessage_Agenix_Http_Message_CookieEnricher_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessageBuilder.%23ctor(Agenix.Http.Message.HttpMessage%2CAgenix.Http.Message.CookieEnricher)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessageBuilder.cs/#L47">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessageBuilder__ctor_" data-uid="Agenix.Http.Message.HttpMessageBuilder.#ctor*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessageBuilder__ctor_Agenix_Http_Message_HttpMessage_Agenix_Http_Message_CookieEnricher_" data-uid="Agenix.Http.Message.HttpMessageBuilder.#ctor(Agenix.Http.Message.HttpMessage,Agenix.Http.Message.CookieEnricher)">HttpMessageBuilder(HttpMessage, CookieEnricher)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMessageBuilder(HttpMessage message, CookieEnricher cookieEnricher)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td><span class="parametername">message</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.CookieEnricher.html">CookieEnricher</a></td>
+        <td><span class="parametername">cookieEnricher</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessageBuilder_Build_Agenix_Api_Context_TestContext_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessageBuilder.Build(Agenix.Api.Context.TestContext%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessageBuilder.cs/#L68">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessageBuilder_Build_" data-uid="Agenix.Http.Message.HttpMessageBuilder.Build*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessageBuilder_Build_Agenix_Api_Context_TestContext_System_String_" data-uid="Agenix.Http.Message.HttpMessageBuilder.Build(Agenix.Api.Context.TestContext,System.String)">Build(TestContext, string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override IMessage Build(TestContext context, string messageType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The test execution context used to construct the message and manage its state within a test
+scenario.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">messageType</span></td>
+        <td><p>The type identifier for the message being constructed, influencing its structure and
+behavior.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Validation.Builder.DefaultMessageBuilder.html#Agenix_Core_Validation_Builder_DefaultMessageBuilder_Build_Agenix_Api_Context_TestContext_System_String_">DefaultMessageBuilder.Build(TestContext, string)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessageBuilder_GetMessage.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessageBuilder.GetMessage%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessageBuilder.cs/#L111">View Source</a>
+  </span>
+  <a id="Agenix_Http_Message_HttpMessageBuilder_GetMessage_" data-uid="Agenix.Http.Message.HttpMessageBuilder.GetMessage*"></a>
+  <h4 id="Agenix_Http_Message_HttpMessageBuilder_GetMessage" data-uid="Agenix.Http.Message.HttpMessageBuilder.GetMessage">GetMessage()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the current message.
+<return>Returns an instance of the current message.</return>
+/</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override HttpMessage GetMessage()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Http.Message.HttpMessage.html">HttpMessage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Message.Builder.StaticMessageBuilder.html#Agenix_Core_Message_Builder_StaticMessageBuilder_GetMessage">StaticMessageBuilder.GetMessage()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.Message.IMessageBuilder.html">IMessageBuilder</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Message.IWithPayloadBuilder.html">IWithPayloadBuilder</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Message.IWithHeaderBuilder.html">IWithHeaderBuilder</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.INamed.html">INamed</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Http_Message_HttpMessageBuilder.md&amp;value=---%0Auid%3A%20Agenix.Http.Message.HttpMessageBuilder%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Http/Message/HttpMessageBuilder.cs/#L37" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
