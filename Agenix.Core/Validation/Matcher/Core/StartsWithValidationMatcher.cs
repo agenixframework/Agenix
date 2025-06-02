@@ -41,9 +41,11 @@ public class StartsWithValidationMatcher : IValidationMatcher
     {
         var control = controlParameters[0];
         if (!value.StartsWith(control))
+        {
             throw new ValidationException(TypeDescriptor.GetClassName(typeof(StartsWithValidationMatcher))
                                           + " failed for field '" + fieldName
                                           + "'. Received value is '" + value
                                           + "', control value is '" + control + "'");
+        }
     }
 }

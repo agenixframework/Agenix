@@ -98,7 +98,10 @@ public class HeaderValidationContext : IValidationContext
     /// <param name="status">The new validation status to set.</param>
     public void UpdateStatus(ValidationStatus status)
     {
-        if (status != ValidationStatus.FAILED) _status = status;
+        if (status != ValidationStatus.FAILED)
+        {
+            _status = status;
+        }
     }
 
     /// <summary>

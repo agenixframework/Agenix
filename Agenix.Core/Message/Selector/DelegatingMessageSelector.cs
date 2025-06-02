@@ -54,13 +54,18 @@ public class DelegatingMessageSelector : IMessageSelector
         _context = context;
         _matchingHeaders = MessageSelectorBuilder.WithString(selector).ToKeyValueDictionary();
 
-        if (_matchingHeaders.Count == 0) throw new AgenixSystemException("Invalid empty message selector");
+        if (_matchingHeaders.Count == 0)
+        {
+            throw new AgenixSystemException("Invalid empty message selector");
+        }
 
         _factories = [];
 
         if (context.ReferenceResolver != null)
+        {
             _factories.AddRange(context.ReferenceResolver.ResolveAll<IMessageSelector.IMessageSelectorFactory>()
                 .Values);
+        }
 
         _factories.AddRange(IMessageSelector.Lookup().Values);
     }

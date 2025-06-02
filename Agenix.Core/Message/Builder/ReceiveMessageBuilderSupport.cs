@@ -240,9 +240,14 @@ public class ReceiveMessageBuilderSupport<T, TB, TS>(TB dlg) : MessageBuilderSup
     public override TS Process(IMessageProcessor processor)
     {
         if (processor is IVariableExtractor)
+        {
             base.Process(processor);
+        }
         else
+        {
             ControlMessageProcessors.Add(processor);
+        }
+
         return _self;
     }
 

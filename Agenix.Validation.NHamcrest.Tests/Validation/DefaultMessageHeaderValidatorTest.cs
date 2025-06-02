@@ -8,8 +8,8 @@ namespace Agenix.Validation.NHamcrest.Tests.Validation;
 
 public class DefaultMessageHeaderValidatorTest : AbstractNUnitSetUp
 {
-    private readonly DefaultMessageHeaderValidator _validator = new();
     private readonly HeaderValidationContext _validationContext = new();
+    private readonly DefaultMessageHeaderValidator _validator = new();
 
     [Test]
     public void TestValidateMessageHeadersHamcrestMatcherSupport()
@@ -24,7 +24,7 @@ public class DefaultMessageHeaderValidatorTest : AbstractNUnitSetUp
 
         _validator.ValidateMessage(receivedMessage, controlMessage, Context, _validationContext);
     }
-    
+
     [Test]
     public void TestValidateHamcrestMatcherError()
     {

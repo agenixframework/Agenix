@@ -92,7 +92,10 @@ public class LoggingClientHandler(HttpMessageHandler innerHandler) : DelegatingH
         }
         else
         {
-            if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Sending Http request message:" + Newline + request);
+            if (Log.IsEnabled(LogLevel.Debug))
+            {
+                Log.LogDebug("Sending Http request message:" + Newline + request);
+            }
         }
     }
 
@@ -109,7 +112,10 @@ public class LoggingClientHandler(HttpMessageHandler innerHandler) : DelegatingH
         }
         else
         {
-            if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Received Http response message:" + Newline + response);
+            if (Log.IsEnabled(LogLevel.Debug))
+            {
+                Log.LogDebug("Received Http response message:" + Newline + response);
+            }
         }
     }
 
@@ -167,7 +173,10 @@ public class LoggingClientHandler(HttpMessageHandler innerHandler) : DelegatingH
         builder.Append(Newline);
 
         AppendHeadersCommon(request.Headers, builder);
-        if (request.Content != null) AppendHeadersCommon(request.Content.Headers, builder);
+        if (request.Content != null)
+        {
+            AppendHeadersCommon(request.Content.Headers, builder);
+        }
 
         builder.Append(Newline);
         builder.Append(body);

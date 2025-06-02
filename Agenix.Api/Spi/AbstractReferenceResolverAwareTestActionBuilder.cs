@@ -57,7 +57,9 @@ public abstract class
             referenceResolver = newReferenceResolver;
 
             if (Delegate is IReferenceResolverAware referenceResolverAware)
+            {
                 referenceResolverAware.SetReferenceResolver(referenceResolver);
+            }
         }
     }
 

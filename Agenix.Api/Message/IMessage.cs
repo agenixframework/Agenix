@@ -133,8 +133,11 @@ public interface IMessage
         var interfaceName = nameof(IMessage).ToUpper();
 
         if (headerData == null || headerData.Count == 0)
+        {
             return
                 $"{interfaceName} [id: {Id}, payload: {MessagePayloadUtils.PrettyPrint(body)}][headers: {ToStringRepresentation(new ReadOnlyDictionary<string, object>(headers))}]";
+        }
+
         return
             $"{interfaceName} [id: {Id}, payload: {MessagePayloadUtils.PrettyPrint(body)}][headers: {ToStringRepresentation(new ReadOnlyDictionary<string, object>(headers))}][header-data: {string.Join(", ", new ReadOnlyCollection<string>(headerData))}]";
     }
@@ -143,8 +146,16 @@ public interface IMessage
     {
         var builder = new StringBuilder();
         builder.Append('{');
-        foreach (var kvp in dictionary) builder.Append($"{kvp.Key}={kvp.Value}, ");
-        if (dictionary.Count > 0) builder.Length -= 2; // Remove the trailing ", "
+        foreach (var kvp in dictionary)
+        {
+            builder.Append($"{kvp.Key}={kvp.Value}, ");
+        }
+
+        if (dictionary.Count > 0)
+        {
+            builder.Length -= 2; // Remove the trailing ", "
+        }
+
         builder.Append('}');
         return builder.ToString();
     }
@@ -166,12 +177,17 @@ public interface IMessage
     /// <returns></returns>
     string Print(TestContext context)
     {
-        if (context == null) return Print();
+        if (context == null)
+        {
+            return Print();
+        }
 
         var logModifier = context.LogModifier;
 
         if (logModifier is LogMessageModifierBase modifier)
+        {
             return Print(modifier.MaskBody(this), modifier.MaskHeaders(this), modifier.MaskHeaderData(this));
+        }
 
         return logModifier != null
             ? Print(logModifier.Mask(GetPayload<string>()?.Trim()), GetHeaders(), GetHeaderData())

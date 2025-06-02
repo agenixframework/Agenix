@@ -49,7 +49,11 @@ public class HumanReadableTaskName
         {
             var frame = stackTrace.GetFrame(methodIndex);
             var method = frame?.GetMethod();
-            if (method?.DeclaringType?.FullName?.StartsWith("Agenix") == true) continue;
+            if (method?.DeclaringType?.FullName?.StartsWith("Agenix") == true)
+            {
+                continue;
+            }
+
             businessIndex = methodIndex;
             break;
         }

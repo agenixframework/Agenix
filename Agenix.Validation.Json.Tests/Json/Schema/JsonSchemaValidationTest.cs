@@ -269,10 +269,10 @@ public class JsonSchemaValidationTest
         // Create a mock repository with the required constructor parameters
         var repositoryMock = new Mock<JsonSchemaRepository>();
         var repositoryList = new List<JsonSchemaRepository> { repositoryMock.Object };
-    
+
         var message = Mock.Of<IMessage>();
         var jsonMessageValidationContext = Mock.Of<JsonMessageValidationContext>();
-    
+
         // Set up the mock to return an empty list of schemas (not null)
         _jsonSchemaFilterMock
             .Setup(x => x.Filter(repositoryList, jsonMessageValidationContext, _referenceResolverMock.Object))

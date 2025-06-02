@@ -1,4 +1,5 @@
 ﻿#region License
+
 // MIT License
 //
 // Copyright (c) 2025 Agenix
@@ -20,6 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using Agenix.Core.Validation.Json;
@@ -29,9 +31,9 @@ using Newtonsoft.Json;
 namespace Agenix.Validation.Json.Dsl;
 
 /// <summary>
-/// Provides static utility methods related to JSON validation and serialization,
-/// enabling DSL-style operations for working with JSON objects, validation,
-/// or serialization tasks.
+///     Provides static utility methods related to JSON validation and serialization,
+///     enabling DSL-style operations for working with JSON objects, validation,
+///     or serialization tasks.
 /// </summary>
 public static class JsonSupport
 {

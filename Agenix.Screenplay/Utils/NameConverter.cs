@@ -51,9 +51,12 @@ public class NameConverter
     {
         var processing = sentence;
         foreach (var abbreviation in Abbreviations)
+        {
             processing = processing.Replace(
                 CultureInfo.CurrentCulture.TextInfo.ToTitleCase(abbreviation.ToLower()),
                 abbreviation);
+        }
+
         return processing;
     }
 
@@ -65,11 +68,20 @@ public class NameConverter
     /// <returns>A formatted and human-readable string representation of the input name.</returns>
     public static string Humanize(string name)
     {
-        if (string.IsNullOrWhiteSpace(name)) return string.Empty;
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return string.Empty;
+        }
 
-        if (name.Contains(' ', StringComparison.Ordinal) && !ContainsParameters(name)) return name;
+        if (name.Contains(' ', StringComparison.Ordinal) && !ContainsParameters(name))
+        {
+            return name;
+        }
 
-        if (ContainsParameters(name)) return HumanizeNameWithParameters(name);
+        if (ContainsParameters(name))
+        {
+            return HumanizeNameWithParameters(name);
+        }
 
         var noUnderscores = name.Replace("_", " ", StringComparison.Ordinal);
         var splitCamelCase = SplitCamelCase(noUnderscores);
@@ -121,7 +133,10 @@ public class NameConverter
             .Select(p => p.Trim())
             .Where(p => !string.IsNullOrEmpty(p));
 
-        foreach (var phrase in phrases) splitWords.AddRange(SplitWordsIn(phrase));
+        foreach (var phrase in phrases)
+        {
+            splitWords.AddRange(SplitWordsIn(phrase));
+        }
 
         return string.Join(" ", splitWords).Trim();
     }
@@ -137,6 +152,7 @@ public class NameConverter
         var currentWord = new StringBuilder();
 
         for (var index = 0; index < phrase.Length; index++)
+        {
             if (OnWordBoundary(phrase, index))
             {
                 splitWords.Add(LowercaseOrAcronym(currentWord.ToString()));
@@ -147,6 +163,7 @@ public class NameConverter
             {
                 currentWord.Append(phrase[index]);
             }
+        }
 
         splitWords.Add(LowercaseOrAcronym(currentWord.ToString()));
 

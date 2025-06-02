@@ -54,6 +54,7 @@ public abstract class AbstractMessageValidator<T> : IMessageValidator<T> where T
 
         // check if we were able to find a proper validation context
         if (validationContext != null)
+        {
             try
             {
                 ValidateMessage(receivedMessage, controlMessage, context, validationContext);
@@ -64,6 +65,7 @@ public abstract class AbstractMessageValidator<T> : IMessageValidator<T> where T
                 validationContext.UpdateStatus(ValidationStatus.FAILED);
                 throw;
             }
+        }
     }
 
     public abstract bool SupportsMessageType(string messageType, IMessage message);
@@ -95,7 +97,9 @@ public abstract class AbstractMessageValidator<T> : IMessageValidator<T> where T
     {
         foreach (var validationContext in validationContexts.Where(validationContext =>
                      GetRequiredValidationContextType().IsInstanceOfType(validationContext)))
+        {
             return (T)validationContext;
+        }
 
         return default;
     }

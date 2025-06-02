@@ -60,7 +60,10 @@ public class DirectConsumer(string name, DirectEndpointConfiguration endpointCon
             ? $"{GetDestinationQueueName()}({selector})"
             : GetDestinationQueueName();
 
-        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug($"Receiving message from queue: '{destinationQueueName}'");
+        if (Log.IsEnabled(LogLevel.Debug))
+        {
+            Log.LogDebug($"Receiving message from queue: '{destinationQueueName}'");
+        }
 
         IMessage message;
         if (!string.IsNullOrWhiteSpace(selector))
@@ -77,7 +80,10 @@ public class DirectConsumer(string name, DirectEndpointConfiguration endpointCon
             message = timeout <= 0 ? destinationQueue.Receive() : destinationQueue.Receive(timeout);
         }
 
-        if (message == null) throw new MessageTimeoutException(timeout, destinationQueueName);
+        if (message == null)
+        {
+            throw new MessageTimeoutException(timeout, destinationQueueName);
+        }
 
         Log.LogInformation($"Received message from queue: '{destinationQueueName}'");
         return message;
@@ -94,11 +100,17 @@ public class DirectConsumer(string name, DirectEndpointConfiguration endpointCon
     {
         var queue = endpointConfiguration.GetQueue();
 
-        if (queue != null) return queue;
+        if (queue != null)
+        {
+            return queue;
+        }
 
         var queueName = endpointConfiguration.GetQueueName();
 
-        if (!string.IsNullOrWhiteSpace(queueName)) return ResolveQueueName(queueName, context);
+        if (!string.IsNullOrWhiteSpace(queueName))
+        {
+            return ResolveQueueName(queueName, context);
+        }
 
         throw new AgenixSystemException(
             "Neither queue name nor queue object is set - please specify destination queue");
@@ -113,10 +125,16 @@ public class DirectConsumer(string name, DirectEndpointConfiguration endpointCon
     protected string GetDestinationQueueName()
     {
         var queue = endpointConfiguration.GetQueue();
-        if (queue != null) return queue.ToString();
+        if (queue != null)
+        {
+            return queue.ToString();
+        }
 
         var queueName = endpointConfiguration.GetQueueName();
-        if (!string.IsNullOrWhiteSpace(queueName)) return queueName;
+        if (!string.IsNullOrWhiteSpace(queueName))
+        {
+            return queueName;
+        }
 
         throw new AgenixSystemException(
             "Neither queue name nor queue object is set - please specify destination queue");
@@ -130,7 +148,9 @@ public class DirectConsumer(string name, DirectEndpointConfiguration endpointCon
     protected IMessageQueue ResolveQueueName(string queueName, TestContext context)
     {
         if (context.ReferenceResolver != null)
+        {
             return context.ReferenceResolver.Resolve<IMessageQueue>(queueName);
+        }
 
         throw new AgenixSystemException(
             "Unable to resolve message queue - missing proper reference resolver in context");

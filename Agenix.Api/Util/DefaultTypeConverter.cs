@@ -45,17 +45,28 @@ public class DefaultTypeConverter(string encodingName) : ITypeConverter
 
     public T ConvertIfNecessary<T>(object target, Type type)
     {
-        if (type.IsInstanceOfType(target)) return (T)target;
+        if (type.IsInstanceOfType(target))
+        {
+            return (T)target;
+        }
 
         var result = ConvertBefore<T>(target, type);
-        if (result.IsPresent) return result.Value;
+        if (result.IsPresent)
+        {
+            return result.Value;
+        }
 
         if (typeof(IXmlSerializable).IsAssignableFrom(type))
         {
             if (target.GetType().IsAssignableFrom(typeof(string)))
+            {
                 return (T)(object)new XDocument(new XElement("root", target.ToString()));
+            }
+
             if (target.GetType().IsAssignableFrom(typeof(XmlNode)))
+            {
                 return (T)(object)new XmlNodeReader((XmlNode)target);
+            }
         }
 
         if (type.IsGenericType && typeof(Dictionary<,>).IsAssignableFrom(type.GetGenericTypeDefinition()))
@@ -71,7 +82,10 @@ public class DefaultTypeConverter(string encodingName) : ITypeConverter
                 while ((line = stringReader.ReadLine()) != null)
                 {
                     var keyValue = line.Split('=');
-                    if (keyValue.Length == 2) nameValueCollection.Add(keyValue[0].Trim(), keyValue[1].Trim());
+                    if (keyValue.Length == 2)
+                    {
+                        nameValueCollection.Add(keyValue[0].Trim(), keyValue[1].Trim());
+                    }
                 }
             }
             catch (Exception ex)
@@ -80,7 +94,10 @@ public class DefaultTypeConverter(string encodingName) : ITypeConverter
             }
 
             var map = new Dictionary<string, object>();
-            foreach (var key in nameValueCollection.AllKeys) map.Add(key, nameValueCollection[key]);
+            foreach (var key in nameValueCollection.AllKeys)
+            {
+                map.Add(key, nameValueCollection[key]);
+            }
 
             return (T)(object)map;
         }
@@ -99,6 +116,7 @@ public class DefaultTypeConverter(string encodingName) : ITypeConverter
         }
 
         if (type == typeof(byte[]))
+        {
             switch (target)
             {
                 case string strTarget:
@@ -116,8 +134,10 @@ public class DefaultTypeConverter(string encodingName) : ITypeConverter
                 case MemoryStream memoryStream:
                     return (T)(object)memoryStream.ToArray();
             }
+        }
 
         if (typeof(Stream).IsAssignableFrom(type))
+        {
             switch (target)
             {
                 case Stream streamTarget:
@@ -148,6 +168,7 @@ public class DefaultTypeConverter(string encodingName) : ITypeConverter
                         return (T)(object)new MemoryStream(fallbackBytes);
                     }
             }
+        }
 
         if (type == typeof(string))
         {
@@ -200,6 +221,7 @@ public class DefaultTypeConverter(string encodingName) : ITypeConverter
         }
 
         if (target is string strTarget2)
+        {
             try
             {
                 return ConvertStringToType<T>(strTarget2, type);
@@ -210,20 +232,39 @@ public class DefaultTypeConverter(string encodingName) : ITypeConverter
                     "WARN: Unable to convert String object to type '{TypeFullName}' - try fallback strategies. Exception: {EMessage}",
                     type.FullName, e.Message);
             }
+        }
 
         if (target is IConvertible convertibleTarget)
         {
             if (type == typeof(int))
+            {
                 return (T)(object)convertibleTarget.ToInt32(null);
+            }
+
             if (type == typeof(short))
+            {
                 return (T)(object)convertibleTarget.ToInt16(null);
+            }
+
             if (type == typeof(byte))
+            {
                 return (T)(object)convertibleTarget.ToByte(null);
+            }
+
             if (type == typeof(long))
+            {
                 return (T)(object)convertibleTarget.ToInt64(null);
+            }
+
             if (type == typeof(float))
+            {
                 return (T)(object)convertibleTarget.ToSingle(null);
-            if (type == typeof(double)) return (T)(object)convertibleTarget.ToDouble(null);
+            }
+
+            if (type == typeof(double))
+            {
+                return (T)(object)convertibleTarget.ToDouble(null);
+            }
         }
 
         try
@@ -247,21 +288,44 @@ public class DefaultTypeConverter(string encodingName) : ITypeConverter
     public T ConvertStringToType<T>(string value, Type type)
     {
         if (type == typeof(string))
+        {
             return (T)(object)value;
+        }
+
         if (type == typeof(int))
+        {
             return (T)(object)int.Parse(value);
+        }
+
         if (type == typeof(short))
+        {
             return (T)(object)short.Parse(value);
+        }
+
         if (type == typeof(byte))
+        {
             return (T)(object)byte.Parse(value);
+        }
+
         if (type == typeof(long))
+        {
             return (T)(object)long.Parse(value);
+        }
+
         if (type == typeof(bool))
+        {
             return (T)(object)bool.Parse(value);
+        }
+
         if (type == typeof(float))
+        {
             return (T)(object)float.Parse(value);
+        }
+
         if (type == typeof(double))
+        {
             return (T)(object)double.Parse(value);
+        }
 
         throw new InvalidOperationException($"Unable to convert '{value}' to required type '{type.FullName}'");
     }

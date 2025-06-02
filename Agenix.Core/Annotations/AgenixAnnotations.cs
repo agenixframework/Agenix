@@ -97,6 +97,7 @@ public abstract class AgenixAnnotations
                             typeof(Agenix).IsAssignableFrom(field.FieldType));
 
         foreach (var field in fields)
+        {
             try
             {
                 Log.LogDebug("Injecting Agenix framework instance on test class field '{FieldName}'", field.Name);
@@ -106,6 +107,7 @@ public abstract class AgenixAnnotations
             {
                 throw new AgenixSystemException($"Failed to inject Agenix framework for field {field.FieldType}", ex);
             }
+        }
     }
 
     /// <summary>
@@ -124,6 +126,7 @@ public abstract class AgenixAnnotations
                             typeof(AgenixContext).IsAssignableFrom(field.FieldType));
 
         foreach (var field in fields)
+        {
             try
             {
                 Log.LogDebug("Injecting Agenix context instance on test class field '{FieldName}'", field.Name);
@@ -133,6 +136,7 @@ public abstract class AgenixAnnotations
             {
                 throw new AgenixSystemException($"Failed to inject Agenix context for field {field.FieldType}", ex);
             }
+        }
     }
 
     /// <summary>
@@ -151,6 +155,7 @@ public abstract class AgenixAnnotations
                             typeof(TestContext).IsAssignableFrom(field.FieldType));
 
         foreach (var field in fields)
+        {
             try
             {
                 Log.LogDebug("Injecting test context instance on test class field '{FieldName}'", field.Name);
@@ -161,6 +166,7 @@ public abstract class AgenixAnnotations
                 throw new AgenixSystemException(
                     $"Not able to provide an Agenix resource injection for type {field.FieldType}", ex);
             }
+        }
     }
 
     /// <summary>
@@ -180,6 +186,7 @@ public abstract class AgenixAnnotations
                             typeof(ITestCaseRunner).IsAssignableFrom(field.FieldType));
 
         foreach (var field in fields)
+        {
             try
             {
                 Log.LogDebug($"Injecting test runner instance on test class field '{field.Name}'");
@@ -190,6 +197,7 @@ public abstract class AgenixAnnotations
                 throw new AgenixSystemException(
                     $"Not able to provide an Agenix resource injection for type {field.FieldType}", ex);
             }
+        }
 
         InjectTestActionRunner(target, runner);
         InjectGherkinTestActionRunner(target, runner);
@@ -211,6 +219,7 @@ public abstract class AgenixAnnotations
                             typeof(ITestActionRunner).IsAssignableFrom(field.FieldType));
 
         foreach (var field in fields)
+        {
             try
             {
                 Log.LogDebug($"Injecting test action runner instance on test class field '{field.Name}'");
@@ -221,6 +230,7 @@ public abstract class AgenixAnnotations
                 throw new AgenixSystemException(
                     $"Not able to provide an Agenix resource injection for type {field.FieldType}", ex);
             }
+        }
     }
 
     /// <summary>
@@ -239,6 +249,7 @@ public abstract class AgenixAnnotations
                             typeof(IGherkinTestActionRunner).IsAssignableFrom(field.FieldType));
 
         foreach (var field in fields)
+        {
             try
             {
                 Log.LogDebug($"Injecting test action runner instance on test class field '{field.Name}'");
@@ -249,6 +260,7 @@ public abstract class AgenixAnnotations
                 throw new AgenixSystemException(
                     $"Not able to provide an Agenix resource injection for type {field.FieldType}", ex);
             }
+        }
     }
 
     /// <summary>
@@ -267,7 +279,10 @@ public abstract class AgenixAnnotations
         {
             // Creating an instance of the config type using its default constructor
             var instance = Activator.CreateInstance(configType);
-            if (instance == null) throw new AgenixSystemException("Instance creation failed for configuration class.");
+            if (instance == null)
+            {
+                throw new AgenixSystemException("Instance creation failed for configuration class.");
+            }
 
             // Assuming there is a method similar to parseConfiguration that takes an object
             ParseConfiguration(instance, agenixContext);
@@ -301,14 +316,19 @@ public abstract class AgenixAnnotations
         if (configType
                 .GetCustomAttributes(typeof(AgenixConfigurationAttribute), true)
                 .FirstOrDefault() is AgenixConfigurationAttribute agenixConfigurationAttribute)
+        {
             foreach (var type in agenixConfigurationAttribute.Classes)
+            {
                 agenixContext.ParseConfiguration(type);
+            }
+        }
 
         // Handle methods with BindToRegistry attribute
         var methods = configType.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
             .Where(m => Attribute.IsDefined(m, typeof(BindToRegistryAttribute)));
 
         foreach (var method in methods)
+        {
             try
             {
                 var name = ReferenceRegistry.GetName(
@@ -317,7 +337,10 @@ public abstract class AgenixAnnotations
 
                 var component = method.Invoke(configuration, null);
 
-                if (component is INamed namedComponent) namedComponent.SetName(name);
+                if (component is INamed namedComponent)
+                {
+                    namedComponent.SetName(name);
+                }
 
                 agenixContext.AddComponent(name, component);
             }
@@ -325,17 +348,21 @@ public abstract class AgenixAnnotations
             {
                 throw new AgenixSystemException("Failed to invoke configuration method", ex);
             }
+        }
 
         // Handle fields with BindToRegistry attribute
         var fields = configType.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
             .Where(f => Attribute.IsDefined(f, typeof(BindToRegistryAttribute)));
 
         foreach (var field in fields)
+        {
             try
             {
                 if (field.DeclaringType != null &&
                     (!field.IsPublic || field.IsInitOnly || !field.DeclaringType.IsPublic))
+                {
                     field.SetValue(configuration, field.GetValue(configuration)); // Ensure field is accessible
+                }
 
                 var name = ReferenceRegistry.GetName(
                     field.GetCustomAttribute<BindToRegistryAttribute>(),
@@ -343,7 +370,10 @@ public abstract class AgenixAnnotations
 
                 var component = field.GetValue(configuration);
 
-                if (component is INamed namedComponent) namedComponent.SetName(name);
+                if (component is INamed namedComponent)
+                {
+                    namedComponent.SetName(name);
+                }
 
                 agenixContext.AddComponent(name, component);
             }
@@ -351,5 +381,6 @@ public abstract class AgenixAnnotations
             {
                 throw new AgenixSystemException("Failed to access configuration field", ex);
             }
+        }
     }
 }

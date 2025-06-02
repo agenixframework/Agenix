@@ -74,7 +74,10 @@ public class CopyNonNullProperties
         try
         {
             var sourceValue = field.GetValue(source);
-            if (sourceValue != null) field.SetValue(target, sourceValue);
+            if (sourceValue != null)
+            {
+                field.SetValue(target, sourceValue);
+            }
         }
         catch (Exception ex)
         {

@@ -53,7 +53,10 @@ public class DefaultLogModifier : LogMessageModifierBase
 
     public override string Mask(string source)
     {
-        if (!AgenixSettings.IsLogModifierEnabled() || source == null || source.Length == 0) return source;
+        if (!AgenixSettings.IsLogModifierEnabled() || source == null || source.Length == 0)
+        {
+            return source;
+        }
 
         var xml = maskXml && source.StartsWith('<');
         var json = maskJson && !xml && (source.StartsWith('{') || source.StartsWith('['));
@@ -65,7 +68,9 @@ public class DefaultLogModifier : LogMessageModifierBase
             masked = CreateXmlPattern(keywords).Replace(masked, $"$1{logMaskValue}$2");
             if (maskKeyValue)
                 // used for the attributes in the XML tags
+            {
                 masked = CreateKeyValuePattern(keywords).Replace(masked, $"$1{logMaskValue}");
+            }
         }
         else if (json)
         {
@@ -88,7 +93,10 @@ public class DefaultLogModifier : LogMessageModifierBase
         if (keyValuePattern == null)
         {
             var keywordExpression = CreateKeywordsExpression(keywords);
-            if (string.IsNullOrEmpty(keywordExpression)) return null;
+            if (string.IsNullOrEmpty(keywordExpression))
+            {
+                return null;
+            }
 
             var regex = $"((?:{keywordExpression})\\s*=\\s*['\"]?)([^,'\"]+)";
             keyValuePattern = new Regex(regex, RegexOptions.IgnoreCase);
@@ -102,7 +110,10 @@ public class DefaultLogModifier : LogMessageModifierBase
         if (formUrlEncodedPattern == null)
         {
             var keywordExpression = CreateKeywordsExpression(keywords);
-            if (string.IsNullOrEmpty(keywordExpression)) return null;
+            if (string.IsNullOrEmpty(keywordExpression))
+            {
+                return null;
+            }
 
             var regex = $"((?:{keywordExpression})\\s*=\\s*)([^&]*)";
             formUrlEncodedPattern = new Regex(regex, RegexOptions.IgnoreCase);
@@ -116,7 +127,10 @@ public class DefaultLogModifier : LogMessageModifierBase
         if (xmlPattern == null)
         {
             var keywordExpression = CreateKeywordsExpression(keywords);
-            if (string.IsNullOrEmpty(keywordExpression)) return null;
+            if (string.IsNullOrEmpty(keywordExpression))
+            {
+                return null;
+            }
 
             var regex = $"(<(?:{keywordExpression})>)[^<]*(</(?:{keywordExpression})>)";
             xmlPattern = new Regex(regex, RegexOptions.IgnoreCase);
@@ -130,7 +144,10 @@ public class DefaultLogModifier : LogMessageModifierBase
         if (jsonPattern == null)
         {
             var keywordExpression = CreateKeywordsExpression(keywords);
-            if (string.IsNullOrEmpty(keywordExpression)) return null;
+            if (string.IsNullOrEmpty(keywordExpression))
+            {
+                return null;
+            }
 
             var regex = $"(\"(?:{keywordExpression})\"\\s*:\\s*)(" + "\"?[^\",]*[\",])";
             jsonPattern = new Regex(regex, RegexOptions.IgnoreCase);
@@ -141,7 +158,10 @@ public class DefaultLogModifier : LogMessageModifierBase
 
     protected static string CreateKeywordsExpression(HashSet<string> keywords)
     {
-        if (keywords == null || keywords.Count == 0) return "";
+        if (keywords == null || keywords.Count == 0)
+        {
+            return "";
+        }
 
         return string.Join("|", keywords.Select(t => Regex.Escape(t)));
     }

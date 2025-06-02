@@ -43,8 +43,15 @@ public class Acronym : IEquatable<Acronym>
 
     public bool Equals(Acronym? other)
     {
-        if (ReferenceEquals(null, other)) return false;
-        if (ReferenceEquals(this, other)) return true;
+        if (ReferenceEquals(null, other))
+        {
+            return false;
+        }
+
+        if (ReferenceEquals(this, other))
+        {
+            return true;
+        }
 
         return _start == other._start &&
                _end == other._end &&
@@ -57,8 +64,12 @@ public class Acronym : IEquatable<Acronym>
         var words = Regex.Split(text, @"\W").Where(w => !string.IsNullOrEmpty(w));
 
         foreach (var word in words)
+        {
             if (IsAnAcronym(word))
+            {
                 acronyms.UnionWith(AppearancesOf(word, text));
+            }
+        }
 
         return acronyms;
     }
@@ -78,7 +89,10 @@ public class Acronym : IEquatable<Acronym>
         while (startAt < text.Length)
         {
             var wordFoundAt = text.IndexOf(word, startAt, StringComparison.Ordinal);
-            if (wordFoundAt == -1) break;
+            if (wordFoundAt == -1)
+            {
+                break;
+            }
 
             acronyms.Add(new Acronym(word, wordFoundAt, wordFoundAt + word.Length));
             startAt += word.Length;
@@ -110,9 +124,21 @@ public class Acronym : IEquatable<Acronym>
 
     public override bool Equals(object? obj)
     {
-        if (ReferenceEquals(null, obj)) return false;
-        if (ReferenceEquals(this, obj)) return true;
-        if (obj.GetType() != GetType()) return false;
+        if (ReferenceEquals(null, obj))
+        {
+            return false;
+        }
+
+        if (ReferenceEquals(this, obj))
+        {
+            return true;
+        }
+
+        if (obj.GetType() != GetType())
+        {
+            return false;
+        }
+
         return Equals((Acronym)obj);
     }
 

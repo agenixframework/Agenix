@@ -55,7 +55,9 @@ public class SimpleReferenceResolver : IReferenceResolver
     public object Resolve(string name)
     {
         if (!_objectStore.TryGetValue(name, out var value))
+        {
             throw new AgenixSystemException($"Unable to find bean reference for name '{name}'");
+        }
 
         return value;
     }

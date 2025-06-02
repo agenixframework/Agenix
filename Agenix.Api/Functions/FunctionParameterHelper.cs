@@ -60,22 +60,35 @@ public sealed class FunctionParameterHelper
             var processed = parameterList[i];
 
             if (processed.StartsWith("'") && !processed.EndsWith("'"))
+            {
                 while (next < parameterList.Count)
                 {
                     if (parameterString.Contains(processed + ", " + parameterList[next]))
+                    {
                         processed += ", " + parameterList[next];
+                    }
                     else if (parameterString.Contains(processed + ", " + parameterList[next]))
+                    {
                         processed += "," + parameterList[next];
+                    }
                     else if (parameterString.Contains(processed + " , " + parameterList[next]))
+                    {
                         processed += " , " + parameterList[next];
+                    }
                     else
+                    {
                         processed += parameterList[next];
+                    }
 
                     i++;
-                    if (parameterList[next].EndsWith("'")) break;
+                    if (parameterList[next].EndsWith("'"))
+                    {
+                        break;
+                    }
 
                     next++;
                 }
+            }
 
             postProcessedList.Add(CutOffSingleQuotes(processed));
         }
@@ -85,9 +98,15 @@ public sealed class FunctionParameterHelper
 
     private static string CutOffSingleQuotes(string param)
     {
-        if (param.Equals("'")) return "";
+        if (param.Equals("'"))
+        {
+            return "";
+        }
 
-        if (param.Length > 1 && param[0] == '\'' && param[^1] == '\'') return param.Substring(1, param.Length - 2);
+        if (param.Length > 1 && param[0] == '\'' && param[^1] == '\'')
+        {
+            return param.Substring(1, param.Length - 2);
+        }
 
         return param;
     }

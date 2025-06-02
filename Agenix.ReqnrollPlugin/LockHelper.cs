@@ -41,7 +41,10 @@ internal static class LockHelper
     {
         lock (GetLockLock)
         {
-            if (Repository.ContainsKey(hashCode)) return Repository[hashCode];
+            if (Repository.ContainsKey(hashCode))
+            {
+                return Repository[hashCode];
+            }
 
             var lockObj = new object();
             Repository.AddOrUpdate(hashCode, lockObj, (key, oldValue) => oldValue);

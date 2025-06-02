@@ -34,16 +34,24 @@ public class DynamicEndpointUriResolver : IEndpointUriResolver
 
         string requestUri;
         if (headers.TryGetValue(IEndpointUriResolver.EndpointUriHeaderName, out var value))
+        {
             requestUri = value.ToString();
+        }
         else if (StringUtils.HasText(defaultUri))
+        {
             requestUri = defaultUri;
+        }
         else
+        {
             requestUri = _defaultEndpointUri;
+        }
 
         if (requestUri == null)
+        {
             throw new AgenixSystemException("Unable to resolve dynamic endpoint uri! Neither header entry '" +
                                             IEndpointUriResolver.EndpointUriHeaderName +
                                             "' nor default endpoint uri is set");
+        }
 
         requestUri = AppendRequestPath(requestUri, headers);
         requestUri = AppendQueryParams(requestUri, headers);
@@ -60,14 +68,23 @@ public class DynamicEndpointUriResolver : IEndpointUriResolver
     /// /
     private string AppendRequestPath(string uri, IDictionary<string, object> headers)
     {
-        if (!headers.TryGetValue(IEndpointUriResolver.RequestPathHeaderName, out var value)) return uri;
+        if (!headers.TryGetValue(IEndpointUriResolver.RequestPathHeaderName, out var value))
+        {
+            return uri;
+        }
 
         var requestUri = uri;
         var path = value.ToString();
 
-        while (requestUri.EndsWith('/')) requestUri = requestUri.Substring(0, requestUri.Length - 1);
+        while (requestUri.EndsWith('/'))
+        {
+            requestUri = requestUri.Substring(0, requestUri.Length - 1);
+        }
 
-        while (path.StartsWith('/') && path.Length > 0) path = path.Length == 1 ? "" : path.Substring(1);
+        while (path.StartsWith('/') && path.Length > 0)
+        {
+            path = path.Length == 1 ? "" : path.Substring(1);
+        }
 
         return requestUri + "/" + path;
     }
@@ -81,7 +98,10 @@ public class DynamicEndpointUriResolver : IEndpointUriResolver
     /// /
     private string AppendQueryParams(string uri, IDictionary<string, object> headers)
     {
-        if (!headers.TryGetValue(IEndpointUriResolver.QueryParamHeaderName, out var value)) return uri;
+        if (!headers.TryGetValue(IEndpointUriResolver.QueryParamHeaderName, out var value))
+        {
+            return uri;
+        }
 
         var requestUri = uri;
         var queryParamBuilder = new StringBuilder();
@@ -90,10 +110,14 @@ public class DynamicEndpointUriResolver : IEndpointUriResolver
         var tokenizer = new StringTokenizer(queryParams, [',']);
 
         // Remove trailing slashes
-        while (requestUri.EndsWith('/')) requestUri = requestUri[..^1];
+        while (requestUri.EndsWith('/'))
+        {
+            requestUri = requestUri[..^1];
+        }
 
         var isFirstToken = true;
         foreach (var token in tokenizer)
+        {
             if (isFirstToken)
             {
                 queryParamBuilder.Append('?').Append(token.ToString());
@@ -103,6 +127,7 @@ public class DynamicEndpointUriResolver : IEndpointUriResolver
             {
                 queryParamBuilder.Append('&').Append(token.ToString());
             }
+        }
 
         return requestUri + queryParamBuilder;
     }

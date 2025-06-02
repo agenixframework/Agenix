@@ -1,6 +1,5 @@
 ﻿using Agenix.Api.Exceptions;
 using Agenix.Api.Validation.Matcher;
-using Agenix.Core.Validation.Matcher;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;

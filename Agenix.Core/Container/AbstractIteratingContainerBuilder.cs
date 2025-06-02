@@ -94,7 +94,10 @@ public abstract class AbstractIteratingContainerBuilder<T, TS> : AbstractTestCon
     /// </returns>
     public override T Build()
     {
-        if (condition == null && conditionExpression == null) conditionExpression = (idx, context) => idx > 10;
+        if (condition == null && conditionExpression == null)
+        {
+            conditionExpression = (idx, context) => idx > 10;
+        }
 
         return base.Build();
     }

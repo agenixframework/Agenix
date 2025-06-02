@@ -46,7 +46,10 @@ public class Sequence(Sequence.Builder builder) : AbstractActionContainer(builde
     /// /
     public override void DoExecute(TestContext context)
     {
-        foreach (var actionBuilder in actions) ExecuteAction(actionBuilder.Build(), context);
+        foreach (var actionBuilder in actions)
+        {
+            ExecuteAction(actionBuilder.Build(), context);
+        }
 
         Log.LogDebug("Action sequence finished successfully.");
     }

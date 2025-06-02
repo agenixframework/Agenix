@@ -65,11 +65,17 @@ public abstract class AbstractAsyncTestAction : AbstractTestAction, ICompletable
         tcs.Task.ContinueWith(task =>
         {
             if (task.Exception != null)
+            {
                 OnError(context, task.Exception.GetBaseException());
+            }
             else if (context.HasExceptions())
+            {
                 OnError(context, context.GetExceptions()[0]);
+            }
             else
+            {
                 OnSuccess(context);
+            }
         });
 
         // Execute async action

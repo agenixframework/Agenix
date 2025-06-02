@@ -1,4 +1,5 @@
 ﻿#region License
+
 // MIT License
 //
 // Copyright (c) 2025 Agenix
@@ -20,6 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using Agenix.Api.Context;
@@ -90,10 +92,16 @@ public class JsonPathVariableExtractor : IVariableExtractor
     /// <param name="context">The context in which the variables are evaluated and stored.</param>
     public void ExtractVariables(IMessage receivedMessage, TestContext context)
     {
-        if (_jsonPathExpressions == null || _jsonPathExpressions.Count == 0) return;
+        if (_jsonPathExpressions == null || _jsonPathExpressions.Count == 0)
+        {
+            return;
+        }
 
 
-        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Reading JSON elements with JSONPath");
+        if (Log.IsEnabled(LogLevel.Debug))
+        {
+            Log.LogDebug("Reading JSON elements with JSONPath");
+        }
 
         try
         {
@@ -107,7 +115,10 @@ public class JsonPathVariableExtractor : IVariableExtractor
                                    ?? throw new AgenixSystemException(
                                        $"Variable name must be set on extractor path expression '{jsonPathExpression}'");
 
-                if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Evaluating JSONPath expression: " + jsonPathExpression);
+                if (Log.IsEnabled(LogLevel.Debug))
+                {
+                    Log.LogDebug("Evaluating JSONPath expression: " + jsonPathExpression);
+                }
 
                 var jsonPathResult = JsonPathUtils.EvaluateAsString(readerContext, jsonPathExpression);
                 context.SetVariable(variableName, jsonPathResult);
@@ -138,7 +149,10 @@ public class JsonPathVariableExtractor : IVariableExtractor
         /// <param name="expressions">A dictionary containing the expressions to be added to the builder.</param>
         public Builder Expressions(IDictionary<string, object> expressions)
         {
-            foreach (var (key, value) in expressions) JsonPathExpressions.Add(key, value);
+            foreach (var (key, value) in expressions)
+            {
+                JsonPathExpressions.Add(key, value);
+            }
 
             return this;
         }

@@ -10,7 +10,6 @@ using Agenix.Api.Validation.Context;
 using Agenix.Core;
 using Agenix.Core.Actions;
 using Agenix.Core.Container;
-using Agenix.Core.Endpoint;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Builder;
 using Agenix.Core.Validation.Builder;
@@ -52,10 +51,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver = new Mock<IReferenceResolver>();
         _messageEndpoint = new Mock<IEndpoint>();
         _messageConsumer = new Mock<IConsumer>();
-        _serializer = new JsonSerializer
-        {
-            ContractResolver = new LowercaseContractResolver()
-        };
+        _serializer = new JsonSerializer { ContractResolver = new LowercaseContractResolver() };
         _configuration = new Mock<IEndpointConfiguration>();
         _resource = new Mock<IResource>();
     }
@@ -861,7 +857,11 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
             .Select(ctx => ctx.JsonPathExpressions)
             .Aggregate(new Dictionary<string, object>(), (acc, map) =>
             {
-                foreach (var item in map) acc[item.Key] = item.Value;
+                foreach (var item in map)
+                {
+                    acc[item.Key] = item.Value;
+                }
+
                 return acc;
             });
 
@@ -1031,7 +1031,9 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         _referenceResolver.Setup(x => x.ResolveAll<JsonSchemaRepository>())
             .Returns(new Dictionary<string, JsonSchemaRepository>
-                { { "customJsonSchemaRepository", schemaRepository } });
+            {
+                { "customJsonSchemaRepository", schemaRepository }
+            });
         _messageEndpoint.Setup(e => e.CreateConsumer()).Returns(_messageConsumer.Object);
         _messageEndpoint.Setup(e => e.EndpointConfiguration).Returns(_configuration.Object);
         _configuration.Setup(c => c.Timeout).Returns(100L);

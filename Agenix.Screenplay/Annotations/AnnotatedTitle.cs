@@ -72,7 +72,9 @@ public class AnnotatedTitle
             var fieldName = FieldVariableFor(field.Name);
             var value = GetValueFrom(question, field);
             if (updatedText.Contains(fieldName) && value != null)
+            {
                 updatedText = updatedText.Replace(fieldName, value.ToString());
+            }
         }
 
         return updatedText;

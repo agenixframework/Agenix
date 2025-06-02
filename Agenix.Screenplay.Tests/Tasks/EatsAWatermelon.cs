@@ -9,17 +9,17 @@ public class EatsAWatermelon : IPerformable
         this.fruit = fruit;
     }
 
+    public void PerformAs<T>(T actor) where T : Actor
+    {
+    }
+
     public static EatsAWatermelon Quietly()
     {
-        return Agenix.Screenplay.Tasks.Instrumented<EatsAWatermelon>("watermelon quietly");
+        return Screenplay.Tasks.Instrumented<EatsAWatermelon>("watermelon quietly");
     }
 
     public static EatsAWatermelon Noisily()
     {
-        return Agenix.Screenplay.Tasks.Instrumented<EatsAWatermelon>("watermelon loudly");
-    }
-    
-    public void PerformAs<T>(T actor) where T : Actor
-    {
+        return Screenplay.Tasks.Instrumented<EatsAWatermelon>("watermelon loudly");
     }
 }

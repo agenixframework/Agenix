@@ -61,7 +61,11 @@ public class FailedConsequence<T>
 
     public void ThrowException()
     {
-        if (_runtimeExceptionCause != null) throw _runtimeExceptionCause;
+        if (_runtimeExceptionCause != null)
+        {
+            throw _runtimeExceptionCause;
+        }
+
         throw _errorCause;
     }
 

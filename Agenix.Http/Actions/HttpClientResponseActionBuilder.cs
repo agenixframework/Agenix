@@ -108,17 +108,28 @@ public class HttpClientResponseActionBuilder : ReceiveMessageAction.ReceiveMessa
         builder.Validators(_validators);
         builder.Validate(ValidationContexts);
 
-        if (_validationProcessor != null) builder.Process(_validationProcessor);
+        if (_validationProcessor != null)
+        {
+            builder.Process(_validationProcessor);
+        }
 
-        foreach (var extractor in GetVariableExtractors()) builder.Process(extractor);
+        foreach (var extractor in GetVariableExtractors())
+        {
+            builder.Process(extractor);
+        }
 
-        foreach (var processor in GetMessageProcessors()) builder.Process(processor);
+        foreach (var processor in GetMessageProcessors())
+        {
+            builder.Process(processor);
+        }
 
         builder.GetMessageBuilderSupport().From(GetMessageBuilderSupport().GetMessageBuilder());
         builder.GetMessageBuilderSupport().Type(GetMessageBuilderSupport().GetMessageType());
 
         foreach (var controlMessageProcessor in GetMessageBuilderSupport().ControlMessageProcessors)
+        {
             builder.GetMessageBuilderSupport().ControlMessageProcessors.Add(controlMessageProcessor);
+        }
 
         return new ReceiveMessageAction(builder);
     }

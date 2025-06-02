@@ -6,7 +6,6 @@ using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
 using Agenix.Core;
 using Agenix.Core.Actions;
-using Agenix.Core.Endpoint;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Builder;
 using Agenix.Core.Validation;
@@ -30,7 +29,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
         factory.MessageValidatorRegistry = new MessageValidatorRegistry();
         return factory;
     }
-    
+
     [Test]
     public void TestSendMessageOverwriteMessageElementsJsonPath()
     {
@@ -39,10 +38,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
         messageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("{ \"TestRequest\": { \"Message\": \"?\" }}"));
 
         // Set up JsonPath expressions to modify a message
-        var overwriteElements = new Dictionary<string, object>
-        {
-            ["$.TestRequest.Message"] = "Hello World!"
-        };
+        var overwriteElements = new Dictionary<string, object> { ["$.TestRequest.Message"] = "Hello World!" };
 
         var processor = new JsonPathMessageProcessor.Builder()
             .Expressions(overwriteElements)

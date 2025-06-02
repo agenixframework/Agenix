@@ -8,10 +8,10 @@ namespace Agenix.Validation.Binary.Tests;
 
 public abstract class AbstractNUnitSetUp
 {
-    protected TestContextFactory TestContextFactory;
     protected TestContext Context;
+    protected TestContextFactory TestContextFactory;
 
-    
+
     [SetUp]
     public void Setup()
     {

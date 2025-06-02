@@ -42,9 +42,13 @@ internal class TestSessionVariables<TK, T> : ConcurrentDictionary<TK, T>, ISessi
     public void Add(TK key, T value)
     {
         if (value == null)
+        {
             TryRemove(key, out value);
+        }
         else
+        {
             TryAdd(key, value);
+        }
     }
 
     public void AddMetaData(string key, string value)
@@ -59,7 +63,10 @@ internal class TestSessionVariables<TK, T> : ConcurrentDictionary<TK, T>, ISessi
 
     public void ShouldContainKey(TK key)
     {
-        if (!ContainsKey(key)) throw new Exception("Session variable " + key + " expected but not found.");
+        if (!ContainsKey(key))
+        {
+            throw new Exception("Session variable " + key + " expected but not found.");
+        }
     }
 
     public new void Clear()

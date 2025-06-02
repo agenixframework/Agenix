@@ -24,10 +24,7 @@ public class Endpoints
 
     [BindToRegistry(Name = "DBProvider")] private static readonly IDbProvider _dbProvider = CreateDbProvider();
 
-    [BindToRegistry(Name = "AdoTemplate")] private AdoTemplate _adoTemplate = new()
-    {
-        DbProvider = _dbProvider
-    };
+    [BindToRegistry(Name = "AdoTemplate")] private AdoTemplate _adoTemplate = new() { DbProvider = _dbProvider };
 
     private static IDbProvider CreateDbProvider()
     {

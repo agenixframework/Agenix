@@ -29,7 +29,9 @@ public class JsonSchemaFilter
         IReferenceResolver referenceResolver)
     {
         if (IsSchemaRepositorySpecified(jsonMessageValidationContext))
+        {
             return FilterByRepositoryName(schemaRepositories, jsonMessageValidationContext);
+        }
 
         return IsSchemaSpecified(jsonMessageValidationContext)
             ? GetSchemaFromContext(jsonMessageValidationContext, referenceResolver)
@@ -43,7 +45,9 @@ public class JsonSchemaFilter
             referenceResolver.Resolve<SimpleJsonSchema>(jsonMessageValidationContext.Schema);
 
         if (Log.IsEnabled(LogLevel.Debug))
+        {
             Log.LogDebug("Found specified schema: \"{Schema}\".", jsonMessageValidationContext.Schema);
+        }
 
         return new List<SimpleJsonSchema> { simpleJsonSchema };
     }
@@ -56,7 +60,11 @@ public class JsonSchemaFilter
                      StringComparison.Ordinal)))
         {
             if (Log.IsEnabled(LogLevel.Debug))
-                Log.LogDebug("Found specified schema-repository: \"{SchemaRepository}\".", jsonMessageValidationContext.SchemaRepository);
+            {
+                Log.LogDebug("Found specified schema-repository: \"{SchemaRepository}\".",
+                    jsonMessageValidationContext.SchemaRepository);
+            }
+
             return jsonSchemaRepository.Schemas;
         }
 

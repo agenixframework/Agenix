@@ -33,7 +33,11 @@ public class InstrumentedTask
 {
     public static T Of<T>(T task) where T : IPerformable
     {
-        if (IsInstrumented(task) || !ShouldInstrument(task)) return task;
+        if (IsInstrumented(task) || !ShouldInstrument(task))
+        {
+            return task;
+        }
+
         return (T)InstrumentedCopyOf(task, task.GetType());
     }
 

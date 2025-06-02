@@ -58,7 +58,9 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
     public override void DoExecute(TestContext context)
     {
         if (Log.IsEnabled(LogLevel.Debug))
+        {
             Log.LogDebug($"Assert container asserting exceptions of type {_exception.Name}");
+        }
 
         try
         {
@@ -69,16 +71,22 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
             Log.LogDebug("Validating caught exception: {0}", e);
 
             if (!_exception.IsAssignableFrom(e.GetType()))
+            {
                 throw new ValidationException("Validation failed for asserted exception type - expected: '" +
                                               _exception.Name + "' but was: '" + e.GetType().Name + "'", e);
+            }
 
             if (_message != null)
             {
                 if (ValidationMatcherUtils.IsValidationMatcherExpression(_message))
+                {
                     ValidationMatcherUtils.ResolveValidationMatcher("message", e.Message, _message, context);
+                }
                 else if (!context.ReplaceDynamicContentInString(_message).Equals(e.Message))
+                {
                     throw new ValidationException("Validation failed for asserted exception message - expected: '" +
                                                   _message + "' but was: '" + e.Message + "'", e);
+                }
             }
 
             Log.LogDebug($"Asserted exception is as expected ({e.GetType().Name}): {e.Message}");
@@ -169,7 +177,10 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
         {
             _exception = Type.GetType(type);
             if (_exception == null)
+            {
                 throw new AgenixSystemException($"Failed to instantiate exception class of type '{type}'");
+            }
+
             return this;
         }
 

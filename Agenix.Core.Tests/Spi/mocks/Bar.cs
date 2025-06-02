@@ -1,4 +1,5 @@
 namespace Agenix.Core.Tests.Spi.mocks;
 
-public class Bar {
+public class Bar
+{
 }

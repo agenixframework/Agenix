@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Validation.Matcher;
-using Agenix.Core.Validation.Matcher;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 

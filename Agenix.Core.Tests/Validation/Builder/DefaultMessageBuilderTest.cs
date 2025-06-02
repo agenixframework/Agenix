@@ -102,7 +102,6 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
     [Platform(Exclude = "MacOsX", Reason = "Only runs on non-Linux/ Unix platforms.")]
     public void TestMessageBuilderWithHeaderTypes()
     {
-
         Console.WriteLine(Environment.OSVersion.Platform);
         var headers = new Dictionary<string, object>
         {
@@ -195,8 +194,9 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
     [Test]
     public void TestMessageBuilderWithHeaderResource()
     {
-        var headerResource = $"assembly://{Assembly.GetExecutingAssembly().GetName().Name}/{Assembly.GetExecutingAssembly().GetName().Name}" +
-                             $".ResourcesTest.validation.builder/header-data-resource.txt";
+        var headerResource =
+            $"assembly://{Assembly.GetExecutingAssembly().GetName().Name}/{Assembly.GetExecutingAssembly().GetName().Name}" +
+            $".ResourcesTest.validation.builder/header-data-resource.txt";
         _messageBuilder.AddHeaderBuilder(new FileResourceHeaderDataBuilder(headerResource));
 
         var resultingMessage = _messageBuilder.Build(Context, AgenixSettings.DefaultMessageType());
@@ -209,8 +209,9 @@ public class DefaultMessageBuilderTest : AbstractNUnitSetUp
     [Test]
     public void TestMessageBuilderWithHeaderResourceVariableSupport()
     {
-        var headerResource = $"assembly://{Assembly.GetExecutingAssembly().GetName().Name}/{Assembly.GetExecutingAssembly().GetName().Name}" +
-                             $".ResourcesTest.validation.builder/variable-data-resource.txt";
+        var headerResource =
+            $"assembly://{Assembly.GetExecutingAssembly().GetName().Name}/{Assembly.GetExecutingAssembly().GetName().Name}" +
+            $".ResourcesTest.validation.builder/variable-data-resource.txt";
         _messageBuilder.AddHeaderBuilder(new FileResourceHeaderDataBuilder(headerResource));
         Context.SetVariable("placeholder", "header data");
 

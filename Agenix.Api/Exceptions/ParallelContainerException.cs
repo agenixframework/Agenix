@@ -42,7 +42,9 @@ public class ParallelContainerException(List<AgenixSystemException> nestedExcept
 
             builder.Append("Several actions failed in parallel container");
             foreach (var exception in nestedExceptions)
+            {
                 builder.Append("\n\t+ ").Append(exception.GetType().Name).Append(": ").Append(exception.Message);
+            }
 
             return builder.ToString();
         }

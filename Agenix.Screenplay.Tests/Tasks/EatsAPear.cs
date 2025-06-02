@@ -10,6 +10,6 @@ public class EatsAPear(string size) : IPerformable
 
     public static EatsAPear OfSize(string size)
     {
-        return Agenix.Screenplay.Tasks.Instrumented<EatsAPear>(size);
+        return Screenplay.Tasks.Instrumented<EatsAPear>(size);
     }
 }

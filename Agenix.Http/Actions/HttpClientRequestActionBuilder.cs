@@ -117,9 +117,15 @@ public class HttpClientRequestActionBuilder : SendMessageAction.SendMessageActio
         builder.Endpoint(GetEndpoint());
         builder.Endpoint(GetEndpointUri());
 
-        foreach (var extractor in GetVariableExtractors()) builder.Process(extractor);
+        foreach (var extractor in GetVariableExtractors())
+        {
+            builder.Process(extractor);
+        }
 
-        foreach (var processor in GetMessageProcessors()) builder.Process(processor);
+        foreach (var processor in GetMessageProcessors())
+        {
+            builder.Process(processor);
+        }
 
         builder.GetMessageBuilderSupport().From(GetMessageBuilderSupport().GetMessageBuilder());
         builder.GetMessageBuilderSupport().Type(GetMessageBuilderSupport().GetMessageType());

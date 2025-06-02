@@ -171,7 +171,11 @@ public partial class VariableExpressionSegmentMatcher
         _currentSegmentExpression = null;
         _currentSegmentIndex = -1;
 
-        if (_currentMatchIndex >= _matches.Count) return false;
+        if (_currentMatchIndex >= _matches.Count)
+        {
+            return false;
+        }
+
         var match = _matches[_currentMatchIndex++];
 
         if (!string.IsNullOrEmpty(match.Groups[JsonPathGroup].Value))

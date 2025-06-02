@@ -4,7 +4,6 @@ using Agenix.Api.Message;
 using Agenix.Api.Messaging;
 using Agenix.Core;
 using Agenix.Core.Actions;
-using Agenix.Core.Endpoint;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Builder;
 using Agenix.Core.Validation.Builder;
@@ -44,10 +43,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             new DefaultPayloadBuilder("{ \"TestRequest\": { \"Message\": \"?\" }}"));
 
         // Create JSONPath expressions to modify message
-        var overwriteElements = new Dictionary<string, object>
-        {
-            ["$.TestRequest.Message"] = "Hello World!"
-        };
+        var overwriteElements = new Dictionary<string, object> { ["$.TestRequest.Message"] = "Hello World!" };
 
         // Create JsonPath processor
         var processor = new JsonPathMessageProcessor.Builder()
@@ -93,8 +89,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         var extractMessageElements = new Dictionary<string, object>
         {
-            ["$.text"] = "messageVar",
-            ["$.person"] = "person"
+            ["$.text"] = "messageVar", ["$.person"] = "person"
         };
 
         var variableExtractor = new JsonPathVariableExtractor.Builder()
@@ -187,10 +182,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
 
-        var jsonPathExpressions = new Dictionary<string, object>
-        {
-            ["$..text"] = "Hello Agenix!"
-        };
+        var jsonPathExpressions = new Dictionary<string, object> { ["$..text"] = "Hello Agenix!" };
 
         var validationContext = new JsonPathMessageValidationContext.Builder()
             .Expressions(jsonPathExpressions)
@@ -229,10 +221,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
 
-        var jsonPathExpressions = new Dictionary<string, object>
-        {
-            ["$.person.age"] = "50"
-        };
+        var jsonPathExpressions = new Dictionary<string, object> { ["$.person.age"] = "50" };
 
         var validationContext = new JsonPathMessageValidationContext.Builder()
             .Expressions(jsonPathExpressions)

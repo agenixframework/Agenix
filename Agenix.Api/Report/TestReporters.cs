@@ -59,7 +59,10 @@ public class TestReporters : ITestListener, ITestSuiteListener, ITestReporterAwa
     /// <param name="test">The test case that has finished executing.</param>
     public void OnTestFinish(ITestCase test)
     {
-        if (test.GetTestResult() != null) _testResults.AddResult(test.GetTestResult());
+        if (test.GetTestResult() != null)
+        {
+            _testResults.AddResult(test.GetTestResult());
+        }
     }
 
     /// Handles the event when a test case completes successfully.
@@ -99,7 +102,10 @@ public class TestReporters : ITestListener, ITestSuiteListener, ITestReporterAwa
     /// it clears any previous test results to ensure a fresh start.
     public void OnStart()
     {
-        if (AutoClear) _testResults = new TestResults();
+        if (AutoClear)
+        {
+            _testResults = new TestResults();
+        }
     }
 
     /// Executes when a test suite finishes with failures.
@@ -174,6 +180,9 @@ public class TestReporters : ITestListener, ITestSuiteListener, ITestReporterAwa
     /// the test results collected during the test execution.
     public void GenerateReports()
     {
-        foreach (var reporter in _testReporters) reporter.GenerateReport(_testResults);
+        foreach (var reporter in _testReporters)
+        {
+            reporter.GenerateReport(_testResults);
+        }
     }
 }

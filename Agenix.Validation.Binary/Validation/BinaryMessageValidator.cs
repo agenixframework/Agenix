@@ -1,4 +1,5 @@
 #region License
+
 // MIT License
 //
 // Copyright (c) 2025 Agenix
@@ -20,6 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using System.Text;
@@ -84,8 +86,10 @@ public class BinaryMessageValidator : DefaultMessageValidator
                 default:
                 {
                     if (n2 == -1)
+                    {
                         throw new ValidationException("Control input stream reached end-of-stream - " +
                                                       "received input stream is not finished yet");
+                    }
 
                     break;
                 }
@@ -99,7 +103,11 @@ public class BinaryMessageValidator : DefaultMessageValidator
                 receivedResult.WriteByte(received);
                 controlResult.WriteByte(control);
 
-                if (received == control) continue;
+                if (received == control)
+                {
+                    continue;
+                }
+
                 var receivedStr = Encoding.UTF8.GetString(receivedResult.ToArray());
                 var controlStr = Encoding.UTF8.GetString(controlResult.ToArray());
 

@@ -94,7 +94,9 @@ public class DelegatingMessageSelectorTest : AbstractNUnitSetUp
     public void TestCustomMessageSelectorDelegation()
     {
         var factories = new Dictionary<string, IMessageSelector.IMessageSelectorFactory>
-            { { "customSelectorFactory", new CustomMessageSelectorFactory() } };
+        {
+            { "customSelectorFactory", new CustomMessageSelectorFactory() }
+        };
 
         Mock.Get(_resolver).Setup(r => r.ResolveAll<IMessageSelector.IMessageSelectorFactory>()).Returns(factories);
 

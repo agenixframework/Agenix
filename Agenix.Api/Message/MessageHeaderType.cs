@@ -95,8 +95,12 @@ public static class MessageHeaderTypeExtensions
         var typeName = headerValue.Substring(1, headerValue.IndexOf(TYPE_SUFFIX, StringComparison.Ordinal) - 1);
 
         foreach (MessageHeaderType messageType in Enum.GetValues(typeof(MessageHeaderType)))
+        {
             if (GetName(messageType).Equals(typeName))
+            {
                 return messageType;
+            }
+        }
 
         throw new AgenixSystemException("Unknown message header type in header value " + headerValue);
     }

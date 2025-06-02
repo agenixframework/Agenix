@@ -50,9 +50,11 @@ public class IgnoreNewLineValidationMatcher : IValidationMatcher
         normalizedControl = Regex.Replace(normalizedControl, "\\n", "");
 
         if (!string.Equals(normalizedValue, normalizedControl, StringComparison.OrdinalIgnoreCase))
+        {
             throw new ValidationException(TypeDescriptor.GetClassName(typeof(IgnoreNewLineValidationMatcher))
                                           + " failed for field '" + fieldName
                                           + "'. Received value is '" + normalizedValue
                                           + "', control value is '" + normalizedControl + "'.");
+        }
     }
 }

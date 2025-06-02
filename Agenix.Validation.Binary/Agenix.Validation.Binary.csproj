@@ -1,26 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
 
-        <!-- NuGet Package-Specific Properties -->
-        <PackageId>Agenix.Validation.Binary</PackageId>
-        <Title>Agenix Binary Validation</Title>
-        <Description>Binary data validation components for the Agenix framework. Provides tools for validating binary files, byte arrays, and binary content in automated tests, supporting various binary formats and comparison operations.</Description>
-        <PackageTags>testing;binary;validation;automation;framework;agenix;bytes;files;comparison;data</PackageTags>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <!-- NuGet Package-Specific Properties -->
+    <PackageId>Agenix.Validation.Binary</PackageId>
+    <Title>Agenix Binary Validation</Title>
+    <Description>Binary data validation components for the Agenix framework. Provides tools for validating binary files, byte arrays, and binary content in automated tests, supporting various binary formats and comparison operations.</Description>
+    <PackageTags>testing;binary;validation;automation;framework;agenix;bytes;files;comparison;data</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
-    </PropertyGroup>
+  </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj"/>
+  </ItemGroup>
 
-    <ItemGroup>
-      <None Remove="Extension\agenix\message\validator\binary" />
-      <EmbeddedResource Include="Extension\agenix\message\validator\binary" />
-    </ItemGroup>
+  <ItemGroup>
+    <None Remove="Extension\agenix\message\validator\binary"/>
+    <EmbeddedResource Include="Extension\agenix\message\validator\binary"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Formats.Asn1" Version="8.0.1"/>
+    <PackageReference Include="System.Text.Json" Version="8.0.5"/>
+  </ItemGroup>
 
 </Project>

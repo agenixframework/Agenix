@@ -90,10 +90,15 @@ public class HttpMessageBuilder : StaticMessageBuilder
             .Where(key => !FilteredHeaders.Contains(key))
             .ToHashSet();
 
-        foreach (var key in headerKeys) to.GetHeaders().Remove(key);
+        foreach (var key in headerKeys)
+        {
+            to.GetHeaders().Remove(key);
+        }
 
         foreach (var entry in from.GetHeaders().Where(entry => !FilteredHeaders.Contains(entry.Key)))
+        {
             to.GetHeaders()[entry.Key] = entry.Value;
+        }
     }
 
     /// Replaces the dynamic content within the cookies of an HTTP message based on the provided context.

@@ -40,7 +40,10 @@ public static class DictionaryExtensions
     {
         var output = new Dictionary<TKey, TVal>(dictA);
 
-        foreach (var (key, value) in dictB) output[key] = value;
+        foreach (var (key, value) in dictB)
+        {
+            output[key] = value;
+        }
 
         return output;
     }

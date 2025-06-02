@@ -90,9 +90,16 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
     {
         this.name = name;
         this.description = description;
-        if (dbProvider != null) DbProvider = dbProvider;
+        if (dbProvider != null)
+        {
+            DbProvider = dbProvider;
+        }
 
-        if (adoTemplate != null) AdoTemplate = adoTemplate;
+        if (adoTemplate != null)
+        {
+            AdoTemplate = adoTemplate;
+        }
+
         this.sqlResourcePath = sqlResourcePath;
         this.transactionIsolationLevel = transactionIsolationLevel;
         this.transactionManager = transactionManager;

@@ -5,9 +5,9 @@ using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
 using Agenix.Core.Endpoint.Direct;
 using Agenix.Core.Message;
-using TestContext = Agenix.Api.Context.TestContext;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using TestContext = Agenix.Api.Context.TestContext;
 using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
 using static Agenix.Core.Actions.SendMessageAction.Builder;
 
@@ -93,7 +93,6 @@ public class MessageStoreTest
             {
                 ctx.UpdateStatus(ValidationStatus.PASSED);
             }
-
         }
 
         public bool SupportsMessageType(string messageType, IMessage message)

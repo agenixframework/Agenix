@@ -256,9 +256,11 @@ public class ResourceHandlerRegistry
         AssertUtils.ArgumentHasText(protocolName, "protocolName");
         AssertUtils.ArgumentNotNull(handlerType, "handlerType");
         if (!typeof(IResource).IsAssignableFrom(handlerType))
+        {
             throw new ArgumentException(
                 string.Format("[{0}] does not implement [{1}] interface (it must).", handlerType.FullName,
                     typeof(IResource).FullName));
+        }
 
         #endregion
 
@@ -268,7 +270,9 @@ public class ResourceHandlerRegistry
             {
                 // register generic uri parser for this scheme
                 if (!UriParser.IsKnownScheme(protocolName))
+                {
                     UriParser.Register(new TolerantUriParser(), protocolName, 0);
+                }
             };
 #if NETSTANDARD
                 callback();
@@ -284,8 +288,11 @@ public class ResourceHandlerRegistry
     {
         var ctor = handlerType.GetConstructor([typeof(string)]);
         if (ctor == null)
+        {
             throw new ArgumentException(
                 $"[{handlerType.FullName}] does not have a constructor that takes a single string as an argument (it must).");
+        }
+
         return new SafeConstructor(ctor);
     }
 

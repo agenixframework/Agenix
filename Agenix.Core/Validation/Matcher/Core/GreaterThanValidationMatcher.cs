@@ -59,9 +59,11 @@ public class GreaterThanValidationMatcher : IValidationMatcher
         }
 
         if (!(dValue > dControl))
+        {
             throw new ValidationException(TypeDescriptor.GetClassName(typeof(GreaterThanValidationMatcher))
                                           + " failed for field '" + fieldName
                                           + "'. Received value is '" + value
                                           + "', control value is '" + control + "'");
+        }
     }
 }

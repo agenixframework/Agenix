@@ -77,7 +77,10 @@ public abstract class LogMessageModifierBase : ILogModifier
 
     public List<string> MaskHeaderData(IMessage message)
     {
-        if (message.GetHeaderData == null || message.GetHeaderData().Count == 0) return [];
+        if (message.GetHeaderData == null || message.GetHeaderData().Count == 0)
+        {
+            return [];
+        }
 
         return message.GetHeaderData().Select(Mask).ToList();
     }

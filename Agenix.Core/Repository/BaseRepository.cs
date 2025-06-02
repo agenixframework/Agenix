@@ -89,7 +89,9 @@ public abstract class BaseRepository(string name) : INamed, InitializingPhase
         try
         {
             foreach (var found in Locations.Select(FileUtils.GetFileResource).Where(found => found.Exists))
+            {
                 AddRepository(found);
+            }
         }
         catch (IOException e)
         {

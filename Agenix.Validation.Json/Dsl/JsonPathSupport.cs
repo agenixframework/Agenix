@@ -1,4 +1,5 @@
 ﻿#region License
+
 // MIT License
 //
 // Copyright (c) 2025 Agenix
@@ -20,6 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using Agenix.Api.Builder;
@@ -78,7 +80,11 @@ public class JsonPathSupport : IWithExpressions<JsonPathSupport>, IPathExpressio
     /// <returns>The current JsonPathSupport instance with added expressions.</returns>
     public JsonPathSupport Expressions(IDictionary<string, object> expressions)
     {
-        foreach (var expression in expressions) _expressions[expression.Key] = expression.Value;
+        foreach (var expression in expressions)
+        {
+            _expressions[expression.Key] = expression.Value;
+        }
+
         return this;
     }
 

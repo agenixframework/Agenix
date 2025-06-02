@@ -114,7 +114,9 @@ public class FileSystemResource : AbstractResource
         if (root.Length > 0 &&
             (root.EndsWith(Path.DirectorySeparatorChar.ToString()) ||
              root.EndsWith(Path.AltDirectorySeparatorChar.ToString())))
+        {
             root = root[..^1];
+        }
 
         return root;
     }
@@ -132,9 +134,13 @@ public class FileSystemResource : AbstractResource
     {
         var path = _fileHandle.DirectoryName;
         if (path.Equals(_fileHandle.Directory.Root.ToString()))
+        {
             path = null;
+        }
         else
+        {
             path = path[(_rootLocation.Length + 1)..];
+        }
 
         return path;
     }
@@ -158,11 +164,17 @@ public class FileSystemResource : AbstractResource
         string resourceName, string basePathPlaceHolder)
     {
         // Remove extra slashes used to indicate that resource is local (handle the case "/C:/path1/...")
-        if (resourceName[0] == '/' && resourceName[2] == ':') resourceName = resourceName.Substring(1);
+        if (resourceName[0] == '/' && resourceName[2] == ':')
+        {
+            resourceName = resourceName.Substring(1);
+        }
 
         if (StringUtils.HasText(resourceName)
             && resourceName.TrimStart().StartsWith(basePathPlaceHolder))
+        {
             return resourceName.Replace(basePathPlaceHolder, AppDomain.CurrentDomain.BaseDirectory).TrimStart();
+        }
+
         return resourceName;
     }
 
@@ -227,7 +239,10 @@ public class FileSystemResource : AbstractResource
     protected FileSystemResource(string resourceName, bool suppressInitialize)
         : base(resourceName)
     {
-        if (!suppressInitialize) Initialize(resourceName);
+        if (!suppressInitialize)
+        {
+            Initialize(resourceName);
+        }
     }
 
     #endregion
@@ -311,6 +326,7 @@ public class FileSystemResource : AbstractResource
         get
         {
             if (Uri.IsFile)
+            {
                 try
                 {
                     return new FileStream(Uri.LocalPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
@@ -319,6 +335,7 @@ public class FileSystemResource : AbstractResource
                 {
                     // ignore difference between File & Directory exception in this case
                 }
+            }
 
             throw new FileNotFoundException(Description
                                             + " cannot be resolved to local file path"

@@ -87,7 +87,9 @@ public class AgenixAddIn
     public static ITestCaseRunner GetFeatureCaseRunner(FeatureContext context)
     {
         if (context != null && FeatureTestCaseRunners.TryGetValue(context.FeatureInfo, out var reporter))
+        {
             return reporter;
+        }
 
         return null;
     }
@@ -150,7 +152,10 @@ public class AgenixAddIn
     /// </returns>
     public static ITestCaseRunner GetScenarioTestCaseRunner(ScenarioContext context)
     {
-        if (context != null && ScenarioTestCaseRunners.TryGetValue(context.ScenarioInfo, out var runner)) return runner;
+        if (context != null && ScenarioTestCaseRunners.TryGetValue(context.ScenarioInfo, out var runner))
+        {
+            return runner;
+        }
 
         return null;
     }

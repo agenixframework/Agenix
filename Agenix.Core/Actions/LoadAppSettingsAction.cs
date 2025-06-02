@@ -53,7 +53,9 @@ public class LoadAppSettingsAction(LoadAppSettingsAction.Builder builder) : Abst
         var resource = FileUtils.GetFileResource(_filePath, context);
 
         if (Log.IsEnabled(LogLevel.Debug))
+        {
             Log.LogDebug("Reading config file => " + FileUtils.GetFileName(resource.Description));
+        }
 
         var settings = FileUtils.LoadAsSettings(resource);
 
@@ -64,11 +66,15 @@ public class LoadAppSettingsAction(LoadAppSettingsAction.Builder builder) : Abst
             var value = settings[key];
 
             if (Log.IsEnabled(LogLevel.Debug))
+            {
                 Log.LogDebug("Loading setting: {Key}={Value} into variables", key, value);
+            }
 
             if (Log.IsEnabled(LogLevel.Debug) && context.GetVariables().ContainsKey(key))
+            {
                 Log.LogDebug("Overwriting setting {Key} old value: {GetVariable} new value: {Value}", key,
                     context.GetVariable(key), value);
+            }
 
             try
             {
@@ -81,7 +87,9 @@ public class LoadAppSettingsAction(LoadAppSettingsAction.Builder builder) : Abst
         }
 
         foreach (var entry in context.ResolveDynamicValuesInMap(unresolved))
+        {
             context.SetVariable(entry.Key, entry.Value);
+        }
 
         Log.LogDebug("Loaded config file => {GetFileName}", FileUtils.GetFileName(resource.Description));
     }

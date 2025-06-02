@@ -52,16 +52,21 @@ public abstract class ValidationUtils
         if (actualValue != null)
         {
             if (expectedValue == null)
+            {
                 throw new ValidationException(BuildValueMismatchErrorMessage(
                     "Values not equal for element '" + pathExpression + "'", null, actualValue));
+            }
 
             var matcher = GetValueMatcher(expectedValue, context);
 
             if (matcher != null)
             {
                 if (!matcher.Validate(actualValue, expectedValue, context))
+                {
                     throw new ValidationException(BuildValueMismatchErrorMessage(
                         "Values not matching for element '" + pathExpression + "'", expectedValue, actualValue));
+                }
+
                 return;
             }
 
@@ -70,15 +75,19 @@ public abstract class ValidationUtils
                 var converted = context.TypeConverter.ConvertIfNecessary<object>(actualValue, expectedValue.GetType());
 
                 if (converted == null)
+                {
                     throw new AgenixSystemException(
                         $"Failed to convert value '{actualValue}' to required type '{expectedValue.GetType()}'");
+                }
 
                 if (IsList(converted))
                 {
                     if (!converted.ToString()!.Equals(expectedValue.ToString()))
+                    {
                         throw new ValidationException(BuildValueMismatchErrorMessage(
                             "Values not equal for element '" + pathExpression + "'", expectedValue.ToString(),
                             converted.ToString()));
+                    }
                 }
                 else if (converted is string[] convertedArray && expectedValue is string[] expectedArray)
                 {
@@ -86,9 +95,11 @@ public abstract class ValidationUtils
                     var expectedDelimitedString = string.Join(",", expectedArray);
 
                     if (convertedDelimitedString != expectedDelimitedString)
+                    {
                         throw new ValidationException(BuildValueMismatchErrorMessage(
                             $"Values not equal for element '{pathExpression}'", expectedDelimitedString,
                             convertedDelimitedString));
+                    }
                 }
                 else if (converted is byte[] convertedBytes && expectedValue is byte[] expectedBytes)
                 {
@@ -96,8 +107,10 @@ public abstract class ValidationUtils
                     var expectedBase64 = Convert.ToBase64String(expectedBytes);
 
                     if (convertedBase64 != expectedBase64)
+                    {
                         throw new ValidationException(BuildValueMismatchErrorMessage(
                             $"Values not equal for element '{pathExpression}'", expectedBase64, convertedBase64));
+                    }
                 }
                 else if (!converted.Equals(expectedValue))
                 {
@@ -123,11 +136,15 @@ public abstract class ValidationUtils
                 }
 
                 if (ValidationMatcherUtils.IsValidationMatcherExpression(expectedValueString))
+                {
                     ValidationMatcherUtils.ResolveValidationMatcher(pathExpression, actualValueString,
                         expectedValueString, context);
+                }
                 else if (actualValueString != expectedValueString)
+                {
                     throw new ValidationException(BuildValueMismatchErrorMessage(
                         $"Values not equal for element '{pathExpression}'", expectedValueString, actualValueString));
+                }
             }
         }
         else if (expectedValue != null)
@@ -137,21 +154,27 @@ public abstract class ValidationUtils
             if (matcher != null)
             {
                 if (!matcher.Validate(actualValue, expectedValue, context))
+                {
                     throw new ValidationException(BuildValueMismatchErrorMessage(
                         "Values not matching for element '" + pathExpression + "'", expectedValue, actualValue));
+                }
             }
             else if (expectedValue is string)
             {
                 var expectedValueString = expectedValue.ToString();
 
                 if (ValidationMatcherUtils.IsValidationMatcherExpression(expectedValueString))
+                {
                     ValidationMatcherUtils.ResolveValidationMatcher(pathExpression,
                         null,
                         expectedValueString,
                         context);
+                }
                 else if (!string.IsNullOrWhiteSpace(expectedValueString))
+                {
                     throw new ValidationException(BuildValueMismatchErrorMessage(
                         "Values not equal for element '" + pathExpression + "'", expectedValueString, null));
+                }
             }
             else
             {
@@ -166,7 +189,10 @@ public abstract class ValidationUtils
     /// <return>True if the object is a generic list, otherwise false.</return>
     private static bool IsList(object obj)
     {
-        if (obj == null) return false;
+        if (obj == null)
+        {
+            return false;
+        }
 
         var type = obj.GetType();
         return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>);

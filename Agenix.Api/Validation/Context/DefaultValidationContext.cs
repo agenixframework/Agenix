@@ -39,7 +39,10 @@ public class DefaultValidationContext : IValidationContext
     /// <param name="status">the new status</param>
     public virtual void UpdateStatus(ValidationStatus status)
     {
-        if (UpdateAllowed()) Status = status;
+        if (UpdateAllowed())
+        {
+            Status = status;
+        }
     }
 
     /// <summary>

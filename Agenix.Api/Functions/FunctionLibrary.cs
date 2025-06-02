@@ -89,8 +89,10 @@ public class FunctionLibrary
     public IFunction GetFunction(string functionName)
     {
         if (!_members.ContainsKey(functionName))
+        {
             throw new NoSuchFunctionException("Can not find function '" + functionName + "' in library " + _name +
                                               " (" + _prefix + ")");
+        }
 
         return _members[functionName];
     }
@@ -104,7 +106,10 @@ public class FunctionLibrary
     {
         var functionPrefix = functionName.Substring(0, functionName.IndexOf(':') + 1);
 
-        if (!functionPrefix.Equals(_prefix)) return false;
+        if (!functionPrefix.Equals(_prefix))
+        {
+            return false;
+        }
 
         return _members.ContainsKey(
             functionName.Substring(functionName.IndexOf(':') + 1, functionName.IndexOf('(')));

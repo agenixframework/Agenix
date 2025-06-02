@@ -1,6 +1,5 @@
 ﻿using Agenix.Api.Exceptions;
 using Agenix.Core.Message;
-using Agenix.Core.Validation.Json;
 using Agenix.Validation.Json.Validation;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
@@ -32,8 +31,7 @@ public class JsonPathMessageProcessorTest : AbstractNUnitSetUp
 
         var jsonPathExpressions = new Dictionary<string, object>
         {
-            { "$.TestMessage.Text", "Hello!" },
-            { "$.TestMessage.Id", "9999999" }
+            { "$.TestMessage.Text", "Hello!" }, { "$.TestMessage.Id", "9999999" }
         };
 
         var processor = new JsonPathMessageProcessor.Builder()

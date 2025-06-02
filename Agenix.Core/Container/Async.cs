@@ -89,7 +89,9 @@ public class Async(Async.Builder builder)
         public override Task DoExecuteAsync(TestContext context)
         {
             foreach (var action in outerInstance.actions.Select(actionBuilder => actionBuilder.Build()))
+            {
                 outerInstance.ExecuteAction(action, context);
+            }
 
             return Task.CompletedTask;
         }
@@ -98,14 +100,18 @@ public class Async(Async.Builder builder)
         {
             Log.LogInformation("Apply error actions after async container ...");
             foreach (var action in outerInstance._errorActions.Select(actionBuilder => actionBuilder.Build()))
+            {
                 action.Execute(context);
+            }
         }
 
         public override void OnSuccess(TestContext context)
         {
             Log.LogInformation("Apply success actions after async container ...");
             foreach (var action in outerInstance._successActions.Select(actionBuilder => actionBuilder.Build()))
+            {
                 action.Execute(context);
+            }
         }
     }
 

@@ -40,13 +40,18 @@ internal class FeatureInfoEqualityComparer : IEqualityComparer<FeatureInfo>
 {
     public bool Equals(FeatureInfo x, FeatureInfo y)
     {
-        if (x == null && y == null) return true;
+        if (x == null && y == null)
+        {
+            return true;
+        }
 
         if (x?.Title == y?.Title
             && x?.Description == y?.Description
             && x?.GenerationTargetLanguage == y?.GenerationTargetLanguage
             && x.Tags.SequenceEqual(y.Tags))
+        {
             return true;
+        }
 
         return false;
     }

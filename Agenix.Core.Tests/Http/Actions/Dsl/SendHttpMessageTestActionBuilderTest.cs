@@ -5,13 +5,13 @@ using Agenix.Api.Endpoint.Resolver;
 using Agenix.Api.Message;
 using Agenix.Api.Messaging;
 using Agenix.Core.Actions;
-using TestContext = Agenix.Api.Context.TestContext;
 using Agenix.Core.Message;
 using Agenix.Http.Actions;
 using Agenix.Http.Message;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using TestContext = Agenix.Api.Context.TestContext;
 using HttpClient = Agenix.Http.Client.HttpClient;
 
 namespace Agenix.Core.Tests.Http.Actions.Dsl;

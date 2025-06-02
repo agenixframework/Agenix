@@ -11,7 +11,7 @@ namespace Agenix.Validation.Json.Tests.Json.Schema;
 
 public class JsonSchemaFilterTest
 {
-    private readonly JsonSchemaFilter _jsonSchemaFilter = new JsonSchemaFilter();
+    private readonly JsonSchemaFilter _jsonSchemaFilter = new();
     private Mock<IReferenceResolver> _referenceResolverMock;
 
     [SetUp]
@@ -19,7 +19,7 @@ public class JsonSchemaFilterTest
     {
         _referenceResolverMock = new Mock<IReferenceResolver>();
     }
-    
+
     [Test]
     public void TestFilterOnSchemaRepositoryName()
     {
@@ -37,10 +37,9 @@ public class JsonSchemaFilterTest
         var thirdSimpleJsonSchema = Mock.Of<SimpleJsonSchema>();
         secondJsonSchemaRepository.Schemas.Add(thirdSimpleJsonSchema);
 
-        var schemaRepositories = new List<JsonSchemaRepository> 
-        { 
-            firstJsonSchemaRepository, 
-            secondJsonSchemaRepository 
+        var schemaRepositories = new List<JsonSchemaRepository>
+        {
+            firstJsonSchemaRepository, secondJsonSchemaRepository
         };
 
         // Setup validation context
@@ -51,8 +50,8 @@ public class JsonSchemaFilterTest
 
         // WHEN
         var simpleJsonSchemas = _jsonSchemaFilter.Filter(
-            schemaRepositories, 
-            validationContext, 
+            schemaRepositories,
+            validationContext,
             _referenceResolverMock.Object);
 
         // THEN
@@ -60,7 +59,7 @@ public class JsonSchemaFilterTest
         Assert.That(simpleJsonSchemas, Does.Contain(secondSimpleJsonSchema));
         Assert.That(simpleJsonSchemas, Does.Contain(thirdSimpleJsonSchema));
     }
-    
+
     [Test]
     public void TestFilterOnSchemaNameUsesApplicationContext()
     {
@@ -89,10 +88,10 @@ public class JsonSchemaFilterTest
 
         // THEN
         _referenceResolverMock.Verify(
-            x => x.Resolve<object>(validationContext.Schema), 
+            x => x.Resolve<object>(validationContext.Schema),
             Times.Once());
     }
-    
+
     [Test]
     public void TestFilterOnSchemaNameReturnsCorrectSchema()
     {
@@ -120,14 +119,14 @@ public class JsonSchemaFilterTest
             .Returns(expectedSimpleJsonSchema);
 
         // WHEN
-        var simpleJsonSchemas = 
+        var simpleJsonSchemas =
             _jsonSchemaFilter.Filter(schemaRepositories, validationContext, _referenceResolverMock.Object);
 
         // THEN
         Assert.That(simpleJsonSchemas, Has.Count.EqualTo(1));
         Assert.That(simpleJsonSchemas[0], Is.EqualTo(expectedSimpleJsonSchema));
     }
-    
+
     [Test]
     public void TestNoSchemaRepositoryFoundThrowsException()
     {
@@ -148,12 +147,12 @@ public class JsonSchemaFilterTest
 
         // WHEN & THEN
         Assert.That(() => _jsonSchemaFilter.Filter(
-                schemaRepositories, 
-                validationContext, 
+                schemaRepositories,
+                validationContext,
                 _referenceResolverMock.Object),
             Throws.TypeOf<AgenixSystemException>());
     }
-    
+
     [Test]
     public void TestNoSchemaFoundThrowsException()
     {
@@ -179,12 +178,12 @@ public class JsonSchemaFilterTest
 
         // WHEN & THEN
         Assert.That(() => _jsonSchemaFilter.Filter(
-                schemaRepositories, 
-                validationContext, 
+                schemaRepositories,
+                validationContext,
                 _referenceResolverMock.Object),
             Throws.TypeOf<AgenixSystemException>());
     }
-    
+
     [Test]
     public void TestNoFilterReturnAllSchemas()
     {
@@ -202,10 +201,9 @@ public class JsonSchemaFilterTest
         var thirdSimpleJsonSchema = Mock.Of<SimpleJsonSchema>();
         secondJsonSchemaRepository.Schemas.Add(thirdSimpleJsonSchema);
 
-        var schemaRepositories = new List<JsonSchemaRepository> 
-        { 
-            firstJsonSchemaRepository, 
-            secondJsonSchemaRepository 
+        var schemaRepositories = new List<JsonSchemaRepository>
+        {
+            firstJsonSchemaRepository, secondJsonSchemaRepository
         };
 
         // Setup validation context
@@ -215,8 +213,8 @@ public class JsonSchemaFilterTest
 
         // WHEN
         var simpleJsonSchemas = _jsonSchemaFilter.Filter(
-            schemaRepositories, 
-            validationContext, 
+            schemaRepositories,
+            validationContext,
             _referenceResolverMock.Object);
 
         // THEN
@@ -225,5 +223,4 @@ public class JsonSchemaFilterTest
         Assert.That(simpleJsonSchemas, Does.Contain(secondSimpleJsonSchema));
         Assert.That(simpleJsonSchemas, Does.Contain(thirdSimpleJsonSchema));
     }
-
 }

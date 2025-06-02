@@ -47,10 +47,14 @@ public class NHamcrestHeaderValidator : IHeaderValidator
     {
         // workaround to be able to test list of strings
         if (receivedValue is string receivedAsString)
+        {
             if (receivedAsString.Contains(','))
+            {
                 receivedValue = receivedAsString.Split([','], StringSplitOptions.RemoveEmptyEntries)
                     .Select(s => s.Trim()) // Remove extra spaces
                     .ToList();
+            }
+        }
 
 
         try
@@ -69,24 +73,34 @@ public class NHamcrestHeaderValidator : IHeaderValidator
                 {
                     var matchesMethod = matcherInterface.GetMethod("Matches");
                     if (matchesMethod != null)
+                    {
                         if (!(bool)matchesMethod.Invoke(controlValue, [receivedValue])!)
+                        {
                             throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage(
                                 $"Header validation failed: Values not matching for header '{headerName}'",
                                 controlValue,
                                 receivedValue));
+                        }
+                    }
                 }
                 else
                 {
                     var equalMatcher = new IsEqualMatcher<object>(controlValue); // Using NHamcrest's Is.EqualTo matcher
                     if (!equalMatcher.Matches(receivedValue))
+                    {
                         throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage(
                             $"Header validation failed: Values not equal for header '{headerName}'", controlValue,
                             receivedValue));
+                    }
                 }
             }
 
 
-            if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug($"Header validation: {headerName}='{controlValue}': OK");
+            if (Log.IsEnabled(LogLevel.Debug))
+            {
+                Log.LogDebug($"Header validation: {headerName}='{controlValue}': OK");
+            }
+
             validationContext.UpdateStatus(ValidationStatus.PASSED);
         }
         catch (ValidationException)

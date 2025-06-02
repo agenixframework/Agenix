@@ -39,7 +39,10 @@ public class HasSize<T>(int size) : Matcher<IEnumerable<T>>
     {
         var count = 0;
         var enumerator = collection.GetEnumerator();
-        while (enumerator.MoveNext()) count++;
+        while (enumerator.MoveNext())
+        {
+            count++;
+        }
 
         return count == size;
     }

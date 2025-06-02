@@ -77,7 +77,10 @@ public class BooleanQuestionConsequence<T> : BaseConsequence<T>
 
     private void ThrowDiagnosticErrorIfProvided(Exception actualError)
     {
-        if (_question is IQuestionDiagnostics diagnostics) throw Complaint.From(diagnostics.OnError(), actualError);
+        if (_question is IQuestionDiagnostics diagnostics)
+        {
+            throw Complaint.From(diagnostics.OnError(), actualError);
+        }
     }
 
     public override string ToString()

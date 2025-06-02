@@ -84,9 +84,11 @@ public class ValidationMatcherLibrary
     public IValidationMatcher GetValidationMatcher(string validationMatcherName)
     {
         if (!_members.ContainsKey(validationMatcherName))
+        {
             throw new NoSuchValidationMatcherException(
                 "Can not find validation matcher " + validationMatcherName + " in library " + _name + " (" +
                 _prefix + ")");
+        }
 
         return _members[validationMatcherName];
     }

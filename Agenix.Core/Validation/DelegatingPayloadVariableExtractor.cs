@@ -83,9 +83,15 @@ public class DelegatingPayloadVariableExtractor : IVariableExtractor
     /// <param name="context">The test context that provides path expressions and dynamic content replacement mechanisms.</param>
     public virtual void ExtractVariables(IMessage message, TestContext context)
     {
-        if (PathExpressions.Count == 0) return;
+        if (PathExpressions.Count == 0)
+        {
+            return;
+        }
 
-        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Reading path elements.");
+        if (Log.IsEnabled(LogLevel.Debug))
+        {
+            Log.LogDebug("Reading path elements.");
+        }
 
         var jsonPathExpressions = new Dictionary<string, object>();
         var xpathExpressions = new Dictionary<string, object>();
@@ -96,9 +102,13 @@ public class DelegatingPayloadVariableExtractor : IVariableExtractor
             var variable = pathExpression.Value;
 
             if (JsonPathMessageValidationContext.IsJsonPathExpression(path))
+            {
                 jsonPathExpressions[path] = variable;
+            }
             else
+            {
                 xpathExpressions[path] = variable;
+            }
         }
 
         if (jsonPathExpressions.Count != 0)
@@ -149,12 +159,16 @@ public class DelegatingPayloadVariableExtractor : IVariableExtractor
             .OrElseGet(() =>
             {
                 if (context.ReferenceResolver.IsResolvable(type, typeof(IVariableExtractor.IBuilder<T, TB>)))
+                {
                     return context.ReferenceResolver.Resolve<IVariableExtractor.IBuilder<T, TB>>(type);
+                }
 
                 if (context.ReferenceResolver.IsResolvable(type + "VariableExtractorBuilder",
                         typeof(IVariableExtractor.IBuilder<T, TB>)))
+                {
                     return context.ReferenceResolver
                         .Resolve<IVariableExtractor.IBuilder<T, TB>>(type + "VariableExtractorBuilder");
+                }
 
                 throw new AgenixSystemException(
                     $"Missing proper variable extractor implementation of type '{type}' - consider adding proper validation module to the project");
@@ -182,7 +196,11 @@ public class DelegatingPayloadVariableExtractor : IVariableExtractor
         /// </returns>
         public Builder Expressions(IDictionary<string, object> expressions)
         {
-            foreach (var expression in expressions) _expressions[expression.Key] = expression.Value;
+            foreach (var expression in expressions)
+            {
+                _expressions[expression.Key] = expression.Value;
+            }
+
             return this;
         }
 
@@ -226,7 +244,11 @@ public class DelegatingPayloadVariableExtractor : IVariableExtractor
         /// </returns>
         public Builder Namespaces(Dictionary<string, string> namespaces)
         {
-            foreach (var ns in namespaces) _namespaces[ns.Key] = ns.Value;
+            foreach (var ns in namespaces)
+            {
+                _namespaces[ns.Key] = ns.Value;
+            }
+
             return this;
         }
 

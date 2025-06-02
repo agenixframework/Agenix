@@ -12,10 +12,9 @@ public class Eats : IPerformable
     {
         this.nestedTask = nestedTask;
     }
-    
+
     public void PerformAs<T>(T actor) where T : Actor
     {
         actor.AttemptsTo(nestedTask);
-
     }
 }

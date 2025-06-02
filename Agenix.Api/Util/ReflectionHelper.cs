@@ -53,7 +53,10 @@ public static class ReflectionHelper
     public static void DoWithClasses(Type clazz, ClassCallback cc)
     {
         var classes = clazz.GetNestedTypes();
-        foreach (var aClazz in classes) cc.Invoke(aClazz);
+        foreach (var aClazz in classes)
+        {
+            cc.Invoke(aClazz);
+        }
     }
 
     /// Executes a callback for each field in the given class type.
@@ -63,7 +66,10 @@ public static class ReflectionHelper
     {
         var fields = clazz.GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
 
-        foreach (var field in fields) fc.Invoke(field);
+        foreach (var field in fields)
+        {
+            fc.Invoke(field);
+        }
     }
 
     /// Executes a callback for each method in the given class type.
@@ -75,7 +81,11 @@ public static class ReflectionHelper
 
         foreach (var method in methods)
         {
-            if (method.IsSpecialName) continue;
+            if (method.IsSpecialName)
+            {
+                continue;
+            }
+
             mc.Invoke(method);
         }
     }
@@ -93,7 +103,10 @@ public static class ReflectionHelper
             var field = fields.FirstOrDefault(f =>
                 string.Equals(f.Name, $"<{name}>k__BackingField", StringComparison.OrdinalIgnoreCase) ||
                 string.Equals(f.Name, name, StringComparison.OrdinalIgnoreCase));
-            if (field != null) return field;
+            if (field != null)
+            {
+                return field;
+            }
 
             clazz = clazz.BaseType; // Move to the base type
         }
@@ -126,28 +139,37 @@ public static class ReflectionHelper
             foreach (var method in methods.Where(m =>
                          string.Equals(m.Name, possibleName, StringComparison.OrdinalIgnoreCase)))
                 // Handle generic methods
+            {
                 if (method.IsGenericMethodDefinition)
                 {
                     var genericArguments = method.GetGenericArguments();
                     if (genericArguments.Length == paramTypes.Length)
+                    {
                         try
                         {
                             // Construct the generic method to match the parameter types
                             var constructedMethod = method.MakeGenericMethod(paramTypes);
 
                             if (AreParametersCompatible(constructedMethod.GetParameters(), paramTypes))
+                            {
                                 return constructedMethod;
+                            }
                         }
                         catch
                         {
                             // If unable to construct the method, continue searching
                         }
+                    }
                 }
                 else
                 {
                     // Handle non-generic methods
-                    if (AreParametersCompatible(method.GetParameters(), paramTypes)) return method;
+                    if (AreParametersCompatible(method.GetParameters(), paramTypes))
+                    {
+                        return method;
+                    }
                 }
+            }
 
             // Move up the type hierarchy
             clazz = clazz.BaseType;
@@ -161,7 +183,10 @@ public static class ReflectionHelper
     /// </summary>
     private static bool AreParametersCompatible(ParameterInfo[] parameters, Type[] paramTypes)
     {
-        if (parameters.Length == 0 && paramTypes.Length == 0) return true;
+        if (parameters.Length == 0 && paramTypes.Length == 0)
+        {
+            return true;
+        }
 
         // Handle `params` parameter matching
         if (parameters.Length > 0 && parameters.Last().GetCustomAttributes(typeof(ParamArrayAttribute), false).Any())
@@ -170,28 +195,46 @@ public static class ReflectionHelper
             var fixedParams = parameters.Take(parameters.Length - 1).ToArray();
             var paramsParam = parameters.Last();
 
-            if (paramTypes.Length < fixedParams.Length) return false;
+            if (paramTypes.Length < fixedParams.Length)
+            {
+                return false;
+            }
 
             // Check fixed parameters
             for (var i = 0; i < fixedParams.Length; i++)
+            {
                 if (!fixedParams[i].ParameterType.IsAssignableFrom(paramTypes[i]))
+                {
                     return false;
+                }
+            }
 
             // Check params parameter
             var paramsType = paramsParam.ParameterType.GetElementType();
             for (var i = fixedParams.Length; i < paramTypes.Length; i++)
+            {
                 if (!paramsType!.IsAssignableFrom(paramTypes[i]))
+                {
                     return false;
+                }
+            }
 
             return true;
         }
 
         // Standard parameter matching
-        if (parameters.Length != paramTypes.Length) return false;
+        if (parameters.Length != paramTypes.Length)
+        {
+            return false;
+        }
 
         for (var i = 0; i < parameters.Length; i++)
+        {
             if (!parameters[i].ParameterType.IsAssignableFrom(paramTypes[i]))
+            {
                 return false;
+            }
+        }
 
         return true;
     }
@@ -199,7 +242,10 @@ public static class ReflectionHelper
     private static bool AreParametersCompatible2(ParameterInfo[] parameters, Type[] paramTypes,
         MethodInfo method = null)
     {
-        if (parameters.Length == 0 && paramTypes.Length == 0) return true;
+        if (parameters.Length == 0 && paramTypes.Length == 0)
+        {
+            return true;
+        }
 
         if (method != null && method.IsGenericMethodDefinition)
         {
@@ -211,7 +257,10 @@ public static class ReflectionHelper
 
                 // Ensure the provided type matches the generic constraints
                 if (constraints.Length > 0 &&
-                    !constraints.All(constraint => constraint.IsAssignableFrom(paramTypes[i]))) return false;
+                    !constraints.All(constraint => constraint.IsAssignableFrom(paramTypes[i])))
+                {
+                    return false;
+                }
             }
         }
 
@@ -228,22 +277,35 @@ public static class ReflectionHelper
             var fixedParams = parameters.Take(parameters.Length - 1).ToArray();
             var paramsParam = parameters.Last();
 
-            if (paramTypes.Length < fixedParams.Length) return false;
+            if (paramTypes.Length < fixedParams.Length)
+            {
+                return false;
+            }
 
             // Check fixed parameters
-            if (fixedParams.Where((t, i) => !t.ParameterType.IsAssignableFrom(paramTypes[i])).Any()) return false;
+            if (fixedParams.Where((t, i) => !t.ParameterType.IsAssignableFrom(paramTypes[i])).Any())
+            {
+                return false;
+            }
 
             // Check params parameter
             var paramsType = paramsParam.ParameterType.GetElementType();
             for (var i = fixedParams.Length; i < paramTypes.Length; i++)
+            {
                 if (!paramsType!.IsAssignableFrom(paramTypes[i]))
+                {
                     return false;
+                }
+            }
 
             return true;
         }
 
         // Standard parameter matching
-        if (parameters.Length != paramTypes.Length) return false;
+        if (parameters.Length != paramTypes.Length)
+        {
+            return false;
+        }
 
         return !parameters.Where((t, i) => !t.ParameterType.IsAssignableFrom(paramTypes[i])).Any();
     }
@@ -277,8 +339,10 @@ public static class ReflectionHelper
         try
         {
             if (!field.IsPublic)
+            {
                 field = field.DeclaringType.GetField(field.Name,
                     BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
+            }
 
             field?.SetValue(instance, value);
         }

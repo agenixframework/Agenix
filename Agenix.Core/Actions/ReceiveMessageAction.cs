@@ -174,7 +174,9 @@ public class ReceiveMessageAction : AbstractTestAction
         var receivedMessage = !string.IsNullOrEmpty(selector) ? ReceiveSelected(context, selector) : Receive(context);
 
         if (receivedMessage == null)
+        {
             throw new AgenixSystemException("Failed to receive message - message is not available");
+        }
 
         // Validate the message
         ValidateMessage(receivedMessage, context);
@@ -202,14 +204,19 @@ public class ReceiveMessageAction : AbstractTestAction
     /// <returns></returns>
     private IMessage ReceiveSelected(TestContext context, string selectorString)
     {
-        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Setting message selector: '{SelectorString}'", selectorString);
+        if (Log.IsEnabled(LogLevel.Debug))
+        {
+            Log.LogDebug("Setting message selector: '{SelectorString}'", selectorString);
+        }
 
         var messageEndpoint = GetOrCreateEndpoint(context);
         var consumer = messageEndpoint.CreateConsumer();
 
         if (consumer is ISelectiveConsumer selectiveConsumer)
+        {
             return selectiveConsumer.Receive(context.ReplaceDynamicContentInString(selectorString), context,
                 ReceiveTimeout > 0 ? ReceiveTimeout : messageEndpoint.EndpointConfiguration.Timeout);
+        }
 
         Log.LogWarning("Unable to receive selectively with consumer implementation: '{Type}'", consumer.GetType());
         return Receive(context);
@@ -222,12 +229,21 @@ public class ReceiveMessageAction : AbstractTestAction
     /// <param name="context"></param>
     protected void ValidateMessage(IMessage message, TestContext context)
     {
-        foreach (var processor in Processors) processor.Process(message, context);
+        foreach (var processor in Processors)
+        {
+            processor.Process(message, context);
+        }
 
-        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Received message:\n{Print}", message.Print(context));
+        if (Log.IsEnabled(LogLevel.Debug))
+        {
+            Log.LogDebug("Received message:\n{Print}", message.Print(context));
+        }
 
         // Extract variables from received message content
-        foreach (var variableExtractor in VariableExtractors) variableExtractor.ExtractVariables(message, context);
+        foreach (var variableExtractor in VariableExtractors)
+        {
+            variableExtractor.ExtractVariables(message, context);
+        }
 
         var controlMessage = CreateControlMessage(context, MessageType);
         context.MessageStore.StoreMessage(
@@ -241,21 +257,32 @@ public class ReceiveMessageAction : AbstractTestAction
         }
         else
         {
-            if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Control message:\n{Print}", controlMessage.Print(context));
+            if (Log.IsEnabled(LogLevel.Debug))
+            {
+                Log.LogDebug("Control message:\n{Print}", controlMessage.Print(context));
+            }
 
             AssumeMessageType(StringUtils.HasText(controlMessage.GetPayload<string>()) ? controlMessage : message);
 
             if (Validators is { Count: > 0 })
             {
                 foreach (var messageValidator in Validators)
+                {
                     messageValidator.ValidateMessage(message, controlMessage, context, ValidationContexts);
+                }
 
                 if (Validators.AsParallel()
                     .Select(v => v.GetType())
-                    .Any(type => typeof(DefaultMessageHeaderValidator).IsAssignableFrom(type))) return;
+                    .Any(type => typeof(DefaultMessageHeaderValidator).IsAssignableFrom(type)))
+                {
+                    return;
+                }
+
                 var defaultMessageHeaderValidator = context.MessageValidatorRegistry.GetDefaultMessageHeaderValidator();
                 if (defaultMessageHeaderValidator != null)
+                {
                     defaultMessageHeaderValidator.ValidateMessage(message, controlMessage, context, ValidationContexts);
+                }
             }
             else
             {
@@ -265,25 +292,36 @@ public class ReceiveMessageAction : AbstractTestAction
                     context.MessageValidatorRegistry.FindMessageValidators(MessageType, message, mustFindValidator);
 
                 foreach (var messageValidator in activeValidators)
+                {
                     messageValidator.ValidateMessage(message, controlMessage, context, ValidationContexts);
+                }
 
                 if (AgenixSettings.IsPerformDefaultValidation() &&
                     ValidationContexts.Any(validationContext => validationContext.Status == ValidationStatus.UNKNOWN))
                 {
                     var defaultValidator = context.MessageValidatorRegistry.GetDefaultMessageValidator();
                     if (!activeValidators.Any(validator => defaultValidator.GetType().IsInstanceOfType(validator)))
+                    {
                         defaultValidator.ValidateMessage(message, controlMessage, context, ValidationContexts);
+                    }
                 }
             }
 
             var unknown = ValidationContexts
                 .Where(validationContext => validationContext.Status == ValidationStatus.UNKNOWN)
                 .ToList();
-            if (unknown.Count <= 0) return;
+            if (unknown.Count <= 0)
+            {
+                return;
+            }
+
             {
                 foreach (var validationContext in unknown)
+                {
                     Log.LogWarning(
                         "Found validation context that has not been processed: {S}", validationContext.GetType().Name);
+                }
+
                 throw new ValidationException(
                     $"Incomplete message validation - total of {unknown.Count} validation context has not been processed");
             }
@@ -302,10 +340,16 @@ public class ReceiveMessageAction : AbstractTestAction
     {
         if (MessageTypeExtensions.IsBinary(MessageType) ||
             MessageTypeExtensions.FormUrlEncoded.Equals(MessageType, StringComparison.OrdinalIgnoreCase))
+        {
             return;
+        }
 
         var payload = message.GetPayload<string>();
-        if (string.IsNullOrEmpty(payload)) return;
+        if (string.IsNullOrEmpty(payload))
+        {
+            return;
+        }
+
         payload = payload.Trim();
 
         if (MessagePayloadUtils.IsXml(payload)
@@ -337,12 +381,21 @@ public class ReceiveMessageAction : AbstractTestAction
     {
         var message = MessageBuilder.Build(context, messageType);
 
-        if (message.Payload == null) return message;
+        if (message.Payload == null)
+        {
+            return message;
+        }
+
         foreach (var processor in context.GetMessageProcessors(MessageDirection.INBOUND))
+        {
             processor.Process(message, context);
+        }
 
 
-        foreach (var processor in ControlMessageProcessors) processor.Process(message, context);
+        foreach (var processor in ControlMessageProcessors)
+        {
+            processor.Process(message, context);
+        }
 
         return message;
     }
@@ -363,9 +416,15 @@ public class ReceiveMessageAction : AbstractTestAction
     /// <exception cref="AgenixSystemException">Thrown when neither the endpoint nor the endpoint URI is set properly.</exception>
     public IEndpoint GetOrCreateEndpoint(TestContext context)
     {
-        if (Endpoint != null) return Endpoint;
+        if (Endpoint != null)
+        {
+            return Endpoint;
+        }
 
-        if (!string.IsNullOrWhiteSpace(EndpointUri)) return context.EndpointFactory.Create(EndpointUri, context);
+        if (!string.IsNullOrWhiteSpace(EndpointUri))
+        {
+            return context.EndpointFactory.Create(EndpointUri, context);
+        }
 
         throw new AgenixSystemException("Neither endpoint nor endpoint uri is set properly!");
     }
@@ -404,7 +463,11 @@ public class ReceiveMessageAction : AbstractTestAction
         /// <return>Returns the instance of ReceiveMessageActionBuilderSupport</return>
         public override ReceiveMessageActionBuilderSupport GetMessageBuilderSupport()
         {
-            if (messageBuilderSupport == null) messageBuilderSupport = new ReceiveMessageActionBuilderSupport(self);
+            if (messageBuilderSupport == null)
+            {
+                messageBuilderSupport = new ReceiveMessageActionBuilderSupport(self);
+            }
+
             return base.GetMessageBuilderSupport();
         }
 
@@ -460,9 +523,15 @@ public class ReceiveMessageAction : AbstractTestAction
 
             ReconcileValidationContexts();
 
-            if (referenceResolver == null) return DoBuild();
+            if (referenceResolver == null)
+            {
+                return DoBuild();
+            }
+
             if (_validationProcessor is IReferenceResolverAware referenceResolverAwareProcessor)
+            {
                 referenceResolverAwareProcessor.SetReferenceResolver(referenceResolver);
+            }
 
             while (_validatorNames.Count > 0)
             {
@@ -471,9 +540,13 @@ public class ReceiveMessageAction : AbstractTestAction
 
                 var validator = referenceResolver.Resolve(validatorName);
                 if (validator is IHeaderValidator headerValidator)
+                {
                     GetHeaderValidationContext().AddHeaderValidator(headerValidator);
+                }
                 else
+                {
                     _validators.Add((IMessageValidator<IValidationContext>)validator);
+                }
             }
 
             return DoBuild();
@@ -577,7 +650,11 @@ public class ReceiveMessageAction : AbstractTestAction
         /// <returns>The current instance of the builder.</returns>
         public TB Selector(IDictionary<string, object> messageSelector)
         {
-            foreach (var kvp in messageSelector) _messageSelectors[kvp.Key] = kvp.Value;
+            foreach (var kvp in messageSelector)
+            {
+                _messageSelectors[kvp.Key] = kvp.Value;
+            }
+
             return self;
         }
 
@@ -599,7 +676,11 @@ public class ReceiveMessageAction : AbstractTestAction
         /// <returns>The updated action builder with the specified validators.</returns>
         public TB Validators(params string[] validators)
         {
-            foreach (var validator in validators) Validator(validator);
+            foreach (var validator in validators)
+            {
+                Validator(validator);
+            }
+
             return self;
         }
 
@@ -642,7 +723,11 @@ public class ReceiveMessageAction : AbstractTestAction
         /// <returns>The builder instance with the added validators.</returns>
         public TB Validator(params IHeaderValidator[] validators)
         {
-            foreach (var validator in validators) GetHeaderValidationContext().AddHeaderValidator(validator);
+            foreach (var validator in validators)
+            {
+                GetHeaderValidationContext().AddHeaderValidator(validator);
+            }
+
             return self;
         }
 
@@ -653,7 +738,11 @@ public class ReceiveMessageAction : AbstractTestAction
         /// <returns>The header validation context.</returns>
         public HeaderValidationContext GetHeaderValidationContext()
         {
-            if (_headerValidationContext != null) return _headerValidationContext;
+            if (_headerValidationContext != null)
+            {
+                return _headerValidationContext;
+            }
+
             _headerValidationContext = new HeaderValidationContext();
 
             Validate(() => _headerValidationContext);
@@ -718,10 +807,15 @@ public class ReceiveMessageAction : AbstractTestAction
         protected void ReconcileValidationContexts()
         {
             var validationContexts = GetValidationContexts();
-            if (!validationContexts.Any(context => context is HeaderValidationContext)) GetHeaderValidationContext();
+            if (!validationContexts.Any(context => context is HeaderValidationContext))
+            {
+                GetHeaderValidationContext();
+            }
 
             if (!validationContexts.Any(context => context is IMessageValidationContext))
+            {
                 InjectMessageValidationContext();
+            }
         }
 
         /// <summary>
@@ -737,14 +831,21 @@ public class ReceiveMessageAction : AbstractTestAction
             if (payload.IsPresent)
             {
                 if (MessagePayloadUtils.IsXml(payload.Value))
+                {
                     validationContext = new XmlMessageValidationContext();
+                }
                 else if (MessagePayloadUtils.IsJson(payload.Value))
+                {
                     validationContext = new JsonMessageValidationContext();
+                }
                 else
+                {
                     validationContext = new DefaultMessageValidationContext();
+                }
             }
 
             if (validationContext == null && messageBuilderSupport != null)
+            {
                 if (messageBuilderSupport.GetMessageBuilder().GetType().IsDefined(typeof(MessagePayloadAttribute)))
                 {
                     var type = messageBuilderSupport.GetMessageBuilder().GetType()
@@ -757,6 +858,7 @@ public class ReceiveMessageAction : AbstractTestAction
                         _ => validationContext
                     };
                 }
+            }
 
             if (validationContext == null)
             {
@@ -776,13 +878,22 @@ public class ReceiveMessageAction : AbstractTestAction
             if (validationContext == null && messageBuilderSupport != null)
             {
                 if (messageBuilderSupport.GetMessageBuilder() is StaticMessageBuilder)
+                {
                     validationContext = new DefaultMessageValidationContext();
+                }
                 else if (messageBuilderSupport.GetMessageBuilder() is IWithPayloadBuilder payloadBuilder)
+                {
                     if (payloadBuilder.GetPayloadBuilder() != null)
+                    {
                         validationContext = new DefaultMessageValidationContext();
+                    }
+                }
             }
 
-            if (validationContext != null) Validate(validationContext);
+            if (validationContext != null)
+            {
+                Validate(validationContext);
+            }
         }
 
         /// <summary>
@@ -792,9 +903,14 @@ public class ReceiveMessageAction : AbstractTestAction
         protected Optional<string> GetMessageResource()
         {
             if (messageBuilderSupport?.GetMessageBuilder() is not IWithPayloadBuilder withPayloadBuilder)
+            {
                 return Optional<string>.Empty;
+            }
+
             if (withPayloadBuilder.GetPayloadBuilder() is FileResourcePayloadBuilder filePayloadBuilder)
+            {
                 return Optional<string>.OfNullable(filePayloadBuilder.GetResourcePath());
+            }
 
             return Optional<string>.Empty;
         }
@@ -805,7 +921,10 @@ public class ReceiveMessageAction : AbstractTestAction
         /// <returns></returns>
         protected virtual Optional<string> GetMessagePayload()
         {
-            if (messageBuilderSupport == null) return Optional<string>.Empty;
+            if (messageBuilderSupport == null)
+            {
+                return Optional<string>.Empty;
+            }
 
             var messageBuilder = messageBuilderSupport.GetMessageBuilder();
 
@@ -814,7 +933,10 @@ public class ReceiveMessageAction : AbstractTestAction
                 case StaticMessageBuilder staticMessageBuilder:
                 {
                     var message = staticMessageBuilder.GetMessage();
-                    if (message.Payload is string) return Optional<string>.OfNullable(message.GetPayload<string>());
+                    if (message.Payload is string)
+                    {
+                        return Optional<string>.OfNullable(message.GetPayload<string>());
+                    }
 
                     break;
                 }
@@ -822,7 +944,9 @@ public class ReceiveMessageAction : AbstractTestAction
                 {
                     var payloadBuilder = withPayloadBuilder.GetPayloadBuilder();
                     if (payloadBuilder is DefaultPayloadBuilder defaultPayloadBuilder)
+                    {
                         return Optional<string>.OfNullable(defaultPayloadBuilder.GetPayload()?.ToString());
+                    }
 
                     break;
                 }

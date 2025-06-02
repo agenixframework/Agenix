@@ -92,10 +92,13 @@ public class InputStreamResource : AbstractResource
         get
         {
             if (_inputStream == null)
+            {
                 throw new InvalidOperationException(
                     "InputStream has already been read - " +
                     "do not use InputStreamResource if a stream " +
                     "needs to be read multiple times");
+            }
+
             var result = _inputStream;
             _inputStream = null;
             return result;

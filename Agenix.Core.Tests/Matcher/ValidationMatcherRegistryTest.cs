@@ -16,8 +16,7 @@ public class ValidationMatcherRegistryTest : AbstractNUnitSetUp
     {
         _validationMatcherLibrary = new ValidationMatcherLibrary
         {
-            Name = "fooValidationMatcherLibrary",
-            Prefix = "foo:"
+            Name = "fooValidationMatcherLibrary", Prefix = "foo:"
         };
         _validationMatcherLibrary.Members.Add("customMatcher", _matcher.Object);
     }

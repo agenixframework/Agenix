@@ -7,9 +7,9 @@ namespace Agenix.Validation.NHamcrest.Tests.Validation;
 
 public class NHamcrestHeaderValidatorTest : AbstractNUnitSetUp
 {
-    private readonly NHamcrestHeaderValidator _validator = new();
     private readonly HeaderValidationContext _validationContext = new();
-    
+    private readonly NHamcrestHeaderValidator _validator = new();
+
     public static IEnumerable<TestCaseData> SuccessData
     {
         get
@@ -18,7 +18,7 @@ public class NHamcrestHeaderValidatorTest : AbstractNUnitSetUp
             yield return new TestCaseData("foo", Is.EqualTo("foo"));
         }
     }
-    
+
     public static IEnumerable<TestCaseData> ErrorData
     {
         get
@@ -27,13 +27,13 @@ public class NHamcrestHeaderValidatorTest : AbstractNUnitSetUp
             yield return new TestCaseData("foo", Is.EqualTo("wrong"));
         }
     }
-    
+
     [TestCaseSource(nameof(SuccessData))]
     public void TestValidateHeaderSuccess(object receivedValue, object controlValue)
     {
         _validator.ValidateHeader("foo", receivedValue, controlValue, Context, _validationContext);
     }
-    
+
     [TestCaseSource(nameof(ErrorData))]
     public void TestValidateHeaderError(object receivedValue, object controlValue)
     {

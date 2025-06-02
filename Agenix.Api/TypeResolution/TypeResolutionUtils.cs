@@ -98,7 +98,11 @@ public sealed class TypeResolutionUtils
     public static Type ResolveType(string typeName)
     {
         var type = TypeRegistry.ResolveType(typeName);
-        if (type == null) type = internalTypeResolver.Resolve(typeName);
+        if (type == null)
+        {
+            type = internalTypeResolver.Resolve(typeName);
+        }
+
         return type;
     }
 
@@ -133,10 +137,13 @@ public sealed class TypeResolutionUtils
                 string.Format(CultureInfo.InvariantCulture, "interfaceNames[{0}]", i));
             var resolvedInterface = ResolveType(interfaceName);
             if (!resolvedInterface.IsInterface)
+            {
                 throw new ArgumentException(
                     string.Format(CultureInfo.InvariantCulture,
                         "[{0}] is a class.",
                         resolvedInterface.FullName));
+            }
+
             interfaces.Add(resolvedInterface);
             interfaces.AddRange(resolvedInterface.GetInterfaces());
         }
@@ -168,12 +175,16 @@ public sealed class TypeResolutionUtils
         var m = methodMatchRegex.Match(pattern);
 
         if (!m.Success)
+        {
             throw new ArgumentException(string.Format("The pattern [{0}] is not well-formed.", pattern));
+        }
 
         // Check method name
         var methodNamePattern = m.Groups["methodName"].Value;
         if (!PatternMatchUtils.SimpleMatch(methodNamePattern, method.Name))
+        {
             return false;
+        }
 
         if (m.Groups["parameters"].Value.Length > 0)
         {
@@ -187,7 +198,9 @@ public sealed class TypeResolutionUtils
 
             // Verify parameter count
             if (paramTypes.Length != paramInfos.Length)
+            {
                 return false;
+            }
 
             // Match parameter types
             return !paramInfos.Where((t, i) => t.ParameterType != ResolveType(paramTypes[i])).Any();

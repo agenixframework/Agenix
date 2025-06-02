@@ -2,7 +2,6 @@
 using Agenix.Api.Annotations;
 using Agenix.Api.Condition;
 using Agenix.Api.Spi;
-using Agenix.Core.Condition;
 using Agenix.Http.Client;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;

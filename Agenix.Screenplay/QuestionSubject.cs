@@ -86,7 +86,11 @@ public class QuestionSubject<T>(Type questionClass)
     private string? AnnotatedSubject()
     {
         var methodAnnotation = AnnotationOnMethodOf(questionClass);
-        if (methodAnnotation != null) return methodAnnotation;
+        if (methodAnnotation != null)
+        {
+            return methodAnnotation;
+        }
+
         return AnnotatedSubjectFromClass(questionClass);
     }
 
@@ -105,9 +109,15 @@ public class QuestionSubject<T>(Type questionClass)
     private string? AnnotatedSubjectFromClass(Type questionClass)
     {
         var subjectAttribute = questionClass.GetCustomAttribute<SubjectAttribute>();
-        if (subjectAttribute != null) return AnnotationOnClass(questionClass);
+        if (subjectAttribute != null)
+        {
+            return AnnotationOnClass(questionClass);
+        }
 
-        if (questionClass.BaseType != null) return AnnotatedSubjectFromClass(questionClass.BaseType);
+        if (questionClass.BaseType != null)
+        {
+            return AnnotatedSubjectFromClass(questionClass.BaseType);
+        }
 
         return null;
     }
@@ -160,7 +170,11 @@ public class QuestionSubject<T>(Type questionClass)
     private string? AnnotationOnClass(Type questionClass)
     {
         var subjectAttribute = questionClass.GetCustomAttribute<SubjectAttribute>();
-        if (subjectAttribute == null) return null;
+        if (subjectAttribute == null)
+        {
+            return null;
+        }
+
         var annotatedTitle = subjectAttribute.Value;
         return AnnotatedTitle.InjectFieldsInto(annotatedTitle).Using(_question);
     }

@@ -90,7 +90,10 @@ public abstract class AbstractTestAction : ITestAction, INamed, IDescribed
     /// <param name="context"></param>
     public virtual void Execute(TestContext context)
     {
-        if (!IsDisabled(context)) DoExecute(context);
+        if (!IsDisabled(context))
+        {
+            DoExecute(context);
+        }
     }
 
     /// <summary>

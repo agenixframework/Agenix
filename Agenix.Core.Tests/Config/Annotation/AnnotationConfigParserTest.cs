@@ -1,7 +1,6 @@
 ﻿using System;
 using Agenix.Api.Config.Annotation;
 using Agenix.Api.Endpoint;
-using Agenix.Core.Endpoint;
 using Agenix.Core.Endpoint.Direct.Annotation;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;

@@ -36,6 +36,7 @@ public abstract class AbstractEndpointBuilder<T> : IEndpointBuilder<T> where T :
     public AbstractEndpointBuilder<T> Initialize()
     {
         if (GetEndpoint() is InitializingPhase phase)
+        {
             try
             {
                 phase.Initialize();
@@ -44,6 +45,7 @@ public abstract class AbstractEndpointBuilder<T> : IEndpointBuilder<T> where T :
             {
                 throw new AgenixSystemException("Failed to initialize server", e);
             }
+        }
 
         return this;
     }

@@ -88,7 +88,10 @@ public static class OnStage
         var theActorIsReferredToByAPronoun = GetPronouns().Any(pronoun =>
             pronoun.Equals(requiredActor, StringComparison.OrdinalIgnoreCase));
 
-        if (theActorIsReferredToByAPronoun) return GetStage().TheActorInTheSpotlight().UsingPronoun(requiredActor);
+        if (theActorIsReferredToByAPronoun)
+        {
+            return GetStage().TheActorInTheSpotlight().UsingPronoun(requiredActor);
+        }
 
         if (AnActorIsOnStage() && TheActorInTheSpotlight().Name.Equals(A_New_Actor))
         {
@@ -149,8 +152,11 @@ public static class OnStage
     public static Stage GetStage()
     {
         if (Stage.Value == null)
+        {
             throw new NoStageException(
                 "No stage available - it looks like you haven't called the SetTheStage() method before calling this one.");
+        }
+
         return Stage.Value;
     }
 
@@ -160,7 +166,10 @@ public static class OnStage
     /// </summary>
     public static void DrawTheCurtain()
     {
-        if (Stage.Value != null) GetStage().DrawTheCurtain();
+        if (Stage.Value != null)
+        {
+            GetStage().DrawTheCurtain();
+        }
     }
 
     /// <summary>

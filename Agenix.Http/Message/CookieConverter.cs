@@ -76,9 +76,15 @@ public class CookieConverter
         builder.Append('=');
         builder.Append(cookie.Value);
 
-        if (!string.IsNullOrEmpty(cookie.Path)) builder.Append(";" + Path + "=").Append(cookie.Path);
+        if (!string.IsNullOrEmpty(cookie.Path))
+        {
+            builder.Append(";" + Path + "=").Append(cookie.Path);
+        }
 
-        if (!string.IsNullOrEmpty(cookie.Domain)) builder.Append(";" + Domain + "=").Append(cookie.Domain);
+        if (!string.IsNullOrEmpty(cookie.Domain))
+        {
+            builder.Append(";" + Domain + "=").Append(cookie.Domain);
+        }
 
         if (cookie.Expires != default)
         {
@@ -90,9 +96,15 @@ public class CookieConverter
             builder.Append($";Max-Age={maxAgeSeconds}");
         }
 
-        if (cookie.Secure) builder.Append(";" + Secure);
+        if (cookie.Secure)
+        {
+            builder.Append(";" + Secure);
+        }
 
-        if (cookie.HttpOnly) builder.Append(";" + HttpOnly);
+        if (cookie.HttpOnly)
+        {
+            builder.Append(";" + HttpOnly);
+        }
 
         return builder.ToString();
     }
@@ -105,9 +117,15 @@ public class CookieConverter
     {
         var cookie = new Cookie(GetCookieParam(Name, cookieString), GetCookieParam(Value, cookieString));
 
-        if (cookieString.Contains(Path)) cookie.Path = GetCookieParam(Path, cookieString);
+        if (cookieString.Contains(Path))
+        {
+            cookie.Path = GetCookieParam(Path, cookieString);
+        }
 
-        if (cookieString.Contains(Domain)) cookie.Domain = GetCookieParam(Domain, cookieString);
+        if (cookieString.Contains(Domain))
+        {
+            cookie.Domain = GetCookieParam(Domain, cookieString);
+        }
 
         if (cookieString.Contains(MaxAge))
         {
@@ -136,10 +154,15 @@ public class CookieConverter
             }
         }
 
-        if (cookieString.Contains(Secure)) cookie.Secure = Convert.ToBoolean(GetCookieParam(Secure, cookieString));
+        if (cookieString.Contains(Secure))
+        {
+            cookie.Secure = Convert.ToBoolean(GetCookieParam(Secure, cookieString));
+        }
 
         if (cookieString.Contains(HttpOnly))
+        {
             cookie.HttpOnly = Convert.ToBoolean(GetCookieParam(HttpOnly, cookieString));
+        }
 
         return cookie;
     }
@@ -151,7 +174,10 @@ public class CookieConverter
     /// @throws Exception if the specified parameter cannot be found within the cookie string.
     private string GetCookieParam(string param, string cookieString)
     {
-        if (param.Equals(Name)) return cookieString[..cookieString.IndexOf('=')];
+        if (param.Equals(Name))
+        {
+            return cookieString[..cookieString.IndexOf('=')];
+        }
 
         if (param.Equals(Value))
         {
@@ -163,7 +189,9 @@ public class CookieConverter
         }
 
         if (ContainsFlag(Secure, param, cookieString) || ContainsFlag(HttpOnly, param, cookieString))
+        {
             return bool.TrueString;
+        }
 
         if (cookieString.Contains(param + '='))
         {

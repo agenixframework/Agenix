@@ -38,6 +38,12 @@ namespace Agenix.Api.IO;
 /// </summary>
 public class StringResource : AbstractResource
 {
+    #region Fields
+
+    private readonly string _description;
+
+    #endregion
+
     /// <summary>
     ///     Creates a new instance of the <see cref="StringResource" /> class.
     /// </summary>
@@ -100,10 +106,4 @@ public class StringResource : AbstractResource
     ///     Gets the content encapsulated by this <see cref="StringResource" />.
     /// </summary>
     public string Content { get; }
-
-    #region Fields
-
-    private readonly string _description;
-
-    #endregion
 }

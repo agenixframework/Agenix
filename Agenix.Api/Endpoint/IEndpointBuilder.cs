@@ -86,9 +86,15 @@ public interface IEndpointBuilder<out T> where T : IEndpoint
             TypeResolver.ResolveAll<IEndpointBuilder<T>>("", ITypeResolver.TYPE_PROPERTY_WILDCARD)
         );
 
-        if (!Log.IsEnabled(LogLevel.Debug)) return validators;
+        if (!Log.IsEnabled(LogLevel.Debug))
+        {
+            return validators;
+        }
+
         foreach (var kvp in validators)
+        {
             Log.LogDebug("Found endpoint builder '{KvpKey}' as {Name}", kvp.Key, kvp.Value.GetType().Name);
+        }
 
         return validators;
     }
@@ -144,7 +150,10 @@ public interface IEndpointBuilder<out T> where T : IEndpoint
     public T Build(AgenixEndpointAttribute endpointAnnotation, IReferenceResolver referenceResolver)
     {
         var nameSetter = ReflectionHelper.FindMethod(GetType(), "Name", typeof(string));
-        if (nameSetter != null) ReflectionHelper.InvokeMethod(nameSetter, this, endpointAnnotation.Name);
+        if (nameSetter != null)
+        {
+            ReflectionHelper.InvokeMethod(nameSetter, this, endpointAnnotation.Name);
+        }
 
         foreach (var endpointProperty in endpointAnnotation.Properties)
         {
