@@ -53,8 +53,5 @@ public class DefaultPayloadBuilder(object payload) : IMessagePayloadBuilder
     ///     Retrieves the payload object that is being built.
     /// </summary>
     /// <returns>The payload object.</returns>
-    public object GetPayload()
-    {
-        return payload;
-    }
+    public object Payload => payload;
 }

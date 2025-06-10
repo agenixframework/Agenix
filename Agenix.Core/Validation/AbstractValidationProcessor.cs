@@ -20,7 +20,7 @@ public abstract class AbstractValidationProcessor<T> : IValidationProcessor, IGe
     ///     Sets the reference resolver for the validation processor.
     /// </summary>
     /// <param name="referenceResolver">The reference resolver to be set.</param>
-    public void SetReferenceResolver(IReferenceResolver referenceResolver)
+    public virtual void SetReferenceResolver(IReferenceResolver referenceResolver)
     {
         ReferenceResolver = referenceResolver;
     }

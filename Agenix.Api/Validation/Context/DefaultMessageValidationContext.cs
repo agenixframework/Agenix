@@ -64,7 +64,7 @@ public class DefaultMessageValidationContext(
 
     /// Gets the set of XPath expressions used to identify message elements
     /// that should be ignored during validation.
-    public ISet<string> IgnoreExpressions => _ignoreExpressions;
+    public HashSet<string> IgnoreExpressions => _ignoreExpressions;
 
     /// Determines whether schema validation is enabled for the context.
     public bool IsSchemaValidationEnabled => _schemaValidationEnabled;

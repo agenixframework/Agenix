@@ -57,23 +57,15 @@ public class FunctionUtilsTest : AbstractNUnitSetUp
         ClassicAssert.AreEqual(
             FunctionUtils.ResolveFunction("core:UpperCase('Yes, I like W0rld, and this is great!')", Context),
             "YES, I LIKE W0RLD, AND THIS IS GREAT!");
-        //Assert.AreEqual(FunctionUtils.ResolveFunction("core:UpperCase('Yes,I like W0rld!')", Context), "YES,I LIKE W0RLD!");
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:UpperCase('Yes,I like W0rld!')", Context), "YES,I LIKE W0RLD!");
         ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:UpperCase('Yes', 'I like W0rld!')", Context), "YES");
         ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:Concat('Hello Yes, I like W0rld!')", Context),
             "Hello Yes, I like W0rld!");
-        //Assert.AreEqual(FunctionUtils.ResolveFunction("core:Concat('Hello Yes,I like W0rld!')", Context), "Hello Yes,I like W0rld!");
-        //Assert.AreEqual(FunctionUtils.ResolveFunction("core:Concat('Hello Yes,I like W0rld!, and this is great')", Context), "Hello Yes,I like W0rld!, and this is great!");
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:Concat('Hello Yes,I like W0rld!')", Context), "Hello Yes,I like W0rld!");
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:Concat('Hello Yes,I like W0rld!, and this is great!')", Context), "Hello Yes,I like W0rld!, and this is great!");
         ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:Concat('Hello Yes , I like W0rld!')", Context),
             "Hello Yes , I like W0rld!");
-        //Assert.AreEqual(FunctionUtils.ResolveFunction("core:Concat('Hello Yes, I like W0rld!', 'Hello Yes,we like W0rld!')", Context), "Hello Yes, I like W0rld!Hello Yes,we like W0rld!");
-
-        ClassicAssert.AreEqual(
-            FunctionUtils.ResolveFunction("core:EscapeXml('<Message>Hello Yes, I like W0rld!</Message>')", Context),
-            "&lt;Message&gt;Hello Yes, I like W0rld!&lt;/Message&gt;");
-        ClassicAssert.AreEqual(
-            FunctionUtils.ResolveFunction("core:EscapeXml('<Message>Hello Yes , I like W0rld!</Message>')",
-                Context), "&lt;Message&gt;Hello Yes , I like W0rld!&lt;/Message&gt;");
-        // Assert.AreEqual(FunctionUtils.ResolveFunction("core:EscapeXml('<Message>Hello Yes,I like W0rld, and this is great!</Message>')", Context), "&lt;Message&gt;Hello Yes,I like W0rld, and this is great!&lt;/Message&gt;");
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:Concat('Hello Yes, I like W0rld!', 'Hello Yes,we like W0rld!')", Context), "Hello Yes, I like W0rld!Hello Yes,we like W0rld!");
     }
 
     [Test]

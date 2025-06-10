@@ -106,10 +106,7 @@ public class DefaultControlExpressionParser : IControlExpressionParser
             var extractedParameter = controlExp.Substring(startParameter + 1, endParameter - startParameter - 1);
             extractedParameters.Add(extractedParameter);
 
-            // Debugging outputs
-            Console.WriteLine($"Extracted Parameter: {extractedParameter}");
-
-            // Move searchFrom to endParameter + 1 to continue searching the remainder of the string
+            // Move searchFrom to endParameter + 1 to continue searching for the remainder of the string
             searchFrom = endParameter + 1;
 
             // Check if there are more delimiters and commas to continue

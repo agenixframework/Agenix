@@ -34,16 +34,19 @@ public interface IMessageValidationContext : IValidationContext, ISchemaValidati
     /// Retrieves the ignored message elements.
     /// @return a set of ignored expressions
     /// /
-    ISet<string> IgnoreExpressions { get; }
+    HashSet<string> IgnoreExpressions { get; }
 
     /// Provides a builder for constructing instances of message validation contexts.
     /// This abstract class is designed to be extended by concrete implementations
     /// and provides methods for configuring schema validation, schema repositories,
     /// and ignored message elements.
-    abstract class Builder<T, S> : IBuilder<T, Builder<T, S>>, IBuilder<Builder<T, S>>
+    public abstract class Builder<T, S> : IValidationContext.IBuilder<T, Builder<T, S>>,
+        IValidationContext.IBuilder<IValidationContext, IBuilder>,
+        ISchemaValidationContext.IBuilder<Builder<T, S>>,
+        IBuilder
+
         where T : IMessageValidationContext
         where S : Builder<T, S>
-
     {
         public readonly HashSet<string> IgnoreExpressions = [];
         protected readonly S Self;
@@ -86,6 +89,7 @@ public interface IMessageValidationContext : IValidationContext, ISchemaValidati
             return Self;
         }
 
+
         public abstract T Build();
 
         /// Adds an ignored path expression for a specific message element.
@@ -104,6 +108,11 @@ public interface IMessageValidationContext : IValidationContext, ISchemaValidati
         {
             IgnoreExpressions.UnionWith(paths);
             return Self;
+        }
+
+        IValidationContext IBuilder<IValidationContext, IBuilder>.Build()
+        {
+            return Build();
         }
     }
 }

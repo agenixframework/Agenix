@@ -81,8 +81,8 @@
 
   <!-- Include LICENSE file in packages -->
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)LICENSE" Pack="true" PackagePath="" Visible="false" />
-    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="" Visible="false" Condition="Exists('$(MSBuildThisFileDirectory)README.md')" />
+    <None Include="$(MSBuildThisFileDirectory)LICENSE" Pack="true" PackagePath="LICENSE" Visible="false" />
+    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="README.md" Visible="false" Condition="Exists('$(MSBuildThisFileDirectory)README.md')" />
   </ItemGroup>
 
   <!-- Source Link Package Reference -->
@@ -93,7 +93,7 @@
     <!-- Include Icons in All Packages -->
       <ItemGroup>
         <!-- Main package icon (required by NuGet) -->
-        <None Include="$(MSBuildThisFileDirectory).assets/icons/icon.png" Pack="true" PackagePath="" Link="icon.png" />
+        <None Include="$(MSBuildThisFileDirectory).assets/icons/icon.png" Pack="true" PackagePath="icon.png" Link="icon.png" />
 
         <!-- Additional icon sizes -->
         <None Include="$(MSBuildThisFileDirectory).assets/icons/icon-16.png" Pack="true" PackagePath="icons/" Link="icons/icon-16.png" />

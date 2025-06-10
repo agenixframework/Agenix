@@ -67,8 +67,5 @@ public class DefaultHeaderDataBuilder : IMessageHeaderDataBuilder
     /// Retrieves the header data.
     /// @return The header data object.
     /// /
-    public object GetHeaderData()
-    {
-        return _headerData;
-    }
+    public object HeaderData => _headerData;
 }

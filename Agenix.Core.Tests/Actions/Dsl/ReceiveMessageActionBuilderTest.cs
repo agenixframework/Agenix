@@ -1235,7 +1235,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     [Test]
     public void TestReceiveBuilderWithValidationProcessor()
     {
-        var callback = new Mock<MockableAbstractValidationProcessor<dynamic>>(MockBehavior.Strict);
+        var callback = new Mock<AbstractValidationProcessor<dynamic>>();
 
         // Setup mock behaviors
         _messageEndpoint.Setup(m => m.CreateConsumer()).Returns(_messageConsumer.Object);
@@ -1276,13 +1276,5 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Verify callback interactions
         callback.Verify(c => c.Validate(It.IsAny<IMessage>(), It.IsAny<TestContext>()), Times.Once);
-    }
-
-    public abstract class MockableAbstractValidationProcessor<T> : AbstractValidationProcessor<T>
-    {
-        public override void Validate(IMessage message, TestContext context)
-        {
-            // Provide some default implementation here if needed, or leave it empty.
-        }
     }
 }

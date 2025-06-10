@@ -158,7 +158,7 @@ public sealed class FunctionUtils
     {
         var functionExpression = VariableUtils.CutOffVariablesPrefix(functionString);
 
-        if (!functionExpression.Contains('(') || !functionExpression.EndsWith(")") ||
+        if (!functionExpression.Contains('(') || !functionExpression.EndsWith(')') ||
             !functionExpression.Contains(':'))
         {
             throw new InvalidFunctionUsageException("Unable to resolve function: " + functionExpression);
@@ -177,7 +177,7 @@ public sealed class FunctionUtils
         parameterString = VariableUtils.ReplaceVariablesInString(parameterString, context, false);
         parameterString = ReplaceFunctionsInString(parameterString, context);
 
-        var value = library.GetFunction(function)
+        var value = library.GetFunction(function.ToLowerInvariant())
             .Execute(FunctionParameterHelper.GetParameterList(parameterString), context);
 
         return value ?? "";

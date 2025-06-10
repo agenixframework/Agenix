@@ -103,12 +103,9 @@ public interface IMessageProcessor : IMessageTransformer
     ///     Interface IBuilder defines the contract for building instances of
     ///     IMessageProcessor implementations.
     /// </summary>
-    new interface IBuilder<out T, TB> where T : IMessageProcessor where TB : IBuilder<T, TB>
+    new interface IBuilder<out T, TB> : IMessageTransformer.IBuilder<T, TB>, IBuilder
+        where T : IMessageProcessor
+        where TB : IBuilder
     {
-        /// <summary>
-        ///     Builds a new message processor instance.
-        /// </summary>
-        /// <returns></returns>
-        T Build();
     }
 }

@@ -73,7 +73,7 @@ public class MessageSupport
     public static class MessageBodySupport
     {
         /// Static entrance for all messaging body-related DSL functionalities.
-        /// <return> A new instance of DelegatingPayloadVariableExtractor.Builder.
+        /// <return/> A new instance of DelegatingPayloadVariableExtractor.Builder.
         public static DelegatingPayloadVariableExtractor.Builder FromBody()
         {
             return DelegatingPayloadVariableExtractor.Builder.FromBody();

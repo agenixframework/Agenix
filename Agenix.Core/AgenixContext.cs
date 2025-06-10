@@ -42,6 +42,7 @@ using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
 using Agenix.Api.Validation.Matcher;
 using Agenix.Api.Variable;
+using Agenix.Api.Xml.Namespace;
 using Agenix.Core.Annotations;
 using Agenix.Core.Functions;
 using Agenix.Core.Log;
@@ -77,6 +78,7 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
         MessageProcessors = builder._messageProcessors;
         TypeConverter = builder._typeConverter;
         LogModifier = builder._logModifier;
+        NamespaceContextBuilder = builder._namespaceContextBuilder;
 
         ContextFactory = builder._testContextFactory;
 
@@ -124,6 +126,8 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
     public ITypeConverter TypeConverter { get; }
 
     public ILogModifier LogModifier { get; }
+
+    public NamespaceContextBuilder NamespaceContextBuilder { get; }
 
     public HashSet<Type> ConfigurationClasses { get; } = [];
 
@@ -404,6 +408,7 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
         internal TestSuiteListeners _testSuiteListeners = new();
         internal ITypeConverter _typeConverter = ITypeConverter.LookupDefault();
         internal ValidationMatcherRegistry _validationMatcherRegistry = new DefaultValidationMatcherRegistry();
+        internal NamespaceContextBuilder _namespaceContextBuilder = new();
 
         /// Builds a default context for the Agenix test infrastructure. The context sets up various listeners,
         /// including test suite listeners, test listeners, test action listeners, and message listeners,
@@ -606,6 +611,11 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
             return this;
         }
 
+        public Builder NamespaceContextBuilder(NamespaceContextBuilder namespaceContextBuilder) {
+            _namespaceContextBuilder = namespaceContextBuilder;
+            return this;
+        }
+
         public AgenixContext Build()
         {
             if (_testContextFactory == null)
@@ -624,6 +634,7 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
                 _testContextFactory.SetReferenceResolver(_referenceResolver);
                 _testContextFactory.TypeConverter = _typeConverter;
                 _testContextFactory.LogModifier = _logModifier;
+                _testContextFactory.NamespaceContextBuilder = _namespaceContextBuilder;
             }
 
             return new AgenixContext(this);

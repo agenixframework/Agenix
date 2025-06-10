@@ -35,6 +35,7 @@ using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Agenix.Api.Variable;
+using Agenix.Api.Variable.Dictionary;
 using Agenix.Core.Message.Builder;
 using Microsoft.Extensions.Logging;
 
@@ -69,7 +70,10 @@ public class SendMessageAction : AbstractTestAction, ICompletable
         Processors = builder.GetMessageProcessors();
         MessageBuilder = builder.GetMessageBuilderSupport().GetMessageBuilder();
         MessageType = builder.GetMessageBuilderSupport().GetMessageType();
+        DataDictionary = builder.GetMessageBuilderSupport().DataDictionary;
     }
+
+    public IDataDictionary DataDictionary { get; set; }
 
     /// <summary>
     ///     Message endpoint instance
@@ -155,6 +159,8 @@ public class SendMessageAction : AbstractTestAction, ICompletable
         {
             processor.Process(message, context);
         }
+
+        DataDictionary?.Process(message, context);
 
         foreach (var processor in Processors)
         {

@@ -74,14 +74,14 @@ public class JsonSerializerPayloadBuilder : DefaultPayloadBuilder
 
     public override object BuildPayload(TestContext context)
     {
-        if (GetPayload() == null || GetPayload() is string)
+        if (Payload == null || Payload is string)
         {
             return base.BuildPayload(context);
         }
 
         if (_jsonSerializer != null)
         {
-            return BuildPayload(_jsonSerializer, GetPayload(), context);
+            return BuildPayload(_jsonSerializer, Payload, context);
         }
 
         if (_serializerName != null)
@@ -92,14 +92,14 @@ public class JsonSerializerPayloadBuilder : DefaultPayloadBuilder
             }
 
             var jsonSerializer = context.ReferenceResolver.Resolve<JsonSerializer>(_serializerName);
-            return BuildPayload(jsonSerializer, GetPayload(), context);
+            return BuildPayload(jsonSerializer, Payload, context);
         }
 
         var jsonSerializers = context.ReferenceResolver.ResolveAll<JsonSerializer>();
         if (jsonSerializers.Count == 1)
         {
             var jsonSerializer = new List<JsonSerializer>(jsonSerializers.Values)[0];
-            return BuildPayload(jsonSerializer, GetPayload(), context);
+            return BuildPayload(jsonSerializer, Payload, context);
         }
 
         throw new AgenixSystemException(

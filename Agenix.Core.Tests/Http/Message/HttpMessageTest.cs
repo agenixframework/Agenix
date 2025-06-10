@@ -323,7 +323,7 @@ public class HttpMessageTest
     }
 
     [Test]
-    public void TestCopyConstructorWithCitrusOverwriteDoesNotPreserveIdAndTimestamp()
+    public void TestCopyConstructorWithAgenixOverwriteDoesNotPreserveIdAndTimestamp()
     {
         // Given
         _httpMessage.Payload = "myPayload";

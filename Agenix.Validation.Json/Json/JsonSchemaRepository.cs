@@ -57,7 +57,7 @@ public class JsonSchemaRepository : BaseRepository
         {
             if (Log.IsEnabled(LogLevel.Debug))
             {
-                Log.LogDebug($"Loading json schema resource '{resource.Description}'");
+                Log.LogDebug("Loading json schema resource '{ResourceDescription}'", resource.Description);
             }
 
             var simpleJsonSchema = new SimpleJsonSchema(resource);

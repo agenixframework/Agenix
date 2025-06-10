@@ -40,6 +40,7 @@ using Agenix.Api.Util;
 using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
 using Agenix.Api.Variable;
+using Agenix.Api.Variable.Dictionary;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Builder;
 using Agenix.Core.Util;
@@ -80,6 +81,7 @@ public class ReceiveMessageAction : AbstractTestAction
         MessageBuilder = builder.GetMessageBuilderSupport().GetMessageBuilder();
         ControlMessageProcessors = builder.GetMessageBuilderSupport().ControlMessageProcessors;
         MessageType = builder.GetMessageBuilderSupport().GetMessageType();
+        DataDictionary = builder.GetMessageBuilderSupport().DataDictionary;
     }
 
     /// <summary>
@@ -91,6 +93,8 @@ public class ReceiveMessageAction : AbstractTestAction
     ///     Represents a collection of message selectors used to filter and retrieve messages based on specific criteria.
     /// </summary>
     public Dictionary<string, object> MessageSelectors { get; }
+
+    public IDataDictionary DataDictionary { get; }
 
     /// <summary>
     ///     Gets the message selector used to filter messages based on specific criteria.
@@ -391,6 +395,7 @@ public class ReceiveMessageAction : AbstractTestAction
             processor.Process(message, context);
         }
 
+        DataDictionary?.Process(message, context);
 
         foreach (var processor in ControlMessageProcessors)
         {
@@ -515,7 +520,7 @@ public class ReceiveMessageAction : AbstractTestAction
 
         protected internal IValidationProcessor _validationProcessor;
 
-        public List<IValidationContext.IBuilder<IValidationContext, dynamic>> ValidationContexts { get; } = [];
+        public List<IValidationContext.IBuilder<IValidationContext, IBuilder>> ValidationContexts { get; } = [];
 
         public override T Build()
         {
@@ -549,6 +554,12 @@ public class ReceiveMessageAction : AbstractTestAction
                 }
             }
 
+            if (messageBuilderSupport.DataDictionaryName != null)
+            {
+                messageBuilderSupport.Dictionary(
+                    referenceResolver.Resolve<IDataDictionary>(messageBuilderSupport.DataDictionaryName));
+            }
+
             return DoBuild();
         }
 
@@ -569,7 +580,7 @@ public class ReceiveMessageAction : AbstractTestAction
         /// <param name="validationContext">The validation context to add.</param>
         /// <typeparam name="B">The type of the validation context builder.</typeparam>
         /// <returns>The current builder instance.</returns>
-        public TB Validate(IValidationContext.IBuilder<IValidationContext, dynamic> validationContext)
+        public TB Validate(IValidationContext.IBuilder<IValidationContext, IBuilder> validationContext)
         {
             ValidationContexts.Add(validationContext);
             return self;
@@ -583,7 +594,7 @@ public class ReceiveMessageAction : AbstractTestAction
         /// <returns>The builder instance with the added validation context.</returns>
         public TB Validate(IValidationContext validationContext)
         {
-            return Validate(new FuncValidationContextBuilder<dynamic>(() => validationContext));
+            return Validate(new FuncValidationContextBuilder<IBuilder>(() => validationContext));
         }
 
         /// <summary>
@@ -594,7 +605,7 @@ public class ReceiveMessageAction : AbstractTestAction
         /// <returns>An instance of the action builder for chaining further configurations.</returns>
         public TB Validate(Func<IValidationContext> validationContextFactory)
         {
-            var validationContextBuilder = new FuncValidationContextBuilder<dynamic>(validationContextFactory);
+            var validationContextBuilder = new FuncValidationContextBuilder<IBuilder>(validationContextFactory);
             return Validate(validationContextBuilder);
         }
 
@@ -615,7 +626,7 @@ public class ReceiveMessageAction : AbstractTestAction
         /// <typeparam name="TFB">The type of the validation context builder.</typeparam>
         /// <param name="validationContexts">The list of validation contexts to be added.</param>
         /// <returns>The builder instance.</returns>
-        public TB Validate(List<IValidationContext.IBuilder<IValidationContext, dynamic>> validationContexts)
+        public TB Validate(List<IValidationContext.IBuilder<IValidationContext, IBuilder>> validationContexts)
         {
             ValidationContexts.AddRange(validationContexts);
             return self;
@@ -627,7 +638,7 @@ public class ReceiveMessageAction : AbstractTestAction
         /// <typeparam name="TFB">The type of the context builder.</typeparam>
         /// <param name="validationContexts">The validation contexts to be added.</param>
         /// <returns>Updated message action builder.</returns>
-        public TB Validate(params IValidationContext.IBuilder<IValidationContext, dynamic>[] validationContexts)
+        public TB Validate(params IValidationContext.IBuilder<IValidationContext, IBuilder>[] validationContexts)
         {
             return Validate(validationContexts.ToList());
         }
@@ -945,7 +956,7 @@ public class ReceiveMessageAction : AbstractTestAction
                     var payloadBuilder = withPayloadBuilder.GetPayloadBuilder();
                     if (payloadBuilder is DefaultPayloadBuilder defaultPayloadBuilder)
                     {
-                        return Optional<string>.OfNullable(defaultPayloadBuilder.GetPayload()?.ToString());
+                        return Optional<string>.OfNullable(defaultPayloadBuilder.Payload?.ToString());
                     }
 
                     break;

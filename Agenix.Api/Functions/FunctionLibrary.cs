@@ -42,7 +42,7 @@ public class FunctionLibrary
     /// <summary>
     ///     The dictionary (map) of functions in this library
     /// </summary>
-    private IDictionary<string, IFunction> _members = new Dictionary<string, IFunction>();
+    private IDictionary<string, IFunction> _members = new Dictionary<string, IFunction>(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
     ///     Name of a function library
