@@ -120,8 +120,8 @@ public class VariableSupportTest : AbstractNUnitSetUp
 
         var validateMessageElements = new Dictionary<string, object>
         {
-            { "//root/element/sub-elementA", "core:Concat('text', '-', 'value')" },
-            { "//sub-elementB", "core:Concat(${text}, '-', 'value')" }
+            { "//root/element/sub-elementA", "agenix:Concat('text', '-', 'value')" },
+            { "//sub-elementB", "agenix:Concat(${text}, '-', 'value')" }
         };
 
         // Act
@@ -210,8 +210,8 @@ public class VariableSupportTest : AbstractNUnitSetUp
 
         var validateMessageElements = new Dictionary<string, object>
         {
-            { "core:Concat('//root/', 'element/sub-elementA')", "text-value" },
-            { "core:Concat('//sub-element', ${variable})", "text-value" }
+            { "agenix:Concat('//root/', 'element/sub-elementA')", "text-value" },
+            { "agenix:Concat('//sub-element', ${variable})", "text-value" }
         };
 
         // Act
@@ -329,9 +329,9 @@ public class VariableSupportTest : AbstractNUnitSetUp
 
         var validateHeaderValues = new Dictionary<string, object>
         {
-            { "header-valueA", "core:UpperCase('a')" },
-            { "header-valueB", "core:UpperCase('b')" },
-            { "header-valueC", "core:UpperCase(${variableC})" }
+            { "header-valueA", "agenix:UpperCase('a')" },
+            { "header-valueB", "agenix:UpperCase('b')" },
+            { "header-valueC", "agenix:UpperCase(${variableC})" }
         };
 
         controlMessageBuilder.AddHeaderBuilder(new DefaultHeaderBuilder(validateHeaderValues));
@@ -440,9 +440,9 @@ public class VariableSupportTest : AbstractNUnitSetUp
 
         var validateHeaderValues = new Dictionary<string, object>
         {
-            { "core:Concat('header', '-', 'valueA')", "A" },
-            { "core:Concat('header', '-', 'valueB')", "B" },
-            { "core:Concat('header', '-', 'valueC')", "C" }
+            { "agenix:Concat('header', '-', 'valueA')", "A" },
+            { "agenix:Concat('header', '-', 'valueB')", "B" },
+            { "agenix:Concat('header', '-', 'valueC')", "C" }
         };
 
         controlMessageBuilder.AddHeaderBuilder(new DefaultHeaderBuilder(validateHeaderValues));

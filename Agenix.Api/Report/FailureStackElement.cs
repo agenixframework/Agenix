@@ -1,33 +1,33 @@
 namespace Agenix.Api.Report;
 
 /// <summary>
-/// Failure stack element provides access to the detailed failure stack message and
-/// the location in the test case XML where error happened.
+///     Failure stack element provides access to the detailed failure stack message and
+///     the location in the test case XML where error happened.
 /// </summary>
 public class FailureStackElement
 {
     /// <summary>
-    /// The name of the failed action
+    ///     The name of the failed action
     /// </summary>
-    private string _actionName;
+    private readonly string _actionName;
 
     /// <summary>
-    /// Path to XML test file
+    ///     Line number in XML test case where error happened
     /// </summary>
-    private string _testFilePath;
+    private readonly long _lineNumberStart;
 
     /// <summary>
-    /// Line number in XML test case where error happened
+    ///     Path to XML test file
     /// </summary>
-    private long _lineNumberStart;
+    private readonly string _testFilePath;
 
     /// <summary>
-    /// Failing action in XML test case ends in this line
+    ///     Failing action in XML test case ends in this line
     /// </summary>
-    private long _lineNumberEnd = 0L;
+    private long _lineNumberEnd;
 
     /// <summary>
-    /// Default constructor using fields.
+    ///     Default constructor using fields.
     /// </summary>
     /// <param name="testFilePath">file path of failed test.</param>
     /// <param name="actionName">the failed action name.</param>
@@ -40,7 +40,25 @@ public class FailureStackElement
     }
 
     /// <summary>
-    /// Constructs the stack trace message.
+    ///     Gets the line number where error happened.
+    /// </summary>
+    /// <returns>the line number</returns>
+    public long LineNumberStart => _lineNumberStart;
+
+    /// <summary>
+    ///     Gets the line number where failing action ends.
+    /// </summary>
+    /// <returns>the toLineNumber</returns>
+    public long LineNumberEnd => _lineNumberEnd;
+
+    /// <summary>
+    ///     Gets the test file path for the failed test.
+    /// </summary>
+    /// <returns>the testFilePath</returns>
+    public string TestFilePath => _testFilePath;
+
+    /// <summary>
+    ///     Constructs the stack trace message.
     /// </summary>
     /// <returns>the stack trace message.</returns>
     public string GetStackMessage()
@@ -49,36 +67,16 @@ public class FailureStackElement
         {
             return $"at {_testFilePath}({_actionName}:{_lineNumberStart}-{_lineNumberEnd})";
         }
-        else
-        {
-            return $"at {_testFilePath}({_actionName}:{_lineNumberStart})";
-        }
+
+        return $"at {_testFilePath}({_actionName}:{_lineNumberStart})";
     }
 
     /// <summary>
-    /// Gets the line number where error happened.
-    /// </summary>
-    /// <returns>the line number</returns>
-    public long LineNumberStart => _lineNumberStart;
-
-    /// <summary>
-    /// Sets the line number where failing action ends.
+    ///     Sets the line number where failing action ends.
     /// </summary>
     /// <param name="toLineNumber">the toLineNumber to set</param>
     public void SetLineNumberEnd(long toLineNumber)
     {
         _lineNumberEnd = toLineNumber;
     }
-
-    /// <summary>
-    /// Gets the line number where failing action ends.
-    /// </summary>
-    /// <returns>the toLineNumber</returns>
-    public long LineNumberEnd => _lineNumberEnd;
-
-    /// <summary>
-    /// Gets the test file path for the failed test.
-    /// </summary>
-    /// <returns>the testFilePath</returns>
-    public string TestFilePath => _testFilePath;
 }

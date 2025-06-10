@@ -36,25 +36,25 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Validation.Xml.Validation.Xml;
 
 /// <summary>
-/// Abstract utility class for XML validation operations.
+///     Abstract utility class for XML validation operations.
 /// </summary>
 public abstract class XmlValidationUtils
 {
     /// <summary>
-    /// Logger
+    ///     Logger
     /// </summary>
     private static readonly ILogger Log = LogManager.GetLogger(typeof(XmlValidationUtils));
 
     /// <summary>
-    /// Prevent instantiation.
+    ///     Prevent instantiation.
     /// </summary>
     private XmlValidationUtils()
     {
     }
 
     /// <summary>
-    /// Checks if given element node is either on ignore list or
-    /// contains @ignore@ tag inside control message
+    ///     Checks if given element node is either on ignore list or
+    ///     contains @ignore@ tag inside control message
     /// </summary>
     /// <param name="source">The source node</param>
     /// <param name="received">The received node</param>
@@ -70,24 +70,28 @@ public abstract class XmlValidationUtils
             {
                 Log.LogDebug("Element: '{LocalName}' is on ignore list - skipped validation", received.LocalName);
             }
+
             return true;
         }
-        else if (source.FirstChild != null &&
-                 StringUtils.HasText(source.FirstChild.Value) &&
-                 source.FirstChild.Value.Trim().Equals(AgenixSettings.IgnorePlaceholder))
+
+        if (source.FirstChild != null &&
+            StringUtils.HasText(source.FirstChild.Value) &&
+            source.FirstChild.Value.Trim().Equals(AgenixSettings.IgnorePlaceholder))
         {
             if (Log.IsEnabled(LogLevel.Debug))
             {
                 Log.LogDebug("Element: '{LocalName}' is ignored by placeholder '{IgnorePlaceholder}'",
                     received.LocalName, AgenixSettings.IgnorePlaceholder);
             }
+
             return true;
         }
+
         return false;
     }
 
     /// <summary>
-    /// Checks whether the node is ignored by node path expression or xpath expression.
+    ///     Checks whether the node is ignored by node path expression or xpath expression.
     /// </summary>
     /// <param name="received">The received node</param>
     /// <param name="ignoreExpressions">Set of ignore expressions</param>
@@ -117,7 +121,7 @@ public abstract class XmlValidationUtils
         //      Numbers2.NumberItem.AreaCode
         // And ignoreValues contains just: AreaCode
         // the only first Node: Numbers1.NumberItem.AreaCode will be ignored.
-        foreach (string expression in ignoreExpressions)
+        foreach (var expression in ignoreExpressions)
         {
             if (received.Equals(XmlUtils.FindNodeByName(received.OwnerDocument, expression)))
             {
@@ -127,11 +131,11 @@ public abstract class XmlValidationUtils
 
         // This is the XPath version using XPath expressions in
         // ignoreValues to identify nodes to be ignored
-        foreach (string expression in ignoreExpressions)
+        foreach (var expression in ignoreExpressions)
         {
             if (XpathUtils.IsXPathExpression(expression))
             {
-                XmlNodeList foundNodes = XpathUtils.EvaluateAsNodeList(received.OwnerDocument,
+                var foundNodes = XpathUtils.EvaluateAsNodeList(received.OwnerDocument,
                     expression, namespaceContext);
 
                 if (foundNodes != null)
@@ -151,8 +155,8 @@ public abstract class XmlValidationUtils
     }
 
     /// <summary>
-    /// Checks whether the current attribute is ignored either by global ignore placeholder in source attribute value or
-    /// by xpath ignore expressions.
+    ///     Checks whether the current attribute is ignored either by global ignore placeholder in source attribute value or
+    ///     by xpath ignore expressions.
     /// </summary>
     /// <param name="receivedElement">The received element</param>
     /// <param name="receivedAttribute">The received attribute</param>
@@ -190,7 +194,7 @@ public abstract class XmlValidationUtils
     }
 
     /// <summary>
-    /// Checks whether the current attribute is ignored.
+    ///     Checks whether the current attribute is ignored.
     /// </summary>
     /// <param name="receivedElement">The received element</param>
     /// <param name="receivedAttribute">The received attribute</param>
@@ -221,9 +225,14 @@ public abstract class XmlValidationUtils
         //      Numbers2.NumberItem.AreaCode
         // And ignoreValues contains just: AreaCode
         // the only first Node: Numbers1.NumberItem.AreaCode will be ignored.
-        return ignoreMessageElements.Select(expression => XmlUtils.FindNodeByName(receivedElement.OwnerDocument, expression)).OfType<XmlNode>().Contains(receivedAttribute) ||
+        return ignoreMessageElements
+                   .Select(expression => XmlUtils.FindNodeByName(receivedElement.OwnerDocument, expression))
+                   .OfType<XmlNode>().Contains(receivedAttribute) ||
                // This is the XPath version using XPath expressions in
                // ignoreValues to identify nodes to be ignored
-               (from expression in ignoreMessageElements where XpathUtils.IsXPathExpression(expression) select XpathUtils.EvaluateAsNode(receivedElement.OwnerDocument, expression, namespaceContext)).OfType<XmlNode>().Contains(receivedAttribute);
+               (from expression in ignoreMessageElements
+                   where XpathUtils.IsXPathExpression(expression)
+                   select XpathUtils.EvaluateAsNode(receivedElement.OwnerDocument, expression, namespaceContext))
+               .OfType<XmlNode>().Contains(receivedAttribute);
     }
 }

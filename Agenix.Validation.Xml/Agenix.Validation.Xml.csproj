@@ -1,52 +1,52 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj"/>
+  </ItemGroup>
 
-    <ItemGroup>
-      <None Remove="Extension\agenix\message\selector\root-qname" />
-      <EmbeddedResource Include="Extension\agenix\message\selector\root-qname" />
-      <None Remove="Extension\agenix\message\selector\xpath" />
-      <EmbeddedResource Include="Extension\agenix\message\selector\xpath" />
-      <None Remove="Extension\agenix\message\schemaValidator\xml" />
-      <EmbeddedResource Include="Extension\agenix\message\schemaValidator\xml" />
-      <None Remove="Extension\agenix\variable\extractor\segment\xpath" />
-      <EmbeddedResource Include="Extension\agenix\variable\extractor\segment\xpath" />
-      <None Remove="Extension\agenix\variable\extractor\xpath" />
-      <EmbeddedResource Include="Extension\agenix\variable\extractor\xpath" />
-      <None Remove="Extension\agenix\message\processor\xpath" />
-      <EmbeddedResource Include="Extension\agenix\message\processor\xpath" />
-      <None Remove="Extension\agenix\message\validator\xml" />
-      <EmbeddedResource Include="Extension\agenix\message\validator\xml" />
-      <None Remove="Extension\agenix\message\validator\xpath" />
-      <EmbeddedResource Include="Extension\agenix\message\validator\xpath" />
-      <None Remove="Extension\agenix\message\validator\xhtml" />
-      <EmbeddedResource Include="Extension\agenix\message\validator\xhtml" />
-      <None Remove="Extension\agenix\message\validator\xhtml-xpath" />
-      <EmbeddedResource Include="Extension\agenix\message\validator\xhtml-xpath" />
-      <None Remove="Extension\agenix\validation\matcher\matchesXml" />
-      <EmbeddedResource Include="Extension\agenix\validation\matcher\matchesXml" />
-      <None Remove="Extension\agenix\function\cdataSection" />
-      <EmbeddedResource Include="Extension\agenix\function\cdataSection" />
-      <None Remove="Extension\agenix\function\escapeXml" />
-      <EmbeddedResource Include="Extension\agenix\function\escapeXml" />
-      <None Remove="Extension\agenix\function\xpath" />
-      <EmbeddedResource Include="Extension\agenix\function\xpath" />
-    </ItemGroup>
+  <ItemGroup>
+    <None Remove="Extension\agenix\message\selector\root-qname"/>
+    <EmbeddedResource Include="Extension\agenix\message\selector\root-qname"/>
+    <None Remove="Extension\agenix\message\selector\xpath"/>
+    <EmbeddedResource Include="Extension\agenix\message\selector\xpath"/>
+    <None Remove="Extension\agenix\message\schemaValidator\xml"/>
+    <EmbeddedResource Include="Extension\agenix\message\schemaValidator\xml"/>
+    <None Remove="Extension\agenix\variable\extractor\segment\xpath"/>
+    <EmbeddedResource Include="Extension\agenix\variable\extractor\segment\xpath"/>
+    <None Remove="Extension\agenix\variable\extractor\xpath"/>
+    <EmbeddedResource Include="Extension\agenix\variable\extractor\xpath"/>
+    <None Remove="Extension\agenix\message\processor\xpath"/>
+    <EmbeddedResource Include="Extension\agenix\message\processor\xpath"/>
+    <None Remove="Extension\agenix\message\validator\xml"/>
+    <EmbeddedResource Include="Extension\agenix\message\validator\xml"/>
+    <None Remove="Extension\agenix\message\validator\xpath"/>
+    <EmbeddedResource Include="Extension\agenix\message\validator\xpath"/>
+    <None Remove="Extension\agenix\message\validator\xhtml"/>
+    <EmbeddedResource Include="Extension\agenix\message\validator\xhtml"/>
+    <None Remove="Extension\agenix\message\validator\xhtml-xpath"/>
+    <EmbeddedResource Include="Extension\agenix\message\validator\xhtml-xpath"/>
+    <None Remove="Extension\agenix\validation\matcher\matchesXml"/>
+    <EmbeddedResource Include="Extension\agenix\validation\matcher\matchesXml"/>
+    <None Remove="Extension\agenix\function\cdataSection"/>
+    <EmbeddedResource Include="Extension\agenix\function\cdataSection"/>
+    <None Remove="Extension\agenix\function\escapeXml"/>
+    <EmbeddedResource Include="Extension\agenix\function\escapeXml"/>
+    <None Remove="Extension\agenix\function\xpath"/>
+    <EmbeddedResource Include="Extension\agenix\function\xpath"/>
+  </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Extension\agenix\variable\" />
-    </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extension\agenix\variable\"/>
+  </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="AngleSharp" Version="1.3.0" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AngleSharp" Version="1.3.0"/>
+  </ItemGroup>
 
 </Project>

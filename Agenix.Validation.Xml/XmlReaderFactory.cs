@@ -25,13 +25,12 @@
 #endregion
 
 
-using System.Text;
 using System.Xml;
 
 namespace Agenix.Validation.Xml;
 
 /// <summary>
-/// Factory for creating configured XML readers
+///     Factory for creating configured XML readers
 /// </summary>
 public class XmlReaderFactory(XmlConfigurer? configurer = null)
 {

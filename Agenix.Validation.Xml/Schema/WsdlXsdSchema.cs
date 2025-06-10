@@ -27,7 +27,6 @@
 
 using System.Text;
 using System.Xml;
-using System.Xml.Schema;
 using Agenix.Api.Exceptions;
 using Agenix.Api.IO;
 using Agenix.Api.Log;
@@ -41,27 +40,27 @@ namespace Agenix.Validation.Xml.Schema;
 public class WsdlXsdSchema : AbstractSchemaCollection
 {
     /// <summary>
-    /// WSDL file resource
-    /// </summary>
-    private IResource _wsdl;
-
-    /// <summary>
-    /// Logger
+    ///     Logger
     /// </summary>
     private static readonly ILogger Log = LogManager.GetLogger(typeof(WsdlXsdSchema));
 
     /// <summary>
-    /// Default constructor
+    ///     WSDL file resource
     /// </summary>
-    public WsdlXsdSchema() : base()
+    private readonly IResource _wsdl;
+
+    /// <summary>
+    ///     Default constructor
+    /// </summary>
+    public WsdlXsdSchema()
     {
     }
 
     /// <summary>
-    /// Constructor using WSDL resource.
+    ///     Constructor using WSDL resource.
     /// </summary>
     /// <param name="wsdl">The WSDL resource</param>
-    public WsdlXsdSchema(IResource wsdl) : base()
+    public WsdlXsdSchema(IResource wsdl)
     {
         _wsdl = wsdl;
     }
@@ -96,12 +95,8 @@ public class WsdlXsdSchema : AbstractSchemaCollection
         try
         {
             using var memoryStream = new MemoryStream();
-            using var xmlWriter = XmlWriter.Create(memoryStream, new XmlWriterSettings
-            {
-                Encoding = Encoding.UTF8,
-                Indent = false,
-                OmitXmlDeclaration = false
-            });
+            using var xmlWriter = XmlWriter.Create(memoryStream,
+                new XmlWriterSettings { Encoding = Encoding.UTF8, Indent = false, OmitXmlDeclaration = false });
 
             element.OwnerDocument.Save(xmlWriter);
             xmlWriter.Flush();
@@ -221,16 +216,18 @@ public class WsdlXsdSchema : AbstractSchemaCollection
 
 
     /// <summary>
-    /// Loads and retrieves the WSDL definition from the provided resource.
+    ///     Loads and retrieves the WSDL definition from the provided resource.
     /// </summary>
     /// <param name="wsdl">
-    /// The resource object referencing the WSDL file to be read. This includes properties such as the URI and input stream.
+    ///     The resource object referencing the WSDL file to be read. This includes properties such as the URI and input
+    ///     stream.
     /// </param>
     /// <returns>
-    /// A <see cref="WsdlDefinition"/> object representing the target WSDL definition, including namespaces, base URI, and target namespace.
+    ///     A <see cref="WsdlDefinition" /> object representing the target WSDL definition, including namespaces, base URI, and
+    ///     target namespace.
     /// </returns>
     /// <exception cref="AgenixSystemException">
-    /// Thrown when the WSDL schema instance cannot be loaded or parsed due to an error.
+    ///     Thrown when the WSDL schema instance cannot be loaded or parsed due to an error.
     /// </exception>
     private WsdlDefinition GetWsdlDefinition(IResource wsdl)
     {
@@ -260,22 +257,26 @@ public class WsdlXsdSchema : AbstractSchemaCollection
     }
 
     /// <summary>
-    /// Loads schema resources from the provided WSDL file resource.
+    ///     Loads schema resources from the provided WSDL file resource.
     /// </summary>
     /// <returns>
-    /// The loaded schema resources as an <see cref="IResource"/> object.
+    ///     The loaded schema resources as an <see cref="IResource" /> object.
     /// </returns>
     protected override IResource LoadSchemaResources()
     {
         ObjectHelper.AssertNotNull(_wsdl, "wsdl file resource is required");
 
-        if (!_wsdl.Exists) {
+        if (!_wsdl.Exists)
+        {
             throw new AgenixSystemException("wsdl file resource '" + _wsdl + " does not exist");
         }
 
-        try {
+        try
+        {
             return LoadSchemas(GetWsdlDefinition(_wsdl));
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             throw new AgenixSystemException("Failed to load schema types from WSDL file", e);
         }
     }

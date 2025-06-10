@@ -4,12 +4,12 @@ using Agenix.Validation.Xml.Functions.Core;
 namespace Agenix.Validation.Xml.Functions;
 
 /// <summary>
-/// Utility class providing static methods for XML-related functions.
+///     Utility class providing static methods for XML-related functions.
 /// </summary>
 public static class XmlFunctions
 {
     /// <summary>
-    /// Runs create CData section function with arguments.
+    ///     Runs create CData section function with arguments.
     /// </summary>
     /// <param name="content">The content to wrap in CDATA</param>
     /// <param name="context">The test context</param>
@@ -20,7 +20,7 @@ public static class XmlFunctions
     }
 
     /// <summary>
-    /// Runs escape XML function with arguments.
+    ///     Runs escape XML function with arguments.
     /// </summary>
     /// <param name="content">The content to escape</param>
     /// <param name="context">The test context</param>
@@ -31,7 +31,7 @@ public static class XmlFunctions
     }
 
     /// <summary>
-    /// Runs XPath function with arguments.
+    ///     Runs XPath function with arguments.
     /// </summary>
     /// <param name="content">The XML content to evaluate</param>
     /// <param name="expression">The XPath expression</param>

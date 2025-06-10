@@ -39,16 +39,15 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Validation.Xml.Message.Selector;
 
 /// <summary>
-/// Message selector accepts XML messages in case XPath expression evaluation result matches
-/// the expected value. With this selector someone can select messages according to a message payload XML
-/// element value for instance.
-///
-/// Syntax is xpath://root/element
+///     Message selector accepts XML messages in case XPath expression evaluation result matches
+///     the expected value. With this selector someone can select messages according to a message payload XML
+///     element value for instance.
+///     Syntax is xpath://root/element
 /// </summary>
 public class XpathPayloadMessageSelector : AbstractMessageSelector
 {
     /// <summary>
-    /// Special selector element name identifying this message selector implementation
+    ///     Special selector element name identifying this message selector implementation
     /// </summary>
     public const string SelectorPrefix = "xpath:";
 
@@ -58,7 +57,7 @@ public class XpathPayloadMessageSelector : AbstractMessageSelector
     private static readonly ILogger Log = LogManager.GetLogger(typeof(XpathPayloadMessageSelector));
 
     /// <summary>
-    /// Default constructor using fields.
+    ///     Default constructor using fields.
     /// </summary>
     /// <param name="selectKey">The selector key</param>
     /// <param name="matchingValue">The expected matching value</param>
@@ -106,27 +105,27 @@ public class XpathPayloadMessageSelector : AbstractMessageSelector
                         XpathUtils.ReplaceDynamicNamespaces(SelectKey, namespaces),
                         namespaces),
                     doc);
-
             }
             else
             {
                 value = EvaluateAsString(
                     XPathExpressionFactory.CreateXPathExpression(SelectKey, namespaces),
                     doc);
-
             }
 
             return Evaluate(value);
         }
         catch (XPathException e)
         {
-            Log.LogWarning("Could not evaluate XPath expression for message selector - ignoring message ({ExceptionType})", e.GetType().Name);
+            Log.LogWarning(
+                "Could not evaluate XPath expression for message selector - ignoring message ({ExceptionType})",
+                e.GetType().Name);
             return false; // wrong XML message - not accepted
         }
     }
 
     /// <summary>
-    /// Evaluates the XPath expression and returns the result as a string.
+    ///     Evaluates the XPath expression and returns the result as a string.
     /// </summary>
     /// <param name="expression">The XPath expression</param>
     /// <param name="document">The XML document to evaluate against</param>
@@ -138,8 +137,7 @@ public class XpathPayloadMessageSelector : AbstractMessageSelector
 
         return result switch
         {
-            XPathNodeIterator iterator => iterator.MoveNext() ?
-                (iterator.Current?.Value ?? string.Empty) : string.Empty,
+            XPathNodeIterator iterator => iterator.MoveNext() ? iterator.Current?.Value ?? string.Empty : string.Empty,
             string str => str,
             double number => number.ToString(CultureInfo.InvariantCulture),
             bool boolean => boolean.ToString().ToLower(),
@@ -149,7 +147,7 @@ public class XpathPayloadMessageSelector : AbstractMessageSelector
 
 
     /// <summary>
-    /// Message selector factory for this implementation.
+    ///     Message selector factory for this implementation.
     /// </summary>
     public class Factory : IMessageSelector.IMessageSelectorFactory
     {
@@ -158,15 +156,14 @@ public class XpathPayloadMessageSelector : AbstractMessageSelector
             return key.StartsWith(SelectorPrefix);
         }
 
-        public XpathPayloadMessageSelector Create(string key, string value, TestContext context)
-        {
-            return new XpathPayloadMessageSelector(key, value, context);
-        }
-
         IMessageSelector IMessageSelector.IMessageSelectorFactory.Create(string key, string value, TestContext context)
         {
             return Create(key, value, context);
         }
+
+        public XpathPayloadMessageSelector Create(string key, string value, TestContext context)
+        {
+            return new XpathPayloadMessageSelector(key, value, context);
+        }
     }
 }
-

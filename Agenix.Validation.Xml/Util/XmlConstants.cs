@@ -28,37 +28,38 @@
 namespace Agenix.Validation.Xml.Util;
 
 /// <summary>
-/// XML constants equivalent to Java's XMLConstants.
+///     XML constants equivalent to Java's XMLConstants.
 /// </summary>
 public static class XmlConstants
 {
     /// <summary>
-    /// Namespace URI to use to represent that there is no Namespace.
+    ///     Namespace URI to use to represent that there is no Namespace.
     /// </summary>
     public const string NullNsUri = "";
 
     /// <summary>
-    /// Prefix to use to represent the default XML Namespace.
+    ///     Prefix to use to represent the default XML Namespace.
     /// </summary>
     public const string DefaultNsPrefix = "";
 
     /// <summary>
-    /// The official XML Namespace name URI.
+    ///     The official XML Namespace name URI.
     /// </summary>
     public const string XmlNsUri = "http://www.w3.org/XML/1998/namespace";
 
     /// <summary>
-    /// The official XML Namespace prefix.
+    ///     The official XML Namespace prefix.
     /// </summary>
     public const string XmlNsPrefix = "xml";
 
     /// <summary>
-    /// The official XML attribute used for specifying XML Namespace declarations.
+    ///     The official XML attribute used for specifying XML Namespace declarations.
     /// </summary>
     public const string XmlnsAttribute = "xmlns";
 
     /// <summary>
-    /// The official XML attribute used for specifying XML Namespace declarations, XMLConstants.XMLNS_ATTRIBUTE, Namespace name URI.
+    ///     The official XML attribute used for specifying XML Namespace declarations, XMLConstants.XMLNS_ATTRIBUTE, Namespace
+    ///     name URI.
     /// </summary>
     public const string XmlnsAttributeNsUri = "http://www.w3.org/2000/xmlns/";
 }

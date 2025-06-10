@@ -46,7 +46,7 @@ namespace Agenix.Validation.NHamcrest.Validation.Matcher;
 public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpressionParser
 {
     private readonly List<string> _collectionMatchers =
-        ["HasSize", "HasItem", "HasItems", "Contains", "ContainsInAnyOrder"];
+        ["HasSize", "HasItem", "HasItems", "Contains", "ContainsInAnyOrder", "OfLength"];
 
     private readonly List<string> _containerMatchers = ["Is", "Not", "EveryItem"];
 
@@ -316,17 +316,26 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
             {
                 UnescapeQuotes(matcherParameter);
 
-                var matcherMethod = ReflectionHelper.FindMethod(typeof(Matchers), matcherName, typeof(int)) ??
-                                    ReflectionHelper.FindMethod(typeof(Matchers), matcherName, typeof(object)) ??
-                                    ReflectionHelper.FindMethod(typeof(Matchers), matcherName, typeof(object[]));
+                var matcherMethod = ReflectionUtils.GetMethod(typeof(Matchers), matcherName, [typeof(int)]);
 
                 if (matcherMethod != null)
                 {
-                    return matcherMethod.Invoke(null,
-                        matcherMethod.GetParameters().Length == 1 &&
-                        matcherMethod.GetParameters()[0].ParameterType == typeof(object[])
-                            ? [matcherParameter]
-                            : [matcherParameter[0]]);
+                    return matcherMethod.Invoke(null, [int.Parse(matcherParameter[0])]);
+                }
+
+                matcherMethod = ReflectionUtils.GetMethod(typeof(Matchers), matcherName, [typeof(object)]);
+
+                if (matcherMethod != null)
+                {
+                    return matcherMethod.Invoke(null, [matcherParameter[0]]);
+                }
+
+                matcherMethod = ReflectionUtils.GetMethod(typeof(Matchers), matcherName, [typeof(object[])]);
+
+
+                if (matcherMethod != null)
+                {
+                    return matcherMethod.Invoke(null, [matcherParameter]);
                 }
             }
 

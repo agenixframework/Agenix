@@ -31,23 +31,30 @@ using System.Xml;
 namespace Agenix.Validation.Xml.Util;
 
 /// <summary>
-/// Convenience methods for working with the DOM API,
-/// in particular for working with DOM Nodes and DOM Elements.
+///     Convenience methods for working with the DOM API,
+///     in particular for working with DOM Nodes and DOM Elements.
 /// </summary>
 public static class DomUtils
 {
     /// <summary>
-    /// Retrieves all child elements of the given DOM element that match any of the given element names.
-    /// Only looks at the direct child level of the given element; do not go into further depth
-    /// (in contrast to the DOM API's GetElementsByTagName method).
+    ///     Retrieves all child elements of the given DOM element that match any of the given element names.
+    ///     Only looks at the direct child level of the given element; do not go into further depth
+    ///     (in contrast to the DOM API's GetElementsByTagName method).
     /// </summary>
     /// <param name="element">The DOM element to analyze</param>
     /// <param name="childElementNames">The child element names to look for</param>
     /// <returns>A List of child XmlElement instances</returns>
     public static List<XmlElement> GetChildElementsByTagName(XmlElement element, params string[] childElementNames)
     {
-        if (element == null) throw new ArgumentNullException(nameof(element), "Element must not be null");
-        if (childElementNames == null) throw new ArgumentNullException(nameof(childElementNames), "Element names collection must not be null");
+        if (element == null)
+        {
+            throw new ArgumentNullException(nameof(element), "Element must not be null");
+        }
+
+        if (childElementNames == null)
+        {
+            throw new ArgumentNullException(nameof(childElementNames), "Element names collection must not be null");
+        }
 
         var childElementNameList = new List<string>(childElementNames);
         var nodeList = element.ChildNodes;
@@ -61,13 +68,14 @@ public static class DomUtils
                 childElements.Add(xmlElement);
             }
         }
+
         return childElements;
     }
 
     /// <summary>
-    /// Retrieves all child elements of the given DOM element that match the given element name.
-    /// Only look at the direct child level of the given element; do not go into further depth
-    /// (in contrast to the DOM API's GetElementsByTagName method).
+    ///     Retrieves all child elements of the given DOM element that match the given element name.
+    ///     Only look at the direct child level of the given element; do not go into further depth
+    ///     (in contrast to the DOM API's GetElementsByTagName method).
     /// </summary>
     /// <param name="element">The DOM element to analyze</param>
     /// <param name="childElementName">The child element name to look for</param>
@@ -78,15 +86,22 @@ public static class DomUtils
     }
 
     /// <summary>
-    /// Utility method that returns the first child element identified by its name.
+    ///     Utility method that returns the first child element identified by its name.
     /// </summary>
     /// <param name="element">The DOM element to analyze</param>
     /// <param name="childElementName">The child element name to look for</param>
     /// <returns>The XmlElement instance, or null if none found</returns>
     public static XmlElement? GetChildElementByTagName(XmlElement element, string childElementName)
     {
-        if (element == null) throw new ArgumentNullException(nameof(element), "Element must not be null");
-        if (childElementName == null) throw new ArgumentNullException(nameof(childElementName), "Element name must not be null");
+        if (element == null)
+        {
+            throw new ArgumentNullException(nameof(element), "Element must not be null");
+        }
+
+        if (childElementName == null)
+        {
+            throw new ArgumentNullException(nameof(childElementName), "Element name must not be null");
+        }
 
         var nodeList = element.ChildNodes;
         for (var i = 0; i < nodeList.Count; i++)
@@ -97,11 +112,12 @@ public static class DomUtils
                 return xmlElement;
             }
         }
+
         return null;
     }
 
     /// <summary>
-    /// Utility method that returns the first child element value identified by its name.
+    ///     Utility method that returns the first child element value identified by its name.
     /// </summary>
     /// <param name="element">The DOM element to analyze</param>
     /// <param name="childElementName">The child element name to look for</param>
@@ -113,13 +129,16 @@ public static class DomUtils
     }
 
     /// <summary>
-    /// Retrieves all child elements of the given DOM element.
+    ///     Retrieves all child elements of the given DOM element.
     /// </summary>
     /// <param name="element">The DOM element to analyze</param>
     /// <returns>A List of child XmlElement instances</returns>
     public static List<XmlElement> GetChildElements(XmlElement element)
     {
-        if (element == null) throw new ArgumentNullException(nameof(element), "Element must not be null");
+        if (element == null)
+        {
+            throw new ArgumentNullException(nameof(element), "Element must not be null");
+        }
 
         var nodeList = element.ChildNodes;
         var childElements = new List<XmlElement>();
@@ -132,20 +151,24 @@ public static class DomUtils
                 childElements.Add(xmlElement);
             }
         }
+
         return childElements;
     }
 
     /// <summary>
-    /// Extracts the text value from the given DOM element, ignoring XML comments.
-    /// Appends all CharacterData nodes and EntityReference nodes into a single
-    /// String value, excluding Comment nodes. Only exposes actual user-specified
-    /// text, no default values of any kind.
+    ///     Extracts the text value from the given DOM element, ignoring XML comments.
+    ///     Appends all CharacterData nodes and EntityReference nodes into a single
+    ///     String value, excluding Comment nodes. Only exposes actual user-specified
+    ///     text, no default values of any kind.
     /// </summary>
     /// <param name="valueElement">The element to extract text from</param>
     /// <returns>The concatenated text content</returns>
     public static string GetTextValue(XmlElement valueElement)
     {
-        if (valueElement == null) throw new ArgumentNullException(nameof(valueElement), "Element must not be null");
+        if (valueElement == null)
+        {
+            throw new ArgumentNullException(nameof(valueElement), "Element must not be null");
+        }
 
         var sb = new StringBuilder();
         var nodeList = valueElement.ChildNodes;
@@ -158,26 +181,34 @@ public static class DomUtils
                 sb.Append(item.Value);
             }
         }
+
         return sb.ToString();
     }
 
     /// <summary>
-    /// Namespace-aware equals comparison. Returns true if either
-    /// LocalName or Name equals desiredName, otherwise returns false.
+    ///     Namespace-aware equals comparison. Returns true if either
+    ///     LocalName or Name equals desiredName, otherwise returns false.
     /// </summary>
     /// <param name="node">The node to check</param>
     /// <param name="desiredName">The desired name to match</param>
     /// <returns>True if names match, false otherwise</returns>
     public static bool NodeNameEquals(XmlNode node, string desiredName)
     {
-        if (node == null) throw new ArgumentNullException(nameof(node), "Node must not be null");
-        if (desiredName == null) throw new ArgumentNullException(nameof(desiredName), "Desired name must not be null");
+        if (node == null)
+        {
+            throw new ArgumentNullException(nameof(node), "Node must not be null");
+        }
+
+        if (desiredName == null)
+        {
+            throw new ArgumentNullException(nameof(desiredName), "Desired name must not be null");
+        }
 
         return NodeNameMatch(node, desiredName);
     }
 
     /// <summary>
-    /// Matches the given node's name and local name against the given desired name.
+    ///     Matches the given node's name and local name against the given desired name.
     /// </summary>
     /// <param name="node">The node to check</param>
     /// <param name="desiredName">The desired name to match</param>
@@ -188,7 +219,7 @@ public static class DomUtils
     }
 
     /// <summary>
-    /// Matches the given node's name and local name against the given desired names.
+    ///     Matches the given node's name and local name against the given desired names.
     /// </summary>
     /// <param name="node">The node to check</param>
     /// <param name="desiredNames">The collection of desired names to match</param>

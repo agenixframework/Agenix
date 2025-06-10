@@ -1,5 +1,5 @@
-using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using Agenix.Api.Context;
 using Agenix.Api.IO;
@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Core.Variable.Dictionary;
 
 /// <summary>
-/// Abstract data dictionary implementation provides global scope handling.
+///     Abstract data dictionary implementation provides global scope handling.
 /// </summary>
 public abstract class AbstractDataDictionary<T> : AbstractMessageProcessor, IDataDictionary<T>
 {
@@ -22,38 +22,29 @@ public abstract class AbstractDataDictionary<T> : AbstractMessageProcessor, IDat
     private static readonly ILogger Log = LogManager.GetLogger(typeof(AbstractDataDictionary<T>));
 
     /// <summary>
-    /// Data dictionary name
-    /// </summary>
-    private string _name;
-
-    /// <summary>
-    /// Scope defines where a dictionary should be applied (explicit or global)
+    ///     Scope defines where a dictionary should be applied (explicit or global)
     /// </summary>
     private bool _globalScope = true;
 
     /// <summary>
-    /// Known mappings to this dictionary
+    ///     Known mappings to this dictionary
     /// </summary>
-    protected System.Collections.Generic.Dictionary<string, string> _mappings = new();
+    protected Dictionary<string, string> _mappings = new();
 
     /// <summary>
-    /// Mapping file resource
+    ///     Data dictionary name
     /// </summary>
-    protected IResource MappingFile;
+    private string _name;
 
     /// <summary>
-    /// Kind of mapping strategy how to identify dictionary item
+    ///     Kind of mapping strategy how to identify dictionary item
     /// </summary>
     private PathMappingStrategy _pathMappingStrategy = PathMappingStrategy.EXACT;
 
     /// <summary>
-    /// Gets the data dictionary name.
+    ///     Mapping file resource
     /// </summary>
-    public string Name
-    {
-        get => _name ?? GetType().Name;
-        set => _name = value;
-    }
+    protected IResource MappingFile;
 
     public IResource MappingFileResource
     {
@@ -61,14 +52,14 @@ public abstract class AbstractDataDictionary<T> : AbstractMessageProcessor, IDat
         set => MappingFile = value;
     }
 
-    public System.Collections.Generic.Dictionary<string, string> Mappings
+    public Dictionary<string, string> Mappings
     {
         get => _mappings;
         set => _mappings = value;
     }
 
     /// <summary>
-    /// Gets or sets the global scope property.
+    ///     Gets or sets the global scope property.
     /// </summary>
     public bool IsGlobalScope
     {
@@ -77,7 +68,16 @@ public abstract class AbstractDataDictionary<T> : AbstractMessageProcessor, IDat
     }
 
     /// <summary>
-    /// Gets the path mapping strategy.
+    ///     Gets the data dictionary name.
+    /// </summary>
+    public string Name
+    {
+        get => _name ?? GetType().Name;
+        set => _name = value;
+    }
+
+    /// <summary>
+    ///     Gets the path mapping strategy.
     /// </summary>
     public PathMappingStrategy PathMappingStrategy
     {
@@ -86,27 +86,7 @@ public abstract class AbstractDataDictionary<T> : AbstractMessageProcessor, IDat
     }
 
     /// <summary>
-    /// Convert to original value type if necessary.
-    /// </summary>
-    /// <typeparam name="V">The value type</typeparam>
-    /// <param name="value">The string value to convert</param>
-    /// <param name="originalValue">The original value for type reference</param>
-    /// <param name="context">The test context</param>
-    /// <returns>Converted value</returns>
-    protected V ConvertIfNecessary<V>(string value, V originalValue, TestContext context)
-    {
-        if (originalValue == null)
-        {
-            return (V)(object)context.ReplaceDynamicContentInString(value);
-        }
-
-        return context.TypeConverter.ConvertIfNecessary<V>(
-            context.ReplaceDynamicContentInString(value),
-            typeof(V));
-    }
-
-    /// <summary>
-    /// Initialize the data dictionary by loading mappings from file if specified.
+    ///     Initialize the data dictionary by loading mappings from file if specified.
     /// </summary>
     public void Initialize()
     {
@@ -138,7 +118,7 @@ public abstract class AbstractDataDictionary<T> : AbstractMessageProcessor, IDat
     }
 
     /// <summary>
-    /// Abstract method to translate values - must be implemented by derived classes.
+    ///     Abstract method to translate values - must be implemented by derived classes.
     /// </summary>
     /// <typeparam name="R">The return type</typeparam>
     /// <param name="key">The key element in message content</param>
@@ -147,8 +127,33 @@ public abstract class AbstractDataDictionary<T> : AbstractMessageProcessor, IDat
     /// <returns>Translated value</returns>
     public abstract R Translate<R>(T key, R value, TestContext context);
 
+    bool IScoped.IsGlobalScope()
+    {
+        return IsGlobalScope;
+    }
+
     /// <summary>
-    /// Load properties from a resource file.
+    ///     Convert to original value type if necessary.
+    /// </summary>
+    /// <typeparam name="V">The value type</typeparam>
+    /// <param name="value">The string value to convert</param>
+    /// <param name="originalValue">The original value for type reference</param>
+    /// <param name="context">The test context</param>
+    /// <returns>Converted value</returns>
+    protected V ConvertIfNecessary<V>(string value, V originalValue, TestContext context)
+    {
+        if (originalValue == null)
+        {
+            return (V)(object)context.ReplaceDynamicContentInString(value);
+        }
+
+        return context.TypeConverter.ConvertIfNecessary<V>(
+            context.ReplaceDynamicContentInString(value),
+            typeof(V));
+    }
+
+    /// <summary>
+    ///     Load properties from a resource file.
     /// </summary>
     /// <param name="resource">The resource to load from</param>
     /// <returns>Dictionary of key-value pairs</returns>
@@ -159,12 +164,8 @@ public abstract class AbstractDataDictionary<T> : AbstractMessageProcessor, IDat
         {
             throw new FileNotFoundException(resource.Description);
         }
+
         properties.Load(resource.InputStream);
         return properties;
-    }
-
-    bool IScoped.IsGlobalScope()
-    {
-       return IsGlobalScope;
     }
 }

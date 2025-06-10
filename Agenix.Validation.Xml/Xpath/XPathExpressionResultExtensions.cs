@@ -31,15 +31,13 @@ using System.Xml.XPath;
 namespace Agenix.Validation.Xml.Xpath;
 
 /// <summary>
-/// Enumeration representing the possible result types for XPath expression evaluation. In Agenix
-/// XPath expressions a prefix may determine the result type like this:
-///
-/// string://MyExpressionString/Value
-/// number://MyExpressionString/Value
-/// boolean://MyExpressionString/Value
-///
-/// The result type prefix is supposed to be stripped off before expression evaluation
-/// and determines the evaluation result.
+///     Enumeration representing the possible result types for XPath expression evaluation. In Agenix
+///     XPath expressions a prefix may determine the result type like this:
+///     string://MyExpressionString/Value
+///     number://MyExpressionString/Value
+///     boolean://MyExpressionString/Value
+///     The result type prefix is supposed to be stripped off before expression evaluation
+///     and determines the evaluation result.
 /// </summary>
 public enum XPathExpressionResult
 {
@@ -52,14 +50,15 @@ public enum XPathExpressionResult
 }
 
 /// <summary>
-/// Extension methods for XPathExpressionResult enum.
+///     Extension methods for XPathExpressionResult enum.
 /// </summary>
 public static class XPathExpressionResultExtensions
 {
     /// <summary>
-    /// Prefix for XPath expressions in Agenix determining the result type
+    ///     Prefix for XPath expressions in Agenix determining the result type
     /// </summary>
     private const string StringPrefix = "string:";
+
     private const string NumberPrefix = "number:";
     private const string IntegerPrefix = "integer:";
     private const string NodePrefix = "node:";
@@ -67,8 +66,8 @@ public static class XPathExpressionResultExtensions
     private const string BooleanPrefix = "boolean:";
 
     /// <summary>
-    /// Get the enumeration value from an expression string. According to the leading
-    /// prefix and a default result type the enumeration value is returned.
+    ///     Get the enumeration value from an expression string. According to the leading
+    ///     prefix and a default result type the enumeration value is returned.
     /// </summary>
     /// <param name="value">The expression string to parse</param>
     /// <param name="defaultResult">The default result type if no prefix is found</param>
@@ -89,23 +88,29 @@ public static class XPathExpressionResultExtensions
         {
             return XPathExpressionResult.Node;
         }
+
         if (value.StartsWith(NodeSetPrefix, StringComparison.Ordinal))
         {
             return XPathExpressionResult.NodeSet;
         }
+
         if (value.StartsWith(BooleanPrefix, StringComparison.Ordinal))
         {
             return XPathExpressionResult.Boolean;
         }
+
         if (value.StartsWith(NumberPrefix, StringComparison.Ordinal))
         {
             return XPathExpressionResult.Number;
         }
-        return value.StartsWith(IntegerPrefix, StringComparison.Ordinal) ? XPathExpressionResult.Integer : defaultResult;
+
+        return value.StartsWith(IntegerPrefix, StringComparison.Ordinal)
+            ? XPathExpressionResult.Integer
+            : defaultResult;
     }
 
     /// <summary>
-    /// Get a constant XPathResultType from this enumeration value.
+    ///     Get a constant XPathResultType from this enumeration value.
     /// </summary>
     /// <param name="result">The XPathExpressionResult enum value</param>
     /// <returns>The corresponding XPathResultType</returns>
@@ -123,7 +128,7 @@ public static class XPathExpressionResultExtensions
     }
 
     /// <summary>
-    /// Get a constant XmlQualifiedName instance from this enumeration value.
+    ///     Get a constant XmlQualifiedName instance from this enumeration value.
     /// </summary>
     /// <param name="result">The XPathExpressionResult enum value</param>
     /// <returns>The corresponding XmlQualifiedName</returns>
@@ -135,13 +140,14 @@ public static class XPathExpressionResultExtensions
             XPathExpressionResult.Node => new XmlQualifiedName("node", "http://www.w3.org/1999/XSL/Transform"),
             XPathExpressionResult.NodeSet => new XmlQualifiedName("node-set", "http://www.w3.org/1999/XSL/Transform"),
             XPathExpressionResult.Boolean => new XmlQualifiedName("boolean", "http://www.w3.org/1999/XSL/Transform"),
-            XPathExpressionResult.Number or XPathExpressionResult.Integer => new XmlQualifiedName("number", "http://www.w3.org/1999/XSL/Transform"),
+            XPathExpressionResult.Number or XPathExpressionResult.Integer => new XmlQualifiedName("number",
+                "http://www.w3.org/1999/XSL/Transform"),
             _ => new XmlQualifiedName("node", "http://www.w3.org/1999/XSL/Transform")
         };
     }
 
     /// <summary>
-    /// Cut off the leading result type prefix in a XPath expression string.
+    ///     Cut off the leading result type prefix in a XPath expression string.
     /// </summary>
     /// <param name="expression">The expression string</param>
     /// <returns>The expression string without the prefix</returns>
@@ -177,6 +183,8 @@ public static class XPathExpressionResultExtensions
             return expression[NumberPrefix.Length..];
         }
 
-        return expression.StartsWith(IntegerPrefix, StringComparison.Ordinal) ? expression[IntegerPrefix.Length..] : expression;
+        return expression.StartsWith(IntegerPrefix, StringComparison.Ordinal)
+            ? expression[IntegerPrefix.Length..]
+            : expression;
     }
 }

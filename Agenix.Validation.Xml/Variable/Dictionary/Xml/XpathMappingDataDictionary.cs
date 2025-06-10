@@ -1,3 +1,4 @@
+using System.Xml;
 using System.Xml.XPath;
 using Agenix.Api.Common;
 using Agenix.Api.Context;
@@ -10,12 +11,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Agenix.Validation.Xml.Variable.Dictionary.Xml;
 
-using System.Xml;
-
 /// <summary>
-/// XML data dictionary implementation maps elements via XPath expressions. When an element is identified by some expression
-/// in the dictionary, the value is overwritten accordingly. Namespace context is either evaluated on the fly or by global namespace
-/// context builder.
+///     XML data dictionary implementation maps elements via XPath expressions. When an element is identified by some
+///     expression
+///     in the dictionary, the value is overwritten accordingly. Namespace context is either evaluated on the fly or by
+///     global namespace
+///     context builder.
 /// </summary>
 public class XpathMappingDataDictionary : AbstractXmlDataDictionary, InitializingPhase
 {
@@ -27,12 +28,24 @@ public class XpathMappingDataDictionary : AbstractXmlDataDictionary, Initializin
     private NamespaceContextBuilder? _namespaceContextBuilder;
 
     /// <summary>
-    /// Gets or sets the namespace context builder.
+    ///     Gets or sets the namespace context builder.
     /// </summary>
     public NamespaceContextBuilder NamespaceContextBuilder
     {
         get => _namespaceContextBuilder;
         set => _namespaceContextBuilder = value;
+    }
+
+    public new void Initialize()
+    {
+        if (PathMappingStrategy != null &&
+            PathMappingStrategy != PathMappingStrategy.EXACT)
+        {
+            Log.LogWarning("{ClassName} ignores path mapping strategy other than {Strategy}",
+                GetType().Name, PathMappingStrategy.EXACT);
+        }
+
+        base.Initialize();
     }
 
     public override T Translate<T>(XmlNode node, T value, TestContext context)
@@ -42,7 +55,8 @@ public class XpathMappingDataDictionary : AbstractXmlDataDictionary, Initializin
             var expression = expressionEntry.Key;
 
             if (XpathUtils.EvaluateExpression(node.OwnerDocument, expression,
-                    BuildNamespaceContext(node, context), XPathResultType.NodeSet) is XPathNodeIterator findings && ContainsNode(findings, node))
+                    BuildNamespaceContext(node, context), XPathResultType.NodeSet) is XPathNodeIterator findings &&
+                ContainsNode(findings, node))
             {
                 if (Log.IsEnabled(LogLevel.Debug))
                 {
@@ -55,11 +69,10 @@ public class XpathMappingDataDictionary : AbstractXmlDataDictionary, Initializin
         }
 
         return value;
-
     }
 
     /// <summary>
-    /// Checks if given node set contains node.
+    ///     Checks if given node set contains node.
     /// </summary>
     /// <param name="findings">The XmlNodeList to search in</param>
     /// <param name="node">The node to find</param>
@@ -81,8 +94,8 @@ public class XpathMappingDataDictionary : AbstractXmlDataDictionary, Initializin
 
 
     /// <summary>
-    /// Builds namespace context with dynamic lookup on received node document and global namespace mappings from
-    /// namespace context builder.
+    ///     Builds namespace context with dynamic lookup on received node document and global namespace mappings from
+    ///     namespace context builder.
     /// </summary>
     /// <param name="node">The element node from message</param>
     /// <param name="context">The current test context</param>
@@ -104,20 +117,8 @@ public class XpathMappingDataDictionary : AbstractXmlDataDictionary, Initializin
         return simpleNamespaceContext;
     }
 
-    public new void Initialize()
-    {
-        if (PathMappingStrategy != null &&
-            PathMappingStrategy != PathMappingStrategy.EXACT)
-        {
-            Log.LogWarning("{ClassName} ignores path mapping strategy other than {Strategy}",
-                GetType().Name, PathMappingStrategy.EXACT);
-        }
-
-        base.Initialize();
-    }
-
     /// <summary>
-    /// Get explicit namespace context builder set on this class or obtain instance from reference resolver.
+    ///     Get explicit namespace context builder set on this class or obtain instance from reference resolver.
     /// </summary>
     /// <param name="context">The test context</param>
     /// <returns>The namespace context builder</returns>
@@ -131,4 +132,3 @@ public class XpathMappingDataDictionary : AbstractXmlDataDictionary, Initializin
         return XmlValidationHelper.GetNamespaceContextBuilder(context);
     }
 }
-

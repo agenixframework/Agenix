@@ -8,22 +8,13 @@ using Agenix.Validation.Xml.Validation.Xml;
 namespace Agenix.Validation.Xml.Dsl;
 
 /// <summary>
-/// Provides support for configuring and using XPath-related functionalities within the DSL.
-/// This class serves as a bridge to configure expressions and adapt to various
-/// processing contexts such as message processing, variable extraction, and validation.
+///     Provides support for configuring and using XPath-related functionalities within the DSL.
+///     This class serves as a bridge to configure expressions and adapt to various
+///     processing contexts such as message processing, variable extraction, and validation.
 /// </summary>
 public class XpathSupport : IWithExpressions<XpathSupport>, IPathExpressionAdapter
 {
     private readonly Dictionary<string, object> _expressions = new();
-
-    /// <summary>
-    /// Static entrance for all XPath-related C# DSL functionalities.
-    /// </summary>
-    /// <returns>New XpathSupport instance</returns>
-    public static XpathSupport Xpath()
-    {
-        return new XpathSupport();
-    }
 
     public IMessageProcessor AsProcessor()
     {
@@ -52,6 +43,7 @@ public class XpathSupport : IWithExpressions<XpathSupport>, IPathExpressionAdapt
         {
             _expressions[kvp.Key] = kvp.Value;
         }
+
         return this;
     }
 
@@ -59,5 +51,14 @@ public class XpathSupport : IWithExpressions<XpathSupport>, IPathExpressionAdapt
     {
         _expressions[expression] = value;
         return this;
+    }
+
+    /// <summary>
+    ///     Static entrance for all XPath-related C# DSL functionalities.
+    /// </summary>
+    /// <returns>New XpathSupport instance</returns>
+    public static XpathSupport Xpath()
+    {
+        return new XpathSupport();
     }
 }

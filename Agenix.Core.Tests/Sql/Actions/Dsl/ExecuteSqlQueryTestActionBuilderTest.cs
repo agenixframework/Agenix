@@ -44,7 +44,7 @@ public class ExecuteSqlQueryTestActionBuilderTest : AbstractNUnitSetUp
                 .Returns(new List<Dictionary<string, object>> { new() { { "CNT_EPISODES", "100000" } } }));
 
         var builder = new DefaultTestCaseRunner(Context);
-        builder.SetVariable("episodeId", "core:RandomNumber(5)");
+        builder.SetVariable("episodeId", "agenix:RandomNumber(5)");
 
         var assemblyLocation = Assembly.GetExecutingAssembly().Location;
         var testDirectory = Path.GetDirectoryName(assemblyLocation);

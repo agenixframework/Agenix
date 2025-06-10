@@ -52,18 +52,15 @@ public class AgenixSystemException : SystemException
     {
     }
 
+    public override string Message => base.Message + GetFailureStackAsString();
+
     public string GetMessage()
     {
         return Message;
     }
 
-    public override string Message
-    {
-        get { return base.Message + GetFailureStackAsString(); }
-    }
-
     /// <summary>
-    /// Get formatted string representation of failure stack information.
+    ///     Get formatted string representation of failure stack information.
     /// </summary>
     /// <returns></returns>
     public string GetFailureStackAsString()
@@ -80,7 +77,7 @@ public class AgenixSystemException : SystemException
     }
 
     /// <summary>
-    /// Sets the custom failure stack holding line number information inside test case.
+    ///     Sets the custom failure stack holding line number information inside test case.
     /// </summary>
     /// <param name="failureStack"></param>
     public void SetFailureStack(List<FailureStackElement> failureStack)
@@ -89,7 +86,7 @@ public class AgenixSystemException : SystemException
     }
 
     /// <summary>
-    /// Gets the custom failure stack with line number information where the testcase failed.
+    ///     Gets the custom failure stack with line number information where the testcase failed.
     /// </summary>
     /// <returns>the failureStack</returns>
     public Stack<FailureStackElement> GetFailureStack()
@@ -103,5 +100,4 @@ public class AgenixSystemException : SystemException
 
         return stack;
     }
-
 }

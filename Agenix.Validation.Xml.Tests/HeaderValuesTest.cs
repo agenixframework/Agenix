@@ -31,17 +31,17 @@ public class HeaderValuesTest : AbstractNUnitSetUp
         _endpointConfiguration.Setup(c => c.Timeout).Returns(5000L);
 
         var message = new DefaultMessage(
-            "<root>" +
-            "<element attributeA='attribute-value' attributeB='attribute-value'>" +
+                "<root>" +
+                "<element attributeA='attribute-value' attributeB='attribute-value'>" +
                 "<sub-elementA attribute='A'>text-value</sub-elementA>" +
                 "<sub-elementB attribute='B'>text-value</sub-elementB>" +
                 "<sub-elementC attribute='C'>text-value</sub-elementC>" +
-            "</element>" +
-            "</root>"
-        )
-        .SetHeader("header-valueA", "A")
-        .SetHeader("header-valueB", "B")
-        .SetHeader("header-valueC", "C");
+                "</element>" +
+                "</root>"
+            )
+            .SetHeader("header-valueA", "A")
+            .SetHeader("header-valueB", "B")
+            .SetHeader("header-valueC", "C");
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
@@ -51,17 +51,14 @@ public class HeaderValuesTest : AbstractNUnitSetUp
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
             "<root>" +
             "<element attributeA='attribute-value' attributeB='attribute-value'>" +
-                "<sub-elementA attribute='A'>text-value</sub-elementA>" +
-                "<sub-elementB attribute='B'>text-value</sub-elementB>" +
-                "<sub-elementC attribute='C'>text-value</sub-elementC>" +
+            "<sub-elementA attribute='A'>text-value</sub-elementA>" +
+            "<sub-elementB attribute='B'>text-value</sub-elementB>" +
+            "<sub-elementC attribute='C'>text-value</sub-elementC>" +
             "</element>" +
             "</root>"
         ));
 
-        var validateHeaderValues = new Dictionary<string, object>
-        {
-            { "header-valueA", "A" }
-        };
+        var validateHeaderValues = new Dictionary<string, object> { { "header-valueA", "A" } };
 
         controlMessageBuilder.AddHeaderBuilder(new DefaultHeaderBuilder(validateHeaderValues));
 
@@ -72,6 +69,7 @@ public class HeaderValuesTest : AbstractNUnitSetUp
 
         receiveAction.Execute(Context);
     }
+
     [Test]
     public void TestValidateHeaderValuesComplete()
     {
@@ -84,17 +82,17 @@ public class HeaderValuesTest : AbstractNUnitSetUp
         _endpointConfiguration.Setup(c => c.Timeout).Returns(5000L);
 
         var message = new DefaultMessage(
-            "<root>" +
-            "<element attributeA='attribute-value' attributeB='attribute-value'>" +
+                "<root>" +
+                "<element attributeA='attribute-value' attributeB='attribute-value'>" +
                 "<sub-elementA attribute='A'>text-value</sub-elementA>" +
                 "<sub-elementB attribute='B'>text-value</sub-elementB>" +
                 "<sub-elementC attribute='C'>text-value</sub-elementC>" +
-            "</element>" +
-            "</root>"
-        )
-        .SetHeader("header-valueA", "A")
-        .SetHeader("header-valueB", "B")
-        .SetHeader("header-valueC", "C");
+                "</element>" +
+                "</root>"
+            )
+            .SetHeader("header-valueA", "A")
+            .SetHeader("header-valueB", "B")
+            .SetHeader("header-valueC", "C");
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
@@ -104,18 +102,16 @@ public class HeaderValuesTest : AbstractNUnitSetUp
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
             "<root>" +
             "<element attributeA='attribute-value' attributeB='attribute-value'>" +
-                "<sub-elementA attribute='A'>text-value</sub-elementA>" +
-                "<sub-elementB attribute='B'>text-value</sub-elementB>" +
-                "<sub-elementC attribute='C'>text-value</sub-elementC>" +
+            "<sub-elementA attribute='A'>text-value</sub-elementA>" +
+            "<sub-elementB attribute='B'>text-value</sub-elementB>" +
+            "<sub-elementC attribute='C'>text-value</sub-elementC>" +
             "</element>" +
             "</root>"
         ));
 
         var validateHeaderValues = new Dictionary<string, object>
         {
-            { "header-valueA", "A" },
-            { "header-valueB", "B" },
-            { "header-valueC", "C" }
+            { "header-valueA", "A" }, { "header-valueB", "B" }, { "header-valueC", "C" }
         };
 
         controlMessageBuilder.AddHeaderBuilder(new DefaultHeaderBuilder(validateHeaderValues));
@@ -129,7 +125,7 @@ public class HeaderValuesTest : AbstractNUnitSetUp
         receiveAction.Execute(Context);
     }
 
-     [Test]
+    [Test]
     public void TestValidateHeaderValuesWrongExpectedValue()
     {
         _endpoint.Reset();
@@ -141,17 +137,17 @@ public class HeaderValuesTest : AbstractNUnitSetUp
         _endpointConfiguration.Setup(c => c.Timeout).Returns(5000L);
 
         var message = new DefaultMessage(
-            "<root>" +
-            "<element attributeA='attribute-value' attributeB='attribute-value'>" +
+                "<root>" +
+                "<element attributeA='attribute-value' attributeB='attribute-value'>" +
                 "<sub-elementA attribute='A'>text-value</sub-elementA>" +
                 "<sub-elementB attribute='B'>text-value</sub-elementB>" +
                 "<sub-elementC attribute='C'>text-value</sub-elementC>" +
-            "</element>" +
-            "</root>"
-        )
-        .SetHeader("header-valueA", "A")
-        .SetHeader("header-valueB", "B")
-        .SetHeader("header-valueC", "C");
+                "</element>" +
+                "</root>"
+            )
+            .SetHeader("header-valueA", "A")
+            .SetHeader("header-valueB", "B")
+            .SetHeader("header-valueC", "C");
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
@@ -161,17 +157,14 @@ public class HeaderValuesTest : AbstractNUnitSetUp
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
             "<root>" +
             "<element attributeA='attribute-value' attributeB='attribute-value'>" +
-                "<sub-elementA attribute='A'>text-value</sub-elementA>" +
-                "<sub-elementB attribute='B'>text-value</sub-elementB>" +
-                "<sub-elementC attribute='C'>text-value</sub-elementC>" +
+            "<sub-elementA attribute='A'>text-value</sub-elementA>" +
+            "<sub-elementB attribute='B'>text-value</sub-elementB>" +
+            "<sub-elementC attribute='C'>text-value</sub-elementC>" +
             "</element>" +
             "</root>"
         ));
 
-        var validateHeaderValues = new Dictionary<string, object>
-        {
-            { "header-valueA", "wrong" }
-        };
+        var validateHeaderValues = new Dictionary<string, object> { { "header-valueA", "wrong" } };
 
         controlMessageBuilder.AddHeaderBuilder(new DefaultHeaderBuilder(validateHeaderValues));
 
@@ -195,17 +188,17 @@ public class HeaderValuesTest : AbstractNUnitSetUp
         _endpointConfiguration.Setup(c => c.Timeout).Returns(5000L);
 
         var message = new DefaultMessage(
-            "<root>" +
-            "<element attributeA='attribute-value' attributeB='attribute-value'>" +
+                "<root>" +
+                "<element attributeA='attribute-value' attributeB='attribute-value'>" +
                 "<sub-elementA attribute='A'>text-value</sub-elementA>" +
                 "<sub-elementB attribute='B'>text-value</sub-elementB>" +
                 "<sub-elementC attribute='C'>text-value</sub-elementC>" +
-            "</element>" +
-            "</root>"
-        )
-        .SetHeader("header-valueA", "A")
-        .SetHeader("header-valueB", "B")
-        .SetHeader("header-valueC", "C");
+                "</element>" +
+                "</root>"
+            )
+            .SetHeader("header-valueA", "A")
+            .SetHeader("header-valueB", "B")
+            .SetHeader("header-valueC", "C");
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
@@ -215,17 +208,14 @@ public class HeaderValuesTest : AbstractNUnitSetUp
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
             "<root>" +
             "<element attributeA='attribute-value' attributeB='attribute-value'>" +
-                "<sub-elementA attribute='A'>text-value</sub-elementA>" +
-                "<sub-elementB attribute='B'>text-value</sub-elementB>" +
-                "<sub-elementC attribute='C'>text-value</sub-elementC>" +
+            "<sub-elementA attribute='A'>text-value</sub-elementA>" +
+            "<sub-elementB attribute='B'>text-value</sub-elementB>" +
+            "<sub-elementC attribute='C'>text-value</sub-elementC>" +
             "</element>" +
             "</root>"
         ));
 
-        var validateHeaderValues = new Dictionary<string, object>
-        {
-            { "header-wrong", "A" }
-        };
+        var validateHeaderValues = new Dictionary<string, object> { { "header-wrong", "A" } };
 
         controlMessageBuilder.AddHeaderBuilder(new DefaultHeaderBuilder(validateHeaderValues));
 
@@ -249,17 +239,17 @@ public class HeaderValuesTest : AbstractNUnitSetUp
         _endpointConfiguration.Setup(c => c.Timeout).Returns(5000L);
 
         var message = new DefaultMessage(
-            "<root>" +
-            "<element attributeA='attribute-value' attributeB='attribute-value'>" +
+                "<root>" +
+                "<element attributeA='attribute-value' attributeB='attribute-value'>" +
                 "<sub-elementA attribute='A'>text-value</sub-elementA>" +
                 "<sub-elementB attribute='B'>text-value</sub-elementB>" +
                 "<sub-elementC attribute='C'>text-value</sub-elementC>" +
-            "</element>" +
-            "</root>"
-        )
-        .SetHeader("header-valueA", "")
-        .SetHeader("header-valueB", "")
-        .SetHeader("header-valueC", "");
+                "</element>" +
+                "</root>"
+            )
+            .SetHeader("header-valueA", "")
+            .SetHeader("header-valueB", "")
+            .SetHeader("header-valueC", "");
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
@@ -269,18 +259,16 @@ public class HeaderValuesTest : AbstractNUnitSetUp
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
             "<root>" +
             "<element attributeA='attribute-value' attributeB='attribute-value'>" +
-                "<sub-elementA attribute='A'>text-value</sub-elementA>" +
-                "<sub-elementB attribute='B'>text-value</sub-elementB>" +
-                "<sub-elementC attribute='C'>text-value</sub-elementC>" +
+            "<sub-elementA attribute='A'>text-value</sub-elementA>" +
+            "<sub-elementB attribute='B'>text-value</sub-elementB>" +
+            "<sub-elementC attribute='C'>text-value</sub-elementC>" +
             "</element>" +
             "</root>"
         ));
 
         var validateHeaderValues = new Dictionary<string, object>
         {
-            { "header-valueA", "" },
-            { "header-valueB", "" },
-            { "header-valueC", "" }
+            { "header-valueA", "" }, { "header-valueB", "" }, { "header-valueC", "" }
         };
 
         controlMessageBuilder.AddHeaderBuilder(new DefaultHeaderBuilder(validateHeaderValues));
@@ -305,17 +293,17 @@ public class HeaderValuesTest : AbstractNUnitSetUp
         _endpointConfiguration.Setup(c => c.Timeout).Returns(5000L);
 
         var message = new DefaultMessage(
-            "<root>" +
-            "<element attributeA='attribute-value' attributeB='attribute-value'>" +
+                "<root>" +
+                "<element attributeA='attribute-value' attributeB='attribute-value'>" +
                 "<sub-elementA attribute='A'>text-value</sub-elementA>" +
                 "<sub-elementB attribute='B'>text-value</sub-elementB>" +
                 "<sub-elementC attribute='C'>text-value</sub-elementC>" +
-            "</element>" +
-            "</root>"
-        )
-        .SetHeader("header-valueA", "")
-        .SetHeader("header-valueB", "")
-        .SetHeader("header-valueC", "");
+                "</element>" +
+                "</root>"
+            )
+            .SetHeader("header-valueA", "")
+            .SetHeader("header-valueB", "")
+            .SetHeader("header-valueC", "");
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
@@ -325,18 +313,16 @@ public class HeaderValuesTest : AbstractNUnitSetUp
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
             "<root>" +
             "<element attributeA='attribute-value' attributeB='attribute-value'>" +
-                "<sub-elementA attribute='A'>text-value</sub-elementA>" +
-                "<sub-elementB attribute='B'>text-value</sub-elementB>" +
-                "<sub-elementC attribute='C'>text-value</sub-elementC>" +
+            "<sub-elementA attribute='A'>text-value</sub-elementA>" +
+            "<sub-elementB attribute='B'>text-value</sub-elementB>" +
+            "<sub-elementC attribute='C'>text-value</sub-elementC>" +
             "</element>" +
             "</root>"
         ));
 
         var validateHeaderValues = new Dictionary<string, object>
         {
-            { "header-valueA", "null" },
-            { "header-valueB", "null" },
-            { "header-valueC", "null" }
+            { "header-valueA", "null" }, { "header-valueB", "null" }, { "header-valueC", "null" }
         };
 
         controlMessageBuilder.AddHeaderBuilder(new DefaultHeaderBuilder(validateHeaderValues));
@@ -361,17 +347,17 @@ public class HeaderValuesTest : AbstractNUnitSetUp
         _endpointConfiguration.Setup(c => c.Timeout).Returns(5000L);
 
         var message = new DefaultMessage(
-            "<root>" +
-            "<element attributeA='attribute-value' attributeB='attribute-value'>" +
+                "<root>" +
+                "<element attributeA='attribute-value' attributeB='attribute-value'>" +
                 "<sub-elementA attribute='A'>text-value</sub-elementA>" +
                 "<sub-elementB attribute='B'>text-value</sub-elementB>" +
                 "<sub-elementC attribute='C'>text-value</sub-elementC>" +
-            "</element>" +
-            "</root>"
-        )
-        .SetHeader("header-valueA", "A")
-        .SetHeader("header-valueB", "B")
-        .SetHeader("header-valueC", "C");
+                "</element>" +
+                "</root>"
+            )
+            .SetHeader("header-valueA", "A")
+            .SetHeader("header-valueB", "B")
+            .SetHeader("header-valueC", "C");
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
@@ -381,17 +367,16 @@ public class HeaderValuesTest : AbstractNUnitSetUp
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
             "<root>" +
             "<element attributeA='attribute-value' attributeB='attribute-value'>" +
-                "<sub-elementA attribute='A'>text-value</sub-elementA>" +
-                "<sub-elementB attribute='B'>text-value</sub-elementB>" +
-                "<sub-elementC attribute='C'>text-value</sub-elementC>" +
+            "<sub-elementA attribute='A'>text-value</sub-elementA>" +
+            "<sub-elementB attribute='B'>text-value</sub-elementB>" +
+            "<sub-elementC attribute='C'>text-value</sub-elementC>" +
             "</element>" +
             "</root>"
         ));
 
         var extractHeaderValues = new Dictionary<string, string>
         {
-            { "header-valueA", "${valueA}" },
-            { "header-valueB", "${valueB}" }
+            { "header-valueA", "${valueA}" }, { "header-valueB", "${valueB}" }
         };
 
         var variableExtractor = new MessageHeaderVariableExtractor.Builder()
@@ -411,5 +396,4 @@ public class HeaderValuesTest : AbstractNUnitSetUp
         Assert.That(Context.GetVariables().ContainsKey("valueB"), Is.True);
         Assert.That(Context.GetVariables()["valueB"], Is.EqualTo("B"));
     }
-
 }

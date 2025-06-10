@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Agenix.Api.Context;
 using Agenix.Api.Message;
@@ -5,13 +6,13 @@ using Agenix.Api.Message;
 namespace Agenix.Core.Variable.Dictionary;
 
 /// <summary>
-/// Represents a simple key-value mapping dictionary derived from AbstractDataDictionary.
-/// This class is used to process messages and update payloads based on key-value mappings.
+///     Represents a simple key-value mapping dictionary derived from AbstractDataDictionary.
+///     This class is used to process messages and update payloads based on key-value mappings.
 /// </summary>
-public class SimpleMappingDictionary(System.Collections.Generic.Dictionary<string, string> mappings)
+public class SimpleMappingDictionary(Dictionary<string, string> mappings)
     : AbstractDataDictionary<string>
 {
-    public SimpleMappingDictionary() : this(new System.Collections.Generic.Dictionary<string, string>())
+    public SimpleMappingDictionary() : this(new Dictionary<string, string>())
     {
     }
 

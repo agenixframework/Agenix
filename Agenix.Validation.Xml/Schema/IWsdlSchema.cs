@@ -39,8 +39,7 @@ public interface IWsdlSchema
 public interface IExtendedWsdlSchema : IWsdlSchema
 {
     IReadOnlyDictionary<string, string> Namespaces { get; }
+    XmlSchema CompiledSchema { get; }
     void AddNamespace(string prefix, string uri);
     bool HasNamespace(string prefix);
-    XmlSchema CompiledSchema { get; }
 }
-

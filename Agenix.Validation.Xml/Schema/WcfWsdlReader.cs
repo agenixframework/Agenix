@@ -31,18 +31,18 @@ using Agenix.Validation.Xml.Schema.Locator;
 namespace Agenix.Validation.Xml.Schema;
 
 /// <summary>
-/// Provides functionality to read and parse WSDL (Web Services Description Language) documents.
-/// Implements the <see cref="IWsdlReader"/> interface to handle WSDL input from various sources,
-/// including locators and input streams.
+///     Provides functionality to read and parse WSDL (Web Services Description Language) documents.
+///     Implements the <see cref="IWsdlReader" /> interface to handle WSDL input from various sources,
+///     including locators and input streams.
 /// </summary>
 public class WcfWsdlReader : IWsdlReader
 {
     /// <summary>
-    /// Reads a WSDL (Web Services Description Language) document using the specified locator
-    /// and extracts its definition, including the target namespace and namespace declarations.
+    ///     Reads a WSDL (Web Services Description Language) document using the specified locator
+    ///     and extracts its definition, including the target namespace and namespace declarations.
     /// </summary>
     /// <param name="locator">The locator that provides the base input source and base URI of the WSDL document.</param>
-    /// <returns>A <see cref="WsdlDefinition"/> object containing the parsed details of the WSDL document.</returns>
+    /// <returns>A <see cref="WsdlDefinition" /> object containing the parsed details of the WSDL document.</returns>
     public WsdlDefinition ReadWsdl(IWsdlLocator locator)
     {
         using var baseStream = locator.GetBaseInputSource();
@@ -53,11 +53,11 @@ public class WcfWsdlReader : IWsdlReader
     }
 
     /// <summary>
-    /// Reads a WSDL (Web Services Description Language) document from the specified locator
-    /// and extracts its definition, including the target namespace and namespace declarations.
+    ///     Reads a WSDL (Web Services Description Language) document from the specified locator
+    ///     and extracts its definition, including the target namespace and namespace declarations.
     /// </summary>
     /// <param name="locator">The locator that provides the base input source and base URI of the WSDL document.</param>
-    /// <returns>A <see cref="WsdlDefinition"/> object containing the parsed details of the WSDL document.</returns>
+    /// <returns>A <see cref="WsdlDefinition" /> object containing the parsed details of the WSDL document.</returns>
     public WsdlDefinition ReadWsdl(string documentBaseUri, Stream inputStream)
     {
         var doc = new XmlDocument();
@@ -66,19 +66,24 @@ public class WcfWsdlReader : IWsdlReader
         return ParseWsdlDocument(doc, documentBaseUri);
     }
 
+
+    public void Dispose()
+    {
+        // Nothing to dispose
+    }
+
     /// <summary>
-    /// Parses an XML document representing a WSDL (Web Services Description Language)
-    /// and extracts its definition, including the target namespace and namespace declarations.
+    ///     Parses an XML document representing a WSDL (Web Services Description Language)
+    ///     and extracts its definition, including the target namespace and namespace declarations.
     /// </summary>
     /// <param name="doc">The XML document to parse, representing the WSDL structure.</param>
     /// <param name="baseUri">The base URI of the WSDL document, used to resolve relative references.</param>
-    /// <returns>A <see cref="WsdlDefinition"/> object containing the parsed details of the WSDL document.</returns>
+    /// <returns>A <see cref="WsdlDefinition" /> object containing the parsed details of the WSDL document.</returns>
     private static WsdlDefinition ParseWsdlDocument(XmlDocument doc, string baseUri)
     {
         var definition = new WsdlDefinition
         {
-            DocumentBaseUri = baseUri,
-            Namespaces = new Dictionary<string, string>()
+            DocumentBaseUri = baseUri, Namespaces = new Dictionary<string, string>()
         };
 
         // Extract target namespace
@@ -130,7 +135,9 @@ public class WcfWsdlReader : IWsdlReader
     {
         var typesNodes = definitionsElement.GetElementsByTagName("types");
         if (typesNodes.Count == 0)
+        {
             return;
+        }
 
         definition.Types = new WsdlTypes();
 
@@ -144,11 +151,4 @@ public class WcfWsdlReader : IWsdlReader
             }
         }
     }
-
-
-    public void Dispose()
-    {
-        // Nothing to dispose
-    }
-
 }

@@ -514,13 +514,15 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
             Assert.That(action.MessageBuilder, Is.InstanceOf<DefaultMessageBuilder>());
         }
+
         var messageBuilder = (DefaultMessageBuilder)action.MessageBuilder;
         using (Assert.EnterMultipleScope())
         {
             Assert.That(messageBuilder.BuildMessagePayload(Context, action.MessageType),
-                    Is.EqualTo("<TestRequest><Message>Hello World!</Message></TestRequest>"));
+                Is.EqualTo("<TestRequest><Message>Hello World!</Message></TestRequest>"));
             Assert.That(messageBuilder.BuildMessageHeaderData(Context).Count, Is.EqualTo(1));
         }
+
         Assert.That(messageBuilder.BuildMessageHeaderData(Context)[0],
             Is.EqualTo("<Header><Name>operation</Name><Value>foo</Value></Header>"));
 
@@ -971,7 +973,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
                 .Validate(JsonSupport.Json()
                     .Expression("$.person.name", "John")
                     .Expression("$.text", "Hello World!")
-                    )));
+                )));
     }
 
     [Test]
@@ -1168,7 +1170,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
             .Body("{}")
             .Validate(JsonSupport.Json()
                 .Schema("jsonTestSchema")
-                ));
+            ));
 
         // Assert
         var test = runner.GetTestCase();

@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FakeItEasy" Version="8.3.0"/>
@@ -12,15 +12,15 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="8.0.0"/>
     <PackageReference Include="Moq" Version="4.20.72"/>
     <PackageReference Include="Moq.AutoMock" Version="3.5.0"/>
-    <PackageReference Include="NHamcrest" Version="4.0.0" />
-    <PackageReference Include="NSubstitute" Version="5.3.0" />
+    <PackageReference Include="NHamcrest" Version="4.0.0"/>
+    <PackageReference Include="NSubstitute" Version="5.3.0"/>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1"/>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Agenix.NUnit.Runtime\Agenix.NUnit.Runtime.csproj" />
-    <ProjectReference Include="..\Agenix.Validation.NHamcrest\Agenix.Validation.NHamcrest.csproj" />
-    <ProjectReference Include="..\Agenix.Validation.Xml\Agenix.Validation.Xml.csproj" />
+    <ProjectReference Include="..\Agenix.NUnit.Runtime\Agenix.NUnit.Runtime.csproj"/>
+    <ProjectReference Include="..\Agenix.Validation.NHamcrest\Agenix.Validation.NHamcrest.csproj"/>
+    <ProjectReference Include="..\Agenix.Validation.Xml\Agenix.Validation.Xml.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
@@ -30,52 +30,52 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Validation\test.xsd" />
-    <EmbeddedResource Include="Resources\Validation\test.xsd" />
-    <None Remove="Resources\Validation\example.dtd" />
-    <EmbeddedResource Include="Resources\Validation\example.dtd" />
-    <None Remove="Resources\Validation\sample.xsd" />
-    <EmbeddedResource Include="Resources\Validation\sample.xsd" />
-    <None Remove="Resources\Validation\SampleMessage.xsd" />
-    <EmbeddedResource Include="Resources\Validation\SampleMessage.xsd" />
-    <None Remove="Resources\Validation\SampleMessageResponse.xsd" />
-    <EmbeddedResource Include="Resources\Validation\SampleMessageResponse.xsd" />
-    <None Remove="Resources\Validation\SampleService.wsdl" />
-    <EmbeddedResource Include="Resources\Validation\SampleService.wsdl" />
-    <None Remove="Resources\Validation\SampleServiceNoMatchingTargetNamespace.wsdl" />
-    <EmbeddedResource Include="Resources\Validation\SampleServiceNoMatchingTargetNamespace.wsdl" />
-    <None Remove="Resources\Validation\SampleServiceWithDuplicateImports.wsdl" />
-    <EmbeddedResource Include="Resources\Validation\SampleServiceWithDuplicateImports.wsdl" />
-    <None Remove="Resources\Validation\SampleServiceWithImports.wsdl" />
-    <EmbeddedResource Include="Resources\Validation\SampleServiceWithImports.wsdl" />
-    <None Remove="Resources\Validation\SampleServiceWithImportsNamespaceDiff.wsdl" />
-    <EmbeddedResource Include="Resources\Validation\SampleServiceWithImportsNamespaceDiff.wsdl" />
-    <None Remove="Resources\Validation\SampleServiceWithIncludes.wsdl" />
-    <EmbeddedResource Include="Resources\Validation\SampleServiceWithIncludes.wsdl" />
-    <None Remove="Resources\Validation\SampleServiceWithWsdlImports.wsdl" />
-    <EmbeddedResource Include="Resources\Validation\SampleServiceWithWsdlImports.wsdl" />
-    <None Remove="Resources\Validation\SampleServiceWithWsdlImportsOnly.wsdl" />
-    <EmbeddedResource Include="Resources\Validation\SampleServiceWithWsdlImportsOnly.wsdl" />
-    <None Remove="Resources\Validation\SampleTypes.xsd" />
-    <EmbeddedResource Include="Resources\Validation\SampleTypes.xsd" />
-    <None Remove="Resources\Validation\TestService.wsdl" />
-    <EmbeddedResource Include="Resources\Validation\TestService.wsdl" />
-    <None Remove="Resources\Validation\types.xsd" />
-    <EmbeddedResource Include="Resources\Validation\types.xsd" />
-    <None Remove="Resources\Actions\test-request-payload.xml" />
-    <EmbeddedResource Include="Resources\Actions\test-request-payload.xml" />
-    <None Remove="Resources\Actions\test-request-payload-with-functions.xml" />
-    <EmbeddedResource Include="Resources\Actions\test-request-payload-with-functions.xml" />
-    <None Remove="Resources\Actions\test-request-payload-with-variables.xml" />
-    <EmbeddedResource Include="Resources\Actions\test-request-payload-with-variables.xml" />
-    <None Remove="Resources\Variables\Dictionary\mapping.properties" />
-    <EmbeddedResource Include="Resources\Variables\Dictionary\mapping.properties" />
-    <None Remove="Resources\Variables\Dictionary\node.data.dictionary" />
-    <EmbeddedResource Include="Resources\Variables\Dictionary\node.data.dictionary" />
-    <None Remove="Resources\Variables\Dictionary\xpath.data.dictionary" />
-    <EmbeddedResource Include="Resources\Variables\Dictionary\xpath.data.dictionary" />
-    <None Remove="Resources\Variables\Dictionary\xpathmapping.properties" />
-    <EmbeddedResource Include="Resources\Variables\Dictionary\xpathmapping.properties" />
+    <None Remove="Resources\Validation\test.xsd"/>
+    <EmbeddedResource Include="Resources\Validation\test.xsd"/>
+    <None Remove="Resources\Validation\example.dtd"/>
+    <EmbeddedResource Include="Resources\Validation\example.dtd"/>
+    <None Remove="Resources\Validation\sample.xsd"/>
+    <EmbeddedResource Include="Resources\Validation\sample.xsd"/>
+    <None Remove="Resources\Validation\SampleMessage.xsd"/>
+    <EmbeddedResource Include="Resources\Validation\SampleMessage.xsd"/>
+    <None Remove="Resources\Validation\SampleMessageResponse.xsd"/>
+    <EmbeddedResource Include="Resources\Validation\SampleMessageResponse.xsd"/>
+    <None Remove="Resources\Validation\SampleService.wsdl"/>
+    <EmbeddedResource Include="Resources\Validation\SampleService.wsdl"/>
+    <None Remove="Resources\Validation\SampleServiceNoMatchingTargetNamespace.wsdl"/>
+    <EmbeddedResource Include="Resources\Validation\SampleServiceNoMatchingTargetNamespace.wsdl"/>
+    <None Remove="Resources\Validation\SampleServiceWithDuplicateImports.wsdl"/>
+    <EmbeddedResource Include="Resources\Validation\SampleServiceWithDuplicateImports.wsdl"/>
+    <None Remove="Resources\Validation\SampleServiceWithImports.wsdl"/>
+    <EmbeddedResource Include="Resources\Validation\SampleServiceWithImports.wsdl"/>
+    <None Remove="Resources\Validation\SampleServiceWithImportsNamespaceDiff.wsdl"/>
+    <EmbeddedResource Include="Resources\Validation\SampleServiceWithImportsNamespaceDiff.wsdl"/>
+    <None Remove="Resources\Validation\SampleServiceWithIncludes.wsdl"/>
+    <EmbeddedResource Include="Resources\Validation\SampleServiceWithIncludes.wsdl"/>
+    <None Remove="Resources\Validation\SampleServiceWithWsdlImports.wsdl"/>
+    <EmbeddedResource Include="Resources\Validation\SampleServiceWithWsdlImports.wsdl"/>
+    <None Remove="Resources\Validation\SampleServiceWithWsdlImportsOnly.wsdl"/>
+    <EmbeddedResource Include="Resources\Validation\SampleServiceWithWsdlImportsOnly.wsdl"/>
+    <None Remove="Resources\Validation\SampleTypes.xsd"/>
+    <EmbeddedResource Include="Resources\Validation\SampleTypes.xsd"/>
+    <None Remove="Resources\Validation\TestService.wsdl"/>
+    <EmbeddedResource Include="Resources\Validation\TestService.wsdl"/>
+    <None Remove="Resources\Validation\types.xsd"/>
+    <EmbeddedResource Include="Resources\Validation\types.xsd"/>
+    <None Remove="Resources\Actions\test-request-payload.xml"/>
+    <EmbeddedResource Include="Resources\Actions\test-request-payload.xml"/>
+    <None Remove="Resources\Actions\test-request-payload-with-functions.xml"/>
+    <EmbeddedResource Include="Resources\Actions\test-request-payload-with-functions.xml"/>
+    <None Remove="Resources\Actions\test-request-payload-with-variables.xml"/>
+    <EmbeddedResource Include="Resources\Actions\test-request-payload-with-variables.xml"/>
+    <None Remove="Resources\Variables\Dictionary\mapping.properties"/>
+    <EmbeddedResource Include="Resources\Variables\Dictionary\mapping.properties"/>
+    <None Remove="Resources\Variables\Dictionary\node.data.dictionary"/>
+    <EmbeddedResource Include="Resources\Variables\Dictionary\node.data.dictionary"/>
+    <None Remove="Resources\Variables\Dictionary\xpath.data.dictionary"/>
+    <EmbeddedResource Include="Resources\Variables\Dictionary\xpath.data.dictionary"/>
+    <None Remove="Resources\Variables\Dictionary\xpathmapping.properties"/>
+    <EmbeddedResource Include="Resources\Variables\Dictionary\xpathmapping.properties"/>
   </ItemGroup>
 
 </Project>

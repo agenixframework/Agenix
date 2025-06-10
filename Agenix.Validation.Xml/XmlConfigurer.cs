@@ -35,17 +35,11 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Validation.Xml;
 
 /// <summary>
-/// Class is loaded with DI container in Agenix. When loaded automatically initializes XML utilities
-/// with this XML processing configuration. Configuration is pushed to XML utility classes after properties are set.
+///     Class is loaded with DI container in Agenix. When loaded automatically initializes XML utilities
+///     with this XML processing configuration. Configuration is pushed to XML utility classes after properties are set.
 /// </summary>
 public class XmlConfigurer : InitializingPhase
 {
-    private static readonly ILogger Logger = LogManager.GetLogger(typeof(XmlConfigurer));
-
-    /// <summary>Default parser and serializer settings</summary>
-    private Dictionary<string, object> _parseSettings = new();
-    private Dictionary<string, object> _serializeSettings = new();
-
     // Configuration parameter constants
     public const string SplitCdataSections = "split-cdata-sections";
     public const string FormatPrettyPrint = "format-pretty-print";
@@ -64,16 +58,22 @@ public class XmlConfigurer : InitializingPhase
     public const string ConformanceLevel = "conformance-level";
     public const string DtdProcessing = "dtd-processing";
     public const string MaxCharactersInDocument = "max-characters-in-document";
+    private static readonly ILogger Logger = LogManager.GetLogger(typeof(XmlConfigurer));
 
     /// <summary>
-    /// XML reader factory for creating configured readers
+    ///     XML reader factory for creating configured readers
     /// </summary>
     private readonly XmlReaderFactory _readerFactory;
 
     /// <summary>
-    /// XML writer factory for creating configured writers
+    ///     XML writer factory for creating configured writers
     /// </summary>
     private readonly XmlWriterFactory _writerFactory;
+
+    /// <summary>Default parser and serializer settings</summary>
+    private Dictionary<string, object> _parseSettings = new();
+
+    private Dictionary<string, object> _serializeSettings = new();
 
     public XmlConfigurer()
     {
@@ -94,7 +94,23 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Creates configured XmlReader instance with common properties and configuration parameters.
+    ///     Initialize the XML configurer and register with XML utilities.
+    /// </summary>
+    public void Initialize()
+    {
+        SetDefaultParseSettings();
+        SetDefaultSerializeSettings();
+
+        // Register this configurer with XML utilities
+        XmlUtils.Initialize(this);
+
+        Logger.LogInformation(
+            "XML Configurer initialized with {ParseSettings} parse settings and {SerializeSettings} serialize settings",
+            _parseSettings.Count, _serializeSettings.Count);
+    }
+
+    /// <summary>
+    ///     Creates configured XmlReader instance with common properties and configuration parameters.
     /// </summary>
     public XmlReader CreateXmlReader(Stream input)
     {
@@ -103,7 +119,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Creates configured XmlReader instance from string input.
+    ///     Creates configured XmlReader instance from string input.
     /// </summary>
     public XmlReader CreateXmlReader(string xmlContent)
     {
@@ -112,7 +128,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Creates configured XmlReader instance from TextReader.
+    ///     Creates configured XmlReader instance from TextReader.
     /// </summary>
     public XmlReader CreateXmlReader(TextReader input)
     {
@@ -121,7 +137,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Creates XmlReaderSettings based on parser configuration.
+    ///     Creates XmlReaderSettings based on parser configuration.
     /// </summary>
     public XmlReaderSettings CreateXmlReaderSettings()
     {
@@ -131,7 +147,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Creates configured XmlWriter instance with common properties and configuration parameters.
+    ///     Creates configured XmlWriter instance with common properties and configuration parameters.
     /// </summary>
     public XmlWriter CreateXmlWriter(Stream output)
     {
@@ -141,7 +157,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Creates configured XmlWriter instance that writes to TextWriter.
+    ///     Creates configured XmlWriter instance that writes to TextWriter.
     /// </summary>
     public XmlWriter CreateXmlWriter(TextWriter output)
     {
@@ -150,7 +166,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Creates configured XmlWriter instance that writes to StringBuilder.
+    ///     Creates configured XmlWriter instance that writes to StringBuilder.
     /// </summary>
     public XmlWriter CreateXmlWriter(StringBuilder output)
     {
@@ -159,7 +175,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Creates XmlWriterSettings based on serializer configuration.
+    ///     Creates XmlWriterSettings based on serializer configuration.
     /// </summary>
     public XmlWriterSettings CreateXmlWriterSettings()
     {
@@ -169,7 +185,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Creates XmlDocument with configured settings.
+    ///     Creates XmlDocument with configured settings.
     /// </summary>
     public XmlDocument CreateXmlDocument()
     {
@@ -179,7 +195,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Creates XmlNameTable for namespace management.
+    ///     Creates XmlNameTable for namespace management.
     /// </summary>
     public XmlNameTable CreateXmlNameTable()
     {
@@ -187,7 +203,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Creates XmlResolver for resource resolution.
+    ///     Creates XmlResolver for resource resolution.
     /// </summary>
     public XmlResolver CreateXmlResolver()
     {
@@ -195,7 +211,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Set reader configuration based on parse settings.
+    ///     Set reader configuration based on parse settings.
     /// </summary>
     protected void ConfigureReaderSettings(XmlReaderSettings settings)
     {
@@ -206,7 +222,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Set writer configuration based on serialize settings.
+    ///     Set writer configuration based on serialize settings.
     /// </summary>
     protected void ConfigureWriterSettings(XmlWriterSettings settings)
     {
@@ -217,7 +233,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Configure XmlDocument based on settings.
+    ///     Configure XmlDocument based on settings.
     /// </summary>
     protected void ConfigureXmlDocument(XmlDocument document)
     {
@@ -234,7 +250,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Sets a config parameter on XmlReaderSettings if applicable.
+    ///     Sets a config parameter on XmlReaderSettings if applicable.
     /// </summary>
     public static void SetReaderConfigParameter(XmlReaderSettings settings, string parameterName, object value)
     {
@@ -252,6 +268,7 @@ public class XmlConfigurer : InitializingPhase
                     {
                         settings.ValidationType = ValidationType.Schema;
                     }
+
                     break;
 
                 case ElementContentWhitespace:
@@ -263,6 +280,7 @@ public class XmlConfigurer : InitializingPhase
                     {
                         settings.XmlResolver = resolver;
                     }
+
                     break;
 
                 case CheckCharacters:
@@ -274,6 +292,7 @@ public class XmlConfigurer : InitializingPhase
                     {
                         settings.ConformanceLevel = level;
                     }
+
                     break;
 
                 // Add DTD processing configuration
@@ -288,6 +307,7 @@ public class XmlConfigurer : InitializingPhase
                             settings.XmlResolver = null;
                         }
                     }
+
                     break;
 
                 case MaxCharactersInDocument:
@@ -295,6 +315,7 @@ public class XmlConfigurer : InitializingPhase
                     {
                         settings.MaxCharactersInDocument = maxChars;
                     }
+
                     break;
 
 
@@ -310,7 +331,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Sets a config parameter on XmlWriterSettings if applicable.
+    ///     Sets a config parameter on XmlWriterSettings if applicable.
     /// </summary>
     public static void SetWriterConfigParameter(XmlWriterSettings settings, string parameterName, object value)
     {
@@ -349,6 +370,7 @@ public class XmlConfigurer : InitializingPhase
                     {
                         settings.NewLineHandling = newLineHandling;
                     }
+
                     break;
 
                 case NewLineChars:
@@ -364,6 +386,7 @@ public class XmlConfigurer : InitializingPhase
                     {
                         settings.ConformanceLevel = level;
                     }
+
                     break;
 
                 default:
@@ -377,16 +400,9 @@ public class XmlConfigurer : InitializingPhase
         }
     }
 
-    private class UpperCaseEncoding(Encoding encoding) : UTF8Encoding(false)
-    {
-        public override string BodyName => encoding.BodyName.ToUpperInvariant();  // Used in XML declaration
-        public override string WebName => encoding.WebName.ToUpperInvariant();
-        public override string HeaderName => encoding.HeaderName.ToUpperInvariant();
-    }
-
 
     /// <summary>
-    /// Logging that parameter was not set on component.
+    ///     Logging that parameter was not set on component.
     /// </summary>
     private static void LogParameterNotSet(string parameterName, string componentName, Exception? ex = null)
     {
@@ -401,7 +417,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Sets the default parse settings.
+    ///     Sets the default parse settings.
     /// </summary>
     private void SetDefaultParseSettings()
     {
@@ -427,7 +443,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Sets the default serialize settings.
+    ///     Sets the default serialize settings.
     /// </summary>
     private void SetDefaultSerializeSettings()
     {
@@ -438,11 +454,10 @@ public class XmlConfigurer : InitializingPhase
         _serializeSettings.TryAdd(Indent, true);
 
         _serializeSettings.TryAdd(IndentChars, "  ");
-
     }
 
     /// <summary>
-    /// Sets the parseSettings property.
+    ///     Sets the parseSettings property.
     /// </summary>
     public void SetParseSettings(Dictionary<string, object>? parseSettings)
     {
@@ -450,7 +465,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Gets the parseSettings property.
+    ///     Gets the parseSettings property.
     /// </summary>
     public Dictionary<string, object> GetParseSettings()
     {
@@ -458,7 +473,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Sets the serializeSettings property.
+    ///     Sets the serializeSettings property.
     /// </summary>
     public void SetSerializeSettings(Dictionary<string, object>? serializeSettings)
     {
@@ -466,7 +481,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Gets the serializeSettings property.
+    ///     Gets the serializeSettings property.
     /// </summary>
     public Dictionary<string, object> GetSerializeSettings()
     {
@@ -474,7 +489,7 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Add or update a parse setting.
+    ///     Add or update a parse setting.
     /// </summary>
     public void AddParseSetting(string key, object value)
     {
@@ -482,25 +497,17 @@ public class XmlConfigurer : InitializingPhase
     }
 
     /// <summary>
-    /// Add or update a serialize setting.
+    ///     Add or update a serialize setting.
     /// </summary>
     public void AddSerializeSetting(string key, object value)
     {
         _serializeSettings[key] = value;
     }
 
-    /// <summary>
-    /// Initialize the XML configurer and register with XML utilities.
-    /// </summary>
-    public void Initialize()
+    private class UpperCaseEncoding(Encoding encoding) : UTF8Encoding(false)
     {
-        SetDefaultParseSettings();
-        SetDefaultSerializeSettings();
-
-        // Register this configurer with XML utilities
-        XmlUtils.Initialize(this);
-
-        Logger.LogInformation("XML Configurer initialized with {ParseSettings} parse settings and {SerializeSettings} serialize settings",
-            _parseSettings.Count, _serializeSettings.Count);
+        public override string BodyName => encoding.BodyName.ToUpperInvariant(); // Used in XML declaration
+        public override string WebName => encoding.WebName.ToUpperInvariant();
+        public override string HeaderName => encoding.HeaderName.ToUpperInvariant();
     }
 }

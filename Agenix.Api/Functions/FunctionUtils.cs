@@ -147,7 +147,7 @@ public sealed class FunctionUtils
     /// </summary>
     /// <param name="functionString">
     ///     The function string to be resolved, including its prefix, name, and parameters (e.g.,
-    ///     "core:Concat('Hello', 'World')").
+    ///     "agenix:Concat('Hello', 'World')").
     /// </param>
     /// <param name="context">The context containing necessary function libraries and variable data for resolution.</param>
     /// <returns>The evaluated result of the function as a string.</returns>

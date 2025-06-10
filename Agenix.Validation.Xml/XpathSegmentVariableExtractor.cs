@@ -41,8 +41,8 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Validation.Xml;
 
 /// <summary>
-/// Represents an implementation of <see cref="SegmentVariableExtractorRegistry.AbstractSegmentVariableExtractor"/>
-/// specifically designed to handle XPath-based variable extraction from XML data.
+///     Represents an implementation of <see cref="SegmentVariableExtractorRegistry.AbstractSegmentVariableExtractor" />
+///     specifically designed to handle XPath-based variable extraction from XML data.
 /// </summary>
 public class XpathSegmentVariableExtractor : SegmentVariableExtractorRegistry.AbstractSegmentVariableExtractor
 {

@@ -89,5 +89,4 @@ public class XmlFormattingMessageProcessorTest : AbstractNUnitSetUp
         // Assert
         Assert.That(message.GetPayload<string>(), Is.EqualTo("This is plaintext"));
     }
-
 }

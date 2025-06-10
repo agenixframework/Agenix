@@ -31,12 +31,12 @@ using Agenix.Validation.Xml.Namespace;
 namespace Agenix.Validation.Xml.Util;
 
 /// <summary>
-/// Utility class for working with XML qualified names (QName).
+///     Utility class for working with XML qualified names (QName).
 /// </summary>
 public static class QNameUtils
 {
     /// <summary>
-    /// Validates the given string as a QName.
+    ///     Validates the given string as a QName.
     /// </summary>
     /// <param name="text">The qualified name</param>
     /// <returns>True if valid, false otherwise</returns>
@@ -49,7 +49,7 @@ public static class QNameUtils
 
         if (text[0] == '{')
         {
-            int closingBrace = text.IndexOf('}');
+            var closingBrace = text.IndexOf('}');
             if (closingBrace == -1 || closingBrace == text.Length - 1)
             {
                 return false;
@@ -60,7 +60,7 @@ public static class QNameUtils
     }
 
     /// <summary>
-    /// Returns the qualified name of the given XML node.
+    ///     Returns the qualified name of the given XML node.
     /// </summary>
     /// <param name="node">The XML node</param>
     /// <returns>The qualified name of the node</returns>
@@ -72,24 +72,24 @@ public static class QNameUtils
         {
             return new QName(node.NamespaceURI, node.LocalName, node.Prefix);
         }
-        else if (!string.IsNullOrEmpty(node.NamespaceURI) && !string.IsNullOrEmpty(node.LocalName))
+
+        if (!string.IsNullOrEmpty(node.NamespaceURI) && !string.IsNullOrEmpty(node.LocalName))
         {
             return new QName(node.NamespaceURI, node.LocalName);
         }
-        else if (!string.IsNullOrEmpty(node.LocalName))
+
+        if (!string.IsNullOrEmpty(node.LocalName))
         {
             return new QName(node.LocalName);
         }
-        else
-        {
-            // As a last resort, use the node name
-            return new QName(node.Name);
-        }
+
+        // As a last resort, use the node name
+        return new QName(node.Name);
     }
 
     /// <summary>
-    /// Parse the given qualified name string into a QName.
-    /// Expects the syntax localPart, {namespace}localPart, or {namespace}prefix:localPart.
+    ///     Parse the given qualified name string into a QName.
+    ///     Expects the syntax localPart, {namespace}localPart, or {namespace}prefix:localPart.
     /// </summary>
     /// <param name="qNameString">The QName string to parse</param>
     /// <returns>A corresponding QName instance</returns>
@@ -128,4 +128,3 @@ public static class QNameUtils
         }
     }
 }
-

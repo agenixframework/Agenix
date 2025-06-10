@@ -150,9 +150,9 @@ public class DefaultTestCaseTest : AbstractNUnitSetUp
         {
             { "name", "Agenix" },
             { "framework", "${name}" },
-            { "hello", "core:Concat('Hello ', ${name}, '!')" },
+            { "hello", "agenix:Concat('Hello ', ${name}, '!')" },
             { "goodbye", "Goodbye ${name}!" },
-            { "welcome", "Welcome ${name}, today is core:CurrentDate()!" }
+            { "welcome", "Welcome ${name}, today is agenix:CurrentDate()!" }
         };
         _fixture.SetVariableDefinitions(variables);
 

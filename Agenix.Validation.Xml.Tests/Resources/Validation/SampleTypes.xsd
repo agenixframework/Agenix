@@ -5,11 +5,11 @@
            elementFormDefault="unqualified"
            attributeFormDefault="unqualified">
 
-  <xs:simpleType name="SampleType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="FOO"/>
-      <xs:enumeration value="BAR"/>
-    </xs:restriction>
-  </xs:simpleType>
+    <xs:simpleType name="SampleType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="FOO"/>
+            <xs:enumeration value="BAR"/>
+        </xs:restriction>
+    </xs:simpleType>
 
 </xs:schema>

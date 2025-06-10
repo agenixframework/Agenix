@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-     xmlns="http://agenix.org/test"
-     targetNamespace="http://agenix.org/test"
-     elementFormDefault="qualified"
-     attributeFormDefault="unqualified">
+           xmlns="http://agenix.org/test"
+           targetNamespace="http://agenix.org/test"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
 
     <xs:element name="message">
         <xs:complexType>

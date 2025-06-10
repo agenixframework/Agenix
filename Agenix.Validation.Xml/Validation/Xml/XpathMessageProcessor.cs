@@ -39,8 +39,8 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Validation.Xml.Validation.Xml;
 
 /// <summary>
-/// Processor implementation evaluating XPath expressions on message payload during message construction.
-/// Class identifies XML elements inside the message payload via XPath expressions to overwrite their value.
+///     Processor implementation evaluating XPath expressions on message payload during message construction.
+///     Class identifies XML elements inside the message payload via XPath expressions to overwrite their value.
 /// </summary>
 public class XpathMessageProcessor : AbstractMessageProcessor
 {
@@ -138,13 +138,13 @@ public class XpathMessageProcessor : AbstractMessageProcessor
 
 
     /// <summary>
-    /// Determines whether the processor supports the specified message type.
+    ///     Determines whether the processor supports the specified message type.
     /// </summary>
     /// <param name="messageType">
-    /// The message type to be evaluated against the supported message types.
+    ///     The message type to be evaluated against the supported message types.
     /// </param>
     /// <returns>
-    /// True if the specified message type is supported by the processor; otherwise, false.
+    ///     True if the specified message type is supported by the processor; otherwise, false.
     /// </returns>
     public override bool SupportsMessageType(string messageType)
     {

@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
@@ -13,22 +12,23 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Validation.Xml.Validation.Matcher.Core;
 
 /// <summary>
-/// Validation matcher receives an XML data and validates it against the expected XML with full
-/// XML validation support (e.g., ignoring elements, namespace support, ...).
+///     Validation matcher receives an XML data and validates it against the expected XML with full
+///     XML validation support (e.g., ignoring elements, namespace support, ...).
 /// </summary>
 public class XmlValidationMatcher : IValidationMatcher
 {
     /// <summary>CDATA section starting and ending in XML</summary>
     private const string CdataSectionStart = "<![CDATA[";
-    private const string CdataSectionEnd = "]]>";
 
-    /// <summary>Xml message validator</summary>
-    private IMessageValidator<IValidationContext>? _messageValidator;
+    private const string CdataSectionEnd = "]]>";
 
     public const string DefaultXmlMessageValidator = "defaultXmlMessageValidator";
 
     /// <summary>Logger</summary>
     private static readonly ILogger Log = LogManager.GetLogger(typeof(DefaultTypeConverter));
+
+    /// <summary>Xml message validator</summary>
+    private IMessageValidator<IValidationContext>? _messageValidator;
 
     public void Validate(string fieldName, string value, List<string> controlParameters, TestContext context)
     {
@@ -43,8 +43,8 @@ public class XmlValidationMatcher : IValidationMatcher
     }
 
     /// <summary>
-    /// Find proper XML message validator. Uses several strategies to lookup default XML message validator.
-    /// Caches found validator for future usage once the lookup is done.
+    ///     Find proper XML message validator. Uses several strategies to lookup default XML message validator.
+    ///     Caches found validator for future usage once the lookup is done.
     /// </summary>
     /// <param name="context">Test context</param>
     /// <returns>Message validator instance</returns>
@@ -63,7 +63,8 @@ public class XmlValidationMatcher : IValidationMatcher
         {
             try
             {
-                defaultMessageValidator = Optional<IMessageValidator<IValidationContext>>.OfNullable(context.ReferenceResolver
+                defaultMessageValidator = Optional<IMessageValidator<IValidationContext>>.OfNullable(context
+                    .ReferenceResolver
                     .Resolve<IMessageValidator<IValidationContext>>(DefaultXmlMessageValidator));
             }
             catch (AgenixSystemException e)
@@ -88,11 +89,10 @@ public class XmlValidationMatcher : IValidationMatcher
     }
 
     /// <summary>
-    /// Cut off CDATA elements.
+    ///     Cut off CDATA elements.
     /// </summary>
     /// <param name="value">Input XML string</param>
     /// <returns>XML string without CDATA wrapper</returns>
-
     private static string RemoveCDataElements(string value)
     {
         var data = value.Trim();

@@ -19,7 +19,7 @@ public class RepeatUntilTrueIT
     {
         _gherkin.Given(CreateVariable("max", "3"));
 
-        _gherkin.When(Repeat().Until("i gt core:RandomNumber(1)").Index("i").Actions(Echo("index is: ${i}")));
+        _gherkin.When(Repeat().Until("i gt agenix:RandomNumber(1)").Index("i").Actions(Echo("index is: ${i}")));
 
         _gherkin.When(Repeat().Until("i gt= 5").Index("i").Actions(Echo("index is: ${i}")));
 

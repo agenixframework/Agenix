@@ -32,22 +32,22 @@ using Agenix.Validation.Xml.Schema;
 namespace Agenix.Validation.Xml;
 
 /// <summary>
-/// Helper class for XML validation operations.
-/// Provides utility methods for resolving schema repositories and namespace context builders.
+///     Helper class for XML validation operations.
+///     Provides utility methods for resolving schema repositories and namespace context builders.
 /// </summary>
 public static class XmlValidationHelper
 {
-    private static readonly NamespaceContextBuilder DefaultNamespaceContextBuilder = new NamespaceContextBuilder();
+    private static readonly NamespaceContextBuilder DefaultNamespaceContextBuilder = new();
 
     /// <summary>
-    /// Consult reference resolver in given test context and resolve all available beans of type XsdSchemaRepository.
+    ///     Consult reference resolver in given test context and resolve all available beans of type XsdSchemaRepository.
     /// </summary>
     /// <param name="context">The test context</param>
     /// <returns>List of XsdSchemaRepository instances</returns>
     public static List<XsdSchemaRepository> GetSchemaRepositories(TestContext context)
     {
         if (context.ReferenceResolver != null &&
-            context.ReferenceResolver.IsResolvable( typeof(XsdSchemaRepository)))
+            context.ReferenceResolver.IsResolvable(typeof(XsdSchemaRepository)))
         {
             return context.ReferenceResolver.ResolveAll<XsdSchemaRepository>().Values.ToList();
         }
@@ -56,14 +56,14 @@ public static class XmlValidationHelper
     }
 
     /// <summary>
-    /// Consult reference resolver in given test context and resolve bean of type NamespaceContextBuilder.
+    ///     Consult reference resolver in given test context and resolve bean of type NamespaceContextBuilder.
     /// </summary>
     /// <param name="context">The current test context</param>
     /// <returns>Resolved namespace context builder instance</returns>
     public static NamespaceContextBuilder GetNamespaceContextBuilder(TestContext context)
     {
         if (context.ReferenceResolver != null &&
-            context.ReferenceResolver.IsResolvable( typeof(NamespaceContextBuilder)))
+            context.ReferenceResolver.IsResolvable(typeof(NamespaceContextBuilder)))
         {
             return context.ReferenceResolver.Resolve<NamespaceContextBuilder>();
         }
@@ -71,5 +71,3 @@ public static class XmlValidationHelper
         return DefaultNamespaceContextBuilder;
     }
 }
-
-

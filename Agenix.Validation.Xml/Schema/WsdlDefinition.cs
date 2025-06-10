@@ -36,7 +36,6 @@ public class WsdlDefinition
     public List<WsdlImport> Imports { get; set; }
 }
 
-
 public class WsdlTypes
 {
     public List<object> ExtensibilityElements { get; set; } = new();
@@ -47,7 +46,6 @@ public class WsdlImport
     public string LocationUri { get; set; }
     public string Namespace { get; set; }
 }
-
 
 public class WsdlType
 {
@@ -73,6 +71,3 @@ public class WsdlSchemaInclude
 {
     public string SchemaLocation { get; set; }
 }
-
-
-

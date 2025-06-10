@@ -41,7 +41,6 @@ public class XsdSchemaRepositoryTest
 
         schemaRepository.Initialize();
         Assert.That(schemaRepository.GetSchemas().Count, Is.EqualTo(0));
-
     }
 
     [Test]
@@ -49,7 +48,8 @@ public class XsdSchemaRepositoryTest
     {
         var schemaRepository = new XsdSchemaRepository();
 
-        schemaRepository.Locations.Add("assembly://Agenix.Validation.Xml.Tests/Agenix.Validation.Xml.Tests.Resources.Validation/TestService.wsdl");
+        schemaRepository.Locations.Add(
+            "assembly://Agenix.Validation.Xml.Tests/Agenix.Validation.Xml.Tests.Resources.Validation/TestService.wsdl");
 
         //schemaRepository.Initialize();
 
@@ -62,7 +62,8 @@ public class XsdSchemaRepositoryTest
     {
         var schemaRepository = new XsdSchemaRepository();
 
-        schemaRepository.Locations.Add("assembly://Agenix.Validation.Xml.Tests/Agenix.Validation.Xml.Tests.Resources.Validation/test.xsd");
+        schemaRepository.Locations.Add(
+            "assembly://Agenix.Validation.Xml.Tests/Agenix.Validation.Xml.Tests.Resources.Validation/test.xsd");
 
         schemaRepository.Initialize();
 

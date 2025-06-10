@@ -25,8 +25,6 @@
 #endregion
 
 
-using System.Xml;
-using System.Xml.Schema;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Util;
 using Agenix.Validation.Xml.Namespace;
@@ -34,13 +32,13 @@ using Agenix.Validation.Xml.Namespace;
 namespace Agenix.Validation.Xml.Schema;
 
 /// <summary>
-/// Mapping strategy uses the root element local name to find matching schema
-/// instance.
+///     Mapping strategy uses the root element local name to find matching schema
+///     instance.
 /// </summary>
 public class RootQNameSchemaMappingStrategy : AbstractSchemaMappingStrategy
 {
     /// <summary>
-    /// Root element names mapping to schema instances
+    ///     Root element names mapping to schema instances
     /// </summary>
     private Dictionary<string, IXsdSchema?> _mappings = new();
 
@@ -73,7 +71,7 @@ public class RootQNameSchemaMappingStrategy : AbstractSchemaMappingStrategy
     }
 
     /// <summary>
-    /// Sets the mappings.
+    ///     Sets the mappings.
     /// </summary>
     /// <param name="mappings">The mappings to set</param>
     public void SetMappings(Dictionary<string, IXsdSchema?>? mappings)
@@ -82,7 +80,7 @@ public class RootQNameSchemaMappingStrategy : AbstractSchemaMappingStrategy
     }
 
     /// <summary>
-    /// Gets the mappings.
+    ///     Gets the mappings.
     /// </summary>
     /// <returns>The current mappings dictionary</returns>
     public Dictionary<string, IXsdSchema?> GetMappings()
@@ -91,7 +89,7 @@ public class RootQNameSchemaMappingStrategy : AbstractSchemaMappingStrategy
     }
 
     /// <summary>
-    /// Adds a mapping for an element name to a schema.
+    ///     Adds a mapping for an element name to a schema.
     /// </summary>
     /// <param name="elementName">The element name</param>
     /// <param name="schema">The schema to map to</param>
@@ -104,7 +102,7 @@ public class RootQNameSchemaMappingStrategy : AbstractSchemaMappingStrategy
     }
 
     /// <summary>
-    /// Adds a mapping for a qualified name to a schema.
+    ///     Adds a mapping for a qualified name to a schema.
     /// </summary>
     /// <param name="namespaceName">The namespace</param>
     /// <param name="elementName">The element name</param>
@@ -119,7 +117,7 @@ public class RootQNameSchemaMappingStrategy : AbstractSchemaMappingStrategy
     }
 
     /// <summary>
-    /// Removes a mapping.
+    ///     Removes a mapping.
     /// </summary>
     /// <param name="key">The key to remove</param>
     /// <returns>True if the mapping was removed, false otherwise</returns>
@@ -129,11 +127,10 @@ public class RootQNameSchemaMappingStrategy : AbstractSchemaMappingStrategy
     }
 
     /// <summary>
-    /// Clears all mappings.
+    ///     Clears all mappings.
     /// </summary>
     public void ClearMappings()
     {
         _mappings.Clear();
     }
 }
-

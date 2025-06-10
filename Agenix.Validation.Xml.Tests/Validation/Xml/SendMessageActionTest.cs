@@ -17,27 +17,27 @@ namespace Agenix.Validation.Xml.Tests.Validation.Xml;
 
 public class SendMessageActionTest : AbstractNUnitSetUp
 {
-    private readonly Mock<IProducer> _producer = new();
     private readonly Mock<IEndpoint> _endpoint = new();
     private readonly Mock<IEndpointConfiguration> _endpointConfiguration = new();
+    private readonly Mock<IProducer> _producer = new();
 
 
     [Test]
     public void TestSendMessageOverwriteMessageElementsXPath()
     {
         var messageBuilder = new DefaultMessageBuilder();
-        messageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?><TestRequest><Message>?</Message></TestRequest>"));
+        messageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?><TestRequest><Message>?</Message></TestRequest>"));
 
-        var overwriteElements = new Dictionary<string, object>
-        {
-            { "/TestRequest/Message", "Hello World!" }
-        };
+        var overwriteElements = new Dictionary<string, object> { { "/TestRequest/Message", "Hello World!" } };
 
         var processor = new XpathMessageProcessor.Builder()
             .Expressions(overwriteElements)
             .Build();
 
-        var controlMessage = new DefaultMessage("<?xml version=\"1.0\" encoding=\"UTF-8\"?><TestRequest><Message>Hello World!</Message></TestRequest>");
+        var controlMessage =
+            new DefaultMessage(
+                "<?xml version=\"1.0\" encoding=\"UTF-8\"?><TestRequest><Message>Hello World!</Message></TestRequest>");
 
         // Reset mocks
         _endpoint.Reset();
@@ -71,21 +71,18 @@ public class SendMessageActionTest : AbstractNUnitSetUp
         var messageBuilder = new DefaultMessageBuilder();
         messageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<TestRequest><Message>?</Message></TestRequest>"));
 
-        var overwriteElements = new Dictionary<string, object>
-        {
-            { "TestRequest.Message", "Hello World!" }
-        };
+        var overwriteElements = new Dictionary<string, object> { { "TestRequest.Message", "Hello World!" } };
 
         var processor = new XpathMessageProcessor.Builder()
             .Expressions(overwriteElements)
             .Build();
 
         var controlMessage = new DefaultMessage("""
-                                                            <?xml version="1.0" encoding="UTF-8"?>
-                                                            <TestRequest>
-                                                                <Message>Hello World!</Message>
-                                                            </TestRequest>
-                                                        """);
+                                                    <?xml version="1.0" encoding="UTF-8"?>
+                                                    <TestRequest>
+                                                        <Message>Hello World!</Message>
+                                                    </TestRequest>
+                                                """);
 
         // Reset mocks
         _endpoint.Reset();

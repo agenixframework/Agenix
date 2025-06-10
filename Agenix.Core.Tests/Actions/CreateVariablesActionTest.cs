@@ -61,7 +61,7 @@ public class CreateVariablesActionTest : AbstractNUnitSetUp
     public void TestCreateSingleVariableWithFunctionValue()
     {
         var createVariablesAction = new CreateVariablesAction.Builder()
-            .Variable("myVariable", "core:Concat('Hello ', 'Agenix')")
+            .Variable("myVariable", "agenix:Concat('Hello ', 'Agenix')")
             .Build();
 
         createVariablesAction.Execute(Context);

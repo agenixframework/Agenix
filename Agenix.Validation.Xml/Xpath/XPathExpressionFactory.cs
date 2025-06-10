@@ -33,14 +33,14 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Validation.Xml.Xpath;
 
 /// <summary>
-/// Factory for creating compiled XPath expressions.
+///     Factory for creating compiled XPath expressions.
 /// </summary>
 public abstract class XPathExpressionFactory
 {
     private static readonly ILogger Log = LogManager.GetLogger(typeof(XPathExpressionFactory));
 
     /// <summary>
-    /// Create a compiled XPath expression using the given string.
+    ///     Create a compiled XPath expression using the given string.
     /// </summary>
     /// <param name="expression">the XPath expression</param>
     /// <returns>the compiled XPath expression</returns>
@@ -52,8 +52,8 @@ public abstract class XPathExpressionFactory
     }
 
     /// <summary>
-    /// Create a compiled XPath expression using the given string and namespaces.
-    /// The namespace map should consist of string prefixes mapped to string namespaces.
+    ///     Create a compiled XPath expression using the given string and namespaces.
+    ///     The namespace map should consist of string prefixes mapped to string namespaces.
     /// </summary>
     /// <param name="expression">the XPath expression</param>
     /// <param name="namespaces">a map that binds string prefixes to string namespaces</param>
@@ -75,12 +75,12 @@ public abstract class XPathExpressionFactory
 }
 
 /// <summary>
-/// .NET implementation of XPath expression factory using System.Xml.XPath.
+///     .NET implementation of XPath expression factory using System.Xml.XPath.
 /// </summary>
 internal static class DotNetXPathExpressionFactory
 {
     /// <summary>
-    /// Creates an XPath expression using .NET's built-in XPath support.
+    ///     Creates an XPath expression using .NET's built-in XPath support.
     /// </summary>
     /// <param name="expression">the XPath expression string</param>
     /// <param name="namespaces">namespace prefix to URI mappings</param>
@@ -120,6 +120,4 @@ internal static class DotNetXPathExpressionFactory
             throw new InvalidOperationException($"Failed to create XPath expression '{expression}'", ex);
         }
     }
-
 }
-

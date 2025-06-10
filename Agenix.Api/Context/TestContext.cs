@@ -138,13 +138,11 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// </summary>
     private ValidationMatcherRegistry _validationMatcherRegistry = new();
 
+
     /// <summary>
     ///     A collection of active timers used within the test context.
     /// </summary>
     protected ConcurrentDictionary<string, IStopTimer> Timers = new();
-
-
-    private NamespaceContextBuilder namespaceContextBuilder = new();
 
     /// <summary>
     ///     Default constructor.
@@ -196,13 +194,9 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     }
 
     /// <summary>
-    /// Represents a builder for configuring and managing namespace contexts in XML structures.
+    ///     Represents a builder for configuring and managing namespace contexts in XML structures.
     /// </summary>
-    public NamespaceContextBuilder NamespaceContextBuilder
-    {
-        get => namespaceContextBuilder;
-        set => namespaceContextBuilder = value;
-    }
+    public NamespaceContextBuilder NamespaceContextBuilder { get; set; } = new();
 
     /// <summary>
     ///     Factory for creating and managing endpoints.

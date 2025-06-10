@@ -27,9 +27,10 @@
 namespace Agenix.Validation.Xml.Validation.Xml.Schema;
 
 /// <summary>
-/// Specifies the strategy for handling validation in the context of XML schema validation.
+///     Specifies the strategy for handling validation in the context of XML schema validation.
 /// </summary>
-public enum ValidationStrategy {
+public enum ValidationStrategy
+{
     IGNORE,
     FAIL
 }

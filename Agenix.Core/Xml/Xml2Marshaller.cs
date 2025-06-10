@@ -28,7 +28,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -41,31 +43,31 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Core.Xml;
 
 /// <summary>
-/// Marshaller uses XML serialization to marshal/unmarshal data.
-/// Provides similar functionality to Java's JAXB2Marshaller.
+///     Marshaller uses XML serialization to marshal/unmarshal data.
+///     Provides similar functionality to Java's JAXB2Marshaller.
 /// </summary>
 public class Xml2Marshaller : IMarshaller, IUnmarshaller
 {
     private static readonly ILogger Log = LogManager.GetLogger(typeof(Xml2Marshaller));
-
-    private volatile XmlSerializerNamespaces _namespaces;
-    private readonly XmlSchema[] _schemas;
-    private readonly Type[] _typesToBeBound;
+    private static readonly Type[] TypeArray = [];
     private readonly string[] _contextPaths;
+    private readonly object _lockObject = new();
 
     private readonly Dictionary<string, object> _marshallerProperties = new();
-    private readonly object _lockObject = new();
-    private static readonly Type[] TypeArray = [];
+    private readonly XmlSchema[] _schemas;
+    private readonly Type[] _typesToBeBound;
+
+    private volatile XmlSerializerNamespaces _namespaces;
 
     /// <summary>
-    /// Default constructor with no bound types
+    ///     Default constructor with no bound types
     /// </summary>
     public Xml2Marshaller() : this(TypeArray)
     {
     }
 
     /// <summary>
-    /// Constructor with types to be bound
+    ///     Constructor with types to be bound
     /// </summary>
     public Xml2Marshaller(params Type[] typesToBeBound)
     {
@@ -75,7 +77,7 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
     }
 
     /// <summary>
-    /// Constructor with context paths (assembly names or namespaces)
+    ///     Constructor with context paths (assembly names or namespaces)
     /// </summary>
     public Xml2Marshaller(params string[] contextPaths)
     {
@@ -85,7 +87,7 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
     }
 
     /// <summary>
-    /// Constructor with schema resource and bound types
+    ///     Constructor with schema resource and bound types
     /// </summary>
     public Xml2Marshaller(IResource schemaResource, params Type[] typesToBeBound)
     {
@@ -95,7 +97,7 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
     }
 
     /// <summary>
-    /// Constructor with schema resource and context paths
+    ///     Constructor with schema resource and context paths
     /// </summary>
     public Xml2Marshaller(IResource schemaResource, params string[] contextPaths)
     {
@@ -105,7 +107,7 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
     }
 
     /// <summary>
-    /// Constructor with multiple schema resources and bound types
+    ///     Constructor with multiple schema resources and bound types
     /// </summary>
     public Xml2Marshaller(IResource[] schemaResources, params Type[] typesToBeBound)
     {
@@ -115,7 +117,7 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
     }
 
     /// <summary>
-    /// Constructor with multiple schema resources and context paths
+    ///     Constructor with multiple schema resources and context paths
     /// </summary>
     public Xml2Marshaller(IResource[] schemaResources, params string[] contextPaths)
     {
@@ -125,7 +127,7 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
     }
 
     /// <summary>
-    /// Marshal object to XML result
+    ///     Marshal object to XML result
     /// </summary>
     public void Marshal(object graph, StringWriter result)
     {
@@ -167,7 +169,35 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
 
 
     /// <summary>
-    /// Determines if the current marshaler properties require post-processing
+    ///     Unmarshal from XML reader
+    /// </summary>
+    public object Unmarshal(XmlReader source)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+
+        try
+        {
+            // Try to determine the type from the root element
+            var rootElementType = DetermineTypeFromXml(source);
+            var serializer = CreateSerializer(rootElementType);
+
+            // Validate against schema if available
+            if (_schemas?.Length > 0)
+            {
+                ValidateAgainstSchema(source);
+            }
+
+            return serializer.Deserialize(source);
+        }
+        catch (Exception ex)
+        {
+            throw new UnmarshallingException("Failed to unmarshal XML", ex);
+        }
+    }
+
+
+    /// <summary>
+    ///     Determines if the current marshaler properties require post-processing
     /// </summary>
     private bool RequiresPostProcessing()
     {
@@ -179,7 +209,7 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
 
 
     /// <summary>
-    /// Checks if a property requires post-processing
+    ///     Checks if a property requires post-processing
     /// </summary>
     private static bool IsPostProcessingProperty(string propertyKey)
     {
@@ -196,18 +226,19 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
 
 
     /// <summary>
-    /// Applies post-processing transformations to XML output based on marshaler properties
+    ///     Applies post-processing transformations to XML output based on marshaler properties
     /// </summary>
     private string PostProcessXmlOutput(string xmlOutput)
     {
         lock (_lockObject)
         {
-            return _marshallerProperties.Aggregate(xmlOutput, (current, property) => ApplyPostProcessingProperty(current, property.Key, property.Value));
+            return _marshallerProperties.Aggregate(xmlOutput,
+                (current, property) => ApplyPostProcessingProperty(current, property.Key, property.Value));
         }
     }
 
     /// <summary>
-    /// Applies a single post-processing property transformation
+    ///     Applies a single post-processing property transformation
     /// </summary>
     private string ApplyPostProcessingProperty(string xml, string propertyKey, object propertyValue)
     {
@@ -239,13 +270,14 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
         }
         catch (Exception ex)
         {
-            Log.LogWarning(ex, "Failed to apply post-processing for property {Key}={Value}", propertyKey, propertyValue);
+            Log.LogWarning(ex, "Failed to apply post-processing for property {Key}={Value}", propertyKey,
+                propertyValue);
             return xml;
         }
     }
 
     /// <summary>
-    /// Removes XML declaration from the beginning of XML string
+    ///     Removes XML declaration from the beginning of XML string
     /// </summary>
     private static string RemoveXmlDeclaration(string xml)
     {
@@ -254,61 +286,62 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
             var declarationEnd = xml.IndexOf("?>") + 2;
             return xml.Substring(declarationEnd).TrimStart('\r', '\n', ' ', '\t');
         }
+
         return xml;
     }
 
     /// <summary>
-    /// Removes namespace declarations from XML elements
+    ///     Removes namespace declarations from XML elements
     /// </summary>
     private static string RemoveNamespaceDeclarations(string xml)
     {
         // Remove xmlns declarations
-        return System.Text.RegularExpressions.Regex.Replace(xml,
+        return Regex.Replace(xml,
             @"\s+xmlns(:[^=]*)?=""[^""]*""",
             "",
-            System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            RegexOptions.IgnoreCase);
     }
 
     /// <summary>
-    /// Removes empty lines from XML
+    ///     Removes empty lines from XML
     /// </summary>
     private static string RemoveEmptyLines(string xml)
     {
         // Remove whitespace between XML elements (including newlines, spaces, tabs)
-        xml = System.Text.RegularExpressions.Regex.Replace(xml,
+        xml = Regex.Replace(xml,
             @">\s+<",
             "><",
-            System.Text.RegularExpressions.RegexOptions.Multiline);
+            RegexOptions.Multiline);
 
         // Remove leading/trailing whitespace
         return xml.Trim();
     }
 
     /// <summary>
-    /// Removes XML comments
+    ///     Removes XML comments
     /// </summary>
     private static string RemoveXmlComments(string xml)
     {
-        return System.Text.RegularExpressions.Regex.Replace(xml,
+        return Regex.Replace(xml,
             @"<!--.*?-->",
             "",
-            System.Text.RegularExpressions.RegexOptions.Singleline);
+            RegexOptions.Singleline);
     }
 
     /// <summary>
-    /// Normalizes whitespace in XML
+    ///     Normalizes whitespace in XML
     /// </summary>
     private static string NormalizeWhitespace(string xml)
     {
         // Replace multiple whitespace with single space, preserve line breaks
-        return System.Text.RegularExpressions.Regex.Replace(xml,
+        return Regex.Replace(xml,
             @"[ \t]+",
             " ");
     }
 
 
     /// <summary>
-    /// Marshal object to stream
+    ///     Marshal object to stream
     /// </summary>
     public void Marshal(object graph, Stream stream)
     {
@@ -351,7 +384,7 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
     }
 
     /// <summary>
-    /// Marshal object to string
+    ///     Marshal object to string
     /// </summary>
     public string MarshalToString(object graph)
     {
@@ -365,36 +398,8 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
         return PostProcessXmlOutput(result);
     }
 
-
     /// <summary>
-    /// Unmarshal from XML reader
-    /// </summary>
-    public object Unmarshal(XmlReader source)
-    {
-        ArgumentNullException.ThrowIfNull(source);
-
-        try
-        {
-            // Try to determine the type from the root element
-            var rootElementType = DetermineTypeFromXml(source);
-            var serializer = CreateSerializer(rootElementType);
-
-            // Validate against schema if available
-            if (_schemas?.Length > 0)
-            {
-                ValidateAgainstSchema(source);
-            }
-
-            return serializer.Deserialize(source);
-        }
-        catch (Exception ex)
-        {
-            throw new UnmarshallingException("Failed to unmarshal XML", ex);
-        }
-    }
-
-    /// <summary>
-    /// Unmarshal from stream
+    ///     Unmarshal from stream
     /// </summary>
     public T Unmarshal<T>(Stream source)
     {
@@ -403,7 +408,7 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
     }
 
     /// <summary>
-    /// Unmarshal from string
+    ///     Unmarshal from string
     /// </summary>
     public T UnmarshalFromString<T>(string xml)
     {
@@ -413,7 +418,7 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
     }
 
     /// <summary>
-    /// Set marshaller property
+    ///     Set marshaller property
     /// </summary>
     public void SetProperty(string key, object value)
     {
@@ -424,7 +429,7 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
     }
 
     /// <summary>
-    /// Add namespace prefix mapping
+    ///     Add namespace prefix mapping
     /// </summary>
     public void AddNamespace(string prefix, string uri)
     {
@@ -433,7 +438,7 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
     }
 
     /// <summary>
-    /// Create XML serializer for the given type
+    ///     Create XML serializer for the given type
     /// </summary>
     private XmlSerializer CreateSerializer(Type type)
     {
@@ -460,20 +465,26 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
     }
 
     /// <summary>
-    /// Find type in the specified context paths
+    ///     Find type in the specified context paths
     /// </summary>
     private Type FindTypeInContextPaths(Type targetType)
     {
-        if (_contextPaths == null) return null;
+        if (_contextPaths == null)
+        {
+            return null;
+        }
 
         foreach (var contextPath in _contextPaths)
         {
             try
             {
                 // Try as an assembly name
-                var assembly = System.Reflection.Assembly.LoadFrom(contextPath);
+                var assembly = Assembly.LoadFrom(contextPath);
                 var foundType = assembly.GetTypes().FirstOrDefault(t => t.Name == targetType.Name);
-                if (foundType != null) return foundType;
+                if (foundType != null)
+                {
+                    return foundType;
+                }
             }
             catch
             {
@@ -484,7 +495,10 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
                     .Where(t => t.Name == targetType.Name);
 
                 var foundType = types.FirstOrDefault();
-                if (foundType != null) return foundType;
+                if (foundType != null)
+                {
+                    return foundType;
+                }
             }
         }
 
@@ -492,7 +506,7 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
     }
 
     /// <summary>
-    /// Determine type from XML root element
+    ///     Determine type from XML root element
     /// </summary>
     private Type DetermineTypeFromXml(XmlReader reader)
     {
@@ -510,7 +524,7 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
     }
 
     /// <summary>
-    /// Get XML type name from type attributes
+    ///     Get XML type name from type attributes
     /// </summary>
     private string GetXmlTypeName(Type type)
     {
@@ -520,80 +534,77 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
 
     private XmlWriterSettings CreateXmlWriterSettings()
     {
-        var settings = new XmlWriterSettings
-        {
-            Encoding = Encoding.UTF8,
-            Indent = true,
-            OmitXmlDeclaration = false
-        };
+        var settings = new XmlWriterSettings { Encoding = Encoding.UTF8, Indent = true, OmitXmlDeclaration = false };
         ApplyMarshallerProperties(settings);
         return settings;
     }
 
     /// <summary>
-    /// Applies configured marshaller properties to the provided XML writer settings.
+    ///     Applies configured marshaller properties to the provided XML writer settings.
     /// </summary>
-    /// <param name="settings">The <see cref="XmlWriterSettings"/> instance where the marshaller properties will be applied.</param>
+    /// <param name="settings">The <see cref="XmlWriterSettings" /> instance where the marshaller properties will be applied.</param>
     private void ApplyMarshallerProperties(XmlWriterSettings settings)
-{
-    lock (_lockObject)
     {
-        foreach (var property in _marshallerProperties)
+        lock (_lockObject)
         {
-            // Skip post-processing properties - they're handled separately
-            if (IsPostProcessingProperty(property.Key))
+            foreach (var property in _marshallerProperties)
             {
-                continue;
-            }
-
-            try
-            {
-                switch (property.Key.ToLowerInvariant())
+                // Skip post-processing properties - they're handled separately
+                if (IsPostProcessingProperty(property.Key))
                 {
-                    case "indent":
-                    case "jaxb.formatted.output":
-                        settings.Indent = Convert.ToBoolean(property.Value);
-                        break;
-                    case "encoding":
-                    case "jaxb.encoding":
-                        settings.Encoding = property.Value as Encoding ?? Encoding.UTF8;
-                        break;
-                    case "omitxmldeclaration":
-                    case "jaxb.fragment":
-                        // JAXB fragment property means omit XML declaration
-                        settings.OmitXmlDeclaration = Convert.ToBoolean(property.Value);
-                        break;
-                    case "indentchars":
-                        settings.IndentChars = property.Value?.ToString() ?? "  ";
-                        break;
-                    case "newlinehandling":
-                        if (Enum.TryParse<NewLineHandling>(property.Value?.ToString(), true, out var newLineHandling))
-                        {
-                            settings.NewLineHandling = newLineHandling;
-                        }
-                        break;
-                    case "newlinechars":
-                        settings.NewLineChars = property.Value?.ToString() ?? Environment.NewLine;
-                        break;
-                    default:
-                        Log.LogWarning("Unknown marshaller property: {Key}={Value}", property.Key, property.Value);
-                        break;
+                    continue;
                 }
-            }
-            catch (Exception ex)
-            {
-                Log.LogWarning(ex, "Unable to set marshaller property {Key}={Value}", property.Key, property.Value);
+
+                try
+                {
+                    switch (property.Key.ToLowerInvariant())
+                    {
+                        case "indent":
+                        case "jaxb.formatted.output":
+                            settings.Indent = Convert.ToBoolean(property.Value);
+                            break;
+                        case "encoding":
+                        case "jaxb.encoding":
+                            settings.Encoding = property.Value as Encoding ?? Encoding.UTF8;
+                            break;
+                        case "omitxmldeclaration":
+                        case "jaxb.fragment":
+                            // JAXB fragment property means omit XML declaration
+                            settings.OmitXmlDeclaration = Convert.ToBoolean(property.Value);
+                            break;
+                        case "indentchars":
+                            settings.IndentChars = property.Value?.ToString() ?? "  ";
+                            break;
+                        case "newlinehandling":
+                            if (Enum.TryParse<NewLineHandling>(property.Value?.ToString(), true,
+                                    out var newLineHandling))
+                            {
+                                settings.NewLineHandling = newLineHandling;
+                            }
+
+                            break;
+                        case "newlinechars":
+                            settings.NewLineChars = property.Value?.ToString() ?? Environment.NewLine;
+                            break;
+                        default:
+                            Log.LogWarning("Unknown marshaller property: {Key}={Value}", property.Key, property.Value);
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.LogWarning(ex, "Unable to set marshaller property {Key}={Value}", property.Key, property.Value);
+                }
             }
         }
     }
-}
 
 
     /// <summary>
-    /// Loads and returns an array of XML schemas from the given resource.
+    ///     Loads and returns an array of XML schemas from the given resource.
     /// </summary>
     /// <param name="schemaResource">The resource containing the schema to be loaded.</param>
-    /// <returns>An array of <see cref="System.Xml.Schema.XmlSchema"/> objects loaded from the resource.</returns>
+    /// <returns>An array of <see cref="System.Xml.Schema.XmlSchema" /> objects loaded from the resource.</returns>
     private static XmlSchema[] LoadSchemas(IResource schemaResource)
     {
         try
@@ -609,7 +620,7 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
     }
 
     /// <summary>
-    /// Loads XML schemas from the provided resources and returns an array of XmlSchema objects.
+    ///     Loads XML schemas from the provided resources and returns an array of XmlSchema objects.
     /// </summary>
     /// <param name="schemaResources">An array of IResource objects representing the schema files to be loaded.</param>
     /// <returns>An array of XmlSchema objects loaded from the specified resources.</returns>
@@ -633,20 +644,22 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
     }
 
     /// <summary>
-    /// Validates the XML document against the loaded XML schemas.
-    /// Throws an exception if the XML document fails validation.
+    ///     Validates the XML document against the loaded XML schemas.
+    ///     Throws an exception if the XML document fails validation.
     /// </summary>
-    /// <param name="reader">The <see cref="XmlReader"/> containing the XML document to validate.</param>
+    /// <param name="reader">The <see cref="XmlReader" /> containing the XML document to validate.</param>
     private void ValidateAgainstSchema(XmlReader reader)
     {
-        if (_schemas?.Length == 0) return;
+        if (_schemas?.Length == 0)
+        {
+            return;
+        }
 
         try
         {
             var settings = new XmlReaderSettings
             {
-                ValidationType = ValidationType.Schema,
-                Schemas = new XmlSchemaSet()
+                ValidationType = ValidationType.Schema, Schemas = new XmlSchemaSet()
             };
 
             // Add each schema individually
@@ -661,6 +674,7 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
                 {
                     throw new ValidationException($"XML validation error: {e.Message}");
                 }
+
                 Log.LogWarning("XML validation warning: {Message}", e.Message);
             };
 
@@ -674,10 +688,10 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
     }
 
     /// <summary>
-    /// Handles XML validation events such as warnings and errors during schema validation.
+    ///     Handles XML validation events such as warnings and errors during schema validation.
     /// </summary>
     /// <param name="sender">The source of the validation event.</param>
-    /// <param name="e">The <see cref="ValidationEventArgs"/> instance containing the event data.</param>
+    /// <param name="e">The <see cref="ValidationEventArgs" /> instance containing the event data.</param>
     private static void ValidationEventHandler(object sender, ValidationEventArgs e)
     {
         switch (e.Severity)

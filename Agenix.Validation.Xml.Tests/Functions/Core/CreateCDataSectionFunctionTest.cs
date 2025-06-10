@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices.JavaScript;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Functions;
 using Agenix.Core.Functions;
@@ -37,6 +36,7 @@ public class CreateCDataSectionFunctionTest : AbstractNUnitSetUp
         Assert.That(functionLookup["cdataSection"].GetType(), Is.EqualTo(typeof(CreateCDataSectionFunction)));
 
         var defaultLibrary = new DefaultFunctionLibrary();
-        Assert.That(defaultLibrary.GetFunction("cdataSection").GetType(), Is.EqualTo(typeof(CreateCDataSectionFunction)));
+        Assert.That(defaultLibrary.GetFunction("cdataSection").GetType(),
+            Is.EqualTo(typeof(CreateCDataSectionFunction)));
     }
 }

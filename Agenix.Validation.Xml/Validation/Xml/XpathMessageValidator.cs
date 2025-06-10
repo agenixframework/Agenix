@@ -44,7 +44,8 @@ namespace Agenix.Validation.Xml.Validation.Xml;
 ///     Message validator evaluates set of XPath expressions on message payload and checks that values are as expected.
 /// </summary>
 /// <since>2.3</since>
-public class XpathMessageValidator : AbstractMessageValidator<XpathMessageValidationContext>, IMessageValidator<IValidationContext>
+public class XpathMessageValidator : AbstractMessageValidator<XpathMessageValidationContext>,
+    IMessageValidator<IValidationContext>
 {
     /// <summary>
     ///     Logger
@@ -52,6 +53,17 @@ public class XpathMessageValidator : AbstractMessageValidator<XpathMessageValida
     private static readonly ILogger Logger = LogManager.GetLogger(typeof(XpathMessageValidator));
 
     private NamespaceContextBuilder? _namespaceContextBuilder;
+
+    /// <summary>
+    ///     Determines whether the validator supports the given message type.
+    /// </summary>
+    /// <param name="messageType">The type of the message being validated.</param>
+    /// <param name="message">The message instance to validate.</param>
+    /// <returns>True if the message type is supported; otherwise, false.</returns>
+    public override bool SupportsMessageType(string messageType, IMessage message)
+    {
+        return new DomXmlMessageValidator().SupportsMessageType(messageType, message);
+    }
 
     public override void ValidateMessage(IMessage receivedMessage, IMessage controlMessage,
         TestContext context, XpathMessageValidationContext validationContext)
@@ -192,17 +204,6 @@ public class XpathMessageValidator : AbstractMessageValidator<XpathMessageValida
         }
 
         return base.FindValidationContext(validationContexts);
-    }
-
-    /// <summary>
-    ///     Determines whether the validator supports the given message type.
-    /// </summary>
-    /// <param name="messageType">The type of the message being validated.</param>
-    /// <param name="message">The message instance to validate.</param>
-    /// <returns>True if the message type is supported; otherwise, false.</returns>
-    public override bool SupportsMessageType(string messageType, IMessage message)
-    {
-        return new DomXmlMessageValidator().SupportsMessageType(messageType, message);
     }
 
     /// <summary>

@@ -2,10 +2,10 @@ using System.Xml;
 using Agenix.Api.Log;
 using Agenix.Api.Spi;
 using Agenix.Api.Validation;
-using Microsoft.Extensions.Logging;
 using Agenix.Api.Xml;
 using Agenix.Core.Message;
 using Agenix.Validation.Xml.Validation.Xml;
+using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 
 namespace Agenix.Validation.Xml.Tests.Validation.Xml;
@@ -32,7 +32,7 @@ public class XmlMarshallingValidationProcessorTest : AbstractNUnitSetUp
 
         build.SetReferenceResolver(new SimpleReferenceResolver());
 
-        Assert.That(() => build.Validate(new DefaultMessage {Payload = "hi"}, null), Throws.Nothing);
+        Assert.That(() => build.Validate(new DefaultMessage { Payload = "hi" }, null), Throws.Nothing);
     }
 
     [Test]
@@ -47,7 +47,7 @@ public class XmlMarshallingValidationProcessorTest : AbstractNUnitSetUp
 
         build.SetReferenceResolver(referenceResolver);
 
-        Assert.That(() => build.Validate(new DefaultMessage {Payload = "buy"}, null), Throws.Nothing);
+        Assert.That(() => build.Validate(new DefaultMessage { Payload = "buy" }, null), Throws.Nothing);
     }
 
 
@@ -55,7 +55,9 @@ public class XmlMarshallingValidationProcessorTest : AbstractNUnitSetUp
     {
         public object Unmarshal(XmlReader xmlReader)
         {
-            return xmlReader == null ? string.Empty :
+            return xmlReader == null
+                ? string.Empty
+                :
                 // Read the XML content as string
                 xmlReader.ReadOuterXml();
 
@@ -68,7 +70,4 @@ public class XmlMarshallingValidationProcessorTest : AbstractNUnitSetUp
             // return doc.OuterXml;
         }
     }
-
-
-
 }

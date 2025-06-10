@@ -31,24 +31,25 @@ using System.Xml.Schema;
 namespace Agenix.Validation.Xml.Schema;
 
 /// <summary>
-/// The <c>XmlSchemaValidator</c> class is used to validate XML documents against a set of XML Schema Definitions (XSDs).
-/// It ensures that the XML conforms to the rules and structure defined by the associated schema set.
+///     The <c>XmlSchemaValidator</c> class is used to validate XML documents against a set of XML Schema Definitions
+///     (XSDs).
+///     It ensures that the XML conforms to the rules and structure defined by the associated schema set.
 /// </summary>
 public class XmlSchemaValidator(XmlSchemaSet schemaSet)
 {
     private readonly XmlSchemaSet _schemaSet = schemaSet ?? throw new ArgumentNullException(nameof(schemaSet));
 
     /// <summary>
-    /// Validates an XML document against the defined XML Schema Definitions (XSDs) in the schema set.
+    ///     Validates an XML document against the defined XML Schema Definitions (XSDs) in the schema set.
     /// </summary>
     /// <param name="reader">
-    /// The <c>XmlReader</c> instance for the XML document that needs to be validated.
+    ///     The <c>XmlReader</c> instance for the XML document that needs to be validated.
     /// </param>
     /// <exception cref="ArgumentNullException">
-    /// Thrown if the provided <c>XmlReader</c> instance is null.
+    ///     Thrown if the provided <c>XmlReader</c> instance is null.
     /// </exception>
     /// <exception cref="XmlException">
-    /// Thrown if the XML document does not conform to the schemas or a validation error occurs.
+    ///     Thrown if the XML document does not conform to the schemas or a validation error occurs.
     /// </exception>
     public void Validate(XmlReader reader)
     {
@@ -72,5 +73,4 @@ public class XmlSchemaValidator(XmlSchemaSet schemaSet)
         using var validatingReader = XmlReader.Create(reader, settings);
         while (validatingReader.Read()) { }
     }
-
 }

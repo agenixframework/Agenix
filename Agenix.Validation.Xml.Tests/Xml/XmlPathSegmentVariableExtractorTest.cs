@@ -84,7 +84,6 @@ public class XmlPathSegmentVariableExtractorTest : AbstractNUnitSetUp
     }
 
 
-
     private VariableExpressionSegmentMatcher MatchSegmentExpressionMatcher(string xpath)
     {
         var variableExpression = $"xpath({xpath})";
@@ -98,6 +97,4 @@ public class XmlPathSegmentVariableExtractorTest : AbstractNUnitSetUp
         var hashBytes = SHA256.HashData(Encoding.UTF8.GetBytes(xmlContent));
         return Convert.ToBase64String(hashBytes);
     }
-
-
 }

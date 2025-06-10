@@ -47,14 +47,18 @@ public class XPathUtilsTest
         Assert.That(namespaces["dns1"], Is.EqualTo("http://agenix.org/foo"));
 
         // Test 2: Two different namespaces with one duplicate
-        namespaces = XpathUtils.GetDynamicNamespaces("//{http://agenix.org/foo}Foo/{http://agenix.org/bar}bar/{http://agenix.org/foo}value");
+        namespaces =
+            XpathUtils.GetDynamicNamespaces(
+                "//{http://agenix.org/foo}Foo/{http://agenix.org/bar}bar/{http://agenix.org/foo}value");
 
         Assert.That(namespaces.Count, Is.EqualTo(2));
         Assert.That(namespaces["dns1"], Is.EqualTo("http://agenix.org/foo"));
         Assert.That(namespaces["dns2"], Is.EqualTo("http://agenix.org/bar"));
 
         // Test 3: Three different namespaces including URN
-        namespaces = XpathUtils.GetDynamicNamespaces("//{http://agenix.org/foo}Foo/{http://agenix.org/bar}bar/{urn:agenix}value");
+        namespaces =
+            XpathUtils.GetDynamicNamespaces(
+                "//{http://agenix.org/foo}Foo/{http://agenix.org/bar}bar/{urn:agenix}value");
 
         Assert.That(namespaces.Count, Is.EqualTo(3));
         Assert.That(namespaces["dns1"], Is.EqualTo("http://agenix.org/foo"));
@@ -85,7 +89,8 @@ public class XPathUtilsTest
             Is.EqualTo("//ns3:Foo/bar"));
 
         Assert.That(
-            XpathUtils.ReplaceDynamicNamespaces("//{http://agenix.org/unkown}Foo/{http://agenix.org/unknown}bar", namespaces),
+            XpathUtils.ReplaceDynamicNamespaces("//{http://agenix.org/unkown}Foo/{http://agenix.org/unknown}bar",
+                namespaces),
             Is.EqualTo("//{http://agenix.org/unkown}Foo/{http://agenix.org/unknown}bar"));
     }
 
@@ -161,6 +166,4 @@ public class XPathUtilsTest
             XpathUtils.EvaluateAsString(xmlDocument, "/person/@status", namespaceContext),
             Is.EqualTo("single"));
     }
-
-
 }

@@ -25,8 +25,6 @@
 #endregion
 
 
-using System.Text;
-using System.Xml;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Message;
@@ -36,20 +34,22 @@ using Agenix.Core.Message.Builder;
 namespace Agenix.Validation.Xml.Message.Builder;
 
 /// <summary>
-/// Represents a payload builder for marshaling a model into a specific message format.
+///     Represents a payload builder for marshaling a model into a specific message format.
 /// </summary>
 /// <remarks>
-/// This class supports the use of either custom implementations of marshallers or named marshallers for transforming model data into the required format.
-/// It extends <see cref="DefaultPayloadBuilder"/> to provide additional functionality specific to marshalling operations.
+///     This class supports the use of either custom implementations of marshallers or named marshallers for transforming
+///     model data into the required format.
+///     It extends <see cref="DefaultPayloadBuilder" /> to provide additional functionality specific to marshalling
+///     operations.
 /// </remarks>
 [MessagePayload(MessageType.XML)]
 public class MarshallingPayloadBuilder : DefaultPayloadBuilder
 {
-private readonly IMarshaller _marshaller;
+    private readonly IMarshaller _marshaller;
     private readonly string _marshallerName;
 
     /// <summary>
-    /// Default constructor using just a model object.
+    ///     Default constructor using just a model object.
     /// </summary>
     /// <param name="model">The model object</param>
     public MarshallingPayloadBuilder(object model) : base(model)
@@ -59,7 +59,7 @@ private readonly IMarshaller _marshaller;
     }
 
     /// <summary>
-    /// Default constructor using object marshaler and model object.
+    ///     Default constructor using object marshaler and model object.
     /// </summary>
     /// <param name="model">The model object</param>
     /// <param name="marshaller">The marshaler instance</param>
@@ -70,7 +70,7 @@ private readonly IMarshaller _marshaller;
     }
 
     /// <summary>
-    /// Default constructor using object marshaller name and model object.
+    ///     Default constructor using object marshaller name and model object.
     /// </summary>
     /// <param name="model">The model object</param>
     /// <param name="marshallerName">The marshaller name</param>
@@ -99,10 +99,8 @@ private readonly IMarshaller _marshaller;
                 var objectMapper = context.ReferenceResolver.Resolve<IMarshaller>(_marshallerName);
                 return BuildPayload(objectMapper, Payload, context);
             }
-            else
-            {
-                throw new AgenixSystemException($"Unable to find proper object marshaller for name '{_marshallerName}'");
-            }
+
+            throw new AgenixSystemException($"Unable to find proper object marshaller for name '{_marshallerName}'");
         }
 
         var marshallerMap = context.ReferenceResolver.ResolveAll<IMarshaller>();
@@ -110,15 +108,14 @@ private readonly IMarshaller _marshaller;
         {
             return BuildPayload(marshallerMap.Values.First(), Payload, context);
         }
-        else
-        {
-            throw new AgenixSystemException($"Unable to auto detect object marshaller - " +
-                                            $"found {marshallerMap.Count} matching marshaller instances in reference resolver");
-        }
+
+        throw new AgenixSystemException($"Unable to auto detect object marshaller - " +
+                                        $"found {marshallerMap.Count} matching marshaller instances in reference resolver");
     }
 
     /// <summary>
-    /// Constructs the payload by marshaling the specified model into an XML format using the provided marshaller and context.
+    ///     Constructs the payload by marshaling the specified model into an XML format using the provided marshaller and
+    ///     context.
     /// </summary>
     /// <param name="marshaller">The marshaller responsible for serializing the model into XML.</param>
     /// <param name="model">The model object to be serialized into XML format.</param>
@@ -141,74 +138,17 @@ private readonly IMarshaller _marshaller;
     }
 
     /// <summary>
-    /// Provides functionality to build a customized <see cref="MarshallingPayloadBuilder"/> instance.
+    ///     Provides functionality to build a customized <see cref="MarshallingPayloadBuilder" /> instance.
     /// </summary>
     /// <remarks>
-    /// This builder supports configuration for marshalling models either with named marshallers or custom marshaller implementations.
+    ///     This builder supports configuration for marshalling models either with named marshallers or custom marshaller
+    ///     implementations.
     /// </remarks>
     public class Builder : IMessagePayloadBuilder.IBuilder<MarshallingPayloadBuilder, Builder>
     {
-        private object _model;
         private IMarshaller _marshaller;
         private string _marshallerName;
-
-        /// <summary>
-        /// Creates and initializes a new instance of the <see cref="Builder"/> class,
-        /// setting the model object for the marshalling payload.
-        /// </summary>
-        /// <param name="model">The model object to be marshalled.</param>
-        /// <returns>A new instance of <see cref="Builder"/> configured with the specified model.</returns>
-        public static Builder Marshal(object model)
-        {
-            var builder = new Builder { _model = model };
-            return builder;
-        }
-
-        /// <summary>
-        /// Creates a new instance of the <see cref="Builder"/> class and initializes it with a model object.
-        /// </summary>
-        /// <param name="model">The model object to be marshalled.</param>
-        /// <returns>A new instance of the <see cref="Builder"/> class configured with the specified model.</returns>
-        public static Builder Marshal(object model, string marshaller)
-        {
-            var builder = new Builder { _model = model, _marshallerName = marshaller };
-            return builder;
-        }
-
-        /// <summary>
-        /// Creates and initializes a new instance of the <see cref="Builder"/> class,
-        /// setting the model object and custom marshaller for the marshalling payload.
-        /// </summary>
-        /// <param name="model">The model object to be marshalled.</param>
-        /// <param name="marshaller">The custom marshaller implementation to use for marshalling.</param>
-        /// <returns>A new instance of <see cref="Builder"/> configured with the specified model and marshaller.</returns>
-        public static Builder Marshal(object model, IMarshaller marshaller)
-        {
-            var builder = new Builder { _model = model, _marshaller = marshaller };
-            return builder;
-        }
-
-        /// <summary>
-        /// Sets the marshaller to be used by the builder.
-        /// </summary>
-        /// <param name="marshallerName">The name of the marshaller to use.</param>
-        /// <returns>The current instance of the <see cref="Builder"/> class for chaining additional configuration steps.</returns>
-        public Builder Marshaller(string marshallerName)
-        {
-            _marshallerName = marshallerName;
-            return this;
-        }
-
-        /// <summary>
-        /// Responsible for marshalling objects into an XML-based payload format.
-        /// </summary>
-        /// <param name="model">The model object to be marshalled.</param>
-        /// <returns>An instance of <see cref="Marshaller"/> initialized for payload construction.</returns>
-        public Builder Marshaller(IMarshaller marshaller)
-        {
-            _marshaller = marshaller;
-            return this;
-        }
+        private object _model;
 
         public MarshallingPayloadBuilder Build()
         {
@@ -217,8 +157,67 @@ private readonly IMarshaller _marshaller;
                 return new MarshallingPayloadBuilder(_model, _marshaller);
             }
 
-            return _marshallerName != null ? new MarshallingPayloadBuilder(_model, _marshallerName) : new MarshallingPayloadBuilder(_model);
+            return _marshallerName != null
+                ? new MarshallingPayloadBuilder(_model, _marshallerName)
+                : new MarshallingPayloadBuilder(_model);
+        }
+
+        /// <summary>
+        ///     Creates and initializes a new instance of the <see cref="Builder" /> class,
+        ///     setting the model object for the marshalling payload.
+        /// </summary>
+        /// <param name="model">The model object to be marshalled.</param>
+        /// <returns>A new instance of <see cref="Builder" /> configured with the specified model.</returns>
+        public static Builder Marshal(object model)
+        {
+            var builder = new Builder { _model = model };
+            return builder;
+        }
+
+        /// <summary>
+        ///     Creates a new instance of the <see cref="Builder" /> class and initializes it with a model object.
+        /// </summary>
+        /// <param name="model">The model object to be marshalled.</param>
+        /// <returns>A new instance of the <see cref="Builder" /> class configured with the specified model.</returns>
+        public static Builder Marshal(object model, string marshaller)
+        {
+            var builder = new Builder { _model = model, _marshallerName = marshaller };
+            return builder;
+        }
+
+        /// <summary>
+        ///     Creates and initializes a new instance of the <see cref="Builder" /> class,
+        ///     setting the model object and custom marshaller for the marshalling payload.
+        /// </summary>
+        /// <param name="model">The model object to be marshalled.</param>
+        /// <param name="marshaller">The custom marshaller implementation to use for marshalling.</param>
+        /// <returns>A new instance of <see cref="Builder" /> configured with the specified model and marshaller.</returns>
+        public static Builder Marshal(object model, IMarshaller marshaller)
+        {
+            var builder = new Builder { _model = model, _marshaller = marshaller };
+            return builder;
+        }
+
+        /// <summary>
+        ///     Sets the marshaller to be used by the builder.
+        /// </summary>
+        /// <param name="marshallerName">The name of the marshaller to use.</param>
+        /// <returns>The current instance of the <see cref="Builder" /> class for chaining additional configuration steps.</returns>
+        public Builder Marshaller(string marshallerName)
+        {
+            _marshallerName = marshallerName;
+            return this;
+        }
+
+        /// <summary>
+        ///     Responsible for marshalling objects into an XML-based payload format.
+        /// </summary>
+        /// <param name="model">The model object to be marshalled.</param>
+        /// <returns>An instance of <see cref="Marshaller" /> initialized for payload construction.</returns>
+        public Builder Marshaller(IMarshaller marshaller)
+        {
+            _marshaller = marshaller;
+            return this;
         }
     }
-
 }

@@ -44,36 +44,30 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     }
 
     /// <summary>
-    /// Provides access to the data dictionary associated with the message builder.
-    /// The data dictionary contains dynamic data that can be used or manipulated
-    /// during the message building process.
+    ///     Provides access to the data dictionary associated with the message builder.
+    ///     The data dictionary contains dynamic data that can be used or manipulated
+    ///     during the message building process.
     /// </summary>
     /// <remarks>
-    /// The data dictionary is a dynamic collection that supports various
-    /// operations for working with message-related data. It is typically used
-    /// for managing key-value pairs needed in constructing or processing
-    /// messages and their attributes.
+    ///     The data dictionary is a dynamic collection that supports various
+    ///     operations for working with message-related data. It is typically used
+    ///     for managing key-value pairs needed in constructing or processing
+    ///     messages and their attributes.
     /// </remarks>
-    public IDataDictionary DataDictionary
-    {
-        get => dataDictionary;
-    }
+    public IDataDictionary DataDictionary => dataDictionary;
 
     /// <summary>
-    /// Gets the name of the data dictionary associated with the message builder.
-    /// This name is used to identify the specific data dictionary being applied
-    /// during the message building or processing operation.
+    ///     Gets the name of the data dictionary associated with the message builder.
+    ///     This name is used to identify the specific data dictionary being applied
+    ///     during the message building or processing operation.
     /// </summary>
     /// <remarks>
-    /// The <c>DataDictionaryName</c> property provides a string identifier for the
-    /// corresponding data dictionary. This can be used for managing or selecting
-    /// a specific data dictionary when multiple dictionaries are involved
-    /// in the message-building workflow.
+    ///     The <c>DataDictionaryName</c> property provides a string identifier for the
+    ///     corresponding data dictionary. This can be used for managing or selecting
+    ///     a specific data dictionary when multiple dictionaries are involved
+    ///     in the message-building workflow.
     /// </remarks>
-    public string DataDictionaryName
-    {
-        get => dataDictionaryName;
-    }
+    public string DataDictionaryName => dataDictionaryName;
 
     /// <summary>
     ///     Sets the reference resolver for the message builder support, ensuring that any needed references can be resolved at
@@ -370,7 +364,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     }
 
     /// <summary>
-    /// Sets an explicit data dictionary for the current action.
+    ///     Sets an explicit data dictionary for the current action.
     /// </summary>
     /// <param name="dictionary">The data dictionary to be used in the action.</param>
     /// <returns>The modified message action builder.</returns>
@@ -381,7 +375,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     }
 
     /// <summary>
-    /// Sets the data dictionary by its name within the message builder support.
+    ///     Sets the data dictionary by its name within the message builder support.
     /// </summary>
     /// <param name="dictionaryName">The name of the data dictionary to use.</param>
     /// <returns>The modified message action builder.</returns>

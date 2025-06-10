@@ -40,11 +40,10 @@ public interface IMessageValidationContext : IValidationContext, ISchemaValidati
     /// This abstract class is designed to be extended by concrete implementations
     /// and provides methods for configuring schema validation, schema repositories,
     /// and ignored message elements.
-    public abstract class Builder<T, S> : IValidationContext.IBuilder<T, Builder<T, S>>,
-        IValidationContext.IBuilder<IValidationContext, IBuilder>,
-        ISchemaValidationContext.IBuilder<Builder<T, S>>,
+    public abstract class Builder<T, S> : IBuilder<T, Builder<T, S>>,
+        IBuilder<IValidationContext, IBuilder>,
+        IBuilder<Builder<T, S>>,
         IBuilder
-
         where T : IMessageValidationContext
         where S : Builder<T, S>
     {
@@ -89,6 +88,11 @@ public interface IMessageValidationContext : IValidationContext, ISchemaValidati
             return Self;
         }
 
+        IValidationContext IBuilder<IValidationContext, IBuilder>.Build()
+        {
+            return Build();
+        }
+
 
         public abstract T Build();
 
@@ -108,11 +112,6 @@ public interface IMessageValidationContext : IValidationContext, ISchemaValidati
         {
             IgnoreExpressions.UnionWith(paths);
             return Self;
-        }
-
-        IValidationContext IBuilder<IValidationContext, IBuilder>.Build()
-        {
-            return Build();
         }
     }
 }

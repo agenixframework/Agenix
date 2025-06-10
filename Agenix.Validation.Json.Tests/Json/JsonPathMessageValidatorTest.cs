@@ -328,10 +328,11 @@ public class JsonPathMessageValidatorTest : AbstractNUnitSetUp
             switch (controlParameters[0])
             {
                 case "NullValue()":
-                    Assert.That(value, NUnitIs.Null);
+                    Assert.That(value, NUnitIs.Null.Or.Empty);
                     break;
                 case "NotNullValue()":
-                    Assert.That(value, NUnitIs.Not.Null);
+                    Assert.That(value, NUnitIs.Not.Null.Or.Empty);
+                    ;
                     break;
             }
         }

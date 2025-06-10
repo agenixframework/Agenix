@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices.JavaScript;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Functions;
 using Agenix.Core.Functions;
@@ -6,7 +5,6 @@ using Agenix.Validation.Xml.Functions.Core;
 using NUnit.Framework;
 
 namespace Agenix.Validation.Xml.Tests.Functions.Core;
-
 
 [TestFixture]
 public class EscapeXmlFunctionTest : AbstractNUnitSetUp

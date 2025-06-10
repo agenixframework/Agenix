@@ -9,8 +9,8 @@ using Agenix.Validation.Xml.Validation.Xml;
 namespace Agenix.Validation.Xml.Validation.Xhtml;
 
 /// <summary>
-/// Represents a validator for validating XHTML messages using XPath expressions.
-/// This validator validates messages after converting their payload into XHTML-compatible format.
+///     Represents a validator for validating XHTML messages using XPath expressions.
+///     This validator validates messages after converting their payload into XHTML-compatible format.
 /// </summary>
 public class XhtmlXpathMessageValidator : XpathMessageValidator, InitializingPhase
 {

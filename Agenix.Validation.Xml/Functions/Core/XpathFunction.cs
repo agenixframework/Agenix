@@ -8,7 +8,7 @@ using Agenix.Validation.Xml.Xpath;
 namespace Agenix.Validation.Xml.Functions.Core;
 
 /// <summary>
-/// XPath function for evaluating XPath expressions against XML sources.
+///     XPath function for evaluating XPath expressions against XML sources.
 /// </summary>
 public class XpathFunction : IFunction
 {
@@ -21,7 +21,8 @@ public class XpathFunction : IFunction
 
         if (parameterList.Count < 2)
         {
-            throw new InvalidFunctionUsageException("Missing parameter for function - usage xpath('xmlSource', 'expression')");
+            throw new InvalidFunctionUsageException(
+                "Missing parameter for function - usage xpath('xmlSource', 'expression')");
         }
 
         var xmlSource = parameterList[0];

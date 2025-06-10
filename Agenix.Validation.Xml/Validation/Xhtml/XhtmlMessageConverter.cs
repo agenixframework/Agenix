@@ -1,5 +1,6 @@
-
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 using Agenix.Api.Common;
 using Agenix.Api.IO;
 using AngleSharp;
@@ -107,7 +108,10 @@ public class XhtmlMessageConverter : InitializingPhase
     private string EnsureXmlCompliance(string xhtmlContent)
     {
         // Fix void elements that need to be self-closing in XML
-        var voidElements = new[] { "input", "br", "hr", "img", "meta", "link", "area", "base", "col", "embed", "source", "track", "wbr" };
+        var voidElements = new[]
+        {
+            "input", "br", "hr", "img", "meta", "link", "area", "base", "col", "embed", "source", "track", "wbr"
+        };
 
         foreach (var element in voidElements)
         {
@@ -161,7 +165,7 @@ public class XhtmlMessageConverter : InitializingPhase
     private string SerializeAsXml(IElement element)
     {
         // Use a more XML-friendly serialization
-        var result = new System.Text.StringBuilder();
+        var result = new StringBuilder();
         SerializeElementAsXml(element, result);
         return result.ToString();
     }
@@ -171,7 +175,7 @@ public class XhtmlMessageConverter : InitializingPhase
     /// </summary>
     /// <param name="element">The element to serialize</param>
     /// <param name="sb">The StringBuilder to append to</param>
-    private void SerializeElementAsXml(IElement element, System.Text.StringBuilder sb)
+    private void SerializeElementAsXml(IElement element, StringBuilder sb)
     {
         var tagName = element.TagName.ToLowerInvariant();
         sb.Append($"<{tagName}");
@@ -181,11 +185,26 @@ public class XhtmlMessageConverter : InitializingPhase
         {
             var attrName = attr.Name.ToLowerInvariant();
             var attrValue = attr.Value ?? attrName; // Handle boolean attributes
-            sb.Append($" {attrName}=\"{System.Web.HttpUtility.HtmlEncode(attrValue)}\"");
+            sb.Append($" {attrName}=\"{HttpUtility.HtmlEncode(attrValue)}\"");
         }
 
         // Check if it's a void element
-        var voidElements = new HashSet<string> { "input", "br", "hr", "img", "meta", "link", "area", "base", "col", "embed", "source", "track", "wbr" };
+        var voidElements = new HashSet<string>
+        {
+            "input",
+            "br",
+            "hr",
+            "img",
+            "meta",
+            "link",
+            "area",
+            "base",
+            "col",
+            "embed",
+            "source",
+            "track",
+            "wbr"
+        };
 
         if (voidElements.Contains(tagName))
         {
@@ -204,7 +223,7 @@ public class XhtmlMessageConverter : InitializingPhase
                 }
                 else if (child is IText textNode)
                 {
-                    sb.Append(System.Web.HttpUtility.HtmlEncode(textNode.TextContent));
+                    sb.Append(HttpUtility.HtmlEncode(textNode.TextContent));
                 }
             }
 

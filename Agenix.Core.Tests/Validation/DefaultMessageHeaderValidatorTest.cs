@@ -79,7 +79,7 @@ public class DefaultMessageHeaderValidatorTest : AbstractNUnitSetUp
             .SetHeader("additional", "additional")
             .SetHeader("bar", "bar_test");
         var controlMessage = new DefaultMessage("Hello World!")
-            .SetHeader("foo", "core:Concat('foo', '_test')")
+            .SetHeader("foo", "agenix:Concat('foo', '_test')")
             .SetHeader("bar", "${bar}");
 
         Context.SetVariable("bar", "bar_test");

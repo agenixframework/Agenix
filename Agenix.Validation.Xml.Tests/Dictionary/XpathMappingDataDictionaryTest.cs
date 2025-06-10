@@ -9,7 +9,6 @@ namespace Agenix.Validation.Xml.Tests.Dictionary;
 
 public class XpathMappingDataDictionaryTest : AbstractNUnitSetUp
 {
-
     private readonly string htmlPayload =
         "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">" +
         "<html>" +
@@ -45,12 +44,12 @@ public class XpathMappingDataDictionaryTest : AbstractNUnitSetUp
         dictionary.ProcessMessage(message, Context);
 
         Assert.That(message.GetPayload<string>().Trim(), Is.EqualTo("""
-                                                                            <?xml version="1.0" encoding="utf-8"?>
-                                                                            <TestMessage>
-                                                                              <Text>Hello!</Text>
-                                                                              <OtherText name="bar">No changes</OtherText>
-                                                                            </TestMessage>
-                                                                            """));
+                                                                    <?xml version="1.0" encoding="utf-8"?>
+                                                                    <TestMessage>
+                                                                      <Text>Hello!</Text>
+                                                                      <OtherText name="bar">No changes</OtherText>
+                                                                    </TestMessage>
+                                                                    """));
     }
 
     [Test]
@@ -60,8 +59,7 @@ public class XpathMappingDataDictionaryTest : AbstractNUnitSetUp
 
         var mappings = new Dictionary<string, string>
         {
-            { "//*[string-length(normalize-space(text())) > 0]", "Hello!" },
-            { "//@*", "bar" }
+            { "//*[string-length(normalize-space(text())) > 0]", "Hello!" }, { "//@*", "bar" }
         };
 
         var dictionary = new XpathMappingDataDictionary { Mappings = mappings };
@@ -80,13 +78,13 @@ public class XpathMappingDataDictionaryTest : AbstractNUnitSetUp
     [Test]
     public void TestTranslateWithNamespaceLookup()
     {
-        var namespacePayload = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><ns1:TestMessage xmlns:ns1=\"http://www.foo.bar\"><ns1:Text>Hello World!</ns1:Text><ns1:OtherText name=\"foo\">No changes</ns1:OtherText></ns1:TestMessage>";
+        var namespacePayload =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?><ns1:TestMessage xmlns:ns1=\"http://www.foo.bar\"><ns1:Text>Hello World!</ns1:Text><ns1:OtherText name=\"foo\">No changes</ns1:OtherText></ns1:TestMessage>";
         var message = new DefaultMessage(namespacePayload);
 
         var mappings = new Dictionary<string, string>
         {
-            { "//ns1:TestMessage/ns1:Text", "Hello!" },
-            { "//@name", "bar" }
+            { "//ns1:TestMessage/ns1:Text", "Hello!" }, { "//@name", "bar" }
         };
 
         var dictionary = new XpathMappingDataDictionary { Mappings = mappings };
@@ -105,21 +103,19 @@ public class XpathMappingDataDictionaryTest : AbstractNUnitSetUp
     [Test]
     public void TestTranslateWithNamespaceBuilder()
     {
-        var message = new DefaultMessage("<?xml version=\"1.0\" encoding=\"UTF-8\"?><ns1:TestMessage xmlns:ns1=\"http://www.foo.bar\"><ns1:Text>Hello World!</ns1:Text><ns1:OtherText name=\"foo\">No changes</ns1:OtherText></ns1:TestMessage>");
+        var message =
+            new DefaultMessage(
+                "<?xml version=\"1.0\" encoding=\"UTF-8\"?><ns1:TestMessage xmlns:ns1=\"http://www.foo.bar\"><ns1:Text>Hello World!</ns1:Text><ns1:OtherText name=\"foo\">No changes</ns1:OtherText></ns1:TestMessage>");
 
         var mappings = new Dictionary<string, string>
         {
-            { "//foo:TestMessage/foo:Text", "Hello!" },
-            { "//@name", "bar" }
+            { "//foo:TestMessage/foo:Text", "Hello!" }, { "//@name", "bar" }
         };
 
         var dictionary = new XpathMappingDataDictionary { Mappings = mappings };
 
         var namespaceContextBuilder = new NamespaceContextBuilder();
-        var namespaces = new Dictionary<string, string>
-        {
-            { "foo", "http://www.foo.bar" }
-        };
+        var namespaces = new Dictionary<string, string> { { "foo", "http://www.foo.bar" } };
         namespaceContextBuilder.NamespaceMappings = namespaces;
         dictionary.NamespaceContextBuilder = namespaceContextBuilder;
 
@@ -141,11 +137,7 @@ public class XpathMappingDataDictionaryTest : AbstractNUnitSetUp
     {
         var message = new DefaultMessage(payload);
 
-        var mappings = new Dictionary<string, string>
-        {
-            { "//TestMessage/Text", "${hello}" },
-            { "//@name", "bar" }
-        };
+        var mappings = new Dictionary<string, string> { { "//TestMessage/Text", "${hello}" }, { "//@name", "bar" } };
 
         Context.SetVariable("hello", "Hello!");
 
@@ -170,8 +162,12 @@ public class XpathMappingDataDictionaryTest : AbstractNUnitSetUp
     {
         var message = new DefaultMessage(payload);
 
-        var dictionary = new XpathMappingDataDictionary { MappingFileResource =
-            FileUtils.GetFileResource("assembly://Agenix.Validation.Xml.Tests/Agenix.Validation.Xml.Tests.Resources.Variables.Dictionary/xpathmapping.properties") };
+        var dictionary = new XpathMappingDataDictionary
+        {
+            MappingFileResource =
+                FileUtils.GetFileResource(
+                    "assembly://Agenix.Validation.Xml.Tests/Agenix.Validation.Xml.Tests.Resources.Variables.Dictionary/xpathmapping.properties")
+        };
         dictionary.Initialize();
 
         dictionary.ProcessMessage(message, Context);
@@ -192,13 +188,9 @@ public class XpathMappingDataDictionaryTest : AbstractNUnitSetUp
     {
         var message = new DefaultMessage(payload);
 
-        var mappings = new Dictionary<string, string>
-        {
-            { "//TestMessage/Unknown", "Hello!" },
-            { "//@name", "bar" }
-        };
+        var mappings = new Dictionary<string, string> { { "//TestMessage/Unknown", "Hello!" }, { "//@name", "bar" } };
 
-        var dictionary = new XpathMappingDataDictionary { Mappings = (mappings) };
+        var dictionary = new XpathMappingDataDictionary { Mappings = mappings };
 
         dictionary.ProcessMessage(message, Context);
 
@@ -221,8 +213,7 @@ public class XpathMappingDataDictionaryTest : AbstractNUnitSetUp
 
         var mappings = new Dictionary<string, string>
         {
-            { "/xh:html/xh:head/xh:title", "Hello" },
-            { "//xh:h1", "Hello Agenix!" }
+            { "/xh:html/xh:head/xh:title", "Hello" }, { "//xh:h1", "Hello Agenix!" }
         };
 
         var dictionary = new XpathMappingDataDictionary { Mappings = mappings };

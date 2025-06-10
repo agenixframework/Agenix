@@ -12,8 +12,8 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Core.Report;
 
 /// <summary>
-/// Specialized test listener responsible for handling test failures
-/// and populating the failure stack for failed test cases.
+///     Specialized test listener responsible for handling test failures
+///     and populating the failure stack for failed test cases.
 /// </summary>
 public class FailureStackTestListener : AbstractTestListener
 {

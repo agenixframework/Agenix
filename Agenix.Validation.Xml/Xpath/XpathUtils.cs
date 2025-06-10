@@ -247,22 +247,37 @@ public abstract class XpathUtils
     {
         try
         {
-            var expression = BuildExpression(xPathExpression, nsContext);
             var navigator = node.CreateNavigator();
 
-            // Use Select to get node iterator, then get the first node
-            var nodeIterator = navigator.Select(expression);
+            // Use Evaluate to get the result directly
+            var result = navigator.Evaluate(xPathExpression, nsContext);
 
-            if (!nodeIterator.MoveNext())
+            // Handle different result types
+            switch (result)
             {
-                throw new AgenixSystemException($"No result for XPath expression: '{xPathExpression}'");
-            }
+                case XPathNodeIterator nodeIterator:
+                    if (!nodeIterator.MoveNext())
+                    {
+                        throw new AgenixSystemException($"No result for XPath expression: '{xPathExpression}'");
+                    }
 
-            // Get the underlying node from the navigator
-            var resultNavigator = nodeIterator.Current;
-            if (resultNavigator?.UnderlyingObject is XmlNode xmlNode)
-            {
-                return xmlNode;
+                    // Get the underlying node from the navigator
+                    var resultNavigator = nodeIterator.Current;
+                    if (resultNavigator?.UnderlyingObject is XmlNode xmlNode)
+                    {
+                        return xmlNode;
+                    }
+
+                    break;
+
+                case XPathNavigator singleNavigator:
+                    // Direct navigator result
+                    if (singleNavigator.UnderlyingObject is XmlNode directXmlNode)
+                    {
+                        return directXmlNode;
+                    }
+
+                    break;
             }
 
             throw new AgenixSystemException($"XPath expression '{xPathExpression}' did not return a node");

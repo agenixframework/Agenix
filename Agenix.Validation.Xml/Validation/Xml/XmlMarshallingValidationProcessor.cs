@@ -11,9 +11,9 @@ using Agenix.Core.Validation;
 namespace Agenix.Validation.Xml.Validation.Xml;
 
 /// <summary>
-/// Provides an abstract base class for XML marshaling validation processors.
-/// Enables the unmarshalling of XML messages and facilitates validation logic by
-/// integrating it with specific validation processes and contexts.
+///     Provides an abstract base class for XML marshaling validation processors.
+///     Enables the unmarshalling of XML messages and facilitates validation logic by
+///     integrating it with specific validation processes and contexts.
 /// </summary>
 /// <typeparam name="T">The type parameter representing the data type to be processed and validated.</typeparam>
 public abstract class XmlMarshallingValidationProcessor<T> : AbstractValidationProcessor<T>
@@ -42,8 +42,9 @@ public abstract class XmlMarshallingValidationProcessor<T> : AbstractValidationP
     {
         if (_unmarshaller == null)
         {
-            ObjectHelper.AssertNotNull(ReferenceResolver, "Marshalling validation callback requires marshaller instance " +
-                                                          "or proper reference resolver with nested bean definition of type marshaller");
+            ObjectHelper.AssertNotNull(ReferenceResolver,
+                "Marshalling validation callback requires marshaller instance " +
+                "or proper reference resolver with nested bean definition of type marshaller");
 
             _unmarshaller = ReferenceResolver.Resolve<IUnmarshaller>();
         }
@@ -59,7 +60,7 @@ public abstract class XmlMarshallingValidationProcessor<T> : AbstractValidationP
     }
 
     /// <summary>
-    /// Creates the payload source for unmarshalling.
+    ///     Creates the payload source for unmarshalling.
     /// </summary>
     /// <param name="payload"></param>
     /// <returns></returns>
@@ -80,7 +81,7 @@ public abstract class XmlMarshallingValidationProcessor<T> : AbstractValidationP
     /// Validates a given message within a specific context.
     /// Invokes the unmarshalling of the message, applies validation logic,
     /// and examines headers for validation consistency.
-    /// <param name="message">The message to be validated implementing the <see cref="IMessage"/> interface.</param>
+    /// <param name="message">The message to be validated implementing the <see cref="IMessage" /> interface.</param>
     /// <param name="context">The test context used for managing validation states and configurations.</param>
     public override void Validate(IMessage message, TestContext context)
     {

@@ -42,6 +42,11 @@ public class NamespaceContextBuilder
     public const string DefaultBeanId = "namespaceContextBuilder";
 
     /// <summary>
+    ///     Default namespace mappings for all tests
+    /// </summary>
+    public Dictionary<string, string> NamespaceMappings { get; set; } = new();
+
+    /// <summary>
     ///     Construct a basic namespace context from the received message and explicit namespace mappings.
     /// </summary>
     /// <param name="receivedMessage">the actual message received.</param>
@@ -91,11 +96,6 @@ public class NamespaceContextBuilder
         var context = BuildContext(receivedMessage, namespaces);
         return context.ToXmlNamespaceManager();
     }
-
-    /// <summary>
-    /// Default namespace mappings for all tests
-    /// </summary>
-    public Dictionary<string, string> NamespaceMappings { get; set; } = new Dictionary<string, string>();
 
     /// <summary>
     ///     Look up namespace attribute declarations in the XML fragment and

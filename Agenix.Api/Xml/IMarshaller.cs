@@ -24,8 +24,6 @@
 
 #endregion
 
-using System.Xml;
-
 namespace Agenix.Api.Xml;
 
 /// <summary>

@@ -56,7 +56,7 @@ public class ValidationMatcherUtils
         var expression =
             VariableUtils.CutOffVariablesPrefix(CutOffValidationMatchersPrefix(validationMatcherExpression));
 
-        if (expression.Equals("Ignore"))
+        if (expression.Equals("Ignore", StringComparison.InvariantCultureIgnoreCase))
         {
             expression += "()";
         }
@@ -74,7 +74,8 @@ public class ValidationMatcherUtils
             prefix = expression.Substring(0, expression.IndexOf(':') + 1);
         }
 
-        var matcherValue = expression.Substring(bodyStart + 1, expression.IndexOf(')') - bodyStart - 1);
+        // Fix: Use LastIndexOf to find the matching closing parenthesis
+        var matcherValue = expression.Substring(bodyStart + 1, expression.LastIndexOf(')') - bodyStart - 1);
         var matcherName = expression.Substring(prefix.Length, bodyStart - prefix.Length);
 
         var library = context.ValidationMatcherRegistry.GetLibraryForPrefix(prefix);

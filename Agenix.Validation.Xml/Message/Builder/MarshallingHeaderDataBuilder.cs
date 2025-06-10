@@ -32,17 +32,17 @@ using Agenix.Core.Message.Builder;
 namespace Agenix.Validation.Xml.Message.Builder;
 
 /// <summary>
-/// Provides functionality for building message header data with
-/// support for object marshalling. This class extends the capabilities of
-/// <see cref="DefaultHeaderDataBuilder"/> by integrating marshaller-specific functionality.
+///     Provides functionality for building message header data with
+///     support for object marshalling. This class extends the capabilities of
+///     <see cref="DefaultHeaderDataBuilder" /> by integrating marshaller-specific functionality.
 /// </summary>
 public class MarshallingHeaderDataBuilder : DefaultHeaderDataBuilder
 {
- private readonly IMarshaller _marshaller;
+    private readonly IMarshaller _marshaller;
     private readonly string _marshallerName;
 
     /// <summary>
-    /// Default constructor using just model object.
+    ///     Default constructor using just model object.
     /// </summary>
     /// <param name="model">The model object</param>
     public MarshallingHeaderDataBuilder(object model) : base(model)
@@ -52,7 +52,7 @@ public class MarshallingHeaderDataBuilder : DefaultHeaderDataBuilder
     }
 
     /// <summary>
-    /// Default constructor using object marshaller and model object.
+    ///     Default constructor using object marshaller and model object.
     /// </summary>
     /// <param name="model">The model object</param>
     /// <param name="marshaller">The marshaller instance</param>
@@ -63,7 +63,7 @@ public class MarshallingHeaderDataBuilder : DefaultHeaderDataBuilder
     }
 
     /// <summary>
-    /// Default constructor using object marshaller name and model object.
+    ///     Default constructor using object marshaller name and model object.
     /// </summary>
     /// <param name="model">The model object</param>
     /// <param name="marshallerName">The marshaller name</param>
@@ -121,5 +121,4 @@ public class MarshallingHeaderDataBuilder : DefaultHeaderDataBuilder
             throw new AgenixSystemException("Failed to marshal object graph for message header data", e);
         }
     }
-
 }

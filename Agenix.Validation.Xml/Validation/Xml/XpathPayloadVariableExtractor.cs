@@ -26,7 +26,6 @@
 
 
 using System.Xml;
-using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
@@ -44,8 +43,8 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Validation.Xml.Validation.Xml;
 
 /// <summary>
-/// Provides functionality for extracting variables from an XML message payload using XPath expressions.
-/// Implements the <see cref="IVariableExtractor"/> interface.
+///     Provides functionality for extracting variables from an XML message payload using XPath expressions.
+///     Implements the <see cref="IVariableExtractor" /> interface.
 /// </summary>
 public class XpathPayloadVariableExtractor : IVariableExtractor
 {
@@ -114,7 +113,9 @@ public class XpathPayloadVariableExtractor : IVariableExtractor
             Log.LogDebug("Reading XML elements with XPath");
         }
 
-        var nsContext = context.NamespaceContextBuilder.BuildContext(message, _namespaces);
+        var nsContext = XmlValidationHelper
+            .GetNamespaceContextBuilder(context)
+            .BuildContext(message, _namespaces);
 
         foreach (var entry in _xPathExpressions)
         {

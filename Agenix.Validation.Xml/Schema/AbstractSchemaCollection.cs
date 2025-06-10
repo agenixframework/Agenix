@@ -36,23 +36,49 @@ namespace Agenix.Validation.Xml.Schema;
 
 public abstract class AbstractSchemaCollection : SimpleXsdSchema, InitializingPhase
 {
+    /// <summary>Official xmlns namespace</summary>
+    public const string WwwW3Org2000Xmlns = "http://www.w3.org/2000/xmlns/";
+
+    public const string W3CXmlSchemaNsUri = "http://www.w3.org/2001/XMLSchema";
+
     /// <summary>List of schema resources</summary>
     protected readonly List<IResource> _schemaResources = [];
 
     /// <summary>Imported schemas</summary>
     protected readonly List<string> ImportedSchemas = [];
 
-    /// <summary>Official xmlns namespace</summary>
-    public const string WwwW3Org2000Xmlns = "http://www.w3.org/2000/xmlns/";
-    public const string W3CXmlSchemaNsUri = "http://www.w3.org/2001/XMLSchema";
+
+    /// <summary>
+    ///     Gets the list of schema resources associated with the collection.
+    /// </summary>
+    public List<IResource> SchemaResources => _schemaResources;
+
+    public void Initialize()
+    {
+        var targetXsd = LoadSchemaResources();
+        if (targetXsd == null)
+        {
+            throw new AgenixSystemException("Failed to find target schema xsd file resource");
+        }
+
+        if (_schemaResources.Count == 0)
+        {
+            throw new AgenixSystemException("At least one schema xsd file resource is required");
+        }
+
+        SetXsd(new ByteArrayResource(FileUtils.CopyToByteArray(targetXsd)));
+
+        AfterPropertiesSet();
+    }
 
 
     /// <summary>
-    /// Creates and returns an instance of <c>XmlSchemaValidator</c> for validating XML documents against a set of XML Schema Definitions (XSDs).
+    ///     Creates and returns an instance of <c>XmlSchemaValidator</c> for validating XML documents against a set of XML
+    ///     Schema Definitions (XSDs).
     /// </summary>
     /// <returns>An initialized <c>XmlSchemaValidator</c> instance configured with compiled schema definitions.</returns>
     /// <exception cref="AgenixSystemException">
-    /// Thrown when there is an issue creating the validator due to IO errors or invalid XML schema definitions.
+    ///     Thrown when there is an issue creating the validator due to IO errors or invalid XML schema definitions.
     /// </exception>
     public virtual XmlSchemaValidator CreateValidator()
     {
@@ -82,12 +108,12 @@ public abstract class AbstractSchemaCollection : SimpleXsdSchema, InitializingPh
     }
 
     /// <summary>
-    /// Handles XML schema validation events during schema parsing or validation processes.
+    ///     Handles XML schema validation events during schema parsing or validation processes.
     /// </summary>
     /// <param name="sender">The source of the validation event, typically an <c>XmlReader</c> or <c>XmlSchemaSet</c>.</param>
     /// <param name="e">The <c>ValidationEventArgs</c> containing details about the validation error or warning.</param>
     /// <exception cref="XmlException">
-    /// Thrown when a validation error of severity <c>Error</c> occurs.
+    ///     Thrown when a validation error of severity <c>Error</c> occurs.
     /// </exception>
     private static void ValidationEventHandler(object sender, ValidationEventArgs e)
     {
@@ -99,7 +125,7 @@ public abstract class AbstractSchemaCollection : SimpleXsdSchema, InitializingPh
     }
 
     /// <summary>
-    /// Recursively add all included schemas as schema resource.
+    ///     Recursively add all included schemas as schema resource.
     /// </summary>
     protected void AddIncludedSchemas(XmlSchema schema)
     {
@@ -135,8 +161,9 @@ public abstract class AbstractSchemaCollection : SimpleXsdSchema, InitializingPh
     }
 
     /// <summary>
-    /// Recursively add all imported schemas as schema resource.
-    /// This is necessary when schema imports are located in assemblies. If they are not added immediately the reference to them is lost.
+    ///     Recursively add all imported schemas as schema resource.
+    ///     This is necessary when schema imports are located in assemblies. If they are not added immediately the reference to
+    ///     them is lost.
     /// </summary>
     /// <param name="schema">The XML schema to process for imports</param>
     protected void AddImportedSchemas(XmlSchema schema)
@@ -149,7 +176,7 @@ public abstract class AbstractSchemaCollection : SimpleXsdSchema, InitializingPh
                 if (!ImportedSchemas.Contains(schemaImport.Namespace))
                 {
                     ImportedSchemas.Add(schemaImport.Namespace);
-                    XmlSchema referencedSchema = schemaImport.Schema;
+                    var referencedSchema = schemaImport.Schema;
 
                     if (referencedSchema != null)
                     {
@@ -172,35 +199,9 @@ public abstract class AbstractSchemaCollection : SimpleXsdSchema, InitializingPh
     }
 
 
-
     /// <summary>
-    /// Loads all schema resource files from schema locations.
+    ///     Loads all schema resource files from schema locations.
     /// </summary>
     /// <returns></returns>
     protected abstract IResource LoadSchemaResources();
-
-
-    /// <summary>
-    /// Gets the list of schema resources associated with the collection.
-    /// </summary>
-    public List<IResource> SchemaResources => _schemaResources;
-
-    public void Initialize()
-    {
-        var targetXsd = LoadSchemaResources();
-        if (targetXsd == null)
-        {
-            throw new AgenixSystemException("Failed to find target schema xsd file resource");
-        }
-
-        if (_schemaResources.Count == 0)
-        {
-            throw new AgenixSystemException("At least one schema xsd file resource is required");
-        }
-
-        SetXsd(new ByteArrayResource(FileUtils.CopyToByteArray(targetXsd)));
-
-        AfterPropertiesSet();
-
-    }
 }

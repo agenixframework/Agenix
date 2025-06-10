@@ -33,22 +33,22 @@ namespace Agenix.Validation.Xml.Tests.Message;
 [XmlType(TypeName = "")]
 public class TestRequest
 {
-    [XmlElement("Message", IsNullable = false)]
-    public string Message { get; set; }
-
     /// <summary>
-    /// Default constructor.
+    ///     Default constructor.
     /// </summary>
     public TestRequest()
     {
     }
 
     /// <summary>
-    /// Default constructor using message field.
+    ///     Default constructor using message field.
     /// </summary>
     /// <param name="message">The message</param>
     public TestRequest(string message)
     {
         Message = message;
     }
+
+    [XmlElement("Message", IsNullable = false)]
+    public string Message { get; set; }
 }

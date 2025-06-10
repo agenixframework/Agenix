@@ -26,23 +26,27 @@
 
 
 using System.Xml;
-using System.Xml.Schema;
 
 namespace Agenix.Validation.Xml.Schema;
 
 /// <summary>
-/// Special schema mapping strategy delegating to several other strategies in
-/// a mapping chain. The first mapping strategy finding a proper schema wins.
+///     Special schema mapping strategy delegating to several other strategies in
+///     a mapping chain. The first mapping strategy finding a proper schema wins.
 /// </summary>
 public class SchemaMappingStrategyChain : IXsdSchemaMappingStrategy
 {
     /// <summary>
-    /// List of strategies to use in this chain
+    ///     List of strategies to use in this chain
     /// </summary>
     private List<IXsdSchemaMappingStrategy> _strategies = [];
 
     /// <summary>
-    /// Gets the schema for given namespace or root element name.
+    ///     Gets the number of strategies in the chain.
+    /// </summary>
+    public int StrategyCount => _strategies.Count;
+
+    /// <summary>
+    ///     Gets the schema for given namespace or root element name.
     /// </summary>
     /// <param name="schemas">List of available schemas.</param>
     /// <param name="document">Document instance to validate.</param>
@@ -65,7 +69,7 @@ public class SchemaMappingStrategyChain : IXsdSchemaMappingStrategy
     }
 
     /// <summary>
-    /// Sets the strategies.
+    ///     Sets the strategies.
     /// </summary>
     /// <param name="strategies">The strategies to set</param>
     public void SetStrategies(List<IXsdSchemaMappingStrategy> strategies)
@@ -74,7 +78,7 @@ public class SchemaMappingStrategyChain : IXsdSchemaMappingStrategy
     }
 
     /// <summary>
-    /// Gets the list of strategies.
+    ///     Gets the list of strategies.
     /// </summary>
     /// <returns>The list of strategies</returns>
     public List<IXsdSchemaMappingStrategy> GetStrategies()
@@ -83,7 +87,7 @@ public class SchemaMappingStrategyChain : IXsdSchemaMappingStrategy
     }
 
     /// <summary>
-    /// Adds a strategy to the chain.
+    ///     Adds a strategy to the chain.
     /// </summary>
     /// <param name="strategy">The strategy to add</param>
     public void AddStrategy(IXsdSchemaMappingStrategy strategy)
@@ -95,7 +99,7 @@ public class SchemaMappingStrategyChain : IXsdSchemaMappingStrategy
     }
 
     /// <summary>
-    /// Removes a strategy from the chain.
+    ///     Removes a strategy from the chain.
     /// </summary>
     /// <param name="strategy">The strategy to remove</param>
     /// <returns>True if the strategy was removed, false otherwise</returns>
@@ -105,15 +109,10 @@ public class SchemaMappingStrategyChain : IXsdSchemaMappingStrategy
     }
 
     /// <summary>
-    /// Clears all strategies from the chain.
+    ///     Clears all strategies from the chain.
     /// </summary>
     public void ClearStrategies()
     {
         _strategies.Clear();
     }
-
-    /// <summary>
-    /// Gets the number of strategies in the chain.
-    /// </summary>
-    public int StrategyCount => _strategies.Count;
 }

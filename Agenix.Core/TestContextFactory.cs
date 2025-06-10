@@ -133,9 +133,9 @@ public class TestContextFactory : IReferenceResolverAware
     public IReferenceResolver ReferenceResolver => _referenceResolver;
 
     /// <summary>
-    /// Gets or sets the NamespaceContextBuilder, which facilitates the construction of namespace mappings
-    /// for XPath expression evaluations. This allows for both default and dynamic mappings derived
-    /// from received messages.
+    ///     Gets or sets the NamespaceContextBuilder, which facilitates the construction of namespace mappings
+    ///     for XPath expression evaluations. This allows for both default and dynamic mappings derived
+    ///     from received messages.
     /// </summary>
     public NamespaceContextBuilder NamespaceContextBuilder { get; set; }
 

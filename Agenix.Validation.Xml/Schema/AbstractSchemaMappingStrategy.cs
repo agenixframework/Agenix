@@ -26,30 +26,31 @@
 
 
 using System.Xml;
-using System.Xml.Schema;
 
 namespace Agenix.Validation.Xml.Schema;
 
 /// <summary>
-/// Abstract schema mapping strategy extracts target namespace and root element name
-/// for subclasses.
+///     Abstract schema mapping strategy extracts target namespace and root element name
+///     for subclasses.
 /// </summary>
 public abstract class AbstractSchemaMappingStrategy : IXsdSchemaMappingStrategy
 {
     /// <summary>
-    /// Gets the schema for given namespace or root element name.
+    ///     Gets the schema for given namespace or root element name.
     /// </summary>
     /// <param name="schemas">List of available schemas.</param>
     /// <param name="document">Document instance to validate.</param>
     /// <returns>The matching XSD schema or null if no match found.</returns>
     public IXsdSchema? GetSchema(List<IXsdSchema> schemas, XmlDocument document)
     {
-        return document?.DocumentElement == null ? null : GetSchema(schemas, document.DocumentElement.NamespaceURI, document.DocumentElement.LocalName);
+        return document?.DocumentElement == null
+            ? null
+            : GetSchema(schemas, document.DocumentElement.NamespaceURI, document.DocumentElement.LocalName);
     }
 
     /// <summary>
-    /// Subclasses must override this method in order to detect schema for
-    /// target namespace and/or root element name.
+    ///     Subclasses must override this method in order to detect schema for
+    ///     target namespace and/or root element name.
     /// </summary>
     /// <param name="schemas">List of available schemas.</param>
     /// <param name="targetNamespace">Target namespace.</param>

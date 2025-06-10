@@ -29,10 +29,10 @@ using Agenix.Validation.Xml.Schema.Locator;
 namespace Agenix.Validation.Xml.Schema;
 
 /// <summary>
-/// Interface for reading WSDL (Web Services Description Language) documents.
-/// Provides methods to interpret and parse WSDL documents from different sources.
+///     Interface for reading WSDL (Web Services Description Language) documents.
+///     Provides methods to interpret and parse WSDL documents from different sources.
 /// </summary>
-public interface IWsdlReader: IDisposable
+public interface IWsdlReader : IDisposable
 {
     WsdlDefinition ReadWsdl(IWsdlLocator locator);
     WsdlDefinition ReadWsdl(string documentBaseUri, Stream inputStream);

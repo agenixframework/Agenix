@@ -278,304 +278,302 @@ public class XPathTest : AbstractNUnitSetUp
     }
 
     [Test]
-        public void TestExtractMessageValuesUsingXPathWithExplicitNamespaceContext()
+    public void TestExtractMessageValuesUsingXPathWithExplicitNamespaceContext()
+    {
+        // Arrange
+        _endpoint.Reset();
+        _consumer.Reset();
+        _endpointConfiguration.Reset();
+
+        _endpoint.Setup(e => e.CreateConsumer()).Returns(_consumer.Object);
+        _endpoint.Setup(e => e.EndpointConfiguration).Returns(_endpointConfiguration.Object);
+        _endpointConfiguration.Setup(ec => ec.Timeout).Returns(5000L);
+
+        // Complex XML with multiple namespaces
+        var message = new DefaultMessage(
+            "<ns1:root xmlns='http://test' xmlns:ns1='http://agenix' xmlns:order='http://test/order'>" +
+            "<element attributeA='attribute-value' attributeB='attribute-value'>" +
+            "<sub-elementA attribute='A'>text-value</sub-elementA>" +
+            "<sub-elementB attribute='B'>text-value</sub-elementB>" +
+            "<sub-elementC attribute='C'>text-value</sub-elementC>" +
+            "</element>" +
+            "<ns1:ns-element>namespace</ns1:ns-element>" +
+            "<search-element>search-for</search-element>" +
+            "<order:product xmlns:order='http://test/order'>" +
+            "<order:name>Widget</order:name>" +
+            "<order:price currency='USD'>19.99</order:price>" +
+            "</order:product>" +
+            "</ns1:root>");
+
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
+            .Returns(message);
+
+        // Map XPath expressions with explicit namespace prefixes to variable names
+        var extractMessageElements = new Dictionary<string, object>
         {
-            // Arrange
-            _endpoint.Reset();
-            _consumer.Reset();
-            _endpointConfiguration.Reset();
+            // Node extractions using explicit namespace prefixes
+            { "node://def:element/def:sub-elementA", "defaultNsElementA" },
+            { "node://def:element/def:sub-elementA/@attribute", "defaultNsElementAttribute" },
+            { "node://def:element/def:sub-elementB", "defaultNsElementB" },
+            { "node://def:element/def:sub-elementB/@attribute", "defaultNsElementBAttribute" },
+            { "node://ns1:ns-element", "namespacedElement" },
+            { "node://def:search-element", "searchElement" },
 
-            _endpoint.Setup(e => e.CreateConsumer()).Returns(_consumer.Object);
-            _endpoint.Setup(e => e.EndpointConfiguration).Returns(_endpointConfiguration.Object);
-            _endpointConfiguration.Setup(ec => ec.Timeout).Returns(5000L);
+            // Product information with order namespace
+            { "node://ord:product/ord:name", "productName" },
+            { "node://ord:product/ord:price", "productPrice" },
+            { "node://ord:product/ord:price/@currency", "productCurrency" },
 
-            // Complex XML with multiple namespaces
-            var message = new DefaultMessage(
-                "<ns1:root xmlns='http://test' xmlns:ns1='http://agenix' xmlns:order='http://test/order'>" +
-                    "<element attributeA='attribute-value' attributeB='attribute-value'>" +
-                        "<sub-elementA attribute='A'>text-value</sub-elementA>" +
-                        "<sub-elementB attribute='B'>text-value</sub-elementB>" +
-                        "<sub-elementC attribute='C'>text-value</sub-elementC>" +
-                    "</element>" +
-                    "<ns1:ns-element>namespace</ns1:ns-element>" +
-                    "<search-element>search-for</search-element>" +
-                    "<order:product xmlns:order='http://test/order'>" +
-                        "<order:name>Widget</order:name>" +
-                        "<order:price currency='USD'>19.99</order:price>" +
-                    "</order:product>" +
-                "</ns1:root>");
+            // Number result type validations
+            { "number:count(/ns1:root/def:element/*)", "childElementCount" },
+            { "number:count(//ord:product)", "productCount" },
 
-            _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-                     .Returns(message);
+            // String result type validations
+            { "string:concat(/ns1:root/ns1:ns-element, ' processed')", "concatenatedValue" },
+            { "string:local-name(/ns1:root)", "rootLocalName" },
+            { "string:namespace-uri(/ns1:root)", "rootNamespaceUri" },
+            { "string:concat(//ord:name, ' costs ', //ord:price, ' ', //ord:price/@currency)", "productSummary" },
 
-            // Map XPath expressions with explicit namespace prefixes to variable names
-            var extractMessageElements = new Dictionary<string, object>
-            {
-                // Node extractions using explicit namespace prefixes
-                { "node://def:element/def:sub-elementA", "defaultNsElementA" },
-                { "node://def:element/def:sub-elementA/@attribute", "defaultNsElementAttribute" },
-                { "node://def:element/def:sub-elementB", "defaultNsElementB" },
-                { "node://def:element/def:sub-elementB/@attribute", "defaultNsElementBAttribute" },
-                { "node://ns1:ns-element", "namespacedElement" },
-                { "node://def:search-element", "searchElement" },
+            // Boolean result type validations
+            { "boolean:contains(/ns1:root/def:search-element, 'search')", "containsSearchText" },
+            { "boolean://ns1:root/def:element", "elementExists" },
+            { "boolean://ord:product", "productExists" },
+            { "boolean://ns1:root/def:element-does-not-exist", "nonExistentElementCheck" }
+        };
 
-                // Product information with order namespace
-                { "node://ord:product/ord:name", "productName" },
-                { "node://ord:product/ord:price", "productPrice" },
-                { "node://ord:product/ord:price/@currency", "productCurrency" },
+        // Create a variable extractor with explicit namespace context
+        var variableExtractor = new XpathPayloadVariableExtractor.Builder()
+            .Expressions(extractMessageElements)
+            .Namespace("def", "http://test") // Map default namespace to 'def' prefix
+            .Namespace("ns1", "http://agenix") // Map explicit namespace
+            .Namespace("ord", "http://test/order") // Map order namespace to 'ord' prefix
+            .Build();
 
-                // Number result type validations
-                { "number:count(/ns1:root/def:element/*)", "childElementCount" },
-                { "number:count(//ord:product)", "productCount" },
+        // Act
+        var controlMessageBuilder = new DefaultMessageBuilder();
+        var validationContext = new XmlMessageValidationContext.Builder()
+            .SchemaValidation(false)
+            .Build();
 
-                // String result type validations
-                { "string:concat(/ns1:root/ns1:ns-element, ' processed')", "concatenatedValue" },
-                { "string:local-name(/ns1:root)", "rootLocalName" },
-                { "string:namespace-uri(/ns1:root)", "rootNamespaceUri" },
-                { "string:concat(//ord:name, ' costs ', //ord:price, ' ', //ord:price/@currency)", "productSummary" },
+        var receiveAction = new ReceiveMessageAction.Builder()
+            .Endpoint(_endpoint.Object)
+            .Message(controlMessageBuilder)
+            .Validate(validationContext)
+            .Process(variableExtractor)
+            .Build();
 
-                // Boolean result type validations
-                { "boolean:contains(/ns1:root/def:search-element, 'search')", "containsSearchText" },
-                { "boolean://ns1:root/def:element", "elementExists" },
-                { "boolean://ord:product", "productExists" },
-                { "boolean://ns1:root/def:element-does-not-exist", "nonExistentElementCheck" }
-            };
+        receiveAction.Execute(Context);
 
-            // Create a variable extractor with explicit namespace context
-            var variableExtractor = new XpathPayloadVariableExtractor.Builder()
-                .Expressions(extractMessageElements)
-                .Namespace("def", "http://test")           // Map default namespace to 'def' prefix
-                .Namespace("ns1", "http://agenix")         // Map explicit namespace
-                .Namespace("ord", "http://test/order")     // Map order namespace to 'ord' prefix
-                .Build();
+        // Assert - Verify all extracted variables from default namespace elements
+        Assert.That(Context.GetVariable("defaultNsElementA"), Is.Not.Null);
+        Assert.That(Context.GetVariable("defaultNsElementA"), Is.EqualTo("text-value"));
 
-            // Act
-            var controlMessageBuilder = new DefaultMessageBuilder();
-            var validationContext = new XmlMessageValidationContext.Builder()
-                .SchemaValidation(false)
-                .Build();
+        Assert.That(Context.GetVariable("defaultNsElementAttribute"), Is.Not.Null);
+        Assert.That(Context.GetVariable("defaultNsElementAttribute"), Is.EqualTo("A"));
 
-            var receiveAction = new ReceiveMessageAction.Builder()
-                .Endpoint(_endpoint.Object)
-                .Message(controlMessageBuilder)
-                .Validate(validationContext)
-                .Process(variableExtractor)
-                .Build();
+        Assert.That(Context.GetVariable("defaultNsElementB"), Is.Not.Null);
+        Assert.That(Context.GetVariable("defaultNsElementB"), Is.EqualTo("text-value"));
 
-            receiveAction.Execute(Context);
+        Assert.That(Context.GetVariable("defaultNsElementBAttribute"), Is.Not.Null);
+        Assert.That(Context.GetVariable("defaultNsElementBAttribute"), Is.EqualTo("B"));
 
-            // Assert - Verify all extracted variables from default namespace elements
-            Assert.That(Context.GetVariable("defaultNsElementA"), Is.Not.Null);
-            Assert.That(Context.GetVariable("defaultNsElementA"), Is.EqualTo("text-value"));
+        // Verify namespaced elements
+        Assert.That(Context.GetVariable("namespacedElement"), Is.Not.Null);
+        Assert.That(Context.GetVariable("namespacedElement"), Is.EqualTo("namespace"));
 
-            Assert.That(Context.GetVariable("defaultNsElementAttribute"), Is.Not.Null);
-            Assert.That(Context.GetVariable("defaultNsElementAttribute"), Is.EqualTo("A"));
+        Assert.That(Context.GetVariable("searchElement"), Is.Not.Null);
+        Assert.That(Context.GetVariable("searchElement"), Is.EqualTo("search-for"));
 
-            Assert.That(Context.GetVariable("defaultNsElementB"), Is.Not.Null);
-            Assert.That(Context.GetVariable("defaultNsElementB"), Is.EqualTo("text-value"));
+        // Verify product information with order namespace
+        Assert.That(Context.GetVariable("productName"), Is.Not.Null);
+        Assert.That(Context.GetVariable("productName"), Is.EqualTo("Widget"));
 
-            Assert.That(Context.GetVariable("defaultNsElementBAttribute"), Is.Not.Null);
-            Assert.That(Context.GetVariable("defaultNsElementBAttribute"), Is.EqualTo("B"));
+        Assert.That(Context.GetVariable("productPrice"), Is.Not.Null);
+        Assert.That(Context.GetVariable("productPrice"), Is.EqualTo("19.99"));
 
-            // Verify namespaced elements
-            Assert.That(Context.GetVariable("namespacedElement"), Is.Not.Null);
-            Assert.That(Context.GetVariable("namespacedElement"), Is.EqualTo("namespace"));
+        Assert.That(Context.GetVariable("productCurrency"), Is.Not.Null);
+        Assert.That(Context.GetVariable("productCurrency"), Is.EqualTo("USD"));
 
-            Assert.That(Context.GetVariable("searchElement"), Is.Not.Null);
-            Assert.That(Context.GetVariable("searchElement"), Is.EqualTo("search-for"));
+        // Verify numeric calculations
+        Assert.That(Context.GetVariable("childElementCount"), Is.Not.Null);
+        Assert.That(Context.GetVariable("childElementCount"), Is.EqualTo("3"));
 
-            // Verify product information with order namespace
-            Assert.That(Context.GetVariable("productName"), Is.Not.Null);
-            Assert.That(Context.GetVariable("productName"), Is.EqualTo("Widget"));
+        Assert.That(Context.GetVariable("productCount"), Is.Not.Null);
+        Assert.That(Context.GetVariable("productCount"), Is.EqualTo("1"));
 
-            Assert.That(Context.GetVariable("productPrice"), Is.Not.Null);
-            Assert.That(Context.GetVariable("productPrice"), Is.EqualTo("19.99"));
+        // Verify string operations
+        Assert.That(Context.GetVariable("concatenatedValue"), Is.Not.Null);
+        Assert.That(Context.GetVariable("concatenatedValue"), Is.EqualTo("namespace processed"));
 
-            Assert.That(Context.GetVariable("productCurrency"), Is.Not.Null);
-            Assert.That(Context.GetVariable("productCurrency"), Is.EqualTo("USD"));
+        Assert.That(Context.GetVariable("rootLocalName"), Is.Not.Null);
+        Assert.That(Context.GetVariable("rootLocalName"), Is.EqualTo("root"));
 
-            // Verify numeric calculations
-            Assert.That(Context.GetVariable("childElementCount"), Is.Not.Null);
-            Assert.That(Context.GetVariable("childElementCount"), Is.EqualTo("3"));
+        Assert.That(Context.GetVariable("rootNamespaceUri"), Is.Not.Null);
+        Assert.That(Context.GetVariable("rootNamespaceUri"), Is.EqualTo("http://agenix"));
 
-            Assert.That(Context.GetVariable("productCount"), Is.Not.Null);
-            Assert.That(Context.GetVariable("productCount"), Is.EqualTo("1"));
+        Assert.That(Context.GetVariable("productSummary"), Is.Not.Null);
+        Assert.That(Context.GetVariable("productSummary"), Is.EqualTo("Widget costs 19.99 USD"));
 
-            // Verify string operations
-            Assert.That(Context.GetVariable("concatenatedValue"), Is.Not.Null);
-            Assert.That(Context.GetVariable("concatenatedValue"), Is.EqualTo("namespace processed"));
+        // Verify boolean operations
+        Assert.That(Context.GetVariable("containsSearchText"), Is.Not.Null);
+        Assert.That(Context.GetVariable("containsSearchText"), Is.EqualTo("True"));
 
-            Assert.That(Context.GetVariable("rootLocalName"), Is.Not.Null);
-            Assert.That(Context.GetVariable("rootLocalName"), Is.EqualTo("root"));
+        Assert.That(Context.GetVariable("elementExists"), Is.Not.Null);
+        Assert.That(Context.GetVariable("elementExists"), Is.EqualTo("True"));
 
-            Assert.That(Context.GetVariable("rootNamespaceUri"), Is.Not.Null);
-            Assert.That(Context.GetVariable("rootNamespaceUri"), Is.EqualTo("http://agenix"));
+        Assert.That(Context.GetVariable("productExists"), Is.Not.Null);
+        Assert.That(Context.GetVariable("productExists"), Is.EqualTo("True"));
 
-            Assert.That(Context.GetVariable("productSummary"), Is.Not.Null);
-            Assert.That(Context.GetVariable("productSummary"), Is.EqualTo("Widget costs 19.99 USD"));
+        Assert.That(Context.GetVariable("nonExistentElementCheck"), Is.Not.Null);
+        Assert.That(Context.GetVariable("nonExistentElementCheck"), Is.EqualTo("False"));
+    }
 
-            // Verify boolean operations
-            Assert.That(Context.GetVariable("containsSearchText"), Is.Not.Null);
-            Assert.That(Context.GetVariable("containsSearchText"), Is.EqualTo("True"));
+    [Test]
+    public void TestExtractMessageValuesWithDynamicNamespaceMapping()
+    {
+        // Arrange
+        _endpoint.Reset();
+        _consumer.Reset();
+        _endpointConfiguration.Reset();
 
-            Assert.That(Context.GetVariable("elementExists"), Is.Not.Null);
-            Assert.That(Context.GetVariable("elementExists"), Is.EqualTo("True"));
+        _endpoint.Setup(e => e.CreateConsumer()).Returns(_consumer.Object);
+        _endpoint.Setup(e => e.EndpointConfiguration).Returns(_endpointConfiguration.Object);
+        _endpointConfiguration.Setup(ec => ec.Timeout).Returns(5000L);
 
-            Assert.That(Context.GetVariable("productExists"), Is.Not.Null);
-            Assert.That(Context.GetVariable("productExists"), Is.EqualTo("True"));
+        // Set up test variables for dynamic namespace mapping
+        Context.SetVariable("defaultNamespace", "http://test");
+        Context.SetVariable("agenixNamespace", "http://agenix");
 
-            Assert.That(Context.GetVariable("nonExistentElementCheck"), Is.Not.Null);
-            Assert.That(Context.GetVariable("nonExistentElementCheck"), Is.EqualTo("False"));
-        }
+        var message = new DefaultMessage(
+            "<ns1:root xmlns='http://test' xmlns:ns1='http://agenix'>" +
+            "<element version='1.0'>" +
+            "<sub-elementA>dynamic-value</sub-elementA>" +
+            "</element>" +
+            "<ns1:metadata>dynamic-metadata</ns1:metadata>" +
+            "</ns1:root>");
 
-        [Test]
-        public void TestExtractMessageValuesWithDynamicNamespaceMapping()
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
+            .Returns(message);
+
+        var extractMessageElements = new Dictionary<string, object>
         {
-            // Arrange
-            _endpoint.Reset();
-            _consumer.Reset();
-            _endpointConfiguration.Reset();
+            { "node://def:element/def:sub-elementA", "dynamicElement" },
+            { "node://def:element/@version", "elementVersion" },
+            { "node://cit:metadata", "dynamicMetadata" },
+            { "string:concat('Extracted: ', //def:element/def:sub-elementA)", "dynamicConcat" }
+        };
 
-            _endpoint.Setup(e => e.CreateConsumer()).Returns(_consumer.Object);
-            _endpoint.Setup(e => e.EndpointConfiguration).Returns(_endpointConfiguration.Object);
-            _endpointConfiguration.Setup(ec => ec.Timeout).Returns(5000L);
-
-            // Set up test variables for dynamic namespace mapping
-            Context.SetVariable("defaultNamespace", "http://test");
-            Context.SetVariable("agenixNamespace", "http://agenix");
-
-            var message = new DefaultMessage(
-                "<ns1:root xmlns='http://test' xmlns:ns1='http://agenix'>" +
-                    "<element version='1.0'>" +
-                        "<sub-elementA>dynamic-value</sub-elementA>" +
-                    "</element>" +
-                    "<ns1:metadata>dynamic-metadata</ns1:metadata>" +
-                "</ns1:root>");
-
-            _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-                     .Returns(message);
-
-            var extractMessageElements = new Dictionary<string, object>
-            {
-                { "node://def:element/def:sub-elementA", "dynamicElement" },
-                { "node://def:element/@version", "elementVersion" },
-                { "node://cit:metadata", "dynamicMetadata" },
-                { "string:concat('Extracted: ', //def:element/def:sub-elementA)", "dynamicConcat" }
-            };
-
-            // Build namespace mappings using variables
-            var namespaceMap = new Dictionary<string, string>
-            {
-                { "def", Context.GetVariable("defaultNamespace") as string },
-                { "cit", Context.GetVariable("agenixNamespace") as string }
-            };
-
-            var variableExtractor = new XpathPayloadVariableExtractor.Builder()
-                .Expressions(extractMessageElements)
-                .Namespaces(namespaceMap)
-                .Build();
-
-            // Act
-            var controlMessageBuilder = new DefaultMessageBuilder();
-            var validationContext = new XmlMessageValidationContext.Builder()
-                .SchemaValidation(false)
-                .Build();
-
-            var receiveAction = new ReceiveMessageAction.Builder()
-                .Endpoint(_endpoint.Object)
-                .Message(controlMessageBuilder)
-                .Validate(validationContext)
-                .Process(variableExtractor)
-                .Build();
-
-            receiveAction.Execute(Context);
-
-            // Assert
-            Assert.That(Context.GetVariable("dynamicElement"), Is.Not.Null);
-            Assert.That(Context.GetVariable("dynamicElement"), Is.EqualTo("dynamic-value"));
-
-            Assert.That(Context.GetVariable("elementVersion"), Is.Not.Null);
-            Assert.That(Context.GetVariable("elementVersion"), Is.EqualTo("1.0"));
-
-            Assert.That(Context.GetVariable("dynamicMetadata"), Is.Not.Null);
-            Assert.That(Context.GetVariable("dynamicMetadata"), Is.EqualTo("dynamic-metadata"));
-
-            Assert.That(Context.GetVariable("dynamicConcat"), Is.Not.Null);
-            Assert.That(Context.GetVariable("dynamicConcat"), Is.EqualTo("Extracted: dynamic-value"));
-        }
-
-        [Test]
-        public void TestExtractMessageValuesWithMixedNamespaceApproaches()
+        // Build namespace mappings using variables
+        var namespaceMap = new Dictionary<string, string>
         {
-            // Arrange
-            _endpoint.Reset();
-            _consumer.Reset();
-            _endpointConfiguration.Reset();
+            { "def", Context.GetVariable("defaultNamespace") }, { "cit", Context.GetVariable("agenixNamespace") }
+        };
 
-            _endpoint.Setup(e => e.CreateConsumer()).Returns(_consumer.Object);
-            _endpoint.Setup(e => e.EndpointConfiguration).Returns(_endpointConfiguration.Object);
-            _endpointConfiguration.Setup(ec => ec.Timeout).Returns(5000L);
+        var variableExtractor = new XpathPayloadVariableExtractor.Builder()
+            .Expressions(extractMessageElements)
+            .Namespaces(namespaceMap)
+            .Build();
 
-            var message = new DefaultMessage(
-                "<ns1:root xmlns='http://test' xmlns:ns1='http://agenix'>" +
-                    "<element>" +
-                        "<sub-elementA>value-a</sub-elementA>" +
-                    "</element>" +
-                    "<ns1:ns-element>namespace-value</ns1:ns-element>" +
-                "</ns1:root>");
+        // Act
+        var controlMessageBuilder = new DefaultMessageBuilder();
+        var validationContext = new XmlMessageValidationContext.Builder()
+            .SchemaValidation(false)
+            .Build();
 
-            _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-                     .Returns(message);
+        var receiveAction = new ReceiveMessageAction.Builder()
+            .Endpoint(_endpoint.Object)
+            .Message(controlMessageBuilder)
+            .Validate(validationContext)
+            .Process(variableExtractor)
+            .Build();
 
-            // Mix of explicit namespace prefixes and dot notation
-            var extractMessageElements = new Dictionary<string, object>
-            {
-                // Using explicit namespace prefix
-                { "node://def:element/def:sub-elementA", "explicitNsValue" },
+        receiveAction.Execute(Context);
 
-                // Using dot notation (namespace-agnostic)
-                { "//*[local-name()='element']/*[local-name()='sub-elementA']", "dotNotationValue" },
+        // Assert
+        Assert.That(Context.GetVariable("dynamicElement"), Is.Not.Null);
+        Assert.That(Context.GetVariable("dynamicElement"), Is.EqualTo("dynamic-value"));
 
-                // Using declared namespace prefix
-                { "node://ns1:ns-element", "declaredNsValue" },
+        Assert.That(Context.GetVariable("elementVersion"), Is.Not.Null);
+        Assert.That(Context.GetVariable("elementVersion"), Is.EqualTo("1.0"));
 
-                // Mixed approaches in functions
-                { "string:concat(//def:element/def:sub-elementA, ' + ', //ns1:ns-element)", "mixedConcat" }
-            };
+        Assert.That(Context.GetVariable("dynamicMetadata"), Is.Not.Null);
+        Assert.That(Context.GetVariable("dynamicMetadata"), Is.EqualTo("dynamic-metadata"));
 
-            var variableExtractor = new XpathPayloadVariableExtractor.Builder()
-                .Expressions(extractMessageElements)
-                .Namespace("def", "http://test")     // Map default namespace
-                .Namespace("ns1", "http://agenix")   // Explicit mapping (though already declared)
-                .Build();
+        Assert.That(Context.GetVariable("dynamicConcat"), Is.Not.Null);
+        Assert.That(Context.GetVariable("dynamicConcat"), Is.EqualTo("Extracted: dynamic-value"));
+    }
 
-            // Act
-            var controlMessageBuilder = new DefaultMessageBuilder();
-            var validationContext = new XmlMessageValidationContext.Builder()
-                .SchemaValidation(false)
-                .Build();
+    [Test]
+    public void TestExtractMessageValuesWithMixedNamespaceApproaches()
+    {
+        // Arrange
+        _endpoint.Reset();
+        _consumer.Reset();
+        _endpointConfiguration.Reset();
 
-            var receiveAction = new ReceiveMessageAction.Builder()
-                .Endpoint(_endpoint.Object)
-                .Message(controlMessageBuilder)
-                .Validate(validationContext)
-                .Process(variableExtractor)
-                .Build();
+        _endpoint.Setup(e => e.CreateConsumer()).Returns(_consumer.Object);
+        _endpoint.Setup(e => e.EndpointConfiguration).Returns(_endpointConfiguration.Object);
+        _endpointConfiguration.Setup(ec => ec.Timeout).Returns(5000L);
 
-            receiveAction.Execute(Context);
+        var message = new DefaultMessage(
+            "<ns1:root xmlns='http://test' xmlns:ns1='http://agenix'>" +
+            "<element>" +
+            "<sub-elementA>value-a</sub-elementA>" +
+            "</element>" +
+            "<ns1:ns-element>namespace-value</ns1:ns-element>" +
+            "</ns1:root>");
 
-            // Assert
-            Assert.That(Context.GetVariable("explicitNsValue"), Is.Not.Null);
-            Assert.That(Context.GetVariable("explicitNsValue"), Is.EqualTo("value-a"));
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
+            .Returns(message);
 
-            Assert.That(Context.GetVariable("dotNotationValue"), Is.Not.Null);
-            Assert.That(Context.GetVariable("dotNotationValue"), Is.EqualTo("value-a"));
+        // Mix of explicit namespace prefixes and dot notation
+        var extractMessageElements = new Dictionary<string, object>
+        {
+            // Using explicit namespace prefix
+            { "node://def:element/def:sub-elementA", "explicitNsValue" },
 
-            Assert.That(Context.GetVariable("declaredNsValue"), Is.Not.Null);
-            Assert.That(Context.GetVariable("declaredNsValue"), Is.EqualTo("namespace-value"));
+            // Using dot notation (namespace-agnostic)
+            { "//*[local-name()='element']/*[local-name()='sub-elementA']", "dotNotationValue" },
 
-            Assert.That(Context.GetVariable("mixedConcat"), Is.Not.Null);
-            Assert.That(Context.GetVariable("mixedConcat"), Is.EqualTo("value-a + namespace-value"));
-        }
+            // Using declared namespace prefix
+            { "node://ns1:ns-element", "declaredNsValue" },
 
+            // Mixed approaches in functions
+            { "string:concat(//def:element/def:sub-elementA, ' + ', //ns1:ns-element)", "mixedConcat" }
+        };
+
+        var variableExtractor = new XpathPayloadVariableExtractor.Builder()
+            .Expressions(extractMessageElements)
+            .Namespace("def", "http://test") // Map default namespace
+            .Namespace("ns1", "http://agenix") // Explicit mapping (though already declared)
+            .Build();
+
+        // Act
+        var controlMessageBuilder = new DefaultMessageBuilder();
+        var validationContext = new XmlMessageValidationContext.Builder()
+            .SchemaValidation(false)
+            .Build();
+
+        var receiveAction = new ReceiveMessageAction.Builder()
+            .Endpoint(_endpoint.Object)
+            .Message(controlMessageBuilder)
+            .Validate(validationContext)
+            .Process(variableExtractor)
+            .Build();
+
+        receiveAction.Execute(Context);
+
+        // Assert
+        Assert.That(Context.GetVariable("explicitNsValue"), Is.Not.Null);
+        Assert.That(Context.GetVariable("explicitNsValue"), Is.EqualTo("value-a"));
+
+        Assert.That(Context.GetVariable("dotNotationValue"), Is.Not.Null);
+        Assert.That(Context.GetVariable("dotNotationValue"), Is.EqualTo("value-a"));
+
+        Assert.That(Context.GetVariable("declaredNsValue"), Is.Not.Null);
+        Assert.That(Context.GetVariable("declaredNsValue"), Is.EqualTo("namespace-value"));
+
+        Assert.That(Context.GetVariable("mixedConcat"), Is.Not.Null);
+        Assert.That(Context.GetVariable("mixedConcat"), Is.EqualTo("value-a + namespace-value"));
+    }
 }

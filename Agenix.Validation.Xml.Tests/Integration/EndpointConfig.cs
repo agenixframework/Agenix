@@ -3,7 +3,6 @@ using Agenix.Api.Spi;
 using Agenix.Api.Xml.Namespace;
 using Agenix.Core.Endpoint.Direct;
 using Agenix.Core.Message;
-using Agenix.Validation.Xml.Variable.Dictionary.Xml;
 
 namespace Agenix.Validation.Xml.Tests.Integration;
 
@@ -32,16 +31,5 @@ public class EndpointConfig
         var builder = new NamespaceContextBuilder();
         builder.NamespaceMappings.Add("def", "http://agenix.org/schemas/samples/HelloService.xsd");
         return builder;
-    }
-
-    [BindToRegistry(Name = "helloServiceDataDictionary")]
-    public NodeMappingDataDictionary HelloServiceDataDictionary()
-    {
-        var dict = new NodeMappingDataDictionary();
-        dict.Mappings.Add("HelloRequest.MessageId", "${messageId}");
-        dict.Mappings.Add("HelloRequest.CorrelationId", "${correlationId}");
-        dict.Mappings.Add("HelloRequest.User", "Agenix");
-        dict.Mappings.Add("HelloRequest.Text", "Hello ${user}");
-        return dict;
     }
 }

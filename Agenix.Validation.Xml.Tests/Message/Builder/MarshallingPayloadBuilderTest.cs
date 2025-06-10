@@ -125,8 +125,8 @@ public class MarshallingPayloadBuilderTest : AbstractNUnitSetUp
 
         // Act & Assert
         Assert.That(() => builder.BuildPayload(Context),
-                   Throws.TypeOf<AgenixSystemException>()
-                         .With.Message.EqualTo("Unable to find proper object marshaller for name 'nonExistentMarshaller'"));
+            Throws.TypeOf<AgenixSystemException>()
+                .With.Message.EqualTo("Unable to find proper object marshaller for name 'nonExistentMarshaller'"));
     }
 
     [Test]
@@ -135,8 +135,7 @@ public class MarshallingPayloadBuilderTest : AbstractNUnitSetUp
         // Arrange
         var marshallerMap = new Dictionary<string, IMarshaller>
         {
-            ["marshaller1"] = _marshaller,
-            ["marshaller2"] = new Xml2Marshaller(typeof(TestRequest))
+            ["marshaller1"] = _marshaller, ["marshaller2"] = new Xml2Marshaller(typeof(TestRequest))
         };
 
         _referenceResolver.Setup(r => r.ResolveAll<IMarshaller>()).Returns(marshallerMap);
@@ -146,9 +145,9 @@ public class MarshallingPayloadBuilderTest : AbstractNUnitSetUp
 
         // Act & Assert
         Assert.That(() => builder.BuildPayload(Context),
-                   Throws.TypeOf<AgenixSystemException>()
-                         .With.Message.Contains("Unable to auto detect object marshaller")
-                         .And.Message.Contains("found 2 matching marshaller instances"));
+            Throws.TypeOf<AgenixSystemException>()
+                .With.Message.Contains("Unable to auto detect object marshaller")
+                .And.Message.Contains("found 2 matching marshaller instances"));
     }
 
     [Test]
@@ -188,11 +187,11 @@ public class MarshallingPayloadBuilderTest : AbstractNUnitSetUp
 
         // Assert - Multiple constraints with Assert.That
         Assert.That(result, Is.Not.Null
-                              .And.Not.Empty
-                              .And.TypeOf<string>()
-                              .And.StartsWith("<TestRequest>")
-                              .And.EndsWith("</TestRequest>")
-                              .And.Contains("Hello Agenix!"));
+            .And.Not.Empty
+            .And.TypeOf<string>()
+            .And.StartsWith("<TestRequest>")
+            .And.EndsWith("</TestRequest>")
+            .And.Contains("Hello Agenix!"));
     }
 
     [Test]
@@ -216,5 +215,4 @@ public class MarshallingPayloadBuilderTest : AbstractNUnitSetUp
         Assert.That(result, Is.Not.Null);
         Assert.That(_referenceResolver.Invocations.Count, Is.EqualTo(1));
     }
-
 }

@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices.JavaScript;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Functions;
 using Agenix.Core.Functions;
@@ -6,8 +5,6 @@ using Agenix.Validation.Xml.Functions.Core;
 using NUnit.Framework;
 
 namespace Agenix.Validation.Xml.Tests.Functions.Core;
-
-using System.Collections.Generic;
 
 [TestFixture]
 public class XpathFunctionTest : AbstractNUnitSetUp
@@ -18,11 +15,7 @@ public class XpathFunctionTest : AbstractNUnitSetUp
     [Test]
     public void TestExecuteXpath()
     {
-        var parameters = new List<string>
-        {
-            XmlSource,
-            "/person/name"
-        };
+        var parameters = new List<string> { XmlSource, "/person/name" };
 
         Assert.That(_function.Execute(parameters, Context), Is.EqualTo("Sheldon"));
     }
@@ -31,7 +24,8 @@ public class XpathFunctionTest : AbstractNUnitSetUp
     public void TestExecuteXpathWithNamespaces()
     {
         var parameters = new List<string>();
-        const string xmlSourceNamespace = "<person xmlns=\"http://agenix.sample.org/person\"><name>Sheldon</name><age>29</age></person>";
+        const string xmlSourceNamespace =
+            "<person xmlns=\"http://agenix.sample.org/person\"><name>Sheldon</name><age>29</age></person>";
         parameters.Add(xmlSourceNamespace);
         parameters.Add("/p:person/p:name");
 
@@ -43,11 +37,7 @@ public class XpathFunctionTest : AbstractNUnitSetUp
     [Test]
     public void TestExecuteXpathUnknown()
     {
-        var parameters = new List<string>
-        {
-            XmlSource,
-            "/person/unknown"
-        };
+        var parameters = new List<string> { XmlSource, "/person/unknown" };
 
         Assert.That(() => _function.Execute(parameters, Context),
             Throws.TypeOf<AgenixSystemException>());

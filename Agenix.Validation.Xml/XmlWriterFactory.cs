@@ -31,12 +31,14 @@ using System.Xml;
 namespace Agenix.Validation.Xml;
 
 /// <summary>
-/// Provides functionality to create instances of <see cref="XmlWriter"/> objects configured with optional settings.
+///     Provides functionality to create instances of <see cref="XmlWriter" /> objects configured with optional settings.
 /// </summary>
 /// <remarks>
-/// The <see cref="XmlWriterFactory"/> class allows creating <see cref="XmlWriter"/> objects for various output targets,
-/// such as <see cref="StringBuilder"/>, <see cref="Stream"/>, and <see cref="TextWriter"/>. An optional
-/// <see cref="XmlConfigurer"/> can be supplied to customize the configuration of the created <see cref="XmlWriter"/> objects.
+///     The <see cref="XmlWriterFactory" /> class allows creating <see cref="XmlWriter" /> objects for various output
+///     targets,
+///     such as <see cref="StringBuilder" />, <see cref="Stream" />, and <see cref="TextWriter" />. An optional
+///     <see cref="XmlConfigurer" /> can be supplied to customize the configuration of the created <see cref="XmlWriter" />
+///     objects.
 /// </remarks>
 public class XmlWriterFactory(XmlConfigurer? configurer = null)
 {
@@ -55,4 +57,3 @@ public class XmlWriterFactory(XmlConfigurer? configurer = null)
         return configurer?.CreateXmlWriter(output) ?? XmlWriter.Create(output);
     }
 }
-

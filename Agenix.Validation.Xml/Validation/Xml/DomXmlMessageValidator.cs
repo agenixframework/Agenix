@@ -47,25 +47,26 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Validation.Xml.Validation.Xml;
 
 /// <summary>
-/// The <c>DomXmlMessageValidator</c> class provides functionality for validating XML messages
-/// in a DOM-based manner. It extends the abstract class <see cref="AbstractMessageValidator{T}"/>
-/// specifically for the <see cref="XmlMessageValidationContext"/> validation context.
+///     The <c>DomXmlMessageValidator</c> class provides functionality for validating XML messages
+///     in a DOM-based manner. It extends the abstract class <see cref="AbstractMessageValidator{T}" />
+///     specifically for the <see cref="XmlMessageValidationContext" /> validation context.
 /// </summary>
 /// <remarks>
-/// <c>DomXmlMessageValidator</c> uses XML schema validation to ensure that messages conform
-/// to the expected structure and definitions. The validator supports namespace validation
-/// and evaluates both message content and schema correctness.
+///     <c>DomXmlMessageValidator</c> uses XML schema validation to ensure that messages conform
+///     to the expected structure and definitions. The validator supports namespace validation
+///     and evaluates both message content and schema correctness.
 /// </remarks>
-public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidationContext>, IMessageValidator<IValidationContext>
+public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidationContext>,
+    IMessageValidator<IValidationContext>
 {
     /// <summary>
-    /// Logger
+    ///     Logger
     /// </summary>
     private static readonly ILogger Logger = LogManager.GetLogger(typeof(DomXmlMessageValidator));
 
-    private NamespaceContextBuilder? _namespaceContextBuilder;
-
     private readonly XmlSchemaValidation _schemaValidation;
+
+    private NamespaceContextBuilder? _namespaceContextBuilder;
 
     public DomXmlMessageValidator() : this(new XmlSchemaValidation())
     {
@@ -77,8 +78,22 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
     }
 
     /// <summary>
-    /// Validates the message by performing XML schema validation, namespace validation,
-    /// content validation, and header data validation.
+    ///     Determines if the specified message type is supported by the validator.
+    /// </summary>
+    /// <param name="messageType">The type of the message as a <see cref="string" />.</param>
+    /// <param name="message">The <see cref="IMessage" /> instance representing the message.</param>
+    /// <returns>
+    ///     A <see cref="bool" /> value indicating whether the message type is supported (true) or not (false).
+    /// </returns>
+    public override bool SupportsMessageType(string messageType, IMessage message)
+    {
+        return messageType.Equals(nameof(MessageType.XML), StringComparison.OrdinalIgnoreCase) &&
+               MessageUtils.HasXmlPayload(message);
+    }
+
+    /// <summary>
+    ///     Validates the message by performing XML schema validation, namespace validation,
+    ///     content validation, and header data validation.
     /// </summary>
     /// <param name="receivedMessage">The received message to validate</param>
     /// <param name="controlMessage">The control message to compare against</param>
@@ -86,7 +101,7 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
     /// <param name="validationContext">The XML message validation context</param>
     /// <exception cref="System.ComponentModel.DataAnnotations.ValidationException">Thrown when validation fails</exception>
     public override void ValidateMessage(IMessage receivedMessage, IMessage controlMessage,
-                                TestContext context, XmlMessageValidationContext validationContext)
+        TestContext context, XmlMessageValidationContext validationContext)
     {
         if (Logger.IsEnabled(LogLevel.Debug))
         {
@@ -109,13 +124,13 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
                 if (controlMessage.GetHeaderData().Count > receivedMessage.GetHeaderData().Count)
                 {
                     throw new ValidationException($"Failed to validate header data XML fragments - found " +
-                                $"{receivedMessage.GetHeaderData().Count} header fragments, expected {controlMessage.GetHeaderData().Count}");
+                                                  $"{receivedMessage.GetHeaderData().Count} header fragments, expected {controlMessage.GetHeaderData().Count}");
                 }
 
                 for (var i = 0; i < controlMessage.GetHeaderData().Count; i++)
                 {
                     ValidateXmlHeaderFragment(receivedMessage.GetHeaderData()[i],
-                            controlMessage.GetHeaderData()[i], validationContext, context);
+                        controlMessage.GetHeaderData()[i], validationContext, context);
                 }
             }
 
@@ -133,9 +148,9 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
 
 
     /// <summary>
-    /// Validate namespaces in a message. The method compares namespace declarations in the root
-    /// element of the received message to expected namespaces. Prefixes are important too, so
-    /// differing namespace prefixes will fail the validation.
+    ///     Validate namespaces in a message. The method compares namespace declarations in the root
+    ///     element of the received message to expected namespaces. Prefixes are important too, so
+    ///     differing namespace prefixes will fail the validation.
     /// </summary>
     /// <param name="expectedNamespaces">Dictionary of expected namespace prefix-URI pairs</param>
     /// <param name="receivedMessage">The received message to validate</param>
@@ -160,8 +175,8 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
         if (foundNamespaces.Count != expectedNamespaces.Count)
         {
             throw new ValidationException($"Number of namespace declarations not equal for node " +
-                    $"{XmlUtils.GetNodesPathName(received.FirstChild)} found " +
-                    $"{foundNamespaces.Count} expected {expectedNamespaces.Count}");
+                                          $"{XmlUtils.GetNodesPathName(received.FirstChild)} found " +
+                                          $"{foundNamespaces.Count} expected {expectedNamespaces.Count}");
         }
 
         foreach (var entry in expectedNamespaces)
@@ -174,9 +189,9 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
                 if (!foundNamespaces[namespacePrefix].Equals(url))
                 {
                     throw new ValidationException($"Namespace '{namespacePrefix}' " +
-                            $"values not equal: found '{foundNamespaces[namespacePrefix]}' " +
-                            $"expected '{url}' in reference node " +
-                            $"{XmlUtils.GetNodesPathName(received.FirstChild)}");
+                                                  $"values not equal: found '{foundNamespaces[namespacePrefix]}' " +
+                                                  $"expected '{url}' in reference node " +
+                                                  $"{XmlUtils.GetNodesPathName(received.FirstChild)}");
                 }
 
                 Logger.LogDebug("Validating namespace {NamespacePrefix} value as expected {Url} - value OK",
@@ -185,7 +200,7 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
             else
             {
                 throw new ValidationException($"Missing namespace {namespacePrefix}({url}) in node " +
-                        $"{XmlUtils.GetNodesPathName(received.FirstChild)}");
+                                              $"{XmlUtils.GetNodesPathName(received.FirstChild)}");
             }
         }
 
@@ -194,14 +209,14 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
 
 
     /// <summary>
-    /// Validate message payloads by comparing to a control message.
+    ///     Validate message payloads by comparing to a control message.
     /// </summary>
     /// <param name="receivedMessage">The received message</param>
     /// <param name="controlMessage">The control message to compare against</param>
     /// <param name="validationContext">The XML message validation context</param>
     /// <param name="context">The test context</param>
     protected void ValidateMessageContent(IMessage receivedMessage, IMessage controlMessage,
-                                          XmlMessageValidationContext validationContext, TestContext context)
+        XmlMessageValidationContext validationContext, TestContext context)
     {
         if (controlMessage?.Payload == null)
         {
@@ -212,8 +227,8 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
         if (controlMessage.Payload is not string)
         {
             throw new ArgumentException(
-                    "DomXmlMessageValidator does only support message payload of type String, " +
-                    "but was " + controlMessage.Payload.GetType());
+                "DomXmlMessageValidator does only support message payload of type String, " +
+                "but was " + controlMessage.Payload.GetType());
         }
 
         var controlMessagePayload = controlMessage.GetPayload<string>();
@@ -222,8 +237,10 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
         {
             if (StringUtils.HasText(controlMessagePayload))
             {
-                throw new ValidationException("Unable to validate message payload - received message payload was empty, control message payload is not");
+                throw new ValidationException(
+                    "Unable to validate message payload - received message payload was empty, control message payload is not");
             }
+
             return;
         }
 
@@ -242,11 +259,11 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
         XmlUtils.StripWhitespaceNodes(source);
 
         ValidateXmlTree(received, source, validationContext, GetNamespaceContextBuilder(context)
-                .BuildContext(receivedMessage, validationContext.Namespaces), context);
+            .BuildContext(receivedMessage, validationContext.Namespaces), context);
     }
 
     /// <summary>
-    /// Validates XML header fragment data.
+    ///     Validates XML header fragment data.
     /// </summary>
     /// <param name="receivedHeaderData">The received header data as XML string</param>
     /// <param name="controlHeaderData">The control header data as XML string</param>
@@ -272,23 +289,25 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
     }
 
     /// <summary>
-    /// Validates element names match between received and source nodes.
+    ///     Validates element names match between received and source nodes.
     /// </summary>
     /// <param name="received">The received node</param>
     /// <param name="source">The source node</param>
     private void DoElementNameValidation(XmlNode received, XmlNode source)
     {
         // validate element name
-        Logger.LogDebug("Validating element: {ElementName} ({NamespaceUri})", received.LocalName, received.NamespaceURI);
+        Logger.LogDebug("Validating element: {ElementName} ({NamespaceUri})", received.LocalName,
+            received.NamespaceURI);
 
         if (!received.LocalName.Equals(source.LocalName))
         {
-            throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage("Element names not equal", source.LocalName, received.LocalName));
+            throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage("Element names not equal",
+                source.LocalName, received.LocalName));
         }
     }
 
     /// <summary>
-    /// Handle element node.
+    ///     Handle element node.
     /// </summary>
     /// <param name="received">The received XML node</param>
     /// <param name="source">The source XML node</param>
@@ -296,14 +315,15 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
     /// <param name="namespaceContext">The namespace context</param>
     /// <param name="context">The test context</param>
     private void DoElement(XmlNode received, XmlNode source,
-            XmlMessageValidationContext validationContext, IXmlNamespaceResolver namespaceContext, TestContext context)
+        XmlMessageValidationContext validationContext, IXmlNamespaceResolver namespaceContext, TestContext context)
     {
         DoElementNameValidation(received, source);
 
         DoElementNamespaceValidation(received, source);
 
         // check if an element is ignored either by xpath or by ignore placeholder in a source message
-        if (XmlValidationUtils.IsElementIgnored(source, received, validationContext.IgnoreExpressions, namespaceContext))
+        if (XmlValidationUtils.IsElementIgnored(source, received, validationContext.IgnoreExpressions,
+                namespaceContext))
         {
             return;
         }
@@ -315,8 +335,9 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
 
         if (CountAttributes(receivedAttr) != CountAttributes(sourceAttr))
         {
-            throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage("Number of attributes not equal for element '" +
-                        received.LocalName + "'", CountAttributes(sourceAttr), CountAttributes(receivedAttr)));
+            throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage(
+                "Number of attributes not equal for element '" +
+                received.LocalName + "'", CountAttributes(sourceAttr), CountAttributes(receivedAttr)));
         }
 
         for (var i = 0; i < receivedAttr.Count; i++)
@@ -328,36 +349,38 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
         if (IsValidationMatcherExpression(source))
         {
             ValidationMatcherUtils.ResolveValidationMatcher(source.Name,
-                    received.FirstChild.Value.Trim(),
-                    source.FirstChild.Value.Trim(),
-                    context);
+                received.FirstChild.Value.Trim(),
+                source.FirstChild.Value.Trim(),
+                context);
             return;
         }
 
         DoText((XmlElement)received, (XmlElement)source);
 
         // work on child nodes
-        List<XmlElement> receivedChildElements = DomUtils.GetChildElements((XmlElement)received);
-        List<XmlElement> sourceChildElements = DomUtils.GetChildElements((XmlElement)source);
+        var receivedChildElements = DomUtils.GetChildElements((XmlElement)received);
+        var sourceChildElements = DomUtils.GetChildElements((XmlElement)source);
 
         if (receivedChildElements.Count != sourceChildElements.Count)
         {
-            throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage("Number of child elements not equal for element '" +
-                    received.LocalName + "'", sourceChildElements.Count, receivedChildElements.Count));
+            throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage(
+                "Number of child elements not equal for element '" +
+                received.LocalName + "'", sourceChildElements.Count, receivedChildElements.Count));
         }
 
         for (var i = 0; i < receivedChildElements.Count; i++)
         {
             ValidateXmlTree(receivedChildElements[i], sourceChildElements[i],
-                    validationContext, namespaceContext, context);
+                validationContext, namespaceContext, context);
         }
 
-        Logger.LogDebug("Validation successful for element: {ElementName} ({NamespaceUri})", received.LocalName, received.NamespaceURI);
+        Logger.LogDebug("Validation successful for element: {ElementName} ({NamespaceUri})", received.LocalName,
+            received.NamespaceURI);
     }
 
 
     /// <summary>
-    /// Handle document type definition with validation of publicId and systemId.
+    ///     Handle document type definition with validation of publicId and systemId.
     /// </summary>
     /// <param name="received">The received XML node</param>
     /// <param name="source">The source XML node</param>
@@ -365,8 +388,8 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
     /// <param name="namespaceContext">The namespace context</param>
     /// <param name="context">The test context</param>
     private void DoDocumentTypeDefinition(XmlNode received, XmlNode source,
-            XmlMessageValidationContext validationContext,
-            IXmlNamespaceResolver namespaceContext, TestContext context)
+        XmlMessageValidationContext validationContext,
+        IXmlNamespaceResolver namespaceContext, TestContext context)
     {
         if (source is not XmlDocumentType sourceDTD)
         {
@@ -375,51 +398,58 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
 
         var receivedDTD = (XmlDocumentType)received;
 
-        Logger.LogDebug("Validating document type definition: {PublicId} ({SystemId})", receivedDTD.PublicId, receivedDTD.SystemId);
+        Logger.LogDebug("Validating document type definition: {PublicId} ({SystemId})", receivedDTD.PublicId,
+            receivedDTD.SystemId);
 
         if (!StringUtils.HasText(sourceDTD.PublicId))
         {
             if (receivedDTD.PublicId != null)
             {
-                throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage("Document type public id not equal",
-                        sourceDTD.PublicId, receivedDTD.PublicId));
+                throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage(
+                    "Document type public id not equal",
+                    sourceDTD.PublicId, receivedDTD.PublicId));
             }
         }
         else if (sourceDTD.PublicId.Trim().Equals(AgenixSettings.IgnorePlaceholder))
         {
-            Logger.LogDebug("Document type public id: '{PublicId}' is ignored by placeholder '{Placeholder}'", receivedDTD.PublicId, AgenixSettings.IgnorePlaceholder);
+            Logger.LogDebug("Document type public id: '{PublicId}' is ignored by placeholder '{Placeholder}'",
+                receivedDTD.PublicId, AgenixSettings.IgnorePlaceholder);
         }
         else if (!StringUtils.HasText(receivedDTD.PublicId) || !receivedDTD.PublicId.Equals(sourceDTD.PublicId))
         {
-            throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage("Document type public id not equal",
-                    sourceDTD.PublicId, receivedDTD.PublicId));
+            throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage(
+                "Document type public id not equal",
+                sourceDTD.PublicId, receivedDTD.PublicId));
         }
 
         if (!StringUtils.HasText(sourceDTD.SystemId))
         {
             if (receivedDTD.SystemId != null)
             {
-                throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage("Document type system id not equal",
-                        sourceDTD.SystemId, receivedDTD.SystemId));
+                throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage(
+                    "Document type system id not equal",
+                    sourceDTD.SystemId, receivedDTD.SystemId));
             }
         }
         else if (sourceDTD.SystemId.Trim().Equals(AgenixSettings.IgnorePlaceholder))
         {
-            Logger.LogDebug("Document type system id: '{SystemId}' is ignored by placeholder '{Placeholder}'", receivedDTD.SystemId, AgenixSettings.IgnorePlaceholder);
+            Logger.LogDebug("Document type system id: '{SystemId}' is ignored by placeholder '{Placeholder}'",
+                receivedDTD.SystemId, AgenixSettings.IgnorePlaceholder);
         }
         else if (!StringUtils.HasText(receivedDTD.SystemId) || !receivedDTD.SystemId.Equals(sourceDTD.SystemId))
         {
-            throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage("Document type system id not equal",
-                    sourceDTD.SystemId, receivedDTD.SystemId));
+            throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage(
+                "Document type system id not equal",
+                sourceDTD.SystemId, receivedDTD.SystemId));
         }
 
         ValidateXmlTree(received.NextSibling,
-                source.NextSibling, validationContext, namespaceContext, context);
+            source.NextSibling, validationContext, namespaceContext, context);
     }
 
 
     /// <summary>
-    /// Validates XML tree structure recursively based on a node type.
+    ///     Validates XML tree structure recursively based on a node type.
     /// </summary>
     /// <param name="received">The received XML node</param>
     /// <param name="source">The source XML node</param>
@@ -454,7 +484,7 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
     }
 
     /// <summary>
-    /// Validates element namespaces match between received and source nodes.
+    ///     Validates element namespaces match between received and source nodes.
     /// </summary>
     /// <param name="received">The received node</param>
     /// <param name="source">The source node</param>
@@ -467,25 +497,28 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
         {
             if (source.NamespaceURI == null)
             {
-                throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage("Element namespace not equal for element '" +
+                throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage(
+                    "Element namespace not equal for element '" +
                     received.LocalName + "'", null, received.NamespaceURI));
             }
 
             if (!received.NamespaceURI.Equals(source.NamespaceURI))
             {
-                throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage("Element namespace not equal for element '" +
+                throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage(
+                    "Element namespace not equal for element '" +
                     received.LocalName + "'", source.NamespaceURI, received.NamespaceURI));
             }
         }
         else if (source.NamespaceURI != null)
         {
-            throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage("Element namespace not equal for element '" +
+            throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage(
+                "Element namespace not equal for element '" +
                 received.LocalName + "'", source.NamespaceURI, null));
         }
     }
 
     /// <summary>
-    /// Handle text node during validation.
+    ///     Handle text node during validation.
     /// </summary>
     /// <param name="received">The received element</param>
     /// <param name="source">The source element</param>
@@ -498,7 +531,8 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
 
         if (!receivedText.Trim().Equals(sourceText.Trim()))
         {
-            throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage("Node value not equal for element '"
+            throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage(
+                "Node value not equal for element '"
                 + received.LocalName + "'", sourceText.Trim(), receivedText.Trim()));
         }
 
@@ -509,7 +543,7 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
     }
 
     /// <summary>
-    /// Handle attribute node during validation.
+    ///     Handle attribute node during validation.
     /// </summary>
     /// <param name="receivedElement">The received element node</param>
     /// <param name="receivedAttribute">The received attribute node</param>
@@ -518,13 +552,14 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
     /// <param name="namespaceContext">The namespace context</param>
     /// <param name="context">The test context</param>
     private void DoAttribute(XmlNode receivedElement, XmlNode receivedAttribute, XmlNode sourceElement,
-            XmlMessageValidationContext validationContext, IXmlNamespaceResolver namespaceContext, TestContext context)
+        XmlMessageValidationContext validationContext, IXmlNamespaceResolver namespaceContext, TestContext context)
     {
         if (receivedAttribute.Name.StartsWith("xmlns")) { return; }
 
         var receivedAttributeName = receivedAttribute.LocalName;
 
-        Logger.LogDebug("Validating attribute: {AttributeName} ({NamespaceUri})", receivedAttributeName, receivedAttribute.NamespaceURI);
+        Logger.LogDebug("Validating attribute: {AttributeName} ({NamespaceUri})", receivedAttributeName,
+            receivedAttribute.NamespaceURI);
 
         var sourceAttributes = sourceElement.Attributes;
         var sourceAttribute = sourceAttributes.GetNamedItem(receivedAttributeName, receivedAttribute.NamespaceURI);
@@ -532,11 +567,12 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
         if (sourceAttribute == null)
         {
             throw new ValidationException("Attribute validation failed for element '"
-                        + receivedElement.LocalName + "', unknown attribute "
-                        + receivedAttributeName + " (" + receivedAttribute.NamespaceURI + ")");
+                                          + receivedElement.LocalName + "', unknown attribute "
+                                          + receivedAttributeName + " (" + receivedAttribute.NamespaceURI + ")");
         }
 
-        if (XmlValidationUtils.IsAttributeIgnored(receivedElement, receivedAttribute, sourceAttribute, validationContext.IgnoreExpressions, namespaceContext))
+        if (XmlValidationUtils.IsAttributeIgnored(receivedElement, receivedAttribute, sourceAttribute,
+                validationContext.IgnoreExpressions, namespaceContext))
         {
             return;
         }
@@ -546,9 +582,9 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
         if (IsValidationMatcherExpression(sourceAttribute))
         {
             ValidationMatcherUtils.ResolveValidationMatcher(sourceAttribute.Name,
-                    receivedAttribute.Value.Trim(),
-                    sourceAttribute.Value.Trim(),
-                    context);
+                receivedAttribute.Value.Trim(),
+                sourceAttribute.Value.Trim(),
+                context);
         }
         else if (receivedValue.Contains(':') && sourceValue.Contains(':'))
         {
@@ -558,8 +594,9 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
         {
             if (!receivedValue.Equals(sourceValue))
             {
-                throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage("Values not equal for attribute '"
-                            + receivedAttributeName + "'", sourceValue, receivedValue));
+                throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage(
+                    "Values not equal for attribute '"
+                    + receivedAttributeName + "'", sourceValue, receivedValue));
             }
         }
 
@@ -567,67 +604,72 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
     }
 
     /// <summary>
-    /// Perform validation on namespace qualified attribute values if present. This includes the validation of namespace presence
-    /// and equality.
+    ///     Perform validation on namespace qualified attribute values if present. This includes the validation of namespace
+    ///     presence
+    ///     and equality.
     /// </summary>
     /// <param name="receivedElement">The received element node</param>
     /// <param name="receivedAttribute">The received attribute node</param>
     /// <param name="sourceElement">The source element node</param>
     /// <param name="sourceAttribute">The source attribute node</param>
-    private void DoNamespaceQualifiedAttributeValidation(XmlNode receivedElement, XmlNode receivedAttribute, XmlNode sourceElement, XmlNode sourceAttribute)
-{
-    string receivedValue = receivedAttribute.Value;
-    string sourceValue = sourceAttribute.Value;
-
-    if (receivedValue.Contains(':') && sourceValue.Contains(':'))
+    private void DoNamespaceQualifiedAttributeValidation(XmlNode receivedElement, XmlNode receivedAttribute,
+        XmlNode sourceElement, XmlNode sourceAttribute)
     {
-        // value has a namespace prefix set, do special QName validation
-        string receivedPrefix = receivedValue[..receivedValue.IndexOf(':')];
-        string sourcePrefix = sourceValue[..sourceValue.IndexOf(':')];
+        var receivedValue = receivedAttribute.Value;
+        var sourceValue = sourceAttribute.Value;
 
-        Dictionary<string, string> receivedNamespaces = XmlUtils.LookupNamespaces(receivedAttribute.OwnerDocument);
-        foreach (var ns in XmlUtils.LookupNamespaces(receivedElement))
+        if (receivedValue.Contains(':') && sourceValue.Contains(':'))
         {
-            receivedNamespaces[ns.Key] = ns.Value;
-        }
+            // value has a namespace prefix set, do special QName validation
+            var receivedPrefix = receivedValue[..receivedValue.IndexOf(':')];
+            var sourcePrefix = sourceValue[..sourceValue.IndexOf(':')];
 
-        if (receivedNamespaces.ContainsKey(receivedPrefix))
-        {
-            var sourceNamespaces = XmlUtils.LookupNamespaces(sourceAttribute.OwnerDocument);
-            foreach (var ns in XmlUtils.LookupNamespaces(sourceElement))
+            var receivedNamespaces = XmlUtils.LookupNamespaces(receivedAttribute.OwnerDocument);
+            foreach (var ns in XmlUtils.LookupNamespaces(receivedElement))
             {
-                sourceNamespaces[ns.Key] = ns.Value;
+                receivedNamespaces[ns.Key] = ns.Value;
             }
 
-            if (sourceNamespaces.ContainsKey(sourcePrefix))
+            if (receivedNamespaces.ContainsKey(receivedPrefix))
             {
-                if (!sourceNamespaces[sourcePrefix].Equals(receivedNamespaces[receivedPrefix]))
+                var sourceNamespaces = XmlUtils.LookupNamespaces(sourceAttribute.OwnerDocument);
+                foreach (var ns in XmlUtils.LookupNamespaces(sourceElement))
                 {
-                    throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage("Values not equal for attribute value namespace '"
-                                + receivedValue + "'", sourceNamespaces[sourcePrefix], receivedNamespaces[receivedPrefix]));
+                    sourceNamespaces[ns.Key] = ns.Value;
                 }
 
-                // remove namespace prefixes as they must not form equality
-                receivedValue = receivedValue[(receivedPrefix + ":").Length..];
-                sourceValue = sourceValue[(sourcePrefix + ":").Length..];
+                if (sourceNamespaces.ContainsKey(sourcePrefix))
+                {
+                    if (!sourceNamespaces[sourcePrefix].Equals(receivedNamespaces[receivedPrefix]))
+                    {
+                        throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage(
+                            "Values not equal for attribute value namespace '"
+                            + receivedValue + "'", sourceNamespaces[sourcePrefix], receivedNamespaces[receivedPrefix]));
+                    }
+
+                    // remove namespace prefixes as they must not form equality
+                    receivedValue = receivedValue[(receivedPrefix + ":").Length..];
+                    sourceValue = sourceValue[(sourcePrefix + ":").Length..];
+                }
+                else
+                {
+                    throw new ValidationException("Received attribute value '" + receivedAttribute.LocalName +
+                                                  "' describes namespace qualified attribute value," +
+                                                  " control value '" + sourceValue + "' does not");
+                }
             }
-            else
-            {
-                throw new ValidationException("Received attribute value '" + receivedAttribute.LocalName + "' describes namespace qualified attribute value," +
-                        " control value '" + sourceValue + "' does not");
-            }
+        }
+
+        if (!receivedValue.Equals(sourceValue))
+        {
+            throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage(
+                "Values not equal for attribute '"
+                + receivedAttribute.LocalName + "'", sourceValue, receivedValue));
         }
     }
 
-    if (!receivedValue.Equals(sourceValue))
-    {
-        throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage("Values not equal for attribute '"
-                    + receivedAttribute.LocalName + "'", sourceValue, receivedValue));
-    }
-}
-
     /// <summary>
-    /// Handle processing instruction during validation.
+    ///     Handle processing instruction during validation.
     /// </summary>
     /// <param name="received">The processing instruction node</param>
     private void DoPI(XmlNode received)
@@ -636,7 +678,7 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
     }
 
     /// <summary>
-    /// Counts the attribute nodes for an element (xmlns attributes ignored)
+    ///     Counts the attribute nodes for an element (xmlns attributes ignored)
     /// </summary>
     /// <param name="attributesR">attributes map</param>
     /// <returns>number of attributes</returns>
@@ -656,7 +698,7 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
     }
 
     /// <summary>
-    /// Checks whether the given node contains a validation matcher
+    ///     Checks whether the given node contains a validation matcher
     /// </summary>
     /// <param name="node">The node to check</param>
     /// <returns>true if node value contains validation matcher, false if not</returns>
@@ -677,13 +719,17 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
 
 
     /// <summary>
-    /// Finds and returns a specific validation context of type <see cref="XmlMessageValidationContext"/>
-    /// from a provided list of validation contexts. If the context is not found, it adapts a
-    /// <see cref="DefaultMessageValidationContext"/> for usage if applicable.
+    ///     Finds and returns a specific validation context of type <see cref="XmlMessageValidationContext" />
+    ///     from a provided list of validation contexts. If the context is not found, it adapts a
+    ///     <see cref="DefaultMessageValidationContext" /> for usage if applicable.
     /// </summary>
-    /// <param name="validationContexts">A list of validation contexts to search through, represented as <see cref="List{IValidationContext}"/>.</param>
+    /// <param name="validationContexts">
+    ///     A list of validation contexts to search through, represented as
+    ///     <see cref="List{IValidationContext}" />.
+    /// </param>
     /// <returns>
-    /// An instance of <see cref="XmlMessageValidationContext"/> if found or created; otherwise, uses the base implementation to return a context.
+    ///     An instance of <see cref="XmlMessageValidationContext" /> if found or created; otherwise, uses the base
+    ///     implementation to return a context.
     /// </returns>
     public override XmlMessageValidationContext FindValidationContext(List<IValidationContext> validationContexts)
     {
@@ -704,24 +750,11 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
     }
 
     /// <summary>
-    /// Determines if the specified message type is supported by the validator.
-    /// </summary>
-    /// <param name="messageType">The type of the message as a <see cref="string"/>.</param>
-    /// <param name="message">The <see cref="IMessage"/> instance representing the message.</param>
-    /// <returns>
-    /// A <see cref="bool"/> value indicating whether the message type is supported (true) or not (false).
-    /// </returns>
-    public override bool SupportsMessageType(string messageType, IMessage message)
-    {
-        return messageType.Equals(nameof(MessageType.XML), StringComparison.OrdinalIgnoreCase) && MessageUtils.HasXmlPayload(message);
-    }
-
-    /// <summary>
-    /// Retrieves the required type of validation context for the validator.
+    ///     Retrieves the required type of validation context for the validator.
     /// </summary>
     /// <returns>
-    /// The <see cref="System.Type"/> instance representing the required validation context type,
-    /// which is <see cref="XmlMessageValidationContext"/> for this validator.
+    ///     The <see cref="System.Type" /> instance representing the required validation context type,
+    ///     which is <see cref="XmlMessageValidationContext" /> for this validator.
     /// </returns>
     protected override Type GetRequiredValidationContextType()
     {
@@ -729,7 +762,7 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
     }
 
     /// <summary>
-    /// Get an explicit namespace context builder set on this class or get instance from reference resolver.
+    ///     Get an explicit namespace context builder set on this class or get instance from reference resolver.
     /// </summary>
     private NamespaceContextBuilder GetNamespaceContextBuilder(TestContext context)
     {
@@ -737,7 +770,7 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
     }
 
     /// <summary>
-    /// Sets the namespace context builder.
+    ///     Sets the namespace context builder.
     /// </summary>
     public void SetNamespaceContextBuilder(NamespaceContextBuilder namespaceContextBuilder)
     {
@@ -745,12 +778,16 @@ public class DomXmlMessageValidator : AbstractMessageValidator<XmlMessageValidat
     }
 
     /// <summary>
-    /// Validates the XML schema of the provided message using the given context and validation context.
+    ///     Validates the XML schema of the provided message using the given context and validation context.
     /// </summary>
-    /// <param name="message">The <see cref="IMessage"/> instance representing the message to be validated.</param>
-    /// <param name="context">The <see cref="TestContext"/> containing information and state related to the test execution.</param>
-    /// <param name="xmlMessageValidationContext">The <see cref="XmlMessageValidationContext"/> providing validation-specific data for XML schema validation.</param>
-    public void ValidateXmlSchema(IMessage message, TestContext context, XmlMessageValidationContext xmlMessageValidationContext)
+    /// <param name="message">The <see cref="IMessage" /> instance representing the message to be validated.</param>
+    /// <param name="context">The <see cref="TestContext" /> containing information and state related to the test execution.</param>
+    /// <param name="xmlMessageValidationContext">
+    ///     The <see cref="XmlMessageValidationContext" /> providing validation-specific
+    ///     data for XML schema validation.
+    /// </param>
+    public void ValidateXmlSchema(IMessage message, TestContext context,
+        XmlMessageValidationContext xmlMessageValidationContext)
     {
         _schemaValidation.Validate(message, context, xmlMessageValidationContext);
     }

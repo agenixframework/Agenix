@@ -30,34 +30,33 @@ using System.Xml.Schema;
 namespace Agenix.Validation.Xml.Schema;
 
 /// <summary>
-/// Represents an interface that provides functionality for interacting with an XSD (XML Schema Definition) schema,
-/// including schema retrieval, validation, and creation of validators.
+///     Represents an interface that provides functionality for interacting with an XSD (XML Schema Definition) schema,
+///     including schema retrieval, validation, and creation of validators.
 /// </summary>
 public interface IXsdSchema
 {
     /// <summary>
-    /// Gets the target namespace of the schema
+    ///     Gets the target namespace of the schema
     /// </summary>
     string? TargetNamespace { get; }
 
     /// <summary>
-    /// Gets the underlying XmlSchema
+    ///     Gets the underlying XmlSchema
     /// </summary>
     XmlSchema Schema { get; }
 
     /// <summary>
-    /// Gets the schema source document
+    ///     Gets the schema source document
     /// </summary>
     XmlDocument? Source { get; }
 
     /// <summary>
-    /// Creates a validator for this schema
+    ///     Creates a validator for this schema
     /// </summary>
     XmlSchemaValidator CreateValidator();
 
     /// <summary>
-    /// Validates an XML document against this schema
+    ///     Validates an XML document against this schema
     /// </summary>
     List<string> Validate(XmlDocument document);
-
 }

@@ -1128,14 +1128,12 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
     public void TestReceiveSelectedWithMessageSelectorAndTimeout()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
-        controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<TestRequest><Message>Hello World!</Message></TestRequest>"));
+        controlMessageBuilder.SetPayloadBuilder(
+            new DefaultPayloadBuilder("<TestRequest><Message>Hello World!</Message></TestRequest>"));
 
-        string messageSelector = "Operation = 'sayHello'";
+        var messageSelector = "Operation = 'sayHello'";
 
-        var headers = new Dictionary<string, object>
-        {
-            { "Operation", "sayHello" }
-        };
+        var headers = new Dictionary<string, object> { { "Operation", "sayHello" } };
         var controlMessage = new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>", headers);
 
         // Reset mocks
@@ -1166,17 +1164,12 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
     public void TestReceiveSelectedWithMessageSelectorMap()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
-        controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<TestRequest><Message>Hello World!</Message></TestRequest>"));
+        controlMessageBuilder.SetPayloadBuilder(
+            new DefaultPayloadBuilder("<TestRequest><Message>Hello World!</Message></TestRequest>"));
 
-        IDictionary<string, object> messageSelector = new Dictionary<string, object>
-        {
-            { "Operation", "sayHello" }
-        };
+        IDictionary<string, object> messageSelector = new Dictionary<string, object> { { "Operation", "sayHello" } };
 
-        var headers = new Dictionary<string, object>
-        {
-            { "Operation", "sayHello" }
-        };
+        var headers = new Dictionary<string, object> { { "Operation", "sayHello" } };
         var controlMessage = new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>", headers);
 
         // Reset mocks
@@ -1206,17 +1199,12 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
     public void TestReceiveSelectedWithMessageSelectorMapAndTimeout()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
-        controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<TestRequest><Message>Hello World!</Message></TestRequest>"));
+        controlMessageBuilder.SetPayloadBuilder(
+            new DefaultPayloadBuilder("<TestRequest><Message>Hello World!</Message></TestRequest>"));
 
-        IDictionary<string,object> messageSelector = new Dictionary<string, object>
-        {
-            { "Operation", "sayHello" }
-        };
+        IDictionary<string, object> messageSelector = new Dictionary<string, object> { { "Operation", "sayHello" } };
 
-        var headers = new Dictionary<string, object>
-        {
-            { "Operation", "sayHello" }
-        };
+        var headers = new Dictionary<string, object> { { "Operation", "sayHello" } };
         var controlMessage = new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>", headers);
 
         // Reset mocks
@@ -1247,7 +1235,8 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
     public void TestMessageTimeout()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
-        controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<TestRequest><Message>Hello World!</Message></TestRequest>"));
+        controlMessageBuilder.SetPayloadBuilder(
+            new DefaultPayloadBuilder("<TestRequest><Message>Hello World!</Message></TestRequest>"));
 
         // Reset mocks
         _endpoint.Reset();
@@ -1305,7 +1294,8 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
     public void TestReceiveEmptyMessagePayloadUnexpected()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
-        controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<TestRequest><Message>Hello World!</Message></TestRequest>"));
+        controlMessageBuilder.SetPayloadBuilder(
+            new DefaultPayloadBuilder("<TestRequest><Message>Hello World!</Message></TestRequest>"));
 
         var controlMessage = new DefaultMessage("");
 

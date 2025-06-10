@@ -28,8 +28,8 @@
 namespace Agenix.Api.IO;
 
 /// <summary>
-/// Represents a resource that is backed by a byte array. Provides methods to access the contents
-/// of the byte array as a <see cref="Stream"/> and a description associated with the resource.
+///     Represents a resource that is backed by a byte array. Provides methods to access the contents
+///     of the byte array as a <see cref="Stream" /> and a description associated with the resource.
 /// </summary>
 public class ByteArrayResource(byte[] byteArray, string description = "byte array resource")
     : AbstractResource
@@ -43,5 +43,4 @@ public class ByteArrayResource(byte[] byteArray, string description = "byte arra
     public override string Description => description;
 
     public override bool IsOpen => false;
-
 }

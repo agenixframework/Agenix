@@ -25,18 +25,16 @@
 #endregion
 
 using System.Xml;
-using System.Xml.Schema;
 
 namespace Agenix.Validation.Xml.Schema;
 
 /// <summary>
-/// Interface for schema mapping strategies used in schema repository.
+///     Interface for schema mapping strategies used in schema repository.
 /// </summary>
-
 public interface IXsdSchemaMappingStrategy
 {
     /// <summary>
-    /// Gets the schema for a given namespace or root element name.
+    ///     Gets the schema for a given namespace or root element name.
     /// </summary>
     /// <param name="schemas">List of available schemas.</param>
     /// <param name="document">Document instance to validate.</param>

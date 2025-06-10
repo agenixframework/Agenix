@@ -32,7 +32,7 @@ using Agenix.Api;
 namespace Agenix.Validation.Xml.Util;
 
 /// <summary>
-/// Class providing several utility methods for XML processing.
+///     Class providing several utility methods for XML processing.
 /// </summary>
 public static class XmlUtils
 {
@@ -45,7 +45,7 @@ public static class XmlUtils
     }
 
     /// <summary>
-    /// Initializes XML utilities with custom configurer.
+    ///     Initializes XML utilities with custom configurer.
     /// </summary>
     /// <param name="xmlConfigurer">The XML configurer</param>
     public static void Initialize(XmlConfigurer xmlConfigurer)
@@ -54,9 +54,9 @@ public static class XmlUtils
     }
 
     /// <summary>
-    /// Searches for a node within a DOM document with a given node path expression.
-    /// Elements are separated by '.' characters.
-    /// Example: Foo.Bar.Poo
+    ///     Searches for a node within a DOM document with a given node path expression.
+    ///     Elements are separated by '.' characters.
+    ///     Example: Foo.Bar.Poo
     /// </summary>
     /// <param name="doc">DOM Document to search for a node</param>
     /// <param name="pathExpression">dot separated path expression</param>
@@ -97,6 +97,7 @@ public static class XmlUtils
                     pathBuilder.Insert(0, '.');
                     pathBuilder.Insert(0, parent.LocalName);
                 }
+
                 parent = parent.ParentNode;
                 cnt--;
             }
@@ -111,7 +112,7 @@ public static class XmlUtils
     }
 
     /// <summary>
-    /// Removes text nodes that are only containing whitespace characters inside a DOM tree.
+    ///     Removes text nodes that are only containing whitespace characters inside a DOM tree.
     /// </summary>
     /// <param name="element">the root node to normalize</param>
     public static void StripWhitespaceNodes(XmlNode element)
@@ -129,8 +130,8 @@ public static class XmlUtils
     }
 
     /// <summary>
-    /// Returns the path expression for a given node.
-    /// Path expressions look like: Foo.Bar.Poo where elements are separated with a dot character.
+    ///     Returns the path expression for a given node.
+    ///     Path expressions look like: Foo.Bar.Poo where elements are separated with a dot character.
     /// </summary>
     /// <param name="node">node in DOM tree</param>
     /// <returns>the path expression representing the node in DOM tree</returns>
@@ -158,7 +159,7 @@ public static class XmlUtils
     }
 
     /// <summary>
-    /// Builds the node path expression for a node in the DOM tree.
+    ///     Builds the node path expression for a node in the DOM tree.
     /// </summary>
     /// <param name="node">node in a DOM tree</param>
     /// <param name="builder">string builder</param>
@@ -170,6 +171,7 @@ public static class XmlUtils
             {
                 builder.Append(node.LocalName);
             }
+
             return;
         }
 
@@ -184,7 +186,7 @@ public static class XmlUtils
     }
 
     /// <summary>
-    /// Serializes a DOM document
+    ///     Serializes a DOM document
     /// </summary>
     /// <param name="doc">Document to serialize</param>
     /// <returns>serialized XML string</returns>
@@ -208,14 +210,8 @@ public static class XmlUtils
     }
 
 
-    private class EncodingStringWriter(Encoding encoding) : StringWriter
-    {
-        public override Encoding Encoding => encoding;
-    }
-
-
     /// <summary>
-    /// Pretty prints an XML string.
+    ///     Pretty prints an XML string.
     /// </summary>
     /// <param name="xml">XML string to format</param>
     /// <returns>pretty printed XML string</returns>
@@ -239,9 +235,9 @@ public static class XmlUtils
     }
 
     /// <summary>
-    /// Look up namespace attribute declarations in the specified node and
-    /// store them in a binding map, where the key is the namespace prefix and the value
-    /// is the namespace uri.
+    ///     Look up namespace attribute declarations in the specified node and
+    ///     store them in a binding map, where the key is the namespace prefix and the value
+    ///     is the namespace uri.
     /// </summary>
     /// <param name="referenceNode">XML node to search for namespace declarations</param>
     /// <returns>map containing namespace prefix - namespace url pairs</returns>
@@ -250,7 +246,7 @@ public static class XmlUtils
         var namespaces = new Dictionary<string, string>();
 
         var node = referenceNode.NodeType == XmlNodeType.Document
-            ? ((XmlDocument)referenceNode).DocumentElement  // Get the root element
+            ? ((XmlDocument)referenceNode).DocumentElement // Get the root element
             : referenceNode;
 
         if (node?.Attributes != null)
@@ -275,7 +271,7 @@ public static class XmlUtils
 
 
     /// <summary>
-    /// Parse message payload with DOM implementation.
+    ///     Parse message payload with DOM implementation.
     /// </summary>
     /// <param name="messagePayload">XML message payload</param>
     /// <returns>DOM document</returns>
@@ -287,12 +283,12 @@ public static class XmlUtils
         using var reader = _configurer.CreateXmlReader(messagePayload.Trim());
         doc.Load(reader); // Use Load(XmlReader) instead of LoadXml(string)
 
-         return doc;
+        return doc;
     }
 
     /// <summary>
-    /// Try to find encoding for document node. Also supports default encoding set
-    /// as system property or environment variable.
+    ///     Try to find encoding for document node. Also supports default encoding set
+    ///     as system property or environment variable.
     /// </summary>
     /// <param name="doc">XML document</param>
     /// <returns>Target encoding</returns>
@@ -305,7 +301,6 @@ public static class XmlUtils
         {
             try
             {
-
                 return Encoding.GetEncoding(defaultEncoding);
             }
             catch
@@ -332,7 +327,7 @@ public static class XmlUtils
     }
 
     /// <summary>
-    /// Try to find target encoding in XML declaration.
+    ///     Try to find target encoding in XML declaration.
     /// </summary>
     /// <param name="messagePayload">XML message payload</param>
     /// <returns>Target encoding</returns>
@@ -365,7 +360,8 @@ public static class XmlUtils
             {
                 var encodingPart = payload.Substring(
                     payload.IndexOf(encodingKey, StringComparison.Ordinal) + encodingKey.Length,
-                    payload.IndexOf("?>", StringComparison.Ordinal) - payload.IndexOf(encodingKey, StringComparison.Ordinal) - encodingKey.Length);
+                    payload.IndexOf("?>", StringComparison.Ordinal) -
+                    payload.IndexOf(encodingKey, StringComparison.Ordinal) - encodingKey.Length);
 
                 var quoteChar = '"';
                 var doubleQuoteIndex = encodingPart.IndexOf('"');
@@ -395,7 +391,7 @@ public static class XmlUtils
     }
 
     /// <summary>
-    /// Removes leading XML declaration from xml if present.
+    ///     Removes leading XML declaration from xml if present.
     /// </summary>
     /// <param name="xml">XML string</param>
     /// <returns>XML string without declaration</returns>
@@ -408,5 +404,10 @@ public static class XmlUtils
 
         return xml;
     }
-}
 
+
+    private class EncodingStringWriter(Encoding encoding) : StringWriter
+    {
+        public override Encoding Encoding => encoding;
+    }
+}

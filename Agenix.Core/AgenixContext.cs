@@ -400,6 +400,7 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
         internal MessageListeners _messageListeners = new();
         internal MessageProcessors _messageProcessors = new();
         internal MessageValidatorRegistry _messageValidatorRegistry = new DefaultMessageValidatorRegistry();
+        internal NamespaceContextBuilder _namespaceContextBuilder = new();
         internal IReferenceResolver _referenceResolver = new SimpleReferenceResolver();
         internal TestActionListeners _testActionListeners = new();
         internal TestContextFactory _testContextFactory;
@@ -408,7 +409,6 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
         internal TestSuiteListeners _testSuiteListeners = new();
         internal ITypeConverter _typeConverter = ITypeConverter.LookupDefault();
         internal ValidationMatcherRegistry _validationMatcherRegistry = new DefaultValidationMatcherRegistry();
-        internal NamespaceContextBuilder _namespaceContextBuilder = new();
 
         /// Builds a default context for the Agenix test infrastructure. The context sets up various listeners,
         /// including test suite listeners, test listeners, test action listeners, and message listeners,
@@ -611,7 +611,8 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
             return this;
         }
 
-        public Builder NamespaceContextBuilder(NamespaceContextBuilder namespaceContextBuilder) {
+        public Builder NamespaceContextBuilder(NamespaceContextBuilder namespaceContextBuilder)
+        {
             _namespaceContextBuilder = namespaceContextBuilder;
             return this;
         }

@@ -31,37 +31,36 @@ using System.Xml.Schema;
 namespace Agenix.Validation.Xml.Schema;
 
 /// <summary>
-/// Represents an implementation of the <see cref="IWsdlSchema"/> interface, providing functionality
-/// to work with XML schemas as both <see cref="XmlSchema"/> and <see cref="XmlElement"/> objects.
+///     Represents an implementation of the <see cref="IWsdlSchema" /> interface, providing functionality
+///     to work with XML schemas as both <see cref="XmlSchema" /> and <see cref="XmlElement" /> objects.
 /// </summary>
 public class SchemaImpl : IWsdlSchema
 {
-    private XmlSchema _xmlSchema;
-    private XmlElement _element;
-
     public SchemaImpl(XmlSchema xmlSchema)
     {
-        _xmlSchema = xmlSchema;
+        Schema = xmlSchema;
         // Convert XmlSchema to XmlElement if needed
-        _element = ConvertSchemaToElement(xmlSchema);
+        Element = ConvertSchemaToElement(xmlSchema);
     }
 
     public SchemaImpl(XmlElement element)
     {
-        _element = element;
+        Element = element;
         // Convert XmlElement to XmlSchema if needed
-        _xmlSchema = ConvertElementToSchema(element);
+        Schema = ConvertElementToSchema(element);
     }
 
-    public XmlElement Element => _element;
-    public XmlSchema Schema => _xmlSchema;
-    public string TargetNamespace => _xmlSchema?.TargetNamespace ?? _element?.GetAttribute("targetNamespace");
+    public XmlSchema Schema { get; }
+
+    public XmlElement Element { get; }
+
+    public string TargetNamespace => Schema?.TargetNamespace ?? Element?.GetAttribute("targetNamespace");
 
     /// <summary>
-    /// Converts an <see cref="XmlSchema"/> to an <see cref="XmlElement"/>.
+    ///     Converts an <see cref="XmlSchema" /> to an <see cref="XmlElement" />.
     /// </summary>
-    /// <param name="schema">The <see cref="XmlSchema"/> to be converted to an <see cref="XmlElement"/>.</param>
-    /// <returns>An <see cref="XmlElement"/> instance representing the provided <see cref="XmlSchema"/>.</returns>
+    /// <param name="schema">The <see cref="XmlSchema" /> to be converted to an <see cref="XmlElement" />.</param>
+    /// <returns>An <see cref="XmlElement" /> instance representing the provided <see cref="XmlSchema" />.</returns>
     private XmlElement ConvertSchemaToElement(XmlSchema schema)
     {
         var doc = new XmlDocument();
@@ -71,14 +70,13 @@ public class SchemaImpl : IWsdlSchema
     }
 
     /// <summary>
-    /// Converts an <see cref="XmlElement"/> to an <see cref="XmlSchema"/>.
+    ///     Converts an <see cref="XmlElement" /> to an <see cref="XmlSchema" />.
     /// </summary>
-    /// <param name="element">The <see cref="XmlElement"/> to be converted to an <see cref="XmlSchema"/>.</param>
-    /// <returns>An <see cref="XmlSchema"/> instance representing the provided <see cref="XmlElement"/>.</returns>
+    /// <param name="element">The <see cref="XmlElement" /> to be converted to an <see cref="XmlSchema" />.</param>
+    /// <returns>An <see cref="XmlSchema" /> instance representing the provided <see cref="XmlElement" />.</returns>
     private XmlSchema ConvertElementToSchema(XmlElement element)
     {
         using var reader = new XmlNodeReader(element);
         return XmlSchema.Read(reader, null);
     }
 }
-

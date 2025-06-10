@@ -49,8 +49,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
 
         var validateMessageElements = new Dictionary<string, object>
         {
-            { "root.element.sub-elementA", "text-value" },
-            { "sub-elementB", "text-value" }
+            { "root.element.sub-elementA", "text-value" }, { "sub-elementB", "text-value" }
         };
 
         var controlMessageBuilder = new DefaultMessageBuilder();
@@ -88,8 +87,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
 
         var validateMessageElements = new Dictionary<string, object>
         {
-            { "root.element.sub-elementA", "" },
-            { "sub-elementB", "" }
+            { "root.element.sub-elementA", "" }, { "sub-elementB", "" }
         };
 
         var controlMessageBuilder = new DefaultMessageBuilder();
@@ -127,8 +125,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
 
         var validateMessageElements = new Dictionary<string, object>
         {
-            { "root.element.sub-elementA.attribute", "A" },
-            { "sub-elementB.attribute", "B" }
+            { "root.element.sub-elementA.attribute", "A" }, { "sub-elementB.attribute", "B" }
         };
 
         var controlMessageBuilder = new DefaultMessageBuilder();
@@ -166,8 +163,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
 
         var validateMessageElements = new Dictionary<string, object>
         {
-            { "root.element.sub-element-wrong", "text-value" },
-            { "sub-element-wrong", "text-value" }
+            { "root.element.sub-element-wrong", "text-value" }, { "sub-element-wrong", "text-value" }
         };
 
         var controlMessageBuilder = new DefaultMessageBuilder();
@@ -205,8 +201,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
 
         var validateMessageElements = new Dictionary<string, object>
         {
-            { "root.element.sub-elementA", "text-value-wrong" },
-            { "sub-elementB", "text-value-wrong" }
+            { "root.element.sub-elementA", "text-value-wrong" }, { "sub-elementB", "text-value-wrong" }
         };
 
         var controlMessageBuilder = new DefaultMessageBuilder();
@@ -244,8 +239,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
 
         var validateMessageElements = new Dictionary<string, object>
         {
-            { "root.element.sub-elementA.attribute", "wrong-value" },
-            { "sub-elementB.attribute", "wrong-value" }
+            { "root.element.sub-elementA.attribute", "wrong-value" }, { "sub-elementB.attribute", "wrong-value" }
         };
 
         var controlMessageBuilder = new DefaultMessageBuilder();
@@ -283,8 +277,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
 
         var validateMessageElements = new Dictionary<string, object>
         {
-            { "root.element.sub-elementA.attribute-wrong", "A" },
-            { "sub-elementB.attribute-wrong", "B" }
+            { "root.element.sub-elementA.attribute-wrong", "A" }, { "sub-elementB.attribute-wrong", "B" }
         };
 
         var controlMessageBuilder = new DefaultMessageBuilder();
@@ -333,8 +326,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
 
         var messageElements = new Dictionary<string, object>
         {
-            { "root.element.sub-elementA", "text-value" },
-            { "sub-elementB", "text-value" }
+            { "root.element.sub-elementA", "text-value" }, { "sub-elementB", "text-value" }
         };
 
         var processor = new XpathMessageProcessor.Builder()
@@ -383,8 +375,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
 
         var messageElements = new Dictionary<string, object>
         {
-            { "root.element.sub-elementA", "" },
-            { "sub-elementB", "" }
+            { "root.element.sub-elementA", "" }, { "sub-elementB", "" }
         };
 
         var processor = new XpathMessageProcessor.Builder()
@@ -433,8 +424,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
 
         var messageElements = new Dictionary<string, object>
         {
-            { "root.element.sub-elementA", "text-value" },
-            { "sub-elementB", "text-value" }
+            { "root.element.sub-elementA", "text-value" }, { "sub-elementB", "text-value" }
         };
 
         var processor = new XpathMessageProcessor.Builder()
@@ -443,8 +433,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
 
         var validateElements = new Dictionary<string, object>
         {
-            { "root.element.sub-elementA", "text-value" },
-            { "sub-elementB", "text-value" }
+            { "root.element.sub-elementA", "text-value" }, { "sub-elementB", "text-value" }
         };
 
         var validationContext = new XpathMessageValidationContext.Builder()
@@ -494,8 +483,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
 
         var messageElements = new Dictionary<string, object>
         {
-            { "root.element.sub-elementA.attribute", "A" },
-            { "sub-elementB.attribute", "B" }
+            { "root.element.sub-elementA.attribute", "A" }, { "sub-elementB.attribute", "B" }
         };
 
         var processor = new XpathMessageProcessor.Builder()
@@ -544,8 +532,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
 
         var messageElements = new Dictionary<string, object>
         {
-            { "root.element.sub-element-wrong", "text-value" },
-            { "sub-element-wrong", "text-value" }
+            { "root.element.sub-element-wrong", "text-value" }, { "sub-element-wrong", "text-value" }
         };
 
         var processor = new XpathMessageProcessor.Builder()
@@ -594,8 +581,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
 
         var messageElements = new Dictionary<string, object>
         {
-            { "root.element.sub-elementA.attribute-wrong", "A" },
-            { "sub-elementB.attribute-wrong", "B" }
+            { "root.element.sub-elementA.attribute-wrong", "A" }, { "sub-elementB.attribute-wrong", "B" }
         };
 
         var processor = new XpathMessageProcessor.Builder()
@@ -644,8 +630,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
 
         var messageElements = new Dictionary<string, object>
         {
-            { "root.element.sub-elementA-wrong.attribute", "A" },
-            { "sub-elementB-wrong.attribute", "B" }
+            { "root.element.sub-elementA-wrong.attribute", "A" }, { "sub-elementB-wrong.attribute", "B" }
         };
 
         var processor = new XpathMessageProcessor.Builder()
@@ -694,8 +679,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
 
         var extractMessageElements = new Dictionary<string, object>
         {
-            { "root.element.sub-elementA", "${valueA}" },
-            { "root.element.sub-elementB", "${valueB}" }
+            { "root.element.sub-elementA", "${valueA}" }, { "root.element.sub-elementB", "${valueB}" }
         };
 
         var variableExtractor = new XpathPayloadVariableExtractor.Builder()
@@ -802,8 +786,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
 
         var extractMessageElements = new Dictionary<string, object>
         {
-            { "root.element.sub-element-wrong", "${valueA}" },
-            { "element.sub-element-wrong", "${valueB}" }
+            { "root.element.sub-element-wrong", "${valueA}" }, { "element.sub-element-wrong", "${valueB}" }
         };
 
         var variableExtractor = new XpathPayloadVariableExtractor.Builder()

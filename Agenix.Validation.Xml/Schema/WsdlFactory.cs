@@ -27,36 +27,46 @@
 namespace Agenix.Validation.Xml.Schema;
 
 /// <summary>
-/// Interface for a factory that creates instances of WSDL (Web Services Description Language) readers.
-/// Provides a mechanism for obtaining new WSDL reader instances and allows for centralized
-/// management of how these instances are created.
+///     Interface for a factory that creates instances of WSDL (Web Services Description Language) readers.
+///     Provides a mechanism for obtaining new WSDL reader instances and allows for centralized
+///     management of how these instances are created.
 /// </summary>
 /// <remarks>
-/// The <see cref="IWsdlFactory"/> interface defines the contract for a factory that
-/// can create WSDL reader instances. Implementations of this interface, such as
-/// <see cref="WsdlFactory"/>, may encapsulate the logic for constructing different
-/// types of WSDL readers, ensuring modularity and ease of use.
+///     The <see cref="IWsdlFactory" /> interface defines the contract for a factory that
+///     can create WSDL reader instances. Implementations of this interface, such as
+///     <see cref="WsdlFactory" />, may encapsulate the logic for constructing different
+///     types of WSDL readers, ensuring modularity and ease of use.
 /// </remarks>
 public interface IWsdlFactory
 {
     IWsdlReader NewWsdlReader();
-    static IWsdlFactory NewInstance() => new WsdlFactory();
+
+    static IWsdlFactory NewInstance()
+    {
+        return new WsdlFactory();
+    }
 }
 
 /// <summary>
-/// Factory class for creating instances of WSDL (Web Services Description Language) readers.
-/// Implements the <see cref="IWsdlFactory"/> interface to provide a mechanism for obtaining
-/// WSDL reader instances.
+///     Factory class for creating instances of WSDL (Web Services Description Language) readers.
+///     Implements the <see cref="IWsdlFactory" /> interface to provide a mechanism for obtaining
+///     WSDL reader instances.
 /// </summary>
 /// <remarks>
-/// The <see cref="WsdlFactory"/> class is used to centralize the creation of WSDL
-/// readers, such as instances of <see cref="WcfWsdlReader"/>. This allows for modularity
-/// and ease of extension. The factory follows a static creation pattern via
-/// the <see cref="NewInstance"/> method.
+///     The <see cref="WsdlFactory" /> class is used to centralize the creation of WSDL
+///     readers, such as instances of <see cref="WcfWsdlReader" />. This allows for modularity
+///     and ease of extension. The factory follows a static creation pattern via
+///     the <see cref="NewInstance" /> method.
 /// </remarks>
 public class WsdlFactory : IWsdlFactory
 {
-    public static IWsdlFactory NewInstance() => new WsdlFactory();
+    public static IWsdlFactory NewInstance()
+    {
+        return new WsdlFactory();
+    }
 
-    public IWsdlReader NewWsdlReader() => new WcfWsdlReader();
+    public IWsdlReader NewWsdlReader()
+    {
+        return new WcfWsdlReader();
+    }
 }

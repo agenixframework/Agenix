@@ -31,22 +31,26 @@ public class XmlFunctionsTest : AbstractNUnitSetUp
     [Test]
     public void TestFunctionUtils()
     {
-        Context.FunctionRegistry = (new DefaultFunctionRegistry());
+        Context.FunctionRegistry = new DefaultFunctionRegistry();
 
-        Assert.That(FunctionUtils.ResolveFunction("core:EscapeXml('<Message>Hello Yes, I like Agenix!</Message>')", Context),
+        Assert.That(
+            FunctionUtils.ResolveFunction("agenix:EscapeXml('<Message>Hello Yes, I like Agenix!</Message>')", Context),
             Is.EqualTo("&lt;Message&gt;Hello Yes, I like Agenix!&lt;/Message&gt;"));
 
-        Assert.That(FunctionUtils.ResolveFunction("core:escapeXml('<Message>Hello Yes , I like Agenix!</Message>')", Context),
+        Assert.That(
+            FunctionUtils.ResolveFunction("agenix:escapeXml('<Message>Hello Yes , I like Agenix!</Message>')", Context),
             Is.EqualTo("&lt;Message&gt;Hello Yes , I like Agenix!&lt;/Message&gt;"));
 
-        Assert.That(FunctionUtils.ResolveFunction("core:escapeXml('<Message>Hello Yes,I like Agenix, and this is great!</Message>')", Context),
+        Assert.That(
+            FunctionUtils.ResolveFunction(
+                "agenix:escapeXml('<Message>Hello Yes,I like Agenix, and this is great!</Message>')", Context),
             Is.EqualTo("&lt;Message&gt;Hello Yes,I like Agenix, and this is great!&lt;/Message&gt;"));
 
-        Assert.That(FunctionUtils.ResolveFunction("core:cdataSection('<Message>Hello Agenix!</Message>')", Context),
+        Assert.That(FunctionUtils.ResolveFunction("agenix:cdataSection('<Message>Hello Agenix!</Message>')", Context),
             Is.EqualTo("<![CDATA[<Message>Hello Agenix!</Message>]]>"));
 
-        Assert.That(FunctionUtils.ResolveFunction("core:Xpath('<Message>Hello Agenix!</Message>', '/Message')", Context),
+        Assert.That(
+            FunctionUtils.ResolveFunction("agenix:Xpath('<Message>Hello Agenix!</Message>', '/Message')", Context),
             Is.EqualTo("Hello Agenix!"));
     }
 }
-

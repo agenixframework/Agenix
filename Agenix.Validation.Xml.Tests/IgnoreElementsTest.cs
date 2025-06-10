@@ -56,11 +56,7 @@ public class IgnoreElementsTest : AbstractNUnitSetUp
             "</root>"
         ));
 
-        var ignoreMessageElements = new HashSet<string>
-        {
-            "//root/element/sub-elementA",
-            "//sub-elementB"
-        };
+        var ignoreMessageElements = new HashSet<string> { "//root/element/sub-elementA", "//sub-elementB" };
 
         var validationContext = new XmlMessageValidationContext.Builder()
             .Ignore(ignoreMessageElements)
@@ -105,10 +101,7 @@ public class IgnoreElementsTest : AbstractNUnitSetUp
             "</root>"
         ));
 
-        var ignoreMessageElements = new HashSet<string>
-        {
-            "//sub-element"
-        };
+        var ignoreMessageElements = new HashSet<string> { "//sub-element" };
 
         var validationContext = new XmlMessageValidationContext.Builder()
             .Ignore(ignoreMessageElements)
@@ -131,9 +124,9 @@ public class IgnoreElementsTest : AbstractNUnitSetUp
         var message = new DefaultMessage(
             "<root>" +
             "<element>" +
-                "<sub-element attribute='A'>text-value</sub-element>" +
-                "<sub-element attribute='B'>text-value</sub-element>" +
-                "<sub-element attribute='C'>text-value</sub-element>" +
+            "<sub-element attribute='A'>text-value</sub-element>" +
+            "<sub-element attribute='B'>text-value</sub-element>" +
+            "<sub-element attribute='C'>text-value</sub-element>" +
             "</element>" +
             "</root>"
         );
@@ -146,18 +139,14 @@ public class IgnoreElementsTest : AbstractNUnitSetUp
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
             "<root>" +
             "<element>" +
-                "<sub-element attribute='wrong'>no validation</sub-element>" +
-                "<sub-element attribute='B'>text-value</sub-element>" +
-                "<sub-element attribute='wrong'>no validation</sub-element>" +
+            "<sub-element attribute='wrong'>no validation</sub-element>" +
+            "<sub-element attribute='B'>text-value</sub-element>" +
+            "<sub-element attribute='wrong'>no validation</sub-element>" +
             "</element>" +
             "</root>"
         ));
 
-        var ignoreMessageElements = new HashSet<string>
-        {
-            "//sub-element[1]",
-            "//sub-element[3]"
-        };
+        var ignoreMessageElements = new HashSet<string> { "//sub-element[1]", "//sub-element[3]" };
 
         var validationContext = new XmlMessageValidationContext.Builder()
             .Ignore(ignoreMessageElements)
@@ -180,11 +169,11 @@ public class IgnoreElementsTest : AbstractNUnitSetUp
         var message = new DefaultMessage(
             "<root>" +
             "<element>" +
-                "<another-element attribute='Z'>text-value</another-element>" +
-                "<sub-element attribute='A'>text-value</sub-element>" +
-                "<sub-element attribute='B'>text-value</sub-element>" +
-                "<sub-element attribute='C'>text-value</sub-element>" +
-                "<another-element attribute='Z'>text-value</another-element>" +
+            "<another-element attribute='Z'>text-value</another-element>" +
+            "<sub-element attribute='A'>text-value</sub-element>" +
+            "<sub-element attribute='B'>text-value</sub-element>" +
+            "<sub-element attribute='C'>text-value</sub-element>" +
+            "<another-element attribute='Z'>text-value</another-element>" +
             "</element>" +
             "</root>"
         );
@@ -197,18 +186,15 @@ public class IgnoreElementsTest : AbstractNUnitSetUp
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
             "<root>" +
             "<element>" +
-                "<another-element>no validation</another-element>" +
-                "<sub-element attribute='wrong'>no validation</sub-element>" +
-                "<sub-element attribute='wrong'>no validation</sub-element>" +
-                "<sub-element attribute='wrong'>no validation</sub-element>" +
+            "<another-element>no validation</another-element>" +
+            "<sub-element attribute='wrong'>no validation</sub-element>" +
+            "<sub-element attribute='wrong'>no validation</sub-element>" +
+            "<sub-element attribute='wrong'>no validation</sub-element>" +
             "</element>" +
             "</root>"
         ));
 
-        var ignoreMessageElements = new HashSet<string>
-        {
-            "/*"
-        };
+        var ignoreMessageElements = new HashSet<string> { "/*" };
 
         var validationContext = new XmlMessageValidationContext.Builder()
             .Ignore(ignoreMessageElements)
@@ -230,17 +216,16 @@ public class IgnoreElementsTest : AbstractNUnitSetUp
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
             "<root>" +
             "<element attributeA='attribute-value' attributeB='attribute-value'>" +
-                "<sub-elementA attribute='no validation'>text-value</sub-elementA>" +
-                "<sub-elementB attribute='no validation'>text-value</sub-elementB>" +
-                "<sub-elementC attribute='C'>text-value</sub-elementC>" +
+            "<sub-elementA attribute='no validation'>text-value</sub-elementA>" +
+            "<sub-elementB attribute='no validation'>text-value</sub-elementB>" +
+            "<sub-elementC attribute='C'>text-value</sub-elementC>" +
             "</element>" +
             "</root>"
         ));
 
         var ignoreMessageElements = new HashSet<string>
         {
-            "//root/element/sub-elementA/@attribute",
-            "//sub-elementB/@attribute"
+            "//root/element/sub-elementA/@attribute", "//sub-elementB/@attribute"
         };
 
         var validationContext = new XmlMessageValidationContext.Builder()
@@ -263,17 +248,14 @@ public class IgnoreElementsTest : AbstractNUnitSetUp
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
             "<root>" +
             "<element attributeA='attribute-value' attributeB='attribute-value'>" +
-                "<sub-elementA attribute='no validation'>text-value</sub-elementA>" +
-                "<sub-elementB attribute='B'>text-value</sub-elementB>" +
-                "<sub-elementC attribute='C'>text-value</sub-elementC>" +
+            "<sub-elementA attribute='no validation'>text-value</sub-elementA>" +
+            "<sub-elementB attribute='B'>text-value</sub-elementB>" +
+            "<sub-elementC attribute='C'>text-value</sub-elementC>" +
             "</element>" +
             "</root>"
         ));
 
-        var ignoreMessageElements = new HashSet<string>
-        {
-            "//@attribute"
-        };
+        var ignoreMessageElements = new HashSet<string> { "//@attribute" };
 
         var validationContext = new XmlMessageValidationContext.Builder()
             .Ignore(ignoreMessageElements)
@@ -302,9 +284,9 @@ public class IgnoreElementsTest : AbstractNUnitSetUp
         var message = new DefaultMessage(
             "<root>" +
             "<element attributeA='attribute-value' attributeB='attribute-value'>" +
-                "<sub-element attribute='A'>text-value</sub-element>" +
-                "<sub-element attribute='B'>text-value</sub-element>" +
-                "<sub-element attribute='C'>text-value</sub-element>" +
+            "<sub-element attribute='A'>text-value</sub-element>" +
+            "<sub-element attribute='B'>text-value</sub-element>" +
+            "<sub-element attribute='C'>text-value</sub-element>" +
             "</element>" +
             "</root>"
         );
@@ -317,17 +299,16 @@ public class IgnoreElementsTest : AbstractNUnitSetUp
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
             "<root>" +
             "<element attributeA='attribute-value' attributeB='attribute-value'>" +
-                "<sub-element attribute='no validation'>text-value</sub-element>" +
-                "<sub-element attribute='no validation'>text-value</sub-element>" +
-                "<sub-element attribute='C'>text-value</sub-element>" +
+            "<sub-element attribute='no validation'>text-value</sub-element>" +
+            "<sub-element attribute='no validation'>text-value</sub-element>" +
+            "<sub-element attribute='C'>text-value</sub-element>" +
             "</element>" +
             "</root>"
         ));
 
         var ignoreMessageElements = new HashSet<string>
         {
-            "//sub-element[1]/@attribute",
-            "//sub-element[2]/@attribute"
+            "//sub-element[1]/@attribute", "//sub-element[2]/@attribute"
         };
 
         var validationContext = new XmlMessageValidationContext.Builder()
@@ -371,10 +352,7 @@ public class IgnoreElementsTest : AbstractNUnitSetUp
             "</root>"
         ));
 
-        var ignoreMessageElements = new HashSet<string>
-        {
-            "//root"
-        };
+        var ignoreMessageElements = new HashSet<string> { "//root" };
 
         var validationContext = new XmlMessageValidationContext.Builder()
             .Ignore(ignoreMessageElements)
@@ -396,23 +374,18 @@ public class IgnoreElementsTest : AbstractNUnitSetUp
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
             "<root>" +
             "<element attributeA='attribute-value' attributeB='attribute-value'>" +
-                "<sub-elementA attribute='A'>no validation</sub-elementA>" +
-                "<sub-elementB attribute='B'>no validation</sub-elementB>" +
-                "<sub-elementC attribute='C'>text-value</sub-elementC>" +
+            "<sub-elementA attribute='A'>no validation</sub-elementA>" +
+            "<sub-elementB attribute='B'>no validation</sub-elementB>" +
+            "<sub-elementC attribute='C'>text-value</sub-elementC>" +
             "</element>" +
             "</root>"
         ));
 
-        var ignoreMessageElements = new HashSet<string>
-        {
-            "//root/element/sub-elementA",
-            "//sub-elementB"
-        };
+        var ignoreMessageElements = new HashSet<string> { "//root/element/sub-elementA", "//sub-elementB" };
 
         var validateElements = new Dictionary<string, object>
         {
-            { "//root/element/sub-elementA", "wrong value" },
-            { "//sub-elementB", "wrong value" }
+            { "//root/element/sub-elementA", "wrong value" }, { "//sub-elementB", "wrong value" }
         };
 
         var validationContext = new XpathMessageValidationContext.Builder()
@@ -476,9 +449,9 @@ public class IgnoreElementsTest : AbstractNUnitSetUp
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
             "<root>" +
             "<element attributeA='attribute-value' attributeB='attribute-value'>" +
-                "<sub-elementA attribute='@Ignore@'>text-value</sub-elementA>" +
-                "<sub-elementB attribute=' @Ignore@ '>text-value</sub-elementB>" +
-                "<sub-elementC attribute='C'>text-value</sub-elementC>" +
+            "<sub-elementA attribute='@Ignore@'>text-value</sub-elementA>" +
+            "<sub-elementB attribute=' @Ignore@ '>text-value</sub-elementB>" +
+            "<sub-elementC attribute='C'>text-value</sub-elementC>" +
             "</element>" +
             "</root>"
         ));
@@ -493,21 +466,19 @@ public class IgnoreElementsTest : AbstractNUnitSetUp
 
     [Test]
     public void TestIgnoreElementsNoMatch()
-    { var controlMessageBuilder = new DefaultMessageBuilder();
+    {
+        var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
             "<root>" +
             "<element attributeA='attribute-value' attributeB='attribute-value'>" +
-                "<sub-elementA attribute='A'>text-value</sub-elementA>" +
-                "<sub-elementB attribute='B'>text-value</sub-elementB>" +
-                "<sub-elementC attribute='C'>text-value</sub-elementC>" +
+            "<sub-elementA attribute='A'>text-value</sub-elementA>" +
+            "<sub-elementB attribute='B'>text-value</sub-elementB>" +
+            "<sub-elementC attribute='C'>text-value</sub-elementC>" +
             "</element>" +
             "</root>"
         ));
 
-        var ignoreMessageElements = new HashSet<string>
-        {
-            "//something-else"
-        };
+        var ignoreMessageElements = new HashSet<string> { "//something-else" };
 
         var validationContext = new XmlMessageValidationContext.Builder()
             .Ignore(ignoreMessageElements)
@@ -519,6 +490,7 @@ public class IgnoreElementsTest : AbstractNUnitSetUp
             .Validate(validationContext)
             .Build();
 
-        Assert.Throws<AgenixSystemException>(() => receiveAction.Execute(Context), "No result for XPath expression: '//something-else'");
+        Assert.Throws<AgenixSystemException>(() => receiveAction.Execute(Context),
+            "No result for XPath expression: '//something-else'");
     }
 }

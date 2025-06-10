@@ -24,6 +24,7 @@
 
 #endregion
 
+using System.Collections;
 using NHamcrest;
 using NHamcrest.Core;
 
@@ -259,5 +260,40 @@ public class Matchers
     public static IMatcher<T> GreaterThan<T>(T value) where T : IComparable<T>
     {
         return new IsGreaterThan<T>(value);
+    }
+
+    public static IMatcher<T> GreaterThanOrEqualTo<T>(T value) where T : IComparable<T>
+    {
+        return new IsGreaterThanOrEqualTo<T>(value);
+    }
+
+    public static IMatcher<T> LessThan<T>(T value) where T : IComparable<T>
+    {
+        return new IsLessThan<T>(value);
+    }
+
+    public static IMatcher<T> LessThanOrEqualTo<T>(T value) where T : IComparable<T>
+    {
+        return new IsLessThanOrEqualTo<T>(value);
+    }
+
+    public static IMatcher<ICollection> HasSize(int length)
+    {
+        return new LengthMatcher<ICollection>(length);
+    }
+
+    public static IMatcher<IEnumerable<T>> HasSize<T>(int length)
+    {
+        return new TypedLengthMatcher<T>(length);
+    }
+
+    public static IMatcher<IEnumerable<T>> OfLength<T>(int length)
+    {
+        return new TypedLengthMatcher<T>(length);
+    }
+
+    public static IMatcher<ICollection> OfLength(int length)
+    {
+        return new LengthMatcher<ICollection>(length);
     }
 }

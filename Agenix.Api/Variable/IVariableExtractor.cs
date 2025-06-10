@@ -83,7 +83,7 @@ public interface IVariableExtractor : IMessageProcessor
     /// <typeparam name="TB">The builder type for the IVariableExtractor implementation.</typeparam>
     /// <returns>An optional builder for the specified IVariableExtractor type.</returns>
     public static new Optional<TB> Lookup<TB>(string extractor)
-         where TB : IBuilder
+        where TB : IBuilder
     {
         try
         {
