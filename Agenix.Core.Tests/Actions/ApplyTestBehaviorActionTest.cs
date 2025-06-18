@@ -1,4 +1,4 @@
-﻿using Agenix.Api;
+using Agenix.Api;
 using Agenix.Core.Actions;
 using Moq;
 using NUnit.Framework;

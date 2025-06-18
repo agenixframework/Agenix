@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Exceptions;
+using Agenix.Api.Exceptions;
 using Agenix.Api.Validation.Matcher;
 using Moq;
 using NUnit.Framework;

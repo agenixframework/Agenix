@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Agenix.Api.Config.Annotation;
 using Agenix.Api.Endpoint;
 using Agenix.Core.Endpoint.Direct.Annotation;

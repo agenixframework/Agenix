@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Spi;

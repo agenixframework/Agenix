@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Agenix.Api.Annotations;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;

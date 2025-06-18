@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Spi;
+using Agenix.Api.Spi;
 using Agenix.Validation.Json.Message.Builder;
 using Moq;
 using Newtonsoft.Json;

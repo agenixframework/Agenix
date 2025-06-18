@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using Agenix.Api.Exceptions;
 
 namespace Agenix.Core.Tests.Util;

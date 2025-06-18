@@ -1,4 +1,4 @@
-﻿using System.Net.Http;
+using System.Net.Http;
 using Agenix.Api.Annotations;
 using Agenix.Api.Condition;
 using Agenix.Api.Spi;

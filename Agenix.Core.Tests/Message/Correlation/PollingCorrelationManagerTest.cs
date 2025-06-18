@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Message.Correlation;
+using Agenix.Api.Message.Correlation;
 using Agenix.Core.Endpoint.Direct;
 using Agenix.Core.Message.Correlation;
 using Moq;

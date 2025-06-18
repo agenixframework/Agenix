@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Agenix.Api.Message;
 using Agenix.Core.Message;
 using NUnit.Framework;

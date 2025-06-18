@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Annotations;
+using Agenix.Api.Annotations;
 using Agenix.Api.Container;
 using Agenix.Core.Container;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;

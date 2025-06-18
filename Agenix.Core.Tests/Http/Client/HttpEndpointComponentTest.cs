@@ -1,4 +1,4 @@
-﻿using System.Net.Http;
+using System.Net.Http;
 using Agenix.Api.Spi;
 using Agenix.Http.Client;
 using Moq;

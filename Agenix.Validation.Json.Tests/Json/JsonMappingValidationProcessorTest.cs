@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Message;
+using Agenix.Api.Message;
 using Agenix.Api.Spi;
 using Agenix.Core.Message;
 using Agenix.Core.Validation.Json;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Agenix.Api.Condition;
 using Agenix.Api.Exceptions;
 using Agenix.Core.Container;

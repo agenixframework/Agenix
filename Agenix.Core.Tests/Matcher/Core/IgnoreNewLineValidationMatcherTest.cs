@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Agenix.Api.Exceptions;
 using Agenix.Core.Validation.Matcher.Core;
 using NUnit.Framework;

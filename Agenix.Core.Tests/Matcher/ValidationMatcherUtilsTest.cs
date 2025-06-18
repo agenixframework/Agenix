@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Agenix.Api.Validation.Matcher;
 using Moq;
 using NUnit.Framework;

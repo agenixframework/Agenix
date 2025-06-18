@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Agenix.Api;
 using Agenix.Api.Message;
 using Agenix.Api.Validation;

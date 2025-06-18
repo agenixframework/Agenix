@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Validation;
+using Agenix.Api.Validation;
 using Agenix.Core.Validation;
 using Agenix.Validation.NHamcrest.Validation;
 using NUnit.Framework.Legacy;

@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Reflection;
 using Agenix.Api.Container;
 using Agenix.Api.Spi;

@@ -1,4 +1,4 @@
-﻿namespace Agenix.Core.Tests.Message;
+namespace Agenix.Core.Tests.Message;
 
 public class TestRequest
 {

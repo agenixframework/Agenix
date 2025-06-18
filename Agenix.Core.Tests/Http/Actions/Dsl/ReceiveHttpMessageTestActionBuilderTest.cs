@@ -1,4 +1,4 @@
-﻿using System.Net.Http;
+using System.Net.Http;
 using Agenix.Api.Message;
 using Agenix.Api.Validation.Context;
 using Agenix.Core.Actions;

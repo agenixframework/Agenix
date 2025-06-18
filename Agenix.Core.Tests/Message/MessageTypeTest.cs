@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Message;
+using Agenix.Api.Message;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 

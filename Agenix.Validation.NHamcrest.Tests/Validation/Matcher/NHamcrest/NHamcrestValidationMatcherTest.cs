@@ -1,4 +1,4 @@
-﻿using Agenix.Validation.NHamcrest.Validation.Matcher;
+using Agenix.Validation.NHamcrest.Validation.Matcher;
 
 namespace Agenix.Validation.NHamcrest.Tests.Validation.Matcher.NHamcrest;
 

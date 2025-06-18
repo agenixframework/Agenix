@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Exceptions;
+using Agenix.Api.Exceptions;
 using Agenix.Api.Validation.Context;
 using Agenix.Core.Message;
 using Agenix.Core.Validation;
