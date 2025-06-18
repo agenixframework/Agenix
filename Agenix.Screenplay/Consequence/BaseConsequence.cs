@@ -143,7 +143,10 @@ public abstract class BaseConsequence<T> : IConsequence<T>
     /// <param name="actualError">The exception to include as the underlying cause of the complaint.</param>
     protected void ThrowComplaintTypeErrorIfSpecified(Exception actualError)
     {
-        if (_complaintType != null) throw Complaint.From(_complaintType, _complaintDetails, actualError);
+        if (_complaintType != null)
+        {
+            throw Complaint.From(_complaintType, _complaintDetails, actualError);
+        }
     }
 
     protected string InputValues()
@@ -156,7 +159,11 @@ public abstract class BaseConsequence<T> : IConsequence<T>
 
     protected string AddRecordedInputValuesTo(string message)
     {
-        if (string.IsNullOrEmpty(InputValues())) return message;
+        if (string.IsNullOrEmpty(InputValues()))
+        {
+            return message;
+        }
+
         return $"{message} [{InputValues()}]";
     }
 

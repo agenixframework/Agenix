@@ -46,9 +46,32 @@ jobs:
         run: dotnet format --verify-no-changes --verbosity diagnostic
         continue-on-error: true  # temporarily
 
-      - name: 🛡️ Security scan
-        run: dotnet list package --vulnerable --include-transitive
-        continue-on-error: true
+      - name: Security Scan
+        run: |
+          echo "🔍 Running security vulnerability scan..."
+          dotnet list package --vulnerable --include-transitive 2>&1 | tee audit.txt
+
+          HIGH_VULNS=$(grep -c "High" audit.txt || true)
+          MODERATE_VULNS=$(grep -c "Moderate" audit.txt || true)
+
+          if [ $HIGH_VULNS -gt 0 ]; then
+            echo "❌ Found $HIGH_VULNS HIGH severity vulnerabilities"
+            echo "🚨 PR will be blocked due to high severity issues"
+            exit 1
+          elif [ $MODERATE_VULNS -gt 0 ]; then
+            echo "⚠️ Found $MODERATE_VULNS MODERATE severity vulnerabilities"
+            echo "🟡 Consider updating these packages"
+          else
+            echo "✅ No vulnerabilities detected"
+          fi
+
+      - name: Upload Security Report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-audit-report
+          path: audit.txt
+          retention-days: 30
 
   # ===== BUILD & TEST MATRIX =====
   build-and-test:
@@ -193,11 +216,12 @@ jobs:
             "build": {
               "content": [
                 {
-                  "files": ["api/**.yml"],
+                  "files": ["api/**.yml", "api/index.md"],
                   "dest": "api"
                 },
                 {
-                  "files": ["README.md"]
+                  "files": ["**/*.md", "**/*.yml"],
+                  "exclude": ["obj/**", "_site/**"]
                 }
               ],
               "resource": [
@@ -211,8 +235,16 @@ jobs:
           EOF
           fi
 
+          # Install DocFX templates
+          echo "Installing DocFX templates..."
+          docfx template list
+          docfx template export default
+
           # Generate API documentation
+          echo "Generating API metadata..."
           docfx metadata docfx.json
+
+          echo "Building documentation..."
           docfx build docfx.json
         continue-on-error: true
 

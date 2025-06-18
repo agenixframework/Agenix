@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -115,9 +115,13 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
         {
             var builder = new HttpClientResponseActionBuilder();
             if (httpClient != null)
+            {
                 builder.Endpoint(httpClient);
+            }
             else
+            {
                 builder.Endpoint(httpClientUri);
+            }
 
             builder.Name("http:receive-response");
             builder.WithReferenceResolver(referenceResolver);
@@ -140,9 +144,13 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
         {
             var builder = new HttpClientResponseActionBuilder();
             if (httpClient != null)
+            {
                 builder.Endpoint(httpClient);
+            }
             else
+            {
                 builder.Endpoint(httpClientUri);
+            }
 
             builder.Name("http:receive-response");
             builder.WithReferenceResolver(referenceResolver);
@@ -182,15 +190,22 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
         {
             var builder = new HttpClientRequestActionBuilder();
             if (httpClient != null)
+            {
                 builder.Endpoint(httpClient);
+            }
             else
+            {
                 builder.Endpoint(httpClientUri);
+            }
 
             builder.Name("http:send-request");
             builder.WithReferenceResolver(referenceResolver);
             builder.Method(method);
 
-            if (!string.IsNullOrWhiteSpace(path)) builder.Path(path);
+            if (!string.IsNullOrWhiteSpace(path))
+            {
+                builder.Path(path);
+            }
 
             newDelegate = builder;
             return builder;

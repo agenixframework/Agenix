@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Functions;
-using Agenix.Core.Functions;
 using Agenix.Core.Functions.Core;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
@@ -13,12 +12,13 @@ public class FunctionUtilsTest : AbstractNUnitSetUp
     [Test]
     public void TestResolveFunction()
     {
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:Concat('Hello',' TestFramework!')", Context),
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:Concat('Hello',' TestFramework!')", Context),
             "Hello TestFramework!");
 
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:Concat('core',':core')", Context), "core:core");
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:Concat('agenix',':core')", Context),
+            "agenix:core");
 
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:Concat('core:core')", Context), "core:core");
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:Concat('agenix:core')", Context), "agenix:core");
     }
 
     [Test]
@@ -27,10 +27,10 @@ public class FunctionUtilsTest : AbstractNUnitSetUp
         Context.SetVariable("greeting", "Hello");
         Context.SetVariable("text", "TestFramework!");
 
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:Concat('Hello',' ', ${text})", Context),
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:Concat('Hello',' ', ${text})", Context),
             "Hello TestFramework!");
 
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:Concat(${greeting},' ', ${text})", Context),
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:Concat(${greeting},' ', ${text})", Context),
             "Hello TestFramework!");
     }
 
@@ -40,41 +40,41 @@ public class FunctionUtilsTest : AbstractNUnitSetUp
         Context.SetVariable("greeting", "HeLl0");
 
         ClassicAssert.AreEqual(
-            FunctionUtils.ResolveFunction("core:UpperCase(core:Concat(${greeting},'W0rld'))", Context),
+            FunctionUtils.ResolveFunction("agenix:UpperCase(agenix:Concat(${greeting},'W0rld'))", Context),
             "HELL0W0RLD");
         ClassicAssert.AreEqual(
-            FunctionUtils.ResolveFunction("core:Concat(core:UpperCase('Yes'),' ',core:UpperCase('I like W0rld!'))",
+            FunctionUtils.ResolveFunction(
+                "agenix:Concat(agenix:UpperCase('Yes'),' ',agenix:UpperCase('I like W0rld!'))",
                 Context), "YES I LIKE W0RLD!");
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:UpperCase('Monday, Tuesday, wednesday')", Context),
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:UpperCase('Monday, Tuesday, wednesday')", Context),
             "MONDAY, TUESDAY, WEDNESDAY");
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:Concat('Monday, Tuesday',' wednesday')", Context),
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:Concat('Monday, Tuesday',' wednesday')", Context),
             "Monday, Tuesday wednesday");
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:UpperCase('Yes, I like W0rld!)", Context),
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:UpperCase('Yes, I like W0rld!)", Context),
             "'YES, I LIKE W0RLD!");
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:UpperCase(''Yes, I like W0rld!')", Context),
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:UpperCase(''Yes, I like W0rld!')", Context),
             "'YES, I LIKE W0RLD!");
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:UpperCase('Yes, I like W0rld!')", Context),
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:UpperCase('Yes, I like W0rld!')", Context),
             "YES, I LIKE W0RLD!");
         ClassicAssert.AreEqual(
-            FunctionUtils.ResolveFunction("core:UpperCase('Yes, I like W0rld, and this is great!')", Context),
+            FunctionUtils.ResolveFunction("agenix:UpperCase('Yes, I like W0rld, and this is great!')", Context),
             "YES, I LIKE W0RLD, AND THIS IS GREAT!");
-        //Assert.AreEqual(FunctionUtils.ResolveFunction("core:UpperCase('Yes,I like W0rld!')", Context), "YES,I LIKE W0RLD!");
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:UpperCase('Yes', 'I like W0rld!')", Context), "YES");
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:Concat('Hello Yes, I like W0rld!')", Context),
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:UpperCase('Yes,I like W0rld!')", Context),
+            "YES,I LIKE W0RLD!");
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:UpperCase('Yes', 'I like W0rld!')", Context),
+            "YES");
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:Concat('Hello Yes, I like W0rld!')", Context),
             "Hello Yes, I like W0rld!");
-        //Assert.AreEqual(FunctionUtils.ResolveFunction("core:Concat('Hello Yes,I like W0rld!')", Context), "Hello Yes,I like W0rld!");
-        //Assert.AreEqual(FunctionUtils.ResolveFunction("core:Concat('Hello Yes,I like W0rld!, and this is great')", Context), "Hello Yes,I like W0rld!, and this is great!");
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:Concat('Hello Yes , I like W0rld!')", Context),
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:Concat('Hello Yes,I like W0rld!')", Context),
+            "Hello Yes,I like W0rld!");
+        ClassicAssert.AreEqual(
+            FunctionUtils.ResolveFunction("agenix:Concat('Hello Yes,I like W0rld!, and this is great!')", Context),
+            "Hello Yes,I like W0rld!, and this is great!");
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:Concat('Hello Yes , I like W0rld!')", Context),
             "Hello Yes , I like W0rld!");
-        //Assert.AreEqual(FunctionUtils.ResolveFunction("core:Concat('Hello Yes, I like W0rld!', 'Hello Yes,we like W0rld!')", Context), "Hello Yes, I like W0rld!Hello Yes,we like W0rld!");
-
         ClassicAssert.AreEqual(
-            FunctionUtils.ResolveFunction("core:EscapeXml('<Message>Hello Yes, I like W0rld!</Message>')", Context),
-            "&lt;Message&gt;Hello Yes, I like W0rld!&lt;/Message&gt;");
-        ClassicAssert.AreEqual(
-            FunctionUtils.ResolveFunction("core:EscapeXml('<Message>Hello Yes , I like W0rld!</Message>')",
-                Context), "&lt;Message&gt;Hello Yes , I like W0rld!&lt;/Message&gt;");
-        // Assert.AreEqual(FunctionUtils.ResolveFunction("core:EscapeXml('<Message>Hello Yes,I like W0rld, and this is great!</Message>')", Context), "&lt;Message&gt;Hello Yes,I like W0rld, and this is great!&lt;/Message&gt;");
+            FunctionUtils.ResolveFunction("agenix:Concat('Hello Yes, I like W0rld!', 'Hello Yes,we like W0rld!')",
+                Context), "Hello Yes, I like W0rld!Hello Yes,we like W0rld!");
     }
 
     [Test]
@@ -91,7 +91,7 @@ public class FunctionUtilsTest : AbstractNUnitSetUp
     {
         Assert.Throws<NoSuchFunctionException>(() =>
             FunctionUtils.ResolveFunction(
-                "core:functiondoesnotexist('<Message>Hello Yes, I like W0rld!</Message>')", Context)
+                "agenix:functiondoesnotexist('<Message>Hello Yes, I like W0rld!</Message>')", Context)
         );
     }
 
@@ -100,23 +100,24 @@ public class FunctionUtilsTest : AbstractNUnitSetUp
     {
         Assert.Throws<InvalidFunctionUsageException>(() =>
             FunctionUtils.ResolveFunction(
-                "core:core", Context)
+                "agenix:core", Context)
         );
     }
 
     [Test]
     public void TestWithNestedFunctions()
     {
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:Concat(core:CurrentDate('yyyy-mm-dd'))", Context),
+        ClassicAssert.AreEqual(
+            FunctionUtils.ResolveFunction("agenix:Concat(agenix:CurrentDate('yyyy-mm-dd'))", Context),
             new CurrentDateFunction().Execute(new List<string> { "yyyy-mm-dd" }, Context));
 
         ClassicAssert.AreEqual(
-            FunctionUtils.ResolveFunction("core:Concat('Now is: ', core:CurrentDate('yyyy-mm-dd'))", Context),
+            FunctionUtils.ResolveFunction("agenix:Concat('Now is: ', agenix:CurrentDate('yyyy-mm-dd'))", Context),
             "Now is: " + new CurrentDateFunction().Execute(new List<string> { "yyyy-mm-dd" }, Context));
 
         ClassicAssert.AreEqual(
             FunctionUtils.ResolveFunction(
-                "core:Concat(core:CurrentDate('yyyy-mm-dd'),' ', core:Concat('Hello', ' Test Framework!'))",
+                "agenix:Concat(agenix:CurrentDate('yyyy-mm-dd'),' ', agenix:Concat('Hello', ' Test Framework!'))",
                 Context),
             new CurrentDateFunction().Execute(new List<string> { "yyyy-mm-dd" }, Context) + " Hello Test Framework!");
     }
@@ -129,7 +130,7 @@ public class FunctionUtilsTest : AbstractNUnitSetUp
 
         ClassicAssert.AreEqual(
             FunctionUtils.ResolveFunction(
-                "core:Concat(core:CurrentDate('${dateFormat}'),' ', core:Concat('${greeting}', ' TestFramework!'))",
+                "agenix:Concat(agenix:CurrentDate('${dateFormat}'),' ', agenix:Concat('${greeting}', ' TestFramework!'))",
                 Context),
             new CurrentDateFunction().Execute(new List<string> { "yyyy-mm-dd" }, Context) + " Hello TestFramework!");
     }
@@ -139,30 +140,30 @@ public class FunctionUtilsTest : AbstractNUnitSetUp
 
     {
         // check the default date format 'dd.MM.yyyy'
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:CurrentDate()", Context),
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:CurrentDate()", Context),
             new CurrentDateFunction().Execute(new List<string> { "dd.MM.yyyy" }, Context));
 
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:CurrentDate('MM/dd/yyyy')", Context),
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:CurrentDate('MM/dd/yyyy')", Context),
             new CurrentDateFunction().Execute(new List<string> { "MM/dd/yyyy" }, Context));
 
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:CurrentDate('MMMMM dd')", Context),
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:CurrentDate('MMMMM dd')", Context),
             new CurrentDateFunction().Execute(new List<string> { "MMMMM dd" }, Context));
 
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:CurrentDate('dddd, dd MMMMM yyyy')", Context),
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:CurrentDate('dddd, dd MMMMM yyyy')", Context),
             new CurrentDateFunction().Execute(new List<string> { "dddd, dd MMMMM yyyy" }, Context));
     }
 
     [Test]
     public void TestEncodeBase64Function()
     {
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:EncodeBase64('foo')", Context),
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:EncodeBase64('foo')", Context),
             new EncodeBase64Function().Execute(new List<string> { "foo" }, Context));
     }
 
     [Test]
     public void TestDecodeBase64Function()
     {
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("core:DecodeBase64('Zm9v')", Context),
+        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:DecodeBase64('Zm9v')", Context),
             new DecodeBase64Function().Execute(new List<string> { "Zm9v" }, Context));
     }
 }

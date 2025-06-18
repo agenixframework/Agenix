@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -54,7 +54,10 @@ public class DefaultAgenixContextProvider(AgenixInstanceStrategy strategy) : IAg
     /// </returns>
     public AgenixContext Create()
     {
-        if (strategy.Equals(AgenixInstanceStrategy.NEW) || _context == null) _context = AgenixContext.Create();
+        if (strategy.Equals(AgenixInstanceStrategy.NEW) || _context == null)
+        {
+            _context = AgenixContext.Create();
+        }
 
         return _context;
     }

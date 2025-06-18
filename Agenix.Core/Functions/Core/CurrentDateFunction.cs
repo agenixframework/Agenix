@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -36,13 +36,16 @@ namespace Agenix.Core.Functions.Core;
 /// <summary>
 ///     Function returning the actual date as formatted string value. User specifies format string as argument.
 ///     TODO: Function has also to support additional date offset in order to manipulate result date value. E.g.
-///     core:CurrentDate('yyyy-MM-dd', '+1y') -> current date + one year
+///     agenix:CurrentDate('yyyy-MM-dd', '+1y') -> current date + one year
 /// </summary>
 public class CurrentDateFunction : IFunction
 {
     public string Execute(List<string> parameterList, TestContext testContext)
     {
-        if (parameterList == null || parameterList.Count == 0) return GetDefaultCurrentDate();
+        if (parameterList == null || parameterList.Count == 0)
+        {
+            return GetDefaultCurrentDate();
+        }
 
         try
         {

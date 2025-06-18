@@ -100,8 +100,12 @@ public class HttpMessage : DefaultMessage
     private void CopyCookies(IMessage message)
     {
         if (message is HttpMessage httpMessage)
+        {
             foreach (var cookie in httpMessage.GetCookiesMap())
+            {
                 _cookies[cookie.Key] = cookie.Value;
+            }
+        }
     }
 
     /// Sets the HTTP request method header for this message.
@@ -130,7 +134,9 @@ public class HttpMessage : DefaultMessage
         SetHeader(HttpMessageHeaders.HttpStatusCode, (int)statusCode);
         var status = (HttpStatusCode)(int)statusCode;
         if (Enum.IsDefined(typeof(HttpStatusCode), (int)statusCode))
+        {
             SetHeader(HttpMessageHeaders.HttpReasonPhrase, status.ToString());
+        }
 
         return this;
     }
@@ -210,7 +216,9 @@ public class HttpMessage : DefaultMessage
     public HttpMessage QueryParam(string? name, string? value = null)
     {
         if (!StringUtils.HasText(name))
+        {
             throw new AgenixSystemException("Invalid query param name - must not be empty!");
+        }
 
         AddQueryParam(name, value);
 
@@ -332,12 +340,15 @@ public class HttpMessage : DefaultMessage
         var statusCode = GetHeader(HttpMessageHeaders.HttpStatusCode);
 
         if (statusCode != null)
+        {
             return statusCode switch
             {
                 HttpStatusCode httpStatusCode => httpStatusCode,
                 int integer => (HttpStatusCode)integer,
                 _ => (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), statusCode.ToString() ?? string.Empty)
             };
+        }
+
         return null;
     }
 
@@ -391,8 +402,12 @@ public class HttpMessage : DefaultMessage
     {
         _cookies.Clear();
         if (cookies != null)
+        {
             foreach (var cookie in cookies)
+            {
                 Cookie(cookie);
+            }
+        }
     }
 
     /// Adds a new cookie to the HTTP message. If a cookie with the same name
@@ -421,11 +436,20 @@ public class HttpMessage : DefaultMessage
         var request = new HttpMessage();
 
         var requestLine = reader.ReadLine()?.Split(' ');
-        if (requestLine?.Length > 0) request.Method(new HttpMethod(requestLine[0]));
+        if (requestLine?.Length > 0)
+        {
+            request.Method(new HttpMethod(requestLine[0]));
+        }
 
-        if (requestLine?.Length > 1) request.Uri(requestLine[1]);
+        if (requestLine?.Length > 1)
+        {
+            request.Uri(requestLine[1]);
+        }
 
-        if (requestLine?.Length > 2) request.Version(requestLine[2]);
+        if (requestLine?.Length > 2)
+        {
+            request.Version(requestLine[2]);
+        }
 
         return ParseHttpMessage(new StringReader(requestData), request);
     }
@@ -440,9 +464,15 @@ public class HttpMessage : DefaultMessage
         var response = new HttpMessage();
 
         var statusLine = reader.ReadLine()?.Split(' ');
-        if (statusLine?.Length > 0) response.Version(statusLine[0]);
+        if (statusLine?.Length > 0)
+        {
+            response.Version(statusLine[0]);
+        }
 
-        if (statusLine?.Length > 1) response.Status((HttpStatusCode)int.Parse(statusLine[1]));
+        if (statusLine?.Length > 1)
+        {
+            response.Status((HttpStatusCode)int.Parse(statusLine[1]));
+        }
 
         return ParseHttpMessage(new StringReader(responseData), response);
     }
@@ -495,8 +525,10 @@ public class HttpMessage : DefaultMessage
         while ((line = reader.ReadLine()) != null && StringUtils.HasText(line))
         {
             if (!line.Contains(':'))
+            {
                 throw new AgenixSystemException(
                     $"Invalid header syntax in line - expected 'key:value' but was '{line}'");
+            }
 
             var keyValue = line.Split(':');
             message.SetHeader(keyValue[0].Trim(), keyValue[1].Trim());
@@ -504,7 +536,9 @@ public class HttpMessage : DefaultMessage
 
         var bodyBuilder = new StringBuilder();
         while ((line = reader.ReadLine()) != null && StringUtils.HasText(line))
+        {
             bodyBuilder.Append(line).Append(Environment.NewLine);
+        }
 
         message.Payload = bodyBuilder.ToString().Trim();
 

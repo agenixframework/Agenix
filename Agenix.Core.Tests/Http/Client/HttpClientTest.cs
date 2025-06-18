@@ -1,10 +1,9 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Mime;
+using System.Text;
 using Agenix.Api.Message;
-using Agenix.Core.Endpoint.Resolver;
-using Agenix.Core.Message;
 using Agenix.Http.Client;
 using Agenix.Http.Message;
 using Moq;
@@ -40,6 +39,7 @@ public class HttpClientTest : AbstractNUnitSetUp
             {
                 _server.Stop();
             }
+
             _server.Close();
         }
         catch (Exception ex)
@@ -51,13 +51,15 @@ public class HttpClientTest : AbstractNUnitSetUp
     private void OnRequest(IAsyncResult result)
     {
         if (result == null || !_server.IsListening)
+        {
             return;
+        }
 
         try
         {
             var context = _server.EndGetContext(result);
             context.Response.StatusCode = 200;
-            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(ResponseBody);
+            var buffer = Encoding.UTF8.GetBytes(ResponseBody);
             context.Response.ContentLength64 = buffer.Length; // Specifies the Content-Length of the response
             context.Response.OutputStream.Write(buffer, 0, buffer.Length);
 
@@ -66,7 +68,8 @@ public class HttpClientTest : AbstractNUnitSetUp
             context.Response.Close();
 
             _server.BeginGetContext(OnRequest, null);
-        }catch (HttpListenerException ex)
+        }
+        catch (HttpListenerException ex)
         {
             Console.WriteLine($"HttpListener exception: {ex.Message}");
         }
@@ -78,7 +81,6 @@ public class HttpClientTest : AbstractNUnitSetUp
         {
             Console.WriteLine($"Unhandled exception: {ex}");
         }
-
     }
 
     [Test]
@@ -88,8 +90,8 @@ public class HttpClientTest : AbstractNUnitSetUp
         var httpClient = new HttpClient(endpointConfiguration);
         var requestUrl = $"http://localhost:{ServerPort}/test/";
 
-        endpointConfiguration.RequestMethod = (HttpMethod.Post);
-        endpointConfiguration.RequestUrl = (requestUrl);
+        endpointConfiguration.RequestMethod = HttpMethod.Post;
+        endpointConfiguration.RequestUrl = requestUrl;
 
         var requestMessage = new HttpMessage(RequestBody);
 
@@ -98,12 +100,13 @@ public class HttpClientTest : AbstractNUnitSetUp
 
         // Act
         httpClient.Send(requestMessage, Context);
-        var responseMessage = (HttpMessage) httpClient.Receive(Context, endpointConfiguration.Timeout);
+        var responseMessage = (HttpMessage)httpClient.Receive(Context, endpointConfiguration.Timeout);
 
         Assert.That(responseMessage.GetPayload<string>(), Is.EqualTo(ResponseBody));
         Assert.That(responseMessage.GetStatusCode(), Is.EqualTo(HttpStatusCode.OK));
         Assert.That(responseMessage.GetVersion(), Is.EqualTo("HTTP/1.1"));
-        Assert.That(responseMessage.GetReasonPhrase(), Is.EqualTo("OK"));;
+        Assert.That(responseMessage.GetReasonPhrase(), Is.EqualTo("OK"));
+        ;
     }
 
     [Test]
@@ -113,10 +116,10 @@ public class HttpClientTest : AbstractNUnitSetUp
         var httpClient = new HttpClient(endpointConfiguration);
         var requestUrl = $"http://localhost:{ServerPort}/test/";
 
-        endpointConfiguration.RequestMethod = (HttpMethod.Post);
-        endpointConfiguration.RequestUrl = (requestUrl);
+        endpointConfiguration.RequestMethod = HttpMethod.Post;
+        endpointConfiguration.RequestUrl = requestUrl;
         endpointConfiguration.ContentType = "text/xml";
-        endpointConfiguration.Charset = ("ISO-8859-1");
+        endpointConfiguration.Charset = "ISO-8859-1";
 
         var requestMessage = new HttpMessage(RequestBody)
             .Header("Operation", "foo");
@@ -127,12 +130,13 @@ public class HttpClientTest : AbstractNUnitSetUp
 
         // Act
         httpClient.Send(requestMessage, Context);
-        var responseMessage = (HttpMessage) httpClient.Receive(Context, endpointConfiguration.Timeout);
+        var responseMessage = (HttpMessage)httpClient.Receive(Context, endpointConfiguration.Timeout);
 
         Assert.That(responseMessage.GetPayload<string>(), Is.EqualTo(ResponseBody));
         Assert.That(responseMessage.GetStatusCode(), Is.EqualTo(HttpStatusCode.OK));
         Assert.That(responseMessage.GetVersion(), Is.EqualTo("HTTP/1.1"));
-        Assert.That(responseMessage.GetReasonPhrase(), Is.EqualTo("OK"));;
+        Assert.That(responseMessage.GetReasonPhrase(), Is.EqualTo("OK"));
+        ;
     }
 
     [Test]
@@ -142,10 +146,10 @@ public class HttpClientTest : AbstractNUnitSetUp
         var httpClient = new HttpClient(endpointConfiguration);
         var requestUrl = $"http://localhost:{ServerPort}/test/";
 
-        endpointConfiguration.RequestMethod = (HttpMethod.Post);
-        endpointConfiguration.RequestUrl = (requestUrl);
+        endpointConfiguration.RequestMethod = HttpMethod.Post;
+        endpointConfiguration.RequestUrl = requestUrl;
         endpointConfiguration.ContentType = "text/xml";
-        endpointConfiguration.Charset = ("ISO-8859-1");
+        endpointConfiguration.Charset = "ISO-8859-1";
 
         var requestMessage = new HttpMessage(RequestBody)
             .ContentType("application/xml;charset=UTF-8")
@@ -158,12 +162,13 @@ public class HttpClientTest : AbstractNUnitSetUp
 
         // Act
         httpClient.Send(requestMessage, Context);
-        var responseMessage = (HttpMessage) httpClient.Receive(Context, endpointConfiguration.Timeout);
+        var responseMessage = (HttpMessage)httpClient.Receive(Context, endpointConfiguration.Timeout);
 
         Assert.That(responseMessage.GetPayload<string>(), Is.EqualTo(ResponseBody));
         Assert.That(responseMessage.GetStatusCode(), Is.EqualTo(HttpStatusCode.OK));
         Assert.That(responseMessage.GetVersion(), Is.EqualTo("HTTP/1.1"));
-        Assert.That(responseMessage.GetReasonPhrase(), Is.EqualTo("OK"));;
+        Assert.That(responseMessage.GetReasonPhrase(), Is.EqualTo("OK"));
+        ;
     }
 
     [Test]
@@ -173,8 +178,8 @@ public class HttpClientTest : AbstractNUnitSetUp
         var httpClient = new HttpClient(endpointConfiguration);
         var requestUrl = $"http://localhost:{ServerPort}/test/";
 
-        endpointConfiguration.RequestMethod = (HttpMethod.Post);
-        endpointConfiguration.RequestUrl = (requestUrl);
+        endpointConfiguration.RequestMethod = HttpMethod.Post;
+        endpointConfiguration.RequestUrl = requestUrl;
 
         var requestMessage = new HttpMessage(RequestBody)
             .Method(HttpMethod.Get);
@@ -184,12 +189,13 @@ public class HttpClientTest : AbstractNUnitSetUp
 
         // Act
         httpClient.Send(requestMessage, Context);
-        var responseMessage = (HttpMessage) httpClient.Receive(Context, endpointConfiguration.Timeout);
+        var responseMessage = (HttpMessage)httpClient.Receive(Context, endpointConfiguration.Timeout);
 
         Assert.That(responseMessage.GetPayload<string>(), Is.EqualTo(ResponseBody));
         Assert.That(responseMessage.GetStatusCode(), Is.EqualTo(HttpStatusCode.OK));
         Assert.That(responseMessage.GetVersion(), Is.EqualTo("HTTP/1.1"));
-        Assert.That(responseMessage.GetReasonPhrase(), Is.EqualTo("OK"));;
+        Assert.That(responseMessage.GetReasonPhrase(), Is.EqualTo("OK"));
+        ;
     }
 
     [Test]
@@ -197,10 +203,10 @@ public class HttpClientTest : AbstractNUnitSetUp
     {
         var endpointConfiguration = new HttpEndpointConfiguration();
         var httpClient = new HttpClient(endpointConfiguration);
-        var requestUrl =$"http://localhost:{ServerPort}/test/";
+        var requestUrl = $"http://localhost:{ServerPort}/test/";
 
-        endpointConfiguration.RequestMethod = (HttpMethod.Get);
-        endpointConfiguration.RequestUrl = (requestUrl);
+        endpointConfiguration.RequestMethod = HttpMethod.Get;
+        endpointConfiguration.RequestUrl = requestUrl;
 
         var requestMessage = new HttpMessage(RequestBody)
             .Accept("application/xml");
@@ -210,12 +216,13 @@ public class HttpClientTest : AbstractNUnitSetUp
 
         // Act
         httpClient.Send(requestMessage, Context);
-        var responseMessage = (HttpMessage) httpClient.Receive(Context, endpointConfiguration.Timeout);
+        var responseMessage = (HttpMessage)httpClient.Receive(Context, endpointConfiguration.Timeout);
 
         Assert.That(responseMessage.GetPayload<string>(), Is.EqualTo(ResponseBody));
         Assert.That(responseMessage.GetStatusCode(), Is.EqualTo(HttpStatusCode.OK));
         Assert.That(responseMessage.GetVersion(), Is.EqualTo("HTTP/1.1"));
-        Assert.That(responseMessage.GetReasonPhrase(), Is.EqualTo("OK"));;
+        Assert.That(responseMessage.GetReasonPhrase(), Is.EqualTo("OK"));
+        ;
     }
 
     [Test]
@@ -225,8 +232,8 @@ public class HttpClientTest : AbstractNUnitSetUp
         var httpClient = new HttpClient(endpointConfiguration);
         var requestUrl = $"http://localhost:{ServerPort}/test/";
 
-        endpointConfiguration.RequestMethod = (HttpMethod.Put);
-        endpointConfiguration.RequestUrl = (requestUrl);
+        endpointConfiguration.RequestMethod = HttpMethod.Put;
+        endpointConfiguration.RequestUrl = requestUrl;
 
         var requestMessage = new HttpMessage(RequestBody);
 
@@ -235,12 +242,13 @@ public class HttpClientTest : AbstractNUnitSetUp
 
         // Act
         httpClient.Send(requestMessage, Context);
-        var responseMessage = (HttpMessage) httpClient.Receive(Context, endpointConfiguration.Timeout);
+        var responseMessage = (HttpMessage)httpClient.Receive(Context, endpointConfiguration.Timeout);
 
         Assert.That(responseMessage.GetPayload<string>(), Is.EqualTo(ResponseBody));
         Assert.That(responseMessage.GetStatusCode(), Is.EqualTo(HttpStatusCode.OK));
         Assert.That(responseMessage.GetVersion(), Is.EqualTo("HTTP/1.1"));
-        Assert.That(responseMessage.GetReasonPhrase(), Is.EqualTo("OK"));;
+        Assert.That(responseMessage.GetReasonPhrase(), Is.EqualTo("OK"));
+        ;
     }
 
     [Test]
@@ -250,8 +258,8 @@ public class HttpClientTest : AbstractNUnitSetUp
         var httpClient = new HttpClient(endpointConfiguration);
         var requestUrl = $"http://localhost:{ServerPort}/test/";
 
-        endpointConfiguration.RequestMethod = (HttpMethod.Get);
-        endpointConfiguration.RequestUrl = (requestUrl);
+        endpointConfiguration.RequestMethod = HttpMethod.Get;
+        endpointConfiguration.RequestUrl = requestUrl;
 
         var messageCorrelator = new Mock<IMessageCorrelator>();
         endpointConfiguration.Correlator = messageCorrelator.Object;
@@ -261,22 +269,23 @@ public class HttpClientTest : AbstractNUnitSetUp
         Assert.That(requestMessage.GetPayload<string>(), Is.EqualTo(RequestBody));
         Assert.That(requestMessage.GetHeaders().Count, Is.EqualTo(2));
 
-       // Setup the behavior for GetCorrelationKey method
-       messageCorrelator.Setup(c => c.GetCorrelationKey(requestMessage))
+        // Setup the behavior for GetCorrelationKey method
+        messageCorrelator.Setup(c => c.GetCorrelationKey(requestMessage))
             .Returns("correlationKey");
 
-       // Setup the behavior for GetCorrelationKeyName method
-       messageCorrelator.Setup(c => c.GetCorrelationKeyName(It.IsAny<string>()))
+        // Setup the behavior for GetCorrelationKeyName method
+        messageCorrelator.Setup(c => c.GetCorrelationKeyName(It.IsAny<string>()))
             .Returns("correlationKeyName");
 
         // Act
         httpClient.Send(requestMessage, Context);
-        var responseMessage = (HttpMessage) httpClient.Receive("correlationKey", Context, endpointConfiguration.Timeout);
+        var responseMessage = (HttpMessage)httpClient.Receive("correlationKey", Context, endpointConfiguration.Timeout);
 
         Assert.That(responseMessage.GetPayload<string>(), Is.EqualTo(ResponseBody));
         Assert.That(responseMessage.GetStatusCode(), Is.EqualTo(HttpStatusCode.OK));
         Assert.That(responseMessage.GetVersion(), Is.EqualTo("HTTP/1.1"));
-        Assert.That(responseMessage.GetReasonPhrase(), Is.EqualTo("OK"));;
+        Assert.That(responseMessage.GetReasonPhrase(), Is.EqualTo("OK"));
+        ;
     }
 
     [Test]
@@ -286,8 +295,8 @@ public class HttpClientTest : AbstractNUnitSetUp
         var httpClient = new HttpClient(endpointConfiguration);
         var requestUrl = $"http://localhost:{ServerPort}/test/";
 
-        endpointConfiguration.RequestMethod = (HttpMethod.Patch);
-        endpointConfiguration.RequestUrl = (requestUrl);
+        endpointConfiguration.RequestMethod = HttpMethod.Patch;
+        endpointConfiguration.RequestUrl = requestUrl;
 
         var requestMessage = new HttpMessage(RequestBody);
 
@@ -296,12 +305,13 @@ public class HttpClientTest : AbstractNUnitSetUp
 
         // Act
         httpClient.Send(requestMessage, Context);
-        var responseMessage = (HttpMessage) httpClient.Receive(Context, endpointConfiguration.Timeout);
+        var responseMessage = (HttpMessage)httpClient.Receive(Context, endpointConfiguration.Timeout);
 
         Assert.That(responseMessage.GetPayload<string>(), Is.EqualTo(ResponseBody));
         Assert.That(responseMessage.GetStatusCode(), Is.EqualTo(HttpStatusCode.OK));
         Assert.That(responseMessage.GetVersion(), Is.EqualTo("HTTP/1.1"));
-        Assert.That(responseMessage.GetReasonPhrase(), Is.EqualTo("OK"));;
+        Assert.That(responseMessage.GetReasonPhrase(), Is.EqualTo("OK"));
+        ;
     }
 
     [Test]
@@ -317,8 +327,8 @@ public class HttpClientTest : AbstractNUnitSetUp
         var requestBody = new byte[20];
         new Random().NextBytes(requestBody);
 
-        endpointConfiguration.RequestMethod = (HttpMethod.Post);
-        endpointConfiguration.RequestUrl = (requestUrl);
+        endpointConfiguration.RequestMethod = HttpMethod.Post;
+        endpointConfiguration.RequestUrl = requestUrl;
 
         var requestMessage = new HttpMessage(requestBody)
             .Accept(MediaTypeNames.Application.Octet)
@@ -329,11 +339,12 @@ public class HttpClientTest : AbstractNUnitSetUp
 
         // Act
         httpClient.Send(requestMessage, Context);
-        var responseMessage = (HttpMessage) httpClient.Receive(Context, endpointConfiguration.Timeout);
+        var responseMessage = (HttpMessage)httpClient.Receive(Context, endpointConfiguration.Timeout);
 
         Assert.That(responseMessage.GetPayload<string>(), Is.EqualTo(ResponseBody));
         Assert.That(responseMessage.GetStatusCode(), Is.EqualTo(HttpStatusCode.OK));
         Assert.That(responseMessage.GetVersion(), Is.EqualTo("HTTP/1.1"));
-        Assert.That(responseMessage.GetReasonPhrase(), Is.EqualTo("OK"));;
+        Assert.That(responseMessage.GetReasonPhrase(), Is.EqualTo("OK"));
+        ;
     }
 }

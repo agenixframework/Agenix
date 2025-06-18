@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -106,7 +106,10 @@ public class HttpCondition() : AbstractCondition("http-check")
     private int InvokeUrl(TestContext context)
     {
         var contextUrl = GetUrl(context);
-        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug($"Probing Http request url '{contextUrl.ToString()}'");
+        if (Log.IsEnabled(LogLevel.Debug))
+        {
+            Log.LogDebug($"Probing Http request url '{contextUrl.ToString()}'");
+        }
 
         var responseCode = -1;
 
@@ -118,7 +121,11 @@ public class HttpCondition() : AbstractCondition("http-check")
         {
             // HttpRequestException doesn't directly expose status codes like WebException did
             // We can extract it if it's available in the exception data
-            if (e.StatusCode.HasValue) responseCode = (int)e.StatusCode.Value;
+            if (e.StatusCode.HasValue)
+            {
+                responseCode = (int)e.StatusCode.Value;
+            }
+
             Log.LogWarning($"Could not access Http url '{contextUrl.ToString()}' - {e.Message}");
         }
         catch (TaskCanceledException)

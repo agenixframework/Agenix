@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -82,8 +82,10 @@ public class FunctionRegistry
         var prefixAlreadyUsed = _functionLibraries.Any(lib => lib.Prefix == functionLibrary.Prefix);
 
         if (prefixAlreadyUsed)
+        {
             throw new AgenixSystemException(
                 $"Function library prefix '{functionLibrary.Prefix}' is already bound to another instance. Please choose another prefix.");
+        }
 
         _functionLibraries.Add(functionLibrary);
     }

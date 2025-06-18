@@ -1,4 +1,5 @@
-﻿#region License
+#region License
+
 // MIT License
 //
 // Copyright (c) 2025 Agenix
@@ -20,6 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using Agenix.Api;
@@ -45,30 +47,46 @@ public class JsonElementValidator(bool strict, TestContext context, ICollection<
     public virtual void Validate(JsonElementValidatorItem<object> control)
     {
         if (IsIgnoredByPlaceholderOrExpressionList(ignoreExpressions, control))
+        {
             return;
+        }
 
         if (ValidationMatcherUtils.IsValidationMatcherExpression(control.ExpectedAsStringOrNull() ?? ""))
+        {
             ValidationMatcherUtils.ResolveValidationMatcher(control.GetJsonPath(), control.ActualAsStringOrNull(),
                 control.ExpectedAsStringOrNull(), context);
+        }
 
         else if (control._expected.GetType() == typeof(JObject))
+        {
             ValidateJsonObject(this, control);
+        }
         else if (control._expected.GetType() == typeof(JArray))
+        {
             ValidateJsonArray(this, control);
+        }
         else
+        {
             ValidateNativeType(control);
+        }
     }
 
     public void ValidateJsonArray(JsonElementValidator validator, JsonElementValidatorItem<object> control)
     {
         var arrayControl = control.EnsureType<JArray>();
 
-        if (strict) ValidateSameSize(control.GetJsonPath(), arrayControl._expected, arrayControl._actual);
+        if (strict)
+        {
+            ValidateSameSize(control.GetJsonPath(), arrayControl._expected, arrayControl._actual);
+        }
 
         var actualIndex = 0;
         for (var i = 0; i < arrayControl._expected.Count; i++)
         {
-            if (IsIgnoredByPlaceholderOrExpressionList(ignoreExpressions, arrayControl.Child(i, i))) continue;
+            if (IsIgnoredByPlaceholderOrExpressionList(ignoreExpressions, arrayControl.Child(i, i)))
+            {
+                continue;
+            }
 
             var isValid = false;
             while (!isValid && actualIndex < arrayControl._actual.Count)
@@ -79,10 +97,12 @@ public class JsonElementValidator(bool strict, TestContext context, ICollection<
             }
 
             if (!isValid)
+            {
                 throw new ValidationException(ValidationUtils.BuildValueToBeInCollectionErrorMessage(
                     $"An item in '{arrayControl.GetJsonPath()}' is missing",
                     arrayControl._expected[i].ToString(),
                     arrayControl._actual.ToArray()));
+            }
         }
     }
 
@@ -136,10 +156,12 @@ public class JsonElementValidator(bool strict, TestContext context, ICollection<
         foreach (var entryControl in controlEntries)
         {
             if (!objectControl._actual.ContainsKey(entryControl.GetName()))
+            {
                 throw new ValidationException(ValidationUtils.BuildValueToBeInCollectionErrorMessage(
                     "Missing JSON entry", entryControl.GetName(),
                     objectControl._actual.Properties().Select(p => p.Name).ToList()
                 ));
+            }
 
             validator.Validate(entryControl);
         }
@@ -156,8 +178,10 @@ public class JsonElementValidator(bool strict, TestContext context, ICollection<
     private void ValidateSameSize<T>(string path, ICollection<T> expected, ICollection<T> actual)
     {
         if (expected.Count != actual.Count)
+        {
             ThrowValueMismatch($"Number of entries is not equal in element: '{path}'", string.Join(", ", expected),
                 string.Join(", ", actual));
+        }
     }
 
     /// <summary>
@@ -168,8 +192,10 @@ public class JsonElementValidator(bool strict, TestContext context, ICollection<
     private static void ValidateNativeType(JsonElementValidatorItem<object> control)
     {
         if (!Equals(control._expected, control._actual))
+        {
             ThrowValueMismatch($"Values not equal for entry: '{control.GetJsonPath()}'", control._expected,
                 control._actual);
+        }
     }
 
     /// <summary>

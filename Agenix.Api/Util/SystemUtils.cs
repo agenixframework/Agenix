@@ -82,11 +82,13 @@ public sealed class SystemUtils
     public static void RegisterLoadedAssemblyResolver()
     {
         if (!_assemblyResolverRegistered)
+        {
             lock (AssemblyResolverLock)
             {
                 AppDomain.CurrentDomain.AssemblyResolve += LoadedAssemblyResolver;
                 _assemblyResolverRegistered = true;
             }
+        }
     }
 
     private static Assembly LoadedAssemblyResolver(object sender, ResolveEventArgs args)

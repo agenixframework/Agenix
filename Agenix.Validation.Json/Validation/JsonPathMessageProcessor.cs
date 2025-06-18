@@ -1,4 +1,5 @@
-﻿#region License
+#region License
+
 // MIT License
 //
 // Copyright (c) 2025 Agenix
@@ -20,6 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using Agenix.Api.Builder;
@@ -88,7 +90,10 @@ public class JsonPathMessageProcessor : AbstractMessageProcessor
     /// <param name="context">The test context that provides dynamic content for JSONPath expressions.</param>
     public override void ProcessMessage(IMessage message, TestContext context)
     {
-        if (string.IsNullOrEmpty(message.GetPayload<string>())) return;
+        if (string.IsNullOrEmpty(message.GetPayload<string>()))
+        {
+            return;
+        }
 
         try
         {
@@ -111,9 +116,13 @@ public class JsonPathMessageProcessor : AbstractMessageProcessor
                     default:
                     {
                         if (!int.TryParse(valueExpression, out var intValue))
+                        {
                             value = valueExpression;
+                        }
                         else
+                        {
                             value = intValue;
+                        }
 
                         break;
                     }
@@ -126,12 +135,16 @@ public class JsonPathMessageProcessor : AbstractMessageProcessor
                 catch (JsonException ex)
                 {
                     if (!_ignoreNotFound)
+                    {
                         throw new UnknownElementException(
                             $"Could not find element for expression: {jsonPathExpression}", ex);
+                    }
                 }
 
                 if (Log.IsEnabled(LogLevel.Debug))
+                {
                     Log.LogDebug($"Element {jsonPathExpression} was set to value: {valueExpression}");
+                }
             }
 
             message.Payload = jsonData.ToString(Formatting.None);
@@ -172,7 +185,10 @@ public class JsonPathMessageProcessor : AbstractMessageProcessor
             }
         }
 
-        if (!pathFound) throw new JsonException($"Path not found: {jsonPath}");
+        if (!pathFound)
+        {
+            throw new JsonException($"Path not found: {jsonPath}");
+        }
     }
 
     /// <summary>
@@ -214,7 +230,11 @@ public class JsonPathMessageProcessor : AbstractMessageProcessor
         /// <returns>The current builder instance with the added expressions.</returns>
         public Builder Expressions(IDictionary<string, object> expressions)
         {
-            foreach (var expression in expressions) _expressions[expression.Key] = expression.Value;
+            foreach (var expression in expressions)
+            {
+                _expressions[expression.Key] = expression.Value;
+            }
+
             return this;
         }
 

@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -56,7 +56,9 @@ public static class AgenixVersion
             var infoVersion = infoVersionAttribute?.InformationalVersion ?? "Info version not set";
 
             if (string.IsNullOrWhiteSpace(infoVersion) || infoVersion == Version)
+            {
                 Log.LogWarning("Agenix version has not been updated from the default yet");
+            }
         }
         catch (Exception e)
         {

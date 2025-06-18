@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -46,7 +46,7 @@ namespace Agenix.Validation.NHamcrest.Validation.Matcher;
 public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpressionParser
 {
     private readonly List<string> _collectionMatchers =
-        ["HasSize", "HasItem", "HasItems", "Contains", "ContainsInAnyOrder"];
+        ["HasSize", "HasItem", "HasItems", "Contains", "ContainsInAnyOrder", "OfLength"];
 
     private readonly List<string> _containerMatchers = ["Is", "Not", "EveryItem"];
 
@@ -84,7 +84,9 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
     public List<string> ExtractControlValues(string controlExpression, char delimiter)
     {
         if (controlExpression.StartsWith("'") && controlExpression.Contains("',"))
+        {
             return new DefaultControlExpressionParser().ExtractControlValues(controlExpression, delimiter);
+        }
 
         return [controlExpression];
     }
@@ -137,9 +139,13 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
             else if (_numericMatchers.Contains(matcherName))
             {
                 if (matcherName == "CloseTo")
+                {
                     MatcherAssert.AssertThat(double.Parse(matcherValue), matcher);
+                }
                 else
+                {
                     MatcherAssert.AssertThat(new NumericComparable(matcherValue), matcher);
+                }
             }
             else if (_iterableMatchers.Contains(matcherName) && ContainsNumericMatcher(matcherExpression))
             {
@@ -173,7 +179,10 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
             {
                 var matcherMethod = ReflectionHelper.FindMethod(typeof(Matchers), matcherName);
 
-                if (matcherMethod != null) return matcherMethod.Invoke(null, null);
+                if (matcherMethod != null)
+                {
+                    return matcherMethod.Invoke(null, null);
+                }
             }
 
             // No-argument collection matchers
@@ -181,11 +190,17 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
             {
                 var matcherMethod = ReflectionHelper.FindMethod(typeof(Matchers), matcherName);
 
-                if (matcherMethod != null) return matcherMethod.Invoke(null, null);
+                if (matcherMethod != null)
+                {
+                    return matcherMethod.Invoke(null, null);
+                }
             }
 
             // Check for missing matcher parameter
-            if (matcherParameter.Length == 0) throw new AgenixSystemException("Missing matcher parameter");
+            if (matcherParameter.Length == 0)
+            {
+                throw new AgenixSystemException("Missing matcher parameter");
+            }
 
             // Container matchers
             if (_containerMatchers.Contains(matcherName))
@@ -267,7 +282,9 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
                                     ReflectionHelper.FindMethod(typeof(Matchers), matcherName, typeof(object));
 
                 if (matcherMethod != null)
+                {
                     return matcherMethod.Invoke(null, [matcherParameter[0]]);
+                }
             }
 
             // Numeric matchers
@@ -277,17 +294,21 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
                     ReflectionHelper.FindMethod(typeof(Matchers), matcherName, typeof(double), typeof(double));
 
                 if (matcherMethod != null)
+                {
                     return matcherMethod.Invoke(
                         null,
                         [
                             double.Parse(matcherParameter[0]),
                             matcherParameter.Length > 1 ? double.Parse(matcherParameter[1]) : 0.0
                         ]);
+                }
 
                 matcherMethod = ReflectionHelper.FindMethod(typeof(Matchers), matcherName, typeof(IComparable));
 
                 if (matcherMethod != null)
+                {
                     return matcherMethod.Invoke(null, [matcherParameter[0]]);
+                }
             }
 
             // Collection matchers
@@ -295,16 +316,27 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
             {
                 UnescapeQuotes(matcherParameter);
 
-                var matcherMethod = ReflectionHelper.FindMethod(typeof(Matchers), matcherName, typeof(int)) ??
-                                    ReflectionHelper.FindMethod(typeof(Matchers), matcherName, typeof(object)) ??
-                                    ReflectionHelper.FindMethod(typeof(Matchers), matcherName, typeof(object[]));
+                var matcherMethod = ReflectionUtils.GetMethod(typeof(Matchers), matcherName, [typeof(int)]);
 
                 if (matcherMethod != null)
-                    return matcherMethod.Invoke(null,
-                        matcherMethod.GetParameters().Length == 1 &&
-                        matcherMethod.GetParameters()[0].ParameterType == typeof(object[])
-                            ? [matcherParameter]
-                            : [matcherParameter[0]]);
+                {
+                    return matcherMethod.Invoke(null, [int.Parse(matcherParameter[0])]);
+                }
+
+                matcherMethod = ReflectionUtils.GetMethod(typeof(Matchers), matcherName, [typeof(object)]);
+
+                if (matcherMethod != null)
+                {
+                    return matcherMethod.Invoke(null, [matcherParameter[0]]);
+                }
+
+                matcherMethod = ReflectionUtils.GetMethod(typeof(Matchers), matcherName, [typeof(object[])]);
+
+
+                if (matcherMethod != null)
+                {
+                    return matcherMethod.Invoke(null, [matcherParameter]);
+                }
             }
 
             // Map matchers
@@ -317,9 +349,11 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
                                         typeof(object));
 
                 if (matcherMethod != null)
+                {
                     return matcherMethod.Invoke(null, matcherMethod.GetParameters().Length == 2
                         ? [matcherParameter[0], matcherParameter[1]]
                         : [matcherParameter[0]]);
+                }
             }
 
             // Option matchers
@@ -365,8 +399,12 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
     private static void UnescapeQuotes(string[] matcherParameters)
     {
         if (matcherParameters != null)
+        {
             for (var i = 0; i < matcherParameters.Length; i++)
+            {
                 matcherParameters[i] = matcherParameters[i].Replace("\\'", "'");
+            }
+        }
     }
 
     /// <summary>
@@ -376,10 +414,16 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
     /// <returns></returns>
     private List<string> GetCollection(string value)
     {
-        if (value == "[]") return [];
+        if (value == "[]")
+        {
+            return [];
+        }
 
         var arrayString = value;
-        if (arrayString.StartsWith("[") && arrayString.EndsWith("]")) arrayString = arrayString[1..^1];
+        if (arrayString.StartsWith("[") && arrayString.EndsWith("]"))
+        {
+            arrayString = arrayString[1..^1];
+        }
 
         return arrayString.Split(',')
             .Select(element => element.Trim())
@@ -405,6 +449,7 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
 
             // Load the string into a dictionary (similar to Java Properties behavior)
             foreach (var line in formattedMapString.Split('\n'))
+            {
                 if (!string.IsNullOrWhiteSpace(line))
                 {
                     var keyValue = line.Split('=', 2); // Split into key-value pair
@@ -418,6 +463,7 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
                             VariableUtils.CutOffDoubleQuotes(value).Trim();
                     }
                 }
+            }
         }
         catch (Exception ex)
         {
@@ -454,7 +500,10 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
      */
     private string[] DetermineNestedMatcherParameters(string rawExpression)
     {
-        if (string.IsNullOrWhiteSpace(rawExpression)) return [];
+        if (string.IsNullOrWhiteSpace(rawExpression))
+        {
+            return [];
+        }
 
         var tokenizer = new Tokenizer();
         var tokenizedExpression = tokenizer.Tokenize(rawExpression);
@@ -476,8 +525,11 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
         public NumericComparable(string value)
         {
             if (value.Contains('.'))
+            {
                 _decimalValue = double.Parse(value);
+            }
             else
+            {
                 try
                 {
                     _number = long.Parse(value);
@@ -486,6 +538,7 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
                 {
                     throw new InvalidOperationException("Invalid numeric string format.", e);
                 }
+            }
         }
 
         /// <summary>
@@ -496,6 +549,7 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
         public int CompareTo(object obj)
         {
             if (_number != null)
+            {
                 switch (obj)
                 {
                     case string or NumericComparable:
@@ -503,8 +557,10 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
                     case long l:
                         return _number.Value.CompareTo(l);
                 }
+            }
 
             if (_decimalValue != null)
+            {
                 switch (obj)
                 {
                     case string or NumericComparable:
@@ -512,6 +568,7 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
                     case double d:
                         return _decimalValue.Value.CompareTo(d);
                 }
+            }
 
             return 0;
         }
@@ -590,9 +647,11 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
         public string[] RestoreInto(string[] expressions)
         {
             for (var i = 0; i < expressions.Length; i++)
+            {
                 expressions[i] = VariableUtils.CutOffSingleQuotes(
                     ReplaceTokens(expressions[i], _originalTokenValues).Trim()
                 );
+            }
 
             return expressions;
         }
@@ -600,7 +659,10 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
         private string ReplaceTokens(string expression, List<string> paramsList)
         {
             for (var i = 0; i < paramsList.Count; i++)
+            {
                 expression = expression.Replace(StartToken + (i + 1) + EndToken, paramsList[i]);
+            }
+
             return expression;
         }
 
@@ -612,8 +674,16 @@ public class NHamcrestValidationMatcher : IValidationMatcher, IControlExpression
         private string FindMatchedValue(Match match)
         {
             var matchedValue = match.Groups["quoted1"].Value;
-            if (string.IsNullOrEmpty(matchedValue)) matchedValue = match.Groups["quoted2"].Value;
-            if (string.IsNullOrEmpty(matchedValue)) matchedValue = match.Groups["unquoted"].Value;
+            if (string.IsNullOrEmpty(matchedValue))
+            {
+                matchedValue = match.Groups["quoted2"].Value;
+            }
+
+            if (string.IsNullOrEmpty(matchedValue))
+            {
+                matchedValue = match.Groups["unquoted"].Value;
+            }
+
             return matchedValue;
         }
     }

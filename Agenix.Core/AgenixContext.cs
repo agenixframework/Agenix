@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -42,6 +42,7 @@ using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
 using Agenix.Api.Validation.Matcher;
 using Agenix.Api.Variable;
+using Agenix.Api.Xml.Namespace;
 using Agenix.Core.Annotations;
 using Agenix.Core.Functions;
 using Agenix.Core.Log;
@@ -77,10 +78,14 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
         MessageProcessors = builder._messageProcessors;
         TypeConverter = builder._typeConverter;
         LogModifier = builder._logModifier;
+        NamespaceContextBuilder = builder._namespaceContextBuilder;
 
         ContextFactory = builder._testContextFactory;
 
-        foreach (var config in builder._configurationClasses) ParseConfiguration(config);
+        foreach (var config in builder._configurationClasses)
+        {
+            ParseConfiguration(config);
+        }
     }
 
     public TestContextFactory ContextFactory { get; }
@@ -122,6 +127,8 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
 
     public ILogModifier LogModifier { get; }
 
+    public NamespaceContextBuilder NamespaceContextBuilder { get; }
+
     public HashSet<Type> ConfigurationClasses { get; } = [];
 
     /// <summary>
@@ -142,7 +149,9 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
 
             // Check if value is a MessageValidator
             if (value is IMessageValidator<IValidationContext> validator)
+            {
                 MessageValidatorRegistry.AddMessageValidator(name, validator);
+            }
         }
     }
 
@@ -204,12 +213,19 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
     {
         var context = Builder.DefaultContext().Build();
 
-        if (string.IsNullOrEmpty(AgenixSettings.DefaultConfigClass())) return context;
+        if (string.IsNullOrEmpty(AgenixSettings.DefaultConfigClass()))
+        {
+            return context;
+        }
 
         try
         {
             var configType = Type.GetType(AgenixSettings.DefaultConfigClass());
-            if (configType == null) throw new TypeLoadException("Type not found.");
+            if (configType == null)
+            {
+                throw new TypeLoadException("Type not found.");
+            }
+
             context.ParseConfiguration(configType);
         }
         catch (Exception ex) when (ex is TypeLoadException or NullReferenceException)
@@ -226,7 +242,10 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
     /// <param name="configClass"></param>
     public void ParseConfiguration(Type configClass)
     {
-        if (!ConfigurationClasses.Add(configClass)) return;
+        if (!ConfigurationClasses.Add(configClass))
+        {
+            return;
+        }
 
         AgenixAnnotations.ParseConfiguration(configClass, this);
     }
@@ -237,7 +256,10 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
     /// <param name="configuration"></param>
     public void ParseConfiguration(object configuration)
     {
-        if (!ConfigurationClasses.Add(configuration.GetType())) return;
+        if (!ConfigurationClasses.Add(configuration.GetType()))
+        {
+            return;
+        }
 
         AgenixAnnotations.ParseConfiguration(configuration, this);
     }
@@ -260,7 +282,9 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
     public void HandleTestResults(TestResults testResults)
     {
         if (!GetTestResults().Equals(testResults))
+        {
             testResults.DoWithResults(result => GetTestResults().AddResult(result));
+        }
     }
 
     /// <summary>
@@ -271,7 +295,10 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
     /// <param name="component">The component to be added and processed for registration and initialization.</param>
     public void AddComponent(string name, object component)
     {
-        if (component is InitializingPhase c) c.Initialize();
+        if (component is InitializingPhase c)
+        {
+            c.Initialize();
+        }
 
         ReferenceResolver.Bind(name, component);
 
@@ -287,7 +314,10 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
             ContextFactory.MessageProcessors.AddMessageProcessor(messageProcessor);
         }
 
-        if (component is ITestSuiteListener suiteListener) SuiteListeners.AddTestSuiteListener(suiteListener);
+        if (component is ITestSuiteListener suiteListener)
+        {
+            SuiteListeners.AddTestSuiteListener(suiteListener);
+        }
 
         if (component is ITestListener testListener)
         {
@@ -295,7 +325,10 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
             ContextFactory.TestListeners.AddTestListener(testListener);
         }
 
-        if (component is ITestReporter testReporter) TestReporters.AddTestReporter(testReporter);
+        if (component is ITestReporter testReporter)
+        {
+            TestReporters.AddTestReporter(testReporter);
+        }
 
         if (component is ITestActionListener testActionListener)
         {
@@ -309,13 +342,25 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
             ContextFactory.MessageListeners.AddMessageListener(messageListener);
         }
 
-        if (component is IBeforeTest beforeTest) ContextFactory.BeforeTest.Add(beforeTest);
+        if (component is IBeforeTest beforeTest)
+        {
+            ContextFactory.BeforeTest.Add(beforeTest);
+        }
 
-        if (component is IAfterTest afterTest) ContextFactory.AfterTest.Add(afterTest);
+        if (component is IAfterTest afterTest)
+        {
+            ContextFactory.AfterTest.Add(afterTest);
+        }
 
-        if (component is IBeforeSuite beforeSuiteComponent) BeforeSuites.Add(beforeSuiteComponent);
+        if (component is IBeforeSuite beforeSuiteComponent)
+        {
+            BeforeSuites.Add(beforeSuiteComponent);
+        }
 
-        if (component is IAfterSuite afterSuiteComponent) AfterSuites.Add(afterSuiteComponent);
+        if (component is IAfterSuite afterSuiteComponent)
+        {
+            AfterSuites.Add(afterSuiteComponent);
+        }
 
         if (component is FunctionLibrary library)
         {
@@ -329,7 +374,10 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
             ContextFactory.ValidationMatcherRegistry.AddValidationMatcherLibrary(validationLibrary);
         }
 
-        if (component is GlobalVariables globalVariables) ContextFactory.GlobalVariables = globalVariables;
+        if (component is GlobalVariables globalVariables)
+        {
+            ContextFactory.GlobalVariables = globalVariables;
+        }
     }
 
     /// <summary>
@@ -352,6 +400,7 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
         internal MessageListeners _messageListeners = new();
         internal MessageProcessors _messageProcessors = new();
         internal MessageValidatorRegistry _messageValidatorRegistry = new DefaultMessageValidatorRegistry();
+        internal NamespaceContextBuilder _namespaceContextBuilder = new();
         internal IReferenceResolver _referenceResolver = new SimpleReferenceResolver();
         internal TestActionListeners _testActionListeners = new();
         internal TestContextFactory _testContextFactory;
@@ -374,24 +423,40 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
             var testReporters = builder._testReporters.GetTestReporters();
 
             foreach (var reporter in testReporters)
+            {
                 if (reporter is ITestSuiteListener listener)
+                {
                     builder.TestSuiteListener(listener);
+                }
+            }
 
             builder.TestSuiteListener(builder._testReporters);
 
             foreach (var reporter in testReporters)
+            {
                 if (reporter is ITestListener listener)
+                {
                     builder.TestListener(listener);
+                }
+            }
 
             builder.TestListener(builder._testReporters);
 
             foreach (var reporter in testReporters)
+            {
                 if (reporter is ITestActionListener listener)
+                {
                     builder.TestActionListener(listener);
+                }
+            }
 
             foreach (var reporter in testReporters)
+            {
                 if (reporter is IMessageListener listener)
+                {
                     builder.MessageListener(listener);
+                }
+            }
 
             return builder;
         }
@@ -546,6 +611,12 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
             return this;
         }
 
+        public Builder NamespaceContextBuilder(NamespaceContextBuilder namespaceContextBuilder)
+        {
+            _namespaceContextBuilder = namespaceContextBuilder;
+            return this;
+        }
+
         public AgenixContext Build()
         {
             if (_testContextFactory == null)
@@ -564,6 +635,7 @@ public class AgenixContext : ITestListenerAware, ITestActionListenerAware, ITest
                 _testContextFactory.SetReferenceResolver(_referenceResolver);
                 _testContextFactory.TypeConverter = _typeConverter;
                 _testContextFactory.LogModifier = _logModifier;
+                _testContextFactory.NamespaceContextBuilder = _namespaceContextBuilder;
             }
 
             return new AgenixContext(this);

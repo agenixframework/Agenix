@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Annotations;
+using Agenix.Api.Annotations;
 using Agenix.Api.Container;
 using Agenix.Core.Container;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
@@ -52,7 +52,10 @@ public class CustomContainerIT
         /// <param name="context">The context in which the actions are to be executed, providing necessary runtime information.</param>
         public override void DoExecute(TestContext context)
         {
-            for (var i = GetActions().Count; i > 0; i--) ExecuteAction(GetActions()[i - 1], context);
+            for (var i = GetActions().Count; i > 0; i--)
+            {
+                ExecuteAction(GetActions()[i - 1], context);
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -59,10 +59,7 @@ public class DefaultMessageBuilder : IMessageBuilder, IWithPayloadBuilder, IWith
         try
         {
             var headers = BuildMessageHeaders(context);
-            var message = new DefaultMessage(payload, headers)
-            {
-                Name = _name
-            };
+            var message = new DefaultMessage(payload, headers) { Name = _name };
             message.SetType(messageType);
 
             var headerData = BuildMessageHeaderData(context);
@@ -136,10 +133,14 @@ public class DefaultMessageBuilder : IMessageBuilder, IWithPayloadBuilder, IWith
         {
             var headers = new Dictionary<string, object>();
             foreach (var entry in _headerBuilders.SelectMany(builder => builder.BuilderHeaders(context)))
+            {
                 headers[entry.Key] = entry.Value;
+            }
 
             foreach (var entry in headers.ToList())
+            {
                 if (entry.Value is string value)
+                {
                     if (MessageHeaderTypeExtensions.IsTyped(value))
                     {
                         var type = MessageHeaderTypeExtensions.FromTypedValue(value);
@@ -147,6 +148,8 @@ public class DefaultMessageBuilder : IMessageBuilder, IWithPayloadBuilder, IWith
                         var valueToConvert = MessageHeaderTypeExtensions.RemoveTypeDefinition(value);
                         headers[entry.Key] = Convert.ChangeType(valueToConvert, clrType);
                     }
+                }
+            }
 
             MessageHeaderUtils.CheckHeaderTypes(headers);
 
@@ -168,8 +171,12 @@ public class DefaultMessageBuilder : IMessageBuilder, IWithPayloadBuilder, IWith
         var headerData = new List<string>();
 
         foreach (var builder in _headerBuilders)
+        {
             if (builder is IMessageHeaderDataBuilder headerDataBuilder)
+            {
                 headerData.Add(headerDataBuilder.BuildHeaderData(context));
+            }
+        }
 
         return headerData;
     }

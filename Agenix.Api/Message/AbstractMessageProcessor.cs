@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -80,9 +80,13 @@ public abstract class AbstractMessageProcessor : IMessageProcessor, IMessageDire
     public void Process(IMessage message, TestContext context)
     {
         if (SupportsMessageType(message.GetType()))
+        {
             ProcessMessage(message, context);
+        }
         else
+        {
             Log.LogDebug("Message processor '{S}' skipped for message type: {GetType1}", GetName(), message.GetType());
+        }
     }
 
     /// <summary>

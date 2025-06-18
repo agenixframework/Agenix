@@ -84,7 +84,11 @@ public class CachedTypeResolver : ITypeResolver
     /// </exception>
     public Type Resolve(string typeName)
     {
-        if (StringUtils.IsNullOrEmpty(typeName)) throw BuildTypeLoadException(typeName);
+        if (StringUtils.IsNullOrEmpty(typeName))
+        {
+            throw BuildTypeLoadException(typeName);
+        }
+
         Type type;
         try
         {
@@ -100,7 +104,11 @@ public class CachedTypeResolver : ITypeResolver
         }
         catch (Exception ex)
         {
-            if (ex is TypeLoadException) throw;
+            if (ex is TypeLoadException)
+            {
+                throw;
+            }
+
             throw BuildTypeLoadException(typeName, ex);
         }
 

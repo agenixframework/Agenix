@@ -1,9 +1,8 @@
-﻿using Agenix.Api.Endpoint;
+using Agenix.Api.Endpoint;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Message;
 using Agenix.Api.Messaging;
 using Agenix.Core.Actions;
-using Agenix.Core.Endpoint;
 using Agenix.Core.Message;
 using Moq;
 using NUnit.Framework;

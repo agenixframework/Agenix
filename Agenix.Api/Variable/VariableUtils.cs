@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -74,31 +74,47 @@ public sealed class VariableUtils
             while (curIndex < str.Length && !isVarComplete)
             {
                 if (str.IndexOf(AgenixSettings.VariablePrefix, curIndex, StringComparison.Ordinal) ==
-                    curIndex) control++;
+                    curIndex)
+                {
+                    control++;
+                }
 
                 if (str[curIndex] == AgenixSettings.VariableSuffix[0] || curIndex + 1 == str.Length)
                 {
                     if (control == 0)
+                    {
                         isVarComplete = true;
+                    }
                     else
+                    {
                         control--;
+                    }
                 }
 
-                if (!isVarComplete) variableNameBuf.Append(str[curIndex]);
+                if (!isVarComplete)
+                {
+                    variableNameBuf.Append(str[curIndex]);
+                }
 
                 ++curIndex;
             }
 
             var value = context.GetVariable(variableNameBuf.ToString());
             if (value == null)
+            {
                 throw new NoSuchVariableException("Variable: " + variableNameBuf + " could not be found");
+            }
 
             newStr.Append(str.Substring(startIndex, searchIndex - startIndex));
 
             if (enableQuoting)
+            {
                 newStr.Append("'" + value + "'");
+            }
             else
+            {
                 newStr.Append(value);
+            }
 
             startIndex = curIndex;
 
@@ -122,8 +138,10 @@ public sealed class VariableUtils
     public static string CutOffVariablesPrefix(string variable)
     {
         if (variable.StartsWith(AgenixSettings.VariablePrefix) && variable.EndsWith(AgenixSettings.VariableSuffix))
+        {
             return variable.Substring(AgenixSettings.VariablePrefix.Length,
                 variable.Length - AgenixSettings.VariableSuffix.Length - 2);
+        }
 
         return variable;
     }
@@ -140,8 +158,10 @@ public sealed class VariableUtils
     public static string CutOffVariablesEscaping(string variable)
     {
         if (variable.StartsWith(AgenixSettings.VariableEscape) && variable.EndsWith(AgenixSettings.VariableEscape))
+        {
             return variable.Substring(AgenixSettings.VariableEscape.Length,
                 variable.Length - 2 * AgenixSettings.VariableEscape.Length);
+        }
 
         return variable;
     }
@@ -154,7 +174,10 @@ public sealed class VariableUtils
     /// <returns>flag true/false</returns>
     public static bool IsVariableName(string expression)
     {
-        if (string.IsNullOrEmpty(expression)) return false;
+        if (string.IsNullOrEmpty(expression))
+        {
+            return false;
+        }
 
         return expression.StartsWith(AgenixSettings.VariablePrefix) &&
                expression.EndsWith(AgenixSettings.VariableSuffix);
@@ -167,9 +190,15 @@ public sealed class VariableUtils
     /// <returns></returns>
     public static string CutOffSingleQuotes(string input)
     {
-        if (string.IsNullOrWhiteSpace(input)) return input;
+        if (string.IsNullOrWhiteSpace(input))
+        {
+            return input;
+        }
 
-        if (input.Length >= 2 && input[0] == '\'' && input[^1] == '\'') return input.Substring(1, input.Length - 2);
+        if (input.Length >= 2 && input[0] == '\'' && input[^1] == '\'')
+        {
+            return input.Substring(1, input.Length - 2);
+        }
 
         return input;
     }
@@ -183,7 +212,9 @@ public sealed class VariableUtils
     {
         if (!string.IsNullOrWhiteSpace(variable) &&
             variable.Length > 1 && variable[0] == '"' && variable[^1] == '"')
+        {
             return variable.Substring(1, variable.Length - 2);
+        }
 
         return variable;
     }

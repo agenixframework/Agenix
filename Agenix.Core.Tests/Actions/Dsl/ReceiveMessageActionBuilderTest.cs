@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Agenix.Api.Endpoint;
@@ -12,12 +12,10 @@ using Agenix.Api.Variable;
 using Agenix.Core.Actions;
 using Agenix.Core.Container;
 using Agenix.Core.Dsl;
-using Agenix.Core.Endpoint;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Builder;
 using Agenix.Core.Validation;
 using Agenix.Core.Validation.Builder;
-using Agenix.Core.Validation.Json;
 using Agenix.Core.Variable;
 using Moq;
 using NUnit.Framework;
@@ -1035,10 +1033,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
             .Returns(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
                 .SetHeader("operation", "sayHello"));
 
-        var messageSelector = new Dictionary<string, object>
-        {
-            { "operation", "sayHello" }
-        };
+        var messageSelector = new Dictionary<string, object> { { "operation", "sayHello" } };
 
         var runner = new DefaultTestCaseRunner(_context);
 
@@ -1240,7 +1235,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     [Test]
     public void TestReceiveBuilderWithValidationProcessor()
     {
-        var callback = new Mock<MockableAbstractValidationProcessor<dynamic>>(MockBehavior.Strict);
+        var callback = new Mock<AbstractValidationProcessor<dynamic>>();
 
         // Setup mock behaviors
         _messageEndpoint.Setup(m => m.CreateConsumer()).Returns(_messageConsumer.Object);
@@ -1281,13 +1276,5 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Verify callback interactions
         callback.Verify(c => c.Validate(It.IsAny<IMessage>(), It.IsAny<TestContext>()), Times.Once);
-    }
-
-    public abstract class MockableAbstractValidationProcessor<T> : AbstractValidationProcessor<T>
-    {
-        public override void Validate(IMessage message, TestContext context)
-        {
-            // Provide some default implementation here if needed, or leave it empty.
-        }
     }
 }

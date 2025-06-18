@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -41,9 +41,11 @@ public class ContainsValidationMatcher : IValidationMatcher
     {
         var control = controlParameters[0];
         if (value == null || !value.Contains(control))
+        {
             throw new ValidationException(TypeDescriptor.GetClassName(typeof(ContainsValidationMatcher))
                                           + " failed for field '" + fieldName
                                           + "'. Received value is '" + value
                                           + "', must contain '" + control + "'.");
+        }
     }
 }

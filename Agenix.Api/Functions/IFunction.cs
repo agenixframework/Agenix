@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -57,16 +57,28 @@ public interface IFunction
     /// <returns>A dictionary where the keys are function names and the values are the corresponding function implementations.</returns>
     static IDictionary<string, IFunction> Lookup()
     {
-        if (Functions.Count != 0) return Functions;
+        if (Functions.Count != 0)
+        {
+            return Functions;
+        }
 
         var resolvedFunctions = new ResourcePathTypeResolver().ResolveAll<dynamic>(ResourcePath);
 
-        foreach (var kvp in resolvedFunctions) Functions[kvp.Key] = kvp.Value;
+        foreach (var kvp in resolvedFunctions)
+        {
+            Functions[kvp.Key] = kvp.Value;
+        }
 
-        if (!Log.IsEnabled(LogLevel.Debug)) return Functions;
+        if (!Log.IsEnabled(LogLevel.Debug))
+        {
+            return Functions;
+        }
+
         {
             foreach (var kvp in Functions)
+            {
                 Log.LogDebug("Found function '{KvpKey}' as {Type}", kvp.Key, kvp.Value.GetType());
+            }
         }
         return Functions;
     }

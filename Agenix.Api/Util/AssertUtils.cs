@@ -51,7 +51,10 @@ public static class AssertUtils
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void ArgumentNotNull(object argument, string name)
     {
-        if (argument == null) ThrowArgumentNullException(name);
+        if (argument == null)
+        {
+            ThrowArgumentNullException(name);
+        }
     }
 
     /// <summary>
@@ -70,7 +73,10 @@ public static class AssertUtils
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void ArgumentNotNull(object argument, string name, string message)
     {
-        if (argument == null) ThrowArgumentNullException(name, message);
+        if (argument == null)
+        {
+            ThrowArgumentNullException(name, message);
+        }
     }
 
     /// <summary>
@@ -87,9 +93,11 @@ public static class AssertUtils
     public static void ArgumentHasText(string argument, string name)
     {
         if (StringUtils.IsNullOrEmpty(argument))
+        {
             ThrowArgumentNullException(
                 name,
                 $"Argument '{name}' cannot be null or resolve to an empty string : '{argument}'.");
+        }
     }
 
     /// <summary>
@@ -109,7 +117,10 @@ public static class AssertUtils
     /// </exception>
     public static void ArgumentHasText(string argument, string name, string message)
     {
-        if (StringUtils.IsNullOrEmpty(argument)) ThrowArgumentNullException(name, message);
+        if (StringUtils.IsNullOrEmpty(argument))
+        {
+            ThrowArgumentNullException(name, message);
+        }
     }
 
     /// <summary>
@@ -125,9 +136,11 @@ public static class AssertUtils
     public static void ArgumentHasLength(ICollection argument, string name)
     {
         if (!ArrayUtils.HasLength(argument))
+        {
             ThrowArgumentNullException(
                 name,
                 $"Argument '{name}' cannot be null or resolve to an empty array");
+        }
     }
 
     /// <summary>
@@ -146,7 +159,10 @@ public static class AssertUtils
     /// </exception>
     public static void ArgumentHasLength(ICollection argument, string name, string message)
     {
-        if (!ArrayUtils.HasLength(argument)) ThrowArgumentNullException(name, message);
+        if (!ArrayUtils.HasLength(argument))
+        {
+            ThrowArgumentNullException(name, message);
+        }
     }
 
     /// <summary>
@@ -162,9 +178,11 @@ public static class AssertUtils
     public static void ArgumentHasElements(ICollection argument, string name)
     {
         if (!ArrayUtils.HasElements(argument))
+        {
             ThrowArgumentException(
                 name,
                 $"Argument '{name}' must not be null or resolve to an empty collection and must contain non-null elements");
+        }
     }
 
     /// <summary>
@@ -187,7 +205,9 @@ public static class AssertUtils
     public static void AssertArgumentType(object argument, string argumentName, Type requiredType, string message)
     {
         if (argument != null && requiredType != null && !requiredType.IsInstanceOfType(argument))
+        {
             ThrowArgumentException(message, argumentName);
+        }
     }
 
     /// <summary>
@@ -201,7 +221,10 @@ public static class AssertUtils
     /// </exception>
     public static void IsTrue(bool expression, string message)
     {
-        if (!expression) ThrowArgumentException(message);
+        if (!expression)
+        {
+            ThrowArgumentException(message);
+        }
     }
 
     /// <summary>
@@ -226,7 +249,10 @@ public static class AssertUtils
     /// <exception cref="InvalidOperationException">if expression is <code>false</code></exception>
     public static void State(bool expression, string message)
     {
-        if (!expression) ThrowInvalidOperationException(message);
+        if (!expression)
+        {
+            ThrowInvalidOperationException(message);
+        }
     }
 
     private static void ThrowInvalidOperationException(string message)

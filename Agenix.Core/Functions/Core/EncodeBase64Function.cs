@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -41,7 +41,9 @@ public class EncodeBase64Function : IFunction
     public string Execute(List<string> parameterList, TestContext testContext)
     {
         if (parameterList == null || parameterList.Count == 0)
+        {
             throw new InvalidFunctionUsageException("Invalid function parameter usage! Missing parameters!");
+        }
 
         var plainTextBytes = Encoding.UTF8.GetBytes(parameterList[0]);
         return Convert.ToBase64String(plainTextBytes);

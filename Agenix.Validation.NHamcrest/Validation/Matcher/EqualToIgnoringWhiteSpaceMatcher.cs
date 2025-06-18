@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -42,9 +42,15 @@ public class EqualToIgnoringWhiteSpaceMatcher(string expected) : IMatcher<string
 
     public bool Matches(string actual)
     {
-        if (actual == null && _expected == null) return true;
+        if (actual == null && _expected == null)
+        {
+            return true;
+        }
 
-        if (actual == null || _expected == null) return false;
+        if (actual == null || _expected == null)
+        {
+            return false;
+        }
 
         return NormalizeWhiteSpace(actual).Equals(_expected, StringComparison.Ordinal);
     }

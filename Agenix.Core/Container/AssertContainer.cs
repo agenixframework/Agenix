@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -58,7 +58,9 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
     public override void DoExecute(TestContext context)
     {
         if (Log.IsEnabled(LogLevel.Debug))
-            Log.LogDebug($"Assert container asserting exceptions of type {_exception.Name}");
+        {
+            Log.LogDebug("Assert container asserting exceptions of type {ExceptionName}", _exception.Name);
+        }
 
         try
         {
@@ -66,22 +68,28 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
         }
         catch (Exception e)
         {
-            Log.LogDebug("Validating caught exception: {0}", e);
+            Log.LogDebug(e, "Validating caught exception: ");
 
             if (!_exception.IsAssignableFrom(e.GetType()))
+            {
                 throw new ValidationException("Validation failed for asserted exception type - expected: '" +
                                               _exception.Name + "' but was: '" + e.GetType().Name + "'", e);
+            }
 
             if (_message != null)
             {
                 if (ValidationMatcherUtils.IsValidationMatcherExpression(_message))
+                {
                     ValidationMatcherUtils.ResolveValidationMatcher("message", e.Message, _message, context);
+                }
                 else if (!context.ReplaceDynamicContentInString(_message).Equals(e.Message))
+                {
                     throw new ValidationException("Validation failed for asserted exception message - expected: '" +
                                                   _message + "' but was: '" + e.Message + "'", e);
+                }
             }
 
-            Log.LogDebug($"Asserted exception is as expected ({e.GetType().Name}): {e.Message}");
+            Log.LogDebug("Asserted exception is as expected ({S}): {EMessage}", e.GetType().Name, e.Message);
 
             Log.LogDebug("Assert exception validation successful: All values OK");
 
@@ -169,7 +177,10 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
         {
             _exception = Type.GetType(type);
             if (_exception == null)
+            {
                 throw new AgenixSystemException($"Failed to instantiate exception class of type '{type}'");
+            }
+
             return this;
         }
 
@@ -188,6 +199,14 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
         public Builder Action(ITestAction action)
         {
             return Action(new FuncITestActionBuilder<ITestAction>(() => action));
+        }
+
+        /// Configures the action to be used within the AssertContainer.
+        /// <param name="action">The delegate that defines the test action to configure.</param>
+        /// <returns>The builder instance for chaining further configurations.</returns>
+        public Builder Action(TestAction action)
+        {
+            return Action(new DelegatingTestAction(action));
         }
 
         /// Fluent API action building entry method used in C# DSL.

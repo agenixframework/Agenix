@@ -160,7 +160,9 @@ public class GenericArgumentsHolder
         get
         {
             if (unresolvedGenericArguments == null)
+            {
                 return false;
+            }
 
             return unresolvedGenericArguments.All(arg => arg.Length <= 0);
         }
@@ -200,7 +202,9 @@ public class GenericArgumentsHolder
     public string[] GetGenericArguments()
     {
         if (unresolvedGenericArguments == null)
+        {
             return StringUtils.EmptyStrings;
+        }
 
         return unresolvedGenericArguments;
     }
@@ -286,7 +290,10 @@ public class GenericArgumentsHolder
         for (var i = 0; i < args.Length; i++)
         {
             var arg = args[i];
-            if (arg.Length > 1 && arg[0] == '[') args[i] = arg.Substring(1, arg.Length - 2);
+            if (arg.Length > 1 && arg[0] == '[')
+            {
+                args[i] = arg.Substring(1, arg.Length - 2);
+            }
         }
 
         return args;

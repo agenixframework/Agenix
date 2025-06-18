@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -37,6 +37,7 @@ using Agenix.Api.Util;
 using Agenix.Api.Validation;
 using Agenix.Api.Validation.Matcher;
 using Agenix.Api.Variable;
+using Agenix.Api.Xml.Namespace;
 using Agenix.Core.Functions;
 using Agenix.Core.Log;
 using Agenix.Core.Validation;
@@ -132,6 +133,13 @@ public class TestContextFactory : IReferenceResolverAware
     public IReferenceResolver ReferenceResolver => _referenceResolver;
 
     /// <summary>
+    ///     Gets or sets the NamespaceContextBuilder, which facilitates the construction of namespace mappings
+    ///     for XPath expression evaluations. This allows for both default and dynamic mappings derived
+    ///     from received messages.
+    /// </summary>
+    public NamespaceContextBuilder NamespaceContextBuilder { get; set; }
+
+    /// <summary>
     ///     Sets the reference resolver for the TestContextFactory.
     /// </summary>
     /// <param name="referenceResolver">
@@ -166,9 +174,20 @@ public class TestContextFactory : IReferenceResolverAware
         context.SetGlobalVariables(GlobalVariables);
         context.SetReferenceResolver(_referenceResolver);
 
-        if (LogModifier != null) context.LogModifier = LogModifier;
+        if (LogModifier != null)
+        {
+            context.LogModifier = LogModifier;
+        }
 
-        if (TypeConverter != null) context.TypeConverter = TypeConverter;
+        if (TypeConverter != null)
+        {
+            context.TypeConverter = TypeConverter;
+        }
+
+        if (NamespaceContextBuilder != null)
+        {
+            context.NamespaceContextBuilder = NamespaceContextBuilder;
+        }
 
         return context;
     }
@@ -193,7 +212,8 @@ public class TestContextFactory : IReferenceResolverAware
             MessageValidatorRegistry = new DefaultMessageValidatorRegistry(),
             MessageProcessors = new MessageProcessors(),
             EndpointFactory = new DefaultEndpointFactory(),
-            SegmentVariableExtractorRegistry = new SegmentVariableExtractorRegistry()
+            SegmentVariableExtractorRegistry = new SegmentVariableExtractorRegistry(),
+            NamespaceContextBuilder = new NamespaceContextBuilder()
         };
 
         return factory;
@@ -217,10 +237,14 @@ public class TestContextFactory : IReferenceResolverAware
             MessageListeners = context.MessageListeners,
             MessageValidatorRegistry = context.MessageValidatorRegistry,
             MessageProcessors = context.MessageProcessors,
-            EndpointFactory = context.EndpointFactory
+            EndpointFactory = context.EndpointFactory,
+            NamespaceContextBuilder = context.NamespaceContextBuilder
         };
 
-        foreach (var kvp in context.GetVariables()) result.GetVariables()[kvp.Key] = kvp.Value;
+        foreach (var kvp in context.GetVariables())
+        {
+            result.GetVariables()[kvp.Key] = kvp.Value;
+        }
 
         result.SetGlobalVariables(new GlobalVariables.Builder()
             .WithVariables(context.GetGlobalVariables())

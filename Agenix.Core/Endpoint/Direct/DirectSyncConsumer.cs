@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -123,10 +123,14 @@ public class DirectSyncConsumer : DirectConsumer, IReplyProducer
         IMessageQueue replyQueue = null;
 
         if (receivedMessage.GetHeader(DirectMessageHeaders.ReplyQueue) is IMessageQueue queue)
+        {
             replyQueue = queue;
+        }
         else if (!string.IsNullOrWhiteSpace(receivedMessage.GetHeader(DirectMessageHeaders.ReplyQueue)?.ToString()))
+        {
             replyQueue = ResolveQueueName(receivedMessage.GetHeader(DirectMessageHeaders.ReplyQueue).ToString(),
                 context);
+        }
 
         if (replyQueue != null)
         {

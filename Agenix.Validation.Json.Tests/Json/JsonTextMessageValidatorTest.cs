@@ -1,8 +1,7 @@
-﻿using Agenix.Api.Exceptions;
+using Agenix.Api.Exceptions;
 using Agenix.Api.Validation.Context;
 using Agenix.Core.Message;
 using Agenix.Core.Validation.Json;
-using Agenix.Core.Validation.Xml;
 using Agenix.Validation.Json.Validation;
 using Moq;
 using Newtonsoft.Json;
@@ -86,7 +85,7 @@ public class JsonTextMessageValidatorTest : AbstractNUnitSetUp
         mockValidatorProvider.Verify(p => p.GetValidator(true, Context, _validationContext));
         mockValidator.Verify(v => v.Validate(It.IsAny<JsonElementValidatorItem<object>>()));
     }
-    
+
     [Test]
     public void ShouldFindProperValidationContext()
     {
@@ -102,11 +101,11 @@ public class JsonTextMessageValidatorTest : AbstractNUnitSetUp
 
         validationContexts.Add(new DefaultMessageValidationContext());
 
-        Assert.That(_fixture.FindValidationContext(validationContexts), Is.InstanceOf<DefaultMessageValidationContext>());
+        Assert.That(_fixture.FindValidationContext(validationContexts),
+            Is.InstanceOf<DefaultMessageValidationContext>());
 
         validationContexts.Add(new JsonMessageValidationContext());
 
         Assert.That(_fixture.FindValidationContext(validationContexts), Is.InstanceOf<JsonMessageValidationContext>());
     }
-
 }

@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using Agenix.Api.Annotations;
 using Agenix.Api.Exceptions;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;

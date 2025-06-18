@@ -127,7 +127,11 @@ public class NHamcrestConditionExpression
         /// <returns>True if the object matches the condition; otherwise, false.</returns>
         public bool Matches(object item)
         {
-            if (item is T typedItem) return innerMatcher.Matches(typedItem);
+            if (item is T typedItem)
+            {
+                return innerMatcher.Matches(typedItem);
+            }
+
             return false;
         }
 
@@ -143,9 +147,13 @@ public class NHamcrestConditionExpression
         public void DescribeMismatch(object item, IDescription mismatchDescription)
         {
             if (item is T typedItem)
+            {
                 innerMatcher.DescribeMismatch(typedItem, mismatchDescription);
+            }
             else
+            {
                 mismatchDescription.AppendText("was ").AppendValue(item);
+            }
         }
     }
 }

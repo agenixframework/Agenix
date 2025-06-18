@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -24,12 +24,15 @@
 
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
 using Agenix.Api.Message;
+using Agenix.Api.Validation.Xml;
 using Agenix.Api.Variable;
 using Agenix.Core.Validation.Json;
 using Microsoft.Extensions.Logging;
@@ -83,9 +86,15 @@ public class DelegatingPayloadVariableExtractor : IVariableExtractor
     /// <param name="context">The test context that provides path expressions and dynamic content replacement mechanisms.</param>
     public virtual void ExtractVariables(IMessage message, TestContext context)
     {
-        if (PathExpressions.Count == 0) return;
+        if (PathExpressions.Count == 0)
+        {
+            return;
+        }
 
-        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Reading path elements.");
+        if (Log.IsEnabled(LogLevel.Debug))
+        {
+            Log.LogDebug("Reading path elements.");
+        }
 
         var jsonPathExpressions = new Dictionary<string, object>();
         var xpathExpressions = new Dictionary<string, object>();
@@ -96,38 +105,108 @@ public class DelegatingPayloadVariableExtractor : IVariableExtractor
             var variable = pathExpression.Value;
 
             if (JsonPathMessageValidationContext.IsJsonPathExpression(path))
+            {
                 jsonPathExpressions[path] = variable;
+            }
             else
+            {
                 xpathExpressions[path] = variable;
+            }
         }
 
         if (jsonPathExpressions.Count != 0)
         {
-            var jsonPathExtractor =
-                LookupVariableExtractor<IVariableExtractor, Builder>("jsonPath", context);
-
-            jsonPathExtractor
-                .Expressions(jsonPathExpressions)
-                .Build()
-                .ExtractVariables(message, context);
+            var jsonPathBuilder = LookupVariableExtractor("jsonPath", context);
+            if (jsonPathBuilder != null)
+            {
+                var extractor = InvokeBuilderMethods(jsonPathBuilder, jsonPathExpressions, null);
+                extractor?.ExtractVariables(message, context);
+            }
         }
 
-        if (xpathExpressions.Any())
+        if (xpathExpressions.Count != 0)
         {
-            // TODO: Implement XML Xpath extractor
-            /*var xpathExtractor = LookupVariableExtractor("xpath", context);
+            var xpathExtractor = LookupVariableExtractor("xpath", context);
 
-            if (_namespaces.Any() && xpathExtractor is IXmlNamespaceAware xmlNamespaceAware)
+            if (Namespaces.Count != 0 && xpathExtractor is IXmlNamespaceAware xmlNamespaceAware)
             {
-                xmlNamespaceAware.SetNamespaces(_namespaces);
+                xmlNamespaceAware.SetNamespaces(Namespaces);
             }
 
-            xpathExtractor
-                .Expressions(xpathExpressions)
-                .Build()
-                .ExtractVariables(message, context);*/
+            if (xpathExtractor != null)
+            {
+                var extractor = InvokeBuilderMethods(xpathExtractor, xpathExpressions, Namespaces);
+                extractor?.ExtractVariables(message, context);
+            }
         }
     }
+
+    /// <summary>
+    ///     Invokes builder methods using reflection to avoid dynamic casting issues.
+    /// </summary>
+    /// <param name="builder">The builder instance</param>
+    /// <param name="expressions">The expressions to set</param>
+    /// <param name="namespaces">The namespaces to set (optional)</param>
+    /// <returns>The built IVariableExtractor instance</returns>
+    private static IVariableExtractor InvokeBuilderMethods(object builder, Dictionary<string, object> expressions,
+        Dictionary<string, string> namespaces)
+    {
+        try
+        {
+            var builderType = builder.GetType();
+
+            // Try to set namespaces first if provided
+            if (namespaces is { Count: > 0 })
+            {
+                var namespacesMethod = builderType.GetMethod("Namespaces", [typeof(Dictionary<string, string>)]);
+                if (namespacesMethod != null)
+                {
+                    builder = namespacesMethod.Invoke(builder, [namespaces]);
+                }
+            }
+
+            // Set expressions
+            var expressionsMethod = builderType.GetMethod("Expressions", [typeof(IDictionary<string, object>)])
+                                    ?? builderType.GetMethod("Expressions", [typeof(Dictionary<string, object>)]);
+
+            if (expressionsMethod != null)
+            {
+                builder = expressionsMethod.Invoke(builder, [expressions]);
+            }
+            else
+            {
+                // Try an individual expression method if Expressions method doesn't exist
+                var expressionMethod = builderType.GetMethod("Expression", [typeof(string), typeof(object)]);
+                if (expressionMethod != null)
+                {
+                    builder = expressions.Aggregate(builder,
+                        (current, expr) => expressionMethod.Invoke(current, [expr.Key, expr.Value]));
+                }
+            }
+
+            // Build the extractor
+            var buildMethod = builderType.GetMethod("Build", Type.EmptyTypes);
+            if (buildMethod != null)
+            {
+                var extractor = buildMethod.Invoke(builder, null) as IVariableExtractor;
+
+                // Handle namespaces on the extractor if not handled on the builder
+                if (namespaces is { Count: > 0 } && extractor is IXmlNamespaceAware xmlNamespaceAware)
+                {
+                    xmlNamespaceAware.SetNamespaces(namespaces);
+                }
+
+                return extractor;
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.LogWarning("Failed to invoke builder methods via reflection: {ExMessage}", ex.Message);
+        }
+
+        return null;
+    }
+
 
     /// <summary>
     ///     Looks up the appropriate IVariableExtractor.IBuilder implementation based on the specified type and context.
@@ -142,23 +221,41 @@ public class DelegatingPayloadVariableExtractor : IVariableExtractor
     /// <exception cref="AgenixSystemException">
     ///     Thrown if no appropriate implementation of the specified type can be found.
     /// </exception>
-    private IVariableExtractor.IBuilder<T, TB> LookupVariableExtractor<T, TB>(string type, TestContext context)
-        where T : IVariableExtractor where TB : IVariableExtractor.IBuilder<T, TB>
+    private object LookupVariableExtractor(string type, TestContext context)
     {
-        return IVariableExtractor.Lookup<T, TB>(type)
-            .OrElseGet(() =>
+        try
+        {
+            // Try the IVariableExtractor.Lookup method first
+            var lookupResult = IVariableExtractor.Lookup<IBuilder>(type);
+            if (lookupResult.IsPresent)
             {
-                if (context.ReferenceResolver.IsResolvable(type, typeof(IVariableExtractor.IBuilder<T, TB>)))
-                    return context.ReferenceResolver.Resolve<IVariableExtractor.IBuilder<T, TB>>(type);
+                return lookupResult;
+            }
+        }
+        catch (InvalidCastException ex)
+        {
+            Log.LogError("Direct lookup failed for type '{Type}': {ExMessage}, trying alternative resolution", type,
+                ex.Message);
+        }
 
-                if (context.ReferenceResolver.IsResolvable(type + "VariableExtractorBuilder",
-                        typeof(IVariableExtractor.IBuilder<T, TB>)))
-                    return context.ReferenceResolver
-                        .Resolve<IVariableExtractor.IBuilder<T, TB>>(type + "VariableExtractorBuilder");
+        // Fallback to reference resolver
+        if (context.ReferenceResolver.IsResolvable(type))
+        {
+            return context.ReferenceResolver.Resolve(type);
+        }
 
-                throw new AgenixSystemException(
-                    $"Missing proper variable extractor implementation of type '{type}' - consider adding proper validation module to the project");
-            });
+        if (context.ReferenceResolver.IsResolvable(type + "VariableExtractorBuilder"))
+        {
+            return context.ReferenceResolver.Resolve(type + "VariableExtractorBuilder");
+        }
+
+        if (context.ReferenceResolver.IsResolvable(type + "PayloadVariableExtractorBuilder"))
+        {
+            return context.ReferenceResolver.Resolve(type + "PayloadVariableExtractorBuilder");
+        }
+
+        throw new AgenixSystemException(
+            $"Missing proper variable extractor implementation of type '{type}' - consider adding proper validation module to the project");
     }
 
     /// <summary>
@@ -182,7 +279,11 @@ public class DelegatingPayloadVariableExtractor : IVariableExtractor
         /// </returns>
         public Builder Expressions(IDictionary<string, object> expressions)
         {
-            foreach (var expression in expressions) _expressions[expression.Key] = expression.Value;
+            foreach (var expression in expressions)
+            {
+                _expressions[expression.Key] = expression.Value;
+            }
+
             return this;
         }
 
@@ -226,7 +327,11 @@ public class DelegatingPayloadVariableExtractor : IVariableExtractor
         /// </returns>
         public Builder Namespaces(Dictionary<string, string> namespaces)
         {
-            foreach (var ns in namespaces) _namespaces[ns.Key] = ns.Value;
+            foreach (var ns in namespaces)
+            {
+                _namespaces[ns.Key] = ns.Value;
+            }
+
             return this;
         }
 

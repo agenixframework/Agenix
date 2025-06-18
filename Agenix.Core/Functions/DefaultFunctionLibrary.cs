@@ -59,7 +59,6 @@ public class DefaultFunctionLibrary : FunctionLibrary
         Members.Add("RandomUUID", new RandomUuidFunction());
         Members.Add("Concat", new ConcatFunction());
         Members.Add("UpperCase", new UpperCaseFunction());
-        Members.Add("EscapeXml", new EscapeXmlFunction());
         Members.Add("CurrentDate", new CurrentDateFunction());
         Members.Add("LowerCase", new LowerCaseFunction());
         Members.Add("RandomString", new RandomStringFunction());

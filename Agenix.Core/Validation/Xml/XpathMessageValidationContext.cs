@@ -117,7 +117,11 @@ public class XpathMessageValidationContext : XmlMessageValidationContext, IValid
         /// <returns>The updated instance of the builder with the specified expressions set.</returns>
         public Builder Expressions(IDictionary<string, object> expressions)
         {
-            foreach (var expression in expressions) _expressions[expression.Key] = expression.Value;
+            foreach (var expression in expressions)
+            {
+                _expressions[expression.Key] = expression.Value;
+            }
+
             return this;
         }
 

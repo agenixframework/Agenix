@@ -1,11 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using Agenix.Api.Endpoint.Resolver;
 using Agenix.Api.Message;
-using Agenix.Core.Endpoint.Resolver;
-using Agenix.Core.Message;
 using Agenix.Http.Message;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
@@ -62,11 +60,7 @@ public class HttpMessageTest
         var cookieMock1 = new Cookie();
         var cookieMock2 = new Cookie();
 
-        _httpMessage.SetCookies(new List<Cookie>
-        {
-            cookieMock1,
-            cookieMock2
-        }.ToArray());
+        _httpMessage.SetCookies(new List<Cookie> { cookieMock1, cookieMock2 }.ToArray());
 
         var expectedCookieMock = new Cookie();
         var newCookies = new List<Cookie> { expectedCookieMock }.ToArray();
@@ -329,7 +323,7 @@ public class HttpMessageTest
     }
 
     [Test]
-    public void TestCopyConstructorWithCitrusOverwriteDoesNotPreserveIdAndTimestamp()
+    public void TestCopyConstructorWithAgenixOverwriteDoesNotPreserveIdAndTimestamp()
     {
         // Given
         _httpMessage.Payload = "myPayload";

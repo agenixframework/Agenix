@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -41,7 +41,9 @@ public class DecodeBase64Function : IFunction
     public string Execute(List<string> parameterList, TestContext testContext)
     {
         if (parameterList == null || parameterList.Count == 0)
+        {
             throw new InvalidFunctionUsageException("Invalid function parameter usage! Missing parameters!");
+        }
 
         var base64EncodedBytes = Convert.FromBase64String(parameterList[0]);
         return Encoding.UTF8.GetString(base64EncodedBytes);

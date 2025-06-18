@@ -1,14 +1,14 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using Agenix.Api.Message;
 using Agenix.Core.Message;
 using Agenix.Http.Client;
 using Agenix.Http.Message;
-using TestContext = Agenix.Api.Context.TestContext;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.Tests.Http.Message;
 
@@ -199,7 +199,7 @@ public class HttpMessageConverterTest
         // GIVEN
         _endpointConfiguration.ContentType = "application/xml";
         _message.Payload =
-            "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<configuration>\n    <appSettings>\n        <add key=\"myVariable\" value=\"test\"/>\n        <add key=\"user\" value=\"Agenix\"/>\n        <add key=\"welcomeText\" value=\"Hello ${user}!\"/>\n        <add key=\"todayDate\" value=\"Today is core:CurrentDate('yyyy-MM-dd')!\"/>\n    </appSettings>\n</configuration>";
+            "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<configuration>\n    <appSettings>\n        <add key=\"myVariable\" value=\"test\"/>\n        <add key=\"user\" value=\"Agenix\"/>\n        <add key=\"welcomeText\" value=\"Hello ${user}!\"/>\n        <add key=\"todayDate\" value=\"Today is agenix:CurrentDate('yyyy-MM-dd')!\"/>\n    </appSettings>\n</configuration>";
 
         // WHEN
         var httpRequestMessage = _messageConverter.ConvertOutbound(_message, _endpointConfiguration, _testContext);
@@ -355,10 +355,7 @@ public class HttpMessageConverterTest
     [Test]
     public void TestHttpEntityMessageBodyIsPreservedOnInbound()
     {
-        var httpResponseMessage = new HttpResponseMessage
-        {
-            Content = new StringContent(_payload)
-        };
+        var httpResponseMessage = new HttpResponseMessage { Content = new StringContent(_payload) };
 
         // WHEN
         var httpMessage = _messageConverter.ConvertInbound(httpResponseMessage, _endpointConfiguration, _testContext);
@@ -370,10 +367,7 @@ public class HttpMessageConverterTest
     [Test]
     public void TestHttpEntityDefaultMessageBodyIsSetOnInbound()
     {
-        var httpResponseMessage = new HttpResponseMessage
-        {
-            Content = new StringContent("")
-        };
+        var httpResponseMessage = new HttpResponseMessage { Content = new StringContent("") };
 
         // WHEN
         var httpMessage = _messageConverter.ConvertInbound(httpResponseMessage, _endpointConfiguration, _testContext);
@@ -485,10 +479,7 @@ public class HttpMessageConverterTest
     [Test]
     public void TestCookiesPreservedOnConfigurationOnInbound()
     {
-        var cookie = new Cookie
-        {
-            Name = "foo"
-        };
+        var cookie = new Cookie { Name = "foo" };
 
         var httpResponseMessage = new HttpResponseMessage();
         httpResponseMessage.Content = new StringContent("foobar");

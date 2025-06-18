@@ -105,9 +105,14 @@ public class BooleanExpressionParser
                         {
                             var parsedNonDigit = ParseNonDigits(expression, currentCharacterIndex);
                             if (IsBoolean(parsedNonDigit))
+                            {
                                 values.Push(ReplaceBooleanStringByIntegerRepresentation(parsedNonDigit));
+                            }
                             else
+                            {
                                 operators.Push(ValidateOperator(parsedNonDigit));
+                            }
+
                             currentCharacterIndex += MoveCursor(parsedNonDigit);
                         }
                         else if (char.IsDigit(currentCharacter))
@@ -124,7 +129,9 @@ public class BooleanExpressionParser
 
             result = bool.Parse(EvaluateExpressionStack(operators, values));
             if (Log.IsEnabled(LogLevel.Debug))
+            {
                 Log.LogDebug($"Boolean expression {expression} evaluates to {result}");
+            }
         }
         catch (InvalidOperationException e)
         {
@@ -193,7 +200,10 @@ public class BooleanExpressionParser
             digitBuffer.Append(currentCharacter);
             ++subExpressionIndex;
 
-            if (subExpressionIndex < expression.Length) currentCharacter = expression[subExpressionIndex];
+            if (subExpressionIndex < expression.Length)
+            {
+                currentCharacter = expression[subExpressionIndex];
+            }
         } while (subExpressionIndex < expression.Length && char.IsDigit(currentCharacter));
 
         return digitBuffer.ToString();
@@ -219,7 +229,10 @@ public class BooleanExpressionParser
             operatorBuffer.Append(currentCharacter);
             subExpressionIndex++;
 
-            if (subExpressionIndex < expression.Length) currentCharacter = expression[subExpressionIndex];
+            if (subExpressionIndex < expression.Length)
+            {
+                currentCharacter = expression[subExpressionIndex];
+            }
         } while (subExpressionIndex < expression.Length && !char.IsDigit(currentCharacter) &&
                  !IsSeparatorToken(currentCharacter));
 
@@ -247,7 +260,10 @@ public class BooleanExpressionParser
      */
     private static string ReplaceBooleanStringByIntegerRepresentation(string possibleBooleanString)
     {
-        if (possibleBooleanString.Equals(true.ToString(), StringComparison.OrdinalIgnoreCase)) return "1";
+        if (possibleBooleanString.Equals(true.ToString(), StringComparison.OrdinalIgnoreCase))
+        {
+            return "1";
+        }
 
         return possibleBooleanString.Equals(false.ToString(), StringComparison.OrdinalIgnoreCase)
             ? "0"
@@ -283,8 +299,13 @@ public class BooleanExpressionParser
     private static bool IsSeparatorToken(char possibleSeparatorChar)
     {
         foreach (SeparatorToken token in Enum.GetValues(typeof(SeparatorToken)))
+        {
             if ((char)token == possibleSeparatorChar)
+            {
                 return true;
+            }
+        }
+
         return false;
     }
 
@@ -298,7 +319,10 @@ public class BooleanExpressionParser
     private static string ValidateOperator(string operatorValue)
     {
         if (!Operators.Contains(operatorValue) && !BooleanOperators.Contains(operatorValue))
+        {
             throw new AgenixSystemException("Unknown operator '" + operatorValue + "'");
+        }
+
         return operatorValue;
     }
 

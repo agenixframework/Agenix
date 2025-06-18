@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -56,6 +56,7 @@ public class DefaultValidationMatcherLibrary : ValidationMatcherLibrary
         Members.Add("Matches", new MatchesValidationMatcher());
         Members.Add("StartsWith", new StartsWithValidationMatcher());
         Members.Add("StringLength", new StringLengthValidationMatcher());
+        Members.Add("Variable", new CreateVariableValidationMatcher());
         Members.Add("Trim", new TrimValidationMatcher());
         Members.Add("TrimAllWhiteSpaces", new TrimAllWhitespacesValidationMatcher());
 
@@ -72,7 +73,9 @@ public class DefaultValidationMatcherLibrary : ValidationMatcherLibrary
             Members.Add(key, matcher);
 
             if (Log.IsEnabled(LogLevel.Debug))
+            {
                 Log.LogDebug("Register message matcher '{Key}' as {Type}", key, matcher.GetType());
+            }
         }
     }
 }

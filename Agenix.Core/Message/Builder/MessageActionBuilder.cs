@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Agenix.Api;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Message;
@@ -148,9 +148,14 @@ public abstract class MessageActionBuilder<T, TM, TB> : AbstractTestActionBuilde
     public virtual TB Process(IMessageProcessor processor)
     {
         if (processor is IVariableExtractor variableExtractor)
+        {
             variableExtractors.Add(variableExtractor);
+        }
         else
+        {
             messageProcessors.Add(processor);
+        }
+
         return self;
     }
 

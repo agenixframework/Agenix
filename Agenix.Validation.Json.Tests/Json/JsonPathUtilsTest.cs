@@ -1,4 +1,4 @@
-﻿using Agenix.Validation.Json.Json;
+using Agenix.Validation.Json.Json;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 

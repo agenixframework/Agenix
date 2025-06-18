@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -71,9 +71,13 @@ public class ObjectBag
         public void To<T>(T value)
         {
             if (value != null)
+            {
                 GetCurrentSession().Add(_key, value);
+            }
             else
+            {
                 GetCurrentSession().Remove(_key);
+            }
         }
     }
 }

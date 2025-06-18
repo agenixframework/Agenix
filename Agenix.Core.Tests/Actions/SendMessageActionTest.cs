@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Exceptions;
@@ -7,7 +7,6 @@ using Agenix.Api.Messaging;
 using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
 using Agenix.Core.Actions;
-using Agenix.Core.Endpoint;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Builder;
 using Agenix.Core.Validation;
@@ -237,17 +236,11 @@ public class SendMessageActionTest : AbstractNUnitSetUp
         messageBuilder.SetPayloadBuilder(
             new DefaultPayloadBuilder("<TestRequest><Message>Hello World!</Message></TestRequest>"));
 
-        Dictionary<string, object> controlHeaders = new()
-        {
-            ["Operation"] = "sayHello"
-        };
+        Dictionary<string, object> controlHeaders = new() { ["Operation"] = "sayHello" };
         var controlMessage =
             new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>", controlHeaders);
 
-        Dictionary<string, object> headers = new()
-        {
-            ["Operation"] = "sayHello"
-        };
+        Dictionary<string, object> headers = new() { ["Operation"] = "sayHello" };
         messageBuilder.AddHeaderBuilder(new DefaultHeaderBuilder(headers));
 
         _endpointMock.Reset();
@@ -280,17 +273,11 @@ public class SendMessageActionTest : AbstractNUnitSetUp
 
         Context.SetVariable("myOperation", "sayHello");
 
-        Dictionary<string, object> controlHeaders = new()
-        {
-            ["Operation"] = "sayHello"
-        };
+        Dictionary<string, object> controlHeaders = new() { ["Operation"] = "sayHello" };
         var controlMessage =
             new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>", controlHeaders);
 
-        Dictionary<string, object> headers = new()
-        {
-            ["Operation"] = "${myOperation}"
-        };
+        Dictionary<string, object> headers = new() { ["Operation"] = "${myOperation}" };
         messageBuilder.AddHeaderBuilder(new DefaultHeaderBuilder(headers));
 
         _endpointMock.Reset();
@@ -343,10 +330,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
         messageBuilder.SetPayloadBuilder(
             new DefaultPayloadBuilder("<TestRequest><Message>Hello World!</Message></TestRequest>"));
 
-        var headers = new Dictionary<string, object>
-        {
-            { "Operation", "${myOperation}" }
-        };
+        var headers = new Dictionary<string, object> { { "Operation", "${myOperation}" } };
         messageBuilder.AddHeaderBuilder(new DefaultHeaderBuilder(headers));
 
         _endpointMock.Reset();
@@ -372,23 +356,16 @@ public class SendMessageActionTest : AbstractNUnitSetUp
         messageBuilder.SetPayloadBuilder(
             new DefaultPayloadBuilder("<TestRequest><Message>Hello World!</Message></TestRequest>"));
 
-        var controlHeaders = new Dictionary<string, object>
-        {
-            { "Operation", "sayHello" }
-        };
+        var controlHeaders = new Dictionary<string, object> { { "Operation", "sayHello" } };
         var controlMessage =
             new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>", controlHeaders);
 
-        var headers = new Dictionary<string, object>
-        {
-            { "Operation", "sayHello" }
-        };
+        var headers = new Dictionary<string, object> { { "Operation", "sayHello" } };
         messageBuilder.AddHeaderBuilder(new DefaultHeaderBuilder(headers));
 
         var extractVars = new Dictionary<string, string>
         {
-            { "Operation", "myOperation" },
-            { MessageHeaders.Id, "correlationId" }
+            { "Operation", "myOperation" }, { MessageHeaders.Id, "correlationId" }
         };
 
         var variableExtractor = new MessageHeaderVariableExtractor.Builder()

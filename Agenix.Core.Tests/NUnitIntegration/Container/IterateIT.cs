@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Agenix.Api.Annotations;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
@@ -22,7 +22,7 @@ public class IterateIT
     {
         _gherkin.Given(CreateVariable("max", "3"));
 
-        _gherkin.When(Iterate().Condition("i lt= core:RandomNumber(1)").Index("i").Actions(Echo("index is: ${i}")));
+        _gherkin.When(Iterate().Condition("i lt= agenix:RandomNumber(1)").Index("i").Actions(Echo("index is: ${i}")));
 
         _gherkin.When(Iterate().Condition("i lt 20").Index("i").Actions(Echo("index is: ${i}")));
 

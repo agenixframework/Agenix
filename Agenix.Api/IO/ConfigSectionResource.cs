@@ -69,7 +69,10 @@ public class ConfigSectionResource : AbstractResource
         get
         {
             if (ConfigElement == null)
+            {
                 throw new FileNotFoundException($"Configuration Section '{_sectionName}' does not exist", _sectionName);
+            }
+
             return new MemoryStream(Encoding.UTF8.GetBytes(ConfigElement.OuterXml));
         }
     }

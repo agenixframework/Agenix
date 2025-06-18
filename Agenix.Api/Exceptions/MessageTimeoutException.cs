@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -65,7 +65,10 @@ public class MessageTimeoutException : ActionTimeoutException
     /// <returns>A detailed message as a string.</returns>
     protected override string GetDetailMessage()
     {
-        if (Timeout <= 0 && Endpoint == null) return "Failed to receive message.";
+        if (Timeout <= 0 && Endpoint == null)
+        {
+            return "Failed to receive message.";
+        }
 
         return $"Failed to receive message on endpoint: '{Endpoint}'";
     }

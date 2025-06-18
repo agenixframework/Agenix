@@ -74,7 +74,7 @@ public interface ITestActionContainer : ITestAction
     /**
     * Get the action that was executed most recently.
     */
-    ITestAction GetActiveAction();
+    ITestAction? GetActiveAction();
 
     /**
     * Gets all nested actions that have been executed in the container.

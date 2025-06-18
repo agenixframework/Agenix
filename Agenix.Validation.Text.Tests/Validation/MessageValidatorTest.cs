@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Validation;
+using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
 using Agenix.Core.Validation;
 using Agenix.Validation.Text.Validation.Text;

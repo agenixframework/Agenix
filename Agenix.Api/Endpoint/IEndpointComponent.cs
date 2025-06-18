@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -89,9 +89,15 @@ public interface IEndpointComponent
     {
         var components = TypeResolver.ResolveAll<IEndpointComponent>();
 
-        if (!Log.IsEnabled(LogLevel.Debug)) return components;
+        if (!Log.IsEnabled(LogLevel.Debug))
+        {
+            return components;
+        }
+
         foreach (var kvp in components)
+        {
             Log.LogDebug("Found endpoint component '{KvpKey}' as {Name}", kvp.Key, kvp.Value.GetType().Name);
+        }
 
         return components;
     }

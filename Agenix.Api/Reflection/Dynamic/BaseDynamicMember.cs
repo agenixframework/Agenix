@@ -97,9 +97,13 @@ public class BaseDynamicMember
     protected static void InvokeMethod(ILGenerator il, bool isStatic, bool isValueType, MethodInfo method)
     {
         if (isStatic || isValueType)
+        {
             il.EmitCall(OpCodes.Call, method, null);
+        }
         else
+        {
             il.EmitCall(OpCodes.Callvirt, method, null);
+        }
     }
 
     /// <summary>
@@ -110,8 +114,13 @@ public class BaseDynamicMember
     protected static void ProcessReturnValue(ILGenerator il, Type returnValueType)
     {
         if (returnValueType == typeof(void))
+        {
             il.Emit(OpCodes.Ldnull);
-        else if (returnValueType.IsValueType) il.Emit(OpCodes.Box, returnValueType);
+        }
+        else if (returnValueType.IsValueType)
+        {
+            il.Emit(OpCodes.Box, returnValueType);
+        }
     }
 
     /// <summary>

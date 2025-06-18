@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -69,30 +69,43 @@ public class DefaultEndpointFactory : IEndpointFactory
     public IEndpoint Create(string uri, TestContext context)
     {
         var endpointUri = context.ReplaceDynamicContentInString(uri);
-        if (!endpointUri.Contains(':')) return context.ReferenceResolver.Resolve<IEndpoint>(endpointUri);
+        if (!endpointUri.Contains(':'))
+        {
+            return context.ReferenceResolver.Resolve<IEndpoint>(endpointUri);
+        }
 
         var tokens = endpointUri.Split(':');
         if (tokens.Length < 2 || (tokens.Length > 0 && string.IsNullOrEmpty(tokens[1])))
+        {
             throw new AgenixSystemException($"Invalid endpoint uri '{endpointUri}'");
+        }
 
         var componentName = tokens[0];
         var components = GetEndpointComponents(context.ReferenceResolver);
 
         if (components == null || !components.TryGetValue(componentName, out var component))
             // Try to get component from default Agenix modules
+        {
             component = IEndpointComponent.Lookup(componentName).OrElse(null);
+        }
 
         if (component == null)
+        {
             throw new AgenixSystemException($"Unable to create endpoint component with name '{componentName}'");
+        }
 
         var parameters = component.GetParameters(endpointUri);
         if (!parameters.TryGetValue(IEndpointComponent.EndpointName, out var cachedEndpointName))
+        {
             cachedEndpointName = endpointUri;
+        }
 
         return _endpointCache.GetOrAdd(cachedEndpointName, _ =>
         {
             if (Log.IsEnabled(LogLevel.Debug))
+            {
                 Log.LogDebug("Creating new endpoint for uri '{CachedEndpointName}'", cachedEndpointName);
+            }
 
             var endpoint = component.CreateEndpoint(endpointUri, context);
             return endpoint;
@@ -112,13 +125,18 @@ public class DefaultEndpointFactory : IEndpointFactory
 
         if (!parser.IsPresent)
             // Try to get parser from default Agenix modules
+        {
             parser = IAnnotationConfigParser<Attribute, IEndpoint>.Lookup(qualifier);
+        }
 
         if (parser.IsPresent)
         {
             var endpoint = parser.Value.Parse(endpointConfig, context.ReferenceResolver) as IEndpoint;
             if (endpoint == null)
+            {
                 throw new AgenixSystemException($"Unable to create endpoint annotation parser with name '{qualifier}'");
+            }
+
             endpoint.SetName(endpointName);
             return endpoint;
         }

@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -85,7 +85,10 @@ public class ActionCondition : AbstractCondition
     /// </returns>
     public override bool IsSatisfied(TestContext context)
     {
-        if (_action == null) return false;
+        if (_action == null)
+        {
+            return false;
+        }
 
         try
         {

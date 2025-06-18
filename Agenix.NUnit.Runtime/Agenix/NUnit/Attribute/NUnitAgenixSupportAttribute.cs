@@ -1,4 +1,5 @@
-﻿#region License
+#region License
+
 // MIT License
 //
 // Copyright (c) 2025 Agenix
@@ -20,6 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using Agenix.Api;
@@ -58,7 +60,8 @@ public class NUnitAgenixSupportAttribute : System.Attribute, ITestAction
         }
 
         var context = AgenixInstanceManager.GetOrDefault().AgenixContext.CreateTestContext();
-        _delegate = CreateTestRunner(test.Name, test.FullName, test.Fixture?.GetType()!, context);
+        _delegate = CreateTestRunner(test, context);
+
 
         AgenixAnnotations.InjectAll(test.Fixture, AgenixInstanceManager.GetOrDefault(), context);
         AgenixAnnotations.InjectTestRunner(test.Fixture, _delegate);
@@ -87,13 +90,15 @@ public class NUnitAgenixSupportAttribute : System.Attribute, ITestAction
     /// <param name="testClass">The type of the test class containing the test case.</param>
     /// <param name="context">The test context providing necessary configurations and state.</param>
     /// <return>An instance of ITestCaseRunner configured with the specified test case details.</return>
-    private static ITestCaseRunner CreateTestRunner(string testName, string packageName, Type testClass,
+    private static ITestCaseRunner CreateTestRunner(ITest test,
         TestContext context)
     {
         var testCaseRunner = TestCaseRunnerFactory.CreateRunner(new DefaultTestCase(), context);
-        testCaseRunner.SetTestClass(testClass);
-        testCaseRunner.SetName(testName);
-        testCaseRunner.SetNamespaceName(packageName);
+        testCaseRunner.SetTestClass(test.Fixture?.GetType());
+        testCaseRunner.SetName(test.Name);
+        testCaseRunner.SetNamespaceName(test.FullName);
+        testCaseRunner.SetAuthor(test.Properties.Get("Author")?.ToString() ?? string.Empty);
+        testCaseRunner.SetDescription(test.Properties.Get("Description")?.ToString() ?? string.Empty);
 
         return testCaseRunner;
     }

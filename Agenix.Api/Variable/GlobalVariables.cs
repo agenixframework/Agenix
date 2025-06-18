@@ -67,7 +67,11 @@ public class GlobalVariables
 
         public Builder WithVariables(Dictionary<string, object> variables)
         {
-            foreach (var item in variables) Variables[item.Key] = item.Value;
+            foreach (var item in variables)
+            {
+                Variables[item.Key] = item.Value;
+            }
+
             return this;
         }
 

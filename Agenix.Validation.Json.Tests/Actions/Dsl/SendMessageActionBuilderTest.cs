@@ -10,7 +10,6 @@ using Agenix.Core.Container;
 using Agenix.Core.Validation.Builder;
 using Agenix.Validation.Json.Dsl;
 using Agenix.Validation.Json.Json;
-using Agenix.Validation.Json.Json.Schema;
 using Agenix.Validation.Json.Message.Builder;
 using Agenix.Validation.Json.Tests.Message;
 using Agenix.Validation.Json.Validation;
@@ -41,10 +40,7 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver = new Mock<IReferenceResolver>();
         _messageEndpoint = new Mock<IEndpoint>();
         _messageProducer = new Mock<IProducer>();
-        _serializer = new JsonSerializer
-        {
-            ContractResolver = new LowercaseContractResolver()
-        };
+        _serializer = new JsonSerializer { ContractResolver = new LowercaseContractResolver() };
     }
 
     [Test]
@@ -432,8 +428,11 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Assert
         var test = runner.GetTestCase();
-        Assert.That(test.GetActionCount(), Is.EqualTo(1));
-        Assert.That(test.GetActions()[0], Is.InstanceOf<SendMessageAction>());
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(test.GetActionCount(), Is.EqualTo(1));
+            Assert.That(test.GetActions()[0], Is.InstanceOf<SendMessageAction>());
+        }
 
         var action = (SendMessageAction)test.GetActions()[0];
         using (Assert.EnterMultipleScope())
@@ -454,7 +453,8 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
         _messageEndpoint.Reset();
         _messageProducer.Reset();
 
-        _messageEndpoint.Setup(x => x.CreateProducer()).Returns(_messageProducer.Object); ;
+        _messageEndpoint.Setup(x => x.CreateProducer()).Returns(_messageProducer.Object);
+        ;
 
         var schemaRepository = new JsonSchemaRepository();
         schemaRepository.SetName("fooRepository");
@@ -468,7 +468,10 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.ResolveAll<JsonSchemaRepository>())
             .Returns(new Dictionary<string, JsonSchemaRepository> { { "fooRepository", schemaRepository } });
         _referenceResolver.Setup(x => x.ResolveAll<ISchemaValidator<ISchemaValidationContext>>())
-            .Returns(new Dictionary<string, ISchemaValidator<ISchemaValidationContext>> { { "jsonSchemaValidator", schemaValidator.Object } });
+            .Returns(new Dictionary<string, ISchemaValidator<ISchemaValidationContext>>
+            {
+                { "jsonSchemaValidator", schemaValidator.Object }
+            });
 
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())

@@ -60,23 +60,33 @@ public class PathExpressionValidationContext
 
         public IValidationContext Build()
         {
-            if (_expressions.Count == 0) return new DefaultValidationContext();
+            if (_expressions.Count == 0)
+            {
+                return new DefaultValidationContext();
+            }
 
             string expression = null;
             using (var enumerator = _expressions.Keys.GetEnumerator())
             {
-                if (enumerator.MoveNext()) expression = enumerator.Current;
+                if (enumerator.MoveNext())
+                {
+                    expression = enumerator.Current;
+                }
             }
 
             if (JsonPathMessageValidationContext.IsJsonPathExpression(expression))
+            {
                 return new JsonPathMessageValidationContext.Builder()
                     .Expressions(_expressions)
                     .Build();
+            }
 
             if (XpathMessageValidationContext.IsXpathExpression(expression))
+            {
                 return new XpathMessageValidationContext.Builder()
                     .Expressions(_expressions)
                     .Build();
+            }
 
             throw new AgenixSystemException($"Unsupported path expression '{expression}'");
         }
@@ -86,7 +96,11 @@ public class PathExpressionValidationContext
         /// including JSONPath and XPath, in custom validation scenarios.
         public Builder Expressions(IDictionary<string, object> expressions)
         {
-            foreach (var kvp in expressions) _expressions[kvp.Key] = kvp.Value;
+            foreach (var kvp in expressions)
+            {
+                _expressions[kvp.Key] = kvp.Value;
+            }
+
             return this;
         }
 
@@ -123,7 +137,10 @@ public class PathExpressionValidationContext
         public Builder JsonPath(string expression, object value)
         {
             if (!JsonPathMessageValidationContext.IsJsonPathExpression(expression))
+            {
                 throw new AgenixSystemException($"Unsupported json path expression '{expression}'");
+            }
+
             return Expression(expression, value);
         }
 
@@ -137,7 +154,9 @@ public class PathExpressionValidationContext
         public Builder Xpath(string expression, object value)
         {
             if (!XpathMessageValidationContext.IsXpathExpression(expression))
+            {
                 throw new AgenixSystemException($"Unsupported xpath expression '{expression}'");
+            }
 
             return Expression(expression, value);
         }

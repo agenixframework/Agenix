@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -48,9 +48,13 @@ public class Catch(Catch.Builder builder)
 
     public override void DoExecute(TestContext context)
     {
-        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Catch container catching exceptions of type " + Exception);
+        if (Log.IsEnabled(LogLevel.Debug))
+        {
+            Log.LogDebug("Catch container catching exceptions of type " + Exception);
+        }
 
         foreach (var actionBuilder in actions)
+        {
             try
             {
                 ExecuteAction(actionBuilder.Build(), context);
@@ -65,6 +69,7 @@ public class Catch(Catch.Builder builder)
 
                 throw new AgenixSystemException(e.Message, e);
             }
+        }
     }
 
 

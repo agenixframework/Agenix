@@ -90,7 +90,11 @@ public class PropertyFileVariableSource : IVariableSource
     {
         lock (_objectMonitor)
         {
-            if (Properties != null) return Properties.Contains(name);
+            if (Properties != null)
+            {
+                return Properties.Contains(name);
+            }
+
             Properties = new Properties();
             InitProperties();
             return Properties.Contains(name);
@@ -110,7 +114,11 @@ public class PropertyFileVariableSource : IVariableSource
     {
         lock (_objectMonitor)
         {
-            if (Properties != null) return Properties.GetProperty(name);
+            if (Properties != null)
+            {
+                return Properties.GetProperty(name);
+            }
+
             Properties = new Properties();
             InitProperties();
             return Properties.GetProperty(name);
@@ -126,7 +134,10 @@ public class PropertyFileVariableSource : IVariableSource
         foreach (var location in _locations)
         {
             var exists = location.Exists;
-            if (!exists && _ignoreMissingResources) continue;
+            if (!exists && _ignoreMissingResources)
+            {
+                continue;
+            }
 
             using var input = location.InputStream;
             lock (_objectMonitor)

@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -35,6 +35,12 @@ namespace Agenix.Core.Message.Builder;
 public class DefaultPayloadBuilder(object payload) : IMessagePayloadBuilder
 {
     /// <summary>
+    ///     Retrieves the payload object that is being built.
+    /// </summary>
+    /// <returns>The payload object.</returns>
+    public object Payload => payload;
+
+    /// <summary>
     ///     Builds the payload based on the provided context, replacing any dynamic content in a string payload.
     /// </summary>
     /// <param name="context">The context that provides methods for replacing dynamic content in a string.</param>
@@ -47,14 +53,5 @@ public class DefaultPayloadBuilder(object payload) : IMessagePayloadBuilder
             string payloadString => context.ReplaceDynamicContentInString(payloadString),
             _ => payload
         };
-    }
-
-    /// <summary>
-    ///     Retrieves the payload object that is being built.
-    /// </summary>
-    /// <returns>The payload object.</returns>
-    public object GetPayload()
-    {
-        return payload;
     }
 }

@@ -1,4 +1,5 @@
-﻿#region License
+#region License
+
 // MIT License
 //
 // Copyright (c) 2025 Agenix
@@ -20,12 +21,12 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
 using Agenix.Core.Validation;
-using Agenix.Core.Validation.Json;
 using Agenix.Validation.Json.Validation;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;

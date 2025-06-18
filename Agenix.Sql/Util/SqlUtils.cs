@@ -1,4 +1,4 @@
-﻿#region Imports
+#region Imports
 
 #region License
 
@@ -86,7 +86,9 @@ public abstract class SqlUtils
         try
         {
             if (Log.IsEnabled(LogLevel.Debug))
+            {
                 Log.LogDebug("Create statements from SQL file: " + sqlResource.File.FullName);
+            }
 
             var inputStream = sqlResource.InputStream;
             var buffer = new StringBuilder();
@@ -95,7 +97,11 @@ public abstract class SqlUtils
             using var reader = new StreamReader(inputStream);
             while (reader.ReadLine() is { } line)
             {
-                if (line.Trim().StartsWith(SqlComment) || string.IsNullOrWhiteSpace(line.Trim())) continue;
+                if (line.Trim().StartsWith(SqlComment) || string.IsNullOrWhiteSpace(line.Trim()))
+                {
+                    continue;
+                }
+
                 if (line.Trim().EndsWith(GetStatementEndingCharacter(lineDecorator)))
                 {
                     buffer.Append(lineDecorator != null ? lineDecorator.Decorate(line) : line);
@@ -103,7 +109,10 @@ public abstract class SqlUtils
 
                     var stmt = buffer.ToString().Trim();
 
-                    if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Found statement: " + stmt);
+                    if (Log.IsEnabled(LogLevel.Debug))
+                    {
+                        Log.LogDebug("Found statement: " + stmt);
+                    }
 
                     stmts.Add(stmt);
                     buffer.Clear();

@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -82,12 +82,14 @@ public interface IVariableExtractor : IMessageProcessor
     /// <typeparam name="T">The IVariableExtractor implementation type.</typeparam>
     /// <typeparam name="TB">The builder type for the IVariableExtractor implementation.</typeparam>
     /// <returns>An optional builder for the specified IVariableExtractor type.</returns>
-    public new static Optional<IBuilder<T, TB>> Lookup<T, TB>(string extractor)
-        where T : IVariableExtractor where TB : IBuilder<T, TB>
+    public static new Optional<TB> Lookup<TB>(string extractor)
+        where TB : IBuilder
     {
         try
         {
-            return Optional<IBuilder<T, TB>>.OfNullable(TypeResolver.Resolve<IBuilder<T, TB>>(extractor));
+            var instance = TypeResolver.Resolve<TB>(extractor);
+
+            return Optional<TB>.Of(instance);
         }
         catch (AgenixSystemException)
         {
@@ -96,7 +98,7 @@ public interface IVariableExtractor : IMessageProcessor
                 ResourcePath, extractor);
         }
 
-        return Optional<IBuilder<T, TB>>.Empty;
+        return Optional<TB>.Empty;
     }
 
     /// <summary>
@@ -105,9 +107,9 @@ public interface IVariableExtractor : IMessageProcessor
     /// </summary>
     /// <typeparam name="T">The type of the IVariableExtractor implementation being built.</typeparam>
     /// <typeparam name="TB">The type of the builder itself, implementing IMessageProcessor.IBuilder.</typeparam>
-    public new interface IBuilder<out T, TB> : IMessageProcessor.IBuilder<T, TB>, IWithExpressions<TB>
+    public new interface IBuilder<out T, TB> : IMessageProcessor.IBuilder<T, TB>, IWithExpressions<TB>, IBuilder
         where T : IVariableExtractor
-        where TB : IBuilder<T, TB>
+        where TB : IBuilder
     {
         new T Build();
     }

@@ -1,8 +1,7 @@
-﻿using System;
+using System;
 using Agenix.Api.Annotations;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
-
 using static Agenix.Core.Container.Sequence.Builder;
 using static Agenix.Core.Actions.EchoAction.Builder;
 using static Agenix.Core.Actions.SleepAction.Builder;
@@ -26,7 +25,7 @@ public class SequentialIT
             Sleep().Milliseconds(500),
             Echo("Hello Agenix!"),
             StopTime()
-            ));
+        ));
 
         _gherkin.When(Sequential().Actions(
             Echo("Hello Agenix!"),

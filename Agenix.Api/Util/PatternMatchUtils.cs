@@ -46,12 +46,27 @@ public abstract class PatternMatchUtils
     /// </returns>
     public static bool SimpleMatch(string pattern, string str)
     {
-        if (ObjectUtils.NullSafeEquals(pattern, str) || "*".Equals(pattern)) return true;
-        if (pattern == null || str == null) return false;
+        if (ObjectUtils.NullSafeEquals(pattern, str) || "*".Equals(pattern))
+        {
+            return true;
+        }
+
+        if (pattern == null || str == null)
+        {
+            return false;
+        }
+
         if (pattern.StartsWith("*") && pattern.EndsWith("*") &&
             str.Contains(pattern.Substring(1, pattern.Length - 1 - 1)))
+        {
             return true;
-        if (pattern.StartsWith("*") && str.EndsWith(pattern.Substring(1, pattern.Length - 1))) return true;
+        }
+
+        if (pattern.StartsWith("*") && str.EndsWith(pattern.Substring(1, pattern.Length - 1)))
+        {
+            return true;
+        }
+
         return pattern.EndsWith("*") && str.StartsWith(pattern.Substring(0, pattern.Length - 1 - 0));
     }
 

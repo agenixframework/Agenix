@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Agenix.Api.Exceptions;
 using Agenix.Core.Actions;
 using Agenix.Core.Container;
@@ -36,9 +36,7 @@ public class ParallelTest : AbstractNUnitSetUp
 
         var actionList = new List<ITestAction>
         {
-            new EchoAction.Builder().Build(),
-            _actionMock.Object,
-            new EchoAction.Builder().Build()
+            new EchoAction.Builder().Build(), _actionMock.Object, new EchoAction.Builder().Build()
         };
 
         parallelAction.SetActions(actionList);
@@ -55,9 +53,7 @@ public class ParallelTest : AbstractNUnitSetUp
 
         var actionList = new List<ITestAction>
         {
-            new EchoAction.Builder().Build(),
-            new EchoAction.Builder().Build(),
-            new EchoAction.Builder().Build()
+            new EchoAction.Builder().Build(), new EchoAction.Builder().Build(), new EchoAction.Builder().Build()
         };
 
         var sleep = new SleepAction.Builder()
@@ -75,10 +71,7 @@ public class ParallelTest : AbstractNUnitSetUp
     {
         var parallelAction = new Parallel.Builder().Build();
 
-        var actionList = new List<ITestAction>
-        {
-            new FailAction.Builder().Build()
-        };
+        var actionList = new List<ITestAction> { new FailAction.Builder().Build() };
 
         parallelAction.SetActions(actionList);
 
@@ -92,9 +85,7 @@ public class ParallelTest : AbstractNUnitSetUp
 
         var actionList = new List<ITestAction>
         {
-            new FailAction.Builder().Build(),
-            new FailAction.Builder().Build(),
-            new FailAction.Builder().Build()
+            new FailAction.Builder().Build(), new FailAction.Builder().Build(), new FailAction.Builder().Build()
         };
 
         parallelAction.SetActions(actionList);
@@ -109,9 +100,7 @@ public class ParallelTest : AbstractNUnitSetUp
 
         var actionList = new List<ITestAction>
         {
-            new EchoAction.Builder().Build(),
-            new FailAction.Builder().Build(),
-            new EchoAction.Builder().Build()
+            new EchoAction.Builder().Build(), new FailAction.Builder().Build(), new EchoAction.Builder().Build()
         };
 
         parallelAction.SetActions(actionList);

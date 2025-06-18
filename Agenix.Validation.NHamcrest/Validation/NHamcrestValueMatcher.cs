@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -62,10 +62,14 @@ public class NHamcrestValueMatcher : IValueMatcher
     {
         // workaround to be able to test a list of strings
         if (received is string receivedAsString)
+        {
             if (receivedAsString.Contains(','))
+            {
                 received = receivedAsString.Split([','], StringSplitOptions.RemoveEmptyEntries)
                     .Select(s => s.Trim()) // Remove extra spaces
                     .ToList();
+            }
+        }
 
 
         if (control != null)
@@ -81,7 +85,10 @@ public class NHamcrestValueMatcher : IValueMatcher
             if (matcherInterface != null)
             {
                 var matchesMethod = matcherInterface.GetMethod("Matches");
-                if (matchesMethod != null) return (bool)matchesMethod.Invoke(control, [received])!;
+                if (matchesMethod != null)
+                {
+                    return (bool)matchesMethod.Invoke(control, [received])!;
+                }
             }
         }
 

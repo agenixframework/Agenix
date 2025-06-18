@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -69,6 +69,7 @@ public class Parallel(Parallel.Builder builder)
         }
 
         while (_threads.Count > 0)
+        {
             try
             {
                 _threads.Pop().Join();
@@ -77,10 +78,14 @@ public class Parallel(Parallel.Builder builder)
             {
                 Log.LogError(e, "Unable to join thread");
             }
+        }
 
         if (_exceptions.Count > 0)
         {
-            if (_exceptions.Count == 1) throw _exceptions[0];
+            if (_exceptions.Count == 1)
+            {
+                throw _exceptions[0];
+            }
 
             throw new ParallelContainerException(_exceptions);
         }

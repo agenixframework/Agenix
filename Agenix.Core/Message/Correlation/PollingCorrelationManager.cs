@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -78,11 +78,16 @@ public class PollingCorrelationManager<T> : DefaultCorrelationManager<T>
     /// <returns>The correlation key.</returns>
     public override string GetCorrelationKey(string correlationKeyName, TestContext context)
     {
-        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug($"Get correlation key for '{correlationKeyName}'");
+        if (Log.IsEnabled(LogLevel.Debug))
+        {
+            Log.LogDebug($"Get correlation key for '{correlationKeyName}'");
+        }
 
         string correlationKey = null;
         if (context.GetVariables().ContainsKey(correlationKeyName))
+        {
             correlationKey = context.GetVariable(correlationKeyName);
+        }
 
         var timeLeft = 1000L;
         var pollingInterval = 300L;
@@ -91,8 +96,10 @@ public class PollingCorrelationManager<T> : DefaultCorrelationManager<T>
             timeLeft -= pollingInterval;
 
             if (RetryLog.IsEnabled(LogLevel.Debug))
+            {
                 RetryLog.LogDebug(
                     $"Correlation key not available yet - retrying in {(timeLeft > 0 ? pollingInterval : pollingInterval + timeLeft)}ms");
+            }
 
             try
             {
@@ -104,11 +111,15 @@ public class PollingCorrelationManager<T> : DefaultCorrelationManager<T>
             }
 
             if (context.GetVariables().ContainsKey(correlationKeyName))
+            {
                 correlationKey = context.GetVariable(correlationKeyName);
+            }
         }
 
         if (correlationKey == null)
+        {
             throw new AgenixSystemException($"Failed to get correlation key for '{correlationKeyName}'");
+        }
 
         return correlationKey;
     }
@@ -131,8 +142,10 @@ public class PollingCorrelationManager<T> : DefaultCorrelationManager<T>
             timeLeft -= pollingInterval;
 
             if (RetryLog.IsEnabled(LogLevel.Debug))
+            {
                 RetryLog.LogDebug(
                     $"{_retryLogMessage} - retrying in {(timeLeft > 0 ? pollingInterval : pollingInterval + timeLeft)}ms");
+            }
 
             try
             {

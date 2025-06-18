@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -45,10 +45,12 @@ public class StringLengthValidationMatcher : IValidationMatcher
         {
             var control = int.Parse(controlParameters[0].Trim());
             if (value.Length != control)
+            {
                 throw new ValidationException(TypeDescriptor.GetClassName(typeof(StringLengthValidationMatcher))
                                               + " failed for field '" + fieldName
                                               + "'. Received value '" + value
                                               + "' should match string length '" + control + "'.");
+            }
         }
         catch (Exception)
         {

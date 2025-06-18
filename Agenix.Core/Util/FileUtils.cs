@@ -105,10 +105,14 @@ public class FileUtils
     public static string ReadToString(IResource resource, Encoding encoding)
     {
         if (!resource.Exists)
+        {
             throw new Exception($"Failed to read resource {resource.Description} - does not exist");
+        }
 
         if (Log.IsEnabled(LogLevel.Debug))
+        {
             Log.LogDebug($"Reading file resource: '{resource.Description}' (encoding is '{encoding.WebName}')");
+        }
 
         return ReadToString(resource.InputStream, encoding);
     }
@@ -122,7 +126,10 @@ public class FileUtils
     /// <exception cref="InvalidOperationException">Thrown when the input stream is null.</exception>
     public static string ReadToString(Stream inputStream, Encoding encoding)
     {
-        if (inputStream == null) throw new InvalidOperationException("Failed to read resource - input stream is empty");
+        if (inputStream == null)
+        {
+            throw new InvalidOperationException("Failed to read resource - input stream is empty");
+        }
 
         using var memoryStream = new MemoryStream();
         inputStream.CopyTo(memoryStream);
@@ -143,7 +150,10 @@ public class FileUtils
         if (!File.Exists(file))
         {
             var dir = Path.GetDirectoryName(file);
-            if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
         }
 
         try
@@ -165,9 +175,15 @@ public class FileUtils
     /// <exception cref="IOException">Thrown when there is an error during the file writing process.</exception>
     public static void WriteToFile(Stream inputStream, FileInfo fileInfo)
     {
-        if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug($"Writing file resource: '{fileInfo.Name}'");
+        if (Log.IsEnabled(LogLevel.Debug))
+        {
+            Log.LogDebug($"Writing file resource: '{fileInfo.Name}'");
+        }
 
-        if (fileInfo.Directory is { Exists: false }) fileInfo.Directory.Create();
+        if (fileInfo.Directory is { Exists: false })
+        {
+            fileInfo.Directory.Create();
+        }
 
         try
         {
@@ -213,7 +229,10 @@ public class FileUtils
             files.AddRange(Directory.GetFiles(dir)
                 .Where(file => fileNamePatterns.Any(pattern => Regex.IsMatch(file, pattern))));
 
-            foreach (var subDir in Directory.GetDirectories(dir)) dirs.Push(subDir);
+            foreach (var subDir in Directory.GetDirectories(dir))
+            {
+                dirs.Push(subDir);
+            }
         }
 
         return files;
@@ -303,7 +322,10 @@ public class FileUtils
     /// <exception cref="InvalidOperationException">Thrown when the file content cannot be read.</exception>
     public static byte[] CopyToByteArray(FileInfo file)
     {
-        if (file == null) return Array.Empty<byte>();
+        if (file == null)
+        {
+            return Array.Empty<byte>();
+        }
 
         try
         {
@@ -324,7 +346,10 @@ public class FileUtils
     /// <exception cref="InvalidOperationException">Thrown when the file stream is null.</exception>
     private static byte[] ReadAllBytes(FileStream fileStream)
     {
-        if (fileStream == null) throw new InvalidOperationException("Input stream is null");
+        if (fileStream == null)
+        {
+            throw new InvalidOperationException("Input stream is null");
+        }
 
         using var memoryStream = new MemoryStream();
         fileStream.CopyTo(memoryStream);
@@ -346,8 +371,10 @@ public class FileUtils
         {
             using var inStream = resource.InputStream;
             if (inStream == null)
+            {
                 throw new InvalidOperationException(
                     $"Unable to access input stream of resource {resource.Description}");
+            }
 
             using var memoryStream = new MemoryStream();
             inStream.CopyTo(memoryStream);
@@ -407,9 +434,15 @@ public class FileUtils
         }
 
         if (xmlDoc.DocumentElement != null)
+        {
             foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes)
+            {
                 if (node is XmlElement element)
+                {
                     properties[element.Name] = element.InnerText;
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -426,7 +459,10 @@ public class FileUtils
         var configMap = new ExeConfigurationFileMap { ExeConfigFilename = resourcePath };
         var config = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
 
-        foreach (var key in config.AppSettings.Settings.AllKeys) settings[key] = config.AppSettings.Settings[key].Value;
+        foreach (var key in config.AppSettings.Settings.AllKeys)
+        {
+            settings[key] = config.AppSettings.Settings[key].Value;
+        }
     }
 
     /// <summary>
@@ -451,12 +487,18 @@ public class FileUtils
             }
 
             if (string.IsNullOrEmpty(tempFilePath))
+            {
                 throw new ArgumentException("Config path must not be null or empty", nameof(tempFilePath));
+            }
 
             if (tempFilePath.EndsWith(FILE_EXTENSION_XML, StringComparison.OrdinalIgnoreCase))
+            {
                 LoadFromXml(settings, tempFilePath);
+            }
             else
+            {
                 LoadFromConfigFile(settings, tempFilePath);
+            }
         }
         catch (Exception e)
         {
@@ -466,6 +508,7 @@ public class FileUtils
         {
             // Clean up the temporary file
             if (File.Exists(tempFilePath))
+            {
                 try
                 {
                     File.Delete(tempFilePath);
@@ -476,6 +519,7 @@ public class FileUtils
                     // Assuming Log is available in this class, based on the code snippet
                     Log.LogWarning($"Failed to delete temporary configuration file: {tempFilePath}", ex);
                 }
+            }
         }
 
 

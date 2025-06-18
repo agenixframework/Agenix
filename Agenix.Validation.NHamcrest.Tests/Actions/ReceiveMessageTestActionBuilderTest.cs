@@ -5,7 +5,6 @@ using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
 using Agenix.Core;
 using Agenix.Core.Actions;
-using Agenix.Core.Endpoint;
 using Agenix.Core.Message;
 using Agenix.Core.Validation.Builder;
 using Agenix.Core.Validation.Json;
@@ -80,7 +79,10 @@ public class ReceiveMessageTestActionBuilderTest : AbstractNUnitSetUp
         var validationContext =
             action.ValidationContexts.FirstOrDefault(c => c is JsonPathMessageValidationContext) as
                 JsonPathMessageValidationContext;
-        if (validationContext == null) throw new AssertionException("Missing validation context");
+        if (validationContext == null)
+        {
+            throw new AssertionException("Missing validation context");
+        }
 
         ClassicAssert.IsTrue(action.MessageBuilder is DefaultMessageBuilder);
         ClassicAssert.AreEqual(5, validationContext.JsonPathExpressions.Count);
@@ -90,7 +92,7 @@ public class ReceiveMessageTestActionBuilderTest : AbstractNUnitSetUp
         ClassicAssert.AreEqual(5, validationContext.JsonPathExpressions["$.index"]);
         ClassicAssert.AreEqual(typeof(AnyOfMatcher<string>), validationContext.JsonPathExpressions["$.id"].GetType());
     }
-    
+
     public class JsonPathValidator : DefaultMessageValidator
     {
         public override IValidationContext FindValidationContext(List<IValidationContext> validationContexts)
@@ -101,5 +103,4 @@ public class ReceiveMessageTestActionBuilderTest : AbstractNUnitSetUp
             return validationContext ?? base.FindValidationContext(validationContexts);
         }
     }
-
 }

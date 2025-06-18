@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -51,9 +51,14 @@ public class DirectEndpointConfigParser : IAnnotationConfigParser<DirectEndpoint
         var queueName = annotation.QueueName;
 
         if (!string.IsNullOrWhiteSpace(queue))
+        {
             builder.Queue(referenceResolver.Resolve<IMessageQueue>(annotation.Queue));
+        }
 
-        if (!string.IsNullOrWhiteSpace(queueName)) builder.Queue(annotation.QueueName);
+        if (!string.IsNullOrWhiteSpace(queueName))
+        {
+            builder.Queue(annotation.QueueName);
+        }
 
         builder.Timeout(annotation.Timeout);
 

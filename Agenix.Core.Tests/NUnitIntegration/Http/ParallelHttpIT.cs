@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Mime;
 using Agenix.Api.Annotations;
 using Agenix.Api.Message;
-using Agenix.Core.Message;
 using Agenix.Http.Actions;
 using Agenix.Http.Client;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;

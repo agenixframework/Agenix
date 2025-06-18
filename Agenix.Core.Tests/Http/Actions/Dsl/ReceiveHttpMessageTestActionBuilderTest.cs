@@ -1,10 +1,7 @@
-﻿using System.Net.Http;
+using System.Net.Http;
 using Agenix.Api.Message;
 using Agenix.Api.Validation.Context;
 using Agenix.Core.Actions;
-using Agenix.Core.Message;
-using TestContext = Agenix.Api.Context.TestContext;
-using Agenix.Core.Validation.Json;
 using Agenix.Core.Validation.Xml;
 using Agenix.Http.Actions;
 using Agenix.Http.Client;
@@ -12,6 +9,7 @@ using Agenix.Http.Message;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using TestContext = Agenix.Api.Context.TestContext;
 using HttpClient = Agenix.Http.Client.HttpClient;
 
 namespace Agenix.Core.Tests.Http.Actions.Dsl;

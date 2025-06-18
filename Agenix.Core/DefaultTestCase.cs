@@ -65,14 +65,19 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     public virtual void AfterTest(TestContext context)
     {
         foreach (var sequenceAfterTest in context.AfterTest)
+        {
             try
             {
-                if (sequenceAfterTest.ShouldExecute(Name, PackageName, Groups)) sequenceAfterTest.Execute(context);
+                if (sequenceAfterTest.ShouldExecute(Name, PackageName, Groups))
+                {
+                    sequenceAfterTest.Execute(context);
+                }
             }
             catch (Exception e)
             {
                 Log.LogWarning(e, "After test failed with errors");
             }
+        }
     }
 
     /// <summary>
@@ -125,7 +130,10 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     /// <param name="context">The context of the test, containing necessary information for execution and results tracking.</param>
     public void Finish(TestContext context)
     {
-        if (GetMetaInfo().GetStatus().Equals(TestCaseMetaInfo.Status.DISABLED)) return;
+        if (GetMetaInfo().GetStatus().Equals(TestCaseMetaInfo.Status.DISABLED))
+        {
+            return;
+        }
 
         try
         {
@@ -146,12 +154,17 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
             }
 
             if (context.IsSuccess(TestResult))
+            {
                 WaitUtils.WaitForCompletion(this, context, Timeout).GetAwaiter().GetResult();
+            }
 
             context.TestListeners.OnTestFinish(this);
             ExecuteFinalActions(context);
 
-            if (contextException != null) throw new TestCaseFailedException(contextException);
+            if (contextException != null)
+            {
+                throw new TestCaseFailedException(contextException);
+            }
         }
         catch (TestCaseFailedException)
         {
@@ -167,9 +180,13 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
             if (TestResult != null)
             {
                 if (TestResult.IsSuccess())
+                {
                     context.TestListeners.OnTestSuccess(this);
+                }
                 else
+                {
                     context.TestListeners.OnTestFailure(this, TestResult.Cause);
+                }
             }
 
             AfterTest(context);
@@ -190,14 +207,19 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
         RestartTimer();
 
         foreach (var sequenceBeforeTest in context.BeforeTest)
+        {
             try
             {
-                if (sequenceBeforeTest.ShouldExecute(Name, PackageName, Groups)) sequenceBeforeTest.Execute(context);
+                if (sequenceBeforeTest.ShouldExecute(Name, PackageName, Groups))
+                {
+                    sequenceBeforeTest.Execute(context);
+                }
             }
             catch (Exception e)
             {
                 throw new AgenixSystemException("Before test failed with errors", e);
             }
+        }
     }
 
     /// <summary>
@@ -240,12 +262,18 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     public void SetParameters(string[] parameterNames, object[] parameterValues)
     {
         if (parameterNames.Length != parameterValues.Length)
+        {
             throw new AgenixSystemException(
                 $"Invalid test parameter usage - received '{parameterNames.Length}' parameters with '{parameterValues.Length}' values");
+        }
 
         for (var i = 0; i < parameterNames.Length; i++)
+        {
             if (parameterValues[i] != null)
+            {
                 _parameters[parameterNames[i]] = parameterValues[i];
+            }
+        }
     }
 
     /// <summary>
@@ -283,6 +311,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
 
             /* walk through the finally-chain and execute the actions in there */
             foreach (var action in _finalActions.Select(actionBuilder => actionBuilder.Build()))
+            {
                 if (!action.IsDisabled(context))
                 {
                     context.TestActionListeners.OnTestActionStart(this, action);
@@ -293,9 +322,14 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
                 {
                     context.TestActionListeners.OnTestActionSkipped(this, action);
                 }
+            }
         }
 
-        if (!TestResult.IsSuccess() || !context.HasExceptions()) return;
+        if (!TestResult.IsSuccess() || !context.HasExceptions())
+        {
+            return;
+        }
+
         var exception = context.GetExceptions()[0];
         context.GetExceptions().RemoveAt(0);
         TestResult = GetTestResultInstanceProvider(context).CreateFailed(this, exception);
@@ -320,9 +354,13 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
 
             if (value is string stringValue)
                 // Check if value is a variable or function and resolve it accordingly
+            {
                 context.SetVariable(key, context.ReplaceDynamicContentInString(stringValue));
+            }
             else
+            {
                 context.SetVariable(key, value);
+            }
         }
     }
 
@@ -340,7 +378,10 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
             {
                 Start(context);
 
-                foreach (var actionBuilder in actions) ExecuteAction(actionBuilder.Build(), context);
+                foreach (var actionBuilder in actions)
+                {
+                    ExecuteAction(actionBuilder.Build(), context);
+                }
 
                 TestResult = GetTestResultInstanceProvider(context).CreateSuccess(this);
             }
@@ -372,9 +413,16 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     private static void DebugVariables(string scope, TestContext context)
     {
         /* Debug print global variables */
-        if (!context.HasVariables() || !Log.IsEnabled(LogLevel.Debug)) return;
+        if (!context.HasVariables() || !Log.IsEnabled(LogLevel.Debug))
+        {
+            return;
+        }
+
         Log.LogDebug("{Scope} variables:", scope);
-        foreach (var entry in context.GetVariables()) Log.LogDebug("{EntryKey} = {EntryValue}", entry.Key, entry.Value);
+        foreach (var entry in context.GetVariables())
+        {
+            Log.LogDebug("{EntryKey} = {EntryValue}", entry.Key, entry.Value);
+        }
     }
 
     /// <summary>
@@ -411,7 +459,10 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     /// </summary>
     private void GracefullyStopTimer()
     {
-        if (_timer.IsRunning) _timer.Stop();
+        if (_timer.IsRunning)
+        {
+            _timer.Stop();
+        }
     }
 
     /// <summary>
@@ -420,7 +471,11 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     /// </summary>
     private void RestartTimer()
     {
-        if (_timer.IsRunning) return;
+        if (_timer.IsRunning)
+        {
+            return;
+        }
+
         _timer.Reset();
         _timer.Start();
     }

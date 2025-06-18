@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Message;
 using Agenix.Api.Spi;
 using Agenix.Core.Endpoint.Direct;
 using Agenix.Core.Message;
-using TestContext = Agenix.Api.Context.TestContext;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.Tests.Endpoint.Direct;
 
@@ -35,10 +35,7 @@ public class DirectEndpointSyncConsumerTest
         var endpoint = new DirectSyncEndpoint();
         endpoint.EndpointConfiguration.SetQueue(_queueMock.Object);
 
-        var headers = new Dictionary<string, object>
-        {
-            { DirectMessageHeaders.ReplyQueue, _replyQueueMock.Object }
-        };
+        var headers = new Dictionary<string, object> { { DirectMessageHeaders.ReplyQueue, _replyQueueMock.Object } };
 
         var message = new DefaultMessage("<TestResponse>Hello World!</TestResponse>", headers);
 

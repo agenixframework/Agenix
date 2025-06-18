@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -125,7 +125,11 @@ public class Optional<T>
     /// <exception cref="Exception">The exception provided by the supplier if no value is present.</exception>
     public T OrElseThrow(Func<Exception> exceptionSupplier)
     {
-        if (IsPresent) return _value;
+        if (IsPresent)
+        {
+            return _value;
+        }
+
         throw exceptionSupplier();
     }
 

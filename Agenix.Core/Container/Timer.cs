@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Agenix.Api.Container;
@@ -68,9 +68,13 @@ public class Timer(Timer.Builder builder)
     public override void DoExecute(TestContext context)
     {
         if (Fork)
+        {
             Task.Run(() => ConfigureAndRunTimer(context));
+        }
         else
+        {
             ConfigureAndRunTimer(context);
+        }
     }
 
     /// Configures and runs the timer associated with the given test context.
@@ -108,7 +112,10 @@ public class Timer(Timer.Builder builder)
                     UpdateIndexCountInTestContext(context, indexCount);
                     Log.LogDebug($"Timer event fired #{indexCount} - executing nested actions");
 
-                    foreach (var actionBuilder in actions) ExecuteAction(actionBuilder.Build(), context);
+                    foreach (var actionBuilder in actions)
+                    {
+                        ExecuteAction(actionBuilder.Build(), context);
+                    }
                 }
                 catch (Exception e)
                 {
@@ -128,6 +135,7 @@ public class Timer(Timer.Builder builder)
         Thread.Sleep((int)Delay);
 
         while (!timerComplete)
+        {
             try
             {
                 Thread.Sleep((int)Interval);
@@ -136,8 +144,12 @@ public class Timer(Timer.Builder builder)
             {
                 Log.LogWarning(e, "Interrupted while waiting for timer to complete");
             }
+        }
 
-        if (TimerException != null) throw TimerException;
+        if (TimerException != null)
+        {
+            throw TimerException;
+        }
     }
 
     /// Updates the current index count in the given test context.
@@ -154,13 +166,21 @@ public class Timer(Timer.Builder builder)
     private void HandleException(Exception e, TestContext context)
     {
         if (e is AgenixSystemException coreSystemException)
+        {
             timerException = coreSystemException;
+        }
         else
+        {
             timerException = new AgenixSystemException(e.Message, e);
+        }
+
         Log.LogError("Timer stopped as a result of nested action error ({EMessage})", e.Message);
         StopTimer();
 
-        if (Fork) context.AddException(TimerException);
+        if (Fork)
+        {
+            context.AddException(TimerException);
+        }
     }
 
 
@@ -245,7 +265,10 @@ public class Timer(Timer.Builder builder)
 
         protected override Timer DoBuild()
         {
-            if (string.IsNullOrEmpty(timerId)) timerId = "agenix-timer-" + SerialNumber();
+            if (string.IsNullOrEmpty(timerId))
+            {
+                timerId = "agenix-timer-" + SerialNumber();
+            }
 
             return new Timer(this);
         }

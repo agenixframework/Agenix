@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -56,9 +56,14 @@ public class FileCondition() : AbstractCondition("file-check")
     public override bool IsSatisfied(TestContext context)
     {
         if (Log.IsEnabled(LogLevel.Debug))
+        {
             Log.LogDebug($"Checking file path '{(_file != null ? _file.FullName : _filePath)}'");
+        }
 
-        if (_file != null) return _file.Exists && !_file.Attributes.HasFlag(FileAttributes.Directory);
+        if (_file != null)
+        {
+            return _file.Exists && !_file.Attributes.HasFlag(FileAttributes.Directory);
+        }
 
         try
         {

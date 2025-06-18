@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -50,7 +50,10 @@ public class SequenceBeforeTest : AbstractTestBoundaryActionContainer, IBeforeTe
     /// </param>
     public override void DoExecute(TestContext context)
     {
-        if (actions == null || actions.Count == 0) return;
+        if (actions == null || actions.Count == 0)
+        {
+            return;
+        }
 
         Log.LogInformation("Entering before test block");
 
@@ -60,7 +63,10 @@ public class SequenceBeforeTest : AbstractTestBoundaryActionContainer, IBeforeTe
             Log.LogDebug("");
         }
 
-        foreach (var action in actions.Select(actionBuilder => actionBuilder.Build())) action.Execute(context);
+        foreach (var action in actions.Select(actionBuilder => actionBuilder.Build()))
+        {
+            action.Execute(context);
+        }
     }
 
     /// <summary>

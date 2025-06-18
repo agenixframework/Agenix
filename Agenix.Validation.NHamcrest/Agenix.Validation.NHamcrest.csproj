@@ -1,34 +1,36 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
 
-        <!-- NuGet Package-Specific Properties -->
-        <PackageId>Agenix.Validation.NHamcrest</PackageId>
-        <Title>Agenix NHamcrest Integration</Title>
-        <Description>NHamcrest matcher integration for the Agenix framework. Extends Agenix validation capabilities with fluent, expressive matchers from NHamcrest, enabling more readable and maintainable test assertions.</Description>
-        <PackageTags>testing;nhamcrest;validation;automation;framework;agenix;matchers;fluent;assertions;readable</PackageTags>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <!-- NuGet Package-Specific Properties -->
+    <PackageId>Agenix.Validation.NHamcrest</PackageId>
+    <Title>Agenix NHamcrest Integration</Title>
+    <Description>NHamcrest matcher integration for the Agenix framework. Extends Agenix validation capabilities with fluent, expressive matchers from NHamcrest, enabling more readable and maintainable test assertions.</Description>
+    <PackageTags>testing;nhamcrest;validation;automation;framework;agenix;matchers;fluent;assertions;readable</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
-    </PropertyGroup>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj"/>
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj"/>
+  </ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="NHamcrest" Version="4.0.0"/>
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NHamcrest" Version="4.0.0"/>
+    <PackageReference Include="System.Formats.Asn1" Version="8.0.1"/>
+    <PackageReference Include="System.Text.Json" Version="8.0.5"/>
+  </ItemGroup>
 
-    <ItemGroup>
-        <None Remove="Extension\agenix\header\validator\nhamcrest"/>
-        <EmbeddedResource Include="Extension\agenix\header\validator\nhamcrest"/>
-        <None Remove="Extension\agenix\validation\matcher\assertThat"/>
-        <EmbeddedResource Include="Extension\agenix\validation\matcher\assertThat"/>
-        <None Remove="Extension\agenix\value\matcher\nhamcrest"/>
-        <EmbeddedResource Include="Extension\agenix\value\matcher\nhamcrest"/>
-    </ItemGroup>
+  <ItemGroup>
+    <None Remove="Extension\agenix\header\validator\nhamcrest"/>
+    <EmbeddedResource Include="Extension\agenix\header\validator\nhamcrest"/>
+    <None Remove="Extension\agenix\validation\matcher\assertThat"/>
+    <EmbeddedResource Include="Extension\agenix\validation\matcher\AssertThat"/>
+    <None Remove="Extension\agenix\value\matcher\nhamcrest"/>
+    <EmbeddedResource Include="Extension\agenix\value\matcher\nhamcrest"/>
+  </ItemGroup>
 
 </Project>

@@ -39,11 +39,20 @@ public static class MessagePayloadUtils
     /// <returns></returns>
     public static string PrettyPrint(string payload)
     {
-        if (!prettyPrint) return payload;
+        if (!prettyPrint)
+        {
+            return payload;
+        }
 
-        if (IsXml(payload)) return PrettyPrintXml(payload);
+        if (IsXml(payload))
+        {
+            return PrettyPrintXml(payload);
+        }
 
-        if (IsJson(payload)) return PrettyPrintJson(payload);
+        if (IsJson(payload))
+        {
+            return PrettyPrintJson(payload);
+        }
 
         return payload;
     }
@@ -88,9 +97,21 @@ public static class MessagePayloadUtils
             if (currentChar == '<')
             {
                 var nextChar = s[i + 1];
-                if (nextChar == '/') indent -= indentNum;
-                if (!singleLine) sb.Append(' ', indent);
-                if (nextChar != '?' && nextChar != '!' && nextChar != '/') indent += indentNum;
+                if (nextChar == '/')
+                {
+                    indent -= indentNum;
+                }
+
+                if (!singleLine)
+                {
+                    sb.Append(' ', indent);
+                }
+
+                if (nextChar != '?' && nextChar != '!' && nextChar != '/')
+                {
+                    indent += indentNum;
+                }
+
                 singleLine = false;
             }
 
@@ -139,7 +160,10 @@ public static class MessagePayloadUtils
     /// <returns></returns>
     public static string PrettyPrintJson(string payload)
     {
-        if ("{}".Equals(payload) || "[]".Equals(payload)) return payload;
+        if ("{}".Equals(payload) || "[]".Equals(payload))
+        {
+            return payload;
+        }
 
         var indentNum = 2;
         var indent = 0;
@@ -154,7 +178,11 @@ public static class MessagePayloadUtils
             switch (currentChar)
             {
                 case '"':
-                    if (!inQuote && isKey) sb.Append(' ', indent);
+                    if (!inQuote && isKey)
+                    {
+                        sb.Append(' ', indent);
+                    }
+
                     inQuote = !inQuote;
                     sb.Append(currentChar);
                     break;
@@ -172,7 +200,11 @@ public static class MessagePayloadUtils
 
                     break;
                 case ' ':
-                    if (inQuote) sb.Append(currentChar);
+                    if (inQuote)
+                    {
+                        sb.Append(currentChar);
+                    }
+
                     break;
                 case '{':
                 case '[':
@@ -183,9 +215,14 @@ public static class MessagePayloadUtils
                     else
                     {
                         if (isKey)
+                        {
                             sb.Append(' ', indent);
+                        }
                         else
+                        {
                             isKey = true;
+                        }
+
                         sb.Append(currentChar);
                         sb.Append(Environment.NewLine);
                         indent += indentNum;
@@ -225,12 +262,18 @@ public static class MessagePayloadUtils
                 case '\n':
                     break;
                 default:
-                    if (inQuote || Environment.NewLine != currentChar.ToString()) sb.Append(currentChar);
+                    if (inQuote || Environment.NewLine != currentChar.ToString())
+                    {
+                        sb.Append(currentChar);
+                    }
+
                     break;
             }
 
             if (inQuote || (Environment.NewLine != currentChar.ToString() && currentChar != ' '))
+            {
                 previousChar = currentChar;
+            }
         }
 
         return sb.ToString();

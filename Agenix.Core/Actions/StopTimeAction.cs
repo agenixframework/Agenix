@@ -123,10 +123,7 @@ public class StopTimeAction(StopTimeAction.Builder builder) : AbstractTestAction
         /// <param name="context">The context in which the test action is executed.</param>
         public static Builder StopTime(string id)
         {
-            var builder = new Builder
-            {
-                _id = id
-            };
+            var builder = new Builder { _id = id };
             return builder;
         }
 
@@ -136,11 +133,7 @@ public class StopTimeAction(StopTimeAction.Builder builder) : AbstractTestAction
         /// <param name="context">The context in which the test action is executed.</param>
         public static Builder StopTime(string id, string suffix)
         {
-            var builder = new Builder
-            {
-                _id = id,
-                _suffix = suffix
-            };
+            var builder = new Builder { _id = id, _suffix = suffix };
             return builder;
         }
 

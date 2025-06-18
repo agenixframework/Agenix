@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -92,13 +92,20 @@ public class ReceiveTimeoutAction : AbstractTestAction
             var selector = MessageSelectorBuilder.Build(MessageSelector, MessageSelectorDictionary, context);
 
             if (!string.IsNullOrWhiteSpace(MessageSelector) && consumer is ISelectiveConsumer selectiveConsumer)
+            {
                 receivedMessage = selectiveConsumer.Receive(selector, context, Timeout);
+            }
             else
+            {
                 receivedMessage = consumer.Receive(context, Timeout);
+            }
 
             if (receivedMessage != null)
             {
-                if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Received message:\n" + receivedMessage.Print(context));
+                if (Log.IsEnabled(LogLevel.Debug))
+                {
+                    Log.LogDebug("Received message:\n" + receivedMessage.Print(context));
+                }
 
                 throw new AgenixSystemException("Message timeout validation failed! " +
                                                 "Received message while waiting for timeout on destination");
@@ -117,9 +124,15 @@ public class ReceiveTimeoutAction : AbstractTestAction
     /// /
     public IEndpoint GetOrCreateEndpoint(TestContext context)
     {
-        if (Endpoint != null) return Endpoint;
+        if (Endpoint != null)
+        {
+            return Endpoint;
+        }
 
-        if (!string.IsNullOrWhiteSpace(EndpointUri)) return context.EndpointFactory.Create(EndpointUri, context);
+        if (!string.IsNullOrWhiteSpace(EndpointUri))
+        {
+            return context.EndpointFactory.Create(EndpointUri, context);
+        }
 
         throw new AgenixSystemException("Neither endpoint nor endpoint uri is set properly!");
     }

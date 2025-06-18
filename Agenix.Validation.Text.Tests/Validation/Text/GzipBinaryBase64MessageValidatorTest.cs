@@ -1,4 +1,4 @@
-﻿using System.IO.Compression;
+using System.IO.Compression;
 using System.Text;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Validation.Context;

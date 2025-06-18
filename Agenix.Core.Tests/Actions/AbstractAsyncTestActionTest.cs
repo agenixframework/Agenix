@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
 using Agenix.Core.Actions;
 using Microsoft.Extensions.Logging;
 using NUnit.Framework;
-using TestContext = Agenix.Api.Context.TestContext;
 using NUnit.Framework.Legacy;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.Tests.Actions;
 
@@ -55,7 +55,10 @@ public class AbstractAsyncTestActionTest : AbstractNUnitSetUp
     {
         public static async Task<T> TimeoutAfter<T>(Task<T> task, TimeSpan timeout)
         {
-            if (task == await Task.WhenAny(task, Task.Delay(timeout))) return await task;
+            if (task == await Task.WhenAny(task, Task.Delay(timeout)))
+            {
+                return await task;
+            }
 
             throw new TimeoutException();
         }

@@ -111,7 +111,10 @@ public class FileResourcePayloadBuilder : IMessagePayloadBuilder, IMessageTypeAw
     /// <return>The payload built from the resource as an object.</return>
     private object BuildFromResource(TestContext context)
     {
-        if (MessageTypeExtensions.IsBinary(_messageType)) return _resource;
+        if (MessageTypeExtensions.IsBinary(_messageType))
+        {
+            return _resource;
+        }
 
         return context.ReplaceDynamicContentInString(GetFileResourceContent(_resource, context));
     }

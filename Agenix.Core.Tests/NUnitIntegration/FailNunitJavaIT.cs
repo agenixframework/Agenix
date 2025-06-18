@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Agenix.Api;
 using Agenix.Api.Annotations;
 using Agenix.Api.Exceptions;
@@ -28,7 +28,8 @@ public class FailNunitJavaIT
     [Category("ShouldFailGroup")]
     public void FailRuntimeExceptionTest()
     {
-        Assert.Throws<TestCaseFailedException>(() => _runner.Run(DefaultTestActionBuilder.Action(
-            _ => throw new Exception("This test should fail because of unknown variable ${foo}"))));
+        Assert.Throws<TestCaseFailedException>(() =>
+            _runner.Run(DefaultTestActionBuilder.Action(_ =>
+                throw new Exception("This test should fail because of unknown variable ${foo}"))));
     }
 }

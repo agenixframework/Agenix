@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -41,9 +41,11 @@ public class ContainsIgnoreCaseValidationMatcher : IValidationMatcher
     {
         var control = controlParameters[0];
         if (!value.ToLower().Contains(control.ToLower()))
+        {
             throw new ValidationException(TypeDescriptor.GetClassName(typeof(ContainsIgnoreCaseValidationMatcher))
                                           + " failed for field '" + fieldName
                                           + "'. Received value is '" + value
                                           + "', control value is '" + control + "'.");
+        }
     }
 }

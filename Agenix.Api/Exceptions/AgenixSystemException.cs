@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -24,13 +24,19 @@
 
 #endregion
 
+using System.Text;
+using Agenix.Api.Report;
+
 namespace Agenix.Api.Exceptions;
 
 /// <summary>
 ///     Basic custom runtime/ system exception for all errors in Agenix
 /// </summary>
+[Serializable]
 public class AgenixSystemException : SystemException
 {
+    private List<FailureStackElement> _failureStack = [];
+
     /// <summary>
     ///     Default constructor.
     /// </summary>
@@ -46,8 +52,52 @@ public class AgenixSystemException : SystemException
     {
     }
 
+    public override string Message => base.Message + GetFailureStackAsString();
+
     public string GetMessage()
     {
-        return base.Message;
+        return Message;
+    }
+
+    /// <summary>
+    ///     Get formatted string representation of failure stack information.
+    /// </summary>
+    /// <returns></returns>
+    public string GetFailureStackAsString()
+    {
+        var builder = new StringBuilder();
+
+        foreach (var failureStackElement in GetFailureStack())
+        {
+            builder.Append("\n\t");
+            builder.Append(failureStackElement.GetStackMessage());
+        }
+
+        return builder.ToString();
+    }
+
+    /// <summary>
+    ///     Sets the custom failure stack holding line number information inside test case.
+    /// </summary>
+    /// <param name="failureStack"></param>
+    public void SetFailureStack(List<FailureStackElement> failureStack)
+    {
+        _failureStack = failureStack;
+    }
+
+    /// <summary>
+    ///     Gets the custom failure stack with line number information where the testcase failed.
+    /// </summary>
+    /// <returns>the failureStack</returns>
+    public Stack<FailureStackElement> GetFailureStack()
+    {
+        var stack = new Stack<FailureStackElement>();
+
+        foreach (var failureStackElement in _failureStack)
+        {
+            stack.Push(failureStackElement);
+        }
+
+        return stack;
     }
 }

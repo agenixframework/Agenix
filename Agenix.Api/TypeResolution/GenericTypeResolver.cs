@@ -53,7 +53,11 @@ public class GenericTypeResolver : TypeResolver
     /// </exception>
     public override Type Resolve(string typeName)
     {
-        if (StringUtils.IsNullOrEmpty(typeName)) throw BuildTypeLoadException(typeName);
+        if (StringUtils.IsNullOrEmpty(typeName))
+        {
+            throw BuildTypeLoadException(typeName);
+        }
+
         var genericInfo = new GenericArgumentsHolder(typeName);
         Type type = null;
         try
@@ -66,7 +70,10 @@ public class GenericTypeResolver : TypeResolver
                     var unresolvedGenericArgs = genericInfo.GetGenericArguments();
                     var genericArgs = new Type[unresolvedGenericArgs.Length];
                     for (var i = 0; i < unresolvedGenericArgs.Length; i++)
+                    {
                         genericArgs[i] = TypeResolutionUtils.ResolveType(unresolvedGenericArgs[i]);
+                    }
+
                     type = type.MakeGenericType(genericArgs);
                 }
 
@@ -80,11 +87,18 @@ public class GenericTypeResolver : TypeResolver
         }
         catch (Exception ex)
         {
-            if (ex is TypeLoadException) throw;
+            if (ex is TypeLoadException)
+            {
+                throw;
+            }
+
             throw BuildTypeLoadException(typeName, ex);
         }
 
-        if (type == null) type = base.Resolve(typeName);
+        if (type == null)
+        {
+            type = base.Resolve(typeName);
+        }
 
         return type;
     }

@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Exceptions;
+using Agenix.Api.Exceptions;
 using Agenix.Validation.Json.Validation;
 using NUnit.Framework;
 
@@ -42,23 +42,17 @@ public class JsonElementValidatorTest : AbstractNUnitSetUp
         {
             new("{\"text\":\"Hello World!\", \"index\":5, \"id\":\"x123456789x\"}",
                 "{\"id\":\"x123456789x\"}"),
-
             new(
                 "[{\"text\":\"Hello World!\", \"index\":1}, {\"text\":\"Hallo Welt!\", \"index\":2}, {\"text\":\"Hola del mundo!\", \"index\":3}]",
                 "[{\"text\":\"Hello World!\", \"index\":1}]"),
-
             new(
                 "[{\"text\":\"Hello World!\", \"index\":1}, {\"text\":\"Hallo Welt!\", \"index\":2}, {\"text\":\"Hola del mundo!\", \"index\":3}]",
                 "[{\"text\":\"Hallo Welt!\", \"index\":2}]"),
-
             new(
                 "[{\"text\":\"Hello World!\", \"index\":1}, {\"text\":\"Hallo Welt!\", \"index\":2}, {\"text\":\"Hola del mundo!\", \"index\":3}]",
                 "[{\"index\": 1}]"),
-
             new("[1, 2, 3]", "[2]"),
-
             new("[1, 2, 1]", "[2, 1]"),
-
             new("[1, 2, 1]", "[1, 2]")
         };
     }

@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -79,6 +79,9 @@ public static class MatcherAssert
     // Overload 3: Assert with a reason and boolean value
     public static void AssertThat(string reason, bool assertion)
     {
-        if (!assertion) throw new AssertionError(reason);
+        if (!assertion)
+        {
+            throw new AssertionError(reason);
+        }
     }
 }

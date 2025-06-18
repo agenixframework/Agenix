@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -36,7 +36,10 @@ public class MatchesPatternMatcher : IMatcher<string>
     public MatchesPatternMatcher(string pattern)
     {
         if (string.IsNullOrWhiteSpace(pattern))
+        {
             throw new ArgumentException("Pattern must not be null or empty", nameof(pattern));
+        }
+
         _pattern = pattern;
     }
 
@@ -48,7 +51,10 @@ public class MatchesPatternMatcher : IMatcher<string>
 
     public bool Matches(string actual)
     {
-        if (actual == null) return false;
+        if (actual == null)
+        {
+            return false;
+        }
 
         try
         {

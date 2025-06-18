@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -82,13 +82,19 @@ public class HttpClient : AbstractEndpoint, IProducer, IReplyConsumer
         foreach (var interceptor in EndpointConfiguration.ClientHandlers
                      .OfType<LoggingClientHandler>()
                      .Where(interceptor => !interceptor.HasMessageListeners()))
+        {
             interceptor.SetMessageListener(context.MessageListeners);
+        }
 
         HttpMessage httpMessage;
         if (message is HttpMessage message1)
+        {
             httpMessage = message1;
+        }
         else
+        {
             httpMessage = new HttpMessage(message);
+        }
 
         var correlationKeyName = GetCorrelationKeyName();
         var correlationKey = EndpointConfiguration.Correlator.GetCorrelationKey(httpMessage);
@@ -101,7 +107,10 @@ public class HttpClient : AbstractEndpoint, IProducer, IReplyConsumer
         Log.LogDebug("Message to send:\n{GetPayload}", httpMessage.GetPayload<string>());
 
         var method = EndpointConfiguration.RequestMethod;
-        if (httpMessage.GetRequestMethod() != null) method = httpMessage.GetRequestMethod();
+        if (httpMessage.GetRequestMethod() != null)
+        {
+            method = httpMessage.GetRequestMethod();
+        }
 
         var httpRequestMessage =
             EndpointConfiguration.MessageConverter.ConvertOutbound(httpMessage, EndpointConfiguration, context);
@@ -171,7 +180,10 @@ public class HttpClient : AbstractEndpoint, IProducer, IReplyConsumer
             ? context.GetVariable(MessageHeaders.MessageReplyTo + "_" + selector)
             : Name;
 
-        if (message == null) throw new MessageTimeoutException(timeout, endpointUri);
+        if (message == null)
+        {
+            throw new MessageTimeoutException(timeout, endpointUri);
+        }
 
         return message;
     }

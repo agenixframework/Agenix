@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -62,6 +62,7 @@ public class SleepAction(SleepAction.Builder builder) : AbstractTestAction("slee
         {
             TimeSpan parsedDuration;
             if (duration.IndexOf('.', StringComparison.Ordinal) > 0)
+            {
                 parsedDuration = TimeUnit switch
                 {
                     ScheduledExecutor.TimeUnit.MILLISECONDS => TimeSpan.FromMilliseconds(Math.Round(double.Parse(
@@ -74,9 +75,12 @@ public class SleepAction(SleepAction.Builder builder) : AbstractTestAction("slee
                     _ => throw new AgenixSystemException(
                         "Unsupported time expression for sleep action - please use one of milliseconds, seconds, minutes")
                 };
+            }
             else
+            {
                 parsedDuration = TimeSpan.FromMilliseconds(
                     ConvertToMilliseconds(long.Parse(duration), TimeUnit));
+            }
 
             Log.LogInformation($"Sleeping {duration} {TimeUnit}");
 

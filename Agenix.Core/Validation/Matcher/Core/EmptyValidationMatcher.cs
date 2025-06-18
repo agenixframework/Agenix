@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -51,9 +51,11 @@ public class EmptyValidationMatcher : IValidationMatcher
     public void Validate(string fieldName, string value, List<string> controlParameters, TestContext context)
     {
         if (value == null || !string.IsNullOrEmpty(value))
+        {
             throw new ValidationException(GetType().Name
                                           + " failed for field '" + fieldName
                                           + "'. Received value '" + value
                                           + "' should be empty");
+        }
     }
 }

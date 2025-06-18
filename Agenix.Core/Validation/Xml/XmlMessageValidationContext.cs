@@ -229,7 +229,11 @@ public class XmlMessageValidationContext : DefaultMessageValidationContext
         /// <returns>The current instance of <c>XmlValidationContextBuilder</c> with the updated namespaces.</returns>
         public S Namespaces(Dictionary<string, string> newNamespaces)
         {
-            foreach (var kvp in newNamespaces) ControlNamespaces[kvp.Key] = kvp.Value;
+            foreach (var kvp in newNamespaces)
+            {
+                ControlNamespaces[kvp.Key] = kvp.Value;
+            }
+
             return _self;
         }
 
@@ -247,7 +251,10 @@ public class XmlMessageValidationContext : DefaultMessageValidationContext
         /// /
         public S NamespaceContext(Dictionary<string, string> newNamespaces)
         {
-            foreach (var kvp in newNamespaces) _namespaces[kvp.Key] = kvp.Value;
+            foreach (var kvp in newNamespaces)
+            {
+                _namespaces[kvp.Key] = kvp.Value;
+            }
 
             return _self;
         }

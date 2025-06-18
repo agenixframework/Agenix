@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Reflection;
 using Agenix.Api;
@@ -6,7 +6,6 @@ using Agenix.Api.Exceptions;
 using Agenix.Api.Report;
 using Agenix.Core.Actions;
 using Agenix.Core.Report;
-using log4net;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
@@ -50,13 +49,15 @@ public class LoggingReporterTest
         // Print agenix information on startup
         _fixture.OnStart();
 
-        _logger.Verify(logger => logger.LogInformation(It.Is<string>(s => s.StartsWith("A G E N I X  T E S T S"))), Times.Once);
+        _logger.Verify(logger => logger.LogInformation(It.Is<string>(s => s.StartsWith("A G E N I X  T E S T S"))),
+            Times.Once);
 
         // Do not print it continuously
         _logger.Invocations.Clear();
         _fixture.OnStart();
 
-        _logger.Verify(logger => logger.LogInformation(It.Is<string>(s => s.StartsWith("A G E N I X  T E S T S"))), Times.Never);
+        _logger.Verify(logger => logger.LogInformation(It.Is<string>(s => s.StartsWith("A G E N I X  T E S T S"))),
+            Times.Never);
     }
 
     [Test]
@@ -133,7 +134,8 @@ public class LoggingReporterTest
 
         //_logger.Verify(l => l.LogInformation("FAILURE (  1234 ms) TestLoggingReporterFailed-1"));
         //_logger.Verify(l => l.LogInformation("FAILURE (  2345 ms) TestLoggingReporterFailed-2"));
-        _logger.Verify(l => l.LogInformation($"\tCaused by: {nestedException.GetType().Name}: {nestedException.Message}"),
+        _logger.Verify(
+            l => l.LogInformation($"\tCaused by: {nestedException.GetType().Name}: {nestedException.Message}"),
             Times.Exactly(1));
         _logger.Verify(l => l.LogInformation("FAILURE (  3456 ms) TestLoggingReporterFailed-3"));
         _logger.Verify(l => l.LogInformation($"\tCaused by: {customErrorMessage}"));
@@ -221,14 +223,19 @@ public class LoggingReporterTest
     private void VerifyResultSummaryLog(int total, int success, int failed, double performance)
     {
         _logger.Verify(l => l.LogInformation("TOTAL:\t\t" + total));
-        _logger.Verify(l => l.LogInformation("SUCCESS:\t\t" + success + " (" + CalculatePercentage(total, success) + "%)"));
-        _logger.Verify(l => l.LogInformation("FAILED:\t\t" + failed + " (" + CalculatePercentage(total, failed) + "%)"));
+        _logger.Verify(l =>
+            l.LogInformation("SUCCESS:\t\t" + success + " (" + CalculatePercentage(total, success) + "%)"));
+        _logger.Verify(l =>
+            l.LogInformation("FAILED:\t\t" + failed + " (" + CalculatePercentage(total, failed) + "%)"));
         _logger.Verify(l => l.LogInformation("PERFORMANCE:\t" + performance + " ms"));
     }
 
     private string CalculatePercentage(int total, int successCount)
     {
-        if (total == 0) return "0.0";
+        if (total == 0)
+        {
+            return "0.0";
+        }
 
         var percentage = (double)successCount / total * 100;
         return string.Format(CultureInfo.InvariantCulture, "{0:0.0}", percentage);
@@ -238,8 +245,12 @@ public class LoggingReporterTest
     {
         var field = targetObject.GetType().GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Static);
         if (field != null)
+        {
             field.SetValue(targetObject, value);
+        }
         else
+        {
             throw new ArgumentException($"Field '{fieldName}' not found on {targetObject.GetType().FullName}");
+        }
     }
 }

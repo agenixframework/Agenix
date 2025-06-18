@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -77,8 +77,10 @@ public class DefaultTextEqualsMessageValidator : DefaultMessageValidator
         }
 
         if (!receivedPayload.Equals(controlPayload))
+        {
             throw new ValidationException("Validation failed - message payload not equal " +
                                           GetFirstDiff(receivedPayload, controlPayload));
+        }
     }
 
     /// <summary>
@@ -92,10 +94,18 @@ public class DefaultTextEqualsMessageValidator : DefaultMessageValidator
     {
         int position;
         for (position = 0; position < received.Length && position < control.Length; position++)
+        {
             if (received[position] != control[position])
+            {
                 break;
+            }
+        }
 
-        if (position >= control.Length && position >= received.Length) return "";
+        if (position >= control.Length && position >= received.Length)
+        {
+            return "";
+        }
+
         var controlEnd = Math.Min(position + 25, control.Length);
         var receivedEnd = Math.Min(position + 25, received.Length);
 

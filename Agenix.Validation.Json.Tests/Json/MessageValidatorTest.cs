@@ -28,5 +28,4 @@ public class MessageValidatorTest
         Assert.That(IMessageValidator<IValidationContext>.Lookup("json").IsPresent);
         Assert.That(IMessageValidator<IValidationContext>.Lookup("json-path").IsPresent);
     }
-
 }

@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Message.Correlation;
+using Agenix.Api.Message.Correlation;
 using Agenix.Core.Endpoint.Direct;
 using Agenix.Core.Message.Correlation;
 using Moq;
@@ -22,8 +22,7 @@ public class PollingCorrelationManagerTest
     {
         var pollableEndpointConfiguration = new DirectSyncEndpointConfiguration
         {
-            PollingInterval = 100L,
-            Timeout = 500L
+            PollingInterval = 100L, Timeout = 500L
         };
 
         var correlationManager = new PollingCorrelationManager<string>(pollableEndpointConfiguration, "Try again");
@@ -40,7 +39,10 @@ public class PollingCorrelationManagerTest
         ClassicAssert.IsNull(correlationManager.Find("foo"));
 
         // Storing multiple items and retrieving them in different order
-        foreach (var key in new[] { "1", "2", "3", "4", "5" }) correlationManager.Store(key, "value" + key);
+        foreach (var key in new[] { "1", "2", "3", "4", "5" })
+        {
+            correlationManager.Store(key, "value" + key);
+        }
 
         foreach (var key in new[] { "1", "5", "3", "2", "4" })
         {
@@ -54,8 +56,7 @@ public class PollingCorrelationManagerTest
     {
         var pollableEndpointConfiguration = new DirectSyncEndpointConfiguration
         {
-            PollingInterval = 100L,
-            Timeout = 500L
+            PollingInterval = 100L, Timeout = 500L
         };
 
         var correlationManager = new PollingCorrelationManager<string>(pollableEndpointConfiguration, "Try again");
@@ -76,8 +77,7 @@ public class PollingCorrelationManagerTest
     {
         var pollableEndpointConfiguration = new DirectSyncEndpointConfiguration
         {
-            PollingInterval = 100L,
-            Timeout = 300L
+            PollingInterval = 100L, Timeout = 300L
         };
 
         var correlationManager = new PollingCorrelationManager<string>(pollableEndpointConfiguration, "Try again");

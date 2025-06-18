@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -62,7 +62,10 @@ public abstract class AbstractMessageSelector(string selectKey, string matchingV
     /// <returns></returns>
     public string GetPayloadAsString(IMessage message)
     {
-        if (message.Payload is IMessage innerMessage) return innerMessage.GetPayload<string>();
+        if (message.Payload is IMessage innerMessage)
+        {
+            return innerMessage.GetPayload<string>();
+        }
 
         return message.Payload.ToString();
     }
@@ -76,6 +79,7 @@ public abstract class AbstractMessageSelector(string selectKey, string matchingV
     protected bool Evaluate(string value)
     {
         if (ValidationMatcherUtils.IsValidationMatcherExpression(MatchingValue))
+        {
             try
             {
                 ValidationMatcherUtils.ResolveValidationMatcher(SelectKey, value, MatchingValue, Context);
@@ -85,6 +89,7 @@ public abstract class AbstractMessageSelector(string selectKey, string matchingV
             {
                 return false;
             }
+        }
 
         return value.Equals(MatchingValue);
     }

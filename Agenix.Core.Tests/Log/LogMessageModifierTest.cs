@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Agenix.Api;
 using Agenix.Api.Log;
 using Agenix.Api.Message;
-using Agenix.Core.Log;
-using Agenix.Core.Message;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
@@ -24,10 +22,7 @@ public class LogMessageModifierTest
     [Test]
     public void TestMaskHeaders()
     {
-        var singleElementDictionary = new Dictionary<string, object>
-        {
-            { "key", "value" }
-        };
+        var singleElementDictionary = new Dictionary<string, object> { { "key", "value" } };
 
         _message.Setup(msg => msg.GetHeaders()).Returns(singleElementDictionary);
 

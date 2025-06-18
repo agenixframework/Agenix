@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Exceptions;
+using Agenix.Api.Exceptions;
 using Agenix.Core;
 using Agenix.Core.Validation;
 using Agenix.Validation.Json.Validation;
@@ -9,10 +9,10 @@ namespace Agenix.Validation.Json.Tests;
 
 public abstract class AbstractNUnitSetUp
 {
-    protected TestContextFactory TestContextFactory;
     protected TestContext Context;
+    protected TestContextFactory TestContextFactory;
 
-    
+
     [SetUp]
     public void Setup()
     {

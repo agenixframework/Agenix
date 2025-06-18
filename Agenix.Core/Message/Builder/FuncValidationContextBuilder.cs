@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -25,6 +25,7 @@
 #endregion
 
 using System;
+using Agenix.Api;
 using Agenix.Api.Validation.Context;
 
 namespace Agenix.Core.Message.Builder;
@@ -38,7 +39,7 @@ namespace Agenix.Core.Message.Builder;
 /// </typeparam>
 public class FuncValidationContextBuilder<TBuilder>(Func<IValidationContext> validationContextFactory)
     : IValidationContext.IBuilder<IValidationContext, TBuilder>
-    where TBuilder : class
+    where TBuilder : IBuilder
 {
     /// <summary>
     ///     Builds and returns an instance of <see cref="IValidationContext" />.

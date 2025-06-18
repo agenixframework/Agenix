@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -53,7 +53,11 @@ public interface ITypeConverter
         {
             /*converters = new ResourcePathTypeResolver().resolveAll(RESOURCE_PATH).ToDictionary(entry => entry.Key,
                                            entry => entry.Value);*/
-            if (Converters.Count == 0) Converters.Add(Default, DefaultTypeConverter.Instance);
+            if (Converters.Count == 0)
+            {
+                Converters.Add(Default, DefaultTypeConverter.Instance);
+            }
+
             Converters.ToList()
                 .ForEach(x => Log.LogDebug("Found type converter '{ObjKey}' as {Type}", x.Key, x.Value.GetType()));
         }
@@ -114,10 +118,16 @@ public interface ITypeConverter
             return converterEntry.Value;
         }
 
-        if (converters.TryGetValue(name, out var value)) return value;
+        if (converters.TryGetValue(name, out var value))
+        {
+            return value;
+        }
 
         if (!AgenixSettings.TypeConverterDefault.Equals(name))
+        {
             Console.WriteLine($"Missing type converter for name '{name}' - using default type converter");
+        }
+
         return defaultTypeConverter;
     }
 }

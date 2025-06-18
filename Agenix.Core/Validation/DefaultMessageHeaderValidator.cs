@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -86,7 +86,10 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
         IDictionary<string, object> controlHeaders = controlMessage.GetHeaders();
         IDictionary<string, object> receivedHeaders = receivedMessage.GetHeaders();
 
-        if (controlHeaders == null || !controlHeaders.Any()) return;
+        if (controlHeaders == null || !controlHeaders.Any())
+        {
+            return;
+        }
 
         Log.LogDebug("Start message header validation ...");
 
@@ -97,12 +100,16 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
                 key.Equals(IEndpointUriResolver.EndpointUriHeaderName) ||
                 key.Equals(IEndpointUriResolver.RequestPathHeaderName) ||
                 key.Equals(IEndpointUriResolver.QueryParamHeaderName))
+            {
                 continue;
+            }
 
             var headerName = GetHeaderName(key, receivedHeaders, context, validationContext);
 
             if (!receivedHeaders.TryGetValue(headerName, out var value))
+            {
                 throw new ValidationException($"Validation failed: Header element '{headerName}' is missing");
+            }
 
             var validator = validationContext.Validators
                                 .FirstOrDefault(v => v.Supports(headerName, controlValue?.GetType()))
@@ -143,8 +150,12 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
         var validators = context.ReferenceResolver.ResolveAll<IHeaderValidator>();
 
         if (validators != null && validators.Count > 0)
+        {
             foreach (var validator in validators)
+            {
                 validatorMap.TryAdd(validator.Key, validator.Value);
+            }
+        }
 
         return validatorMap.Values.Distinct().ToList();
     }
@@ -162,7 +173,11 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
     {
         var headerName = context.ResolveDynamicValue(name);
 
-        if (receivedHeaders.ContainsKey(headerName) || !validationContext.HeaderNameIgnoreCase) return headerName;
+        if (receivedHeaders.ContainsKey(headerName) || !validationContext.HeaderNameIgnoreCase)
+        {
+            return headerName;
+        }
+
         var key = headerName;
 
         Log.LogDebug($"Finding case insensitive header for key '{key}'");

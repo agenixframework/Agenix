@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection;
 using Agenix.Api.Message;
 using Agenix.Core.Message;
@@ -84,8 +84,9 @@ public class StaticMessageBuilderTest : AbstractNUnitSetUp
     [Test]
     public void TestBuildMessageContentWithAdditionalHeaderResource()
     {
-        var headerResource = $"assembly://{Assembly.GetExecutingAssembly().GetName().Name}/{Assembly.GetExecutingAssembly().GetName().Name}.ResourcesTest" +
-                             $".validation.builder/payload-data-resource.txt";
+        var headerResource =
+            $"assembly://{Assembly.GetExecutingAssembly().GetName().Name}/{Assembly.GetExecutingAssembly().GetName().Name}.ResourcesTest" +
+            $".validation.builder/payload-data-resource.txt";
 
         var testMessage = new DefaultMessage("TestMessage").SetHeader("header1", "value1");
         _staticMessageBuilder = new StaticMessageBuilder(testMessage);

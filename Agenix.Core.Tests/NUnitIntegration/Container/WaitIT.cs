@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using Agenix.Api.Annotations;
@@ -38,7 +38,9 @@ public class WaitIT
     private void OnRequest(IAsyncResult result)
     {
         if (result == null || !_server.IsListening)
+        {
             return;
+        }
 
         try
         {
@@ -47,7 +49,8 @@ public class WaitIT
             context.Response.Close();
 
             _server.BeginGetContext(OnRequest, null);
-        } catch (HttpListenerException ex)
+        }
+        catch (HttpListenerException ex)
         {
             Console.WriteLine($"HttpListener exception: {ex.Message}");
         }
@@ -59,7 +62,6 @@ public class WaitIT
         {
             Console.WriteLine($"Unhandled exception: {ex}");
         }
-
     }
 
     [OneTimeTearDown]
@@ -71,6 +73,7 @@ public class WaitIT
             {
                 _server.Stop();
             }
+
             _server.Close();
         }
         catch (Exception ex)

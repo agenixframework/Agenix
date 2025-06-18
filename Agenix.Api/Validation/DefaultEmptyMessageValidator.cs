@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -62,12 +62,16 @@ public class DefaultEmptyMessageValidator : DefaultMessageValidator
         }
 
         if (!string.IsNullOrEmpty(controlMessage.GetPayload<string>()))
+        {
             throw new ValidationException("Empty message validation failed - control message is not empty!");
+        }
 
         Log.LogDebug("Start to verify empty message payload ...");
 
         if (!string.IsNullOrEmpty(receivedMessage.GetPayload<string>()))
+        {
             throw new ValidationException("Validation failed - received message content is not empty!");
+        }
 
         Log.LogInformation("Message payload is empty as expected: All values OK");
     }

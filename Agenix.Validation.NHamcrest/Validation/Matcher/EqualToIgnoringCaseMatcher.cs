@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -39,9 +39,15 @@ public class EqualToIgnoringCaseMatcher(string expected) : IMatcher<string>
 
     public bool Matches(string actual)
     {
-        if (actual == null && expected == null) return true;
+        if (actual == null && expected == null)
+        {
+            return true;
+        }
 
-        if (actual == null || expected == null) return false;
+        if (actual == null || expected == null)
+        {
+            return false;
+        }
 
         return string.Equals(expected, actual, StringComparison.OrdinalIgnoreCase);
     }

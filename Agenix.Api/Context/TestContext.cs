@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -37,6 +37,7 @@ using Agenix.Api.Util;
 using Agenix.Api.Validation;
 using Agenix.Api.Validation.Matcher;
 using Agenix.Api.Variable;
+using Agenix.Api.Xml.Namespace;
 using Agenix.Core;
 using Microsoft.Extensions.Logging;
 
@@ -137,6 +138,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// </summary>
     private ValidationMatcherRegistry _validationMatcherRegistry = new();
 
+
     /// <summary>
     ///     A collection of active timers used within the test context.
     /// </summary>
@@ -192,6 +194,11 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     }
 
     /// <summary>
+    ///     Represents a builder for configuring and managing namespace contexts in XML structures.
+    /// </summary>
+    public NamespaceContextBuilder NamespaceContextBuilder { get; set; } = new();
+
+    /// <summary>
     ///     Factory for creating and managing endpoints.
     /// </summary>
     public IEndpointFactory EndpointFactory
@@ -203,7 +210,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <summary>
     ///     Provides a registry for message validators.
     /// </summary>
-    public MessageValidatorRegistry MessageValidatorRegistry
+    public virtual MessageValidatorRegistry MessageValidatorRegistry
     {
         get => _messageValidatorRegistry;
         set => _messageValidatorRegistry = value;
@@ -276,7 +283,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     ///     Retrieves the current reference resolver instance.
     /// </summary>
     /// <returns>The current instance of IReferenceResolver.</returns>
-    public IReferenceResolver ReferenceResolver => _referenceResolver;
+    public virtual IReferenceResolver? ReferenceResolver => _referenceResolver;
 
     /// <summary>
     ///     Sets the reference resolver to be used by the TestContext.
@@ -309,7 +316,9 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
                 var processorDirection = MessageDirection.UNBOUND;
 
                 if (processor is IMessageDirectionAware awareProcessor)
+                {
                     processorDirection = awareProcessor.GetDirection();
+                }
 
                 return processorDirection == direction || processorDirection == MessageDirection.UNBOUND;
             })
@@ -353,7 +362,9 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     public void RegisterTimer(string timerId, IStopTimer timer)
     {
         if (!Timers.TryAdd(timerId, timer))
+        {
             throw new InvalidOperationException("Timer already registered with this id");
+        }
     }
 
     /// <summary>
@@ -363,7 +374,11 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <returns>True if the timer was successfully stopped; otherwise, false.</returns>
     public bool StopTimer(string timerId)
     {
-        if (!Timers.TryGetValue(timerId, out var timer)) return false;
+        if (!Timers.TryGetValue(timerId, out var timer))
+        {
+            return false;
+        }
+
         timer.StopTimer();
         return true;
     }
@@ -373,7 +388,10 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// </summary>
     public void StopTimers()
     {
-        foreach (var timerId in Timers.Keys) StopTimer(timerId);
+        foreach (var timerId in Timers.Keys)
+        {
+            StopTimer(timerId);
+        }
     }
 
     /// <summary>
@@ -406,7 +424,10 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     public void Clear()
     {
         _variables.Clear();
-        foreach (var entry in _globalVariables.GetVariables()) _variables[entry.Key] = entry.Value;
+        foreach (var entry in _globalVariables.GetVariables())
+        {
+            _variables[entry.Key] = entry.Value;
+        }
     }
 
     /// <summary>
@@ -447,6 +468,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     private void LogMessage(string operation, IMessage message, MessageDirection direction)
     {
         if (_messageListeners != null && _messageListeners.IsEmpty())
+        {
             switch (direction)
             {
                 case MessageDirection.OUTBOUND:
@@ -460,7 +482,11 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
                 default:
                     throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
             }
-        else if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug($"{operation} message:\n{message?.ToString() ?? ""}");
+        }
+        else if (Log.IsEnabled(LogLevel.Debug))
+        {
+            Log.LogDebug($"{operation} message:\n{message?.ToString() ?? ""}");
+        }
     }
 
     /// <summary>
@@ -505,8 +531,10 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
 
         if (variableName.StartsWith(AgenixSettings.VariableEscape) &&
             variableName.EndsWith(AgenixSettings.VariableEscape))
+        {
             return AgenixSettings.VariablePrefix + VariableUtils.CutOffVariablesEscaping(variableName) +
                    AgenixSettings.VariableSuffix;
+        }
 
         return _variables.TryGetValue(variableName, out var o)
             ? o
@@ -548,17 +576,23 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     public void SetVariable(string variableName, object value)
     {
         if (string.IsNullOrEmpty(variableName) || VariableUtils.CutOffVariablesPrefix(variableName).Length == 0)
+        {
             throw new AgenixSystemException("Can not create variable '" + variableName +
                                             "', please define proper variable name");
+        }
 
         if (value == null)
+        {
             throw new VariableNullValueException(
                 "Trying to set variable: " + VariableUtils.CutOffVariablesPrefix(variableName) +
                 ", but variable value is null");
+        }
 
         if (Log.IsEnabled(LogLevel.Debug))
+        {
             Log.LogDebug(
                 $"Setting variable: {VariableUtils.CutOffVariablesPrefix(variableName)} with value: '{value}'");
+        }
 
         _variables[VariableUtils.CutOffVariablesPrefix(variableName)] = value;
     }
@@ -589,7 +623,10 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <returns>the resolved expression value</returns>
     public string ResolveDynamicValue(string expression)
     {
-        if (VariableUtils.IsVariableName(expression)) return GetVariable(expression);
+        if (VariableUtils.IsVariableName(expression))
+        {
+            return GetVariable(expression);
+        }
 
         return _functionRegistry.IsFunction(expression)
             ? FunctionUtils.ResolveFunction(expression, this)
@@ -606,9 +643,14 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     {
         T adaptedValue;
         if (value is string strValue)
+        {
             adaptedValue = (T)(object)ReplaceDynamicContentInString(strValue);
+        }
         else
+        {
             adaptedValue = value;
+        }
+
         return adaptedValue;
     }
 
@@ -654,11 +696,18 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
         List<T> variableFreeList = new(list.Count);
 
         foreach (var value in list)
+        {
             if (value is string strValue)
                 // Add new value after check if it is variable or function
+            {
                 variableFreeList.Add((T)(object)ReplaceDynamicContentInString(strValue));
+            }
             else
+            {
                 variableFreeList.Add(value); // Added to preserve non-string values in the list
+            }
+        }
+
         return variableFreeList;
     }
 
@@ -668,7 +717,10 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <param name="variablesToSet">The list of variables to set.</param>
     public void AddVariables(Dictionary<string, object> variablesToSet)
     {
-        foreach (var (key, value) in variablesToSet) SetVariable(key, value ?? "");
+        foreach (var (key, value) in variablesToSet)
+        {
+            SetVariable(key, value ?? "");
+        }
     }
 
     /// <summary>
@@ -680,12 +732,18 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     public void AddVariables(string[] variableNames, object[] variableValues)
     {
         if (variableNames.Length != variableValues.Length)
+        {
             throw new AgenixSystemException(
                 $"Invalid context variable usage - received '{variableNames.Length}' variables with '{variableValues.Length}' values");
+        }
 
         for (var i = 0; i < variableNames.Length; i++)
+        {
             if (variableValues[i] != null)
+            {
                 SetVariable(variableNames[i], variableValues[i]);
+            }
+        }
     }
 
     /// <summary>

@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -58,7 +58,10 @@ public class CustomTestContainerBuilder<T>(T container) : AbstractTestContainerB
 
     public override T Build()
     {
-        if (_container.GetActions().Count > 0) return _container;
+        if (_container.GetActions().Count > 0)
+        {
+            return _container;
+        }
 
         return base.Build();
     }

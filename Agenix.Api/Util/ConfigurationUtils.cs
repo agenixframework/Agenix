@@ -200,7 +200,11 @@ public static class ConfigurationUtils
     /// <returns>The line number of the specified node.</returns>
     public static int GetLineNumber(XmlNode node)
     {
-        if (node is ITextPosition) return ((ITextPosition)node).LineNumber;
+        if (node is ITextPosition)
+        {
+            return ((ITextPosition)node).LineNumber;
+        }
+
         return ConfigurationErrorsException.GetLineNumber(node);
     }
 
@@ -211,7 +215,11 @@ public static class ConfigurationUtils
     /// <returns>The name of the file specified node is defined in.</returns>
     public static string GetFileName(XmlNode node)
     {
-        if (node is ITextPosition) return ((ITextPosition)node).Filename;
+        if (node is ITextPosition)
+        {
+            return ((ITextPosition)node).Filename;
+        }
+
         return ConfigurationErrorsException.GetFilename(node);
     }
 
@@ -233,11 +241,16 @@ public static class ConfigurationUtils
             typeof(ConfigurationManager).GetField("s_configSystem", BindingFlags.Static | BindingFlags.NonPublic);
         // for MONO
         if (s_configSystem == null)
+        {
             s_configSystem =
                 typeof(ConfigurationManager).GetField("configSystem", BindingFlags.Static | BindingFlags.NonPublic);
+        }
+
         var innerConfigSystem = (IInternalConfigSystem)s_configSystem.GetValue(null);
         if (configSystem is IChainableConfigSystem)
+        {
             ((IChainableConfigSystem)configSystem).SetInnerConfigurationSystem(innerConfigSystem);
+        }
 
         try
         {
@@ -251,13 +264,21 @@ public static class ConfigurationUtils
             }
             else
             {
-                if (enforce) ResetConfigurationSystem();
+                if (enforce)
+                {
+                    ResetConfigurationSystem();
+                }
+
                 mi.Invoke(null, new object[] { configSystem, true });
             }
         }
         catch (InvalidOperationException)
         {
-            if (!enforce) throw;
+            if (!enforce)
+            {
+                throw;
+            }
+
             s_configSystem.SetValue(null, configSystem);
         }
 
@@ -269,7 +290,11 @@ public static class ConfigurationUtils
     /// </summary>
     public static void ResetConfigurationSystem()
     {
-        if (SystemUtils.MonoRuntime) return;
+        if (SystemUtils.MonoRuntime)
+        {
+            return;
+        }
+
         var initStateRef =
             typeof(ConfigurationManager).GetField("s_initState", BindingFlags.NonPublic | BindingFlags.Static);
         var notStarted = Activator.CreateInstance(initStateRef.FieldType);

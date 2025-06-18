@@ -1,5 +1,4 @@
-﻿using Agenix.Api.Exceptions;
-using Agenix.Core.Endpoint.Adapter.Mapping;
+using Agenix.Api.Exceptions;
 using Agenix.Core.Message;
 using Agenix.Validation.Json.Endpoint.Adapter.Mapping;
 using NUnit.Framework;

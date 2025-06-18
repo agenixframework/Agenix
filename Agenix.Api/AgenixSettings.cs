@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -29,6 +29,7 @@ using System.Reflection;
 using System.Xml.Linq;
 using Agenix.Api.Log;
 using Agenix.Api.Message;
+using Agenix.Api.Util;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
@@ -103,6 +104,7 @@ public sealed class AgenixSettings
     public const string OutboundJsonSchemaValidationEnabledProp = "agenix.validation.outbound.json.schema.enabled";
     public const string OutboundXmlSchemaValidationEnabledProp = "agenix.validation.outbound.xml.schema.enabled";
     private const string ApplicationPropertyFileProperty = "agenix-application";
+    public const string NoSchemaFoundStrategyPropertyName = "agenix.xml.no.schema.found.strategy";
 
     //
     // Flag to enable/disable fallback to default text equals validation
@@ -137,10 +139,8 @@ public sealed class AgenixSettings
         {
             (Format: ConfigurationFormat.JSON, Extension: ".json",
                 Action: (b, p) => b.AddJsonFile(p, true, true)),
-
             (Format: ConfigurationFormat.XML, Extension: ".xml",
                 Action: (b, p) => b.AddXmlFile(p, true, true)),
-
             (Format: ConfigurationFormat.INI, Extension: ".ini",
                 Action: (b, p) => b.AddIniFile(p, true, true))
         };
@@ -180,6 +180,11 @@ public sealed class AgenixSettings
         return GetProperty(AgenixFileEncodingProp, "UTF-8");
     }
 
+    public static Optional<string> GetNoSchemaFoundStrategy()
+    {
+        return Optional<string>.OfNullable(GetProperty(NoSchemaFoundStrategyPropertyName));
+    }
+
     /// <summary>
     ///     Retrieves the file name of the default Agenix application property file. If no specific property is configured,
     ///     defaults to "agenix-application.json".
@@ -213,7 +218,10 @@ public sealed class AgenixSettings
         foreach (var (format, extension, addAction) in Formats)
         {
             var configPath = Path.Combine(assemblyLocation, $"{ApplicationPropertyFileProperty}{extension}");
-            if (!File.Exists(configPath)) continue;
+            if (!File.Exists(configPath))
+            {
+                continue;
+            }
 
             try
             {
@@ -240,7 +248,6 @@ public sealed class AgenixSettings
                 Log.LogError(ex, "Failed to load configuration from {ConfigPath}, trying next format", configPath);
                 _activeFormat = ConfigurationFormat.NONE;
                 _activeConfigPath = null;
-                continue;
             }
         }
 
@@ -278,7 +285,9 @@ public sealed class AgenixSettings
                 }
 
                 if (Log.IsEnabled(LogLevel.Trace))
+                {
                     Log.LogTrace("Loading configuration: {Key}={Value}", kvp.Key, kvp.Value);
+                }
 
                 try
                 {
@@ -347,7 +356,10 @@ public sealed class AgenixSettings
             for (var i = 0; i < parts.Length - 1; i++)
             {
                 if (current?[parts[i]] == null || current[parts[i]] is not { Type: JTokenType.Object })
+                {
                     current[parts[i]] = new JObject();
+                }
+
                 current = (JObject)current[parts[i]];
             }
 
@@ -381,12 +393,16 @@ public sealed class AgenixSettings
         {
             XDocument doc;
             if (File.Exists(_activeConfigPath))
+            {
                 doc = XDocument.Load(_activeConfigPath);
+            }
             else
+            {
                 doc = new XDocument(
                     new XElement("configuration",
                         new XElement("appSettings"))
                 );
+            }
 
             var appSettings = doc.Root?.Element("appSettings");
             if (appSettings == null)
@@ -399,13 +415,17 @@ public sealed class AgenixSettings
                 .FirstOrDefault(e => e.Attribute("key")?.Value == key);
 
             if (setting == null)
+            {
                 appSettings?.Add(
                     new XElement("add",
                         new XAttribute("key", key),
                         new XAttribute("value", value))
                 );
+            }
             else
+            {
                 setting.Attribute("value")!.Value = value;
+            }
 
             doc.Save(_activeConfigPath);
             Log.LogTrace("Updated XML property {Key}={Value}", key, value);
@@ -456,7 +476,11 @@ public sealed class AgenixSettings
             if (sectionIndex == -1)
             {
                 // Add a new section
-                if (lines.Count > 0) lines.Add("");
+                if (lines.Count > 0)
+                {
+                    lines.Add("");
+                }
+
                 lines.Add($"[{section}]");
                 lines.Add(propertyLine);
             }
@@ -465,15 +489,22 @@ public sealed class AgenixSettings
                 // Find property in the section
                 var nextSectionIndex = lines.FindIndex(sectionIndex + 1,
                     l => l.StartsWith('[') && l.EndsWith(']'));
-                if (nextSectionIndex == -1) nextSectionIndex = lines.Count;
+                if (nextSectionIndex == -1)
+                {
+                    nextSectionIndex = lines.Count;
+                }
 
                 var propertyIndex = lines.FindIndex(sectionIndex + 1, nextSectionIndex - sectionIndex - 1,
                     l => l.StartsWith($"{propertyKey}="));
 
                 if (propertyIndex == -1)
+                {
                     lines.Insert(sectionIndex + 1, propertyLine);
+                }
                 else
+                {
                     lines[propertyIndex] = propertyLine;
+                }
             }
 
             File.WriteAllLines(_activeConfigPath, lines);
@@ -501,15 +532,21 @@ public sealed class AgenixSettings
             var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
             if (config.AppSettings.Settings[key] == null)
+            {
                 config.AppSettings.Settings.Add(key, value);
+            }
             else
+            {
                 config.AppSettings.Settings[key].Value = value;
+            }
 
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
 
             if (Log.IsEnabled(LogLevel.Trace))
+            {
                 Log.LogTrace("Updated {config.FilePath} property {Key}={Value}", config.FilePath, key, value);
+            }
         }
         catch (Exception ex)
         {
@@ -641,6 +678,7 @@ public sealed class AgenixSettings
                     defaultHashSet.Add(trimmedKeyword);
                 }
             }
+
             return defaultHashSet;
         }
     }
@@ -684,7 +722,10 @@ public sealed class AgenixSettings
             var value = _configuration?[key] ??
                         GetPropertyEnvOrDefault(key, ToEnvironmentVariableName(key), defaultValue);
 
-            if (Log.IsEnabled(LogLevel.Trace)) Log.LogTrace("Getting property {Key}={Value}", key, value);
+            if (Log.IsEnabled(LogLevel.Trace))
+            {
+                Log.LogTrace("Getting property {Key}={Value}", key, value);
+            }
 
             return value;
         }

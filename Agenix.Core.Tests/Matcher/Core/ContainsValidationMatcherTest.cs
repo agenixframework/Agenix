@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Agenix.Api.Exceptions;
 using Agenix.Core.Validation.Matcher.Core;
 using NUnit.Framework;
@@ -39,7 +39,10 @@ public class ContainsValidationMatcherTest : AbstractNUnitSetUp
             ClassicAssert.IsTrue(e.GetMessage().Contains(fieldName));
             ClassicAssert.IsTrue(e.GetMessage().Contains(control[0]));
 
-            if (value != null) ClassicAssert.IsTrue(e.GetMessage().Contains(value));
+            if (value != null)
+            {
+                ClassicAssert.IsTrue(e.GetMessage().Contains(value));
+            }
         }
     }
 }

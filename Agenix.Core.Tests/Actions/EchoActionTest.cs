@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Exceptions;
+using Agenix.Api.Exceptions;
 using Agenix.Core.Actions;
 using NUnit.Framework;
 
@@ -26,7 +26,7 @@ public class EchoActionTest : AbstractNUnitSetUp
     [Test]
     public void TestEchoMessageWithFunctions()
     {
-        var echo = new EchoAction.Builder().Message("Today is core:CurrentDate()").Build();
+        var echo = new EchoAction.Builder().Message("Today is agenix:CurrentDate()").Build();
 
         echo.Execute(Context);
     }

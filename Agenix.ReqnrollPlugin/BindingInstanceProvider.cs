@@ -84,10 +84,14 @@ public class BindingInstanceProvider
     public T GetBinding<T>() where T : class
     {
         // First try our cache
-        if (_bindingInstances.TryGetValue(typeof(T), out var instance)) return (T)instance;
+        if (_bindingInstances.TryGetValue(typeof(T), out var instance))
+        {
+            return (T)instance;
+        }
 
         // Then try to resolve from the container if available
         if (Container != null)
+        {
             try
             {
                 return Container.Resolve<T>();
@@ -97,6 +101,7 @@ public class BindingInstanceProvider
                 // Type is not registered in container
                 return null;
             }
+        }
 
         return null;
     }
@@ -111,7 +116,9 @@ public class BindingInstanceProvider
     public IEnumerable<object> GetAllBindingInstances()
     {
         if (Container == null)
+        {
             return [];
+        }
 
         // Get all loaded assemblies
         var assemblies = AppDomain.CurrentDomain.GetAssemblies();
@@ -134,11 +141,16 @@ public class BindingInstanceProvider
         // Resolve each binding type from the container
         var result = new List<object>();
         foreach (var type in bindingTypes)
+        {
             try
             {
                 var instance = Container.Resolve(type);
 
-                if (instance == null) continue;
+                if (instance == null)
+                {
+                    continue;
+                }
+
                 result.Add(instance);
                 // Optionally cache the instance
                 _bindingInstances[type] = instance;
@@ -147,6 +159,7 @@ public class BindingInstanceProvider
             {
                 // Skip if can't resolve
             }
+        }
 
         return result;
     }

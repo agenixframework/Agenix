@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -50,11 +50,16 @@ public class ValidationMatcherRegistry
     public ValidationMatcherLibrary GetLibraryForPrefix(string validationMatcherPrefix)
     {
         if (_validationMatcherLibraries == null)
+        {
             throw new NoSuchValidationMatcherLibraryException(
                 $"Can not find ValidatorMatcher library for prefix '{validationMatcherPrefix}'");
+        }
 
         foreach (var validationMatcherLibrary in _validationMatcherLibraries.Where(validationMatcherLibrary =>
-                     validationMatcherLibrary.Prefix.Equals(validationMatcherPrefix))) return validationMatcherLibrary;
+                     validationMatcherLibrary.Prefix.Equals(validationMatcherPrefix)))
+        {
+            return validationMatcherLibrary;
+        }
 
         throw new NoSuchValidationMatcherLibraryException(
             $"Can not find ValidatorMatcher library for prefix '{validationMatcherPrefix}'");
@@ -70,9 +75,11 @@ public class ValidationMatcherRegistry
             _validationMatcherLibraries.Any(lib => lib.Prefix.Equals(validationMatcherLibrary.Prefix));
 
         if (prefixAlreadyUsed)
+        {
             throw new AgenixSystemException(
                 $"Validation matcher library prefix '{validationMatcherLibrary.Prefix} is already bound to another instance. " +
                 "Please choose another prefix.");
+        }
 
         _validationMatcherLibraries.Add(validationMatcherLibrary);
     }

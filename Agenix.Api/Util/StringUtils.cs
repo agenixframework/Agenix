@@ -121,9 +121,21 @@ public static class StringUtils
     public static string[] Split(
         string s, string delimiters, bool trimTokens, bool ignoreEmptyTokens, string quoteChars)
     {
-        if (s == null) return new string[0];
-        if (string.IsNullOrEmpty(delimiters)) return new[] { s };
-        if (quoteChars == null) quoteChars = string.Empty;
+        if (s == null)
+        {
+            return new string[0];
+        }
+
+        if (string.IsNullOrEmpty(delimiters))
+        {
+            return new[] { s };
+        }
+
+        if (quoteChars == null)
+        {
+            quoteChars = string.Empty;
+        }
+
         AssertUtils.IsTrue(quoteChars.Length % 2 == 0, "the number of quote characters must be even");
 
         var delimiterChars = delimiters.ToCharArray();
@@ -137,8 +149,16 @@ public static class StringUtils
         for (var ixSep = 0; ixSep < count; ixSep++)
         {
             var token = s.Substring(startIndex, delimiterPositions[ixSep] - startIndex);
-            if (trimTokens) token = token.Trim();
-            if (!(ignoreEmptyTokens && token.Length == 0)) tokens.Add(token);
+            if (trimTokens)
+            {
+                token = token.Trim();
+            }
+
+            if (!(ignoreEmptyTokens && token.Length == 0))
+            {
+                tokens.Add(token);
+            }
+
             startIndex = delimiterPositions[ixSep] + 1;
         }
 
@@ -146,12 +166,22 @@ public static class StringUtils
         if (startIndex < s.Length)
         {
             var token = s.Substring(startIndex);
-            if (trimTokens) token = token.Trim();
-            if (!(ignoreEmptyTokens && token.Length == 0)) tokens.Add(token);
+            if (trimTokens)
+            {
+                token = token.Trim();
+            }
+
+            if (!(ignoreEmptyTokens && token.Length == 0))
+            {
+                tokens.Add(token);
+            }
         }
         else if (startIndex == s.Length)
         {
-            if (!ignoreEmptyTokens) tokens.Add(string.Empty);
+            if (!ignoreEmptyTokens)
+            {
+                tokens.Add(string.Empty);
+            }
         }
 
         return tokens.ToArray();
@@ -172,17 +202,20 @@ public static class StringUtils
             for (var ixCurDelim = 0; ixCurDelim < delimiters.Length; ixCurDelim++)
             {
                 if (delimiters[ixCurDelim] == curChar)
+                {
                     if (quoteNestingDepth == 0)
                     {
                         delimiterPositions[count] = ixCurChar;
                         count++;
                         break;
                     }
+                }
 
                 if (quoteNestingDepth == 0)
                 {
                     // check, if we're facing an opening char
                     for (var ixCurQuoteChar = 0; ixCurQuoteChar < quoteChars.Length; ixCurQuoteChar += 2)
+                    {
                         if (quoteChars[ixCurQuoteChar] == curChar)
                         {
                             quoteNestingDepth++;
@@ -190,13 +223,19 @@ public static class StringUtils
                             expectedQuoteCloseChar = quoteChars[ixCurQuoteChar + 1];
                             break;
                         }
+                    }
                 }
                 else
                 {
                     // check if we're facing an expected open or close char
                     if (curChar == expectedQuoteOpenChar)
+                    {
                         quoteNestingDepth++;
-                    else if (curChar == expectedQuoteCloseChar) quoteNestingDepth--;
+                    }
+                    else if (curChar == expectedQuoteCloseChar)
+                    {
+                        quoteNestingDepth--;
+                    }
                 }
             }
         }
@@ -247,8 +286,16 @@ public static class StringUtils
     /// </returns>
     public static string[] DelimitedListToStringArray(string input, string delimiter)
     {
-        if (input == null) return new string[0];
-        if (!HasLength(delimiter)) return new[] { input };
+        if (input == null)
+        {
+            return new string[0];
+        }
+
+        if (!HasLength(delimiter))
+        {
+            return new[] { input };
+        }
+
         //		    return input.Split(delimiter[0]);
         return Split(input, delimiter, false, false, null);
     }
@@ -268,12 +315,20 @@ public static class StringUtils
     public static string CollectionToDelimitedString<T>(
         IEnumerable<T> c, string delimiter)
     {
-        if (c == null) return "null";
+        if (c == null)
+        {
+            return "null";
+        }
+
         var sb = new StringBuilder();
         var i = 0;
         foreach (object obj in c)
         {
-            if (i++ > 0) sb.Append(delimiter);
+            if (i++ > 0)
+            {
+                sb.Append(delimiter);
+            }
+
             sb.Append(obj);
         }
 
@@ -322,7 +377,10 @@ public static class StringUtils
     /// </param>
     public static string ArrayToDelimitedString<T>(IEnumerable<T> source, string delimiter)
     {
-        if (source == null) return "null";
+        if (source == null)
+        {
+            return "null";
+        }
 
         return CollectionToDelimitedString(source, delimiter);
     }
@@ -422,7 +480,11 @@ public static class StringUtils
     /// </summary>
     public static string GetTextOrNull(string value)
     {
-        if (!HasText(value)) return null;
+        if (!HasText(value))
+        {
+            return null;
+        }
+
         return value;
     }
 
@@ -435,7 +497,9 @@ public static class StringUtils
     {
         if (text != null
             && text.Length > 2)
+        {
             return text.Substring(1, text.Length - 2);
+        }
 
         return string.Empty;
     }
@@ -469,12 +533,19 @@ public static class StringUtils
                 {
                     var exp = text.Substring(start + 2, end - start - 2);
                     if (IsNullOrEmpty(exp))
+                    {
                         throw new FormatException(
                             string.Format("Empty {0}{1} value found in text : '{2}'.",
                                 AntExpressionPrefix,
                                 AntExpressionSuffix,
                                 text));
-                    if (expressions.IndexOf(exp) < 0) expressions.Add(exp);
+                    }
+
+                    if (expressions.IndexOf(exp) < 0)
+                    {
+                        expressions.Add(exp);
+                    }
+
                     start = text.IndexOf(AntExpressionPrefix, end);
                 }
             }
@@ -502,8 +573,16 @@ public static class StringUtils
     /// </returns>
     public static string SetAntExpression(string text, string expression, object expValue)
     {
-        if (IsNullOrEmpty(text)) return string.Empty;
-        if (expValue == null) expValue = string.Empty;
+        if (IsNullOrEmpty(text))
+        {
+            return string.Empty;
+        }
+
+        if (expValue == null)
+        {
+            expValue = string.Empty;
+        }
+
         return text.Replace(
             Surround(AntExpressionPrefix, expression, AntExpressionSuffix), expValue.ToString());
     }
@@ -578,27 +657,43 @@ public static class StringUtils
     /// <returns>The converted string.</returns>
     public static string ConvertEscapedCharacters(string inputString)
     {
-        if (inputString == null) return null;
+        if (inputString == null)
+        {
+            return null;
+        }
+
         var sb = new StringBuilder(inputString.Length);
         for (var i = 0; i < inputString.Length; i++)
+        {
             if (inputString[i].Equals('\\'))
             {
                 i++;
                 if (inputString[i].Equals('t'))
+                {
                     sb.Append('\t');
+                }
                 else if (inputString[i].Equals('r'))
+                {
                     sb.Append('\r');
+                }
                 else if (inputString[i].Equals('n'))
+                {
                     sb.Append('\n');
+                }
                 else if (inputString[i].Equals('\\'))
+                {
                     sb.Append('\\');
+                }
                 else
+                {
                     sb.Append("\\" + inputString[i]);
+                }
             }
             else
             {
                 sb.Append(inputString[i]);
             }
+        }
 
         return sb.ToString();
     }

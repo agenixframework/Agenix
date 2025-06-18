@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -67,7 +67,10 @@ public class Wait(Wait.Builder<ICondition> builder)
         var timeLeft = GetWaitTimeMs(context);
         var intervalMs = GetIntervalMs(context);
 
-        if (intervalMs > timeLeft) intervalMs = timeLeft;
+        if (intervalMs > timeLeft)
+        {
+            intervalMs = timeLeft;
+        }
 
         var callable = async () => await Task.FromResult(Condition.IsSatisfied(context));
 
@@ -75,7 +78,10 @@ public class Wait(Wait.Builder<ICondition> builder)
         {
             timeLeft -= intervalMs;
 
-            if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug($"Waiting for condition {Condition.GetName()}");
+            if (Log.IsEnabled(LogLevel.Debug))
+            {
+                Log.LogDebug($"Waiting for condition {Condition.GetName()}");
+            }
 
             var task = Task.Run(callable);
             var checkStartTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
@@ -99,6 +105,7 @@ public class Wait(Wait.Builder<ICondition> builder)
             var sleepTime = intervalMs - (DateTimeOffset.Now.ToUnixTimeMilliseconds() - checkStartTime);
 
             if (sleepTime > 0)
+            {
                 try
                 {
                     Thread.Sleep(Convert.ToInt32(sleepTime));
@@ -107,6 +114,7 @@ public class Wait(Wait.Builder<ICondition> builder)
                 {
                     Log.LogWarning(e, "Interrupted during wait!");
                 }
+            }
         }
 
         throw new AgenixSystemException(Condition.GetErrorMessage(context));

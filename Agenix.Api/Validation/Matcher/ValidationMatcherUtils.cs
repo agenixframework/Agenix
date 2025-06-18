@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -56,18 +56,26 @@ public class ValidationMatcherUtils
         var expression =
             VariableUtils.CutOffVariablesPrefix(CutOffValidationMatchersPrefix(validationMatcherExpression));
 
-        if (expression.Equals("Ignore")) expression += "()";
+        if (expression.Equals("Ignore", StringComparison.InvariantCultureIgnoreCase))
+        {
+            expression += "()";
+        }
 
         var bodyStart = expression.IndexOf('(');
         if (bodyStart < 0)
+        {
             throw new AgenixSystemException(
                 "Illegal syntax for validation matcher expression - missing validation value in '()' function body");
+        }
 
         var prefix = "";
         if (expression.IndexOf(':') > 0 && expression.IndexOf(':') < bodyStart)
+        {
             prefix = expression.Substring(0, expression.IndexOf(':') + 1);
+        }
 
-        var matcherValue = expression.Substring(bodyStart + 1, expression.IndexOf(')') - bodyStart - 1);
+        // Fix: Use LastIndexOf to find the matching closing parenthesis
+        var matcherValue = expression.Substring(bodyStart + 1, expression.LastIndexOf(')') - bodyStart - 1);
         var matcherName = expression.Substring(prefix.Length, bodyStart - prefix.Length);
 
         var library = context.ValidationMatcherRegistry.GetLibraryForPrefix(prefix);
@@ -112,8 +120,10 @@ public class ValidationMatcherUtils
     {
         if (expression.StartsWith(AgenixSettings.ValidationMatcherPrefix) &&
             expression.EndsWith(AgenixSettings.ValidationMatcherSuffix))
+        {
             return expression.Substring(AgenixSettings.ValidationMatcherPrefix.Length,
                 expression.Length - AgenixSettings.ValidationMatcherSuffix.Length - 1);
+        }
 
         return expression;
     }
@@ -121,7 +131,9 @@ public class ValidationMatcherUtils
     private static IControlExpressionParser LookupControlExpressionParser(IValidationMatcher validationMatcher)
     {
         if (validationMatcher.GetType() == typeof(IControlExpressionParser))
+        {
             return validationMatcher as IControlExpressionParser;
+        }
 
         return new DefaultControlExpressionParser();
     }

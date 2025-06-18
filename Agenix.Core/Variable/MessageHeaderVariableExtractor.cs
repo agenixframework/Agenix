@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -79,8 +79,10 @@ public class MessageHeaderVariableExtractor : IVariableExtractor
                                          $"Variable name must be set for extractor on header '{headerElementName}'");
 
             if (message.GetHeader(headerElementName) == null)
+            {
                 throw new UnknownElementException(
                     $"Could not find header element {headerElementName} in received header");
+            }
 
             context.SetVariable(targetVariableName, message.GetHeader(headerElementName).ToString());
         }
@@ -115,7 +117,10 @@ public class MessageHeaderVariableExtractor : IVariableExtractor
 
         public Builder Expressions(IDictionary<string, object> expressions)
         {
-            foreach (var (key, value) in expressions) JsonPathExpressions.Add(key, value);
+            foreach (var (key, value) in expressions)
+            {
+                JsonPathExpressions.Add(key, value);
+            }
 
             return this;
         }
@@ -144,7 +149,10 @@ public class MessageHeaderVariableExtractor : IVariableExtractor
         /// <returns></returns>
         public Builder Headers(IDictionary<string, string> expressions)
         {
-            foreach (var (key, value) in expressions) JsonPathExpressions.Add(key, value);
+            foreach (var (key, value) in expressions)
+            {
+                JsonPathExpressions.Add(key, value);
+            }
 
             return this;
         }

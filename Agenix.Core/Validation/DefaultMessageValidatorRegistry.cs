@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -55,7 +55,9 @@ public class DefaultMessageValidatorRegistry : MessageValidatorRegistry
     private void RegisterMessageValidators()
     {
         foreach (var validator in IMessageValidator<IValidationContext>.Lookup())
+        {
             AddMessageValidator(validator.Key, validator.Value);
+        }
     }
 
     /// <summary>
@@ -65,6 +67,8 @@ public class DefaultMessageValidatorRegistry : MessageValidatorRegistry
     private void RegisterSchemaValidators()
     {
         foreach (var validator in ISchemaValidator<ISchemaValidationContext>.Lookup())
+        {
             AddSchemeValidator(validator.Key, validator.Value);
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Agenix.Api;
+using Agenix.Api;
 using Agenix.Api.Annotations;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
@@ -28,7 +28,7 @@ public class EchoActionNUnitIT
     [Test]
     public void EchoTest()
     {
-        runner.Run(CreateVariable("time", "core:CurrentDate()"));
+        runner.Run(CreateVariable("time", "agenix:CurrentDate()"));
 
         runner.Run(Echo("Hello Agenix!"));
 
@@ -38,7 +38,7 @@ public class EchoActionNUnitIT
     [Test]
     public void EchoGherkinTest()
     {
-        gherkin.Given(CreateVariable("time", "core:CurrentDate()"));
+        gherkin.Given(CreateVariable("time", "agenix:CurrentDate()"));
 
         gherkin.When(Echo("Hello Agenix!"));
 

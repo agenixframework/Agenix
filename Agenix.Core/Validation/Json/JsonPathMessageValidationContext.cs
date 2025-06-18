@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -25,6 +25,7 @@
 #endregion
 
 using System.Collections.Generic;
+using Agenix.Api;
 using Agenix.Api.Builder;
 using Agenix.Api.Message;
 using Agenix.Api.Validation.Context;
@@ -55,8 +56,8 @@ public class JsonPathMessageValidationContext(JsonPathMessageValidationContext.B
     }
 
     // Fluent builder
-    public class Builder : IValidationContext.IBuilder<JsonPathMessageValidationContext, Builder>,
-        IWithExpressions<Builder>, IVariableExtractorAdapter, IMessageProcessorAdapter
+    public class Builder : IValidationContext.IBuilder<JsonPathMessageValidationContext, IBuilder>,
+        IWithExpressions<Builder>, IVariableExtractorAdapter, IMessageProcessorAdapter, IBuilder
     {
         internal readonly Dictionary<string, object> _expressions = new();
 
@@ -101,7 +102,11 @@ public class JsonPathMessageValidationContext(JsonPathMessageValidationContext.B
         /// <returns>The current instance of the builder, allowing for fluent configuration.</returns>
         public Builder Expressions(IDictionary<string, object> expressions)
         {
-            foreach (var kvp in expressions) _expressions[kvp.Key] = kvp.Value;
+            foreach (var kvp in expressions)
+            {
+                _expressions[kvp.Key] = kvp.Value;
+            }
+
             return this;
         }
 

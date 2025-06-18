@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -73,16 +73,23 @@ public class ExecuteSqlAction : AbstractDatabaseConnectingTestAction
     /// </exception>
     protected void ExecuteStatements(List<string> newStatements, TestContext context)
     {
-        if (AdoTemplate == null) throw new AgenixSystemException("No AdoTemplate configured for sql execution!");
+        if (AdoTemplate == null)
+        {
+            throw new AgenixSystemException("No AdoTemplate configured for sql execution!");
+        }
 
         foreach (var statement in newStatements)
+        {
             try
             {
                 var toExecute = context.ReplaceDynamicContentInString(statement.Trim().EndsWith(';')
                     ? statement.Trim()[..(statement.Trim().Length - 1)]
                     : statement.Trim());
 
-                if (Log.IsEnabled(LogLevel.Debug)) Log.LogDebug("Executing SQL statement: " + toExecute);
+                if (Log.IsEnabled(LogLevel.Debug))
+                {
+                    Log.LogDebug("Executing SQL statement: " + toExecute);
+                }
 
                 AdoTemplate.ExecuteNonQuery(_commandType, toExecute);
 
@@ -91,10 +98,15 @@ public class ExecuteSqlAction : AbstractDatabaseConnectingTestAction
             catch (Exception e)
             {
                 if (_ignoreErrors)
+                {
                     Log.LogError("Ignoring error while executing SQL statement: " + e.Message, e);
+                }
                 else
+                {
                     throw new AgenixSystemException(e.Message, e);
+                }
             }
+        }
     }
 
     /// Executes a series of SQL statements within the given test context.

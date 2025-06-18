@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -26,6 +26,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Agenix.Api;
 using Agenix.Api.Message;
 using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
@@ -88,7 +89,7 @@ public class ReceiveMessageBuilderSupport<T, TB, TS>(TB dlg) : MessageBuilderSup
     /// </summary>
     /// <param name="validationContext">The validation context to use for message action validation.</param>
     /// <returns>The current instance of the message builder support.</returns>
-    public TS Validate(IValidationContext.IBuilder<IValidationContext, dynamic> validationContext)
+    public TS Validate(IValidationContext.IBuilder<IValidationContext, IBuilder> validationContext)
     {
         _delegate.Validate(validationContext);
         return _self;
@@ -101,7 +102,7 @@ public class ReceiveMessageBuilderSupport<T, TB, TS>(TB dlg) : MessageBuilderSup
     /// <returns>The current instance of the message builder support.</returns>
     public TS Validate(IValidationContext validationContext)
     {
-        return Validate(new FuncValidationContextBuilder<dynamic>(() => validationContext));
+        return Validate(new FuncValidationContextBuilder<IBuilder>(() => validationContext));
     }
 
     /// <summary>
@@ -119,7 +120,7 @@ public class ReceiveMessageBuilderSupport<T, TB, TS>(TB dlg) : MessageBuilderSup
     /// </summary>
     /// <param name="validationContexts">List of validation context builders.</param>
     /// <returns>The current instance of the message builder support.</returns>
-    public TS Validate(List<IValidationContext.IBuilder<IValidationContext, dynamic>> validationContexts)
+    public TS Validate(List<IValidationContext.IBuilder<IValidationContext, IBuilder>> validationContexts)
     {
         _delegate.Validate(validationContexts);
         return _self;
@@ -130,7 +131,7 @@ public class ReceiveMessageBuilderSupport<T, TB, TS>(TB dlg) : MessageBuilderSup
     /// </summary>
     /// <param name="validationContexts">An array of validation context builders to be validated.</param>
     /// <returns>The current instance of the message builder support.</returns>
-    public TS Validate(params IValidationContext.IBuilder<IValidationContext, dynamic>[] validationContexts)
+    public TS Validate(params IValidationContext.IBuilder<IValidationContext, IBuilder>[] validationContexts)
     {
         return Validate(validationContexts.ToList());
     }
@@ -240,9 +241,14 @@ public class ReceiveMessageBuilderSupport<T, TB, TS>(TB dlg) : MessageBuilderSup
     public override TS Process(IMessageProcessor processor)
     {
         if (processor is IVariableExtractor)
+        {
             base.Process(processor);
+        }
         else
+        {
             ControlMessageProcessors.Add(processor);
+        }
+
         return _self;
     }
 

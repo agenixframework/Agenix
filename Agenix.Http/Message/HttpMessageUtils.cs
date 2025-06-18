@@ -42,9 +42,13 @@ public static class HttpMessageUtils
     {
         HttpMessage source;
         if (from is HttpMessage httpMessage)
+        {
             source = httpMessage;
+        }
         else
+        {
             source = new HttpMessage(from);
+        }
 
         Copy(source, to);
     }
@@ -61,10 +65,18 @@ public static class HttpMessageUtils
 
         foreach (var entry in from.GetHeaders().Where(entry =>
                      !entry.Key.Equals(MessageHeaders.Id) && !entry.Key.Equals(MessageHeaders.Timestamp)))
+        {
             to.Header(entry.Key, entry.Value);
+        }
 
-        foreach (var headerData in from.GetHeaderData()) to.AddHeaderData(headerData);
+        foreach (var headerData in from.GetHeaderData())
+        {
+            to.AddHeaderData(headerData);
+        }
 
-        foreach (var cookie in from.GetCookies()) to.Cookie(cookie);
+        foreach (var cookie in from.GetCookies())
+        {
+            to.Cookie(cookie);
+        }
     }
 }

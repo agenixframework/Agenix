@@ -27,5 +27,9 @@
       "uniqueItems": true
     }
   },
-  "required": ["isbn", "title", "author"]
+  "required": [
+    "isbn",
+    "title",
+    "author"
+  ]
 }

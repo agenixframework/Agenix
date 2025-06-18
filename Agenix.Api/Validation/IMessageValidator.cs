@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -90,9 +90,15 @@ public interface IMessageValidator<T> where T : IValidationContext
                 null)
         );
 
-        if (!Log.IsEnabled(LogLevel.Debug)) return validators;
+        if (!Log.IsEnabled(LogLevel.Debug))
+        {
+            return validators;
+        }
+
         foreach (var kvp in validators)
+        {
             Log.LogDebug("Found message validator '{KvpKey}' as {Name}", kvp.Key, kvp.Value.GetType().Name);
+        }
 
         return validators;
     }

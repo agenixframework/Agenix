@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -124,7 +124,10 @@ public class DirectSyncProducer : DirectProducer, IReplyConsumer
     {
         var message = _correlationManager.Find(selector, timeout);
 
-        if (message == null) throw new MessageTimeoutException(timeout, GetDestinationQueueName());
+        if (message == null)
+        {
+            throw new MessageTimeoutException(timeout, GetDestinationQueueName());
+        }
 
         return message;
     }
@@ -155,7 +158,9 @@ public class DirectSyncProducer : DirectProducer, IReplyConsumer
         var replyMessage = replyQueue.Receive(_endpointConfiguration.Timeout);
 
         if (replyMessage == null)
+        {
             throw new ReplyMessageTimeoutException(_endpointConfiguration.Timeout, destinationQueueName);
+        }
 
         Log.LogInformation("Received synchronous response from reply queue");
 
@@ -177,7 +182,10 @@ public class DirectSyncProducer : DirectProducer, IReplyConsumer
             return temporaryQueue;
         }
 
-        if (message.GetHeader(DirectMessageHeaders.ReplyQueue) is IMessageQueue queue) return queue;
+        if (message.GetHeader(DirectMessageHeaders.ReplyQueue) is IMessageQueue queue)
+        {
+            return queue;
+        }
 
         return ResolveQueueName(message.GetHeader(DirectMessageHeaders.ReplyQueue).ToString(), context);
     }

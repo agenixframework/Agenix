@@ -1,4 +1,3 @@
-
 using Agenix.Api;
 using Agenix.Api.Annotations;
 using Agenix.Api.Context;
@@ -15,14 +14,12 @@ using static Agenix.Core.Actions.SendMessageAction.Builder;
 [AgenixConfiguration(Classes = [typeof(Endpoints)])]
 public class EchoSteps
 {
-    [AgenixResource]
-    protected ITestCaseRunner runner;
-
-    [AgenixResource]
-    protected TestContext context;
-    
     [AgenixEndpoint(Name = "EchoEndpoint")]
     private IEndpoint _directEndpoint;
+
+    [AgenixResource] protected TestContext context;
+
+    [AgenixResource] protected ITestCaseRunner runner;
 
     [Given(@"^My name is (.*)$")]
     public void MyNameIs(string name)
@@ -57,7 +54,7 @@ public class EchoSteps
             .Type(MessageType.PLAINTEXT)
             .Body(body));
     }
-    
+
     private class Endpoints
     {
         [BindToRegistry] private readonly IMessageQueue _messages = new DefaultMessageQueue("messages");

@@ -1,4 +1,5 @@
-﻿#region License
+#region License
+
 // MIT License
 //
 // Copyright (c) 2025 Agenix
@@ -20,6 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using Newtonsoft.Json.Linq;
@@ -40,7 +42,10 @@ public static class JTokenConversionHelper
     /// <exception cref="InvalidOperationException">Thrown when the JToken type is unsupported.</exception>
     public static object? ConvertToDynamic(JToken token)
     {
-        if (token == null) throw new ArgumentNullException(nameof(token), "JToken cannot be null.");
+        if (token == null)
+        {
+            throw new ArgumentNullException(nameof(token), "JToken cannot be null.");
+        }
 
         switch (token.Type)
         {

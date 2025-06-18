@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -42,7 +42,8 @@ public interface IMessageTransformer
     /// @type param T The type of IMessageTransformer that this builder will create.
     /// @type param TB The type of the builder itself, to allow for fluent builder patterns.
     /// /
-    interface IBuilder<out T, TB> where T : IMessageTransformer where TB : IBuilder<T, TB>
+    interface IBuilder<out T, TB> where T : IMessageTransformer
+        where TB : IBuilder
     {
         /// Builds a new message processor instance.
         /// @return new instance of message processor.

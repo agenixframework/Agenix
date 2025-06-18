@@ -1,4 +1,5 @@
-﻿#region License
+#region License
+
 // MIT License
 //
 // Copyright (c) 2025 Agenix
@@ -20,6 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using System.Text.RegularExpressions;
@@ -109,7 +111,10 @@ public class JsonElementValidatorItem<T>
 
     private static string NormalizePath(string path)
     {
-        if (!path.StartsWith("$")) path = "$" + path;
+        if (!path.StartsWith("$"))
+        {
+            path = "$" + path;
+        }
 
         // Replace dot notation with bracket notation for properties
         path = Regex.Replace(path, @"\.?([a-zA-Z_]\w*)", @"['$1']");
@@ -131,11 +136,14 @@ public class JsonElementValidatorItem<T>
     public JsonElementValidatorItem<TU> EnsureType<TU>() where TU : JToken
     {
         if (_expected is not TU expectedObj || _actual is not TU actualObj)
+        {
             throw new ValidationException(ValidationUtils.BuildValueMismatchErrorMessage(
                 "Type mismatch for JSON entry '" + _name + "'",
                 typeof(TU).Name,
                 _actual == null ? null : _actual.GetType().Name
             ));
+        }
+
         var type = new JsonElementValidatorItem<TU>(_name, actualObj, expectedObj);
         type.Parent(this);
         return type;
@@ -208,7 +216,11 @@ public class JsonElementValidatorItem<T>
     /// </returns>
     public string GetName()
     {
-        if (_index != null) return $"[{_index}]";
+        if (_index != null)
+        {
+            return $"[{_index}]";
+        }
+
         return _name ?? "$";
     }
 
@@ -232,7 +244,11 @@ public class JsonElementValidatorItem<T>
     public string GetJsonPath()
     {
         var parentPath = _parent == null ? "$" : ((dynamic)_parent).GetJsonPath();
-        if (_index != null) return $"{parentPath}[{_index}]";
+        if (_index != null)
+        {
+            return $"{parentPath}[{_index}]";
+        }
+
         return _name != null ? $"{parentPath}['{_name}']" : parentPath;
     }
 

@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Exceptions;
+using Agenix.Api.Exceptions;
 using Agenix.Core;
 using Agenix.Core.Validation;
 using NUnit.Framework;
@@ -8,10 +8,10 @@ namespace Agenix.Validation.Text.Tests;
 
 public abstract class AbstractNUnitSetUp
 {
-    protected TestContextFactory TestContextFactory;
     protected TestContext Context;
+    protected TestContextFactory TestContextFactory;
 
-    
+
     [SetUp]
     public void Setup()
     {

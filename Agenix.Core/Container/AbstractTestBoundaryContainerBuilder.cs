@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -102,7 +102,11 @@ public abstract class AbstractTestBoundaryContainerBuilder<T, S> : AbstractTestC
     /// <return>The updated container builder instance</return>
     public S WhenSystemProperties(Dictionary<string, string> systemProperties)
     {
-        foreach (var property in systemProperties) _systemProperties[property.Key] = property.Value;
+        foreach (var property in systemProperties)
+        {
+            _systemProperties[property.Key] = property.Value;
+        }
+
         return (S)this;
     }
 
@@ -122,7 +126,11 @@ public abstract class AbstractTestBoundaryContainerBuilder<T, S> : AbstractTestC
     /// @return The updated container builder instance
     public S WhenEnv(Dictionary<string, string> envs)
     {
-        foreach (var variable in envs) _env[variable.Key] = variable.Value;
+        foreach (var variable in envs)
+        {
+            _env[variable.Key] = variable.Value;
+        }
+
         return (S)this;
     }
 

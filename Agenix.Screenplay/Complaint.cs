@@ -55,7 +55,10 @@ public class Complaint
     /// </returns>
     public static Exception From(Type complaintType, string complaintDetails, Exception actualError)
     {
-        if (complaintDetails == null && actualError.Message == null) return From(complaintType, actualError);
+        if (complaintDetails == null && actualError.Message == null)
+        {
+            return From(complaintType, actualError);
+        }
 
         complaintDetails = ErrorMessageFrom(complaintDetails, actualError);
 
@@ -81,8 +84,16 @@ public class Complaint
     /// </returns>
     private static string ErrorMessageFrom(string complaintDetails, Exception actualError)
     {
-        if (complaintDetails == null) return actualError.Message;
-        if (actualError.Message == null) return complaintDetails;
+        if (complaintDetails == null)
+        {
+            return actualError.Message;
+        }
+
+        if (actualError.Message == null)
+        {
+            return complaintDetails;
+        }
+
         return complaintDetails + " - " + actualError.Message;
     }
 

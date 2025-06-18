@@ -1,4 +1,5 @@
-﻿#region License
+#region License
+
 // MIT License
 //
 // Copyright (c) 2025 Agenix
@@ -20,10 +21,10 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using Agenix.Api.Exceptions;
-using Agenix.Core.Validation.Json;
 using Agenix.Validation.Json.Validation;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -63,7 +64,11 @@ public static class JsonPathUtils
         string jsonPathFunction = null;
         foreach (var name in JsonPathFunctions.GetSupportedFunctions())
         {
-            if (!expression.EndsWith($".{name}()")) continue;
+            if (!expression.EndsWith($".{name}()"))
+            {
+                continue;
+            }
+
             jsonPathFunction = name;
             expression = expression.Substring(0, expression.Length - $".{name}()".Length);
             break;
@@ -80,7 +85,9 @@ public static class JsonPathUtils
                 object jsonPathResult = jToken;
 
                 if (!string.IsNullOrEmpty(jsonPathFunction))
+                {
                     jsonPathResult = JsonPathFunctions.Evaluate(jToken, jsonPathFunction);
+                }
 
                 jsonPathResults.Add(jsonPathResult);
             }
@@ -125,12 +132,20 @@ public static class JsonPathUtils
         var resultOfStrings = new List<string>();
 
         foreach (var jsonPathResult in (List<object>)jsonPathResults)
+        {
             if (jsonPathResult.GetType() == typeof(JObject))
+            {
                 resultOfStrings.Add(((JObject)jsonPathResult).ToString(Formatting.None));
+            }
             else if (jsonPathResult.GetType() == typeof(JArray))
+            {
                 resultOfStrings.Add(((JArray)jsonPathResult).ToString(Formatting.None));
+            }
             else
+            {
                 resultOfStrings.Add(string.Join(", ", jsonPathResult));
+            }
+        }
 
         return string.Join(", ", resultOfStrings);
     }

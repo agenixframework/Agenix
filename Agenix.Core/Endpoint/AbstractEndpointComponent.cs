@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,14 +27,24 @@ public abstract class AbstractEndpointComponent(string name) : IEndpointComponen
             string path;
 
             if (endpointUri.StartsWith("http://") || endpointUri.StartsWith("https://"))
+            {
                 path = uri.GetComponents(UriComponents.HostAndPort, UriFormat.Unescaped) +
                        uri.GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+            }
             else
+            {
                 path = uri.GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+            }
 
-            if (path.StartsWith("//")) path = path[2..];
+            if (path.StartsWith("//"))
+            {
+                path = path[2..];
+            }
 
-            if (path.Contains('?')) path = path[..path.IndexOf('?')];
+            if (path.Contains('?'))
+            {
+                path = path[..path.IndexOf('?')];
+            }
 
             var parameters = GetParameters(uri.ToString());
             string endpointName = null;
@@ -48,9 +58,14 @@ public abstract class AbstractEndpointComponent(string name) : IEndpointComponen
 
             var referenceResolverAware = endpoint as IReferenceResolverAware;
             if (referenceResolverAware != null)
+            {
                 referenceResolverAware.SetReferenceResolver(context.ReferenceResolver);
+            }
 
-            if (!string.IsNullOrEmpty(endpointName)) endpoint.SetName(endpointName);
+            if (!string.IsNullOrEmpty(endpointName))
+            {
+                endpoint.SetName(endpointName);
+            }
 
             return endpoint;
         }
@@ -87,12 +102,18 @@ public abstract class AbstractEndpointComponent(string name) : IEndpointComponen
             {
                 var parameterValue = token.Split('=');
                 if (parameterValue.Length == 1)
+                {
                     parameters[parameterValue[0]] = null;
+                }
                 else if (parameterValue.Length == 2)
+                {
                     parameters[parameterValue[0]] = parameterValue[1];
+                }
                 else
+                {
                     throw new AgenixSystemException(
                         $"Invalid parameter key/value combination '{string.Join(", ", parameterValue)}'");
+                }
             }
         }
 
@@ -117,8 +138,10 @@ public abstract class AbstractEndpointComponent(string name) : IEndpointComponen
             var field = ReflectionHelper.FindField(endpointConfiguration.GetType(), parameterEntry.Key);
 
             if (field == null)
+            {
                 throw new AgenixSystemException(
                     $"Unable to find parameter field on endpoint configuration '{parameterEntry.Key}'");
+            }
 
             // Find the corresponding setter method
             var setterName = "Set" + char.ToUpper(parameterEntry.Key[0]) + parameterEntry.Key[1..];
@@ -131,8 +154,10 @@ public abstract class AbstractEndpointComponent(string name) : IEndpointComponen
             }
 
             if (setter == null)
+            {
                 throw new AgenixSystemException(
                     $"Unable to find parameter setter on endpoint configuration '{setterName}'");
+            }
 
             // Convert the parameter value to the appropriate type and invoke the setter method
             if (parameterEntry.Value != null)
@@ -180,13 +205,24 @@ public abstract class AbstractEndpointComponent(string name) : IEndpointComponen
             // Use reflection to find the field in the given type
             var field = ReflectionHelper.FindField(endpointConfigurationType, parameterEntry.Key);
 
-            if (field != null) continue;
-            if (paramString.Length == 0)
-                paramString.Append('?').Append(parameterEntry.Key);
-            else
-                paramString.Append('&').Append(parameterEntry.Key);
+            if (field != null)
+            {
+                continue;
+            }
 
-            if (parameterEntry.Value != null) paramString.Append('=').Append(parameterEntry.Value);
+            if (paramString.Length == 0)
+            {
+                paramString.Append('?').Append(parameterEntry.Key);
+            }
+            else
+            {
+                paramString.Append('&').Append(parameterEntry.Key);
+            }
+
+            if (parameterEntry.Value != null)
+            {
+                paramString.Append('=').Append(parameterEntry.Value);
+            }
         }
 
         return paramString.ToString();

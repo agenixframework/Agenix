@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -49,16 +49,26 @@ public class RandomNumberFunction : IFunction
         var paddingOn = true;
 
         if (parameterList == null || parameterList.Count == 0)
+        {
             throw new InvalidFunctionUsageException("Function parameters must not be empty");
+        }
 
-        if (parameterList.Count > 2) throw new InvalidFunctionUsageException("Too many parameters for function");
+        if (parameterList.Count > 2)
+        {
+            throw new InvalidFunctionUsageException("Too many parameters for function");
+        }
 
         var numberLength = int.Parse(parameterList[0]);
         if (numberLength < 0)
+        {
             throw new InvalidFunctionUsageException(
                 "Invalid parameter definition. Number of letters must not be positive non-zero integer value");
+        }
 
-        if (parameterList.Count > 1) paddingOn = bool.Parse(parameterList[1]);
+        if (parameterList.Count > 1)
+        {
+            paddingOn = bool.Parse(parameterList[1]);
+        }
 
         return GetRandomNumber(numberLength, paddingOn);
     }
@@ -67,11 +77,16 @@ public class RandomNumberFunction : IFunction
     public string GetRandomNumber(int numberLength, bool paddingOn)
     {
         if (numberLength < 1)
+        {
             throw new InvalidFunctionUsageException(
                 "numberLength must be greater than 0 - supplied " + numberLength);
+        }
 
         var buffer = new StringBuilder();
-        for (var i = 0; i < numberLength; i++) buffer.Append(_generator.Next(10));
+        for (var i = 0; i < numberLength; i++)
+        {
+            buffer.Append(_generator.Next(10));
+        }
 
         return CheckLeadingZeros(buffer.ToString(), paddingOn);
     }
@@ -104,7 +119,9 @@ public class RandomNumberFunction : IFunction
 
         if (builder.Length == 0)
             // very unlikely to happen, ensures that empty string is not returned
+        {
             builder.Append('0');
+        }
 
         return builder.ToString();
     }
@@ -116,11 +133,17 @@ public class RandomNumberFunction : IFunction
     /// <returns></returns>
     private static string ReplaceLeadingZero(string generated)
     {
-        if (generated[0] != '0') return generated;
+        if (generated[0] != '0')
+        {
+            return generated;
+        }
 
         // find number > 0 as a replacement to avoid leading zero numbers
         var replacement = 0;
-        while (replacement == 0) replacement = _generator.Next(10);
+        while (replacement == 0)
+        {
+            replacement = _generator.Next(10);
+        }
 
         return replacement + generated[1..];
     }

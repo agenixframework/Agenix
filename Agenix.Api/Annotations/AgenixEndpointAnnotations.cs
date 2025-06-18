@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -62,7 +62,10 @@ public abstract class AgenixEndpointAnnotations
         ReflectionHelper.DoWithFields(target.GetType(), field =>
         {
             if (!field.IsDefined(typeof(AgenixEndpointAttribute)) ||
-                !typeof(IEndpoint).IsAssignableFrom(field.FieldType)) return;
+                !typeof(IEndpoint).IsAssignableFrom(field.FieldType))
+            {
+                return;
+            }
 
             Log.LogDebug("Injecting Agenix endpoint on test class field '{FieldName}'", field.Name);
             var endpointAnnotation = field.GetCustomAttribute<AgenixEndpointAttribute>();
@@ -124,7 +127,10 @@ public abstract class AgenixEndpointAnnotations
     {
         var attribute = field.GetCustomAttribute<AgenixEndpointAttribute>();
 
-        if (attribute != null && !string.IsNullOrWhiteSpace(attribute.Name)) return attribute.Name;
+        if (attribute != null && !string.IsNullOrWhiteSpace(attribute.Name))
+        {
+            return attribute.Name;
+        }
 
         return field.Name;
     }

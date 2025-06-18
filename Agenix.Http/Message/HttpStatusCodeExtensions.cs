@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -43,7 +43,11 @@ public static class HttpStatusCodeExtensions
     /// </returns>
     public static HttpStatusCode? ValueOf(int statusCode)
     {
-        if (Enum.IsDefined(typeof(HttpStatusCode), statusCode)) return (HttpStatusCode)statusCode;
+        if (Enum.IsDefined(typeof(HttpStatusCode), statusCode))
+        {
+            return (HttpStatusCode)statusCode;
+        }
+
         return null; // Or handle custom status codes differently
     }
 }

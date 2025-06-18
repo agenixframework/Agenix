@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -112,9 +112,15 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
                 : $"TEST STEP {testCase.GetActionIndex(testAction) + 1}/{testCase.GetActionCount()}: {testAction.Name ?? testAction.GetType().Name}");
 
             if (testAction is ITestActionContainer container)
+            {
                 Debug($"TEST ACTION CONTAINER with {container.GetActionCount()} embedded actions");
+            }
 
-            if (testAction is not IDescribed described || string.IsNullOrWhiteSpace(described.GetDescription())) return;
+            if (testAction is not IDescribed described || string.IsNullOrWhiteSpace(described.GetDescription()))
+            {
+                return;
+            }
+
             Debug("");
             Debug(described.GetDescription());
             Debug("");
@@ -254,7 +260,11 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
 
         Separator();
 
-        if (!_logger.IsEnabled(LogLevel.Debug)) return;
+        if (!_logger.IsEnabled(LogLevel.Debug))
+        {
+            return;
+        }
+
         Debug("BEFORE TEST SUITE");
         NewLine();
     }
@@ -344,11 +354,13 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
             Info(ToFormattedTestResult(testResult));
 
             if (testResult.IsFailed())
+            {
                 Info(
                     testResult.Cause != null
                     && !string.IsNullOrWhiteSpace(testResult.Cause.Message)
                         ? $"\tCaused by: {testResult.Cause.GetType().Name}: {testResult.Cause.Message}"
                         : $"\tCaused by: {testResult.ErrorMessage ?? "Unknown error"}");
+            }
         });
 
         NewLine();
@@ -412,7 +424,10 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
     /// <param name="line">The message to log at the debug level.</param>
     protected void Debug(string line)
     {
-        if (_logger.IsEnabled(LogLevel.Debug)) _logger.LogDebug(line);
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug(line);
+        }
     }
 
     /// <summary>

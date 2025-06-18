@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
@@ -101,8 +101,10 @@ public class DefaultTestCaseTest : AbstractNUnitSetUp
 
         var duration = VerifyDurationHasBeenMeasured(_fixture.GetTestResult());
         if (duration < TimeSpan.FromMilliseconds(500))
+        {
             Assert.Fail(
                 "TestResult / Duration should be more than 500 ms, because that's how long the async action takes!");
+        }
     }
 
     [Test]
@@ -136,7 +138,8 @@ public class DefaultTestCaseTest : AbstractNUnitSetUp
         var exception = Assert.Throws(typeof(TestCaseFailedException), () => { _fixture.Finish(Context); });
 
         Debug.Assert(exception != null, nameof(exception) + " != null");
-        Assert.That(exception.Message, Is.EqualTo("Failed to wait for the test container to finish properly - timeout exceeded"));
+        Assert.That(exception.Message,
+            Is.EqualTo("Failed to wait for the test container to finish properly - timeout exceeded"));
     }
 
     [Test]
@@ -147,9 +150,9 @@ public class DefaultTestCaseTest : AbstractNUnitSetUp
         {
             { "name", "Agenix" },
             { "framework", "${name}" },
-            { "hello", "core:Concat('Hello ', ${name}, '!')" },
+            { "hello", "agenix:Concat('Hello ', ${name}, '!')" },
             { "goodbye", "Goodbye ${name}!" },
-            { "welcome", "Welcome ${name}, today is core:CurrentDate()!" }
+            { "welcome", "Welcome ${name}, today is agenix:CurrentDate()!" }
         };
         _fixture.SetVariableDefinitions(variables);
 

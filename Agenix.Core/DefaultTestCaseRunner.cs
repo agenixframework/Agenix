@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -127,7 +127,10 @@ public class DefaultTestCaseRunner : ITestCaseRunner
     /// <param name="groups">Array of group names to set for the test case.</param>
     public void SetGroups(string[] groups)
     {
-        if (_testCase is ITestGroupAware aware) aware.SetGroups(groups);
+        if (_testCase is ITestGroupAware aware)
+        {
+            aware.SetGroups(groups);
+        }
     }
 
     /// Sets a variable with the specified name and value.
@@ -178,9 +181,14 @@ public class DefaultTestCaseRunner : ITestCaseRunner
     public T Run<T>(ITestActionBuilder<T> builder) where T : ITestAction
     {
         if (builder is IReferenceResolverAware referenceResolverAwareBuilder)
+        {
             referenceResolverAwareBuilder.SetReferenceResolver(Context.ReferenceResolver);
+        }
 
-        if (builder is ApplyTestBehaviorAction.Builder applyTestBehaviorBuilder) applyTestBehaviorBuilder.On(this);
+        if (builder is ApplyTestBehaviorAction.Builder applyTestBehaviorBuilder)
+        {
+            applyTestBehaviorBuilder.On(this);
+        }
 
         var action = builder.Build();
 
@@ -188,13 +196,20 @@ public class DefaultTestCaseRunner : ITestCaseRunner
         {
             case FinallySequence.Builder finallySequenceBuilder:
             {
-                foreach (var finalAction in finallySequenceBuilder.GetActions()) _testCase.AddFinalAction(finalAction);
+                foreach (var finalAction in finallySequenceBuilder.GetActions())
+                {
+                    _testCase.AddFinalAction(finalAction);
+                }
+
                 return action;
             }
             case FuncITestActionBuilder<FinallySequence.Builder> finallySequenceBuilder:
             {
                 foreach (var finalAction in finallySequenceBuilder.Build().GetActions())
+                {
                     _testCase.AddFinalAction(finalAction);
+                }
+
                 return action;
             }
         }

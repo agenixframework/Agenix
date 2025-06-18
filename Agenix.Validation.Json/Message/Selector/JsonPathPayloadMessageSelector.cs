@@ -1,4 +1,5 @@
 #region License
+
 // MIT License
 //
 // Copyright (c) 2025 Agenix
@@ -20,6 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using Agenix.Api.Context;
@@ -32,21 +34,20 @@ using Agenix.Validation.Json.Json;
 namespace Agenix.Validation.Json.Message.Selector;
 
 /// <summary>
-/// Message selector accepts JSON messages in case the JsonPath expression evaluation result matches
-/// the expected value. With this selector someone can select messages according to a message payload JSON
-/// element value, for instance.
-///
-/// Syntax is jsonPath:$.root.element
+///     Message selector accepts JSON messages in case the JsonPath expression evaluation result matches
+///     the expected value. With this selector someone can select messages according to a message payload JSON
+///     element value, for instance.
+///     Syntax is jsonPath:$.root.element
 /// </summary>
 public class JsonPathPayloadMessageSelector : AbstractMessageSelector
 {
     /// <summary>
-    /// Special selector key prefix identifying this message selector implementation
+    ///     Special selector key prefix identifying this message selector implementation
     /// </summary>
     public static readonly string SelectorPrefix = "jsonPath:";
 
     /// <summary>
-    /// Default constructor using fields.
+    ///     Default constructor using fields.
     /// </summary>
     public JsonPathPayloadMessageSelector(string expression, string control, TestContext context)
         : base(expression[SelectorPrefix.Length..], control, context)
@@ -54,13 +55,13 @@ public class JsonPathPayloadMessageSelector : AbstractMessageSelector
     }
 
     /// <summary>
-    /// Determines whether the provided IMessage satisfies the selection criteria
-    /// based on the payload content and JSON evaluation.
+    ///     Determines whether the provided IMessage satisfies the selection criteria
+    ///     based on the payload content and JSON evaluation.
     /// </summary>
     /// <param name="message">The message to evaluate for selection.</param>
     /// <returns>
-    /// A boolean value indicating whether the specified message meets the criteria.
-    /// Returns true if the message is accepted, otherwise false.
+    ///     A boolean value indicating whether the specified message meets the criteria.
+    ///     Returns true if the message is accepted, otherwise false.
     /// </returns>
     public override bool Accept(IMessage message)
     {
@@ -83,7 +84,7 @@ public class JsonPathPayloadMessageSelector : AbstractMessageSelector
     }
 
     /// <summary>
-    /// Message selector factory for this implementation.
+    ///     Message selector factory for this implementation.
     /// </summary>
     public class Factory : IMessageSelector.IMessageSelectorFactory
     {

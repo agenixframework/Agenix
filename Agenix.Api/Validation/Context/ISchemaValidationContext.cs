@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -51,7 +51,7 @@ public interface ISchemaValidationContext
     ///     Fluent builder interface.
     /// </summary>
     /// <typeparam name="TB">The type of the builder.</typeparam>
-    public interface IBuilder<TB>
+    public interface IBuilder<TB> : IBuilder
     {
         /// <summary>
         ///     Sets schema validation enabled or disabled for this message.

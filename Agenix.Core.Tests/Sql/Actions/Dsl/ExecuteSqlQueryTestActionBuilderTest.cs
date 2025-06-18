@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -34,10 +34,7 @@ public class ExecuteSqlQueryTestActionBuilderTest : AbstractNUnitSetUp
     [Test]
     public void TestExecuteSqlQueryWithResource()
     {
-        var results = new List<Dictionary<string, object>>
-        {
-            new() { { "NAME", "Leonard" } }
-        };
+        var results = new List<Dictionary<string, object>> { new() { { "NAME", "Leonard" } } };
 
         _adoTemplate.Setup(j => j.QueryWithRowMapper(CommandType.Text, It.IsAny<string>(),
                 It.IsAny<ExecuteSqlQueryAction.DictionaryRowMapper>()))
@@ -47,7 +44,7 @@ public class ExecuteSqlQueryTestActionBuilderTest : AbstractNUnitSetUp
                 .Returns(new List<Dictionary<string, object>> { new() { { "CNT_EPISODES", "100000" } } }));
 
         var builder = new DefaultTestCaseRunner(Context);
-        builder.SetVariable("episodeId", "core:RandomNumber(5)");
+        builder.SetVariable("episodeId", "agenix:RandomNumber(5)");
 
         var assemblyLocation = Assembly.GetExecutingAssembly().Location;
         var testDirectory = Path.GetDirectoryName(assemblyLocation);
@@ -92,8 +89,7 @@ public class ExecuteSqlQueryTestActionBuilderTest : AbstractNUnitSetUp
     {
         var results = new List<Dictionary<string, object>>
         {
-            new() { { "NAME", "Penny" } },
-            new() { { "NAME", "Sheldon" } }
+            new() { { "NAME", "Penny" } }, new() { { "NAME", "Sheldon" } }
         };
 
         _adoTemplate.Reset();
@@ -104,7 +100,9 @@ public class ExecuteSqlQueryTestActionBuilderTest : AbstractNUnitSetUp
         _adoTemplate
             .Setup(j => j.QueryWithRowMapper(It.IsAny<CommandType>(), "SELECT COUNT(*) as CNT_EPISODES FROM EPISODES",
                 It.IsAny<ExecuteSqlQueryAction.DictionaryRowMapper>())).Returns(new List<Dictionary<string, object>>
-                { new() { { "CNT_EPISODES", "9999" } } });
+            {
+                new() { { "CNT_EPISODES", "9999" } }
+            });
 
         var builder = new DefaultTestCaseRunner(Context);
         builder.Run(Query().AdoTemplate(_adoTemplate.Object)
@@ -147,8 +145,7 @@ public class ExecuteSqlQueryTestActionBuilderTest : AbstractNUnitSetUp
     {
         var results = new List<Dictionary<string, object>>
         {
-            new() { { "NAME", "Penny" } },
-            new() { { "NAME", "Sheldon" } }
+            new() { { "NAME", "Penny" } }, new() { { "NAME", "Sheldon" } }
         };
 
         Mock.Get(_adoTemplate.Object).Reset();
@@ -160,7 +157,9 @@ public class ExecuteSqlQueryTestActionBuilderTest : AbstractNUnitSetUp
         _adoTemplate
             .Setup(j => j.QueryWithRowMapper(It.IsAny<CommandType>(), "SELECT COUNT(*) as CNT_EPISODES FROM EPISODES",
                 It.IsAny<ExecuteSqlQueryAction.DictionaryRowMapper>())).Returns(new List<Dictionary<string, object>>
-                { new() { { "CNT_EPISODES", "9999" } } });
+            {
+                new() { { "CNT_EPISODES", "9999" } }
+            });
 
         var builder = new DefaultTestCaseRunner(Context);
 
@@ -218,8 +217,12 @@ public class ExecuteSqlQueryTestActionBuilderTest : AbstractNUnitSetUp
         IEnumerable<KeyValuePair<string, List<string>>> rows)
     {
         foreach (var row in rows)
+        {
             if (row.Key.Equals(columnName, StringComparison.OrdinalIgnoreCase))
+            {
                 return row;
+            }
+        }
 
         throw new InvalidOperationException($"Missing column in result set for name '{columnName}'");
     }

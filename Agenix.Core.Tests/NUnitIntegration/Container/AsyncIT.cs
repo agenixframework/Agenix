@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Annotations;
+using Agenix.Api.Annotations;
 using Agenix.Api.Log;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using Microsoft.Extensions.Logging;

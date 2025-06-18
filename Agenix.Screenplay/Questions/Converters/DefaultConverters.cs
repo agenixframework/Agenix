@@ -58,7 +58,10 @@ public class DefaultConverters
     public static IConverter<T> ConverterFor<T>(Type type)
     {
         if (!DefaultConverterMap.TryGetValue(type, out var value))
+        {
             throw new InvalidOperationException($"No converter found for {type}");
+        }
+
         return (IConverter<T>)value;
     }
 

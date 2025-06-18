@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Spi;
@@ -40,10 +40,7 @@ public class DefaultEndpointFactoryTest
     public void TestResolveCustomEndpoint()
     {
         // Arrange
-        var components = new Dictionary<string, IEndpointComponent>
-        {
-            { "custom", new DirectEndpointComponent() }
-        };
+        var components = new Dictionary<string, IEndpointComponent> { { "custom", new DirectEndpointComponent() } };
 
         _referenceResolver.Setup(r => r.ResolveAll<IEndpointComponent>()).Returns(components);
         var context = new TestContext();
@@ -63,10 +60,7 @@ public class DefaultEndpointFactoryTest
     public void TestOverwriteEndpointComponent()
     {
         // Arrange
-        var components = new Dictionary<string, IEndpointComponent>
-        {
-            { "jms", new DirectEndpointComponent() }
-        };
+        var components = new Dictionary<string, IEndpointComponent> { { "jms", new DirectEndpointComponent() } };
 
         _referenceResolver.Setup(r => r.ResolveAll<IEndpointComponent>()).Returns(components);
         var context = new TestContext();

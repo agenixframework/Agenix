@@ -1,4 +1,5 @@
-﻿#region License
+#region License
+
 // MIT License
 //
 // Copyright (c) 2025 Agenix
@@ -20,6 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using Agenix.Api;
@@ -91,7 +93,9 @@ public class JsonTextMessageValidator : AbstractMessageValidator<IMessageValidat
         Log.LogDebug("Start JSON message validation ...");
 
         if (validationContext.IsSchemaValidationEnabled)
+        {
             _jsonSchemaValidation.Validate(receivedMessage, context, validationContext);
+        }
 
         var receivedJsonText = receivedMessage.GetPayload<string>();
         var controlJsonText = context.ReplaceDynamicContentInString(controlMessage.GetPayload<string>());
@@ -104,7 +108,9 @@ public class JsonTextMessageValidator : AbstractMessageValidator<IMessageValidat
 
 
         if (string.IsNullOrWhiteSpace(receivedJsonText))
+        {
             throw new ValidationException("Validation failed - expected message contents, but received empty message!");
+        }
 
         _elementValidatorProvider.GetValidator(_strict, context, validationContext)
             .Validate(JsonElementValidatorItem<object>.ParseJson(receivedJsonText, controlJsonText));
@@ -120,7 +126,9 @@ public class JsonTextMessageValidator : AbstractMessageValidator<IMessageValidat
         if (validationContexts
                 .FirstOrDefault(x => x is JsonMessageValidationContext) is IMessageValidationContext
             jsonMessageValidationContext)
+        {
             return jsonMessageValidationContext;
+        }
 
         var defaultMessageValidationContext = validationContexts
                 .FirstOrDefault(x => x.GetType() == typeof(DefaultMessageValidationContext))

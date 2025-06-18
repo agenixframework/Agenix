@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -84,7 +84,10 @@ internal class SafeBindingInvoker : BindingInvoker
         {
             PreserveStackTrace(ex);
 
-            if (binding is IHookBinding == false) throw;
+            if (binding is IHookBinding == false)
+            {
+                throw;
+            }
 
             var hookBinding = binding as IHookBinding;
 
@@ -95,7 +98,9 @@ internal class SafeBindingInvoker : BindingInvoker
                 || hookBinding.HookType == HookType.AfterStep
                 || hookBinding.HookType == HookType.AfterScenario
                 || hookBinding.HookType == HookType.AfterScenarioBlock)
+            {
                 SetTestError(contextManager.ScenarioContext, ex);
+            }
         }
 
         return result;

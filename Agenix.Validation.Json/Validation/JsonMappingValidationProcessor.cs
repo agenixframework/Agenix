@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Context;
+using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
 using Agenix.Api.Message;
@@ -109,15 +109,21 @@ public abstract class JsonMappingValidationProcessor<T>(JsonSerializer jsonSeria
             if (_jsonSerializer == null)
             {
                 if (_referenceResolver != null)
+                {
                     _jsonSerializer = _referenceResolver.Resolve<JsonSerializer>();
+                }
                 else
+                {
                     throw new AgenixSystemException(
                         "Missing JsonSerializer - please set proper serializer or reference resolver");
+                }
             }
 
             // Ensure a validation processor is set
             if (_validationProcessor == null)
+            {
                 throw new AgenixSystemException("Missing validation processor - please add proper validation logic");
+            }
 
             return new ConcreteJsonMappingValidationProcessor<TB>(_jsonSerializer, _validationProcessor);
         }

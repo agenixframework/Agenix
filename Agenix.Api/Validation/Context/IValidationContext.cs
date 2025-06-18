@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -54,9 +54,9 @@ public interface IValidationContext
     /// </summary>
     /// <typeparam name="T">The type of the context.</typeparam>
     /// <typeparam name="TB">The type of the builder.</typeparam>
-    public interface IBuilder<out T, TB>
+    public interface IBuilder<out T, TB> : IBuilder
         where T : IValidationContext
-        where TB : class
+        where TB : IBuilder
     {
         /// <summary>
         ///     Builds a new validation context instance.

@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -76,7 +76,10 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
     protected void ExecuteStatements(List<string> newStatements, List<Dictionary<string, object>> allResultRows,
         Dictionary<string, List<string>> columnValuesMap, TestContext context)
     {
-        if (AdoTemplate == null) throw new AgenixSystemException("No AdoTemplate configured for query execution!");
+        if (AdoTemplate == null)
+        {
+            throw new AgenixSystemException("No AdoTemplate configured for query execution!");
+        }
 
         foreach (var statement in newStatements)
         {
@@ -120,12 +123,18 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
         {
             var columnName = variableEntry.Key;
             if (columnValuesMap.ContainsKey(columnName.ToLower()))
+            {
                 context.SetVariable(variableEntry.Value, ConstructVariableValue(columnValuesMap[columnName.ToLower()]));
+            }
             else if (columnValuesMap.ContainsKey(columnName.ToUpper()))
+            {
                 context.SetVariable(variableEntry.Value, ConstructVariableValue(columnValuesMap[columnName.ToUpper()]));
+            }
             else
+            {
                 throw new AgenixSystemException(
                     $"Failed to create variables from database values! Unable to find column '{columnName}' in database result set");
+            }
         }
     }
 
@@ -151,12 +160,19 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
             var columnName = column.Key;
             string columnValue;
 
-            if (!columnValuesMap.ContainsKey(columnName)) columnValuesMap[columnName] = [];
+            if (!columnValuesMap.ContainsKey(columnName))
+            {
+                columnValuesMap[columnName] = [];
+            }
 
             if (column.Value is byte[] byteArray)
+            {
                 columnValue = Convert.ToBase64String(byteArray);
+            }
             else
+            {
                 columnValue = (column.Value == null ? null : column.Value.ToString())!;
+            }
 
             columnValuesMap[columnName].Add(columnValue);
         }
@@ -176,15 +192,25 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
     /// </returns>
     private string ConstructVariableValue(List<string> rowValues)
     {
-        if (rowValues == null || rowValues.Count == 0) return string.Empty;
+        if (rowValues == null || rowValues.Count == 0)
+        {
+            return string.Empty;
+        }
 
-        if (rowValues.Count == 1) return rowValues[0] == null ? NullValue : rowValues[0];
+        if (rowValues.Count == 1)
+        {
+            return rowValues[0] == null ? NullValue : rowValues[0];
+        }
 
         var result = new StringBuilder();
 
         using (var it = rowValues.GetEnumerator())
         {
-            if (it.MoveNext()) result.Append(it.Current);
+            if (it.MoveNext())
+            {
+                result.Append(it.Current);
+            }
+
             while (it.MoveNext())
             {
                 var nextValue = it.Current;
@@ -215,7 +241,10 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
         TestContext context)
     {
         // Now apply control set validation if specified
-        if (!_controlResultSet.Any()) return;
+        if (!_controlResultSet.Any())
+        {
+            return;
+        }
 
         PerformControlResultSetValidation(columnValuesMap, context);
         Log.LogDebug("SQL query validation successful: All values OK");
@@ -244,19 +273,27 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
             var columnName = controlEntry.Key;
 
             if (columnValuesMap.ContainsKey(columnName.ToLower()))
+            {
                 columnName = columnName.ToLower();
+            }
             else if (columnValuesMap.ContainsKey(columnName.ToUpper()))
+            {
                 columnName = columnName.ToUpper();
+            }
             else if (!columnValuesMap.ContainsKey(columnName))
+            {
                 throw new AgenixSystemException($"Could not find column '{columnName}' in SQL result set");
+            }
 
             var resultColumnValues = columnValuesMap[columnName];
             var controlColumnValues = controlEntry.Value;
 
             // First, check the size of column values (representing the number of allResultRows in the result set)
             if (resultColumnValues.Count != controlColumnValues.Count)
+            {
                 throw new AgenixSystemException(
                     $"Validation failed for column: '{columnName}' expected rows count: {controlColumnValues.Count} but was {resultColumnValues.Count}");
+            }
 
             using var it = resultColumnValues.GetEnumerator();
             foreach (var controlValue in controlColumnValues)
@@ -280,7 +317,9 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
     {
         var trimmedStatement = statement.ToLower().Trim();
         if (!(trimmedStatement.StartsWith("select") || trimmedStatement.StartsWith("with")))
+        {
             throw new AgenixSystemException($"Missing SELECT or WITH keyword in statement: {trimmedStatement}");
+        }
     }
 
     /// <summary>
@@ -316,17 +355,24 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
         if (resultValue == null)
         {
             if (!IsAgenixNullValue(controlValue))
+            {
                 throw new ValidationException(
                     $"Validation failed for column: '{columnName}' found value: NULL expected value: {controlValue}");
+            }
+
             Log.LogDebug($"Validating database value for column: '{columnName}' value as expected: NULL - value OK");
             return;
         }
 
         if (resultValue.Equals(controlValue))
+        {
             Log.LogDebug($"Validation successful for column: '{columnName}' expected value: {controlValue} - value OK");
+        }
         else
+        {
             throw new ValidationException(
                 $"Validation failed for column: '{columnName}' found value: '{resultValue}' expected value: {(string.IsNullOrEmpty(controlValue) ? "NULL" : controlValue)}");
+        }
     }
 
     /// <summary>
@@ -412,7 +458,10 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
         {
             var result = new Dictionary<string, object>();
 
-            for (var i = 0; i < dataReader.FieldCount; i++) result[dataReader.GetName(i)] = dataReader.GetValue(i);
+            for (var i = 0; i < dataReader.FieldCount; i++)
+            {
+                result[dataReader.GetName(i)] = dataReader.GetValue(i);
+            }
 
             return result;
         }

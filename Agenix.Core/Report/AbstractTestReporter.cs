@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -63,9 +63,13 @@ public abstract class AbstractTestReporter : ITestReporter
         catch (Exception e)
         {
             if (IgnoreErrors)
+            {
                 Log.LogError(e, "Failed to create test report");
+            }
             else
+            {
                 throw;
+            }
         }
     }
 

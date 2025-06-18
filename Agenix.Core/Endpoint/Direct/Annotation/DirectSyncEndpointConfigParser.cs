@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -53,14 +53,21 @@ public class
         var queueName = annotation.QueueName;
 
         if (!string.IsNullOrWhiteSpace(queue))
+        {
             builder.Queue(referenceResolver.Resolve<IMessageQueue>(annotation.Queue));
+        }
 
-        if (!string.IsNullOrWhiteSpace(queueName)) builder.Queue(annotation.QueueName);
+        if (!string.IsNullOrWhiteSpace(queueName))
+        {
+            builder.Queue(annotation.QueueName);
+        }
 
         builder.Timeout(annotation.Timeout);
 
         if (!string.IsNullOrWhiteSpace(annotation.Correlator))
+        {
             builder.Correlator(referenceResolver.Resolve<IMessageCorrelator>(annotation.Correlator));
+        }
 
         builder.PollingInterval(annotation.PollingInterval);
 

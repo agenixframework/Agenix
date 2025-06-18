@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Agenix.Api.Log;
 using Microsoft.Extensions.Logging;
 using NUnit.Framework;
@@ -51,7 +51,9 @@ public class NUnitLog4NetSupportAttribute : Attribute, ITestAction
     public void BeforeTest(ITest test)
     {
         if (test.IsSuite)
+        {
             ConfigureLogging(_configPath, _minimumLevel);
+        }
     }
 
     /// <summary>

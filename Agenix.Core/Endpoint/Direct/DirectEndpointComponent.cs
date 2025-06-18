@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -65,7 +65,9 @@ public class DirectEndpointComponent(string name = "direct") : AbstractEndpointC
         endpoint.EndpointConfiguration.SetQueueName(queueName);
 
         if (!context.ReferenceResolver.IsResolvable(queueName))
+        {
             context.ReferenceResolver.Bind(queueName, new DefaultMessageQueue(queueName));
+        }
 
         EnrichEndpointConfiguration(endpoint.EndpointConfiguration, parameters, context);
 

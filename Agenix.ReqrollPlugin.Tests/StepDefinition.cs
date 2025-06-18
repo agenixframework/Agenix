@@ -1,4 +1,5 @@
-﻿#region License
+#region License
+
 // MIT License
 //
 // Copyright (c) 2025 Agenix
@@ -20,6 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using Agenix.Api;
@@ -29,38 +31,33 @@ using Agenix.Core.Actions;
 using Microsoft.Extensions.Logging;
 using Reqnroll;
 
-namespace Agenix.Reqroll.Plugin.Tests
+namespace Agenix.Reqroll.Plugin.Tests;
+
+[Binding]
+public sealed class StepDefinition
 {
-    [Binding]
-    public sealed class StepDefinition
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(Hooks));
+    [AgenixResource] private ITestCaseRunner _testCaseRunner;
+
+    [Given("I have entered (.*) into the calculator")]
+    public void GivenIHaveEnteredSomethingIntoTheCalculator(int number)
     {
-        [AgenixResource] private ITestCaseRunner _testCaseRunner;
+        _testCaseRunner.Given(EchoAction.Builder.Echo(number.ToString()));
+    }
 
-        private static readonly ILogger Log = LogManager.GetLogger(typeof(Hooks));
+    [When("I press add")]
+    public void WhenIPressAdd()
+    {
+    }
 
-        [Given("I have entered (.*) into the calculator")]
-        public void GivenIHaveEnteredSomethingIntoTheCalculator(int number)
-        {
-            _testCaseRunner.Given(EchoAction.Builder.Echo(number.ToString()));
-        }
+    [Then("the result should be (.*) on the screen")]
+    public void ThenTheResultShouldBe(int result)
+    {
+    }
 
-        [When("I press add")]
-        public void WhenIPressAdd()
-        {
-
-        }
-
-        [Then("the result should be (.*) on the screen")]
-        public void ThenTheResultShouldBe(int result)
-        {
-
-        }
-
-        [Then(@"I execute failed step")]
-        public void ThenIExecuteFailedTest()
-        {
-            throw new Exception("This step raises an exception.");
-        }
-
+    [Then(@"I execute failed step")]
+    public void ThenIExecuteFailedTest()
+    {
+        throw new Exception("This step raises an exception.");
     }
 }

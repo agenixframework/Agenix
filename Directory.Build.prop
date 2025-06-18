@@ -1,6 +1,10 @@
 <Project>
   <!-- Shared properties for all projects in the solution -->
   <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RuntimeFrameworkVersion>8.0.11</RuntimeFrameworkVersion> <!-- Latest secure version -->
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+
     <!-- License Information -->
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>icon.png</PackageIcon>
@@ -65,12 +69,20 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       </PackageReference>
+
+      <!-- Security fixes for vulnerable packages -->
+          <PackageVersion Include="System.Formats.Asn1" Version="8.0.1" />
+          <PackageVersion Include="System.Text.Json" Version="8.0.5" />
+          <PackageVersion Include="System.Net.Http" Version="4.3.4" />
+          <PackageVersion Include="System.Security.Cryptography.X509Certificates" Version="4.3.2" />
+          <PackageVersion Include="System.Data.SqlClient" Version="4.8.6" />
+
     </ItemGroup>
 
   <!-- Include LICENSE file in packages -->
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)LICENSE" Pack="true" PackagePath="" Visible="false" />
-    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="" Visible="false" Condition="Exists('$(MSBuildThisFileDirectory)README.md')" />
+    <None Include="$(MSBuildThisFileDirectory)LICENSE" Pack="true" PackagePath="LICENSE" Visible="false" />
+    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="README.md" Visible="false" Condition="Exists('$(MSBuildThisFileDirectory)README.md')" />
   </ItemGroup>
 
   <!-- Source Link Package Reference -->
@@ -81,7 +93,7 @@
     <!-- Include Icons in All Packages -->
       <ItemGroup>
         <!-- Main package icon (required by NuGet) -->
-        <None Include="$(MSBuildThisFileDirectory).assets/icons/icon.png" Pack="true" PackagePath="" Link="icon.png" />
+        <None Include="$(MSBuildThisFileDirectory).assets/icons/icon.png" Pack="true" PackagePath="icon.png" Link="icon.png" />
 
         <!-- Additional icon sizes -->
         <None Include="$(MSBuildThisFileDirectory).assets/icons/icon-16.png" Pack="true" PackagePath="icons/" Link="icons/icon-16.png" />

@@ -1,4 +1,5 @@
 #region License
+
 // MIT License
 //
 // Copyright (c) 2025 Agenix
@@ -20,6 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 using System.Text;
@@ -69,7 +71,10 @@ public class JsonSchemaValidation(JsonSchemaFilter jsonSchemaFilter) : ISchemaVa
         if (!report.IsSuccess)
         {
             if (Log.IsEnabled(LogLevel.Error))
+            {
                 Log.LogError("Failed to validate Json schema for message:\n{GetPayload}", message.GetPayload<string>());
+            }
+
             throw new ValidationException(ConstructErrorMessage(report));
         }
 
@@ -124,7 +129,10 @@ public class JsonSchemaValidation(JsonSchemaFilter jsonSchemaFilter) : ISchemaVa
         var stringBuilder = new StringBuilder();
         stringBuilder.Append("Json validation failed: ");
         foreach (var processingMessage in report.ValidationErrors)
+        {
             stringBuilder.Append("\n\t").Append(processingMessage.Message);
+        }
+
         return stringBuilder.ToString();
     }
 
@@ -134,7 +142,10 @@ public class JsonSchemaValidation(JsonSchemaFilter jsonSchemaFilter) : ISchemaVa
     /// /
     private static List<JsonSchemaRepository> FindSchemaRepositories(TestContext context)
     {
-        if (context.ReferenceResolver == null) return [];
+        if (context.ReferenceResolver == null)
+        {
+            return [];
+        }
 
         var repositories = context.ReferenceResolver.ResolveAll<JsonSchemaRepository>();
         return repositories != null ? repositories.Values.ToList() : [];
@@ -163,10 +174,17 @@ public class JsonSchemaValidation(JsonSchemaFilter jsonSchemaFilter) : ISchemaVa
     /// /
     private GraciousProcessingReport Validate(IMessage message, List<SimpleJsonSchema> jsonSchemas)
     {
-        if (jsonSchemas.Count == 0) return new GraciousProcessingReport(true);
+        if (jsonSchemas.Count == 0)
+        {
+            return new GraciousProcessingReport(true);
+        }
 
         var processingReport = new GraciousProcessingReport();
-        foreach (var simpleJsonSchema in jsonSchemas) processingReport.MergeWith(Validate(message, simpleJsonSchema));
+        foreach (var simpleJsonSchema in jsonSchemas)
+        {
+            processingReport.MergeWith(Validate(message, simpleJsonSchema));
+        }
+
         return processingReport;
     }
 
@@ -179,7 +197,10 @@ public class JsonSchemaValidation(JsonSchemaFilter jsonSchemaFilter) : ISchemaVa
         try
         {
             var receivedJson = JToken.Parse(message.GetPayload<string>());
-            if (!receivedJson.HasValues) return [];
+            if (!receivedJson.HasValues)
+            {
+                return [];
+            }
 
             receivedJson.IsValid(simpleJsonSchema.Schema!, out IList<ValidationError> errors);
 

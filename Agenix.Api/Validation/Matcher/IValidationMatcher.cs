@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -81,18 +81,31 @@ public interface IValidationMatcher
     /// <param name="value">the value to be validated.</param>
     /// <param name="controlParameters">the control parameters.</param>
     /// <param name="context"></param>
-    void Validate(string fieldName, string value, List<string> controlParameters, TestContext context);
+    void Validate(string fieldName, string value, List<string>? controlParameters, TestContext context);
 
     static IDictionary<string, IValidationMatcher> Lookup()
     {
-        if (Validators.Count != 0) return Validators;
-        var resolvedValidators = TypeResolver.ResolveAll<dynamic>();
-        foreach (var kvp in resolvedValidators) Validators[kvp.Key] = kvp.Value;
+        if (Validators.Count != 0)
+        {
+            return Validators;
+        }
 
-        if (!Log.IsEnabled(LogLevel.Debug)) return Validators;
+        var resolvedValidators = TypeResolver.ResolveAll<dynamic>();
+        foreach (var kvp in resolvedValidators)
+        {
+            Validators[kvp.Key] = kvp.Value;
+        }
+
+        if (!Log.IsEnabled(LogLevel.Debug))
+        {
+            return Validators;
+        }
+
         {
             foreach (var kvp in Validators)
+            {
                 Log.LogDebug("Found validation matcher '{KvpKey}' as {Type}", kvp.Key, kvp.Value.GetType());
+            }
         }
         return Validators;
     }

@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Annotations;
+using Agenix.Api.Annotations;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Endpoint.Resolver;
 using Agenix.Api.Message;

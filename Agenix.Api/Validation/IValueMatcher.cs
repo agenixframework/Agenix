@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -94,16 +94,28 @@ public interface IValueMatcher
     /// <returns>A dictionary containing the registered header validators.</returns>
     static IDictionary<string, IValueMatcher> Lookup()
     {
-        if (Validators.Count != 0) return Validators;
+        if (Validators.Count != 0)
+        {
+            return Validators;
+        }
 
         var resolvedValidators = TypeResolver.ResolveAll<IValueMatcher>();
 
-        foreach (var kvp in resolvedValidators) Validators[kvp.Key] = kvp.Value;
+        foreach (var kvp in resolvedValidators)
+        {
+            Validators[kvp.Key] = kvp.Value;
+        }
 
-        if (!Log.IsEnabled(LogLevel.Debug)) return Validators;
+        if (!Log.IsEnabled(LogLevel.Debug))
+        {
+            return Validators;
+        }
+
         {
             foreach (var kvp in Validators)
+            {
                 Log.LogDebug("Found validator '{KvpKey}' as {Type}", kvp.Key, kvp.Value.GetType());
+            }
         }
         return Validators;
     }

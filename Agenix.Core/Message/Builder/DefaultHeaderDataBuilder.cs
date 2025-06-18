@@ -36,15 +36,18 @@ namespace Agenix.Core.Message.Builder;
 /// </summary>
 public class DefaultHeaderDataBuilder : IMessageHeaderDataBuilder
 {
-    private readonly object _headerData;
-
     /// Default constructor for initializing the header data.
     /// @param headerData The data representing the header fragment.
     /// /
     public DefaultHeaderDataBuilder(object headerData)
     {
-        _headerData = headerData;
+        HeaderData = headerData;
     }
+
+    /// Retrieves the header data.
+    /// @return The header data object.
+    /// /
+    public object HeaderData { get; }
 
     /// Builds header data by replacing dynamic content in the header data string.
     /// @param context The context used to replace dynamic content in the header data string.
@@ -52,23 +55,15 @@ public class DefaultHeaderDataBuilder : IMessageHeaderDataBuilder
     /// /
     public virtual string BuildHeaderData(TestContext context)
     {
-        return _headerData == null
+        return HeaderData == null
             ? ""
-            : context.ReplaceDynamicContentInString(_headerData is string
-                ? _headerData.ToString()
-                : TypeConversionUtils.ConvertIfNecessary<string>(_headerData, typeof(string)));
+            : context.ReplaceDynamicContentInString(HeaderData is string
+                ? HeaderData.ToString()
+                : TypeConversionUtils.ConvertIfNecessary<string>(HeaderData, typeof(string)));
     }
 
     public Dictionary<string, object> BuilderHeaders(TestContext context)
     {
         return new Dictionary<string, object>();
-    }
-
-    /// Retrieves the header data.
-    /// @return The header data object.
-    /// /
-    public object GetHeaderData()
-    {
-        return _headerData;
     }
 }

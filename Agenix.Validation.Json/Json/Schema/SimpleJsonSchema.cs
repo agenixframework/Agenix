@@ -1,4 +1,5 @@
-﻿#region License
+#region License
+
 // MIT License
 //
 // Copyright (c) 2025 Agenix
@@ -20,6 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 #endregion
 
 #region Imports
@@ -40,32 +42,33 @@ namespace Agenix.Validation.Json.Json.Schema;
 public class SimpleJsonSchema : InitializingPhase
 {
     /// <summary>
-    /// Represents an adapter for handling a JSON schema and its associated resource references,
-    /// enabling usage in validation workflows.
+    ///     Represents an adapter for handling a JSON schema and its associated resource references,
+    ///     enabling usage in validation workflows.
     /// </summary>
     /// <remarks>
-    /// This class integrates with custom resource references and loaded JSON schemas,
-    /// providing a framework to use them within validation functionalities.
-    /// It is designed to be initialized with valid resources and schemas for proper operation.
+    ///     This class integrates with custom resource references and loaded JSON schemas,
+    ///     providing a framework to use them within validation functionalities.
+    ///     It is designed to be initialized with valid resources and schemas for proper operation.
     /// </remarks>
     /// <exception cref="ArgumentNullException">
-    /// Thrown when required resource or schema objects are null during initialization.
+    ///     Thrown when required resource or schema objects are null during initialization.
     /// </exception>
     /// <exception cref="InvalidOperationException">
-    /// Thrown when the schema initialization process encounters errors.
+    ///     Thrown when the schema initialization process encounters errors.
     /// </exception>
     public SimpleJsonSchema(IResource json)
     {
         Json = json;
     }
 
-    public SimpleJsonSchema() {
+    public SimpleJsonSchema()
+    {
     }
 
     /// <summary>
     ///     The Resource of the JSON schema passed from the file
     /// </summary>
-    private IResource Json { get; set; } = null!;
+    private IResource Json { get; } = null!;
 
     /// <summary>
     ///     The parsed JSON schema ready for validation
@@ -73,19 +76,19 @@ public class SimpleJsonSchema : InitializingPhase
     public JSchema? Schema { get; set; }
 
     /// <summary>
-    /// Initializes the SimpleJsonSchema instance by loading and parsing
-    /// the JSON schema definition into the Schema property.
+    ///     Initializes the SimpleJsonSchema instance by loading and parsing
+    ///     the JSON schema definition into the Schema property.
     /// </summary>
     /// <remarks>
-    /// This method retrieves the JSON schema from an IResource instance using
-    /// its GetReader() method and processes it using the JSchema.Load method
-    /// provided by the Newtonsoft.Json.Schema library.
+    ///     This method retrieves the JSON schema from an IResource instance using
+    ///     its GetReader() method and processes it using the JSchema.Load method
+    ///     provided by the Newtonsoft.Json.Schema library.
     /// </remarks>
     /// <exception cref="IOException">
-    /// Thrown when there is an error in retrieving the JSON schema resource or during schema parsing.
+    ///     Thrown when there is an error in retrieving the JSON schema resource or during schema parsing.
     /// </exception>
     /// <exception cref="AgenixSystemException">
-    /// Thrown when there is an unexpected issue during the loading of the JSON schema.
+    ///     Thrown when there is an unexpected issue during the loading of the JSON schema.
     /// </exception>
     public void Initialize()
     {
