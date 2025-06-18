@@ -67,7 +67,8 @@ public sealed class FunctionParameterHelper
                     {
                         processed += ", " + parameterList[next];
                     }
-                    else if (parameterString.Contains(processed + ", " + parameterList[next]))
+                    else if (parameterString.Contains(processed + "," +
+                                                      parameterList[next])) // Fixed: removed duplicate
                     {
                         processed += "," + parameterList[next];
                     }
@@ -77,7 +78,7 @@ public sealed class FunctionParameterHelper
                     }
                     else
                     {
-                        processed += parameterList[next];
+                        processed += "," + parameterList[next]; // Fixed: added comma in fallback
                     }
 
                     i++;
@@ -95,6 +96,7 @@ public sealed class FunctionParameterHelper
 
         return postProcessedList;
     }
+
 
     private static string CutOffSingleQuotes(string param)
     {

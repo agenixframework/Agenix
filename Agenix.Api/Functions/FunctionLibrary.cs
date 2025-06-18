@@ -37,12 +37,13 @@ public class FunctionLibrary
     /// <summary>
     ///     The Default function prefix
     /// </summary>
-    private const string DefaultPrefix = "core:";
+    private const string DefaultPrefix = "agenix:";
 
     /// <summary>
     ///     The dictionary (map) of functions in this library
     /// </summary>
-    private IDictionary<string, IFunction> _members = new Dictionary<string, IFunction>();
+    private IDictionary<string, IFunction> _members =
+        new Dictionary<string, IFunction>(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
     ///     Name of a function library

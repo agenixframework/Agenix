@@ -428,8 +428,11 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Assert
         var test = runner.GetTestCase();
-        Assert.That(test.GetActionCount(), Is.EqualTo(1));
-        Assert.That(test.GetActions()[0], Is.InstanceOf<SendMessageAction>());
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(test.GetActionCount(), Is.EqualTo(1));
+            Assert.That(test.GetActions()[0], Is.InstanceOf<SendMessageAction>());
+        }
 
         var action = (SendMessageAction)test.GetActions()[0];
         using (Assert.EnterMultipleScope())

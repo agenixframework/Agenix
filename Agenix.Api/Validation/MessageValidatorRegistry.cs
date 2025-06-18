@@ -197,7 +197,7 @@ public class MessageValidatorRegistry
     /// </summary>
     /// <param name="name">The name of the message validator to retrieve.</param>
     /// <returns>An Optional containing the found message validator if present, otherwise an empty Optional.</returns>
-    public Optional<IMessageValidator<IValidationContext>> FindMessageValidator(string name)
+    public virtual Optional<IMessageValidator<IValidationContext>> FindMessageValidator(string name)
     {
         return _messageValidators.TryGetValue(name, out var validator)
             ? Optional<IMessageValidator<IValidationContext>>.Of(validator)

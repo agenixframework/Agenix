@@ -25,6 +25,7 @@
 #endregion
 
 using System.Collections.Generic;
+using Agenix.Api;
 using Agenix.Api.Builder;
 using Agenix.Api.Message;
 using Agenix.Api.Validation.Context;
@@ -55,8 +56,8 @@ public class JsonPathMessageValidationContext(JsonPathMessageValidationContext.B
     }
 
     // Fluent builder
-    public class Builder : IValidationContext.IBuilder<JsonPathMessageValidationContext, Builder>,
-        IWithExpressions<Builder>, IVariableExtractorAdapter, IMessageProcessorAdapter
+    public class Builder : IValidationContext.IBuilder<JsonPathMessageValidationContext, IBuilder>,
+        IWithExpressions<Builder>, IVariableExtractorAdapter, IMessageProcessorAdapter, IBuilder
     {
         internal readonly Dictionary<string, object> _expressions = new();
 

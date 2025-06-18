@@ -83,14 +83,14 @@ public class ValidationMatcherLibrary
     /// <returns>the validationMatcher instance.</returns>
     public IValidationMatcher GetValidationMatcher(string validationMatcherName)
     {
-        if (!_members.ContainsKey(validationMatcherName))
+        if (!_members.TryGetValue(validationMatcherName, out var matcher))
         {
             throw new NoSuchValidationMatcherException(
                 "Can not find validation matcher " + validationMatcherName + " in library " + _name + " (" +
                 _prefix + ")");
         }
 
-        return _members[validationMatcherName];
+        return matcher;
     }
 
     /// <summary>
@@ -100,10 +100,10 @@ public class ValidationMatcherLibrary
     /// <returns>boolean flag to mark existence.</returns>
     public bool KnowsValidationMatcher(string validationMatcherName)
     {
-        if (validationMatcherName.Contains(":"))
+        if (validationMatcherName.Contains(':'))
         {
             var validationMatcherPrefix =
-                validationMatcherName.Substring(0, validationMatcherName.IndexOf(':') + 1);
+                validationMatcherName[..(validationMatcherName.IndexOf(':') + 1)];
 
             var startIndex = validationMatcherName.IndexOf(':');
             var length = validationMatcherName.IndexOf('(') - startIndex - 1;
@@ -112,6 +112,6 @@ public class ValidationMatcherLibrary
                 validationMatcherName.Substring(startIndex + 1, length));
         }
 
-        return _members.ContainsKey(validationMatcherName.Substring(0, validationMatcherName.IndexOf('(')));
+        return _members.ContainsKey(validationMatcherName[..validationMatcherName.IndexOf('(')]);
     }
 }

@@ -50,7 +50,7 @@ public interface IMessage
     /// <summary>
     ///     Gets/Sets the message payload.
     /// </summary>
-    object Payload { get; set; }
+    object? Payload { get; set; }
 
     /// <summary>
     ///     Gets the message header value by its header name.

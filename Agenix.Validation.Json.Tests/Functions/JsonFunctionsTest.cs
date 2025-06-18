@@ -18,7 +18,7 @@ public class JsonFunctionsTest : AbstractNUnitSetUp
     {
         Context.FunctionRegistry = new DefaultFunctionRegistry();
         Assert.That(
-            FunctionUtils.ResolveFunction("core:jsonPath('{\"message\": \"Hello Agenix!\"}', '$.message')", Context),
+            FunctionUtils.ResolveFunction("agenix:jsonPath('{\"message\": \"Hello Agenix!\"}', '$.message')", Context),
             Is.EqualTo("Hello Agenix!"));
     }
 }

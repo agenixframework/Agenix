@@ -81,7 +81,7 @@ public interface IValidationMatcher
     /// <param name="value">the value to be validated.</param>
     /// <param name="controlParameters">the control parameters.</param>
     /// <param name="context"></param>
-    void Validate(string fieldName, string value, List<string> controlParameters, TestContext context);
+    void Validate(string fieldName, string value, List<string>? controlParameters, TestContext context);
 
     static IDictionary<string, IValidationMatcher> Lookup()
     {

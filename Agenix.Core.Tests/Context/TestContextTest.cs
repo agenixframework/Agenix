@@ -280,11 +280,12 @@ public class TestContextTest : AbstractNUnitSetUp
         Assert.That(Context.ReplaceDynamicContentInString("Hello TestFramework!"), Is.EqualTo("Hello TestFramework!"));
 
         // Test function calls (without quoting)
-        Assert.That(Context.ReplaceDynamicContentInString("core:Concat('Hello', ' TestFramework!')"),
+        Assert.That(Context.ReplaceDynamicContentInString("agenix:Concat('Hello', ' TestFramework!')"),
             Is.EqualTo("Hello TestFramework!"));
-        Assert.That(Context.ReplaceDynamicContentInString("core:Concat('agenix', ':agenix')"),
+        Assert.That(Context.ReplaceDynamicContentInString("agenix:Concat('agenix', ':agenix')"),
             Is.EqualTo("agenix:agenix"));
-        Assert.That(Context.ReplaceDynamicContentInString("core:Concat('agenix:agenix')"), Is.EqualTo("agenix:agenix"));
+        Assert.That(Context.ReplaceDynamicContentInString("agenix:Concat('agenix:agenix')"),
+            Is.EqualTo("agenix:agenix"));
 
         // Test variable replacement with quoting enabled
         Assert.That(Context.ReplaceDynamicContentInString("Variable test is: ${test}", true),
@@ -298,18 +299,18 @@ public class TestContextTest : AbstractNUnitSetUp
             Is.EqualTo("Hello TestFramework!"));
 
         // Test function calls with quoting enabled
-        Assert.That(Context.ReplaceDynamicContentInString("core:Concat('Hello', ' TestFramework!')", true),
+        Assert.That(Context.ReplaceDynamicContentInString("agenix:Concat('Hello', ' TestFramework!')", true),
             Is.EqualTo("'Hello TestFramework!'"));
 
         // Repeated tests for basic cases (without quoting)
         Assert.That(Context.ReplaceDynamicContentInString("Hello TestFramework!"), Is.EqualTo("Hello TestFramework!"));
-        Assert.That(Context.ReplaceDynamicContentInString("core:Concat('Hello', ' TestFramework!')"),
+        Assert.That(Context.ReplaceDynamicContentInString("agenix:Concat('Hello', ' TestFramework!')"),
             Is.EqualTo("Hello TestFramework!"));
 
         // Repeated tests for basic cases (with quoting)
         Assert.That(Context.ReplaceDynamicContentInString("Hello TestFramework!", true),
             Is.EqualTo("Hello TestFramework!"));
-        Assert.That(Context.ReplaceDynamicContentInString("core:Concat('Hello', ' TestFramework!')", true),
+        Assert.That(Context.ReplaceDynamicContentInString("agenix:Concat('Hello', ' TestFramework!')", true),
             Is.EqualTo("'Hello TestFramework!'"));
 
         // Tests with spacing
@@ -324,7 +325,7 @@ public class TestContextTest : AbstractNUnitSetUp
         Assert.That(Context.ReplaceDynamicContentInString("${//escaped//}"), Is.EqualTo("${escaped}"));
 
         // Test function with escaped variable
-        Assert.That(Context.ReplaceDynamicContentInString("core:Concat('${////escaped////}', ' That is ok!')"),
+        Assert.That(Context.ReplaceDynamicContentInString("agenix:Concat('${////escaped////}', ' That is ok!')"),
             Is.EqualTo("${escaped} That is ok!"));
 
         // Set up variables to test path-like variables and escaping
@@ -488,7 +489,7 @@ public class TestContextTest : AbstractNUnitSetUp
 
         //WHEN/THEN
         Assert.That(Context.ResolveDynamicValue("${test}"), Is.EqualTo("testtesttest"));
-        Assert.That(Context.ResolveDynamicValue("core:Concat('Hello', ' TestFramework!')"),
+        Assert.That(Context.ResolveDynamicValue("agenix:Concat('Hello', ' TestFramework!')"),
             Is.EqualTo("Hello TestFramework!"));
         Assert.That(Context.ResolveDynamicValue("nonDynamicValue"), Is.EqualTo("nonDynamicValue"));
     }

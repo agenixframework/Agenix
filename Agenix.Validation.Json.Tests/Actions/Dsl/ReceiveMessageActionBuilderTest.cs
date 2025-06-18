@@ -222,21 +222,30 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Assert
         var test = runner.GetTestCase();
-        Assert.That(test.GetActionCount(), Is.EqualTo(1));
-        Assert.That(test.GetActions()[0], Is.InstanceOf<ReceiveMessageAction>());
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(test.GetActionCount(), Is.EqualTo(1));
+            Assert.That(test.GetActions()[0], Is.InstanceOf<ReceiveMessageAction>());
+        }
 
         var action = (ReceiveMessageAction)test.GetActions()[0];
-        Assert.That(action.Name, Is.EqualTo("receive"));
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(action.Name, Is.EqualTo("receive"));
 
-        Assert.That(action.MessageType, Is.EqualTo(nameof(MessageType.JSON)));
-        Assert.That(action.Endpoint, Is.SameAs(_messageEndpoint.Object));
-        Assert.That(action.ValidationContexts.Count, Is.EqualTo(2));
+            Assert.That(action.MessageType, Is.EqualTo(nameof(MessageType.JSON)));
+            Assert.That(action.Endpoint, Is.SameAs(_messageEndpoint.Object));
+            Assert.That(action.ValidationContexts, Has.Count.EqualTo(2));
+        }
 
         // Checking validation contexts
         Assert.That(action.ValidationContexts, Has.Some.InstanceOf<HeaderValidationContext>());
-        Assert.That(action.ValidationContexts, Has.Some.InstanceOf<DefaultMessageValidationContext>());
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(action.ValidationContexts, Has.Some.InstanceOf<DefaultMessageValidationContext>());
 
-        Assert.That(action.MessageBuilder, Is.InstanceOf<DefaultMessageBuilder>());
+            Assert.That(action.MessageBuilder, Is.InstanceOf<DefaultMessageBuilder>());
+        }
 
         var messageBuilder = (DefaultMessageBuilder)action.MessageBuilder;
         Assert.That(messageBuilder.BuildMessagePayload(Context, action.MessageType),
@@ -413,18 +422,28 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Assert
         var test = runner.GetTestCase();
-        Assert.That(test.GetActionCount(), Is.EqualTo(1));
-        Assert.That(test.GetActions()[0], Is.InstanceOf<ReceiveMessageAction>());
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(test.GetActionCount(), Is.EqualTo(1));
+            Assert.That(test.GetActions()[0], Is.InstanceOf<ReceiveMessageAction>());
+        }
 
         var action = (ReceiveMessageAction)test.GetActions()[0];
-        Assert.That(action.Name, Is.EqualTo("receive"));
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(action.Name, Is.EqualTo("receive"));
 
-        Assert.That(action.MessageType, Is.EqualTo(nameof(MessageType.JSON)));
-        Assert.That(action.Endpoint, Is.SameAs(_messageEndpoint.Object));
-        Assert.That(action.ValidationContexts.Count, Is.EqualTo(1));
-        Assert.That(action.ValidationContexts, Has.Some.InstanceOf<HeaderValidationContext>());
+            Assert.That(action.MessageType, Is.EqualTo(nameof(MessageType.JSON)));
+            Assert.That(action.Endpoint, Is.SameAs(_messageEndpoint.Object));
+            Assert.That(action.ValidationContexts.Count, Is.EqualTo(1));
+        }
 
-        Assert.That(action.MessageBuilder, Is.InstanceOf<DefaultMessageBuilder>());
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(action.ValidationContexts, Has.Some.InstanceOf<HeaderValidationContext>());
+
+            Assert.That(action.MessageBuilder, Is.InstanceOf<DefaultMessageBuilder>());
+        }
 
         var messageBuilder = (DefaultMessageBuilder)action.MessageBuilder;
         Assert.That(messageBuilder.BuildMessageHeaderData(Context).Count, Is.EqualTo(1));
@@ -478,21 +497,32 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Assert
         var test = runner.GetTestCase();
-        Assert.That(test.GetActionCount(), Is.EqualTo(2));
-        Assert.That(test.GetActions()[0], Is.InstanceOf<ReceiveMessageAction>());
-        Assert.That(test.GetActions()[1], Is.InstanceOf<ReceiveMessageAction>());
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(test.GetActionCount(), Is.EqualTo(2));
+            Assert.That(test.GetActions()[0], Is.InstanceOf<ReceiveMessageAction>());
+            Assert.That(test.GetActions()[1], Is.InstanceOf<ReceiveMessageAction>());
+        }
 
         // Assert first action
         var action = (ReceiveMessageAction)test.GetActions()[0];
-        Assert.That(action.Name, Is.EqualTo("receive"));
-        Assert.That(action.Endpoint, Is.SameAs(_messageEndpoint.Object));
-        Assert.That(action.MessageType, Is.EqualTo(nameof(MessageType.XML)));
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(action.Name, Is.EqualTo("receive"));
+            Assert.That(action.Endpoint, Is.SameAs(_messageEndpoint.Object));
+            Assert.That(action.MessageType, Is.EqualTo(nameof(MessageType.XML)));
 
-        Assert.That(action.MessageBuilder, Is.InstanceOf<DefaultMessageBuilder>());
+            Assert.That(action.MessageBuilder, Is.InstanceOf<DefaultMessageBuilder>());
+        }
+
         var messageBuilder = (DefaultMessageBuilder)action.MessageBuilder;
-        Assert.That(messageBuilder.BuildMessagePayload(Context, action.MessageType),
-            Is.EqualTo("<TestRequest><Message>Hello World!</Message></TestRequest>"));
-        Assert.That(messageBuilder.BuildMessageHeaderData(Context).Count, Is.EqualTo(1));
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(messageBuilder.BuildMessagePayload(Context, action.MessageType),
+                Is.EqualTo("<TestRequest><Message>Hello World!</Message></TestRequest>"));
+            Assert.That(messageBuilder.BuildMessageHeaderData(Context).Count, Is.EqualTo(1));
+        }
+
         Assert.That(messageBuilder.BuildMessageHeaderData(Context)[0],
             Is.EqualTo("<Header><Name>operation</Name><Value>foo</Value></Header>"));
 
@@ -593,7 +623,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
                 Is.EqualTo("<TestRequest><Message>Hello World!</Message></TestRequest>"));
 
             // Verify multiple header data elements
-            Assert.That(messageBuilder.BuildMessageHeaderData(Context).Count, Is.EqualTo(3));
+            Assert.That(messageBuilder.BuildMessageHeaderData(Context), Has.Count.EqualTo(3));
         }
 
         using (Assert.EnterMultipleScope())
@@ -624,7 +654,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
                 Is.EqualTo("<TestRequest><Message>Hello World!</Message></TestRequest>"));
 
             // Verify multiple header data elements for the static message builder
-            Assert.That(staticMessageBuilder.BuildMessageHeaderData(Context).Count, Is.EqualTo(3));
+            Assert.That(staticMessageBuilder.BuildMessageHeaderData(Context), Has.Count.EqualTo(3));
         }
 
         using (Assert.EnterMultipleScope())
@@ -756,8 +786,11 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Assert
         var test = runner.GetTestCase();
-        Assert.That(test.GetActionCount(), Is.EqualTo(1));
-        Assert.That(test.GetActions()[0], Is.TypeOf<ReceiveMessageAction>());
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(test.GetActionCount(), Is.EqualTo(1));
+            Assert.That(test.GetActions()[0], Is.TypeOf<ReceiveMessageAction>());
+        }
 
         var action = (ReceiveMessageAction)test.GetActions()[0];
         using (Assert.EnterMultipleScope())
@@ -940,7 +973,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
                 .Validate(JsonSupport.Json()
                     .Expression("$.person.name", "John")
                     .Expression("$.text", "Hello World!")
-                    .Build())));
+                )));
     }
 
     [Test]
@@ -970,22 +1003,31 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
             .Validate(JsonSupport.Json()
                 .Ignore("$..text")
                 .Ignore("$.person.surname")
-                .Ignore("$.index").Build()));
+                .Ignore("$.index")));
 
         // Assert
         var test = runner.GetTestCase();
-        Assert.That(test.GetActionCount(), Is.EqualTo(1));
-        Assert.That(test.GetActions()[0], Is.InstanceOf<ReceiveMessageAction>());
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(test.GetActionCount(), Is.EqualTo(1));
+            Assert.That(test.GetActions()[0], Is.InstanceOf<ReceiveMessageAction>());
+        }
 
         var action = (ReceiveMessageAction)test.GetActions()[0];
-        Assert.That(action.Name, Is.EqualTo("receive"));
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(action.Name, Is.EqualTo("receive"));
 
-        Assert.That(action.MessageType, Is.EqualTo("JSON"));
-        Assert.That(action.Endpoint, Is.EqualTo(_messageEndpoint.Object));
-        Assert.That(action.ValidationContexts.Count, Is.EqualTo(2));
+            Assert.That(action.MessageType, Is.EqualTo("JSON"));
+            Assert.That(action.Endpoint, Is.EqualTo(_messageEndpoint.Object));
+            Assert.That(action.ValidationContexts, Has.Count.EqualTo(2));
+        }
 
-        Assert.That(action.ValidationContexts.Any(c => c is HeaderValidationContext), Is.True);
-        Assert.That(action.ValidationContexts.Any(c => c is JsonMessageValidationContext), Is.True);
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(action.ValidationContexts.Any(c => c is HeaderValidationContext), Is.True);
+            Assert.That(action.ValidationContexts.Any(c => c is JsonMessageValidationContext), Is.True);
+        }
 
         var validationContext = action.ValidationContexts
             .OfType<JsonMessageValidationContext>()
@@ -1051,7 +1093,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
             .Body("{}")
             .Validate(JsonSupport.Json()
                 .SchemaRepository("customJsonSchemaRepository")
-                .Build()));
+            ));
 
         // Assert
         var test = runner.GetTestCase();
@@ -1128,7 +1170,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
             .Body("{}")
             .Validate(JsonSupport.Json()
                 .Schema("jsonTestSchema")
-                .Build()));
+            ));
 
         // Assert
         var test = runner.GetTestCase();
@@ -1197,8 +1239,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
             .Message()
             .Body("{}")
             .Validate(JsonSupport.Json()
-                .SchemaValidation(true)
-                .Build()));
+                .SchemaValidation(true)));
 
         // Assert
         var test = runner.GetTestCase();
@@ -1253,8 +1294,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
             .Message()
             .Body("{}")
             .Validate(JsonSupport.Json()
-                .SchemaValidation(false)
-                .Build()));
+                .SchemaValidation(false)));
 
         // Assert
         var test = runner.GetTestCase();

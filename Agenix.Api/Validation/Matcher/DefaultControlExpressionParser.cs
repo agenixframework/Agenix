@@ -64,6 +64,7 @@ public class DefaultControlExpressionParser : IControlExpressionParser
         return extractedParameters;
     }
 
+
     /// <summary>
     ///     Extracts parameters from a control expression string using the specified delimiter
     ///     and adds them to the provided collection.
@@ -82,21 +83,12 @@ public class DefaultControlExpressionParser : IControlExpressionParser
         while (true)
         {
             var startParameter = controlExp.IndexOf(delimiter, searchFrom);
-
             if (startParameter == -1)
             {
                 return; // No starting delimiter found, exit
             }
 
-            var endParameter = controlExp.IndexOf(delimiter, startParameter + 1);
-
-            // Ensure the end parameter check is within bounds and find the right delimiter
-            while (endParameter != -1 && endParameter < controlExp.Length - 1 && controlExp[endParameter + 1] != ',' &&
-                   controlExp[endParameter + 1] != ')')
-            {
-                endParameter = controlExp.IndexOf(delimiter, endParameter + 1);
-            }
-
+            var endParameter = FindMatchingDelimiter(controlExp, delimiter, startParameter);
             if (endParameter == -1)
             {
                 throw new AgenixSystemException(
@@ -106,17 +98,59 @@ public class DefaultControlExpressionParser : IControlExpressionParser
             var extractedParameter = controlExp.Substring(startParameter + 1, endParameter - startParameter - 1);
             extractedParameters.Add(extractedParameter);
 
-            // Debugging outputs
-            Console.WriteLine($"Extracted Parameter: {extractedParameter}");
-
-            // Move searchFrom to endParameter + 1 to continue searching the remainder of the string
+            // Move searchFrom to after the closing delimiter
             searchFrom = endParameter + 1;
 
-            // Check if there are more delimiters and commas to continue
-            if (controlExp.IndexOf(delimiter, searchFrom) == -1 || controlExp.IndexOf(',', searchFrom) == -1)
+            // Skip any whitespace or commas to find the next parameter
+            while (searchFrom < controlExp.Length &&
+                   (controlExp[searchFrom] == ',' || char.IsWhiteSpace(controlExp[searchFrom])))
+            {
+                searchFrom++;
+            }
+
+            // If we've reached the end or there's no delimiter ahead, we're done
+            if (searchFrom >= controlExp.Length || controlExp.IndexOf(delimiter, searchFrom) == -1)
             {
                 break;
             }
         }
+    }
+
+    /// <summary>
+    ///     Finds the matching closing delimiter by looking for the next delimiter that appears
+    ///     right before a comma or at the end of the string, indicating it's a closing delimiter
+    ///     rather than a delimiter within the content.
+    /// </summary>
+    /// <param name="controlExp">The control expression string.</param>
+    /// <param name="delimiter">The delimiter character to match.</param>
+    /// <param name="startDelimiterPos">The position of the opening delimiter.</param>
+    /// <returns>The index of the matching delimiter, or -1 if not found.</returns>
+    private int FindMatchingDelimiter(string controlExp, char delimiter, int startDelimiterPos)
+    {
+        var searchFrom = startDelimiterPos + 1;
+
+        while (searchFrom < controlExp.Length)
+        {
+            var nextDelimiter = controlExp.IndexOf(delimiter, searchFrom);
+            if (nextDelimiter == -1)
+            {
+                return -1; // No more delimiters found
+            }
+
+            // Check if this delimiter is followed by a comma, whitespace, or is at the end
+            // This indicates it's a closing delimiter
+            var nextPos = nextDelimiter + 1;
+            if (nextPos >= controlExp.Length ||
+                controlExp[nextPos] == ',' ||
+                char.IsWhiteSpace(controlExp[nextPos]))
+            {
+                return nextDelimiter; // Found the closing delimiter
+            }
+
+            // This delimiter is within the content, continue searching
+            searchFrom = nextDelimiter + 1;
+        }
+
+        return -1; // No matching delimiter found
     }
 }

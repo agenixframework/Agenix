@@ -59,7 +59,7 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
     {
         if (Log.IsEnabled(LogLevel.Debug))
         {
-            Log.LogDebug($"Assert container asserting exceptions of type {_exception.Name}");
+            Log.LogDebug("Assert container asserting exceptions of type {ExceptionName}", _exception.Name);
         }
 
         try
@@ -68,7 +68,7 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
         }
         catch (Exception e)
         {
-            Log.LogDebug("Validating caught exception: {0}", e);
+            Log.LogDebug(e, "Validating caught exception: ");
 
             if (!_exception.IsAssignableFrom(e.GetType()))
             {
@@ -89,7 +89,7 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
                 }
             }
 
-            Log.LogDebug($"Asserted exception is as expected ({e.GetType().Name}): {e.Message}");
+            Log.LogDebug("Asserted exception is as expected ({S}): {EMessage}", e.GetType().Name, e.Message);
 
             Log.LogDebug("Assert exception validation successful: All values OK");
 
@@ -199,6 +199,14 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
         public Builder Action(ITestAction action)
         {
             return Action(new FuncITestActionBuilder<ITestAction>(() => action));
+        }
+
+        /// Configures the action to be used within the AssertContainer.
+        /// <param name="action">The delegate that defines the test action to configure.</param>
+        /// <returns>The builder instance for chaining further configurations.</returns>
+        public Builder Action(TestAction action)
+        {
+            return Action(new DelegatingTestAction(action));
         }
 
         /// Fluent API action building entry method used in C# DSL.

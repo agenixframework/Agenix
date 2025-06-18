@@ -29,6 +29,7 @@ using System.Reflection;
 using System.Xml.Linq;
 using Agenix.Api.Log;
 using Agenix.Api.Message;
+using Agenix.Api.Util;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
@@ -103,6 +104,7 @@ public sealed class AgenixSettings
     public const string OutboundJsonSchemaValidationEnabledProp = "agenix.validation.outbound.json.schema.enabled";
     public const string OutboundXmlSchemaValidationEnabledProp = "agenix.validation.outbound.xml.schema.enabled";
     private const string ApplicationPropertyFileProperty = "agenix-application";
+    public const string NoSchemaFoundStrategyPropertyName = "agenix.xml.no.schema.found.strategy";
 
     //
     // Flag to enable/disable fallback to default text equals validation
@@ -176,6 +178,11 @@ public sealed class AgenixSettings
     public static string AgenixFileEncoding()
     {
         return GetProperty(AgenixFileEncodingProp, "UTF-8");
+    }
+
+    public static Optional<string> GetNoSchemaFoundStrategy()
+    {
+        return Optional<string>.OfNullable(GetProperty(NoSchemaFoundStrategyPropertyName));
     }
 
     /// <summary>

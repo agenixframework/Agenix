@@ -89,7 +89,7 @@ public interface ISchemaValidator<in T> where T : ISchemaValidationContext
         {
             foreach (var kvp in resolvedSchemas)
             {
-                Log.LogDebug($"Found schema validator '{kvp.Key}' as {kvp.Value.GetType()}");
+                Log.LogDebug("Found schema validator '{KvpKey}' as {Type}", kvp.Key, kvp.Value.GetType());
             }
         }
         return resolvedSchemas;

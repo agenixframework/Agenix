@@ -37,6 +37,7 @@ using Agenix.Api.Util;
 using Agenix.Api.Validation;
 using Agenix.Api.Validation.Matcher;
 using Agenix.Api.Variable;
+using Agenix.Api.Xml.Namespace;
 using Agenix.Core;
 using Microsoft.Extensions.Logging;
 
@@ -137,6 +138,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// </summary>
     private ValidationMatcherRegistry _validationMatcherRegistry = new();
 
+
     /// <summary>
     ///     A collection of active timers used within the test context.
     /// </summary>
@@ -192,6 +194,11 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     }
 
     /// <summary>
+    ///     Represents a builder for configuring and managing namespace contexts in XML structures.
+    /// </summary>
+    public NamespaceContextBuilder NamespaceContextBuilder { get; set; } = new();
+
+    /// <summary>
     ///     Factory for creating and managing endpoints.
     /// </summary>
     public IEndpointFactory EndpointFactory
@@ -203,7 +210,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <summary>
     ///     Provides a registry for message validators.
     /// </summary>
-    public MessageValidatorRegistry MessageValidatorRegistry
+    public virtual MessageValidatorRegistry MessageValidatorRegistry
     {
         get => _messageValidatorRegistry;
         set => _messageValidatorRegistry = value;
@@ -276,7 +283,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     ///     Retrieves the current reference resolver instance.
     /// </summary>
     /// <returns>The current instance of IReferenceResolver.</returns>
-    public IReferenceResolver ReferenceResolver => _referenceResolver;
+    public virtual IReferenceResolver? ReferenceResolver => _referenceResolver;
 
     /// <summary>
     ///     Sets the reference resolver to be used by the TestContext.

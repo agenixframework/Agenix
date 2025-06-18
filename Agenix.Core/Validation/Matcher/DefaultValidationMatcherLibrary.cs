@@ -56,6 +56,7 @@ public class DefaultValidationMatcherLibrary : ValidationMatcherLibrary
         Members.Add("Matches", new MatchesValidationMatcher());
         Members.Add("StartsWith", new StartsWithValidationMatcher());
         Members.Add("StringLength", new StringLengthValidationMatcher());
+        Members.Add("Variable", new CreateVariableValidationMatcher());
         Members.Add("Trim", new TrimValidationMatcher());
         Members.Add("TrimAllWhiteSpaces", new TrimAllWhitespacesValidationMatcher());
 

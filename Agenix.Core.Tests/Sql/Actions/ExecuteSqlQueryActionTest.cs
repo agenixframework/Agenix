@@ -536,7 +536,7 @@ public class ExecuteSqlQueryActionTest : AbstractNUnitSetUp
         _executeSqlQueryAction.Statements([sql]);
 
         _executeSqlQueryAction.Validate("ORDERTYPE", "${testVariable}");
-        _executeSqlQueryAction.Validate("STATUS", "core:Concat('in_', ${progressVar})");
+        _executeSqlQueryAction.Validate("STATUS", "agenix:Concat('in_', ${progressVar})");
 
         // Set up context variables
         Context.SetVariable("testVariable", "testVariableValue");

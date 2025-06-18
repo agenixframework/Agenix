@@ -1,0 +1,2 @@
+name=defaultXhtmlMessageValidator
+type=Agenix.Validation.Xml.Validation.Xhtml.XhtmlMessageValidator

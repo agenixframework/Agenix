@@ -42,7 +42,7 @@ public interface ISegmentVariableExtractor
     bool CanExtract(TestContext testContext, object obj, VariableExpressionSegmentMatcher matcher);
 
     /// <summary>
-    ///     Extract variables from a given object. Implementations should throw a CitrusRuntimeException
+    ///     Extract variables from a given object. Implementations should throw a AgenixSystemException
     /// </summary>
     /// <param name="testContext">the test context</param>
     /// <param name="obj">the object of which to extract the value</param>

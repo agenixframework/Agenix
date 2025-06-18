@@ -199,7 +199,7 @@ public class HttpMessageConverterTest
         // GIVEN
         _endpointConfiguration.ContentType = "application/xml";
         _message.Payload =
-            "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<configuration>\n    <appSettings>\n        <add key=\"myVariable\" value=\"test\"/>\n        <add key=\"user\" value=\"Agenix\"/>\n        <add key=\"welcomeText\" value=\"Hello ${user}!\"/>\n        <add key=\"todayDate\" value=\"Today is core:CurrentDate('yyyy-MM-dd')!\"/>\n    </appSettings>\n</configuration>";
+            "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<configuration>\n    <appSettings>\n        <add key=\"myVariable\" value=\"test\"/>\n        <add key=\"user\" value=\"Agenix\"/>\n        <add key=\"welcomeText\" value=\"Hello ${user}!\"/>\n        <add key=\"todayDate\" value=\"Today is agenix:CurrentDate('yyyy-MM-dd')!\"/>\n    </appSettings>\n</configuration>";
 
         // WHEN
         var httpRequestMessage = _messageConverter.ConvertOutbound(_message, _endpointConfiguration, _testContext);

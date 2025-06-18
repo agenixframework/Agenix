@@ -147,7 +147,7 @@ public sealed class FunctionUtils
     /// </summary>
     /// <param name="functionString">
     ///     The function string to be resolved, including its prefix, name, and parameters (e.g.,
-    ///     "core:Concat('Hello', 'World')").
+    ///     "agenix:Concat('Hello', 'World')").
     /// </param>
     /// <param name="context">The context containing necessary function libraries and variable data for resolution.</param>
     /// <returns>The evaluated result of the function as a string.</returns>
@@ -158,7 +158,7 @@ public sealed class FunctionUtils
     {
         var functionExpression = VariableUtils.CutOffVariablesPrefix(functionString);
 
-        if (!functionExpression.Contains('(') || !functionExpression.EndsWith(")") ||
+        if (!functionExpression.Contains('(') || !functionExpression.EndsWith(')') ||
             !functionExpression.Contains(':'))
         {
             throw new InvalidFunctionUsageException("Unable to resolve function: " + functionExpression);
@@ -177,7 +177,7 @@ public sealed class FunctionUtils
         parameterString = VariableUtils.ReplaceVariablesInString(parameterString, context, false);
         parameterString = ReplaceFunctionsInString(parameterString, context);
 
-        var value = library.GetFunction(function)
+        var value = library.GetFunction(function.ToLowerInvariant())
             .Execute(FunctionParameterHelper.GetParameterList(parameterString), context);
 
         return value ?? "";

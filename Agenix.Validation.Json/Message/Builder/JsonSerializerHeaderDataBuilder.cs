@@ -82,14 +82,14 @@ public class JsonSerializerHeaderDataBuilder : DefaultHeaderDataBuilder
     /// </exception>
     public override string BuildHeaderData(TestContext context)
     {
-        if (GetHeaderData() == null || GetHeaderData() is string)
+        if (HeaderData == null || HeaderData is string)
         {
             return base.BuildHeaderData(context);
         }
 
         if (_jsonSerializer != null)
         {
-            return BuildHeaderData(_jsonSerializer, GetHeaderData(), context);
+            return BuildHeaderData(_jsonSerializer, HeaderData, context);
         }
 
         if (_serializerName != null)
@@ -100,14 +100,14 @@ public class JsonSerializerHeaderDataBuilder : DefaultHeaderDataBuilder
             }
 
             var jsonSerializer = context.ReferenceResolver.Resolve<JsonSerializer>(_serializerName);
-            return BuildHeaderData(jsonSerializer, GetHeaderData(), context);
+            return BuildHeaderData(jsonSerializer, HeaderData, context);
         }
 
         var jsonSerializers = context.ReferenceResolver.ResolveAll<JsonSerializer>();
         if (jsonSerializers.Count == 1)
         {
             var jsonSerializer = new List<JsonSerializer>(jsonSerializers.Values)[0];
-            return BuildHeaderData(jsonSerializer, GetHeaderData(), context);
+            return BuildHeaderData(jsonSerializer, HeaderData, context);
         }
 
         throw new AgenixSystemException(

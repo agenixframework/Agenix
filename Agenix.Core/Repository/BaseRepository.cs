@@ -59,7 +59,7 @@ public abstract class BaseRepository(string name) : INamed, InitializingPhase
     ///     The locations in this list represent file paths or resource identifiers to be processed
     ///     by the repository.
     /// </remarks>
-    public List<string> Locations { get; set; }
+    public List<string> Locations { get; set; } = [];
 
     /// <summary>
     ///     Sets the name of the repository. This method updates the internal name field
@@ -84,7 +84,7 @@ public abstract class BaseRepository(string name) : INamed, InitializingPhase
     ///     Thrown when an I/O error occurs during the initialization process, encapsulating
     ///     the original IOException as the inner exception.
     /// </exception>
-    public void Initialize()
+    public virtual void Initialize()
     {
         try
         {
