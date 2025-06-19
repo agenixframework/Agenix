@@ -1,0 +1,11 @@
+version: 2
+updates:
+  - package-ecosystem: "nuget" # Or "pip", "maven", "composer", etc.
+    directory: "/"           # Root directory of the package
+    schedule:
+      interval: "weekly"     # Options: "daily", "weekly", "monthly"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    rebase-strategy: "auto"

@@ -467,7 +467,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <param name="direction">The direction of the message.</param>
     private void LogMessage(string operation, IMessage message, MessageDirection direction)
     {
-        if (_messageListeners != null && _messageListeners.IsEmpty())
+        if (_messageListeners != null && !_messageListeners.IsEmpty())
         {
             switch (direction)
             {
@@ -485,7 +485,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
         }
         else if (Log.IsEnabled(LogLevel.Debug))
         {
-            Log.LogDebug($"{operation} message:\n{message?.ToString() ?? ""}");
+            Log.LogDebug("{Operation} message:\n{Empty}", operation, message?.ToString() ?? "");
         }
     }
 
@@ -513,7 +513,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
         }
         catch (Exception e)
         {
-            Log.LogWarning("Executing error handler listener failed!", e);
+            Log.LogWarning(e, "Executing error handler listener failed!");
         }
 
         return exception;
@@ -545,7 +545,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <summary>
     ///     Gets the value for the given variable expression. Expression usually is the simple variable name, with optional
     ///     expression prefix/suffix.
-    ///     In case the the variable is not known to the context, throw a runtime exception.
+    ///     In case the variable is not known to the context, throw a runtime exception.
     /// </summary>
     /// <param name="variableExpression">expression to search for.</param>
     /// <returns>value of the variable</returns>
@@ -591,7 +591,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
         if (Log.IsEnabled(LogLevel.Debug))
         {
             Log.LogDebug(
-                $"Setting variable: {VariableUtils.CutOffVariablesPrefix(variableName)} with value: '{value}'");
+                "Setting variable: {CutOffVariablesPrefix} with value: '{Value}'", VariableUtils.CutOffVariablesPrefix(variableName), value);
         }
 
         _variables[VariableUtils.CutOffVariablesPrefix(variableName)] = value;

@@ -27,7 +27,7 @@ public abstract class AbstractEndpoint(IEndpointConfiguration endpointConfigurat
     /// <summary>
     ///     Gets/ Sets the endpoints producer name.
     /// </summary>
-    public string Name { get; set; } = nameof(AbstractEndpoint);
+    public virtual string Name { get; set; } = nameof(AbstractEndpoint);
 
     public void SetName(string name)
     {
