@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading;
+using Agenix.Api;
 using Agenix.Api.Annotations;
 using Agenix.Api.Condition;
 using Agenix.Api.Message;
+using Agenix.Core.Actions;
 using Agenix.Core.Tests.Util;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
@@ -117,15 +120,44 @@ public class WaitIT
         ));
     }
 
+
     [Test]
     public void WaitAction()
     {
+        var actionStarted = new ManualResetEventSlim(false);
+        var actionCompleted = new ManualResetEventSlim(false);
+        var sleepStarted = new ManualResetEventSlim(false);
+        var sleepCompleted = new ManualResetEventSlim(false);
+
+        // Create a controlled sleep action
+        var controlledSleepAction = DefaultTestActionBuilder.Action( context =>
+        {
+            actionStarted.Set();
+            sleepStarted.Set();
+            Thread.Sleep(250);
+            sleepCompleted.Set();
+            actionCompleted.Set();
+        });
+
         _gherkin.When(WaitFor<ICondition>()
             .Execution()
             .Interval(300)
             .Milliseconds(500)
-            .Action(Sleep().Milliseconds(250))
+            .Action(controlledSleepAction)
         );
+
+        // Verify the timing expectations
+        Assert.That(actionStarted.Wait(TimeSpan.FromSeconds(2)), Is.True,
+            "Action should have started");
+
+        Assert.That(sleepStarted.Wait(TimeSpan.FromSeconds(1)), Is.True,
+            "Sleep should have started");
+
+        Assert.That(sleepCompleted.Wait(TimeSpan.FromSeconds(1)), Is.True,
+            "Sleep should have completed");
+
+        Assert.That(actionCompleted.Wait(TimeSpan.FromSeconds(1)), Is.True,
+            "Action should have completed");
     }
 
     [Test]

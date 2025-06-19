@@ -138,21 +138,39 @@ public class AsyncTest : AbstractNUnitSetUp
     [Test]
     public void TestWaitForFinishTimeout()
     {
-        // Setup the action to simulate a delay
+        var actionStarted = new ManualResetEventSlim(false);
+        var actionCanComplete = new ManualResetEventSlim(false);
+
+        // Setup the action with controlled timing
         _action.Setup(a => a.Execute(Context))
-            .Callback(() => Thread.Sleep(500));
+            .Callback(() =>
+            {
+                actionStarted.Set(); // Signal that action has started
+                actionCanComplete.Wait(); // Wait for permission to complete
+            });
 
         var container = new Async.Builder()
             .Actions(_action.Object)
             .Build();
 
-        container.Execute(Context);
+        // Start the container execution
+        var executionTask = Task.Run(() => container.Execute(Context));
 
-        // Assert that the waitForDone logic throws a TimeoutException
+        // Wait for action to start
+        Assert.That(actionStarted.Wait(TimeSpan.FromSeconds(1)), Is.True,
+            "Action should have started");
+
+        // Now test the timeout - the action is guaranteed to be running
         Assert.ThrowsAsync<AgenixSystemException>(async () =>
         {
             await WaitUtils.WaitForCompletion(container, Context, 200);
         });
+
+        // Clean up - allow action to complete
+        actionCanComplete.Set();
+
+        // Wait for execution to finish to avoid resource leaks
+        Assert.That(executionTask.Wait(TimeSpan.FromSeconds(1)), Is.True);
     }
 
     [Test]

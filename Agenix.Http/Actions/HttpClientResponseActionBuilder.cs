@@ -76,25 +76,6 @@ public class HttpClientResponseActionBuilder : ReceiveMessageAction.ReceiveMessa
             : base.GetMessagePayload();
     }
 
-    /*public ReceiveMessageAction(
-        ReceiveMessageActionBuilder<ReceiveMessageAction, ReceiveMessageActionBuilderSupport, Builder> builder)
-        : base(builder.GetName() ?? "receive", builder.GetDescription() ?? "")
-    {
-        Endpoint = builder.GetEndpoint();
-        EndpointUri = builder.GetEndpointUri();
-        ReceiveTimeout = builder._receiveTimeout;
-        Selector = builder._messageSelector;
-        MessageSelectors = builder._messageSelectors;
-        Validators = builder._validators;
-        Processor = builder._validationProcessor;
-        ValidationContexts = builder.GetValidationContexts();
-        VariableExtractors = builder.GetVariableExtractors();
-        Processors = builder.GetMessageProcessors();
-        MessageBuilder = builder.GetMessageBuilderSupport().GetMessageBuilder();
-        ControlMessageProcessors = builder.GetMessageBuilderSupport().ControlMessageProcessors;
-        MessageType = builder.GetMessageBuilderSupport().GetMessageType();
-    }*/
-
     protected override ReceiveMessageAction DoBuild()
     {
         var builder = new ReceiveMessageAction.Builder();

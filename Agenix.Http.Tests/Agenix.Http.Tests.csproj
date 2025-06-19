@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="coverlet.collector" Version="6.0.0"/>
+        <PackageReference Include="log4net" Version="3.1.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="8.0.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+        <PackageReference Include="Moq" Version="4.20.72" />
+        <PackageReference Include="Moq.AutoMock" Version="3.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="NUnit.Framework"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj" />
+      <ProjectReference Include="..\Agenix.Http\Agenix.Http.csproj" />
+      <ProjectReference Include="..\Agenix.NUnit.Runtime\Agenix.NUnit.Runtime.csproj" />
+      <ProjectReference Include="..\Agenix.Validation.Binary\Agenix.Validation.Binary.csproj" />
+      <ProjectReference Include="..\Agenix.Validation.Json\Agenix.Validation.Json.csproj" />
+      <ProjectReference Include="..\Agenix.Validation.NHamcrest\Agenix.Validation.NHamcrest.csproj" />
+      <ProjectReference Include="..\Agenix.Validation.Text\Agenix.Validation.Text.csproj" />
+      <ProjectReference Include="..\Agenix.Validation.Xml\Agenix.Validation.Xml.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="log4net.config">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+</Project>

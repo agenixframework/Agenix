@@ -70,11 +70,15 @@ public class DefaultTestCaseTest : AbstractNUnitSetUp
 
         VerifyDurationHasBeenMeasured(_fixture.GetTestResult());
     }
-
+    
     [Test]
     public void TestWaitForFinish()
     {
         _fixture.SetName("MyTestCase");
+
+        var actionStarted = new ManualResetEventSlim(false);
+        var actionCompleted = new ManualResetEventSlim(false);
+        var startTime = DateTime.UtcNow;
 
         _fixture.AddTestAction(new ConcreteAsyncTestAction
         {
@@ -82,7 +86,9 @@ public class DefaultTestCaseTest : AbstractNUnitSetUp
             {
                 try
                 {
+                    actionStarted.Set(); // Signal that the action has started
                     Thread.Sleep(500);
+                    actionCompleted.Set(); // Signal that the action has completed
                 }
                 catch (Exception e)
                 {
@@ -92,19 +98,29 @@ public class DefaultTestCaseTest : AbstractNUnitSetUp
                 return Task.CompletedTask;
             }
         });
-        var echoAction = new EchoAction.Builder().Build();
 
+        var echoAction = new EchoAction.Builder().Build();
         _fixture.AddTestAction(echoAction);
 
         _fixture.Execute(Context);
+
+        // Wait for the async action to start before calling Finish
+        Assert.That(actionStarted.Wait(TimeSpan.FromSeconds(2)), Is.True,
+            "Async action should have started");
+
         _fixture.Finish(Context);
 
+        // Verify that the action actually completed
+        Assert.That(actionCompleted.Wait(TimeSpan.FromSeconds(1)), Is.True,
+            "Async action should have completed");
+
         var duration = VerifyDurationHasBeenMeasured(_fixture.GetTestResult());
-        if (duration < TimeSpan.FromMilliseconds(500))
-        {
-            Assert.Fail(
-                "TestResult / Duration should be more than 500 ms, because that's how long the async action takes!");
-        }
+
+        // More precise timing assertion
+        var actualElapsed = DateTime.UtcNow - startTime;
+        Assert.That(duration, Is.GreaterThanOrEqualTo(TimeSpan.FromMilliseconds(500)),
+            $"TestResult duration should be at least 500ms, but was {duration.TotalMilliseconds}ms. " +
+            $"Actual elapsed time: {actualElapsed.TotalMilliseconds}ms");
     }
 
     [Test]
@@ -115,13 +131,20 @@ public class DefaultTestCaseTest : AbstractNUnitSetUp
 
         var echoAction = new EchoAction.Builder().Build();
 
+        var actionStarted = new ManualResetEventSlim(false);
+        var timeoutTested = new ManualResetEventSlim(false);
+
         _fixture.AddTestAction(new ConcreteAsyncTestAction
         {
             DoExecuteAsyncFunc = _ =>
             {
                 try
                 {
-                    Thread.Sleep(1000);
+                    actionStarted.Set(); // Signal that the async action has started
+
+                    // Wait for the timeout test to complete, or until a reasonable timeout
+                    // This ensures the action stays "running" during the timeout test
+                    timeoutTested.Wait(TimeSpan.FromSeconds(10));
                 }
                 catch (Exception e)
                 {
@@ -133,9 +156,21 @@ public class DefaultTestCaseTest : AbstractNUnitSetUp
         });
         _fixture.AddTestAction(echoAction);
 
+        // Start execution
         _fixture.Execute(Context);
 
-        var exception = Assert.Throws(typeof(TestCaseFailedException), () => { _fixture.Finish(Context); });
+        // Wait for the async action to start before testing timeout
+        Assert.That(actionStarted.Wait(TimeSpan.FromSeconds(2)), Is.True,
+            "Async action should have started");
+
+        // Now test the timeout behavior - we know the action is running
+        var exception = Assert.Throws(typeof(TestCaseFailedException), () =>
+        {
+            _fixture.Finish(Context);
+        });
+
+        // Signal that timeout test is complete so async action can finish
+        timeoutTested.Set();
 
         Debug.Assert(exception != null, nameof(exception) + " != null");
         Assert.That(exception.Message,

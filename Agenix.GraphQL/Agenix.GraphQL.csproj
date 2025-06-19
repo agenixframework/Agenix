@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GraphQL.Client" Version="6.1.0"/>
+    <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="6.1.0"/>
+    <PackageReference Include="HotChocolate.AspNetCore" Version="15.1.6" />
+    <PackageReference Include="HotChocolate.Subscriptions.InMemory" Version="15.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extension\agenix\action\" />
+    <Folder Include="Interceptor\"/>
+    <Folder Include="Message\"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Extensions\agenix\action\builder\graphql" />
+    <EmbeddedResource Include="Extension\agenix\action\builder\graphql" />
+    <None Remove="Extensions\agenix\endpoint\builder\graphql" />
+    <EmbeddedResource Include="Extension\agenix\endpoint\builder\graphql" />
+    <None Remove="Extensions\agenix\endpoint\component\graphql" />
+    <EmbeddedResource Include="Extension\agenix\endpoint\component\graphql" />
+    <None Remove="Extensions\agenix\endpoint\component\graphql-secure" />
+    <EmbeddedResource Include="Extension\agenix\endpoint\component\graphql-secure" />
+  </ItemGroup>
+
+</Project>
