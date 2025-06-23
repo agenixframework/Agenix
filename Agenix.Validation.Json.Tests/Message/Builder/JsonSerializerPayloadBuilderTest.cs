@@ -35,7 +35,7 @@ public class JsonSerializerPayloadBuilderTest : AbstractNUnitSetUp
         var result = builder.BuildPayload(Context);
 
         // Assert
-        ClassicAssert.AreEqual("{\"Message\":\"Hello Agenix!\"}", result);
+        Assert.That(result, Is.EqualTo("{\"Message\":\"Hello Agenix!\"}"));
     }
 
     [Test]
@@ -43,7 +43,7 @@ public class JsonSerializerPayloadBuilderTest : AbstractNUnitSetUp
     {
         var builder = new JsonSerializerPayloadBuilder(_request, _mapper);
 
-        ClassicAssert.AreEqual(builder.BuildPayload(Context), "{\"Message\":\"Hello Agenix!\"}");
+        Assert.That(builder.BuildPayload(Context), Is.EqualTo("{\"Message\":\"Hello Agenix!\"}"));
     }
 
     [Test]
@@ -61,7 +61,7 @@ public class JsonSerializerPayloadBuilderTest : AbstractNUnitSetUp
         var result = builder.BuildPayload(Context);
 
         // Assert
-        ClassicAssert.AreEqual("{\"Message\":\"Hello Agenix!\"}", result);
+        Assert.That(result, Is.EqualTo("{\"Message\":\"Hello Agenix!\"}"));
     }
 
     [Test]
@@ -70,6 +70,6 @@ public class JsonSerializerPayloadBuilderTest : AbstractNUnitSetUp
         Context.SetVariable("message", "Hello Agenix!");
         var builder = new JsonSerializerPayloadBuilder(new TestRequest("${message}"), _mapper);
 
-        ClassicAssert.AreEqual(builder.BuildPayload(Context), "{\"Message\":\"Hello Agenix!\"}");
+        Assert.That(builder.BuildPayload(Context), Is.EqualTo("{\"Message\":\"Hello Agenix!\"}"));
     }
 }

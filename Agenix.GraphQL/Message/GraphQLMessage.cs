@@ -277,7 +277,7 @@ public class GraphQLMessage : DefaultMessage
     /// <returns>A JSON string containing the GraphQL operation.</returns>
     public string ToJson()
     {
-        var request = new Dictionary<string, object> { ["query"] =  Payload?.ToString() ?? string.Empty };
+        var request = new Dictionary<string, object> { ["query"] = Payload?.ToString() ?? string.Empty };
 
         if (Variables != null)
         {

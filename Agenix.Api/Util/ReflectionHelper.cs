@@ -136,40 +136,40 @@ public static class ReflectionHelper
 
             // Iterating through all possible names
             foreach (var possibleName in possibleNames)
-            foreach (var method in methods.Where(m =>
-                         string.Equals(m.Name, possibleName, StringComparison.OrdinalIgnoreCase)))
+                foreach (var method in methods.Where(m =>
+                             string.Equals(m.Name, possibleName, StringComparison.OrdinalIgnoreCase)))
                 // Handle generic methods
-            {
-                if (method.IsGenericMethodDefinition)
                 {
-                    var genericArguments = method.GetGenericArguments();
-                    if (genericArguments.Length == paramTypes.Length)
+                    if (method.IsGenericMethodDefinition)
                     {
-                        try
+                        var genericArguments = method.GetGenericArguments();
+                        if (genericArguments.Length == paramTypes.Length)
                         {
-                            // Construct the generic method to match the parameter types
-                            var constructedMethod = method.MakeGenericMethod(paramTypes);
-
-                            if (AreParametersCompatible(constructedMethod.GetParameters(), paramTypes))
+                            try
                             {
-                                return constructedMethod;
+                                // Construct the generic method to match the parameter types
+                                var constructedMethod = method.MakeGenericMethod(paramTypes);
+
+                                if (AreParametersCompatible(constructedMethod.GetParameters(), paramTypes))
+                                {
+                                    return constructedMethod;
+                                }
+                            }
+                            catch
+                            {
+                                // If unable to construct the method, continue searching
                             }
                         }
-                        catch
+                    }
+                    else
+                    {
+                        // Handle non-generic methods
+                        if (AreParametersCompatible(method.GetParameters(), paramTypes))
                         {
-                            // If unable to construct the method, continue searching
+                            return method;
                         }
                     }
                 }
-                else
-                {
-                    // Handle non-generic methods
-                    if (AreParametersCompatible(method.GetParameters(), paramTypes))
-                    {
-                        return method;
-                    }
-                }
-            }
 
             // Move up the type hierarchy
             clazz = clazz.BaseType;

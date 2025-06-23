@@ -698,7 +698,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
         foreach (var value in list)
         {
             if (value is string strValue)
-                // Add new value after check if it is variable or function
+            // Add new value after check if it is variable or function
             {
                 variableFreeList.Add((T)(object)ReplaceDynamicContentInString(strValue));
             }

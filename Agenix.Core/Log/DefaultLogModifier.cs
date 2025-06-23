@@ -67,7 +67,7 @@ public class DefaultLogModifier : LogMessageModifierBase
         {
             masked = CreateXmlPattern(keywords).Replace(masked, $"$1{logMaskValue}$2");
             if (maskKeyValue)
-                // used for the attributes in the XML tags
+            // used for the attributes in the XML tags
             {
                 masked = CreateKeyValuePattern(keywords).Replace(masked, $"$1{logMaskValue}");
             }

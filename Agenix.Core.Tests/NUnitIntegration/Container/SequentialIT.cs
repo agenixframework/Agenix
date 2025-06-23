@@ -2,11 +2,11 @@ using System;
 using Agenix.Api.Annotations;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
-using static Agenix.Core.Container.Sequence.Builder;
+using static Agenix.Core.Actions.DefaultTestActionBuilder;
 using static Agenix.Core.Actions.EchoAction.Builder;
 using static Agenix.Core.Actions.SleepAction.Builder;
 using static Agenix.Core.Actions.StopTimeAction.Builder;
-using static Agenix.Core.Actions.DefaultTestActionBuilder;
+using static Agenix.Core.Container.Sequence.Builder;
 
 namespace Agenix.Core.Tests.NUnitIntegration.Container;
 

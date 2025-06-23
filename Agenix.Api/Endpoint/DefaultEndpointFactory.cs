@@ -84,7 +84,7 @@ public class DefaultEndpointFactory : IEndpointFactory
         var components = GetEndpointComponents(context.ReferenceResolver);
 
         if (components == null || !components.TryGetValue(componentName, out var component))
-            // Try to get component from default Agenix modules
+        // Try to get component from default Agenix modules
         {
             component = IEndpointComponent.Lookup(componentName).OrElse(null);
         }
@@ -124,7 +124,7 @@ public class DefaultEndpointFactory : IEndpointFactory
                 : null);
 
         if (!parser.IsPresent)
-            // Try to get parser from default Agenix modules
+        // Try to get parser from default Agenix modules
         {
             parser = IAnnotationConfigParser<Attribute, IEndpoint>.Lookup(qualifier);
         }

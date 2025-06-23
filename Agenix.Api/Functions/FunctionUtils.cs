@@ -66,7 +66,7 @@ public sealed class FunctionUtils
         // make sure a given string expression meets requirements for having a function
         if (string.IsNullOrEmpty(stringValue) || stringValue.IndexOf(':') < 0 || stringValue.IndexOf('(') < 0 ||
             stringValue.IndexOf(')') < 0)
-            // it is not a function, as it is defined as 'prefix:methodName(arguments)'
+        // it is not a function, as it is defined as 'prefix:methodName(arguments)'
         {
             return stringValue;
         }

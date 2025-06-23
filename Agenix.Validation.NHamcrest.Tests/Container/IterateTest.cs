@@ -24,7 +24,7 @@ public class IterateTest : AbstractNUnitSetUp
         iterate.Execute(Context);
 
         ClassicAssert.NotNull(Context.GetVariable("${i}"));
-        ClassicAssert.AreEqual("5", Context.GetVariable("${i}"));
+        Assert.That(Context.GetVariable("${i}"), NUnit.Framework.Is.EqualTo("5"));
 
         Mock.Get(_action).Verify(a => a.Execute(Context), Times.Exactly(5));
     }

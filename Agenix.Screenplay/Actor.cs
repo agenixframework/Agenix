@@ -187,9 +187,9 @@ public class Actor : IPerformsTasks
     {
         // See if any ability extends or implements T
         return (from entry in _abilities
-            let abilityType = entry.Key
-            where typeof(T).IsAssignableFrom(abilityType)
-            select entry.Value as T).FirstOrDefault();
+                let abilityType = entry.Key
+                where typeof(T).IsAssignableFrom(abilityType)
+                select entry.Value as T).FirstOrDefault();
     }
 
 

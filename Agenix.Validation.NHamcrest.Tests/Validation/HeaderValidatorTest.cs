@@ -15,11 +15,11 @@ public class HeaderValidatorTest
     public void TestLookup()
     {
         var validators = IHeaderValidator.Lookup();
-        ClassicAssert.AreEqual(2, validators.Count);
+        Assert.That(validators.Count, Is.EqualTo(2));
         ClassicAssert.IsNotNull(validators["defaultHeaderValidator"]);
-        ClassicAssert.AreEqual(validators["defaultHeaderValidator"].GetType(), typeof(DefaultHeaderValidator));
+        Assert.That(typeof(DefaultHeaderValidator), Is.EqualTo(validators["defaultHeaderValidator"].GetType()));
         ClassicAssert.IsNotNull(validators["hamcrestHeaderValidator"]);
-        ClassicAssert.AreEqual(validators["hamcrestHeaderValidator"].GetType(), typeof(NHamcrestHeaderValidator));
+        Assert.That(typeof(NHamcrestHeaderValidator), Is.EqualTo(validators["hamcrestHeaderValidator"].GetType()));
     }
 
     [Test]

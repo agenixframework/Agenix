@@ -2,8 +2,8 @@ using Agenix.Api.Spi;
 using Agenix.Http.Client;
 using Moq;
 using NUnit.Framework.Legacy;
-using TestContext = Agenix.Api.Context.TestContext;
 using HttpClient = Agenix.Http.Client.HttpClient;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Http.Tests.Client;
 

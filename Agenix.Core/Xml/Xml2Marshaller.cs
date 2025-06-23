@@ -659,7 +659,8 @@ public class Xml2Marshaller : IMarshaller, IUnmarshaller
         {
             var settings = new XmlReaderSettings
             {
-                ValidationType = ValidationType.Schema, Schemas = new XmlSchemaSet()
+                ValidationType = ValidationType.Schema,
+                Schemas = new XmlSchemaSet()
             };
 
             // Add each schema individually

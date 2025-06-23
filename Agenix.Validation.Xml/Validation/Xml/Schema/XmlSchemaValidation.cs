@@ -153,18 +153,18 @@ public class XmlSchemaValidation : ISchemaValidator<ISchemaValidationContext>
                         schemaRepository = schemaRepositories[0];
                         break;
                     case > 0:
-                    {
-                        schemaRepository = schemaRepositories
-                            .FirstOrDefault(repository => repository.CanValidate(doc));
-
-                        if (schemaRepository == null)
                         {
-                            throw new AgenixSystemException(
-                                $"Failed to find proper schema repository for validating element '{doc.FirstChild.LocalName}({doc.FirstChild.NamespaceURI})'");
-                        }
+                            schemaRepository = schemaRepositories
+                                .FirstOrDefault(repository => repository.CanValidate(doc));
 
-                        break;
-                    }
+                            if (schemaRepository == null)
+                            {
+                                throw new AgenixSystemException(
+                                    $"Failed to find proper schema repository for validating element '{doc.FirstChild.LocalName}({doc.FirstChild.NamespaceURI})'");
+                            }
+
+                            break;
+                        }
                     default:
                         Logger.LogWarning(
                             "Neither schema instance nor schema repository defined - skipping XML schema validation");

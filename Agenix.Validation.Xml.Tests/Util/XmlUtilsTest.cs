@@ -677,7 +677,7 @@ public class XmlUtilsTest
     }
 
 
-// Helper method for namespace testing
+    // Helper method for namespace testing
     private XmlNamespaceManager CreateNamespaceManager(XmlDocument doc)
     {
         var nsmgr = new XmlNamespaceManager(doc.NameTable);

@@ -231,8 +231,8 @@ public abstract class XmlValidationUtils
                // This is the XPath version using XPath expressions in
                // ignoreValues to identify nodes to be ignored
                (from expression in ignoreMessageElements
-                   where XpathUtils.IsXPathExpression(expression)
-                   select XpathUtils.EvaluateAsNode(receivedElement.OwnerDocument, expression, namespaceContext))
+                where XpathUtils.IsXPathExpression(expression)
+                select XpathUtils.EvaluateAsNode(receivedElement.OwnerDocument, expression, namespaceContext))
                .OfType<XmlNode>().Contains(receivedAttribute);
     }
 }

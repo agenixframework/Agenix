@@ -16,7 +16,8 @@ namespace Agenix.Core.Tests.Endpoint.Direct.Annotation;
 public class DirectSyncEndpointConfigParserTest
 {
     private TestContext _context;
-    [AgenixEndpoint] [DirectSyncEndpointConfig(QueueName = "testQueue")]
+    [AgenixEndpoint]
+    [DirectSyncEndpointConfig(QueueName = "testQueue")]
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
     private DirectSyncEndpoint _directSyncEndpoint1;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
@@ -29,17 +30,20 @@ public class DirectSyncEndpointConfigParserTest
     private DirectSyncEndpoint _directSyncEndpoint2;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
 
-    [AgenixEndpoint] [DirectSyncEndpointConfig(Correlator = "replyMessageCorrelator")]
+    [AgenixEndpoint]
+    [DirectSyncEndpointConfig(Correlator = "replyMessageCorrelator")]
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
     private DirectSyncEndpoint _directSyncEndpoint3;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
 
-    [AgenixEndpoint] [DirectSyncEndpointConfig(QueueName = "testQueue")]
+    [AgenixEndpoint]
+    [DirectSyncEndpointConfig(QueueName = "testQueue")]
 #pragma warning disable CS0169 // Field is never used
     private DirectSyncEndpoint _directSyncEndpoint4;
 #pragma warning restore CS0169 // Field is never used
 
-    [AgenixEndpoint] [DirectSyncEndpointConfig(QueueName = "testQueue")]
+    [AgenixEndpoint]
+    [DirectSyncEndpointConfig(QueueName = "testQueue")]
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
     private DirectSyncEndpoint _directSyncEndpoint5;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
@@ -52,7 +56,8 @@ public class DirectSyncEndpointConfigParserTest
     private DirectSyncEndpoint _directSyncEndpoint6;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
 
-    [AgenixEndpoint] [DirectSyncEndpointConfig(Correlator = "replyMessageCorrelator")]
+    [AgenixEndpoint]
+    [DirectSyncEndpointConfig(Correlator = "replyMessageCorrelator")]
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
     private DirectSyncEndpoint _directSyncEndpoint7;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value

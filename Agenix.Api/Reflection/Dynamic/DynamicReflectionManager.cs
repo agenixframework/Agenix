@@ -409,7 +409,7 @@ public sealed class DynamicReflectionManager
         }
 
         if (!valueType.IsValueType)
-            // we're facing a reftype/valuetype mix that never can convert
+        // we're facing a reftype/valuetype mix that never can convert
         {
             throw new InvalidCastException(
                 $"Cannot convert value '{value}' of type {valueType.FullName} at position {argIndex} to argument type {targetType.FullName}");
@@ -549,7 +549,7 @@ public sealed class DynamicReflectionManager
         }
         else if (fieldInfo.IsStatic)
         {
-//                object v = fieldInfo.GetValue(null); // ensure type is initialized...
+            //                object v = fieldInfo.GetValue(null); // ensure type is initialized...
             il.Emit(OpCodes.Ldsfld, fieldInfo);
         }
         else
