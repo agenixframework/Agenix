@@ -216,13 +216,13 @@ public class SendMessageAction : AbstractTestAction, ICompletable
         {
             if (task is { IsFaulted: true, Exception: not null })
             {
-                Log.LogWarning("Failure in forked send action: " + task.Exception.Message);
+                Log.LogWarning("Failure in forked send action: {}", task.Exception.Message);
             }
             else
             {
                 foreach (var ctxEx in context.GetExceptions())
                 {
-                    Log.LogWarning(ctxEx.Message);
+                    Log.LogWarning(ctxEx, ctxEx.Message);
                 }
             }
         });

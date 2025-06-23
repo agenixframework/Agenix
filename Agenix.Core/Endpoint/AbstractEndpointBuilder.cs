@@ -7,7 +7,7 @@ namespace Agenix.Core.Endpoint;
 
 public abstract class AbstractEndpointBuilder<T> : IEndpointBuilder<T> where T : IEndpoint
 {
-    public T Build()
+    public virtual T Build()
     {
         return GetEndpoint();
     }
