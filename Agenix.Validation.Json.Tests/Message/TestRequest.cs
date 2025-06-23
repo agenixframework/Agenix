@@ -1,4 +1,4 @@
-﻿namespace Agenix.Validation.Json.Tests.Message;
+namespace Agenix.Validation.Json.Tests.Message;
 
 public class TestRequest
 {

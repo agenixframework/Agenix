@@ -35,7 +35,7 @@ public interface IReferenceResolver : IReferenceRegistry
     /// <returns>The resolved reference object.</returns>
     List<T> Resolve<T>(params string[] names)
     {
-        return names.Length > 0 ? Resolve<T>(names, typeof(T)) : [..ResolveAll<T>().Values];
+        return names.Length > 0 ? Resolve<T>(names, typeof(T)) : [.. ResolveAll<T>().Values];
     }
 
     /// Resolves a reference by its name and type.

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Agenix.Api;
 using Agenix.Api.Annotations;
@@ -13,9 +13,9 @@ using Agenix.Core.Message;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
-using TestContext = Agenix.Api.Context.TestContext;
-using static Agenix.Core.Actions.SendMessageAction.Builder;
 using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
+using static Agenix.Core.Actions.SendMessageAction.Builder;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.Tests.NUnitIntegration;
 
@@ -88,7 +88,9 @@ public class EndpointInjectionIT
 
     [AgenixFramework] private Agenix agenix;
 
-    [AgenixEndpoint] [DirectEndpointConfig(QueueName = "FOO.direct.queue")] [BindToRegistry]
+    [AgenixEndpoint]
+    [DirectEndpointConfig(QueueName = "FOO.direct.queue")]
+    [BindToRegistry]
     private IEndpoint directEndpoint;
 
     [AgenixEndpoint] private IEndpoint foo;

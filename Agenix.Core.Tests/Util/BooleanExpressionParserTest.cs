@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Exceptions;
+using Agenix.Api.Exceptions;
 using Agenix.Core.Util;
 using NUnit.Framework;
 

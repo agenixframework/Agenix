@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Agenix.Api.Endpoint;
@@ -20,9 +20,9 @@ using Agenix.Core.Variable;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
-using TestContext = Agenix.Api.Context.TestContext;
 using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
 using IResource = Agenix.Api.IO.IResource;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.Tests.Actions.Dsl;
 

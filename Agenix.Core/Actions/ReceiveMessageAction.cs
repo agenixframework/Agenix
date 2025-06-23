@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -942,25 +942,25 @@ public class ReceiveMessageAction : AbstractTestAction
             switch (messageBuilder)
             {
                 case StaticMessageBuilder staticMessageBuilder:
-                {
-                    var message = staticMessageBuilder.GetMessage();
-                    if (message.Payload is string)
                     {
-                        return Optional<string>.OfNullable(message.GetPayload<string>());
-                    }
+                        var message = staticMessageBuilder.GetMessage();
+                        if (message.Payload is string)
+                        {
+                            return Optional<string>.OfNullable(message.GetPayload<string>());
+                        }
 
-                    break;
-                }
+                        break;
+                    }
                 case IWithPayloadBuilder withPayloadBuilder:
-                {
-                    var payloadBuilder = withPayloadBuilder.GetPayloadBuilder();
-                    if (payloadBuilder is DefaultPayloadBuilder defaultPayloadBuilder)
                     {
-                        return Optional<string>.OfNullable(defaultPayloadBuilder.Payload?.ToString());
-                    }
+                        var payloadBuilder = withPayloadBuilder.GetPayloadBuilder();
+                        if (payloadBuilder is DefaultPayloadBuilder defaultPayloadBuilder)
+                        {
+                            return Optional<string>.OfNullable(defaultPayloadBuilder.Payload?.ToString());
+                        }
 
-                    break;
-                }
+                        break;
+                    }
             }
 
             return Optional<string>.Empty;

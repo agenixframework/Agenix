@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Agenix.Core.Actions;
 using Agenix.Core.Util;
 using NUnit.Framework;

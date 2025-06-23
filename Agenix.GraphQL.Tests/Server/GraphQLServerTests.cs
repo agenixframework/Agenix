@@ -97,61 +97,61 @@ public class GraphQLServerTest : AbstractNUnitSetUp
     }
 
     [Test]
-public void ShouldReceiveGraphQLResponse()
-{
-    // Add debug logging before sending
-    Console.WriteLine("=== Test Debug Info ===");
-    Console.WriteLine($"Server running: {_graphQLServer?.IsRunning()}");
-    Console.WriteLine($"Server port: {_port}");
-    Console.WriteLine($"GraphQL URI: {_uri}");
-
-    // Test server health first with a simple HTTP request
-    try
+    public void ShouldReceiveGraphQLResponse()
     {
-        using var httpClient = new HttpClient();
-        var healthResponse = httpClient.GetAsync($"http://localhost:{_port}/graphql").Result;
-        Console.WriteLine($"Server health check: {healthResponse.StatusCode}");
+        // Add debug logging before sending
+        Console.WriteLine("=== Test Debug Info ===");
+        Console.WriteLine($"Server running: {_graphQLServer?.IsRunning()}");
+        Console.WriteLine($"Server port: {_port}");
+        Console.WriteLine($"GraphQL URI: {_uri}");
+
+        // Test server health first with a simple HTTP request
+        try
+        {
+            using var httpClient = new HttpClient();
+            var healthResponse = httpClient.GetAsync($"http://localhost:{_port}/graphql").Result;
+            Console.WriteLine($"Server health check: {healthResponse.StatusCode}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Server health check failed: {ex.Message}");
+        }
+
+        // First send a query
+        var query = new GraphQLMessage("{ user }")
+            .SetOperationType(GraphQLOperationType.QUERY);
+
+        Console.WriteLine($"Sending query: {query.Payload}");
+
+        _graphQLClient.Send(query, Context);
+        Console.WriteLine("Query sent successfully");
+
+        // Add a longer wait to see if response arrives
+        Thread.Sleep(1000);
+
+        // Then receive the response
+        var response = _graphQLClient.Receive(Context, 10000L); // Increase timeout
+
+        Console.WriteLine($"Response received: {response != null}");
+        Console.WriteLine($"Response type: {response?.GetType()}");
+
+        Assert.That(response, Is.Not.Null);
+        Assert.That(response, Is.InstanceOf<GraphQLMessage>());
+
+        var graphqlResponse = (GraphQLMessage)response;
+
+        // Debug: Print the actual payload to see what we're getting
+        var payload = graphqlResponse.Payload?.ToString() ?? "null";
+        Console.WriteLine($"Actual payload: '{payload}'");
+        Console.WriteLine($"Payload length: {payload.Length}");
+        Console.WriteLine($"Payload type: {graphqlResponse.Payload?.GetType().Name ?? "null"}");
+
+        // Check if there are any headers or other properties
+        Console.WriteLine($"Headers count: {graphqlResponse.Headers?.Count ?? 0}");
+        Console.WriteLine($"Message ID: {graphqlResponse.Id}");
+
+        Assert.That(graphqlResponse.Payload, Is.Not.Empty);
     }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Server health check failed: {ex.Message}");
-    }
-
-    // First send a query
-    var query = new GraphQLMessage("{ user }")
-        .SetOperationType(GraphQLOperationType.QUERY);
-
-    Console.WriteLine($"Sending query: {query.Payload}");
-
-    _graphQLClient.Send(query, Context);
-    Console.WriteLine("Query sent successfully");
-
-    // Add a longer wait to see if response arrives
-    Thread.Sleep(1000);
-
-    // Then receive the response
-    var response = _graphQLClient.Receive(Context, 10000L); // Increase timeout
-
-    Console.WriteLine($"Response received: {response != null}");
-    Console.WriteLine($"Response type: {response?.GetType()}");
-
-    Assert.That(response, Is.Not.Null);
-    Assert.That(response, Is.InstanceOf<GraphQLMessage>());
-
-    var graphqlResponse = (GraphQLMessage)response;
-
-    // Debug: Print the actual payload to see what we're getting
-    var payload = graphqlResponse.Payload?.ToString() ?? "null";
-    Console.WriteLine($"Actual payload: '{payload}'");
-    Console.WriteLine($"Payload length: {payload.Length}");
-    Console.WriteLine($"Payload type: {graphqlResponse.Payload?.GetType().Name ?? "null"}");
-
-    // Check if there are any headers or other properties
-    Console.WriteLine($"Headers count: {graphqlResponse.Headers?.Count ?? 0}");
-    Console.WriteLine($"Message ID: {graphqlResponse.Id}");
-
-    Assert.That(graphqlResponse.Payload, Is.Not.Empty);
-}
 
 
     [Test]

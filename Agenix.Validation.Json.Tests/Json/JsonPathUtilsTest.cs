@@ -1,4 +1,4 @@
-﻿using Agenix.Validation.Json.Json;
+using Agenix.Validation.Json.Json;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
@@ -41,20 +41,20 @@ public class JsonPathUtilsTest : AbstractNUnitSetUp
     public void TestEvaluateAsString()
     {
         const string keySetOfManufacturersExpression = "$.Manufacturers[?(@.Name == 'Acme Co')].KeySet()";
-        ClassicAssert.AreEqual("Name, Products",
-            JsonPathUtils.EvaluateAsString(_jsonSource, keySetOfManufacturersExpression));
+        Assert.That(JsonPathUtils.EvaluateAsString(_jsonSource, keySetOfManufacturersExpression),
+            Is.EqualTo("Name, Products"));
 
         const string oneSpecificManufacturerExpression = "$.Manufacturers[?(@.Name == 'Acme Co')]";
-        ClassicAssert.AreEqual(
-            "{\"Name\":\"Acme Co\",\"Products\":[{\"Name\":\"Anvil\",\"Price\":50}]}",
-            JsonPathUtils.EvaluateAsString(_jsonSource, oneSpecificManufacturerExpression));
+        Assert.That(
+            JsonPathUtils.EvaluateAsString(_jsonSource, oneSpecificManufacturerExpression),
+            Is.EqualTo("{\"Name\":\"Acme Co\",\"Products\":[{\"Name\":\"Anvil\",\"Price\":50}]}"));
 
         const string manufacturersSize = "$.Manufacturers.Size()";
-        ClassicAssert.AreEqual("2",
-            JsonPathUtils.EvaluateAsString(_jsonSource, manufacturersSize));
+        Assert.That(JsonPathUtils.EvaluateAsString(_jsonSource, manufacturersSize),
+            Is.EqualTo("2"));
 
         const string listOfProductNamesWherePriceGreaterThanThree = "$..Products[?(@.Price > 3)].Name";
-        ClassicAssert.AreEqual("Anvil, Elbow Grease, Headlight Fluid",
-            JsonPathUtils.EvaluateAsString(_jsonSource, listOfProductNamesWherePriceGreaterThanThree));
+        Assert.That(JsonPathUtils.EvaluateAsString(_jsonSource, listOfProductNamesWherePriceGreaterThanThree),
+            Is.EqualTo("Anvil, Elbow Grease, Headlight Fluid"));
     }
 }

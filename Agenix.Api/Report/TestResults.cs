@@ -39,7 +39,7 @@ public class TestResults
     /// <return>A list containing all the test results.</return>
     public List<TestResult> AsList()
     {
-        return [.._results];
+        return [.. _results];
     }
 
     /// Adds a test result to the collection.

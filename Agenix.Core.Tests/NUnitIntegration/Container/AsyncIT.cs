@@ -1,14 +1,14 @@
-﻿using Agenix.Api.Annotations;
+using Agenix.Api.Annotations;
 using Agenix.Api.Log;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using Microsoft.Extensions.Logging;
 using NUnit.Framework;
-using static Agenix.Core.Container.Async.Builder;
-using static Agenix.Core.Actions.StopTimeAction.Builder;
-using static Agenix.Core.Actions.SleepAction.Builder;
-using static Agenix.Core.Actions.EchoAction.Builder;
 using static Agenix.Core.Actions.DefaultTestActionBuilder;
+using static Agenix.Core.Actions.EchoAction.Builder;
+using static Agenix.Core.Actions.SleepAction.Builder;
+using static Agenix.Core.Actions.StopTimeAction.Builder;
 using static Agenix.Core.Actions.TraceVariablesAction.Builder;
+using static Agenix.Core.Container.Async.Builder;
 
 namespace Agenix.Core.Tests.NUnitIntegration.Container;
 

@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -195,23 +195,23 @@ public class DefaultTestCaseRunner : ITestCaseRunner
         switch (builder)
         {
             case FinallySequence.Builder finallySequenceBuilder:
-            {
-                foreach (var finalAction in finallySequenceBuilder.GetActions())
                 {
-                    _testCase.AddFinalAction(finalAction);
-                }
+                    foreach (var finalAction in finallySequenceBuilder.GetActions())
+                    {
+                        _testCase.AddFinalAction(finalAction);
+                    }
 
-                return action;
-            }
+                    return action;
+                }
             case FuncITestActionBuilder<FinallySequence.Builder> finallySequenceBuilder:
-            {
-                foreach (var finalAction in finallySequenceBuilder.Build().GetActions())
                 {
-                    _testCase.AddFinalAction(finalAction);
-                }
+                    foreach (var finalAction in finallySequenceBuilder.Build().GetActions())
+                    {
+                        _testCase.AddFinalAction(finalAction);
+                    }
 
-                return action;
-            }
+                    return action;
+                }
         }
 
         _testCase.AddTestAction(action);

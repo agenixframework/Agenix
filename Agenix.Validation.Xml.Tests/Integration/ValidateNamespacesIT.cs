@@ -33,11 +33,11 @@ using Agenix.Api.Message;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using Agenix.Validation.Xml.Dsl;
 using NUnit.Framework;
+using static Agenix.Core.Actions.EchoAction.Builder;
 using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
 using static Agenix.Core.Actions.SendMessageAction.Builder;
 using static Agenix.Core.Container.AssertContainer.Builder;
 using TestContext = Agenix.Api.Context.TestContext;
-using static Agenix.Core.Actions.EchoAction.Builder;
 
 namespace Agenix.Validation.Xml.Tests.Integration;
 

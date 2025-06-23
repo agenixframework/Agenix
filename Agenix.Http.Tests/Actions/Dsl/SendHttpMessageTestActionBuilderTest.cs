@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using System.Net.Mime;
 using Agenix.Api.Endpoint.Resolver;
 using Agenix.Api.Message;
@@ -10,8 +10,8 @@ using Agenix.Http.Actions;
 using Agenix.Http.Message;
 using Moq;
 using NUnit.Framework.Legacy;
-using TestContext = Agenix.Api.Context.TestContext;
 using HttpClient = Agenix.Http.Client.HttpClient;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Http.Tests.Actions.Dsl;
 
@@ -19,6 +19,7 @@ public class SendHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
 {
     private readonly HttpClient _httpClient = Mock.Of<HttpClient>();
     private readonly IProducer _messageProducer = Mock.Of<IProducer>();
+
 
     [Test]
     public void TestFork()
@@ -28,8 +29,26 @@ public class SendHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
 
         Mock.Get(_httpClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
 
+        // Create synchronization primitives for fork testing
+        var firstMessageSent = new ManualResetEventSlim(false);
+        var secondMessageSent = new ManualResetEventSlim(false);
+
+        // Setup mocks to signal when messages are sent
+        Mock.Get(_messageProducer)
+            .Setup(m => m.Send(
+                It.Is<IMessage>(msg => msg.GetPayload<string>() == "Foo"),
+                It.IsAny<TestContext>()))
+            .Callback(() => firstMessageSent.Set());
+
+        Mock.Get(_messageProducer)
+            .Setup(m => m.Send(
+                It.Is<IMessage>(msg => msg.GetPayload<string>() == "Bar"),
+                It.IsAny<TestContext>()))
+            .Callback(() => secondMessageSent.Set());
+
         var builder = new DefaultTestCaseRunner(Context);
 
+        // First action (non-forked)
         builder.Run(HttpActionBuilder.Http().Client(_httpClient)
             .Send()
             .Get()
@@ -37,6 +56,7 @@ public class SendHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
             .Type(MessageType.PLAINTEXT)
             .Header("additional", "additionalValue"));
 
+        // Second action (forked)
         builder.Run(HttpActionBuilder.Http().Client(_httpClient)
             .Send()
             .Post()
@@ -44,6 +64,13 @@ public class SendHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
             .Type(MessageType.PLAINTEXT)
             .Fork(true));
 
+        // Wait for both messages to be sent (with timeout)
+        Assert.That(firstMessageSent.Wait(TimeSpan.FromSeconds(5)), Is.True,
+            "First message should be sent within timeout");
+        Assert.That(secondMessageSent.Wait(TimeSpan.FromSeconds(5)), Is.True,
+            "Second message should be sent within timeout");
+
+        // Verify the calls occurred
         Mock.Get(_messageProducer).Verify(m => m.Send(
             It.Is<IMessage>(msg => msg.GetPayload<string>() == "Foo"),
             It.IsAny<TestContext>()), Times.Once);
@@ -77,6 +104,10 @@ public class SendHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
         action = (SendMessageAction)test.GetActions()[1];
         ClassicAssert.AreEqual("Bar", ((HttpMessageBuilder)action.MessageBuilder).GetMessage().GetPayload<string>());
         ClassicAssert.IsTrue(action.ForkMode);
+
+        // Clean up
+        firstMessageSent.Dispose();
+        secondMessageSent.Dispose();
     }
 
     [Test]

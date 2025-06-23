@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Agenix.Api;
 using Agenix.Api.Annotations;
 using Agenix.Api.Exceptions;

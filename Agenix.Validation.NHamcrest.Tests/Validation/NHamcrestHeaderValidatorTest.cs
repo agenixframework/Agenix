@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Exceptions;
+using Agenix.Api.Exceptions;
 using Agenix.Api.Validation.Context;
 using Agenix.Validation.NHamcrest.Validation;
 using Is = NHamcrest.Is;

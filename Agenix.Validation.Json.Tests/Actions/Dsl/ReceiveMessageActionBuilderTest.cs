@@ -26,12 +26,12 @@ using Newtonsoft.Json.Serialization;
 using NHamcrest;
 using NHamcrest.Core;
 using NUnit.Framework;
-using IReferenceResolver = Agenix.Api.Spi.IReferenceResolver;
-using TestContext = Agenix.Api.Context.TestContext;
 using Contains = NHamcrest.Contains;
-using IsNull = NHamcrest.Is;
 using Has = NUnit.Framework.Has;
+using IReferenceResolver = Agenix.Api.Spi.IReferenceResolver;
 using Is = NUnit.Framework.Is;
+using IsNull = NHamcrest.Is;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Validation.Json.Tests.Actions.Dsl;
 

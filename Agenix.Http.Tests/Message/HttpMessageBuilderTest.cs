@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using Agenix.Api.Message;
 using Agenix.Http.Message;
 using Moq;

@@ -32,9 +32,9 @@ using Agenix.Api.Message;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using Agenix.Validation.Xml.Dsl;
 using NUnit.Framework;
+using static Agenix.Core.Actions.CreateVariablesAction.Builder;
 using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
 using static Agenix.Core.Actions.SendMessageAction.Builder;
-using static Agenix.Core.Actions.CreateVariablesAction.Builder;
 using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Validation.Xml.Tests.Integration;

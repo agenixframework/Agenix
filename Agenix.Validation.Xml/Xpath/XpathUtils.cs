@@ -426,46 +426,46 @@ public abstract class XpathUtils
         switch (resultType)
         {
             case XPathExpressionResult.Node:
-            {
-                var resultNode = EvaluateAsNode(node, xPathExpression, nsContext);
-                return ExtractNodeValue(resultNode);
-            }
+                {
+                    var resultNode = EvaluateAsNode(node, xPathExpression, nsContext);
+                    return ExtractNodeValue(resultNode);
+                }
 
             case XPathExpressionResult.NodeSet:
-            {
-                var resultNodeList = EvaluateAsNodeList(node, xPathExpression, nsContext);
+                {
+                    var resultNodeList = EvaluateAsNodeList(node, xPathExpression, nsContext);
 
-                return (from XmlNode resultNode in resultNodeList select ExtractNodeValue(resultNode)).ToList();
-            }
+                    return (from XmlNode resultNode in resultNodeList select ExtractNodeValue(resultNode)).ToList();
+                }
 
             case XPathExpressionResult.String:
                 return EvaluateAsString(node, xPathExpression, nsContext);
 
             case XPathExpressionResult.Integer:
-            {
-                var result = EvaluateAsObject(node, xPathExpression, nsContext, resultType.GetAsXPathResultType());
-
-                if (result == null)
                 {
-                    throw new AgenixSystemException($"No result for XPath expression: '{xPathExpression}'");
-                }
+                    var result = EvaluateAsObject(node, xPathExpression, nsContext, resultType.GetAsXPathResultType());
 
-                return (int)Math.Round(Convert.ToDouble(result));
-            }
+                    if (result == null)
+                    {
+                        throw new AgenixSystemException($"No result for XPath expression: '{xPathExpression}'");
+                    }
+
+                    return (int)Math.Round(Convert.ToDouble(result));
+                }
 
             case XPathExpressionResult.Boolean:
             case XPathExpressionResult.Number:
             default:
-            {
-                var result = EvaluateAsObject(node, xPathExpression, nsContext, resultType.GetAsXPathResultType());
-
-                if (result == null)
                 {
-                    throw new AgenixSystemException($"No result for XPath expression: '{xPathExpression}'");
-                }
+                    var result = EvaluateAsObject(node, xPathExpression, nsContext, resultType.GetAsXPathResultType());
 
-                return result;
-            }
+                    if (result == null)
+                    {
+                        throw new AgenixSystemException($"No result for XPath expression: '{xPathExpression}'");
+                    }
+
+                    return result;
+                }
         }
     }
 

@@ -150,7 +150,7 @@ public class TestReporters : ITestListener, ITestSuiteListener, ITestReporterAwa
     /// <return>A list of ITestReporter instances.</return>
     public List<ITestReporter> GetTestReporters()
     {
-        return [.._testReporters];
+        return [.. _testReporters];
     }
 
     /// Indicates if the test results should be cleared for each test suite.

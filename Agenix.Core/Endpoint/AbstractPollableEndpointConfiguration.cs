@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Endpoint;
+using Agenix.Api.Endpoint;
 
 namespace Agenix.Core.Endpoint;
 

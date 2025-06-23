@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading;
@@ -10,11 +10,11 @@ using Agenix.Core.Actions;
 using Agenix.Core.Tests.Util;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
-using static Agenix.Core.Container.Parallel.Builder;
-using static Agenix.Core.Actions.SleepAction.Builder;
-using static Agenix.Core.Container.Sequence.Builder;
 using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
 using static Agenix.Core.Actions.SendMessageAction.Builder;
+using static Agenix.Core.Actions.SleepAction.Builder;
+using static Agenix.Core.Container.Parallel.Builder;
+using static Agenix.Core.Container.Sequence.Builder;
 using static Agenix.Core.Container.Wait.Builder<Agenix.Api.Condition.ICondition>;
 
 namespace Agenix.Core.Tests.NUnitIntegration.Container;
@@ -130,7 +130,7 @@ public class WaitIT
         var sleepCompleted = new ManualResetEventSlim(false);
 
         // Create a controlled sleep action
-        var controlledSleepAction = DefaultTestActionBuilder.Action( context =>
+        var controlledSleepAction = DefaultTestActionBuilder.Action(context =>
         {
             actionStarted.Set();
             sleepStarted.Set();
@@ -142,7 +142,7 @@ public class WaitIT
         _gherkin.When(WaitFor<ICondition>()
             .Execution()
             .Interval(300)
-            .Milliseconds(500)
+            .Milliseconds(2000)
             .Action(controlledSleepAction)
         );
 

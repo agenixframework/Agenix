@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Message;
+using Agenix.Api.Message;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Selector;
 using Agenix.Core.Util;

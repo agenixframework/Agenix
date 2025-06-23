@@ -47,7 +47,8 @@ public class NodeMappingDataDictionaryTest : AbstractNUnitSetUp
 
         var dictionary = new NodeMappingDataDictionary
         {
-            Mappings = mappings, PathMappingStrategy = PathMappingStrategy.STARTS_WITH
+            Mappings = mappings,
+            PathMappingStrategy = PathMappingStrategy.STARTS_WITH
         };
 
         dictionary.ProcessMessage(message, Context);
@@ -72,7 +73,8 @@ public class NodeMappingDataDictionaryTest : AbstractNUnitSetUp
 
         var dictionary = new NodeMappingDataDictionary
         {
-            Mappings = mappings, PathMappingStrategy = PathMappingStrategy.ENDS_WITH
+            Mappings = mappings,
+            PathMappingStrategy = PathMappingStrategy.ENDS_WITH
         };
 
         dictionary.ProcessMessage(message, Context);
@@ -122,7 +124,8 @@ public class NodeMappingDataDictionaryTest : AbstractNUnitSetUp
 
         var dictionary = new NodeMappingDataDictionary
         {
-            Mappings = mappings, PathMappingStrategy = PathMappingStrategy.ENDS_WITH
+            Mappings = mappings,
+            PathMappingStrategy = PathMappingStrategy.ENDS_WITH
         };
 
         dictionary.ProcessMessage(message, Context);

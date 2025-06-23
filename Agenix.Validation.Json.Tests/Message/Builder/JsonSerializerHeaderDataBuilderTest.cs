@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Spi;
+using Agenix.Api.Spi;
 using Agenix.Validation.Json.Message.Builder;
 using Moq;
 using Newtonsoft.Json;
@@ -35,7 +35,7 @@ public class JsonSerializerHeaderDataBuilderTest : AbstractNUnitSetUp
         var result = builder.BuildHeaderData(Context);
 
         // Assert
-        ClassicAssert.AreEqual("{\"Message\":\"Hello Agenix!\"}", result);
+        Assert.That(result, Is.EqualTo("{\"Message\":\"Hello Agenix!\"}"));
     }
 
     [Test]
@@ -43,7 +43,7 @@ public class JsonSerializerHeaderDataBuilderTest : AbstractNUnitSetUp
     {
         var builder = new JsonSerializerHeaderDataBuilder(_request, _mapper);
 
-        ClassicAssert.AreEqual(builder.BuildHeaderData(Context), "{\"Message\":\"Hello Agenix!\"}");
+        Assert.That(builder.BuildHeaderData(Context), Is.EqualTo("{\"Message\":\"Hello Agenix!\"}"));
     }
 
     [Test]
@@ -61,7 +61,7 @@ public class JsonSerializerHeaderDataBuilderTest : AbstractNUnitSetUp
         var result = builder.BuildHeaderData(Context);
 
         // Assert
-        ClassicAssert.AreEqual("{\"Message\":\"Hello Agenix!\"}", result);
+        Assert.That(result, Is.EqualTo("{\"Message\":\"Hello Agenix!\"}"));
     }
 
     [Test]
@@ -70,6 +70,6 @@ public class JsonSerializerHeaderDataBuilderTest : AbstractNUnitSetUp
         Context.SetVariable("message", "Hello Agenix!");
         var builder = new JsonSerializerHeaderDataBuilder(new TestRequest("${message}"), _mapper);
 
-        ClassicAssert.AreEqual(builder.BuildHeaderData(Context), "{\"Message\":\"Hello Agenix!\"}");
+        Assert.That(builder.BuildHeaderData(Context), Is.EqualTo("{\"Message\":\"Hello Agenix!\"}"));
     }
 }

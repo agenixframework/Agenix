@@ -15,8 +15,8 @@ using NUnit.Framework.Legacy;
 using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
 using static Agenix.Core.Validation.Json.JsonMessageValidationContext.Builder;
 using static Moq.It;
-using Is = NHamcrest.Is;
 using Contains = NHamcrest.Contains;
+using Is = NHamcrest.Is;
 using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Validation.NHamcrest.Tests.Actions;
@@ -63,15 +63,15 @@ public class ReceiveMessageTestActionBuilderTest : AbstractNUnitSetUp
         );
 
         var test = builder.GetTestCase();
-        ClassicAssert.AreEqual(1, test.GetActionCount());
-        ClassicAssert.AreEqual(typeof(ReceiveMessageAction), test.GetActions()[0].GetType());
+        Assert.That(test.GetActionCount(), NUnit.Framework.Is.EqualTo(1));
+        Assert.That(test.GetActions()[0].GetType(), NUnit.Framework.Is.EqualTo(typeof(ReceiveMessageAction)));
 
         var action = (ReceiveMessageAction)test.GetActions()[0];
-        ClassicAssert.AreEqual("receive", action.Name);
+        Assert.That(action.Name, NUnit.Framework.Is.EqualTo("receive"));
 
-        ClassicAssert.AreEqual(nameof(MessageType.JSON), action.MessageType);
-        ClassicAssert.AreEqual(_messageEndpoint, action.Endpoint);
-        ClassicAssert.AreEqual(3, action.ValidationContexts.Count);
+        Assert.That(action.MessageType, NUnit.Framework.Is.EqualTo(nameof(MessageType.JSON)));
+        Assert.That(action.Endpoint, NUnit.Framework.Is.EqualTo(_messageEndpoint));
+        Assert.That(action.ValidationContexts.Count, NUnit.Framework.Is.EqualTo(3));
         ClassicAssert.IsTrue(action.ValidationContexts.Exists(c => c is HeaderValidationContext));
         ClassicAssert.IsTrue(action.ValidationContexts.Exists(c => c is JsonMessageValidationContext));
         ClassicAssert.IsTrue(action.ValidationContexts.Exists(c => c is JsonPathMessageValidationContext));
@@ -85,12 +85,12 @@ public class ReceiveMessageTestActionBuilderTest : AbstractNUnitSetUp
         }
 
         ClassicAssert.IsTrue(action.MessageBuilder is DefaultMessageBuilder);
-        ClassicAssert.AreEqual(5, validationContext.JsonPathExpressions.Count);
-        ClassicAssert.AreEqual("John", validationContext.JsonPathExpressions["$.person.name"]);
-        ClassicAssert.AreEqual(true, validationContext.JsonPathExpressions["$.person.active"]);
-        ClassicAssert.AreEqual("Hello World!", validationContext.JsonPathExpressions["$.text"]);
-        ClassicAssert.AreEqual(5, validationContext.JsonPathExpressions["$.index"]);
-        ClassicAssert.AreEqual(typeof(AnyOfMatcher<string>), validationContext.JsonPathExpressions["$.id"].GetType());
+        Assert.That(validationContext.JsonPathExpressions.Count, NUnit.Framework.Is.EqualTo(5));
+        Assert.That(validationContext.JsonPathExpressions["$.person.name"], NUnit.Framework.Is.EqualTo("John"));
+        Assert.That(validationContext.JsonPathExpressions["$.person.active"], NUnit.Framework.Is.EqualTo(true));
+        Assert.That(validationContext.JsonPathExpressions["$.text"], NUnit.Framework.Is.EqualTo("Hello World!"));
+        Assert.That(validationContext.JsonPathExpressions["$.index"], NUnit.Framework.Is.EqualTo(5));
+        Assert.That(validationContext.JsonPathExpressions["$.id"].GetType(), NUnit.Framework.Is.EqualTo(typeof(AnyOfMatcher<string>)));
     }
 
     public class JsonPathValidator : DefaultMessageValidator

@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using System.Net.Mime;
 using Agenix.Api.Annotations;
 using Agenix.Api.Message;

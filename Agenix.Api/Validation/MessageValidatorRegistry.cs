@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -113,7 +113,7 @@ public class MessageValidatorRegistry
             _messageValidators.Values.Where(validator => validator.SupportsMessageType(messageType, message)));
 
         if (IsEmptyOrDefault(matchingValidators))
-            // Try to find fallback message validator for given message payload
+        // Try to find fallback message validator for given message payload
         {
             if (message.Payload is string payload && !string.IsNullOrWhiteSpace(payload))
             {

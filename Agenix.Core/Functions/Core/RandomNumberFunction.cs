@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -118,7 +118,7 @@ public class RandomNumberFunction : IFunction
         }
 
         if (builder.Length == 0)
-            // very unlikely to happen, ensures that empty string is not returned
+        // very unlikely to happen, ensures that empty string is not returned
         {
             builder.Append('0');
         }

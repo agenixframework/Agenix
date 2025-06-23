@@ -364,7 +364,7 @@ public class XhtmlMessageConverter : InitializingPhase
                     case "boolean-attributes":
                         // Configure boolean attribute handling
                         break;
-                    // Add more configuration options as needed
+                        // Add more configuration options as needed
                 }
             }
         }

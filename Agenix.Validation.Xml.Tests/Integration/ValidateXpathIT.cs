@@ -35,10 +35,10 @@ using Agenix.Core.Actions;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using Agenix.Validation.Xml.Dsl;
 using NUnit.Framework;
-using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
-using static Agenix.Core.Actions.SendMessageAction.Builder;
 using static Agenix.Core.Actions.CreateVariablesAction.Builder;
 using static Agenix.Core.Actions.EchoAction.Builder;
+using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
+using static Agenix.Core.Actions.SendMessageAction.Builder;
 using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Validation.Xml.Tests.Integration;
