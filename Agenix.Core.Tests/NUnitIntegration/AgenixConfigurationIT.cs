@@ -1,4 +1,4 @@
-﻿using Agenix.Api;
+using Agenix.Api;
 using Agenix.Api.Annotations;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Message;
@@ -8,8 +8,8 @@ using Agenix.Core.Message;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
-using static Agenix.Core.Actions.SendMessageAction.Builder;
 using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
+using static Agenix.Core.Actions.SendMessageAction.Builder;
 
 namespace Agenix.Core.Tests.NUnitIntegration;
 

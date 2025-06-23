@@ -1,9 +1,9 @@
-﻿using Agenix.Api;
+using Agenix.Api;
 using Agenix.Api.Annotations;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
-using static Agenix.Core.Actions.EchoAction.Builder;
 using static Agenix.Core.Actions.ApplyTestBehaviorAction.Builder;
+using static Agenix.Core.Actions.EchoAction.Builder;
 using static Agenix.Core.Container.Sequence.Builder;
 
 namespace Agenix.Core.Tests.NUnitIntegration;

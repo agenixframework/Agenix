@@ -30,9 +30,9 @@ using Agenix.Api.Endpoint;
 using Agenix.Api.Message;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
+using static Agenix.Core.Actions.CreateVariablesAction.Builder;
 using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
 using static Agenix.Core.Actions.SendMessageAction.Builder;
-using static Agenix.Core.Actions.CreateVariablesAction.Builder;
 
 namespace Agenix.Validation.Xml.Tests.Integration;
 

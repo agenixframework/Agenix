@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Agenix.Core.Actions;
 using Agenix.Core.Container;
 using Moq;

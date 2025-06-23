@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Message;
+using Agenix.Api.Message;
 using Agenix.Api.Validation.Context;
 using Agenix.Core;
 using Agenix.Core.Actions;
@@ -8,8 +8,8 @@ using Agenix.Http.Client;
 using Agenix.Http.Message;
 using Moq;
 using NUnit.Framework.Legacy;
-using TestContext = Agenix.Api.Context.TestContext;
 using HttpClient = Agenix.Http.Client.HttpClient;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Http.Tests.Actions.Dsl;
 

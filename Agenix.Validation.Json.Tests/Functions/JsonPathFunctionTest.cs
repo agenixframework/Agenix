@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Exceptions;
+using Agenix.Api.Exceptions;
 using Agenix.Validation.Json.Functions.Core;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
@@ -15,35 +15,35 @@ public class JsonPathFunctionTest : AbstractNUnitSetUp
     public void TestExecuteJsonPath()
     {
         var parameters = new List<string> { _jsonSource, "$.person.name" };
-        ClassicAssert.AreEqual(_function.Execute(parameters, Context), "Sheldon");
+        Assert.That(_function.Execute(parameters, Context), Is.EqualTo("Sheldon"));
     }
 
     [Test]
     public void TestExecuteJsonPathWithKeySet()
     {
         var parameters = new List<string> { _jsonSource, "$.person.KeySet()" };
-        ClassicAssert.AreEqual(_function.Execute(parameters, Context), "name, age");
+        Assert.That(_function.Execute(parameters, Context), Is.EqualTo("name, age"));
     }
 
     [Test]
     public void TestExecuteJsonPathWithValues()
     {
         var parameters = new List<string> { _jsonSource, "$.person.Values()" };
-        ClassicAssert.AreEqual(_function.Execute(parameters, Context), "Sheldon, 29");
+        Assert.That(_function.Execute(parameters, Context), Is.EqualTo("Sheldon, 29"));
     }
 
     [Test]
     public void TestExecuteJsonPathWithSize()
     {
         var parameters = new List<string> { _jsonSource, "$.person.Size()" };
-        ClassicAssert.AreEqual(_function.Execute(parameters, Context), "2");
+        Assert.That(_function.Execute(parameters, Context), Is.EqualTo("2"));
     }
 
     [Test]
     public void TestExecuteJsonPathWithToString()
     {
         var parameters = new List<string> { _jsonSource, "$.person.ToString()" };
-        ClassicAssert.AreEqual("{\"name\":\"Sheldon\",\"age\":\"29\"}", _function.Execute(parameters, Context));
+        Assert.That(_function.Execute(parameters, Context), Is.EqualTo("{\"name\":\"Sheldon\",\"age\":\"29\"}"));
     }
 
     [Test]

@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using Agenix.Api.Endpoint.Resolver;
 using Agenix.Api.Message;
 using Agenix.Http.Message;

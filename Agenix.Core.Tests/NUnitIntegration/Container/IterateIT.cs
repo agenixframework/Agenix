@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using Agenix.Api.Annotations;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
 using static Agenix.Core.Actions.CreateVariablesAction.Builder;
+using static Agenix.Core.Actions.DefaultTestActionBuilder;
 using static Agenix.Core.Actions.EchoAction.Builder;
 using static Agenix.Core.Container.Iterate.Builder;
-using static Agenix.Core.Actions.DefaultTestActionBuilder;
 using ITestAction = Agenix.Api.ITestAction;
 
 namespace Agenix.Core.Tests.NUnitIntegration.Container;

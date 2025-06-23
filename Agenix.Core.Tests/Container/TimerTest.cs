@@ -1,4 +1,4 @@
-﻿using System.Threading;
+using System.Threading;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
 using Agenix.Core.Actions;

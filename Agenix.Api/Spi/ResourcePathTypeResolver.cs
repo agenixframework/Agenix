@@ -309,7 +309,7 @@ public class ResourcePathTypeResolver : ITypeResolver
         // Extract the filename (everything after the last dot)
         var lastDotIndex = resourcePath.LastIndexOf('.');
         if (lastDotIndex < 0)
-            // No dots found, use the whole path as namespace and leave filename empty
+        // No dots found, use the whole path as namespace and leave filename empty
         {
             return $"assembly://{assemblyName}/{resourcePath}/";
         }
@@ -391,9 +391,9 @@ public class ResourcePathTypeResolver : ITypeResolver
 
         // Iterate through all matching properties and merge them
         foreach (var entry in from prop in matchingProperties.Values
-                 where prop != null
-                 from DictionaryEntry entry in prop
-                 select entry)
+                              where prop != null
+                              from DictionaryEntry entry in prop
+                              select entry)
         {
             properties.SetProperty(entry.Key.ToString(), entry.Value?.ToString());
         }

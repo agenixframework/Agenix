@@ -83,7 +83,8 @@ public class WcfWsdlReader : IWsdlReader
     {
         var definition = new WsdlDefinition
         {
-            DocumentBaseUri = baseUri, Namespaces = new Dictionary<string, string>()
+            DocumentBaseUri = baseUri,
+            Namespaces = new Dictionary<string, string>()
         };
 
         // Extract target namespace

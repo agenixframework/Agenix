@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
@@ -9,8 +9,8 @@ using Agenix.Core.Actions;
 using Agenix.Core.Functions.Core;
 using Moq;
 using NUnit.Framework;
-using TestContext = Agenix.Api.Context.TestContext;
 using static Agenix.Core.Actions.DefaultTestActionBuilder;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.Tests.TestCase;
 
@@ -70,7 +70,7 @@ public class DefaultTestCaseTest : AbstractNUnitSetUp
 
         VerifyDurationHasBeenMeasured(_fixture.GetTestResult());
     }
-    
+
     [Test]
     public void TestWaitForFinish()
     {

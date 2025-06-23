@@ -2,8 +2,8 @@ using System.Net;
 using Agenix.Api.Message;
 using Agenix.Http.Actions;
 using Agenix.Http.Message;
-using static Moq.Mock;
 using static System.Net.HttpStatusCode;
+using static Moq.Mock;
 
 namespace Agenix.Http.Tests.Actions;
 

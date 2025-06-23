@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Log;
+using Agenix.Api.Log;
 using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;

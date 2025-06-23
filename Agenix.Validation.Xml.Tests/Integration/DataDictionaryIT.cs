@@ -7,12 +7,12 @@ using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using Agenix.Validation.Xml.Dsl;
 using Agenix.Validation.Xml.Variable.Dictionary.Xml;
 using NUnit.Framework;
-using TestContext = Agenix.Api.Context.TestContext;
 using static Agenix.Core.Actions.CreateVariablesAction.Builder;
-using static Agenix.Core.Actions.TraceVariablesAction.Builder;
 using static Agenix.Core.Actions.EchoAction.Builder;
 using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
 using static Agenix.Core.Actions.SendMessageAction.Builder;
+using static Agenix.Core.Actions.TraceVariablesAction.Builder;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Validation.Xml.Tests.Integration;
 

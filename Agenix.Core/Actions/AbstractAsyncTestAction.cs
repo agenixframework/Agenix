@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Agenix.Api.Common;
 using Agenix.Api.Context;

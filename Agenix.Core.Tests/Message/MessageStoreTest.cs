@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Agenix.Api;
 using Agenix.Api.Message;
 using Agenix.Api.Validation;
@@ -7,9 +7,9 @@ using Agenix.Core.Endpoint.Direct;
 using Agenix.Core.Message;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
-using TestContext = Agenix.Api.Context.TestContext;
 using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
 using static Agenix.Core.Actions.SendMessageAction.Builder;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.Tests.Message;
 

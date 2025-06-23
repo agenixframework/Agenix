@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Message.Correlation;
+using Agenix.Api.Message.Correlation;
 using Agenix.Core.Endpoint.Direct;
 using Agenix.Core.Message.Correlation;
 using Moq;
@@ -22,7 +22,8 @@ public class PollingCorrelationManagerTest
     {
         var pollableEndpointConfiguration = new DirectSyncEndpointConfiguration
         {
-            PollingInterval = 100L, Timeout = 500L
+            PollingInterval = 100L,
+            Timeout = 500L
         };
 
         var correlationManager = new PollingCorrelationManager<string>(pollableEndpointConfiguration, "Try again");
@@ -56,7 +57,8 @@ public class PollingCorrelationManagerTest
     {
         var pollableEndpointConfiguration = new DirectSyncEndpointConfiguration
         {
-            PollingInterval = 100L, Timeout = 500L
+            PollingInterval = 100L,
+            Timeout = 500L
         };
 
         var correlationManager = new PollingCorrelationManager<string>(pollableEndpointConfiguration, "Try again");
@@ -77,7 +79,8 @@ public class PollingCorrelationManagerTest
     {
         var pollableEndpointConfiguration = new DirectSyncEndpointConfiguration
         {
-            PollingInterval = 100L, Timeout = 300L
+            PollingInterval = 100L,
+            Timeout = 300L
         };
 
         var correlationManager = new PollingCorrelationManager<string>(pollableEndpointConfiguration, "Try again");

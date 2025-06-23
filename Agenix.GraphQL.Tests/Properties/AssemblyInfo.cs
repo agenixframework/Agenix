@@ -1,3 +1,3 @@
-﻿using Agenix.GraphQL.Tests.Properties;
+using Agenix.GraphQL.Tests.Properties;
 
 [assembly: NUnitLog4NetSupport]

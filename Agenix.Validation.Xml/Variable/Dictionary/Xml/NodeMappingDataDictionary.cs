@@ -33,50 +33,50 @@ public class NodeMappingDataDictionary : AbstractXmlDataDictionary, Initializing
         switch (PathMappingStrategy)
         {
             case PathMappingStrategy.EXACT:
-            {
-                if (!Mappings.TryGetValue(nodePath, out var mapping))
                 {
-                    return value;
-                }
+                    if (!Mappings.TryGetValue(nodePath, out var mapping))
+                    {
+                        return value;
+                    }
 
-                if (Log.IsEnabled(LogLevel.Debug))
-                {
-                    Log.LogDebug("Data dictionary setting element '{NodePath}' with value: {Value}",
-                        nodePath, mapping);
-                }
+                    if (Log.IsEnabled(LogLevel.Debug))
+                    {
+                        Log.LogDebug("Data dictionary setting element '{NodePath}' with value: {Value}",
+                            nodePath, mapping);
+                    }
 
-                return ConvertIfNecessary(Mappings[nodePath], value, context);
-            }
+                    return ConvertIfNecessary(Mappings[nodePath], value, context);
+                }
             case PathMappingStrategy.ENDS_WITH:
-            {
-                foreach (var entry in Mappings.Where(entry => nodePath.EndsWith(entry.Key)))
                 {
-                    if (Log.IsEnabled(LogLevel.Debug))
+                    foreach (var entry in Mappings.Where(entry => nodePath.EndsWith(entry.Key)))
                     {
-                        Log.LogDebug("Data dictionary setting element '{NodePath}' with value: {Value}",
-                            nodePath, entry.Value);
+                        if (Log.IsEnabled(LogLevel.Debug))
+                        {
+                            Log.LogDebug("Data dictionary setting element '{NodePath}' with value: {Value}",
+                                nodePath, entry.Value);
+                        }
+
+                        return ConvertIfNecessary(entry.Value, value, context);
                     }
 
-                    return ConvertIfNecessary(entry.Value, value, context);
+                    break;
                 }
-
-                break;
-            }
             case PathMappingStrategy.STARTS_WITH:
-            {
-                foreach (var entry in Mappings.Where(entry => nodePath.StartsWith(entry.Key)))
                 {
-                    if (Log.IsEnabled(LogLevel.Debug))
+                    foreach (var entry in Mappings.Where(entry => nodePath.StartsWith(entry.Key)))
                     {
-                        Log.LogDebug("Data dictionary setting element '{NodePath}' with value: {Value}",
-                            nodePath, entry.Value);
+                        if (Log.IsEnabled(LogLevel.Debug))
+                        {
+                            Log.LogDebug("Data dictionary setting element '{NodePath}' with value: {Value}",
+                                nodePath, entry.Value);
+                        }
+
+                        return ConvertIfNecessary(entry.Value, value, context);
                     }
 
-                    return ConvertIfNecessary(entry.Value, value, context);
+                    break;
                 }
-
-                break;
-            }
         }
 
         return value;

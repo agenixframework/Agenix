@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using Agenix.Http.Message;
 using NUnit.Framework.Legacy;
 using TestContext = Agenix.Api.Context.TestContext;

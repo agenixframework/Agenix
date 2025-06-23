@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Annotations;
+using Agenix.Api.Annotations;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Message;
 using Agenix.Api.Spi;
@@ -14,7 +14,8 @@ namespace Agenix.Core.Tests.Endpoint.Direct.Annotation;
 public class DirectEndpointConfigParserTest
 {
     private TestContext _context;
-    [AgenixEndpoint] [DirectEndpointConfig(QueueName = "testQueue")]
+    [AgenixEndpoint]
+    [DirectEndpointConfig(QueueName = "testQueue")]
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
     private DirectEndpoint _directEndpoint1;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
@@ -26,12 +27,14 @@ public class DirectEndpointConfigParserTest
     private DirectEndpoint _directEndpoint2;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
 
-    [AgenixEndpoint] [DirectEndpointConfig]
+    [AgenixEndpoint]
+    [DirectEndpointConfig]
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
     private DirectEndpoint _directEndpoint3;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
 
-    [AgenixEndpoint] [DirectEndpointConfig(QueueName = "testQueue")]
+    [AgenixEndpoint]
+    [DirectEndpointConfig(QueueName = "testQueue")]
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
     private DirectEndpoint _directEndpoint4;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value

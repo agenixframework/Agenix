@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using Agenix.Api.Condition;
 using Agenix.Core.Actions;
 using Agenix.Core.Container;

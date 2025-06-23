@@ -1,10 +1,10 @@
 using Agenix.Core;
 using Agenix.Core.Container;
 using NUnit.Framework.Legacy;
-using Is = NHamcrest.Is;
-using static Agenix.Core.Container.Iterate.Builder;
 using static Agenix.Core.Actions.CreateVariablesAction.Builder;
+using static Agenix.Core.Container.Iterate.Builder;
 using static Agenix.Validation.NHamcrest.Container.NHamcrestConditionExpression;
+using Is = NHamcrest.Is;
 
 namespace Agenix.Validation.NHamcrest.Tests.Container;
 
@@ -21,17 +21,17 @@ public class IterateTestActionBuilderTest : AbstractNUnitSetUp
             .Actions(CreateVariable("index", "${i}")));
 
         ClassicAssert.NotNull(Context.GetVariable("i"));
-        ClassicAssert.AreEqual("4", Context.GetVariable("i"));
+        Assert.That(Context.GetVariable("i"), NUnit.Framework.Is.EqualTo("4"));
 
         var test = builder.GetTestCase();
-        ClassicAssert.AreEqual(1, test.GetActionCount());
-        ClassicAssert.AreEqual(typeof(Iterate), test.GetActions()[0].GetType());
-        ClassicAssert.AreEqual("iterate", test.GetActions()[0].Name);
+        Assert.That(test.GetActionCount(), NUnit.Framework.Is.EqualTo(1));
+        Assert.That(test.GetActions()[0].GetType(), NUnit.Framework.Is.EqualTo(typeof(Iterate)));
+        Assert.That(test.GetActions()[0].Name, NUnit.Framework.Is.EqualTo("iterate"));
 
         var container = (Iterate)test.GetActions()[0];
-        ClassicAssert.AreEqual(1, container.GetActionCount());
-        ClassicAssert.AreEqual("i", container.GetIndexName());
-        ClassicAssert.AreEqual(1, container.GetStep());
-        ClassicAssert.AreEqual(0, container.GetStart());
+        Assert.That(container.GetActionCount(), NUnit.Framework.Is.EqualTo(1));
+        Assert.That(container.GetIndexName(), NUnit.Framework.Is.EqualTo("i"));
+        Assert.That(container.GetStep(), NUnit.Framework.Is.EqualTo(1));
+        Assert.That(container.GetStart(), NUnit.Framework.Is.EqualTo(0));
     }
 }

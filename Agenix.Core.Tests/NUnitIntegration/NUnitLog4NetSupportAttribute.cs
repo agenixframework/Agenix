@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Agenix.Api.Log;
 using Microsoft.Extensions.Logging;
 using NUnit.Framework;

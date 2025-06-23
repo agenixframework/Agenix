@@ -1,4 +1,4 @@
-﻿using Agenix.Api;
+using Agenix.Api;
 using Agenix.Api.Annotations;
 using Agenix.Api.Spi;
 using Agenix.Api.Variable;

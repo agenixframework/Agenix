@@ -1,13 +1,13 @@
-﻿using Agenix.Api.Annotations;
+using Agenix.Api.Annotations;
 using Agenix.Api.Condition;
 using Agenix.Api.Spi;
 using Agenix.Core;
 using Agenix.Http.Client;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
-using HttpClient = Agenix.Http.Client.HttpClient;
-using static Agenix.Core.Container.Wait.Builder<Agenix.Api.Condition.ICondition>;
-using static Agenix.Core.Actions.SendMessageAction.Builder;
 using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
+using static Agenix.Core.Actions.SendMessageAction.Builder;
+using static Agenix.Core.Container.Wait.Builder<Agenix.Api.Condition.ICondition>;
+using HttpClient = Agenix.Http.Client.HttpClient;
 
 namespace Agenix.Http.Tests.Integration;
 
@@ -16,7 +16,8 @@ public class WaitHttpIT
 {
     private const string fakeApiRequestUrl = "https://jsonplaceholder.typicode.com/posts/1";
 
-    [BindToRegistry(Name = "_client")] private readonly HttpClient _client = new HttpClientBuilder()
+    [BindToRegistry(Name = "_client")]
+    private readonly HttpClient _client = new HttpClientBuilder()
         .RequestUrl(fakeApiRequestUrl)
         .RequestMethod(HttpMethod.Get)
         .Build();

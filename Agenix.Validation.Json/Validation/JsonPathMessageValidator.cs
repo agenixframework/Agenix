@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -100,7 +100,7 @@ public class JsonPathMessageValidator : AbstractMessageValidator<JsonPathMessage
                 var expectedValue = value;
 
                 if (expectedValue is string)
-                    //check if the expected value is variable or function (and resolve it, if yes)
+                //check if the expected value is variable or function (and resolve it, if yes)
                 {
                     expectedValue = context.ReplaceDynamicContentInString(expectedValue.ToString());
                 }

@@ -142,7 +142,7 @@ public sealed class ReflectionUtils
             if (string.Equals(candidate.Name, method, StringComparison.CurrentCultureIgnoreCase))
             {
                 var parameterTypes = Array.ConvertAll(candidate.GetParameters(),
-                    delegate(ParameterInfo i) { return i.ParameterType; });
+                    delegate (ParameterInfo i) { return i.ParameterType; });
                 var typesMatch = false;
 
                 var zeroTypeArguments = null == argumentTypes || argumentTypes.Length == 0;

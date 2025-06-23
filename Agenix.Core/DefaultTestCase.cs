@@ -353,7 +353,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
             var value = entry.Value;
 
             if (value is string stringValue)
-                // Check if value is a variable or function and resolve it accordingly
+            // Check if value is a variable or function and resolve it accordingly
             {
                 context.SetVariable(key, context.ReplaceDynamicContentInString(stringValue));
             }

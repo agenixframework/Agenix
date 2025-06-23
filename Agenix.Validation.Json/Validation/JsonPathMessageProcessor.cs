@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -114,18 +114,18 @@ public class JsonPathMessageProcessor : AbstractMessageProcessor
                         value = false;
                         break;
                     default:
-                    {
-                        if (!int.TryParse(valueExpression, out var intValue))
                         {
-                            value = valueExpression;
-                        }
-                        else
-                        {
-                            value = intValue;
-                        }
+                            if (!int.TryParse(valueExpression, out var intValue))
+                            {
+                                value = valueExpression;
+                            }
+                            else
+                            {
+                                value = intValue;
+                            }
 
-                        break;
-                    }
+                            break;
+                        }
                 }
 
                 try

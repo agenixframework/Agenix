@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -190,9 +190,9 @@ public class DefaultHeaderValidator : IHeaderValidator
 
                 // Iterate over received values and try to match with expected values
                 foreach (var receivedValueString in from receivedValueString in receivedValueStrings
-                         let validated = ValidateExpected(headerName, context, receivedValueString, expectedValuesCopy)
-                         where !validated
-                         select receivedValueString)
+                                                    let validated = ValidateExpected(headerName, context, receivedValueString, expectedValuesCopy)
+                                                    where !validated
+                                                    select receivedValueString)
                 {
                     throw new ValidationException(
                         $"Values not equal for header element '{headerName}', expected '{string.Join(", ", expectedValues)}' but was '{receivedValueString}'");

@@ -204,7 +204,7 @@ public class JsonSchemaValidation(JsonSchemaFilter jsonSchemaFilter) : ISchemaVa
 
             receivedJson.IsValid(simpleJsonSchema.Schema!, out IList<ValidationError> errors);
 
-            return [..errors];
+            return [.. errors];
         }
         catch (JsonReaderException e)
         {

@@ -28,8 +28,8 @@
 using System;
 using Agenix.Api.Context;
 using Agenix.Api.Endpoint;
-using Agenix.Api.Message;
 using Agenix.Api.Log;
+using Agenix.Api.Message;
 
 namespace Agenix.Core.Endpoint;
 

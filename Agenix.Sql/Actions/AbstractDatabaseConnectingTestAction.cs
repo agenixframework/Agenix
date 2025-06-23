@@ -1,4 +1,4 @@
-﻿#region Imports
+#region Imports
 
 #region License
 

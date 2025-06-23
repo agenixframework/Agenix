@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // MIT License
 //
@@ -78,9 +78,9 @@ public class DelegatingMessageSelector : IMessageSelector
     public bool Accept(IMessage message)
     {
         return (from entry in _matchingHeaders
-            let factory =
-                _factories.FirstOrDefault(f => f.Supports(entry.Key)) ?? new HeaderMatchingMessageSelector.Factory()
-            select factory.Create(entry.Key, entry.Value, _context)).All(selector => selector.Accept(message));
+                let factory =
+                    _factories.FirstOrDefault(f => f.Supports(entry.Key)) ?? new HeaderMatchingMessageSelector.Factory()
+                select factory.Create(entry.Key, entry.Value, _context)).All(selector => selector.Accept(message));
     }
 
     /// <summary>

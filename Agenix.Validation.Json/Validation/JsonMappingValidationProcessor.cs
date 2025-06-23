@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Context;
+using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
 using Agenix.Api.Message;

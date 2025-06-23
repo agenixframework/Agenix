@@ -89,7 +89,8 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         var extractMessageElements = new Dictionary<string, object>
         {
-            ["$.text"] = "messageVar", ["$.person"] = "person"
+            ["$.text"] = "messageVar",
+            ["$.person"] = "person"
         };
 
         var variableExtractor = new JsonPathVariableExtractor.Builder()

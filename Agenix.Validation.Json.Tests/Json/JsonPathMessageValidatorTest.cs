@@ -1,4 +1,4 @@
-﻿using Agenix.Api.Exceptions;
+using Agenix.Api.Exceptions;
 using Agenix.Api.Message;
 using Agenix.Api.Validation.Context;
 using Agenix.Api.Validation.Matcher;
@@ -8,10 +8,10 @@ using Agenix.Core.Validation.Xml;
 using Agenix.Validation.Json.Validation;
 using NHamcrest;
 using NUnit.Framework;
-using TestContext = Agenix.Api.Context.TestContext;
 using Has = NHamcrest.Has;
 using Is = NHamcrest.Is;
 using NUnitIs = NUnit.Framework.Is;
+using TestContext = Agenix.Api.Context.TestContext;
 
 
 namespace Agenix.Validation.Json.Tests.Json;

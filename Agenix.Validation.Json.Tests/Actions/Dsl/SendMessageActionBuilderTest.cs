@@ -17,9 +17,9 @@ using Moq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using NUnit.Framework;
-using TestContext = Agenix.Api.Context.TestContext;
 using static Agenix.Core.Actions.SendMessageAction.Builder;
 using IReferenceResolver = Agenix.Api.Spi.IReferenceResolver;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Validation.Json.Tests.Actions.Dsl;
 

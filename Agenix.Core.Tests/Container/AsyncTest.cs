@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -97,6 +97,7 @@ public class AsyncTest : AbstractNUnitSetUp
         _error.Verify(e => e.Execute(Context), Times.Never);
     }
 
+
     [Test]
     public async Task TestFailingActionAsync()
     {
@@ -109,6 +110,23 @@ public class AsyncTest : AbstractNUnitSetUp
         failAction.Setup(f => f.Execute(Context))
             .Throws(new AgenixSystemException("Generated error to interrupt test execution"));
 
+        // Use ManualResetEventSlim for better synchronization
+        var action1Executed = new ManualResetEventSlim(false);
+        var failActionExecuted = new ManualResetEventSlim(false);
+        var errorActionExecuted = new ManualResetEventSlim(false);
+        var containerCompleted = new ManualResetEventSlim(false);
+
+        // Setup execution tracking
+        action1.Setup(a => a.Execute(Context))
+            .Callback(() => action1Executed.Set());
+
+        failAction.Setup(f => f.Execute(Context))
+            .Callback(() => failActionExecuted.Set())
+            .Throws(new AgenixSystemException("Generated error to interrupt test execution"));
+
+        _error.Setup(e => e.Execute(Context))
+            .Callback(() => errorActionExecuted.Set());
+
         // Build the Async container including the failAction
         var container = new Async.Builder()
             .SuccessAction(_success.Object)
@@ -116,24 +134,45 @@ public class AsyncTest : AbstractNUnitSetUp
             .Actions(action1.Object, failAction.Object, action2.Object, action3.Object)
             .Build();
 
-        // Execute the container
-        container.Execute(Context);
+        try
+        {
+            // Execute the container
+            container.Execute(Context);
 
-        // Wait for the asynchronous operation to complete (Replace with appropriate wait logic if needed)
-        await WaitUtils.WaitForCompletion(container, Context);
+            // Wait for specific execution points with timeouts
+            Assert.That(action1Executed.Wait(TimeSpan.FromSeconds(5)), Is.True,
+                "Action1 should execute within timeout");
 
-        // Check for exceptions in context
-        ClassicAssert.AreEqual(1, Context.GetExceptions().Count);
-        ClassicAssert.IsInstanceOf<AgenixSystemException>(Context.GetExceptions().First());
-        ClassicAssert.AreEqual("Generated error to interrupt test execution", Context.GetExceptions().First().Message);
+            Assert.That(failActionExecuted.Wait(TimeSpan.FromSeconds(5)), Is.True,
+                "FailAction should execute within timeout");
 
-        // Verify execution order
-        action1.Verify(a => a.Execute(Context), Times.Once);
-        action2.Verify(a => a.Execute(Context), Times.Never);
-        action3.Verify(a => a.Execute(Context), Times.Never);
+            Assert.That(errorActionExecuted.Wait(TimeSpan.FromSeconds(5)), Is.True,
+                "Error action should execute within timeout");
 
-        _error.Verify(e => e.Execute(Context), Times.Once);
-        _success.Verify(s => s.Execute(Context), Times.Never);
+            // Wait for the asynchronous operation to complete
+            await WaitUtils.WaitForCompletion(container, Context);
+
+            // Check for exceptions in context
+            ClassicAssert.AreEqual(1, Context.GetExceptions().Count);
+            ClassicAssert.IsInstanceOf<AgenixSystemException>(Context.GetExceptions().First());
+            ClassicAssert.AreEqual("Generated error to interrupt test execution", Context.GetExceptions().First().Message);
+
+            // Verify execution order and behavior
+            action1.Verify(a => a.Execute(Context), Times.Once);
+            action2.Verify(a => a.Execute(Context), Times.Never);
+            action3.Verify(a => a.Execute(Context), Times.Never);
+
+            _error.Verify(e => e.Execute(Context), Times.Once);
+            _success.Verify(s => s.Execute(Context), Times.Never);
+        }
+        finally
+        {
+            // Clean up synchronization primitives
+            action1Executed.Dispose();
+            failActionExecuted.Dispose();
+            errorActionExecuted.Dispose();
+            containerCompleted.Dispose();
+        }
     }
 
     [Test]
