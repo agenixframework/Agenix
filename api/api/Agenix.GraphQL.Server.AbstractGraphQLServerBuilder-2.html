@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class AbstractGraphQLServerBuilder&lt;TServer, TBuilder&gt; </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class AbstractGraphQLServerBuilder&lt;TServer, TBuilder&gt; ">
+    
+    <meta name="description" content="Abstract builder for GraphQL servers that provides fluent API for configuration.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2">
+
+
+
+  <h1 id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2" class="text-break">Class AbstractGraphQLServerBuilder&lt;TServer, TBuilder&gt;</h1>
+  <div class="markdown level0 summary"><p>Abstract builder for GraphQL servers that provides fluent API for configuration.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Core.Endpoint.AbstractEndpointBuilder-1.html">AbstractEndpointBuilder</a>&lt;TServer&gt;</div>
+    <div class="level2"><a class="xref" href="Agenix.Core.Server.AbstractServerBuilder-2.html">AbstractServerBuilder</a>&lt;TServer, TBuilder&gt;</div>
+    <div class="level3"><span class="xref">AbstractGraphQLServerBuilder&lt;TServer, TBuilder&gt;</span></div>
+      <div class="level4"><a class="xref" href="Agenix.GraphQL.Server.GraphQLServerBuilder.html">GraphQLServerBuilder</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.Endpoint.IEndpointBuilder-1.html">IEndpointBuilder</a>&lt;TServer&gt;</div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Core.Server.AbstractServerBuilder-2.html#Agenix_Core_Server_AbstractServerBuilder_2_AutoStart_System_Boolean_">AbstractServerBuilder&lt;TServer, TBuilder&gt;.AutoStart(bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Server.AbstractServerBuilder-2.html#Agenix_Core_Server_AbstractServerBuilder_2_EndpointAdapter_Agenix_Api_Endpoint_IEndpointAdapter_">AbstractServerBuilder&lt;TServer, TBuilder&gt;.EndpointAdapter(IEndpointAdapter)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Server.AbstractServerBuilder-2.html#Agenix_Core_Server_AbstractServerBuilder_2_DebugLogging_System_Boolean_">AbstractServerBuilder&lt;TServer, TBuilder&gt;.DebugLogging(bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Server.AbstractServerBuilder-2.html#Agenix_Core_Server_AbstractServerBuilder_2_Timeout_System_Int64_">AbstractServerBuilder&lt;TServer, TBuilder&gt;.Timeout(long)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Endpoint.AbstractEndpointBuilder-1.html#Agenix_Core_Endpoint_AbstractEndpointBuilder_1_Build">AbstractEndpointBuilder&lt;TServer&gt;.Build()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Endpoint.AbstractEndpointBuilder-1.html#Agenix_Core_Endpoint_AbstractEndpointBuilder_1_Supports_System_Type_">AbstractEndpointBuilder&lt;TServer&gt;.Supports(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Endpoint.AbstractEndpointBuilder-1.html#Agenix_Core_Endpoint_AbstractEndpointBuilder_1_Name_System_String_">AbstractEndpointBuilder&lt;TServer&gt;.Name(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Endpoint.AbstractEndpointBuilder-1.html#Agenix_Core_Endpoint_AbstractEndpointBuilder_1_Initialize">AbstractEndpointBuilder&lt;TServer&gt;.Initialize()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.GraphQL.html">GraphQL</a>.<a class="xref" href="Agenix.GraphQL.Server.html">Server</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.GraphQL.dll</h6>
+  <h5 id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class AbstractGraphQLServerBuilder&lt;TServer, TBuilder&gt; : AbstractServerBuilder&lt;TServer, TBuilder&gt;, IEndpointBuilder&lt;TServer&gt; where TServer : GraphQLServer where TBuilder : AbstractGraphQLServerBuilder&lt;TServer, TBuilder&gt;</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TServer</span></td>
+        <td><p>The type of GraphQL server being built</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TBuilder</span></td>
+        <td><p>The type of the builder itself for fluent chaining</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2__ctor__0_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Server.AbstractGraphQLServerBuilder%602.%23ctor(%600)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Server/AbstractGraphQLServerBuilder.cs/#L73">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2__ctor_" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2.#ctor*"></a>
+  <h4 id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2__ctor__0_" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2.#ctor(`0)">AbstractGraphQLServerBuilder(TServer)</h4>
+  <div class="markdown level1 summary"><p>Constructor</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected AbstractGraphQLServerBuilder(TServer server1Old)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TServer</span></td>
+        <td><span class="parametername">server1Old</span></td>
+        <td><p>The GraphQL server instance</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_AddMutationResolver_System_String_System_Func_System_Object_System_Object_System_Threading_Tasks_Task_System_Object___.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Server.AbstractGraphQLServerBuilder%602.AddMutationResolver(System.String%2CSystem.Func%7BSystem.Object%2CSystem.Object%2CSystem.Threading.Tasks.Task%7BSystem.Object%7D%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Server/AbstractGraphQLServerBuilder.cs/#L158">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_AddMutationResolver_" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2.AddMutationResolver*"></a>
+  <h4 id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_AddMutationResolver_System_String_System_Func_System_Object_System_Object_System_Threading_Tasks_Task_System_Object___" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2.AddMutationResolver(System.String,System.Func{System.Object,System.Object,System.Threading.Tasks.Task{System.Object}})">AddMutationResolver(string, Func&lt;object, object, Task&lt;object&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Adds a mutation resolver</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TBuilder AddMutationResolver(string fieldName, Func&lt;object, object, Task&lt;object&gt;&gt; resolver)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">fieldName</span></td>
+        <td><p>The GraphQL field name</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</td>
+        <td><span class="parametername">resolver</span></td>
+        <td><p>The resolver function</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TBuilder</span></td>
+        <td><p>The builder instance for fluent chaining</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_AddQueryResolver_System_String_System_Func_System_Object_System_Object_System_Threading_Tasks_Task_System_Object___.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Server.AbstractGraphQLServerBuilder%602.AddQueryResolver(System.String%2CSystem.Func%7BSystem.Object%2CSystem.Object%2CSystem.Threading.Tasks.Task%7BSystem.Object%7D%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Server/AbstractGraphQLServerBuilder.cs/#L140">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_AddQueryResolver_" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2.AddQueryResolver*"></a>
+  <h4 id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_AddQueryResolver_System_String_System_Func_System_Object_System_Object_System_Threading_Tasks_Task_System_Object___" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2.AddQueryResolver(System.String,System.Func{System.Object,System.Object,System.Threading.Tasks.Task{System.Object}})">AddQueryResolver(string, Func&lt;object, object, Task&lt;object&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Adds a query resolver</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TBuilder AddQueryResolver(string fieldName, Func&lt;object, object, Task&lt;object&gt;&gt; resolver)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">fieldName</span></td>
+        <td><p>The GraphQL field name</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</td>
+        <td><span class="parametername">resolver</span></td>
+        <td><p>The resolver function</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TBuilder</span></td>
+        <td><p>The builder instance for fluent chaining</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_AddSubscriptionResolver_System_String_System_Func_System_Object_System_Object_System_Threading_Tasks_Task_System_Object___.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Server.AbstractGraphQLServerBuilder%602.AddSubscriptionResolver(System.String%2CSystem.Func%7BSystem.Object%2CSystem.Object%2CSystem.Threading.Tasks.Task%7BSystem.Object%7D%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Server/AbstractGraphQLServerBuilder.cs/#L176">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_AddSubscriptionResolver_" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2.AddSubscriptionResolver*"></a>
+  <h4 id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_AddSubscriptionResolver_System_String_System_Func_System_Object_System_Object_System_Threading_Tasks_Task_System_Object___" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2.AddSubscriptionResolver(System.String,System.Func{System.Object,System.Object,System.Threading.Tasks.Task{System.Object}})">AddSubscriptionResolver(string, Func&lt;object, object, Task&lt;object&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Adds a subscription resolver</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TBuilder AddSubscriptionResolver(string fieldName, Func&lt;object, object, Task&lt;object&gt;&gt; resolver)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">fieldName</span></td>
+        <td><p>The GraphQL field name</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</td>
+        <td><span class="parametername">resolver</span></td>
+        <td><p>The resolver function</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TBuilder</span></td>
+        <td><p>The builder instance for fluent chaining</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_ContextPath_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Server.AbstractGraphQLServerBuilder%602.ContextPath(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Server/AbstractGraphQLServerBuilder.cs/#L127">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_ContextPath_" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2.ContextPath*"></a>
+  <h4 id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_ContextPath_System_String_" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2.ContextPath(System.String)">ContextPath(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the context path</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TBuilder ContextPath(string contextPath)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">contextPath</span></td>
+        <td><p>The context path</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TBuilder</span></td>
+        <td><p>The builder instance for fluent chaining</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_GetEndpoint.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Server.AbstractGraphQLServerBuilder%602.GetEndpoint%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Server/AbstractGraphQLServerBuilder.cs/#L83">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_GetEndpoint_" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2.GetEndpoint*"></a>
+  <h4 id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_GetEndpoint" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2.GetEndpoint">GetEndpoint()</h4>
+  <div class="markdown level1 summary"><p>Gets the endpoint</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override TServer GetEndpoint()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TServer</span></td>
+        <td><p>The GraphQL server endpoint</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Endpoint.AbstractEndpointBuilder-1.html#Agenix_Core_Endpoint_AbstractEndpointBuilder_1_GetEndpoint">AbstractEndpointBuilder&lt;TServer&gt;.GetEndpoint()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_GraphQLPath_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Server.AbstractGraphQLServerBuilder%602.GraphQLPath(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Server/AbstractGraphQLServerBuilder.cs/#L115">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_GraphQLPath_" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2.GraphQLPath*"></a>
+  <h4 id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_GraphQLPath_System_String_" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2.GraphQLPath(System.String)">GraphQLPath(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the GraphQL endpoint path</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TBuilder GraphQLPath(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>The GraphQL endpoint path</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TBuilder</span></td>
+        <td><p>The builder instance for fluent chaining</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_Host_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Server.AbstractGraphQLServerBuilder%602.Host(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Server/AbstractGraphQLServerBuilder.cs/#L104">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_Host_" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2.Host*"></a>
+  <h4 id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_Host_System_String_" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2.Host(System.String)">Host(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the host property</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TBuilder Host(string host)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">host</span></td>
+        <td><p>The host address</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TBuilder</span></td>
+        <td><p>The builder instance for fluent chaining</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_Port_System_Int32_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Server.AbstractGraphQLServerBuilder%602.Port(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Server/AbstractGraphQLServerBuilder.cs/#L93">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_Port_" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2.Port*"></a>
+  <h4 id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_Port_System_Int32_" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2.Port(System.Int32)">Port(int)</h4>
+  <div class="markdown level1 summary"><p>Sets the port property</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TBuilder Port(int port)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">port</span></td>
+        <td><p>The port number</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TBuilder</span></td>
+        <td><p>The builder instance for fluent chaining</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_Timeout_System_Int64_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Server.AbstractGraphQLServerBuilder%602.Timeout(System.Int64)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Server/AbstractGraphQLServerBuilder.cs/#L193">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_Timeout_" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2.Timeout*"></a>
+  <h4 id="Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2_Timeout_System_Int64_" data-uid="Agenix.GraphQL.Server.AbstractGraphQLServerBuilder`2.Timeout(System.Int64)">Timeout(long)</h4>
+  <div class="markdown level1 summary"><p>Sets the default timeout for GraphQL operations</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override TBuilder Timeout(long timeout)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">timeout</span></td>
+        <td><p>The timeout in milliseconds</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TBuilder</span></td>
+        <td><p>The builder instance for fluent chaining</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">AbstractServerBuilder&lt;TServer, TBuilder&gt;.Timeout(long)</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.Endpoint.IEndpointBuilder-1.html">IEndpointBuilder&lt;T&gt;</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Server_AbstractGraphQLServerBuilder_2.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Server.AbstractGraphQLServerBuilder%602%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Server/AbstractGraphQLServerBuilder.cs/#L10" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Namespace Agenix.Validation.Xml.Schema </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Namespace Agenix.Validation.Xml.Schema ">
+    
+    
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Validation.Xml.Schema">
+
+  <h1 id="Agenix_Validation_Xml_Schema" data-uid="Agenix.Validation.Xml.Schema" class="text-break">Namespace Agenix.Validation.Xml.Schema</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">
+Classes
+</h3>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.AbstractSchemaCollection.html">AbstractSchemaCollection</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.AbstractSchemaMappingStrategy.html">AbstractSchemaMappingStrategy</a></h4>
+      <section><p>Abstract schema mapping strategy extracts target namespace and root element name
+for subclasses.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.RootQNameSchemaMappingStrategy.html">RootQNameSchemaMappingStrategy</a></h4>
+      <section><p>Mapping strategy uses the root element local name to find matching schema
+instance.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.SchemaImpl.html">SchemaImpl</a></h4>
+      <section><p>Represents an implementation of the <a class="xref" href="Agenix.Validation.Xml.Schema.IWsdlSchema.html">IWsdlSchema</a> interface, providing functionality
+to work with XML schemas as both <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.schema.xmlschema">XmlSchema</a> and <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlelement">XmlElement</a> objects.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.SchemaMappingStrategyChain.html">SchemaMappingStrategyChain</a></h4>
+      <section><p>Special schema mapping strategy delegating to several other strategies in
+a mapping chain. The first mapping strategy finding a proper schema wins.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.SimpleXsdSchema.html">SimpleXsdSchema</a></h4>
+      <section><p>C# equivalent of Spring's SimpleXsdSchema
+Represents a simple XSD schema wrapper</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.TargetNamespaceSchemaMappingStrategy.html">TargetNamespaceSchemaMappingStrategy</a></h4>
+      <section><p>Mapping strategy checks on target namespaces in schemas to find matching schema
+instance.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.WcfWsdlReader.html">WcfWsdlReader</a></h4>
+      <section><p>Provides functionality to read and parse WSDL (Web Services Description Language) documents.
+Implements the <a class="xref" href="Agenix.Validation.Xml.Schema.IWsdlReader.html">IWsdlReader</a> interface to handle WSDL input from various sources,
+including locators and input streams.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.WsdlDefinition.html">WsdlDefinition</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.WsdlFactory.html">WsdlFactory</a></h4>
+      <section><p>Factory class for creating instances of WSDL (Web Services Description Language) readers.
+Implements the <a class="xref" href="Agenix.Validation.Xml.Schema.IWsdlFactory.html">IWsdlFactory</a> interface to provide a mechanism for obtaining
+WSDL reader instances.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.WsdlImport.html">WsdlImport</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.WsdlSchema.html">WsdlSchema</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.WsdlSchemaImport.html">WsdlSchemaImport</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.WsdlSchemaInclude.html">WsdlSchemaInclude</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.WsdlType.html">WsdlType</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.WsdlTypes.html">WsdlTypes</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.WsdlXsdSchema.html">WsdlXsdSchema</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.XmlSchemaValidator.html">XmlSchemaValidator</a></h4>
+      <section><p>The <code>XmlSchemaValidator</code> class is used to validate XML documents against a set of XML Schema Definitions
+(XSDs).
+It ensures that the XML conforms to the rules and structure defined by the associated schema set.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.XsdSchemaRepository.html">XsdSchemaRepository</a></h4>
+      <section></section>
+    <h3 id="interfaces">
+Interfaces
+</h3>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.IExtendedWsdlSchema.html">IExtendedWsdlSchema</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.IWsdlFactory.html">IWsdlFactory</a></h4>
+      <section><p>Interface for a factory that creates instances of WSDL (Web Services Description Language) readers.
+Provides a mechanism for obtaining new WSDL reader instances and allows for centralized
+management of how these instances are created.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.IWsdlReader.html">IWsdlReader</a></h4>
+      <section><p>Interface for reading WSDL (Web Services Description Language) documents.
+Provides methods to interpret and parse WSDL documents from different sources.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.IWsdlSchema.html">IWsdlSchema</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.IXsdSchema.html">IXsdSchema</a></h4>
+      <section><p>Represents an interface that provides functionality for interacting with an XSD (XML Schema Definition) schema,
+including schema retrieval, validation, and creation of validators.</p>
+</section>
+      <h4><a class="xref" href="Agenix.Validation.Xml.Schema.IXsdSchemaMappingStrategy.html">IXsdSchemaMappingStrategy</a></h4>
+      <section><p>Interface for schema mapping strategies used in schema repository.</p>
+</section>
+
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

@@ -81,6 +81,8 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Agenix.Api.Message.IMessageProcessor.html">IMessageProcessor</a>.<a class="xref" href="Agenix.Api.Message.IMessageProcessor.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Core.Message.DelegatingPathExpressionProcessor.html">DelegatingPathExpressionProcessor</a>, <a class="xref" href="Agenix.Core.Message.DelegatingPathExpressionProcessor.html">DelegatingPathExpressionProcessor</a>.<a class="xref" href="Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.html">Builder</a>&gt;</div>
+    <div><a class="xref" href="Agenix.Api.Message.IMessageTransformer.html">IMessageTransformer</a>.<a class="xref" href="Agenix.Api.Message.IMessageTransformer.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Core.Message.DelegatingPathExpressionProcessor.html">DelegatingPathExpressionProcessor</a>, <a class="xref" href="Agenix.Core.Message.DelegatingPathExpressionProcessor.html">DelegatingPathExpressionProcessor</a>.<a class="xref" href="Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.html">Builder</a>&gt;</div>
+    <div><a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a></div>
     <div><a class="xref" href="Agenix.Api.Builder.IWithExpressions-1.html">IWithExpressions</a>&lt;<a class="xref" href="Agenix.Core.Message.DelegatingPathExpressionProcessor.html">DelegatingPathExpressionProcessor</a>.<a class="xref" href="Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.html">Builder</a>&gt;</div>
   </div>
   <div class="inheritedMembers">
@@ -108,7 +110,7 @@
   <h6><strong>Assembly</strong>: Agenix.Core.dll</h6>
   <h5 id="Agenix_Core_Message_DelegatingPathExpressionProcessor_Builder_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class DelegatingPathExpressionProcessor.Builder : IMessageProcessor.IBuilder&lt;DelegatingPathExpressionProcessor, DelegatingPathExpressionProcessor.Builder&gt;, IWithExpressions&lt;DelegatingPathExpressionProcessor.Builder&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class DelegatingPathExpressionProcessor.Builder : IMessageProcessor.IBuilder&lt;DelegatingPathExpressionProcessor, DelegatingPathExpressionProcessor.Builder&gt;, IMessageTransformer.IBuilder&lt;DelegatingPathExpressionProcessor, DelegatingPathExpressionProcessor.Builder&gt;, IBuilder, IWithExpressions&lt;DelegatingPathExpressionProcessor.Builder&gt;</code></pre>
   </div>
   <h3 id="properties">Properties
 </h3>
@@ -117,7 +119,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_DelegatingPathExpressionProcessor_Builder_PathExpressions.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.PathExpressions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/DelegatingPathExpressionProcessor.cs/#L134">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/DelegatingPathExpressionProcessor.cs/#L158">View Source</a>
   </span>
   <a id="Agenix_Core_Message_DelegatingPathExpressionProcessor_Builder_PathExpressions_" data-uid="Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.PathExpressions*"></a>
   <h4 id="Agenix_Core_Message_DelegatingPathExpressionProcessor_Builder_PathExpressions" data-uid="Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.PathExpressions">PathExpressions</h4>
@@ -149,7 +151,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_DelegatingPathExpressionProcessor_Builder_Build.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.Build%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/DelegatingPathExpressionProcessor.cs/#L139">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/DelegatingPathExpressionProcessor.cs/#L163">View Source</a>
   </span>
   <a id="Agenix_Core_Message_DelegatingPathExpressionProcessor_Builder_Build_" data-uid="Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.Build*"></a>
   <h4 id="Agenix_Core_Message_DelegatingPathExpressionProcessor_Builder_Build" data-uid="Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.Build">Build()</h4>
@@ -179,7 +181,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_DelegatingPathExpressionProcessor_Builder_Expression_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.Expression(System.String%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/DelegatingPathExpressionProcessor.cs/#L160">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/DelegatingPathExpressionProcessor.cs/#L188">View Source</a>
   </span>
   <a id="Agenix_Core_Message_DelegatingPathExpressionProcessor_Builder_Expression_" data-uid="Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.Expression*"></a>
   <h4 id="Agenix_Core_Message_DelegatingPathExpressionProcessor_Builder_Expression_System_String_System_Object_" data-uid="Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.Expression(System.String,System.Object)">Expression(string, object)</h4>
@@ -233,7 +235,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_DelegatingPathExpressionProcessor_Builder_Expressions_System_Collections_Generic_IDictionary_System_String_System_Object__.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.Expressions(System.Collections.Generic.IDictionary%7BSystem.String%2CSystem.Object%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/DelegatingPathExpressionProcessor.cs/#L150">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/DelegatingPathExpressionProcessor.cs/#L174">View Source</a>
   </span>
   <a id="Agenix_Core_Message_DelegatingPathExpressionProcessor_Builder_Expressions_" data-uid="Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.Expressions*"></a>
   <h4 id="Agenix_Core_Message_DelegatingPathExpressionProcessor_Builder_Expressions_System_Collections_Generic_IDictionary_System_String_System_Object__" data-uid="Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.Expressions(System.Collections.Generic.IDictionary{System.String,System.Object})">Expressions(IDictionary&lt;string, object&gt;)</h4>
@@ -283,7 +285,7 @@ to configure.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_DelegatingPathExpressionProcessor_Builder_JsonPath.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.JsonPath%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/DelegatingPathExpressionProcessor.cs/#L177">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/DelegatingPathExpressionProcessor.cs/#L205">View Source</a>
   </span>
   <a id="Agenix_Core_Message_DelegatingPathExpressionProcessor_Builder_JsonPath_" data-uid="Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.JsonPath*"></a>
   <h4 id="Agenix_Core_Message_DelegatingPathExpressionProcessor_Builder_JsonPath" data-uid="Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.JsonPath">JsonPath()</h4>
@@ -313,7 +315,7 @@ to configure.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_DelegatingPathExpressionProcessor_Builder_Xpath.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.Xpath%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/DelegatingPathExpressionProcessor.cs/#L169">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/DelegatingPathExpressionProcessor.cs/#L197">View Source</a>
   </span>
   <a id="Agenix_Core_Message_DelegatingPathExpressionProcessor_Builder_Xpath_" data-uid="Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.Xpath*"></a>
   <h4 id="Agenix_Core_Message_DelegatingPathExpressionProcessor_Builder_Xpath" data-uid="Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder.Xpath">Xpath()</h4>
@@ -343,6 +345,12 @@ to configure.</p>
       <a class="xref" href="Agenix.Api.Message.IMessageProcessor.IBuilder-2.html">IMessageProcessor.IBuilder&lt;T, TB&gt;</a>
   </div>
   <div>
+      <a class="xref" href="Agenix.Api.Message.IMessageTransformer.IBuilder-2.html">IMessageTransformer.IBuilder&lt;T, TB&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a>
+  </div>
+  <div>
       <a class="xref" href="Agenix.Api.Builder.IWithExpressions-1.html">IWithExpressions&lt;TB&gt;</a>
   </div>
 
@@ -357,7 +365,7 @@ to configure.</p>
                     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_DelegatingPathExpressionProcessor_Builder.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.DelegatingPathExpressionProcessor.Builder%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
                   </li>
                   <li>
-                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/DelegatingPathExpressionProcessor.cs/#L129" class="contribution-link">View Source</a>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/DelegatingPathExpressionProcessor.cs/#L153" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

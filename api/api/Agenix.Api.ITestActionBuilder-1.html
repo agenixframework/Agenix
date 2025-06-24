@@ -95,6 +95,38 @@
       </tr>
     </tbody>
   </table>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_ITestActionBuilder_1_ResourcePath.md&amp;value=---%0Auid%3A%20Agenix.Api.ITestActionBuilder%601.ResourcePath%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/ITestActionBuilder.cs/#L64">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_ITestActionBuilder_1_ResourcePath" data-uid="Agenix.Api.ITestActionBuilder`1.ResourcePath">ResourcePath</h4>
+  <div class="markdown level1 summary"><p>Endpoint builder resource lookup path</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string ResourcePath = &quot;Extension/agenix/action/builder&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
 </h3>
   <span class="small pull-right mobile-hide">
@@ -102,7 +134,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_ITestActionBuilder_1_Build.md&amp;value=---%0Auid%3A%20Agenix.Api.ITestActionBuilder%601.Build%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/ITestActionBuilder.cs/#L39">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/ITestActionBuilder.cs/#L45">View Source</a>
   </span>
   <a id="Agenix_Api_ITestActionBuilder_1_Build_" data-uid="Agenix.Api.ITestActionBuilder`1.Build*"></a>
   <h4 id="Agenix_Api_ITestActionBuilder_1_Build" data-uid="Agenix.Api.ITestActionBuilder`1.Build">Build()</h4>
@@ -129,6 +161,88 @@
       </tr>
     </tbody>
   </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_ITestActionBuilder_1_Lookup.md&amp;value=---%0Auid%3A%20Agenix.Api.ITestActionBuilder%601.Lookup%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/ITestActionBuilder.cs/#L76">View Source</a>
+  </span>
+  <a id="Agenix_Api_ITestActionBuilder_1_Lookup_" data-uid="Agenix.Api.ITestActionBuilder`1.Lookup*"></a>
+  <h4 id="Agenix_Api_ITestActionBuilder_1_Lookup" data-uid="Agenix.Api.ITestActionBuilder`1.Lookup">Lookup()</h4>
+  <div class="markdown level1 summary"><p>Resolves all available test action builders from resource path lookup. Scans classpath for test action builder meta information
+and instantiates those builders.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IDictionary&lt;string, ITestActionBuilder&lt;ITestAction&gt;&gt; Lookup()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder</a>&lt;<a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>&gt;&gt;</td>
+        <td><p>Dictionary of action builder name to builder instance</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_ITestActionBuilder_1_Lookup_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.ITestActionBuilder%601.Lookup(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/ITestActionBuilder.cs/#L95">View Source</a>
+  </span>
+  <a id="Agenix_Api_ITestActionBuilder_1_Lookup_" data-uid="Agenix.Api.ITestActionBuilder`1.Lookup*"></a>
+  <h4 id="Agenix_Api_ITestActionBuilder_1_Lookup_System_String_" data-uid="Agenix.Api.ITestActionBuilder`1.Lookup(System.String)">Lookup(string)</h4>
+  <div class="markdown level1 summary"><p>Searches for available test action builders from the defined resource path.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Optional&lt;ITestActionBuilder&lt;ITestAction&gt;&gt; Lookup(string builder)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">builder</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Util.Optional-1.html">Optional</a>&lt;<a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder</a>&lt;<a class="xref" href="Agenix.Api.ITestAction.html">ITestAction</a>&gt;&gt;</td>
+        <td><p>A dictionary containing the available test action builders, keyed by their names.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 </article>
           </div>
@@ -141,7 +255,7 @@
                     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_ITestActionBuilder_1.md&amp;value=---%0Auid%3A%20Agenix.Api.ITestActionBuilder%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
                   </li>
                   <li>
-                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/ITestActionBuilder.cs/#L33" class="contribution-link">View Source</a>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/ITestActionBuilder.cs/#L39" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

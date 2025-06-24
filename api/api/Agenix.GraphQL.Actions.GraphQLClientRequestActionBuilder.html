@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class GraphQLClientRequestActionBuilder </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class GraphQLClientRequestActionBuilder ">
+    
+    <meta name="description" content="Provides functionality for building GraphQL client requests with customizable attributes such as GraphQL query, mutation, subscription, variables, and more. This builder extends the capabilities of SendMessageAction.Builder by adding GraphQL-specific configurations and behaviors.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder">
+
+
+
+  <h1 id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder" class="text-break">Class GraphQLClientRequestActionBuilder</h1>
+  <div class="markdown level0 summary"><p>Provides functionality for building GraphQL client requests with customizable
+attributes such as GraphQL query, mutation, subscription, variables, and more.
+This builder extends the capabilities of <code>SendMessageAction.Builder</code>
+by adding GraphQL-specific configurations and behaviors.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html">AbstractTestActionBuilder</a>&lt;<a class="xref" href="Agenix.Core.Actions.SendMessageAction.html">SendMessageAction</a>, <a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.html">GraphQLClientRequestActionBuilder</a>&gt;</div>
+    <div class="level2"><a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html">MessageActionBuilder</a>&lt;<a class="xref" href="Agenix.Core.Actions.SendMessageAction.html">SendMessageAction</a>, <a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.html">GraphQLClientRequestActionBuilder</a>.<a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport.html">GraphQLMessageBuilderSupport</a>, <a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.html">GraphQLClientRequestActionBuilder</a>&gt;</div>
+    <div class="level3"><a class="xref" href="Agenix.Core.Actions.SendMessageAction.html">SendMessageAction</a>.<a class="xref" href="Agenix.Core.Actions.SendMessageAction.SendMessageActionBuilder-3.html">SendMessageActionBuilder</a>&lt;<a class="xref" href="Agenix.Core.Actions.SendMessageAction.html">SendMessageAction</a>, <a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.html">GraphQLClientRequestActionBuilder</a>.<a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport.html">GraphQLMessageBuilderSupport</a>, <a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.html">GraphQLClientRequestActionBuilder</a>&gt;</div>
+    <div class="level4"><span class="xref">GraphQLClientRequestActionBuilder</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder</a>&lt;<a class="xref" href="Agenix.Core.Actions.SendMessageAction.html">SendMessageAction</a>&gt;</div>
+    <div><a class="xref" href="Agenix.Api.Spi.IReferenceResolverAware.html">IReferenceResolverAware</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.SendMessageAction.SendMessageActionBuilder-3.html#Agenix_Core_Actions_SendMessageAction_SendMessageActionBuilder_3_ForkMode">SendMessageAction.SendMessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.ForkMode</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.SendMessageAction.SendMessageActionBuilder-3.html#Agenix_Core_Actions_SendMessageAction_SendMessageActionBuilder_3_Fork_System_Boolean_">SendMessageAction.SendMessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.Fork(bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Actions.SendMessageAction.SendMessageActionBuilder-3.html#Agenix_Core_Actions_SendMessageAction_SendMessageActionBuilder_3_Build">SendMessageAction.SendMessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.Build()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_messageProcessors">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.messageProcessors</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_variableExtractors">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.variableExtractors</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3__endpoint">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;._endpoint</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3__endpointUri">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;._endpointUri</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_messageBuilderSupport">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.messageBuilderSupport</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_referenceResolver">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.referenceResolver</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_SetReferenceResolver_Agenix_Api_Spi_IReferenceResolver_">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.SetReferenceResolver(IReferenceResolver)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Message_Agenix_Api_Message_IMessageBuilder_">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.Message(IMessageBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Message_Agenix_Api_Message_IMessage_">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.Message(IMessage)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Transform_Agenix_Api_Message_IMessageProcessor_">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.Transform(IMessageProcessor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Transform_Agenix_Api_Message_IMessageProcessorAdapter_">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.Transform(IMessageProcessorAdapter)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Transform_Agenix_Api_Message_MessageProcessorAdapter_">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.Transform(MessageProcessorAdapter)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Transform__1_Agenix_Api_Message_IMessageProcessor_IBuilder_Agenix_Api_Message_IMessageProcessor___0__">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.Transform&lt;B&gt;(IMessageProcessor.IBuilder&lt;IMessageProcessor, B&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Process__1_Agenix_Api_Message_IMessageProcessor_IBuilder_Agenix_Api_Message_IMessageProcessor___0__">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.Process&lt;B&gt;(IMessageProcessor.IBuilder&lt;IMessageProcessor, B&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Process_Agenix_Api_Message_IMessageProcessorAdapter_">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.Process(IMessageProcessorAdapter)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Process_Agenix_Api_Message_IMessageProcessor_">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.Process(IMessageProcessor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_WithReferenceResolver_Agenix_Api_Spi_IReferenceResolver_">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.WithReferenceResolver(IReferenceResolver)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Endpoint_Agenix_Api_Endpoint_IEndpoint_">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.Endpoint(IEndpoint)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Endpoint_System_String_">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.Endpoint(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_Message">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.Message()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_GetMessageBuilderSupport">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.GetMessageBuilderSupport()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_GetEndpoint">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.GetEndpoint()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_GetEndpointUri">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.GetEndpointUri()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_GetVariableExtractors">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.GetVariableExtractors()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_GetMessageProcessors">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.GetMessageProcessors()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageActionBuilder-3.html#Agenix_Core_Message_Builder_MessageActionBuilder_3_DoBuild">MessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;.DoBuild()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html#Agenix_Core_AbstractTestActionBuilder_2_self">AbstractTestActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder&gt;.self</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html#Agenix_Core_AbstractTestActionBuilder_2_Build">AbstractTestActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder&gt;.Build()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html#Agenix_Core_AbstractTestActionBuilder_2_Name_System_String_">AbstractTestActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder&gt;.Name(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html#Agenix_Core_AbstractTestActionBuilder_2_Description_System_String_">AbstractTestActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder&gt;.Description(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html#Agenix_Core_AbstractTestActionBuilder_2_GetName">AbstractTestActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder&gt;.GetName()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.AbstractTestActionBuilder-2.html#Agenix_Core_AbstractTestActionBuilder_2_GetDescription">AbstractTestActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder&gt;.GetDescription()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.GraphQL.html">GraphQL</a>.<a class="xref" href="Agenix.GraphQL.Actions.html">Actions</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.GraphQL.dll</h6>
+  <h5 id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageActionBuilder&lt;SendMessageAction, GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder&gt;, ITestActionBuilder&lt;SendMessageAction&gt;, IReferenceResolverAware</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder__ctor.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Actions/GraphQLClientRequestActionBuilder.cs/#L48">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder__ctor_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.#ctor*"></a>
+  <h4 id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder__ctor" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.#ctor">GraphQLClientRequestActionBuilder()</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the GraphQLClientRequestActionBuilder with a default GraphQL message.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientRequestActionBuilder()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder__ctor_Agenix_Api_Message_IMessageBuilder_Agenix_GraphQL_Message_GraphQLMessage_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.%23ctor(Agenix.Api.Message.IMessageBuilder%2CAgenix.GraphQL.Message.GraphQLMessage)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Actions/GraphQLClientRequestActionBuilder.cs/#L60">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder__ctor_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.#ctor*"></a>
+  <h4 id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder__ctor_Agenix_Api_Message_IMessageBuilder_Agenix_GraphQL_Message_GraphQLMessage_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.#ctor(Agenix.Api.Message.IMessageBuilder,Agenix.GraphQL.Message.GraphQLMessage)">GraphQLClientRequestActionBuilder(IMessageBuilder, GraphQLMessage)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the GraphQLClientRequestActionBuilder with a specific message builder and GraphQL message.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientRequestActionBuilder(IMessageBuilder messageBuilder, GraphQLMessage graphQLMessage)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessageBuilder.html">IMessageBuilder</a></td>
+        <td><span class="parametername">messageBuilder</span></td>
+        <td><p>The message builder to use.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Message.GraphQLMessage.html">GraphQLMessage</a></td>
+        <td><span class="parametername">graphQLMessage</span></td>
+        <td><p>The GraphQL message to configure.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Accept_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Accept(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Actions/GraphQLClientRequestActionBuilder.cs/#L214">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Accept_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Accept*"></a>
+  <h4 id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Accept_System_String_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Accept(System.String)">Accept(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the accept header for the GraphQL response.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientRequestActionBuilder Accept(string accept)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">accept</span></td>
+        <td><p>The accept header value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.html">GraphQLClientRequestActionBuilder</a></td>
+        <td><p>The updated instance of GraphQLClientRequestActionBuilder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Authorization_System_String_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Authorization(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Actions/GraphQLClientRequestActionBuilder.cs/#L180">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Authorization_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Authorization*"></a>
+  <h4 id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Authorization_System_String_System_String_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Authorization(System.String,System.String)">Authorization(string, string)</h4>
+  <div class="markdown level1 summary"><p>Sets an authorization header for the GraphQL request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientRequestActionBuilder Authorization(string token, string scheme = &quot;Bearer&quot;)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">token</span></td>
+        <td><p>The authorization token.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">scheme</span></td>
+        <td><p>The authorization scheme (default: Bearer).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.html">GraphQLClientRequestActionBuilder</a></td>
+        <td><p>The updated instance of GraphQLClientRequestActionBuilder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_ContentType_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.ContentType(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Actions/GraphQLClientRequestActionBuilder.cs/#L203">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_ContentType_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.ContentType*"></a>
+  <h4 id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_ContentType_System_String_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.ContentType(System.String)">ContentType(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the content type for the GraphQL request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientRequestActionBuilder ContentType(string contentType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">contentType</span></td>
+        <td><p>The content type (default: application/json).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.html">GraphQLClientRequestActionBuilder</a></td>
+        <td><p>The updated instance of GraphQLClientRequestActionBuilder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_DoBuild.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.DoBuild%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Actions/GraphQLClientRequestActionBuilder.cs/#L224">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_DoBuild_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.DoBuild*"></a>
+  <h4 id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_DoBuild" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.DoBuild">DoBuild()</h4>
+  <div class="markdown level1 summary"><p>Builds the SendMessageAction for executing the GraphQL request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override SendMessageAction DoBuild()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Core.Actions.SendMessageAction.html">SendMessageAction</a></td>
+        <td><p>The configured SendMessageAction.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Agenix.Core.Message.Builder.MessageActionBuilder&lt;Agenix.Core.Actions.SendMessageAction, Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder&gt;.DoBuild()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_GetMessageBuilderSupport.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.GetMessageBuilderSupport%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Actions/GraphQLClientRequestActionBuilder.cs/#L70">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_GetMessageBuilderSupport_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.GetMessageBuilderSupport*"></a>
+  <h4 id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_GetMessageBuilderSupport" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.GetMessageBuilderSupport">GetMessageBuilderSupport()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the instance of the GraphQLMessageBuilderSupport associated with the current builder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport GetMessageBuilderSupport()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.html">GraphQLClientRequestActionBuilder</a>.<a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport.html">GraphQLMessageBuilderSupport</a></td>
+        <td><p>The instance of GraphQLMessageBuilderSupport initialized for this request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Agenix.Core.Message.Builder.MessageActionBuilder&lt;Agenix.Core.Actions.SendMessageAction, Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder&gt;.GetMessageBuilderSupport()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Header_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Header(System.String%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Actions/GraphQLClientRequestActionBuilder.cs/#L192">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Header_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Header*"></a>
+  <h4 id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Header_System_String_System_Object_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Header(System.String,System.Object)">Header(string, object)</h4>
+  <div class="markdown level1 summary"><p>Adds a custom header to the GraphQL request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientRequestActionBuilder Header(string name, object value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The header name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The header value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.html">GraphQLClientRequestActionBuilder</a></td>
+        <td><p>The updated instance of GraphQLClientRequestActionBuilder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Mutation_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Mutation(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Actions/GraphQLClientRequestActionBuilder.cs/#L92">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Mutation_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Mutation*"></a>
+  <h4 id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Mutation_System_String_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Mutation(System.String)">Mutation(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the GraphQL mutation for the request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientRequestActionBuilder Mutation(string mutation)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">mutation</span></td>
+        <td><p>The GraphQL mutation string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.html">GraphQLClientRequestActionBuilder</a></td>
+        <td><p>The updated instance of GraphQLClientRequestActionBuilder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_OperationName_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.OperationName(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Actions/GraphQLClientRequestActionBuilder.cs/#L112">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_OperationName_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.OperationName*"></a>
+  <h4 id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_OperationName_System_String_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.OperationName(System.String)">OperationName(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the operation name for the GraphQL request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientRequestActionBuilder OperationName(string operationName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">operationName</span></td>
+        <td><p>The operation name.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.html">GraphQLClientRequestActionBuilder</a></td>
+        <td><p>The updated instance of GraphQLClientRequestActionBuilder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_OperationType_Agenix_GraphQL_Message_GraphQLOperationType_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.OperationType(Agenix.GraphQL.Message.GraphQLOperationType)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Actions/GraphQLClientRequestActionBuilder.cs/#L123">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_OperationType_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.OperationType*"></a>
+  <h4 id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_OperationType_Agenix_GraphQL_Message_GraphQLOperationType_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.OperationType(Agenix.GraphQL.Message.GraphQLOperationType)">OperationType(GraphQLOperationType)</h4>
+  <div class="markdown level1 summary"><p>Sets the operation name for the GraphQL request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientRequestActionBuilder OperationType(GraphQLOperationType operationType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Message.GraphQLOperationType.html">GraphQLOperationType</a></td>
+        <td><span class="parametername">operationType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.html">GraphQLClientRequestActionBuilder</a></td>
+        <td><p>The updated instance of GraphQLClientRequestActionBuilder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Query_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Query(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Actions/GraphQLClientRequestActionBuilder.cs/#L81">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Query_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Query*"></a>
+  <h4 id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Query_System_String_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Query(System.String)">Query(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the GraphQL query for the request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientRequestActionBuilder Query(string query)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">query</span></td>
+        <td><p>The GraphQL query string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.html">GraphQLClientRequestActionBuilder</a></td>
+        <td><p>The updated instance of GraphQLClientRequestActionBuilder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Subscription_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Subscription(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Actions/GraphQLClientRequestActionBuilder.cs/#L102">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Subscription_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Subscription*"></a>
+  <h4 id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Subscription_System_String_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Subscription(System.String)">Subscription(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the GraphQL subscription for the request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientRequestActionBuilder Subscription(string subscription)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">subscription</span></td>
+        <td><p>The GraphQL subscription string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.html">GraphQLClientRequestActionBuilder</a></td>
+        <td><p>The updated instance of GraphQLClientRequestActionBuilder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Uri_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Uri(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Actions/GraphQLClientRequestActionBuilder.cs/#L157">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Uri_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Uri*"></a>
+  <h4 id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Uri_System_String_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Uri(System.String)">Uri(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the GraphQL endpoint URI for the request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientRequestActionBuilder Uri(string endpointUri)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">endpointUri</span></td>
+        <td><p>The GraphQL endpoint URI.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.html">GraphQLClientRequestActionBuilder</a></td>
+        <td><p>The updated instance of GraphQLClientRequestActionBuilder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_UseWebSocket_System_Boolean_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.UseWebSocket(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Actions/GraphQLClientRequestActionBuilder.cs/#L168">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_UseWebSocket_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.UseWebSocket*"></a>
+  <h4 id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_UseWebSocket_System_Boolean_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.UseWebSocket(System.Boolean)">UseWebSocket(bool)</h4>
+  <div class="markdown level1 summary"><p>Enables WebSocket for subscriptions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientRequestActionBuilder UseWebSocket(bool useWebSocket = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">useWebSocket</span></td>
+        <td><p>Whether to use WebSocket for subscriptions.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.html">GraphQLClientRequestActionBuilder</a></td>
+        <td><p>The updated instance of GraphQLClientRequestActionBuilder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Variable_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Variable(System.String%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Actions/GraphQLClientRequestActionBuilder.cs/#L135">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Variable_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Variable*"></a>
+  <h4 id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Variable_System_String_System_Object_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Variable(System.String,System.Object)">Variable(string, object)</h4>
+  <div class="markdown level1 summary"><p>Adds a variable to the GraphQL request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientRequestActionBuilder Variable(string name, object value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The variable name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The variable value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.html">GraphQLClientRequestActionBuilder</a></td>
+        <td><p>The updated instance of GraphQLClientRequestActionBuilder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Variables_System_Collections_Generic_IDictionary_System_String_System_Object__.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Variables(System.Collections.Generic.IDictionary%7BSystem.String%2CSystem.Object%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Actions/GraphQLClientRequestActionBuilder.cs/#L146">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Variables_" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Variables*"></a>
+  <h4 id="Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder_Variables_System_Collections_Generic_IDictionary_System_String_System_Object__" data-uid="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.Variables(System.Collections.Generic.IDictionary{System.String,System.Object})">Variables(IDictionary&lt;string, object&gt;)</h4>
+  <div class="markdown level1 summary"><p>Sets multiple variables for the GraphQL request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientRequestActionBuilder Variables(IDictionary&lt;string, object&gt; variables)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td><span class="parametername">variables</span></td>
+        <td><p>Dictionary of variables to set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.html">GraphQLClientRequestActionBuilder</a></td>
+        <td><p>The updated instance of GraphQLClientRequestActionBuilder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.ITestActionBuilder-1.html">ITestActionBuilder&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Spi.IReferenceResolverAware.html">IReferenceResolverAware</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Actions_GraphQLClientRequestActionBuilder.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Actions/GraphQLClientRequestActionBuilder.cs/#L40" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

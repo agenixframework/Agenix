@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class DomUtils </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class DomUtils ">
+    
+    <meta name="description" content="Convenience methods for working with the DOM API, in particular for working with DOM Nodes and DOM Elements.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Validation.Xml.Util.DomUtils">
+
+
+
+  <h1 id="Agenix_Validation_Xml_Util_DomUtils" data-uid="Agenix.Validation.Xml.Util.DomUtils" class="text-break">Class DomUtils</h1>
+  <div class="markdown level0 summary"><p>Convenience methods for working with the DOM API,
+in particular for working with DOM Nodes and DOM Elements.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">DomUtils</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Validation.html">Validation</a>.<a class="xref" href="Agenix.Validation.Xml.html">Xml</a>.<a class="xref" href="Agenix.Validation.Xml.Util.html">Util</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Validation.Xml.dll</h6>
+  <h5 id="Agenix_Validation_Xml_Util_DomUtils_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class DomUtils</code></pre>
+  </div>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Util_DomUtils_GetChildElementByTagName_System_Xml_XmlElement_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Util.DomUtils.GetChildElementByTagName(System.Xml.XmlElement%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Util/DomUtils.cs/#L94">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Util_DomUtils_GetChildElementByTagName_" data-uid="Agenix.Validation.Xml.Util.DomUtils.GetChildElementByTagName*"></a>
+  <h4 id="Agenix_Validation_Xml_Util_DomUtils_GetChildElementByTagName_System_Xml_XmlElement_System_String_" data-uid="Agenix.Validation.Xml.Util.DomUtils.GetChildElementByTagName(System.Xml.XmlElement,System.String)">GetChildElementByTagName(XmlElement, string)</h4>
+  <div class="markdown level1 summary"><p>Utility method that returns the first child element identified by its name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static XmlElement? GetChildElementByTagName(XmlElement element, string childElementName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlelement">XmlElement</a></td>
+        <td><span class="parametername">element</span></td>
+        <td><p>The DOM element to analyze</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">childElementName</span></td>
+        <td><p>The child element name to look for</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlelement">XmlElement</a></td>
+        <td><p>The XmlElement instance, or null if none found</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Util_DomUtils_GetChildElementValueByTagName_System_Xml_XmlElement_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Util.DomUtils.GetChildElementValueByTagName(System.Xml.XmlElement%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Util/DomUtils.cs/#L125">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Util_DomUtils_GetChildElementValueByTagName_" data-uid="Agenix.Validation.Xml.Util.DomUtils.GetChildElementValueByTagName*"></a>
+  <h4 id="Agenix_Validation_Xml_Util_DomUtils_GetChildElementValueByTagName_System_Xml_XmlElement_System_String_" data-uid="Agenix.Validation.Xml.Util.DomUtils.GetChildElementValueByTagName(System.Xml.XmlElement,System.String)">GetChildElementValueByTagName(XmlElement, string)</h4>
+  <div class="markdown level1 summary"><p>Utility method that returns the first child element value identified by its name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string? GetChildElementValueByTagName(XmlElement element, string childElementName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlelement">XmlElement</a></td>
+        <td><span class="parametername">element</span></td>
+        <td><p>The DOM element to analyze</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">childElementName</span></td>
+        <td><p>The child element name to look for</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The extracted text value, or null if no child element found</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Util_DomUtils_GetChildElements_System_Xml_XmlElement_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Util.DomUtils.GetChildElements(System.Xml.XmlElement)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Util/DomUtils.cs/#L136">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Util_DomUtils_GetChildElements_" data-uid="Agenix.Validation.Xml.Util.DomUtils.GetChildElements*"></a>
+  <h4 id="Agenix_Validation_Xml_Util_DomUtils_GetChildElements_System_Xml_XmlElement_" data-uid="Agenix.Validation.Xml.Util.DomUtils.GetChildElements(System.Xml.XmlElement)">GetChildElements(XmlElement)</h4>
+  <div class="markdown level1 summary"><p>Retrieves all child elements of the given DOM element.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static List&lt;XmlElement&gt; GetChildElements(XmlElement element)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlelement">XmlElement</a></td>
+        <td><span class="parametername">element</span></td>
+        <td><p>The DOM element to analyze</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlelement">XmlElement</a>&gt;</td>
+        <td><p>A List of child XmlElement instances</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Util_DomUtils_GetChildElementsByTagName_System_Xml_XmlElement_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Util.DomUtils.GetChildElementsByTagName(System.Xml.XmlElement%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Util/DomUtils.cs/#L83">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Util_DomUtils_GetChildElementsByTagName_" data-uid="Agenix.Validation.Xml.Util.DomUtils.GetChildElementsByTagName*"></a>
+  <h4 id="Agenix_Validation_Xml_Util_DomUtils_GetChildElementsByTagName_System_Xml_XmlElement_System_String_" data-uid="Agenix.Validation.Xml.Util.DomUtils.GetChildElementsByTagName(System.Xml.XmlElement,System.String)">GetChildElementsByTagName(XmlElement, string)</h4>
+  <div class="markdown level1 summary"><p>Retrieves all child elements of the given DOM element that match the given element name.
+Only look at the direct child level of the given element; do not go into further depth
+(in contrast to the DOM API's GetElementsByTagName method).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static List&lt;XmlElement&gt; GetChildElementsByTagName(XmlElement element, string childElementName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlelement">XmlElement</a></td>
+        <td><span class="parametername">element</span></td>
+        <td><p>The DOM element to analyze</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">childElementName</span></td>
+        <td><p>The child element name to look for</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlelement">XmlElement</a>&gt;</td>
+        <td><p>A List of child XmlElement instances</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Util_DomUtils_GetChildElementsByTagName_System_Xml_XmlElement_System_String___.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Util.DomUtils.GetChildElementsByTagName(System.Xml.XmlElement%2CSystem.String%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Util/DomUtils.cs/#L47">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Util_DomUtils_GetChildElementsByTagName_" data-uid="Agenix.Validation.Xml.Util.DomUtils.GetChildElementsByTagName*"></a>
+  <h4 id="Agenix_Validation_Xml_Util_DomUtils_GetChildElementsByTagName_System_Xml_XmlElement_System_String___" data-uid="Agenix.Validation.Xml.Util.DomUtils.GetChildElementsByTagName(System.Xml.XmlElement,System.String[])">GetChildElementsByTagName(XmlElement, params string[])</h4>
+  <div class="markdown level1 summary"><p>Retrieves all child elements of the given DOM element that match any of the given element names.
+Only looks at the direct child level of the given element; do not go into further depth
+(in contrast to the DOM API's GetElementsByTagName method).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static List&lt;XmlElement&gt; GetChildElementsByTagName(XmlElement element, params string[] childElementNames)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlelement">XmlElement</a></td>
+        <td><span class="parametername">element</span></td>
+        <td><p>The DOM element to analyze</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td><span class="parametername">childElementNames</span></td>
+        <td><p>The child element names to look for</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlelement">XmlElement</a>&gt;</td>
+        <td><p>A List of child XmlElement instances</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Util_DomUtils_GetTextValue_System_Xml_XmlElement_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Util.DomUtils.GetTextValue(System.Xml.XmlElement)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Util/DomUtils.cs/#L166">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Util_DomUtils_GetTextValue_" data-uid="Agenix.Validation.Xml.Util.DomUtils.GetTextValue*"></a>
+  <h4 id="Agenix_Validation_Xml_Util_DomUtils_GetTextValue_System_Xml_XmlElement_" data-uid="Agenix.Validation.Xml.Util.DomUtils.GetTextValue(System.Xml.XmlElement)">GetTextValue(XmlElement)</h4>
+  <div class="markdown level1 summary"><p>Extracts the text value from the given DOM element, ignoring XML comments.
+Appends all CharacterData nodes and EntityReference nodes into a single
+String value, excluding Comment nodes. Only exposes actual user-specified
+text, no default values of any kind.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string GetTextValue(XmlElement valueElement)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlelement">XmlElement</a></td>
+        <td><span class="parametername">valueElement</span></td>
+        <td><p>The element to extract text from</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The concatenated text content</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Util_DomUtils_NodeNameEquals_System_Xml_XmlNode_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Util.DomUtils.NodeNameEquals(System.Xml.XmlNode%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Util/DomUtils.cs/#L195">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Util_DomUtils_NodeNameEquals_" data-uid="Agenix.Validation.Xml.Util.DomUtils.NodeNameEquals*"></a>
+  <h4 id="Agenix_Validation_Xml_Util_DomUtils_NodeNameEquals_System_Xml_XmlNode_System_String_" data-uid="Agenix.Validation.Xml.Util.DomUtils.NodeNameEquals(System.Xml.XmlNode,System.String)">NodeNameEquals(XmlNode, string)</h4>
+  <div class="markdown level1 summary"><p>Namespace-aware equals comparison. Returns true if either
+LocalName or Name equals desiredName, otherwise returns false.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool NodeNameEquals(XmlNode node, string desiredName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></td>
+        <td><span class="parametername">node</span></td>
+        <td><p>The node to check</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">desiredName</span></td>
+        <td><p>The desired name to match</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>True if names match, false otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Util_DomUtils.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Util.DomUtils%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Util/DomUtils.cs/#L37" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

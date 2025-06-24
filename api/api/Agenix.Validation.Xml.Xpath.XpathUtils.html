@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class XpathUtils </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class XpathUtils ">
+    
+    <meta name="description" content="Provides utility methods for working with XPath expressions and evaluating them against XML nodes.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils">
+
+
+
+  <h1 id="Agenix_Validation_Xml_Xpath_XpathUtils" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils" class="text-break">Class XpathUtils</h1>
+  <div class="markdown level0 summary"><p>Provides utility methods for working with XPath expressions and evaluating them against XML nodes.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">XpathUtils</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Validation.html">Validation</a>.<a class="xref" href="Agenix.Validation.Xml.html">Xml</a>.<a class="xref" href="Agenix.Validation.Xml.Xpath.html">Xpath</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Validation.Xml.dll</h6>
+  <h5 id="Agenix_Validation_Xml_Xpath_XpathUtils_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class XpathUtils</code></pre>
+  </div>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Xpath_XpathUtils_DynamicNsEnd.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Xpath.XpathUtils.DynamicNsEnd%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Xpath/XpathUtils.cs/#L47">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Xml_Xpath_XpathUtils_DynamicNsEnd" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.DynamicNsEnd">DynamicNsEnd</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DynamicNsEnd = &quot;}&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Xpath_XpathUtils_DynamicNsStart.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Xpath.XpathUtils.DynamicNsStart%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Xpath/XpathUtils.cs/#L45">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Xml_Xpath_XpathUtils_DynamicNsStart" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.DynamicNsStart">DynamicNsStart</h4>
+  <div class="markdown level1 summary"><p>Dynamic namespace prefix suffix</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DynamicNsStart = &quot;{&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Xpath_XpathUtils_Evaluate_System_Xml_XmlNode_System_String_System_Xml_IXmlNamespaceResolver_Agenix_Validation_Xml_Xpath_XPathExpressionResult_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Xpath.XpathUtils.Evaluate(System.Xml.XmlNode%2CSystem.String%2CSystem.Xml.IXmlNamespaceResolver%2CAgenix.Validation.Xml.Xpath.XPathExpressionResult)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Xpath/XpathUtils.cs/#L423">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Xpath_XpathUtils_Evaluate_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.Evaluate*"></a>
+  <h4 id="Agenix_Validation_Xml_Xpath_XpathUtils_Evaluate_System_Xml_XmlNode_System_String_System_Xml_IXmlNamespaceResolver_Agenix_Validation_Xml_Xpath_XPathExpressionResult_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.Evaluate(System.Xml.XmlNode,System.String,System.Xml.IXmlNamespaceResolver,Agenix.Validation.Xml.Xpath.XPathExpressionResult)">Evaluate(XmlNode, string, IXmlNamespaceResolver, XPathExpressionResult)</h4>
+  <div class="markdown level1 summary"><p>Evaluate XPath expression as String result type regardless
+what actual result type the expression will evaluate to.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static object Evaluate(XmlNode node, string xPathExpression, IXmlNamespaceResolver nsContext, XPathExpressionResult resultType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></td>
+        <td><span class="parametername">node</span></td>
+        <td><p>The XML node to evaluate against</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">xPathExpression</span></td>
+        <td><p>The XPath expression</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.ixmlnamespaceresolver">IXmlNamespaceResolver</a></td>
+        <td><span class="parametername">nsContext</span></td>
+        <td><p>The namespace context (optional)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Validation.Xml.Xpath.XPathExpressionResult.html">XPathExpressionResult</a></td>
+        <td><span class="parametername">resultType</span></td>
+        <td><p>The expected result type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><p>The evaluation result</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateAsBoolean_System_Xml_XmlNode_System_String_System_Xml_IXmlNamespaceResolver_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateAsBoolean(System.Xml.XmlNode%2CSystem.String%2CSystem.Xml.IXmlNamespaceResolver)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Xpath/XpathUtils.cs/#L367">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateAsBoolean_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateAsBoolean*"></a>
+  <h4 id="Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateAsBoolean_System_Xml_XmlNode_System_String_System_Xml_IXmlNamespaceResolver_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateAsBoolean(System.Xml.XmlNode,System.String,System.Xml.IXmlNamespaceResolver)">EvaluateAsBoolean(XmlNode, string, IXmlNamespaceResolver?)</h4>
+  <div class="markdown level1 summary"><p>Evaluate XPath expression with the result type Boolean value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool EvaluateAsBoolean(XmlNode node, string xPathExpression, IXmlNamespaceResolver? nsContext = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></td>
+        <td><span class="parametername">node</span></td>
+        <td><p>The XML node to evaluate against</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">xPathExpression</span></td>
+        <td><p>The XPath expression</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.ixmlnamespaceresolver">IXmlNamespaceResolver</a></td>
+        <td><span class="parametername">nsContext</span></td>
+        <td><p>The namespace context (optional)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>The boolean result of the XPath evaluation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateAsNode_System_Xml_XmlNode_System_String_System_Xml_IXmlNamespaceResolver_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateAsNode(System.Xml.XmlNode%2CSystem.String%2CSystem.Xml.IXmlNamespaceResolver)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Xpath/XpathUtils.cs/#L246">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateAsNode_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateAsNode*"></a>
+  <h4 id="Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateAsNode_System_Xml_XmlNode_System_String_System_Xml_IXmlNamespaceResolver_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateAsNode(System.Xml.XmlNode,System.String,System.Xml.IXmlNamespaceResolver)">EvaluateAsNode(XmlNode, string, IXmlNamespaceResolver?)</h4>
+  <div class="markdown level1 summary"><p>Evaluate XPath expression with result type Node.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static XmlNode EvaluateAsNode(XmlNode node, string xPathExpression, IXmlNamespaceResolver? nsContext = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></td>
+        <td><span class="parametername">node</span></td>
+        <td><p>The XML node to evaluate against</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">xPathExpression</span></td>
+        <td><p>The XPath expression</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.ixmlnamespaceresolver">IXmlNamespaceResolver</a></td>
+        <td><span class="parametername">nsContext</span></td>
+        <td><p>The namespace context (optional)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></td>
+        <td><p>The first matching XML node</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Exceptions.AgenixSystemException.html">AgenixSystemException</a></td>
+        <td><p>Thrown when no node matches the expression</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateAsNodeList_System_Xml_XmlNode_System_String_System_Xml_IXmlNamespaceResolver_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateAsNodeList(System.Xml.XmlNode%2CSystem.String%2CSystem.Xml.IXmlNamespaceResolver)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Xpath/XpathUtils.cs/#L304">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateAsNodeList_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateAsNodeList*"></a>
+  <h4 id="Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateAsNodeList_System_Xml_XmlNode_System_String_System_Xml_IXmlNamespaceResolver_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateAsNodeList(System.Xml.XmlNode,System.String,System.Xml.IXmlNamespaceResolver)">EvaluateAsNodeList(XmlNode, string, IXmlNamespaceResolver?)</h4>
+  <div class="markdown level1 summary"><p>Evaluate XPath expression with the result type NodeList.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static XmlNodeList EvaluateAsNodeList(XmlNode node, string xPathExpression, IXmlNamespaceResolver? nsContext = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></td>
+        <td><span class="parametername">node</span></td>
+        <td><p>The XML node to evaluate against</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">xPathExpression</span></td>
+        <td><p>The XPath expression</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.ixmlnamespaceresolver">IXmlNamespaceResolver</a></td>
+        <td><span class="parametername">nsContext</span></td>
+        <td><p>The namespace context (optional)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnodelist">XmlNodeList</a></td>
+        <td><p>The collection of matching XML nodes</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Exceptions.AgenixSystemException.html">AgenixSystemException</a></td>
+        <td><p>Thrown when no nodes match the expression</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateAsNumber_System_Xml_XmlNode_System_String_System_Xml_IXmlNamespaceResolver_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateAsNumber(System.Xml.XmlNode%2CSystem.String%2CSystem.Xml.IXmlNamespaceResolver)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Xpath/XpathUtils.cs/#L379">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateAsNumber_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateAsNumber*"></a>
+  <h4 id="Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateAsNumber_System_Xml_XmlNode_System_String_System_Xml_IXmlNamespaceResolver_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateAsNumber(System.Xml.XmlNode,System.String,System.Xml.IXmlNamespaceResolver)">EvaluateAsNumber(XmlNode, string, IXmlNamespaceResolver?)</h4>
+  <div class="markdown level1 summary"><p>Evaluate XPath expression with result type Number.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static double EvaluateAsNumber(XmlNode node, string xPathExpression, IXmlNamespaceResolver? nsContext = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></td>
+        <td><span class="parametername">node</span></td>
+        <td><p>The XML node to evaluate against</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">xPathExpression</span></td>
+        <td><p>The XPath expression</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.ixmlnamespaceresolver">IXmlNamespaceResolver</a></td>
+        <td><span class="parametername">nsContext</span></td>
+        <td><p>The namespace context (optional)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td><p>The numeric result of the XPath evaluation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateAsObject_System_Xml_XmlNode_System_String_System_Xml_IXmlNamespaceResolver_System_Xml_XPath_XPathResultType_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateAsObject(System.Xml.XmlNode%2CSystem.String%2CSystem.Xml.IXmlNamespaceResolver%2CSystem.Xml.XPath.XPathResultType)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Xpath/XpathUtils.cs/#L392">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateAsObject_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateAsObject*"></a>
+  <h4 id="Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateAsObject_System_Xml_XmlNode_System_String_System_Xml_IXmlNamespaceResolver_System_Xml_XPath_XPathResultType_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateAsObject(System.Xml.XmlNode,System.String,System.Xml.IXmlNamespaceResolver,System.Xml.XPath.XPathResultType)">EvaluateAsObject(XmlNode, string, IXmlNamespaceResolver?, XPathResultType)</h4>
+  <div class="markdown level1 summary"><p>Evaluate XPath expression with a specified result type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static object EvaluateAsObject(XmlNode node, string xPathExpression, IXmlNamespaceResolver? nsContext = null, XPathResultType resultType = XPathResultType.Any)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></td>
+        <td><span class="parametername">node</span></td>
+        <td><p>The XML node to evaluate against</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">xPathExpression</span></td>
+        <td><p>The XPath expression</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.ixmlnamespaceresolver">IXmlNamespaceResolver</a></td>
+        <td><span class="parametername">nsContext</span></td>
+        <td><p>The namespace context (optional)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathresulttype">XPathResultType</a></td>
+        <td><span class="parametername">resultType</span></td>
+        <td><p>The expected result type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><p>The result of the XPath evaluation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateAsString_System_Xml_XmlNode_System_String_System_Xml_IXmlNamespaceResolver_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateAsString(System.Xml.XmlNode%2CSystem.String%2CSystem.Xml.IXmlNamespaceResolver)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Xpath/XpathUtils.cs/#L346">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateAsString_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateAsString*"></a>
+  <h4 id="Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateAsString_System_Xml_XmlNode_System_String_System_Xml_IXmlNamespaceResolver_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateAsString(System.Xml.XmlNode,System.String,System.Xml.IXmlNamespaceResolver)">EvaluateAsString(XmlNode, string, IXmlNamespaceResolver?)</h4>
+  <div class="markdown level1 summary"><p>Evaluate XPath expression with result type String.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string EvaluateAsString(XmlNode node, string xPathExpression, IXmlNamespaceResolver? nsContext = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></td>
+        <td><span class="parametername">node</span></td>
+        <td><p>The XML node to evaluate against</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">xPathExpression</span></td>
+        <td><p>The XPath expression</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.ixmlnamespaceresolver">IXmlNamespaceResolver</a></td>
+        <td><span class="parametername">nsContext</span></td>
+        <td><p>The namespace context (optional)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The string result of the XPath evaluation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateExpression_System_Xml_XmlNode_System_String_System_Xml_IXmlNamespaceResolver_System_Xml_XPath_XPathResultType_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateExpression(System.Xml.XmlNode%2CSystem.String%2CSystem.Xml.IXmlNamespaceResolver%2CSystem.Xml.XPath.XPathResultType)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Xpath/XpathUtils.cs/#L502">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateExpression_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateExpression*"></a>
+  <h4 id="Agenix_Validation_Xml_Xpath_XpathUtils_EvaluateExpression_System_Xml_XmlNode_System_String_System_Xml_IXmlNamespaceResolver_System_Xml_XPath_XPathResultType_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.EvaluateExpression(System.Xml.XmlNode,System.String,System.Xml.IXmlNamespaceResolver,System.Xml.XPath.XPathResultType)">EvaluateExpression(XmlNode, string, IXmlNamespaceResolver?, XPathResultType)</h4>
+  <div class="markdown level1 summary"><p>Evaluates the XPath expression.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static object EvaluateExpression(XmlNode node, string xPathExpression, IXmlNamespaceResolver? nsContext = null, XPathResultType returnType = XPathResultType.Any)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></td>
+        <td><span class="parametername">node</span></td>
+        <td><p>The XML node to evaluate against</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">xPathExpression</span></td>
+        <td><p>The XPath expression string</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.ixmlnamespaceresolver">IXmlNamespaceResolver</a></td>
+        <td><span class="parametername">nsContext</span></td>
+        <td><p>The namespace context (optional)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathresulttype">XPathResultType</a></td>
+        <td><span class="parametername">returnType</span></td>
+        <td><p>The expected return type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><p>The evaluation result</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Exceptions.AgenixSystemException.html">AgenixSystemException</a></td>
+        <td><p>Thrown when XPath evaluation fails</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Xpath_XpathUtils_GetDynamicNamespaces_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Xpath.XpathUtils.GetDynamicNamespaces(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Xpath/XpathUtils.cs/#L68">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Xpath_XpathUtils_GetDynamicNamespaces_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.GetDynamicNamespaces*"></a>
+  <h4 id="Agenix_Validation_Xml_Xpath_XpathUtils_GetDynamicNamespaces_System_String_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.GetDynamicNamespaces(System.String)">GetDynamicNamespaces(string)</h4>
+  <div class="markdown level1 summary"><p>Extracts dynamic namespaces that are inline inside an XPath expression. Example:</p>
+<pre><code class="lang-csharp">/{http://sample.org/foo}foo/{http://sample.org/bar}bar</code></pre>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Dictionary&lt;string, string&gt; GetDynamicNamespaces(string expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The XPath expression containing dynamic namespaces</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><p>Dictionary mapping namespace prefixes to namespace URIs</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Xpath_XpathUtils_HasDynamicNamespaces_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Xpath.XpathUtils.HasDynamicNamespaces(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Xpath/XpathUtils.cs/#L138">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Xpath_XpathUtils_HasDynamicNamespaces_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.HasDynamicNamespaces*"></a>
+  <h4 id="Agenix_Validation_Xml_Xpath_XpathUtils_HasDynamicNamespaces_System_String_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.HasDynamicNamespaces(System.String)">HasDynamicNamespaces(string)</h4>
+  <div class="markdown level1 summary"><p>Searches for dynamic namespaces in expression.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool HasDynamicNamespaces(string expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The XPath expression to check</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>True if the expression contains dynamic namespaces, false otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Xpath_XpathUtils_IsXPathExpression_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Xpath.XpathUtils.IsXPathExpression(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Xpath/XpathUtils.cs/#L404">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Xpath_XpathUtils_IsXPathExpression_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.IsXPathExpression*"></a>
+  <h4 id="Agenix_Validation_Xml_Xpath_XpathUtils_IsXPathExpression_System_String_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.IsXPathExpression(System.String)">IsXPathExpression(string)</h4>
+  <div class="markdown level1 summary"><p>Method to find out whether an expression is of XPath nature or custom dot notation syntax.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsXPathExpression(string expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The expression string to check</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>True if the expression is an XPath expression, false otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Xpath_XpathUtils_ReplaceDynamicNamespaces_System_String_System_Collections_Generic_Dictionary_System_String_System_String__.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Xpath.XpathUtils.ReplaceDynamicNamespaces(System.String%2CSystem.Collections.Generic.Dictionary%7BSystem.String%2CSystem.String%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Xpath/XpathUtils.cs/#L107">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Xpath_XpathUtils_ReplaceDynamicNamespaces_" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.ReplaceDynamicNamespaces*"></a>
+  <h4 id="Agenix_Validation_Xml_Xpath_XpathUtils_ReplaceDynamicNamespaces_System_String_System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="Agenix.Validation.Xml.Xpath.XpathUtils.ReplaceDynamicNamespaces(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">ReplaceDynamicNamespaces(string, Dictionary&lt;string, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Replaces all dynamic namespaces in an XPath expression with respective prefixes
+in a namespace map.
+XPath: <pre><code class="lang-csharp">/{http://sample.org/foo}foo/{http://sample.org/bar}bar</code></pre>
+results in <pre><code class="lang-csharp">/ns1:foo/ns2:bar</code></pre> where the namespace map contains ns1 and ns2.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ReplaceDynamicNamespaces(string expression, Dictionary&lt;string, string&gt; namespaces)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The XPath expression with dynamic namespaces</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><span class="parametername">namespaces</span></td>
+        <td><p>Dictionary mapping namespace prefixes to URIs</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The XPath expression with namespace prefixes</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Xpath_XpathUtils.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Xpath.XpathUtils%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Xpath/XpathUtils.cs/#L42" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

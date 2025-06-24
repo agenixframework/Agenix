@@ -386,6 +386,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Common.IShutdownPhase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Common.IShutdownPhase.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Common.IShutdownPhase",
+      "Summary": "<p sourcefile=\"api/Agenix.Api.Common.IShutdownPhase.yml\" sourcestartlinenumber=\"1\">Represents a shutdown phase component that can be destroyed.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Agenix.Api.Common.InitializingPhase.yml",
       "output": {
         ".html": {
@@ -397,6 +411,20 @@
       "IsMRef": true,
       "Title": "Agenix.Api.Common.InitializingPhase",
       "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Common.ShutdownPhase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Common.ShutdownPhase.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Common.ShutdownPhase",
+      "Summary": "<p sourcefile=\"api/Agenix.Api.Common.ShutdownPhase.yml\" sourcestartlinenumber=\"1\">Represents a shutdown phase component that can be destroyed.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -666,6 +694,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Endpoint.Adapter.Mapping.IEndpointAdapterMappingStrategy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Endpoint.Adapter.Mapping.IEndpointAdapterMappingStrategy.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Endpoint.Adapter.Mapping.IEndpointAdapterMappingStrategy",
+      "Summary": "<p sourcefile=\"api/Agenix.Api.Endpoint.Adapter.Mapping.IEndpointAdapterMappingStrategy.yml\" sourcestartlinenumber=\"1\">Strategy finds proper endpoint adapter instance for given mapping key.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Agenix.Api.Endpoint.Adapter.Mapping.IMappingKeyExtractor.yml",
       "output": {
         ".html": {
@@ -719,6 +761,20 @@
       "IsMRef": true,
       "Title": "Agenix.Api.Endpoint.IEndpoint",
       "Summary": "<p sourcefile=\"api/Agenix.Api.Endpoint.IEndpoint.yml\" sourcestartlinenumber=\"1\">Represents an endpoint for messaging processes that includes configurations,\nand provides capabilities to produce and consume messages.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Endpoint.IEndpointAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Endpoint.IEndpointAdapter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Endpoint.IEndpointAdapter",
+      "Summary": "<p sourcefile=\"api/Agenix.Api.Endpoint.IEndpointAdapter.yml\" sourcestartlinenumber=\"1\">Endpoint adapter represents a special message handler that delegates incoming request messages to some message endpoint.\nClients can receive request messages from endpoint and provide proper response messages that will be used as\nadapter response.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -904,6 +960,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Exceptions.MarshallingException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Exceptions.MarshallingException.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Exceptions.MarshallingException",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Agenix.Api.Exceptions.MessageTimeoutException.yml",
       "output": {
         ".html": {
@@ -1086,6 +1156,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Exceptions.UnmarshallingException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Exceptions.UnmarshallingException.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Exceptions.UnmarshallingException",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Agenix.Api.Exceptions.ValidationException.yml",
       "output": {
         ".html": {
@@ -1212,6 +1296,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.IBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.IBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.IBuilder",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Agenix.Api.IO.AbstractResource.yml",
       "output": {
         ".html": {
@@ -1237,6 +1335,20 @@
       "IsMRef": true,
       "Title": "Agenix.Api.IO.AssemblyResource",
       "Summary": "<p sourcefile=\"api/Agenix.Api.IO.AssemblyResource.yml\" sourcestartlinenumber=\"1\">An <xref href=\"Agenix.Api.IO.IResource\" data-throw-if-not-resolved=\"false\"></xref> implementation for\nresources stored within assemblies.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.IO.ByteArrayResource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.IO.ByteArrayResource.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.IO.ByteArrayResource",
+      "Summary": "<p sourcefile=\"api/Agenix.Api.IO.ByteArrayResource.yml\" sourcestartlinenumber=\"1\">Represents a resource that is backed by a byte array. Provides methods to access the contents\nof the byte array as a <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref> and a description associated with the resource.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -2528,6 +2640,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Report.FailureStackElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Report.FailureStackElement.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Report.FailureStackElement",
+      "Summary": "<p sourcefile=\"api/Agenix.Api.Report.FailureStackElement.yml\" sourcestartlinenumber=\"1\">Failure stack element provides access to the detailed failure stack message and\nthe location in the test case XML where error happened.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Agenix.Api.Report.IMessageListener.yml",
       "output": {
         ".html": {
@@ -2776,6 +2902,48 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Agenix.Api.Report",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Server.IRunnable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Server.IRunnable.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Server.IRunnable",
+      "Summary": "<p sourcefile=\"api/Agenix.Api.Server.IRunnable.yml\" sourcestartlinenumber=\"1\">C# equivalent of Java's Runnable interface\nRepresents a task that can be executed by a thread</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Server.IServer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Server.IServer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Server.IServer",
+      "Summary": "<p sourcefile=\"api/Agenix.Api.Server.IServer.yml\" sourcestartlinenumber=\"1\">Server representation in Agenix is a runnable instance accepting client connections.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Server.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Server.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Server",
       "Summary": null
     },
     {
@@ -3368,6 +3536,34 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Util.ReflectionUtils.CustomAttributeBuilderBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Util.ReflectionUtils.CustomAttributeBuilderBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Util.ReflectionUtils.CustomAttributeBuilderBuilder",
+      "Summary": "<p sourcefile=\"api/Agenix.Api.Util.ReflectionUtils.CustomAttributeBuilderBuilder.yml\" sourcestartlinenumber=\"1\">Creates a <xref href=\"System.Reflection.Emit.CustomAttributeBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Util.ReflectionUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Util.ReflectionUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Util.ReflectionUtils",
+      "Summary": "<p sourcefile=\"api/Agenix.Api.Util.ReflectionUtils.yml\" sourcestartlinenumber=\"1\">Various reflection-related methods that are missing from the standard library.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Agenix.Api.Util.StringUtils.yml",
       "output": {
         ".html": {
@@ -3956,6 +4152,62 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Variable.Dictionary.IDataDictionary-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Variable.Dictionary.IDataDictionary-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Variable.Dictionary.IDataDictionary<T>",
+      "Summary": "<p sourcefile=\"api/Agenix.Api.Variable.Dictionary.IDataDictionary-1.yml\" sourcestartlinenumber=\"1\">Data dictionary interface describes a mechanism to modify message content (payload) with global dictionary\nelements.\nDictionary translates element values to those defined in the dictionary.</p>\n<p>\n    Dictionary takes part in message construction for inbound and outbound messages in agenix.\n</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Variable.Dictionary.IDataDictionary.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Variable.Dictionary.IDataDictionary.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Variable.Dictionary.IDataDictionary",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Variable.Dictionary.PathMappingStrategy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Variable.Dictionary.PathMappingStrategy.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Variable.Dictionary.PathMappingStrategy",
+      "Summary": "<p sourcefile=\"api/Agenix.Api.Variable.Dictionary.PathMappingStrategy.yml\" sourcestartlinenumber=\"1\">Possible mapping strategies for identifying matching dictionary items\nwith path comparison.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Variable.Dictionary.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Variable.Dictionary.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Variable.Dictionary",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Agenix.Api.Variable.GlobalVariables.Builder.yml",
       "output": {
         ".html": {
@@ -4176,6 +4428,132 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Agenix.Api.Variable",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Xml.IMarshaller.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Xml.IMarshaller.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Xml.IMarshaller",
+      "Summary": "<p sourcefile=\"api/Agenix.Api.Xml.IMarshaller.yml\" sourcestartlinenumber=\"1\">Defines the contract for a marshaller that serializes objects into an XML format.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Xml.IUnmarshaller.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Xml.IUnmarshaller.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Xml.IUnmarshaller",
+      "Summary": "<p sourcefile=\"api/Agenix.Api.Xml.IUnmarshaller.yml\" sourcestartlinenumber=\"1\">Defines a mechanism for unmarshalling data from an XML source.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Xml.Namespace.DefaultNamespaceContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Xml.Namespace.DefaultNamespaceContext.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Xml.Namespace.DefaultNamespaceContext",
+      "Summary": "<p sourcefile=\"api/Agenix.Api.Xml.Namespace.DefaultNamespaceContext.yml\" sourcestartlinenumber=\"1\">Default implementation of IXmlNamespaceResolver that provides namespace context functionality\nsimilar to Java's NamespaceContext interface.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Xml.Namespace.DefaultNamespaceContextExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Xml.Namespace.DefaultNamespaceContextExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Xml.Namespace.DefaultNamespaceContextExtensions",
+      "Summary": "<p sourcefile=\"api/Agenix.Api.Xml.Namespace.DefaultNamespaceContextExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for DefaultNamespaceContext integration</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Xml.Namespace.NamespaceContextBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Xml.Namespace.NamespaceContextBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Xml.Namespace.NamespaceContextBuilder",
+      "Summary": "<p sourcefile=\"api/Agenix.Api.Xml.Namespace.NamespaceContextBuilder.yml\" sourcestartlinenumber=\"1\">Builds a namespace context for XPath expression evaluations. Builder supports default mappings\nas well as dynamic mappings from a received message.\nNamespace mappings are defined as key value pairs where key is defined as a namespace prefix and value is the\nactual namespace uri.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Xml.Namespace.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Xml.Namespace.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Xml.Namespace",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Xml.StringResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Xml.StringResult.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Xml.StringResult",
+      "Summary": "<p sourcefile=\"api/Agenix.Api.Xml.StringResult.yml\" sourcestartlinenumber=\"1\">Helper representing a stream result that is written to a String writer.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Xml.StringSource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Xml.StringSource.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Xml.StringSource",
+      "Summary": "<p sourcefile=\"api/Agenix.Api.Xml.StringSource.yml\" sourcestartlinenumber=\"1\">A simple stream source representation of a static String content. Can be read many times and uses default encoding\nset via configuration settings.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Api.Xml.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Api.Xml.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Api.Xml",
       "Summary": null
     },
     {
@@ -5678,6 +6056,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Core.Endpoint.AbstractEndpointAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Core.Endpoint.AbstractEndpointAdapter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Core.Endpoint.AbstractEndpointAdapter",
+      "Summary": "<p sourcefile=\"api/Agenix.Core.Endpoint.AbstractEndpointAdapter.yml\" sourcestartlinenumber=\"1\">Abstract endpoint adapter adds fallback endpoint adapter in case no response was provided.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Agenix.Core.Endpoint.AbstractEndpointBuilder-1.yml",
       "output": {
         ".html": {
@@ -5930,6 +6322,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Core.Endpoint.Direct.DirectEndpointAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Core.Endpoint.Direct.DirectEndpointAdapter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Core.Endpoint.Direct.DirectEndpointAdapter",
+      "Summary": "<p sourcefile=\"api/Agenix.Core.Endpoint.Direct.DirectEndpointAdapter.yml\" sourcestartlinenumber=\"1\">Endpoint adapter forwards incoming requests to message queue and waits synchronously for response\non reply queue. Provides simple endpoint for clients to connect to message queue in order to provide proper\nresponse message.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Agenix.Core.Endpoint.Direct.DirectEndpointBuilder.yml",
       "output": {
         ".html": {
@@ -6164,7 +6570,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Agenix.Core.Functions.Core.CurrentDateFunction",
-      "Summary": "<p sourcefile=\"api/Agenix.Core.Functions.Core.CurrentDateFunction.yml\" sourcestartlinenumber=\"1\">Function returning the actual date as formatted string value. User specifies format string as argument.\nTODO: Function has also to support additional date offset in order to manipulate result date value. E.g.\ncore:CurrentDate('yyyy-MM-dd', '+1y') -&gt; current date + one year</p>\n"
+      "Summary": "<p sourcefile=\"api/Agenix.Core.Functions.Core.CurrentDateFunction.yml\" sourcestartlinenumber=\"1\">Function returning the actual date as formatted string value. User specifies format string as argument.\nTODO: Function has also to support additional date offset in order to manipulate result date value. E.g.\nagenix:CurrentDate('yyyy-MM-dd', '+1y') -&gt; current date + one year</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -6966,6 +7372,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Core.Report.AbstractTestListener.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Core.Report.AbstractTestListener.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Core.Report.AbstractTestListener",
+      "Summary": "<p sourcefile=\"api/Agenix.Core.Report.AbstractTestListener.yml\" sourcestartlinenumber=\"1\">Basic implementation of <xref href=\"Agenix.Api.Report.ITestListener\" data-throw-if-not-resolved=\"false\"></xref> interface so that subclasses must not implement\nall methods but only overwrite some listener methods.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Agenix.Core.Report.AbstractTestReporter.yml",
       "output": {
         ".html": {
@@ -6991,6 +7411,20 @@
       "IsMRef": true,
       "Title": "Agenix.Core.Report.DefaultTestReporters",
       "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Core.Report.FailureStackTestListener.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Core.Report.FailureStackTestListener.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Core.Report.FailureStackTestListener",
+      "Summary": "<p sourcefile=\"api/Agenix.Core.Report.FailureStackTestListener.yml\" sourcestartlinenumber=\"1\">Specialized test listener responsible for handling test failures\nand populating the failure stack for failed test cases.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -7046,6 +7480,48 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Agenix.Core.Repository",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Core.Server.AbstractServer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Core.Server.AbstractServer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Core.Server.AbstractServer",
+      "Summary": "<p sourcefile=\"api/Agenix.Core.Server.AbstractServer.yml\" sourcestartlinenumber=\"1\">Represents an abstract server providing the base implementation for server functionality.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Core.Server.AbstractServerBuilder-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Core.Server.AbstractServerBuilder-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Core.Server.AbstractServerBuilder<TServer, TBuilder>",
+      "Summary": "<p sourcefile=\"api/Agenix.Core.Server.AbstractServerBuilder-2.yml\" sourcestartlinenumber=\"1\">Abstract server builder providing fluent API for configuring server instances.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Core.Server.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Core.Server.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Core.Server",
       "Summary": null
     },
     {
@@ -7554,6 +8030,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Core.Validation.Matcher.Core.CreateVariableValidationMatcher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Core.Validation.Matcher.Core.CreateVariableValidationMatcher.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Core.Validation.Matcher.Core.CreateVariableValidationMatcher",
+      "Summary": "<p sourcefile=\"api/Agenix.Core.Validation.Matcher.Core.CreateVariableValidationMatcher.yml\" sourcestartlinenumber=\"1\">The <code>CreateVariableValidationMatcher</code> class is responsible for validating and setting variable values\nwithin a given <xref href=\"Agenix.Api.Context.TestContext\" data-throw-if-not-resolved=\"false\"></xref> during the validation process.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Agenix.Core.Validation.Matcher.Core.DatePatternValidationMatcher.yml",
       "output": {
         ".html": {
@@ -7946,6 +8436,48 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Core.Variable.Dictionary.AbstractDataDictionary-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Core.Variable.Dictionary.AbstractDataDictionary-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Core.Variable.Dictionary.AbstractDataDictionary<T>",
+      "Summary": "<p sourcefile=\"api/Agenix.Core.Variable.Dictionary.AbstractDataDictionary-1.yml\" sourcestartlinenumber=\"1\">Abstract data dictionary implementation provides global scope handling.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Core.Variable.Dictionary.SimpleMappingDictionary.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Core.Variable.Dictionary.SimpleMappingDictionary.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Core.Variable.Dictionary.SimpleMappingDictionary",
+      "Summary": "<p sourcefile=\"api/Agenix.Core.Variable.Dictionary.SimpleMappingDictionary.yml\" sourcestartlinenumber=\"1\">Represents a simple key-value mapping dictionary derived from AbstractDataDictionary.\nThis class is used to process messages and update payloads based on key-value mappings.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Core.Variable.Dictionary.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Core.Variable.Dictionary.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Core.Variable.Dictionary",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Agenix.Core.Variable.MessageHeaderVariableExtractor.Builder.yml",
       "output": {
         ".html": {
@@ -7988,6 +8520,34 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Core.Xml.Xml2Marshaller.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Core.Xml.Xml2Marshaller.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Core.Xml.Xml2Marshaller",
+      "Summary": "<p sourcefile=\"api/Agenix.Core.Xml.Xml2Marshaller.yml\" sourcestartlinenumber=\"1\">Marshaller uses XML serialization to marshal/unmarshal data.\nProvides similar functionality to Java's JAXB2Marshaller.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Core.Xml.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Core.Xml.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Core.Xml",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Agenix.Core.yml",
       "output": {
         ".html": {
@@ -7998,6 +8558,468 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Agenix.Core",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Actions.GraphQLActionBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Actions.GraphQLActionBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Actions.GraphQLActionBuilder",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Actions.GraphQLActionBuilder.yml\" sourcestartlinenumber=\"1\">Provides functionality to build and configure GraphQL-related test actions fluently.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Actions.GraphQLClientActionBuilder.GraphQLClientReceiveActionBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Actions.GraphQLClientActionBuilder.GraphQLClientReceiveActionBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Actions.GraphQLClientActionBuilder.GraphQLClientReceiveActionBuilder",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Actions.GraphQLClientActionBuilder.GraphQLClientReceiveActionBuilder.yml\" sourcestartlinenumber=\"1\">Configures actions for receiving GraphQL responses from an GraphQL client or URI.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Actions.GraphQLClientActionBuilder.GraphQLClientSendActionBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Actions.GraphQLClientActionBuilder.GraphQLClientSendActionBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Actions.GraphQLClientActionBuilder.GraphQLClientSendActionBuilder",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Actions.GraphQLClientActionBuilder.GraphQLClientSendActionBuilder.yml\" sourcestartlinenumber=\"1\">Provides methods for building and configuring GraphQL client send actions.\nEnables the construction of client-side GraphQL send operations with specified parameters and options.\nPart of the fluent API for configuring and executing GraphQL interactions.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Actions.GraphQLClientActionBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Actions.GraphQLClientActionBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Actions.GraphQLClientActionBuilder",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Actions.GraphQLClientActionBuilder.yml\" sourcestartlinenumber=\"1\">Provides a fluent API for building and configuring GraphQL actions.\nSupports initiating client GraphQL operations including queries, mutations, and subscriptions.\nExtends behavior to resolve references dynamically during action construction.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport.yml\" sourcestartlinenumber=\"1\">Builder support class for GraphQL message configuration.\nProvides additional GraphQL-specific configuration methods.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.yml\" sourcestartlinenumber=\"1\">Provides functionality for building GraphQL client requests with customizable\nattributes such as GraphQL query, mutation, subscription, variables, and more.\nThis builder extends the capabilities of <code sourcefile=\"api/Agenix.GraphQL.Actions.GraphQLClientRequestActionBuilder.yml\" sourcestartlinenumber=\"3\">SendMessageAction.Builder</code>\nby adding GraphQL-specific configurations and behaviors.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Actions.GraphQLClientResponseActionBuilder.GraphQLMessageBuilderSupport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Actions.GraphQLClientResponseActionBuilder.GraphQLMessageBuilderSupport.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Actions.GraphQLClientResponseActionBuilder.GraphQLMessageBuilderSupport",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Actions.GraphQLClientResponseActionBuilder.GraphQLMessageBuilderSupport.yml\" sourcestartlinenumber=\"1\">Provides support for building GraphQL messages within the context of the ReceiveMessageAction.\nThis class serves as a helper for configuring various properties of a GraphQL message, including\nthe name, payload, data, errors, extensions, and associated metadata required for GraphQL message handling.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Actions.GraphQLClientResponseActionBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Actions.GraphQLClientResponseActionBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Actions.GraphQLClientResponseActionBuilder",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Actions.GraphQLClientResponseActionBuilder.yml\" sourcestartlinenumber=\"1\">Facilitates the creation and configuration of GraphQL client response actions.\nThis class extends the capabilities of ReceiveMessageAction.Builder to provide specialized support\nfor constructing GraphQL response messages. It allows users to define message properties such as\nGraphQL data, errors, extensions, and metadata, which are tailored for handling GraphQL interactions.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Actions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Actions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Actions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Client.GraphQLClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Client.GraphQLClient.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Client.GraphQLClient",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Client.GraphQLClient.yml\" sourcestartlinenumber=\"1\">GraphQL client implementation that extends AbstractEndpoint and provides GraphQL-specific functionality.\nSupports queries, mutations, and subscriptions with full Agenix integration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Client.GraphQLClientBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Client.GraphQLClientBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Client.GraphQLClientBuilder",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Client.GraphQLClientBuilder.yml\" sourcestartlinenumber=\"1\">Builder for creating and configuring GraphQL client endpoints with fluent API.\nProvides methods to configure GraphQL-specific settings such as endpoint URLs,\nauthentication, retry policies, and WebSocket support for subscriptions.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Client.GraphQLClientFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Client.GraphQLClientFactory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Client.GraphQLClientFactory",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Client.GraphQLClientFactory.yml\" sourcestartlinenumber=\"1\">Represents a factory for creating message handlers for GraphQL operations.\nThis factory allows the configuration of multiple delegating handlers that form a pipeline\nfor processing GraphQL HTTP requests and responses.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Client.GraphQLEndpointComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Client.GraphQLEndpointComponent.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Client.GraphQLEndpointComponent",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Client.GraphQLEndpointComponent.yml\" sourcestartlinenumber=\"1\">Represents a component responsible for creating GraphQL client endpoints based on a given URI resource\nand associated parameters. It allows configuration of GraphQL-specific endpoint settings and supports\nvarious GraphQL-related options such as operation types, WebSocket connections, and subscription handling.\nSupports both HTTP and HTTPS protocols for secure communication.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Client.GraphQLEndpointConfiguration.GraphQLAuthenticationConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Client.GraphQLEndpointConfiguration.GraphQLAuthenticationConfiguration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Client.GraphQLEndpointConfiguration.GraphQLAuthenticationConfiguration",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Client.GraphQLEndpointConfiguration.GraphQLAuthenticationConfiguration.yml\" sourcestartlinenumber=\"1\">Authentication configuration for GraphQL requests.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Client.GraphQLEndpointConfiguration.GraphQLRetryPolicy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Client.GraphQLEndpointConfiguration.GraphQLRetryPolicy.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Client.GraphQLEndpointConfiguration.GraphQLRetryPolicy",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Client.GraphQLEndpointConfiguration.GraphQLRetryPolicy.yml\" sourcestartlinenumber=\"1\">Retry policy configuration for GraphQL requests.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Client.GraphQLEndpointConfiguration.GraphQLSerializerOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Client.GraphQLEndpointConfiguration.GraphQLSerializerOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Client.GraphQLEndpointConfiguration.GraphQLSerializerOptions",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Client.GraphQLEndpointConfiguration.GraphQLSerializerOptions.yml\" sourcestartlinenumber=\"1\">Configuration options for GraphQL serialization.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Client.GraphQLEndpointConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Client.GraphQLEndpointConfiguration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Client.GraphQLEndpointConfiguration",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Client.GraphQLSecureEndpointComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Client.GraphQLSecureEndpointComponent.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Client.GraphQLSecureEndpointComponent",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Client.GraphQLSecureEndpointComponent.yml\" sourcestartlinenumber=\"1\">GraphQL endpoint component that enforces HTTPS for secure communication.\nAutomatically uses HTTPS for HTTP requests and WSS for WebSocket subscriptions.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Client.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Client.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Client",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Interceptor.LoggingGraphQLClientHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Interceptor.LoggingGraphQLClientHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Interceptor.LoggingGraphQLClientHandler",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Interceptor.LoggingGraphQLClientHandler.yml\" sourcestartlinenumber=\"1\">The LoggingGraphQLClientHandler class is a custom HTTP message handler that logs GraphQL request and response\nmessages.\nIt extends the DelegatingHandler, enabling modification or inspection of GraphQL requests and responses during HTTP\ncommunication with enhanced GraphQL-specific formatting.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Interceptor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Interceptor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Interceptor",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Message.GraphQLMessage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Message.GraphQLMessage.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Message.GraphQLMessage",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Message.GraphQLMessage.yml\" sourcestartlinenumber=\"1\">Represents a GraphQL message containing query, variables, and operation metadata.\nThis class extends the base message functionality to provide GraphQL-specific features.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Message.GraphQLMessageBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Message.GraphQLMessageBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Message.GraphQLMessageBuilder",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Message.GraphQLMessageBuilder.yml\" sourcestartlinenumber=\"1\">Builder class for constructing GraphQL messages using a fluent API.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Message.GraphQLMessageConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Message.GraphQLMessageConverter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Message.GraphQLMessageConverter",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Message.GraphQLMessageConverter.yml\" sourcestartlinenumber=\"1\">Converts GraphQL messages to GraphQL requests and GraphQL responses back to messages.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Message.GraphQLMessageHeaders.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Message.GraphQLMessageHeaders.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Message.GraphQLMessageHeaders",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Message.GraphQLMessageHeaders.yml\" sourcestartlinenumber=\"1\">Contains constants for GraphQL-specific message headers.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Message.GraphQLMessageUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Message.GraphQLMessageUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Message.GraphQLMessageUtils",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Message.GraphQLMessageUtils.yml\" sourcestartlinenumber=\"1\">Utility class providing helper methods for GraphQL message operations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Message.GraphQLOperationType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Message.GraphQLOperationType.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Message.GraphQLOperationType",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Message.GraphQLOperationType.yml\" sourcestartlinenumber=\"1\">Represents the type of GraphQL operation.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Message.GraphQLSubscriptionOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Message.GraphQLSubscriptionOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Message.GraphQLSubscriptionOptions",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Message.GraphQLSubscriptionOptions.yml\" sourcestartlinenumber=\"1\">Represents configuration options for GraphQL subscriptions.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Message.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Message.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Message",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Server.AbstractGraphQLServerBuilder-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Server.AbstractGraphQLServerBuilder-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Server.AbstractGraphQLServerBuilder<TServer, TBuilder>",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Server.AbstractGraphQLServerBuilder-2.yml\" sourcestartlinenumber=\"1\">Abstract builder for GraphQL servers that provides fluent API for configuration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Server.GraphQLServer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Server.GraphQLServer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Server.GraphQLServer",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Server.GraphQLServer.yml\" sourcestartlinenumber=\"1\">GraphQL Server implementation using Hot Chocolate framework</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Server.GraphQLServerBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Server.GraphQLServerBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Server.GraphQLServerBuilder",
+      "Summary": "<p sourcefile=\"api/Agenix.GraphQL.Server.GraphQLServerBuilder.yml\" sourcestartlinenumber=\"1\">Builder for GraphQL servers that provides fluent API for configuration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.GraphQL.Server.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.GraphQL.Server.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.GraphQL.Server",
       "Summary": null
     },
     {
@@ -10420,7 +11442,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Agenix.Validation.Json.Message.Selector.JsonPathPayloadMessageSelector",
-      "Summary": "<p sourcefile=\"api/Agenix.Validation.Json.Message.Selector.JsonPathPayloadMessageSelector.yml\" sourcestartlinenumber=\"1\">Message selector accepts JSON messages in case the JsonPath expression evaluation result matches\nthe expected value. With this selector someone can select messages according to a message payload JSON\nelement value, for instance.</p>\n<p sourcefile=\"api/Agenix.Validation.Json.Message.Selector.JsonPathPayloadMessageSelector.yml\" sourcestartlinenumber=\"5\">Syntax is jsonPath:$.root.element</p>\n"
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Json.Message.Selector.JsonPathPayloadMessageSelector.yml\" sourcestartlinenumber=\"1\">Message selector accepts JSON messages in case the JsonPath expression evaluation result matches\nthe expected value. With this selector someone can select messages according to a message payload JSON\nelement value, for instance.\nSyntax is jsonPath:$.root.element</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -10686,6 +11708,62 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Agenix.Validation.Json.Validation",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Json.Variable.Dictionary.Json.AbstractJsonDataDictionary.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Json.Variable.Dictionary.Json.AbstractJsonDataDictionary.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Json.Variable.Dictionary.Json.AbstractJsonDataDictionary",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Json.Variable.Dictionary.Json.AbstractJsonDataDictionary.yml\" sourcestartlinenumber=\"1\">Abstract json data dictionary works on json message data. Each value is translated with a dictionary.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Json.Variable.Dictionary.Json.JsonMappingDataDictionary.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Json.Variable.Dictionary.Json.JsonMappingDataDictionary.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Json.Variable.Dictionary.Json.JsonMappingDataDictionary",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Json.Variable.Dictionary.Json.JsonMappingDataDictionary.yml\" sourcestartlinenumber=\"1\">Simple json data dictionary implementation holds a set of mappings where keys are json path expressions to match\njson object graph. Parses message payload to json object tree. Traverses\nthrough json data supporting nested json objects, arrays and values.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Json.Variable.Dictionary.Json.JsonPathMappingDataDictionary.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Json.Variable.Dictionary.Json.JsonPathMappingDataDictionary.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Json.Variable.Dictionary.Json.JsonPathMappingDataDictionary",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Json.Variable.Dictionary.Json.JsonPathMappingDataDictionary.yml\" sourcestartlinenumber=\"1\">JSON data dictionary implementation maps elements via JsonPath expressions. When an element is identified by some expression\nin the dictionary, the value is overwritten accordingly.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Json.Variable.Dictionary.Json.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Json.Variable.Dictionary.Json.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Json.Variable.Dictionary.Json",
       "Summary": null
     },
     {
@@ -10980,6 +12058,1252 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Agenix.Validation.Text.Validation.Text",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Dsl.XmlSupport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Dsl.XmlSupport.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Dsl.XmlSupport",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Dsl.XmlSupport.yml\" sourcestartlinenumber=\"1\">Provides a set of static methods to support XML-related validation processes.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Dsl.XpathSupport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Dsl.XpathSupport.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Dsl.XpathSupport",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Dsl.XpathSupport.yml\" sourcestartlinenumber=\"1\">Provides support for configuring and using XPath-related functionalities within the DSL.\nThis class serves as a bridge to configure expressions and adapt to various\nprocessing contexts such as message processing, variable extraction, and validation.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Dsl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Dsl.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Dsl",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Functions.Core.CreateCDataSectionFunction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Functions.Core.CreateCDataSectionFunction.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Functions.Core.CreateCDataSectionFunction",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Functions.Core.CreateCDataSectionFunction.yml\" sourcestartlinenumber=\"1\">Adds XML CDATA section tags to parameter value. This is extremely useful when having\nCDATA sections in the message payload. Agenix test case itself also uses CDATA sections and\nnested CDATA sections are not allowed. This function adds the CDATA section tags\nat runtime.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Functions.Core.EscapeXmlFunction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Functions.Core.EscapeXmlFunction.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Functions.Core.EscapeXmlFunction",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Functions.Core.EscapeXmlFunction.yml\" sourcestartlinenumber=\"1\">Escapes XML fragment with escaped characters for '&lt;', '&gt;'.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Functions.Core.XpathFunction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Functions.Core.XpathFunction.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Functions.Core.XpathFunction",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Functions.Core.XpathFunction.yml\" sourcestartlinenumber=\"1\">XPath function for evaluating XPath expressions against XML sources.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Functions.Core.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Functions.Core.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Functions.Core",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Functions.XmlFunctions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Functions.XmlFunctions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Functions.XmlFunctions",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Functions.XmlFunctions.yml\" sourcestartlinenumber=\"1\">Utility class providing static methods for XML-related functions.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Functions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Functions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Functions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Message.Builder.MarshallingHeaderDataBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Message.Builder.MarshallingHeaderDataBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Message.Builder.MarshallingHeaderDataBuilder",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Message.Builder.MarshallingHeaderDataBuilder.yml\" sourcestartlinenumber=\"1\">Provides functionality for building message header data with\nsupport for object marshalling. This class extends the capabilities of\n<xref href=\"Agenix.Core.Message.Builder.DefaultHeaderDataBuilder\" data-throw-if-not-resolved=\"false\"></xref> by integrating marshaller-specific functionality.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Message.Builder.MarshallingPayloadBuilder.Builder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Message.Builder.MarshallingPayloadBuilder.Builder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Message.Builder.MarshallingPayloadBuilder.Builder",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Message.Builder.MarshallingPayloadBuilder.Builder.yml\" sourcestartlinenumber=\"1\">Provides functionality to build a customized <xref href=\"Agenix.Validation.Xml.Message.Builder.MarshallingPayloadBuilder\" data-throw-if-not-resolved=\"false\"></xref> instance.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Message.Builder.MarshallingPayloadBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Message.Builder.MarshallingPayloadBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Message.Builder.MarshallingPayloadBuilder",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Message.Builder.MarshallingPayloadBuilder.yml\" sourcestartlinenumber=\"1\">Represents a payload builder for marshaling a model into a specific message format.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Message.Builder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Message.Builder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Message.Builder",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Message.Selector.RootQNameMessageSelector.Factory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Message.Selector.RootQNameMessageSelector.Factory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Message.Selector.RootQNameMessageSelector.Factory",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Message.Selector.RootQNameMessageSelector.Factory.yml\" sourcestartlinenumber=\"1\">Message selector factory for this implementation.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Message.Selector.RootQNameMessageSelector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Message.Selector.RootQNameMessageSelector.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Message.Selector.RootQNameMessageSelector",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Message.Selector.RootQNameMessageSelector.yml\" sourcestartlinenumber=\"1\">Message selector that accepts XML messages according to specified root element QName.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Message.Selector.XpathPayloadMessageSelector.Factory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Message.Selector.XpathPayloadMessageSelector.Factory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Message.Selector.XpathPayloadMessageSelector.Factory",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Message.Selector.XpathPayloadMessageSelector.Factory.yml\" sourcestartlinenumber=\"1\">Message selector factory for this implementation.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Message.Selector.XpathPayloadMessageSelector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Message.Selector.XpathPayloadMessageSelector.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Message.Selector.XpathPayloadMessageSelector",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Message.Selector.XpathPayloadMessageSelector.yml\" sourcestartlinenumber=\"1\">Message selector accepts XML messages in case XPath expression evaluation result matches\nthe expected value. With this selector someone can select messages according to a message payload XML\nelement value for instance.\nSyntax is xpath://root/element</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Message.Selector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Message.Selector.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Message.Selector",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Namespace.QName.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Namespace.QName.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Namespace.QName",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Namespace.QName.yml\" sourcestartlinenumber=\"1\">QName represents a qualified name as defined in the XML specifications:\nNCName, Namespace Name, Namespace Prefix.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Namespace.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Namespace.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Namespace",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.AbstractSchemaCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.AbstractSchemaCollection.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.AbstractSchemaCollection",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.AbstractSchemaMappingStrategy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.AbstractSchemaMappingStrategy.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.AbstractSchemaMappingStrategy",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Schema.AbstractSchemaMappingStrategy.yml\" sourcestartlinenumber=\"1\">Abstract schema mapping strategy extracts target namespace and root element name\nfor subclasses.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.IExtendedWsdlSchema.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.IExtendedWsdlSchema.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.IExtendedWsdlSchema",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.IWsdlFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.IWsdlFactory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.IWsdlFactory",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Schema.IWsdlFactory.yml\" sourcestartlinenumber=\"1\">Interface for a factory that creates instances of WSDL (Web Services Description Language) readers.\nProvides a mechanism for obtaining new WSDL reader instances and allows for centralized\nmanagement of how these instances are created.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.IWsdlReader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.IWsdlReader.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.IWsdlReader",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Schema.IWsdlReader.yml\" sourcestartlinenumber=\"1\">Interface for reading WSDL (Web Services Description Language) documents.\nProvides methods to interpret and parse WSDL documents from different sources.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.IWsdlSchema.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.IWsdlSchema.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.IWsdlSchema",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.IXsdSchema.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.IXsdSchema.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.IXsdSchema",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Schema.IXsdSchema.yml\" sourcestartlinenumber=\"1\">Represents an interface that provides functionality for interacting with an XSD (XML Schema Definition) schema,\nincluding schema retrieval, validation, and creation of validators.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.IXsdSchemaMappingStrategy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.IXsdSchemaMappingStrategy.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.IXsdSchemaMappingStrategy",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Schema.IXsdSchemaMappingStrategy.yml\" sourcestartlinenumber=\"1\">Interface for schema mapping strategies used in schema repository.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.Locator.IWsdlLocator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.Locator.IWsdlLocator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.Locator.IWsdlLocator",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Schema.Locator.IWsdlLocator.yml\" sourcestartlinenumber=\"1\">Interface for locating WSDL resources and their imports</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.Locator.WsdlLocator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.Locator.WsdlLocator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.Locator.WsdlLocator",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Schema.Locator.WsdlLocator.yml\" sourcestartlinenumber=\"1\">Responsible for locating WSDL resources and their imports.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.Locator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.Locator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.Locator",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.RootQNameSchemaMappingStrategy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.RootQNameSchemaMappingStrategy.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.RootQNameSchemaMappingStrategy",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Schema.RootQNameSchemaMappingStrategy.yml\" sourcestartlinenumber=\"1\">Mapping strategy uses the root element local name to find matching schema\ninstance.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.SchemaImpl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.SchemaImpl.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.SchemaImpl",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Schema.SchemaImpl.yml\" sourcestartlinenumber=\"1\">Represents an implementation of the <xref href=\"Agenix.Validation.Xml.Schema.IWsdlSchema\" data-throw-if-not-resolved=\"false\"></xref> interface, providing functionality\nto work with XML schemas as both <xref href=\"System.Xml.Schema.XmlSchema\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"System.Xml.XmlElement\" data-throw-if-not-resolved=\"false\"></xref> objects.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.SchemaMappingStrategyChain.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.SchemaMappingStrategyChain.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.SchemaMappingStrategyChain",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Schema.SchemaMappingStrategyChain.yml\" sourcestartlinenumber=\"1\">Special schema mapping strategy delegating to several other strategies in\na mapping chain. The first mapping strategy finding a proper schema wins.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.SimpleXsdSchema.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.SimpleXsdSchema.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.SimpleXsdSchema",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Schema.SimpleXsdSchema.yml\" sourcestartlinenumber=\"1\">C# equivalent of Spring's SimpleXsdSchema\nRepresents a simple XSD schema wrapper</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.TargetNamespaceSchemaMappingStrategy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.TargetNamespaceSchemaMappingStrategy.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.TargetNamespaceSchemaMappingStrategy",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Schema.TargetNamespaceSchemaMappingStrategy.yml\" sourcestartlinenumber=\"1\">Mapping strategy checks on target namespaces in schemas to find matching schema\ninstance.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.WcfWsdlReader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.WcfWsdlReader.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.WcfWsdlReader",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Schema.WcfWsdlReader.yml\" sourcestartlinenumber=\"1\">Provides functionality to read and parse WSDL (Web Services Description Language) documents.\nImplements the <xref href=\"Agenix.Validation.Xml.Schema.IWsdlReader\" data-throw-if-not-resolved=\"false\"></xref> interface to handle WSDL input from various sources,\nincluding locators and input streams.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.WsdlDefinition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.WsdlDefinition.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.WsdlDefinition",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.WsdlFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.WsdlFactory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.WsdlFactory",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Schema.WsdlFactory.yml\" sourcestartlinenumber=\"1\">Factory class for creating instances of WSDL (Web Services Description Language) readers.\nImplements the <xref href=\"Agenix.Validation.Xml.Schema.IWsdlFactory\" data-throw-if-not-resolved=\"false\"></xref> interface to provide a mechanism for obtaining\nWSDL reader instances.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.WsdlImport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.WsdlImport.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.WsdlImport",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.WsdlSchema.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.WsdlSchema.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.WsdlSchema",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.WsdlSchemaImport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.WsdlSchemaImport.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.WsdlSchemaImport",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.WsdlSchemaInclude.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.WsdlSchemaInclude.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.WsdlSchemaInclude",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.WsdlType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.WsdlType.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.WsdlType",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.WsdlTypes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.WsdlTypes.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.WsdlTypes",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.WsdlXsdSchema.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.WsdlXsdSchema.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.WsdlXsdSchema",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.XmlSchemaValidator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.XmlSchemaValidator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.XmlSchemaValidator",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Schema.XmlSchemaValidator.yml\" sourcestartlinenumber=\"1\">The <code>XmlSchemaValidator</code> class is used to validate XML documents against a set of XML Schema Definitions\n(XSDs).\nIt ensures that the XML conforms to the rules and structure defined by the associated schema set.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.XsdSchemaRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.XsdSchemaRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema.XsdSchemaRepository",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Schema.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Schema.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Schema",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Util.DomUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Util.DomUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Util.DomUtils",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Util.DomUtils.yml\" sourcestartlinenumber=\"1\">Convenience methods for working with the DOM API,\nin particular for working with DOM Nodes and DOM Elements.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Util.QNameUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Util.QNameUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Util.QNameUtils",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Util.QNameUtils.yml\" sourcestartlinenumber=\"1\">Utility class for working with XML qualified names (QName).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Util.XmlConstants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Util.XmlConstants.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Util.XmlConstants",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Util.XmlConstants.yml\" sourcestartlinenumber=\"1\">XML constants equivalent to Java's XMLConstants.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Util.XmlUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Util.XmlUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Util.XmlUtils",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Util.XmlUtils.yml\" sourcestartlinenumber=\"1\">Class providing several utility methods for XML processing.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Util.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Util.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Util",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Validation.Matcher.Core.XmlValidationMatcher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Validation.Matcher.Core.XmlValidationMatcher.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Validation.Matcher.Core.XmlValidationMatcher",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Validation.Matcher.Core.XmlValidationMatcher.yml\" sourcestartlinenumber=\"1\">Validation matcher receives an XML data and validates it against the expected XML with full\nXML validation support (e.g., ignoring elements, namespace support, ...).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Validation.Matcher.Core.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Validation.Matcher.Core.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Validation.Matcher.Core",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Validation.Xhtml.XhtmlMessageConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Validation.Xhtml.XhtmlMessageConverter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Validation.Xhtml.XhtmlMessageConverter",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Validation.Xhtml.XhtmlMessageConverter.yml\" sourcestartlinenumber=\"1\">Provides functionality to convert HTML content into a valid XHTML format. This class also supports\noperations for validating XHTML content and managing configurations for content processing.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Validation.Xhtml.XhtmlMessageValidator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Validation.Xhtml.XhtmlMessageValidator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Validation.Xhtml.XhtmlMessageValidator",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Validation.Xhtml.XhtmlMessageValidator.yml\" sourcestartlinenumber=\"1\">Provides validation mechanisms for XHTML messages by extending the functionality\nof the base DomXmlMessageValidator class. This validator is specifically designed\nto handle messages with XHTML content while ensuring XML schema validation is also applied.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Validation.Xhtml.XhtmlXpathMessageValidator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Validation.Xhtml.XhtmlXpathMessageValidator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Validation.Xhtml.XhtmlXpathMessageValidator",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Validation.Xhtml.XhtmlXpathMessageValidator.yml\" sourcestartlinenumber=\"1\">Represents a validator for validating XHTML messages using XPath expressions.\nThis validator validates messages after converting their payload into XHTML-compatible format.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Validation.Xhtml.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Validation.Xhtml.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Validation.Xhtml",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Validation.Xml.DomXmlMessageValidator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Validation.Xml.DomXmlMessageValidator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Validation.Xml.DomXmlMessageValidator",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Validation.Xml.DomXmlMessageValidator.yml\" sourcestartlinenumber=\"1\">The <code>DomXmlMessageValidator</code> class provides functionality for validating XML messages\nin a DOM-based manner. It extends the abstract class <xref href=\"Agenix.Api.Validation.AbstractMessageValidator%601\" data-throw-if-not-resolved=\"false\"></xref>\nspecifically for the <xref href=\"Agenix.Core.Validation.Xml.XmlMessageValidationContext\" data-throw-if-not-resolved=\"false\"></xref> validation context.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Validation.Xml.Schema.ValidationStrategy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Validation.Xml.Schema.ValidationStrategy.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Validation.Xml.Schema.ValidationStrategy",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Validation.Xml.Schema.ValidationStrategy.yml\" sourcestartlinenumber=\"1\">Specifies the strategy for handling validation in the context of XML schema validation.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Validation.Xml.Schema.XmlSchemaValidation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Validation.Xml.Schema.XmlSchemaValidation.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Validation.Xml.Schema.XmlSchemaValidation",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Validation.Xml.Schema.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Validation.Xml.Schema.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Validation.Xml.Schema",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Validation.Xml.XmlMarshallingValidationProcessor-1.Builder-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Validation.Xml.XmlMarshallingValidationProcessor-1.Builder-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Validation.Xml.XmlMarshallingValidationProcessor<T>.Builder<B>",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Validation.Xml.XmlMarshallingValidationProcessor-1.Builder-1.yml\" sourcestartlinenumber=\"1\">Fluent builder.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Validation.Xml.XmlMarshallingValidationProcessor-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Validation.Xml.XmlMarshallingValidationProcessor-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Validation.Xml.XmlMarshallingValidationProcessor<T>",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Validation.Xml.XmlMarshallingValidationProcessor-1.yml\" sourcestartlinenumber=\"1\">Provides an abstract base class for XML marshaling validation processors.\nEnables the unmarshalling of XML messages and facilitates validation logic by\nintegrating it with specific validation processes and contexts.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Validation.Xml.XmlValidationUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Validation.Xml.XmlValidationUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Validation.Xml.XmlValidationUtils",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Validation.Xml.XmlValidationUtils.yml\" sourcestartlinenumber=\"1\">Abstract utility class for XML validation operations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Validation.Xml.XpathMessageProcessor.Builder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Validation.Xml.XpathMessageProcessor.Builder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Validation.Xml.XpathMessageProcessor.Builder",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Validation.Xml.XpathMessageProcessor.Builder.yml\" sourcestartlinenumber=\"1\">Fluent builder.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Validation.Xml.XpathMessageProcessor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Validation.Xml.XpathMessageProcessor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Validation.Xml.XpathMessageProcessor",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Validation.Xml.XpathMessageProcessor.yml\" sourcestartlinenumber=\"1\">Processor implementation evaluating XPath expressions on message payload during message construction.\nClass identifies XML elements inside the message payload via XPath expressions to overwrite their value.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Validation.Xml.XpathMessageValidator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Validation.Xml.XpathMessageValidator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Validation.Xml.XpathMessageValidator",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Validation.Xml.XpathMessageValidator.yml\" sourcestartlinenumber=\"1\">Message validator evaluates set of XPath expressions on message payload and checks that values are as expected.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Validation.Xml.XpathPayloadVariableExtractor.Builder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Validation.Xml.XpathPayloadVariableExtractor.Builder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Validation.Xml.XpathPayloadVariableExtractor.Builder",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Validation.Xml.XpathPayloadVariableExtractor.Builder.yml\" sourcestartlinenumber=\"1\">Fluent builder.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Validation.Xml.XpathPayloadVariableExtractor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Validation.Xml.XpathPayloadVariableExtractor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Validation.Xml.XpathPayloadVariableExtractor",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Validation.Xml.XpathPayloadVariableExtractor.yml\" sourcestartlinenumber=\"1\">Provides functionality for extracting variables from an XML message payload using XPath expressions.\nImplements the <xref href=\"Agenix.Api.Variable.IVariableExtractor\" data-throw-if-not-resolved=\"false\"></xref> interface.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Validation.Xml.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Validation.Xml.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Validation.Xml",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Variable.Dictionary.Xml.AbstractXmlDataDictionary.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Variable.Dictionary.Xml.AbstractXmlDataDictionary.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Variable.Dictionary.Xml.AbstractXmlDataDictionary",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Variable.Dictionary.Xml.AbstractXmlDataDictionary.yml\" sourcestartlinenumber=\"1\">Abstract data dictionary works on XML message payloads only with parsing the document and translating each element\nand attribute with respective value in dictionary.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Variable.Dictionary.Xml.NodeMappingDataDictionary.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Variable.Dictionary.Xml.NodeMappingDataDictionary.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Variable.Dictionary.Xml.NodeMappingDataDictionary",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Variable.Dictionary.Xml.NodeMappingDataDictionary.yml\" sourcestartlinenumber=\"1\">Very basic data dictionary that holds a list of mappings for message elements. Mapping key is the element path\ninside\nthe XML structure. The mapping value is set as a new element\nvalue where test variables are supported in value expressions.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Variable.Dictionary.Xml.XpathMappingDataDictionary.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Variable.Dictionary.Xml.XpathMappingDataDictionary.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Variable.Dictionary.Xml.XpathMappingDataDictionary",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Variable.Dictionary.Xml.XpathMappingDataDictionary.yml\" sourcestartlinenumber=\"1\">XML data dictionary implementation maps elements via XPath expressions. When an element is identified by some\nexpression\nin the dictionary, the value is overwritten accordingly. Namespace context is either evaluated on the fly or by\nglobal namespace\ncontext builder.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Variable.Dictionary.Xml.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Variable.Dictionary.Xml.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Variable.Dictionary.Xml",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.XmlConfigurer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.XmlConfigurer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.XmlConfigurer",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.XmlConfigurer.yml\" sourcestartlinenumber=\"1\">Class is loaded with DI container in Agenix. When loaded automatically initializes XML utilities\nwith this XML processing configuration. Configuration is pushed to XML utility classes after properties are set.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.XmlFormattingMessageProcessor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.XmlFormattingMessageProcessor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.XmlFormattingMessageProcessor",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.XmlFormattingMessageProcessor.yml\" sourcestartlinenumber=\"1\">The XmlFormattingMessageProcessor is responsible for processing messages\nwhere the payload is expected to be in XML format. The processor formats\nthe XML payload into a pretty-printed format for enhanced readability.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.XmlReaderFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.XmlReaderFactory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.XmlReaderFactory",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.XmlReaderFactory.yml\" sourcestartlinenumber=\"1\">Factory for creating configured XML readers</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.XmlValidationHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.XmlValidationHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.XmlValidationHelper",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.XmlValidationHelper.yml\" sourcestartlinenumber=\"1\">Helper class for XML validation operations.\nProvides utility methods for resolving schema repositories and namespace context builders.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.XmlWriterFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.XmlWriterFactory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.XmlWriterFactory",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.XmlWriterFactory.yml\" sourcestartlinenumber=\"1\">Provides functionality to create instances of <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref> objects configured with optional settings.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Xpath.XPathExpressionFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Xpath.XPathExpressionFactory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Xpath.XPathExpressionFactory",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Xpath.XPathExpressionFactory.yml\" sourcestartlinenumber=\"1\">Factory for creating compiled XPath expressions.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Xpath.XPathExpressionResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Xpath.XPathExpressionResult.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Xpath.XPathExpressionResult",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Xpath.XPathExpressionResult.yml\" sourcestartlinenumber=\"1\">Enumeration representing the possible result types for XPath expression evaluation. In Agenix\nXPath expressions a prefix may determine the result type like this:\nstring://MyExpressionString/Value\nnumber://MyExpressionString/Value\nboolean://MyExpressionString/Value\nThe result type prefix is supposed to be stripped off before expression evaluation\nand determines the evaluation result.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Xpath.XPathExpressionResultExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Xpath.XPathExpressionResultExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Xpath.XPathExpressionResultExtensions",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Xpath.XPathExpressionResultExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for XPathExpressionResult enum.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Xpath.XpathUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Xpath.XpathUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Xpath.XpathUtils",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.Xpath.XpathUtils.yml\" sourcestartlinenumber=\"1\">Provides utility methods for working with XPath expressions and evaluating them against XML nodes.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.Xpath.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.Xpath.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.Xpath",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.XpathSegmentVariableExtractor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.XpathSegmentVariableExtractor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml.XpathSegmentVariableExtractor",
+      "Summary": "<p sourcefile=\"api/Agenix.Validation.Xml.XpathSegmentVariableExtractor.yml\" sourcestartlinenumber=\"1\">Represents an implementation of <xref href=\"Agenix.Api.Variable.SegmentVariableExtractorRegistry.AbstractSegmentVariableExtractor\" data-throw-if-not-resolved=\"false\"></xref>\nspecifically designed to handle XPath-based variable extraction from XML data.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Agenix.Validation.Xml.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/api/Agenix.Validation.Xml.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Agenix.Validation.Xml",
       "Summary": null
     },
     {

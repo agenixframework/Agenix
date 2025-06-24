@@ -79,6 +79,9 @@
     <div>
       <a class="xref" href="Agenix.Api.Message.IMessageProcessor.html#Agenix_Api_Message_IMessageProcessor_Transform_Agenix_Api_Message_IMessage_Agenix_Api_Context_TestContext_">IMessageProcessor.Transform(IMessage, TestContext)</a>
     </div>
+    <div>
+      <a class="xref" href="Agenix.Api.Message.IMessageProcessor.html#Agenix_Api_Message_IMessageProcessor_Lookup__2_System_String_">IMessageProcessor.Lookup&lt;T, TB&gt;(string)</a>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Api.html">Api</a>.<a class="xref" href="Agenix.Api.Variable.html">Variable</a></h6>
   <h6><strong>Assembly</strong>: Agenix.Api.dll</h6>
@@ -130,19 +133,19 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Variable_IVariableExtractor_Lookup__2_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Variable.IVariableExtractor.Lookup%60%602(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Variable_IVariableExtractor_Lookup__1_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Variable.IVariableExtractor.Lookup%60%601(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Variable/IVariableExtractor.cs/#L85">View Source</a>
   </span>
   <a id="Agenix_Api_Variable_IVariableExtractor_Lookup_" data-uid="Agenix.Api.Variable.IVariableExtractor.Lookup*"></a>
-  <h4 id="Agenix_Api_Variable_IVariableExtractor_Lookup__2_System_String_" data-uid="Agenix.Api.Variable.IVariableExtractor.Lookup``2(System.String)">Lookup&lt;T, TB&gt;(string)</h4>
+  <h4 id="Agenix_Api_Variable_IVariableExtractor_Lookup__1_System_String_" data-uid="Agenix.Api.Variable.IVariableExtractor.Lookup``1(System.String)">Lookup&lt;TB&gt;(string)</h4>
   <div class="markdown level1 summary"><p>Looks up and returns an optional builder for the specified IVariableExtractor type.`</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Optional&lt;IVariableExtractor.IBuilder&lt;T, TB&gt;&gt; Lookup&lt;T, TB&gt;(string extractor) where T : IVariableExtractor where TB : IVariableExtractor.IBuilder&lt;T, TB&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public static Optional&lt;TB&gt; Lookup&lt;TB&gt;(string extractor) where TB : IBuilder</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -172,7 +175,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Agenix.Api.Util.Optional-1.html">Optional</a>&lt;<a class="xref" href="Agenix.Api.Variable.IVariableExtractor.html">IVariableExtractor</a>.<a class="xref" href="Agenix.Api.Variable.IVariableExtractor.IBuilder-2.html">IBuilder</a>&lt;T, TB&gt;&gt;</td>
+        <td><a class="xref" href="Agenix.Api.Util.Optional-1.html">Optional</a>&lt;TB&gt;</td>
         <td><p>An optional builder for the specified IVariableExtractor type.</p>
 </td>
       </tr>
@@ -187,11 +190,6 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The IVariableExtractor implementation type.</p>
-</td>
-      </tr>
       <tr>
         <td><span class="parametername">TB</span></td>
         <td><p>The builder type for the IVariableExtractor implementation.</p>

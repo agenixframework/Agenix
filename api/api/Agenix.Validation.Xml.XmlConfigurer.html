@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class XmlConfigurer </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class XmlConfigurer ">
+    
+    <meta name="description" content="Class is loaded with DI container in Agenix. When loaded automatically initializes XML utilities with this XML processing configuration. Configuration is pushed to XML utility classes after properties are set.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Validation.Xml.XmlConfigurer">
+
+
+
+  <h1 id="Agenix_Validation_Xml_XmlConfigurer" data-uid="Agenix.Validation.Xml.XmlConfigurer" class="text-break">Class XmlConfigurer</h1>
+  <div class="markdown level0 summary"><p>Class is loaded with DI container in Agenix. When loaded automatically initializes XML utilities
+with this XML processing configuration. Configuration is pushed to XML utility classes after properties are set.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">XmlConfigurer</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.Common.InitializingPhase.html">InitializingPhase</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Validation.html">Validation</a>.<a class="xref" href="Agenix.Validation.Xml.html">Xml</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Validation.Xml.dll</h6>
+  <h5 id="Agenix_Validation_Xml_XmlConfigurer_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class XmlConfigurer : InitializingPhase</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer__ctor.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L78">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer__ctor_" data-uid="Agenix.Validation.Xml.XmlConfigurer.#ctor*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer__ctor" data-uid="Agenix.Validation.Xml.XmlConfigurer.#ctor">XmlConfigurer()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlConfigurer()</code></pre>
+  </div>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_CdataSections.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.CdataSections%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L47">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_CdataSections" data-uid="Agenix.Validation.Xml.XmlConfigurer.CdataSections">CdataSections</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string CdataSections = &quot;cdata-sections&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_CheckCharacters.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.CheckCharacters%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L57">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_CheckCharacters" data-uid="Agenix.Validation.Xml.XmlConfigurer.CheckCharacters">CheckCharacters</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string CheckCharacters = &quot;check-characters&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_ConformanceLevel.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.ConformanceLevel%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L58">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_ConformanceLevel" data-uid="Agenix.Validation.Xml.XmlConfigurer.ConformanceLevel">ConformanceLevel</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string ConformanceLevel = &quot;conformance-level&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_DtdProcessing.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.DtdProcessing%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L59">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_DtdProcessing" data-uid="Agenix.Validation.Xml.XmlConfigurer.DtdProcessing">DtdProcessing</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DtdProcessing = &quot;dtd-processing&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_ElementContentWhitespace.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.ElementContentWhitespace%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L46">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_ElementContentWhitespace" data-uid="Agenix.Validation.Xml.XmlConfigurer.ElementContentWhitespace">ElementContentWhitespace</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string ElementContentWhitespace = &quot;element-content-whitespace&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_Encoding.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.Encoding%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L54">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_Encoding" data-uid="Agenix.Validation.Xml.XmlConfigurer.Encoding">Encoding</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string Encoding = &quot;encoding&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_FormatPrettyPrint.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.FormatPrettyPrint%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L45">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_FormatPrettyPrint" data-uid="Agenix.Validation.Xml.XmlConfigurer.FormatPrettyPrint">FormatPrettyPrint</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string FormatPrettyPrint = &quot;format-pretty-print&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_Indent.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.Indent%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L51">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_Indent" data-uid="Agenix.Validation.Xml.XmlConfigurer.Indent">Indent</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string Indent = &quot;indent&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_IndentChars.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.IndentChars%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L52">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_IndentChars" data-uid="Agenix.Validation.Xml.XmlConfigurer.IndentChars">IndentChars</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string IndentChars = &quot;indent-chars&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_MaxCharactersInDocument.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.MaxCharactersInDocument%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L60">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_MaxCharactersInDocument" data-uid="Agenix.Validation.Xml.XmlConfigurer.MaxCharactersInDocument">MaxCharactersInDocument</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string MaxCharactersInDocument = &quot;max-characters-in-document&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_NewLineChars.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.NewLineChars%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L56">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_NewLineChars" data-uid="Agenix.Validation.Xml.XmlConfigurer.NewLineChars">NewLineChars</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NewLineChars = &quot;new-line-chars&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_NewLineHandling.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.NewLineHandling%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L55">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_NewLineHandling" data-uid="Agenix.Validation.Xml.XmlConfigurer.NewLineHandling">NewLineHandling</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string NewLineHandling = &quot;new-line-handling&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_OmitXmlDeclaration.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.OmitXmlDeclaration%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L53">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_OmitXmlDeclaration" data-uid="Agenix.Validation.Xml.XmlConfigurer.OmitXmlDeclaration">OmitXmlDeclaration</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string OmitXmlDeclaration = &quot;omit-xml-declaration&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_ResourceResolver.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.ResourceResolver%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L49">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_ResourceResolver" data-uid="Agenix.Validation.Xml.XmlConfigurer.ResourceResolver">ResourceResolver</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string ResourceResolver = &quot;resource-resolver&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_SplitCdataSections.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.SplitCdataSections%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L44">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_SplitCdataSections" data-uid="Agenix.Validation.Xml.XmlConfigurer.SplitCdataSections">SplitCdataSections</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string SplitCdataSections = &quot;split-cdata-sections&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_ValidateIfSchema.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.ValidateIfSchema%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L48">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_ValidateIfSchema" data-uid="Agenix.Validation.Xml.XmlConfigurer.ValidateIfSchema">ValidateIfSchema</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string ValidateIfSchema = &quot;validate-if-schema&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_XmlDeclaration.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.XmlDeclaration%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L50">View Source</a>
+  </span>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_XmlDeclaration" data-uid="Agenix.Validation.Xml.XmlConfigurer.XmlDeclaration">XmlDeclaration</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string XmlDeclaration = &quot;xml-declaration&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_AddParseSetting_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.AddParseSetting(System.String%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L494">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_AddParseSetting_" data-uid="Agenix.Validation.Xml.XmlConfigurer.AddParseSetting*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_AddParseSetting_System_String_System_Object_" data-uid="Agenix.Validation.Xml.XmlConfigurer.AddParseSetting(System.String,System.Object)">AddParseSetting(string, object)</h4>
+  <div class="markdown level1 summary"><p>Add or update a parse setting.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddParseSetting(string key, object value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_AddSerializeSetting_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.AddSerializeSetting(System.String%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L502">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_AddSerializeSetting_" data-uid="Agenix.Validation.Xml.XmlConfigurer.AddSerializeSetting*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_AddSerializeSetting_System_String_System_Object_" data-uid="Agenix.Validation.Xml.XmlConfigurer.AddSerializeSetting(System.String,System.Object)">AddSerializeSetting(string, object)</h4>
+  <div class="markdown level1 summary"><p>Add or update a serialize setting.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddSerializeSetting(string key, object value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_ConfigureReaderSettings_System_Xml_XmlReaderSettings_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.ConfigureReaderSettings(System.Xml.XmlReaderSettings)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L216">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_ConfigureReaderSettings_" data-uid="Agenix.Validation.Xml.XmlConfigurer.ConfigureReaderSettings*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_ConfigureReaderSettings_System_Xml_XmlReaderSettings_" data-uid="Agenix.Validation.Xml.XmlConfigurer.ConfigureReaderSettings(System.Xml.XmlReaderSettings)">ConfigureReaderSettings(XmlReaderSettings)</h4>
+  <div class="markdown level1 summary"><p>Set reader configuration based on parse settings.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void ConfigureReaderSettings(XmlReaderSettings settings)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlreadersettings">XmlReaderSettings</a></td>
+        <td><span class="parametername">settings</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_ConfigureWriterSettings_System_Xml_XmlWriterSettings_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.ConfigureWriterSettings(System.Xml.XmlWriterSettings)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L227">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_ConfigureWriterSettings_" data-uid="Agenix.Validation.Xml.XmlConfigurer.ConfigureWriterSettings*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_ConfigureWriterSettings_System_Xml_XmlWriterSettings_" data-uid="Agenix.Validation.Xml.XmlConfigurer.ConfigureWriterSettings(System.Xml.XmlWriterSettings)">ConfigureWriterSettings(XmlWriterSettings)</h4>
+  <div class="markdown level1 summary"><p>Set writer configuration based on serialize settings.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void ConfigureWriterSettings(XmlWriterSettings settings)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlwritersettings">XmlWriterSettings</a></td>
+        <td><span class="parametername">settings</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_ConfigureXmlDocument_System_Xml_XmlDocument_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.ConfigureXmlDocument(System.Xml.XmlDocument)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L238">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_ConfigureXmlDocument_" data-uid="Agenix.Validation.Xml.XmlConfigurer.ConfigureXmlDocument*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_ConfigureXmlDocument_System_Xml_XmlDocument_" data-uid="Agenix.Validation.Xml.XmlConfigurer.ConfigureXmlDocument(System.Xml.XmlDocument)">ConfigureXmlDocument(XmlDocument)</h4>
+  <div class="markdown level1 summary"><p>Configure XmlDocument based on settings.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void ConfigureXmlDocument(XmlDocument document)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument">XmlDocument</a></td>
+        <td><span class="parametername">document</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_CreateXmlDocument.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.CreateXmlDocument%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L190">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlDocument_" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlDocument*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlDocument" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlDocument">CreateXmlDocument()</h4>
+  <div class="markdown level1 summary"><p>Creates XmlDocument with configured settings.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlDocument CreateXmlDocument()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument">XmlDocument</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_CreateXmlNameTable.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.CreateXmlNameTable%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L200">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlNameTable_" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlNameTable*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlNameTable" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlNameTable">CreateXmlNameTable()</h4>
+  <div class="markdown level1 summary"><p>Creates XmlNameTable for namespace management.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlNameTable CreateXmlNameTable()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnametable">XmlNameTable</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_CreateXmlReader_System_IO_Stream_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.CreateXmlReader(System.IO.Stream)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L115">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlReader_" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlReader*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlReader_System_IO_Stream_" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlReader(System.IO.Stream)">CreateXmlReader(Stream)</h4>
+  <div class="markdown level1 summary"><p>Creates configured XmlReader instance with common properties and configuration parameters.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlReader CreateXmlReader(Stream input)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></td>
+        <td><span class="parametername">input</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlreader">XmlReader</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_CreateXmlReader_System_IO_TextReader_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.CreateXmlReader(System.IO.TextReader)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L133">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlReader_" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlReader*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlReader_System_IO_TextReader_" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlReader(System.IO.TextReader)">CreateXmlReader(TextReader)</h4>
+  <div class="markdown level1 summary"><p>Creates configured XmlReader instance from TextReader.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlReader CreateXmlReader(TextReader input)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.textreader">TextReader</a></td>
+        <td><span class="parametername">input</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlreader">XmlReader</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_CreateXmlReader_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.CreateXmlReader(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L124">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlReader_" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlReader*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlReader_System_String_" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlReader(System.String)">CreateXmlReader(string)</h4>
+  <div class="markdown level1 summary"><p>Creates configured XmlReader instance from string input.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlReader CreateXmlReader(string xmlContent)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">xmlContent</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlreader">XmlReader</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_CreateXmlReaderSettings.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.CreateXmlReaderSettings%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L142">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlReaderSettings_" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlReaderSettings*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlReaderSettings" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlReaderSettings">CreateXmlReaderSettings()</h4>
+  <div class="markdown level1 summary"><p>Creates XmlReaderSettings based on parser configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlReaderSettings CreateXmlReaderSettings()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlreadersettings">XmlReaderSettings</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_CreateXmlResolver.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.CreateXmlResolver%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L208">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlResolver_" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlResolver*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlResolver" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlResolver">CreateXmlResolver()</h4>
+  <div class="markdown level1 summary"><p>Creates XmlResolver for resource resolution.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlResolver CreateXmlResolver()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlresolver">XmlResolver</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_CreateXmlWriter_System_IO_Stream_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.CreateXmlWriter(System.IO.Stream)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L152">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlWriter_" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlWriter*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlWriter_System_IO_Stream_" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlWriter(System.IO.Stream)">CreateXmlWriter(Stream)</h4>
+  <div class="markdown level1 summary"><p>Creates configured XmlWriter instance with common properties and configuration parameters.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlWriter CreateXmlWriter(Stream output)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></td>
+        <td><span class="parametername">output</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlwriter">XmlWriter</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_CreateXmlWriter_System_IO_TextWriter_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.CreateXmlWriter(System.IO.TextWriter)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L162">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlWriter_" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlWriter*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlWriter_System_IO_TextWriter_" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlWriter(System.IO.TextWriter)">CreateXmlWriter(TextWriter)</h4>
+  <div class="markdown level1 summary"><p>Creates configured XmlWriter instance that writes to TextWriter.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlWriter CreateXmlWriter(TextWriter output)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.textwriter">TextWriter</a></td>
+        <td><span class="parametername">output</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlwriter">XmlWriter</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_CreateXmlWriter_System_Text_StringBuilder_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.CreateXmlWriter(System.Text.StringBuilder)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L171">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlWriter_" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlWriter*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlWriter_System_Text_StringBuilder_" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlWriter(System.Text.StringBuilder)">CreateXmlWriter(StringBuilder)</h4>
+  <div class="markdown level1 summary"><p>Creates configured XmlWriter instance that writes to StringBuilder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlWriter CreateXmlWriter(StringBuilder output)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.stringbuilder">StringBuilder</a></td>
+        <td><span class="parametername">output</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlwriter">XmlWriter</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_CreateXmlWriterSettings.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.CreateXmlWriterSettings%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L180">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlWriterSettings_" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlWriterSettings*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_CreateXmlWriterSettings" data-uid="Agenix.Validation.Xml.XmlConfigurer.CreateXmlWriterSettings">CreateXmlWriterSettings()</h4>
+  <div class="markdown level1 summary"><p>Creates XmlWriterSettings based on serializer configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlWriterSettings CreateXmlWriterSettings()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlwritersettings">XmlWriterSettings</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_GetParseSettings.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.GetParseSettings%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L470">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_GetParseSettings_" data-uid="Agenix.Validation.Xml.XmlConfigurer.GetParseSettings*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_GetParseSettings" data-uid="Agenix.Validation.Xml.XmlConfigurer.GetParseSettings">GetParseSettings()</h4>
+  <div class="markdown level1 summary"><p>Gets the parseSettings property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, object&gt; GetParseSettings()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_GetSerializeSettings.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.GetSerializeSettings%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L486">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_GetSerializeSettings_" data-uid="Agenix.Validation.Xml.XmlConfigurer.GetSerializeSettings*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_GetSerializeSettings" data-uid="Agenix.Validation.Xml.XmlConfigurer.GetSerializeSettings">GetSerializeSettings()</h4>
+  <div class="markdown level1 summary"><p>Gets the serializeSettings property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, object&gt; GetSerializeSettings()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_Initialize.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.Initialize%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L99">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_Initialize_" data-uid="Agenix.Validation.Xml.XmlConfigurer.Initialize*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_Initialize" data-uid="Agenix.Validation.Xml.XmlConfigurer.Initialize">Initialize()</h4>
+  <div class="markdown level1 summary"><p>Initialize the XML configurer and register with XML utilities.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Initialize()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_SetParseSettings_System_Collections_Generic_Dictionary_System_String_System_Object__.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.SetParseSettings(System.Collections.Generic.Dictionary%7BSystem.String%2CSystem.Object%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L462">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_SetParseSettings_" data-uid="Agenix.Validation.Xml.XmlConfigurer.SetParseSettings*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_SetParseSettings_System_Collections_Generic_Dictionary_System_String_System_Object__" data-uid="Agenix.Validation.Xml.XmlConfigurer.SetParseSettings(System.Collections.Generic.Dictionary{System.String,System.Object})">SetParseSettings(Dictionary&lt;string, object&gt;?)</h4>
+  <div class="markdown level1 summary"><p>Sets the parseSettings property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetParseSettings(Dictionary&lt;string, object&gt;? parseSettings)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td><span class="parametername">parseSettings</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_SetReaderConfigParameter_System_Xml_XmlReaderSettings_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.SetReaderConfigParameter(System.Xml.XmlReaderSettings%2CSystem.String%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L255">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_SetReaderConfigParameter_" data-uid="Agenix.Validation.Xml.XmlConfigurer.SetReaderConfigParameter*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_SetReaderConfigParameter_System_Xml_XmlReaderSettings_System_String_System_Object_" data-uid="Agenix.Validation.Xml.XmlConfigurer.SetReaderConfigParameter(System.Xml.XmlReaderSettings,System.String,System.Object)">SetReaderConfigParameter(XmlReaderSettings, string, object)</h4>
+  <div class="markdown level1 summary"><p>Sets a config parameter on XmlReaderSettings if applicable.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SetReaderConfigParameter(XmlReaderSettings settings, string parameterName, object value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlreadersettings">XmlReaderSettings</a></td>
+        <td><span class="parametername">settings</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">parameterName</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_SetSerializeSettings_System_Collections_Generic_Dictionary_System_String_System_Object__.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.SetSerializeSettings(System.Collections.Generic.Dictionary%7BSystem.String%2CSystem.Object%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L478">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_SetSerializeSettings_" data-uid="Agenix.Validation.Xml.XmlConfigurer.SetSerializeSettings*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_SetSerializeSettings_System_Collections_Generic_Dictionary_System_String_System_Object__" data-uid="Agenix.Validation.Xml.XmlConfigurer.SetSerializeSettings(System.Collections.Generic.Dictionary{System.String,System.Object})">SetSerializeSettings(Dictionary&lt;string, object&gt;?)</h4>
+  <div class="markdown level1 summary"><p>Sets the serializeSettings property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetSerializeSettings(Dictionary&lt;string, object&gt;? serializeSettings)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td><span class="parametername">serializeSettings</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer_SetWriterConfigParameter_System_Xml_XmlWriterSettings_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer.SetWriterConfigParameter(System.Xml.XmlWriterSettings%2CSystem.String%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L336">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_XmlConfigurer_SetWriterConfigParameter_" data-uid="Agenix.Validation.Xml.XmlConfigurer.SetWriterConfigParameter*"></a>
+  <h4 id="Agenix_Validation_Xml_XmlConfigurer_SetWriterConfigParameter_System_Xml_XmlWriterSettings_System_String_System_Object_" data-uid="Agenix.Validation.Xml.XmlConfigurer.SetWriterConfigParameter(System.Xml.XmlWriterSettings,System.String,System.Object)">SetWriterConfigParameter(XmlWriterSettings, string, object)</h4>
+  <div class="markdown level1 summary"><p>Sets a config parameter on XmlWriterSettings if applicable.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SetWriterConfigParameter(XmlWriterSettings settings, string parameterName, object value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlwritersettings">XmlWriterSettings</a></td>
+        <td><span class="parametername">settings</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">parameterName</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.InitializingPhase.html">InitializingPhase</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_XmlConfigurer.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.XmlConfigurer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/XmlConfigurer.cs/#L41" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

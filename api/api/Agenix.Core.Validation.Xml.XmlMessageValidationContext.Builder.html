@@ -86,7 +86,9 @@ and adapting message validation contexts for XML schemas and XPath checks.</p>
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Core.Validation.Xml.XmlMessageValidationContext.html">XmlMessageValidationContext</a>, <a class="xref" href="Agenix.Api.Validation.Context.IMessageValidationContext.html">IMessageValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IMessageValidationContext.Builder-2.html">Builder</a>&lt;<a class="xref" href="Agenix.Core.Validation.Xml.XmlMessageValidationContext.html">XmlMessageValidationContext</a>, <a class="xref" href="Agenix.Core.Validation.Xml.XmlMessageValidationContext.html">XmlMessageValidationContext</a>.<a class="xref" href="Agenix.Core.Validation.Xml.XmlMessageValidationContext.Builder.html">Builder</a>&gt;&gt;</div>
+    <div><a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>, <a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a>&gt;</div>
     <div><a class="xref" href="Agenix.Api.Validation.Context.ISchemaValidationContext.html">ISchemaValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.ISchemaValidationContext.IBuilder-1.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IMessageValidationContext.html">IMessageValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IMessageValidationContext.Builder-2.html">Builder</a>&lt;<a class="xref" href="Agenix.Core.Validation.Xml.XmlMessageValidationContext.html">XmlMessageValidationContext</a>, <a class="xref" href="Agenix.Core.Validation.Xml.XmlMessageValidationContext.html">XmlMessageValidationContext</a>.<a class="xref" href="Agenix.Core.Validation.Xml.XmlMessageValidationContext.Builder.html">Builder</a>&gt;&gt;</div>
+    <div><a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a></div>
     <div><a class="xref" href="Agenix.Api.Validation.Xml.IXmlNamespaceAware.html">IXmlNamespaceAware</a></div>
   </div>
   <div class="inheritedMembers">
@@ -159,7 +161,7 @@ and adapting message validation contexts for XML schemas and XPath checks.</p>
   <h6><strong>Assembly</strong>: Agenix.Core.dll</h6>
   <h5 id="Agenix_Core_Validation_Xml_XmlMessageValidationContext_Builder_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class XmlMessageValidationContext.Builder : XmlMessageValidationContext.XmlValidationContextBuilder&lt;XmlMessageValidationContext, XmlMessageValidationContext.Builder&gt;, IValidationContext.IBuilder&lt;XmlMessageValidationContext, IMessageValidationContext.Builder&lt;XmlMessageValidationContext, XmlMessageValidationContext.Builder&gt;&gt;, ISchemaValidationContext.IBuilder&lt;IMessageValidationContext.Builder&lt;XmlMessageValidationContext, XmlMessageValidationContext.Builder&gt;&gt;, IXmlNamespaceAware</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class XmlMessageValidationContext.Builder : XmlMessageValidationContext.XmlValidationContextBuilder&lt;XmlMessageValidationContext, XmlMessageValidationContext.Builder&gt;, IValidationContext.IBuilder&lt;XmlMessageValidationContext, IMessageValidationContext.Builder&lt;XmlMessageValidationContext, XmlMessageValidationContext.Builder&gt;&gt;, IValidationContext.IBuilder&lt;IValidationContext, IBuilder&gt;, ISchemaValidationContext.IBuilder&lt;IMessageValidationContext.Builder&lt;XmlMessageValidationContext, XmlMessageValidationContext.Builder&gt;&gt;, IBuilder, IXmlNamespaceAware</code></pre>
   </div>
   <h3 id="methods">Methods
 </h3>
@@ -446,7 +448,13 @@ context.</p>
       <a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IValidationContext.IBuilder&lt;T, TB&gt;</a>
   </div>
   <div>
+      <a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IValidationContext.IBuilder&lt;T, TB&gt;</a>
+  </div>
+  <div>
       <a class="xref" href="Agenix.Api.Validation.Context.ISchemaValidationContext.IBuilder-1.html">ISchemaValidationContext.IBuilder&lt;TB&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a>
   </div>
   <div>
       <a class="xref" href="Agenix.Api.Validation.Xml.IXmlNamespaceAware.html">IXmlNamespaceAware</a>

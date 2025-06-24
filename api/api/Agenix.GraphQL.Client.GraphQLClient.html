@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class GraphQLClient </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class GraphQLClient ">
+    
+    <meta name="description" content="GraphQL client implementation that extends AbstractEndpoint and provides GraphQL-specific functionality. Supports queries, mutations, and subscriptions with full Agenix integration.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.GraphQL.Client.GraphQLClient">
+
+
+
+  <h1 id="Agenix_GraphQL_Client_GraphQLClient" data-uid="Agenix.GraphQL.Client.GraphQLClient" class="text-break">Class GraphQLClient</h1>
+  <div class="markdown level0 summary"><p>GraphQL client implementation that extends AbstractEndpoint and provides GraphQL-specific functionality.
+Supports queries, mutations, and subscriptions with full Agenix integration.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Core.Endpoint.AbstractEndpoint.html">AbstractEndpoint</a></div>
+    <div class="level2"><span class="xref">GraphQLClient</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.Endpoint.IEndpoint.html">IEndpoint</a></div>
+    <div><a class="xref" href="Agenix.Api.Common.INamed.html">INamed</a></div>
+    <div><a class="xref" href="Agenix.Api.Messaging.IProducer.html">IProducer</a></div>
+    <div><a class="xref" href="Agenix.Api.Messaging.IReplyConsumer.html">IReplyConsumer</a></div>
+    <div><a class="xref" href="Agenix.Api.Messaging.ISelectiveConsumer.html">ISelectiveConsumer</a></div>
+    <div><a class="xref" href="Agenix.Api.Messaging.IConsumer.html">IConsumer</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Core.Endpoint.AbstractEndpoint.html#Agenix_Core_Endpoint_AbstractEndpoint_ConsumerName">AbstractEndpoint.ConsumerName</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Endpoint.AbstractEndpoint.html#Agenix_Core_Endpoint_AbstractEndpoint_ProducerName">AbstractEndpoint.ProducerName</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Endpoint.AbstractEndpoint.html#Agenix_Core_Endpoint_AbstractEndpoint_Name">AbstractEndpoint.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Endpoint.AbstractEndpoint.html#Agenix_Core_Endpoint_AbstractEndpoint_SetName_System_String_">AbstractEndpoint.SetName(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.GraphQL.html">GraphQL</a>.<a class="xref" href="Agenix.GraphQL.Client.html">Client</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.GraphQL.dll</h6>
+  <h5 id="Agenix_GraphQL_Client_GraphQLClient_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class GraphQLClient : AbstractEndpoint, IEndpoint, INamed, IProducer, IReplyConsumer, ISelectiveConsumer, IConsumer</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClient__ctor.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClient.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClient.cs/#L78">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClient__ctor_" data-uid="Agenix.GraphQL.Client.GraphQLClient.#ctor*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClient__ctor" data-uid="Agenix.GraphQL.Client.GraphQLClient.#ctor">GraphQLClient()</h4>
+  <div class="markdown level1 summary"><p>Default constructor initializing endpoint configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClient()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClient__ctor_Agenix_GraphQL_Client_GraphQLEndpointConfiguration_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClient.%23ctor(Agenix.GraphQL.Client.GraphQLEndpointConfiguration)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClient.cs/#L67">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClient__ctor_" data-uid="Agenix.GraphQL.Client.GraphQLClient.#ctor*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClient__ctor_Agenix_GraphQL_Client_GraphQLEndpointConfiguration_" data-uid="Agenix.GraphQL.Client.GraphQLClient.#ctor(Agenix.GraphQL.Client.GraphQLEndpointConfiguration)">GraphQLClient(GraphQLEndpointConfiguration)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the GraphQLClient with the specified endpoint configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClient(GraphQLEndpointConfiguration endpointConfiguration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLEndpointConfiguration.html">GraphQLEndpointConfiguration</a></td>
+        <td><span class="parametername">endpointConfiguration</span></td>
+        <td><p>The GraphQL endpoint configuration.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClient_EndpointConfiguration.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClient.EndpointConfiguration%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClient.cs/#L85">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClient_EndpointConfiguration_" data-uid="Agenix.GraphQL.Client.GraphQLClient.EndpointConfiguration*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClient_EndpointConfiguration" data-uid="Agenix.GraphQL.Client.GraphQLClient.EndpointConfiguration">EndpointConfiguration</h4>
+  <div class="markdown level1 summary"><p>Gets the GraphQL endpoint configuration for this client.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override GraphQLEndpointConfiguration EndpointConfiguration { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLEndpointConfiguration.html">GraphQLEndpointConfiguration</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Endpoint.AbstractEndpoint.html#Agenix_Core_Endpoint_AbstractEndpoint_EndpointConfiguration">AbstractEndpoint.EndpointConfiguration</a></div>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClient_CreateConsumer.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClient.CreateConsumer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClient.cs/#L284">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClient_CreateConsumer_" data-uid="Agenix.GraphQL.Client.GraphQLClient.CreateConsumer*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClient_CreateConsumer" data-uid="Agenix.GraphQL.Client.GraphQLClient.CreateConsumer">CreateConsumer()</h4>
+  <div class="markdown level1 summary"><p>Creates and returns an instance of an ISelectiveConsumer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override ISelectiveConsumer CreateConsumer()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Messaging.ISelectiveConsumer.html">ISelectiveConsumer</a></td>
+        <td><p>An instance of ISelectiveConsumer, specifically the current instance of GraphQLClient.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Endpoint.AbstractEndpoint.html#Agenix_Core_Endpoint_AbstractEndpoint_CreateConsumer">AbstractEndpoint.CreateConsumer()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClient_CreateProducer.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClient.CreateProducer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClient.cs/#L275">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClient_CreateProducer_" data-uid="Agenix.GraphQL.Client.GraphQLClient.CreateProducer*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClient_CreateProducer" data-uid="Agenix.GraphQL.Client.GraphQLClient.CreateProducer">CreateProducer()</h4>
+  <div class="markdown level1 summary"><p>Creates and returns an instance of a producer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override IProducer CreateProducer()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Messaging.IProducer.html">IProducer</a></td>
+        <td><p>The current instance as an implementation of the IProducer interface.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Endpoint.AbstractEndpoint.html#Agenix_Core_Endpoint_AbstractEndpoint_CreateProducer">AbstractEndpoint.CreateProducer()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClient_Receive_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClient.Receive(Agenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClient.cs/#L166">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClient_Receive_" data-uid="Agenix.GraphQL.Client.GraphQLClient.Receive*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClient_Receive_Agenix_Api_Context_TestContext_" data-uid="Agenix.GraphQL.Client.GraphQLClient.Receive(Agenix.Api.Context.TestContext)">Receive(TestContext)</h4>
+  <div class="markdown level1 summary"><p>Receives a message using a correlation key derived from the context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IMessage Receive(TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The test context providing additional information required for receiving the message.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></td>
+        <td><p>Returns an <a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a> instance that matches the correlation key.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClient_Receive_Agenix_Api_Context_TestContext_System_Int64_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClient.Receive(Agenix.Api.Context.TestContext%2CSystem.Int64)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClient.cs/#L177">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClient_Receive_" data-uid="Agenix.GraphQL.Client.GraphQLClient.Receive*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClient_Receive_Agenix_Api_Context_TestContext_System_Int64_" data-uid="Agenix.GraphQL.Client.GraphQLClient.Receive(Agenix.Api.Context.TestContext,System.Int64)">Receive(TestContext, long)</h4>
+  <div class="markdown level1 summary"><p>Receives a message from the endpoint using a specified correlation key and context, with a timeout.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual IMessage Receive(TestContext context, long timeout)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context in which the message is being received.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">timeout</span></td>
+        <td><p>The time in milliseconds to wait for the message before timing out.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></td>
+        <td><p>The received message, or null if the timeout expires before a message is received.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClient_Receive_System_String_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClient.Receive(System.String%2CAgenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClient.cs/#L188">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClient_Receive_" data-uid="Agenix.GraphQL.Client.GraphQLClient.Receive*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClient_Receive_System_String_Agenix_Api_Context_TestContext_" data-uid="Agenix.GraphQL.Client.GraphQLClient.Receive(System.String,Agenix.Api.Context.TestContext)">Receive(string, TestContext)</h4>
+  <div class="markdown level1 summary"><p>Receives a message from the endpoint using the provided selector and test context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IMessage Receive(string selector, TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">selector</span></td>
+        <td><p>The correlation key used to identify the message.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The test context which may contain details for message correlation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></td>
+        <td><p>The received message as an <a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClient_Receive_System_String_Agenix_Api_Context_TestContext_System_Int64_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClient.Receive(System.String%2CAgenix.Api.Context.TestContext%2CSystem.Int64)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClient.cs/#L201">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClient_Receive_" data-uid="Agenix.GraphQL.Client.GraphQLClient.Receive*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClient_Receive_System_String_Agenix_Api_Context_TestContext_System_Int64_" data-uid="Agenix.GraphQL.Client.GraphQLClient.Receive(System.String,Agenix.Api.Context.TestContext,System.Int64)">Receive(string, TestContext, long)</h4>
+  <div class="markdown level1 summary"><p>Receives a message based on the specified selector within a given timeout period.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IMessage Receive(string selector, TestContext context, long timeout)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">selector</span></td>
+        <td><p>The selector criteria to filter the messages.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The test context that provides necessary execution environment information.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
+        <td><span class="parametername">timeout</span></td>
+        <td><p>The maximum amount of time to wait for a message before timing out.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></td>
+        <td><p>The message that matches the selector criteria.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Exceptions.MessageTimeoutException.html">MessageTimeoutException</a></td>
+        <td><p>Thrown when a message cannot be received within the specified timeout.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClient_Send_Agenix_Api_Message_IMessage_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClient.Send(Agenix.Api.Message.IMessage%2CAgenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClient.cs/#L93">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClient_Send_" data-uid="Agenix.GraphQL.Client.GraphQLClient.Send*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClient_Send_Agenix_Api_Message_IMessage_Agenix_Api_Context_TestContext_" data-uid="Agenix.GraphQL.Client.GraphQLClient.Send(Agenix.Api.Message.IMessage,Agenix.Api.Context.TestContext)">Send(IMessage, TestContext)</h4>
+  <div class="markdown level1 summary"><p>Sends a GraphQL message and stores the response for later retrieval.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Send(IMessage message, TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></td>
+        <td><span class="parametername">message</span></td>
+        <td><p>The GraphQL message to send.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The test context.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClient_SetCorrelationManager_Agenix_Api_Message_Correlation_ICorrelationManager_Agenix_Api_Message_IMessage__.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClient.SetCorrelationManager(Agenix.Api.Message.Correlation.ICorrelationManager%7BAgenix.Api.Message.IMessage%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClient.cs/#L293">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClient_SetCorrelationManager_" data-uid="Agenix.GraphQL.Client.GraphQLClient.SetCorrelationManager*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClient_SetCorrelationManager_Agenix_Api_Message_Correlation_ICorrelationManager_Agenix_Api_Message_IMessage__" data-uid="Agenix.GraphQL.Client.GraphQLClient.SetCorrelationManager(Agenix.Api.Message.Correlation.ICorrelationManager{Agenix.Api.Message.IMessage})">SetCorrelationManager(ICorrelationManager&lt;IMessage&gt;)</h4>
+  <div class="markdown level1 summary"><p>Sets the correlation manager used for managing message correlation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetCorrelationManager(ICorrelationManager&lt;IMessage&gt; correlationManager)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.Correlation.ICorrelationManager-1.html">ICorrelationManager</a>&lt;<a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a>&gt;</td>
+        <td><span class="parametername">correlationManager</span></td>
+        <td><p>The correlation manager to be set for message correlation operations.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.Endpoint.IEndpoint.html">IEndpoint</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.INamed.html">INamed</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Messaging.IProducer.html">IProducer</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Messaging.IReplyConsumer.html">IReplyConsumer</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Messaging.ISelectiveConsumer.html">ISelectiveConsumer</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Messaging.IConsumer.html">IConsumer</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClient.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClient%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClient.cs/#L48" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

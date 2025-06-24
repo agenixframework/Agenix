@@ -216,7 +216,7 @@ This property allows for the retrieval or replacement of the current set of vali
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_MessageValidatorRegistry_AddMessageValidator_System_String_Agenix_Api_Validation_IMessageValidator_Agenix_Api_Validation_Context_IValidationContext__.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.MessageValidatorRegistry.AddMessageValidator(System.String%2CAgenix.Api.Validation.IMessageValidator%7BAgenix.Api.Validation.Context.IValidationContext%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/MessageValidatorRegistry.cs/#L213">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/MessageValidatorRegistry.cs/#L225">View Source</a>
   </span>
   <a id="Agenix_Api_Validation_MessageValidatorRegistry_AddMessageValidator_" data-uid="Agenix.Api.Validation.MessageValidatorRegistry.AddMessageValidator*"></a>
   <h4 id="Agenix_Api_Validation_MessageValidatorRegistry_AddMessageValidator_System_String_Agenix_Api_Validation_IMessageValidator_Agenix_Api_Validation_Context_IValidationContext__" data-uid="Agenix.Api.Validation.MessageValidatorRegistry.AddMessageValidator(System.String,Agenix.Api.Validation.IMessageValidator{Agenix.Api.Validation.Context.IValidationContext})">AddMessageValidator(string, IMessageValidator&lt;IValidationContext&gt;)</h4>
@@ -256,7 +256,7 @@ This property allows for the retrieval or replacement of the current set of vali
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_MessageValidatorRegistry_AddSchemeValidator_System_String_Agenix_Api_Validation_ISchemaValidator_Agenix_Api_Validation_Context_ISchemaValidationContext__.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.MessageValidatorRegistry.AddSchemeValidator(System.String%2CAgenix.Api.Validation.ISchemaValidator%7BAgenix.Api.Validation.Context.ISchemaValidationContext%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/MessageValidatorRegistry.cs/#L226">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/MessageValidatorRegistry.cs/#L240">View Source</a>
   </span>
   <a id="Agenix_Api_Validation_MessageValidatorRegistry_AddSchemeValidator_" data-uid="Agenix.Api.Validation.MessageValidatorRegistry.AddSchemeValidator*"></a>
   <h4 id="Agenix_Api_Validation_MessageValidatorRegistry_AddSchemeValidator_System_String_Agenix_Api_Validation_ISchemaValidator_Agenix_Api_Validation_Context_ISchemaValidationContext__" data-uid="Agenix.Api.Validation.MessageValidatorRegistry.AddSchemeValidator(System.String,Agenix.Api.Validation.ISchemaValidator{Agenix.Api.Validation.Context.ISchemaValidationContext})">AddSchemeValidator(string, ISchemaValidator&lt;ISchemaValidationContext&gt;)</h4>
@@ -296,7 +296,7 @@ This property allows for the retrieval or replacement of the current set of vali
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_MessageValidatorRegistry_FindMessageValidator_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.MessageValidatorRegistry.FindMessageValidator(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/MessageValidatorRegistry.cs/#L188">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/MessageValidatorRegistry.cs/#L200">View Source</a>
   </span>
   <a id="Agenix_Api_Validation_MessageValidatorRegistry_FindMessageValidator_" data-uid="Agenix.Api.Validation.MessageValidatorRegistry.FindMessageValidator*"></a>
   <h4 id="Agenix_Api_Validation_MessageValidatorRegistry_FindMessageValidator_System_String_" data-uid="Agenix.Api.Validation.MessageValidatorRegistry.FindMessageValidator(System.String)">FindMessageValidator(string)</h4>
@@ -305,7 +305,7 @@ This property allows for the retrieval or replacement of the current set of vali
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Optional&lt;IMessageValidator&lt;IValidationContext&gt;&gt; FindMessageValidator(string name)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Optional&lt;IMessageValidator&lt;IValidationContext&gt;&gt; FindMessageValidator(string name)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -409,7 +409,7 @@ found, fallback validators may be returned.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_MessageValidatorRegistry_FindSchemaValidator_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.MessageValidatorRegistry.FindSchemaValidator(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/MessageValidatorRegistry.cs/#L322">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/MessageValidatorRegistry.cs/#L349">View Source</a>
   </span>
   <a id="Agenix_Api_Validation_MessageValidatorRegistry_FindSchemaValidator_" data-uid="Agenix.Api.Validation.MessageValidatorRegistry.FindSchemaValidator*"></a>
   <h4 id="Agenix_Api_Validation_MessageValidatorRegistry_FindSchemaValidator_System_String_" data-uid="Agenix.Api.Validation.MessageValidatorRegistry.FindSchemaValidator(System.String)">FindSchemaValidator(string)</h4>
@@ -459,7 +459,7 @@ found, fallback validators may be returned.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_MessageValidatorRegistry_FindSchemaValidators_System_String_Agenix_Api_Message_IMessage_.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.MessageValidatorRegistry.FindSchemaValidators(System.String%2CAgenix.Api.Message.IMessage)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/MessageValidatorRegistry.cs/#L296">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/MessageValidatorRegistry.cs/#L312">View Source</a>
   </span>
   <a id="Agenix_Api_Validation_MessageValidatorRegistry_FindSchemaValidators_" data-uid="Agenix.Api.Validation.MessageValidatorRegistry.FindSchemaValidators*"></a>
   <h4 id="Agenix_Api_Validation_MessageValidatorRegistry_FindSchemaValidators_System_String_Agenix_Api_Message_IMessage_" data-uid="Agenix.Api.Validation.MessageValidatorRegistry.FindSchemaValidators(System.String,Agenix.Api.Message.IMessage)">FindSchemaValidators(string, IMessage)</h4>
@@ -516,7 +516,7 @@ If no specific schema validators are found, fallback validators may be returned 
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_MessageValidatorRegistry_GetDefaultMessageHeaderValidator.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.MessageValidatorRegistry.GetDefaultMessageHeaderValidator%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/MessageValidatorRegistry.cs/#L249">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/MessageValidatorRegistry.cs/#L265">View Source</a>
   </span>
   <a id="Agenix_Api_Validation_MessageValidatorRegistry_GetDefaultMessageHeaderValidator_" data-uid="Agenix.Api.Validation.MessageValidatorRegistry.GetDefaultMessageHeaderValidator*"></a>
   <h4 id="Agenix_Api_Validation_MessageValidatorRegistry_GetDefaultMessageHeaderValidator" data-uid="Agenix.Api.Validation.MessageValidatorRegistry.GetDefaultMessageHeaderValidator">GetDefaultMessageHeaderValidator()</h4>
@@ -548,7 +548,7 @@ If no specific schema validators are found, fallback validators may be returned 
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_MessageValidatorRegistry_GetDefaultMessageValidator.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.MessageValidatorRegistry.GetDefaultMessageValidator%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/MessageValidatorRegistry.cs/#L240">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/MessageValidatorRegistry.cs/#L256">View Source</a>
   </span>
   <a id="Agenix_Api_Validation_MessageValidatorRegistry_GetDefaultMessageValidator_" data-uid="Agenix.Api.Validation.MessageValidatorRegistry.GetDefaultMessageValidator*"></a>
   <h4 id="Agenix_Api_Validation_MessageValidatorRegistry_GetDefaultMessageValidator" data-uid="Agenix.Api.Validation.MessageValidatorRegistry.GetDefaultMessageValidator">GetDefaultMessageValidator()</h4>
@@ -580,7 +580,7 @@ If no specific schema validators are found, fallback validators may be returned 
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_MessageValidatorRegistry_GetMessageValidator_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.MessageValidatorRegistry.GetMessageValidator(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/MessageValidatorRegistry.cs/#L201">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/MessageValidatorRegistry.cs/#L213">View Source</a>
   </span>
   <a id="Agenix_Api_Validation_MessageValidatorRegistry_GetMessageValidator_" data-uid="Agenix.Api.Validation.MessageValidatorRegistry.GetMessageValidator*"></a>
   <h4 id="Agenix_Api_Validation_MessageValidatorRegistry_GetMessageValidator_System_String_" data-uid="Agenix.Api.Validation.MessageValidatorRegistry.GetMessageValidator(System.String)">GetMessageValidator(string)</h4>

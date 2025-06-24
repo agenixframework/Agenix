@@ -87,7 +87,9 @@ essential validation behaviors to a customizable context.</p>
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IBuilder</a>&lt;T, <a class="xref" href="Agenix.Api.Validation.Context.IMessageValidationContext.html">IMessageValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IMessageValidationContext.Builder-2.html">Builder</a>&lt;T, S&gt;&gt;</div>
+    <div><a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>, <a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a>&gt;</div>
     <div><a class="xref" href="Agenix.Api.Validation.Context.ISchemaValidationContext.html">ISchemaValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.ISchemaValidationContext.IBuilder-1.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IMessageValidationContext.html">IMessageValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IMessageValidationContext.Builder-2.html">Builder</a>&lt;T, S&gt;&gt;</div>
+    <div><a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a></div>
     <div><a class="xref" href="Agenix.Api.Validation.Xml.IXmlNamespaceAware.html">IXmlNamespaceAware</a></div>
   </div>
   <div class="inheritedMembers">
@@ -151,7 +153,7 @@ essential validation behaviors to a customizable context.</p>
   <h6><strong>Assembly</strong>: Agenix.Core.dll</h6>
   <h5 id="Agenix_Core_Validation_Xml_XmlMessageValidationContext_XmlValidationContextBuilder_2_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class XmlMessageValidationContext.XmlValidationContextBuilder&lt;T, S&gt; : IMessageValidationContext.Builder&lt;T, S&gt;, IValidationContext.IBuilder&lt;T, IMessageValidationContext.Builder&lt;T, S&gt;&gt;, ISchemaValidationContext.IBuilder&lt;IMessageValidationContext.Builder&lt;T, S&gt;&gt;, IXmlNamespaceAware where T : XmlMessageValidationContext where S : XmlMessageValidationContext.XmlValidationContextBuilder&lt;T, S&gt;, new()</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract class XmlMessageValidationContext.XmlValidationContextBuilder&lt;T, S&gt; : IMessageValidationContext.Builder&lt;T, S&gt;, IValidationContext.IBuilder&lt;T, IMessageValidationContext.Builder&lt;T, S&gt;&gt;, IValidationContext.IBuilder&lt;IValidationContext, IBuilder&gt;, ISchemaValidationContext.IBuilder&lt;IMessageValidationContext.Builder&lt;T, S&gt;&gt;, IBuilder, IXmlNamespaceAware where T : XmlMessageValidationContext where S : XmlMessageValidationContext.XmlValidationContextBuilder&lt;T, S&gt;, new()</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -319,7 +321,7 @@ essential validation behaviors to a customizable context.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_Xml_XmlMessageValidationContext_XmlValidationContextBuilder_2_Delegate_Agenix_Api_Validation_Context_IMessageValidationContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.Xml.XmlMessageValidationContext.XmlValidationContextBuilder%602.Delegate(Agenix.Api.Validation.Context.IMessageValidationContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Xml/XmlMessageValidationContext.cs/#L260">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Xml/XmlMessageValidationContext.cs/#L267">View Source</a>
   </span>
   <a id="Agenix_Core_Validation_Xml_XmlMessageValidationContext_XmlValidationContextBuilder_2_Delegate_" data-uid="Agenix.Core.Validation.Xml.XmlMessageValidationContext.XmlValidationContextBuilder`2.Delegate*"></a>
   <h4 id="Agenix_Core_Validation_Xml_XmlMessageValidationContext_XmlValidationContextBuilder_2_Delegate_Agenix_Api_Validation_Context_IMessageValidationContext_" data-uid="Agenix.Core.Validation.Xml.XmlMessageValidationContext.XmlValidationContextBuilder`2.Delegate(Agenix.Api.Validation.Context.IMessageValidationContext)">Delegate(IMessageValidationContext)</h4>
@@ -421,7 +423,7 @@ essential validation behaviors to a customizable context.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_Xml_XmlMessageValidationContext_XmlValidationContextBuilder_2_NamespaceContext_System_Collections_Generic_Dictionary_System_String_System_String__.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.Xml.XmlMessageValidationContext.XmlValidationContextBuilder%602.NamespaceContext(System.Collections.Generic.Dictionary%7BSystem.String%2CSystem.String%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Xml/XmlMessageValidationContext.cs/#L248">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Xml/XmlMessageValidationContext.cs/#L252">View Source</a>
   </span>
   <a id="Agenix_Core_Validation_Xml_XmlMessageValidationContext_XmlValidationContextBuilder_2_NamespaceContext_" data-uid="Agenix.Core.Validation.Xml.XmlMessageValidationContext.XmlValidationContextBuilder`2.NamespaceContext*"></a>
   <h4 id="Agenix_Core_Validation_Xml_XmlMessageValidationContext_XmlValidationContextBuilder_2_NamespaceContext_System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="Agenix.Core.Validation.Xml.XmlMessageValidationContext.XmlValidationContextBuilder`2.NamespaceContext(System.Collections.Generic.Dictionary{System.String,System.String})">NamespaceContext(Dictionary&lt;string, string&gt;)</h4>
@@ -468,7 +470,7 @@ essential validation behaviors to a customizable context.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_Xml_XmlMessageValidationContext_XmlValidationContextBuilder_2_NamespaceContext_System_String_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.Xml.XmlMessageValidationContext.XmlValidationContextBuilder%602.NamespaceContext(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Xml/XmlMessageValidationContext.cs/#L238">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/Xml/XmlMessageValidationContext.cs/#L242">View Source</a>
   </span>
   <a id="Agenix_Core_Validation_Xml_XmlMessageValidationContext_XmlValidationContextBuilder_2_NamespaceContext_" data-uid="Agenix.Core.Validation.Xml.XmlMessageValidationContext.XmlValidationContextBuilder`2.NamespaceContext*"></a>
   <h4 id="Agenix_Core_Validation_Xml_XmlMessageValidationContext_XmlValidationContextBuilder_2_NamespaceContext_System_String_System_String_" data-uid="Agenix.Core.Validation.Xml.XmlMessageValidationContext.XmlValidationContextBuilder`2.NamespaceContext(System.String,System.String)">NamespaceContext(string, string)</h4>
@@ -606,7 +608,13 @@ updated.</p>
       <a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IValidationContext.IBuilder&lt;T, TB&gt;</a>
   </div>
   <div>
+      <a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IValidationContext.IBuilder&lt;T, TB&gt;</a>
+  </div>
+  <div>
       <a class="xref" href="Agenix.Api.Validation.Context.ISchemaValidationContext.IBuilder-1.html">ISchemaValidationContext.IBuilder&lt;TB&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a>
   </div>
   <div>
       <a class="xref" href="Agenix.Api.Validation.Xml.IXmlNamespaceAware.html">IXmlNamespaceAware</a>

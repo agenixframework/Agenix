@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class GraphQLMessage </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class GraphQLMessage ">
+    
+    <meta name="description" content="Represents a GraphQL message containing query, variables, and operation metadata. This class extends the base message functionality to provide GraphQL-specific features.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.GraphQL.Message.GraphQLMessage">
+
+
+
+  <h1 id="Agenix_GraphQL_Message_GraphQLMessage" data-uid="Agenix.GraphQL.Message.GraphQLMessage" class="text-break">Class GraphQLMessage</h1>
+  <div class="markdown level0 summary"><p>Represents a GraphQL message containing query, variables, and operation metadata.
+This class extends the base message functionality to provide GraphQL-specific features.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Core.Message.DefaultMessage.html">DefaultMessage</a></div>
+    <div class="level2"><span class="xref">GraphQLMessage</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_Id">DefaultMessage.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_Name">DefaultMessage.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_Payload">DefaultMessage.Payload</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_GetHeader_System_String_">DefaultMessage.GetHeader(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_SetHeader_System_String_System_Object_">DefaultMessage.SetHeader(string, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_RemoveHeader_System_String_">DefaultMessage.RemoveHeader(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_AddHeaderData_System_String_">DefaultMessage.AddHeaderData(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_GetHeaderData">DefaultMessage.GetHeaderData()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_GetHeaders">DefaultMessage.GetHeaders()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_GetPayload__1">DefaultMessage.GetPayload&lt;TX&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_GetType">DefaultMessage.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_SetType_System_String_">DefaultMessage.SetType(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_GetTimestamp">DefaultMessage.GetTimestamp()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_SetType_Agenix_Api_Message_MessageType_">DefaultMessage.SetType(MessageType)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.DefaultMessage.html#Agenix_Core_Message_DefaultMessage_ToString">DefaultMessage.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.GraphQL.html">GraphQL</a>.<a class="xref" href="Agenix.GraphQL.Message.html">Message</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.GraphQL.dll</h6>
+  <h5 id="Agenix_GraphQL_Message_GraphQLMessage_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class GraphQLMessage : DefaultMessage, IMessage</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage__ctor.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L44">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage__ctor_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.#ctor*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage__ctor" data-uid="Agenix.GraphQL.Message.GraphQLMessage.#ctor">GraphQLMessage()</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the GraphQLMessage class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLMessage()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage__ctor_Agenix_Api_Message_IMessage_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.%23ctor(Agenix.Api.Message.IMessage)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L52">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage__ctor_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.#ctor*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage__ctor_Agenix_Api_Message_IMessage_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.#ctor(Agenix.Api.Message.IMessage)">GraphQLMessage(IMessage)</h4>
+  <div class="markdown level1 summary"><p>Represents a GraphQL message containing query, variables, cookies, headers,
+and other relevant information for constructing and handling GraphQL requests.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLMessage(IMessage message)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></td>
+        <td><span class="parametername">message</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage__ctor_Agenix_Api_Message_IMessage_System_Boolean_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.%23ctor(Agenix.Api.Message.IMessage%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L70">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage__ctor_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.#ctor*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage__ctor_Agenix_Api_Message_IMessage_System_Boolean_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.#ctor(Agenix.Api.Message.IMessage,System.Boolean)">GraphQLMessage(IMessage, bool)</h4>
+  <div class="markdown level1 summary"><p>Represents a message specific to GraphQL, extending the functionality of DefaultMessage.
+Provides methods and properties tailored for GraphQL operations, such as defining queries,
+variables, operation names, headers, cookies, and other GraphQL-specific configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLMessage(IMessage message, bool forceAgenixHeaderUpdate)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a></td>
+        <td><span class="parametername">message</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">forceAgenixHeaderUpdate</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage__ctor_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.%23ctor(System.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L78">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage__ctor_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.#ctor*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage__ctor_System_Object_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.#ctor(System.Object)">GraphQLMessage(object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLMessage(object payload)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">payload</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage__ctor_System_Object_System_Collections_Generic_Dictionary_System_String_System_Object__.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.%23ctor(System.Object%2CSystem.Collections.Generic.Dictionary%7BSystem.String%2CSystem.Object%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L87">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage__ctor_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.#ctor*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage__ctor_System_Object_System_Collections_Generic_Dictionary_System_String_System_Object__" data-uid="Agenix.GraphQL.Message.GraphQLMessage.#ctor(System.Object,System.Collections.Generic.Dictionary{System.String,System.Object})">GraphQLMessage(object, Dictionary&lt;string, object&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLMessage(object payload, Dictionary&lt;string, object&gt; headers)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">payload</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td><span class="parametername">headers</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_Cookies.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.Cookies%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L105">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_Cookies_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.Cookies*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_Cookies" data-uid="Agenix.GraphQL.Message.GraphQLMessage.Cookies">Cookies</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the cookies for the GraphQL request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, string&gt;? Cookies { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_Extensions.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.Extensions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L230">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_Extensions_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.Extensions*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_Extensions" data-uid="Agenix.GraphQL.Message.GraphQLMessage.Extensions">Extensions</h4>
+  <div class="markdown level1 summary"><p>Gets or sets extensions for the GraphQL request.
+Extensions are additional data that can be sent alongside the GraphQL operation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, object?&gt; Extensions { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_Headers.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.Headers%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L219">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_Headers_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.Headers*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_Headers" data-uid="Agenix.GraphQL.Message.GraphQLMessage.Headers">Headers</h4>
+  <div class="markdown level1 summary"><p>Gets or sets additional HTTP headers for the GraphQL request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, object&gt; Headers { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_SubscriptionOptions.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.SubscriptionOptions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L241">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_SubscriptionOptions_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.SubscriptionOptions*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_SubscriptionOptions" data-uid="Agenix.GraphQL.Message.GraphQLMessage.SubscriptionOptions">SubscriptionOptions</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the subscription options for GraphQL subscriptions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLSubscriptionOptions? SubscriptionOptions { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Message.GraphQLSubscriptionOptions.html">GraphQLSubscriptionOptions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_Timeout.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.Timeout%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L224">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_Timeout_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.Timeout*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_Timeout" data-uid="Agenix.GraphQL.Message.GraphQLMessage.Timeout">Timeout</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the timeout for the GraphQL operation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TimeSpan? Timeout { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a>?</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_UseGetForQueries.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.UseGetForQueries%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L236">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_UseGetForQueries_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.UseGetForQueries*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_UseGetForQueries" data-uid="Agenix.GraphQL.Message.GraphQLMessage.UseGetForQueries">UseGetForQueries</h4>
+  <div class="markdown level1 summary"><p>Gets or sets whether to use the GET method for queries instead of POST.
+By default, GraphQL operations use POST method.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UseGetForQueries { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_Variables.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.Variables%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L110">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_Variables_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.Variables*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_Variables" data-uid="Agenix.GraphQL.Message.GraphQLMessage.Variables">Variables</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the variables to be used with the GraphQL operation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object? Variables { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_Accept_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.Accept(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L210">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_Accept_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.Accept*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_Accept_System_String_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.Accept(System.String)">Accept(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLMessage Accept(string accept)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">accept</span></td>
+        <td><p>The accept header value to set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Message.GraphQLMessage.html">GraphQLMessage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_AddCookie_System_String_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.AddCookie(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L248">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_AddCookie_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.AddCookie*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_AddCookie_System_String_System_String_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.AddCookie(System.String,System.String)">AddCookie(string, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a cookie to the GraphQL request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddCookie(string name, string value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The cookie name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The cookie value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_AddHeader_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.AddHeader(System.String%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L365">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_AddHeader_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.AddHeader*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_AddHeader_System_String_System_Object_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.AddHeader(System.String,System.Object)">AddHeader(string, object)</h4>
+  <div class="markdown level1 summary"><p>Adds or updates a header value for the GraphQL request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddHeader(string name, object value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The header name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The header value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_AddHeaders_System_Collections_Generic_Dictionary_System_String_System_Object__.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.AddHeaders(System.Collections.Generic.Dictionary%7BSystem.String%2CSystem.Object%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L375">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_AddHeaders_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.AddHeaders*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_AddHeaders_System_Collections_Generic_Dictionary_System_String_System_Object__" data-uid="Agenix.GraphQL.Message.GraphQLMessage.AddHeaders(System.Collections.Generic.Dictionary{System.String,System.Object})">AddHeaders(Dictionary&lt;string, object&gt;)</h4>
+  <div class="markdown level1 summary"><p>Adds or updates multiple headers for the GraphQL request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddHeaders(Dictionary&lt;string, object&gt; headers)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</td>
+        <td><span class="parametername">headers</span></td>
+        <td><p>The headers to add.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_ContentType_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.ContentType(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L201">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_ContentType_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.ContentType*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_ContentType_System_String_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.ContentType(System.String)">ContentType(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLMessage ContentType(string contentType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">contentType</span></td>
+        <td><p>The content type header value to use</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Message.GraphQLMessage.html">GraphQLMessage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_FromJson_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.FromJson(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L306">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_FromJson_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.FromJson*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_FromJson_System_String_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.FromJson(System.String)">FromJson(string)</h4>
+  <div class="markdown level1 summary"><p>Creates a GraphQL message from a JSON string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static GraphQLMessage FromJson(string json)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">json</span></td>
+        <td><p>The JSON string containing the GraphQL operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Message.GraphQLMessage.html">GraphQLMessage</a></td>
+        <td><p>A GraphQLMessage instance parsed from the JSON.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_GetCookie_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.GetCookie(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L259">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_GetCookie_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.GetCookie*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_GetCookie_System_String_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.GetCookie(System.String)">GetCookie(string)</h4>
+  <div class="markdown level1 summary"><p>Gets the value of a specific cookie.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? GetCookie(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The cookie name.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The cookie value if found, null otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_GetExtension_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.GetExtension(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L458">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_GetExtension_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.GetExtension*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_GetExtension_System_String_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.GetExtension(System.String)">GetExtension(string)</h4>
+  <div class="markdown level1 summary"><p>Retrieves the value of a specified extension by its name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object? GetExtension(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the extension to retrieve.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><p>The value of the extension if it exists, or null if the specified extension is not found.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_GetOperationName.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.GetOperationName%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L174">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_GetOperationName_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.GetOperationName*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_GetOperationName" data-uid="Agenix.GraphQL.Message.GraphQLMessage.GetOperationName">GetOperationName()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the name of the GraphQL operation from the headers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetOperationName()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>A string representing the operation name if it exists in the headers; otherwise, an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_GetOperationType.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.GetOperationType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L189">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_GetOperationType_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.GetOperationType*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_GetOperationType" data-uid="Agenix.GraphQL.Message.GraphQLMessage.GetOperationType">GetOperationType()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the operation type of the current GraphQL message.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLOperationType GetOperationType()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Message.GraphQLOperationType.html">GraphQLOperationType</a></td>
+        <td><p>The operation type of the message as a <a class="xref" href="Agenix.GraphQL.Message.GraphQLOperationType.html">GraphQLOperationType</a>.
+Returns <a class="xref" href="Agenix.GraphQL.Message.GraphQLOperationType.html#Agenix_GraphQL_Message_GraphQLOperationType_QUERY">QUERY</a> if the operation type is not explicitly set in the message headers.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_GetVariable_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.GetVariable(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L439">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_GetVariable_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.GetVariable*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_GetVariable_System_String_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.GetVariable(System.String)">GetVariable(string)</h4>
+  <div class="markdown level1 summary"><p>Gets a variable value from the GraphQL operation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object? GetVariable(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The variable name.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><p>The variable value, or null if not found.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_Header_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.Header(System.String%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L60">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_Header_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.Header*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_Header_System_String_System_Object_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.Header(System.String,System.Object)">Header(string, object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLMessage Header(string headerName, object headerValue)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">headerName</span></td>
+        <td><p>The name of the header.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">headerValue</span></td>
+        <td><p>The value of the header.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Message.GraphQLMessage.html">GraphQLMessage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_RemoveCookie_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.RemoveCookie(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L269">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_RemoveCookie_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.RemoveCookie*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_RemoveCookie_System_String_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.RemoveCookie(System.String)">RemoveCookie(string)</h4>
+  <div class="markdown level1 summary"><p>Removes a cookie from the GraphQL request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool RemoveCookie(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The cookie name to remove.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>True if the cookie was removed, false if it didn't exist.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_SetExtension_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.SetExtension(System.String%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L418">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_SetExtension_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.SetExtension*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_SetExtension_System_String_System_Object_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.SetExtension(System.String,System.Object)">SetExtension(string, object?)</h4>
+  <div class="markdown level1 summary"><p>Sets an extension in the GraphQLMessage by adding or updating the key-value pair in the extensions dictionary.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLMessage SetExtension(string name, object? value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the extension to be added or updated.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The value of the extension associated with the specified name.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Message.GraphQLMessage.html">GraphQLMessage</a></td>
+        <td><p>The current instance of the GraphQLMessage with the updated extensions.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_SetOperationName_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.SetOperationName(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L151">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_SetOperationName_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.SetOperationName*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_SetOperationName_System_String_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.SetOperationName(System.String)">SetOperationName(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the operation name for the GraphQL message.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLMessage SetOperationName(string operation)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">operation</span></td>
+        <td><p>The name of the operation to be executed in the GraphQL query.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Message.GraphQLMessage.html">GraphQLMessage</a></td>
+        <td><p>The updated <a class="xref" href="Agenix.GraphQL.Message.GraphQLMessage.html">GraphQLMessage</a> instance with the specified operation name set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_SetOperationType_Agenix_GraphQL_Message_GraphQLOperationType_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.SetOperationType(Agenix.GraphQL.Message.GraphQLOperationType)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L120">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_SetOperationType_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.SetOperationType*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_SetOperationType_Agenix_GraphQL_Message_GraphQLOperationType_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.SetOperationType(Agenix.GraphQL.Message.GraphQLOperationType)">SetOperationType(GraphQLOperationType)</h4>
+  <div class="markdown level1 summary"><p>Sets the type of the GraphQL operation for the message and updates the corresponding header.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLMessage SetOperationType(GraphQLOperationType method)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Message.GraphQLOperationType.html">GraphQLOperationType</a></td>
+        <td><span class="parametername">method</span></td>
+        <td><p>The <a class="xref" href="Agenix.GraphQL.Message.GraphQLOperationType.html">GraphQLOperationType</a> representing the type of GraphQL operation,
+such as QUERY, MUTATION, or SUBSCRIPTION.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Message.GraphQLMessage.html">GraphQLMessage</a></td>
+        <td><p>The current instance of the <a class="xref" href="Agenix.GraphQL.Message.GraphQLMessage.html">GraphQLMessage</a> for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_SetVariable_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.SetVariable(System.String%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L388">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_SetVariable_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.SetVariable*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_SetVariable_System_String_System_Object_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.SetVariable(System.String,System.Object)">SetVariable(string, object?)</h4>
+  <div class="markdown level1 summary"><p>Sets a variable value for the GraphQL operation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLMessage SetVariable(string name, object? value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The variable name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The variable value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Message.GraphQLMessage.html">GraphQLMessage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_Status_System_Net_HttpStatusCode_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.Status(System.Net.HttpStatusCode)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L131">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_Status_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.Status*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_Status_System_Net_HttpStatusCode_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.Status(System.Net.HttpStatusCode)">Status(HttpStatusCode)</h4>
+  <div class="markdown level1 summary"><p>Sets the HTTP response status code header.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GraphQLMessage Status(HttpStatusCode statusCode)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.httpstatuscode">HttpStatusCode</a></td>
+        <td><span class="parametername">statusCode</span></td>
+        <td><p>The status code header values it to respond with.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Message.GraphQLMessage.html">GraphQLMessage</a></td>
+        <td><p>The modified <a class="xref" href="Agenix.GraphQL.Message.GraphQLMessage.html">GraphQLMessage</a> instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_ToJson.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.ToJson%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L278">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_ToJson_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.ToJson*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_ToJson" data-uid="Agenix.GraphQL.Message.GraphQLMessage.ToJson">ToJson()</h4>
+  <div class="markdown level1 summary"><p>Converts the GraphQL message to a JSON string representation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ToJson()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>A JSON string containing the GraphQL operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_Uri_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.Uri(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L161">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_Uri_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.Uri*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_Uri_System_String_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.Uri(System.String)">Uri(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLMessage Uri(string requestUri)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">requestUri</span></td>
+        <td><p>The URI string to be set as the request URI header.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Message.GraphQLMessage.html">GraphQLMessage</a></td>
+        <td><p>The modified instance of HttpMessage with the updated URI headers.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage_UseWebSocket_System_Boolean_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage.UseWebSocket(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L96">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Message_GraphQLMessage_UseWebSocket_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.UseWebSocket*"></a>
+  <h4 id="Agenix_GraphQL_Message_GraphQLMessage_UseWebSocket_System_Boolean_" data-uid="Agenix.GraphQL.Message.GraphQLMessage.UseWebSocket(System.Boolean)">UseWebSocket(bool)</h4>
+  <div class="markdown level1 summary"><p>Configures whether to use WebSocket for the GraphQL message.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLMessage UseWebSocket(bool useWebSocket = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">useWebSocket</span></td>
+        <td><p>A boolean indicating whether to enable WebSocket. Defaults to true.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Message.GraphQLMessage.html">GraphQLMessage</a></td>
+        <td><p>The current instance of the <a class="xref" href="Agenix.GraphQL.Message.GraphQLMessage.html">GraphQLMessage</a> with the updated configuration.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.Message.IMessage.html">IMessage</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Message_GraphQLMessage.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Message.GraphQLMessage%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Message/GraphQLMessage.cs/#L39" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

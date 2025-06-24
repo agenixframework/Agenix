@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class XsdSchemaRepository </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class XsdSchemaRepository ">
+    
+    
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Validation.Xml.Schema.XsdSchemaRepository">
+
+
+
+  <h1 id="Agenix_Validation_Xml_Schema_XsdSchemaRepository" data-uid="Agenix.Validation.Xml.Schema.XsdSchemaRepository" class="text-break">Class XsdSchemaRepository</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Core.Repository.BaseRepository.html">BaseRepository</a></div>
+    <div class="level2"><span class="xref">XsdSchemaRepository</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.Common.INamed.html">INamed</a></div>
+    <div><a class="xref" href="Agenix.Api.Common.InitializingPhase.html">InitializingPhase</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Core.Repository.BaseRepository.html#Agenix_Core_Repository_BaseRepository_Name">BaseRepository.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Repository.BaseRepository.html#Agenix_Core_Repository_BaseRepository_Locations">BaseRepository.Locations</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Repository.BaseRepository.html#Agenix_Core_Repository_BaseRepository_SetName_System_String_">BaseRepository.SetName(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Validation.html">Validation</a>.<a class="xref" href="Agenix.Validation.Xml.html">Xml</a>.<a class="xref" href="Agenix.Validation.Xml.Schema.html">Schema</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Validation.Xml.dll</h6>
+  <h5 id="Agenix_Validation_Xml_Schema_XsdSchemaRepository_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class XsdSchemaRepository : BaseRepository, INamed, InitializingPhase</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Schema_XsdSchemaRepository__ctor.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Schema.XsdSchemaRepository.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Schema/XsdSchemaRepository.cs/#L38">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Schema_XsdSchemaRepository__ctor_" data-uid="Agenix.Validation.Xml.Schema.XsdSchemaRepository.#ctor*"></a>
+  <h4 id="Agenix_Validation_Xml_Schema_XsdSchemaRepository__ctor" data-uid="Agenix.Validation.Xml.Schema.XsdSchemaRepository.#ctor">XsdSchemaRepository()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XsdSchemaRepository()</code></pre>
+  </div>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Schema_XsdSchemaRepository_AddRepository_Agenix_Api_IO_IResource_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Schema.XsdSchemaRepository.AddRepository(Agenix.Api.IO.IResource)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Schema/XsdSchemaRepository.cs/#L77">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Schema_XsdSchemaRepository_AddRepository_" data-uid="Agenix.Validation.Xml.Schema.XsdSchemaRepository.AddRepository*"></a>
+  <h4 id="Agenix_Validation_Xml_Schema_XsdSchemaRepository_AddRepository_Agenix_Api_IO_IResource_" data-uid="Agenix.Validation.Xml.Schema.XsdSchemaRepository.AddRepository(Agenix.Api.IO.IResource)">AddRepository(IResource)</h4>
+  <div class="markdown level1 summary"><p>Adds a resource to the repository, processing it based on its file type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void AddRepository(IResource resource)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a></td>
+        <td><span class="parametername">resource</span></td>
+        <td><p>The resource instance to be added to the repository, typically representing a file.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Repository.BaseRepository.html#Agenix_Core_Repository_BaseRepository_AddRepository_Agenix_Api_IO_IResource_">BaseRepository.AddRepository(IResource)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Schema_XsdSchemaRepository_CanValidate_System_Xml_XmlDocument_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Schema.XsdSchemaRepository.CanValidate(System.Xml.XmlDocument)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Schema/XsdSchemaRepository.cs/#L62">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Schema_XsdSchemaRepository_CanValidate_" data-uid="Agenix.Validation.Xml.Schema.XsdSchemaRepository.CanValidate*"></a>
+  <h4 id="Agenix_Validation_Xml_Schema_XsdSchemaRepository_CanValidate_System_Xml_XmlDocument_" data-uid="Agenix.Validation.Xml.Schema.XsdSchemaRepository.CanValidate(System.Xml.XmlDocument)">CanValidate(XmlDocument)</h4>
+  <div class="markdown level1 summary"><p>Find the matching schema for document using given schema mapping strategy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool CanValidate(XmlDocument doc)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument">XmlDocument</a></td>
+        <td><span class="parametername">doc</span></td>
+        <td><p>The document instance to validate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>Boolean flag marking matching schema instance found</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Schema_XsdSchemaRepository_GetSchemaMappingStrategy.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Schema.XsdSchemaRepository.GetSchemaMappingStrategy%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Schema/XsdSchemaRepository.cs/#L212">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Schema_XsdSchemaRepository_GetSchemaMappingStrategy_" data-uid="Agenix.Validation.Xml.Schema.XsdSchemaRepository.GetSchemaMappingStrategy*"></a>
+  <h4 id="Agenix_Validation_Xml_Schema_XsdSchemaRepository_GetSchemaMappingStrategy" data-uid="Agenix.Validation.Xml.Schema.XsdSchemaRepository.GetSchemaMappingStrategy">GetSchemaMappingStrategy()</h4>
+  <div class="markdown level1 summary"><p>Gets the schema mapping strategy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IXsdSchemaMappingStrategy GetSchemaMappingStrategy()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Validation.Xml.Schema.IXsdSchemaMappingStrategy.html">IXsdSchemaMappingStrategy</a></td>
+        <td><p>The current XsdSchemaMappingStrategy</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Schema_XsdSchemaRepository_GetSchemas.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Schema.XsdSchemaRepository.GetSchemas%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Schema/XsdSchemaRepository.cs/#L184">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Schema_XsdSchemaRepository_GetSchemas_" data-uid="Agenix.Validation.Xml.Schema.XsdSchemaRepository.GetSchemas*"></a>
+  <h4 id="Agenix_Validation_Xml_Schema_XsdSchemaRepository_GetSchemas" data-uid="Agenix.Validation.Xml.Schema.XsdSchemaRepository.GetSchemas">GetSchemas()</h4>
+  <div class="markdown level1 summary"><p>Get the list of known schemas.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;IXsdSchema&gt; GetSchemas()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Validation.Xml.Schema.IXsdSchema.html">IXsdSchema</a>&gt;</td>
+        <td><p>The schema sources</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Schema_XsdSchemaRepository_Initialize.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Schema.XsdSchemaRepository.Initialize%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Schema/XsdSchemaRepository.cs/#L68">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Schema_XsdSchemaRepository_Initialize_" data-uid="Agenix.Validation.Xml.Schema.XsdSchemaRepository.Initialize*"></a>
+  <h4 id="Agenix_Validation_Xml_Schema_XsdSchemaRepository_Initialize" data-uid="Agenix.Validation.Xml.Schema.XsdSchemaRepository.Initialize">Initialize()</h4>
+  <div class="markdown level1 summary"><p>Initializes the repository by iterating through the defined locations and adding existing
+resources to the repository. This method handles the initialization logic, including retrieving
+file resources, verifying their existence, and invoking the repository addition process for each.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Initialize()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Agenix.Core.Repository.BaseRepository.html#Agenix_Core_Repository_BaseRepository_Initialize">BaseRepository.Initialize()</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Exceptions.AgenixSystemException.html">AgenixSystemException</a></td>
+        <td><p>Thrown when an I/O error occurs during the initialization process, encapsulating
+the original IOException as the inner exception.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Schema_XsdSchemaRepository_SetSchemaMappingStrategy_Agenix_Validation_Xml_Schema_IXsdSchemaMappingStrategy_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Schema.XsdSchemaRepository.SetSchemaMappingStrategy(Agenix.Validation.Xml.Schema.IXsdSchemaMappingStrategy)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Schema/XsdSchemaRepository.cs/#L202">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Schema_XsdSchemaRepository_SetSchemaMappingStrategy_" data-uid="Agenix.Validation.Xml.Schema.XsdSchemaRepository.SetSchemaMappingStrategy*"></a>
+  <h4 id="Agenix_Validation_Xml_Schema_XsdSchemaRepository_SetSchemaMappingStrategy_Agenix_Validation_Xml_Schema_IXsdSchemaMappingStrategy_" data-uid="Agenix.Validation.Xml.Schema.XsdSchemaRepository.SetSchemaMappingStrategy(Agenix.Validation.Xml.Schema.IXsdSchemaMappingStrategy)">SetSchemaMappingStrategy(IXsdSchemaMappingStrategy)</h4>
+  <div class="markdown level1 summary"><p>Set the schema mapping strategy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetSchemaMappingStrategy(IXsdSchemaMappingStrategy schemaMappingStrategy)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Validation.Xml.Schema.IXsdSchemaMappingStrategy.html">IXsdSchemaMappingStrategy</a></td>
+        <td><span class="parametername">schemaMappingStrategy</span></td>
+        <td><p>The schema mapping strategy to set</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Schema_XsdSchemaRepository_SetSchemas_System_Collections_Generic_List_Agenix_Validation_Xml_Schema_IXsdSchema__.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Schema.XsdSchemaRepository.SetSchemas(System.Collections.Generic.List%7BAgenix.Validation.Xml.Schema.IXsdSchema%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Schema/XsdSchemaRepository.cs/#L193">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Schema_XsdSchemaRepository_SetSchemas_" data-uid="Agenix.Validation.Xml.Schema.XsdSchemaRepository.SetSchemas*"></a>
+  <h4 id="Agenix_Validation_Xml_Schema_XsdSchemaRepository_SetSchemas_System_Collections_Generic_List_Agenix_Validation_Xml_Schema_IXsdSchema__" data-uid="Agenix.Validation.Xml.Schema.XsdSchemaRepository.SetSchemas(System.Collections.Generic.List{Agenix.Validation.Xml.Schema.IXsdSchema})">SetSchemas(List&lt;IXsdSchema&gt;)</h4>
+  <div class="markdown level1 summary"><p>Set the list of known schemas.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetSchemas(List&lt;IXsdSchema&gt; schemas)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Validation.Xml.Schema.IXsdSchema.html">IXsdSchema</a>&gt;</td>
+        <td><span class="parametername">schemas</span></td>
+        <td><p>The schemas to set</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.INamed.html">INamed</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.InitializingPhase.html">InitializingPhase</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Schema_XsdSchemaRepository.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Schema.XsdSchemaRepository%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Schema/XsdSchemaRepository.cs/#L38" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

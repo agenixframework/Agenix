@@ -82,7 +82,9 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Core.Validation.Json.JsonMessageValidationContext.html">JsonMessageValidationContext</a>, <a class="xref" href="Agenix.Api.Validation.Context.IMessageValidationContext.html">IMessageValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IMessageValidationContext.Builder-2.html">Builder</a>&lt;<a class="xref" href="Agenix.Core.Validation.Json.JsonMessageValidationContext.html">JsonMessageValidationContext</a>, <a class="xref" href="Agenix.Core.Validation.Json.JsonMessageValidationContext.html">JsonMessageValidationContext</a>.<a class="xref" href="Agenix.Core.Validation.Json.JsonMessageValidationContext.Builder.html">Builder</a>&gt;&gt;</div>
+    <div><a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>, <a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a>&gt;</div>
     <div><a class="xref" href="Agenix.Api.Validation.Context.ISchemaValidationContext.html">ISchemaValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.ISchemaValidationContext.IBuilder-1.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IMessageValidationContext.html">IMessageValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IMessageValidationContext.Builder-2.html">Builder</a>&lt;<a class="xref" href="Agenix.Core.Validation.Json.JsonMessageValidationContext.html">JsonMessageValidationContext</a>, <a class="xref" href="Agenix.Core.Validation.Json.JsonMessageValidationContext.html">JsonMessageValidationContext</a>.<a class="xref" href="Agenix.Core.Validation.Json.JsonMessageValidationContext.Builder.html">Builder</a>&gt;&gt;</div>
+    <div><a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -139,7 +141,7 @@
   <h6><strong>Assembly</strong>: Agenix.Core.dll</h6>
   <h5 id="Agenix_Core_Validation_Json_JsonMessageValidationContext_Builder_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class JsonMessageValidationContext.Builder : IMessageValidationContext.Builder&lt;JsonMessageValidationContext, JsonMessageValidationContext.Builder&gt;, IValidationContext.IBuilder&lt;JsonMessageValidationContext, IMessageValidationContext.Builder&lt;JsonMessageValidationContext, JsonMessageValidationContext.Builder&gt;&gt;, ISchemaValidationContext.IBuilder&lt;IMessageValidationContext.Builder&lt;JsonMessageValidationContext, JsonMessageValidationContext.Builder&gt;&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class JsonMessageValidationContext.Builder : IMessageValidationContext.Builder&lt;JsonMessageValidationContext, JsonMessageValidationContext.Builder&gt;, IValidationContext.IBuilder&lt;JsonMessageValidationContext, IMessageValidationContext.Builder&lt;JsonMessageValidationContext, JsonMessageValidationContext.Builder&gt;&gt;, IValidationContext.IBuilder&lt;IValidationContext, IBuilder&gt;, ISchemaValidationContext.IBuilder&lt;IMessageValidationContext.Builder&lt;JsonMessageValidationContext, JsonMessageValidationContext.Builder&gt;&gt;, IBuilder</code></pre>
   </div>
   <h3 id="methods">Methods
 </h3>
@@ -302,7 +304,13 @@
       <a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IValidationContext.IBuilder&lt;T, TB&gt;</a>
   </div>
   <div>
+      <a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IValidationContext.IBuilder&lt;T, TB&gt;</a>
+  </div>
+  <div>
       <a class="xref" href="Agenix.Api.Validation.Context.ISchemaValidationContext.IBuilder-1.html">ISchemaValidationContext.IBuilder&lt;TB&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a>
   </div>
 
 </article>

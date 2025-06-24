@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class XmlUtils </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class XmlUtils ">
+    
+    <meta name="description" content="Class providing several utility methods for XML processing.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Validation.Xml.Util.XmlUtils">
+
+
+
+  <h1 id="Agenix_Validation_Xml_Util_XmlUtils" data-uid="Agenix.Validation.Xml.Util.XmlUtils" class="text-break">Class XmlUtils</h1>
+  <div class="markdown level0 summary"><p>Class providing several utility methods for XML processing.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">XmlUtils</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Validation.html">Validation</a>.<a class="xref" href="Agenix.Validation.Xml.html">Xml</a>.<a class="xref" href="Agenix.Validation.Xml.Util.html">Util</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Validation.Xml.dll</h6>
+  <h5 id="Agenix_Validation_Xml_Util_XmlUtils_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class XmlUtils</code></pre>
+  </div>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Util_XmlUtils_FindNodeByName_System_Xml_XmlDocument_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Util.XmlUtils.FindNodeByName(System.Xml.XmlDocument%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Util/XmlUtils.cs/#L64">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Util_XmlUtils_FindNodeByName_" data-uid="Agenix.Validation.Xml.Util.XmlUtils.FindNodeByName*"></a>
+  <h4 id="Agenix_Validation_Xml_Util_XmlUtils_FindNodeByName_System_Xml_XmlDocument_System_String_" data-uid="Agenix.Validation.Xml.Util.XmlUtils.FindNodeByName(System.Xml.XmlDocument,System.String)">FindNodeByName(XmlDocument, string)</h4>
+  <div class="markdown level1 summary"><p>Searches for a node within a DOM document with a given node path expression.
+Elements are separated by '.' characters.
+Example: Foo.Bar.Poo</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static XmlNode? FindNodeByName(XmlDocument doc, string pathExpression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument">XmlDocument</a></td>
+        <td><span class="parametername">doc</span></td>
+        <td><p>DOM Document to search for a node</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">pathExpression</span></td>
+        <td><p>dot separated path expression</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></td>
+        <td><p>Node element found in the DOM document</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Util_XmlUtils_GetNodesPathName_System_Xml_XmlNode_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Util.XmlUtils.GetNodesPathName(System.Xml.XmlNode)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Util/XmlUtils.cs/#L138">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Util_XmlUtils_GetNodesPathName_" data-uid="Agenix.Validation.Xml.Util.XmlUtils.GetNodesPathName*"></a>
+  <h4 id="Agenix_Validation_Xml_Util_XmlUtils_GetNodesPathName_System_Xml_XmlNode_" data-uid="Agenix.Validation.Xml.Util.XmlUtils.GetNodesPathName(System.Xml.XmlNode)">GetNodesPathName(XmlNode)</h4>
+  <div class="markdown level1 summary"><p>Returns the path expression for a given node.
+Path expressions look like: Foo.Bar.Poo where elements are separated with a dot character.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string GetNodesPathName(XmlNode node)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></td>
+        <td><span class="parametername">node</span></td>
+        <td><p>node in DOM tree</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>the path expression representing the node in DOM tree</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Util_XmlUtils_GetTargetEncoding_System_Xml_XmlDocument_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Util.XmlUtils.GetTargetEncoding(System.Xml.XmlDocument)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Util/XmlUtils.cs/#L295">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Util_XmlUtils_GetTargetEncoding_" data-uid="Agenix.Validation.Xml.Util.XmlUtils.GetTargetEncoding*"></a>
+  <h4 id="Agenix_Validation_Xml_Util_XmlUtils_GetTargetEncoding_System_Xml_XmlDocument_" data-uid="Agenix.Validation.Xml.Util.XmlUtils.GetTargetEncoding(System.Xml.XmlDocument)">GetTargetEncoding(XmlDocument)</h4>
+  <div class="markdown level1 summary"><p>Try to find encoding for document node. Also supports default encoding set
+as system property or environment variable.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Encoding GetTargetEncoding(XmlDocument doc)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument">XmlDocument</a></td>
+        <td><span class="parametername">doc</span></td>
+        <td><p>XML document</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.encoding">Encoding</a></td>
+        <td><p>Target encoding</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Util_XmlUtils_Initialize_Agenix_Validation_Xml_XmlConfigurer_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Util.XmlUtils.Initialize(Agenix.Validation.Xml.XmlConfigurer)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Util/XmlUtils.cs/#L51">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Util_XmlUtils_Initialize_" data-uid="Agenix.Validation.Xml.Util.XmlUtils.Initialize*"></a>
+  <h4 id="Agenix_Validation_Xml_Util_XmlUtils_Initialize_Agenix_Validation_Xml_XmlConfigurer_" data-uid="Agenix.Validation.Xml.Util.XmlUtils.Initialize(Agenix.Validation.Xml.XmlConfigurer)">Initialize(XmlConfigurer)</h4>
+  <div class="markdown level1 summary"><p>Initializes XML utilities with custom configurer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Initialize(XmlConfigurer xmlConfigurer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Validation.Xml.XmlConfigurer.html">XmlConfigurer</a></td>
+        <td><span class="parametername">xmlConfigurer</span></td>
+        <td><p>The XML configurer</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Util_XmlUtils_LookupNamespaces_System_Xml_XmlNode_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Util.XmlUtils.LookupNamespaces(System.Xml.XmlNode)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Util/XmlUtils.cs/#L244">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Util_XmlUtils_LookupNamespaces_" data-uid="Agenix.Validation.Xml.Util.XmlUtils.LookupNamespaces*"></a>
+  <h4 id="Agenix_Validation_Xml_Util_XmlUtils_LookupNamespaces_System_Xml_XmlNode_" data-uid="Agenix.Validation.Xml.Util.XmlUtils.LookupNamespaces(System.Xml.XmlNode)">LookupNamespaces(XmlNode)</h4>
+  <div class="markdown level1 summary"><p>Look up namespace attribute declarations in the specified node and
+store them in a binding map, where the key is the namespace prefix and the value
+is the namespace uri.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Dictionary&lt;string, string&gt; LookupNamespaces(XmlNode referenceNode)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></td>
+        <td><span class="parametername">referenceNode</span></td>
+        <td><p>XML node to search for namespace declarations</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><p>map containing namespace prefix - namespace url pairs</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Util_XmlUtils_OmitXmlDeclaration_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Util.XmlUtils.OmitXmlDeclaration(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Util/XmlUtils.cs/#L398">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Util_XmlUtils_OmitXmlDeclaration_" data-uid="Agenix.Validation.Xml.Util.XmlUtils.OmitXmlDeclaration*"></a>
+  <h4 id="Agenix_Validation_Xml_Util_XmlUtils_OmitXmlDeclaration_System_String_" data-uid="Agenix.Validation.Xml.Util.XmlUtils.OmitXmlDeclaration(System.String)">OmitXmlDeclaration(string)</h4>
+  <div class="markdown level1 summary"><p>Removes leading XML declaration from xml if present.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string OmitXmlDeclaration(string xml)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">xml</span></td>
+        <td><p>XML string</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>XML string without declaration</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Util_XmlUtils_ParseMessagePayload_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Util.XmlUtils.ParseMessagePayload(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Util/XmlUtils.cs/#L278">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Util_XmlUtils_ParseMessagePayload_" data-uid="Agenix.Validation.Xml.Util.XmlUtils.ParseMessagePayload*"></a>
+  <h4 id="Agenix_Validation_Xml_Util_XmlUtils_ParseMessagePayload_System_String_" data-uid="Agenix.Validation.Xml.Util.XmlUtils.ParseMessagePayload(System.String)">ParseMessagePayload(string)</h4>
+  <div class="markdown level1 summary"><p>Parse message payload with DOM implementation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static XmlDocument ParseMessagePayload(string messagePayload)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">messagePayload</span></td>
+        <td><p>XML message payload</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument">XmlDocument</a></td>
+        <td><p>DOM document</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Util_XmlUtils_PrettyPrint_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Util.XmlUtils.PrettyPrint(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Util/XmlUtils.cs/#L218">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Util_XmlUtils_PrettyPrint_" data-uid="Agenix.Validation.Xml.Util.XmlUtils.PrettyPrint*"></a>
+  <h4 id="Agenix_Validation_Xml_Util_XmlUtils_PrettyPrint_System_String_" data-uid="Agenix.Validation.Xml.Util.XmlUtils.PrettyPrint(System.String)">PrettyPrint(string)</h4>
+  <div class="markdown level1 summary"><p>Pretty prints an XML string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string PrettyPrint(string xml)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">xml</span></td>
+        <td><p>XML string to format</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>pretty printed XML string</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Util_XmlUtils_Serialize_System_Xml_XmlDocument_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Util.XmlUtils.Serialize(System.Xml.XmlDocument)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Util/XmlUtils.cs/#L193">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Util_XmlUtils_Serialize_" data-uid="Agenix.Validation.Xml.Util.XmlUtils.Serialize*"></a>
+  <h4 id="Agenix_Validation_Xml_Util_XmlUtils_Serialize_System_Xml_XmlDocument_" data-uid="Agenix.Validation.Xml.Util.XmlUtils.Serialize(System.Xml.XmlDocument)">Serialize(XmlDocument)</h4>
+  <div class="markdown level1 summary"><p>Serializes a DOM document</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string Serialize(XmlDocument doc)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument">XmlDocument</a></td>
+        <td><span class="parametername">doc</span></td>
+        <td><p>Document to serialize</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>serialized XML string</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Util_XmlUtils_StripWhitespaceNodes_System_Xml_XmlNode_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Util.XmlUtils.StripWhitespaceNodes(System.Xml.XmlNode)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Util/XmlUtils.cs/#L118">View Source</a>
+  </span>
+  <a id="Agenix_Validation_Xml_Util_XmlUtils_StripWhitespaceNodes_" data-uid="Agenix.Validation.Xml.Util.XmlUtils.StripWhitespaceNodes*"></a>
+  <h4 id="Agenix_Validation_Xml_Util_XmlUtils_StripWhitespaceNodes_System_Xml_XmlNode_" data-uid="Agenix.Validation.Xml.Util.XmlUtils.StripWhitespaceNodes(System.Xml.XmlNode)">StripWhitespaceNodes(XmlNode)</h4>
+  <div class="markdown level1 summary"><p>Removes text nodes that are only containing whitespace characters inside a DOM tree.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void StripWhitespaceNodes(XmlNode element)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></td>
+        <td><span class="parametername">element</span></td>
+        <td><p>the root node to normalize</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Xml_Util_XmlUtils.md&amp;value=---%0Auid%3A%20Agenix.Validation.Xml.Util.XmlUtils%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Xml/Util/XmlUtils.cs/#L37" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class GraphQLClientBuilder </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class GraphQLClientBuilder ">
+    
+    <meta name="description" content="Builder for creating and configuring GraphQL client endpoints with fluent API. Provides methods to configure GraphQL-specific settings such as endpoint URLs, authentication, retry policies, and WebSocket support for subscriptions.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder">
+
+
+
+  <h1 id="Agenix_GraphQL_Client_GraphQLClientBuilder" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder" class="text-break">Class GraphQLClientBuilder</h1>
+  <div class="markdown level0 summary"><p>Builder for creating and configuring GraphQL client endpoints with fluent API.
+Provides methods to configure GraphQL-specific settings such as endpoint URLs,
+authentication, retry policies, and WebSocket support for subscriptions.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Core.Endpoint.AbstractEndpointBuilder-1.html">AbstractEndpointBuilder</a>&lt;<a class="xref" href="Agenix.GraphQL.Client.GraphQLClient.html">GraphQLClient</a>&gt;</div>
+    <div class="level2"><span class="xref">GraphQLClientBuilder</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.Endpoint.IEndpointBuilder-1.html">IEndpointBuilder</a>&lt;<a class="xref" href="Agenix.GraphQL.Client.GraphQLClient.html">GraphQLClient</a>&gt;</div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Core.Endpoint.AbstractEndpointBuilder-1.html#Agenix_Core_Endpoint_AbstractEndpointBuilder_1_Supports_System_Type_">AbstractEndpointBuilder&lt;GraphQLClient&gt;.Supports(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Endpoint.AbstractEndpointBuilder-1.html#Agenix_Core_Endpoint_AbstractEndpointBuilder_1_Name_System_String_">AbstractEndpointBuilder&lt;GraphQLClient&gt;.Name(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Endpoint.AbstractEndpointBuilder-1.html#Agenix_Core_Endpoint_AbstractEndpointBuilder_1_Initialize">AbstractEndpointBuilder&lt;GraphQLClient&gt;.Initialize()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.GraphQL.html">GraphQL</a>.<a class="xref" href="Agenix.GraphQL.Client.html">Client</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.GraphQL.dll</h6>
+  <h5 id="Agenix_GraphQL_Client_GraphQLClientBuilder_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class GraphQLClientBuilder : AbstractEndpointBuilder&lt;GraphQLClient&gt;, IEndpointBuilder&lt;GraphQLClient&gt;</code></pre>
+  </div>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClientBuilder_BasicAuth_System_String_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClientBuilder.BasicAuth(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClientBuilder.cs/#L169">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClientBuilder_BasicAuth_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.BasicAuth*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClientBuilder_BasicAuth_System_String_System_String_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.BasicAuth(System.String,System.String)">BasicAuth(string, string)</h4>
+  <div class="markdown level1 summary"><p>Configures Basic authentication for GraphQL requests.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientBuilder BasicAuth(string username, string password)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">username</span></td>
+        <td><p>The username.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">password</span></td>
+        <td><p>The password.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLClientBuilder.html">GraphQLClientBuilder</a></td>
+        <td><p>The builder instance for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClientBuilder_BearerAuth_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClientBuilder.BearerAuth(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClientBuilder.cs/#L153">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClientBuilder_BearerAuth_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.BearerAuth*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClientBuilder_BearerAuth_System_String_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.BearerAuth(System.String)">BearerAuth(string)</h4>
+  <div class="markdown level1 summary"><p>Configures Bearer token authentication for GraphQL requests.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientBuilder BearerAuth(string token)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">token</span></td>
+        <td><p>The Bearer token.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLClientBuilder.html">GraphQLClientBuilder</a></td>
+        <td><p>The builder instance for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClientBuilder_Build.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClientBuilder.Build%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClientBuilder.cs/#L279">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClientBuilder_Build_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.Build*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClientBuilder_Build" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.Build">Build()</h4>
+  <div class="markdown level1 summary"><p>Builds and returns the configured GraphQL client instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override GraphQLClient Build()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLClient.html">GraphQLClient</a></td>
+        <td><p>A configured GraphQL client.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Agenix.Core.Endpoint.AbstractEndpointBuilder&lt;Agenix.GraphQL.Client.GraphQLClient&gt;.Build()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClientBuilder_Charset_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClientBuilder.Charset(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClientBuilder.cs/#L105">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClientBuilder_Charset_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.Charset*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClientBuilder_Charset_System_String_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.Charset(System.String)">Charset(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the character encoding for GraphQL communications.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientBuilder Charset(string charset)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">charset</span></td>
+        <td><p>The character encoding (default: UTF-8).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLClientBuilder.html">GraphQLClientBuilder</a></td>
+        <td><p>The builder instance for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClientBuilder_ClientHandler_System_Net_Http_DelegatingHandler_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClientBuilder.ClientHandler(System.Net.Http.DelegatingHandler)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClientBuilder.cs/#L244">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClientBuilder_ClientHandler_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.ClientHandler*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClientBuilder_ClientHandler_System_Net_Http_DelegatingHandler_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.ClientHandler(System.Net.Http.DelegatingHandler)">ClientHandler(DelegatingHandler)</h4>
+  <div class="markdown level1 summary"><p>Adds a custom HTTP message handler to the GraphQL client pipeline.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientBuilder ClientHandler(DelegatingHandler handler)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler">DelegatingHandler</a></td>
+        <td><span class="parametername">handler</span></td>
+        <td><p>The delegating handler to add.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLClientBuilder.html">GraphQLClientBuilder</a></td>
+        <td><p>The builder instance for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClientBuilder_ClientHandlers_System_Net_Http_DelegatingHandler___.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClientBuilder.ClientHandlers(System.Net.Http.DelegatingHandler%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClientBuilder.cs/#L255">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClientBuilder_ClientHandlers_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.ClientHandlers*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClientBuilder_ClientHandlers_System_Net_Http_DelegatingHandler___" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.ClientHandlers(System.Net.Http.DelegatingHandler[])">ClientHandlers(params DelegatingHandler[])</h4>
+  <div class="markdown level1 summary"><p>Adds multiple custom HTTP message handlers to the GraphQL client pipeline.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientBuilder ClientHandlers(params DelegatingHandler[] handlers)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.delegatinghandler">DelegatingHandler</a>[]</td>
+        <td><span class="parametername">handlers</span></td>
+        <td><p>The delegating handlers to add.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLClientBuilder.html">GraphQLClientBuilder</a></td>
+        <td><p>The builder instance for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClientBuilder_ContentType_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClientBuilder.ContentType(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClientBuilder.cs/#L94">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClientBuilder_ContentType_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.ContentType*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClientBuilder_ContentType_System_String_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.ContentType(System.String)">ContentType(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the content type for GraphQL requests.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientBuilder ContentType(string contentType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">contentType</span></td>
+        <td><p>The content type (default: application/json).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLClientBuilder.html">GraphQLClientBuilder</a></td>
+        <td><p>The builder instance for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClientBuilder_CustomAuth_System_Collections_Generic_IDictionary_System_String_System_String__.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClientBuilder.CustomAuth(System.Collections.Generic.IDictionary%7BSystem.String%2CSystem.String%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClientBuilder.cs/#L185">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClientBuilder_CustomAuth_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.CustomAuth*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClientBuilder_CustomAuth_System_Collections_Generic_IDictionary_System_String_System_String__" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.CustomAuth(System.Collections.Generic.IDictionary{System.String,System.String})">CustomAuth(IDictionary&lt;string, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Configures custom authentication headers for GraphQL requests.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientBuilder CustomAuth(IDictionary&lt;string, string&gt; customHeaders)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><span class="parametername">customHeaders</span></td>
+        <td><p>Dictionary of custom authentication headers.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLClientBuilder.html">GraphQLClientBuilder</a></td>
+        <td><p>The builder instance for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClientBuilder_DefaultHeader_System_String_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClientBuilder.DefaultHeader(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClientBuilder.cs/#L128">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClientBuilder_DefaultHeader_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.DefaultHeader*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClientBuilder_DefaultHeader_System_String_System_String_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.DefaultHeader(System.String,System.String)">DefaultHeader(string, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a default header to be sent with every GraphQL request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientBuilder DefaultHeader(string name, string value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The header name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The header value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLClientBuilder.html">GraphQLClientBuilder</a></td>
+        <td><p>The builder instance for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClientBuilder_DefaultHeaders_System_Collections_Generic_IDictionary_System_String_System_String__.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClientBuilder.DefaultHeaders(System.Collections.Generic.IDictionary%7BSystem.String%2CSystem.String%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClientBuilder.cs/#L139">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClientBuilder_DefaultHeaders_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.DefaultHeaders*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClientBuilder_DefaultHeaders_System_Collections_Generic_IDictionary_System_String_System_String__" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.DefaultHeaders(System.Collections.Generic.IDictionary{System.String,System.String})">DefaultHeaders(IDictionary&lt;string, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>Adds multiple default headers to be sent with every GraphQL request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientBuilder DefaultHeaders(IDictionary&lt;string, string&gt; headers)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><span class="parametername">headers</span></td>
+        <td><p>Dictionary of headers to add.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLClientBuilder.html">GraphQLClientBuilder</a></td>
+        <td><p>The builder instance for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClientBuilder_EndpointUrl_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClientBuilder.EndpointUrl(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClientBuilder.cs/#L60">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClientBuilder_EndpointUrl_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.EndpointUrl*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClientBuilder_EndpointUrl_System_String_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.EndpointUrl(System.String)">EndpointUrl(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the GraphQL endpoint URL for queries and mutations.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientBuilder EndpointUrl(string endpointUrl)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">endpointUrl</span></td>
+        <td><p>The GraphQL endpoint URL.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLClientBuilder.html">GraphQLClientBuilder</a></td>
+        <td><p>The builder instance for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClientBuilder_GetEndpoint.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClientBuilder.GetEndpoint%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClientBuilder.cs/#L50">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClientBuilder_GetEndpoint_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.GetEndpoint*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClientBuilder_GetEndpoint" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.GetEndpoint">GetEndpoint()</h4>
+  <div class="markdown level1 summary"><p>Provides the implementation for retrieving the HTTP client endpoint instance
+initialized within the builder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override GraphQLClient GetEndpoint()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLClient.html">GraphQLClient</a></td>
+        <td><p>The initialized instance of HttpClient representing the endpoint.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Agenix.Core.Endpoint.AbstractEndpointBuilder&lt;Agenix.GraphQL.Client.GraphQLClient&gt;.GetEndpoint()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClientBuilder_HandleCookies_System_Boolean_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClientBuilder.HandleCookies(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClientBuilder.cs/#L116">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClientBuilder_HandleCookies_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.HandleCookies*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClientBuilder_HandleCookies_System_Boolean_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.HandleCookies(System.Boolean)">HandleCookies(bool)</h4>
+  <div class="markdown level1 summary"><p>Configures whether cookies should be handled automatically.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientBuilder HandleCookies(bool handleCookies = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">handleCookies</span></td>
+        <td><p>True to handle cookies automatically, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLClientBuilder.html">GraphQLClientBuilder</a></td>
+        <td><p>The builder instance for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClientBuilder_JsonSerializerOptions_GraphQL_Client_Serializer_Newtonsoft_NewtonsoftJsonSerializer_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClientBuilder.JsonSerializerOptions(GraphQL.Client.Serializer.Newtonsoft.NewtonsoftJsonSerializer)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClientBuilder.cs/#L233">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClientBuilder_JsonSerializerOptions_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.JsonSerializerOptions*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClientBuilder_JsonSerializerOptions_GraphQL_Client_Serializer_Newtonsoft_NewtonsoftJsonSerializer_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.JsonSerializerOptions(GraphQL.Client.Serializer.Newtonsoft.NewtonsoftJsonSerializer)">JsonSerializerOptions(NewtonsoftJsonSerializer)</h4>
+  <div class="markdown level1 summary"><p>Configures JSON serialization options for GraphQL requests and responses.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientBuilder JsonSerializerOptions(NewtonsoftJsonSerializer serializer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">NewtonsoftJsonSerializer</span></td>
+        <td><span class="parametername">serializer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLClientBuilder.html">GraphQLClientBuilder</a></td>
+        <td><p>The builder instance for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClientBuilder_RetryPolicy_System_Int32_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClientBuilder.RetryPolicy(System.Int32%2CSystem.Int32%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClientBuilder.cs/#L206">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClientBuilder_RetryPolicy_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.RetryPolicy*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClientBuilder_RetryPolicy_System_Int32_System_Int32_System_Boolean_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.RetryPolicy(System.Int32,System.Int32,System.Boolean)">RetryPolicy(int, int, bool)</h4>
+  <div class="markdown level1 summary"><p>Configures retry policy for failed GraphQL requests.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientBuilder RetryPolicy(int maxRetries, int retryDelayMilliseconds = 1000, bool useExponentialBackoff = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">maxRetries</span></td>
+        <td><p>Maximum number of retry attempts.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">retryDelayMilliseconds</span></td>
+        <td><p>Delay between retries in milliseconds.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">useExponentialBackoff</span></td>
+        <td><p>Whether to use exponential backoff.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLClientBuilder.html">GraphQLClientBuilder</a></td>
+        <td><p>The builder instance for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClientBuilder_RetryableStatusCodes_System_Int32___.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClientBuilder.RetryableStatusCodes(System.Int32%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClientBuilder.cs/#L222">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClientBuilder_RetryableStatusCodes_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.RetryableStatusCodes*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClientBuilder_RetryableStatusCodes_System_Int32___" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.RetryableStatusCodes(System.Int32[])">RetryableStatusCodes(params int[])</h4>
+  <div class="markdown level1 summary"><p>Configures custom HTTP status codes that should trigger a retry.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientBuilder RetryableStatusCodes(params int[] statusCodes)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>[]</td>
+        <td><span class="parametername">statusCodes</span></td>
+        <td><p>List of HTTP status codes that should trigger retries.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLClientBuilder.html">GraphQLClientBuilder</a></td>
+        <td><p>The builder instance for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClientBuilder_Timeout_System_Int32_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClientBuilder.Timeout(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClientBuilder.cs/#L269">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClientBuilder_Timeout_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.Timeout*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClientBuilder_Timeout_System_Int32_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.Timeout(System.Int32)">Timeout(int)</h4>
+  <div class="markdown level1 summary"><p>Sets the request timeout for GraphQL operations.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientBuilder Timeout(int timeoutMilliseconds)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">timeoutMilliseconds</span></td>
+        <td><p>The timeout in milliseconds.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLClientBuilder.html">GraphQLClientBuilder</a></td>
+        <td><p>The builder instance for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClientBuilder_UseWebSocketForSubscriptions_System_Boolean_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClientBuilder.UseWebSocketForSubscriptions(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClientBuilder.cs/#L83">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClientBuilder_UseWebSocketForSubscriptions_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.UseWebSocketForSubscriptions*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClientBuilder_UseWebSocketForSubscriptions_System_Boolean_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.UseWebSocketForSubscriptions(System.Boolean)">UseWebSocketForSubscriptions(bool)</h4>
+  <div class="markdown level1 summary"><p>Configures whether to use WebSocket for GraphQL subscriptions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientBuilder UseWebSocketForSubscriptions(bool useWebSocket = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">useWebSocket</span></td>
+        <td><p>True to use WebSocket for subscriptions, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLClientBuilder.html">GraphQLClientBuilder</a></td>
+        <td><p>The builder instance for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClientBuilder_WebSocketEndpointUrl_System_String_.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClientBuilder.WebSocketEndpointUrl(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClientBuilder.cs/#L72">View Source</a>
+  </span>
+  <a id="Agenix_GraphQL_Client_GraphQLClientBuilder_WebSocketEndpointUrl_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.WebSocketEndpointUrl*"></a>
+  <h4 id="Agenix_GraphQL_Client_GraphQLClientBuilder_WebSocketEndpointUrl_System_String_" data-uid="Agenix.GraphQL.Client.GraphQLClientBuilder.WebSocketEndpointUrl(System.String)">WebSocketEndpointUrl(string)</h4>
+  <div class="markdown level1 summary"><p>Sets the WebSocket endpoint URL for GraphQL subscriptions.
+If not specified, will be derived from the main endpoint URL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphQLClientBuilder WebSocketEndpointUrl(string webSocketEndpointUrl)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">webSocketEndpointUrl</span></td>
+        <td><p>The WebSocket endpoint URL.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.GraphQL.Client.GraphQLClientBuilder.html">GraphQLClientBuilder</a></td>
+        <td><p>The builder instance for method chaining.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.Endpoint.IEndpointBuilder-1.html">IEndpointBuilder&lt;T&gt;</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_GraphQL_Client_GraphQLClientBuilder.md&amp;value=---%0Auid%3A%20Agenix.GraphQL.Client.GraphQLClientBuilder%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.GraphQL/Client/GraphQLClientBuilder.cs/#L38" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

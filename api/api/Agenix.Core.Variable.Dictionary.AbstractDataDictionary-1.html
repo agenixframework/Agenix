@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class AbstractDataDictionary&lt;T&gt; </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class AbstractDataDictionary&lt;T&gt; ">
+    
+    <meta name="description" content="Abstract data dictionary implementation provides global scope handling.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1">
+
+
+
+  <h1 id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1" class="text-break">Class AbstractDataDictionary&lt;T&gt;</h1>
+  <div class="markdown level0 summary"><p>Abstract data dictionary implementation provides global scope handling.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Agenix.Api.Message.AbstractMessageProcessor.html">AbstractMessageProcessor</a></div>
+    <div class="level2"><span class="xref">AbstractDataDictionary&lt;T&gt;</span></div>
+      <div class="level3"><a class="xref" href="Agenix.Core.Variable.Dictionary.SimpleMappingDictionary.html">SimpleMappingDictionary</a></div>
+      <div class="level3"><a class="xref" href="Agenix.Validation.Json.Variable.Dictionary.Json.AbstractJsonDataDictionary.html">AbstractJsonDataDictionary</a></div>
+      <div class="level3"><a class="xref" href="Agenix.Validation.Xml.Variable.Dictionary.Xml.AbstractXmlDataDictionary.html">AbstractXmlDataDictionary</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Agenix.Api.Message.IMessageTypeSelector.html">IMessageTypeSelector</a></div>
+    <div><a class="xref" href="Agenix.Api.Variable.Dictionary.IDataDictionary-1.html">IDataDictionary</a>&lt;T&gt;</div>
+    <div><a class="xref" href="Agenix.Api.Message.IMessageDirectionAware.html">IMessageDirectionAware</a></div>
+    <div><a class="xref" href="Agenix.Core.IScoped.html">IScoped</a></div>
+    <div><a class="xref" href="Agenix.Api.Common.InitializingPhase.html">InitializingPhase</a></div>
+    <div><a class="xref" href="Agenix.Api.Variable.Dictionary.IDataDictionary.html">IDataDictionary</a></div>
+    <div><a class="xref" href="Agenix.Api.Message.IMessageProcessor.html">IMessageProcessor</a></div>
+    <div><a class="xref" href="Agenix.Api.Message.IMessageTransformer.html">IMessageTransformer</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Api.Message.AbstractMessageProcessor.html#Agenix_Api_Message_AbstractMessageProcessor_Direction">AbstractMessageProcessor.Direction</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Api.Message.AbstractMessageProcessor.html#Agenix_Api_Message_AbstractMessageProcessor_GetDirection">AbstractMessageProcessor.GetDirection()</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Api.Message.AbstractMessageProcessor.html#Agenix_Api_Message_AbstractMessageProcessor_Process_Agenix_Api_Message_IMessage_Agenix_Api_Context_TestContext_">AbstractMessageProcessor.Process(IMessage, TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Api.Message.AbstractMessageProcessor.html#Agenix_Api_Message_AbstractMessageProcessor_SupportsMessageType_System_String_">AbstractMessageProcessor.SupportsMessageType(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Api.Message.AbstractMessageProcessor.html#Agenix_Api_Message_AbstractMessageProcessor_ProcessMessage_Agenix_Api_Message_IMessage_Agenix_Api_Context_TestContext_">AbstractMessageProcessor.ProcessMessage(IMessage, TestContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Api.Message.AbstractMessageProcessor.html#Agenix_Api_Message_AbstractMessageProcessor_GetName">AbstractMessageProcessor.GetName()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Core.html">Core</a>.<a class="xref" href="Agenix.Core.Variable.html">Variable</a>.<a class="xref" href="Agenix.Core.Variable.Dictionary.html">Dictionary</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Core.dll</h6>
+  <h5 id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class AbstractDataDictionary&lt;T&gt; : AbstractMessageProcessor, IMessageTypeSelector, IDataDictionary&lt;T&gt;, IMessageDirectionAware, IScoped, InitializingPhase, IDataDictionary, IMessageProcessor, IMessageTransformer</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_MappingFile.md&amp;value=---%0Auid%3A%20Agenix.Core.Variable.Dictionary.AbstractDataDictionary%601.MappingFile%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Variable/Dictionary/AbstractDataDictionary.cs/#L47">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_MappingFile" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1.MappingFile">MappingFile</h4>
+  <div class="markdown level1 summary"><p>Mapping file resource</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected IResource MappingFile</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1__mappings.md&amp;value=---%0Auid%3A%20Agenix.Core.Variable.Dictionary.AbstractDataDictionary%601._mappings%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Variable/Dictionary/AbstractDataDictionary.cs/#L32">View Source</a>
+  </span>
+  <h4 id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1__mappings" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1._mappings">_mappings</h4>
+  <div class="markdown level1 summary"><p>Known mappings to this dictionary</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Dictionary&lt;string, string&gt; _mappings</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_IsGlobalScope.md&amp;value=---%0Auid%3A%20Agenix.Core.Variable.Dictionary.AbstractDataDictionary%601.IsGlobalScope%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Variable/Dictionary/AbstractDataDictionary.cs/#L64">View Source</a>
+  </span>
+  <a id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_IsGlobalScope_" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1.IsGlobalScope*"></a>
+  <h4 id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_IsGlobalScope" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1.IsGlobalScope">IsGlobalScope</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the global scope property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsGlobalScope { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_MappingFileResource.md&amp;value=---%0Auid%3A%20Agenix.Core.Variable.Dictionary.AbstractDataDictionary%601.MappingFileResource%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Variable/Dictionary/AbstractDataDictionary.cs/#L49">View Source</a>
+  </span>
+  <a id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_MappingFileResource_" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1.MappingFileResource*"></a>
+  <h4 id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_MappingFileResource" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1.MappingFileResource">MappingFileResource</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IResource MappingFileResource { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_Mappings.md&amp;value=---%0Auid%3A%20Agenix.Core.Variable.Dictionary.AbstractDataDictionary%601.Mappings%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Variable/Dictionary/AbstractDataDictionary.cs/#L55">View Source</a>
+  </span>
+  <a id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_Mappings_" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1.Mappings*"></a>
+  <h4 id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_Mappings" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1.Mappings">Mappings</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, string&gt; Mappings { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_Name.md&amp;value=---%0Auid%3A%20Agenix.Core.Variable.Dictionary.AbstractDataDictionary%601.Name%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Variable/Dictionary/AbstractDataDictionary.cs/#L73">View Source</a>
+  </span>
+  <a id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_Name_" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1.Name*"></a>
+  <h4 id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_Name" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1.Name">Name</h4>
+  <div class="markdown level1 summary"><p>Gets the data dictionary name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Name { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_PathMappingStrategy.md&amp;value=---%0Auid%3A%20Agenix.Core.Variable.Dictionary.AbstractDataDictionary%601.PathMappingStrategy%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Variable/Dictionary/AbstractDataDictionary.cs/#L82">View Source</a>
+  </span>
+  <a id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_PathMappingStrategy_" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1.PathMappingStrategy*"></a>
+  <h4 id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_PathMappingStrategy" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1.PathMappingStrategy">PathMappingStrategy</h4>
+  <div class="markdown level1 summary"><p>Gets the path mapping strategy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PathMappingStrategy PathMappingStrategy { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Variable.Dictionary.PathMappingStrategy.html">PathMappingStrategy</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_ConvertIfNecessary__1_System_String___0_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Variable.Dictionary.AbstractDataDictionary%601.ConvertIfNecessary%60%601(System.String%2C%60%600%2CAgenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Variable/Dictionary/AbstractDataDictionary.cs/#L143">View Source</a>
+  </span>
+  <a id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_ConvertIfNecessary_" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1.ConvertIfNecessary*"></a>
+  <h4 id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_ConvertIfNecessary__1_System_String___0_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1.ConvertIfNecessary``1(System.String,``0,Agenix.Api.Context.TestContext)">ConvertIfNecessary&lt;V&gt;(string, V, TestContext)</h4>
+  <div class="markdown level1 summary"><p>Convert to original value type if necessary.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected V ConvertIfNecessary&lt;V&gt;(string value, V originalValue, TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The string value to convert</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">V</span></td>
+        <td><span class="parametername">originalValue</span></td>
+        <td><p>The original value for type reference</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The test context</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">V</span></td>
+        <td><p>Converted value</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">V</span></td>
+        <td><p>The value type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_Initialize.md&amp;value=---%0Auid%3A%20Agenix.Core.Variable.Dictionary.AbstractDataDictionary%601.Initialize%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Variable/Dictionary/AbstractDataDictionary.cs/#L91">View Source</a>
+  </span>
+  <a id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_Initialize_" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1.Initialize*"></a>
+  <h4 id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_Initialize" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1.Initialize">Initialize()</h4>
+  <div class="markdown level1 summary"><p>Initialize the data dictionary by loading mappings from file if specified.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Initialize()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_LoadProperties_Agenix_Api_IO_IResource_.md&amp;value=---%0Auid%3A%20Agenix.Core.Variable.Dictionary.AbstractDataDictionary%601.LoadProperties(Agenix.Api.IO.IResource)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Variable/Dictionary/AbstractDataDictionary.cs/#L160">View Source</a>
+  </span>
+  <a id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_LoadProperties_" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1.LoadProperties*"></a>
+  <h4 id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_LoadProperties_Agenix_Api_IO_IResource_" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1.LoadProperties(Agenix.Api.IO.IResource)">LoadProperties(IResource)</h4>
+  <div class="markdown level1 summary"><p>Load properties from a resource file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Properties LoadProperties(IResource resource)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.IO.IResource.html">IResource</a></td>
+        <td><span class="parametername">resource</span></td>
+        <td><p>The resource to load from</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Util.Properties.html">Properties</a></td>
+        <td><p>Dictionary of key-value pairs</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_Translate__1__0___0_Agenix_Api_Context_TestContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Variable.Dictionary.AbstractDataDictionary%601.Translate%60%601(%600%2C%60%600%2CAgenix.Api.Context.TestContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Variable/Dictionary/AbstractDataDictionary.cs/#L128">View Source</a>
+  </span>
+  <a id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_Translate_" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1.Translate*"></a>
+  <h4 id="Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1_Translate__1__0___0_Agenix_Api_Context_TestContext_" data-uid="Agenix.Core.Variable.Dictionary.AbstractDataDictionary`1.Translate``1(`0,``0,Agenix.Api.Context.TestContext)">Translate&lt;R&gt;(T, R, TestContext)</h4>
+  <div class="markdown level1 summary"><p>Abstract method to translate values - must be implemented by derived classes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract R Translate&lt;R&gt;(T key, R value, TestContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>The key element in message content</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">R</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>Current value</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Agenix.Api.Context.TestContext.html">TestContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The current test context</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">R</span></td>
+        <td><p>Translated value</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">R</span></td>
+        <td><p>The return type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Agenix.Api.Message.IMessageTypeSelector.html">IMessageTypeSelector</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Variable.Dictionary.IDataDictionary-1.html">IDataDictionary&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Message.IMessageDirectionAware.html">IMessageDirectionAware</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Core.IScoped.html">IScoped</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Common.InitializingPhase.html">InitializingPhase</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Variable.Dictionary.IDataDictionary.html">IDataDictionary</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Message.IMessageProcessor.html">IMessageProcessor</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.Message.IMessageTransformer.html">IMessageTransformer</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Variable_Dictionary_AbstractDataDictionary_1.md&amp;value=---%0Auid%3A%20Agenix.Core.Variable.Dictionary.AbstractDataDictionary%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Variable/Dictionary/AbstractDataDictionary.cs/#L17" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

@@ -83,6 +83,7 @@
       <div class="level4"><a class="xref" href="Agenix.Api.Exceptions.ActionTimeoutException.html">ActionTimeoutException</a></div>
       <div class="level4"><a class="xref" href="Agenix.Api.Exceptions.AssertionError.html">AssertionError</a></div>
       <div class="level4"><a class="xref" href="Agenix.Api.Exceptions.InvalidFunctionUsageException.html">InvalidFunctionUsageException</a></div>
+      <div class="level4"><a class="xref" href="Agenix.Api.Exceptions.MarshallingException.html">MarshallingException</a></div>
       <div class="level4"><a class="xref" href="Agenix.Api.Exceptions.NoSuchFunctionException.html">NoSuchFunctionException</a></div>
       <div class="level4"><a class="xref" href="Agenix.Api.Exceptions.NoSuchFunctionLibraryException.html">NoSuchFunctionLibraryException</a></div>
       <div class="level4"><a class="xref" href="Agenix.Api.Exceptions.NoSuchMessageValidatorException.html">NoSuchMessageValidatorException</a></div>
@@ -93,6 +94,7 @@
       <div class="level4"><a class="xref" href="Agenix.Api.Exceptions.PathNoFoundException.html">PathNoFoundException</a></div>
       <div class="level4"><a class="xref" href="Agenix.Api.Exceptions.TestCaseFailedException.html">TestCaseFailedException</a></div>
       <div class="level4"><a class="xref" href="Agenix.Api.Exceptions.UnknownElementException.html">UnknownElementException</a></div>
+      <div class="level4"><a class="xref" href="Agenix.Api.Exceptions.UnmarshallingException.html">UnmarshallingException</a></div>
       <div class="level4"><a class="xref" href="Agenix.Api.Exceptions.ValidationException.html">ValidationException</a></div>
       <div class="level4"><a class="xref" href="Agenix.Api.Exceptions.VariableNullValueException.html">VariableNullValueException</a></div>
   </div>
@@ -122,9 +124,6 @@
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception.innerexception">Exception.InnerException</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception.message">Exception.Message</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception.source">Exception.Source</a>
@@ -158,7 +157,8 @@
   <h6><strong>Assembly</strong>: Agenix.Api.dll</h6>
   <h5 id="Agenix_Api_Exceptions_AgenixSystemException_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class AgenixSystemException : SystemException, ISerializable</code></pre>
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class AgenixSystemException : SystemException, ISerializable</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -167,7 +167,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Exceptions_AgenixSystemException__ctor.md&amp;value=---%0Auid%3A%20Agenix.Api.Exceptions.AgenixSystemException.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Exceptions/AgenixSystemException.cs/#L37">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Exceptions/AgenixSystemException.cs/#L43">View Source</a>
   </span>
   <a id="Agenix_Api_Exceptions_AgenixSystemException__ctor_" data-uid="Agenix.Api.Exceptions.AgenixSystemException.#ctor*"></a>
   <h4 id="Agenix_Api_Exceptions_AgenixSystemException__ctor" data-uid="Agenix.Api.Exceptions.AgenixSystemException.#ctor">AgenixSystemException()</h4>
@@ -183,7 +183,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Exceptions_AgenixSystemException__ctor_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Exceptions.AgenixSystemException.%23ctor(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Exceptions/AgenixSystemException.cs/#L41">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Exceptions/AgenixSystemException.cs/#L47">View Source</a>
   </span>
   <a id="Agenix_Api_Exceptions_AgenixSystemException__ctor_" data-uid="Agenix.Api.Exceptions.AgenixSystemException.#ctor*"></a>
   <h4 id="Agenix_Api_Exceptions_AgenixSystemException__ctor_System_String_" data-uid="Agenix.Api.Exceptions.AgenixSystemException.#ctor(System.String)">AgenixSystemException(string)</h4>
@@ -215,7 +215,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Exceptions_AgenixSystemException__ctor_System_String_System_Exception_.md&amp;value=---%0Auid%3A%20Agenix.Api.Exceptions.AgenixSystemException.%23ctor(System.String%2CSystem.Exception)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Exceptions/AgenixSystemException.cs/#L45">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Exceptions/AgenixSystemException.cs/#L51">View Source</a>
   </span>
   <a id="Agenix_Api_Exceptions_AgenixSystemException__ctor_" data-uid="Agenix.Api.Exceptions.AgenixSystemException.#ctor*"></a>
   <h4 id="Agenix_Api_Exceptions_AgenixSystemException__ctor_System_String_System_Exception_" data-uid="Agenix.Api.Exceptions.AgenixSystemException.#ctor(System.String,System.Exception)">AgenixSystemException(string, Exception)</h4>
@@ -247,14 +247,113 @@
       </tr>
     </tbody>
   </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Exceptions_AgenixSystemException_Message.md&amp;value=---%0Auid%3A%20Agenix.Api.Exceptions.AgenixSystemException.Message%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Exceptions/AgenixSystemException.cs/#L55">View Source</a>
+  </span>
+  <a id="Agenix_Api_Exceptions_AgenixSystemException_Message_" data-uid="Agenix.Api.Exceptions.AgenixSystemException.Message*"></a>
+  <h4 id="Agenix_Api_Exceptions_AgenixSystemException_Message" data-uid="Agenix.Api.Exceptions.AgenixSystemException.Message">Message</h4>
+  <div class="markdown level1 summary"><p>Gets a message that describes the current exception.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string Message { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The error message that explains the reason for the exception, or an empty string (&quot;&quot;).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception.message">Exception.Message</a></div>
   <h3 id="methods">Methods
 </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Exceptions_AgenixSystemException_GetFailureStack.md&amp;value=---%0Auid%3A%20Agenix.Api.Exceptions.AgenixSystemException.GetFailureStack%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Exceptions/AgenixSystemException.cs/#L92">View Source</a>
+  </span>
+  <a id="Agenix_Api_Exceptions_AgenixSystemException_GetFailureStack_" data-uid="Agenix.Api.Exceptions.AgenixSystemException.GetFailureStack*"></a>
+  <h4 id="Agenix_Api_Exceptions_AgenixSystemException_GetFailureStack" data-uid="Agenix.Api.Exceptions.AgenixSystemException.GetFailureStack">GetFailureStack()</h4>
+  <div class="markdown level1 summary"><p>Gets the custom failure stack with line number information where the testcase failed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Stack&lt;FailureStackElement&gt; GetFailureStack()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.stack-1">Stack</a>&lt;<a class="xref" href="Agenix.Api.Report.FailureStackElement.html">FailureStackElement</a>&gt;</td>
+        <td><p>the failureStack</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Exceptions_AgenixSystemException_GetFailureStackAsString.md&amp;value=---%0Auid%3A%20Agenix.Api.Exceptions.AgenixSystemException.GetFailureStackAsString%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Exceptions/AgenixSystemException.cs/#L66">View Source</a>
+  </span>
+  <a id="Agenix_Api_Exceptions_AgenixSystemException_GetFailureStackAsString_" data-uid="Agenix.Api.Exceptions.AgenixSystemException.GetFailureStackAsString*"></a>
+  <h4 id="Agenix_Api_Exceptions_AgenixSystemException_GetFailureStackAsString" data-uid="Agenix.Api.Exceptions.AgenixSystemException.GetFailureStackAsString">GetFailureStackAsString()</h4>
+  <div class="markdown level1 summary"><p>Get formatted string representation of failure stack information.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetFailureStackAsString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Exceptions_AgenixSystemException_GetMessage.md&amp;value=---%0Auid%3A%20Agenix.Api.Exceptions.AgenixSystemException.GetMessage%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Exceptions/AgenixSystemException.cs/#L49">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Exceptions/AgenixSystemException.cs/#L57">View Source</a>
   </span>
   <a id="Agenix_Api_Exceptions_AgenixSystemException_GetMessage_" data-uid="Agenix.Api.Exceptions.AgenixSystemException.GetMessage*"></a>
   <h4 id="Agenix_Api_Exceptions_AgenixSystemException_GetMessage" data-uid="Agenix.Api.Exceptions.AgenixSystemException.GetMessage">GetMessage()</h4>
@@ -279,6 +378,39 @@
       </tr>
     </tbody>
   </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Exceptions_AgenixSystemException_SetFailureStack_System_Collections_Generic_List_Agenix_Api_Report_FailureStackElement__.md&amp;value=---%0Auid%3A%20Agenix.Api.Exceptions.AgenixSystemException.SetFailureStack(System.Collections.Generic.List%7BAgenix.Api.Report.FailureStackElement%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Exceptions/AgenixSystemException.cs/#L83">View Source</a>
+  </span>
+  <a id="Agenix_Api_Exceptions_AgenixSystemException_SetFailureStack_" data-uid="Agenix.Api.Exceptions.AgenixSystemException.SetFailureStack*"></a>
+  <h4 id="Agenix_Api_Exceptions_AgenixSystemException_SetFailureStack_System_Collections_Generic_List_Agenix_Api_Report_FailureStackElement__" data-uid="Agenix.Api.Exceptions.AgenixSystemException.SetFailureStack(System.Collections.Generic.List{Agenix.Api.Report.FailureStackElement})">SetFailureStack(List&lt;FailureStackElement&gt;)</h4>
+  <div class="markdown level1 summary"><p>Sets the custom failure stack holding line number information inside test case.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetFailureStack(List&lt;FailureStackElement&gt; failureStack)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Api.Report.FailureStackElement.html">FailureStackElement</a>&gt;</td>
+        <td><span class="parametername">failureStack</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.runtime.serialization.iserializable">ISerializable</a>
@@ -295,7 +427,7 @@
                     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Exceptions_AgenixSystemException.md&amp;value=---%0Auid%3A%20Agenix.Api.Exceptions.AgenixSystemException%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
                   </li>
                   <li>
-                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Exceptions/AgenixSystemException.cs/#L32" class="contribution-link">View Source</a>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Exceptions/AgenixSystemException.cs/#L35" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

@@ -75,11 +75,17 @@
 IMessageProcessor implementations.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Agenix.Api.Message.IMessageTransformer.IBuilder-2.html#Agenix_Api_Message_IMessageTransformer_IBuilder_2_Build">IMessageTransformer.IBuilder&lt;T, TB&gt;.Build()</a>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Api.html">Api</a>.<a class="xref" href="Agenix.Api.Message.html">Message</a></h6>
   <h6><strong>Assembly</strong>: Agenix.Api.dll</h6>
   <h5 id="Agenix_Api_Message_IMessageProcessor_IBuilder_2_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IMessageProcessor.IBuilder&lt;out T, TB&gt; where T : IMessageProcessor where TB : IMessageProcessor.IBuilder&lt;out T, TB&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IMessageProcessor.IBuilder&lt;out T, TB&gt; : IMessageTransformer.IBuilder&lt;T, TB&gt;, IBuilder where T : IMessageProcessor where TB : IBuilder</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -96,39 +102,6 @@ IMessageProcessor implementations.</p>
       </tr>
       <tr>
         <td><span class="parametername">TB</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="methods">Methods
-</h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Message_IMessageProcessor_IBuilder_2_Build.md&amp;value=---%0Auid%3A%20Agenix.Api.Message.IMessageProcessor.IBuilder%602.Build%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Message/IMessageProcessor.cs/#L112">View Source</a>
-  </span>
-  <a id="Agenix_Api_Message_IMessageProcessor_IBuilder_2_Build_" data-uid="Agenix.Api.Message.IMessageProcessor.IBuilder`2.Build*"></a>
-  <h4 id="Agenix_Api_Message_IMessageProcessor_IBuilder_2_Build" data-uid="Agenix.Api.Message.IMessageProcessor.IBuilder`2.Build">Build()</h4>
-  <div class="markdown level1 summary"><p>Builds a new message processor instance.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">T Build()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">T</span></td>
         <td></td>
       </tr>
     </tbody>

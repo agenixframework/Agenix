@@ -83,7 +83,9 @@
     <h5>Implements</h5>
     <div><a class="xref" href="Agenix.Api.Variable.IVariableExtractor.html">IVariableExtractor</a>.<a class="xref" href="Agenix.Api.Variable.IVariableExtractor.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.html">JsonPathVariableExtractor</a>, <a class="xref" href="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.html">JsonPathVariableExtractor</a>.<a class="xref" href="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder.html">Builder</a>&gt;</div>
     <div><a class="xref" href="Agenix.Api.Message.IMessageProcessor.html">IMessageProcessor</a>.<a class="xref" href="Agenix.Api.Message.IMessageProcessor.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.html">JsonPathVariableExtractor</a>, <a class="xref" href="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.html">JsonPathVariableExtractor</a>.<a class="xref" href="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder.html">Builder</a>&gt;</div>
+    <div><a class="xref" href="Agenix.Api.Message.IMessageTransformer.html">IMessageTransformer</a>.<a class="xref" href="Agenix.Api.Message.IMessageTransformer.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.html">JsonPathVariableExtractor</a>, <a class="xref" href="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.html">JsonPathVariableExtractor</a>.<a class="xref" href="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder.html">Builder</a>&gt;</div>
     <div><a class="xref" href="Agenix.Api.Builder.IWithExpressions-1.html">IWithExpressions</a>&lt;<a class="xref" href="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.html">JsonPathVariableExtractor</a>.<a class="xref" href="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder.html">Builder</a>&gt;</div>
+    <div><a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a></div>
     <div><a class="xref" href="Agenix.Api.Message.IMessageProcessorAdapter.html">IMessageProcessorAdapter</a></div>
     <div><a class="xref" href="Agenix.Api.Validation.IValidationContextAdapter.html">IValidationContextAdapter</a></div>
   </div>
@@ -112,7 +114,7 @@
   <h6><strong>Assembly</strong>: Agenix.Validation.Json.dll</h6>
   <h5 id="Agenix_Validation_Json_Validation_JsonPathVariableExtractor_Builder_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class JsonPathVariableExtractor.Builder : IVariableExtractor.IBuilder&lt;JsonPathVariableExtractor, JsonPathVariableExtractor.Builder&gt;, IMessageProcessor.IBuilder&lt;JsonPathVariableExtractor, JsonPathVariableExtractor.Builder&gt;, IWithExpressions&lt;JsonPathVariableExtractor.Builder&gt;, IMessageProcessorAdapter, IValidationContextAdapter</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class JsonPathVariableExtractor.Builder : IVariableExtractor.IBuilder&lt;JsonPathVariableExtractor, JsonPathVariableExtractor.Builder&gt;, IMessageProcessor.IBuilder&lt;JsonPathVariableExtractor, JsonPathVariableExtractor.Builder&gt;, IMessageTransformer.IBuilder&lt;JsonPathVariableExtractor, JsonPathVariableExtractor.Builder&gt;, IWithExpressions&lt;JsonPathVariableExtractor.Builder&gt;, IBuilder, IMessageProcessorAdapter, IValidationContextAdapter</code></pre>
   </div>
   <h3 id="methods">Methods
 </h3>
@@ -121,7 +123,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonPathVariableExtractor_Builder_AsProcessor.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder.AsProcessor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonPathVariableExtractor.cs/#L166">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonPathVariableExtractor.cs/#L180">View Source</a>
   </span>
   <a id="Agenix_Validation_Json_Validation_JsonPathVariableExtractor_Builder_AsProcessor_" data-uid="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder.AsProcessor*"></a>
   <h4 id="Agenix_Validation_Json_Validation_JsonPathVariableExtractor_Builder_AsProcessor" data-uid="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder.AsProcessor">AsProcessor()</h4>
@@ -155,7 +157,7 @@ for processing messages based on JSON path expressions.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonPathVariableExtractor_Builder_AsValidationContext.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder.AsValidationContext%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonPathVariableExtractor.cs/#L177">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonPathVariableExtractor.cs/#L191">View Source</a>
   </span>
   <a id="Agenix_Validation_Json_Validation_JsonPathVariableExtractor_Builder_AsValidationContext_" data-uid="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder.AsValidationContext*"></a>
   <h4 id="Agenix_Validation_Json_Validation_JsonPathVariableExtractor_Builder_AsValidationContext" data-uid="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder.AsValidationContext">AsValidationContext()</h4>
@@ -187,7 +189,7 @@ for processing messages based on JSON path expressions.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonPathVariableExtractor_Builder_Build.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder.Build%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonPathVariableExtractor.cs/#L130">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonPathVariableExtractor.cs/#L141">View Source</a>
   </span>
   <a id="Agenix_Validation_Json_Validation_JsonPathVariableExtractor_Builder_Build_" data-uid="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder.Build*"></a>
   <h4 id="Agenix_Validation_Json_Validation_JsonPathVariableExtractor_Builder_Build" data-uid="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder.Build">Build()</h4>
@@ -217,7 +219,7 @@ for processing messages based on JSON path expressions.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonPathVariableExtractor_Builder_Expression_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder.Expression(System.String%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonPathVariableExtractor.cs/#L152">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonPathVariableExtractor.cs/#L166">View Source</a>
   </span>
   <a id="Agenix_Validation_Json_Validation_JsonPathVariableExtractor_Builder_Expression_" data-uid="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder.Expression*"></a>
   <h4 id="Agenix_Validation_Json_Validation_JsonPathVariableExtractor_Builder_Expression_System_String_System_Object_" data-uid="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder.Expression(System.String,System.Object)">Expression(string, object)</h4>
@@ -273,7 +275,7 @@ for processing messages based on JSON path expressions.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonPathVariableExtractor_Builder_Expressions_System_Collections_Generic_IDictionary_System_String_System_Object__.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder.Expressions(System.Collections.Generic.IDictionary%7BSystem.String%2CSystem.Object%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonPathVariableExtractor.cs/#L139">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonPathVariableExtractor.cs/#L150">View Source</a>
   </span>
   <a id="Agenix_Validation_Json_Validation_JsonPathVariableExtractor_Builder_Expressions_" data-uid="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder.Expressions*"></a>
   <h4 id="Agenix_Validation_Json_Validation_JsonPathVariableExtractor_Builder_Expressions_System_Collections_Generic_IDictionary_System_String_System_Object__" data-uid="Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder.Expressions(System.Collections.Generic.IDictionary{System.String,System.Object})">Expressions(IDictionary&lt;string, object&gt;)</h4>
@@ -325,7 +327,13 @@ for processing messages based on JSON path expressions.</p>
       <a class="xref" href="Agenix.Api.Message.IMessageProcessor.IBuilder-2.html">IMessageProcessor.IBuilder&lt;T, TB&gt;</a>
   </div>
   <div>
+      <a class="xref" href="Agenix.Api.Message.IMessageTransformer.IBuilder-2.html">IMessageTransformer.IBuilder&lt;T, TB&gt;</a>
+  </div>
+  <div>
       <a class="xref" href="Agenix.Api.Builder.IWithExpressions-1.html">IWithExpressions&lt;TB&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a>
   </div>
   <div>
       <a class="xref" href="Agenix.Api.Message.IMessageProcessorAdapter.html">IMessageProcessorAdapter</a>
@@ -345,7 +353,7 @@ for processing messages based on JSON path expressions.</p>
                     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Validation_Json_Validation_JsonPathVariableExtractor_Builder.md&amp;value=---%0Auid%3A%20Agenix.Validation.Json.Validation.JsonPathVariableExtractor.Builder%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
                   </li>
                   <li>
-                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonPathVariableExtractor.cs/#L125" class="contribution-link">View Source</a>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Validation.Json/Validation/JsonPathVariableExtractor.cs/#L136" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

@@ -80,6 +80,7 @@
     <div class="level1"><a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html">MessageBuilderSupport</a>&lt;T, TB, TS&gt;</div>
     <div class="level2"><span class="xref">ReceiveMessageBuilderSupport&lt;T, TB, TS&gt;</span></div>
       <div class="level3"><a class="xref" href="Agenix.Core.Actions.ReceiveMessageAction.ReceiveMessageActionBuilderSupport.html">ReceiveMessageAction.ReceiveMessageActionBuilderSupport</a></div>
+      <div class="level3"><a class="xref" href="Agenix.GraphQL.Actions.GraphQLClientResponseActionBuilder.GraphQLMessageBuilderSupport.html">GraphQLClientResponseActionBuilder.GraphQLMessageBuilderSupport</a></div>
       <div class="level3"><a class="xref" href="Agenix.Http.Actions.HttpClientResponseActionBuilder.HttpMessageBuilderSupport.html">HttpClientResponseActionBuilder.HttpMessageBuilderSupport</a></div>
   </div>
   <div class="implements">
@@ -100,6 +101,18 @@
     </div>
     <div>
       <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3__messageType">MessageBuilderSupport&lt;T, TB, TS&gt;._messageType</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_dataDictionary">MessageBuilderSupport&lt;T, TB, TS&gt;.dataDictionary</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_dataDictionaryName">MessageBuilderSupport&lt;T, TB, TS&gt;.dataDictionaryName</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_DataDictionary">MessageBuilderSupport&lt;T, TB, TS&gt;.DataDictionary</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_DataDictionaryName">MessageBuilderSupport&lt;T, TB, TS&gt;.DataDictionaryName</a>
     </div>
     <div>
       <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_SetReferenceResolver_Agenix_Api_Spi_IReferenceResolver_">MessageBuilderSupport&lt;T, TB, TS&gt;.SetReferenceResolver(IReferenceResolver)</a>
@@ -157,6 +170,12 @@
     </div>
     <div>
       <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Name_System_String_">MessageBuilderSupport&lt;T, TB, TS&gt;.Name(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Dictionary_Agenix_Api_Variable_Dictionary_IDataDictionary_">MessageBuilderSupport&lt;T, TB, TS&gt;.Dictionary(IDataDictionary)</a>
+    </div>
+    <div>
+      <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Dictionary_System_String_">MessageBuilderSupport&lt;T, TB, TS&gt;.Dictionary(string)</a>
     </div>
     <div>
       <a class="xref" href="Agenix.Core.Message.Builder.MessageBuilderSupport-3.html#Agenix_Core_Message_Builder_MessageBuilderSupport_3_Process_Agenix_Api_Message_IMessageProcessor_">MessageBuilderSupport&lt;T, TB, TS&gt;.Process(IMessageProcessor)</a>
@@ -246,7 +265,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3__ctor__1_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.%23ctor(%601)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L43">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L44">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3__ctor_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.#ctor*"></a>
   <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3__ctor__1_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.#ctor(`1)">ReceiveMessageBuilderSupport(TB)</h4>
@@ -281,7 +300,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_ControlMessageProcessors.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.ControlMessageProcessors%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L55">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L56">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_ControlMessageProcessors_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.ControlMessageProcessors*"></a>
   <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_ControlMessageProcessors" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.ControlMessageProcessors">ControlMessageProcessors</h4>
@@ -316,7 +335,7 @@ destination.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_HeaderIgnoreCase.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.HeaderIgnoreCase%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L62">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L63">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_HeaderIgnoreCase_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.HeaderIgnoreCase*"></a>
   <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_HeaderIgnoreCase" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.HeaderIgnoreCase">HeaderIgnoreCase</h4>
@@ -351,7 +370,7 @@ allowing greater flexibility in handling headers from various sources.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_HeaderNameIgnoreCase_System_Boolean_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.HeaderNameIgnoreCase(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L80">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L81">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_HeaderNameIgnoreCase_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.HeaderNameIgnoreCase*"></a>
   <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_HeaderNameIgnoreCase_System_Boolean_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.HeaderNameIgnoreCase(System.Boolean)">HeaderNameIgnoreCase(bool)</h4>
@@ -401,7 +420,7 @@ allowing greater flexibility in handling headers from various sources.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Process_Agenix_Api_Message_IMessageProcessor_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Process(Agenix.Api.Message.IMessageProcessor)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L240">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L241">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Process_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Process*"></a>
   <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Process_Agenix_Api_Message_IMessageProcessor_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Process(Agenix.Api.Message.IMessageProcessor)">Process(IMessageProcessor)</h4>
@@ -454,7 +473,7 @@ Otherwise, processes it directly.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Process_Agenix_Api_Message_MessageProcessor_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Process(Agenix.Api.Message.MessageProcessor)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L254">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L260">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Process_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Process*"></a>
   <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Process_Agenix_Api_Message_MessageProcessor_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Process(Agenix.Api.Message.MessageProcessor)">Process(MessageProcessor)</h4>
@@ -504,7 +523,7 @@ Otherwise, processes it directly.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Process_Agenix_Api_Variable_VariableExtractor_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Process(Agenix.Api.Variable.VariableExtractor)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L264">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L270">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Process_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Process*"></a>
   <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Process_Agenix_Api_Variable_VariableExtractor_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Process(Agenix.Api.Variable.VariableExtractor)">Process(VariableExtractor)</h4>
@@ -554,7 +573,7 @@ Otherwise, processes it directly.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Selector_System_Collections_Generic_IDictionary_System_String_System_Object__.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Selector(System.Collections.Generic.IDictionary%7BSystem.String%2CSystem.Object%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L154">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L155">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Selector_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Selector*"></a>
   <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Selector_System_Collections_Generic_IDictionary_System_String_System_Object__" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Selector(System.Collections.Generic.IDictionary{System.String,System.Object})">Selector(IDictionary&lt;string, object&gt;)</h4>
@@ -604,7 +623,7 @@ Otherwise, processes it directly.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Selector_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Selector(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L143">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L144">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Selector_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Selector*"></a>
   <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Selector_System_String_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Selector(System.String)">Selector(string)</h4>
@@ -654,7 +673,7 @@ Otherwise, processes it directly.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Timeout_System_Int64_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Timeout(System.Int64)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L69">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L70">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Timeout_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Timeout*"></a>
   <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Timeout_System_Int64_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Timeout(System.Int64)">Timeout(long)</h4>
@@ -704,7 +723,7 @@ Otherwise, processes it directly.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_Context_IValidationContext_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Validate(Agenix.Api.Validation.Context.IValidationContext)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L102">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L103">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validate*"></a>
   <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_Context_IValidationContext_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validate(Agenix.Api.Validation.Context.IValidationContext)">Validate(IValidationContext)</h4>
@@ -751,19 +770,19 @@ Otherwise, processes it directly.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_System_Object__.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Validate(Agenix.Api.Validation.Context.IValidationContext.IBuilder%7BAgenix.Api.Validation.Context.IValidationContext%2CSystem.Object%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_Agenix_Api_IBuilder__.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Validate(Agenix.Api.Validation.Context.IValidationContext.IBuilder%7BAgenix.Api.Validation.Context.IValidationContext%2CAgenix.Api.IBuilder%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L91">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L92">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validate*"></a>
-  <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_System_Object__" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validate(Agenix.Api.Validation.Context.IValidationContext.IBuilder{Agenix.Api.Validation.Context.IValidationContext,System.Object})">Validate(IBuilder&lt;IValidationContext, dynamic&gt;)</h4>
+  <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_Agenix_Api_IBuilder__" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validate(Agenix.Api.Validation.Context.IValidationContext.IBuilder{Agenix.Api.Validation.Context.IValidationContext,Agenix.Api.IBuilder})">Validate(IBuilder&lt;IValidationContext, IBuilder&gt;)</h4>
   <div class="markdown level1 summary"><p>Validates the message action using the provided validation context.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TS Validate(IValidationContext.IBuilder&lt;IValidationContext, dynamic&gt; validationContext)</code></pre>
+    <pre><code class="lang-csharp hljs">public TS Validate(IValidationContext.IBuilder&lt;IValidationContext, IBuilder&gt; validationContext)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -776,7 +795,7 @@ Otherwise, processes it directly.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>, <span class="xref">dynamic</span>&gt;</td>
+        <td><a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>, <a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a>&gt;</td>
         <td><span class="parametername">validationContext</span></td>
         <td><p>The validation context to use for message action validation.</p>
 </td>
@@ -801,19 +820,19 @@ Otherwise, processes it directly.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_System_Object____.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Validate(Agenix.Api.Validation.Context.IValidationContext.IBuilder%7BAgenix.Api.Validation.Context.IValidationContext%2CSystem.Object%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_Agenix_Api_IBuilder____.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Validate(Agenix.Api.Validation.Context.IValidationContext.IBuilder%7BAgenix.Api.Validation.Context.IValidationContext%2CAgenix.Api.IBuilder%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L133">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L134">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validate*"></a>
-  <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_System_Object____" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validate(Agenix.Api.Validation.Context.IValidationContext.IBuilder{Agenix.Api.Validation.Context.IValidationContext,System.Object}[])">Validate(params IBuilder&lt;IValidationContext, dynamic&gt;[])</h4>
+  <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_Agenix_Api_IBuilder____" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validate(Agenix.Api.Validation.Context.IValidationContext.IBuilder{Agenix.Api.Validation.Context.IValidationContext,Agenix.Api.IBuilder}[])">Validate(params IBuilder&lt;IValidationContext, IBuilder&gt;[])</h4>
   <div class="markdown level1 summary"><p>Validates the specified validation contexts.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TS Validate(params IValidationContext.IBuilder&lt;IValidationContext, dynamic&gt;[] validationContexts)</code></pre>
+    <pre><code class="lang-csharp hljs">public TS Validate(params IValidationContext.IBuilder&lt;IValidationContext, IBuilder&gt;[] validationContexts)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -826,7 +845,7 @@ Otherwise, processes it directly.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>, <span class="xref">dynamic</span>&gt;[]</td>
+        <td><a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>, <a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a>&gt;[]</td>
         <td><span class="parametername">validationContexts</span></td>
         <td><p>An array of validation context builders to be validated.</p>
 </td>
@@ -854,7 +873,7 @@ Otherwise, processes it directly.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_IValidationContextAdapter_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Validate(Agenix.Api.Validation.IValidationContextAdapter)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L112">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L113">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validate*"></a>
   <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_IValidationContextAdapter_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validate(Agenix.Api.Validation.IValidationContextAdapter)">Validate(IValidationContextAdapter)</h4>
@@ -904,7 +923,7 @@ Otherwise, processes it directly.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_IValidationProcessor_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Validate(Agenix.Api.Validation.IValidationProcessor)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L219">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L220">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validate*"></a>
   <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_IValidationProcessor_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validate(Agenix.Api.Validation.IValidationProcessor)">Validate(IValidationProcessor)</h4>
@@ -954,7 +973,7 @@ Otherwise, processes it directly.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_ValidationProcessor_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Validate(Agenix.Api.Validation.ValidationProcessor)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L229">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L230">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validate*"></a>
   <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_Agenix_Api_Validation_ValidationProcessor_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validate(Agenix.Api.Validation.ValidationProcessor)">Validate(ValidationProcessor)</h4>
@@ -1001,19 +1020,19 @@ Otherwise, processes it directly.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_System_Collections_Generic_List_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_System_Object___.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Validate(System.Collections.Generic.List%7BAgenix.Api.Validation.Context.IValidationContext.IBuilder%7BAgenix.Api.Validation.Context.IValidationContext%2CSystem.Object%7D%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_System_Collections_Generic_List_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_Agenix_Api_IBuilder___.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Validate(System.Collections.Generic.List%7BAgenix.Api.Validation.Context.IValidationContext.IBuilder%7BAgenix.Api.Validation.Context.IValidationContext%2CAgenix.Api.IBuilder%7D%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L122">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L123">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validate*"></a>
-  <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_System_Collections_Generic_List_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_System_Object___" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validate(System.Collections.Generic.List{Agenix.Api.Validation.Context.IValidationContext.IBuilder{Agenix.Api.Validation.Context.IValidationContext,System.Object}})">Validate(List&lt;IBuilder&lt;IValidationContext, dynamic&gt;&gt;)</h4>
+  <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validate_System_Collections_Generic_List_Agenix_Api_Validation_Context_IValidationContext_IBuilder_Agenix_Api_Validation_Context_IValidationContext_Agenix_Api_IBuilder___" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validate(System.Collections.Generic.List{Agenix.Api.Validation.Context.IValidationContext.IBuilder{Agenix.Api.Validation.Context.IValidationContext,Agenix.Api.IBuilder}})">Validate(List&lt;IBuilder&lt;IValidationContext, IBuilder&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>Validates the message using a list of validation context builders.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TS Validate(List&lt;IValidationContext.IBuilder&lt;IValidationContext, dynamic&gt;&gt; validationContexts)</code></pre>
+    <pre><code class="lang-csharp hljs">public TS Validate(List&lt;IValidationContext.IBuilder&lt;IValidationContext, IBuilder&gt;&gt; validationContexts)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -1026,7 +1045,7 @@ Otherwise, processes it directly.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>, <span class="xref">dynamic</span>&gt;&gt;</td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>, <a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a>&gt;&gt;</td>
         <td><span class="parametername">validationContexts</span></td>
         <td><p>List of validation context builders.</p>
 </td>
@@ -1054,7 +1073,7 @@ Otherwise, processes it directly.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validator_Agenix_Api_Validation_IHeaderValidator_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Validator(Agenix.Api.Validation.IHeaderValidator)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L208">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L209">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validator_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validator*"></a>
   <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validator_Agenix_Api_Validation_IHeaderValidator_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validator(Agenix.Api.Validation.IHeaderValidator)">Validator(IHeaderValidator)</h4>
@@ -1104,7 +1123,7 @@ Otherwise, processes it directly.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validator_Agenix_Api_Validation_IMessageValidator_Agenix_Api_Validation_Context_IValidationContext__.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Validator(Agenix.Api.Validation.IMessageValidator%7BAgenix.Api.Validation.Context.IValidationContext%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L165">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L166">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validator_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validator*"></a>
   <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validator_Agenix_Api_Validation_IMessageValidator_Agenix_Api_Validation_Context_IValidationContext__" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validator(Agenix.Api.Validation.IMessageValidator{Agenix.Api.Validation.Context.IValidationContext})">Validator(IMessageValidator&lt;IValidationContext&gt;)</h4>
@@ -1154,7 +1173,7 @@ Otherwise, processes it directly.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validator_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Validator(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L197">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L198">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validator_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validator*"></a>
   <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validator_System_String_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validator(System.String)">Validator(string)</h4>
@@ -1204,7 +1223,7 @@ Otherwise, processes it directly.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validators_Agenix_Api_Validation_IMessageValidator_Agenix_Api_Validation_Context_IValidationContext____.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Validators(Agenix.Api.Validation.IMessageValidator%7BAgenix.Api.Validation.Context.IValidationContext%7D%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L176">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L177">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validators_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validators*"></a>
   <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validators_Agenix_Api_Validation_IMessageValidator_Agenix_Api_Validation_Context_IValidationContext____" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validators(Agenix.Api.Validation.IMessageValidator{Agenix.Api.Validation.Context.IValidationContext}[])">Validators(params IMessageValidator&lt;IValidationContext&gt;[])</h4>
@@ -1254,7 +1273,7 @@ Otherwise, processes it directly.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validators_System_Collections_Generic_List_Agenix_Api_Validation_IMessageValidator_Agenix_Api_Validation_Context_IValidationContext___.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603.Validators(System.Collections.Generic.List%7BAgenix.Api.Validation.IMessageValidator%7BAgenix.Api.Validation.Context.IValidationContext%7D%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L186">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L187">View Source</a>
   </span>
   <a id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validators_" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validators*"></a>
   <h4 id="Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3_Validators_System_Collections_Generic_List_Agenix_Api_Validation_IMessageValidator_Agenix_Api_Validation_Context_IValidationContext___" data-uid="Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport`3.Validators(System.Collections.Generic.List{Agenix.Api.Validation.IMessageValidator{Agenix.Api.Validation.Context.IValidationContext}})">Validators(List&lt;IMessageValidator&lt;IValidationContext&gt;&gt;)</h4>
@@ -1318,7 +1337,7 @@ Otherwise, processes it directly.</p>
                     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Message_Builder_ReceiveMessageBuilderSupport_3.md&amp;value=---%0Auid%3A%20Agenix.Core.Message.Builder.ReceiveMessageBuilderSupport%603%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
                   </li>
                   <li>
-                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L43" class="contribution-link">View Source</a>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Message/Builder/ReceiveMessageBuilderSupport.cs/#L44" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

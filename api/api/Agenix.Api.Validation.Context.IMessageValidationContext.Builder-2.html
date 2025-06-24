@@ -84,7 +84,9 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IBuilder</a>&lt;T, <a class="xref" href="Agenix.Api.Validation.Context.IMessageValidationContext.html">IMessageValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IMessageValidationContext.Builder-2.html">Builder</a>&lt;T, S&gt;&gt;</div>
+    <div><a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.html">IValidationContext</a>, <a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a>&gt;</div>
     <div><a class="xref" href="Agenix.Api.Validation.Context.ISchemaValidationContext.html">ISchemaValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.ISchemaValidationContext.IBuilder-1.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Api.Validation.Context.IMessageValidationContext.html">IMessageValidationContext</a>.<a class="xref" href="Agenix.Api.Validation.Context.IMessageValidationContext.Builder-2.html">Builder</a>&lt;T, S&gt;&gt;</div>
+    <div><a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -114,7 +116,7 @@
   <h6><strong>Assembly</strong>: Agenix.Api.dll</h6>
   <h5 id="Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class IMessageValidationContext.Builder&lt;T, S&gt; : IValidationContext.IBuilder&lt;T, IMessageValidationContext.Builder&lt;T, S&gt;&gt;, ISchemaValidationContext.IBuilder&lt;IMessageValidationContext.Builder&lt;T, S&gt;&gt; where T : IMessageValidationContext where S : IMessageValidationContext.Builder&lt;T, S&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract class IMessageValidationContext.Builder&lt;T, S&gt; : IValidationContext.IBuilder&lt;T, IMessageValidationContext.Builder&lt;T, S&gt;&gt;, IValidationContext.IBuilder&lt;IValidationContext, IBuilder&gt;, ISchemaValidationContext.IBuilder&lt;IMessageValidationContext.Builder&lt;T, S&gt;&gt;, IBuilder where T : IMessageValidationContext where S : IMessageValidationContext.Builder&lt;T, S&gt;</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -142,7 +144,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2__ctor.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.Context.IMessageValidationContext.Builder%602.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L54">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L56">View Source</a>
   </span>
   <a id="Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2__ctor_" data-uid="Agenix.Api.Validation.Context.IMessageValidationContext.Builder`2.#ctor*"></a>
   <h4 id="Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2__ctor" data-uid="Agenix.Api.Validation.Context.IMessageValidationContext.Builder`2.#ctor">Builder()</h4>
@@ -159,7 +161,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_IgnoreExpressions.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.Context.IMessageValidationContext.Builder%602.IgnoreExpressions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L48">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L50">View Source</a>
   </span>
   <h4 id="Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_IgnoreExpressions" data-uid="Agenix.Api.Validation.Context.IMessageValidationContext.Builder`2.IgnoreExpressions">IgnoreExpressions</h4>
   <div class="markdown level1 summary"></div>
@@ -188,7 +190,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_Self.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.Context.IMessageValidationContext.Builder%602.Self%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L49">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L51">View Source</a>
   </span>
   <h4 id="Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_Self" data-uid="Agenix.Api.Validation.Context.IMessageValidationContext.Builder`2.Self">Self</h4>
   <div class="markdown level1 summary"></div>
@@ -217,7 +219,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2__schema.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.Context.IMessageValidationContext.Builder%602._schema%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L50">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L52">View Source</a>
   </span>
   <h4 id="Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2__schema" data-uid="Agenix.Api.Validation.Context.IMessageValidationContext.Builder`2._schema">_schema</h4>
   <div class="markdown level1 summary"></div>
@@ -246,7 +248,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2__schemaRepository.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.Context.IMessageValidationContext.Builder%602._schemaRepository%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L51">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L53">View Source</a>
   </span>
   <h4 id="Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2__schemaRepository" data-uid="Agenix.Api.Validation.Context.IMessageValidationContext.Builder`2._schemaRepository">_schemaRepository</h4>
   <div class="markdown level1 summary"></div>
@@ -275,7 +277,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2__schemaValidation.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.Context.IMessageValidationContext.Builder%602._schemaValidation%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L52">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L54">View Source</a>
   </span>
   <h4 id="Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2__schemaValidation" data-uid="Agenix.Api.Validation.Context.IMessageValidationContext.Builder`2._schemaValidation">_schemaValidation</h4>
   <div class="markdown level1 summary"></div>
@@ -306,7 +308,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_Build.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.Context.IMessageValidationContext.Builder%602.Build%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L89">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L97">View Source</a>
   </span>
   <a id="Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_Build_" data-uid="Agenix.Api.Validation.Context.IMessageValidationContext.Builder`2.Build*"></a>
   <h4 id="Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_Build" data-uid="Agenix.Api.Validation.Context.IMessageValidationContext.Builder`2.Build">Build()</h4>
@@ -338,7 +340,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_Ignore_System_Collections_Generic_ISet_System_String__.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.Context.IMessageValidationContext.Builder%602.Ignore(System.Collections.Generic.ISet%7BSystem.String%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L103">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L111">View Source</a>
   </span>
   <a id="Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_Ignore_" data-uid="Agenix.Api.Validation.Context.IMessageValidationContext.Builder`2.Ignore*"></a>
   <h4 id="Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_Ignore_System_Collections_Generic_ISet_System_String__" data-uid="Agenix.Api.Validation.Context.IMessageValidationContext.Builder`2.Ignore(System.Collections.Generic.ISet{System.String})">Ignore(ISet&lt;string&gt;)</h4>
@@ -386,7 +388,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_Ignore_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.Context.IMessageValidationContext.Builder%602.Ignore(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L94">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L102">View Source</a>
   </span>
   <a id="Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_Ignore_" data-uid="Agenix.Api.Validation.Context.IMessageValidationContext.Builder`2.Ignore*"></a>
   <h4 id="Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_Ignore_System_String_" data-uid="Agenix.Api.Validation.Context.IMessageValidationContext.Builder`2.Ignore(System.String)">Ignore(string)</h4>
@@ -434,7 +436,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_Schema_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.Context.IMessageValidationContext.Builder%602.Schema(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L74">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L76">View Source</a>
   </span>
   <a id="Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_Schema_" data-uid="Agenix.Api.Validation.Context.IMessageValidationContext.Builder`2.Schema*"></a>
   <h4 id="Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_Schema_System_String_" data-uid="Agenix.Api.Validation.Context.IMessageValidationContext.Builder`2.Schema(System.String)">Schema(string)</h4>
@@ -482,7 +484,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_SchemaRepository_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.Context.IMessageValidationContext.Builder%602.SchemaRepository(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L83">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L85">View Source</a>
   </span>
   <a id="Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_SchemaRepository_" data-uid="Agenix.Api.Validation.Context.IMessageValidationContext.Builder`2.SchemaRepository*"></a>
   <h4 id="Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_SchemaRepository_System_String_" data-uid="Agenix.Api.Validation.Context.IMessageValidationContext.Builder`2.SchemaRepository(System.String)">SchemaRepository(string)</h4>
@@ -530,7 +532,7 @@
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_SchemaValidation_System_Boolean_.md&amp;value=---%0Auid%3A%20Agenix.Api.Validation.Context.IMessageValidationContext.Builder%602.SchemaValidation(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L65">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Validation/Context/IMessageValidationContext.cs/#L67">View Source</a>
   </span>
   <a id="Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_SchemaValidation_" data-uid="Agenix.Api.Validation.Context.IMessageValidationContext.Builder`2.SchemaValidation*"></a>
   <h4 id="Agenix_Api_Validation_Context_IMessageValidationContext_Builder_2_SchemaValidation_System_Boolean_" data-uid="Agenix.Api.Validation.Context.IMessageValidationContext.Builder`2.SchemaValidation(System.Boolean)">SchemaValidation(bool)</h4>
@@ -579,7 +581,13 @@
       <a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IValidationContext.IBuilder&lt;T, TB&gt;</a>
   </div>
   <div>
+      <a class="xref" href="Agenix.Api.Validation.Context.IValidationContext.IBuilder-2.html">IValidationContext.IBuilder&lt;T, TB&gt;</a>
+  </div>
+  <div>
       <a class="xref" href="Agenix.Api.Validation.Context.ISchemaValidationContext.IBuilder-1.html">ISchemaValidationContext.IBuilder&lt;TB&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a>
   </div>
 
 </article>

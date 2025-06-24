@@ -1,0 +1,2791 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class ReflectionUtils </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class ReflectionUtils ">
+    
+    <meta name="description" content="Various reflection-related methods that are missing from the standard library.">
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.Api.Util.ReflectionUtils">
+
+
+
+  <h1 id="Agenix_Api_Util_ReflectionUtils" data-uid="Agenix.Api.Util.ReflectionUtils" class="text-break">Class ReflectionUtils</h1>
+  <div class="markdown level0 summary"><p>Various reflection-related methods that are missing from the standard library.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">ReflectionUtils</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Agenix.html">Agenix</a>.<a class="xref" href="Agenix.Api.html">Api</a>.<a class="xref" href="Agenix.Api.Util.html">Util</a></h6>
+  <h6><strong>Assembly</strong>: Agenix.Api.dll</h6>
+  <h5 id="Agenix_Api_Util_ReflectionUtils_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class ReflectionUtils</code></pre>
+  </div>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_AllMembersCaseInsensitiveFlags.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.AllMembersCaseInsensitiveFlags%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L22">View Source</a>
+  </span>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_AllMembersCaseInsensitiveFlags" data-uid="Agenix.Api.Util.ReflectionUtils.AllMembersCaseInsensitiveFlags">AllMembersCaseInsensitiveFlags</h4>
+  <div class="markdown level1 summary"><p>Convenience <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.bindingflags">BindingFlags</a> value that will
+match all private and public, static and instance members on a class
+in a case inSenSItivE fashion.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const BindingFlags AllMembersCaseInsensitiveFlags = IgnoreCase | Instance | Static | Public | NonPublic</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.bindingflags">BindingFlags</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_CreateCustomAttribute_System_Attribute_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.CreateCustomAttribute(System.Attribute)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L1034">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_CreateCustomAttribute_" data-uid="Agenix.Api.Util.ReflectionUtils.CreateCustomAttribute*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_CreateCustomAttribute_System_Attribute_" data-uid="Agenix.Api.Util.ReflectionUtils.CreateCustomAttribute(System.Attribute)">CreateCustomAttribute(Attribute)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.emit.customattributebuilder">CustomAttributeBuilder</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static CustomAttributeBuilder CreateCustomAttribute(Attribute sourceAttribute)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.attribute">Attribute</a></td>
+        <td><span class="parametername">sourceAttribute</span></td>
+        <td><p>The source attribute to copy properties from.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.emit.customattributebuilder">CustomAttributeBuilder</a></td>
+        <td><p>A custom attribute builder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullreferenceexception">NullReferenceException</a></td>
+        <td><p>If the supplied <code class="paramref">sourceAttribute</code> is
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_CreateCustomAttribute_System_Reflection_CustomAttributeData_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.CreateCustomAttribute(System.Reflection.CustomAttributeData)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L1076">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_CreateCustomAttribute_" data-uid="Agenix.Api.Util.ReflectionUtils.CreateCustomAttribute*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_CreateCustomAttribute_System_Reflection_CustomAttributeData_" data-uid="Agenix.Api.Util.ReflectionUtils.CreateCustomAttribute(System.Reflection.CustomAttributeData)">CreateCustomAttribute(CustomAttributeData)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.emit.customattributebuilder">CustomAttributeBuilder</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static CustomAttributeBuilder CreateCustomAttribute(CustomAttributeData attributeData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.customattributedata">CustomAttributeData</a></td>
+        <td><span class="parametername">attributeData</span></td>
+        <td><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.customattributedata">CustomAttributeData</a> to create
+the custom attribute builder from.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.emit.customattributebuilder">CustomAttributeBuilder</a></td>
+        <td><p>A custom attribute builder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_CreateCustomAttribute_System_Type_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.CreateCustomAttribute(System.Type)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L1046">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_CreateCustomAttribute_" data-uid="Agenix.Api.Util.ReflectionUtils.CreateCustomAttribute*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_CreateCustomAttribute_System_Type_" data-uid="Agenix.Api.Util.ReflectionUtils.CreateCustomAttribute(System.Type)">CreateCustomAttribute(Type)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.emit.customattributebuilder">CustomAttributeBuilder</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static CustomAttributeBuilder CreateCustomAttribute(Type type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The desired <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.attribute">Attribute</a> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.emit.customattributebuilder">CustomAttributeBuilder</a></td>
+        <td><p>A custom attribute builder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_CreateCustomAttribute_System_Type_System_Attribute_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.CreateCustomAttribute(System.Type%2CSystem.Attribute)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L1017">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_CreateCustomAttribute_" data-uid="Agenix.Api.Util.ReflectionUtils.CreateCustomAttribute*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_CreateCustomAttribute_System_Type_System_Attribute_" data-uid="Agenix.Api.Util.ReflectionUtils.CreateCustomAttribute(System.Type,System.Attribute)">CreateCustomAttribute(Type, Attribute)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.emit.customattributebuilder">CustomAttributeBuilder</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static CustomAttributeBuilder CreateCustomAttribute(Type type, Attribute sourceAttribute)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The desired <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.attribute">Attribute</a> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.attribute">Attribute</a></td>
+        <td><span class="parametername">sourceAttribute</span></td>
+        <td><p>Source attribute to copy properties from (may be <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.emit.customattributebuilder">CustomAttributeBuilder</a></td>
+        <td><p>A custom attribute builder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_CreateCustomAttribute_System_Type_System_Object___.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.CreateCustomAttribute(System.Type%2CSystem.Object%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L1062">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_CreateCustomAttribute_" data-uid="Agenix.Api.Util.ReflectionUtils.CreateCustomAttribute*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_CreateCustomAttribute_System_Type_System_Object___" data-uid="Agenix.Api.Util.ReflectionUtils.CreateCustomAttribute(System.Type,System.Object[])">CreateCustomAttribute(Type, params object[])</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.emit.customattributebuilder">CustomAttributeBuilder</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static CustomAttributeBuilder CreateCustomAttribute(Type type, params object[] ctorArgs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The desired <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.attribute">Attribute</a> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</td>
+        <td><span class="parametername">ctorArgs</span></td>
+        <td><p>Any constructor arguments for the attribute (may be <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>
+in the case of no arguments).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.emit.customattributebuilder">CustomAttributeBuilder</a></td>
+        <td><p>A custom attribute builder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_CreateCustomAttribute_System_Type_System_Object___System_Attribute_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.CreateCustomAttribute(System.Type%2CSystem.Object%5B%5D%2CSystem.Attribute)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L909">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_CreateCustomAttribute_" data-uid="Agenix.Api.Util.ReflectionUtils.CreateCustomAttribute*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_CreateCustomAttribute_System_Type_System_Object___System_Attribute_" data-uid="Agenix.Api.Util.ReflectionUtils.CreateCustomAttribute(System.Type,System.Object[],System.Attribute)">CreateCustomAttribute(Type, object[], Attribute)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.emit.customattributebuilder">CustomAttributeBuilder</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static CustomAttributeBuilder CreateCustomAttribute(Type type, object[] ctorArgs, Attribute sourceAttribute)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The desired <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.attribute">Attribute</a> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</td>
+        <td><span class="parametername">ctorArgs</span></td>
+        <td><p>Any constructor arguments for the attribute (may be <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>
+in the case of no arguments).</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.attribute">Attribute</a></td>
+        <td><span class="parametername">sourceAttribute</span></td>
+        <td><p>Source attribute to copy properties from (may be <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.emit.customattributebuilder">CustomAttributeBuilder</a></td>
+        <td><p>A custom attribute builder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_Util_ReflectionUtils_CreateCustomAttribute_System_Type_System_Object___System_Attribute__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    Note that if a non-<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> <code class="paramref">sourceAttribute</code>
+    is supplied, any read write properties exposed by the <code class="paramref">sourceAttribute</code>
+    will be used to overwrite values that may have been passed in via the
+    <code class="paramref">ctorArgs</code>. That is, the <code class="paramref">ctorArgs</code> will be used
+    to initialize the custom attribute, and then any read-write properties on the
+    <code class="paramref">sourceAttribute</code> will be plugged in.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>If the <code class="paramref">type</code> parameter is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>If the <code class="paramref">type</code> parameter is not a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>
+that derives from the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.attribute">Attribute</a> class.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_Util_ReflectionUtils_CreateCustomAttribute_System_Type_System_Object___System_Attribute__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.emit.customattributebuilder">CustomAttributeBuilder</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_GetConstructorByArgumentValues__1_System_Collections_Generic_IList___0__System_Object___.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.GetConstructorByArgumentValues%60%601(System.Collections.Generic.IList%7B%60%600%7D%2CSystem.Object%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L500">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_GetConstructorByArgumentValues_" data-uid="Agenix.Api.Util.ReflectionUtils.GetConstructorByArgumentValues*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_GetConstructorByArgumentValues__1_System_Collections_Generic_IList___0__System_Object___" data-uid="Agenix.Api.Util.ReflectionUtils.GetConstructorByArgumentValues``1(System.Collections.Generic.IList{``0},System.Object[])">GetConstructorByArgumentValues&lt;T&gt;(IList&lt;T&gt;, object[])</h4>
+  <div class="markdown level1 summary"><p>From a given list of constructors, selects the constructor having an exact match on the given
+<code class="paramref">argValues</code>' types.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ConstructorInfo GetConstructorByArgumentValues&lt;T&gt;(IList&lt;T&gt; methods, object[] argValues) where T : MethodBase</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList</a>&lt;T&gt;</td>
+        <td><span class="parametername">methods</span></td>
+        <td><p>the list of constructors to choose from</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</td>
+        <td><span class="parametername">argValues</span></td>
+        <td><p>the arguments to the method</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.constructorinfo">ConstructorInfo</a></td>
+        <td><p>the constructor matching exactly the passed <code class="paramref">argValues</code>' types</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.ambiguousmatchexception">AmbiguousMatchException</a></td>
+        <td><p>If more than 1 matching methods are found in the <code class="paramref">methods</code> list.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_GetCustomAttributes_System_Reflection_MemberInfo_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.GetCustomAttributes(System.Reflection.MemberInfo)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L1222">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_GetCustomAttributes_" data-uid="Agenix.Api.Util.ReflectionUtils.GetCustomAttributes*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_GetCustomAttributes_System_Reflection_MemberInfo_" data-uid="Agenix.Api.Util.ReflectionUtils.GetCustomAttributes(System.Reflection.MemberInfo)">GetCustomAttributes(MemberInfo)</h4>
+  <div class="markdown level1 summary"><p>Calculates and returns the list of attributes that apply to the
+specified type or method.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IList GetCustomAttributes(MemberInfo member)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.memberinfo">MemberInfo</a></td>
+        <td><span class="parametername">member</span></td>
+        <td><p>The type or method to find attributes for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ilist">IList</a></td>
+        <td><p>A list of custom attributes (CustomAttributeData or Attribute instances)
+that should be applied to type or method.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_GetDefaultValue_System_Type_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.GetDefaultValue(System.Type)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L678">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_GetDefaultValue_" data-uid="Agenix.Api.Util.ReflectionUtils.GetDefaultValue*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_GetDefaultValue_System_Type_" data-uid="Agenix.Api.Util.ReflectionUtils.GetDefaultValue(System.Type)">GetDefaultValue(Type)</h4>
+  <div class="markdown level1 summary"><p>Returns the default value for the specified <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static object GetDefaultValue(Type type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> to return default value for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><p>The default value for the specified <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_Util_ReflectionUtils_GetDefaultValue_System_Type__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    Follows the standard .NET conventions for default values where
+    relevant; for example, all numeric types default to the value
+    <code>0</code>.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></td>
+        <td><p>If the supplied <code class="paramref">type</code> is an enumerated type that
+has no values.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_GetDefaultValues_System_Type___.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.GetDefaultValues(System.Type%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L730">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_GetDefaultValues_" data-uid="Agenix.Api.Util.ReflectionUtils.GetDefaultValues*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_GetDefaultValues_System_Type___" data-uid="Agenix.Api.Util.ReflectionUtils.GetDefaultValues(System.Type[])">GetDefaultValues(Type[])</h4>
+  <div class="markdown level1 summary"><p>Returns an array consisting of the default values for the supplied
+<code class="paramref">types</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static object[] GetDefaultValues(Type[] types)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>[]</td>
+        <td><span class="parametername">types</span></td>
+        <td><p>The array of <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s to return default values for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</td>
+        <td><p>An array consisting of the default values for the supplied
+<code class="paramref">types</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></td>
+        <td><p>If any of the elements in the supplied <code class="paramref">types</code>
+array is an enumerated type that has no values.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_Util_ReflectionUtils_GetDefaultValues_System_Type____seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Agenix.Api.Util.ReflectionUtils.html#Agenix_Api_Util_ReflectionUtils_GetDefaultValue_System_Type_">GetDefaultValue(Type)</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_GetExplicitBaseException_System_Exception_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.GetExplicitBaseException(System.Exception)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L1466">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_GetExplicitBaseException_" data-uid="Agenix.Api.Util.ReflectionUtils.GetExplicitBaseException*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_GetExplicitBaseException_System_Exception_" data-uid="Agenix.Api.Util.ReflectionUtils.GetExplicitBaseException(System.Exception)">GetExplicitBaseException(Exception)</h4>
+  <div class="markdown level1 summary"><p>Returns the explicit <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a> that is the root cause of an exception.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Exception GetExplicitBaseException(Exception ex)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a></td>
+        <td><span class="parametername">ex</span></td>
+        <td><p>The last exception thrown.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a></td>
+        <td><p>The first explicit exception thrown in a chain of exceptions.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_Util_ReflectionUtils_GetExplicitBaseException_System_Exception__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If the InnerException property of the current exception is a null reference
+or a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullreferenceexception">NullReferenceException</a>, returns the current exception.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_GetGenericMethod_System_Type_System_String_System_Type___System_Type___.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.GetGenericMethod(System.Type%2CSystem.String%2CSystem.Type%5B%5D%2CSystem.Type%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L304">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_GetGenericMethod_" data-uid="Agenix.Api.Util.ReflectionUtils.GetGenericMethod*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_GetGenericMethod_System_Type_System_String_System_Type___System_Type___" data-uid="Agenix.Api.Util.ReflectionUtils.GetGenericMethod(System.Type,System.String,System.Type[],System.Type[])">GetGenericMethod(Type, string, Type[], Type[])</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static MethodInfo GetGenericMethod(Type type, string methodName, Type[] typeArguments, Type[] parameterTypes)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">methodName</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>[]</td>
+        <td><span class="parametername">typeArguments</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>[]</td>
+        <td><span class="parametername">parameterTypes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.methodinfo">MethodInfo</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_GetGenericParameterNames_System_Reflection_MethodInfo_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.GetGenericParameterNames(System.Reflection.MethodInfo)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L276">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_GetGenericParameterNames_" data-uid="Agenix.Api.Util.ReflectionUtils.GetGenericParameterNames*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_GetGenericParameterNames_System_Reflection_MethodInfo_" data-uid="Agenix.Api.Util.ReflectionUtils.GetGenericParameterNames(System.Reflection.MethodInfo)">GetGenericParameterNames(MethodInfo)</h4>
+  <div class="markdown level1 summary"><p>Returns an array of <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/reference-types">string</a>s that represent
+the names of the generic type parameter.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string[] GetGenericParameterNames(MethodInfo method)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.methodinfo">MethodInfo</a></td>
+        <td><span class="parametername">method</span></td>
+        <td><p>The method.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td><p>An array containing the parameter names.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>If <code class="paramref">method</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_GetGenericParameterNames_System_Type___.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.GetGenericParameterNames(System.Type%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L292">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_GetGenericParameterNames_" data-uid="Agenix.Api.Util.ReflectionUtils.GetGenericParameterNames*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_GetGenericParameterNames_System_Type___" data-uid="Agenix.Api.Util.ReflectionUtils.GetGenericParameterNames(System.Type[])">GetGenericParameterNames(Type[])</h4>
+  <div class="markdown level1 summary"><p>Returns an array of <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/reference-types">string</a>s that represent
+the names of the generic type parameter.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string[] GetGenericParameterNames(Type[] args)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>[]</td>
+        <td><span class="parametername">args</span></td>
+        <td><p>The parameter info array.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td><p>An array containing parameter names.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>If <code class="paramref">args</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> or any of the
+elements <code class="paramref">args</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_GetInstanceFieldValue_System_Object_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.GetInstanceFieldValue(System.Object%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L1532">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_GetInstanceFieldValue_" data-uid="Agenix.Api.Util.ReflectionUtils.GetInstanceFieldValue*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_GetInstanceFieldValue_System_Object_System_String_" data-uid="Agenix.Api.Util.ReflectionUtils.GetInstanceFieldValue(System.Object,System.String)">GetInstanceFieldValue(object, string)</h4>
+  <div class="markdown level1 summary"><p>Convenience method that uses reflection to return the value of a non-public field of a given object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static object GetInstanceFieldValue(object obj, string fieldName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>The instance of the object from which to retrieve the field value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">fieldName</span></td>
+        <td><p>Name of the field on the object from which to retrieve the value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_Util_ReflectionUtils_GetInstanceFieldValue_System_Object_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Useful in certain instances during testing to avoid the need to add protected properties, etc. to a class just
+to facilitate testing.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_GetInterfaces_System_Type_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.GetInterfaces(System.Type)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L1440">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_GetInterfaces_" data-uid="Agenix.Api.Util.ReflectionUtils.GetInterfaces*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_GetInterfaces_System_Type_" data-uid="Agenix.Api.Util.ReflectionUtils.GetInterfaces(System.Type)">GetInterfaces(Type)</h4>
+  <div class="markdown level1 summary"><p>Gets all of the interfaces implemented by
+the specified <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Type[] GetInterfaces(Type type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The object to get the interfaces of.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>[]</td>
+        <td><p>All of the interfaces implemented by the
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_GetMatchingMethods_System_Type_System_Reflection_MethodInfo___System_Boolean_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.GetMatchingMethods(System.Type%2CSystem.Reflection.MethodInfo%5B%5D%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L1293">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_GetMatchingMethods_" data-uid="Agenix.Api.Util.ReflectionUtils.GetMatchingMethods*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_GetMatchingMethods_System_Type_System_Reflection_MethodInfo___System_Boolean_" data-uid="Agenix.Api.Util.ReflectionUtils.GetMatchingMethods(System.Type,System.Reflection.MethodInfo[],System.Boolean)">GetMatchingMethods(Type, MethodInfo[], bool)</h4>
+  <div class="markdown level1 summary"><p>Tries to find matching methods in the specified <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>
+for each method in the supplied <code class="paramref">methods</code> list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static MethodInfo[] GetMatchingMethods(Type type, MethodInfo[] methods, bool strict)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> to look for matching methods in.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.methodinfo">MethodInfo</a>[]</td>
+        <td><span class="parametername">methods</span></td>
+        <td><p>The methods to match.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">strict</span></td>
+        <td><p>A flag that specifies whether to throw an exception if a matching
+method is not found.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.methodinfo">MethodInfo</a>[]</td>
+        <td><p>A list of the matched methods.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>If either of the <code class="paramref">type</code> or
+<code class="paramref">methods</code> parameters are <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_GetMethod_System_Type_System_String_System_Type___.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.GetMethod(System.Type%2CSystem.String%2CSystem.Type%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L102">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_GetMethod_" data-uid="Agenix.Api.Util.ReflectionUtils.GetMethod*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_GetMethod_System_Type_System_String_System_Type___" data-uid="Agenix.Api.Util.ReflectionUtils.GetMethod(System.Type,System.String,System.Type[])">GetMethod(Type, string, Type[])</h4>
+  <div class="markdown level1 summary"><p>Returns method for the specified <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>, method
+name and argument
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static MethodInfo GetMethod(Type targetType, string method, Type[] argumentTypes)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">targetType</span></td>
+        <td><p>The target <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> to find the method on.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">method</span></td>
+        <td><p>The method to find.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>[]</td>
+        <td><span class="parametername">argumentTypes</span></td>
+        <td><p>The argument <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s. May be
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> if the method has no arguments.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.methodinfo">MethodInfo</a></td>
+        <td><p>The target method.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_Util_ReflectionUtils_GetMethod_System_Type_System_String_System_Type____remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Searches with BindingFlags</p>
+<p>
+    When dealing with interface methods, you probable want to 'normalize' method references by calling
+    <a class="xref" href="Agenix.Api.Util.ReflectionUtils.html#Agenix_Api_Util_ReflectionUtils_MapInterfaceMethodToImplementationIfNecessary_System_Reflection_MethodInfo_System_Type_">MapInterfaceMethodToImplementationIfNecessary(MethodInfo, Type)</a>.
+</p>
+</div>
+  <h5 id="Agenix_Api_Util_ReflectionUtils_GetMethod_System_Type_System_String_System_Type____seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Agenix.Api.Util.ReflectionUtils.html#Agenix_Api_Util_ReflectionUtils_MapInterfaceMethodToImplementationIfNecessary_System_Reflection_MethodInfo_System_Type_">MapInterfaceMethodToImplementationIfNecessary(MethodInfo, Type)</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_GetMethod_System_Type_System_String_System_Type___System_Int32_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.GetMethod(System.Type%2CSystem.String%2CSystem.Type%5B%5D%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L131">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_GetMethod_" data-uid="Agenix.Api.Util.ReflectionUtils.GetMethod*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_GetMethod_System_Type_System_String_System_Type___System_Int32_" data-uid="Agenix.Api.Util.ReflectionUtils.GetMethod(System.Type,System.String,System.Type[],System.Int32)">GetMethod(Type, string, Type[], int)</h4>
+  <div class="markdown level1 summary"><p>Returns method for the specified <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>, method
+name and argument
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static MethodInfo GetMethod(Type targetType, string method, Type[] argumentTypes, int genericArgumentsCount)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">targetType</span></td>
+        <td><p>The target <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> to find the method on.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">method</span></td>
+        <td><p>The method to find.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>[]</td>
+        <td><span class="parametername">argumentTypes</span></td>
+        <td><p>The argument <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s. May be
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> if the method has no arguments.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">genericArgumentsCount</span></td>
+        <td><p>Number of Generic Arguments in the method</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.methodinfo">MethodInfo</a></td>
+        <td><p>The target method.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_Util_ReflectionUtils_GetMethod_System_Type_System_String_System_Type___System_Int32__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Searches with BindingFlags</p>
+<p>
+    When dealing with interface methods, you probably want to 'normalize' method references by calling
+    <a class="xref" href="Agenix.Api.Util.ReflectionUtils.html#Agenix_Api_Util_ReflectionUtils_MapInterfaceMethodToImplementationIfNecessary_System_Reflection_MethodInfo_System_Type_">MapInterfaceMethodToImplementationIfNecessary(MethodInfo, Type)</a>.
+</p>
+</div>
+  <h5 id="Agenix_Api_Util_ReflectionUtils_GetMethod_System_Type_System_String_System_Type___System_Int32__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Agenix.Api.Util.ReflectionUtils.html#Agenix_Api_Util_ReflectionUtils_MapInterfaceMethodToImplementationIfNecessary_System_Reflection_MethodInfo_System_Type_">MapInterfaceMethodToImplementationIfNecessary(MethodInfo, Type)</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_GetMethodByArgumentValues__1_System_Collections_Generic_IEnumerable___0__System_Object___.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.GetMethodByArgumentValues%60%601(System.Collections.Generic.IEnumerable%7B%60%600%7D%2CSystem.Object%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L391">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_GetMethodByArgumentValues_" data-uid="Agenix.Api.Util.ReflectionUtils.GetMethodByArgumentValues*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_GetMethodByArgumentValues__1_System_Collections_Generic_IEnumerable___0__System_Object___" data-uid="Agenix.Api.Util.ReflectionUtils.GetMethodByArgumentValues``1(System.Collections.Generic.IEnumerable{``0},System.Object[])">GetMethodByArgumentValues&lt;T&gt;(IEnumerable&lt;T&gt;, object[])</h4>
+  <div class="markdown level1 summary"><p>From a given list of methods, selects the method having an exact match on the given <code class="paramref">argValues</code>'
+types.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static MethodInfo GetMethodByArgumentValues&lt;T&gt;(IEnumerable&lt;T&gt; methods, object[] argValues) where T : MethodBase</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</td>
+        <td><span class="parametername">methods</span></td>
+        <td><p>the list of methods to choose from</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</td>
+        <td><span class="parametername">argValues</span></td>
+        <td><p>the arguments to the method</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.methodinfo">MethodInfo</a></td>
+        <td><p>the method matching exactly the passed <code class="paramref">argValues</code>' types</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.ambiguousmatchexception">AmbiguousMatchException</a></td>
+        <td><p>If more than 1 matching methods are found in the <code class="paramref">methods</code> list.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_GetParameterTypes_System_Reflection_MethodBase_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.GetParameterTypes(System.Reflection.MethodBase)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L233">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_GetParameterTypes_" data-uid="Agenix.Api.Util.ReflectionUtils.GetParameterTypes*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_GetParameterTypes_System_Reflection_MethodBase_" data-uid="Agenix.Api.Util.ReflectionUtils.GetParameterTypes(System.Reflection.MethodBase)">GetParameterTypes(MethodBase)</h4>
+  <div class="markdown level1 summary"><p>Returns an array of parameter <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s for the specified method
+or constructor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Type[] GetParameterTypes(MethodBase method)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.methodbase">MethodBase</a></td>
+        <td><span class="parametername">method</span></td>
+        <td><p>The method (or constructor).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>[]</td>
+        <td><p>An array containing the parameter <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>If <code class="paramref">method</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_GetParameterTypes_System_Reflection_ParameterInfo___.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.GetParameterTypes(System.Reflection.ParameterInfo%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L249">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_GetParameterTypes_" data-uid="Agenix.Api.Util.ReflectionUtils.GetParameterTypes*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_GetParameterTypes_System_Reflection_ParameterInfo___" data-uid="Agenix.Api.Util.ReflectionUtils.GetParameterTypes(System.Reflection.ParameterInfo[])">GetParameterTypes(ParameterInfo[])</h4>
+  <div class="markdown level1 summary"><p>Returns an array of parameter <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s for the
+specified parameter info array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Type[] GetParameterTypes(ParameterInfo[] args)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.parameterinfo">ParameterInfo</a>[]</td>
+        <td><span class="parametername">args</span></td>
+        <td><p>The parameter info array.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>[]</td>
+        <td><p>An array containing parameter <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>If <code class="paramref">args</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> or any of the
+elements <code class="paramref">args</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_GetSignature_System_Type_System_String_System_Type___.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.GetSignature(System.Type%2CSystem.String%2CSystem.Type%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L64">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_GetSignature_" data-uid="Agenix.Api.Util.ReflectionUtils.GetSignature*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_GetSignature_System_Type_System_String_System_Type___" data-uid="Agenix.Api.Util.ReflectionUtils.GetSignature(System.Type,System.String,System.Type[])">GetSignature(Type, string, Type[])</h4>
+  <div class="markdown level1 summary"><p>Returns signature for the specified <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>, method name and argument
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string GetSignature(Type type, string method, Type[] argumentTypes)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> the method is in.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">method</span></td>
+        <td><p>The method name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>[]</td>
+        <td><span class="parametername">argumentTypes</span></td>
+        <td><p>The argument <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The method signature.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_GetTypes_System_Object___.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.GetTypes(System.Object%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L803">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_GetTypes_" data-uid="Agenix.Api.Util.ReflectionUtils.GetTypes*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_GetTypes_System_Object___" data-uid="Agenix.Api.Util.ReflectionUtils.GetTypes(System.Object[])">GetTypes(object[])</h4>
+  <div class="markdown level1 summary"><p>Returns an array containing the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s of the
+objects in the supplied array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Type[] GetTypes(object[] args)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</td>
+        <td><span class="parametername">args</span></td>
+        <td><p>The objects array for which the corresponding <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s
+are needed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>[]</td>
+        <td><p>An array containing the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s of the objects
+in the supplied array; this array will be empty (but not
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> if the supplied <code class="paramref">args</code>
+is null or has no elements.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_Util_ReflectionUtils_GetTypes_System_Object____examples">Examples</h5>
+  <p>
+    [C#]<br>
+    Given an array containing the following objects,
+    <pre><code class="lang-csharp">[83, "Foo", new object ()]</code></pre>, the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>
+    array returned from this method call would consist of the following
+    <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> elements...
+    <pre><code class="lang-csharp">[Int32, String, Object]</code></pre>.
+
+
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_HasAtLeastOneMethodWithName_System_Type_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.HasAtLeastOneMethodWithName(System.Type%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L841">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_HasAtLeastOneMethodWithName_" data-uid="Agenix.Api.Util.ReflectionUtils.HasAtLeastOneMethodWithName*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_HasAtLeastOneMethodWithName_System_Type_System_String_" data-uid="Agenix.Api.Util.ReflectionUtils.HasAtLeastOneMethodWithName(System.Type,System.String)">HasAtLeastOneMethodWithName(Type, string)</h4>
+  <div class="markdown level1 summary"><p>Does the given <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> and/or it's superclasses
+have at least one or more methods with the given name (with any
+argument types)?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool HasAtLeastOneMethodWithName(Type type, string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> to be checked.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the method to be searched for. Case inSenSItivE.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the given <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> or / and it's
+superclasses have at least one or more methods (with any argument types);
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a> if not, or either of the parameters is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_Util_ReflectionUtils_HasAtLeastOneMethodWithName_System_Type_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    Includes non-public methods in the methods searched.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_IsNullableType_System_Type_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.IsNullableType(System.Type)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L49">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_IsNullableType_" data-uid="Agenix.Api.Util.ReflectionUtils.IsNullableType*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_IsNullableType_System_Type_" data-uid="Agenix.Api.Util.ReflectionUtils.IsNullableType(System.Type)">IsNullableType(Type)</h4>
+  <div class="markdown level1 summary"><p>Checks, if the specified type is a nullable</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsNullableType(Type type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_IsTypeNullable_System_Type_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.IsTypeNullable(System.Type)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L1389">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_IsTypeNullable_" data-uid="Agenix.Api.Util.ReflectionUtils.IsTypeNullable*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_IsTypeNullable_System_Type_" data-uid="Agenix.Api.Util.ReflectionUtils.IsTypeNullable(System.Type)">IsTypeNullable(Type)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified type is nullable.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsTypeNullable(Type type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The type.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p><code>true</code> if the specified type is ullable]; otherwise, <code>false</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_IsTypeVisible_System_Type_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.IsTypeVisible(System.Type)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L1377">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_IsTypeVisible_" data-uid="Agenix.Api.Util.ReflectionUtils.IsTypeVisible*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_IsTypeVisible_System_Type_" data-uid="Agenix.Api.Util.ReflectionUtils.IsTypeVisible(System.Type)">IsTypeVisible(Type)</h4>
+  <div class="markdown level1 summary"><p>Is the supplied <code class="paramref">type</code> can be accessed outside the assembly ?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsTypeVisible(Type type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The type to check.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the type can be accessed outside the assembly;
+Otherwise <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_IsTypeVisible_System_Type_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.IsTypeVisible(System.Type%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L1404">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_IsTypeVisible_" data-uid="Agenix.Api.Util.ReflectionUtils.IsTypeVisible*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_IsTypeVisible_System_Type_System_String_" data-uid="Agenix.Api.Util.ReflectionUtils.IsTypeVisible(System.Type,System.String)">IsTypeVisible(Type, string)</h4>
+  <div class="markdown level1 summary"><p>Is the supplied <code class="paramref">type</code> can be accessed
+from the supplied friendly assembly ?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsTypeVisible(Type type, string friendlyAssemblyName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The type to check.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">friendlyAssemblyName</span></td>
+        <td><p>The friendly assembly name.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the type can be accessed
+from the supplied friendly assembly; Otherwise <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_MapInterfaceMethodToImplementationIfNecessary_System_Reflection_MethodInfo_System_Type_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.MapInterfaceMethodToImplementationIfNecessary(System.Reflection.MethodInfo%2CSystem.Type)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L205">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_MapInterfaceMethodToImplementationIfNecessary_" data-uid="Agenix.Api.Util.ReflectionUtils.MapInterfaceMethodToImplementationIfNecessary*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_MapInterfaceMethodToImplementationIfNecessary_System_Reflection_MethodInfo_System_Type_" data-uid="Agenix.Api.Util.ReflectionUtils.MapInterfaceMethodToImplementationIfNecessary(System.Reflection.MethodInfo,System.Type)">MapInterfaceMethodToImplementationIfNecessary(MethodInfo, Type)</h4>
+  <div class="markdown level1 summary"><p>Resolves a given <code class="paramref">methodInfo</code> to the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.methodinfo">MethodInfo</a> representing the actual
+implementation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static MethodInfo MapInterfaceMethodToImplementationIfNecessary(MethodInfo methodInfo, Type implementingType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.methodinfo">MethodInfo</a></td>
+        <td><span class="parametername">methodInfo</span></td>
+        <td><p>a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.methodinfo">MethodInfo</a></p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">implementingType</span></td>
+        <td><p>the type to lookup</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.methodinfo">MethodInfo</a></td>
+        <td><p>the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.methodinfo">MethodInfo</a> representing the actual implementation method of the specified
+<code class="paramref">methodInfo</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_Util_ReflectionUtils_MapInterfaceMethodToImplementationIfNecessary_System_Reflection_MethodInfo_System_Type__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>see article
+<a href="http://weblog.ikvm.net/CommentView.aspx?guid=7356a87f-e5d7-4723-ae49-b263ab9e40ae">
+How To Get an Explicit
+Interface Implementation Method
+</a>
+.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_MemberwiseCopy_System_Object_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.MemberwiseCopy(System.Object%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L1499">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_MemberwiseCopy_" data-uid="Agenix.Api.Util.ReflectionUtils.MemberwiseCopy*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_MemberwiseCopy_System_Object_System_Object_" data-uid="Agenix.Api.Util.ReflectionUtils.MemberwiseCopy(System.Object,System.Object)">MemberwiseCopy(object, object)</h4>
+  <div class="markdown level1 summary"><p>Copies all fields from one object to another.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void MemberwiseCopy(object fromObject, object toObject)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">fromObject</span></td>
+        <td><p>The source object</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">toObject</span></td>
+        <td><p>The object, who's fields will be populated with values from the source object</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_Util_ReflectionUtils_MemberwiseCopy_System_Object_System_Object__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The types of both objects must be related. This means, that either of the following is true:</p>
+<ul><li>fromObject.GetType() == toObject.GetType()</li><li>fromObject.GetType() is derived from toObject.GetType()</li><li>toObject.GetType() is derived from fromObject.GetType()</li></ul>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></td>
+        <td><p>If the object's types are not related</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_MethodCountForName_System_Type_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.MethodCountForName(System.Type%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L858">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_MethodCountForName_" data-uid="Agenix.Api.Util.ReflectionUtils.MethodCountForName*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_MethodCountForName_System_Type_System_String_" data-uid="Agenix.Api.Util.ReflectionUtils.MethodCountForName(System.Type,System.String)">MethodCountForName(Type, string)</h4>
+  <div class="markdown level1 summary"><p>Within <code class="paramref">type</code>, counts the number of overloads for the method with the given (case-insensitive!)
+<code class="paramref">name</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int MethodCountForName(Type type, string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The type to be searched</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>the name of the method for which overloads shall be counted</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><p>The number of overloads for method <code class="paramref">name</code> within type <code class="paramref">type</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_MethodIsOnOneOfTheseInterfaces_System_Reflection_MethodBase_System_Type___.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.MethodIsOnOneOfTheseInterfaces(System.Reflection.MethodBase%2CSystem.Type%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L619">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_MethodIsOnOneOfTheseInterfaces_" data-uid="Agenix.Api.Util.ReflectionUtils.MethodIsOnOneOfTheseInterfaces*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_MethodIsOnOneOfTheseInterfaces_System_Reflection_MethodBase_System_Type___" data-uid="Agenix.Api.Util.ReflectionUtils.MethodIsOnOneOfTheseInterfaces(System.Reflection.MethodBase,System.Type[])">MethodIsOnOneOfTheseInterfaces(MethodBase, Type[])</h4>
+  <div class="markdown level1 summary"><p>Is the supplied <code class="paramref">method</code> declared on one of these interfaces?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool MethodIsOnOneOfTheseInterfaces(MethodBase method, Type[] interfaces)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.methodbase">MethodBase</a></td>
+        <td><span class="parametername">method</span></td>
+        <td><p>The method to check.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>[]</td>
+        <td><span class="parametername">interfaces</span></td>
+        <td><p>The array of interfaces we want to check.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p><see lang="true"></see> if the method is declared on one of these interfaces.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></td>
+        <td><p>If any of the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s specified is not an interface.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>If <code class="paramref">method</code> or any of the specified interfaces is
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_PackageParamArray_System_Object___System_Int32_System_Type_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.PackageParamArray(System.Object%5B%5D%2CSystem.Int32%2CSystem.Type)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L513">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_PackageParamArray_" data-uid="Agenix.Api.Util.ReflectionUtils.PackageParamArray*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_PackageParamArray_System_Object___System_Int32_System_Type_" data-uid="Agenix.Api.Util.ReflectionUtils.PackageParamArray(System.Object[],System.Int32,System.Type)">PackageParamArray(object[], int, Type)</h4>
+  <div class="markdown level1 summary"><p>Packages arguments into argument list containing parameter array as a last argument.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static object[] PackageParamArray(object[] argValues, int argCount, Type elementType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</td>
+        <td><span class="parametername">argValues</span></td>
+        <td><p>Argument vaklues to package.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">argCount</span></td>
+        <td><p>Total number of oarameters.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">elementType</span></td>
+        <td><p>Type of the param array element.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</td>
+        <td><p>Packaged arguments.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_ParameterTypesMatch_System_Reflection_MethodInfo_System_Type___.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.ParameterTypesMatch(System.Reflection.MethodInfo%2CSystem.Type%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L755">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_ParameterTypesMatch_" data-uid="Agenix.Api.Util.ReflectionUtils.ParameterTypesMatch*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_ParameterTypesMatch_System_Reflection_MethodInfo_System_Type___" data-uid="Agenix.Api.Util.ReflectionUtils.ParameterTypesMatch(System.Reflection.MethodInfo,System.Type[])">ParameterTypesMatch(MethodInfo, Type[])</h4>
+  <div class="markdown level1 summary"><p>Checks that the parameter <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s of the
+supplied <code class="paramref">candidate</code> match the parameter
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s of the supplied
+<code class="paramref">parameterTypes</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool ParameterTypesMatch(MethodInfo candidate, Type[] parameterTypes)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.methodinfo">MethodInfo</a></td>
+        <td><span class="parametername">candidate</span></td>
+        <td><p>The method to be checked.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>[]</td>
+        <td><span class="parametername">parameterTypes</span></td>
+        <td><p>The array of parameter <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s to check against.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the parameter <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s
+match.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_PropertyIsIndexer_System_String_System_Type_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.PropertyIsIndexer(System.String%2CSystem.Type)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L586">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_PropertyIsIndexer_" data-uid="Agenix.Api.Util.ReflectionUtils.PropertyIsIndexer*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_PropertyIsIndexer_System_String_System_Type_" data-uid="Agenix.Api.Util.ReflectionUtils.PropertyIsIndexer(System.String,System.Type)">PropertyIsIndexer(string, Type)</h4>
+  <div class="markdown level1 summary"><p>Is the supplied <code class="paramref">propertyName</code> the default indexer for the
+supplied <code class="paramref">type</code>?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool PropertyIsIndexer(string propertyName, Type type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">propertyName</span></td>
+        <td><p>The name of the property on the supplied <code class="paramref">type</code> to be checked.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>  to be checked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p><see lang="true"></see> if the supplied <code class="paramref">propertyName</code> is the
+default indexer for the supplied <code class="paramref">type</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullreferenceexception">NullReferenceException</a></td>
+        <td><p>If the supplied <code class="paramref">type</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_SetInstanceFieldValue_System_Object_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.SetInstanceFieldValue(System.Object%2CSystem.String%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L1565">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_SetInstanceFieldValue_" data-uid="Agenix.Api.Util.ReflectionUtils.SetInstanceFieldValue*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_SetInstanceFieldValue_System_Object_System_String_System_Object_" data-uid="Agenix.Api.Util.ReflectionUtils.SetInstanceFieldValue(System.Object,System.String,System.Object)">SetInstanceFieldValue(object, string, object)</h4>
+  <div class="markdown level1 summary"><p>Convenience method that uses reflection to set the value of a non-public field of a given object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SetInstanceFieldValue(object obj, string fieldName, object fieldValue)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>The instance of the object from which to set the field value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">fieldName</span></td>
+        <td><p>Name of the field on the object to which to set the value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">fieldValue</span></td>
+        <td><p>The field value to set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_Util_ReflectionUtils_SetInstanceFieldValue_System_Object_System_String_System_Object__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Useful in certain instances during testing to avoid the need to add protected properties, etc. to a class just
+to facilitate testing.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_ToInterfaceArray_System_Type_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.ToInterfaceArray(System.Type)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L551">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_ToInterfaceArray_" data-uid="Agenix.Api.Util.ReflectionUtils.ToInterfaceArray*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_ToInterfaceArray_System_Type_" data-uid="Agenix.Api.Util.ReflectionUtils.ToInterfaceArray(System.Type)">ToInterfaceArray(Type)</h4>
+  <div class="markdown level1 summary"><p>Convenience method to convert an interface <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>
+to a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> array that contains
+all the interfaces inherited and the specified interface.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IList&lt;Type&gt; ToInterfaceArray(Type intf)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">intf</span></td>
+        <td><p>The interface to convert.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>&gt;</td>
+        <td><p>An array of interface <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>s.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></td>
+        <td><p>If the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> specified is not an interface.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>If <code class="paramref">intf</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_TypeOfOrType_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.TypeOfOrType(System.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L1345">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_TypeOfOrType_" data-uid="Agenix.Api.Util.ReflectionUtils.TypeOfOrType*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_TypeOfOrType_System_Object_" data-uid="Agenix.Api.Util.ReflectionUtils.TypeOfOrType(System.Object)">TypeOfOrType(object)</h4>
+  <div class="markdown level1 summary"><p>Returns the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> of the supplied
+<code class="paramref">source</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Type TypeOfOrType(object source)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>A <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> or <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a> instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><p>The <code class="paramref">source</code>argument if it is a
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a> or the result of invoking
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">GetType()</a> on the argument if it
+is an <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Agenix_Api_Util_ReflectionUtils_TypeOfOrType_System_Object__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    If the <code class="paramref">source</code> is a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>
+    instance, the return value of this method call with be the
+    <code class="paramref">source</code> parameter cast to a
+    <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>. If the <code class="paramref">source</code> is
+    anything other than a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>, the return value
+    will be the result of invoking the <code class="paramref">source</code>'s
+    <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">GetType()</a> method.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullreferenceexception">NullReferenceException</a></td>
+        <td><p>If the <code class="paramref">source</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils_UnwrapTargetInvocationException_System_Reflection_TargetInvocationException_.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils.UnwrapTargetInvocationException(System.Reflection.TargetInvocationException)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L1358">View Source</a>
+  </span>
+  <a id="Agenix_Api_Util_ReflectionUtils_UnwrapTargetInvocationException_" data-uid="Agenix.Api.Util.ReflectionUtils.UnwrapTargetInvocationException*"></a>
+  <h4 id="Agenix_Api_Util_ReflectionUtils_UnwrapTargetInvocationException_System_Reflection_TargetInvocationException_" data-uid="Agenix.Api.Util.ReflectionUtils.UnwrapTargetInvocationException(System.Reflection.TargetInvocationException)">UnwrapTargetInvocationException(TargetInvocationException)</h4>
+  <div class="markdown level1 summary"><p>Unwraps the supplied <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.targetinvocationexception">TargetInvocationException</a>
+and returns the inner exception preserving the stack trace.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Exception UnwrapTargetInvocationException(TargetInvocationException ex)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.targetinvocationexception">TargetInvocationException</a></td>
+        <td><span class="parametername">ex</span></td>
+        <td><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.targetinvocationexception">TargetInvocationException</a> to unwrap.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a></td>
+        <td><p>The unwrapped exception.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Util_ReflectionUtils.md&amp;value=---%0Auid%3A%20Agenix.Api.Util.ReflectionUtils%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Util/ReflectionUtils.cs/#L15" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

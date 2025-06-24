@@ -80,6 +80,7 @@ initialization, managing locations, and handling repository resources.</p>
     <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
     <div class="level1"><span class="xref">BaseRepository</span></div>
       <div class="level2"><a class="xref" href="Agenix.Validation.Json.Json.JsonSchemaRepository.html">JsonSchemaRepository</a></div>
+      <div class="level2"><a class="xref" href="Agenix.Validation.Xml.Schema.XsdSchemaRepository.html">XsdSchemaRepository</a></div>
   </div>
   <div class="implements">
     <h5>Implements</h5>
@@ -234,7 +235,7 @@ This property is read-only and reflects the value initialized at the time of cre
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Repository_BaseRepository_AddRepository_Agenix_Api_IO_IResource_.md&amp;value=---%0Auid%3A%20Agenix.Core.Repository.BaseRepository.AddRepository(Agenix.Api.IO.IResource)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Repository/BaseRepository.cs/#L109">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Repository/BaseRepository.cs/#L111">View Source</a>
   </span>
   <a id="Agenix_Core_Repository_BaseRepository_AddRepository_" data-uid="Agenix.Core.Repository.BaseRepository.AddRepository*"></a>
   <h4 id="Agenix_Core_Repository_BaseRepository_AddRepository_Agenix_Api_IO_IResource_" data-uid="Agenix.Core.Repository.BaseRepository.AddRepository(Agenix.Api.IO.IResource)">AddRepository(IResource)</h4>
@@ -282,7 +283,7 @@ file resources, verifying their existence, and invoking the repository addition 
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Initialize()</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual void Initialize()</code></pre>
   </div>
   <h5 class="exceptions">Exceptions</h5>
   <table class="table table-bordered table-condensed">

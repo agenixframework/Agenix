@@ -83,7 +83,9 @@
     <h5>Implements</h5>
     <div><a class="xref" href="Agenix.Api.Variable.IVariableExtractor.html">IVariableExtractor</a>.<a class="xref" href="Agenix.Api.Variable.IVariableExtractor.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.html">DelegatingPayloadVariableExtractor</a>, <a class="xref" href="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.html">DelegatingPayloadVariableExtractor</a>.<a class="xref" href="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.html">Builder</a>&gt;</div>
     <div><a class="xref" href="Agenix.Api.Message.IMessageProcessor.html">IMessageProcessor</a>.<a class="xref" href="Agenix.Api.Message.IMessageProcessor.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.html">DelegatingPayloadVariableExtractor</a>, <a class="xref" href="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.html">DelegatingPayloadVariableExtractor</a>.<a class="xref" href="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.html">Builder</a>&gt;</div>
+    <div><a class="xref" href="Agenix.Api.Message.IMessageTransformer.html">IMessageTransformer</a>.<a class="xref" href="Agenix.Api.Message.IMessageTransformer.IBuilder-2.html">IBuilder</a>&lt;<a class="xref" href="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.html">DelegatingPayloadVariableExtractor</a>, <a class="xref" href="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.html">DelegatingPayloadVariableExtractor</a>.<a class="xref" href="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.html">Builder</a>&gt;</div>
     <div><a class="xref" href="Agenix.Api.Builder.IWithExpressions-1.html">IWithExpressions</a>&lt;<a class="xref" href="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.html">DelegatingPayloadVariableExtractor</a>.<a class="xref" href="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.html">Builder</a>&gt;</div>
+    <div><a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -113,7 +115,7 @@
   <h6><strong>Assembly</strong>: Agenix.Core.dll</h6>
   <h5 id="Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class DelegatingPayloadVariableExtractor.Builder : IVariableExtractor.IBuilder&lt;DelegatingPayloadVariableExtractor, DelegatingPayloadVariableExtractor.Builder&gt;, IMessageProcessor.IBuilder&lt;DelegatingPayloadVariableExtractor, DelegatingPayloadVariableExtractor.Builder&gt;, IWithExpressions&lt;DelegatingPayloadVariableExtractor.Builder&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public class DelegatingPayloadVariableExtractor.Builder : IVariableExtractor.IBuilder&lt;DelegatingPayloadVariableExtractor, DelegatingPayloadVariableExtractor.Builder&gt;, IMessageProcessor.IBuilder&lt;DelegatingPayloadVariableExtractor, DelegatingPayloadVariableExtractor.Builder&gt;, IMessageTransformer.IBuilder&lt;DelegatingPayloadVariableExtractor, DelegatingPayloadVariableExtractor.Builder&gt;, IWithExpressions&lt;DelegatingPayloadVariableExtractor.Builder&gt;, IBuilder</code></pre>
   </div>
   <h5 id="Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>This class provides a fluent interface for specifying namespaces and expressions,
@@ -126,7 +128,7 @@ and for building <a class="xref" href="Agenix.Core.Validation.DelegatingPayloadV
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder_Build.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.Build%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/DelegatingPayloadVariableExtractor.cs/#L209">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/DelegatingPayloadVariableExtractor.cs/#L310">View Source</a>
   </span>
   <a id="Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder_Build_" data-uid="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.Build*"></a>
   <h4 id="Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder_Build" data-uid="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.Build">Build()</h4>
@@ -158,7 +160,7 @@ and for building <a class="xref" href="Agenix.Core.Validation.DelegatingPayloadV
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder_Expression_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.Expression(System.String%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/DelegatingPayloadVariableExtractor.cs/#L197">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/DelegatingPayloadVariableExtractor.cs/#L298">View Source</a>
   </span>
   <a id="Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder_Expression_" data-uid="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.Expression*"></a>
   <h4 id="Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder_Expression_System_String_System_Object_" data-uid="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.Expression(System.String,System.Object)">Expression(string, object)</h4>
@@ -214,7 +216,7 @@ and for building <a class="xref" href="Agenix.Core.Validation.DelegatingPayloadV
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder_Expressions_System_Collections_Generic_IDictionary_System_String_System_Object__.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.Expressions(System.Collections.Generic.IDictionary%7BSystem.String%2CSystem.Object%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/DelegatingPayloadVariableExtractor.cs/#L183">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/DelegatingPayloadVariableExtractor.cs/#L280">View Source</a>
   </span>
   <a id="Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder_Expressions_" data-uid="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.Expressions*"></a>
   <h4 id="Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder_Expressions_System_Collections_Generic_IDictionary_System_String_System_Object__" data-uid="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.Expressions(System.Collections.Generic.IDictionary{System.String,System.Object})">Expressions(IDictionary&lt;string, object&gt;)</h4>
@@ -264,7 +266,7 @@ and for building <a class="xref" href="Agenix.Core.Validation.DelegatingPayloadV
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder_FromBody.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.FromBody%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/DelegatingPayloadVariableExtractor.cs/#L215">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/DelegatingPayloadVariableExtractor.cs/#L316">View Source</a>
   </span>
   <a id="Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder_FromBody_" data-uid="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.FromBody*"></a>
   <h4 id="Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder_FromBody" data-uid="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.FromBody">FromBody()</h4>
@@ -294,7 +296,7 @@ and for building <a class="xref" href="Agenix.Core.Validation.DelegatingPayloadV
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder_Namespace_System_String_System_String_.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.Namespace(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/DelegatingPayloadVariableExtractor.cs/#L241">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/DelegatingPayloadVariableExtractor.cs/#L346">View Source</a>
   </span>
   <a id="Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder_Namespace_" data-uid="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.Namespace*"></a>
   <h4 id="Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder_Namespace_System_String_System_String_" data-uid="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.Namespace(System.String,System.String)">Namespace(string, string)</h4>
@@ -350,7 +352,7 @@ and for building <a class="xref" href="Agenix.Core.Validation.DelegatingPayloadV
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder_Namespaces_System_Collections_Generic_Dictionary_System_String_System_String__.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.Namespaces(System.Collections.Generic.Dictionary%7BSystem.String%2CSystem.String%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/DelegatingPayloadVariableExtractor.cs/#L227">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/DelegatingPayloadVariableExtractor.cs/#L328">View Source</a>
   </span>
   <a id="Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder_Namespaces_" data-uid="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.Namespaces*"></a>
   <h4 id="Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder_Namespaces_System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder.Namespaces(System.Collections.Generic.Dictionary{System.String,System.String})">Namespaces(Dictionary&lt;string, string&gt;)</h4>
@@ -403,7 +405,13 @@ and for building <a class="xref" href="Agenix.Core.Validation.DelegatingPayloadV
       <a class="xref" href="Agenix.Api.Message.IMessageProcessor.IBuilder-2.html">IMessageProcessor.IBuilder&lt;T, TB&gt;</a>
   </div>
   <div>
+      <a class="xref" href="Agenix.Api.Message.IMessageTransformer.IBuilder-2.html">IMessageTransformer.IBuilder&lt;T, TB&gt;</a>
+  </div>
+  <div>
       <a class="xref" href="Agenix.Api.Builder.IWithExpressions-1.html">IWithExpressions&lt;TB&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Agenix.Api.IBuilder.html">IBuilder</a>
   </div>
 
 </article>
@@ -417,7 +425,7 @@ and for building <a class="xref" href="Agenix.Core.Validation.DelegatingPayloadV
                     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Core_Validation_DelegatingPayloadVariableExtractor_Builder.md&amp;value=---%0Auid%3A%20Agenix.Core.Validation.DelegatingPayloadVariableExtractor.Builder%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
                   </li>
                   <li>
-                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/DelegatingPayloadVariableExtractor.cs/#L171" class="contribution-link">View Source</a>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Core/Validation/DelegatingPayloadVariableExtractor.cs/#L268" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

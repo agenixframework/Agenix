@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Namespace Agenix.GraphQL.Client </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Namespace Agenix.GraphQL.Client ">
+    
+    
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Agenix.GraphQL.Client">
+
+  <h1 id="Agenix_GraphQL_Client" data-uid="Agenix.GraphQL.Client" class="text-break">Namespace Agenix.GraphQL.Client</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">
+Classes
+</h3>
+      <h4><a class="xref" href="Agenix.GraphQL.Client.GraphQLClient.html">GraphQLClient</a></h4>
+      <section><p>GraphQL client implementation that extends AbstractEndpoint and provides GraphQL-specific functionality.
+Supports queries, mutations, and subscriptions with full Agenix integration.</p>
+</section>
+      <h4><a class="xref" href="Agenix.GraphQL.Client.GraphQLClientBuilder.html">GraphQLClientBuilder</a></h4>
+      <section><p>Builder for creating and configuring GraphQL client endpoints with fluent API.
+Provides methods to configure GraphQL-specific settings such as endpoint URLs,
+authentication, retry policies, and WebSocket support for subscriptions.</p>
+</section>
+      <h4><a class="xref" href="Agenix.GraphQL.Client.GraphQLClientFactory.html">GraphQLClientFactory</a></h4>
+      <section><p>Represents a factory for creating message handlers for GraphQL operations.
+This factory allows the configuration of multiple delegating handlers that form a pipeline
+for processing GraphQL HTTP requests and responses.</p>
+</section>
+      <h4><a class="xref" href="Agenix.GraphQL.Client.GraphQLEndpointComponent.html">GraphQLEndpointComponent</a></h4>
+      <section><p>Represents a component responsible for creating GraphQL client endpoints based on a given URI resource
+and associated parameters. It allows configuration of GraphQL-specific endpoint settings and supports
+various GraphQL-related options such as operation types, WebSocket connections, and subscription handling.
+Supports both HTTP and HTTPS protocols for secure communication.</p>
+</section>
+      <h4><a class="xref" href="Agenix.GraphQL.Client.GraphQLEndpointConfiguration.html">GraphQLEndpointConfiguration</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Agenix.GraphQL.Client.GraphQLEndpointConfiguration.GraphQLAuthenticationConfiguration.html">GraphQLEndpointConfiguration.GraphQLAuthenticationConfiguration</a></h4>
+      <section><p>Authentication configuration for GraphQL requests.</p>
+</section>
+      <h4><a class="xref" href="Agenix.GraphQL.Client.GraphQLEndpointConfiguration.GraphQLRetryPolicy.html">GraphQLEndpointConfiguration.GraphQLRetryPolicy</a></h4>
+      <section><p>Retry policy configuration for GraphQL requests.</p>
+</section>
+      <h4><a class="xref" href="Agenix.GraphQL.Client.GraphQLEndpointConfiguration.GraphQLSerializerOptions.html">GraphQLEndpointConfiguration.GraphQLSerializerOptions</a></h4>
+      <section><p>Configuration options for GraphQL serialization.</p>
+</section>
+      <h4><a class="xref" href="Agenix.GraphQL.Client.GraphQLSecureEndpointComponent.html">GraphQLSecureEndpointComponent</a></h4>
+      <section><p>GraphQL endpoint component that enforces HTTPS for secure communication.
+Automatically uses HTTPS for HTTP requests and WSS for WebSocket subscriptions.</p>
+</section>
+
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

@@ -78,7 +78,7 @@ IMessageProcessor interfaces.</p>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="Agenix.Api.Message.IMessageProcessor.IBuilder-2.html#Agenix_Api_Message_IMessageProcessor_IBuilder_2_Build">IMessageProcessor.IBuilder&lt;T, TB&gt;.Build()</a>
+      <a class="xref" href="Agenix.Api.Message.IMessageTransformer.IBuilder-2.html#Agenix_Api_Message_IMessageTransformer_IBuilder_2_Build">IMessageTransformer.IBuilder&lt;T, TB&gt;.Build()</a>
     </div>
     <div>
       <a class="xref" href="Agenix.Api.Builder.IWithExpressions-1.html#Agenix_Api_Builder_IWithExpressions_1_Expressions_System_Collections_Generic_IDictionary_System_String_System_Object__">IWithExpressions&lt;TB&gt;.Expressions(IDictionary&lt;string, object&gt;)</a>
@@ -91,7 +91,7 @@ IMessageProcessor interfaces.</p>
   <h6><strong>Assembly</strong>: Agenix.Api.dll</h6>
   <h5 id="Agenix_Api_Variable_IVariableExtractor_IBuilder_2_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IVariableExtractor.IBuilder&lt;out T, TB&gt; : IMessageProcessor.IBuilder&lt;T, TB&gt;, IWithExpressions&lt;TB&gt; where T : IVariableExtractor where TB : IVariableExtractor.IBuilder&lt;out T, TB&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IVariableExtractor.IBuilder&lt;out T, TB&gt; : IMessageProcessor.IBuilder&lt;T, TB&gt;, IMessageTransformer.IBuilder&lt;T, TB&gt;, IWithExpressions&lt;TB&gt;, IBuilder where T : IVariableExtractor where TB : IBuilder</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -121,7 +121,7 @@ IMessageProcessor interfaces.</p>
     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Variable_IVariableExtractor_IBuilder_2_Build.md&amp;value=---%0Auid%3A%20Agenix.Api.Variable.IVariableExtractor.IBuilder%602.Build%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Variable/IVariableExtractor.cs/#L112">View Source</a>
+    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Variable/IVariableExtractor.cs/#L114">View Source</a>
   </span>
   <a id="Agenix_Api_Variable_IVariableExtractor_IBuilder_2_Build_" data-uid="Agenix.Api.Variable.IVariableExtractor.IBuilder`2.Build*"></a>
   <h4 id="Agenix_Api_Variable_IVariableExtractor_IBuilder_2_Build" data-uid="Agenix.Api.Variable.IVariableExtractor.IBuilder`2.Build">Build()</h4>
@@ -158,7 +158,7 @@ IMessageProcessor interfaces.</p>
                     <a href="https://github.com/asuruceanu/Agenix/new/master/apiSpec/new?filename=Agenix_Api_Variable_IVariableExtractor_IBuilder_2.md&amp;value=---%0Auid%3A%20Agenix.Api.Variable.IVariableExtractor.IBuilder%602%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
                   </li>
                   <li>
-                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Variable/IVariableExtractor.cs/#L108" class="contribution-link">View Source</a>
+                    <a href="https://github.com/asuruceanu/Agenix/blob/master/Agenix.Api/Variable/IVariableExtractor.cs/#L110" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
