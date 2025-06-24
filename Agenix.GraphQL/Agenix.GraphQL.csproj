@@ -9,12 +9,12 @@
   <ItemGroup>
     <PackageReference Include="GraphQL.Client" Version="6.1.0"/>
     <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="6.1.0"/>
-    <PackageReference Include="HotChocolate.AspNetCore" Version="15.1.6" />
-    <PackageReference Include="HotChocolate.Subscriptions.InMemory" Version="15.1.6" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="15.1.6"/>
+    <PackageReference Include="HotChocolate.Subscriptions.InMemory" Version="15.1.6"/>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Extension\agenix\action\" />
+    <Folder Include="Extension\agenix\action\"/>
     <Folder Include="Interceptor\"/>
     <Folder Include="Message\"/>
   </ItemGroup>
@@ -24,14 +24,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Extensions\agenix\action\builder\graphql" />
-    <EmbeddedResource Include="Extension\agenix\action\builder\graphql" />
-    <None Remove="Extensions\agenix\endpoint\builder\graphql" />
-    <EmbeddedResource Include="Extension\agenix\endpoint\builder\graphql" />
-    <None Remove="Extensions\agenix\endpoint\component\graphql" />
-    <EmbeddedResource Include="Extension\agenix\endpoint\component\graphql" />
-    <None Remove="Extensions\agenix\endpoint\component\graphql-secure" />
-    <EmbeddedResource Include="Extension\agenix\endpoint\component\graphql-secure" />
+    <None Remove="Extensions\agenix\action\builder\graphql"/>
+    <EmbeddedResource Include="Extension\agenix\action\builder\graphql"/>
+    <None Remove="Extensions\agenix\endpoint\builder\graphql"/>
+    <EmbeddedResource Include="Extension\agenix\endpoint\builder\graphql"/>
+    <None Remove="Extensions\agenix\endpoint\component\graphql"/>
+    <EmbeddedResource Include="Extension\agenix\endpoint\component\graphql"/>
+    <None Remove="Extensions\agenix\endpoint\component\graphql-secure"/>
+    <EmbeddedResource Include="Extension\agenix\endpoint\component\graphql-secure"/>
   </ItemGroup>
 
 </Project>

@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Copyright>Copyright (c) 2025 Agenix</Copyright>
     <Authors>Andrei Suruceanu</Authors>
     <IsPackable>false</IsPackable>
@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Agenix.NUnit.Runtime\Agenix.NUnit.Runtime.csproj" />
+    <ProjectReference Include="..\Agenix.NUnit.Runtime\Agenix.NUnit.Runtime.csproj"/>
     <ProjectReference Include="..\Agenix.Validation.Json\Agenix.Validation.Json.csproj"/>
     <ProjectReference Include="..\Agenix.Validation.NHamcrest\Agenix.Validation.NHamcrest.csproj"/>
   </ItemGroup>
@@ -36,19 +36,19 @@
     <EmbeddedResource Include="Resources\Validation\BookSchema.json"/>
     <None Remove="Resources\validation\ProductsSchema.json"/>
     <EmbeddedResource Include="Resources\Validation\ProductsSchema.json"/>
-    <None Remove="Resources\Variable\Dictionary\json-path.data.dictionary" />
-    <EmbeddedResource Include="Resources\Variable\Dictionary\json-path.data.dictionary" />
-    <None Remove="Resources\Variable\Dictionary\json.data.dictionary" />
-    <EmbeddedResource Include="Resources\Variable\Dictionary\json.data.dictionary" />
-    <None Remove="Resources\Variable\Dictionary\jsonmapping.properties" />
-    <EmbeddedResource Include="Resources\Variable\Dictionary\jsonmapping.properties" />
-    <None Remove="Resources\Variable\Dictionary\mapping.properties" />
-    <EmbeddedResource Include="Resources\Variable\Dictionary\mapping.properties" />
+    <None Remove="Resources\Variable\Dictionary\json-path.data.dictionary"/>
+    <EmbeddedResource Include="Resources\Variable\Dictionary\json-path.data.dictionary"/>
+    <None Remove="Resources\Variable\Dictionary\json.data.dictionary"/>
+    <EmbeddedResource Include="Resources\Variable\Dictionary\json.data.dictionary"/>
+    <None Remove="Resources\Variable\Dictionary\jsonmapping.properties"/>
+    <EmbeddedResource Include="Resources\Variable\Dictionary\jsonmapping.properties"/>
+    <None Remove="Resources\Variable\Dictionary\mapping.properties"/>
+    <EmbeddedResource Include="Resources\Variable\Dictionary\mapping.properties"/>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Integration\" />
-    <Folder Include="Message\Selector\" />
+    <Folder Include="Integration\"/>
+    <Folder Include="Message\Selector\"/>
   </ItemGroup>
 
 </Project>

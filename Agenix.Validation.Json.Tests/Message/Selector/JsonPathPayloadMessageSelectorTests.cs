@@ -1,3 +1,29 @@
+#region License
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements. See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership. The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License. You may obtain a copy of the License at
+// 
+//   http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied. See the License for the
+// specific language governing permissions and limitations
+// under the License.
+// 
+// Copyright (c) 2025 Agenix
+// 
+// This file has been modified from its original form.
+// Original work Copyright (C) 2006-2025 the original author or authors.
+
+#endregion
+
 using Agenix.Core.Message;
 using Agenix.Validation.Json.Message.Selector;
 using NUnit.Framework;
@@ -13,9 +39,12 @@ namespace Agenix.Validation.Json.Tests.Message.Selector
 
             using (Assert.EnterMultipleScope())
             {
-                Assert.That(messageSelector.Accept(new DefaultMessage("{ \"foo\": { \"text\": \"foobar\" } }")), Is.True);
-                Assert.That(messageSelector.Accept(new DefaultMessage("{ \"foo\": { \"text\": \"barfoo\" } }")), Is.False);
-                Assert.That(messageSelector.Accept(new DefaultMessage("{ \"bar\": { \"text\": \"foobar\" } }")), Is.False);
+                Assert.That(messageSelector.Accept(new DefaultMessage("{ \"foo\": { \"text\": \"foobar\" } }")),
+                    Is.True);
+                Assert.That(messageSelector.Accept(new DefaultMessage("{ \"foo\": { \"text\": \"barfoo\" } }")),
+                    Is.False);
+                Assert.That(messageSelector.Accept(new DefaultMessage("{ \"bar\": { \"text\": \"foobar\" } }")),
+                    Is.False);
                 Assert.That(messageSelector.Accept(new DefaultMessage("This is plain text!")), Is.False);
             }
         }
@@ -23,13 +52,17 @@ namespace Agenix.Validation.Json.Tests.Message.Selector
         [Test]
         public void TestJsonPathEvaluationValidationMatcher()
         {
-            var messageSelector = new JsonPathPayloadMessageSelector("jsonPath:$.foo.text", "@StartsWith(foo)@", Context);
+            var messageSelector =
+                new JsonPathPayloadMessageSelector("jsonPath:$.foo.text", "@StartsWith(foo)@", Context);
 
             using (Assert.EnterMultipleScope())
             {
-                Assert.That(messageSelector.Accept(new DefaultMessage("{ \"foo\": { \"text\": \"foobar\" } }")), Is.True);
-                Assert.That(messageSelector.Accept(new DefaultMessage("{ \"foo\": { \"text\": \"barfoo\" } }")), Is.False);
-                Assert.That(messageSelector.Accept(new DefaultMessage("{ \"bar\": { \"text\": \"foobar\" } }")), Is.False);
+                Assert.That(messageSelector.Accept(new DefaultMessage("{ \"foo\": { \"text\": \"foobar\" } }")),
+                    Is.True);
+                Assert.That(messageSelector.Accept(new DefaultMessage("{ \"foo\": { \"text\": \"barfoo\" } }")),
+                    Is.False);
+                Assert.That(messageSelector.Accept(new DefaultMessage("{ \"bar\": { \"text\": \"foobar\" } }")),
+                    Is.False);
                 Assert.That(messageSelector.Accept(new DefaultMessage("This is plain text!")), Is.False);
             }
         }
@@ -41,10 +74,17 @@ namespace Agenix.Validation.Json.Tests.Message.Selector
 
             using (Assert.EnterMultipleScope())
             {
-                Assert.That(messageSelector.Accept(new DefaultMessage(new DefaultMessage("{ \"foo\": { \"text\": \"foobar\" } }"))), Is.True);
-                Assert.That(messageSelector.Accept(new DefaultMessage(new DefaultMessage("{ \"foo\": { \"text\": \"barfoo\" } }"))), Is.False);
-                Assert.That(messageSelector.Accept(new DefaultMessage(new DefaultMessage("{ \"bar\": { \"text\": \"foobar\" } }"))), Is.False);
-                Assert.That(messageSelector.Accept(new DefaultMessage(new DefaultMessage("This is plain text!"))), Is.False);
+                Assert.That(
+                    messageSelector.Accept(
+                        new DefaultMessage(new DefaultMessage("{ \"foo\": { \"text\": \"foobar\" } }"))), Is.True);
+                Assert.That(
+                    messageSelector.Accept(
+                        new DefaultMessage(new DefaultMessage("{ \"foo\": { \"text\": \"barfoo\" } }"))), Is.False);
+                Assert.That(
+                    messageSelector.Accept(
+                        new DefaultMessage(new DefaultMessage("{ \"bar\": { \"text\": \"foobar\" } }"))), Is.False);
+                Assert.That(messageSelector.Accept(new DefaultMessage(new DefaultMessage("This is plain text!"))),
+                    Is.False);
             }
         }
     }
