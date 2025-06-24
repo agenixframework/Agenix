@@ -1,3 +1,3 @@
-﻿using Agenix.Validation.Xml.Tests;
+using Agenix.Validation.Xml.Tests;
 
 [assembly: NUnitLog4NetSupport]

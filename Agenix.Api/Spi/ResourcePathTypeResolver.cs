@@ -193,7 +193,7 @@ public class ResourcePathTypeResolver : ITypeResolver
         }
         catch (IOException e)
         {
-            Log.LogWarning(@"Failed to resolve resources in '{FullPath}' => ", fullPath, e);
+            Log.LogWarning(e, "Failed to resolve resources in '{}' => ", fullPath);
         }
 
         return typeLookup;
@@ -225,7 +225,7 @@ public class ResourcePathTypeResolver : ITypeResolver
 
         // Track already loaded assemblies by name to avoid duplicates
         var loadedAssemblyNames = new HashSet<string>(
-            AppDomain.CurrentDomain.GetAssemblies().Select(a => a.GetName().Name)
+            AppDomain.CurrentDomain.GetAssemblies().Select(a => a.GetName().Name)!
         );
 
         // First load assemblies from the current directory
