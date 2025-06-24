@@ -74,8 +74,7 @@ public class DataDictionaryIT
 
     public NodeMappingDataDictionary HelloServiceDataDictionary()
     {
-        var dict = new NodeMappingDataDictionary();
-        dict.IsGlobalScope = false;
+        var dict = new NodeMappingDataDictionary { IsGlobalScope = false };
         dict.Mappings.Add("HelloRequest.MessageId", "${messageId}");
         dict.Mappings.Add("HelloRequest.CorrelationId", "${correlationId}");
         dict.Mappings.Add("HelloRequest.User", "Agenix");

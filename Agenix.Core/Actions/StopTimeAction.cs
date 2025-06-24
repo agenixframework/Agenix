@@ -61,7 +61,7 @@ public class StopTimeAction(StopTimeAction.Builder builder) : AbstractTestAction
         {
             if (context.GetVariables().ContainsKey(timeLineId))
             {
-                var time = DateTime.Now.Ticks - context.GetVariable<long>(timeLineId, typeof(long));
+                var time = DateTime.Now.Ticks - context.GetVariable<long>(timeLineId);
                 context.SetVariable(timeLineId + timeLineSuffix, time);
 
                 Log.LogInformation(description != null

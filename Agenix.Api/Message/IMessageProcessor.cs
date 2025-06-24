@@ -105,7 +105,5 @@ public interface IMessageProcessor : IMessageTransformer
     /// </summary>
     new interface IBuilder<out T, TB> : IMessageTransformer.IBuilder<T, TB>, IBuilder
         where T : IMessageProcessor
-        where TB : IBuilder
-    {
-    }
+        where TB : IBuilder;
 }
