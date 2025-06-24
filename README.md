@@ -11,13 +11,13 @@
 
   <!-- Badges -->
   <p>
-    <a href="https://github.com/asuruceanu/Agenix/actions">
-      <img src="https://github.com/asuruceanu/Agenix/actions/workflows/dotnet-pr-check.yml/badge.svg" alt="CI Status"/>
+    <a href="https://github.com/agenixframework/Agenix/actions">
+      <img src="https://github.com/agenixframework/Agenix/actions/workflows/dotnet-pr-check.yml/badge.svg" alt="CI Status"/>
     </a>
     <a href="https://www.nuget.org/packages/Agenix.Core/">
       <img src="https://img.shields.io/nuget/v/Agenix.Core.svg" alt="NuGet Version"/>
     </a>
-    <a href="https://github.com/asuruceanu/agenix/blob/master/LICENSE">
+    <a href="https://github.com/agenixframework/agenix/blob/master/LICENSE">
       <img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="License"/>
     </a>
   </p>
