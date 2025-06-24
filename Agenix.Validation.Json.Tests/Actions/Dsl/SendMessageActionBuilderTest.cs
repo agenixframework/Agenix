@@ -1,3 +1,29 @@
+#region License
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements. See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership. The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License. You may obtain a copy of the License at
+// 
+//   http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied. See the License for the
+// specific language governing permissions and limitations
+// under the License.
+// 
+// Copyright (c) 2025 Agenix
+// 
+// This file has been modified from its original form.
+// Original work Copyright (C) 2006-2025 the original author or authors.
+
+#endregion
+
 using Agenix.Api.Endpoint;
 using Agenix.Api.Message;
 using Agenix.Api.Messaging;
@@ -516,7 +542,10 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
     [Test]
     public void TestSendBuilderWithDictionary()
     {
-        var dictionary = new JsonMappingDataDictionary { Mappings = new Dictionary<string, string> { { "TestRequest.Message", "Hello World!" } } };
+        var dictionary = new JsonMappingDataDictionary
+        {
+            Mappings = new Dictionary<string, string> { { "TestRequest.Message", "Hello World!" } }
+        };
 
         // Arrange
         _referenceResolver.Reset();
@@ -558,7 +587,10 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
     [Test]
     public void TestSendBuilderWithDictionaryName()
     {
-        var dictionary = new JsonMappingDataDictionary { Mappings = new Dictionary<string, string> { { "TestRequest.Message", "Hello World!" } } };
+        var dictionary = new JsonMappingDataDictionary
+        {
+            Mappings = new Dictionary<string, string> { { "TestRequest.Message", "Hello World!" } }
+        };
 
         // Reset mocks
         // Arrange
@@ -569,21 +601,21 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
         _messageEndpoint.Setup(x => x.CreateProducer()).Returns(_messageProducer.Object);
 
         _messageProducer
-           .Setup(x => x.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-           .Callback<IMessage, TestContext>((message, context) =>
-           {
-               var payload = NormalizeJson(message.GetPayload<string>());
-               Assert.That(payload, Is.EqualTo("{\"TestRequest\":{\"Message\":\"Hello World!\"}}"));
-           });
+            .Setup(x => x.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
+            .Callback<IMessage, TestContext>((message, context) =>
+            {
+                var payload = NormalizeJson(message.GetPayload<string>());
+                Assert.That(payload, Is.EqualTo("{\"TestRequest\":{\"Message\":\"Hello World!\"}}"));
+            });
 
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-           .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new Dictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-           .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new Dictionary<string, SequenceAfterTest>());
         _referenceResolver.Setup(x => x.Resolve<IDataDictionary>("customDictionary"))
-           .Returns(dictionary);
+            .Returns(dictionary);
 
         Context.SetReferenceResolver(_referenceResolver.Object);
         var runner = new DefaultTestCaseRunner(Context);

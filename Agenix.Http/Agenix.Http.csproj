@@ -24,18 +24,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Extension\agenix\" />
+    <Folder Include="Extension\agenix\"/>
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Extension\agenix\action\builder\http" />
-    <EmbeddedResource Include="Extension\agenix\action\builder\http" />
-    <None Remove="Extension\agenix\endpoint\builder\http" />
-    <EmbeddedResource Include="Extension\agenix\endpoint\builder\http" />
-    <None Remove="Extension\agenix\endpoint\component\http" />
-    <EmbeddedResource Include="Extension\agenix\endpoint\component\http" />
-    <None Remove="Extension\agenix\endpoint\component\https" />
-    <EmbeddedResource Include="Extension\agenix\endpoint\component\https" />
+    <None Remove="Extension\agenix\action\builder\http"/>
+    <EmbeddedResource Include="Extension\agenix\action\builder\http"/>
+    <None Remove="Extension\agenix\endpoint\builder\http"/>
+    <EmbeddedResource Include="Extension\agenix\endpoint\builder\http"/>
+    <None Remove="Extension\agenix\endpoint\component\http"/>
+    <EmbeddedResource Include="Extension\agenix\endpoint\component\http"/>
+    <None Remove="Extension\agenix\endpoint\component\https"/>
+    <EmbeddedResource Include="Extension\agenix\endpoint\component\https"/>
   </ItemGroup>
 
 </Project>

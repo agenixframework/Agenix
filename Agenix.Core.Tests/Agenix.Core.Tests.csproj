@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Copyright>Copyright (c) 2025 Agenix</Copyright>
     <Authors>Andrei Suruceanu</Authors>
     <RootNamespace>Agenix.Core.Tests</RootNamespace>
@@ -16,7 +16,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="8.0.0"/>
     <PackageReference Include="Moq" Version="4.20.72"/>
     <PackageReference Include="Moq.AutoMock" Version="3.5.0"/>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1"/>
     <PackageReference Include="System.Data.SQLite" Version="1.0.119"/>
     <PackageReference Include="System.Formats.Asn1" Version="8.0.1"/>
     <PackageReference Include="System.Text.Json" Version="8.0.5"/>

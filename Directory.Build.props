@@ -6,19 +6,19 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 
     <!-- License Information -->
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageIconUrl>https://raw.githubusercontent.com/asuruceanu/agenix/master/.assets/icons/icon.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/agenixframework/agenix/master/.assets/icons/icon.png</PackageIconUrl>
     <Copyright>Copyright (c) 2025 Agenix</Copyright>
 
     <!-- Author Information -->
-    <Authors>Andrei Suruceanu</Authors>
+    <Authors>Agenix Team</Authors>
 
     <!-- Repository Information -->
-    <RepositoryUrl>https://github.com/asuruceanu/Agenix.ATF</RepositoryUrl>
+    <RepositoryUrl>https://github.com/agenixframework/Agenix.ATF</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageProjectUrl>https://github.com/asuruceanu/Agenix.ATF</PackageProjectUrl>
-    <PackageOwners>andy.suruceanu@gmail.com</PackageOwners>
+    <PackageProjectUrl>https://github.com/agenixframework/Agenix.ATF</PackageProjectUrl>
+    <PackageOwners>team@agenixframework.org</PackageOwners>
 
     <!-- Package Settings -->
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
@@ -102,30 +102,5 @@
         <None Include="$(MSBuildThisFileDirectory).assets/icons/icon-128.png" Pack="true" PackagePath="icons/" Link="icons/icon-128.png" />
         <None Include="$(MSBuildThisFileDirectory).assets/icons/icon.svg" Pack="true" PackagePath="icons/" Link="icons/icon.svg" />
       </ItemGroup>
-
-
-    <Project>
-      <PropertyGroup>
-        <!-- Define our own CI detection -->
-        <IsCI Condition="'$(GITHUB_ACTIONS)' == 'true' OR '$(TF_BUILD)' == 'true' OR '$(CI)' == 'true'">true</IsCI>
-      </PropertyGroup>
-
-      <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
-        <!-- Always enable parallelism -->
-        <AssemblyAttribute_Parallelizable>NUnit.Framework.ParallelScope.All</AssemblyAttribute_Parallelizable>
-
-        <!-- Use ProcessorCount if > 1, otherwise use 2 -->
-        <AssemblyAttribute_LevelOfParallelism>$([MSBuild]::ValueOrDefault('$([System.Math]::Max($([System.Environment]::ProcessorCount), 2))', '2'))</AssemblyAttribute_LevelOfParallelism>
-      </PropertyGroup>
-
-      <ItemGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
-        <AssemblyAttribute Include="NUnit.Framework.ParallelizableAttribute">
-          <_Parameter1>$(AssemblyAttribute_Parallelizable)</_Parameter1>
-        </AssemblyAttribute>
-        <AssemblyAttribute Include="NUnit.Framework.LevelOfParallelismAttribute">
-          <_Parameter1>$(AssemblyAttribute_LevelOfParallelism)</_Parameter1>
-        </AssemblyAttribute>
-      </ItemGroup>
-    </Project>
 
 </Project>

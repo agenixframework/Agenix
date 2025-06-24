@@ -27,7 +27,7 @@
 
   <ItemGroup>
     <Folder Include="Extension\agenix\message\"/>
-    <Folder Include="Variable\Dictionary\Json\" />
+    <Folder Include="Variable\Dictionary\Json\"/>
   </ItemGroup>
 
   <ItemGroup>
