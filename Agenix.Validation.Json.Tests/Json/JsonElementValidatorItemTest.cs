@@ -44,7 +44,7 @@ public class JsonElementValidatorItemTest
     [TestCaseSource(nameof(GetPathPairs))]
     public void ShouldGetJsonPath(string expectedPath, JsonElementValidatorItem<string> fixture)
     {
-        ClassicAssert.AreEqual(expectedPath, fixture.GetJsonPath());
+        Assert.That(fixture.GetJsonPath(), Is.EqualTo(expectedPath));
     }
 
     public static IEnumerable<TestCaseData> GetNamePairs()
@@ -69,6 +69,6 @@ public class JsonElementValidatorItemTest
     [TestCaseSource(nameof(GetNamePairs))]
     public void ShouldGetName(string expectedName, JsonElementValidatorItem<string> fixture)
     {
-        ClassicAssert.AreEqual(expectedName, fixture.GetName());
+        Assert.That(fixture.GetName(), Is.EqualTo(expectedName));
     }
 }

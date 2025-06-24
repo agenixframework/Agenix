@@ -78,7 +78,7 @@ public class MessageListeners : IMessageListenerAware
 
     /// Checks if the message listeners list is empty.
     /// <return>Returns true if there are no message listeners; otherwise, false.</return>
-    public bool IsEmpty()
+    public virtual bool IsEmpty()
     {
         return _messageListeners.Count == 0;
     }

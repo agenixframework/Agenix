@@ -467,7 +467,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <param name="direction">The direction of the message.</param>
     private void LogMessage(string operation, IMessage message, MessageDirection direction)
     {
-        if (_messageListeners != null && _messageListeners.IsEmpty())
+        if (_messageListeners != null && !_messageListeners.IsEmpty())
         {
             switch (direction)
             {
@@ -485,7 +485,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
         }
         else if (Log.IsEnabled(LogLevel.Debug))
         {
-            Log.LogDebug($"{operation} message:\n{message?.ToString() ?? ""}");
+            Log.LogDebug("{Operation} message:\n{Empty}", operation, message?.ToString() ?? "");
         }
     }
 
@@ -513,7 +513,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
         }
         catch (Exception e)
         {
-            Log.LogWarning("Executing error handler listener failed!", e);
+            Log.LogWarning(e, "Executing error handler listener failed!");
         }
 
         return exception;
@@ -545,13 +545,13 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <summary>
     ///     Gets the value for the given variable expression. Expression usually is the simple variable name, with optional
     ///     expression prefix/suffix.
-    ///     In case the the variable is not known to the context, throw a runtime exception.
+    ///     In case the variable is not known to the context, throw a runtime exception.
     /// </summary>
     /// <param name="variableExpression">expression to search for.</param>
     /// <returns>value of the variable</returns>
     public string GetVariable(string variableExpression)
     {
-        return GetVariable<string>(variableExpression, typeof(string));
+        return GetVariable<string>(variableExpression);
     }
 
     /// <summary>
@@ -561,9 +561,9 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <param name="variableExpression"></param>
     /// <param name="type"></param>
     /// <returns></returns>
-    public T GetVariable<T>(string variableExpression, Type type)
+    public T GetVariable<T>(string variableExpression)
     {
-        return _typeConverter.ConvertIfNecessary<T>(GetVariableObject(variableExpression), type);
+        return _typeConverter.ConvertIfNecessary<T>(GetVariableObject(variableExpression), typeof(T));
     }
 
     /// <summary>
@@ -591,7 +591,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
         if (Log.IsEnabled(LogLevel.Debug))
         {
             Log.LogDebug(
-                $"Setting variable: {VariableUtils.CutOffVariablesPrefix(variableName)} with value: '{value}'");
+                "Setting variable: {CutOffVariablesPrefix} with value: '{Value}'", VariableUtils.CutOffVariablesPrefix(variableName), value);
         }
 
         _variables[VariableUtils.CutOffVariablesPrefix(variableName)] = value;
@@ -698,7 +698,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
         foreach (var value in list)
         {
             if (value is string strValue)
-                // Add new value after check if it is variable or function
+            // Add new value after check if it is variable or function
             {
                 variableFreeList.Add((T)(object)ReplaceDynamicContentInString(strValue));
             }

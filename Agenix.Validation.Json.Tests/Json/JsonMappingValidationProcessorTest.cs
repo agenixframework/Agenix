@@ -21,8 +21,8 @@ public class JsonMappingValidationProcessorTest : AbstractNUnitSetUp
             .JsonSerializer(_jsonSerializer)
             .Validator((person, headers, context) =>
             {
-                ClassicAssert.AreEqual(person.Name, "John");
-                ClassicAssert.AreEqual(person.Age, 23);
+                Assert.That(person.Name, Is.EqualTo("John"));
+                Assert.That(person.Age, Is.EqualTo(23));
             })
             .Build();
 
@@ -40,8 +40,8 @@ public class JsonMappingValidationProcessorTest : AbstractNUnitSetUp
             .WithReferenceResolver(referenceResolver)
             .Validator((person, headers, context) =>
             {
-                ClassicAssert.AreEqual(person.Name, "John");
-                ClassicAssert.AreEqual(person.Age, 23);
+                Assert.That(person.Name, Is.EqualTo("John"));
+                Assert.That(person.Age, Is.EqualTo(23));
             })
             .Build();
 
@@ -54,7 +54,7 @@ public class JsonMappingValidationProcessorTest : AbstractNUnitSetUp
         var processor = JsonMappingValidationProcessor<Person>
             .Validate()
             .JsonSerializer(_jsonSerializer)
-            .Validator((person, headers, context) => { ClassicAssert.AreEqual(person.Age, -1); })
+            .Validator((person, headers, context) => { Assert.That(person.Age, Is.EqualTo(-1)); })
             .Build();
 
         Assert.Throws<AssertionException>(() => processor.Validate(_message, Context));

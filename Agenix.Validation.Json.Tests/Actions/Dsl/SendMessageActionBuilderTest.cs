@@ -4,6 +4,7 @@ using Agenix.Api.Messaging;
 using Agenix.Api.Report;
 using Agenix.Api.Validation;
 using Agenix.Api.Validation.Context;
+using Agenix.Api.Variable.Dictionary;
 using Agenix.Core;
 using Agenix.Core.Actions;
 using Agenix.Core.Container;
@@ -13,13 +14,15 @@ using Agenix.Validation.Json.Json;
 using Agenix.Validation.Json.Message.Builder;
 using Agenix.Validation.Json.Tests.Message;
 using Agenix.Validation.Json.Validation;
+using Agenix.Validation.Json.Variable.Dictionary.Json;
 using Moq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using NUnit.Framework;
-using TestContext = Agenix.Api.Context.TestContext;
 using static Agenix.Core.Actions.SendMessageAction.Builder;
 using IReferenceResolver = Agenix.Api.Spi.IReferenceResolver;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Validation.Json.Tests.Actions.Dsl;
 
@@ -454,7 +457,6 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
         _messageProducer.Reset();
 
         _messageEndpoint.Setup(x => x.CreateProducer()).Returns(_messageProducer.Object);
-        ;
 
         var schemaRepository = new JsonSchemaRepository();
         schemaRepository.SetName("fooRepository");
@@ -508,6 +510,108 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
             Assert.That(action.Schema, Is.EqualTo("fooSchema"));
             Assert.That(action.SchemaRepository, Is.EqualTo("fooRepository"));
         }
+    }
+
+
+    [Test]
+    public void TestSendBuilderWithDictionary()
+    {
+        var dictionary = new JsonMappingDataDictionary { Mappings = new Dictionary<string, string> { { "TestRequest.Message", "Hello World!" } } };
+
+        // Arrange
+        _referenceResolver.Reset();
+        _messageEndpoint.Reset();
+        _messageProducer.Reset();
+
+        _messageEndpoint.Setup(x => x.CreateProducer()).Returns(_messageProducer.Object);
+        _messageProducer
+            .Setup(x => x.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
+            .Callback<IMessage, TestContext>((message, context) =>
+            {
+                var payload = NormalizeJson(message.GetPayload<string>());
+                Assert.That(payload, Is.EqualTo("{\"TestRequest\":{\"Message\":\"Hello World!\"}}"));
+            });
+
+        var runner = new DefaultTestCaseRunner(Context);
+        runner.Run(SendMessageAction.Builder.Send(_messageEndpoint.Object)
+            .Message()
+            .Type(MessageType.JSON)
+            .Body("{ \"TestRequest\": { \"Message\": \"?\" }}")
+            .Dictionary(dictionary));
+
+        var test = runner.GetTestCase();
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(test.GetActionCount(), Is.EqualTo(1));
+            Assert.That(test.GetActions()[0].GetType(), Is.EqualTo(typeof(SendMessageAction)));
+        }
+
+        var action = (SendMessageAction)test.GetActions()[0];
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(action.Name, Is.EqualTo("send"));
+            Assert.That(action.Endpoint, Is.EqualTo(_messageEndpoint.Object));
+            Assert.That(action.DataDictionary, Is.EqualTo(dictionary));
+        }
+    }
+
+    [Test]
+    public void TestSendBuilderWithDictionaryName()
+    {
+        var dictionary = new JsonMappingDataDictionary { Mappings = new Dictionary<string, string> { { "TestRequest.Message", "Hello World!" } } };
+
+        // Reset mocks
+        // Arrange
+        _referenceResolver.Reset();
+        _messageEndpoint.Reset();
+        _messageProducer.Reset();
+
+        _messageEndpoint.Setup(x => x.CreateProducer()).Returns(_messageProducer.Object);
+
+        _messageProducer
+           .Setup(x => x.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
+           .Callback<IMessage, TestContext>((message, context) =>
+           {
+               var payload = NormalizeJson(message.GetPayload<string>());
+               Assert.That(payload, Is.EqualTo("{\"TestRequest\":{\"Message\":\"Hello World!\"}}"));
+           });
+
+        _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
+        _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
+        _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
+           .Returns(new Dictionary<string, SequenceBeforeTest>());
+        _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
+           .Returns(new Dictionary<string, SequenceAfterTest>());
+        _referenceResolver.Setup(x => x.Resolve<IDataDictionary>("customDictionary"))
+           .Returns(dictionary);
+
+        Context.SetReferenceResolver(_referenceResolver.Object);
+        var runner = new DefaultTestCaseRunner(Context);
+        runner.Run(Send(_messageEndpoint.Object)
+            .Message()
+            .Type(MessageType.JSON)
+            .Body("{ \"TestRequest\": { \"Message\": \"?\" }}")
+            .Dictionary("customDictionary"));
+
+        var test = runner.GetTestCase();
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(test.GetActionCount(), Is.EqualTo(1));
+            Assert.That(test.GetActions()[0].GetType(), Is.EqualTo(typeof(SendMessageAction)));
+        }
+
+        var action = (SendMessageAction)test.GetActions()[0];
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(action.Name, Is.EqualTo("send"));
+            Assert.That(action.Endpoint, Is.EqualTo(_messageEndpoint.Object));
+            Assert.That(action.DataDictionary, Is.EqualTo(dictionary));
+        }
+    }
+
+    private static string NormalizeJson(string json)
+    {
+        return JToken.Parse(json).ToString(Formatting.None);
     }
 
     // Create a custom contract resolver that converts property names to lowercase

@@ -95,24 +95,24 @@ public class XpathSegmentVariableExtractor : SegmentVariableExtractorRegistry.Ab
                 document = xmlDoc;
                 break;
             case string xmlString:
-            {
-                var documentCacheKey = GenerateDocumentCacheKey(xmlString);
-
-                // Try to get a cached document
-                if (testContext.GetVariables().TryGetValue(documentCacheKey, out var cachedDoc) &&
-                    cachedDoc is XmlDocument cachedDocument)
                 {
-                    document = cachedDocument;
-                }
-                else
-                {
-                    // Parse and cache the document
-                    document = XmlUtils.ParseMessagePayload(xmlString);
-                    testContext.SetVariable(documentCacheKey, document);
-                }
+                    var documentCacheKey = GenerateDocumentCacheKey(xmlString);
 
-                break;
-            }
+                    // Try to get a cached document
+                    if (testContext.GetVariables().TryGetValue(documentCacheKey, out var cachedDoc) &&
+                        cachedDoc is XmlDocument cachedDocument)
+                    {
+                        document = cachedDocument;
+                    }
+                    else
+                    {
+                        // Parse and cache the document
+                        document = XmlUtils.ParseMessagePayload(xmlString);
+                        testContext.SetVariable(documentCacheKey, document);
+                    }
+
+                    break;
+                }
         }
 
         if (document == null)

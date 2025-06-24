@@ -155,27 +155,27 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
         Dictionary<string, List<string>> columnValuesMap)
     {
         foreach (var row in results)
-        foreach (var column in row)
-        {
-            var columnName = column.Key;
-            string columnValue;
-
-            if (!columnValuesMap.ContainsKey(columnName))
+            foreach (var column in row)
             {
-                columnValuesMap[columnName] = [];
-            }
+                var columnName = column.Key;
+                string columnValue;
 
-            if (column.Value is byte[] byteArray)
-            {
-                columnValue = Convert.ToBase64String(byteArray);
-            }
-            else
-            {
-                columnValue = (column.Value == null ? null : column.Value.ToString())!;
-            }
+                if (!columnValuesMap.ContainsKey(columnName))
+                {
+                    columnValuesMap[columnName] = [];
+                }
 
-            columnValuesMap[columnName].Add(columnValue);
-        }
+                if (column.Value is byte[] byteArray)
+                {
+                    columnValue = Convert.ToBase64String(byteArray);
+                }
+                else
+                {
+                    columnValue = (column.Value == null ? null : column.Value.ToString())!;
+                }
+
+                columnValuesMap[columnName].Add(columnValue);
+            }
     }
 
     /// <summary>

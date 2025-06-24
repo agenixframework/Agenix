@@ -7,12 +7,12 @@ using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using Agenix.Validation.Xml.Dsl;
 using Agenix.Validation.Xml.Variable.Dictionary.Xml;
 using NUnit.Framework;
-using TestContext = Agenix.Api.Context.TestContext;
 using static Agenix.Core.Actions.CreateVariablesAction.Builder;
-using static Agenix.Core.Actions.TraceVariablesAction.Builder;
 using static Agenix.Core.Actions.EchoAction.Builder;
 using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
 using static Agenix.Core.Actions.SendMessageAction.Builder;
+using static Agenix.Core.Actions.TraceVariablesAction.Builder;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Validation.Xml.Tests.Integration;
 
@@ -74,8 +74,7 @@ public class DataDictionaryIT
 
     public NodeMappingDataDictionary HelloServiceDataDictionary()
     {
-        var dict = new NodeMappingDataDictionary();
-        dict.IsGlobalScope = false;
+        var dict = new NodeMappingDataDictionary { IsGlobalScope = false };
         dict.Mappings.Add("HelloRequest.MessageId", "${messageId}");
         dict.Mappings.Add("HelloRequest.CorrelationId", "${correlationId}");
         dict.Mappings.Add("HelloRequest.User", "Agenix");

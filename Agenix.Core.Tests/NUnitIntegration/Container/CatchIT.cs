@@ -2,8 +2,8 @@ using Agenix.Api.Annotations;
 using Agenix.Api.Exceptions;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
-using static Agenix.Core.Container.Catch.Builder;
 using static Agenix.Core.Actions.FailAction.Builder;
+using static Agenix.Core.Container.Catch.Builder;
 
 namespace Agenix.Core.Tests.NUnitIntegration.Container;
 

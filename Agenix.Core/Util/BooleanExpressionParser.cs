@@ -100,30 +100,30 @@ public class BooleanExpressionParser
                         currentCharacterIndex += MoveCursor(((char)SeparatorToken.CLOSE_PARENTHESIS).ToString());
                         break;
                     default:
-                    {
-                        if (!char.IsDigit(currentCharacter))
                         {
-                            var parsedNonDigit = ParseNonDigits(expression, currentCharacterIndex);
-                            if (IsBoolean(parsedNonDigit))
+                            if (!char.IsDigit(currentCharacter))
                             {
-                                values.Push(ReplaceBooleanStringByIntegerRepresentation(parsedNonDigit));
+                                var parsedNonDigit = ParseNonDigits(expression, currentCharacterIndex);
+                                if (IsBoolean(parsedNonDigit))
+                                {
+                                    values.Push(ReplaceBooleanStringByIntegerRepresentation(parsedNonDigit));
+                                }
+                                else
+                                {
+                                    operators.Push(ValidateOperator(parsedNonDigit));
+                                }
+
+                                currentCharacterIndex += MoveCursor(parsedNonDigit);
                             }
-                            else
+                            else if (char.IsDigit(currentCharacter))
                             {
-                                operators.Push(ValidateOperator(parsedNonDigit));
+                                var parsedDigits = ParseDigits(expression, currentCharacterIndex);
+                                values.Push(parsedDigits);
+                                currentCharacterIndex += MoveCursor(parsedDigits);
                             }
 
-                            currentCharacterIndex += MoveCursor(parsedNonDigit);
+                            break;
                         }
-                        else if (char.IsDigit(currentCharacter))
-                        {
-                            var parsedDigits = ParseDigits(expression, currentCharacterIndex);
-                            values.Push(parsedDigits);
-                            currentCharacterIndex += MoveCursor(parsedDigits);
-                        }
-
-                        break;
-                    }
                 }
             }
 

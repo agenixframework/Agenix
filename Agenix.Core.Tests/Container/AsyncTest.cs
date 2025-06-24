@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 using ITestAction = Agenix.Api.ITestAction;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.Tests.Container;
 
@@ -65,11 +67,36 @@ public class AsyncTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public async Task TestMultipleActionsAsync()
+    public void TestMultipleActionsAsync()
     {
         var action1 = new Mock<ITestAction>();
         var action2 = new Mock<ITestAction>();
         var action3 = new Mock<ITestAction>();
+
+        using var resetEvent = new ManualResetEventSlim(false);
+        var executedActions = 0;
+
+        // Setup actions to signal completion
+        action1.Setup(a => a.Execute(It.IsAny<TestContext>()))
+            .Callback(() =>
+            {
+                if (Interlocked.Increment(ref executedActions) == 3)
+                    resetEvent.Set();
+            });
+
+        action2.Setup(a => a.Execute(It.IsAny<TestContext>()))
+            .Callback(() =>
+            {
+                if (Interlocked.Increment(ref executedActions) == 3)
+                    resetEvent.Set();
+            });
+
+        action3.Setup(a => a.Execute(It.IsAny<TestContext>()))
+            .Callback(() =>
+            {
+                if (Interlocked.Increment(ref executedActions) == 3)
+                    resetEvent.Set();
+            });
 
         // Build the Async container
         var container = new Async.Builder()
@@ -81,8 +108,9 @@ public class AsyncTest : AbstractNUnitSetUp
         // Execute the container
         container.Execute(Context);
 
-        // Wait for the asynchronous operation to complete (Replace with appropriate wait logic if needed)
-        await WaitUtils.WaitForCompletion(container, Context);
+        // Wait for all actions to complete with timeout
+        Assert.That(resetEvent.Wait(TimeSpan.FromSeconds(5)), Is.True,
+            "Async actions did not complete within the expected time");
 
         // Verify that each action was executed once
         action1.Verify(a => a.Execute(Context), Times.Once);
@@ -108,6 +136,23 @@ public class AsyncTest : AbstractNUnitSetUp
         failAction.Setup(f => f.Execute(Context))
             .Throws(new AgenixSystemException("Generated error to interrupt test execution"));
 
+        // Use ManualResetEventSlim for better synchronization
+        var action1Executed = new ManualResetEventSlim(false);
+        var failActionExecuted = new ManualResetEventSlim(false);
+        var errorActionExecuted = new ManualResetEventSlim(false);
+        var containerCompleted = new ManualResetEventSlim(false);
+
+        // Setup execution tracking
+        action1.Setup(a => a.Execute(Context))
+            .Callback(() => action1Executed.Set());
+
+        failAction.Setup(f => f.Execute(Context))
+            .Callback(() => failActionExecuted.Set())
+            .Throws(new AgenixSystemException("Generated error to interrupt test execution"));
+
+        _error.Setup(e => e.Execute(Context))
+            .Callback(() => errorActionExecuted.Set());
+
         // Build the Async container including the failAction
         var container = new Async.Builder()
             .SuccessAction(_success.Object)
@@ -115,44 +160,83 @@ public class AsyncTest : AbstractNUnitSetUp
             .Actions(action1.Object, failAction.Object, action2.Object, action3.Object)
             .Build();
 
-        // Execute the container
-        container.Execute(Context);
+        try
+        {
+            // Execute the container
+            container.Execute(Context);
 
-        // Wait for the asynchronous operation to complete (Replace with appropriate wait logic if needed)
-        await WaitUtils.WaitForCompletion(container, Context);
+            // Wait for specific execution points with timeouts
+            Assert.That(action1Executed.Wait(TimeSpan.FromSeconds(5)), Is.True,
+                "Action1 should execute within timeout");
 
-        // Check for exceptions in context
-        ClassicAssert.AreEqual(1, Context.GetExceptions().Count);
-        ClassicAssert.IsInstanceOf<AgenixSystemException>(Context.GetExceptions().First());
-        ClassicAssert.AreEqual("Generated error to interrupt test execution", Context.GetExceptions().First().Message);
+            Assert.That(failActionExecuted.Wait(TimeSpan.FromSeconds(5)), Is.True,
+                "FailAction should execute within timeout");
 
-        // Verify execution order
-        action1.Verify(a => a.Execute(Context), Times.Once);
-        action2.Verify(a => a.Execute(Context), Times.Never);
-        action3.Verify(a => a.Execute(Context), Times.Never);
+            Assert.That(errorActionExecuted.Wait(TimeSpan.FromSeconds(5)), Is.True,
+                "Error action should execute within timeout");
 
-        _error.Verify(e => e.Execute(Context), Times.Once);
-        _success.Verify(s => s.Execute(Context), Times.Never);
+            // Wait for the asynchronous operation to complete
+            await WaitUtils.WaitForCompletion(container, Context);
+
+            // Check for exceptions in context
+            ClassicAssert.AreEqual(1, Context.GetExceptions().Count);
+            ClassicAssert.IsInstanceOf<AgenixSystemException>(Context.GetExceptions().First());
+            ClassicAssert.AreEqual("Generated error to interrupt test execution", Context.GetExceptions().First().Message);
+
+            // Verify execution order and behavior
+            action1.Verify(a => a.Execute(Context), Times.Once);
+            action2.Verify(a => a.Execute(Context), Times.Never);
+            action3.Verify(a => a.Execute(Context), Times.Never);
+
+            _error.Verify(e => e.Execute(Context), Times.Once);
+            _success.Verify(s => s.Execute(Context), Times.Never);
+        }
+        finally
+        {
+            // Clean up synchronization primitives
+            action1Executed.Dispose();
+            failActionExecuted.Dispose();
+            errorActionExecuted.Dispose();
+            containerCompleted.Dispose();
+        }
     }
 
     [Test]
     public void TestWaitForFinishTimeout()
     {
-        // Setup the action to simulate a delay
+        var actionStarted = new ManualResetEventSlim(false);
+        var actionCanComplete = new ManualResetEventSlim(false);
+
+        // Setup the action with controlled timing
         _action.Setup(a => a.Execute(Context))
-            .Callback(() => Thread.Sleep(500));
+            .Callback(() =>
+            {
+                actionStarted.Set(); // Signal that action has started
+                actionCanComplete.Wait(); // Wait for permission to complete
+            });
 
         var container = new Async.Builder()
             .Actions(_action.Object)
             .Build();
 
-        container.Execute(Context);
+        // Start the container execution
+        var executionTask = Task.Run(() => container.Execute(Context));
 
-        // Assert that the waitForDone logic throws a TimeoutException
+        // Wait for action to start
+        Assert.That(actionStarted.Wait(TimeSpan.FromSeconds(1)), Is.True,
+            "Action should have started");
+
+        // Now test the timeout - the action is guaranteed to be running
         Assert.ThrowsAsync<AgenixSystemException>(async () =>
         {
             await WaitUtils.WaitForCompletion(container, Context, 200);
         });
+
+        // Clean up - allow action to complete
+        actionCanComplete.Set();
+
+        // Wait for execution to finish to avoid resource leaks
+        Assert.That(executionTask.Wait(TimeSpan.FromSeconds(1)), Is.True);
     }
 
     [Test]

@@ -104,4 +104,28 @@
       </ItemGroup>
 
 
+    <Project>
+      <PropertyGroup>
+        <!-- Define our own CI detection -->
+        <IsCI Condition="'$(GITHUB_ACTIONS)' == 'true' OR '$(TF_BUILD)' == 'true' OR '$(CI)' == 'true'">true</IsCI>
+      </PropertyGroup>
+
+      <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
+        <!-- Always enable parallelism -->
+        <AssemblyAttribute_Parallelizable>NUnit.Framework.ParallelScope.All</AssemblyAttribute_Parallelizable>
+
+        <!-- Use ProcessorCount if > 1, otherwise use 2 -->
+        <AssemblyAttribute_LevelOfParallelism>$([MSBuild]::ValueOrDefault('$([System.Math]::Max($([System.Environment]::ProcessorCount), 2))', '2'))</AssemblyAttribute_LevelOfParallelism>
+      </PropertyGroup>
+
+      <ItemGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
+        <AssemblyAttribute Include="NUnit.Framework.ParallelizableAttribute">
+          <_Parameter1>$(AssemblyAttribute_Parallelizable)</_Parameter1>
+        </AssemblyAttribute>
+        <AssemblyAttribute Include="NUnit.Framework.LevelOfParallelismAttribute">
+          <_Parameter1>$(AssemblyAttribute_LevelOfParallelism)</_Parameter1>
+        </AssemblyAttribute>
+      </ItemGroup>
+    </Project>
+
 </Project>

@@ -21,7 +21,7 @@ public class JsonPathMessageProcessorTest : AbstractNUnitSetUp
 
         processor.ProcessMessage(message, Context);
 
-        ClassicAssert.AreEqual("{\"TestMessage\":{\"Text\":\"Hello!\"}}", message.GetPayload<string>());
+        Assert.That(message.GetPayload<string>(), Is.EqualTo("{\"TestMessage\":{\"Text\":\"Hello!\"}}"));
     }
 
     [Test]
@@ -40,7 +40,7 @@ public class JsonPathMessageProcessorTest : AbstractNUnitSetUp
 
         processor.ProcessMessage(message, Context);
 
-        ClassicAssert.AreEqual("{\"TestMessage\":{\"Text\":\"Hello!\",\"Id\":9999999}}", message.GetPayload<string>());
+        Assert.That(message.GetPayload<string>(), Is.EqualTo("{\"TestMessage\":{\"Text\":\"Hello!\",\"Id\":9999999}}"));
     }
 
     [Test]
@@ -58,8 +58,8 @@ public class JsonPathMessageProcessorTest : AbstractNUnitSetUp
 
         processor.ProcessMessage(message, Context);
 
-        ClassicAssert.AreEqual("{\"TestMessage\":[{\"Text\":\"Hello!\"},{\"Text\":\"Hello!\"}]}",
-            message.GetPayload<string>());
+        Assert.That(message.GetPayload<string>(),
+            Is.EqualTo("{\"TestMessage\":[{\"Text\":\"Hello!\"},{\"Text\":\"Hello!\"}]}"));
     }
 
     [Test]
@@ -76,7 +76,7 @@ public class JsonPathMessageProcessorTest : AbstractNUnitSetUp
 
         processor.ProcessMessage(message, Context);
 
-        ClassicAssert.AreEqual("{\"TestMessage\":{\"Text\":\"Hello World!\"}}", message.GetPayload<string>());
+        Assert.That(message.GetPayload<string>(), Is.EqualTo("{\"TestMessage\":{\"Text\":\"Hello World!\"}}"));
     }
 
     [Test]

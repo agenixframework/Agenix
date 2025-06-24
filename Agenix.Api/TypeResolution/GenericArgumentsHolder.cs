@@ -297,26 +297,26 @@ public class GenericArgumentsHolder
         }
 
         return args;
-//            ArrayList args = new ArrayList();
-//            originalArgs = originalArgs.Trim();
-//            if (originalArgs.Length == 0)
-//            {
-//                return new string[0];
-//            }
-//
-//            if (originalArgs.IndexOf(',') == -1)
-//            {
-//                return new string[] { originalArgs };
-//            }
-//
-//            // pattern assumes "(,<argname>)+"
-//            originalArgs = "," + originalArgs;
-//
-//            foreach (Match match in GenericArgumentListPattern.Matches(originalArgs))
-//            {
-//                string arg = match.Groups["args"].Value.Trim(' ', '\t', '[', ']');
-//                args.Add(arg);
-//            }
+        //            ArrayList args = new ArrayList();
+        //            originalArgs = originalArgs.Trim();
+        //            if (originalArgs.Length == 0)
+        //            {
+        //                return new string[0];
+        //            }
+        //
+        //            if (originalArgs.IndexOf(',') == -1)
+        //            {
+        //                return new string[] { originalArgs };
+        //            }
+        //
+        //            // pattern assumes "(,<argname>)+"
+        //            originalArgs = "," + originalArgs;
+        //
+        //            foreach (Match match in GenericArgumentListPattern.Matches(originalArgs))
+        //            {
+        //                string arg = match.Groups["args"].Value.Trim(' ', '\t', '[', ']');
+        //                args.Add(arg);
+        //            }
 
         //            Match m = GenericArgumentListPattern.Match(originalArgs);
         //            if (m != null && m.Success)
@@ -343,7 +343,7 @@ public class GenericArgumentsHolder
         //            }
         //            args.Add(originalArgs.Substring(index, originalArgs.Length - index).Trim());
 
-//            return (string[])args.ToArray(typeof(string));
+        //            return (string[])args.ToArray(typeof(string));
     }
 
     #endregion

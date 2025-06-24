@@ -193,7 +193,7 @@ public class ResourcePathTypeResolver : ITypeResolver
         }
         catch (IOException e)
         {
-            Log.LogWarning(@"Failed to resolve resources in '{FullPath}' => ", fullPath, e);
+            Log.LogWarning(e, "Failed to resolve resources in '{}' => ", fullPath);
         }
 
         return typeLookup;
@@ -225,7 +225,7 @@ public class ResourcePathTypeResolver : ITypeResolver
 
         // Track already loaded assemblies by name to avoid duplicates
         var loadedAssemblyNames = new HashSet<string>(
-            AppDomain.CurrentDomain.GetAssemblies().Select(a => a.GetName().Name)
+            AppDomain.CurrentDomain.GetAssemblies().Select(a => a.GetName().Name)!
         );
 
         // First load assemblies from the current directory
@@ -309,7 +309,7 @@ public class ResourcePathTypeResolver : ITypeResolver
         // Extract the filename (everything after the last dot)
         var lastDotIndex = resourcePath.LastIndexOf('.');
         if (lastDotIndex < 0)
-            // No dots found, use the whole path as namespace and leave filename empty
+        // No dots found, use the whole path as namespace and leave filename empty
         {
             return $"assembly://{assemblyName}/{resourcePath}/";
         }
@@ -391,9 +391,9 @@ public class ResourcePathTypeResolver : ITypeResolver
 
         // Iterate through all matching properties and merge them
         foreach (var entry in from prop in matchingProperties.Values
-                 where prop != null
-                 from DictionaryEntry entry in prop
-                 select entry)
+                              where prop != null
+                              from DictionaryEntry entry in prop
+                              select entry)
         {
             properties.SetProperty(entry.Key.ToString(), entry.Value?.ToString());
         }

@@ -1,11 +1,10 @@
 using Agenix.Core;
 using Agenix.Core.Actions;
 using Agenix.Core.Container;
-using NUnit.Framework.Legacy;
 using static Agenix.Core.Actions.EchoAction.Builder;
 using static Agenix.Core.Actions.SleepAction.Builder;
-using static Agenix.Validation.NHamcrest.Container.NHamcrestConditionExpression;
 using static Agenix.Core.Container.RepeatOnErrorUntilTrue.Builder;
+using static Agenix.Validation.NHamcrest.Container.NHamcrestConditionExpression;
 using Is = NHamcrest.Is;
 
 namespace Agenix.Validation.NHamcrest.Tests.Container;
@@ -31,30 +30,41 @@ public class RepeatOnErrorTestActionBuilderTest : AbstractNUnitSetUp
                 .StartsWith(2)
                 .Actions(Echo("${var}"))
         );
-
-        ClassicAssert.IsNotNull(Context.GetVariable("i"));
-        ClassicAssert.AreEqual(Context.GetVariable("i"), "1");
-        ClassicAssert.IsNotNull(Context.GetVariable("k"));
-        ClassicAssert.AreEqual(Context.GetVariable("k"), "2");
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(Context.GetVariable("i"), NUnit.Framework.Is.Not.Null);
+            Assert.That("1", NUnit.Framework.Is.EqualTo(Context.GetVariable("i")));
+            Assert.That(Context.GetVariable("k"), NUnit.Framework.Is.Not.Null);
+            Assert.That("2", NUnit.Framework.Is.EqualTo(Context.GetVariable("k")));
+        }
 
         var test = builder.GetTestCase();
-        ClassicAssert.AreEqual(test.GetActionCount(), 2);
-        ClassicAssert.AreEqual(test.GetActions()[0].GetType(), typeof(RepeatOnErrorUntilTrue));
-        ClassicAssert.AreEqual(test.GetActions()[0].Name, "repeat-on-error");
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(2, NUnit.Framework.Is.EqualTo(test.GetActionCount()));
+            Assert.That(typeof(RepeatOnErrorUntilTrue), NUnit.Framework.Is.EqualTo(test.GetActions()[0].GetType()));
+            Assert.That("repeat-on-error", NUnit.Framework.Is.EqualTo(test.GetActions()[0].Name));
+        }
 
         var container = (RepeatOnErrorUntilTrue)test.GetActions()[0];
-        ClassicAssert.AreEqual(container.GetActionCount(), 3);
-        ClassicAssert.AreEqual(container.AutoSleep, 250L);
-        ClassicAssert.AreEqual(container.Condition, "i gt 5");
-        ClassicAssert.AreEqual(container.GetStart(), 1);
-        ClassicAssert.AreEqual(container.GetIndexName(), "i");
-        ClassicAssert.AreEqual(container.GetTestAction(0).GetType(), typeof(EchoAction));
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(3, NUnit.Framework.Is.EqualTo(container.GetActionCount()));
+            Assert.That(250L, NUnit.Framework.Is.EqualTo(container.AutoSleep));
+            Assert.That("i gt 5", NUnit.Framework.Is.EqualTo(container.Condition));
+            Assert.That(1, NUnit.Framework.Is.EqualTo(container.GetStart()));
+            Assert.That("i", NUnit.Framework.Is.EqualTo(container.GetIndexName()));
+            Assert.That(typeof(EchoAction), NUnit.Framework.Is.EqualTo(container.GetTestAction(0).GetType()));
+        }
 
         container = (RepeatOnErrorUntilTrue)test.GetActions()[1];
-        ClassicAssert.AreEqual(container.GetActionCount(), 1);
-        ClassicAssert.AreEqual(container.AutoSleep, 200L);
-        ClassicAssert.AreEqual(container.GetStart(), 2);
-        ClassicAssert.AreEqual(container.GetIndexName(), "k");
-        ClassicAssert.AreEqual(container.GetTestAction(0).GetType(), typeof(EchoAction));
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(1, NUnit.Framework.Is.EqualTo(container.GetActionCount()));
+            Assert.That(200L, NUnit.Framework.Is.EqualTo(container.AutoSleep));
+            Assert.That(2, NUnit.Framework.Is.EqualTo(container.GetStart()));
+            Assert.That("k", NUnit.Framework.Is.EqualTo(container.GetIndexName()));
+            Assert.That(typeof(EchoAction), NUnit.Framework.Is.EqualTo(container.GetTestAction(0).GetType()));
+        }
     }
 }

@@ -211,7 +211,7 @@ public class DefaultTypeConverter(string encodingName) : ITypeConverter
                         case IDictionary:
                             // Convert the dictionary to a string in the format "{key1=value1, key2=value2}"
                             var elements = (from kvp in (Dictionary<object, object>)target
-                                select $"{kvp.Key}={kvp.Value}").ToList();
+                                            select $"{kvp.Key}={kvp.Value}").ToList();
 
                             return (T)(object)("{" + string.Join(", ", elements) + "}");
                     }

@@ -1,8 +1,8 @@
 using Agenix.Core.Container;
 using Moq;
 using NUnit.Framework.Legacy;
-using Is = NHamcrest.Is;
 using static Agenix.Validation.NHamcrest.Container.NHamcrestConditionExpression;
+using Is = NHamcrest.Is;
 using ITestAction = Agenix.Api.ITestAction;
 
 namespace Agenix.Validation.NHamcrest.Tests.Container;
@@ -24,7 +24,7 @@ public class RepeatUntilTrueTest : AbstractNUnitSetUp
         repeatUntilTrue.Execute(Context);
 
         ClassicAssert.IsNotNull(Context.GetVariable("${i}"));
-        ClassicAssert.AreEqual("4", Context.GetVariable("${i}"));
+        Assert.That(Context.GetVariable("${i}"), NUnit.Framework.Is.EqualTo("4"));
 
         Mock.Get(_action).Verify(a => a.Execute(Context), Times.Exactly(4));
     }

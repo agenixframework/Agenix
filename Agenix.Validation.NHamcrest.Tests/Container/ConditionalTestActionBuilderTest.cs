@@ -1,11 +1,10 @@
 using Agenix.Core;
 using Agenix.Core.Container;
-using NUnit.Framework.Legacy;
-using static Agenix.Core.Actions.EchoAction.Builder;
 using static Agenix.Core.Actions.CreateVariablesAction.Builder;
+using static Agenix.Core.Actions.EchoAction.Builder;
 using static Agenix.Core.Container.Conditional.Builder;
-using Is = NHamcrest.Is;
 using static Agenix.Validation.NHamcrest.Container.NHamcrestConditionExpression;
+using Is = NHamcrest.Is;
 
 namespace Agenix.Validation.NHamcrest.Tests.Container;
 
@@ -24,20 +23,29 @@ public class ConditionalTestActionBuilderTest : AbstractNUnitSetUp
         builder.Run(Conditional().When(AssertThat("${var}", Is.LessThan("5")).AsCondition())
             .Actions(Echo("${var}"), CreateVariable("noExecution", "false")));
 
-        ClassicAssert.IsNotNull(Context.GetVariable("noExecution"));
-        ClassicAssert.AreEqual(Context.GetVariable("noExecution"), "true");
-        ClassicAssert.IsNotNull(Context.GetVariable("execution"));
-        ClassicAssert.AreEqual(Context.GetVariable("execution"), "true");
+        Assert.That(Context.GetVariable("noExecution"), NUnit.Framework.Is.Not.Null);
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(Context.GetVariable("noExecution"), NUnit.Framework.Is.EqualTo("true"));
+            Assert.That(Context.GetVariable("execution"), NUnit.Framework.Is.Not.Null);
+        }
+        Assert.That(Context.GetVariable("execution"), NUnit.Framework.Is.EqualTo("true"));
 
         var test = builder.GetTestCase();
-        ClassicAssert.AreEqual(test.GetActionCount(), 2);
-        ClassicAssert.AreEqual(test.GetActions()[0].GetType(), typeof(Conditional));
-        ClassicAssert.AreEqual(test.GetActions()[0].Name, "conditional");
-        ClassicAssert.AreEqual(test.GetActions()[1].GetType(), typeof(Conditional));
-        ClassicAssert.AreEqual(test.GetActions()[1].Name, "conditional");
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(test.GetActionCount(), NUnit.Framework.Is.EqualTo(2));
+            Assert.That(test.GetActions()[0].GetType(), NUnit.Framework.Is.EqualTo(typeof(Conditional)));
+            Assert.That(test.GetActions()[0].Name, NUnit.Framework.Is.EqualTo("conditional"));
+            Assert.That(test.GetActions()[1].GetType(), NUnit.Framework.Is.EqualTo(typeof(Conditional)));
+            Assert.That(test.GetActions()[1].Name, NUnit.Framework.Is.EqualTo("conditional"));
+        }
 
         var container = (Conditional)test.GetActions()[0];
-        ClassicAssert.AreEqual(container.GetActionCount(), 2);
-        ClassicAssert.IsNotNull(container.ConditionExpression);
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(container.GetActionCount(), NUnit.Framework.Is.EqualTo(2));
+            Assert.That(container.ConditionExpression, NUnit.Framework.Is.Not.Null);
+        }
     }
 }

@@ -30,45 +30,45 @@ public class JsonPathVariableExtractorTest : AbstractNUnitSetUp
         variableExtractor.ExtractVariables(new DefaultMessage(_jsonPayload), Context);
 
         ClassicAssert.IsNotNull(Context.GetVariable("keySet"));
-        ClassicAssert.AreEqual("text, person, index, numbers, id", Context.GetVariable("keySet"));
+        Assert.That(Context.GetVariable("keySet"), Is.EqualTo("text, person, index, numbers, id"));
 
 
         ClassicAssert.IsNotNull(Context.GetVariable("index"));
-        ClassicAssert.AreEqual("5", Context.GetVariable("index"));
+        Assert.That(Context.GetVariable("index"), Is.EqualTo("5"));
 
 
         ClassicAssert.IsNotNull(Context.GetVariable("numbers"));
-        ClassicAssert.AreEqual("[10,20,30,40]", Context.GetVariable("numbers"));
+        Assert.That(Context.GetVariable("numbers"), Is.EqualTo("[10,20,30,40]"));
 
 
         ClassicAssert.IsNotNull(Context.GetVariable("numbersSize"));
-        ClassicAssert.AreEqual("4", Context.GetVariable("numbersSize"));
+        Assert.That(Context.GetVariable("numbersSize"), Is.EqualTo("4"));
 
         ClassicAssert.IsNotNull(Context.GetVariable("person"));
-        ClassicAssert.AreEqual("{\"name\":\"John\",\"surname\":\"Doe\"}", Context.GetVariable("person"));
+        Assert.That(Context.GetVariable("person"), Is.EqualTo("{\"name\":\"John\",\"surname\":\"Doe\"}"));
 
         ClassicAssert.IsNotNull(Context.GetVariable("personName"));
-        ClassicAssert.AreEqual("John", Context.GetVariable("personName"));
+        Assert.That(Context.GetVariable("personName"), Is.EqualTo("John"));
 
         ClassicAssert.IsNotNull(Context.GetVariable("toString"));
-        ClassicAssert.AreEqual(
-            "{\"text\":\"Hello World!\",\"person\":{\"name\":\"John\",\"surname\":\"Doe\"},\"index\":5,\"numbers\":[10,20,30,40],\"id\":\"x123456789x\"}",
-            Context.GetVariable("toString"));
+        Assert.That(
+            Context.GetVariable("toString"),
+            Is.EqualTo("{\"text\":\"Hello World!\",\"person\":{\"name\":\"John\",\"surname\":\"Doe\"},\"index\":5,\"numbers\":[10,20,30,40],\"id\":\"x123456789x\"}"));
 
         ClassicAssert.IsNotNull(Context.GetVariable("values"));
-        ClassicAssert.AreEqual("Hello World!, {\"name\":\"John\",\"surname\":\"Doe\"}, 5, [10,20,30,40], x123456789x",
-            Context.GetVariable("values"));
+        Assert.That(Context.GetVariable("values"),
+            Is.EqualTo("Hello World!, {\"name\":\"John\",\"surname\":\"Doe\"}, 5, [10,20,30,40], x123456789x"));
 
         ClassicAssert.IsNotNull(Context.GetVariable("size"));
-        ClassicAssert.AreEqual("5", Context.GetVariable("size"));
+        Assert.That(Context.GetVariable("size"), Is.EqualTo("5"));
 
         ClassicAssert.IsNotNull(Context.GetVariable("all"));
-        ClassicAssert.AreEqual("Hello World!, {\"name\":\"John\",\"surname\":\"Doe\"}, 5, [10,20,30,40], x123456789x",
-            Context.GetVariable("all"));
+        Assert.That(Context.GetVariable("all"),
+            Is.EqualTo("Hello World!, {\"name\":\"John\",\"surname\":\"Doe\"}, 5, [10,20,30,40], x123456789x"));
 
         ClassicAssert.IsNotNull(Context.GetVariable("root"));
-        ClassicAssert.AreEqual(
-            "{\"text\":\"Hello World!\",\"person\":{\"name\":\"John\",\"surname\":\"Doe\"},\"index\":5,\"numbers\":[10,20,30,40],\"id\":\"x123456789x\"}",
-            Context.GetVariable("root"));
+        Assert.That(
+            Context.GetVariable("root"),
+            Is.EqualTo("{\"text\":\"Hello World!\",\"person\":{\"name\":\"John\",\"surname\":\"Doe\"},\"index\":5,\"numbers\":[10,20,30,40],\"id\":\"x123456789x\"}"));
     }
 }

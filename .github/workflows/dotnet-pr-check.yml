@@ -137,22 +137,6 @@ jobs:
             echo "----------------------------------------"
           done
 
-      - name: 📊 Generate code coverage report
-        if: matrix.os == 'ubuntu-latest'
-        uses: danielpalme/ReportGenerator-GitHub-Action@5.2.0
-        with:
-          reports: 'TestResults/**/coverage.cobertura.xml'
-          targetdir: 'coveragereport'
-          reporttypes: 'Html;Cobertura;TextSummary'
-
-      - name: 📈 Upload coverage to Codecov
-        if: matrix.os == 'ubuntu-latest'
-        uses: codecov/codecov-action@v3
-        with:
-          files: TestResults/**/coverage.cobertura.xml
-          fail_ci_if_error: false
-          verbose: true
-
       - name: 📋 Publish test results
         uses: dorny/test-reporter@v1
         if: always()
@@ -173,7 +157,6 @@ jobs:
           name: build-artifacts
           path: |
             ./artifacts/*.nupkg
-            ./coveragereport/**
           retention-days: 30
 
   # ===== DOCUMENTATION =====

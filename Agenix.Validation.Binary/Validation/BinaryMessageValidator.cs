@@ -84,15 +84,15 @@ public class BinaryMessageValidator : DefaultMessageValidator
                     throw new ValidationException("Received input stream reached end-of-stream - " +
                                                   "control input stream is not finished yet");
                 default:
-                {
-                    if (n2 == -1)
                     {
-                        throw new ValidationException("Control input stream reached end-of-stream - " +
-                                                      "received input stream is not finished yet");
-                    }
+                        if (n2 == -1)
+                        {
+                            throw new ValidationException("Control input stream reached end-of-stream - " +
+                                                          "received input stream is not finished yet");
+                        }
 
-                    break;
-                }
+                        break;
+                    }
             }
 
             for (var i = 0; i < Math.Min(n1, n2); i++)

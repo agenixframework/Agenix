@@ -2,8 +2,8 @@ using Agenix.Api.Annotations;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
 using Spring.Data.Core;
-using static Agenix.Sql.Actions.ExecuteSqlQueryAction.Builder;
 using static Agenix.Core.Actions.CreateVariablesAction.Builder;
+using static Agenix.Sql.Actions.ExecuteSqlQueryAction.Builder;
 using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.Tests.Sql.Integration;

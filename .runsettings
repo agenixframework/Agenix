@@ -14,4 +14,13 @@
   <RunConfiguration>
     <CollectSourceInformation>true</CollectSourceInformation>
   </RunConfiguration>
+   <NUnit>
+       <NumberOfTestWorkers>4</NumberOfTestWorkers>
+       <ParallelizeAssembly>true</ParallelizeAssembly>
+       <ParallelScope>All</ParallelScope>
+     </NUnit>
+
+     <RunConfiguration>
+       <MaxCpuCount>0</MaxCpuCount> <!-- 0 = use all available cores -->
+     </RunConfiguration>
 </RunSettings>

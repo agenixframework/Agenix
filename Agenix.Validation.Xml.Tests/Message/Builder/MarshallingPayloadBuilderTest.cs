@@ -135,7 +135,8 @@ public class MarshallingPayloadBuilderTest : AbstractNUnitSetUp
         // Arrange
         var marshallerMap = new Dictionary<string, IMarshaller>
         {
-            ["marshaller1"] = _marshaller, ["marshaller2"] = new Xml2Marshaller(typeof(TestRequest))
+            ["marshaller1"] = _marshaller,
+            ["marshaller2"] = new Xml2Marshaller(typeof(TestRequest))
         };
 
         _referenceResolver.Setup(r => r.ResolveAll<IMarshaller>()).Returns(marshallerMap);

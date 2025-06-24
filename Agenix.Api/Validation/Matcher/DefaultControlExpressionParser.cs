@@ -55,8 +55,8 @@ public class DefaultControlExpressionParser : IControlExpressionParser
 
         ExtractParameters(controlExpression, useDelimiter, extractedParameters, 0);
         if (extractedParameters.Count == 0)
-            // if the controlExpression has text but no parameters were extracted, then assume that
-            // the controlExpression itself is the only parameter
+        // if the controlExpression has text but no parameters were extracted, then assume that
+        // the controlExpression itself is the only parameter
         {
             extractedParameters.Add(controlExpression);
         }

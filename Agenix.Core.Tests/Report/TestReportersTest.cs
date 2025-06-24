@@ -95,7 +95,7 @@ public class TestReportersTest
 
         _fixture.OnTestFinish(_testCaseMock.Object);
 
-        List<TestResult> testResults = [.._fixture.GetTestResults().AsList()];
+        List<TestResult> testResults = [.. _fixture.GetTestResults().AsList()];
 
         Assert.That(testResults.Count, Is.EqualTo(0));
     }
