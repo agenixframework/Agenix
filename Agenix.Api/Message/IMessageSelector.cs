@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -50,22 +50,46 @@ public interface IMessageSelector
     private static readonly ILogger Log = LogManager.GetLogger(typeof(IMessageSelector));
 
     /// <summary>
-    ///     Represents the type resolver used for mapping resource paths to types and properties in the message selector
+    ///     Lazy-initialized type resolver used for mapping resource paths to types and properties in the message selector
     ///     domain.
     /// </summary>
-    private static readonly ResourcePathTypeResolver TypeResolver = new(ResourcePath);
+    private static readonly Lazy<ResourcePathTypeResolver> TypeResolver =
+        new(() => new ResourcePathTypeResolver(ResourcePath));
 
-    private static IDictionary<string, IMessageSelectorFactory>
-        _factories = new ConcurrentDictionary<string, IMessageSelectorFactory>();
+    /// <summary>
+    ///     Lazy-initialized cache of message selector factories for improved performance and thread safety.
+    /// </summary>
+    private static readonly Lazy<IDictionary<string, IMessageSelectorFactory>> FactoriesCache =
+        new(LoadMessageSelectorFactories);
 
     /// <summary>
     ///     Checks weather this selector should accept a given message or not. When accepting the message, the selective
-    ///     consumer
-    ///     is provided with the message; otherwise the message is skipped for this consumer.
+    ///     consumer is provided with the message; otherwise the message is skipped for this consumer.
     /// </summary>
     /// <param name="message">the message to check</param>
     /// <returns>true if the message will be accepted, false otherwise.</returns>
     bool Accept(IMessage message);
+
+    /// <summary>
+    ///     Loads all available message selector factories from the type resolver.
+    /// </summary>
+    /// <returns>A dictionary containing all loaded message selector factories.</returns>
+    private static IDictionary<string, IMessageSelectorFactory> LoadMessageSelectorFactories()
+    {
+        var factories = new Dictionary<string, IMessageSelectorFactory>(
+            TypeResolver.Value.ResolveAll<IMessageSelectorFactory>()
+        );
+
+        if (Log.IsEnabled(LogLevel.Debug))
+        {
+            foreach (var kvp in factories)
+            {
+                Log.LogDebug("Found message selector '{KvpKey}' as {Type}", kvp.Key, kvp.Value.GetType());
+            }
+        }
+
+        return factories;
+    }
 
     /// <summary>
     ///     Provides a dictionary of message selector factories.
@@ -73,27 +97,7 @@ public interface IMessageSelector
     /// <returns>A dictionary containing message selector factories keyed by a selector type.</returns>
     public static IDictionary<string, IMessageSelectorFactory> Lookup()
     {
-        if (_factories.Count > 0)
-        {
-            return _factories;
-        }
-
-        _factories = new Dictionary<string, IMessageSelectorFactory>
-        (
-            TypeResolver.ResolveAll<IMessageSelectorFactory>()
-        );
-
-        if (!Log.IsEnabled(LogLevel.Debug))
-        {
-            return _factories;
-        }
-
-        foreach (var kvp in _factories)
-        {
-            Log.LogDebug("Found message selector '{KvpKey}' as {Type}", kvp.Key, kvp.Value.GetType());
-        }
-
-        return _factories;
+        return FactoriesCache.Value;
     }
 
     /// <summary>
@@ -108,12 +112,13 @@ public interface IMessageSelector
         /// <returns>true if the factory accepts the key, false otherwise.</returns>
         bool Supports(string key);
 
-        /// Create a new message selector for given predicates.
-        /// @param key selector key
-        /// @param value selector value
-        /// @param context test context
-        /// @return the created selector
-        /// /
+        /// <summary>
+        ///     Create a new message selector for given predicates.
+        /// </summary>
+        /// <param name="key">selector key</param>
+        /// <param name="value">selector value</param>
+        /// <param name="context">test context</param>
+        /// <returns>the created selector</returns>
         IMessageSelector Create(string key, string value, TestContext context);
     }
 }

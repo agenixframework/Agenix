@@ -7,23 +7,24 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Collections.Concurrent;
 using Agenix.Api.Annotations;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
@@ -50,7 +51,12 @@ public interface IEndpointBuilder<out T> where T : IEndpoint
     ///     Resolver for associating resource paths with types. Used to interpret and map
     ///     resource paths to associated types or properties within the endpoint builder context.
     /// </summary>
-    private static readonly ResourcePathTypeResolver TypeResolver = new(ResourcePath);
+    /// <summary>
+    ///     Lazy-initialized resolver for dynamically loading and resolving resources based on a specified resource path.
+    /// </summary>
+    private static readonly Lazy<ResourcePathTypeResolver> TypeResolver =
+        new(() => new ResourcePathTypeResolver(ResourcePath));
+
 
     /// <summary>
     ///     Represents the resource path where endpoint builder configurations
@@ -79,24 +85,40 @@ public interface IEndpointBuilder<out T> where T : IEndpoint
     ///     Retrieves a dictionary of endpoint builders, with endpoint names as keys and endpoint builders as values.
     /// </summary>
     /// <returns>A dictionary containing mappings of endpoint names to their corresponding builders.</returns>
-    public static Dictionary<string, IEndpointBuilder<T>> Lookup()
+    /// <summary>
+    ///     Lazy-initialized cache of endpoint builders for improved performance and thread safety.
+    /// </summary>
+    private static readonly Lazy<ConcurrentDictionary<string, IEndpointBuilder<T>>> BuildersCache =
+        new(LoadEndpointBuilders);
+
+    /// <summary>
+    ///     Loads all available endpoint builders from the type resolver.
+    /// </summary>
+    /// <returns>A dictionary containing all loaded endpoint builders.</returns>
+    private static ConcurrentDictionary<string, IEndpointBuilder<T>> LoadEndpointBuilders()
     {
-        var validators = new Dictionary<string, IEndpointBuilder<T>>
-        (
-            TypeResolver.ResolveAll<IEndpointBuilder<T>>("", ITypeResolver.TYPE_PROPERTY_WILDCARD)
+        var builders = new ConcurrentDictionary<string, IEndpointBuilder<T>>(
+            TypeResolver.Value.ResolveAll<IEndpointBuilder<T>>("", ITypeResolver.TYPE_PROPERTY_WILDCARD)
         );
 
-        if (!Log.IsEnabled(LogLevel.Debug))
+        if (Log.IsEnabled(LogLevel.Debug))
         {
-            return validators;
+            foreach (var kvp in builders)
+            {
+                Log.LogDebug("Found endpoint builder '{KvpKey}' as {Name}", kvp.Key, kvp.Value.GetType().Name);
+            }
         }
 
-        foreach (var kvp in validators)
-        {
-            Log.LogDebug("Found endpoint builder '{KvpKey}' as {Name}", kvp.Key, kvp.Value.GetType().Name);
-        }
+        return builders;
+    }
 
-        return validators;
+    /// <summary>
+    ///     Retrieves a dictionary of endpoint builders, with endpoint names as keys and endpoint builders as values.
+    /// </summary>
+    /// <returns>A dictionary containing mappings of endpoint names to their corresponding builders.</returns>
+    public static ConcurrentDictionary<string, IEndpointBuilder<T>> Lookup()
+    {
+        return BuildersCache.Value;
     }
 
     /// <summary>
@@ -114,12 +136,12 @@ public interface IEndpointBuilder<out T> where T : IEndpoint
             if (builder.Contains('.'))
             {
                 var separatorIndex = builder.LastIndexOf('.');
-                instance = TypeResolver.Resolve<IEndpointBuilder<T>>(builder[..separatorIndex],
+                instance = TypeResolver.Value.Resolve<IEndpointBuilder<T>>(builder[..separatorIndex],
                     builder[(separatorIndex + 1)..]);
             }
             else
             {
-                instance = TypeResolver.Resolve<IEndpointBuilder<T>>(builder);
+                instance = TypeResolver.Value.Resolve<IEndpointBuilder<T>>(builder);
             }
 
             return Optional<IEndpointBuilder<T>>.Of(instance);
@@ -162,7 +184,11 @@ public interface IEndpointBuilder<out T> where T : IEndpoint
             {
                 if (endpointProperty.Type != typeof(string) && referenceResolver.IsResolvable(endpointProperty.Value))
                 {
-                    var resolvedValue = referenceResolver.Resolve<T>(endpointProperty.Value);
+                    var resolvedValue = Convert.ChangeType(
+                        referenceResolver.Resolve(endpointProperty.Value),
+                        endpointProperty.Type
+                    );
+
                     ReflectionHelper.InvokeMethod(propertyMethod, this, resolvedValue);
                 }
                 else

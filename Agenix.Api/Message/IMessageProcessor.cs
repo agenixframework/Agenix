@@ -7,23 +7,24 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Collections.Concurrent;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
@@ -51,10 +52,17 @@ public interface IMessageProcessor : IMessageTransformer
     private static readonly ILogger Log = LogManager.GetLogger(typeof(IMessageProcessor));
 
     /// <summary>
-    ///     Type resolver used to locate and retrieve custom message processors by performing
+    ///     Lazy-initialized type resolver used to locate and retrieve custom message processors by performing
     ///     resource path lookups, enabling dynamic discovery and management of processor types.
     /// </summary>
-    private static readonly ResourcePathTypeResolver TypeResolver = new(ResourcePath);
+    private static readonly Lazy<ResourcePathTypeResolver> TypeResolver =
+        new(() => new ResourcePathTypeResolver(ResourcePath));
+
+    /// <summary>
+    ///     Lazy-initialized cache for individual processor lookups to avoid repeated resolution attempts.
+    /// </summary>
+    private static readonly Lazy<ConcurrentDictionary<string, object>> ProcessorLookupCache =
+        new(() => new ConcurrentDictionary<string, object>());
 
     /// <summary>
     ///     Processes the given message payload within the specified test context.
@@ -85,18 +93,24 @@ public interface IMessageProcessor : IMessageTransformer
     public static Optional<IBuilder<T, TB>> Lookup<T, TB>(string processor)
         where T : IMessageProcessor where TB : IBuilder<T, TB>
     {
-        try
-        {
-            return Optional<IBuilder<T, TB>>.Of(TypeResolver.Resolve<TB>(processor));
-        }
-        catch (AgenixSystemException)
-        {
-            Log.LogWarning(
-                "Failed to resolve message processor from resource '{ExtensionAgenixMessageProcessor}/{Processor}'",
-                ResourcePath, processor);
-        }
+        // Create a cache key that includes type information for generic safety
+        var cacheKey = $"{processor}_{typeof(TB).FullName}";
 
-        return Optional<IBuilder<T, TB>>.Empty;
+        return (Optional<IBuilder<T, TB>>)ProcessorLookupCache.Value.GetOrAdd(cacheKey, key =>
+        {
+            try
+            {
+                var instance = TypeResolver.Value.Resolve<TB>(processor);
+                return Optional<IBuilder<T, TB>>.Of(instance);
+            }
+            catch (AgenixSystemException)
+            {
+                Log.LogWarning(
+                    "Failed to resolve message processor from resource '{ResourcePath}/{Processor}'",
+                    ResourcePath, processor);
+                return Optional<IBuilder<T, TB>>.Empty;
+            }
+        });
     }
 
     /// <summary>
