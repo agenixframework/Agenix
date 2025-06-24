@@ -8,6 +8,7 @@ using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 using ITestAction = Agenix.Api.ITestAction;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.Tests.Container;
 
@@ -65,11 +66,36 @@ public class AsyncTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public async Task TestMultipleActionsAsync()
+    public void TestMultipleActionsAsync()
     {
         var action1 = new Mock<ITestAction>();
         var action2 = new Mock<ITestAction>();
         var action3 = new Mock<ITestAction>();
+
+        using var resetEvent = new ManualResetEventSlim(false);
+        var executedActions = 0;
+
+        // Setup actions to signal completion
+        action1.Setup(a => a.Execute(It.IsAny<TestContext>()))
+            .Callback(() =>
+            {
+                if (Interlocked.Increment(ref executedActions) == 3)
+                    resetEvent.Set();
+            });
+
+        action2.Setup(a => a.Execute(It.IsAny<TestContext>()))
+            .Callback(() =>
+            {
+                if (Interlocked.Increment(ref executedActions) == 3)
+                    resetEvent.Set();
+            });
+
+        action3.Setup(a => a.Execute(It.IsAny<TestContext>()))
+            .Callback(() =>
+            {
+                if (Interlocked.Increment(ref executedActions) == 3)
+                    resetEvent.Set();
+            });
 
         // Build the Async container
         var container = new Async.Builder()
@@ -81,8 +107,9 @@ public class AsyncTest : AbstractNUnitSetUp
         // Execute the container
         container.Execute(Context);
 
-        // Wait for the asynchronous operation to complete (Replace with appropriate wait logic if needed)
-        await WaitUtils.WaitForCompletion(container, Context);
+        // Wait for all actions to complete with timeout
+        Assert.That(resetEvent.Wait(TimeSpan.FromSeconds(5)), Is.True,
+            "Async actions did not complete within the expected time");
 
         // Verify that each action was executed once
         action1.Verify(a => a.Execute(Context), Times.Once);
@@ -95,7 +122,6 @@ public class AsyncTest : AbstractNUnitSetUp
         // Verify that the error action was never executed
         _error.Verify(e => e.Execute(Context), Times.Never);
     }
-
 
     [Test]
     public async Task TestFailingActionAsync()

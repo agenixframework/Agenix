@@ -88,7 +88,7 @@ public abstract class AbstractDataDictionary<T> : AbstractMessageProcessor, IDat
     /// <summary>
     ///     Initialize the data dictionary by loading mappings from file if specified.
     /// </summary>
-    public void Initialize()
+    public virtual void Initialize()
     {
         if (MappingFile != null)
         {

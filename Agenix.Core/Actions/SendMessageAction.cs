@@ -406,6 +406,15 @@ public class SendMessageAction : AbstractTestAction, ICompletable
                 messageBuilderSupport = GetMessageBuilderSupport();
             }
 
+            if (referenceResolver != null)
+            {
+                if (messageBuilderSupport.DataDictionaryName != null)
+                {
+                    messageBuilderSupport.Dictionary(
+                        referenceResolver.Resolve<IDataDictionary>(messageBuilderSupport.DataDictionaryName));
+                }
+            }
+
             return DoBuild();
         }
     }

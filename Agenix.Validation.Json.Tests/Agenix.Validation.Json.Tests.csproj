@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Agenix.NUnit.Runtime\Agenix.NUnit.Runtime.csproj" />
     <ProjectReference Include="..\Agenix.Validation.Json\Agenix.Validation.Json.csproj"/>
     <ProjectReference Include="..\Agenix.Validation.NHamcrest\Agenix.Validation.NHamcrest.csproj"/>
   </ItemGroup>
@@ -26,18 +27,8 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0"/>
     <PackageReference Include="Moq" Version="4.20.72"/>
     <PackageReference Include="Moq.AutoMock" Version="3.5.0"/>
-    <PackageReference Include="NUnit" Version="4.3.2"/>
-    <PackageReference Include="NUnit.Analyzers" Version="4.7.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="NUnit3TestAdapter" Version="5.0.0"/>
     <PackageReference Include="System.Formats.Asn1" Version="8.0.1"/>
     <PackageReference Include="System.Text.Json" Version="8.0.5"/>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Resources\"/>
   </ItemGroup>
 
   <ItemGroup>
@@ -45,6 +36,19 @@
     <EmbeddedResource Include="Resources\Validation\BookSchema.json"/>
     <None Remove="Resources\validation\ProductsSchema.json"/>
     <EmbeddedResource Include="Resources\Validation\ProductsSchema.json"/>
+    <None Remove="Resources\Variable\Dictionary\json-path.data.dictionary" />
+    <EmbeddedResource Include="Resources\Variable\Dictionary\json-path.data.dictionary" />
+    <None Remove="Resources\Variable\Dictionary\json.data.dictionary" />
+    <EmbeddedResource Include="Resources\Variable\Dictionary\json.data.dictionary" />
+    <None Remove="Resources\Variable\Dictionary\jsonmapping.properties" />
+    <EmbeddedResource Include="Resources\Variable\Dictionary\jsonmapping.properties" />
+    <None Remove="Resources\Variable\Dictionary\mapping.properties" />
+    <EmbeddedResource Include="Resources\Variable\Dictionary\mapping.properties" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Integration\" />
+    <Folder Include="Message\Selector\" />
   </ItemGroup>
 
 </Project>

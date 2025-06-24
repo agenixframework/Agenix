@@ -551,7 +551,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <returns>value of the variable</returns>
     public string GetVariable(string variableExpression)
     {
-        return GetVariable<string>(variableExpression, typeof(string));
+        return GetVariable<string>(variableExpression);
     }
 
     /// <summary>
@@ -561,9 +561,9 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <param name="variableExpression"></param>
     /// <param name="type"></param>
     /// <returns></returns>
-    public T GetVariable<T>(string variableExpression, Type type)
+    public T GetVariable<T>(string variableExpression)
     {
-        return _typeConverter.ConvertIfNecessary<T>(GetVariableObject(variableExpression), type);
+        return _typeConverter.ConvertIfNecessary<T>(GetVariableObject(variableExpression), typeof(T));
     }
 
     /// <summary>

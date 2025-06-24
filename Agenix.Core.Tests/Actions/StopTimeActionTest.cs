@@ -21,24 +21,21 @@ public class StopTimeActionTest : AbstractNUnitSetUp
         ClassicAssert.IsTrue(Context.GetVariables()
             .ContainsKey(StopTimeAction.DefaultTimeLineId + StopTimeAction.DefaultTimeLineValueSuffix));
         ClassicAssert.AreEqual(
-            Context.GetVariable<long>(StopTimeAction.DefaultTimeLineId + StopTimeAction.DefaultTimeLineValueSuffix,
-                typeof(long)), 0L);
+            Context.GetVariable<long>(StopTimeAction.DefaultTimeLineId + StopTimeAction.DefaultTimeLineValueSuffix), 0L);
         Thread.Sleep(100);
         stopTime.Execute(Context);
         ClassicAssert.IsTrue(Context.GetVariables().ContainsKey(StopTimeAction.DefaultTimeLineId));
         ClassicAssert.IsTrue(Context.GetVariables()
             .ContainsKey(StopTimeAction.DefaultTimeLineId + StopTimeAction.DefaultTimeLineValueSuffix));
         ClassicAssert.IsTrue(
-            Context.GetVariable<long>(StopTimeAction.DefaultTimeLineId + StopTimeAction.DefaultTimeLineValueSuffix,
-                typeof(long)) >= 100L);
+            Context.GetVariable<long>(StopTimeAction.DefaultTimeLineId + StopTimeAction.DefaultTimeLineValueSuffix) >= 100L);
         Thread.Sleep(100);
         stopTime.Execute(Context);
         ClassicAssert.IsTrue(Context.GetVariables().ContainsKey(StopTimeAction.DefaultTimeLineId));
         ClassicAssert.IsTrue(Context.GetVariables()
             .ContainsKey(StopTimeAction.DefaultTimeLineId + StopTimeAction.DefaultTimeLineValueSuffix));
         ClassicAssert.IsTrue(
-            Context.GetVariable<long>(StopTimeAction.DefaultTimeLineId + StopTimeAction.DefaultTimeLineValueSuffix,
-                typeof(long)) >= 200L);
+            Context.GetVariable<long>(StopTimeAction.DefaultTimeLineId + StopTimeAction.DefaultTimeLineValueSuffix) >= 200L);
     }
 
     [Test]
@@ -55,18 +52,18 @@ public class StopTimeActionTest : AbstractNUnitSetUp
         stopTime.Execute(Context);
         ClassicAssert.IsTrue(Context.GetVariables().ContainsKey("stopMe"));
         ClassicAssert.IsTrue(Context.GetVariables().ContainsKey("stopMe_time"));
-        ClassicAssert.AreEqual(Context.GetVariable<long>("stopMe_time", typeof(long)), 0L);
+        ClassicAssert.AreEqual(Context.GetVariable<long>("stopMe_time"), 0L);
 
         Thread.Sleep(100);
         stopTime.Execute(Context);
         ClassicAssert.IsTrue(Context.GetVariables().ContainsKey("stopMe"));
         ClassicAssert.IsTrue(Context.GetVariables().ContainsKey("stopMe_time"));
-        ClassicAssert.IsTrue(Context.GetVariable<long>("stopMe_time", typeof(long)) >= 100L);
+        ClassicAssert.IsTrue(Context.GetVariable<long>("stopMe_time") >= 100L);
         Thread.Sleep(100);
         stopTime.Execute(Context);
         ClassicAssert.IsTrue(Context.GetVariables().ContainsKey("stopMe"));
         ClassicAssert.IsTrue(Context.GetVariables().ContainsKey("stopMe_time"));
-        ClassicAssert.IsTrue(Context.GetVariable<long>("stopMe_time", typeof(long)) >= 200L);
+        ClassicAssert.IsTrue(Context.GetVariable<long>("stopMe_time") >= 200L);
     }
 
     [Test]
@@ -90,7 +87,7 @@ public class StopTimeActionTest : AbstractNUnitSetUp
         ClassicAssert.IsTrue(Context.GetVariables().ContainsKey("stopThem_VALUE"));
         ClassicAssert.IsFalse(Context.GetVariables().ContainsKey("stopUs"));
         ClassicAssert.IsFalse(Context.GetVariables().ContainsKey("stopUs_VALUE"));
-        ClassicAssert.AreEqual(Context.GetVariable<long>("stopThem_VALUE", typeof(long)), 0L);
+        ClassicAssert.AreEqual(Context.GetVariable<long>("stopThem_VALUE"), 0L);
 
         Thread.Sleep(100);
         stopTime2.Execute(Context);
@@ -98,8 +95,8 @@ public class StopTimeActionTest : AbstractNUnitSetUp
         ClassicAssert.IsTrue(Context.GetVariables().ContainsKey("stopThem_VALUE"));
         ClassicAssert.IsTrue(Context.GetVariables().ContainsKey("stopUs"));
         ClassicAssert.IsTrue(Context.GetVariables().ContainsKey("stopUs_VALUE"));
-        ClassicAssert.AreEqual(Context.GetVariable<long>("stopThem_VALUE", typeof(long)), 0L);
-        ClassicAssert.AreEqual(Context.GetVariable<long>("stopUs_VALUE", typeof(long)), 0L);
+        ClassicAssert.AreEqual(Context.GetVariable<long>("stopThem_VALUE"), 0L);
+        ClassicAssert.AreEqual(Context.GetVariable<long>("stopUs_VALUE"), 0L);
 
         Thread.Sleep(100);
         stopTime1.Execute(Context);
@@ -108,7 +105,7 @@ public class StopTimeActionTest : AbstractNUnitSetUp
         ClassicAssert.IsTrue(Context.GetVariables().ContainsKey("stopThem_VALUE"));
         ClassicAssert.IsTrue(Context.GetVariables().ContainsKey("stopUs"));
         ClassicAssert.IsTrue(Context.GetVariables().ContainsKey("stopUs_VALUE"));
-        ClassicAssert.IsTrue(Context.GetVariable<long>("stopThem_VALUE", typeof(long)) >= 200L);
-        ClassicAssert.IsTrue(Context.GetVariable<long>("stopUs_VALUE", typeof(long)) >= 100L);
+        ClassicAssert.IsTrue(Context.GetVariable<long>("stopThem_VALUE") >= 200L);
+        ClassicAssert.IsTrue(Context.GetVariable<long>("stopUs_VALUE") >= 100L);
     }
 }
