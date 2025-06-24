@@ -6,7 +6,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 
     <!-- License Information -->
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl>https://raw.githubusercontent.com/asuruceanu/agenix/master/.assets/icons/icon.png</PackageIconUrl>
     <Copyright>Copyright (c) 2025 Agenix</Copyright>

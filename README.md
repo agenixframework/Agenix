@@ -18,7 +18,7 @@
       <img src="https://img.shields.io/nuget/v/Agenix.Core.svg" alt="NuGet Version"/>
     </a>
     <a href="https://github.com/asuruceanu/agenix/blob/master/LICENSE">
-      <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"/>
+      <img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="License"/>
     </a>
   </p>
 
@@ -42,6 +42,25 @@
 
 Unlike traditional testing frameworks, Agenix focuses on **business-readable test automation** that bridges the gap between technical implementation and business requirements. The framework's Screenplay pattern allows you to write tests that read like natural language while maintaining the full power of programmatic test automation.
 
+## ️ Framework Origins
+
+This framework is **based on the [Citrus Framework](https://citrusframework.org/)**, originally developed for Java-based integration testing. Key portions of this .NET implementation were derived from and inspired by the Citrus Framework codebase.
+
+- **Original Citrus Framework**: Copyright (C) 2006-2024 the original author or authors
+- **License**: Both projects are licensed under Apache License 2.0
+- **Agenix Implementation**: Copyright (C) 2025 Agenix
+
+We extend our gratitude to the Citrus Framework maintainers and contributors for their excellent work that served as the foundation for this .NET adaptation.
+
+##  License
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+
+This project includes software derived from the Citrus Framework - see the [NOTICE](NOTICE) file for additional attribution details.
+
+##  Related Projects
+
+- [Citrus Framework (Java)](https://github.com/citrusframework/citrus) - The original framework that inspired this implementation
 
 ## Table of Contents
 
@@ -50,7 +69,6 @@ Unlike traditional testing frameworks, Agenix focuses on **business-readable tes
 - [Getting Started](#getting-started)
 - [Module overview](#module-overview)
 - [Development Guidelines](#development-guidelines)
-- [License](#license)
 
 ## Overview
 
@@ -276,27 +294,3 @@ When reporting issues, please include:
 - **Sensitive data** should use configuration or environment variables
 - **Dependencies** regularly updated for security patches
 - **Test data** should not contain real customer information
-
-## License
-
-MIT License
-
-Copyright (c) 2025 Agenix
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.

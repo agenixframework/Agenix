@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Copyright>Copyright (c) 2025 Agenix</Copyright>
     <Authors>Andrei Suruceanu</Authors>
     <IsPackable>false</IsPackable>
