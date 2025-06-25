@@ -83,7 +83,8 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
             .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
         _referenceResolver.Setup(x => x.ResolveAll<IMarshaller>())
-            .Returns(() => {
+            .Returns(() =>
+            {
                 var dictionary = new ConcurrentDictionary<string, IMarshaller>();
                 dictionary.TryAdd("marshaller", _marshaller);
                 return dictionary;

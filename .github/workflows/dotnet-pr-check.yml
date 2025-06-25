@@ -1,4 +1,3 @@
-
 name: CI/CD Pipeline
 
 on:
@@ -16,11 +15,10 @@ on:
       - '.assets/**'
   workflow_dispatch:  # Allow manual triggering
 
-# Add these permissions
 permissions:
   contents: read
-  checks: write          # Allows creating test result check runs
-  pull-requests: write   # Allows updating PR status
+  checks: write
+  pull-requests: write
   actions: read
   issues: read
 
@@ -31,16 +29,16 @@ env:
   DOTNET_CLI_TELEMETRY_OPTOUT: true
 
 jobs:
-  # ===== CODE QUALITY CHECKS =====
-  code-quality:
-    name: 🔍 Code Quality
+  # ===== CODE FORMATTING CHECK (Parallel) =====
+  code-formatting:
+    name: 🎨 Code Formatting
     runs-on: ubuntu-latest
+    # Skip for merge commits to develop/master
+    if: ${{ !(github.event_name == 'push' && contains(github.event.head_commit.message, 'Merge pull request')) || github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch' }}
 
     steps:
       - name: 📥 Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Full history for better analysis
 
       - name: 🔧 Setup .NET
         uses: actions/setup-dotnet@v4
@@ -50,11 +48,37 @@ jobs:
       - name: 📦 Restore dependencies
         run: dotnet restore
 
-      - name: 🔍 Code formatting check
+      - name: 🎨 Code formatting check
         run: dotnet format --verify-no-changes --verbosity diagnostic
-        continue-on-error: true  # temporarily
+        continue-on-error: true  # 🔧 Allow the pipeline to continue even if formatting fails
 
-      - name: Security Scan
+      - name: 📝 Format check result
+        if: failure()
+        run: |
+            echo "⚠️ Code formatting issues detected!"
+            echo "💡 Run 'dotnet format' locally to fix formatting"
+            echo "🟡 This is a warning, not blocking the pipeline"
+
+  # ===== SECURITY SCAN (Parallel) =====
+  security-scan:
+    name: 🔒 Security Scan
+    runs-on: ubuntu-latest
+    # Skip for merge commits to develop/master
+    if: ${{ !(github.event_name == 'push' && contains(github.event.head_commit.message, 'Merge pull request')) || github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch' }}
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: 📦 Restore dependencies
+        run: dotnet restore
+
+      - name: 🔒 Security vulnerability scan
         run: |
           echo "🔍 Running security vulnerability scan..."
           dotnet list package --vulnerable --include-transitive 2>&1 | tee audit.txt
@@ -73,7 +97,7 @@ jobs:
             echo "✅ No vulnerabilities detected"
           fi
 
-      - name: Upload Security Report
+      - name: 📋 Upload Security Report
         if: failure()
         uses: actions/upload-artifact@v4
         with:
@@ -85,7 +109,9 @@ jobs:
   build-and-test:
     name: 🏗️ Build & Test
     runs-on: ${{ matrix.os }}
-    needs: code-quality
+    needs: [code-formatting, security-scan]  # 🔧 Wait for BOTH parallel jobs
+    # Skip for merge commits to develop/master
+    if: ${{ !(github.event_name == 'push' && contains(github.event.head_commit.message, 'Merge pull request')) || github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch' }}
 
     strategy:
       fail-fast: false
@@ -97,13 +123,14 @@ jobs:
             shell: bash
           - os: windows-latest
             artifact-name: windows
-            shell: bash  # 🔧 CHANGED: Force bash on Windows
+            shell: bash
           - os: macos-latest
             artifact-name: macos
             shell: bash
     defaults:
       run:
         shell: ${{ matrix.shell }}
+
     steps:
       - name: 📥 Checkout code
         uses: actions/checkout@v4
@@ -126,7 +153,6 @@ jobs:
 
       - name: 🧪 Run all unit tests
         run: |
-          # Run tests for each test project individually to get detailed results
           for test_project in $(find . -name "*Tests.csproj" -type f | sort); do
             project_name=$(basename "$test_project" .csproj)
             echo "Running tests for: $project_name"
@@ -167,12 +193,13 @@ jobs:
             ./artifacts/*.nupkg
           retention-days: 30
 
-  # ===== DOCUMENTATION =====
+  # ===== DOCUMENTATION (Only for direct pushes to master) =====
   documentation:
     name: 📚 Documentation
     runs-on: ubuntu-latest
     needs: build-and-test
-    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    # Only run for direct pushes to master (not merge commits from PRs)
+    if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'push' && !contains(github.event.head_commit.message, 'Merge pull request') }}
 
     steps:
       - name: 📥 Checkout code
@@ -188,7 +215,6 @@ jobs:
 
       - name: 📚 Generate documentation
         run: |
-          # Create basic docfx.json if it doesn't exist
           if [ ! -f "docfx.json" ]; then
             echo "Creating basic docfx.json..."
             cat > docfx.json << 'EOF'
@@ -226,16 +252,9 @@ jobs:
           EOF
           fi
 
-          # Install DocFX templates
-          echo "Installing DocFX templates..."
           docfx template list
           docfx template export default
-
-          # Generate API documentation
-          echo "Generating API metadata..."
           docfx metadata docfx.json
-
-          echo "Building documentation..."
           docfx build docfx.json
         continue-on-error: true
 
@@ -250,8 +269,8 @@ jobs:
   summary:
     name: 📊 Build Summary
     runs-on: ubuntu-latest
-    needs: [code-quality, build-and-test]
-    if: always()
+    needs: [code-formatting, security-scan, build-and-test]  # 🔧 Updated dependencies
+    if: always() && (needs.code-formatting.result != 'skipped' || needs.security-scan.result != 'skipped' || needs.build-and-test.result != 'skipped')
 
     steps:
       - name: 📊 Generate summary
@@ -260,11 +279,16 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Job | Status |" >> $GITHUB_STEP_SUMMARY
           echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
-          echo "| Code Quality | ${{ needs.code-quality.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Build & Test | ${{ needs.build-and-test.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Code Formatting | ${{ needs.code-formatting.result == 'success' && '✅ Passed' || needs.code-formatting.result == 'skipped' && '⏭️ Skipped' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Security Scan | ${{ needs.security-scan.result == 'success' && '✅ Passed' || needs.security-scan.result == 'skipped' && '⏭️ Skipped' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Build & Test | ${{ needs.build-and-test.result == 'success' && '✅ Passed' || needs.build-and-test.result == 'skipped' && '⏭️ Skipped' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### 📈 Key Metrics" >> $GITHUB_STEP_SUMMARY
           echo "- **Branch**: \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
           echo "- **Commit**: \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
           echo "- **Trigger**: \`${{ github.event_name }}\`" >> $GITHUB_STEP_SUMMARY
           echo "- **Actor**: @${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+
+          if [[ "${{ contains(github.event.head_commit.message, 'Merge pull request') }}" == "true" ]]; then
+            echo "- **Note**: 🚫 CI/CD skipped for merge commit (already validated in PR)" >> $GITHUB_STEP_SUMMARY
+          fi
