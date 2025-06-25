@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -56,7 +56,7 @@ public class ResourcePathTypeResolver : ITypeResolver
     /// <summary>
     ///     Cached specific type names as resolved from assembly.
     /// </summary>
-    private readonly ConcurrentDictionary<string, Dictionary<string, string>> _typeCache = new();
+    private readonly ConcurrentDictionary<string, ConcurrentDictionary<string, string>> _typeCache = new();
 
     /// <summary>
     ///     Default constructor using an Extension resource base path.
@@ -105,13 +105,15 @@ public class ResourcePathTypeResolver : ITypeResolver
 
         if (!_typeCache.TryGetValue(cacheKey, out var map))
         {
-            map = new Dictionary<string, string> { { cacheKey, ResolveProperty(resourcePath, property) } };
+            map = new ConcurrentDictionary<string, string>();
+            map.TryAdd(cacheKey, ResolveProperty(resourcePath, property));
             _typeCache[cacheKey] = map;
         }
 
         var type = new TypeResolver().Resolve(map[cacheKey]);
         return (T)ObjectUtils.InstantiateType(ObjectUtils.GetZeroArgConstructorInfo(type), initargs);
     }
+
 
     /// <summary>
     ///     Resolves all resources specified by the given parameters into a dictionary.
@@ -123,13 +125,13 @@ public class ResourcePathTypeResolver : ITypeResolver
     /// <returns>A dictionary containing resource keys mapped to resolved instances of type <typeparamref name="T" />.</returns>
     public IDictionary<string, T> ResolveAll<T>(string resourcePath, string property, string keyProperty)
     {
-        if (!_typeCache.TryGetValue(ToCacheKey(resourcePath, property, keyProperty), out var typeLookup))
+        if (!_typeCache.TryGetValue(ToCacheKey(resourcePath, property, keyProperty), out ConcurrentDictionary<string, string> typeLookup))
         {
             typeLookup = GetPropertyMappingsFromResources(resourcePath, property, keyProperty);
             _typeCache[ToCacheKey(resourcePath, property, keyProperty)] = typeLookup;
         }
 
-        var resources = new Dictionary<string, T>();
+        var resources = new ConcurrentDictionary<string, T>();
 
         foreach (var kvp in typeLookup)
         {
@@ -159,11 +161,11 @@ public class ResourcePathTypeResolver : ITypeResolver
     /// <param name="property">The specific property to extract from the resources.</param>
     /// <param name="keyProperty">The key property used to index the resulting dictionary.</param>
     /// <returns>A dictionary containing mappings of keys to properties extracted from the resources.</returns>
-    private Dictionary<string, string> GetPropertyMappingsFromResources(string path, string property,
+    private ConcurrentDictionary<string, string> GetPropertyMappingsFromResources(string path, string property,
         string keyProperty)
     {
         var fullPath = GetFullResourcePath(path);
-        Dictionary<string, string> typeLookup = new();
+        ConcurrentDictionary<string, string> typeLookup = new();
 
         try
         {
@@ -179,12 +181,12 @@ public class ResourcePathTypeResolver : ITypeResolver
                 {
                     foreach (DictionaryEntry prop in resourceProps)
                     {
-                        typeLookup.Add(resourceName + "." + prop.Key, prop.Value.ToString());
+                        typeLookup.TryAdd(resourceName + "." + prop.Key, prop.Value.ToString());
                     }
                 }
                 else
                 {
-                    typeLookup.Add(
+                    typeLookup.TryAdd(
                         keyProperty != null
                             ? ResolveProperty(fullPath + "/" + resourceName, keyProperty)
                             : resourceName, resourceType);

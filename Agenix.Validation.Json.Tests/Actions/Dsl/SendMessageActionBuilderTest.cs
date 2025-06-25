@@ -7,23 +7,24 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Collections.Concurrent;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Message;
 using Agenix.Api.Messaging;
@@ -91,11 +92,13 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
 
-        var mappers = new Dictionary<string, JsonSerializer> { { "serializer", _serializer } };
+        var mappers = new ConcurrentDictionary<string, JsonSerializer>();
+        mappers.TryAdd("serializer", _serializer);
+
         _referenceResolver.Setup(x => x.ResolveAll<JsonSerializer>()).Returns(mappers);
         _referenceResolver.Setup(x => x.Resolve<JsonSerializer>()).Returns(_serializer);
 
@@ -159,11 +162,14 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
         _referenceResolver.Setup(x => x.ResolveAll<JsonSerializer>())
-            .Returns(new Dictionary<string, JsonSerializer> { { "serializer", _serializer } });
+            .Returns(new ConcurrentDictionary<string, JsonSerializer>(
+                new Dictionary<string, JsonSerializer> { { "serializer", _serializer } }
+            ));
+
         _referenceResolver.Setup(x => x.Resolve<JsonSerializer>()).Returns(_serializer);
 
         Context.SetReferenceResolver(_referenceResolver.Object);
@@ -265,9 +271,9 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
         _referenceResolver.Setup(x => x.IsResolvable("myJsonSerializer")).Returns(true);
         _referenceResolver.Setup(x => x.Resolve<JsonSerializer>("myJsonSerializer"))
             .Returns(_serializer);
@@ -435,13 +441,15 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
 
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.ResolveAll<JsonSchemaRepository>())
-            .Returns(new Dictionary<string, JsonSchemaRepository> { { "fooRepository", schemaRepository } });
+            .Returns(new ConcurrentDictionary<string, JsonSchemaRepository>(
+                new Dictionary<string, JsonSchemaRepository> { { "fooRepository", schemaRepository } }
+            ));
 
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
 
         Context.SetReferenceResolver(_referenceResolver.Object);
 
@@ -494,18 +502,23 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
 
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.ResolveAll<JsonSchemaRepository>())
-            .Returns(new Dictionary<string, JsonSchemaRepository> { { "fooRepository", schemaRepository } });
+            .Returns(new ConcurrentDictionary<string, JsonSchemaRepository>(
+                new Dictionary<string, JsonSchemaRepository> { { "fooRepository", schemaRepository } }
+            ));
         _referenceResolver.Setup(x => x.ResolveAll<ISchemaValidator<ISchemaValidationContext>>())
-            .Returns(new Dictionary<string, ISchemaValidator<ISchemaValidationContext>>
-            {
-                { "jsonSchemaValidator", schemaValidator.Object }
-            });
+            .Returns(new ConcurrentDictionary<string, ISchemaValidator<ISchemaValidationContext>>(
+                new Dictionary<string, ISchemaValidator<ISchemaValidationContext>>
+                {
+                    { "jsonSchemaValidator", schemaValidator.Object }
+                }
+            ));
+
 
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
 
         Context.SetReferenceResolver(_referenceResolver.Object);
         Context.MessageValidatorRegistry.AddSchemeValidator("JSON", schemaValidator.Object);
@@ -611,9 +624,9 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
         _referenceResolver.Setup(x => x.Resolve<IDataDictionary>("customDictionary"))
             .Returns(dictionary);
 

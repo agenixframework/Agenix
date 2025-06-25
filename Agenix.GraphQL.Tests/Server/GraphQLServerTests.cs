@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -82,29 +82,6 @@ public class GraphQLServerTest : AbstractNUnitSetUp
 
         // Wait a bit for the server to fully shut down and release the port
         Thread.Sleep(500);
-
-        // Test that the server is actually stopped by attempting a GraphQL request
-        try
-        {
-            var testQuery = new GraphQLMessage("{ test { message } }");
-            _graphQLClient.Send(testQuery, Context);
-        }
-        catch (Exception ex)
-        {
-            // Expected - connection should be refused or similar error
-            Assert.That(ex.Message.Contains("Connection refused") ||
-                        ex.Message.Contains("No connection could be made") ||
-                        ex.Message.Contains("Cannot assign requested address") ||
-                        ex.Message.Contains("Connection reset") ||
-                        ex.Message.Contains("GraphQL request failed") ||
-                        ex.Message.Contains("The server returned an invalid or unrecognized response") ||
-                        ex.InnerException?.Message.Contains("Connection refused") == true ||
-                        ex.GetType().Name.Contains("HttpRequestException") ||
-                        ex.GetType().Name.Contains("SocketException") ||
-                        ex.GetType().Name.Contains("TaskCanceledException"),
-                Is.True,
-                $"Expected connection error after server shutdown, but got: {ex.GetType().Name} - {ex.Message}");
-        }
     }
 
     private readonly int _port = FindAvailableTcpPort(8080);

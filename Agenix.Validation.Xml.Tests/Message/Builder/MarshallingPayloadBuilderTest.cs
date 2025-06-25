@@ -7,23 +7,24 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Collections.Concurrent;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Spi;
 using Agenix.Api.Xml;
@@ -52,7 +53,7 @@ public class MarshallingPayloadBuilderTest : AbstractNUnitSetUp
     public void ShouldBuildPayload()
     {
         // Arrange
-        var marshallerMap = new Dictionary<string, IMarshaller> { ["marshaller"] = _marshaller };
+        var marshallerMap = new ConcurrentDictionary<string, IMarshaller> { ["marshaller"] = _marshaller };
 
         _referenceResolver.Setup(r => r.ResolveAll<IMarshaller>()).Returns(marshallerMap);
         _referenceResolver.Setup(r => r.Resolve<IMarshaller>()).Returns(_marshaller);
@@ -132,7 +133,7 @@ public class MarshallingPayloadBuilderTest : AbstractNUnitSetUp
     public void ShouldThrowExceptionWhenMultipleMarshallersFound()
     {
         // Arrange
-        var marshallerMap = new Dictionary<string, IMarshaller>
+        var marshallerMap = new ConcurrentDictionary<string, IMarshaller>
         {
             ["marshaller1"] = _marshaller,
             ["marshaller2"] = new Xml2Marshaller(typeof(TestRequest))
@@ -199,7 +200,7 @@ public class MarshallingPayloadBuilderTest : AbstractNUnitSetUp
     {
         _referenceResolver.Reset();
         // Arrange
-        var marshallerMap = new Dictionary<string, IMarshaller> { ["marshaller"] = _marshaller };
+        var marshallerMap = new ConcurrentDictionary<string, IMarshaller> { ["marshaller"] = _marshaller };
 
         _referenceResolver.Setup(r => r.ResolveAll<IMarshaller>()).Returns(marshallerMap);
         Context.SetReferenceResolver(_referenceResolver.Object);

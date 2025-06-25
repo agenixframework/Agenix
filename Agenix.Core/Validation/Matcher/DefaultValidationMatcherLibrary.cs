@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -42,23 +42,23 @@ public class DefaultValidationMatcherLibrary : ValidationMatcherLibrary
     {
         Name = " CoreValidationMatcherLibrary";
 
-        Members.Add("EqualsIgnoreCase", new EqualsIgnoreCaseValidationMatcher());
-        Members.Add("Empty", new EmptyValidationMatcher());
-        Members.Add("Ignore", new IgnoreValidationMatcher());
-        Members.Add("ContainsIgnoreCase", new ContainsIgnoreCaseValidationMatcher());
-        Members.Add("Contains", new ContainsValidationMatcher());
-        Members.Add("DatePattern", new DatePatternValidationMatcher());
-        Members.Add("EndsWith", new EndsWithValidationMatcher());
-        Members.Add("LowerThan", new LowerThanValidationMatcher());
-        Members.Add("GreaterThan", new GreaterThanValidationMatcher());
-        Members.Add("IgnoreNewLine", new IgnoreNewLineValidationMatcher());
-        Members.Add("IsNumber", new IsNumberValidationMatcher());
-        Members.Add("Matches", new MatchesValidationMatcher());
-        Members.Add("StartsWith", new StartsWithValidationMatcher());
-        Members.Add("StringLength", new StringLengthValidationMatcher());
-        Members.Add("Variable", new CreateVariableValidationMatcher());
-        Members.Add("Trim", new TrimValidationMatcher());
-        Members.Add("TrimAllWhiteSpaces", new TrimAllWhitespacesValidationMatcher());
+        Members.TryAdd("EqualsIgnoreCase", new EqualsIgnoreCaseValidationMatcher());
+        Members.TryAdd("Empty", new EmptyValidationMatcher());
+        Members.TryAdd("Ignore", new IgnoreValidationMatcher());
+        Members.TryAdd("ContainsIgnoreCase", new ContainsIgnoreCaseValidationMatcher());
+        Members.TryAdd("Contains", new ContainsValidationMatcher());
+        Members.TryAdd("DatePattern", new DatePatternValidationMatcher());
+        Members.TryAdd("EndsWith", new EndsWithValidationMatcher());
+        Members.TryAdd("LowerThan", new LowerThanValidationMatcher());
+        Members.TryAdd("GreaterThan", new GreaterThanValidationMatcher());
+        Members.TryAdd("IgnoreNewLine", new IgnoreNewLineValidationMatcher());
+        Members.TryAdd("IsNumber", new IsNumberValidationMatcher());
+        Members.TryAdd("Matches", new MatchesValidationMatcher());
+        Members.TryAdd("StartsWith", new StartsWithValidationMatcher());
+        Members.TryAdd("StringLength", new StringLengthValidationMatcher());
+        Members.TryAdd("Variable", new CreateVariableValidationMatcher());
+        Members.TryAdd("Trim", new TrimValidationMatcher());
+        Members.TryAdd("TrimAllWhiteSpaces", new TrimAllWhitespacesValidationMatcher());
 
         LookupValidationMatchers();
     }
@@ -70,7 +70,7 @@ public class DefaultValidationMatcherLibrary : ValidationMatcherLibrary
     {
         foreach (var (key, matcher) in IValidationMatcher.Lookup())
         {
-            Members.Add(key, matcher);
+            Members.TryAdd(key, matcher);
 
             if (Log.IsEnabled(LogLevel.Debug))
             {
