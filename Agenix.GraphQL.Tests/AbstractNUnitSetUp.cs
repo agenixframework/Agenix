@@ -36,7 +36,7 @@ namespace Agenix.GraphQL.Tests;
 
 public abstract class AbstractNUnitSetUp
 {
-     private TestContext _context;
+    private TestContext _context;
     private TestContextFactory _testContextFactory;
 
     protected TestContext Context => _context;

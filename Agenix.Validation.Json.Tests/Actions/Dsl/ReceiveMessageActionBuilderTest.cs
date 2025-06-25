@@ -1102,7 +1102,8 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _configuration.Reset();
 
         _referenceResolver.Setup(x => x.ResolveAll<JsonSchemaRepository>())
-            .Returns(() => {
+            .Returns(() =>
+            {
                 var dictionary = new ConcurrentDictionary<string, JsonSchemaRepository>();
                 dictionary.TryAdd("customJsonSchemaRepository", schemaRepository);
                 return dictionary;

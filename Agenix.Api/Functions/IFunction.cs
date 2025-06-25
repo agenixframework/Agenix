@@ -37,7 +37,7 @@ namespace Agenix.Api.Functions;
 /// </summary>
 public interface IFunction
 {
-/// <summary>
+    /// <summary>
     ///     Logger.
     /// </summary>
     private static readonly ILogger Log = LogManager.GetLogger(typeof(IFunction));

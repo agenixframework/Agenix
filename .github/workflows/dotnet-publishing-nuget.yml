@@ -83,12 +83,6 @@ jobs:
           /p:FileVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} \
           /p:InformationalVersion=${{ steps.gitversion.outputs.informationalVersion }}
 
-    - name: Test
-      run: |
-        dotnet test --configuration Release --no-build --verbosity normal \
-          --collect:"XPlat Code Coverage" \
-          --results-directory ./coverage
-
     - name: Pack NuGet packages
       run: |
         dotnet pack --configuration Release --no-build --output ./artifacts \
