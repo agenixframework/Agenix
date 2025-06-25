@@ -7,23 +7,24 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Collections.Concurrent;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
@@ -57,10 +58,55 @@ public interface ISchemaValidator<in T> where T : ISchemaValidationContext
     private static readonly ILogger Log = LogManager.GetLogger(typeof(ISchemaValidator<T>).Name);
 
     /// <summary>
-    ///     Provides resolution of types by using a specified resource path for
-    ///     runtime class reference mapping, typically used in schema validation processes.
+    ///     Lazy-initialized type resolver for runtime class reference mapping in schema validation processes.
     /// </summary>
-    private static readonly ResourcePathTypeResolver TypeResolver = new(ResourcePath);
+    private static readonly Lazy<ResourcePathTypeResolver> TypeResolver =
+        new(() => new ResourcePathTypeResolver(ResourcePath));
+
+    /// <summary>
+    ///     Lazy-initialized cache of schema validators for improved performance and thread safety.
+    /// </summary>
+    private static readonly Lazy<IDictionary<string, ISchemaValidator<T>>> ValidatorsCache =
+        new(LoadSchemaValidators);
+
+    /// <summary>
+    ///     Lazy-initialized cache for individual validator lookups to avoid repeated resolution attempts.
+    /// </summary>
+    private static readonly Lazy<ConcurrentDictionary<string, Optional<ISchemaValidator<T>>>> IndividualLookupCache =
+        new(() => new ConcurrentDictionary<string, Optional<ISchemaValidator<T>>>());
+
+    /// <summary>
+    ///     Loads all available schema validators from the type resolver.
+    /// </summary>
+    /// <returns>A dictionary containing all loaded schema validators.</returns>
+    private static IDictionary<string, ISchemaValidator<T>> LoadSchemaValidators()
+    {
+        var validators = new ConcurrentDictionary<string, ISchemaValidator<T>>();
+
+        try
+        {
+            var resolvedSchemas = TypeResolver.Value.ResolveAll<ISchemaValidator<T>>("", ITypeResolver.DEFAULT_TYPE_PROPERTY, "name");
+
+            foreach (var kvp in resolvedSchemas)
+            {
+                validators[kvp.Key] = kvp.Value;
+            }
+
+            if (Log.IsEnabled(LogLevel.Debug))
+            {
+                foreach (var kvp in validators)
+                {
+                    Log.LogDebug("Found schema validator '{Key}' as {Type}", kvp.Key, kvp.Value.GetType());
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.LogWarning("Failed to load schema validators from resource path: {Error}", ex.Message);
+        }
+
+        return validators;
+    }
 
     /// <summary>
     ///     Resolves all available validators from the defined resource path.
@@ -73,46 +119,30 @@ public interface ISchemaValidator<in T> where T : ISchemaValidationContext
     /// </returns>
     static IDictionary<string, ISchemaValidator<T>> Lookup()
     {
-        var resolvedSchemas =
-            TypeResolver.ResolveAll<ISchemaValidator<T>>("", ITypeResolver.DEFAULT_TYPE_PROPERTY, "name");
-
-        foreach (var kvp in resolvedSchemas)
-        {
-            resolvedSchemas[kvp.Key] = kvp.Value;
-        }
-
-        if (!Log.IsEnabled(LogLevel.Debug))
-        {
-            return resolvedSchemas;
-        }
-
-        {
-            foreach (var kvp in resolvedSchemas)
-            {
-                Log.LogDebug("Found schema validator '{KvpKey}' as {Type}", kvp.Key, kvp.Value.GetType());
-            }
-        }
-        return resolvedSchemas;
+        return ValidatorsCache.Value;
     }
 
     /// <summary>
     ///     Resolves all available schema validators from the defined resource path lookup.
     ///     Scans assemblies for validator meta-information and returns instantiated validators as a collection.
     /// </summary>
-    /// <returns>A dictionary containing the registered schema validators.</returns>
+    /// <param name="validator">The name of the validator to lookup.</param>
+    /// <returns>An Optional containing the validator if found, otherwise an empty Optional.</returns>
     public static Optional<ISchemaValidator<T>> Lookup(string validator)
     {
-        try
+        return IndividualLookupCache.Value.GetOrAdd(validator, key =>
         {
-            var instance = TypeResolver.Resolve<ISchemaValidator<T>>(validator, ITypeResolver.DEFAULT_TYPE_PROPERTY);
-            return Optional<ISchemaValidator<T>>.Of(instance);
-        }
-        catch (AgenixSystemException)
-        {
-            Log.LogWarning($"Failed to resolve validator from resource '{validator}'");
-        }
-
-        return Optional<ISchemaValidator<T>>.Empty;
+            try
+            {
+                var instance = TypeResolver.Value.Resolve<ISchemaValidator<T>>(key, ITypeResolver.DEFAULT_TYPE_PROPERTY);
+                return Optional<ISchemaValidator<T>>.Of(instance);
+            }
+            catch (AgenixSystemException)
+            {
+                Log.LogWarning("Failed to resolve validator from resource '{Validator}'", key);
+                return Optional<ISchemaValidator<T>>.Empty;
+            }
+        });
     }
 
     /// <summary>

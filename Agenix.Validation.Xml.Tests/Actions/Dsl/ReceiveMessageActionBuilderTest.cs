@@ -7,23 +7,24 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Collections.Concurrent;
 using Agenix.Api.Endpoint;
 using Agenix.Api.IO;
 using Agenix.Api.Message;
@@ -156,11 +157,16 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
         _referenceResolver.Setup(x => x.ResolveAll<IMarshaller>())
-            .Returns(new Dictionary<string, IMarshaller> { { "marshaller", _marshaller } });
+            .Returns(() =>
+            {
+                var dictionary = new ConcurrentDictionary<string, IMarshaller>();
+                dictionary.TryAdd("marshaller", _marshaller);
+                return dictionary;
+            });
         _referenceResolver.Setup(x => x.Resolve<IMarshaller>()).Returns(_marshaller);
 
         Context.SetReferenceResolver(_referenceResolver.Object);
@@ -242,9 +248,9 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
         _referenceResolver.Setup(x => x.IsResolvable("myMarshaller")).Returns(true);
         _referenceResolver.Setup(x => x.Resolve<IMarshaller>("myMarshaller")).Returns(_marshaller);
 
@@ -371,9 +377,9 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<IEndpoint>("fooMessageEndpoint")).Returns(_messageEndpoint.Object);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
 
         Context.SetReferenceResolver(_referenceResolver.Object);
         var runner = new DefaultTestCaseRunner(Context);
@@ -626,11 +632,17 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
         _referenceResolver.Setup(x => x.ResolveAll<IMarshaller>())
-            .Returns(new Dictionary<string, IMarshaller> { { "marshaller", _marshaller } });
+            .Returns(() =>
+            {
+                var dictionary = new ConcurrentDictionary<string, IMarshaller>();
+                dictionary.TryAdd("marshaller", _marshaller);
+                return dictionary;
+            });
+
         _referenceResolver.Setup(x => x.Resolve<IMarshaller>()).Returns(_marshaller);
 
         Context.SetReferenceResolver(_referenceResolver.Object);
@@ -716,9 +728,9 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
         _referenceResolver.Setup(x => x.IsResolvable("myMarshaller")).Returns(true);
         _referenceResolver.Setup(x => x.Resolve<IMarshaller>("myMarshaller")).Returns(_marshaller);
 
@@ -920,9 +932,9 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
 
         Context.SetReferenceResolver(_referenceResolver.Object);
         var runner = new DefaultTestCaseRunner(Context);
@@ -972,9 +984,9 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<IDataDictionary>("customDictionary")).Returns(dictionary);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
 
         Context.SetReferenceResolver(_referenceResolver.Object);
         var runner = new DefaultTestCaseRunner(Context);
@@ -1028,9 +1040,9 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
 
         Context.SetReferenceResolver(_referenceResolver.Object);
         var runner = new DefaultTestCaseRunner(Context);
@@ -1075,9 +1087,9 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
 
         Context.SetReferenceResolver(_referenceResolver.Object);
         var runner = new DefaultTestCaseRunner(Context);
@@ -1121,9 +1133,9 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
 
         Context.SetReferenceResolver(_referenceResolver.Object);
         var runner = new DefaultTestCaseRunner(Context);
@@ -1167,9 +1179,9 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
 
         Context.SetReferenceResolver(_referenceResolver.Object);
         var runner = new DefaultTestCaseRunner(Context);
@@ -1223,9 +1235,9 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
 
         Context.SetReferenceResolver(_referenceResolver.Object);
         var runner = new DefaultTestCaseRunner(Context);
@@ -1279,9 +1291,9 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
 
         Context.SetReferenceResolver(_referenceResolver.Object);
         var runner = new DefaultTestCaseRunner(Context);
@@ -1353,9 +1365,9 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
 
         Context.SetReferenceResolver(_referenceResolver.Object);
         var runner = new DefaultTestCaseRunner(Context);
@@ -1406,9 +1418,9 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
 
         Context.SetReferenceResolver(_referenceResolver.Object);
         var runner = new DefaultTestCaseRunner(Context);
@@ -1466,9 +1478,9 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
 
         Context.SetReferenceResolver(_referenceResolver.Object);
         var runner = new DefaultTestCaseRunner(Context);
@@ -1524,9 +1536,9 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
 
         Context.SetReferenceResolver(_referenceResolver.Object);
         var runner = new DefaultTestCaseRunner(Context);
@@ -1581,9 +1593,9 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
         _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
-            .Returns(new Dictionary<string, SequenceBeforeTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
-            .Returns(new Dictionary<string, SequenceAfterTest>());
+            .Returns(new ConcurrentDictionary<string, SequenceAfterTest>());
 
         Context.SetReferenceResolver(_referenceResolver.Object);
         var runner = new DefaultTestCaseRunner(Context);

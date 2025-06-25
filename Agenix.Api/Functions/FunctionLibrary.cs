@@ -7,23 +7,24 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Collections.Concurrent;
 using Agenix.Api.Exceptions;
 
 namespace Agenix.Api.Functions;
@@ -43,7 +44,7 @@ public class FunctionLibrary
     ///     The dictionary (map) of functions in this library
     /// </summary>
     private IDictionary<string, IFunction> _members =
-        new Dictionary<string, IFunction>(StringComparer.OrdinalIgnoreCase);
+        new ConcurrentDictionary<string, IFunction>(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
     ///     Name of a function library
@@ -89,13 +90,13 @@ public class FunctionLibrary
     /// <returns>The function instance.</returns>
     public IFunction GetFunction(string functionName)
     {
-        if (!_members.ContainsKey(functionName))
+        if (!_members.TryGetValue(functionName, out var function))
         {
             throw new NoSuchFunctionException("Can not find function '" + functionName + "' in library " + _name +
                                               " (" + _prefix + ")");
         }
 
-        return _members[functionName];
+        return function;
     }
 
     /// <summary>

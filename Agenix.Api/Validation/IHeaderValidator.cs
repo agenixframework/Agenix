@@ -7,23 +7,24 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Collections.Concurrent;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
@@ -46,13 +47,8 @@ public interface IHeaderValidator
     /// </summary>
     private static readonly ILogger Log = LogManager.GetLogger(typeof(IHeaderValidator));
 
-    static readonly ResourcePathTypeResolver TypeResolver = new(ResourcePath);
-
-    /// <summary>
-    ///     Dictionary to store header validators.
-    /// </summary>
-    private static readonly IDictionary<string, IHeaderValidator> Validators =
-        new Dictionary<string, IHeaderValidator>();
+    private static readonly Lazy<ResourcePathTypeResolver> TypeResolver =
+        new(() => new ResourcePathTypeResolver(ResourcePath));
 
     /// <summary>
     ///     Represents the path used to identify and locate the resource associated with the HeaderValidator implementation.
@@ -83,33 +79,45 @@ public interface IHeaderValidator
     ///     Scans assemblies for validator meta-information and instantiates those validators.
     /// </summary>
     /// <returns>A dictionary containing the registered header validators.</returns>
-    static IDictionary<string, IHeaderValidator> Lookup()
-    {
-        if (Validators.Count != 0)
-        {
-            return Validators;
-        }
+    private static readonly Lazy<IDictionary<string, IHeaderValidator>> ValidatorsLazy =
+        new(LoadHeaderValidators);
 
-        var resolvedValidators =
-            TypeResolver.ResolveAll<dynamic>(ResourcePath, ITypeResolver.DEFAULT_TYPE_PROPERTY, "name");
+    /// <summary>
+    /// Loads all available header validators by resolving them from the resource path.
+    /// Scans and instantiates header validator implementations using a type resolver and
+    /// organizes them within a dictionary.
+    /// </summary>
+    /// <returns>A dictionary containing the mapping of header validator names to their corresponding instances.</returns>
+    private static IDictionary<string, IHeaderValidator> LoadHeaderValidators()
+    {
+        var validators = new ConcurrentDictionary<string, IHeaderValidator>();
+        var resolvedValidators = TypeResolver.Value.ResolveAll<dynamic>(ResourcePath, ITypeResolver.DEFAULT_TYPE_PROPERTY, "name");
 
         foreach (var kvp in resolvedValidators)
         {
-            Validators[kvp.Key] = kvp.Value;
+            validators[kvp.Key] = kvp.Value;
         }
 
-        if (!Log.IsEnabled(LogLevel.Debug))
+        if (Log.IsEnabled(LogLevel.Debug))
         {
-            return Validators;
-        }
-
-        {
-            foreach (var kvp in Validators)
+            foreach (var kvp in validators)
             {
                 Log.LogDebug("Found header validator '{KvpKey}' as {Type}", kvp.Key, kvp.Value.GetType());
             }
         }
-        return Validators;
+
+        return validators;
+    }
+
+    /// <summary>
+    /// Retrieves a dictionary of registered header validators mapped by their respective validator names.
+    /// </summary>
+    /// <returns>
+    /// A dictionary where keys are validator names, and values are the corresponding implementations of <see cref="IHeaderValidator"/>.
+    /// </returns>
+    static IDictionary<string, IHeaderValidator> Lookup()
+    {
+        return ValidatorsLazy.Value;
     }
 
     /// <summary>
@@ -123,7 +131,7 @@ public interface IHeaderValidator
     {
         try
         {
-            var instance = TypeResolver.Resolve<dynamic>(validator);
+            var instance = TypeResolver.Value.Resolve<dynamic>(validator);
             return Optional<IHeaderValidator>.Of(instance);
         }
         catch (AgenixSystemException)

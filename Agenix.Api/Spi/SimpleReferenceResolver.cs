@@ -7,23 +7,24 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Collections.Concurrent;
 using Agenix.Api.Exceptions;
 
 namespace Agenix.Api.Spi;
@@ -31,7 +32,7 @@ namespace Agenix.Api.Spi;
 /// SimpleReferenceResolver provides methods to resolve and bind objects by their names or types from an object store.
 public class SimpleReferenceResolver : IReferenceResolver
 {
-    private readonly Dictionary<string, object> _objectStore = new();
+    private readonly ConcurrentDictionary<string, object> _objectStore = new();
 
     /// Resolves an object of the specified type from the object store.
     /// <typeparam name="T">The type of the object to resolve.</typeparam>
@@ -80,12 +81,12 @@ public class SimpleReferenceResolver : IReferenceResolver
     /// Resolves all objects of a specified type in the object store.
     /// <typeparam name="T">The type of objects to resolve.</typeparam>
     /// <return>A dictionary containing the resolved objects, with their names as keys.</return>
-    public Dictionary<string, T> ResolveAll<T>()
+    public ConcurrentDictionary<string, T> ResolveAll<T>()
     {
-        return _objectStore
+        return new ConcurrentDictionary<string, T>(_objectStore
             .Where(kvp => kvp.Value is not null)
             .Where(kvp => kvp.Value is T)
-            .ToDictionary(kvp => kvp.Key, kvp => (T)kvp.Value);
+            .ToDictionary(kvp => kvp.Key, kvp => (T)kvp.Value));
     }
 
     /// Checks if an object with the given name can be resolved.

@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -53,9 +53,16 @@ public interface IEndpointComponent
     private static readonly string ResourcePath = "Extension/agenix/endpoint/component";
 
     /// <summary>
-    ///     Resolver for dynamically loading and resolving resources based on a specified resource path.
+    ///     Lazy-initialized resolver for dynamically loading and resolving resources based on a specified resource path.
     /// </summary>
-    private static readonly ResourcePathTypeResolver TypeResolver = new(ResourcePath);
+    private static readonly Lazy<ResourcePathTypeResolver> TypeResolver =
+        new(() => new ResourcePathTypeResolver(ResourcePath));
+
+    /// <summary>
+    ///     Lazy-initialized cache of endpoint components for improved performance and thread safety.
+    /// </summary>
+    private static readonly Lazy<IDictionary<string, IEndpointComponent>> ComponentsCache =
+        new(LoadEndpointComponents);
 
     /// <summary>
     ///     Creates an endpoint instance by parsing the given dynamic endpoint URI with specific properties and parameters.
@@ -79,6 +86,25 @@ public interface IEndpointComponent
     IDictionary<string, string> GetParameters(string endpointUri);
 
     /// <summary>
+    ///     Loads all available endpoint components from the resource path.
+    /// </summary>
+    /// <returns>A dictionary containing all loaded endpoint components.</returns>
+    private static IDictionary<string, IEndpointComponent> LoadEndpointComponents()
+    {
+        var components = TypeResolver.Value.ResolveAll<IEndpointComponent>();
+
+        if (Log.IsEnabled(LogLevel.Debug))
+        {
+            foreach (var kvp in components)
+            {
+                Log.LogDebug("Found endpoint component '{KvpKey}' as {Name}", kvp.Key, kvp.Value.GetType().Name);
+            }
+        }
+
+        return components;
+    }
+
+    /// <summary>
     ///     Provides a lookup of available endpoint components, indexed by their respective types.
     /// </summary>
     /// <returns>
@@ -87,19 +113,7 @@ public interface IEndpointComponent
     /// </returns>
     public static IDictionary<string, IEndpointComponent> Lookup()
     {
-        var components = TypeResolver.ResolveAll<IEndpointComponent>();
-
-        if (!Log.IsEnabled(LogLevel.Debug))
-        {
-            return components;
-        }
-
-        foreach (var kvp in components)
-        {
-            Log.LogDebug("Found endpoint component '{KvpKey}' as {Name}", kvp.Key, kvp.Value.GetType().Name);
-        }
-
-        return components;
+        return ComponentsCache.Value;
     }
 
     /// <summary>
@@ -117,7 +131,7 @@ public interface IEndpointComponent
     {
         try
         {
-            return Optional<IEndpointComponent>.Of(TypeResolver.Resolve<IEndpointComponent>(validator));
+            return Optional<IEndpointComponent>.Of(TypeResolver.Value.Resolve<IEndpointComponent>(validator));
         }
         catch (TypeLoadException)
         {

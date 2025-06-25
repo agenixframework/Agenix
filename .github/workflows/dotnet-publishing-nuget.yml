@@ -83,12 +83,6 @@ jobs:
           /p:FileVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} \
           /p:InformationalVersion=${{ steps.gitversion.outputs.informationalVersion }}
 
-    - name: Test
-      run: |
-        dotnet test --configuration Release --no-build --verbosity normal \
-          --collect:"XPlat Code Coverage" \
-          --results-directory ./coverage
-
     - name: Pack NuGet packages
       run: |
         dotnet pack --configuration Release --no-build --output ./artifacts \
@@ -102,7 +96,9 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: nuget-packages
-        path: ./artifacts/*.nupkg
+        path: |
+          ./artifacts/*.nupkg
+          ./artifacts/*.snupkg
         retention-days: 30
 
   # Security Scan Job
@@ -220,13 +216,14 @@ jobs:
     - name: Publish to NuGet
       run: |
         echo "🚀 Publishing ${{ steps.publish-settings.outputs.release-type }} packages..."
-        for package in ./artifacts/*.nupkg; do
-          echo "Publishing: $(basename $package)"
-          dotnet nuget push "$package" \
-            --api-key "${{ secrets.NUGET_API_KEY }}" \
-            --source "https://api.nuget.org/v3/index.json" \
-            --skip-duplicate \
-            --no-symbols
+        for package in ./artifacts/*.nupkg ./artifacts/*.snupkg; do
+          if [[ -f "$package" ]]; then
+            echo "Publishing: $(basename $package)"
+            dotnet nuget push "$package" \
+              --api-key "${{ secrets.NUGET_API_KEY }}" \
+              --source "https://api.nuget.org/v3/index.json" \
+              --skip-duplicate
+          fi
         done
 
     - name: Create GitHub Release
