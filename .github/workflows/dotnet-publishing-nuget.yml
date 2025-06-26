@@ -197,7 +197,7 @@ jobs:
           echo "release-type=stable" >> $GITHUB_OUTPUT
         elif [[ "${{ github.ref }}" == "refs/heads/develop" ]]; then
           echo "release-type=preview" >> $GITHUB_OUTPUT
-        elif [[ "${{ github.ref }}" == "refs/heads/hotfix/"*]]; then
+        elif [[ "${{ github.ref }}" == refs/heads/hotfix/*]]; then
           echo "release-type=hotfix" >> $GITHUB_OUTPUT
         else
           echo "release-type=beta" >> $GITHUB_OUTPUT
