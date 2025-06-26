@@ -13,11 +13,12 @@ on:
 
 # Add these permissions
 permissions:
- contents: read
- checks: write          # Allows creating test result check runs
- pull-requests: write   # Allows updating PR status
- actions: read
- issues: read
+  contents: write  # Required for creating releases
+  packages: write  # Required for publishing packages
+  checks: write          # Allows creating test result check runs
+  pull-requests: write   # Allows updating PR status
+  actions: read
+  issues: read
 
 env:
   DOTNET_VERSION: '8.0.x'
@@ -27,7 +28,7 @@ env:
 
 jobs:
   # Build and Test Job
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.gitversion.outputs.semVer }}
@@ -104,7 +105,7 @@ jobs:
   # Security Scan Job
   security-scan:
     runs-on: ubuntu-latest
-    needs: build-and-test
+    needs: build
     # Only run on push events (merges)
     if: github.event_name == 'push'
 
@@ -159,10 +160,10 @@ jobs:
   # Publish to NuGet Job (ONLY runs on merges to protected branches)
   publish-nuget:
     runs-on: ubuntu-latest
-    needs: [build-and-test, security-scan]
+    needs: [build, security-scan]
     if: |
       always() &&
-      needs.build-and-test.result == 'success' &&
+      needs.build.result == 'success' &&
       (needs.security-scan.result == 'success' || needs.security-scan.result == 'skipped') &&
       github.event_name == 'push' &&
       (
@@ -174,7 +175,7 @@ jobs:
       )
 
     environment:
-      name: ${{ needs.build-and-test.outputs.is-release == 'true' && 'production' || 'staging' }}
+      name: ${{ needs.build.outputs.is-release == 'true' && 'production' || 'staging' }}
       url: https://www.nuget.org
 
     steps:
@@ -192,11 +193,11 @@ jobs:
     - name: Determine publish settings
       id: publish-settings
       run: |
-        if [[ "${{ needs.build-and-test.outputs.is-release }}" == "true" ]]; then
+        if [[ "${{ needs.build.outputs.is-release }}" == "true" ]]; then
           echo "release-type=stable" >> $GITHUB_OUTPUT
         elif [[ "${{ github.ref }}" == "refs/heads/develop" ]]; then
           echo "release-type=preview" >> $GITHUB_OUTPUT
-        elif [[ "${{ github.ref }}" == refs/heads/hotfix/* ]]; then
+        elif [[ "${{ github.ref }}" == "refs/heads/hotfix/"*]]; then
           echo "release-type=hotfix" >> $GITHUB_OUTPUT
         else
           echo "release-type=beta" >> $GITHUB_OUTPUT
@@ -226,35 +227,10 @@ jobs:
           fi
         done
 
-    - name: Create GitHub Release
-      if: startsWith(github.ref, 'refs/tags/v') && needs.build-and-test.outputs.is-release == 'true'
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref_name }}
-        release_name: Release ${{ needs.build-and-test.outputs.version }}
-        body: |
-          ## 🚀 Release ${{ needs.build-and-test.outputs.version }}
-
-          ### 📦 NuGet Packages
-          - Version: `${{ needs.build-and-test.outputs.nuget-version }}`
-          - Published to: [NuGet.org](https://www.nuget.org)
-
-          ### 🔧 Installation
-          ```bash
-          dotnet add package YourPackageName --version ${{ needs.build-and-test.outputs.nuget-version }}
-          ```
-
-          ### 📝 Changes
-          See the full changelog in the commit history.
-        draft: false
-        prerelease: false
-
   # Notification Job
   notify:
     runs-on: ubuntu-latest
-    needs: [build-and-test, publish-nuget]
+    needs: [build, publish-nuget]
     if: always() && (needs.publish-nuget.result == 'success' || needs.publish-nuget.result == 'failure')
 
     steps:
@@ -262,12 +238,12 @@ jobs:
       if: needs.publish-nuget.result == 'success'
       run: |
         echo "✅ Successfully published NuGet packages!"
-        echo "Version: ${{ needs.build-and-test.outputs.nuget-version }}"
-        echo "Type: ${{ needs.build-and-test.outputs.is-release == 'true' && 'Stable Release' || 'Pre-release' }}"
+        echo "Version: ${{ needs.build.outputs.nuget-version }}"
+        echo "Type: ${{ needs.build.outputs.is-release == 'true' && 'Stable Release' || 'Pre-release' }}"
 
     - name: Notify Failure
       if: needs.publish-nuget.result == 'failure'
       run: |
         echo "❌ Failed to publish NuGet packages!"
-        echo "Version: ${{ needs.build-and-test.outputs.nuget-version }}"
+        echo "Version: ${{ needs.build.outputs.nuget-version }}"
         exit 1
