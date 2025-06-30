@@ -9,8 +9,8 @@
   <ItemGroup>
     <PackageReference Include="GraphQL.Client" Version="6.1.0"/>
     <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="6.1.0"/>
-    <PackageReference Include="HotChocolate.AspNetCore" Version="15.1.6"/>
-    <PackageReference Include="HotChocolate.Subscriptions.InMemory" Version="15.1.6"/>
+    <PackageReference Include="HotChocolate.AspNetCore" Version="15.1.7"/>
+    <PackageReference Include="HotChocolate.Subscriptions.InMemory" Version="15.1.7"/>
   </ItemGroup>
 
   <ItemGroup>
