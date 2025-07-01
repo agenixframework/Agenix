@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -46,11 +46,21 @@ public class GraphQLClientActionBuilder : AbstractReferenceResolverAwareTestActi
 
     private readonly string? _graphQLClientUri;
 
+    /// <summary>
+    /// Facilitates the creation and configuration of GraphQL client actions.
+    /// Provides functionality to build and chain actions such as sending and receiving
+    /// GraphQL operations, while supporting dynamic reference resolution.
+    /// </summary>
     public GraphQLClientActionBuilder(IEndpoint graphQLClient)
     {
         _graphQLClient = graphQLClient;
     }
 
+    /// <summary>
+    /// Serves as a concrete implementation for building and configuring GraphQL client actions.
+    /// Enables the setup of client operations such as sending, receiving, and subscription handling,
+    /// while embedding tailored mechanisms for reference resolution support.
+    /// </summary>
     public GraphQLClientActionBuilder(string graphQLClientUri)
     {
         _graphQLClientUri = graphQLClientUri;
@@ -87,6 +97,11 @@ public class GraphQLClientActionBuilder : AbstractReferenceResolverAwareTestActi
         return this;
     }
 
+    /// <summary>
+    /// Builds and returns the configured test action instance.
+    /// Ensures that the delegate action is not null and invokes its build process.
+    /// </summary>
+    /// <returns>A fully constructed instance of a test action.</returns>
     public override ITestAction Build()
     {
         ObjectHelper.AssertNotNull(_delegate, "Missing delegate action to build");
@@ -94,12 +109,9 @@ public class GraphQLClientActionBuilder : AbstractReferenceResolverAwareTestActi
     }
 
     /// <summary>
-    ///     Configures actions for receiving GraphQL responses from an GraphQL client or URI.
+    /// Facilitates the construction and configuration of actions for receiving responses from a GraphQL client or endpoint.
+    /// Provides specialized methods to define how received GraphQL responses are processed, including integration with reference resolvers.
     /// </summary>
-    /// <remarks>
-    ///     This builder allows for detailed configuration of how GraphQL responses are handled
-    ///     when interacting with a GraphQL client or endpoint.
-    /// </remarks>
     public sealed class GraphQLClientReceiveActionBuilder(
         IEndpoint? httpClient,
         string? httpClientUri,

@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -31,6 +31,14 @@ using Agenix.Http.Message;
 
 namespace Agenix.Http.Client;
 
+/// <summary>
+/// Provides a builder for configuring and initializing an HTTP client endpoint.
+/// </summary>
+/// <remarks>
+/// This builder is used to set up necessary configurations, such as request URL,
+/// HTTP method, message converters, and other options for the HttpClient
+/// before building the endpoint instance.
+/// </remarks>
 public class HttpClientBuilder : AbstractEndpointBuilder<HttpClient>
 {
     /// Endpoint target
@@ -208,6 +216,43 @@ public class HttpClientBuilder : AbstractEndpointBuilder<HttpClient>
     public HttpClientBuilder Timeout(long timeout)
     {
         _endpoint.EndpointConfiguration.Timeout = timeout;
+        return this;
+    }
+
+    /// <summary>
+    ///     Adds a client handler to the HTTP client endpoint configuration.
+    ///     Client handlers are used to intercept and process HTTP requests and responses,
+    ///     allowing for cross-cutting concerns such as logging, authentication, or custom processing.
+    /// </summary>
+    /// <param name="handler">
+    ///     The <see cref="DelegatingHandler" /> instance to be added to the client handlers collection.
+    /// </param>
+    /// <returns>
+    ///     The current instance of <see cref="HttpClientBuilder" /> to allow method chaining.
+    /// </returns>
+    public HttpClientBuilder ClientHandler(DelegatingHandler handler)
+    {
+        _endpoint.EndpointConfiguration.ClientHandlers.Add(handler);
+        return this;
+    }
+
+    /// <summary>
+    ///     Adds multiple client handlers to the HTTP client endpoint configuration.
+    ///     Client handlers are used to intercept and process HTTP requests and responses,
+    ///     allowing for cross-cutting concerns such as logging, authentication, or custom processing.
+    /// </summary>
+    /// <param name="handlers">
+    ///     A collection of <see cref="DelegatingHandler" /> instances to be added to the client handlers collection.
+    /// </param>
+    /// <returns>
+    ///     The current instance of <see cref="HttpClientBuilder" /> to allow method chaining.
+    /// </returns>
+    public HttpClientBuilder ClientHandlers(IEnumerable<DelegatingHandler> handlers)
+    {
+        foreach (var handler in handlers)
+        {
+            _endpoint.EndpointConfiguration.ClientHandlers.Add(handler);
+        }
         return this;
     }
 }

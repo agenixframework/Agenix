@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+      <TargetFramework>net8.0</TargetFramework>
+      <ImplicitUsings>enable</ImplicitUsings>
+      <Nullable>enable</Nullable>
+
+      <!-- NuGet Package-Specific Properties -->
+      <PackageId>Agenix.Azure.Security</PackageId>
+      <Title>Agenix Azure Security</Title>
+      <Description>Azure Key Vault SecretClient and Azure AD authentication for Agenix test automation framework</Description>
+      <PackageTags>agenix;testing;azure;keyvault;security;authentication</PackageTags>
+      <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+      <RootNamespace>Agenix.Azure.Security</RootNamespace>
+    </PropertyGroup>
+
+  <ItemGroup>
+    <!-- JWT token parsing -->
+    <PackageReference Include="Azure.Identity" Version="1.14.1"/>
+    <PackageReference Include="Azure.Security.KeyVault.Secrets" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.1" />
+    <PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.8.0" />
+  </ItemGroup>
+  
+    <ItemGroup>
+      <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj" />
+    </ItemGroup>
+
+</Project>

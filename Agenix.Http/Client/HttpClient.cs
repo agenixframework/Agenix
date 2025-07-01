@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -56,6 +56,10 @@ public class HttpClient : AbstractEndpoint, IProducer, IReplyConsumer
     private ICorrelationManager<IMessage> _correlationManager;
 
 
+    /// <summary>
+    /// Provides an HTTP client implementation for executing HTTP requests and receiving responses,
+    /// utilizing an endpoint configuration for defining HTTP client-specific behavior.
+    /// </summary>
     public HttpClient(HttpEndpointConfiguration endpointConfiguration)
         : base(endpointConfiguration)
     {
@@ -77,6 +81,18 @@ public class HttpClient : AbstractEndpoint, IProducer, IReplyConsumer
     public override HttpEndpointConfiguration EndpointConfiguration =>
         (HttpEndpointConfiguration)base.EndpointConfiguration;
 
+    /// <summary>
+    /// Sends an HTTP message to the configured endpoint, applying any client handlers or interceptors
+    /// and preparing the message for dispatch. Correlation IDs and additional context are managed
+    /// and used to facilitate message tracking and communication.
+    /// </summary>
+    /// <param name="message">
+    /// The message to be sent, which may contain headers, payload, and other metadata.
+    /// </param>
+    /// <param name="context">
+    /// The context in which the HTTP operation is executed, providing variables, listeners,
+    /// and configuration settings necessary for processing the message.
+    /// </param>
     public void Send(IMessage message, TestContext context)
     {
         foreach (var interceptor in EndpointConfiguration.ClientHandlers

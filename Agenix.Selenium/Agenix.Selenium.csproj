@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <!-- NuGet Package-Specific Properties -->
+    <PackageId>Agenix.Selenium</PackageId>
+    <Title>Agenix Selenium Testing Tools</Title>
+    <Description>Selenium web automation testing tools and utilities for the Agenix framework. Simplifies browser automation, element interaction testing, and web application verification in automated test scenarios.</Description>
+    <PackageTags>selenium-testing;api-testing;automation;framework;agenix</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Selenium.Support" Version="4.33.0"/>
+    <PackageReference Include="Selenium.WebDriver" Version="4.33.0"/>
+    <PackageReference Include="SeleniumExtras.WaitHelpers" Version="1.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Config\" />
+    <Folder Include="Endpoint\Builder\"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Extension\agenix\endpoint\builder\selenium" />
+    <EmbeddedResource Include="Extension\agenix\endpoint\builder\selenium" />
+    <None Remove="Extension\agenix\endpoint\component\selenium" />
+    <EmbeddedResource Include="Extension\agenix\endpoint\component\selenium" />
+    <None Remove="Extension\agenix\endpoint\parser\selenium" />
+    <EmbeddedResource Include="Extension\agenix\endpoint\parser\selenium" />
+  </ItemGroup>
+  
+
+</Project>

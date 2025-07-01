@@ -153,6 +153,7 @@ jobs:
 
       - name: 🧪 Run all unit tests
         run: |
+          overall_result=0
           for test_project in $(find . -name "*Tests.csproj" -type f | sort); do
             project_name=$(basename "$test_project" .csproj)
             echo "Running tests for: $project_name"
@@ -165,11 +166,18 @@ jobs:
               --logger "console;verbosity=detailed" \
               --collect:"XPlat Code Coverage" \
               --results-directory ./TestResults \
-              --settings .runsettings || exit 1
+              --settings .runsettings || overall_result=1
 
             echo "Completed tests for: $project_name"
             echo "----------------------------------------"
           done
+
+          if [ $overall_result -ne 0 ]; then
+            echo "❌ One or more test projects failed"
+            exit 1
+          else
+            echo "✅ All test projects passed"
+          fi
 
       - name: 📋 Publish test results
         uses: dorny/test-reporter@v1

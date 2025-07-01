@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -37,12 +37,34 @@ using Microsoft.Extensions.Logging;
 
 namespace Agenix.Api.Util;
 
+/// <summary>
+/// Provides a default implementation of the <see cref="ITypeConverter"/> interface,
+/// allowing for type conversion operations and handling common scenarios related
+/// to encoding and normalization.
+/// </summary>
 public class DefaultTypeConverter(string encodingName) : ITypeConverter
 {
     private static readonly ILogger Log = LogManager.GetLogger(typeof(DefaultTypeConverter));
 
+    /// <summary>
+    /// A static instance of the <see cref="DefaultTypeConverter"/> class,
+    /// initialized with the default file encoding defined by the application settings.
+    /// </summary>
+    /// <remarks>
+    /// This instance provides a global, shared type conversion utility for handling
+    /// various type transformations within the application context. The default
+    /// configuration ensures consistency across the application when converting between
+    /// types or handling encoded file operations.
+    /// </remarks>
     public static readonly DefaultTypeConverter Instance = new(AgenixSettings.AgenixFileEncoding());
 
+    /// <summary>
+    /// Converts the given object to the specified type if necessary.
+    /// </summary>
+    /// <param name="target">The object to be converted.</param>
+    /// <param name="type">The target type to which the object should be converted.</param>
+    /// <typeparam name="T">The generic type to which the target object will be converted.</typeparam>
+    /// <returns>The converted object of the specified type.</returns>
     public T ConvertIfNecessary<T>(object target, Type type)
     {
         if (type.IsInstanceOfType(target))
@@ -327,7 +349,7 @@ public class DefaultTypeConverter(string encodingName) : ITypeConverter
             return (T)(object)double.Parse(value);
         }
 
-        throw new InvalidOperationException($"Unable to convert '{value}' to required type '{type.FullName}'");
+        throw new AgenixSystemException($"Unable to convert '{value}' to required type '{type.FullName}'");
     }
 
     private static string FromListToString(List<string> list)
@@ -368,7 +390,7 @@ public class DefaultTypeConverter(string encodingName) : ITypeConverter
             return (T)(object)target.ToString();
         }
 
-        throw new InvalidOperationException(
+        throw new AgenixSystemException(
             $"Unable to convert object '{target?.GetType().Name ?? "null"}' to target type '{type}'");
     }
 }
