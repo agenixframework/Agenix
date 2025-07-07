@@ -476,7 +476,7 @@ public class FileUtils
     {
         var settings = new NameValueCollection();
         // Create a temporary file to hold the stream content
-        var tempFilePath = Path.GetTempFileName();
+        var tempFilePath = Path.GetRandomFileName();
 
         try
         {

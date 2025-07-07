@@ -95,18 +95,8 @@ public class KeyVaultSecretClient
         catch (Exception ex)
         {
             Log.LogError(ex, "Failed to retrieve secret '{SecretName}' from vault '{VaultUri}'", secretName, _configuration.VaultUri);
-            throw;
+            throw new InvalidOperationException($"Failed to retrieve secret '{secretName}' from vault '{_configuration.VaultUri}'", ex);
         }
-    }
-
-    /// <summary>
-    /// Get secret value as string synchronously
-    /// </summary>
-    /// <param name="secretName">Name of the secret</param>
-    /// <returns>Secret value as string</returns>
-    public string GetSecret(string secretName)
-    {
-        return GetSecretAsync(secretName).GetAwaiter().GetResult();
     }
 
     /// <summary>
@@ -140,61 +130,8 @@ public class KeyVaultSecretClient
         {
             Log.LogError(ex, "Failed to retrieve secret '{SecretName}' version '{Version}' from vault '{VaultUri}'",
                 secretName, version, _configuration.VaultUri);
-            throw;
+            throw new InvalidOperationException($"Failed to retrieve secret '{secretName}' from vault '{_configuration.VaultUri}'", ex);
         }
-    }
-
-    /// <summary>
-    /// Get specific version of secret value as string synchronously
-    /// </summary>
-    /// <param name="secretName">Name of the secret</param>
-    /// <param name="version">Secret version</param>
-    /// <returns>Secret value as string</returns>
-    public string GetSecret(string secretName, string version)
-    {
-        return GetSecretAsync(secretName, version).GetAwaiter().GetResult();
-    }
-
-    /// <summary>
-    /// Check if secret exists
-    /// </summary>
-    /// <param name="secretName">Name of the secret</param>
-    /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>True if secret exists, false otherwise</returns>
-    public async Task<bool> SecretExistsAsync(string secretName, CancellationToken cancellationToken = default)
-    {
-        if (string.IsNullOrWhiteSpace(secretName))
-            throw new ArgumentException("Secret name cannot be null or empty", nameof(secretName));
-
-        try
-        {
-            Log.LogDebug("Checking if secret '{SecretName}' exists in vault '{VaultUri}'", secretName, _configuration.VaultUri);
-
-            await _secretClient.GetSecretAsync(secretName, cancellationToken: cancellationToken);
-
-            Log.LogDebug("Secret '{SecretName}' exists in vault '{VaultUri}'", secretName, _configuration.VaultUri);
-            return true;
-        }
-        catch (RequestFailedException ex) when (ex.Status == 404)
-        {
-            Log.LogDebug("Secret '{SecretName}' does not exist in vault '{VaultUri}'", secretName, _configuration.VaultUri);
-            return false;
-        }
-        catch (Exception ex)
-        {
-            Log.LogError(ex, "Error checking if secret '{SecretName}' exists in vault '{VaultUri}'", secretName, _configuration.VaultUri);
-            throw;
-        }
-    }
-
-    /// <summary>
-    /// Check if a secret exists synchronously
-    /// </summary>
-    /// <param name="secretName">Name of the secret</param>
-    /// <returns>True if a secret exists, false otherwise</returns>
-    public bool SecretExists(string secretName)
-    {
-        return SecretExistsAsync(secretName).GetAwaiter().GetResult();
     }
 
     /// <summary>
@@ -246,6 +183,27 @@ public class KeyVaultSecretClient
     }
 
     /// <summary>
+    /// Get a specific version of secret value as string synchronously
+    /// </summary>
+    /// <param name="secretName">Name of the secret</param>
+    /// <param name="version">Secret version</param>
+    /// <returns>Secret value as string</returns>
+    public string GetSecret(string secretName, string version)
+    {
+        return GetSecretAsync(secretName, version).GetAwaiter().GetResult();
+    }
+
+    /// <summary>
+    /// Get secret value as string synchronously
+    /// </summary>
+    /// <param name="secretName">Name of the secret</param>
+    /// <returns>Secret value as string</returns>
+    public string GetSecret(string secretName)
+    {
+        return GetSecretAsync(secretName).GetAwaiter().GetResult();
+    }
+
+    /// <summary>
     /// Get multiple secrets at once synchronously
     /// </summary>
     /// <param name="secretNames">Names of the secrets to retrieve</param>
@@ -253,6 +211,48 @@ public class KeyVaultSecretClient
     public Dictionary<string, string> GetSecrets(IEnumerable<string> secretNames)
     {
         return GetSecretsAsync(secretNames).GetAwaiter().GetResult();
+    }
+
+    /// <summary>
+    /// Check if a secret exists
+    /// </summary>
+    /// <param name="secretName">Name of the secret</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>True if a secret exists, false otherwise</returns>
+    public async Task<bool> SecretExistsAsync(string secretName, CancellationToken cancellationToken = default)
+    {
+        if (string.IsNullOrWhiteSpace(secretName))
+            throw new ArgumentException("Secret name cannot be null or empty", nameof(secretName));
+
+        try
+        {
+            Log.LogDebug("Checking if secret '{SecretName}' exists in vault '{VaultUri}'", secretName, _configuration.VaultUri);
+
+            await _secretClient.GetSecretAsync(secretName, cancellationToken: cancellationToken);
+
+            Log.LogDebug("Secret '{SecretName}' exists in vault '{VaultUri}'", secretName, _configuration.VaultUri);
+            return true;
+        }
+        catch (RequestFailedException ex) when (ex.Status == 404)
+        {
+            Log.LogDebug(ex, "Secret '{SecretName}' does not exist in vault '{VaultUri}'", secretName, _configuration.VaultUri);
+            return false;
+        }
+        catch (Exception ex)
+        {
+            Log.LogError(ex, "Error checking if secret '{SecretName}' exists in vault '{VaultUri}'", secretName, _configuration.VaultUri);
+            throw new InvalidOperationException($"Failed to check if secret '{secretName}' exists in vault '{_configuration.VaultUri}'", ex);
+        }
+    }
+
+    /// <summary>
+    /// Check if a secret exists synchronously
+    /// </summary>
+    /// <param name="secretName">Name of the secret</param>
+    /// <returns>True if a secret exists, false otherwise</returns>
+    public bool SecretExists(string secretName)
+    {
+        return SecretExistsAsync(secretName).GetAwaiter().GetResult();
     }
 
     /// <summary>

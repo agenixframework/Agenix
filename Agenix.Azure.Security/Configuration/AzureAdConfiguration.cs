@@ -130,30 +130,30 @@ public class AzureAdConfiguration
     public void Validate()
     {
         if (string.IsNullOrWhiteSpace(TenantId))
-            throw new ArgumentException("TenantId is required", nameof(TenantId));
+            throw new InvalidOperationException("TenantId is required");
 
         if (string.IsNullOrWhiteSpace(ClientId))
-            throw new ArgumentException("ClientId is required", nameof(ClientId));
+            throw new InvalidOperationException("ClientId is required");
 
         if (string.IsNullOrWhiteSpace(ClientSecret))
-            throw new ArgumentException("ClientSecret is required", nameof(ClientSecret));
+            throw new InvalidOperationException("ClientSecret is required");
 
         // Validate tenant ID format (GUID or domain)
         if (!Guid.TryParse(TenantId, out _) && !IsValidDomainName(TenantId))
-            throw new ArgumentException("TenantId must be a valid GUID or domain name", nameof(TenantId));
+            throw new InvalidOperationException("TenantId must be a valid GUID or domain name");
 
         // Validate client ID format (GUID)
         if (!Guid.TryParse(ClientId, out _))
-            throw new ArgumentException("ClientId must be a valid GUID", nameof(ClientId));
+            throw new InvalidOperationException("ClientId must be a valid GUID");
 
         // Validate authority URL if provided
         if (!string.IsNullOrWhiteSpace(Authority))
         {
             if (!Uri.TryCreate(Authority, UriKind.Absolute, out var uri))
-                throw new ArgumentException("Authority must be a valid absolute URL", nameof(Authority));
+                throw new InvalidOperationException("Authority must be a valid absolute URL");
 
             if (uri.Scheme != "https")
-                throw new ArgumentException("Authority must use HTTPS scheme", nameof(Authority));
+                throw new InvalidOperationException("Authority must use HTTPS scheme");
         }
     }
 

@@ -27,7 +27,7 @@ namespace Agenix.Configuration.Sample.Approach1;
 /// <summary>
 /// Console application to demonstrate Approach 1: Direct Instance Example
 /// </summary>
-public class Program
+public static class Program
 {
     /// <summary>
     /// Entry point for the console application to demonstrate the Direct Instance Example.

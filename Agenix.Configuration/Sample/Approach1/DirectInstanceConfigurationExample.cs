@@ -71,11 +71,11 @@ public class DirectInstanceExample
         // Get configuration for current environment
         var config = _configManager.GetConfiguration();
 
-        Console.WriteLine("Current Environment: {Environment}", _configManager.CurrentEnvironment);
-        Console.WriteLine("Database Connection: {Connection}", config.DatabaseConnectionString);
-        Console.WriteLine("API Base URL: {Url}", config.ApiBaseUrl);
-        Console.WriteLine("Cache Provider: {Provider}", config.Cache.Provider);
-        Console.WriteLine("Log Level: {Level}", config.Logging.Level);
+        Console.WriteLine("Current Environment: {0}", _configManager.CurrentEnvironment);
+        Console.WriteLine("Database Connection: {0}", config.DatabaseConnectionString);
+        Console.WriteLine("API Base URL: {0}", config.ApiBaseUrl);
+        Console.WriteLine("Cache Provider: {0}", config.Cache.Provider);
+        Console.WriteLine("Log Level: {0}", config.Logging.Level);
     }
 
     /// <summary>
@@ -189,7 +189,7 @@ public class DatabaseService
     {
         var config = _configManager.GetConfiguration();
         Console.WriteLine("Connecting to database: {0}",
-            config.DatabaseConnectionString.Substring(0, Math.Min(50, config.DatabaseConnectionString.Length)) + "...");
+            config.DatabaseConnectionString[..Math.Min(50, config.DatabaseConnectionString.Length)] + "...");
     }
 }
 

@@ -45,13 +45,13 @@ public class ClickAction : FindElementAction
     /// <summary>
     ///     Executes the click action on the found web element
     /// </summary>
-    protected override void Execute(IWebElement webElement, SeleniumBrowser browser, TestContext context)
+    protected override void Execute(IWebElement element, SeleniumBrowser browser, TestContext context)
     {
         // Call base implementation to set the element in context
-        base.Execute(webElement, browser, context);
+        base.Execute(element, browser, context);
 
         // Perform the click action
-        webElement.Click();
+        element.Click();
     }
 
     /// <summary>

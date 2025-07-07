@@ -90,7 +90,7 @@ public class OAuthTokenResult
             AccessToken = response.AccessToken,
             TokenType = response.EffectiveTokenType,
             ExpiresAt = response.ExpiresAt,
-            GrantedScopes = response.GrantedScopes,
+            GrantedScopes = response.GetGrantedScopes(),
             AdditionalData = response.AdditionalData
         };
     }

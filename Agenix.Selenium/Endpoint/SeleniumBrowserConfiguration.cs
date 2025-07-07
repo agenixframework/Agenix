@@ -143,7 +143,7 @@ public class SeleniumBrowserConfiguration : AbstractEndpointConfiguration
         catch (ArgumentException ex) when (ex.Message.Contains("may not be overridden"))
         {
             // Silently ignore frozen preferences
-            Log.LogWarning("Warning: Cannot set frozen preference '{PreferenceName}': {ExMessage}", preferenceName, ex.Message);
+            Log.LogWarning(ex, "Warning: Cannot set frozen preference '{PreferenceName}'", preferenceName);
         }
     }
 

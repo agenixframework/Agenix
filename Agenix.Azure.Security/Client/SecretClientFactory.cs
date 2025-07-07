@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,6 +21,7 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using System.Collections.Concurrent;
@@ -34,27 +36,32 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Azure.Security.Client;
 
 /// <summary>
-/// Factory for creating and caching Azure Key Vault SecretClient instances
+///     Factory for creating and caching Azure Key Vault SecretClient instances
 /// </summary>
 public static class SecretClientFactory
 {
     /// <summary>
-    /// Logger instance.
+    ///     Logger instance.
     /// </summary>
     private static readonly ILogger Log = LogManager.GetLogger(typeof(SecretClientFactory));
 
     /// <summary>
-    /// Cache for SecretClient instances
+    ///     Cache for SecretClient instances
     /// </summary>
     private static readonly ConcurrentDictionary<string, SecretClient> ClientCache = new();
 
     /// <summary>
-    /// Lock for thread-safe operations
+    ///     Lock for thread-safe operations
     /// </summary>
     private static readonly SemaphoreSlim FactoryLock = new(1, 1);
 
     /// <summary>
-    /// Get or retrieve a cached SecretClient instance
+    ///     Get the number of cached clients
+    /// </summary>
+    public static int CachedClientCount => ClientCache.Count;
+
+    /// <summary>
+    ///     Get or retrieve a cached SecretClient instance
     /// </summary>
     /// <param name="configuration">Key Vault configuration</param>
     /// <returns>SecretClient instance</returns>
@@ -101,7 +108,7 @@ public static class SecretClientFactory
     }
 
     /// <summary>
-    /// Get a SecretClient instance synchronously
+    ///     Get a SecretClient instance synchronously
     /// </summary>
     /// <param name="configuration">Key Vault configuration</param>
     /// <returns>SecretClient instance</returns>
@@ -111,7 +118,7 @@ public static class SecretClientFactory
     }
 
     /// <summary>
-    /// Get a SecretClient with individual parameters
+    ///     Get a SecretClient with individual parameters
     /// </summary>
     /// <param name="vaultUri">Azure Key Vault URI</param>
     /// <param name="tenantId">Azure AD tenant identifier</param>
@@ -119,7 +126,8 @@ public static class SecretClientFactory
     /// <param name="clientSecret">Azure AD application secret</param>
     /// <param name="authority">Optional authority URL</param>
     /// <returns>SecretClient instance</returns>
-    public static SecretClient GetClient(string vaultUri, string tenantId, string clientId, string clientSecret, string? authority = null)
+    public static SecretClient GetClient(string vaultUri, string tenantId, string clientId, string clientSecret,
+        string? authority = null)
     {
         var configuration = new KeyVaultConfiguration
         {
@@ -134,7 +142,7 @@ public static class SecretClientFactory
     }
 
     /// <summary>
-    /// Create ClientSecretCredential from configuration
+    ///     Create ClientSecretCredential from configuration
     /// </summary>
     /// <param name="configuration">Key Vault configuration</param>
     /// <returns>ClientSecretCredential instance</returns>
@@ -176,7 +184,7 @@ public static class SecretClientFactory
     }
 
     /// <summary>
-    /// Create SecretClientOptions from configuration
+    ///     Create SecretClientOptions from configuration
     /// </summary>
     /// <param name="configuration">Key Vault configuration</param>
     /// <returns>SecretClientOptions</returns>
@@ -236,7 +244,7 @@ public static class SecretClientFactory
     }
 
     /// <summary>
-    /// Apply additional configuration options
+    ///     Apply additional configuration options
     /// </summary>
     /// <param name="options">SecretClientOptions to modify</param>
     /// <param name="key">Option key</param>
@@ -246,58 +254,23 @@ public static class SecretClientFactory
         switch (key.ToLowerInvariant())
         {
             case "maxretries":
-                if (value is int maxRetries)
-                {
-                    options.Retry.MaxRetries = maxRetries;
-                }
-                break;
             case "retrydelay":
-                if (value is TimeSpan delay)
-                {
-                    options.Retry.Delay = delay;
-                }
-                break;
             case "maxretrydelay":
-                if (value is TimeSpan maxDelay)
-                {
-                    options.Retry.MaxDelay = maxDelay;
-                }
-                break;
             case "retrymode":
-                if (value is RetryMode retryMode)
-                {
-                    options.Retry.Mode = retryMode;
-                }
+                ApplyRetryOption(options, key.ToLowerInvariant(), value);
                 break;
             case "transport":
                 if (value is HttpPipelineTransport transport)
                 {
                     options.Transport = transport;
                 }
+
                 break;
             case "isloggingcontentallowed":
-                if (value is bool isLoggingContentAllowed)
-                {
-                    options.Diagnostics.IsLoggingContentEnabled = isLoggingContentAllowed;
-                }
-                break;
             case "isloggingenabled":
-                if (value is bool isLoggingEnabled)
-                {
-                    options.Diagnostics.IsLoggingEnabled = isLoggingEnabled;
-                }
-                break;
             case "istelemetryenabled":
-                if (value is bool isTelemetryEnabled)
-                {
-                    options.Diagnostics.IsTelemetryEnabled = isTelemetryEnabled;
-                }
-                break;
             case "applicationid":
-                if (value is string applicationId)
-                {
-                    options.Diagnostics.ApplicationId = applicationId;
-                }
+                ApplyDiagnosticsOption(options, key.ToLowerInvariant(), value);
                 break;
             default:
                 Log.LogWarning("Unknown SecretClientOptions property: {Key}", key);
@@ -305,8 +278,78 @@ public static class SecretClientFactory
         }
     }
 
+    private static void ApplyRetryOption(SecretClientOptions options, string key, object value)
+    {
+        switch (key)
+        {
+            case "maxretries":
+                if (value is int maxRetries)
+                {
+                    options.Retry.MaxRetries = maxRetries;
+                }
+
+                break;
+            case "retrydelay":
+                if (value is TimeSpan delay)
+                {
+                    options.Retry.Delay = delay;
+                }
+
+                break;
+            case "maxretrydelay":
+                if (value is TimeSpan maxDelay)
+                {
+                    options.Retry.MaxDelay = maxDelay;
+                }
+
+                break;
+            case "retrymode":
+                if (value is RetryMode retryMode)
+                {
+                    options.Retry.Mode = retryMode;
+                }
+
+                break;
+        }
+    }
+
+    private static void ApplyDiagnosticsOption(SecretClientOptions options, string key, object value)
+    {
+        switch (key)
+        {
+            case "isloggingcontentallowed":
+                if (value is bool isLoggingContentAllowed)
+                {
+                    options.Diagnostics.IsLoggingContentEnabled = isLoggingContentAllowed;
+                }
+
+                break;
+            case "isloggingenabled":
+                if (value is bool isLoggingEnabled)
+                {
+                    options.Diagnostics.IsLoggingEnabled = isLoggingEnabled;
+                }
+
+                break;
+            case "istelemetryenabled":
+                if (value is bool isTelemetryEnabled)
+                {
+                    options.Diagnostics.IsTelemetryEnabled = isTelemetryEnabled;
+                }
+
+                break;
+            case "applicationid":
+                if (value is string applicationId)
+                {
+                    options.Diagnostics.ApplicationId = applicationId;
+                }
+
+                break;
+        }
+    }
+
     /// <summary>
-    /// Clear the client cache
+    ///     Clear the client cache
     /// </summary>
     public static async Task ClearCacheAsync()
     {
@@ -324,7 +367,7 @@ public static class SecretClientFactory
     }
 
     /// <summary>
-    /// Clear the client cache synchronously
+    ///     Clear the client cache synchronously
     /// </summary>
     public static void ClearCache()
     {
@@ -332,12 +375,7 @@ public static class SecretClientFactory
     }
 
     /// <summary>
-    /// Get the number of cached clients
-    /// </summary>
-    public static int CachedClientCount => ClientCache.Count;
-
-    /// <summary>
-    /// Remove a specific client from cache
+    ///     Remove a specific client from cache
     /// </summary>
     /// <param name="configuration">Configuration of the client to remove</param>
     /// <returns>True if the client was found and removed, false otherwise</returns>
@@ -354,6 +392,7 @@ public static class SecretClientFactory
                 Log.LogDebug("Removed SecretClient from cache for vault: {VaultUri}, tenant: {TenantId}",
                     configuration.VaultUri, configuration.TenantId);
             }
+
             return removed;
         }
         finally
@@ -363,7 +402,7 @@ public static class SecretClientFactory
     }
 
     /// <summary>
-    /// Remove a specific client from cache synchronously
+    ///     Remove a specific client from cache synchronously
     /// </summary>
     /// <param name="configuration">Configuration of the client to remove</param>
     /// <returns>True if the client was found and removed, false otherwise</returns>

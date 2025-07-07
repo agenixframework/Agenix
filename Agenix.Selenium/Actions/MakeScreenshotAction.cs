@@ -78,7 +78,7 @@ public class MakeScreenshotAction : AbstractSeleniumAction
             try
             {
                 var screenshot = screenshotDriver.GetScreenshot();
-                ScreenshotPath = SaveScreenshot(screenshot, context);
+                ScreenshotPath = SaveScreenshot(screenshot);
             }
             catch (Exception ex)
             {
@@ -129,9 +129,8 @@ public class MakeScreenshotAction : AbstractSeleniumAction
     ///     Saves a screenshot to a temporary file path with a unique timestamped name.
     /// </summary>
     /// <param name="screenshot">The screenshot to be saved.</param>
-    /// <param name="context">The test context that may contain relevant information for saving the screenshot.</param>
     /// <returns>The file path where the screenshot was saved.</returns>
-    private static string SaveScreenshot(Screenshot screenshot, TestContext context)
+    private static string SaveScreenshot(Screenshot screenshot)
     {
         var tempFileName = $"screenshot_{DateTime.Now:yyyyMMdd_HHmmss_fff}.png";
         var tempPath = Path.Combine(Path.GetTempPath(), tempFileName);
