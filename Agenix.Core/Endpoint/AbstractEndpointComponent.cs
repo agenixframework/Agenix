@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -188,8 +188,11 @@ public abstract class AbstractEndpointComponent(string name) : IEndpointComponen
             // Convert the parameter value to the appropriate type and invoke the setter method
             if (parameterEntry.Value != null)
             {
-                var convertedValue =
-                    TypeConversionUtils.ConvertStringToType<dynamic>(parameterEntry.Value, field.FieldType, context);
+                var convertMethod = typeof(TypeConversionUtils).GetMethod("ConvertStringToType", [typeof(string), typeof(Type), typeof(TestContext)
+                ]);
+                var genericMethod = convertMethod.MakeGenericMethod(field.FieldType);
+                var convertedValue = genericMethod.Invoke(null, [parameterEntry.Value, field.FieldType, context]);
+
                 ReflectionHelper.InvokeMethod(setter, endpointConfiguration, convertedValue);
             }
             else

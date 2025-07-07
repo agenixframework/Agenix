@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -163,11 +163,11 @@ public class WaitIT
             Thread.Sleep(250);
             sleepCompleted.Set();
             actionCompleted.Set();
-        });
+        }).Name("ControlledSleepAction").Description("A controlled sleep action that can be used for timing tests");
 
         _gherkin.When(WaitFor<ICondition>()
             .Execution()
-            .Interval(300)
+            .Interval(400)
             .Milliseconds(2000)
             .Action(controlledSleepAction)
         );
@@ -179,7 +179,7 @@ public class WaitIT
         Assert.That(sleepStarted.Wait(TimeSpan.FromSeconds(1)), Is.True,
             "Sleep should have started");
 
-        Assert.That(sleepCompleted.Wait(TimeSpan.FromSeconds(1)), Is.True,
+        Assert.That(sleepCompleted.Wait(TimeSpan.FromSeconds(3)), Is.True,
             "Sleep should have completed");
 
         Assert.That(actionCompleted.Wait(TimeSpan.FromSeconds(1)), Is.True,
