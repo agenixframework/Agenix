@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,6 +21,7 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using System.Collections.Concurrent;
@@ -33,21 +35,21 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Azure.Security.Client;
 
 /// <summary>
-/// OAuth token client for acquiring and managing access tokens
+///     OAuth token client for acquiring and managing access tokens
 /// </summary>
 public class OAuthTokenClient : IDisposable
 {
     private static readonly ILogger Log = LogManager.GetLogger(typeof(OAuthTokenClient));
 
     private readonly HttpClient _httpClient;
-    private readonly bool _ownsHttpClient;
     private readonly JwtSecurityTokenHandler _jwtHandler;
-    private readonly ConcurrentDictionary<string, CachedToken> _tokenCache;
+    private readonly bool _ownsHttpClient;
     private readonly SemaphoreSlim _refreshSemaphore;
+    private readonly ConcurrentDictionary<string, CachedToken> _tokenCache;
     private bool _disposed;
 
     /// <summary>
-    /// OAuth token client for acquiring and managing access tokens
+    ///     OAuth token client for acquiring and managing access tokens
     /// </summary>
     public OAuthTokenClient(HttpClient? httpClient = null)
     {
@@ -59,9 +61,57 @@ public class OAuthTokenClient : IDisposable
     }
 
     /// <summary>
-    /// Get OAuth token with automatic caching
+    ///     Releases all resources used by the OAuthTokenClient, including the HttpClient
+    ///     if it was created internally, and other disposable members.
     /// </summary>
-    public async Task<string?> GetTokenAsync(OAuthClientConfiguration configuration, TimeSpan? cacheExpiry = null, CancellationToken cancellationToken = default)
+    /// <summary>
+    ///     Releases all resources used by the OAuthTokenClient, including the HttpClient
+    ///     if it was created internally, and other disposable members.
+    /// </summary>
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Releases the resources used by the OAuthTokenClient instance, including managed
+    /// and optionally unmanaged resources. If the embedded HttpClient was created internally,
+    /// it will be disposed as well.
+    /// </summary>
+    /// <param name="disposing">
+    /// Indicates whether to release both managed and unmanaged resources.
+    /// If true, both types of resources are disposed.
+    /// </param>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposed)
+        {
+            return;
+        }
+
+        if (disposing)
+        {
+            // Dispose of managed resources
+            _refreshSemaphore?.Dispose();
+            if (_ownsHttpClient)
+            {
+                _httpClient?.Dispose();
+            }
+        }
+
+        // Dispose unmanaged resources here if any
+        // (none in this case)
+
+        _disposed = true;
+    }
+
+
+    /// <summary>
+    ///     Get OAuth token with automatic caching
+    /// </summary>
+    public async Task<string?> GetTokenAsync(OAuthClientConfiguration configuration, TimeSpan? cacheExpiry = null,
+        CancellationToken cancellationToken = default)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
 
@@ -94,6 +144,7 @@ public class OAuthTokenClient : IDisposable
                 {
                     return cachedToken.Token;
                 }
+
                 _tokenCache.TryRemove(cacheKey, out _);
             }
 
@@ -120,12 +171,12 @@ public class OAuthTokenClient : IDisposable
     }
 
     /// <summary>
-    /// Acquire access token using client credentials flow
+    ///     Acquire access token using client credentials flow
     /// </summary>
-    public async Task<OAuthTokenResult> AcquireTokenAsync(OAuthClientConfiguration configuration, CancellationToken cancellationToken = default)
+    public async Task<OAuthTokenResult> AcquireTokenAsync(OAuthClientConfiguration configuration,
+        CancellationToken cancellationToken = default)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-
         configuration.Validate();
 
         var retryCount = 0;
@@ -142,24 +193,15 @@ public class OAuthTokenClient : IDisposable
 
                 if (result.IsSuccess)
                 {
-                    Log.LogInformation("Successfully acquired OAuth token for client: {ClientId}", configuration.ClientId);
+                    Log.LogInformation("Successfully acquired OAuth token for client: {ClientId}",
+                        configuration.ClientId);
                     return result;
                 }
 
-                Log.LogWarning("OAuth token request failed: {Error} - {Description}", result.Error, result.ErrorDescription);
-
-                // Don't retry on client errors (4xx)
-                if (IsClientError(result))
+                var handleResult = await HandleFailedTokenRequest(result, retryCount, retryConfig, cancellationToken);
+                if (handleResult != null)
                 {
-                    Log.LogInformation("Not retrying OAuth request due to client error: {Error}", result.Error);
-                    return result;
-                }
-
-                if (retryCount < retryConfig.MaxRetries)
-                {
-                    var delay = retryConfig.GetDelay(retryCount);
-                    Log.LogInformation("Retrying OAuth token request in {Delay}ms", delay.TotalMilliseconds);
-                    await Task.Delay(delay, cancellationToken);
+                    return handleResult;
                 }
 
                 retryCount++;
@@ -171,17 +213,10 @@ public class OAuthTokenClient : IDisposable
             }
             catch (Exception ex)
             {
-                Log.LogError(ex, "Unexpected error during OAuth token request (attempt {Attempt})", retryCount + 1);
-
-                if (retryCount >= retryConfig.MaxRetries)
+                var exceptionResult = await HandleException(ex, retryCount, retryConfig, cancellationToken);
+                if (exceptionResult != null)
                 {
-                    return OAuthTokenResult.Failed("request_failed", "Maximum retry attempts exceeded", ex);
-                }
-
-                if (retryCount < retryConfig.MaxRetries)
-                {
-                    var delay = retryConfig.GetDelay(retryCount);
-                    await Task.Delay(delay, cancellationToken);
+                    return exceptionResult;
                 }
 
                 retryCount++;
@@ -191,13 +226,66 @@ public class OAuthTokenClient : IDisposable
         return OAuthTokenResult.Failed("max_retries_exceeded", "Maximum retry attempts exceeded");
     }
 
+    private static async Task<OAuthTokenResult?> HandleFailedTokenRequest(
+        OAuthTokenResult result,
+        int retryCount,
+        object retryConfig,
+        CancellationToken cancellationToken)
+    {
+        Log.LogWarning("OAuth token request failed: {Error} - {Description}", result.Error, result.ErrorDescription);
+
+        // Don't retry on client errors (4xx)
+        if (IsClientError(result))
+        {
+            Log.LogInformation("Not retrying OAuth request due to client error: {Error}", result.Error);
+            return result;
+        }
+
+        var maxRetries = (int)retryConfig.GetType().GetProperty("MaxRetries")?.GetValue(retryConfig)!;
+        if (retryCount < maxRetries)
+        {
+            var delay = (TimeSpan)retryConfig.GetType().GetMethod("GetDelay")
+                ?.Invoke(retryConfig, [retryCount])!;
+            Log.LogInformation("Retrying OAuth token request in {Delay}ms", delay.TotalMilliseconds);
+            await Task.Delay(delay, cancellationToken);
+        }
+
+        return null; // Continue retrying
+    }
+
+    private static async Task<OAuthTokenResult?> HandleException(
+        Exception ex,
+        int retryCount,
+        object retryConfig,
+        CancellationToken cancellationToken)
+    {
+        Log.LogError(ex, "Unexpected error during OAuth token request (attempt {Attempt})", retryCount + 1);
+
+        var maxRetries = (int)retryConfig.GetType().GetProperty("MaxRetries")?.GetValue(retryConfig)!;
+        if (retryCount >= maxRetries)
+        {
+            return OAuthTokenResult.Failed("request_failed", "Maximum retry attempts exceeded", ex);
+        }
+
+        if (retryCount < maxRetries)
+        {
+            var delay = (TimeSpan)retryConfig.GetType().GetMethod("GetDelay")
+                ?.Invoke(retryConfig, [retryCount])!;
+            await Task.Delay(delay, cancellationToken);
+        }
+
+        return null; // Continue retrying
+    }
+
     /// <summary>
-    /// Parse JWT token to get claims and expiration
+    ///     Parse JWT token to get claims and expiration
     /// </summary>
     public JwtSecurityToken? ParseToken(string token)
     {
         if (string.IsNullOrWhiteSpace(token))
+        {
             return null;
+        }
 
         try
         {
@@ -211,17 +299,22 @@ public class OAuthTokenClient : IDisposable
     }
 
     /// <summary>
-    /// Check if token is expired
+    ///     Check if token is expired
     /// </summary>
     public bool IsTokenExpired(string token, TimeSpan? buffer = null)
     {
         if (string.IsNullOrWhiteSpace(token))
+        {
             return true;
+        }
 
         try
         {
             var jwtToken = ParseToken(token);
-            if (jwtToken == null) return true;
+            if (jwtToken == null)
+            {
+                return true;
+            }
 
             var expiryBuffer = buffer ?? TimeSpan.FromMinutes(5);
             return jwtToken.ValidTo <= DateTime.UtcNow.Add(expiryBuffer);
@@ -233,7 +326,7 @@ public class OAuthTokenClient : IDisposable
     }
 
     /// <summary>
-    /// Get token expiration time
+    ///     Get token expiration time
     /// </summary>
     public DateTime? GetTokenExpiration(string token)
     {
@@ -242,19 +335,22 @@ public class OAuthTokenClient : IDisposable
     }
 
     /// <summary>
-    /// Get remaining token lifetime
+    ///     Get remaining token lifetime
     /// </summary>
     public TimeSpan? GetRemainingTokenLifetime(string token)
     {
         var expiration = GetTokenExpiration(token);
-        if (!expiration.HasValue) return null;
+        if (!expiration.HasValue)
+        {
+            return null;
+        }
 
         var remaining = expiration.Value - DateTime.UtcNow;
         return remaining > TimeSpan.Zero ? remaining : TimeSpan.Zero;
     }
 
     /// <summary>
-    /// Remove token from cache
+    ///     Remove token from cache
     /// </summary>
     public void RemoveToken(string cacheKey)
     {
@@ -263,7 +359,7 @@ public class OAuthTokenClient : IDisposable
     }
 
     /// <summary>
-    /// Clear all cached tokens
+    ///     Clear all cached tokens
     /// </summary>
     public void ClearCache()
     {
@@ -272,7 +368,7 @@ public class OAuthTokenClient : IDisposable
     }
 
     /// <summary>
-    /// Get cache statistics
+    ///     Get cache statistics
     /// </summary>
     public OAuthCacheStatistics GetCacheStatistics()
     {
@@ -289,7 +385,8 @@ public class OAuthTokenClient : IDisposable
         };
     }
 
-    private async Task<OAuthTokenResult> ExecuteTokenRequestAsync(OAuthClientConfiguration configuration, CancellationToken cancellationToken)
+    private async Task<OAuthTokenResult> ExecuteTokenRequestAsync(OAuthClientConfiguration configuration,
+        CancellationToken cancellationToken)
     {
         using var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
         cts.CancelAfter(configuration.Timeout);
@@ -297,10 +394,8 @@ public class OAuthTokenClient : IDisposable
         var formData = configuration.GetFormData();
         var content = new FormUrlEncodedContent(formData);
 
-        using var request = new HttpRequestMessage(HttpMethod.Post, configuration.TokenEndpoint)
-        {
-            Content = content
-        };
+        using var request = new HttpRequestMessage(HttpMethod.Post, configuration.TokenEndpoint);
+        request.Content = content;
 
         // Add custom headers
         foreach (var header in configuration.CustomHeaders)
@@ -321,14 +416,13 @@ public class OAuthTokenClient : IDisposable
         {
             try
             {
-                var tokenResponse = JsonSerializer.Deserialize<OAuthTokenResponse>(responseContent, new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
+                var tokenResponse = JsonSerializer.Deserialize<OAuthTokenResponse>(responseContent,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
                 if (tokenResponse?.HasError == true)
                 {
-                    return OAuthTokenResult.Failed(tokenResponse.Error ?? "unknown_error", tokenResponse.ErrorDescription);
+                    return OAuthTokenResult.Failed(tokenResponse.Error ?? "unknown_error",
+                        tokenResponse.ErrorDescription);
                 }
 
                 if (tokenResponse == null || string.IsNullOrEmpty(tokenResponse.AccessToken))
@@ -344,25 +438,21 @@ public class OAuthTokenClient : IDisposable
                 return OAuthTokenResult.Failed("invalid_response", "Failed to parse token response", ex);
             }
         }
-        else
-        {
-            try
-            {
-                var errorResponse = JsonSerializer.Deserialize<OAuthTokenResponse>(responseContent, new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
 
-                return OAuthTokenResult.Failed(
-                    errorResponse?.Error ?? $"http_error_{(int)response.StatusCode}",
-                    errorResponse?.ErrorDescription ?? response.ReasonPhrase);
-            }
-            catch
-            {
-                return OAuthTokenResult.Failed(
-                    $"http_error_{(int)response.StatusCode}",
-                    $"HTTP {(int)response.StatusCode}: {response.ReasonPhrase}");
-            }
+        try
+        {
+            var errorResponse = JsonSerializer.Deserialize<OAuthTokenResponse>(responseContent,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            return OAuthTokenResult.Failed(
+                errorResponse?.Error ?? $"http_error_{(int)response.StatusCode}",
+                errorResponse?.ErrorDescription ?? response.ReasonPhrase);
+        }
+        catch
+        {
+            return OAuthTokenResult.Failed(
+                $"http_error_{(int)response.StatusCode}",
+                $"HTTP {(int)response.StatusCode}: {response.ReasonPhrase}");
         }
     }
 
@@ -381,23 +471,6 @@ public class OAuthTokenClient : IDisposable
         };
     }
 
-    /// <summary>
-    /// Releases all resources used by the OAuthTokenClient, including the HttpClient
-    /// if it was created internally, and other disposable members.
-    /// </summary>
-    public void Dispose()
-    {
-        if (_disposed) return;
-
-        _refreshSemaphore?.Dispose();
-        if (_ownsHttpClient)
-        {
-            _httpClient?.Dispose();
-        }
-
-        _disposed = true;
-    }
-
     private record CachedToken(string Token, DateTime ExpiresAt)
     {
         public DateTime CachedAt { get; } = DateTime.UtcNow;
@@ -405,21 +478,40 @@ public class OAuthTokenClient : IDisposable
 }
 
 /// <summary>
-/// OAuth cache statistics
+///     OAuth cache statistics
 /// </summary>
 public class OAuthCacheStatistics
 {
+    /// <summary>
+    /// Represents the total number of tokens currently tracked in the cache.
+    /// </summary>
     public int TotalTokens { get; init; }
+
+    /// <summary>
+    /// Represents the number of tokens in the cache that are currently valid and have not expired.
+    /// </summary>
     public int ValidTokens { get; init; }
+
+    /// <summary>
+    /// Represents the number of expired tokens currently tracked in the cache.
+    /// </summary>
     public int ExpiredTokens { get; init; }
+
+    /// <summary>
+    /// Represents the timestamp of the earliest cached token currently tracked in the cache.
+    /// </summary>
     public DateTime? OldestToken { get; init; }
+
+    /// <summary>
+    /// Represents the timestamp when the most recently cached token was added to the cache.
+    /// </summary>
     public DateTime? NewestToken { get; init; }
 
     /// <summary>
-    /// Returns a string representation of the object.
+    ///     Returns a string representation of the object.
     /// </summary>
     /// <return>
-    /// A string that represents the current object.
+    ///     A string that represents the current object.
     /// </return>
     public override string ToString()
     {

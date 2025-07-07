@@ -117,7 +117,7 @@ public class NavigateAction : AbstractSeleniumAction
         catch (UriFormatException)
         {
             // Handle relative URL
-            NavigateToRelativeUrl(browser, context, resolvedPage);
+            NavigateToRelativeUrl(browser, resolvedPage);
         }
     }
 
@@ -125,16 +125,15 @@ public class NavigateAction : AbstractSeleniumAction
     ///     Navigates to a relative URL by combining it with the base URL of the browser.
     /// </summary>
     /// <param name="browser">The browser instance used for navigation.</param>
-    /// <param name="context">The test context in which the action is performed.</param>
     /// <param name="relativePage">The relative page path to navigate to.</param>
-    private static void NavigateToRelativeUrl(SeleniumBrowser browser, TestContext context, string relativePage)
+    private static void NavigateToRelativeUrl(SeleniumBrowser browser, string relativePage)
     {
         var baseUrl = GetBaseUrl(browser);
 
         try
         {
             // Validate base URL
-            var baseUri = new Uri(baseUrl);
+            _ = new Uri(baseUrl);
         }
         catch (Exception e) when (e is UriFormatException or ArgumentNullException)
         {
@@ -172,7 +171,7 @@ public class NavigateAction : AbstractSeleniumAction
         }
         catch (Exception ex)
         {
-            Logger.LogDebug("Could not get current URL: {ExMessage}", ex.Message);
+            Logger.LogDebug(ex, "Could not get current URL");
             return string.Empty;
         }
     }
@@ -200,14 +199,16 @@ public class NavigateAction : AbstractSeleniumAction
     /// <param name="url">The original URL to be made caching-safe.</param>
     /// <param name="timestamp">The timestamp in milliseconds since the Unix epoch, used for ensuring cache uniqueness.</param>
     /// <returns>A caching-safe URL with an appended or replaced timestamp parameter.</returns>
-    private string MakeIeCachingSafeUrl(string url, long timestamp)
+    private static string MakeIeCachingSafeUrl(string url, long timestamp)
     {
         if (url.Contains("timestamp="))
         {
             // Replace existing timestamp parameter
             return Regex.Replace(url,
                 @"(.*)(timestamp=)([^&#]*)(.*)",
-                $"$1$2{timestamp}$4");
+                $"$1$2{timestamp}$4",
+                RegexOptions.None,
+                TimeSpan.FromMilliseconds(100));
         }
 
         // Add new timestamp parameter

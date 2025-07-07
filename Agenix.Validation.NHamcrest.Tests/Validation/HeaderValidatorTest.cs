@@ -43,9 +43,9 @@ public class HeaderValidatorTest
         var validators = IHeaderValidator.Lookup();
         Assert.That(validators.Count, Is.EqualTo(2));
         ClassicAssert.IsNotNull(validators["defaultHeaderValidator"]);
-        Assert.That(typeof(DefaultHeaderValidator), Is.EqualTo(validators["defaultHeaderValidator"].GetType()));
+        Assert.That(validators["defaultHeaderValidator"].GetType(), Is.EqualTo(typeof(DefaultHeaderValidator)));
         ClassicAssert.IsNotNull(validators["hamcrestHeaderValidator"]);
-        Assert.That(typeof(NHamcrestHeaderValidator), Is.EqualTo(validators["hamcrestHeaderValidator"].GetType()));
+        Assert.That(validators["hamcrestHeaderValidator"].GetType(), Is.EqualTo(typeof(NHamcrestHeaderValidator)));
     }
 
     [Test]

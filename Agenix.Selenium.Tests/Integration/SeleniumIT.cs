@@ -238,6 +238,8 @@ public class SeleniumIT
 
 
     [Test]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("SonarQube", "S2699:Tests should include assertions",
+        Justification = "Test uses fluent API assertion through _testCaseRunner.Then() which verifies element text contains expected value")]
     public void Test_Login_Page()
     {
         _testCaseRunner.Given(FinallySequence.Builder.DoFinally()

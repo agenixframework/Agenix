@@ -75,10 +75,10 @@ public class WaitUntilAction : FindElementAction
     /// <summary>
     ///     Executes the wait until action on the web element.
     /// </summary>
-    /// <param name="webElement">The web element to wait for</param>
+    /// <param name="element">The web element to wait for</param>
     /// <param name="browser">The Selenium browser instance</param>
     /// <param name="context">The test context</param>
-    protected override void Execute(IWebElement webElement, SeleniumBrowser browser, TestContext context)
+    protected override void Execute(IWebElement element, SeleniumBrowser browser, TestContext context)
     {
         var wait = new WebDriverWait(browser.WebDriver, TimeSpan.FromMilliseconds(_timeout));
 
@@ -92,7 +92,7 @@ public class WaitUntilAction : FindElementAction
                     wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("*")));
                     break;
                 case "visible":
-                    wait.Until(ExpectedConditions.ElementToBeClickable(webElement));
+                    wait.Until(ExpectedConditions.ElementToBeClickable(element));
                     break;
                 default:
                     throw new AgenixSystemException($"Unknown wait condition: {_condition}");

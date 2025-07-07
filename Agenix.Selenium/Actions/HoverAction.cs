@@ -76,12 +76,12 @@ public class HoverAction : FindElementAction
     /// <param name="webElement">The web element on which the hover action is to be performed.</param>
     /// <param name="browser">The Selenium browser instance controlling the WebDriver for interaction.</param>
     /// <param name="context">The test context providing additional data about the test environment and execution.</param>
-    protected override void Execute(IWebElement webElement, SeleniumBrowser browser, TestContext context)
+    protected override void Execute(IWebElement element, SeleniumBrowser browser, TestContext context)
     {
-        base.Execute(webElement, browser, context);
+        base.Execute(element, browser, context);
 
         var actions = new OpenQA.Selenium.Interactions.Actions(browser.WebDriver);
-        actions.MoveToElement(webElement).Perform();
+        actions.MoveToElement(element).Perform();
     }
 
     /// <summary>

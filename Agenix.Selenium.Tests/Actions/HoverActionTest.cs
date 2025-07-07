@@ -67,6 +67,10 @@ public class HoverActionTest : AbstractNUnitSetUp
             .Build();
 
         action.Execute(Context);
+
+        // Verify that FindElement was called with the correct By selector
+        _webDriver.Verify(x => x.FindElement(By.Id("myButton")), Times.Once);
+
     }
 
     [Test]

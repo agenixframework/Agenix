@@ -39,18 +39,30 @@ public class OAuthClientConfigurationTests
     [Test]
     public void Constructor_DefaultValues_AreSetCorrectly()
     {
-        // Assert
-        Assert.That(_configuration.TokenEndpoint, Is.EqualTo(string.Empty));
-        Assert.That(_configuration.ClientId, Is.EqualTo(string.Empty));
-        Assert.That(_configuration.ClientSecret, Is.EqualTo(string.Empty));
-        Assert.That(_configuration.Scopes, Is.Not.Null);
-        Assert.That(_configuration.Scopes, Is.Empty);
-        Assert.That(_configuration.AdditionalParameters, Is.Not.Null);
-        Assert.That(_configuration.AdditionalParameters, Is.Empty);
-        Assert.That(_configuration.CustomHeaders, Is.Not.Null);
-        Assert.That(_configuration.CustomHeaders, Is.Empty);
-        Assert.That(_configuration.Timeout, Is.EqualTo(TimeSpan.FromSeconds(30)));
-        Assert.That(_configuration.RetryConfiguration, Is.Not.Null);
+        Assert.Multiple(() =>
+        {
+            // Assert
+            Assert.That(_configuration.TokenEndpoint, Is.EqualTo(string.Empty));
+            Assert.That(_configuration.ClientId, Is.EqualTo(string.Empty));
+            Assert.That(_configuration.ClientSecret, Is.EqualTo(string.Empty));
+            Assert.That(_configuration.Scopes, Is.Not.Null);
+        });
+        Assert.Multiple(() =>
+        {
+            Assert.That(_configuration.Scopes, Is.Empty);
+            Assert.That(_configuration.AdditionalParameters, Is.Not.Null);
+        });
+        Assert.Multiple(() =>
+        {
+            Assert.That(_configuration.AdditionalParameters, Is.Empty);
+            Assert.That(_configuration.CustomHeaders, Is.Not.Null);
+        });
+        Assert.Multiple(() =>
+        {
+            Assert.That(_configuration.CustomHeaders, Is.Empty);
+            Assert.That(_configuration.Timeout, Is.EqualTo(TimeSpan.FromSeconds(30)));
+            Assert.That(_configuration.RetryConfiguration, Is.Not.Null);
+        });
     }
 
     [Test]
@@ -247,7 +259,7 @@ public class OAuthClientConfigurationTests
     }
 
     [Test]
-    public void Validate_NullTokenEndpoint_ThrowsArgumentException()
+    public void Validate_NullTokenEndpoint_ThrowsInvalidOperationException()
     {
         // Arrange
         _configuration.TokenEndpoint = null;
@@ -255,13 +267,12 @@ public class OAuthClientConfigurationTests
         _configuration.ClientSecret = "test-secret";
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentException>(() => _configuration.Validate());
-        Assert.That(ex.ParamName, Is.EqualTo("TokenEndpoint"));
+        var ex = Assert.Throws<InvalidOperationException>(() => _configuration.Validate());
         Assert.That(ex.Message, Does.Contain("TokenEndpoint is required"));
     }
 
     [Test]
-    public void Validate_EmptyTokenEndpoint_ThrowsArgumentException()
+    public void Validate_EmptyTokenEndpoint_ThrowsInvalidOperationException()
     {
         // Arrange
         _configuration.TokenEndpoint = "";
@@ -269,12 +280,11 @@ public class OAuthClientConfigurationTests
         _configuration.ClientSecret = "test-secret";
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentException>(() => _configuration.Validate());
-        Assert.That(ex.ParamName, Is.EqualTo("TokenEndpoint"));
+        Assert.Throws<InvalidOperationException>(() => _configuration.Validate());
     }
 
     [Test]
-    public void Validate_WhitespaceTokenEndpoint_ThrowsArgumentException()
+    public void Validate_WhitespaceTokenEndpoint_ThrowsInvalidOperationException()
     {
         // Arrange
         _configuration.TokenEndpoint = "   ";
@@ -282,12 +292,11 @@ public class OAuthClientConfigurationTests
         _configuration.ClientSecret = "test-secret";
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentException>(() => _configuration.Validate());
-        Assert.That(ex.ParamName, Is.EqualTo("TokenEndpoint"));
+        Assert.Throws<InvalidOperationException>(() => _configuration.Validate());
     }
 
     [Test]
-    public void Validate_NullClientId_ThrowsArgumentException()
+    public void Validate_NullClientId_ThrowsInvalidOperationException()
     {
         // Arrange
         _configuration.TokenEndpoint = "https://auth.example.com/token";
@@ -295,13 +304,12 @@ public class OAuthClientConfigurationTests
         _configuration.ClientSecret = "test-secret";
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentException>(() => _configuration.Validate());
-        Assert.That(ex.ParamName, Is.EqualTo("ClientId"));
+        var ex = Assert.Throws<InvalidOperationException>(() => _configuration.Validate());
         Assert.That(ex.Message, Does.Contain("ClientId is required"));
     }
 
     [Test]
-    public void Validate_EmptyClientId_ThrowsArgumentException()
+    public void Validate_EmptyClientId_ThrowsInvalidOperationException()
     {
         // Arrange
         _configuration.TokenEndpoint = "https://auth.example.com/token";
@@ -309,12 +317,11 @@ public class OAuthClientConfigurationTests
         _configuration.ClientSecret = "test-secret";
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentException>(() => _configuration.Validate());
-        Assert.That(ex.ParamName, Is.EqualTo("ClientId"));
+        Assert.Throws<InvalidOperationException>(() => _configuration.Validate());
     }
 
     [Test]
-    public void Validate_NullClientSecret_ThrowsArgumentException()
+    public void Validate_NullClientSecret_ThrowsInvalidOperationException()
     {
         // Arrange
         _configuration.TokenEndpoint = "https://auth.example.com/token";
@@ -322,13 +329,12 @@ public class OAuthClientConfigurationTests
         _configuration.ClientSecret = null;
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentException>(() => _configuration.Validate());
-        Assert.That(ex.ParamName, Is.EqualTo("ClientSecret"));
+        var ex = Assert.Throws<InvalidOperationException>(() => _configuration.Validate());
         Assert.That(ex.Message, Does.Contain("ClientSecret is required"));
     }
 
     [Test]
-    public void Validate_EmptyClientSecret_ThrowsArgumentException()
+    public void Validate_EmptyClientSecret_ThrowsInvalidOperationException()
     {
         // Arrange
         _configuration.TokenEndpoint = "https://auth.example.com/token";
@@ -336,12 +342,11 @@ public class OAuthClientConfigurationTests
         _configuration.ClientSecret = "";
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentException>(() => _configuration.Validate());
-        Assert.That(ex.ParamName, Is.EqualTo("ClientSecret"));
+        Assert.Throws<InvalidOperationException>(() => _configuration.Validate());
     }
 
     [Test]
-    public void Validate_InvalidTokenEndpointUrl_ThrowsArgumentException()
+    public void Validate_InvalidTokenEndpointUrl_ThrowsInvalidOperationException()
     {
         // Arrange
         _configuration.TokenEndpoint = "not-a-valid-url";
@@ -349,13 +354,12 @@ public class OAuthClientConfigurationTests
         _configuration.ClientSecret = "test-secret";
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentException>(() => _configuration.Validate());
-        Assert.That(ex.ParamName, Is.EqualTo("TokenEndpoint"));
+        var ex = Assert.Throws<InvalidOperationException>(() => _configuration.Validate());
         Assert.That(ex.Message, Does.Contain("must be a valid absolute URL"));
     }
 
     [Test]
-    public void Validate_RelativeTokenEndpointUrl_ThrowsArgumentException()
+    public void Validate_RelativeTokenEndpointUrl_ThrowsInvalidOperationException()
     {
         // Arrange
         _configuration.TokenEndpoint = "/oauth/token";
@@ -363,16 +367,12 @@ public class OAuthClientConfigurationTests
         _configuration.ClientSecret = "test-secret";
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentException>(() => _configuration.Validate());
-        Assert.Multiple(() =>
-        {
-            Assert.That(ex.ParamName, Is.EqualTo("TokenEndpoint"));
-            Assert.That(ex.Message, Does.Match(@"TokenEndpoint must (use HTTP or HTTPS scheme|be a valid absolute URL)"));
-        });
+        var ex = Assert.Throws<InvalidOperationException>(() => _configuration.Validate());
+        Assert.That(ex.Message, Does.Match(@"TokenEndpoint must (use HTTP or HTTPS scheme|be a valid absolute URL)"));
     }
 
     [Test]
-    public void Validate_InvalidScheme_ThrowsArgumentException()
+    public void Validate_InvalidScheme_ThrowsInvalidOperationException()
     {
         // Arrange
         _configuration.TokenEndpoint = "ftp://auth.example.com/token";
@@ -380,8 +380,7 @@ public class OAuthClientConfigurationTests
         _configuration.ClientSecret = "test-secret";
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentException>(() => _configuration.Validate());
-        Assert.That(ex.ParamName, Is.EqualTo("TokenEndpoint"));
+        var ex = Assert.Throws<InvalidOperationException>(() => _configuration.Validate());
         Assert.That(ex.Message, Does.Contain("must use HTTP or HTTPS scheme"));
     }
 
@@ -410,7 +409,7 @@ public class OAuthClientConfigurationTests
     }
 
     [Test]
-    public void Validate_ZeroTimeout_ThrowsArgumentException()
+    public void Validate_ZeroTimeout_ThrowsInvalidOperationException()
     {
         // Arrange
         _configuration.TokenEndpoint = "https://auth.example.com/token";
@@ -419,13 +418,12 @@ public class OAuthClientConfigurationTests
         _configuration.Timeout = TimeSpan.Zero;
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentException>(() => _configuration.Validate());
-        Assert.That(ex.ParamName, Is.EqualTo("Timeout"));
+        var ex = Assert.Throws<InvalidOperationException>(() => _configuration.Validate());
         Assert.That(ex.Message, Does.Contain("Timeout must be positive"));
     }
 
     [Test]
-    public void Validate_NegativeTimeout_ThrowsArgumentException()
+    public void Validate_NegativeTimeout_ThrowsInvalidOperationException()
     {
         // Arrange
         _configuration.TokenEndpoint = "https://auth.example.com/token";
@@ -434,8 +432,7 @@ public class OAuthClientConfigurationTests
         _configuration.Timeout = TimeSpan.FromSeconds(-1);
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentException>(() => _configuration.Validate());
-        Assert.That(ex.ParamName, Is.EqualTo("Timeout"));
+        var ex = Assert.Throws<InvalidOperationException>(() => _configuration.Validate());
         Assert.That(ex.Message, Does.Contain("Timeout must be positive"));
     }
 

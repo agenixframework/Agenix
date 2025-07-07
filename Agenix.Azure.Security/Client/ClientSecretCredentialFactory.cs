@@ -35,27 +35,32 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Azure.Security.Client;
 
 /// <summary>
-/// Factory for creating and caching Azure AD ClientSecretCredential instances
+///     Factory for creating and caching Azure AD ClientSecretCredential instances
 /// </summary>
 public static class ClientSecretCredentialFactory
 {
     /// <summary>
-    /// Logger instance.
+    ///     Logger instance.
     /// </summary>
     private static readonly ILogger Log = LogManager.GetLogger(typeof(ClientSecretCredentialFactory));
 
     /// <summary>
-    /// Cache for credential instances
+    ///     Cache for credential instances
     /// </summary>
     private static readonly ConcurrentDictionary<string, ClientSecretCredential> CredentialCache = new();
 
     /// <summary>
-    /// Lock for thread-safe operations
+    ///     Lock for thread-safe operations
     /// </summary>
     private static readonly SemaphoreSlim FactoryLock = new(1, 1);
 
     /// <summary>
-    /// Get or retrieve a cached ClientSecretCredential instance
+    ///     Get the number of cached credentials
+    /// </summary>
+    public static int CachedCredentialCount => CredentialCache.Count;
+
+    /// <summary>
+    ///     Get or retrieve a cached ClientSecretCredential instance
     /// </summary>
     /// <param name="configuration">Azure AD configuration</param>
     /// <returns>ClientSecretCredential instance</returns>
@@ -105,7 +110,7 @@ public static class ClientSecretCredentialFactory
     }
 
     /// <summary>
-    /// Get a ClientSecretCredential instance synchronously
+    ///     Get a ClientSecretCredential instance synchronously
     /// </summary>
     /// <param name="configuration">Azure AD configuration</param>
     /// <returns>ClientSecretCredential instance</returns>
@@ -115,14 +120,15 @@ public static class ClientSecretCredentialFactory
     }
 
     /// <summary>
-    /// Get a ClientSecretCredential with individual parameters
+    ///     Get a ClientSecretCredential with individual parameters
     /// </summary>
     /// <param name="tenantId">Azure AD tenant identifier</param>
     /// <param name="clientId">Azure AD application identifier</param>
     /// <param name="clientSecret">Azure AD application secret</param>
     /// <param name="authority">Optional authority URL</param>
     /// <returns>ClientSecretCredential instance</returns>
-    public static ClientSecretCredential GetCredential(string tenantId, string clientId, string clientSecret, string? authority = null)
+    public static ClientSecretCredential GetCredential(string tenantId, string clientId, string clientSecret,
+        string? authority = null)
     {
         var configuration = new AzureAdConfiguration
         {
@@ -136,7 +142,7 @@ public static class ClientSecretCredentialFactory
     }
 
     /// <summary>
-    /// Create ClientSecretCredentialOptions from configuration
+    ///     Create ClientSecretCredentialOptions from configuration
     /// </summary>
     /// <param name="configuration">Azure AD configuration</param>
     /// <returns>ClientSecretCredentialOptions</returns>
@@ -202,7 +208,7 @@ public static class ClientSecretCredentialFactory
 
 
     /// <summary>
-    /// Apply additional configuration options
+    ///     Apply additional configuration options
     /// </summary>
     /// <param name="options">ClientSecretCredentialOptions to modify</param>
     /// <param name="key">Option key</param>
@@ -212,58 +218,19 @@ public static class ClientSecretCredentialFactory
         switch (key.ToLowerInvariant())
         {
             case "maxretries":
-                if (value is int maxRetries)
-                {
-                    options.Retry.MaxRetries = maxRetries;
-                }
-                break;
             case "retrydelay":
-                if (value is TimeSpan delay)
-                {
-                    options.Retry.Delay = delay;
-                }
-                break;
             case "maxretrydelay":
-                if (value is TimeSpan maxDelay)
-                {
-                    options.Retry.MaxDelay = maxDelay;
-                }
-                break;
             case "retrymode":
-                if (value is RetryMode retryMode)
-                {
-                    options.Retry.Mode = retryMode;
-                }
+                ApplyRetryOption(options, key, value);
                 break;
             case "transport":
-                if (value is HttpPipelineTransport transport)
-                {
-                    options.Transport = transport;
-                }
+                ApplyTransportOption(options, value);
                 break;
             case "isloggingcontentallowed":
-                if (value is bool isLoggingContentAllowed)
-                {
-                    options.Diagnostics.IsLoggingContentEnabled = isLoggingContentAllowed;
-                }
-                break;
             case "isloggingenabled":
-                if (value is bool isLoggingEnabled)
-                {
-                    options.Diagnostics.IsLoggingEnabled = isLoggingEnabled;
-                }
-                break;
             case "istelemetryenabled":
-                if (value is bool isTelemetryEnabled)
-                {
-                    options.Diagnostics.IsTelemetryEnabled = isTelemetryEnabled;
-                }
-                break;
             case "applicationid":
-                if (value is string applicationId)
-                {
-                    options.Diagnostics.ApplicationId = applicationId;
-                }
+                ApplyDiagnosticsOption(options, key, value);
                 break;
             default:
                 Log.LogWarning("Unknown ClientSecretCredentialOptions property: {Key}", key);
@@ -271,8 +238,54 @@ public static class ClientSecretCredentialFactory
         }
     }
 
+    private static void ApplyRetryOption(ClientSecretCredentialOptions options, string key, object value)
+    {
+        switch (key.ToLowerInvariant())
+        {
+            case "maxretries" when value is int maxRetries:
+                options.Retry.MaxRetries = maxRetries;
+                break;
+            case "retrydelay" when value is TimeSpan delay:
+                options.Retry.Delay = delay;
+                break;
+            case "maxretrydelay" when value is TimeSpan maxDelay:
+                options.Retry.MaxDelay = maxDelay;
+                break;
+            case "retrymode" when value is RetryMode retryMode:
+                options.Retry.Mode = retryMode;
+                break;
+        }
+    }
+
+    private static void ApplyTransportOption(ClientSecretCredentialOptions options, object value)
+    {
+        if (value is HttpPipelineTransport transport)
+        {
+            options.Transport = transport;
+        }
+    }
+
+    private static void ApplyDiagnosticsOption(ClientSecretCredentialOptions options, string key, object value)
+    {
+        switch (key.ToLowerInvariant())
+        {
+            case "isloggingcontentallowed" when value is bool isLoggingContentAllowed:
+                options.Diagnostics.IsLoggingContentEnabled = isLoggingContentAllowed;
+                break;
+            case "isloggingenabled" when value is bool isLoggingEnabled:
+                options.Diagnostics.IsLoggingEnabled = isLoggingEnabled;
+                break;
+            case "istelemetryenabled" when value is bool isTelemetryEnabled:
+                options.Diagnostics.IsTelemetryEnabled = isTelemetryEnabled;
+                break;
+            case "applicationid" when value is string applicationId:
+                options.Diagnostics.ApplicationId = applicationId;
+                break;
+        }
+    }
+
     /// <summary>
-    /// Clear the credential cache
+    ///     Clear the credential cache
     /// </summary>
     public static async Task ClearCacheAsync()
     {
@@ -290,7 +303,7 @@ public static class ClientSecretCredentialFactory
     }
 
     /// <summary>
-    /// Clear the credential cache synchronously
+    ///     Clear the credential cache synchronously
     /// </summary>
     public static void ClearCache()
     {
@@ -298,12 +311,7 @@ public static class ClientSecretCredentialFactory
     }
 
     /// <summary>
-    /// Get the number of cached credentials
-    /// </summary>
-    public static int CachedCredentialCount => CredentialCache.Count;
-
-    /// <summary>
-    /// Remove a specific credential from cache
+    ///     Remove a specific credential from cache
     /// </summary>
     /// <param name="configuration">Configuration of the credential to remove</param>
     /// <returns>True if the credential was found and removed, false otherwise</returns>
@@ -320,6 +328,7 @@ public static class ClientSecretCredentialFactory
                 Log.LogDebug("Removed ClientSecretCredential from cache for tenant: {TenantId}, client: {ClientId}",
                     configuration.TenantId, configuration.ClientId);
             }
+
             return removed;
         }
         finally
@@ -329,7 +338,7 @@ public static class ClientSecretCredentialFactory
     }
 
     /// <summary>
-    /// Remove a specific credential from cache synchronously
+    ///     Remove a specific credential from cache synchronously
     /// </summary>
     /// <param name="configuration">Configuration of the credential to remove</param>
     /// <returns>True if the credential was found and removed, false otherwise</returns>
