@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -42,11 +42,17 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
 
     private readonly string? _httpClientUri;
 
+    /// Represents a builder for configuring and constructing HTTP client actions.
+    /// This class provides methods to configure an HTTP client, send and receive HTTP messages,
+    /// and resolve references for constructing test actions.
     public HttpClientActionBuilder(IEndpoint httpClient)
     {
         _httpClient = httpClient;
     }
 
+    /// Represents a builder for configuring and constructing HTTP client actions.
+    /// This class allows for sending and receiving HTTP messages, while enabling the usage
+    /// of a reference resolver and delegation of actions for building test executions.
     public HttpClientActionBuilder(string httpClientUri)
     {
         _httpClientUri = httpClientUri;
@@ -85,6 +91,9 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
         return new HttpClientSendActionBuilder(_httpClient, _httpClientUri, referenceResolver, _delegate);
     }
 
+    /// Builds and returns an instance of an ITestAction.
+    /// This method ensures the delegate action has been properly configured before creating the test action.
+    /// <return>The built instance of an ITestAction.</return>
     public override ITestAction Build()
     {
         ObjectHelper.AssertNotNull(_delegate, "Missing delegate action to build");

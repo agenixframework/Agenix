@@ -145,7 +145,7 @@ public class FileUtils
     /// <exception cref="AgenixSystemException">Thrown when there is an error writing to the file.</exception>
     public static void WriteToFile(string content, string file, Encoding charset)
     {
-        Log.LogDebug($"Writing file resource: {file} (encoding is {charset.EncodingName})");
+        Log.LogDebug("Writing file resource: {File} (encoding is {CharsetEncodingName})", file, charset.EncodingName);
 
         if (!File.Exists(file))
         {

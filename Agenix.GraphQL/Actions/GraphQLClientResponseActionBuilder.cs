@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -44,12 +44,23 @@ public class GraphQLClientResponseActionBuilder : ReceiveMessageAction.ReceiveMe
 {
     private readonly GraphQLMessage _graphQLMessage;
 
+    /// <summary>
+    /// Facilitates the construction of a GraphQL client response action by providing a fluent API for configuring message handling behaviors.
+    /// This builder initializes a `GraphQLMessage` instance and wraps it with a `GraphQLMessageBuilder` for extended configuration.
+    /// It ensures response handling adheres to the needs of GraphQL message processing, supporting customizations like header case insensitivity.
+    /// </summary>
     public GraphQLClientResponseActionBuilder()
     {
         _graphQLMessage = new GraphQLMessage();
         Message(new GraphQLMessageBuilder(_graphQLMessage)).HeaderIgnoreCase = true;
     }
 
+    /// <summary>
+    /// Provides a builder for configuring actions related to GraphQL client response handling.
+    /// This class facilitates the creation of response actions by utilizing a `GraphQLMessage` instance
+    /// and ensures that headers are treated with case insensitivity.
+    /// Inherits behavior from `ReceiveMessageAction.ReceiveMessageActionBuilder` to support advanced message processing capabilities.
+    /// </summary>
     public GraphQLClientResponseActionBuilder(IMessageBuilder messageBuilder, GraphQLMessage graphQLMessage)
     {
         _graphQLMessage = graphQLMessage;
@@ -82,6 +93,15 @@ public class GraphQLClientResponseActionBuilder : ReceiveMessageAction.ReceiveMe
             : base.GetMessagePayload();
     }
 
+    /// <summary>
+    /// Builds and returns a configured instance of <see cref="ReceiveMessageAction"/>.
+    /// This method aggregates and applies properties, processors, validators, and message building details defined within the builder
+    /// to ensure the resulting action instance complies with the desired GraphQL client response handling logic.
+    /// </summary>
+    /// <returns>
+    /// A fully configured instance of <see cref="ReceiveMessageAction"/> that integrates all specified behaviors,
+    /// including validation, message processing, and extraction mechanisms.
+    /// </returns>
     protected override ReceiveMessageAction DoBuild()
     {
         var builder = new ReceiveMessageAction.Builder();

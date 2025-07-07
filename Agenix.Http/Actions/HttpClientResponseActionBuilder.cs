@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -42,12 +42,19 @@ public class HttpClientResponseActionBuilder : ReceiveMessageAction.ReceiveMessa
 {
     private readonly HttpMessage _httpMessage;
 
+    /// Represents a builder for constructing HTTP client response actions with specified configurations and settings.
+    /// This builder initializes an HTTP message and provides default configurations such as case-insensitive headers.
+    /// It extends the functionality of `ReceiveMessageActionBuilder` with specific support for HTTP client responses.
     public HttpClientResponseActionBuilder()
     {
         _httpMessage = new HttpMessage();
         Message(new HttpMessageBuilder(_httpMessage)).HeaderIgnoreCase = true;
     }
 
+    /// Represents a specialized action builder for handling HTTP client responses with custom configurations and functionalities.
+    /// This class extends the `ReceiveMessageAction.ReceiveMessageActionBuilder` to provide specific support for HTTP message handling.
+    /// It initializes an instance of `HttpMessage` and enables customization such as case-insensitive header settings.
+    /// Provides methods and functionality to construct and manage HTTP response message actions effectively.
     public HttpClientResponseActionBuilder(IMessageBuilder messageBuilder, HttpMessage httpMessage)
     {
         _httpMessage = httpMessage;
@@ -76,6 +83,12 @@ public class HttpClientResponseActionBuilder : ReceiveMessageAction.ReceiveMessa
             : base.GetMessagePayload();
     }
 
+    /// Constructs the `ReceiveMessageAction` instance using the configured properties of the builder.
+    /// This method initializes a `ReceiveMessageAction.Builder` and sets its attributes such as name,
+    /// description, endpoint, timeout, message selectors, validators, and processors based on the builder's configuration.
+    /// Additionally, message builder support and control message processors are applied to the constructed builder.
+    /// Implements the logic required to fully construct a `ReceiveMessageAction` before returning it.
+    /// <return>A fully constructed `ReceiveMessageAction` instance.</return>
     protected override ReceiveMessageAction DoBuild()
     {
         var builder = new ReceiveMessageAction.Builder();

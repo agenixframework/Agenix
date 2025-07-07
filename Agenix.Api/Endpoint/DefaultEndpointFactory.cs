@@ -112,6 +112,16 @@ public class DefaultEndpointFactory : IEndpointFactory
         });
     }
 
+    /// <summary>
+    /// Creates an instance of IEndpoint based on the provided name, configuration attribute, and context.
+    /// </summary>
+    /// <param name="endpointName">The name to assign to the created endpoint.</param>
+    /// <param name="endpointConfig">An attribute containing the configuration data required to create the endpoint.</param>
+    /// <param name="context">An instance of TestContext that provides the necessary context and services for the endpoint creation.</param>
+    /// <returns>An instance of IEndpoint configured based on the provided parameters.</returns>
+    /// <exception cref="AgenixSystemException">
+    /// Thrown when the endpoint configuration is invalid, or a corresponding parser could not be found or instantiated.
+    /// </exception>
     public IEndpoint Create(string endpointName, Attribute endpointConfig, TestContext context)
     {
         var attribute = endpointConfig.GetType().GetCustomAttribute<AgenixEndpointConfigAttribute>();
