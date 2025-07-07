@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -41,12 +41,18 @@ public class HttpClientRequestActionBuilder : SendMessageAction.SendMessageActio
 {
     private readonly HttpMessage _httpMessage;
 
+    /// Represents a builder for configuring and constructing an HTTP client request action using the provided
+    /// HTTP message and message builder. This builder integrates HTTP-specific configurations such as HTTP method,
+    /// URI path, and additional options supported by `HttpMessageBuilderSupport`.
+    /// Extends the `SendMessageActionBuilder` class to enable enhanced message customization for HTTP actions using `HttpMessage`.
     public HttpClientRequestActionBuilder()
     {
         _httpMessage = new HttpMessage();
         Message(new HttpMessageBuilder(_httpMessage));
     }
 
+    /// Represents a builder for constructing an HTTP client request action with various customizable options such as HTTP method, URI, path, and query parameters.
+    /// This builder extends the `SendMessageActionBuilder` to provide HTTP-specific configurations and utilizes `HttpMessageBuilderSupport` for additional support in message customization.
     public HttpClientRequestActionBuilder(IMessageBuilder messageBuilder, HttpMessage httpMessage)
     {
         _httpMessage = httpMessage;
@@ -108,6 +114,13 @@ public class HttpClientRequestActionBuilder : SendMessageAction.SendMessageActio
         return this;
     }
 
+    /// Builds and returns a configured `SendMessageAction` instance by assembling its components
+    /// such as endpoint details, message configuration, variable extractors, and message processors.
+    /// Configures the action's message, type, and additional parameters using the assigned
+    /// `HttpMessageBuilderSupport` and other builder properties.
+    /// <returns>
+    /// A fully constructed `SendMessageAction` object with the specified configurations applied.
+    /// </returns>
     protected override SendMessageAction DoBuild()
     {
         var builder = new SendMessageAction.Builder();

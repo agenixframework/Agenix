@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+
+      <RootNamespace>Agenix.Configuration</RootNamespace>
+      <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+      <PackageId>Agenix.Configuration</PackageId>
+      <Description>Core configuration management interfaces and implementations for Agenix ATF with JSON and YAML support</Description>
+      <Title>Agenix Configuration Management Library</Title>
+      <PackageTags>agenix;configuration;json;yaml;dotnet;testing;automation;framework;atf</PackageTags>
+
+    </PropertyGroup>
+
+  <ItemGroup>
+
+    <!-- YAML Support -->
+    <PackageReference Include="YamlDotNet" Version="16.3.0" />
+  </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Core\Models\" />
+      <Folder Include="Core\Providers\" />
+      <Folder Include="Extensions\Builders\" />
+      <Folder Include="Sample\Approach1\" />
+      <Folder Include="Sample\Config\" />
+      <Folder Include="Sample\Models\" />
+      <Folder Include="Singleton\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Sample\Config\appsettings.json" />
+      <EmbeddedResource Include="Sample\Config\appsettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Sample\Config\appsettings.dev.json" />
+      <EmbeddedResource Include="Sample\Config\appsettings.dev.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Sample\Config\appsettings.prod.json" />
+      <EmbeddedResource Include="Sample\Config\appsettings.prod.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Agenix.Api\Agenix.Api.csproj" />
+    </ItemGroup>
+
+</Project>

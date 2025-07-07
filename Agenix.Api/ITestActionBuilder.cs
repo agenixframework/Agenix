@@ -73,7 +73,7 @@ public interface ITestActionBuilder<out T> where T : ITestAction
     /// Lazy-initialized cache of test action builders for improved performance and thread safety
     /// </summary>
     private static readonly Lazy<IDictionary<string, ITestActionBuilder<ITestAction>>> BuildersCache =
-        new(() => LoadTestActionBuilders());
+        new(LoadTestActionBuilders);
 
     /// <summary>
     /// Lazy-initialized cache for individual builder lookups to avoid repeated resolution attempts

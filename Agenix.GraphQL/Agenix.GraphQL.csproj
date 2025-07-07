@@ -4,6 +4,13 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <!-- NuGet Package-Specific Properties -->
+    <PackageId>Agenix.GraphQL</PackageId>
+    <Title>Agenix GraphQL Testing Tools</Title>
+    <Description>GraphQL client testing tools and utilities for the Agenix framework. Simplifies GraphQL query/mutation testing, and endpoint verification in automated test scenarios.</Description>
+    <PackageTags>graphql-testing;api-testing;automation;framework;agenix</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

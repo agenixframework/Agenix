@@ -21,7 +21,7 @@
 
     <!-- Package Settings -->
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <WarningsAsErrors />
+    <WarningsAsErrors/>
 
     <!-- Optional NuGet Enhancements -->
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -35,9 +35,10 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
 
-    <VersionPrefix>0.0.1</VersionPrefix>
-    <FileVersion>$(VersionPrefix)</FileVersion>
-    <AssemblyVersion>$(VersionPrefix)</AssemblyVersion>
+    <!-- MinVer Configuration -->
+    <MinVerTagPrefix>v</MinVerTagPrefix>
+    <MinVerDefaultPreReleaseIdentifiers>preview</MinVerDefaultPreReleaseIdentifiers>
+    <MinVerVerbosity>normal</MinVerVerbosity>
 
     <!-- Build Properties -->
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
@@ -84,17 +85,22 @@
 
   <!-- Source Link Package Reference -->
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
+  </ItemGroup>
+
+  <!-- Add MinVer package reference -->
+  <ItemGroup>
+    <PackageReference Include="MinVer" Version="5.0.0" PrivateAssets="All" />
   </ItemGroup>
 
   <!-- Include LICENSE and README files in packages -->
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)LICENSE" Pack="true" PackagePath="LICENSE" Visible="false" />
-    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="README.md" Visible="false" Condition="Exists('$(MSBuildThisFileDirectory)README.md')" />
+    <None Include="$(MSBuildThisFileDirectory)LICENSE" Pack="true" PackagePath="LICENSE" Visible="false"/>
+    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="README.md" Visible="false" Condition="Exists('$(MSBuildThisFileDirectory)README.md')"/>
   </ItemGroup>
 
   <!-- Include Icons in All Packages -->
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory).assets/icons/icon.png" Pack="true" PackagePath="icon.png" Link="icon.png" />
+    <None Include="$(MSBuildThisFileDirectory).assets/icons/icon.png" Pack="true" PackagePath="icon.png" Link="icon.png"/>
   </ItemGroup>
 </Project>
