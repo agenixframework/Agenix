@@ -179,12 +179,15 @@ cd Agenix.ATF
 | **Agenix.Http**    | HTTP client testing capabilities and utilities    | • HTTP request/response handling<br>• REST API testing<br>• HTTP validation                       |
 | **Agenix.GraphQL** | GraphQL client testing capabilities and utilities | • GraphQL query/mutation handling<br>• GraphQL server integration<br>• Response validation        |
 | **Agenix.Sql**     | Database testing and SQL execution utilities      | • Database connectivity<br>• SQL query execution<br>• Data validation<br>• Transaction management |
+| **Agenix.Selenium** | Web browser automation and UI testing utilities   | • Web browser control<br>• Element interaction<br>• Page navigation<br>• UI test automation |
+| **Agenix.Azure.Security** | Azure authentication and Key Vault integration utilities | • Azure AD authentication<br>• Key Vault secret management<br>• OAuth token handling<br>• Credential caching |
 
 ### 🎭 Testing Pattern Implementations
 
 | Module                | Description                                          | Key Features                                                                                              |
 |-----------------------|------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
 | **Agenix.Screenplay** | Screenplay pattern implementation for readable tests | • Actor-based testing<br>• Task and Question abstractions<br>• Ability pattern<br>• Fluent test scenarios |
+| **Agenix.Configuration** | Environment-based configuration management utilities | • JSON/YAML configuration<br>• Environment variables<br>• Configuration caching<br>• Multi-environment support |
 
 ### 🔌 Framework Integration Modules
 
@@ -234,144 +237,6 @@ cd Agenix.ATF
 | **Integration Testing** | All modules                 | End-to-end workflows                  |
 | **Data Validation**     | All Validation.* modules    | Content verification, format checking |
 
-## Development Guidelines
-
-### 🛠️ Prerequisites
-
-- **.NET 8.0 SDK** or later
-- **JetBrains Rider** or **Visual Studio 2022** (recommended IDEs)
-- **Git** for version control
-- **NuGet** package manager
-
-### 📝 Coding Standards
-
-#### **Naming Conventions**
-
-- **Classes**: PascalCase (`CustomerService`, `HttpRequestBuilder`)
-- **Methods**: PascalCase (`PerformAs`, `AnsweredBy`)
-- **Properties**: PascalCase (`Name`, `RequestUrl`)
-- **Fields**: camelCase with underscore prefix for private (`_httpClient`, `_connectionString`)
-- **Constants**: PascalCase (`MaxRetryCount`, `DefaultTimeout`)
-- **Interfaces**: PascalCase with 'I' prefix (`IPerformable`, `IQuestion<T>`)
-
-#### **Code Style**
-
-- **File scoped namespaces** for new files
-- **Primary constructors** where appropriate (C# 12 feature)
-- **Expression-bodied members** for simple implementations
-- **Nullable reference types** enabled
-- **XML documentation** for public APIs
-
-### 🧪 Testing Guidelines
-
-#### **Test Structure**
-
-- **Arrange-Act-Assert** pattern for unit tests
-- **Given-When-Then** structure for BDD scenarios
-- **Descriptive test names** that explain the scenario
-
-#### **Test Categories**
-
-- **Unit Tests**: Fast, isolated, test single components
-- **Integration Tests**: Test component interactions
-- **Acceptance Tests**: End-to-end business scenarios using Screenplay pattern
-
-### 🔧 Development Workflow
-
-#### **Branch Strategy**
-
-1. **master**: Production-ready code
-2. **develop**: Integration branch for features
-3. **feature/**: Individual feature development
-4. **bugfix/**: Bug fixes
-5. **release/**: Release preparation
-
-#### **Commit Guidelines**
-
-- Use **conventional commits** format:
-  ```
-  type(scope): description
-
-  feat(screenplay): add question chaining support
-  fix(http): resolve timeout issue in HttpClient
-  docs(readme): update installation instructions
-  test(validation): add binary comparison tests
-  ```
-
-### 📦 Dependencies
-
-#### **Core Dependencies**
-
-- **NUnit 4.x**: Primary testing framework
-- **NSubstitute/Moq**: Mocking library
-- **Newtonsoft.Json**: JSON processing
-- **System.Net.Http**: HTTP client operations
-
-#### **Adding New Dependencies**
-
-1. Evaluate necessity and alternatives
-2. Check license compatibility
-3. Add to appropriate project only
-4. Update documentation
-
-### 🚀 Building and Testing
-
-#### **Local Development**
-
-```console
-# Restore packages
-dotnet restore
-
-# Build solution
-dotnet build
-
-# Run all tests
-dotnet test
-
-# Run specific test project
-dotnet test Agenix.Screenplay.Tests
-```
-
-#### **IDE Configuration**
-
-- **EditorConfig** settings are enforced
-- **ReSharper/Rider** settings in `.sln.DotSettings`
-- **License headers** automatically applied using templates
-
-### 📋 Pull Request Guidelines
-
-#### **Before Submitting**
-
-- [ ] All tests pass locally
-- [ ] Code follows established conventions
-- [ ] XML documentation added for public APIs
-- [ ] License headers present in new files
-- [ ] Breaking changes documented
-
-#### **PR Description Should Include**
-
-- **What**: Brief description of changes
-- **Why**: Reason for the change
-- **How**: Technical approach used
-- **Testing**: How the change was tested
-- **Breaking Changes**: Any breaking changes
-
-### 🐛 Issue Reporting
-
-When reporting issues, please include:
-
-- **Framework version**
-- **Target framework** (.NET version)
-- **Minimal reproduction case**
-- **Expected vs actual behavior**
-- **Environment details** (OS, IDE, etc.)
-
-### 🔒 Security Considerations
-
-- **No hardcoded credentials** in code or tests
-- **Sensitive data** should use configuration or environment variables
-- **Dependencies** regularly updated for security patches
-- **Test data** should not contain real customer information
 
 [1]: .assets/logos/agenix-logo-large.png "Agenix"
 
