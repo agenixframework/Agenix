@@ -124,22 +124,22 @@ public class OAuthClientConfiguration
     public void Validate()
     {
         if (string.IsNullOrWhiteSpace(TokenEndpoint))
-            throw new ArgumentException("TokenEndpoint is required", nameof(TokenEndpoint));
+            throw new InvalidOperationException("TokenEndpoint is required");
 
         if (string.IsNullOrWhiteSpace(ClientId))
-            throw new ArgumentException("ClientId is required", nameof(ClientId));
+            throw new InvalidOperationException("ClientId is required");
 
         if (string.IsNullOrWhiteSpace(ClientSecret))
-            throw new ArgumentException("ClientSecret is required", nameof(ClientSecret));
+            throw new InvalidOperationException("ClientSecret is required");
 
         if (!Uri.TryCreate(TokenEndpoint, UriKind.Absolute, out var uri))
-            throw new ArgumentException("TokenEndpoint must be a valid absolute URL", nameof(TokenEndpoint));
+            throw new InvalidOperationException("TokenEndpoint must be a valid absolute URL");
 
         if (uri.Scheme != "https" && uri.Scheme != "http")
-            throw new ArgumentException("TokenEndpoint must use HTTP or HTTPS scheme", nameof(TokenEndpoint));
+            throw new InvalidOperationException("TokenEndpoint must use HTTP or HTTPS scheme");
 
         if (Timeout <= TimeSpan.Zero)
-            throw new ArgumentException("Timeout must be positive", nameof(Timeout));
+            throw new InvalidOperationException("Timeout must be positive");
     }
 }
 

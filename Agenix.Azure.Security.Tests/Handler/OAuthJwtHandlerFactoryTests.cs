@@ -92,7 +92,7 @@ public class OAuthJwtHandlerFactoryTests
     public void CreateClientCredentialsHandler_NullTokenEndpoint_ThrowsArgumentNullException()
     {
         // Act & Assert
-        Assert.Throws<ArgumentException>(() =>
+        Assert.Throws<InvalidOperationException>(() =>
             OAuthJwtHandlerFactory.CreateClientCredentialsHandler(null, TestClientId, TestClientSecret));
     }
 
@@ -100,7 +100,7 @@ public class OAuthJwtHandlerFactoryTests
     public void CreateClientCredentialsHandler_NullClientId_ThrowsArgumentNullException()
     {
         // Act & Assert
-        Assert.Throws<ArgumentException>(() =>
+        Assert.Throws<InvalidOperationException>(() =>
             OAuthJwtHandlerFactory.CreateClientCredentialsHandler(TestTokenEndpoint, null, TestClientSecret));
     }
 
@@ -108,7 +108,7 @@ public class OAuthJwtHandlerFactoryTests
     public void CreateClientCredentialsHandler_NullClientSecret_ThrowsArgumentNullException()
     {
         // Act & Assert
-        Assert.Throws<ArgumentException>(() =>
+        Assert.Throws<InvalidOperationException>(() =>
             OAuthJwtHandlerFactory.CreateClientCredentialsHandler(TestTokenEndpoint, TestClientId, null));
     }
 
@@ -351,30 +351,30 @@ public class OAuthJwtHandlerFactoryTests
     }
 
     [Test]
-    public void FactoryMethods_WithEmptyStringParameters_ThrowArgumentException()
+    public void FactoryMethods_WithEmptyStringParameters_ThrowInvalidOperationException()
     {
         // Act & Assert
-        Assert.Throws<ArgumentException>(() =>
+        Assert.Throws<InvalidOperationException>(() =>
             OAuthJwtHandlerFactory.CreateClientCredentialsHandler("", TestClientId, TestClientSecret));
 
-        Assert.Throws<ArgumentException>(() =>
+        Assert.Throws<InvalidOperationException>(() =>
             OAuthJwtHandlerFactory.CreateClientCredentialsHandler(TestTokenEndpoint, "", TestClientSecret));
 
-        Assert.Throws<ArgumentException>(() =>
+        Assert.Throws<InvalidOperationException>(() =>
             OAuthJwtHandlerFactory.CreateClientCredentialsHandler(TestTokenEndpoint, TestClientId, ""));
     }
 
     [Test]
-    public void FactoryMethods_WithWhitespaceParameters_ThrowArgumentException()
+    public void FactoryMethods_WithWhitespaceParameters_ThrowInvalidOperationException()
     {
         // Act & Assert
-        Assert.Throws<ArgumentException>(() =>
+        Assert.Throws<InvalidOperationException>(() =>
             OAuthJwtHandlerFactory.CreateClientCredentialsHandler("   ", TestClientId, TestClientSecret));
 
-        Assert.Throws<ArgumentException>(() =>
+        Assert.Throws<InvalidOperationException>(() =>
             OAuthJwtHandlerFactory.CreateClientCredentialsHandler(TestTokenEndpoint, "   ", TestClientSecret));
 
-        Assert.Throws<ArgumentException>(() =>
+        Assert.Throws<InvalidOperationException>(() =>
             OAuthJwtHandlerFactory.CreateClientCredentialsHandler(TestTokenEndpoint, TestClientId, "   "));
     }
 }

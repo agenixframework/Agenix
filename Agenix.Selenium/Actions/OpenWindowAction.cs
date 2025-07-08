@@ -89,15 +89,7 @@ public class OpenWindowAction : AbstractSeleniumAction
         var newWindowHandles = browser.WebDriver.WindowHandles.ToHashSet();
 
         // Find the newly opened window
-        string newWindow = null;
-        foreach (var window in newWindowHandles)
-        {
-            if (!windowHandles.Contains(window))
-            {
-                newWindow = window;
-                break;
-            }
-        }
+        var newWindow = newWindowHandles.FirstOrDefault(window => !windowHandles.Contains(window));
 
         if (!string.IsNullOrEmpty(newWindow))
         {

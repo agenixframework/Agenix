@@ -88,7 +88,7 @@ public class FindElementAction : AbstractSeleniumAction
     /// <summary>
     ///     Optional By used in fluent API
     /// </summary>
-    public By By { get; }
+    public By? By { get; }
 
     /// <summary>
     /// Executes the find element action by locating the specified element on the page and processing it.
@@ -110,6 +110,17 @@ public class FindElementAction : AbstractSeleniumAction
 
         Validate(element, browser, context);
         Execute(element, browser, context);
+    }
+
+    /// <summary>
+    ///     Subclasses may override this method to add element actions
+    /// </summary>
+    protected virtual void Execute(IWebElement element, SeleniumBrowser browser, TestContext context)
+    {
+        if (!string.IsNullOrWhiteSpace(element.TagName))
+        {
+            context.GetVariables()[element.TagName] = element;
+        }
     }
 
     /// <summary>
@@ -154,7 +165,7 @@ public class FindElementAction : AbstractSeleniumAction
     /// <summary>
     ///     Validates web element property value with validation matcher support
     /// </summary>
-    private void ValidateElementProperty(string propertyName, string controlValue, string resultValue,
+    private static void ValidateElementProperty(string propertyName, string controlValue, string resultValue,
         TestContext context)
     {
         if (!string.IsNullOrWhiteSpace(controlValue))
@@ -173,17 +184,6 @@ public class FindElementAction : AbstractSeleniumAction
                                                   $"{propertyName} expected '{control}', but was '{resultValue}'");
                 }
             }
-        }
-    }
-
-    /// <summary>
-    ///     Subclasses may override this method to add element actions
-    /// </summary>
-    protected virtual void Execute(IWebElement element, SeleniumBrowser browser, TestContext context)
-    {
-        if (!string.IsNullOrWhiteSpace(element.TagName))
-        {
-            context.GetVariables()[element.TagName] = element;
         }
     }
 
@@ -215,16 +215,10 @@ public class FindElementAction : AbstractSeleniumAction
     /// <summary>
     ///     Helper method to replace dynamic content (placeholder implementation)
     /// </summary>
-    private string ReplaceDynamicContent(string value, TestContext context)
+    private static string ReplaceDynamicContent(string value, TestContext context)
     {
-        if (string.IsNullOrEmpty(value))
-        {
-            return value;
-        }
-
-        // Simple variable replacement - implement based on your context
-        return context.GetVariables().Aggregate(value,
-            (current, variable) => current.Replace($"${{{variable.Key}}}", variable.Value?.ToString() ?? ""));
+        return string.IsNullOrEmpty(value) ? value :
+            context.ReplaceDynamicContentInString(str: value);
     }
 
     /// <summary>

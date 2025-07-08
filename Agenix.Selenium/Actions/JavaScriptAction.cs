@@ -119,7 +119,7 @@ public class JavaScriptAction : AbstractSeleniumAction
     /// </summary>
     /// <param name="jsExecutor">An instance of <see cref="IJavaScriptExecutor" /> used to execute JavaScript.</param>
     /// <returns>A list of JavaScript error messages collected from the browser.</returns>
-    private List<string> GetJavaScriptErrors(IJavaScriptExecutor jsExecutor)
+    private static List<string> GetJavaScriptErrors(IJavaScriptExecutor jsExecutor)
     {
         var errors = new List<string>();
 
@@ -132,7 +132,7 @@ public class JavaScriptAction : AbstractSeleniumAction
         }
         catch (Exception ex)
         {
-            Logger.LogDebug("Could not retrieve JavaScript errors: {ExMessage}", ex.Message);
+            Logger.LogDebug(ex, "Could not retrieve JavaScript errors");
         }
 
         return errors;
@@ -144,12 +144,9 @@ public class JavaScriptAction : AbstractSeleniumAction
     /// <param name="actualErrors">A list of JavaScript errors encountered during script execution.</param>
     private void ValidateExpectedErrors(List<string> actualErrors)
     {
-        foreach (var expectedError in _expectedErrors)
+        foreach (var expectedError in _expectedErrors.Where(expectedError => !actualErrors.Contains(expectedError)))
         {
-            if (!actualErrors.Contains(expectedError))
-            {
-                throw new ValidationException($"Missing JavaScript error: {expectedError}");
-            }
+            throw new ValidationException($"Missing JavaScript error: {expectedError}");
         }
     }
 

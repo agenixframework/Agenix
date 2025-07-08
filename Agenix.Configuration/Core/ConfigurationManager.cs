@@ -144,14 +144,14 @@ public class ConfigurationManager<T> : IConfigurationManager<T> where T : class,
                 LoadEnvironmentFile();
             }
 
-            // Load main configuration file
+            // Load the main configuration file
             var mainConfigPath = Path.Combine(_options.ConfigurationDirectory,
                 $"{_options.ConfigurationName}{_options.FileExtension}");
 
             if (File.Exists(mainConfigPath))
             {
                 AddConfigurationFile(configBuilder, mainConfigPath, false);
-                _logger.LogDebug("Loaded main configuration from: {mainConfigPath} (Format: {_options.Format})",
+                _logger.LogDebug("Loaded main configuration from: {mainConfigPath} (Format: {_optionsFormat})",
                     mainConfigPath, _options.Format);
             }
 
@@ -162,7 +162,7 @@ public class ConfigurationManager<T> : IConfigurationManager<T> where T : class,
             if (File.Exists(envConfigPath))
             {
                 AddConfigurationFile(configBuilder, envConfigPath, true);
-                _logger.LogDebug("Loaded environment configuration from: {envConfigPath} (Format: {_options.Format})",
+                _logger.LogDebug("Loaded environment configuration from: {envConfigPath} (Format: {_optionsFormat})",
                     envConfigPath, _options.Format);
             }
 
@@ -173,13 +173,13 @@ public class ConfigurationManager<T> : IConfigurationManager<T> where T : class,
             var configObject = new T();
             configuration.Bind(configObject);
 
-            _logger.LogInformation("Successfully loaded configuration for environment: {environment} (Format: {_options.Format})",
+            _logger.LogInformation("Successfully loaded configuration for environment: {environment} (Format: {_optionsFormat})",
                 environment, _options.Format);
             return configObject;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to load configuration for environment: {environment} (Format: {_options.Format})",
+            _logger.LogError(ex, "Failed to load configuration for environment: {environment} (Format: {_optionsFormat})",
                 environment, _options.Format);
             throw new InvalidOperationException($"Failed to load configuration for environment '{environment}' with format '{_options.Format}'", ex);
         }

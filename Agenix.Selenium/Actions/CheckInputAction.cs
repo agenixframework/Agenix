@@ -56,16 +56,16 @@ public class CheckInputAction : FindElementAction
     /// <summary>
     ///     Executes the main logic of the CheckInputAction by setting the desired state of a checkbox element.
     /// </summary>
-    /// <param name="webElement">The web element representing the checkbox input to interact with.</param>
+    /// <param name="element">The web element representing the checkbox input to interact with.</param>
     /// <param name="browser">The SeleniumBrowser instance managing the Selenium WebDriver session.</param>
     /// <param name="context">The TestContext providing the execution context for the action.</param>
-    protected override void Execute(IWebElement webElement, SeleniumBrowser browser, TestContext context)
+    protected override void Execute(IWebElement element, SeleniumBrowser browser, TestContext context)
     {
-        base.Execute(webElement, browser, context);
+        base.Execute(element, browser, context);
 
-        if ((webElement.Selected && !_checked) || (_checked && !webElement.Selected))
+        if ((element.Selected && !_checked) || (_checked && !element.Selected))
         {
-            webElement.Click();
+            element.Click();
         }
     }
 

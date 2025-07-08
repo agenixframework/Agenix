@@ -434,10 +434,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     /// </summary>
     public SwitchWindowAction.Builder SwitchWindow()
     {
-        var builder = new SwitchWindowAction.Builder()
-            .WithBrowser(_seleniumBrowser);
-        _delegateBuilder = builder;
-        return builder;
+        return Focus();
     }
 
     /// <summary>

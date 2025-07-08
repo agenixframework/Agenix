@@ -106,11 +106,12 @@ public class OAuthTokenResponse
     /// <summary>
     /// Get granted scopes as list
     /// </summary>
-    [JsonIgnore]
-    public List<string> GrantedScopes =>
-        string.IsNullOrEmpty(Scope)
+    public List<string> GetGrantedScopes()
+    {
+        return string.IsNullOrEmpty(Scope)
             ? []
             : Scope.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
+    }
 
     /// <summary>
     /// Get effective token type (defaults to "Bearer")

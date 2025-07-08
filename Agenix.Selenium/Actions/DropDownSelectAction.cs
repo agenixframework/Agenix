@@ -68,14 +68,14 @@ public class DropDownSelectAction : FindElementAction
     /// <summary>
     ///     Executes the logic to select one or multiple options from a dropdown menu.
     /// </summary>
-    /// <param name="webElement">The web element representing the dropdown to be interacted with.</param>
+    /// <param name="element">The web element representing the dropdown to be interacted with.</param>
     /// <param name="browser">The browser instance currently being used for testing.</param>
     /// <param name="context">The context object containing test-related data and utilities.</param>
-    protected override void Execute(IWebElement webElement, SeleniumBrowser browser, TestContext context)
+    protected override void Execute(IWebElement element, SeleniumBrowser browser, TestContext context)
     {
-        base.Execute(webElement, browser, context);
+        base.Execute(element, browser, context);
 
-        var dropdown = new SelectElement(webElement);
+        var dropdown = new SelectElement(element);
 
         if (!string.IsNullOrWhiteSpace(_option))
         {
@@ -137,7 +137,7 @@ public class DropDownSelectAction : FindElementAction
     /// <param name="option">The web element representing the option to be compared.</param>
     /// <param name="value">The string value to compare against the option's text or value attribute.</param>
     /// <returns>True if the option's text or value attribute matches the given string value, otherwise false.</returns>
-    private bool IsSameValue(IWebElement option, string value)
+    private static bool IsSameValue(IWebElement option, string value)
     {
         var optionText = option.Text?.Trim();
         return value.Equals(!string.IsNullOrWhiteSpace(optionText) ? optionText : option.GetAttribute("value"));
@@ -151,10 +151,10 @@ public class DropDownSelectAction : FindElementAction
     ///     A boolean value indicating whether the browser is Internet Explorer.
     ///     Returns true if the browser type contains "internet" or "ie"; otherwise, false.
     /// </returns>
-    private bool IsInternetExplorer(SeleniumBrowser browser)
+    private static bool IsInternetExplorer(SeleniumBrowser browser)
     {
-        return browser.EndpointConfiguration.BrowserType.ToLower().Contains("internet") ||
-               browser.EndpointConfiguration.BrowserType.ToLower().Contains("ie");
+        return browser.EndpointConfiguration.BrowserType.Contains("internet", StringComparison.CurrentCultureIgnoreCase) ||
+               browser.EndpointConfiguration.BrowserType.Contains("ie", StringComparison.CurrentCultureIgnoreCase);
     }
 
     /// <summary>

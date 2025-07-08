@@ -35,7 +35,7 @@ namespace Agenix.Selenium.Actions;
 /// <summary>
 ///     Selenium action for starting a browser instance.
 /// </summary>
-public class StartBrowserAction : AbstractSeleniumAction, ITestAction
+public class StartBrowserAction : AbstractSeleniumAction
 {
     private static readonly ILogger Logger = LogManager.GetLogger(typeof(StartBrowserAction));
 

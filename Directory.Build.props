@@ -64,11 +64,11 @@
 
   <!-- Common Package References for Tests -->
   <ItemGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0"/>
-    <PackageReference Include="NUnit" Version="4.3.2"/>
-    <PackageReference Include="NUnit3TestAdapter" Version="5.0.0"/>
-    <PackageReference Include="NSubstitute" Version="5.3.0"/>
-    <PackageReference Include="coverlet.collector" Version="6.0.0">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="NUnit" Version="4.3.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
+    <PackageReference Include="NSubstitute" Version="5.3.0" />
+    <PackageReference Include="coverlet.collector" Version="6.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -76,11 +76,11 @@
 
   <!-- Security fixes for vulnerable packages -->
   <ItemGroup>
-    <PackageVersion Include="System.Formats.Asn1" Version="8.0.1"/>
-    <PackageVersion Include="System.Text.Json" Version="8.0.5"/>
-    <PackageVersion Include="System.Net.Http" Version="4.3.4"/>
-    <PackageVersion Include="System.Security.Cryptography.X509Certificates" Version="4.3.2"/>
-    <PackageVersion Include="System.Data.SqlClient" Version="4.8.6"/>
+    <PackageVersion Include="System.Formats.Asn1" Version="9.0.6" />
+    <PackageVersion Include="System.Text.Json" Version="9.0.6" />
+    <PackageVersion Include="System.Net.Http" Version="4.3.4" />
+    <PackageVersion Include="System.Security.Cryptography.X509Certificates" Version="4.3.2" />
+    <PackageVersion Include="System.Data.SqlClient" Version="4.9.0" />
   </ItemGroup>
 
   <!-- Source Link Package Reference -->

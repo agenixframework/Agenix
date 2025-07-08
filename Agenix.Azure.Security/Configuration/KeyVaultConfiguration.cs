@@ -133,46 +133,46 @@ public class KeyVaultConfiguration
     public void Validate()
     {
         if (string.IsNullOrWhiteSpace(VaultUri))
-            throw new ArgumentException("VaultUri is required", nameof(VaultUri));
+            throw new InvalidOperationException("VaultUri is required");
 
         if (string.IsNullOrWhiteSpace(TenantId))
-            throw new ArgumentException("TenantId is required", nameof(TenantId));
+            throw new InvalidOperationException("TenantId is required");
 
         if (string.IsNullOrWhiteSpace(ClientId))
-            throw new ArgumentException("ClientId is required", nameof(ClientId));
+            throw new InvalidOperationException("ClientId is required");
 
         if (string.IsNullOrWhiteSpace(ClientSecret))
-            throw new ArgumentException("ClientSecret is required", nameof(ClientSecret));
+            throw new InvalidOperationException("ClientSecret is required");
 
         // Validate vault URI format
         if (!Uri.TryCreate(VaultUri, UriKind.Absolute, out var vaultUri))
-            throw new ArgumentException("VaultUri must be a valid absolute URL", nameof(VaultUri));
+            throw new InvalidOperationException("VaultUri must be a valid absolute URL");
 
         if (vaultUri.Scheme != "https")
-            throw new ArgumentException("VaultUri must use HTTPS scheme", nameof(VaultUri));
+            throw new InvalidOperationException("VaultUri must use HTTPS scheme");
 
         if (!vaultUri.Host.EndsWith(".vault.azure.net", StringComparison.OrdinalIgnoreCase) &&
             !vaultUri.Host.EndsWith(".vault.azure.cn", StringComparison.OrdinalIgnoreCase) &&
             !vaultUri.Host.EndsWith(".vault.usgovcloudapi.net", StringComparison.OrdinalIgnoreCase) &&
             !vaultUri.Host.EndsWith(".vault.microsoftazure.de", StringComparison.OrdinalIgnoreCase))
-            throw new ArgumentException("VaultUri must be a valid Azure Key Vault URL", nameof(VaultUri));
+            throw new InvalidOperationException("VaultUri must be a valid Azure Key Vault URL");
 
         // Validate tenant ID format (GUID or domain)
         if (!Guid.TryParse(TenantId, out _) && !IsValidDomainName(TenantId))
-            throw new ArgumentException("TenantId must be a valid GUID or domain name", nameof(TenantId));
+            throw new InvalidOperationException("TenantId must be a valid GUID or domain name");
 
         // Validate client ID format (GUID)
         if (!Guid.TryParse(ClientId, out _))
-            throw new ArgumentException("ClientId must be a valid GUID", nameof(ClientId));
+            throw new InvalidOperationException("ClientId must be a valid GUID");
 
         // Validate authority URL if provided
         if (!string.IsNullOrWhiteSpace(Authority))
         {
             if (!Uri.TryCreate(Authority, UriKind.Absolute, out var uri))
-                throw new ArgumentException("Authority must be a valid absolute URL", nameof(Authority));
+                throw new InvalidOperationException("Authority must be a valid absolute URL");
 
             if (uri.Scheme != "https")
-                throw new ArgumentException("Authority must use HTTPS scheme", nameof(Authority));
+                throw new InvalidOperationException("Authority must use HTTPS scheme");
         }
     }
 

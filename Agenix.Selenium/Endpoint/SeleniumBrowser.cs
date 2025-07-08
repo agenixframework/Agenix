@@ -66,12 +66,6 @@ public class SeleniumBrowser : AbstractEndpoint, IProducer, IDisposable
     /// </summary>
     private readonly string _temporaryStorage;
 
-    /// <summary>
-    ///     Represents the private instance of an IWebDriver used to interact with and control the web browser in the
-    ///     SeleniumBrowser class.
-    /// </summary>
-    private IWebDriver? _webDriver;
-
 
     /// <summary>
     ///     Provides functionality for managing Selenium WebDriver instances
@@ -107,25 +101,54 @@ public class SeleniumBrowser : AbstractEndpoint, IProducer, IDisposable
     /// <summary>
     ///     Gets or sets the web driver
     /// </summary>
-    public virtual IWebDriver WebDriver
-    {
-        get => _webDriver;
-        set => _webDriver = value;
-    }
+    public virtual IWebDriver? WebDriver { get; set; }
 
     /// <summary>
     ///     Gets whether the browser is started
     /// </summary>
-    public virtual bool IsStarted => _webDriver != null;
+    public virtual bool IsStarted => WebDriver != null;
+
+    private bool _disposed;
 
     /// <summary>
     ///     Disposes of the browser resources
     /// </summary>
     public void Dispose()
     {
-        Stop();
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
 
-        // Clean up temporary storage
+    /// <summary>
+    /// Releases the resources used by the SeleniumBrowser instance.
+    /// This method is called to clean up both managed and unmanaged resources
+    /// held by the SeleniumBrowser class. Implements the <see cref="IDisposable"/> pattern.
+    /// </summary>
+    /// <param name="disposing">
+    /// Indicates whether the method is being called explicitly (true)
+    /// or by the runtime garbage collector (false). When true, managed
+    /// resources as well as unmanaged resources are disposed; otherwise, only
+    /// unmanaged resources are released.
+    /// </param>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!_disposed)
+        {
+            if (disposing)
+            {
+                // Dispose of managed resources
+                Stop();
+            }
+
+            // Dispose unmanaged resources
+            CleanupTemporaryStorage();
+
+            _disposed = true;
+        }
+    }
+
+    private void CleanupTemporaryStorage()
+    {
         try
         {
             if (Directory.Exists(_temporaryStorage))
@@ -167,23 +190,23 @@ public class SeleniumBrowser : AbstractEndpoint, IProducer, IDisposable
         {
             if (_endpointConfiguration.WebDriver != null)
             {
-                _webDriver = _endpointConfiguration.WebDriver;
+                WebDriver = _endpointConfiguration.WebDriver;
             }
             else if (!string.IsNullOrEmpty(_endpointConfiguration.RemoteServerUrl))
             {
-                _webDriver = CreateRemoteWebDriver(_endpointConfiguration.BrowserType,
+                WebDriver = CreateRemoteWebDriver(_endpointConfiguration.BrowserType,
                     _endpointConfiguration.RemoteServerUrl);
             }
             else
             {
-                _webDriver = CreateLocalWebDriver(_endpointConfiguration.BrowserType);
+                WebDriver = CreateLocalWebDriver(_endpointConfiguration.BrowserType);
             }
 
             if (_endpointConfiguration.EventHandlers != null && _endpointConfiguration.EventHandlers.Count != 0)
             {
-                Logger.LogInformation("Add event listeners to web driver {}",
+                Logger.LogInformation("Add event listeners to web driver {EventHandlerCount}",
                     _endpointConfiguration.EventHandlers.Count);
-                var eventFiringDriver = new EventFiringWebDriver(_webDriver);
+                var eventFiringDriver = new EventFiringWebDriver(WebDriver);
 
                 // Apply all the event handlers from configuration
                 foreach (var eventHandler in _endpointConfiguration.EventHandlers)
@@ -192,7 +215,7 @@ public class SeleniumBrowser : AbstractEndpoint, IProducer, IDisposable
                 }
 
                 // Replace your original driver with the event-firing one
-                _webDriver = eventFiringDriver;
+                WebDriver = eventFiringDriver;
             }
         }
         else
@@ -208,19 +231,19 @@ public class SeleniumBrowser : AbstractEndpoint, IProducer, IDisposable
     {
         if (IsStarted)
         {
-            Logger.LogInformation("Stopping browser {WebDriverUrl}", _webDriver.Url);
+            Logger.LogInformation("Stopping browser {WebDriverUrl}", WebDriver.Url);
 
             try
             {
-                Logger.LogInformation("Trying to close the browser {WebDriver1}...", _webDriver);
-                _webDriver.Quit();
+                Logger.LogInformation("Trying to close the browser {WebDriver1}...", WebDriver);
+                WebDriver.Quit();
             }
             catch (WebDriverException e)
             {
-                Logger.LogError("Browser is unreachable or failed to close: {EMessage}", e.Message);
+                Logger.LogError(e, "Browser is unreachable or failed to close");
             }
 
-            _webDriver = null;
+            WebDriver = null;
         }
         else
         {
@@ -435,10 +458,10 @@ public class SeleniumBrowser : AbstractEndpoint, IProducer, IDisposable
     }
 
     /// <summary>
-    ///     Creates temporary storage directory
+    ///     Creates a temporary storage directory
     /// </summary>
     /// <returns>Path to temporary directory</returns>
-    private string CreateTemporaryStorage()
+    private static string CreateTemporaryStorage()
     {
         try
         {

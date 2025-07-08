@@ -365,7 +365,7 @@ public class MultiVaultSecretClient
     /// <summary>
     /// Get configured vault URIs
     /// </summary>
-    public string[] VaultUris => _vaultClients.Select(c => c.VaultUri).ToArray();
+    public string[] GetVaultUris() => _vaultClients.Select(c => c.VaultUri).ToArray();
 }
 
 /// <summary>
@@ -412,9 +412,11 @@ public class SecretResult
     /// </returns>
     public override string ToString()
     {
-        return Found
-            ? $"Found in {VaultUri}{(FromCache ? " (cached)" : "")}"
-            : "Not found";
+        if (!Found)
+            return "Not found";
+
+        var cacheIndicator = FromCache ? " (cached)" : "";
+        return $"Found in {VaultUri}{cacheIndicator}";
     }
 }
 

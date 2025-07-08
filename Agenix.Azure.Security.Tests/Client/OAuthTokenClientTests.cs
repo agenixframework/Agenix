@@ -188,13 +188,13 @@ public class OAuthTokenClientTests
 
 
     [Test]
-    public async Task GetTokenAsync_InvalidConfiguration_ThrowsArgumentException()
+    public async Task GetTokenAsync_InvalidConfiguration_ThrowsInvalidOperationException()
     {
         // Arrange
         var invalidConfig = new OAuthClientConfiguration(); // Missing required fields
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentException>(() =>
+        Assert.ThrowsAsync<InvalidOperationException>(() =>
             _tokenClient.GetTokenAsync(invalidConfig));
     }
 
