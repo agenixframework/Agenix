@@ -76,8 +76,8 @@
 
   <!-- Security fixes for vulnerable packages -->
   <ItemGroup>
-    <PackageVersion Include="System.Formats.Asn1" Version="9.0.6" />
-    <PackageVersion Include="System.Text.Json" Version="9.0.6" />
+    <PackageVersion Include="System.Formats.Asn1" Version="9.0.7" />
+    <PackageVersion Include="System.Text.Json" Version="9.0.7" />
     <PackageVersion Include="System.Net.Http" Version="4.3.4" />
     <PackageVersion Include="System.Security.Cryptography.X509Certificates" Version="4.3.2" />
     <PackageVersion Include="System.Data.SqlClient" Version="4.9.0" />
@@ -90,7 +90,7 @@
 
   <!-- Add MinVer package reference -->
   <ItemGroup>
-    <PackageReference Include="MinVer" Version="5.0.0" PrivateAssets="All" />
+    <PackageReference Include="MinVer" Version="6.0.0" PrivateAssets="All" />
   </ItemGroup>
 
   <!-- Include LICENSE and README files in packages -->
