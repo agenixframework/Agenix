@@ -107,21 +107,27 @@ public class AsyncTest : AbstractNUnitSetUp
             .Callback(() =>
             {
                 if (Interlocked.Increment(ref executedActions) == 3)
+                {
                     resetEvent.Set();
+                }
             });
 
         action2.Setup(a => a.Execute(It.IsAny<TestContext>()))
             .Callback(() =>
             {
                 if (Interlocked.Increment(ref executedActions) == 3)
+                {
                     resetEvent.Set();
+                }
             });
 
         action3.Setup(a => a.Execute(It.IsAny<TestContext>()))
             .Callback(() =>
             {
                 if (Interlocked.Increment(ref executedActions) == 3)
+                {
                     resetEvent.Set();
+                }
             });
 
         // Build the Async container

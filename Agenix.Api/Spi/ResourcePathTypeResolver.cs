@@ -125,7 +125,7 @@ public class ResourcePathTypeResolver : ITypeResolver
     /// <returns>A dictionary containing resource keys mapped to resolved instances of type <typeparamref name="T" />.</returns>
     public IDictionary<string, T> ResolveAll<T>(string resourcePath, string property, string keyProperty)
     {
-        if (!_typeCache.TryGetValue(ToCacheKey(resourcePath, property, keyProperty), out ConcurrentDictionary<string, string> typeLookup))
+        if (!_typeCache.TryGetValue(ToCacheKey(resourcePath, property, keyProperty), out var typeLookup))
         {
             typeLookup = GetPropertyMappingsFromResources(resourcePath, property, keyProperty);
             _typeCache[ToCacheKey(resourcePath, property, keyProperty)] = typeLookup;

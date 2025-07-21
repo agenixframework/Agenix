@@ -30,69 +30,69 @@ using Agenix.Configuration.Core.Models;
 namespace Agenix.Configuration.Extensions.Builders;
 
 /// <summary>
-/// Builder interface for creating configuration managers with fluent API.
+///     Builder interface for creating configuration managers with fluent API.
 /// </summary>
 /// <typeparam name="T">The type of the configuration object</typeparam>
 public interface IConfigurationBuilder<T> where T : class, new()
 {
     /// <summary>
-    /// Sets the base name for configuration files.
+    ///     Sets the base name for configuration files.
     /// </summary>
     /// <param name="name">The configuration name (e.g., "appsettings")</param>
     /// <returns>The builder instance for method chaining</returns>
     IConfigurationBuilder<T> WithConfigurationName(string name);
 
     /// <summary>
-    /// Sets the directory where configuration files are located.
+    ///     Sets the directory where configuration files are located.
     /// </summary>
     /// <param name="directory">The configuration directory path</param>
     /// <returns>The builder instance for method chaining</returns>
     IConfigurationBuilder<T> WithConfigurationDirectory(string directory);
 
     /// <summary>
-    /// Sets the configuration file format (JSON or YAML).
+    ///     Sets the configuration file format (JSON or YAML).
     /// </summary>
     /// <param name="format">The configuration format to use</param>
     /// <returns>The builder instance for method chaining</returns>
     IConfigurationBuilder<T> WithFormat(ConfigurationFormat format);
 
     /// <summary>
-    /// Enables or disables environment file support.
+    ///     Enables or disables environment file support.
     /// </summary>
     /// <param name="enabled">True to enable environment file support</param>
     /// <returns>The builder instance for method chaining</returns>
     IConfigurationBuilder<T> WithEnvironmentFileSupport(bool enabled);
 
     /// <summary>
-    /// Sets the directory where environment files are located.
+    ///     Sets the directory where environment files are located.
     /// </summary>
     /// <param name="directory">The environment file directory path</param>
     /// <returns>The builder instance for method chaining</returns>
     IConfigurationBuilder<T> WithEnvironmentFileDirectory(string directory);
 
     /// <summary>
-    /// Sets the name of the environment file.
+    ///     Sets the name of the environment file.
     /// </summary>
     /// <param name="fileName">The environment file name (e.g., ".env")</param>
     /// <returns>The builder instance for method chaining</returns>
     IConfigurationBuilder<T> WithEnvironmentFileName(string fileName);
 
     /// <summary>
-    /// Sets the default environment name.
+    ///     Sets the default environment name.
     /// </summary>
     /// <param name="environment">The default environment name</param>
     /// <returns>The builder instance for method chaining</returns>
     IConfigurationBuilder<T> WithDefaultEnvironment(string environment);
 
     /// <summary>
-    /// Enables or disables configuration caching.
+    ///     Enables or disables configuration caching.
     /// </summary>
     /// <param name="enabled">True to enable caching</param>
     /// <returns>The builder instance for method chaining</returns>
     IConfigurationBuilder<T> WithCaching(bool enabled);
 
     /// <summary>
-    /// Builds and returns the configuration manager instance.
+    ///     Builds and returns the configuration manager instance.
     /// </summary>
     /// <returns>A configured IConfigurationManager instance</returns>
     IConfigurationManager<T> Build();

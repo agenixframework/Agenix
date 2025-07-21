@@ -29,12 +29,12 @@ using Microsoft.Extensions.Configuration;
 namespace Agenix.Configuration.Core.Providers;
 
 /// <summary>
-/// YAML configuration source that reads configuration from YAML files.
+///     YAML configuration source that reads configuration from YAML files.
 /// </summary>
 public class YamlConfigurationSource : FileConfigurationSource
 {
     /// <summary>
-    /// Builds the YAML configuration provider.
+    ///     Builds the YAML configuration provider.
     /// </summary>
     /// <param name="builder">The configuration builder</param>
     /// <returns>A new YamlConfigurationProvider instance</returns>

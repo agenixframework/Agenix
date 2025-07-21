@@ -76,8 +76,9 @@ public interface IAnnotationConfigParser<in TAttribute, out TEndpoint> : IAnnota
     /// <summary>
     ///     Lazy-initialized cache for individual parser lookups to avoid repeated resolution attempts.
     /// </summary>
-    private static readonly Lazy<ConcurrentDictionary<string, Optional<IAnnotationConfigParser>>> IndividualLookupCache =
-        new(() => new ConcurrentDictionary<string, Optional<IAnnotationConfigParser>>());
+    private static readonly Lazy<ConcurrentDictionary<string, Optional<IAnnotationConfigParser>>>
+        IndividualLookupCache =
+            new(() => new ConcurrentDictionary<string, Optional<IAnnotationConfigParser>>());
 
     /// <summary>
     ///     Parses the given annotation and resolves references to create an endpoint.

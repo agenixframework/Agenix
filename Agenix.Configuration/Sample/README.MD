@@ -1,7 +1,7 @@
-
 ## 4. Approach 2: Dependency Injection
 
 <llm-snippet-file>Agenix.Configuration/Sample/Approach2/DependencyInjectionExample.cs</llm-snippet-file>
+
 ```csharp
 #region License
 
@@ -12,16 +12,16 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
 
 #endregion
@@ -56,7 +56,7 @@ public class DependencyInjectionExample
         services.AddSingleton<IConfigurationManager<ApplicationSettings>>(provider =>
         {
             var logger = provider.GetService<ILogger<ConfigurationManager<ApplicationSettings>>>();
-            
+
             return ConfigurationExtensions
                 .CreateConfigurationBuilder<ApplicationSettings>()
                 .WithConfigurationName("appsettings")
@@ -128,7 +128,7 @@ public class DemoHostedService : BackgroundService
         _logger.LogInformation("=== Approach 2: Dependency Injection Example ===");
 
         using var scope = _serviceProvider.CreateScope();
-        
+
         // Get services from DI container
         var databaseService = scope.ServiceProvider.GetRequiredService<IDatabaseService>();
         var apiService = scope.ServiceProvider.GetRequiredService<IApiService>();
@@ -200,11 +200,11 @@ public class DatabaseService : IDatabaseService
     public async Task ConnectAsync()
     {
         var config = await _configManager.GetConfigurationAsync();
-        
+
         _logger.LogInformation("DatabaseService: Connecting to database...");
-        _logger.LogInformation("Connection string: {ConnectionString}", 
+        _logger.LogInformation("Connection string: {ConnectionString}",
             config.DatabaseConnectionString.Substring(0, Math.Min(50, config.DatabaseConnectionString.Length)) + "...");
-        
+
         // Simulate database connection
         await Task.Delay(100);
         _logger.LogInformation("DatabaseService: Connected successfully!");
@@ -225,14 +225,14 @@ public class ApiService : IApiService
     public async Task<string> GetDataAsync()
     {
         var config = await _configManager.GetConfigurationAsync();
-        
+
         _logger.LogInformation("ApiService: Making API call...");
         _logger.LogInformation("API Base URL: {BaseUrl}", config.ApiBaseUrl);
-        
+
         // Simulate API call
         await Task.Delay(200);
         var data = $"Data from {config.ApiBaseUrl}";
-        
+
         _logger.LogInformation("ApiService: Received data: {Data}", data);
         return data;
     }
@@ -260,7 +260,7 @@ public class BusinessService : IBusinessService
     public async Task ProcessDataAsync()
     {
         var config = await _configManager.GetConfigurationAsync();
-        
+
         _logger.LogInformation("BusinessService: Processing data...");
         _logger.LogInformation("Advanced Analytics enabled: {Enabled}", config.Features.EnableAdvancedAnalytics);
 
@@ -285,10 +285,12 @@ public class BusinessService : IBusinessService
 ```
 
 <llm-snippet-file>Agenix.Configuration/Sample/Approach2/README.md</llm-snippet-file>
+
 ```markdown
 # Approach 2: Dependency Injection
 
-This approach demonstrates how to integrate the Agenix Configuration Manager with .NET's built-in dependency injection container.
+This approach demonstrates how to integrate the Agenix Configuration Manager with .NET's built-in dependency injection
+container.
 
 ## Key Characteristics
 
@@ -326,7 +328,7 @@ This approach demonstrates how to integrate the Agenix Configuration Manager wit
 services.AddSingleton<IConfigurationManager<ApplicationSettings>>(provider =>
 {
     var logger = provider.GetService<ILogger<ConfigurationManager<ApplicationSettings>>>();
-    
+
     return ConfigurationExtensions
         .CreateConfigurationBuilder<ApplicationSettings>()
         .WithConfigurationName("appsettings")
@@ -341,7 +343,7 @@ services.AddSingleton<IConfigurationManager<ApplicationSettings>>(provider =>
 public class MyService
 {
     private readonly IConfigurationManager<ApplicationSettings> _configManager;
-    
+
     public MyService(IConfigurationManager<ApplicationSettings> configManager)
     {
         _configManager = configManager;
@@ -352,6 +354,7 @@ public class MyService
 ## Registration Options
 
 ### Option 1: Builder Pattern (Recommended)
+
 ```csharp
 services.AddSingleton<IConfigurationManager<ApplicationSettings>>(provider =>
     ConfigurationExtensions
@@ -364,6 +367,7 @@ services.AddSingleton<IConfigurationManager<ApplicationSettings>>(provider =>
 ```
 
 ### Option 2: Direct Options
+
 ```csharp
 services.AddSingleton<IConfigurationManager<ApplicationSettings>>(provider =>
 {
@@ -400,6 +404,7 @@ var service = new MyService(mockConfigManager.Object);
 
 - `DependencyInjectionExample.cs` - Complete example with service registration and usage
 - `README.md` - This documentation
+
 ```
 
 ## 5. Approach 3: Singleton
@@ -415,16 +420,16 @@ var service = new MyService(mockConfigManager.Object);
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
 
 #endregion
@@ -478,8 +483,8 @@ public class SingletonExample
 
         // Access configuration from anywhere - no injection needed!
         var config = ConfigurationSingleton<ApplicationSettings>.GetConfiguration();
-        
-        _logger.LogInformation("Current Environment: {Environment}", 
+
+        _logger.LogInformation("Current Environment: {Environment}",
             ConfigurationSingleton<ApplicationSettings>.CurrentEnvironment);
         _logger.LogInformation("Database Connection: {Connection}", config.DatabaseConnectionString);
         _logger.LogInformation("API Base URL: {Url}", config.ApiBaseUrl);
@@ -522,7 +527,7 @@ public class SingletonExample
 
         _logger.LogInformation("Async loaded config for current environment:");
         _logger.LogInformation("  Advanced Analytics: {Enabled}", config.Features.EnableAdvancedAnalytics);
-        
+
         _logger.LogInformation("Async loaded config for dev environment:");
         _logger.LogInformation("  Advanced Analytics: {Enabled}", devConfig.Features.EnableAdvancedAnalytics);
     }
@@ -535,9 +540,9 @@ public class SingletonExample
         _logger.LogInformation("=== Approach 3: Singleton - Configuration Management ===");
 
         // Check configuration properties
-        _logger.LogInformation("Caching enabled: {Enabled}", 
+        _logger.LogInformation("Caching enabled: {Enabled}",
             ConfigurationSingleton<ApplicationSettings>.IsConfigurationCached);
-        _logger.LogInformation("Current environment: {Environment}", 
+        _logger.LogInformation("Current environment: {Environment}",
             ConfigurationSingleton<ApplicationSettings>.CurrentEnvironment);
 
         // Load configuration (will be cached if caching is enabled)
@@ -582,9 +587,9 @@ public class SingletonExample
     {
         // This can be called from anywhere in your application
         // No need for dependency injection or passing instances around
-        
+
         var config = ConfigurationSingleton<ApplicationSettings>.GetConfiguration();
-        
+
         Console.WriteLine($"Static access - API URL: {config.ApiBaseUrl}");
         Console.WriteLine($"Static access - Current Environment: {ConfigurationSingleton<ApplicationSettings>.CurrentEnvironment}");
     }
@@ -609,11 +614,11 @@ public class DatabaseService
     {
         // Access configuration directly from singleton
         var config = ConfigurationSingleton<ApplicationSettings>.GetConfiguration();
-        
+
         _logger.LogInformation("DatabaseService: Connecting to database...");
-        _logger.LogInformation("Connection string: {ConnectionString}", 
+        _logger.LogInformation("Connection string: {ConnectionString}",
             config.DatabaseConnectionString.Substring(0, Math.Min(50, config.DatabaseConnectionString.Length)) + "...");
-        
+
         _logger.LogInformation("DatabaseService: Connected successfully!");
     }
 
@@ -621,11 +626,11 @@ public class DatabaseService
     {
         // Async access also available
         var config = await ConfigurationSingleton<ApplicationSettings>.GetConfigurationAsync();
-        
+
         _logger.LogInformation("DatabaseService: Async connecting to database...");
-        _logger.LogInformation("Connection string: {ConnectionString}", 
+        _logger.LogInformation("Connection string: {ConnectionString}",
             config.DatabaseConnectionString.Substring(0, Math.Min(50, config.DatabaseConnectionString.Length)) + "...");
-        
+
         await Task.Delay(100); // Simulate async operation
         _logger.LogInformation("DatabaseService: Async connected successfully!");
     }
@@ -648,13 +653,13 @@ public class ApiService
     {
         // Access configuration directly from singleton
         var config = ConfigurationSingleton<ApplicationSettings>.GetConfiguration();
-        
+
         _logger.LogInformation("ApiService: Making API call...");
         _logger.LogInformation("API Base URL: {BaseUrl}", config.ApiBaseUrl);
-        
+
         var data = $"Data from {config.ApiBaseUrl}";
         _logger.LogInformation("ApiService: Received data: {Data}", data);
-        
+
         return data;
     }
 
@@ -662,14 +667,14 @@ public class ApiService
     {
         // Async access
         var config = await ConfigurationSingleton<ApplicationSettings>.GetConfigurationAsync();
-        
+
         _logger.LogInformation("ApiService: Making async API call...");
         _logger.LogInformation("API Base URL: {BaseUrl}", config.ApiBaseUrl);
-        
+
         await Task.Delay(200); // Simulate async operation
         var data = $"Async data from {config.ApiBaseUrl}";
         _logger.LogInformation("ApiService: Received async data: {Data}", data);
-        
+
         return data;
     }
 }
@@ -695,7 +700,7 @@ public class BusinessService
     {
         // Access configuration directly
         var config = ConfigurationSingleton<ApplicationSettings>.GetConfiguration();
-        
+
         _logger.LogInformation("BusinessService: Processing data...");
         _logger.LogInformation("Advanced Analytics enabled: {Enabled}", config.Features.EnableAdvancedAnalytics);
 
@@ -738,7 +743,7 @@ public static class ConfigurationUtilities
     public static bool IsFeatureEnabled(string feature, string environment)
     {
         var config = ConfigurationSingleton<ApplicationSettings>.GetConfiguration(environment);
-        
+
         return feature.ToLower() switch
         {
             "newdashboard" => config.Features.EnableNewDashboard,
@@ -753,20 +758,22 @@ public static class ConfigurationUtilities
     /// </summary>
     public static async Task<string> GetApiBaseUrlAsync(string environment = "")
     {
-        var config = string.IsNullOrEmpty(environment) 
+        var config = string.IsNullOrEmpty(environment)
             ? await ConfigurationSingleton<ApplicationSettings>.GetConfigurationAsync()
             : await ConfigurationSingleton<ApplicationSettings>.GetConfigurationAsync(environment);
-            
+
         return config.ApiBaseUrl;
     }
 }
 ```
 
 <llm-snippet-file>Agenix.Configuration/Sample/Approach3/README.md</llm-snippet-file>
+
 ```markdown
 # Approach 3: Singleton
 
-This approach demonstrates the singleton pattern for global configuration access using the `ConfigurationSingleton<T>` class.
+This approach demonstrates the singleton pattern for global configuration access using the `ConfigurationSingleton<T>`
+class.
 
 ## Key Characteristics
 
@@ -820,6 +827,7 @@ var devConfig = ConfigurationSingleton<ApplicationSettings>.GetConfiguration("de
 ## Configuration Methods
 
 ### Basic Configuration
+
 ```csharp
 ConfigurationSingleton<ApplicationSettings>.Configure(
     configurationName: "appsettings",
@@ -829,6 +837,7 @@ ConfigurationSingleton<ApplicationSettings>.Configure(
 ```
 
 ### Full Configuration
+
 ```csharp
 ConfigurationSingleton<ApplicationSettings>.Configure(
     logger: logger,
@@ -846,6 +855,7 @@ ConfigurationSingleton<ApplicationSettings>.Configure(
 ## Access Methods
 
 ### Synchronous Access
+
 ```csharp
 // Current environment
 var config = ConfigurationSingleton<ApplicationSettings>.GetConfiguration();
@@ -855,6 +865,7 @@ var devConfig = ConfigurationSingleton<ApplicationSettings>.GetConfiguration("de
 ```
 
 ### Asynchronous Access
+
 ```csharp
 // Current environment
 var config = await ConfigurationSingleton<ApplicationSettings>.GetConfigurationAsync();
@@ -864,6 +875,7 @@ var devConfig = await ConfigurationSingleton<ApplicationSettings>.GetConfigurati
 ```
 
 ### Configuration Management
+
 ```csharp
 // Check if caching is enabled
 bool isCached = ConfigurationSingleton<ApplicationSettings>.IsConfigurationCached;
@@ -938,6 +950,7 @@ ConfigurationSingleton<ApplicationSettings>.Configure(
 
 - `SingletonExample.cs` - Complete example with all features demonstrated
 - `README.md` - This documentation
+
 ```
 
 All example files are now created with comprehensive demonstrations of each approach, including:

@@ -174,19 +174,20 @@ cd Agenix.ATF
 
 ### 🌐 Protocol & Communication Modules
 
-| Module             | Description                                       | Key Features                                                                                      |
-|--------------------|---------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| **Agenix.Http**    | HTTP client testing capabilities and utilities    | • HTTP request/response handling<br>• REST API testing<br>• HTTP validation                       |
-| **Agenix.GraphQL** | GraphQL client testing capabilities and utilities | • GraphQL query/mutation handling<br>• GraphQL server integration<br>• Response validation        |
-| **Agenix.Sql**     | Database testing and SQL execution utilities      | • Database connectivity<br>• SQL query execution<br>• Data validation<br>• Transaction management |
-| **Agenix.Selenium** | Web browser automation and UI testing utilities   | • Web browser control<br>• Element interaction<br>• Page navigation<br>• UI test automation |
+| Module                    | Description                                              | Key Features                                                                                                 |
+|---------------------------|----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| **Agenix.Http**           | HTTP client testing capabilities and utilities           | • HTTP request/response handling<br>• REST API testing<br>• HTTP validation                                  |
+| **Agenix.GraphQL**        | GraphQL client testing capabilities and utilities        | • GraphQL query/mutation handling<br>• GraphQL server integration<br>• Response validation                   |
+| **Agenix.Sql**            | Database testing and SQL execution utilities             | • Database connectivity<br>• SQL query execution<br>• Data validation<br>• Transaction management            |
+| **Agenix.Selenium**       | Web browser automation and UI testing utilities          | • Web browser control<br>• Element interaction<br>• Page navigation<br>• UI test automation                  |
+| **Agenix.Playwright**     | Modern web browser automation and testing framework      | • Cross-browser automation<br>• Fast and reliable testing<br>• Auto-wait mechanisms<br>• Network interception|
 | **Agenix.Azure.Security** | Azure authentication and Key Vault integration utilities | • Azure AD authentication<br>• Key Vault secret management<br>• OAuth token handling<br>• Credential caching |
 
 ### 🎭 Testing Pattern Implementations
 
-| Module                | Description                                          | Key Features                                                                                              |
-|-----------------------|------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| **Agenix.Screenplay** | Screenplay pattern implementation for readable tests | • Actor-based testing<br>• Task and Question abstractions<br>• Ability pattern<br>• Fluent test scenarios |
+| Module                   | Description                                          | Key Features                                                                                                   |
+|--------------------------|------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| **Agenix.Screenplay**    | Screenplay pattern implementation for readable tests | • Actor-based testing<br>• Task and Question abstractions<br>• Ability pattern<br>• Fluent test scenarios      |
 | **Agenix.Configuration** | Environment-based configuration management utilities | • JSON/YAML configuration<br>• Environment variables<br>• Configuration caching<br>• Multi-environment support |
 
 ### 🔌 Framework Integration Modules
@@ -236,7 +237,6 @@ cd Agenix.ATF
 | **Unit Testing**        | NUnit.Runtime, Core         | Component testing, mocking            |
 | **Integration Testing** | All modules                 | End-to-end workflows                  |
 | **Data Validation**     | All Validation.* modules    | Content verification, format checking |
-
 
 [1]: .assets/logos/agenix-logo-large.png "Agenix"
 

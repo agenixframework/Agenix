@@ -1,9 +1,7 @@
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Agenix.Selenium.Actions;
 using Agenix.Selenium.Endpoint;
 using Moq;
-using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace Agenix.Selenium.Tests.Actions;
@@ -11,10 +9,6 @@ namespace Agenix.Selenium.Tests.Actions;
 [TestFixture]
 public class SetInputActionTest : AbstractNUnitSetUp
 {
-    private SeleniumBrowser _seleniumBrowser = new();
-    private Mock<IWebDriver> _webDriver = new();
-    private Mock<IWebElement> _element = new();
-
     [SetUp]
     public void SetupMethod()
     {
@@ -27,6 +21,10 @@ public class SetInputActionTest : AbstractNUnitSetUp
         _element.Setup(x => x.Enabled).Returns(true);
         _element.Setup(x => x.TagName).Returns("input");
     }
+
+    private readonly SeleniumBrowser _seleniumBrowser = new();
+    private readonly Mock<IWebDriver> _webDriver = new();
+    private readonly Mock<IWebElement> _element = new();
 
     [Test]
     public void TestExecute()

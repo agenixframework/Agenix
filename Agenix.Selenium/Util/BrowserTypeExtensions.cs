@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,6 +21,7 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using OpenQA.Selenium;
@@ -27,62 +29,62 @@ using OpenQA.Selenium;
 namespace Agenix.Selenium.Util;
 
 /// <summary>
-/// Represents the types of web browsers supported for automated testing or interaction.
+///     Represents the types of web browsers supported for automated testing or interaction.
 /// </summary>
 public enum BrowserType
 {
     /// <summary>
-    /// Represents the Google Chrome web browser as a supported browser type
-    /// for automated testing or interaction in the <c>BrowserType</c> enumeration.
+    ///     Represents the Google Chrome web browser as a supported browser type
+    ///     for automated testing or interaction in the <c>BrowserType</c> enumeration.
     /// </summary>
     CHROME,
 
     /// <summary>
-    /// Represents the Microsoft Edge web browser as a supported browser type
-    /// in the <c>BrowserType</c> enumeration used for automated testing or interaction.
+    ///     Represents the Microsoft Edge web browser as a supported browser type
+    ///     in the <c>BrowserType</c> enumeration used for automated testing or interaction.
     /// </summary>
     EDGE,
 
     /// <summary>
-    /// Represents the Mozilla Firefox web browser as a supported browser type
-    /// for automated testing or interaction in the <c>BrowserType</c> enumeration.
+    ///     Represents the Mozilla Firefox web browser as a supported browser type
+    ///     for automated testing or interaction in the <c>BrowserType</c> enumeration.
     /// </summary>
     FIREFOX,
 
     /// <summary>
-    /// Represents the Safari web browser as a supported browser type
-    /// in the <c>BrowserType</c> enumeration for automated testing or interaction.
+    ///     Represents the Safari web browser as a supported browser type
+    ///     in the <c>BrowserType</c> enumeration for automated testing or interaction.
     /// </summary>
     SAFARI,
 
     /// <summary>
-    /// Represents the Internet Explorer web browser as a supported browser type
-    /// for automated testing or interaction in the <c>BrowserType</c> enumeration.
+    ///     Represents the Internet Explorer web browser as a supported browser type
+    ///     for automated testing or interaction in the <c>BrowserType</c> enumeration.
     /// </summary>
     INTERNET_EXPLORER,
 
     /// <summary>
-    /// Represents the Opera web browser as a supported browser type
-    /// within the <c>BrowserType</c> enumeration for automated testing or interaction.
+    ///     Represents the Opera web browser as a supported browser type
+    ///     within the <c>BrowserType</c> enumeration for automated testing or interaction.
     /// </summary>
     OPERA,
 
     /// <summary>
-    /// Represents the HtmlUnit browser as a lightweight, headless browser type
-    /// in the <c>BrowserType</c> enumeration, primarily used for testing purposes
-    /// without a graphical user interface.
+    ///     Represents the HtmlUnit browser as a lightweight, headless browser type
+    ///     in the <c>BrowserType</c> enumeration, primarily used for testing purposes
+    ///     without a graphical user interface.
     /// </summary>
-    HTML_UNIT,
+    HTML_UNIT
 }
 
 /// <summary>
-/// Provides extension methods for the <c>BrowserType</c> enumeration, enabling retrieval of
-/// browser names and type matching functionality.
+///     Provides extension methods for the <c>BrowserType</c> enumeration, enabling retrieval of
+///     browser names and type matching functionality.
 /// </summary>
 public static class BrowserTypeExtensions
 {
     /// <summary>
-    /// Retrieves the corresponding browser name as a string based on the specified browser type.
+    ///     Retrieves the corresponding browser name as a string based on the specified browser type.
     /// </summary>
     /// <param name="browser">The browser type for which to get the name.</param>
     /// <returns>The string representation of the browser name.</returns>
@@ -103,7 +105,7 @@ public static class BrowserTypeExtensions
     }
 
     /// <summary>
-    /// Determines whether the specified browser type matches the given browser name.
+    ///     Determines whether the specified browser type matches the given browser name.
     /// </summary>
     /// <param name="browser">The browser type to evaluate.</param>
     /// <param name="browserName">The browser name to compare against the browser type.</param>
@@ -112,7 +114,9 @@ public static class BrowserTypeExtensions
     {
         var mainName = browser.GetBrowserName();
         if (mainName.Equals(browserName, StringComparison.OrdinalIgnoreCase))
+        {
             return true;
+        }
 
         return browser switch
         {
@@ -124,16 +128,15 @@ public static class BrowserTypeExtensions
     }
 
     /// <summary>
-    /// Checks if the given browser type matches the browser name specified in the provided capabilities.
+    ///     Checks if the given browser type matches the browser name specified in the provided capabilities.
     /// </summary>
     /// <param name="browser">The browser type to check.</param>
     /// <param name="capabilities">The capabilities containing the browser name to match against the browser type.</param>
     /// <returns>True if the browser type matches the browser name in the capabilities; otherwise, false.</returns>
-    /// <exception cref="ArgumentNullException">Thrown when the <paramref name="capabilities"/> argument is null.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when the <paramref name="capabilities" /> argument is null.</exception>
     public static bool Is(this BrowserType browser, ICapabilities capabilities)
     {
         ArgumentNullException.ThrowIfNull(capabilities);
         return browser.Is(capabilities.GetCapability("browserName")?.ToString() ?? "");
     }
 }
-

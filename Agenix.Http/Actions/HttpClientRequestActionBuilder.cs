@@ -119,7 +119,7 @@ public class HttpClientRequestActionBuilder : SendMessageAction.SendMessageActio
     /// Configures the action's message, type, and additional parameters using the assigned
     /// `HttpMessageBuilderSupport` and other builder properties.
     /// <returns>
-    /// A fully constructed `SendMessageAction` object with the specified configurations applied.
+    ///     A fully constructed `SendMessageAction` object with the specified configurations applied.
     /// </returns>
     protected override SendMessageAction DoBuild()
     {

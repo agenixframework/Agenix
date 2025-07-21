@@ -9,10 +9,6 @@ namespace Agenix.Selenium.Tests.Actions;
 [TestFixture]
 public class NavigateActionTest : AbstractNUnitSetUp
 {
-    private SeleniumBrowser _seleniumBrowser;
-    private Mock<IWebDriver> _webDriver;
-    private Mock<INavigation> _navigation;
-
     [SetUp]
     public void SetupMethod()
     {
@@ -24,6 +20,10 @@ public class NavigateActionTest : AbstractNUnitSetUp
 
         _webDriver.Setup(x => x.Navigate()).Returns(_navigation.Object);
     }
+
+    private SeleniumBrowser _seleniumBrowser;
+    private Mock<IWebDriver> _webDriver;
+    private Mock<INavigation> _navigation;
 
     [Test]
     public void TestNavigatePageUrl()

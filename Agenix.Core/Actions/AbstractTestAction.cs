@@ -41,8 +41,8 @@ public abstract class AbstractTestAction : ITestAction, INamed, IDescribed
     protected string description;
 
     /// <summary>
-    /// Abstract base class for test actions.
-    /// Provides default implementation for name and description management.
+    ///     Abstract base class for test actions.
+    ///     Provides default implementation for name and description management.
     /// </summary>
     public AbstractTestAction()
     {

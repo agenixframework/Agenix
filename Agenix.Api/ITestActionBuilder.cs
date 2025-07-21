@@ -40,49 +40,42 @@ namespace Agenix.Api;
 public interface ITestActionBuilder<out T> where T : ITestAction
 {
     /// <summary>
-    ///     Builds a new test action instance.
-    /// </summary>
-    /// <returns>the built test action.</returns>
-    T Build();
-
-    public interface IDelegatingTestActionBuilder<out TU> : ITestActionBuilder<TU> where TU : ITestAction
-    {
-        /// <summary>
-        ///     Gets the delegate test action builder.
-        /// </summary>
-        ITestActionBuilder<TU> Delegate { get; }
-    }
-
-    /// <summary>
-    /// Logger for TestActionBuilder operations
-    /// </summary>
-    private static readonly ILogger Logger = LogManager.GetLogger(typeof(ITestActionBuilder<ITestAction>));
-
-    /// <summary>
-    /// Endpoint builder resource lookup path
+    ///     Endpoint builder resource lookup path
     /// </summary>
     public const string ResourcePath = "Extension/agenix/action/builder";
 
     /// <summary>
-    /// Lazy-initialized resolver for test action builders
+    ///     Logger for TestActionBuilder operations
+    /// </summary>
+    private static readonly ILogger Logger = LogManager.GetLogger(typeof(ITestActionBuilder<ITestAction>));
+
+    /// <summary>
+    ///     Lazy-initialized resolver for test action builders
     /// </summary>
     private static readonly Lazy<ResourcePathTypeResolver> TypeResolver =
         new(() => new ResourcePathTypeResolver(ResourcePath));
 
     /// <summary>
-    /// Lazy-initialized cache of test action builders for improved performance and thread safety
+    ///     Lazy-initialized cache of test action builders for improved performance and thread safety
     /// </summary>
     private static readonly Lazy<IDictionary<string, ITestActionBuilder<ITestAction>>> BuildersCache =
         new(LoadTestActionBuilders);
 
     /// <summary>
-    /// Lazy-initialized cache for individual builder lookups to avoid repeated resolution attempts
+    ///     Lazy-initialized cache for individual builder lookups to avoid repeated resolution attempts
     /// </summary>
-    private static readonly Lazy<ConcurrentDictionary<string, Optional<ITestActionBuilder<ITestAction>>>> IndividualLookupCache =
-        new(() => new ConcurrentDictionary<string, Optional<ITestActionBuilder<ITestAction>>>());
+    private static readonly Lazy<ConcurrentDictionary<string, Optional<ITestActionBuilder<ITestAction>>>>
+        IndividualLookupCache =
+            new(() => new ConcurrentDictionary<string, Optional<ITestActionBuilder<ITestAction>>>());
 
     /// <summary>
-    /// Loads all available test action builders from the type resolver.
+    ///     Builds a new test action instance.
+    /// </summary>
+    /// <returns>the built test action.</returns>
+    T Build();
+
+    /// <summary>
+    ///     Loads all available test action builders from the type resolver.
     /// </summary>
     /// <returns>A dictionary containing all loaded test action builders.</returns>
     private static IDictionary<string, ITestActionBuilder<ITestAction>> LoadTestActionBuilders()
@@ -101,8 +94,9 @@ public interface ITestActionBuilder<out T> where T : ITestAction
     }
 
     /// <summary>
-    /// Resolves all available test action builders from resource path lookup. Scans classpath for test action builder meta information
-    /// and instantiates those builders.
+    ///     Resolves all available test action builders from resource path lookup. Scans classpath for test action builder meta
+    ///     information
+    ///     and instantiates those builders.
     /// </summary>
     /// <returns>Dictionary of action builder name to builder instance</returns>
     public static IDictionary<string, ITestActionBuilder<ITestAction>> Lookup()
@@ -111,7 +105,7 @@ public interface ITestActionBuilder<out T> where T : ITestAction
     }
 
     /// <summary>
-    /// Searches for available test action builders from the defined resource path.
+    ///     Searches for available test action builders from the defined resource path.
     /// </summary>
     /// <returns>An Optional containing the test action builder if found, otherwise an empty Optional.</returns>
     public static Optional<ITestActionBuilder<ITestAction>> Lookup(string builder)
@@ -125,10 +119,19 @@ public interface ITestActionBuilder<out T> where T : ITestAction
             }
             catch (AgenixSystemException ex)
             {
-                Logger.LogWarning("Failed to resolve test action builder from resource '{ResourcePath}/{Builder}': {Error}",
+                Logger.LogWarning(
+                    "Failed to resolve test action builder from resource '{ResourcePath}/{Builder}': {Error}",
                     ResourcePath, key, ex.Message);
                 return Optional<ITestActionBuilder<ITestAction>>.Empty;
             }
         });
+    }
+
+    public interface IDelegatingTestActionBuilder<out TU> : ITestActionBuilder<TU> where TU : ITestAction
+    {
+        /// <summary>
+        ///     Gets the delegate test action builder.
+        /// </summary>
+        ITestActionBuilder<TU> Delegate { get; }
     }
 }

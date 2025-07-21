@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,6 +21,7 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using System.Collections.ObjectModel;
@@ -33,9 +35,9 @@ namespace Agenix.Selenium.Tests.Actions;
 
 public class CloseWindowActionTest : AbstractNUnitSetUp
 {
+    private readonly Mock<ITargetLocator> _locator = new();
     private readonly SeleniumBrowser _seleniumBrowser = new();
     private readonly Mock<IWebDriver> _webDriver = new();
-    private readonly Mock<ITargetLocator> _locator = new();
 
     [SetUp]
     public void SetupMethod()

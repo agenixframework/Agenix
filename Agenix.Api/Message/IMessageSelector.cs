@@ -24,7 +24,6 @@
 
 #endregion
 
-using System.Collections.Concurrent;
 using Agenix.Api.Context;
 using Agenix.Api.Log;
 using Agenix.Api.Spi;

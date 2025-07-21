@@ -29,5 +29,3 @@ using Agenix.GraphQL.Tests.Properties;
 [assembly: NUnitLog4NetSupport]
 [assembly: Parallelizable(ParallelScope.Fixtures)]
 [assembly: LevelOfParallelism(4)]
-
-

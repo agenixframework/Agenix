@@ -25,7 +25,6 @@
 #endregion
 
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using Agenix.Api.Endpoint;
 using Agenix.Api.IO;
 using Agenix.Api.Message;

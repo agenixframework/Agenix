@@ -27,12 +27,12 @@
 namespace Agenix.Api.Endpoint.Adapter.Mapping;
 
 /// <summary>
-/// Strategy finds proper endpoint adapter instance for given mapping key.
+///     Strategy finds proper endpoint adapter instance for given mapping key.
 /// </summary>
 public interface IEndpointAdapterMappingStrategy
 {
     /// <summary>
-    /// Finds endpoint adapter for the mapping key.
+    ///     Finds endpoint adapter for the mapping key.
     /// </summary>
     /// <param name="mappingKey">The mapping key to search for.</param>
     /// <returns>The endpoint adapter instance.</returns>

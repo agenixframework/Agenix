@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -38,6 +38,21 @@ namespace Agenix.Core.Functions.Core;
 /// </summary>
 public class EncodeBase64Function : IFunction
 {
+    /// <summary>
+    ///     Encodes a character sequence to Base64 binary using the given character set.
+    /// </summary>
+    /// <param name="parameterList">
+    ///     A list of strings where the first element is the text to be encoded.
+    /// </param>
+    /// <param name="testContext">
+    ///     Context object that provides runtime execution properties required by the function.
+    /// </param>
+    /// <returns>
+    ///     A Base64 encoded string representation of the input text.
+    /// </returns>
+    /// <exception cref="InvalidFunctionUsageException">
+    ///     Thrown when the parameter list is null or does not contain any elements.
+    /// </exception>
     public string Execute(List<string> parameterList, TestContext testContext)
     {
         if (parameterList == null || parameterList.Count == 0)

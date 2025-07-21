@@ -43,72 +43,74 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Core.Server;
 
 /// <summary>
-/// Represents an abstract server providing the base implementation for server functionality.
+///     Represents an abstract server providing the base implementation for server functionality.
 /// </summary>
 /// <remarks>
-/// This abstract class extends <see cref="AbstractEndpoint"/> and implements multiple server-related interfaces, including <see cref="IServer"/>, <see cref="InitializingPhase"/>, <see cref="IShutdownPhase"/>, and <see cref="IReferenceResolverAware"/>.
-/// It serves as the foundation for defining server behavior, lifecycle management, and configuration handling.
+///     This abstract class extends <see cref="AbstractEndpoint" /> and implements multiple server-related interfaces,
+///     including <see cref="IServer" />, <see cref="InitializingPhase" />, <see cref="IShutdownPhase" />, and
+///     <see cref="IReferenceResolverAware" />.
+///     It serves as the foundation for defining server behavior, lifecycle management, and configuration handling.
 /// </remarks>
 public abstract class AbstractServer : AbstractEndpoint, IServer, InitializingPhase, IShutdownPhase,
     IReferenceResolverAware
 {
     /// <summary>
-    /// Default in memory queue suffix
+    ///     Default in memory queue suffix
     /// </summary>
     public const string DefaultChannelIdSuffix = ".inbound";
 
     /// <summary>
-    /// Running flag
-    /// </summary>
-    private volatile bool _running;
-
-    /// <summary>
-    /// Autostart server after properties are set
-    /// </summary>
-    private bool _autoStart;
-
-    /// <summary>
-    /// Thread running the server
-    /// </summary>
-    private Thread _thread;
-
-    /// <summary>
-    /// Monitor for startup and running lifecycle
+    ///     Monitor for startup and running lifecycle
     /// </summary>
     private readonly object _runningLock = new();
 
     /// <summary>
-    /// Reference resolver injected
-    /// </summary>
-    private IReferenceResolver _referenceResolver;
-
-    /// <summary>
-    /// Message endpoint adapter for incoming requests
-    /// </summary>
-    private IEndpointAdapter _endpointAdapter;
-
-    /// <summary>
-    /// Handler interceptors such as security or logging interceptors
-    /// </summary>
-    private List<object> _interceptors = [];
-
-    /// <summary>
-    /// Timeout delegated to default endpoint adapter if not set explicitly
-    /// </summary>
-    private long _defaultTimeout = 1000;
-
-    /// <summary>
-    /// Inbound memory queue debug logging
-    /// </summary>
-    private bool _debugLogging;
-
-    /// <summary>
-    /// Logger
+    ///     Logger
     /// </summary>
     protected readonly ILogger Logger;
 
     /// <summary>
-    /// Default constructor using endpoint configuration
+    ///     Autostart server after properties are set
+    /// </summary>
+    private bool _autoStart;
+
+    /// <summary>
+    ///     Inbound memory queue debug logging
+    /// </summary>
+    private bool _debugLogging;
+
+    /// <summary>
+    ///     Timeout delegated to default endpoint adapter if not set explicitly
+    /// </summary>
+    private long _defaultTimeout = 1000;
+
+    /// <summary>
+    ///     Message endpoint adapter for incoming requests
+    /// </summary>
+    private IEndpointAdapter _endpointAdapter;
+
+    /// <summary>
+    ///     Handler interceptors such as security or logging interceptors
+    /// </summary>
+    private List<object> _interceptors = [];
+
+    /// <summary>
+    ///     Reference resolver injected
+    /// </summary>
+    private IReferenceResolver _referenceResolver;
+
+    /// <summary>
+    ///     Running flag
+    /// </summary>
+    private volatile bool _running;
+
+    /// <summary>
+    ///     Thread running the server
+    /// </summary>
+    private Thread _thread;
+
+    /// <summary>
+    ///     Default constructor using endpoint configuration
     /// </summary>
     protected AbstractServer() : base(null)
     {
@@ -116,7 +118,7 @@ public abstract class AbstractServer : AbstractEndpoint, IServer, InitializingPh
     }
 
     /// <summary>
-    /// Constructor with logger
+    ///     Constructor with logger
     /// </summary>
     protected AbstractServer(ILogger logger) : base(null)
     {
@@ -124,91 +126,7 @@ public abstract class AbstractServer : AbstractEndpoint, IServer, InitializingPh
     }
 
     /// <summary>
-    /// Start the server - C# equivalent of Java's start() method
-    /// </summary>
-    public virtual void Start()
-    {
-        Logger.LogDebug("Starting server: {ServerName} ...", Name);
-
-        Startup();
-
-        lock (_runningLock)
-        {
-            _running = true;
-        }
-
-        // Create and start thread similar to Java's threading model
-        _thread = new Thread(new ThreadStart(Run))
-        {
-            IsBackground = false, // Equivalent to setDaemon(false) in Java
-            Name = $"{Name}-ServerThread"
-        };
-        _thread.Start();
-
-        Logger.LogInformation("Started server: {ServerName}", Name);
-    }
-
-    /// <summary>
-    /// Stop the server - C# equivalent of Java's stop() method
-    /// </summary>
-    public virtual void Stop()
-    {
-        if (IsRunning())
-        {
-            Logger.LogDebug("Stopping server: {ServerName} ...", Name);
-
-            Shutdown();
-
-            lock (_runningLock)
-            {
-                _running = false;
-            }
-
-            _thread = null;
-
-            Logger.LogInformation("Stopped server: {ServerName}", Name);
-        }
-    }
-
-    /// <summary>
-    /// Implementation of IRunnable.Run() - C# equivalent of Java's Runnable.run()
-    /// Subclasses may overwrite this method in order to add special execution logic.
-    /// </summary>
-    public virtual void Run()
-    {
-        // Default implementation - keep thread alive while running
-        // This mimics the Java behavior where the thread stays alive
-        while (IsRunning())
-        {
-            try
-            {
-                Thread.Sleep(100); // Small sleep to prevent busy waiting
-            }
-            catch (ThreadInterruptedException)
-            {
-                // Thread was interrupted, exit the loop
-                break;
-            }
-            catch (Exception ex)
-            {
-                Logger.LogError(ex, "Error in server run loop");
-                break;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Subclasses must implement this method called on server startup
-    /// </summary>
-    protected abstract void Startup();
-
-    /// <summary>
-    /// Subclasses must implement this method called on server shutdown
-    /// </summary>
-    protected abstract void Shutdown();
-
-    /// <summary>
-    /// Initialize the server
+    ///     Initialize the server
     /// </summary>
     public virtual void Initialize()
     {
@@ -251,8 +169,141 @@ public abstract class AbstractServer : AbstractEndpoint, IServer, InitializingPh
         }
     }
 
+    public void SetReferenceResolver(IReferenceResolver referenceResolver)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <summary>
-    /// Get test context factory
+    ///     Start the server - C# equivalent of Java's start() method
+    /// </summary>
+    public virtual void Start()
+    {
+        Logger.LogDebug("Starting server: {ServerName} ...", Name);
+
+        Startup();
+
+        lock (_runningLock)
+        {
+            _running = true;
+        }
+
+        // Create and start thread similar to Java's threading model
+        _thread = new Thread(Run)
+        {
+            IsBackground = false, // Equivalent to setDaemon(false) in Java
+            Name = $"{Name}-ServerThread"
+        };
+        _thread.Start();
+
+        Logger.LogInformation("Started server: {ServerName}", Name);
+    }
+
+    /// <summary>
+    ///     Stop the server - C# equivalent of Java's stop() method
+    /// </summary>
+    public virtual void Stop()
+    {
+        if (IsRunning())
+        {
+            Logger.LogDebug("Stopping server: {ServerName} ...", Name);
+
+            Shutdown();
+
+            lock (_runningLock)
+            {
+                _running = false;
+            }
+
+            _thread = null;
+
+            Logger.LogInformation("Stopped server: {ServerName}", Name);
+        }
+    }
+
+    /// <summary>
+    ///     Implementation of IRunnable.Run() - C# equivalent of Java's Runnable.run()
+    ///     Subclasses may overwrite this method in order to add special execution logic.
+    /// </summary>
+    public virtual void Run()
+    {
+        // Default implementation - keep thread alive while running
+        // This mimics the Java behavior where the thread stays alive
+        while (IsRunning())
+        {
+            try
+            {
+                Thread.Sleep(100); // Small sleep to prevent busy waiting
+            }
+            catch (ThreadInterruptedException)
+            {
+                // Thread was interrupted, exit the loop
+                break;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, "Error in server run loop");
+                break;
+            }
+        }
+    }
+
+    /// <summary>
+    ///     Check if server is running
+    /// </summary>
+    public bool IsRunning()
+    {
+        lock (_runningLock)
+        {
+            return _running;
+        }
+    }
+
+    /// <summary>
+    ///     Get endpoint configuration
+    /// </summary>
+    public override IEndpointConfiguration EndpointConfiguration =>
+        _endpointAdapter?.GetEndpoint()?.EndpointConfiguration;
+
+    /// <summary>
+    ///     Create consumer
+    /// </summary>
+    public override IConsumer CreateConsumer()
+    {
+        return _endpointAdapter?.GetEndpoint()?.CreateConsumer();
+    }
+
+    /// <summary>
+    ///     Create producer
+    /// </summary>
+    public override IProducer CreateProducer()
+    {
+        return _endpointAdapter?.GetEndpoint()?.CreateProducer();
+    }
+
+    /// <summary>
+    ///     Destroy the server
+    /// </summary>
+    public virtual void Destroy()
+    {
+        if (IsRunning())
+        {
+            Stop();
+        }
+    }
+
+    /// <summary>
+    ///     Subclasses must implement this method called on server startup
+    /// </summary>
+    protected abstract void Startup();
+
+    /// <summary>
+    ///     Subclasses must implement this method called on server shutdown
+    /// </summary>
+    protected abstract void Shutdown();
+
+    /// <summary>
+    ///     Get test context factory
     /// </summary>
     private TestContextFactory GetTestContextFactory()
     {
@@ -271,18 +322,7 @@ public abstract class AbstractServer : AbstractEndpoint, IServer, InitializingPh
     }
 
     /// <summary>
-    /// Destroy the server
-    /// </summary>
-    public virtual void Destroy()
-    {
-        if (IsRunning())
-        {
-            Stop();
-        }
-    }
-
-    /// <summary>
-    /// Join server thread - C# equivalent of Java's thread.join()
+    ///     Join server thread - C# equivalent of Java's thread.join()
     /// </summary>
     public void Join()
     {
@@ -296,43 +336,10 @@ public abstract class AbstractServer : AbstractEndpoint, IServer, InitializingPh
         }
     }
 
-    /// <summary>
-    /// Check if server is running
-    /// </summary>
-    public bool IsRunning()
-    {
-        lock (_runningLock)
-        {
-            return _running;
-        }
-    }
-
-    /// <summary>
-    /// Get endpoint configuration
-    /// </summary>
-    public override IEndpointConfiguration EndpointConfiguration =>
-        _endpointAdapter?.GetEndpoint()?.EndpointConfiguration;
-
-    /// <summary>
-    /// Create consumer
-    /// </summary>
-    public override IConsumer CreateConsumer()
-    {
-        return _endpointAdapter?.GetEndpoint()?.CreateConsumer();
-    }
-
-    /// <summary>
-    /// Create producer
-    /// </summary>
-    public override IProducer CreateProducer()
-    {
-        return _endpointAdapter?.GetEndpoint()?.CreateProducer();
-    }
-
     #region Properties - C# equivalent of Java getters/setters
 
     /// <summary>
-    /// Enable/disable server auto start
+    ///     Enable/disable server auto start
     /// </summary>
     public bool AutoStart
     {
@@ -341,7 +348,7 @@ public abstract class AbstractServer : AbstractEndpoint, IServer, InitializingPh
     }
 
     /// <summary>
-    /// Gets or sets the running state
+    ///     Gets or sets the running state
     /// </summary>
     public bool Running
     {
@@ -350,7 +357,7 @@ public abstract class AbstractServer : AbstractEndpoint, IServer, InitializingPh
     }
 
     /// <summary>
-    /// Gets the reference resolver
+    ///     Gets the reference resolver
     /// </summary>
     public IReferenceResolver ReferenceResolver
     {
@@ -359,7 +366,7 @@ public abstract class AbstractServer : AbstractEndpoint, IServer, InitializingPh
     }
 
     /// <summary>
-    /// Gets or sets the message endpoint adapter
+    ///     Gets or sets the message endpoint adapter
     /// </summary>
     public IEndpointAdapter EndpointAdapter
     {
@@ -368,7 +375,7 @@ public abstract class AbstractServer : AbstractEndpoint, IServer, InitializingPh
     }
 
     /// <summary>
-    /// Gets or sets the handler interceptors
+    ///     Gets or sets the handler interceptors
     /// </summary>
     public List<object> Interceptors
     {
@@ -377,7 +384,7 @@ public abstract class AbstractServer : AbstractEndpoint, IServer, InitializingPh
     }
 
     /// <summary>
-    /// Gets or sets the default timeout for sending and receiving messages
+    ///     Gets or sets the default timeout for sending and receiving messages
     /// </summary>
     public long DefaultTimeout
     {
@@ -386,7 +393,7 @@ public abstract class AbstractServer : AbstractEndpoint, IServer, InitializingPh
     }
 
     /// <summary>
-    /// Gets or sets debug logging
+    ///     Gets or sets debug logging
     /// </summary>
     public bool DebugLogging
     {
@@ -395,9 +402,4 @@ public abstract class AbstractServer : AbstractEndpoint, IServer, InitializingPh
     }
 
     #endregion
-
-    public void SetReferenceResolver(IReferenceResolver referenceResolver)
-    {
-        throw new NotImplementedException();
-    }
 }

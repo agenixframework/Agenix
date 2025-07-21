@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -38,6 +38,22 @@ namespace Agenix.Core.Functions.Core;
 /// </summary>
 public class TranslateFunction : IFunction
 {
+    /// <summary>
+    ///     Replaces substrings in a given input string that match a regular expression pattern with a replacement string.
+    /// </summary>
+    /// <param name="parameterList">
+    ///     A list of parameters:
+    ///     - The first element is the input string to be processed.
+    ///     - The second element is a regular expression pattern used to identify substrings to replace.
+    ///     - The third element is the replacement string.
+    /// </param>
+    /// <param name="testContext">An instance of the test context for additional context-related functionality.</param>
+    /// <returns>
+    ///     A string with substrings matching the regular expression replaced by the replacement string.
+    /// </returns>
+    /// <exception cref="InvalidFunctionUsageException">
+    ///     Thrown if the number of parameters in the provided list is less than three.
+    /// </exception>
     public string Execute(List<string> parameterList, TestContext testContext)
     {
         if (parameterList == null || parameterList.Count < 3)

@@ -57,6 +57,16 @@ public interface IEndpointBuilder<out T> where T : IEndpoint
     private static readonly Lazy<ResourcePathTypeResolver> TypeResolver =
         new(() => new ResourcePathTypeResolver(ResourcePath));
 
+    /// <summary>
+    ///     Retrieves a dictionary of endpoint builders, with endpoint names as keys and endpoint builders as values.
+    /// </summary>
+    /// <returns>A dictionary containing mappings of endpoint names to their corresponding builders.</returns>
+    /// <summary>
+    ///     Lazy-initialized cache of endpoint builders for improved performance and thread safety.
+    /// </summary>
+    private static readonly Lazy<ConcurrentDictionary<string, IEndpointBuilder<T>>> BuildersCache =
+        new(LoadEndpointBuilders);
+
 
     /// <summary>
     ///     Represents the resource path where endpoint builder configurations
@@ -80,16 +90,6 @@ public interface IEndpointBuilder<out T> where T : IEndpoint
     ///     True if the specified endpoint type is supported; otherwise, false.
     /// </returns>
     bool Supports(Type endpointType);
-
-    /// <summary>
-    ///     Retrieves a dictionary of endpoint builders, with endpoint names as keys and endpoint builders as values.
-    /// </summary>
-    /// <returns>A dictionary containing mappings of endpoint names to their corresponding builders.</returns>
-    /// <summary>
-    ///     Lazy-initialized cache of endpoint builders for improved performance and thread safety.
-    /// </summary>
-    private static readonly Lazy<ConcurrentDictionary<string, IEndpointBuilder<T>>> BuildersCache =
-        new(LoadEndpointBuilders);
 
     /// <summary>
     ///     Loads all available endpoint builders from the type resolver.

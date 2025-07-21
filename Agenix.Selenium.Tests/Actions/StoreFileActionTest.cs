@@ -1,7 +1,6 @@
 using Agenix.Selenium.Actions;
 using Agenix.Selenium.Endpoint;
 using Moq;
-using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace Agenix.Selenium.Tests.Actions;
@@ -9,9 +8,6 @@ namespace Agenix.Selenium.Tests.Actions;
 [TestFixture]
 public class StoreFileActionTest : AbstractNUnitSetUp
 {
-    private SeleniumBrowser _seleniumBrowser;
-    private Mock<IWebDriver> _webDriver;
-
     [SetUp]
     public void SetupMethod()
     {
@@ -20,6 +16,9 @@ public class StoreFileActionTest : AbstractNUnitSetUp
 
         _seleniumBrowser.WebDriver = _webDriver.Object;
     }
+
+    private SeleniumBrowser _seleniumBrowser;
+    private Mock<IWebDriver> _webDriver;
 
     [Test]
     public void TestExecute()

@@ -188,7 +188,8 @@ public abstract class AbstractEndpointComponent(string name) : IEndpointComponen
             // Convert the parameter value to the appropriate type and invoke the setter method
             if (parameterEntry.Value != null)
             {
-                var convertMethod = typeof(TypeConversionUtils).GetMethod("ConvertStringToType", [typeof(string), typeof(Type), typeof(TestContext)
+                var convertMethod = typeof(TypeConversionUtils).GetMethod("ConvertStringToType", [
+                    typeof(string), typeof(Type), typeof(TestContext)
                 ]);
                 var genericMethod = convertMethod.MakeGenericMethod(field.FieldType);
                 var convertedValue = genericMethod.Invoke(null, [parameterEntry.Value, field.FieldType, context]);

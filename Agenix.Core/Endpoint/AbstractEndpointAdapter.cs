@@ -29,35 +29,34 @@ using Agenix.Api.Context;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Log;
 using Agenix.Api.Message;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Endpoint;
 
-using Microsoft.Extensions.Logging;
-
 /// <summary>
-/// Abstract endpoint adapter adds fallback endpoint adapter in case no response was provided.
+///     Abstract endpoint adapter adds fallback endpoint adapter in case no response was provided.
 /// </summary>
 public abstract class AbstractEndpointAdapter : IEndpointAdapter
 {
     /// <summary>
-    /// Fallback adapter
+    ///     Logger
+    /// </summary>
+    private readonly ILogger _logger = LogManager.GetLogger(typeof(AbstractEndpointAdapter));
+
+    /// <summary>
+    ///     Fallback adapter
     /// </summary>
     private IEndpointAdapter _fallbackEndpointAdapter;
 
     /// <summary>
-    /// Endpoint adapter name
+    ///     Endpoint adapter name
     /// </summary>
     private string _name;
 
     private TestContextFactory? _testContextFactory;
 
     /// <summary>
-    /// Logger
-    /// </summary>
-    private readonly ILogger _logger = LogManager.GetLogger(typeof(AbstractEndpointAdapter));
-
-    /// <summary>
-    /// Initializes a new instance of the AbstractEndpointAdapter class.
+    ///     Initializes a new instance of the AbstractEndpointAdapter class.
     /// </summary>
     protected AbstractEndpointAdapter(ILogger logger)
     {
@@ -66,7 +65,46 @@ public abstract class AbstractEndpointAdapter : IEndpointAdapter
     }
 
     /// <summary>
-    /// Handles a request message and returns a proper response.
+    ///     Gets or sets the name of this endpoint adapter.
+    /// </summary>
+    public string Name
+    {
+        get => _name;
+        set => _name = value ?? throw new ArgumentNullException(nameof(value));
+    }
+
+    /// <summary>
+    ///     Gets or sets the fallback endpoint adapter.
+    /// </summary>
+    public IEndpointAdapter? FallbackEndpointAdapter
+    {
+        get => _fallbackEndpointAdapter;
+        set => _fallbackEndpointAdapter = value;
+    }
+
+    /// <summary>
+    ///     Gets or sets the test context factory.
+    /// </summary>
+    public TestContextFactory? TestContextFactory
+    {
+        get
+        {
+            if (_testContextFactory == null)
+            {
+                _logger.LogWarning("Could not identify proper test context factory from dependency injection - " +
+                                   "constructing own test context factory. This restricts test context capabilities to an " +
+                                   "absolute minimum! You could do better when enabling proper dependency injection for this server instance.");
+
+                _testContextFactory = TestContextFactory.NewInstance();
+            }
+
+            return _testContextFactory;
+        }
+        set => _testContextFactory = value;
+    }
+
+    /// <summary>
+    ///     Handles a request message and returns a proper response.
     /// </summary>
     /// <param name="request">The request message.</param>
     /// <returns>The response message.</returns>
@@ -93,70 +131,31 @@ public abstract class AbstractEndpointAdapter : IEndpointAdapter
     }
 
     /// <summary>
-    /// Subclasses must implement this method in order to handle incoming request message. If
-    /// this method does not return any response message fallback endpoint adapter is invoked for processing.
+    ///     Gets message endpoint to interact with this endpoint adapter.
+    /// </summary>
+    /// <returns>The endpoint instance.</returns>
+    public abstract IEndpoint GetEndpoint();
+
+    /// <summary>
+    ///     Gets the endpoint configuration.
+    /// </summary>
+    /// <returns>The endpoint configuration.</returns>
+    public abstract IEndpointConfiguration GetEndpointConfiguration();
+
+    /// <summary>
+    ///     Subclasses must implement this method in order to handle incoming request message. If
+    ///     this method does not return any response message fallback endpoint adapter is invoked for processing.
     /// </summary>
     /// <param name="message">The request message.</param>
     /// <returns>The response message.</returns>
     protected abstract IMessage? HandleMessageInternal(IMessage message);
 
     /// <summary>
-    /// Gets or sets the name of this endpoint adapter.
-    /// </summary>
-    public string Name
-    {
-        get => _name;
-        set => _name = value ?? throw new ArgumentNullException(nameof(value));
-    }
-
-    /// <summary>
-    /// Gets or sets the fallback endpoint adapter.
-    /// </summary>
-    public IEndpointAdapter? FallbackEndpointAdapter
-    {
-        get => _fallbackEndpointAdapter;
-        set => _fallbackEndpointAdapter = value;
-    }
-
-    /// <summary>
-    /// Gets or sets the test context factory.
-    /// </summary>
-    public TestContextFactory? TestContextFactory
-    {
-        get
-        {
-            if (_testContextFactory == null)
-            {
-                _logger.LogWarning("Could not identify proper test context factory from dependency injection - " +
-                                   "constructing own test context factory. This restricts test context capabilities to an " +
-                                   "absolute minimum! You could do better when enabling proper dependency injection for this server instance.");
-
-                _testContextFactory = TestContextFactory.NewInstance();
-            }
-
-            return _testContextFactory;
-        }
-        set => _testContextFactory = value;
-    }
-
-    /// <summary>
-    /// Gets new test context from factory.
+    ///     Gets new test context from factory.
     /// </summary>
     /// <returns>The test context.</returns>
     protected TestContext GetTestContext()
     {
         return TestContextFactory!.GetObject();
     }
-
-    /// <summary>
-    /// Gets message endpoint to interact with this endpoint adapter.
-    /// </summary>
-    /// <returns>The endpoint instance.</returns>
-    public abstract IEndpoint GetEndpoint();
-
-    /// <summary>
-    /// Gets the endpoint configuration.
-    /// </summary>
-    /// <returns>The endpoint configuration.</returns>
-    public abstract IEndpointConfiguration GetEndpointConfiguration();
 }

@@ -28,13 +28,13 @@ namespace Agenix.Azure.Security.Tests.Configuration;
 [TestFixture]
 public class OAuthClientConfigurationTests
 {
-    private OAuthClientConfiguration _configuration;
-
     [SetUp]
     public void SetUp()
     {
         _configuration = new OAuthClientConfiguration();
     }
+
+    private OAuthClientConfiguration _configuration;
 
     [Test]
     public void Constructor_DefaultValues_AreSetCorrectly()

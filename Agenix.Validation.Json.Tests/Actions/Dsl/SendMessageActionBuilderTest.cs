@@ -575,7 +575,7 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
             });
 
         var runner = new DefaultTestCaseRunner(Context);
-        runner.Run(SendMessageAction.Builder.Send(_messageEndpoint.Object)
+        runner.Run(Send(_messageEndpoint.Object)
             .Message()
             .Type(MessageType.JSON)
             .Body("{ \"TestRequest\": { \"Message\": \"?\" }}")

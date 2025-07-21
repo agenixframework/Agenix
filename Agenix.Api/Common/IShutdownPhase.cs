@@ -27,17 +27,17 @@
 namespace Agenix.Api.Common;
 
 /// <summary>
-/// Represents a shutdown phase component that can be destroyed.
+///     Represents a shutdown phase component that can be destroyed.
 /// </summary>
 public delegate void ShutdownPhase();
 
 /// <summary>
-/// Represents a shutdown phase component that can be destroyed.
+///     Represents a shutdown phase component that can be destroyed.
 /// </summary>
 public interface IShutdownPhase
 {
     /// <summary>
-    /// Destroy component.
+    ///     Destroy component.
     /// </summary>
     void Destroy();
 }

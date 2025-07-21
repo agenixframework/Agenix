@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -33,37 +33,68 @@ using Agenix.Api.Functions;
 
 namespace Agenix.Core.Functions.Core;
 
+/// <summary>
+///     Represents a function that generates random strings based on specified parameters.
+///     This function implements the <see cref="IFunction" /> interface.
+/// </summary>
 public class RandomStringFunction : IFunction
 {
+    /// <summary>
+    ///     Represents a constant value "UPPERCASE" used to specify that the generated random string
+    ///     should consist of uppercase letters only.
+    /// </summary>
     public const string Uppercase = "UPPERCASE";
 
+    /// <summary>
+    ///     Represents a constant value "LOWERCASE" used to specify that the generated random string
+    ///     should consist of lowercase letters only.
+    /// </summary>
     public const string Lowercase = "LOWERCASE";
 
+    /// <summary>
+    ///     Represents a constant value "MIXED" used to specify that the generated random string
+    ///     should consist of both uppercase and lowercase letters.
+    /// </summary>
     public const string Mixed = "MIXED";
 
     private readonly char[] _alphabetLower =
-    {
+    [
         'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
         'v', 'w', 'x', 'y', 'z'
-    };
+    ];
 
     private readonly char[] _alphabetMixed =
-    {
+    [
         'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
         'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
         'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
-    };
+    ];
 
     private readonly char[] _alphabetUpper =
-    {
+    [
         'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
         'V', 'W', 'X', 'Y', 'Z'
-    };
+    ];
 
     private readonly Random _generator = new(Environment.TickCount);
 
     private readonly char[] _numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
+    /// <summary>
+    ///     Executes the Random String function generating a random string based on the specified parameters.
+    /// </summary>
+    /// <param name="parameterList">
+    ///     A list of input parameters where:
+    ///     - The first value specifies the number of letters (a positive non-zero integer).
+    ///     - The second value (optional) defines the notation method (Uppercase, Lowercase, or Mixed).
+    ///     - The third value (optional) is a boolean indicating whether to include numbers.
+    /// </param>
+    /// <param name="testContext">
+    ///     Provides the test execution context including test-specific environment settings.
+    /// </param>
+    /// <returns>
+    ///     A randomly generated string based on the defined parameters.
+    /// </returns>
     public string Execute(List<string> parameterList, TestContext testContext)
     {
         var notationMethod = Mixed;
@@ -120,7 +151,7 @@ public class RandomStringFunction : IFunction
 
         var upperRange = alphabet.Length - 1;
 
-        // make sure first character is not a number
+        // make sure the first character is not a number
         builder.Append(alphabet[_generator.Next(upperRange)]);
 
         if (includeNumbers)

@@ -28,24 +28,23 @@ using Agenix.Configuration.Sample.Models;
 namespace Agenix.Configuration.Sample.Approach1;
 
 /// <summary>
-/// Demonstrates Approach 1: Direct Instance Usage
-/// - Create ConfigurationOptions directly
-/// - Instantiate ConfigurationManager with options
-/// - Use the manager instance throughout the application
+///     Demonstrates Approach 1: Direct Instance Usage
+///     - Create ConfigurationOptions directly
+///     - Instantiate ConfigurationManager with options
+///     - Use the manager instance throughout the application
 /// </summary>
 public class DirectInstanceExample
 {
     private readonly IConfigurationManager<ApplicationSettings> _configManager;
 
     /// <summary>
-    /// Provides an example of direct instance usage for configuration management.
-    /// - Demonstrates creating a configuration options object manually
-    /// - Showcases instantiation and use of a configuration manager with the defined options
-    /// - Includes various implementation scenarios like environment-specific configurations, caching, and async operations
+    ///     Provides an example of direct instance usage for configuration management.
+    ///     - Demonstrates creating a configuration options object manually
+    ///     - Showcases instantiation and use of a configuration manager with the defined options
+    ///     - Includes various implementation scenarios like environment-specific configurations, caching, and async operations
     /// </summary>
     public DirectInstanceExample()
     {
-
         // Create configuration options
         var options = new ConfigurationOptions
         {
@@ -62,7 +61,7 @@ public class DirectInstanceExample
     }
 
     /// <summary>
-    /// Demonstrates basic configuration usage
+    ///     Demonstrates basic configuration usage
     /// </summary>
     public void DemonstrateBasicUsage()
     {
@@ -79,7 +78,7 @@ public class DirectInstanceExample
     }
 
     /// <summary>
-    /// Demonstrates environment-specific configuration
+    ///     Demonstrates environment-specific configuration
     /// </summary>
     public void DemonstrateEnvironmentSpecificUsage()
     {
@@ -101,7 +100,7 @@ public class DirectInstanceExample
     }
 
     /// <summary>
-    /// Demonstrates async configuration loading
+    ///     Demonstrates async configuration loading
     /// </summary>
     public async Task DemonstrateAsyncUsage()
     {
@@ -119,7 +118,7 @@ public class DirectInstanceExample
     }
 
     /// <summary>
-    /// Demonstrates configuration caching and reloading
+    ///     Demonstrates configuration caching and reloading
     /// </summary>
     public void DemonstrateCachingAndReloading()
     {
@@ -145,7 +144,7 @@ public class DirectInstanceExample
     }
 
     /// <summary>
-    /// Demonstrates passing configuration manager to services
+    ///     Demonstrates passing configuration manager to services
     /// </summary>
     public void DemonstrateServiceUsage()
     {
@@ -162,17 +161,17 @@ public class DirectInstanceExample
 }
 
 /// <summary>
-/// Example service that uses configuration manager
+///     Example service that uses configuration manager
 /// </summary>
 public class DatabaseService
 {
     private readonly IConfigurationManager<ApplicationSettings> _configManager;
 
     /// <summary>
-    /// Represents a service for managing database connections and operations.
-    /// Utilizes the configuration manager to retrieve connection settings.
-    /// - Integrates with the application's configuration management to adapt to environment-specific settings.
-    /// - Supports connection initialization based on retrieved configuration data.
+    ///     Represents a service for managing database connections and operations.
+    ///     Utilizes the configuration manager to retrieve connection settings.
+    ///     - Integrates with the application's configuration management to adapt to environment-specific settings.
+    ///     - Supports connection initialization based on retrieved configuration data.
     /// </summary>
     public DatabaseService(IConfigurationManager<ApplicationSettings> configManager)
     {
@@ -180,10 +179,10 @@ public class DatabaseService
     }
 
     /// <summary>
-    /// Establishes a connection to the database using configuration settings retrieved from
-    /// the configuration manager.
-    /// - Retrieves the database connection string from the configuration object
-    /// - Outputs a truncated version of the connection string for demonstration purposes
+    ///     Establishes a connection to the database using configuration settings retrieved from
+    ///     the configuration manager.
+    ///     - Retrieves the database connection string from the configuration object
+    ///     - Outputs a truncated version of the connection string for demonstration purposes
     /// </summary>
     public void Connect()
     {
@@ -194,17 +193,17 @@ public class DatabaseService
 }
 
 /// <summary>
-/// Example service that uses configuration manager
+///     Example service that uses configuration manager
 /// </summary>
 public class ApiService
 {
     private readonly IConfigurationManager<ApplicationSettings> _configManager;
 
     /// <summary>
-    /// Represents an example API service that retrieves configuration data and demonstrates its usage.
-    /// - Designed to consume configuration settings through the provided configuration manager
-    /// - Retrieves necessary configuration like the API base URL for making service calls
-    /// - Showcases dependency injection for passing the configuration manager to services
+    ///     Represents an example API service that retrieves configuration data and demonstrates its usage.
+    ///     - Designed to consume configuration settings through the provided configuration manager
+    ///     - Retrieves necessary configuration like the API base URL for making service calls
+    ///     - Showcases dependency injection for passing the configuration manager to services
     /// </summary>
     public ApiService(IConfigurationManager<ApplicationSettings> configManager)
     {
@@ -212,9 +211,9 @@ public class ApiService
     }
 
     /// <summary>
-    /// Retrieves data by using the configuration settings provided through the injected configuration manager.
-    /// - Accesses the current API base URL from the configuration
-    /// - Outputs the API call base URL to the console
+    ///     Retrieves data by using the configuration settings provided through the injected configuration manager.
+    ///     - Accesses the current API base URL from the configuration
+    ///     - Outputs the API call base URL to the console
     /// </summary>
     public void GetData()
     {

@@ -49,11 +49,6 @@ public interface IValidationMatcher
     private static readonly ILogger Log = LogManager.GetLogger(typeof(IValidationMatcher));
 
     /// <summary>
-    ///     Represents the path used to identify and locate the resource associated with the ValidationMatcher implementation.
-    /// </summary>
-    static string ResourcePath => "Extension/agenix/validation/matcher";
-
-    /// <summary>
     ///     Lazy-initialized type resolver for resolving resource paths and retrieving type-related information during runtime.
     /// </summary>
     /// <remarks>
@@ -74,6 +69,11 @@ public interface IValidationMatcher
     /// </remarks>
     private static readonly Lazy<IDictionary<string, IValidationMatcher>> ValidatorsCache =
         new(() => LoadValidationMatchers());
+
+    /// <summary>
+    ///     Represents the path used to identify and locate the resource associated with the ValidationMatcher implementation.
+    /// </summary>
+    static string ResourcePath => "Extension/agenix/validation/matcher";
 
     /// <summary>
     ///     Loads all available validation matchers from the type resolver.

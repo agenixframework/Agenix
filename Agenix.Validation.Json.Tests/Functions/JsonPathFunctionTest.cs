@@ -27,7 +27,6 @@
 using Agenix.Api.Exceptions;
 using Agenix.Validation.Json.Functions.Core;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Agenix.Validation.Json.Tests.Functions;
 

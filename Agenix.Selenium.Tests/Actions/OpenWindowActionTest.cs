@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Agenix.Api.Exceptions;
 using Agenix.Selenium.Actions;
 using Agenix.Selenium.Endpoint;
-using Agenix.Selenium.Util;
 using Moq;
-using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace Agenix.Selenium.Tests.Actions;
@@ -14,10 +10,6 @@ namespace Agenix.Selenium.Tests.Actions;
 [TestFixture]
 public class OpenWindowActionTest : AbstractNUnitSetUp
 {
-    private readonly SeleniumBrowser _seleniumBrowser = new();
-    private readonly Mock<IWebDriver> _webDriver = new();
-    private readonly Mock<ITargetLocator> _locator = new();
-
     [SetUp]
     public void SetupMethod()
     {
@@ -31,6 +23,10 @@ public class OpenWindowActionTest : AbstractNUnitSetUp
 
         _webDriver.Setup(x => x.SwitchTo()).Returns(_locator.Object);
     }
+
+    private readonly SeleniumBrowser _seleniumBrowser = new();
+    private readonly Mock<IWebDriver> _webDriver = new();
+    private readonly Mock<ITargetLocator> _locator = new();
 
     [Test]
     public void TestOpenWindow()

@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Agenix.Api;
 using Agenix.Api.Annotations;
 using Agenix.Api.Spi;
@@ -220,9 +221,12 @@ public class SeleniumIT
             var id = element.GetAttribute("id");
             var className = element.GetAttribute("class");
 
-            var identifier = !string.IsNullOrEmpty(id) ? $"#{id}" :
-                !string.IsNullOrEmpty(className) ? $".{className.Split(' ')[0]}" :
-                "no-identifier";
+            var identifier = (id, className) switch
+            {
+                (not null and not "", _) => $"#{id}",
+                (_, not null and not "") => $".{className.Split(' ')[0]}",
+                _ => "no-identifier"
+            };
 
             return $"{tagName}[{identifier}]";
         }
@@ -236,10 +240,10 @@ public class SeleniumIT
         }
     }
 
-
     [Test]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("SonarQube", "S2699:Tests should include assertions",
-        Justification = "Test uses fluent API assertion through _testCaseRunner.Then() which verifies element text contains expected value")]
+    [SuppressMessage("SonarQube", "S2699:Tests should include assertions",
+        Justification =
+            "Test uses fluent API assertion through _testCaseRunner.Then() which verifies element text contains expected value")]
     public void Test_Login_Page()
     {
         _testCaseRunner.Given(FinallySequence.Builder.DoFinally()

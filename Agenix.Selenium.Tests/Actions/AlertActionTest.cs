@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,26 +21,26 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using Agenix.Api.Exceptions;
 using Agenix.Selenium.Actions;
 using Agenix.Selenium.Endpoint;
-
-namespace Agenix.Selenium.Tests.Actions;
-
 using Moq;
 using OpenQA.Selenium;
 
+namespace Agenix.Selenium.Tests.Actions;
+
 /// <summary>
-/// @since 2.7
+///     @since 2.7
 /// </summary>
 public class AlertActionTest : AbstractNUnitSetUp
 {
+    private readonly Mock<IAlert> _alert = new();
+    private readonly Mock<ITargetLocator> _locator = new();
     private readonly SeleniumBrowser _seleniumBrowser = new();
     private readonly Mock<IWebDriver> _webDriver = new();
-    private readonly Mock<ITargetLocator> _locator = new();
-    private readonly Mock<IAlert> _alert = new();
 
 
     [SetUp]
@@ -49,7 +50,7 @@ public class AlertActionTest : AbstractNUnitSetUp
         _alert.Reset();
         _locator.Reset();
 
-        _seleniumBrowser.WebDriver = (_webDriver.Object);
+        _seleniumBrowser.WebDriver = _webDriver.Object;
 
         _webDriver.Setup(x => x.SwitchTo()).Returns(_locator.Object);
         _alert.Setup(x => x.Text).Returns("This is a warning!");

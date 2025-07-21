@@ -29,27 +29,28 @@ using Agenix.Api.Message;
 namespace Agenix.Api.Endpoint;
 
 /// <summary>
-/// Endpoint adapter represents a special message handler that delegates incoming request messages to some message endpoint.
-/// Clients can receive request messages from endpoint and provide proper response messages that will be used as
-/// adapter response.
+///     Endpoint adapter represents a special message handler that delegates incoming request messages to some message
+///     endpoint.
+///     Clients can receive request messages from endpoint and provide proper response messages that will be used as
+///     adapter response.
 /// </summary>
 public interface IEndpointAdapter
 {
     /// <summary>
-    /// Handles a request message and returning a proper response.
+    ///     Handles a request message and returning a proper response.
     /// </summary>
     /// <param name="message">The request message.</param>
     /// <returns>The response message.</returns>
     IMessage HandleMessage(IMessage message);
 
     /// <summary>
-    /// Gets message endpoint to interact with this endpoint adapter.
+    ///     Gets message endpoint to interact with this endpoint adapter.
     /// </summary>
     /// <returns>The endpoint instance.</returns>
     IEndpoint GetEndpoint();
 
     /// <summary>
-    /// Gets the endpoint configuration.
+    ///     Gets the endpoint configuration.
     /// </summary>
     /// <returns>The endpoint configuration.</returns>
     IEndpointConfiguration GetEndpointConfiguration();

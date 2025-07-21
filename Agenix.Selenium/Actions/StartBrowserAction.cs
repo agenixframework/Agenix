@@ -24,7 +24,6 @@
 
 #endregion
 
-using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Log;
 using Agenix.Selenium.Endpoint;

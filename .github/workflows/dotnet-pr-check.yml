@@ -146,6 +146,12 @@ jobs:
       - name: 🏗️ Build solution
         run: dotnet build --configuration Release --no-restore
 
+      - name: Install Playwright CLI
+        run: dotnet tool install --global Microsoft.Playwright.CLI
+
+      - name: Install Playwright Browsers
+        run: playwright install --with-deps
+
       - name: 🔍 List test projects
         run: |
           echo "Found test projects:"

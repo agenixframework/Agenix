@@ -34,13 +34,12 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Configuration.Core;
 
 /// <summary>
-/// Implementation of IConfigurationManager that provides environment-specific configuration loading
-/// with caching support for both JSON and YAML formats.
+///     Implementation of IConfigurationManager that provides environment-specific configuration loading
+///     with caching support for both JSON and YAML formats.
 /// </summary>
 /// <typeparam name="T">The type of the configuration object</typeparam>
 public class ConfigurationManager<T> : IConfigurationManager<T> where T : class, new()
 {
-    private readonly ConfigurationOptions _options;
     private readonly ConcurrentDictionary<string, T> _cache = new();
 
     /// <summary>
@@ -48,9 +47,11 @@ public class ConfigurationManager<T> : IConfigurationManager<T> where T : class,
     /// </summary>
     private readonly ILogger _logger = LogManager.GetLogger(typeof(ConfigurationManager<>).MakeGenericType(typeof(T)));
 
+    private readonly ConfigurationOptions _options;
+
 
     /// <summary>
-    /// Initializes a new instance of the ConfigurationManager class.
+    ///     Initializes a new instance of the ConfigurationManager class.
     /// </summary>
     /// <param name="options">Configuration options</param>
     public ConfigurationManager(ConfigurationOptions options)
@@ -69,8 +70,8 @@ public class ConfigurationManager<T> : IConfigurationManager<T> where T : class,
     public T GetConfiguration()
     {
         var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")
-                         ?? Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")
-                         ?? _options.DefaultEnvironment;
+                          ?? Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")
+                          ?? _options.DefaultEnvironment;
 
         CurrentEnvironment = environment;
         return GetConfiguration(environment);
@@ -80,7 +81,9 @@ public class ConfigurationManager<T> : IConfigurationManager<T> where T : class,
     public T GetConfiguration(string environment)
     {
         if (string.IsNullOrWhiteSpace(environment))
+        {
             throw new ArgumentException("Environment cannot be null or empty", nameof(environment));
+        }
 
         CurrentEnvironment = environment;
 
@@ -173,15 +176,18 @@ public class ConfigurationManager<T> : IConfigurationManager<T> where T : class,
             var configObject = new T();
             configuration.Bind(configObject);
 
-            _logger.LogInformation("Successfully loaded configuration for environment: {environment} (Format: {_optionsFormat})",
+            _logger.LogInformation(
+                "Successfully loaded configuration for environment: {environment} (Format: {_optionsFormat})",
                 environment, _options.Format);
             return configObject;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to load configuration for environment: {environment} (Format: {_optionsFormat})",
+            _logger.LogError(ex,
+                "Failed to load configuration for environment: {environment} (Format: {_optionsFormat})",
                 environment, _options.Format);
-            throw new InvalidOperationException($"Failed to load configuration for environment '{environment}' with format '{_options.Format}'", ex);
+            throw new InvalidOperationException(
+                $"Failed to load configuration for environment '{environment}' with format '{_options.Format}'", ex);
         }
     }
 
@@ -190,10 +196,10 @@ public class ConfigurationManager<T> : IConfigurationManager<T> where T : class,
         switch (_options.Format)
         {
             case ConfigurationFormat.JSON:
-                builder.AddJsonFile(filePath, optional: optional, reloadOnChange: false);
+                builder.AddJsonFile(filePath, optional, false);
                 break;
             case ConfigurationFormat.YAML:
-                builder.AddYamlFile(filePath, optional: optional, reloadOnChange: false);
+                builder.AddYamlFile(filePath, optional, false);
                 break;
             default:
                 throw new NotSupportedException($"Configuration format '{_options.Format}' is not supported.");
@@ -203,14 +209,20 @@ public class ConfigurationManager<T> : IConfigurationManager<T> where T : class,
     private void LoadEnvironmentFile()
     {
         var envFilePath = Path.Combine(_options.EnvironmentFileDirectory, _options.EnvironmentFileName);
-        if (!File.Exists(envFilePath)) return;
+        if (!File.Exists(envFilePath))
+        {
+            return;
+        }
 
         try
         {
             var lines = File.ReadAllLines(envFilePath);
             foreach (var line in lines)
             {
-                if (string.IsNullOrWhiteSpace(line) || line.StartsWith('#')) continue;
+                if (string.IsNullOrWhiteSpace(line) || line.StartsWith('#'))
+                {
+                    continue;
+                }
 
                 var parts = line.Split('=', 2);
                 if (parts.Length == 2)
@@ -218,6 +230,7 @@ public class ConfigurationManager<T> : IConfigurationManager<T> where T : class,
                     Environment.SetEnvironmentVariable(parts[0].Trim(), parts[1].Trim());
                 }
             }
+
             _logger.LogDebug("Loaded environment file: {Path}", envFilePath);
         }
         catch (Exception ex)

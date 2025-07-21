@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,8 +21,10 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
+using System.Text;
 using Agenix.Api;
 using Agenix.Api.Exceptions;
 using Agenix.Api.IO;
@@ -30,21 +33,40 @@ using Agenix.Selenium.Endpoint;
 
 namespace Agenix.Selenium.Actions;
 
-using System.IO;
-using System.Text;
-
 /// <summary>
-/// Provides a fluent API for building Selenium-based test actions.
+///     Provides a fluent API for building Selenium-based test actions.
 /// </summary>
 public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelegatingTestActionBuilder<ISeleniumAction>
 {
+    private AbstractSeleniumAction.ISeleniumActionBuilder<ISeleniumAction>? _delegateBuilder;
+
     /// <summary>Selenium browser</summary>
     private SeleniumBrowser? _seleniumBrowser;
 
-    private AbstractSeleniumAction.ISeleniumActionBuilder<ISeleniumAction>? _delegateBuilder;
+    /// <summary>
+    ///     Builds the ISeleniumAction instance configured by the current SeleniumActionBuilder instance.
+    /// </summary>
+    /// <returns>An instance of ISeleniumAction representing the configured Selenium action.</returns>
+    public ISeleniumAction Build()
+    {
+        ObjectHelper.AssertNotNull(_delegateBuilder, "Missing delegate action to build");
+        if (_seleniumBrowser != null)
+        {
+            _delegateBuilder.WithBrowser(_seleniumBrowser);
+        }
+
+        return _delegateBuilder.Build();
+    }
+
 
     /// <summary>
-    /// Fluent API action building entry method used in C# DSL.
+    ///     Gets the delegating test action builder representing the delegate functionality for creating or composing Selenium
+    ///     actions.
+    /// </summary>
+    public ITestActionBuilder<ISeleniumAction> Delegate { get; }
+
+    /// <summary>
+    ///     Fluent API action building entry method used in C# DSL.
     /// </summary>
     /// <returns></returns>
     public static SeleniumActionBuilder Selenium()
@@ -53,7 +75,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Use a custom selenium browser.
+    ///     Use a custom selenium browser.
     /// </summary>
     public SeleniumActionBuilder Browser(SeleniumBrowser newSeleniumBrowser)
     {
@@ -62,7 +84,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Start a browser instance.
+    ///     Start a browser instance.
     /// </summary>
     public StartBrowserAction.Builder Start()
     {
@@ -73,7 +95,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Start explicit browser instance.
+    ///     Start explicit browser instance.
     /// </summary>
     public StartBrowserAction.Builder Start(SeleniumBrowser seleniumBrowser)
     {
@@ -85,7 +107,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Stop browser instance.
+    ///     Stop browser instance.
     /// </summary>
     public StopBrowserAction.Builder Stop()
     {
@@ -95,7 +117,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Stop explicit browser instance.
+    ///     Stop explicit browser instance.
     /// </summary>
     public StopBrowserAction.Builder Stop(SeleniumBrowser seleniumBrowser)
     {
@@ -107,7 +129,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Alert element.
+    ///     Alert element.
     /// </summary>
     public AlertAction.Builder Alert()
     {
@@ -117,7 +139,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Navigate action.
+    ///     Navigate action.
     /// </summary>
     public NavigateAction.Builder Navigate()
     {
@@ -128,7 +150,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Navigate action.
+    ///     Navigate action.
     /// </summary>
     public NavigateAction.Builder Navigate(string page)
     {
@@ -140,7 +162,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Finds element.
+    ///     Finds element.
     /// </summary>
     public FindElementAction.Builder Find()
     {
@@ -151,7 +173,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Dropdown select single option action.
+    ///     Dropdown select single option action.
     /// </summary>
     public DropDownSelectAction.Builder Select(string option)
     {
@@ -163,7 +185,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Dropdown select multiple options action.
+    ///     Dropdown select multiple options action.
     /// </summary>
     public DropDownSelectAction.Builder Select(params string[] options)
     {
@@ -175,7 +197,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Set input action.
+    ///     Set input action.
     /// </summary>
     public SetInputAction.Builder SetInput(string value)
     {
@@ -187,7 +209,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Set input action.
+    ///     Set input action.
     /// </summary>
     public SetInputAction.Builder SetInput()
     {
@@ -198,7 +220,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Fill form action.
+    ///     Fill form action.
     /// </summary>
     public FillFormAction.Builder FillForm()
     {
@@ -209,7 +231,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Check input action.
+    ///     Check input action.
     /// </summary>
     public CheckInputAction.Builder CheckInput()
     {
@@ -220,7 +242,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Check input action.
+    ///     Check input action.
     /// </summary>
     public CheckInputAction.Builder CheckInput(bool isChecked)
     {
@@ -232,7 +254,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Clicks element.
+    ///     Clicks element.
     /// </summary>
     public ClickAction.Builder Click()
     {
@@ -243,7 +265,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Hover element.
+    ///     Hover element.
     /// </summary>
     public HoverAction.Builder Hover()
     {
@@ -254,7 +276,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Clear browser cache.
+    ///     Clear browser cache.
     /// </summary>
     public ClearBrowserCacheAction.Builder ClearCache()
     {
@@ -265,7 +287,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Make screenshot.
+    ///     Make screenshot.
     /// </summary>
     public MakeScreenshotAction.Builder Screenshot()
     {
@@ -276,7 +298,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Make screenshot with custom output directory.
+    ///     Make screenshot with custom output directory.
     /// </summary>
     public MakeScreenshotAction.Builder Screenshot(string outputDir)
     {
@@ -288,7 +310,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Store file.
+    ///     Store file.
     /// </summary>
     public StoreFileAction.Builder Store()
     {
@@ -299,7 +321,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Store file.
+    ///     Store file.
     /// </summary>
     /// <param name="filePath"></param>
     public StoreFileAction.Builder Store(string filePath)
@@ -312,7 +334,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Get stored file.
+    ///     Get stored file.
     /// </summary>
     public GetStoredFileAction.Builder GetStored()
     {
@@ -323,7 +345,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Get stored file.
+    ///     Get stored file.
     /// </summary>
     /// <param name="fileName"></param>
     public GetStoredFileAction.Builder GetStored(string fileName)
@@ -336,7 +358,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Wait until element meets condition.
+    ///     Wait until element meets condition.
     /// </summary>
     public WaitUntilAction.Builder WaitUntil()
     {
@@ -347,7 +369,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Execute JavaScript.
+    ///     Execute JavaScript.
     /// </summary>
     public JavaScriptAction.Builder JavaScript()
     {
@@ -358,7 +380,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Execute JavaScript.
+    ///     Execute JavaScript.
     /// </summary>
     public JavaScriptAction.Builder JavaScript(string script)
     {
@@ -370,7 +392,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Execute JavaScript.
+    ///     Execute JavaScript.
     /// </summary>
     public JavaScriptAction.Builder JavaScript(IResource script)
     {
@@ -378,7 +400,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Execute JavaScript.
+    ///     Execute JavaScript.
     /// </summary>
     public JavaScriptAction.Builder JavaScript(IResource scriptResource, Encoding encoding)
     {
@@ -397,7 +419,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Open window.
+    ///     Open window.
     /// </summary>
     public OpenWindowAction.Builder Open()
     {
@@ -408,7 +430,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Close window.
+    ///     Close window.
     /// </summary>
     public CloseWindowAction.Builder Close()
     {
@@ -419,7 +441,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Switch window.
+    ///     Switch window.
     /// </summary>
     public SwitchWindowAction.Builder Focus()
     {
@@ -430,31 +452,10 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     }
 
     /// <summary>
-    /// Switch window.
+    ///     Switch window.
     /// </summary>
     public SwitchWindowAction.Builder SwitchWindow()
     {
         return Focus();
     }
-
-    /// <summary>
-    /// Builds the ISeleniumAction instance configured by the current SeleniumActionBuilder instance.
-    /// </summary>
-    /// <returns>An instance of ISeleniumAction representing the configured Selenium action.</returns>
-    public ISeleniumAction Build()
-    {
-        ObjectHelper.AssertNotNull(_delegateBuilder, "Missing delegate action to build");
-        if (_seleniumBrowser != null)
-        {
-            _delegateBuilder.WithBrowser(_seleniumBrowser);
-        }
-
-        return _delegateBuilder.Build();
-    }
-
-
-    /// <summary>
-    /// Gets the delegating test action builder representing the delegate functionality for creating or composing Selenium actions.
-    /// </summary>
-    public ITestActionBuilder<ISeleniumAction> Delegate { get; }
 }

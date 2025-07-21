@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -110,6 +110,7 @@ public sealed class AgenixSettings
     // Flag to enable/disable fallback to default text equals validation
     //
     public const string PerformDefaultValidationProp = "agenix.perform.default.validation";
+    private const string AppSettingsElement = "appSettings";
 
     /// <summary>
     ///     Logger.
@@ -129,6 +130,14 @@ public sealed class AgenixSettings
     public static readonly string OutboundJsonSchemaValidationEnabledDefault = bool.FalseString;
     public static readonly string OutboundXmlSchemaValidationEnabledDefault = bool.FalseString;
     public static readonly string PerformDefaultValidationDefault = bool.FalseString;
+
+    /**
+     * File path charset parameter
+     */
+    public static readonly string FilePathCharsetParameterProperty = "agenix.file.path.charset.parameter";
+
+    public static readonly string FilePathCharsetParameterEnv = "AGENIX_FILE_PATH_CHARSET_PARAMETER";
+    public static readonly string FilePathCharsetParameterDefault = "; charset=";
 
     /// <summary>
     ///     Represents a collection of supported configuration formats,
@@ -180,6 +189,15 @@ public sealed class AgenixSettings
         return GetProperty(AgenixFileEncodingProp, "UTF-8");
     }
 
+    /// <summary>
+    ///     Retrieves the configured strategy used when no XML schema is found during validation.
+    ///     This method accesses the <c>agenix.xml.no.schema.found.strategy</c> property to determine the behavior
+    ///     for schema validation scenarios where no schema is explicitly provided.
+    /// </summary>
+    /// <returns>
+    ///     An <c>Optional&lt;string&gt;</c> containing the value of the no-schema-found strategy if defined;
+    ///     otherwise, an empty <c>Optional</c>.
+    /// </returns>
     public static Optional<string> GetNoSchemaFoundStrategy()
     {
         return Optional<string>.OfNullable(GetProperty(NoSchemaFoundStrategyPropertyName));
@@ -198,6 +216,12 @@ public sealed class AgenixSettings
     }
 
     // Add a method to reload configuration
+    /// <summary>
+    ///     Reloads the configuration settings for the Agenix application by detecting
+    ///     and loading the current configuration state. This method ensures that any
+    ///     updates to the configuration source are applied to the application context.
+    ///     It also logs the operation to help track configuration reload events.
+    /// </summary>
     public static void ReloadConfiguration()
     {
         Log.LogInformation("Reloading configuration...");
@@ -329,6 +353,7 @@ public sealed class AgenixSettings
                 SetIniProperty(key, value);
                 break;
             case ConfigurationFormat.NONE:
+                break;
             default:
                 SetAppConfigProperty(key, value);
                 break;
@@ -370,8 +395,7 @@ public sealed class AgenixSettings
         }
         catch (Exception ex)
         {
-            Log.LogError(ex, "Failed to set JSON property {Key}", key);
-            throw;
+            throw new InvalidOperationException($"Failed to set JSON property '{key}'", ex);
         }
     }
 
@@ -400,15 +424,15 @@ public sealed class AgenixSettings
             {
                 doc = new XDocument(
                     new XElement("configuration",
-                        new XElement("appSettings"))
+                        new XElement(AppSettingsElement))
                 );
             }
 
-            var appSettings = doc.Root?.Element("appSettings");
+            var appSettings = doc.Root?.Element(AppSettingsElement);
             if (appSettings == null)
             {
-                doc.Root?.Add(new XElement("appSettings"));
-                appSettings = doc.Root?.Element("appSettings");
+                doc.Root?.Add(new XElement(AppSettingsElement));
+                appSettings = doc.Root?.Element(AppSettingsElement);
             }
 
             var setting = appSettings?.Elements("add")
@@ -432,8 +456,7 @@ public sealed class AgenixSettings
         }
         catch (Exception ex)
         {
-            Log.LogError(ex, "Failed to set XML property {Key}", key);
-            throw;
+            throw new InvalidOperationException($"Failed to set XML property '{key}'", ex);
         }
     }
 
@@ -513,7 +536,7 @@ public sealed class AgenixSettings
         catch (Exception ex)
         {
             Log.LogError(ex, "Failed to set INI property {Key}", key);
-            throw;
+            throw new InvalidOperationException($"Failed to set INI property '{key}'", ex);
         }
     }
 
@@ -541,17 +564,16 @@ public sealed class AgenixSettings
             }
 
             config.Save(ConfigurationSaveMode.Modified);
-            ConfigurationManager.RefreshSection("appSettings");
+            ConfigurationManager.RefreshSection(AppSettingsElement);
 
             if (Log.IsEnabled(LogLevel.Trace))
             {
-                Log.LogTrace("Updated {config.FilePath} property {Key}={Value}", config.FilePath, key, value);
+                Log.LogTrace("Updated {ConfigFilePath} property {Key}={Value}", config.FilePath, key, value);
             }
         }
         catch (Exception ex)
         {
-            Log.LogError(ex, "Failed to set app.config property {Key}", key);
-            throw;
+            throw new InvalidOperationException($"Failed to set app.config property '{key}'", ex);
         }
     }
 
@@ -631,6 +653,19 @@ public sealed class AgenixSettings
         return GetProperty(TestNameSpaceVariableProp, TestNameSpaceVariableDefault);
     }
 
+    /// <summary>
+    ///     Retrieves the configuration value for the file path charset parameter. This method determines
+    ///     the character encoding parameter used when handling file paths, defaulting to a pre-specified
+    ///     value if no custom configuration is available.
+    /// </summary>
+    /// <returns>
+    ///     A string representing the file path charset parameter, either retrieved from the configuration
+    ///     or resolved to the default value.
+    /// </returns>
+    public static string GetFilePathCharsetParameter()
+    {
+        return GetProperty(FilePathCharsetParameterProperty, FilePathCharsetParameterDefault);
+    }
 
     /// <summary>
     ///     Get logger mask keywords.

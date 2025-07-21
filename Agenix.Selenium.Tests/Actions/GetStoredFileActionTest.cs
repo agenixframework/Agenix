@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,6 +21,7 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using Agenix.Api.Exceptions;
@@ -59,7 +61,6 @@ public class GetStoredFileActionTest : AbstractNUnitSetUp
         var content = File.ReadAllText(Context.GetVariable(SeleniumHeaders.SeleniumDownloadFile));
 
         Assert.That(content, Is.EqualTo(string.Empty));
-
     }
 
     [Test]
