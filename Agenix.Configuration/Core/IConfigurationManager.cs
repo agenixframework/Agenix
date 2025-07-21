@@ -1,4 +1,3 @@
-
 #region License
 
 // Licensed to the Apache Software Foundation (ASF) under one
@@ -28,54 +27,54 @@
 namespace Agenix.Configuration.Core;
 
 /// <summary>
-/// Interface for configuration management with environment-specific configuration loading.
+///     Interface for configuration management with environment-specific configuration loading.
 /// </summary>
 /// <typeparam name="T">The type of the configuration object</typeparam>
 public interface IConfigurationManager<T> where T : class, new()
 {
     /// <summary>
-    /// Gets a value indicating whether configuration caching is enabled.
+    ///     Gets a value indicating whether configuration caching is enabled.
     /// </summary>
     bool IsConfigurationCached { get; }
 
     /// <summary>
-    /// Gets the name of the current environment being used.
+    ///     Gets the name of the current environment being used.
     /// </summary>
     string? CurrentEnvironment { get; }
 
     /// <summary>
-    /// Gets the configuration for the current environment.
+    ///     Gets the configuration for the current environment.
     /// </summary>
     /// <returns>The configuration object for the current environment</returns>
     T GetConfiguration();
 
     /// <summary>
-    /// Gets the configuration for a specific environment.
+    ///     Gets the configuration for a specific environment.
     /// </summary>
     /// <param name="environment">The environment name (e.g., "Development", "Production")</param>
     /// <returns>The configuration object for the specified environment</returns>
     T GetConfiguration(string environment);
 
     /// <summary>
-    /// Asynchronously gets the configuration for the current environment.
+    ///     Asynchronously gets the configuration for the current environment.
     /// </summary>
     /// <returns>A task containing the configuration object for the current environment</returns>
     Task<T> GetConfigurationAsync();
 
     /// <summary>
-    /// Asynchronously gets the configuration for a specific environment.
+    ///     Asynchronously gets the configuration for a specific environment.
     /// </summary>
     /// <param name="environment">The environment name (e.g., "Development", "Production")</param>
     /// <returns>A task containing the configuration object for the specified environment</returns>
     Task<T> GetConfigurationAsync(string environment);
 
     /// <summary>
-    /// Reloads the configuration for the current environment, clearing any cached values.
+    ///     Reloads the configuration for the current environment, clearing any cached values.
     /// </summary>
     void ReloadConfiguration();
 
     /// <summary>
-    /// Reloads the configuration for a specific environment, clearing any cached values.
+    ///     Reloads the configuration for a specific environment, clearing any cached values.
     /// </summary>
     /// <param name="environment">The environment name to reload</param>
     void ReloadConfiguration(string environment);

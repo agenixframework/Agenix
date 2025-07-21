@@ -4,13 +4,13 @@ using System.Text;
 namespace Agenix.Azure.Security.Tests.Handler;
 
 /// <summary>
-/// Test HTTP message handler for testing HTTP clients and handlers
+///     Test HTTP message handler for testing HTTP clients and handlers
 /// </summary>
 public class TestHttpMessageHandler : HttpMessageHandler
 {
     private readonly Queue<(HttpStatusCode StatusCode, string Content)> _responses = new();
-    private HttpStatusCode _defaultStatusCode = HttpStatusCode.OK;
     private string _defaultContent = string.Empty;
+    private HttpStatusCode _defaultStatusCode = HttpStatusCode.OK;
     private Exception? _exception;
 
     public int RequestCount { get; private set; }
@@ -18,7 +18,7 @@ public class TestHttpMessageHandler : HttpMessageHandler
     public HttpRequestMessage? LastRequest => Requests.LastOrDefault();
 
     /// <summary>
-    /// Set a single response for all requests
+    ///     Set a single response for all requests
     /// </summary>
     public void SetResponse(HttpStatusCode statusCode, string content)
     {
@@ -29,7 +29,7 @@ public class TestHttpMessageHandler : HttpMessageHandler
     }
 
     /// <summary>
-    /// Set multiple responses in sequence
+    ///     Set multiple responses in sequence
     /// </summary>
     public void SetResponses(params (HttpStatusCode StatusCode, string Content)[] responses)
     {
@@ -38,11 +38,12 @@ public class TestHttpMessageHandler : HttpMessageHandler
         {
             _responses.Enqueue(response);
         }
+
         _exception = null;
     }
 
     /// <summary>
-    /// Set an exception to be thrown on the next request
+    ///     Set an exception to be thrown on the next request
     /// </summary>
     public void SetException(Exception exception)
     {
@@ -50,7 +51,7 @@ public class TestHttpMessageHandler : HttpMessageHandler
     }
 
     /// <summary>
-    /// Reset the handler state
+    ///     Reset the handler state
     /// </summary>
     public void Reset()
     {
@@ -62,7 +63,8 @@ public class TestHttpMessageHandler : HttpMessageHandler
         _defaultContent = string.Empty;
     }
 
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+        CancellationToken cancellationToken)
     {
         RequestCount++;
         Requests.Add(request);
@@ -95,6 +97,7 @@ public class TestHttpMessageHandler : HttpMessageHandler
             Requests.Clear();
             _responses.Clear();
         }
+
         base.Dispose(disposing);
     }
 }

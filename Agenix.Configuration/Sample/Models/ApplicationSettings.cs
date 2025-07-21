@@ -1,4 +1,3 @@
-
 #region License
 
 // Licensed to the Apache Software Foundation (ASF) under one
@@ -25,95 +24,95 @@
 namespace Agenix.Configuration.Sample.Models;
 
 /// <summary>
-/// Sample application settings for demonstrating configuration usage.
+///     Sample application settings for demonstrating configuration usage.
 /// </summary>
 public class ApplicationSettings
 {
     /// <summary>
-    /// Database connection string
+    ///     Database connection string
     /// </summary>
     public string DatabaseConnectionString { get; set; } = string.Empty;
 
     /// <summary>
-    /// API base URL
+    ///     API base URL
     /// </summary>
     public string ApiBaseUrl { get; set; } = string.Empty;
 
     /// <summary>
-    /// Logging configuration
+    ///     Logging configuration
     /// </summary>
     public LoggingSettings Logging { get; set; } = new();
 
     /// <summary>
-    /// Cache configuration
+    ///     Cache configuration
     /// </summary>
     public CacheSettings Cache { get; set; } = new();
 
     /// <summary>
-    /// Feature flags
+    ///     Feature flags
     /// </summary>
     public FeatureFlags Features { get; set; } = new();
 }
 
 /// <summary>
-/// Logging configuration settings
+///     Logging configuration settings
 /// </summary>
 public class LoggingSettings
 {
     /// <summary>
-    /// Minimum log level
+    ///     Minimum log level
     /// </summary>
     public string Level { get; set; } = "Information";
 
     /// <summary>
-    /// Log file path
+    ///     Log file path
     /// </summary>
     public string FilePath { get; set; } = "./logs/app.log";
 
     /// <summary>
-    /// Enable console logging
+    ///     Enable console logging
     /// </summary>
     public bool EnableConsole { get; set; } = true;
 }
 
 /// <summary>
-/// Cache configuration settings
+///     Cache configuration settings
 /// </summary>
 public class CacheSettings
 {
     /// <summary>
-    /// Cache provider type
+    ///     Cache provider type
     /// </summary>
     public string Provider { get; set; } = "Memory";
 
     /// <summary>
-    /// Cache expiration time in minutes
+    ///     Cache expiration time in minutes
     /// </summary>
     public int ExpirationMinutes { get; set; } = 60;
 
     /// <summary>
-    /// Redis connection string (if using Redis)
+    ///     Redis connection string (if using Redis)
     /// </summary>
     public string? RedisConnectionString { get; set; }
 }
 
 /// <summary>
-/// Feature flags configuration
+///     Feature flags configuration
 /// </summary>
 public class FeatureFlags
 {
     /// <summary>
-    /// Enable new dashboard feature
+    ///     Enable new dashboard feature
     /// </summary>
     public bool EnableNewDashboard { get; set; } = false;
 
     /// <summary>
-    /// Enable advanced analytics
+    ///     Enable advanced analytics
     /// </summary>
     public bool EnableAdvancedAnalytics { get; set; } = true;
 
     /// <summary>
-    /// Enable beta features
+    ///     Enable beta features
     /// </summary>
     public bool EnableBetaFeatures { get; set; } = false;
 }

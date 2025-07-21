@@ -7,24 +7,22 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
-
-using System.Globalization;
 
 namespace Agenix.Api.Report;
 
@@ -33,7 +31,6 @@ public class TestResults
 {
     private const string ZeroPercentage = "0.0";
     private readonly HashSet<TestResult> _results = [];
-    private long _totalDurationMillis;
 
     /// Converts the collection of test results to a list.
     /// <return>A list containing all the test results.</return>
@@ -47,8 +44,6 @@ public class TestResults
     /// <return>True if the result was added to the collection; otherwise, false.</return>
     public bool AddResult(TestResult result)
     {
-        _totalDurationMillis += (long)result.Duration.TotalMilliseconds;
-
         return _results.Add(result);
     }
 
@@ -126,18 +121,8 @@ public class TestResults
     /// /
     public TimeSpan GetTotalDuration()
     {
-        return TimeSpan.FromMilliseconds(_totalDurationMillis);
-    }
-
-    /// Creates and returns a new NumberFormatInfo instance with customized decimal and group separators.
-    /// <return>A NumberFormatInfo instance with decimal and group separators set to "." and "," respectively.</return>
-    private NumberFormatInfo GetNewDecimalFormat()
-    {
-        var numberFormat = new NumberFormatInfo { NumberDecimalSeparator = ".", NumberGroupSeparator = "," };
-
-        // Set custom format for zero and one decimal place
-        var specificCulture = new CultureInfo("en-US") { NumberFormat = numberFormat };
-
-        return numberFormat;
+        return TimeSpan.FromMilliseconds(_results
+            .Where(r => r.Duration != null)
+            .Sum(r => r.Duration.TotalMilliseconds));
     }
 }

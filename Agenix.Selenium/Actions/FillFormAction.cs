@@ -170,10 +170,10 @@ public class FillFormAction : AbstractSeleniumAction
         }
 
         /// <summary>
-        /// Builds and returns an instance of <see cref="FillFormAction"/>.
+        ///     Builds and returns an instance of <see cref="FillFormAction" />.
         /// </summary>
         /// <returns>
-        /// A new instance of <see cref="FillFormAction"/> configured using the builder.
+        ///     A new instance of <see cref="FillFormAction" /> configured using the builder.
         /// </returns>
         public override FillFormAction Build()
         {

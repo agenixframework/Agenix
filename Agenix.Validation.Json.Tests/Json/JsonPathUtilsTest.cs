@@ -26,7 +26,6 @@
 
 using Agenix.Validation.Json.Json;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Agenix.Validation.Json.Tests.Json;
 

@@ -30,7 +30,6 @@ using Agenix.Core.Message;
 using Agenix.Core.Validation.Json;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Agenix.Validation.Json.Tests.Json;
 

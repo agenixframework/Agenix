@@ -60,12 +60,34 @@ public class DefaultFunctionLibrary : FunctionLibrary
         Members.Add("Concat", new ConcatFunction());
         Members.Add("UpperCase", new UpperCaseFunction());
         Members.Add("CurrentDate", new CurrentDateFunction());
+        Members.Add("ChangeDate", new ChangeDateFunction());
         Members.Add("LowerCase", new LowerCaseFunction());
         Members.Add("RandomString", new RandomStringFunction());
         Members.Add("RandomNumber", new RandomNumberFunction());
+        Members.Add("RandomNumberGenerator", new AdvancedRandomNumberFunction());
         Members.Add("EncodeBase64", new EncodeBase64Function());
         Members.Add("DecodeBase64", new DecodeBase64Function());
         Members.Add("Translate", new TranslateFunction());
+        Members.Add("Absolute", new AbsoluteFunction());
+        Members.Add("Average", new AvgFunction());
+        Members.Add("Ceiling", new CeilingFunction());
+        Members.Add("DigestAuthHeader", new DigestAuthHeaderFunction());
+        Members.Add("EscapeJson", new EscapeJsonFunction());
+        Members.Add("Floor", new FloorFunction());
+        Members.Add("Message", new LoadMessageFunction());
+        Members.Add("LocalHostAddress", new LocalHostAddressFunction());
+        Members.Add("Maximum", new MaxFunction());
+        Members.Add("Minimum", new MinFunction());
+        Members.Add("RandomEnumValue", new RandomEnumValueFunction());
+        Members.Add("ReadFile", new ReadFileResourceFunction());
+        Members.Add("StringLength", new StringLengthFunction());
+        Members.Add("SubstringAfter", new SubstringAfterFunction());
+        Members.Add("SubstringBefore", new SubstringBeforeFunction());
+        Members.Add("Substring", new SubstringFunction());
+        Members.Add("Sum", new SumFunction());
+        Members.Add("UnixTimestamp", new UnixTimestampFunction());
+        Members.Add("UrlEncode", new UrlEncodeFunction());
+        Members.Add("UrlDecode", new UrlDecodeFunction());
 
         LookupFunctions();
     }

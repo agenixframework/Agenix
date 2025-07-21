@@ -36,9 +36,9 @@ using Newtonsoft.Json.Linq;
 namespace Agenix.Validation.Json.Variable.Dictionary.Json;
 
 /// <summary>
-/// Simple json data dictionary implementation holds a set of mappings where keys are json path expressions to match
-/// json object graph. Parses message payload to json object tree. Traverses
-/// through json data supporting nested json objects, arrays and values.
+///     Simple json data dictionary implementation holds a set of mappings where keys are json path expressions to match
+///     json object graph. Parses message payload to json object tree. Traverses
+///     through json data supporting nested json objects, arrays and values.
 /// </summary>
 public class JsonMappingDataDictionary : AbstractJsonDataDictionary
 {
@@ -136,19 +136,27 @@ public class JsonMappingDataDictionary : AbstractJsonDataDictionary
         var stringValue = value?.ToString();
 
         if (string.IsNullOrEmpty(stringValue))
+        {
             return value;
+        }
 
         // Try to parse as integer
-        if (int.TryParse(stringValue, out int intValue))
+        if (int.TryParse(stringValue, out var intValue))
+        {
             return intValue;
+        }
 
         // Try to parse as double
-        if (double.TryParse(stringValue, out double doubleValue))
+        if (double.TryParse(stringValue, out var doubleValue))
+        {
             return doubleValue;
+        }
 
         // Try to parse as boolean
-        if (bool.TryParse(stringValue, out bool boolValue))
+        if (bool.TryParse(stringValue, out var boolValue))
+        {
             return boolValue;
+        }
 
         // Check for null
         return stringValue.Equals("null", StringComparison.OrdinalIgnoreCase)
@@ -160,7 +168,7 @@ public class JsonMappingDataDictionary : AbstractJsonDataDictionary
 
 
     /// <summary>
-    /// Walks through the Json object structure and translates values based on element path if necessary.
+    ///     Walks through the Json object structure and translates values based on element path if necessary.
     /// </summary>
     /// <param name="jsonData">The JSON object to traverse</param>
     /// <param name="jsonPath">The current JSON path</param>

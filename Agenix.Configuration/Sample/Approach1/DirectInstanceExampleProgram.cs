@@ -1,4 +1,3 @@
-
 #region License
 
 // Licensed to the Apache Software Foundation (ASF) under one
@@ -25,20 +24,19 @@
 namespace Agenix.Configuration.Sample.Approach1;
 
 /// <summary>
-/// Console application to demonstrate Approach 1: Direct Instance Example
+///     Console application to demonstrate Approach 1: Direct Instance Example
 /// </summary>
 public static class Program
 {
     /// <summary>
-    /// Entry point for the console application to demonstrate the Direct Instance Example.
-    /// Handles the sequential execution of demonstration methods, including basic usage,
-    /// environment-specific usage, asynchronous usage, caching and reloading, and service usage.
+    ///     Entry point for the console application to demonstrate the Direct Instance Example.
+    ///     Handles the sequential execution of demonstration methods, including basic usage,
+    ///     environment-specific usage, asynchronous usage, caching and reloading, and service usage.
     /// </summary>
     /// <param name="args">Array of command-line arguments passed to the application.</param>
-    /// <returns>A <see cref="Task"/> representing the asynchronous execution of the program.</returns>
+    /// <returns>A <see cref="Task" /> representing the asynchronous execution of the program.</returns>
     public static async Task Main(string[] args)
     {
-
         // Setup logging
         try
         {

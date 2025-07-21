@@ -32,9 +32,11 @@ namespace Agenix.Http.Client;
 public class HttpsEndpointComponent() : HttpEndpointComponent("https")
 {
     /// <summary>
-    /// Gets the scheme that specifies the protocol used for constructing endpoint URIs in the derived HTTP client component.
-    /// The property returns a predefined scheme value, such as "https://" for secure connections in derived classes like <c>HttpsEndpointComponent</c>.
-    /// This serves as the base URI protocol scheme for endpoints created by the component.
+    ///     Gets the scheme that specifies the protocol used for constructing endpoint URIs in the derived HTTP client
+    ///     component.
+    ///     The property returns a predefined scheme value, such as "https://" for secure connections in derived classes like
+    ///     <c>HttpsEndpointComponent</c>.
+    ///     This serves as the base URI protocol scheme for endpoints created by the component.
     /// </summary>
     protected override string Scheme => "https://";
 }

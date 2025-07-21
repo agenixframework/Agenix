@@ -30,15 +30,15 @@ using Agenix.GraphQL.Client;
 namespace Agenix.GraphQL.Tests.Endpoint.Builder;
 
 /// <summary>
-/// Unit tests for the GraphQL endpoint component lookup and builder functionality.
-/// Tests the registration and discovery of GraphQL endpoint builders in the framework.
+///     Unit tests for the GraphQL endpoint component lookup and builder functionality.
+///     Tests the registration and discovery of GraphQL endpoint builders in the framework.
 /// </summary>
 [TestFixture]
 public class GraphQLEndpointsTest
 {
     /// <summary>
-    /// Tests that GraphQL endpoint builders are properly registered and can be looked up by name.
-    /// Verifies that both client and server GraphQL endpoints are available in the endpoint registry.
+    ///     Tests that GraphQL endpoint builders are properly registered and can be looked up by name.
+    ///     Verifies that both client and server GraphQL endpoints are available in the endpoint registry.
     /// </summary>
     [Test]
     public void ShouldLookupEndpoints()
@@ -52,8 +52,8 @@ public class GraphQLEndpointsTest
     }
 
     /// <summary>
-    /// Tests that specific GraphQL endpoint builders can be looked up individually by name
-    /// and that they return the correct builder types.
+    ///     Tests that specific GraphQL endpoint builders can be looked up individually by name
+    ///     and that they return the correct builder types.
     /// </summary>
     [Test]
     public void ShouldLookupEndpoint()
@@ -67,8 +67,8 @@ public class GraphQLEndpointsTest
     }
 
     /// <summary>
-    /// Tests that GraphQL endpoint builders are properly configured with expected default settings.
-    /// Verifies that the builders can create functional endpoint instances.
+    ///     Tests that GraphQL endpoint builders are properly configured with expected default settings.
+    ///     Verifies that the builders can create functional endpoint instances.
     /// </summary>
     [Test]
     public void ShouldCreateGraphQlEndpoints()

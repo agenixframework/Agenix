@@ -8,12 +8,12 @@ using OpenQA.Selenium.Support.Events;
 namespace Agenix.Selenium.Config;
 
 /// <summary>
-/// Parser for SeleniumBrowserConfig attribute to create SeleniumBrowser instances
+///     Parser for SeleniumBrowserConfig attribute to create SeleniumBrowser instances
 /// </summary>
 public class SeleniumBrowserConfigParser : IAnnotationConfigParser<SeleniumBrowserConfigAttribute, SeleniumBrowser>
 {
     /// <summary>
-    /// Parses the SeleniumBrowserConfig attribute and creates a configured SeleniumBrowser instance
+    ///     Parses the SeleniumBrowserConfig attribute and creates a configured SeleniumBrowser instance
     /// </summary>
     /// <param name="attribute">The SeleniumBrowserConfig attribute to parse</param>
     /// <param name="referenceResolver">Reference resolver for dependency injection</param>
@@ -69,7 +69,7 @@ public class SeleniumBrowserConfigParser : IAnnotationConfigParser<SeleniumBrows
     }
 
     /// <summary>
-    /// Parses a SeleniumBrowserConfig attribute and creates a configured SeleniumBrowser instance.
+    ///     Parses a SeleniumBrowserConfig attribute and creates a configured SeleniumBrowser instance.
     /// </summary>
     /// <param name="annotation">The SeleniumBrowserConfig attribute to parse.</param>
     /// <param name="referenceResolver">The reference resolver used for resolving dependencies during parsing.</param>
@@ -81,6 +81,7 @@ public class SeleniumBrowserConfigParser : IAnnotationConfigParser<SeleniumBrows
             return Parse(seleniumBrowserConfig, referenceResolver);
         }
 
-        throw new ArgumentException($"Unsupported attribute type: {annotation.GetType().Name}. Expected {nameof(SeleniumBrowserConfigAttribute)}.");
+        throw new ArgumentException(
+            $"Unsupported attribute type: {annotation.GetType().Name}. Expected {nameof(SeleniumBrowserConfigAttribute)}.");
     }
 }

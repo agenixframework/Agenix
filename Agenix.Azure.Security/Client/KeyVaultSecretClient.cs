@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,6 +21,7 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using Agenix.Api.Log;
@@ -31,27 +33,27 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Azure.Security.Client;
 
 /// <summary>
-/// Client for retrieving secrets from Azure Key Vault
+///     Client for retrieving secrets from Azure Key Vault
 /// </summary>
 public class KeyVaultSecretClient
 {
     /// <summary>
-    /// Logger instance
+    ///     Logger instance
     /// </summary>
     private static readonly ILogger Log = LogManager.GetLogger(typeof(KeyVaultSecretClient));
 
     /// <summary>
-    /// The underlying Azure SecretClient
-    /// </summary>
-    private readonly SecretClient _secretClient;
-
-    /// <summary>
-    /// Key Vault configuration
+    ///     Key Vault configuration
     /// </summary>
     private readonly KeyVaultConfiguration _configuration;
 
     /// <summary>
-    /// Initialize KeyVaultSecretClient with configuration
+    ///     The underlying Azure SecretClient
+    /// </summary>
+    private readonly SecretClient _secretClient;
+
+    /// <summary>
+    ///     Initialize KeyVaultSecretClient with configuration
     /// </summary>
     /// <param name="configuration">Key Vault configuration</param>
     public KeyVaultSecretClient(KeyVaultConfiguration configuration)
@@ -61,7 +63,7 @@ public class KeyVaultSecretClient
     }
 
     /// <summary>
-    /// Initialize KeyVaultSecretClient with existing SecretClient
+    ///     Initialize KeyVaultSecretClient with existing SecretClient
     /// </summary>
     /// <param name="secretClient">Azure SecretClient instance</param>
     /// <param name="configuration">Key Vault configuration</param>
@@ -72,7 +74,17 @@ public class KeyVaultSecretClient
     }
 
     /// <summary>
-    /// Get secret value as string
+    ///     Get the vault URI
+    /// </summary>
+    public string VaultUri => _configuration.VaultUri;
+
+    /// <summary>
+    ///     Get the underlying Azure SecretClient for advanced operations
+    /// </summary>
+    public SecretClient UnderlyingClient => _secretClient;
+
+    /// <summary>
+    ///     Get secret value as string
     /// </summary>
     /// <param name="secretName">Name of the secret</param>
     /// <param name="cancellationToken">Cancellation token</param>
@@ -80,39 +92,50 @@ public class KeyVaultSecretClient
     public async Task<string> GetSecretAsync(string secretName, CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(secretName))
+        {
             throw new ArgumentException("Secret name cannot be null or empty", nameof(secretName));
+        }
 
         try
         {
-            Log.LogDebug("Retrieving secret '{SecretName}' from vault '{VaultUri}'", secretName, _configuration.VaultUri);
+            Log.LogDebug("Retrieving secret '{SecretName}' from vault '{VaultUri}'", secretName,
+                _configuration.VaultUri);
 
             var response = await _secretClient.GetSecretAsync(secretName, cancellationToken: cancellationToken);
             var secretValue = response.Value.Value;
 
-            Log.LogDebug("Successfully retrieved secret '{SecretName}' from vault '{VaultUri}'", secretName, _configuration.VaultUri);
+            Log.LogDebug("Successfully retrieved secret '{SecretName}' from vault '{VaultUri}'", secretName,
+                _configuration.VaultUri);
             return secretValue;
         }
         catch (Exception ex)
         {
-            Log.LogError(ex, "Failed to retrieve secret '{SecretName}' from vault '{VaultUri}'", secretName, _configuration.VaultUri);
-            throw new InvalidOperationException($"Failed to retrieve secret '{secretName}' from vault '{_configuration.VaultUri}'", ex);
+            Log.LogError(ex, "Failed to retrieve secret '{SecretName}' from vault '{VaultUri}'", secretName,
+                _configuration.VaultUri);
+            throw new InvalidOperationException(
+                $"Failed to retrieve secret '{secretName}' from vault '{_configuration.VaultUri}'", ex);
         }
     }
 
     /// <summary>
-    /// Get specific version of secret value as string
+    ///     Get specific version of secret value as string
     /// </summary>
     /// <param name="secretName">Name of the secret</param>
     /// <param name="version">Secret version</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Secret value as string</returns>
-    public async Task<string> GetSecretAsync(string secretName, string version, CancellationToken cancellationToken = default)
+    public async Task<string> GetSecretAsync(string secretName, string version,
+        CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(secretName))
+        {
             throw new ArgumentException("Secret name cannot be null or empty", nameof(secretName));
+        }
 
         if (string.IsNullOrWhiteSpace(version))
+        {
             throw new ArgumentException("Secret version cannot be null or empty", nameof(version));
+        }
 
         try
         {
@@ -130,26 +153,33 @@ public class KeyVaultSecretClient
         {
             Log.LogError(ex, "Failed to retrieve secret '{SecretName}' version '{Version}' from vault '{VaultUri}'",
                 secretName, version, _configuration.VaultUri);
-            throw new InvalidOperationException($"Failed to retrieve secret '{secretName}' from vault '{_configuration.VaultUri}'", ex);
+            throw new InvalidOperationException(
+                $"Failed to retrieve secret '{secretName}' from vault '{_configuration.VaultUri}'", ex);
         }
     }
 
     /// <summary>
-    /// Get multiple secrets at once
+    ///     Get multiple secrets at once
     /// </summary>
     /// <param name="secretNames">Names of the secrets to retrieve</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Dictionary with secret names as keys and secret values as values</returns>
-    public async Task<Dictionary<string, string>> GetSecretsAsync(IEnumerable<string> secretNames, CancellationToken cancellationToken = default)
+    public async Task<Dictionary<string, string>> GetSecretsAsync(IEnumerable<string> secretNames,
+        CancellationToken cancellationToken = default)
     {
         if (secretNames == null)
+        {
             throw new ArgumentNullException(nameof(secretNames));
+        }
 
         var secretNamesList = secretNames.ToList();
         if (secretNamesList.Count == 0)
+        {
             return new Dictionary<string, string>();
+        }
 
-        Log.LogDebug("Retrieving {Count} secrets from vault '{VaultUri}'", secretNamesList.Count, _configuration.VaultUri);
+        Log.LogDebug("Retrieving {Count} secrets from vault '{VaultUri}'", secretNamesList.Count,
+            _configuration.VaultUri);
 
         var results = new Dictionary<string, string>();
         var tasks = secretNamesList.Select(async secretName =>
@@ -161,7 +191,8 @@ public class KeyVaultSecretClient
             }
             catch (Exception ex)
             {
-                Log.LogWarning(ex, "Failed to retrieve secret '{SecretName}' while getting multiple secrets", secretName);
+                Log.LogWarning(ex, "Failed to retrieve secret '{SecretName}' while getting multiple secrets",
+                    secretName);
                 return new KeyValuePair<string, string>(secretName, string.Empty);
             }
         });
@@ -183,7 +214,7 @@ public class KeyVaultSecretClient
     }
 
     /// <summary>
-    /// Get a specific version of secret value as string synchronously
+    ///     Get a specific version of secret value as string synchronously
     /// </summary>
     /// <param name="secretName">Name of the secret</param>
     /// <param name="version">Secret version</param>
@@ -194,7 +225,7 @@ public class KeyVaultSecretClient
     }
 
     /// <summary>
-    /// Get secret value as string synchronously
+    ///     Get secret value as string synchronously
     /// </summary>
     /// <param name="secretName">Name of the secret</param>
     /// <returns>Secret value as string</returns>
@@ -204,7 +235,7 @@ public class KeyVaultSecretClient
     }
 
     /// <summary>
-    /// Get multiple secrets at once synchronously
+    ///     Get multiple secrets at once synchronously
     /// </summary>
     /// <param name="secretNames">Names of the secrets to retrieve</param>
     /// <returns>Dictionary with secret names as keys and secret values as values</returns>
@@ -214,7 +245,7 @@ public class KeyVaultSecretClient
     }
 
     /// <summary>
-    /// Check if a secret exists
+    ///     Check if a secret exists
     /// </summary>
     /// <param name="secretName">Name of the secret</param>
     /// <param name="cancellationToken">Cancellation token</param>
@@ -222,11 +253,14 @@ public class KeyVaultSecretClient
     public async Task<bool> SecretExistsAsync(string secretName, CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(secretName))
+        {
             throw new ArgumentException("Secret name cannot be null or empty", nameof(secretName));
+        }
 
         try
         {
-            Log.LogDebug("Checking if secret '{SecretName}' exists in vault '{VaultUri}'", secretName, _configuration.VaultUri);
+            Log.LogDebug("Checking if secret '{SecretName}' exists in vault '{VaultUri}'", secretName,
+                _configuration.VaultUri);
 
             await _secretClient.GetSecretAsync(secretName, cancellationToken: cancellationToken);
 
@@ -235,18 +269,21 @@ public class KeyVaultSecretClient
         }
         catch (RequestFailedException ex) when (ex.Status == 404)
         {
-            Log.LogDebug(ex, "Secret '{SecretName}' does not exist in vault '{VaultUri}'", secretName, _configuration.VaultUri);
+            Log.LogDebug(ex, "Secret '{SecretName}' does not exist in vault '{VaultUri}'", secretName,
+                _configuration.VaultUri);
             return false;
         }
         catch (Exception ex)
         {
-            Log.LogError(ex, "Error checking if secret '{SecretName}' exists in vault '{VaultUri}'", secretName, _configuration.VaultUri);
-            throw new InvalidOperationException($"Failed to check if secret '{secretName}' exists in vault '{_configuration.VaultUri}'", ex);
+            Log.LogError(ex, "Error checking if secret '{SecretName}' exists in vault '{VaultUri}'", secretName,
+                _configuration.VaultUri);
+            throw new InvalidOperationException(
+                $"Failed to check if secret '{secretName}' exists in vault '{_configuration.VaultUri}'", ex);
         }
     }
 
     /// <summary>
-    /// Check if a secret exists synchronously
+    ///     Check if a secret exists synchronously
     /// </summary>
     /// <param name="secretName">Name of the secret</param>
     /// <returns>True if a secret exists, false otherwise</returns>
@@ -254,14 +291,4 @@ public class KeyVaultSecretClient
     {
         return SecretExistsAsync(secretName).GetAwaiter().GetResult();
     }
-
-    /// <summary>
-    /// Get the vault URI
-    /// </summary>
-    public string VaultUri => _configuration.VaultUri;
-
-    /// <summary>
-    /// Get the underlying Azure SecretClient for advanced operations
-    /// </summary>
-    public SecretClient UnderlyingClient => _secretClient;
 }

@@ -31,27 +31,27 @@ using Agenix.Core.Endpoint;
 namespace Agenix.GraphQL.Client;
 
 /// <summary>
-/// Represents a component responsible for creating GraphQL client endpoints based on a given URI resource
-/// and associated parameters. It allows configuration of GraphQL-specific endpoint settings and supports
-/// various GraphQL-related options such as operation types, WebSocket connections, and subscription handling.
-/// Supports both HTTP and HTTPS protocols for secure communication.
+///     Represents a component responsible for creating GraphQL client endpoints based on a given URI resource
+///     and associated parameters. It allows configuration of GraphQL-specific endpoint settings and supports
+///     various GraphQL-related options such as operation types, WebSocket connections, and subscription handling.
+///     Supports both HTTP and HTTPS protocols for secure communication.
 /// </summary>
 public class GraphQLEndpointComponent : AbstractEndpointComponent
 {
     /// <summary>
-    /// Represents a component responsible for creating GraphQL client endpoints based on a given URI resource
-    /// and associated parameters. It allows configuration of GraphQL-specific endpoint settings and supports
-    /// various GraphQL-related options such as operation types, WebSocket connections, and subscription handling.
+    ///     Represents a component responsible for creating GraphQL client endpoints based on a given URI resource
+    ///     and associated parameters. It allows configuration of GraphQL-specific endpoint settings and supports
+    ///     various GraphQL-related options such as operation types, WebSocket connections, and subscription handling.
     /// </summary>
     public GraphQLEndpointComponent() : this("graphql")
     {
     }
 
     /// <summary>
-    /// Represents a specialized component used for creating GraphQL client endpoints based on specific
-    /// resource paths and parameters. This component handles configuration and initialization of
-    /// GraphQL endpoints, enabling customization of options such as operation types, WebSocket usage,
-    /// and subscription management.
+    ///     Represents a specialized component used for creating GraphQL client endpoints based on specific
+    ///     resource paths and parameters. This component handles configuration and initialization of
+    ///     GraphQL endpoints, enabling customization of options such as operation types, WebSocket usage,
+    ///     and subscription management.
     /// </summary>
     /// <param name="name">The name identifier for this GraphQL endpoint component.</param>
     public GraphQLEndpointComponent(string name) : base(name)
@@ -59,24 +59,24 @@ public class GraphQLEndpointComponent : AbstractEndpointComponent
     }
 
     /// <summary>
-    /// Gets the URI scheme used for GraphQL endpoints.
-    /// Returns "http://" by default, but can be overridden for HTTPS support.
+    ///     Gets the URI scheme used for GraphQL endpoints.
+    ///     Returns "http://" by default, but can be overridden for HTTPS support.
     /// </summary>
     /// <returns>A string representing the scheme (e.g., "http://").</returns>
     protected virtual string Scheme => "http://";
 
     /// <summary>
-    /// Gets the WebSocket URI scheme used for GraphQL subscriptions.
-    /// Returns "ws://" by default, but can be overridden for secure WebSocket support.
+    ///     Gets the WebSocket URI scheme used for GraphQL subscriptions.
+    ///     Returns "ws://" by default, but can be overridden for secure WebSocket support.
     /// </summary>
     /// <returns>A string representing the WebSocket scheme (e.g., "ws://").</returns>
     protected virtual string WebSocketScheme => "ws://";
 
     /// <summary>
-    /// Creates a GraphQL endpoint based on the provided resource path, parameters, and execution context.
-    /// This method constructs an endpoint with configuration details defined in the parameters and
-    /// customizes specific GraphQL options such as the operation type, WebSocket usage, and subscription settings.
-    /// Automatically handles both HTTP and HTTPS protocols based on the secure parameter or resource path.
+    ///     Creates a GraphQL endpoint based on the provided resource path, parameters, and execution context.
+    ///     This method constructs an endpoint with configuration details defined in the parameters and
+    ///     customizes specific GraphQL options such as the operation type, WebSocket usage, and subscription settings.
+    ///     Automatically handles both HTTP and HTTPS protocols based on the secure parameter or resource path.
     /// </summary>
     /// <param name="resourcePath">The relative path for the resource to be accessed by the GraphQL endpoint.</param>
     /// <param name="parameters">A dictionary of parameters used to configure the endpoint, including GraphQL-specific options.</param>
@@ -152,7 +152,7 @@ public class GraphQLEndpointComponent : AbstractEndpointComponent
     }
 
     /// <summary>
-    /// Determines whether HTTPS should be used based on the resource path and parameters.
+    ///     Determines whether HTTPS should be used based on the resource path and parameters.
     /// </summary>
     /// <param name="resourcePath">The resource path that may contain protocol information.</param>
     /// <param name="parameters">Parameters that may contain a 'secure' flag.</param>
@@ -184,7 +184,7 @@ public class GraphQLEndpointComponent : AbstractEndpointComponent
     }
 
     /// <summary>
-    /// Configures authentication settings from parameters.
+    ///     Configures authentication settings from parameters.
     /// </summary>
     /// <param name="config">The GraphQL endpoint configuration.</param>
     /// <param name="parameters">The parameters dictionary.</param>
@@ -196,7 +196,10 @@ public class GraphQLEndpointComponent : AbstractEndpointComponent
                             parameters.ContainsKey("authUsername") ||
                             parameters.ContainsKey("authPassword");
 
-        if (!hasAuthParams) return;
+        if (!hasAuthParams)
+        {
+            return;
+        }
 
         config.Authentication ??= new GraphQLEndpointConfiguration.GraphQLAuthenticationConfiguration();
 
@@ -222,7 +225,7 @@ public class GraphQLEndpointComponent : AbstractEndpointComponent
     }
 
     /// <summary>
-    /// Configures retry policy settings from parameters.
+    ///     Configures retry policy settings from parameters.
     /// </summary>
     /// <param name="config">The GraphQL endpoint configuration.</param>
     /// <param name="parameters">The parameter dictionary.</param>

@@ -1,9 +1,7 @@
-using System;
 using Agenix.Selenium.Actions;
 using Agenix.Selenium.Endpoint;
 using Agenix.Selenium.Util;
 using Moq;
-using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace Agenix.Selenium.Tests.Actions;
@@ -11,11 +9,6 @@ namespace Agenix.Selenium.Tests.Actions;
 [TestFixture]
 public class StartBrowserActionTest : AbstractNUnitSetUp
 {
-    private Mock<SeleniumBrowser> _seleniumBrowser = new();
-    private Mock<SeleniumBrowserConfiguration> _seleniumBrowserConfiguration = new();
-    private Mock<IWebDriver> _webDriver = new();
-    private Mock<INavigation> _navigation = new();
-
     [SetUp]
     public void SetupMethod()
     {
@@ -30,6 +23,11 @@ public class StartBrowserActionTest : AbstractNUnitSetUp
         _seleniumBrowserConfiguration.Setup(x => x.BrowserType).Returns(BrowserType.CHROME.GetBrowserName());
         _webDriver.Setup(x => x.Navigate()).Returns(_navigation.Object);
     }
+
+    private readonly Mock<SeleniumBrowser> _seleniumBrowser = new();
+    private readonly Mock<SeleniumBrowserConfiguration> _seleniumBrowserConfiguration = new();
+    private readonly Mock<IWebDriver> _webDriver = new();
+    private readonly Mock<INavigation> _navigation = new();
 
     [Test]
     public void TestStart()
@@ -63,7 +61,8 @@ public class StartBrowserActionTest : AbstractNUnitSetUp
             .WithBrowser(_seleniumBrowser.Object)
             .Build();
 
-        action.Execute(Context); ;
+        action.Execute(Context);
+        ;
 
         Assert.That(Context.GetVariable(SeleniumHeaders.SeleniumBrowser), Is.EqualTo("ChromeBrowser"));
 

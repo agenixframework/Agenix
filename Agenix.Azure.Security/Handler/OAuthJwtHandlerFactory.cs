@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,6 +21,7 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using Agenix.Azure.Security.Client;
@@ -28,12 +30,12 @@ using Agenix.Azure.Security.Configuration;
 namespace Agenix.Azure.Security.Handler;
 
 /// <summary>
-/// Factory for creating OAuth JWT authentication handlers
+///     Factory for creating OAuth JWT authentication handlers
 /// </summary>
 public static class OAuthJwtHandlerFactory
 {
     /// <summary>
-    /// Create OAuth JWT handler with client credentials flow
+    ///     Create OAuth JWT handler with client credentials flow
     /// </summary>
     public static OAuthJwtAuthenticationHandler CreateClientCredentialsHandler(
         string tokenEndpoint,
@@ -55,7 +57,7 @@ public static class OAuthJwtHandlerFactory
     }
 
     /// <summary>
-    /// Create OAuth JWT handler with full configuration
+    ///     Create OAuth JWT handler with full configuration
     /// </summary>
     public static OAuthJwtAuthenticationHandler CreateHandler(
         OAuthClientConfiguration oauthConfiguration,
@@ -66,7 +68,7 @@ public static class OAuthJwtHandlerFactory
     }
 
     /// <summary>
-    /// Create OAuth JWT handler with custom HTTP client
+    ///     Create OAuth JWT handler with custom HTTP client
     /// </summary>
     public static OAuthJwtAuthenticationHandler CreateHandler(
         OAuthClientConfiguration oauthConfiguration,
@@ -78,7 +80,7 @@ public static class OAuthJwtHandlerFactory
     }
 
     /// <summary>
-    /// Create OAuth JWT handler for client credentials with single scope
+    ///     Create OAuth JWT handler for client credentials with single scope
     /// </summary>
     public static OAuthJwtAuthenticationHandler CreateForScope(
         string tokenEndpoint,
@@ -91,7 +93,7 @@ public static class OAuthJwtHandlerFactory
     }
 
     /// <summary>
-    /// Create OAuth JWT handler with method providers (for dynamic values)
+    ///     Create OAuth JWT handler with method providers (for dynamic values)
     /// </summary>
     public static OAuthJwtAuthenticationHandler CreateWithProviders(
         string tokenEndpoint,
@@ -113,7 +115,7 @@ public static class OAuthJwtHandlerFactory
     }
 
     /// <summary>
-    /// Create OAuth JWT handler with dynamic configuration
+    ///     Create OAuth JWT handler with dynamic configuration
     /// </summary>
     public static OAuthJwtAuthenticationHandler CreateWithConfiguration(
         Func<OAuthClientConfiguration> configurationProvider,
@@ -125,7 +127,7 @@ public static class OAuthJwtHandlerFactory
     }
 
     /// <summary>
-    /// Create OAuth JWT handler with additional parameters
+    ///     Create OAuth JWT handler with additional parameters
     /// </summary>
     public static OAuthJwtAuthenticationHandler CreateWithParameters(
         string tokenEndpoint,
@@ -151,7 +153,7 @@ public static class OAuthJwtHandlerFactory
     }
 
     /// <summary>
-    /// Create OAuth JWT handler with retry configuration
+    ///     Create OAuth JWT handler with retry configuration
     /// </summary>
     public static OAuthJwtAuthenticationHandler CreateWithRetry(
         string tokenEndpoint,

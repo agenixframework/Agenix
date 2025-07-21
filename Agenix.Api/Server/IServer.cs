@@ -29,22 +29,22 @@ using Agenix.Api.Endpoint;
 namespace Agenix.Api.Server;
 
 /// <summary>
-/// Server representation in Agenix is a runnable instance accepting client connections.
+///     Server representation in Agenix is a runnable instance accepting client connections.
 /// </summary>
 public interface IServer : IEndpoint, IRunnable
 {
     /// <summary>
-    /// Start the server
+    ///     Start the server
     /// </summary>
     void Start();
 
     /// <summary>
-    /// Stop the server
+    ///     Stop the server
     /// </summary>
     void Stop();
 
     /// <summary>
-    /// Is server running
+    ///     Is server running
     /// </summary>
     /// <returns>True if server is running, false otherwise</returns>
     bool IsRunning();

@@ -32,12 +32,12 @@ using Agenix.GraphQL.Client;
 namespace Agenix.GraphQL.Actions;
 
 /// <summary>
-/// Provides functionality to build and configure GraphQL-related test actions fluently.
+///     Provides functionality to build and configure GraphQL-related test actions fluently.
 /// </summary>
 /// <remarks>
-/// GraphQLActionBuilder is a specialized builder that extends from
-/// AbstractReferenceResolverAwareTestActionBuilder, allowing seamless construction
-/// and execution of GraphQL test actions with support for reference resolver injection.
+///     GraphQLActionBuilder is a specialized builder that extends from
+///     AbstractReferenceResolverAwareTestActionBuilder, allowing seamless construction
+///     and execution of GraphQL test actions with support for reference resolver injection.
 /// </remarks>
 public class GraphQLActionBuilder : AbstractReferenceResolverAwareTestActionBuilder<ITestAction>
 {

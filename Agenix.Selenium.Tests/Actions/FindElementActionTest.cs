@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,6 +21,7 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using Agenix.Api.Exceptions;
@@ -32,9 +34,9 @@ namespace Agenix.Selenium.Tests.Actions;
 
 public class FindElementActionTest : AbstractNUnitSetUp
 {
+    private readonly Mock<IWebElement> _element = new();
     private readonly SeleniumBrowser _seleniumBrowser = new();
     private readonly Mock<IWebDriver> _webDriver = new();
-    private readonly Mock<IWebElement> _element = new();
 
     [SetUp]
     public void SetupMethod()
@@ -139,7 +141,8 @@ public class FindElementActionTest : AbstractNUnitSetUp
 
     [Test]
     [TestCaseSource(nameof(ValidationErrorProvider))]
-    public void TestExecuteFindByValidationFailed(string tagName, string text, string attribute, string cssStyle, bool displayed, bool enabled, string errorMsg)
+    public void TestExecuteFindByValidationFailed(string tagName, string text, string attribute, string cssStyle,
+        bool displayed, bool enabled, string errorMsg)
     {
         _element.Setup(x => x.TagName).Returns("button");
         _element.Setup(x => x.Text).Returns("Click Me!");
@@ -175,7 +178,9 @@ public class FindElementActionTest : AbstractNUnitSetUp
         [
             ["input", "Click Me!", "submit", "red", true, true, "tag-name expected 'input', but was 'button'"],
             ["button", "Click!", "submit", "red", true, true, "text expected 'Click!', but was 'Click Me!'"],
-            ["button", "Click Me!", "cancel", "red", true, true, "attribute 'type' expected 'cancel', but was 'submit'"
+            [
+                "button", "Click Me!", "cancel", "red", true, true,
+                "attribute 'type' expected 'cancel', but was 'submit'"
             ],
             ["button", "Click Me!", "submit", "red", false, true, "'displayed' expected 'False', but was 'True'"],
             ["button", "Click Me!", "submit", "red", true, false, "'enabled' expected 'False', but was 'True'"],

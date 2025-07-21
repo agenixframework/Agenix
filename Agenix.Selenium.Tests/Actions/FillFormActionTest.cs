@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,6 +21,7 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using System.Collections.ObjectModel;
@@ -32,9 +34,9 @@ namespace Agenix.Selenium.Tests.Actions;
 
 public class FillFormActionTest : AbstractNUnitSetUp
 {
+    private readonly Mock<IWebElement> _element = new();
     private readonly SeleniumBrowser _seleniumBrowser = new();
     private readonly Mock<IWebDriver> _webDriver = new();
-    private readonly Mock<IWebElement> _element = new();
 
     [SetUp]
     public void SetupMethod()
@@ -97,11 +99,11 @@ public class FillFormActionTest : AbstractNUnitSetUp
         var action = new FillFormAction.Builder()
             .WithBrowser(_seleniumBrowser)
             .FromJson("""
-                {
-                    "username": "foo_user",
-                    "password": "secret"
-                }
-                """)
+                      {
+                          "username": "foo_user",
+                          "password": "secret"
+                      }
+                      """)
             .Build();
 
         action.Execute(Context);

@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -331,11 +331,9 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
     /// </returns>
     private static string FormatDurationString(ITestCase test)
     {
-#pragma warning disable CS8073 // The result of the expression is always the same since a value of this type is never equal to 'null'
-        return test.GetTestResult() != null && test.GetTestResult().Duration != null
-#pragma warning restore CS8073 // The result of the expression is always the same since a value of this type is never equal to 'null'
-            ? $" ({test.GetTestResult().Duration.ToString()}) "
-            : "";
+        return test?.GetTestResult()?.Duration == null || test?.GetTestResult()?.Duration == TimeSpan.Zero
+            ? ""
+            : $" ({test.GetTestResult().Duration.TotalMilliseconds:F0} ms)";
     }
 
     /// <summary>
@@ -369,7 +367,7 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
         Info($"SUCCESS:\t\t{testResults.GetSuccess()} ({testResults.GetSuccessPercentageFormatted()}%)");
         Info($"FAILED:\t\t{testResults.GetFailed()} ({testResults.GetFailedPercentageFormatted()}%)");
         Debug($"SKIPPED:\t\t{testResults.GetSkipped()} ({testResults.GetSkippedPercentageFormatted()}%)");
-        Info($"PERFORMANCE:\t{(long)testResults.GetTotalDuration().TotalMilliseconds} ms");
+        Info($"TIME:\t{FormatDuration(testResults.GetTotalDuration())}");
 
         NewLine();
 
@@ -384,10 +382,64 @@ public class LoggingReporter : AbstractTestReporter, IMessageListener, ITestSuit
     ///     A formatted string summarizing the test result, including the result status, duration in milliseconds, and
     ///     test name.
     /// </returns>
-    private string ToFormattedTestResult(TestResult testResult)
+    private static string ToFormattedTestResult(TestResult testResult)
     {
-        return $"{testResult.Result} ({testResult.Duration.TotalMilliseconds,6:G0} ms) {testResult.TestName}";
+        return $"{testResult.Result} {FormatDuration(testResult.Duration)} {testResult.TestName}";
     }
+
+    /// <summary>
+    ///     Converts a given duration into a human-readable string representation, formatted based on the duration's length.
+    /// </summary>
+    /// <param name="duration">The duration to be formatted, represented as a TimeSpan object.</param>
+    /// <returns>A string representing the formatted duration, such as milliseconds, seconds, minutes, or hours.</returns>
+    public static string FormatDuration(TimeSpan duration)
+    {
+        if (duration.TotalMilliseconds < 1000)
+        {
+            return $"[{duration.TotalMilliseconds:F0} ms]";
+        }
+
+        if (duration.TotalSeconds < 60)
+        {
+            var seconds = (int)duration.TotalSeconds;
+            var milliseconds = duration.Milliseconds;
+            return milliseconds > 0
+                ? $"[{seconds} sec {milliseconds} ms]"
+                : $"[{seconds} sec]";
+        }
+
+        if (duration.TotalMinutes < 60)
+        {
+            var minutes = (int)duration.TotalMinutes;
+            var seconds = duration.Seconds;
+            var milliseconds = duration.Milliseconds;
+
+            if (milliseconds > 0)
+            {
+                return $"[{minutes} min {seconds} sec {milliseconds} ms]";
+            }
+
+            if (seconds > 0)
+            {
+                return $"[{minutes} min {seconds} sec]";
+            }
+
+            return $"[{minutes} min]";
+        }
+
+        // For hours
+        var hours = (int)duration.TotalHours;
+        var mins = duration.Minutes;
+        var secs = duration.Seconds;
+
+        if (secs > 0)
+        {
+            return $"[{hours} h {mins} min {secs} sec]";
+        }
+
+        return mins > 0 ? $"[{hours} h {mins} min]" : $"[{hours} h]";
+    }
+
 
     /// <summary>
     ///     Prints the Agenix test banner to the log for display purposes.

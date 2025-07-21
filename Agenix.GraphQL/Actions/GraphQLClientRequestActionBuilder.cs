@@ -32,10 +32,10 @@ using Agenix.GraphQL.Message;
 namespace Agenix.GraphQL.Actions;
 
 /// <summary>
-/// Provides functionality for building GraphQL client requests with customizable
-/// attributes such as GraphQL query, mutation, subscription, variables, and more.
-/// This builder extends the capabilities of `SendMessageAction.Builder`
-/// by adding GraphQL-specific configurations and behaviors.
+///     Provides functionality for building GraphQL client requests with customizable
+///     attributes such as GraphQL query, mutation, subscription, variables, and more.
+///     This builder extends the capabilities of `SendMessageAction.Builder`
+///     by adding GraphQL-specific configurations and behaviors.
 /// </summary>
 public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageActionBuilder<SendMessageAction,
     GraphQLClientRequestActionBuilder.GraphQLMessageBuilderSupport, GraphQLClientRequestActionBuilder>
@@ -43,7 +43,7 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
     private readonly GraphQLMessage _graphQLMessage;
 
     /// <summary>
-    /// Initializes a new instance of the GraphQLClientRequestActionBuilder with a default GraphQL message.
+    ///     Initializes a new instance of the GraphQLClientRequestActionBuilder with a default GraphQL message.
     /// </summary>
     public GraphQLClientRequestActionBuilder()
     {
@@ -53,7 +53,8 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
 
 
     /// <summary>
-    /// Initializes a new instance of the GraphQLClientRequestActionBuilder with a specific message builder and GraphQL message.
+    ///     Initializes a new instance of the GraphQLClientRequestActionBuilder with a specific message builder and GraphQL
+    ///     message.
     /// </summary>
     /// <param name="messageBuilder">The message builder to use.</param>
     /// <param name="graphQLMessage">The GraphQL message to configure.</param>
@@ -64,7 +65,7 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
     }
 
     /// <summary>
-    /// Retrieves the instance of the GraphQLMessageBuilderSupport associated with the current builder.
+    ///     Retrieves the instance of the GraphQLMessageBuilderSupport associated with the current builder.
     /// </summary>
     /// <returns>The instance of GraphQLMessageBuilderSupport initialized for this request.</returns>
     public override GraphQLMessageBuilderSupport GetMessageBuilderSupport()
@@ -74,7 +75,7 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
     }
 
     /// <summary>
-    /// Sets the GraphQL query for the request.
+    ///     Sets the GraphQL query for the request.
     /// </summary>
     /// <param name="query">The GraphQL query string.</param>
     /// <returns>The updated instance of GraphQLClientRequestActionBuilder.</returns>
@@ -85,7 +86,7 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
     }
 
     /// <summary>
-    /// Sets the GraphQL mutation for the request.
+    ///     Sets the GraphQL mutation for the request.
     /// </summary>
     /// <param name="mutation">The GraphQL mutation string.</param>
     /// <returns>The updated instance of GraphQLClientRequestActionBuilder.</returns>
@@ -95,7 +96,7 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
     }
 
     /// <summary>
-    /// Sets the GraphQL subscription for the request.
+    ///     Sets the GraphQL subscription for the request.
     /// </summary>
     /// <param name="subscription">The GraphQL subscription string.</param>
     /// <returns>The updated instance of GraphQLClientRequestActionBuilder.</returns>
@@ -105,7 +106,7 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
     }
 
     /// <summary>
-    /// Sets the operation name for the GraphQL request.
+    ///     Sets the operation name for the GraphQL request.
     /// </summary>
     /// <param name="operationName">The operation name.</param>
     /// <returns>The updated instance of GraphQLClientRequestActionBuilder.</returns>
@@ -116,7 +117,7 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
     }
 
     /// <summary>
-    /// Sets the operation name for the GraphQL request.
+    ///     Sets the operation name for the GraphQL request.
     /// </summary>
     /// <param name="operationName">The operation name.</param>
     /// <returns>The updated instance of GraphQLClientRequestActionBuilder.</returns>
@@ -127,7 +128,7 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
     }
 
     /// <summary>
-    /// Adds a variable to the GraphQL request.
+    ///     Adds a variable to the GraphQL request.
     /// </summary>
     /// <param name="name">The variable name.</param>
     /// <param name="value">The variable value.</param>
@@ -139,7 +140,7 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
     }
 
     /// <summary>
-    /// Sets multiple variables for the GraphQL request.
+    ///     Sets multiple variables for the GraphQL request.
     /// </summary>
     /// <param name="variables">Dictionary of variables to set.</param>
     /// <returns>The updated instance of GraphQLClientRequestActionBuilder.</returns>
@@ -150,7 +151,7 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
     }
 
     /// <summary>
-    /// Sets the GraphQL endpoint URI for the request.
+    ///     Sets the GraphQL endpoint URI for the request.
     /// </summary>
     /// <param name="endpointUri">The GraphQL endpoint URI.</param>
     /// <returns>The updated instance of GraphQLClientRequestActionBuilder.</returns>
@@ -161,7 +162,7 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
     }
 
     /// <summary>
-    /// Enables WebSocket for subscriptions.
+    ///     Enables WebSocket for subscriptions.
     /// </summary>
     /// <param name="useWebSocket">Whether to use WebSocket for subscriptions.</param>
     /// <returns>The updated instance of GraphQLClientRequestActionBuilder.</returns>
@@ -172,7 +173,7 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
     }
 
     /// <summary>
-    /// Sets an authorization header for the GraphQL request.
+    ///     Sets an authorization header for the GraphQL request.
     /// </summary>
     /// <param name="token">The authorization token.</param>
     /// <param name="scheme">The authorization scheme (default: Bearer).</param>
@@ -184,7 +185,7 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
     }
 
     /// <summary>
-    /// Adds a custom header to the GraphQL request.
+    ///     Adds a custom header to the GraphQL request.
     /// </summary>
     /// <param name="name">The header name.</param>
     /// <param name="value">The header value.</param>
@@ -196,7 +197,7 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
     }
 
     /// <summary>
-    /// Sets the content type for the GraphQL request.
+    ///     Sets the content type for the GraphQL request.
     /// </summary>
     /// <param name="contentType">The content type (default: application/json).</param>
     /// <returns>The updated instance of GraphQLClientRequestActionBuilder.</returns>
@@ -207,7 +208,7 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
     }
 
     /// <summary>
-    /// Sets the accept header for the GraphQL response.
+    ///     Sets the accept header for the GraphQL response.
     /// </summary>
     /// <param name="accept">The accept header value.</param>
     /// <returns>The updated instance of GraphQLClientRequestActionBuilder.</returns>
@@ -218,7 +219,7 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
     }
 
     /// <summary>
-    /// Builds the SendMessageAction for executing the GraphQL request.
+    ///     Builds the SendMessageAction for executing the GraphQL request.
     /// </summary>
     /// <returns>The configured SendMessageAction.</returns>
     protected override SendMessageAction DoBuild()
@@ -247,8 +248,8 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
     }
 
     /// <summary>
-    /// Builder support class for GraphQL message configuration.
-    /// Provides additional GraphQL-specific configuration methods.
+    ///     Builder support class for GraphQL message configuration.
+    ///     Provides additional GraphQL-specific configuration methods.
     /// </summary>
     public class GraphQLMessageBuilderSupport(
         GraphQLMessage graphQLMessage,
@@ -257,7 +258,7 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
             newDelegate)
     {
         /// <summary>
-        /// Sets the GraphQL query through the builder support.
+        ///     Sets the GraphQL query through the builder support.
         /// </summary>
         /// <param name="query">The GraphQL query string.</param>
         /// <returns>The GraphQLMessageBuilderSupport instance.</returns>
@@ -268,10 +269,10 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
         }
 
         /// <summary>
-        /// Sets the body of the GraphQL message to the specified content.
+        ///     Sets the body of the GraphQL message to the specified content.
         /// </summary>
         /// <param name="body">The content to set as the body of the GraphQL message.</param>
-        /// <returns>Returns the current instance of <see cref="GraphQLMessageBuilderSupport"/> after setting the body.</returns>
+        /// <returns>Returns the current instance of <see cref="GraphQLMessageBuilderSupport" /> after setting the body.</returns>
         public override GraphQLMessageBuilderSupport Body(string body)
         {
             return Query(body);
@@ -296,7 +297,7 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
         }
 
         /// <summary>
-        /// Adds a variable through the builder support.
+        ///     Adds a variable through the builder support.
         /// </summary>
         /// <param name="name">The variable name.</param>
         /// <param name="value">The variable value.</param>
@@ -308,7 +309,7 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
         }
 
         /// <summary>
-        /// Sets multiple variables through the builder support.
+        ///     Sets multiple variables through the builder support.
         /// </summary>
         /// <param name="variables">Dictionary of variables to set.</param>
         /// <returns>The GraphQLMessageBuilderSupport instance.</returns>
@@ -319,11 +320,11 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
         }
 
         /// <summary>
-        /// Adds or updates an extension for the GraphQL message.
+        ///     Adds or updates an extension for the GraphQL message.
         /// </summary>
         /// <param name="name">The name of the extension to add or update.</param>
         /// <param name="value">The value of the extension.</param>
-        /// <returns>The current instance of <see cref="GraphQLMessageBuilderSupport"/> for method chaining.</returns>
+        /// <returns>The current instance of <see cref="GraphQLMessageBuilderSupport" /> for method chaining.</returns>
         public GraphQLMessageBuilderSupport Extension(string name, object value)
         {
             graphQLMessage.SetExtension(name, value);
@@ -331,7 +332,7 @@ public class GraphQLClientRequestActionBuilder : SendMessageAction.SendMessageAc
         }
 
         /// <summary>
-        /// Sets the extensions for the GraphQL message through the builder support.
+        ///     Sets the extensions for the GraphQL message through the builder support.
         /// </summary>
         /// <param name="extensions">Dictionary of extensions to set.</param>
         /// <returns>The GraphQLMessageBuilderSupport instance.</returns>

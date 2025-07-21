@@ -30,7 +30,7 @@ using Agenix.Core.Endpoint;
 namespace Agenix.Core.Server;
 
 /// <summary>
-/// Abstract server builder providing fluent API for configuring server instances.
+///     Abstract server builder providing fluent API for configuring server instances.
 /// </summary>
 /// <typeparam name="TServer">The server type that extends AbstractServer.</typeparam>
 /// <typeparam name="TBuilder">The builder type that extends AbstractServerBuilder.</typeparam>
@@ -46,7 +46,7 @@ public abstract class AbstractServerBuilder<TServer, TBuilder> : AbstractEndpoin
     }
 
     /// <summary>
-    /// Sets the autoStart property.
+    ///     Sets the autoStart property.
     /// </summary>
     /// <param name="autoStart">Whether to auto-start the server.</param>
     /// <returns>The builder instance for method chaining.</returns>
@@ -57,7 +57,7 @@ public abstract class AbstractServerBuilder<TServer, TBuilder> : AbstractEndpoin
     }
 
     /// <summary>
-    /// Sets the endpoint adapter.
+    ///     Sets the endpoint adapter.
     /// </summary>
     /// <param name="endpointAdapter">The endpoint adapter to set.</param>
     /// <returns>The builder instance for method chaining.</returns>
@@ -68,7 +68,7 @@ public abstract class AbstractServerBuilder<TServer, TBuilder> : AbstractEndpoin
     }
 
     /// <summary>
-    /// Sets the debug logging enabled flag.
+    ///     Sets the debug logging enabled flag.
     /// </summary>
     /// <param name="enabled">Whether debug logging is enabled.</param>
     /// <returns>The builder instance for method chaining.</returns>
@@ -79,7 +79,7 @@ public abstract class AbstractServerBuilder<TServer, TBuilder> : AbstractEndpoin
     }
 
     /// <summary>
-    /// Sets the default timeout.
+    ///     Sets the default timeout.
     /// </summary>
     /// <param name="timeout">The timeout value in milliseconds.</param>
     /// <returns>The builder instance for method chaining.</returns>

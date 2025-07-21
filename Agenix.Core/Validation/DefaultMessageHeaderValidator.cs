@@ -61,8 +61,6 @@ public class DefaultMessageHeaderValidator : AbstractMessageValidator<HeaderVali
     /// </summary>
     private List<IHeaderValidator> _validators = [];
 
-    public DefaultMessageHeaderValidator() { }
-
     /// <summary>
     ///     Determines if the given message type is supported by this message validator.
     /// </summary>

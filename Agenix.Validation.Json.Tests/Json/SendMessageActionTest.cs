@@ -139,7 +139,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
 
         referenceResolverSpy
             .Setup(x => x.ResolveAll<ISchemaValidator<ISchemaValidationContext>>())
-            .Returns(new ConcurrentDictionary<string, ISchemaValidator<ISchemaValidationContext>>()
+            .Returns(new ConcurrentDictionary<string, ISchemaValidator<ISchemaValidationContext>>
             {
                 ["jsonSchemaValidator"] = schemaValidator.Object
             });

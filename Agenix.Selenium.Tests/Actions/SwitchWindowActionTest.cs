@@ -1,22 +1,15 @@
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Agenix.Api.Exceptions;
 using Agenix.Selenium.Actions;
 using Agenix.Selenium.Endpoint;
 using Moq;
-using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
 namespace Agenix.Selenium.Tests.Actions;
 
 [TestFixture]
 public class SwitchWindowActionTest : AbstractNUnitSetUp
 {
-    private SeleniumBrowser _seleniumBrowser;
-    private Mock<IWebDriver> _webDriver;
-    private Mock<ITargetLocator> _locator;
-
     [SetUp]
     public void SetupMethod()
     {
@@ -29,14 +22,19 @@ public class SwitchWindowActionTest : AbstractNUnitSetUp
         _webDriver.Setup(x => x.SwitchTo()).Returns(_locator.Object);
     }
 
+    private SeleniumBrowser _seleniumBrowser;
+    private Mock<IWebDriver> _webDriver;
+    private Mock<ITargetLocator> _locator;
+
     [Test]
     public void TestSwitchToActiveWindow()
     {
         var windows = new ReadOnlyCollection<string>
         ([
-            "active_window",
-            "last_window",
-            "other_window"]
+                "active_window",
+                "last_window",
+                "other_window"
+            ]
         );
 
         _webDriver.Setup(x => x.WindowHandles).Returns(windows);
@@ -62,8 +60,10 @@ public class SwitchWindowActionTest : AbstractNUnitSetUp
     {
         var windows = new ReadOnlyCollection<string>
         (
-            ["active_window",
-            "other_window"]
+            [
+                "active_window",
+                "other_window"
+            ]
         );
 
         _webDriver.Setup(x => x.WindowHandles).Returns(windows);

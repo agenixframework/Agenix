@@ -26,7 +26,6 @@
 
 using System.Net.Http.Headers;
 using System.Text;
-using System.Text.Json;
 using Agenix.Api.Context;
 using Agenix.Api.Message;
 using Agenix.GraphQL.Client;

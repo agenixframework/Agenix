@@ -26,6 +26,7 @@
 
 
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -47,6 +48,7 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using Agenix.Selenium.Actions;
@@ -58,10 +60,10 @@ namespace Agenix.Selenium.Tests.Actions;
 
 public class ClearBrowserCacheActionTest : AbstractNUnitSetUp
 {
-    private readonly SeleniumBrowser _seleniumBrowser = new();
-    public readonly Mock<IWebDriver> WebDriver = new();
-    private readonly Mock<IOptions> _webDriverOptions = new();
     private readonly Mock<ICookieJar> _cookieJar = new();
+    private readonly SeleniumBrowser _seleniumBrowser = new();
+    private readonly Mock<IOptions> _webDriverOptions = new();
+    public readonly Mock<IWebDriver> WebDriver = new();
 
 
     [SetUp]
@@ -80,7 +82,6 @@ public class ClearBrowserCacheActionTest : AbstractNUnitSetUp
 
         WebDriver.Setup(x => x.Manage()).Returns(_webDriverOptions.Object);
         _webDriverOptions.Setup(x => x.Cookies).Returns(_cookieJar.Object);
-
     }
 
     [Test]

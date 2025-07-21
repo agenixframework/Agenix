@@ -9,8 +9,6 @@ using Agenix.Selenium.Endpoint;
 using Agenix.Selenium.Util;
 using Moq;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Interactions.Internal;
 using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Selenium.Tests.Actions;
@@ -63,12 +61,12 @@ public class SeleniumTestActionBuilderTest : AbstractNUnitSetUp
         // CRITICAL: Precise WindowHandles sequence for OpenWindowAction
         // The action calls WindowHandles exactly twice: before and after opening
         _webDriver.SetupSequence(x => x.WindowHandles)
-            .Returns(new ReadOnlyCollection<string>(["last_window"]))               // 1st call - before opening
+            .Returns(new ReadOnlyCollection<string>(["last_window"])) // 1st call - before opening
             .Returns(new ReadOnlyCollection<string>(["last_window", "new_window"])) // 2nd call - after opening
             .Returns(new ReadOnlyCollection<string>(["last_window", "new_window"])) // For subsequent actions
             .Returns(new ReadOnlyCollection<string>(["last_window", "new_window"])) // For switch window
             .Returns(new ReadOnlyCollection<string>(["last_window", "new_window"])) // For close window
-            .Returns(new ReadOnlyCollection<string>(["last_window"]));              // After close
+            .Returns(new ReadOnlyCollection<string>(["last_window"])); // After close
 
         _webDriver.Setup(x => x.CurrentWindowHandle).Returns("last_window");
         _seleniumBrowserConfiguration.Setup(x => x.BrowserType).Returns(BrowserType.CHROME.GetBrowserName());

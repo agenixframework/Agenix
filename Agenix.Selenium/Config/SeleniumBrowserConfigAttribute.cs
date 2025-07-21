@@ -29,54 +29,54 @@ using Agenix.Api.Annotations;
 namespace Agenix.Selenium.Config;
 
 /// <summary>
-/// Configuration attribute for Selenium browser endpoints
+///     Configuration attribute for Selenium browser endpoints
 /// </summary>
 [AttributeUsage(AttributeTargets.Field)]
 [AgenixEndpointConfig("selenium.browser")]
 public class SeleniumBrowserConfigAttribute : Attribute
 {
     /// <summary>
-    /// Browser start page
+    ///     Browser start page
     /// </summary>
     public string StartPage { get; set; } = "";
 
     /// <summary>
-    /// Version
+    ///     Version
     /// </summary>
     public string Version { get; set; } = "";
 
     /// <summary>
-    /// Remote server URL
+    ///     Remote server URL
     /// </summary>
     public string RemoteServer { get; set; } = "";
 
     /// <summary>
-    /// Browser event listeners
+    ///     Browser event listeners
     /// </summary>
     public string[] EventListeners { get; set; } = [];
 
     /// <summary>
-    /// Web driver instance
+    ///     Web driver instance
     /// </summary>
     public string WebDriver { get; set; } = "";
 
     /// <summary>
-    /// Browser type
+    ///     Browser type
     /// </summary>
     public string Type { get; set; } = "";
 
     /// <summary>
-    /// Firefox profile
+    ///     Firefox profile
     /// </summary>
     public string FirefoxProfile { get; set; } = "";
 
     /// <summary>
-    /// JavaScript enabled
+    ///     JavaScript enabled
     /// </summary>
     public bool JavaScript { get; set; } = true;
 
     /// <summary>
-    /// Timeout in milliseconds
+    ///     Timeout in milliseconds
     /// </summary>
     public long Timeout { get; set; } = 5000L;
 }

@@ -49,11 +49,11 @@ public class JsonPathExpressionValidationIT
     [DirectEndpointConfig(Queue = "test")]
     private DirectEndpoint _direct;
 
-    [BindToRegistry] private IMessageQueue test = new DefaultMessageQueue("test");
+    [AgenixResource] protected TestContext context;
 
     [AgenixResource] protected ITestCaseRunner runner;
 
-    [AgenixResource] protected TestContext context;
+    [BindToRegistry] private IMessageQueue test = new DefaultMessageQueue("test");
 
 
     [Test]

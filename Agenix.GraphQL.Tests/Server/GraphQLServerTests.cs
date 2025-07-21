@@ -29,7 +29,6 @@ using System.Net.Sockets;
 using Agenix.GraphQL.Client;
 using Agenix.GraphQL.Message;
 using Agenix.GraphQL.Server;
-using HotChocolate.Resolvers;
 
 namespace Agenix.GraphQL.Tests.Server;
 
@@ -248,7 +247,7 @@ public class GraphQLServerTest : AbstractNUnitSetUp
     }
 
     /// <summary>
-    /// Find available TCP port starting from the given port
+    ///     Find available TCP port starting from the given port
     /// </summary>
     private static int FindAvailableTcpPort(int startPort)
     {

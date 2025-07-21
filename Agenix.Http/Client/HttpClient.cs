@@ -57,8 +57,8 @@ public class HttpClient : AbstractEndpoint, IProducer, IReplyConsumer
 
 
     /// <summary>
-    /// Provides an HTTP client implementation for executing HTTP requests and receiving responses,
-    /// utilizing an endpoint configuration for defining HTTP client-specific behavior.
+    ///     Provides an HTTP client implementation for executing HTTP requests and receiving responses,
+    ///     utilizing an endpoint configuration for defining HTTP client-specific behavior.
     /// </summary>
     public HttpClient(HttpEndpointConfiguration endpointConfiguration)
         : base(endpointConfiguration)
@@ -82,16 +82,16 @@ public class HttpClient : AbstractEndpoint, IProducer, IReplyConsumer
         (HttpEndpointConfiguration)base.EndpointConfiguration;
 
     /// <summary>
-    /// Sends an HTTP message to the configured endpoint, applying any client handlers or interceptors
-    /// and preparing the message for dispatch. Correlation IDs and additional context are managed
-    /// and used to facilitate message tracking and communication.
+    ///     Sends an HTTP message to the configured endpoint, applying any client handlers or interceptors
+    ///     and preparing the message for dispatch. Correlation IDs and additional context are managed
+    ///     and used to facilitate message tracking and communication.
     /// </summary>
     /// <param name="message">
-    /// The message to be sent, which may contain headers, payload, and other metadata.
+    ///     The message to be sent, which may contain headers, payload, and other metadata.
     /// </param>
     /// <param name="context">
-    /// The context in which the HTTP operation is executed, providing variables, listeners,
-    /// and configuration settings necessary for processing the message.
+    ///     The context in which the HTTP operation is executed, providing variables, listeners,
+    ///     and configuration settings necessary for processing the message.
     /// </param>
     public void Send(IMessage message, TestContext context)
     {

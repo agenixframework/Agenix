@@ -225,8 +225,8 @@ public class OAuthJwtHandlerFactoryTests
     public void CreateWithProviders_ValidProviders_ReturnsHandler()
     {
         // Arrange
-        Func<string> clientIdProvider = () => TestClientId;
-        Func<string> clientSecretProvider = () => TestClientSecret;
+        var clientIdProvider = () => TestClientId;
+        var clientSecretProvider = () => TestClientSecret;
 
         // Act
         var handler = OAuthJwtHandlerFactory.CreateWithProviders(
@@ -244,7 +244,7 @@ public class OAuthJwtHandlerFactoryTests
     public void CreateWithConfiguration_ValidConfigurationProvider_ReturnsHandler()
     {
         // Arrange
-        Func<OAuthClientConfiguration> configProvider = () => new OAuthClientConfiguration
+        var configProvider = () => new OAuthClientConfiguration
         {
             TokenEndpoint = TestTokenEndpoint,
             ClientId = TestClientId,
@@ -289,10 +289,7 @@ public class OAuthJwtHandlerFactoryTests
         var handler = OAuthJwtHandlerFactory.CreateWithParameters(
             TestTokenEndpoint,
             TestClientId,
-            TestClientSecret,
-            scopes: null,
-            additionalParameters: null,
-            customHeaders: null);
+            TestClientSecret);
 
         // Assert
         Assert.That(handler, Is.Not.Null);

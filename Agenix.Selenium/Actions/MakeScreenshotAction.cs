@@ -60,7 +60,7 @@ public class MakeScreenshotAction : AbstractSeleniumAction
     public string OutputDir => _outputDir;
 
     /// <summary>
-    /// The file path where the screenshot taken by the browser is stored.
+    ///     The file path where the screenshot taken by the browser is stored.
     /// </summary>
     public string ScreenshotPath { get; private set; }
 

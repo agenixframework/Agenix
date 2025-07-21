@@ -1,4 +1,3 @@
-
 #region License
 
 // Licensed to the Apache Software Foundation (ASF) under one
@@ -30,12 +29,12 @@ using Agenix.Configuration.Extensions.Builders;
 namespace Agenix.Configuration.Extensions;
 
 /// <summary>
-/// Extension methods for creating configuration managers and builders.
+///     Extension methods for creating configuration managers and builders.
 /// </summary>
 public static class ConfigurationExtensions
 {
     /// <summary>
-    /// Creates a new configuration builder for the specified type.
+    ///     Creates a new configuration builder for the specified type.
     /// </summary>
     /// <typeparam name="T">The type of the configuration object</typeparam>
     /// <returns>A new configuration builder instance</returns>

@@ -51,6 +51,13 @@ public abstract class AbstractSeleniumAction : AbstractTestAction, ISeleniumActi
     /// </summary>
     private readonly SeleniumBrowser? _browser;
 
+    /// <summary>
+    ///     Abstract base class for all Selenium actions.
+    ///     Encapsulates functionalities to interact with browser instances and perform Selenium-based commands.
+    /// </summary>
+    /// <param name="builder">
+    ///     The builder instance for configuring and describing the Selenium action.
+    /// </param>
     protected AbstractSeleniumAction(ISeleniumActionBuilder<ISeleniumAction> builder) : this(builder.GetName(), builder)
     {
     }
@@ -112,9 +119,9 @@ public abstract class AbstractSeleniumAction : AbstractTestAction, ISeleniumActi
     protected abstract void Execute(SeleniumBrowser browser, TestContext context);
 
     /// <summary>
-    /// Interface for building Selenium-based test actions.
-    /// Provides methods for configuring and describing Selenium actions,
-    /// including setting custom browsers and retrieving metadata such as names and descriptions.
+    ///     Interface for building Selenium-based test actions.
+    ///     Provides methods for configuring and describing Selenium actions,
+    ///     including setting custom browsers and retrieving metadata such as names and descriptions.
     /// </summary>
     public interface ISeleniumActionBuilder<out T> : ITestActionBuilder<T> where T : ISeleniumAction
     {
@@ -149,13 +156,28 @@ public abstract class AbstractSeleniumAction : AbstractTestAction, ISeleniumActi
     /// </summary>
     /// <typeparam name="T">The type of Selenium action being built</typeparam>
     /// <typeparam name="TB">The type of builder (for fluent interface)</typeparam>
-    public abstract class Builder<T, TB> : AbstractTestActionBuilder<T, TB>, ISeleniumActionBuilder<T> where T : ISeleniumAction
+    public abstract class Builder<T, TB> : AbstractTestActionBuilder<T, TB>, ISeleniumActionBuilder<T>
+        where T : ISeleniumAction
         where TB : Builder<T, TB>
     {
         /// <summary>
         ///     The browser instance to use for the action
         /// </summary>
         public SeleniumBrowser? Browser { get; private set; }
+
+        // Explicit interface implementation to return the interface type
+        ISeleniumActionBuilder<T> ISeleniumActionBuilder<T>.WithBrowser(SeleniumBrowser seleniumBrowser)
+        {
+            return WithBrowser(seleniumBrowser);
+        }
+
+        /// <summary>
+        ///     Builds an instance of the specified action type.
+        /// </summary>
+        /// <returns>
+        ///     An instance of the corresponding action.
+        /// </returns>
+        public abstract override T Build();
 
         /// <summary>
         ///     Sets a custom Selenium browser for the action
@@ -167,14 +189,5 @@ public abstract class AbstractSeleniumAction : AbstractTestAction, ISeleniumActi
             Browser = seleniumBrowser;
             return self;
         }
-
-        // Explicit interface implementation to return the interface type
-        ISeleniumActionBuilder<T> ISeleniumActionBuilder<T>.WithBrowser(SeleniumBrowser seleniumBrowser)
-        {
-            return WithBrowser(seleniumBrowser);
-        }
-
-        public abstract override T Build();
-
     }
 }

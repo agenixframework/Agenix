@@ -33,11 +33,6 @@ namespace Agenix.Azure.Security.Tests.Client;
 [TestFixture]
 public class OAuthTokenClientTests
 {
-    private OAuthTokenClient _tokenClient;
-    private TestHttpMessageHandler _testHttpHandler;
-    private HttpClient _httpClient;
-    private OAuthClientConfiguration _configuration;
-
     [SetUp]
     public void SetUp()
     {
@@ -61,6 +56,11 @@ public class OAuthTokenClientTests
         _httpClient?.Dispose();
         _testHttpHandler?.Dispose();
     }
+
+    private OAuthTokenClient _tokenClient;
+    private TestHttpMessageHandler _testHttpHandler;
+    private HttpClient _httpClient;
+    private OAuthClientConfiguration _configuration;
 
     [Test]
     public void Constructor_WithoutHttpClient_CreatesOwnHttpClient()
@@ -89,12 +89,7 @@ public class OAuthTokenClientTests
     public async Task GetTokenAsync_ValidConfiguration_ReturnsToken()
     {
         // Arrange
-        var tokenResponse = new
-        {
-            access_token = "test-access-token",
-            token_type = "Bearer",
-            expires_in = 3600
-        };
+        var tokenResponse = new { access_token = "test-access-token", token_type = "Bearer", expires_in = 3600 };
 
         _testHttpHandler.SetResponse(HttpStatusCode.OK, JsonSerializer.Serialize(tokenResponse));
 
@@ -112,12 +107,7 @@ public class OAuthTokenClientTests
     {
         // Arrange
         var validJwt = CreateTestJwtToken(DateTime.UtcNow.AddHours(1));
-        var tokenResponse = new
-        {
-            access_token = validJwt,
-            token_type = "Bearer",
-            expires_in = 3600
-        };
+        var tokenResponse = new { access_token = validJwt, token_type = "Bearer", expires_in = 3600 };
 
         _testHttpHandler.SetResponse(HttpStatusCode.OK, JsonSerializer.Serialize(tokenResponse));
 
@@ -136,12 +126,7 @@ public class OAuthTokenClientTests
     public async Task GetTokenAsync_ExpiredCachedToken_AcquiresNewToken()
     {
         // Arrange
-        var firstResponse = new
-        {
-            access_token = "first-token",
-            token_type = "Bearer",
-            expires_in = 3600
-        };
+        var firstResponse = new { access_token = "first-token", token_type = "Bearer", expires_in = 3600 };
 
         _testHttpHandler.SetResponse(HttpStatusCode.OK, JsonSerializer.Serialize(firstResponse));
 
@@ -151,12 +136,7 @@ public class OAuthTokenClientTests
         // Wait for cache to expire
         await Task.Delay(50);
 
-        var secondResponse = new
-        {
-            access_token = "second-token",
-            token_type = "Bearer",
-            expires_in = 3600
-        };
+        var secondResponse = new { access_token = "second-token", token_type = "Bearer", expires_in = 3600 };
         _testHttpHandler.SetResponse(HttpStatusCode.OK, JsonSerializer.Serialize(secondResponse));
 
         var result2 = await _tokenClient.GetTokenAsync(_configuration, TimeSpan.FromMilliseconds(1));
@@ -171,11 +151,7 @@ public class OAuthTokenClientTests
     public async Task GetTokenAsync_FailedTokenAcquisition_ReturnsNull()
     {
         // Arrange
-        var errorResponse = new
-        {
-            error = "invalid_request",
-            error_description = "Invalid request"
-        };
+        var errorResponse = new { error = "invalid_request", error_description = "Invalid request" };
 
         _testHttpHandler.SetResponse(HttpStatusCode.BadRequest, JsonSerializer.Serialize(errorResponse));
 
@@ -214,12 +190,7 @@ public class OAuthTokenClientTests
     public async Task AcquireTokenAsync_SuccessfulResponse_ReturnsSuccessResult()
     {
         // Arrange
-        var tokenResponse = new
-        {
-            access_token = "test-token",
-            token_type = "Bearer",
-            expires_in = 3600
-        };
+        var tokenResponse = new { access_token = "test-token", token_type = "Bearer", expires_in = 3600 };
 
         _testHttpHandler.SetResponse(HttpStatusCode.OK, JsonSerializer.Serialize(tokenResponse));
 
@@ -237,11 +208,7 @@ public class OAuthTokenClientTests
     public async Task AcquireTokenAsync_ClientError_DoesNotRetry()
     {
         // Arrange
-        var errorResponse = new
-        {
-            error = "invalid_client",
-            error_description = "Invalid client"
-        };
+        var errorResponse = new { error = "invalid_client", error_description = "Invalid client" };
 
         _testHttpHandler.SetResponse(HttpStatusCode.BadRequest, JsonSerializer.Serialize(errorResponse));
 
@@ -263,11 +230,7 @@ public class OAuthTokenClientTests
         _configuration.RetryConfiguration.InitialDelay = TimeSpan.FromMilliseconds(10);
         _configuration.RetryConfiguration.UseJitter = false;
 
-        var errorResponse = new
-        {
-            error = "server_error",
-            error_description = "Server error"
-        };
+        var errorResponse = new { error = "server_error", error_description = "Server error" };
 
         _testHttpHandler.SetResponse(HttpStatusCode.InternalServerError, JsonSerializer.Serialize(errorResponse));
 
@@ -451,12 +414,7 @@ public class OAuthTokenClientTests
     public async Task RemoveToken_ExistingCacheKey_RemovesTokenFromCache()
     {
         // Arrange
-        var tokenResponse = new
-        {
-            access_token = "test-token",
-            token_type = "Bearer",
-            expires_in = 3600
-        };
+        var tokenResponse = new { access_token = "test-token", token_type = "Bearer", expires_in = 3600 };
 
         _testHttpHandler.SetResponse(HttpStatusCode.OK, JsonSerializer.Serialize(tokenResponse));
 
@@ -469,31 +427,22 @@ public class OAuthTokenClientTests
         _tokenClient.RemoveToken(cacheKey);
 
         // Setup second response for verification
-        var secondResponse = new
-        {
-            access_token = "new-token",
-            token_type = "Bearer",
-            expires_in = 3600
-        };
+        var secondResponse = new { access_token = "new-token", token_type = "Bearer", expires_in = 3600 };
         _testHttpHandler.SetResponse(HttpStatusCode.OK, JsonSerializer.Serialize(secondResponse));
 
         var result = await _tokenClient.GetTokenAsync(_configuration);
 
         // Assert
         Assert.That(result, Is.EqualTo("new-token"));
-        Assert.That(_testHttpHandler.RequestCount, Is.EqualTo(initialRequestCount + 1)); // One more call after cache clear
+        Assert.That(_testHttpHandler.RequestCount,
+            Is.EqualTo(initialRequestCount + 1)); // One more call after cache clear
     }
 
     [Test]
     public async Task ClearCache_WithCachedTokens_ClearsAllTokens()
     {
         // Arrange
-        var tokenResponse = new
-        {
-            access_token = "test-token",
-            token_type = "Bearer",
-            expires_in = 3600
-        };
+        var tokenResponse = new { access_token = "test-token", token_type = "Bearer", expires_in = 3600 };
 
         _testHttpHandler.SetResponse(HttpStatusCode.OK, JsonSerializer.Serialize(tokenResponse));
 
@@ -505,31 +454,22 @@ public class OAuthTokenClientTests
         _tokenClient.ClearCache();
 
         // Setup second response for verification
-        var secondResponse = new
-        {
-            access_token = "new-token",
-            token_type = "Bearer",
-            expires_in = 3600
-        };
+        var secondResponse = new { access_token = "new-token", token_type = "Bearer", expires_in = 3600 };
         _testHttpHandler.SetResponse(HttpStatusCode.OK, JsonSerializer.Serialize(secondResponse));
 
         var result = await _tokenClient.GetTokenAsync(_configuration);
 
         // Assert
         Assert.That(result, Is.EqualTo("new-token"));
-        Assert.That(_testHttpHandler.RequestCount, Is.EqualTo(initialRequestCount + 1)); // One more call after cache clear
+        Assert.That(_testHttpHandler.RequestCount,
+            Is.EqualTo(initialRequestCount + 1)); // One more call after cache clear
     }
 
     [Test]
     public async Task GetCacheStatistics_WithCachedTokens_ReturnsCorrectStatistics()
     {
         // Arrange
-        var tokenResponse = new
-        {
-            access_token = "test-token",
-            token_type = "Bearer",
-            expires_in = 3600
-        };
+        var tokenResponse = new { access_token = "test-token", token_type = "Bearer", expires_in = 3600 };
 
         _testHttpHandler.SetResponse(HttpStatusCode.OK, JsonSerializer.Serialize(tokenResponse));
 
@@ -621,9 +561,9 @@ public class OAuthTokenClientTests
     // Test HTTP Message Handler to track requests
     private class TestHttpMessageHandler : HttpMessageHandler
     {
-        private HttpStatusCode _statusCode = HttpStatusCode.OK;
         private string _content = string.Empty;
         private Exception? _exception;
+        private HttpStatusCode _statusCode = HttpStatusCode.OK;
 
         public int RequestCount { get; private set; }
         public List<HttpRequestMessage> Requests { get; } = new();
@@ -640,7 +580,8 @@ public class OAuthTokenClientTests
             _exception = exception;
         }
 
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+            CancellationToken cancellationToken)
         {
             RequestCount++;
             Requests.Add(request);

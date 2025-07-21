@@ -46,26 +46,17 @@ public class GraphQLMessage : DefaultMessage
     }
 
     /// <summary>
-    /// Represents a GraphQL message containing query, variables, cookies, headers,
-    /// and other relevant information for constructing and handling GraphQL requests.
+    ///     Represents a GraphQL message containing query, variables, cookies, headers,
+    ///     and other relevant information for constructing and handling GraphQL requests.
     /// </summary>
     public GraphQLMessage(IMessage message) : this(message, false)
     {
     }
 
-    /// Sets a new header name-value pair for the HTTP message.
-    /// <param name="headerName">The name of the header.</param>
-    /// <param name="headerValue">The value of the header.</param>
-    /// <return>The altered HttpMessage instance.</return>
-    public GraphQLMessage Header(string headerName, object headerValue)
-    {
-        return (GraphQLMessage)base.SetHeader(headerName, headerValue);
-    }
-
     /// <summary>
-    /// Represents a message specific to GraphQL, extending the functionality of DefaultMessage.
-    /// Provides methods and properties tailored for GraphQL operations, such as defining queries,
-    /// variables, operation names, headers, cookies, and other GraphQL-specific configuration.
+    ///     Represents a message specific to GraphQL, extending the functionality of DefaultMessage.
+    ///     Provides methods and properties tailored for GraphQL operations, such as defining queries,
+    ///     variables, operation names, headers, cookies, and other GraphQL-specific configuration.
     /// </summary>
     public GraphQLMessage(IMessage message, bool forceAgenixHeaderUpdate) : base(message, forceAgenixHeaderUpdate)
     {
@@ -89,17 +80,6 @@ public class GraphQLMessage : DefaultMessage
     }
 
     /// <summary>
-    /// Configures whether to use WebSocket for the GraphQL message.
-    /// </summary>
-    /// <param name="useWebSocket">A boolean indicating whether to enable WebSocket. Defaults to true.</param>
-    /// <returns>The current instance of the <see cref="GraphQLMessage"/> with the updated configuration.</returns>
-    public GraphQLMessage UseWebSocket(bool useWebSocket = true)
-    {
-        SetHeader(GraphQLMessageHeaders.UseWebSocket, useWebSocket.ToString());
-        return this;
-    }
-
-    /// <summary>
     ///     Gets or sets the cookies for the GraphQL request.
     /// </summary>
     public Dictionary<string, string>? Cookies { get; set; }
@@ -108,112 +88,6 @@ public class GraphQLMessage : DefaultMessage
     ///     Gets or sets the variables to be used with the GraphQL operation.
     /// </summary>
     public object? Variables { get; set; }
-
-    /// <summary>
-    /// Sets the type of the GraphQL operation for the message and updates the corresponding header.
-    /// </summary>
-    /// <param name="method">The <see cref="GraphQLOperationType"/> representing the type of GraphQL operation,
-    /// such as QUERY, MUTATION, or SUBSCRIPTION.</param>
-    /// <returns>
-    /// The current instance of the <see cref="GraphQLMessage"/> for method chaining.
-    /// </returns>
-    public GraphQLMessage SetOperationType(GraphQLOperationType method)
-    {
-        SetHeader(GraphQLMessageHeaders.OperationType, method.ToString());
-        return this;
-    }
-
-    /// <summary>
-    /// Sets the HTTP response status code header.
-    /// </summary>
-    /// <param name="statusCode">The status code header values it to respond with.</param>
-    /// <returns>The modified <see cref="GraphQLMessage"/> instance.</returns>
-    public virtual GraphQLMessage Status(HttpStatusCode statusCode)
-    {
-        SetHeader(GraphQLMessageHeaders.StatusCode, (int)statusCode);
-        var status = (HttpStatusCode)(int)statusCode;
-        if (Enum.IsDefined(typeof(HttpStatusCode), (int)statusCode))
-        {
-            SetHeader(GraphQLMessageHeaders.ReasonPhrase, status.ToString());
-        }
-
-        return this;
-    }
-
-    /// <summary>
-    /// Sets the operation name for the GraphQL message.
-    /// </summary>
-    /// <param name="operation">
-    /// The name of the operation to be executed in the GraphQL query.
-    /// </param>
-    /// <returns>
-    /// The updated <see cref="GraphQLMessage"/> instance with the specified operation name set.
-    /// </returns>
-    public GraphQLMessage SetOperationName(string operation)
-    {
-        SetHeader(GraphQLMessageHeaders.OperationName, operation);
-        return this;
-    }
-
-    /// Sets the HTTP request URI header values. This method is used to configure
-    /// the URI associated with the HTTP request by setting the appropriate headers.
-    /// <param name="requestUri">The URI string to be set as the request URI header.</param>
-    /// <returns>The modified instance of HttpMessage with the updated URI headers.</returns>
-    public GraphQLMessage Uri(string requestUri)
-    {
-        SetHeader(IEndpointUriResolver.EndpointUriHeaderName, requestUri);
-        SetHeader(GraphQLMessageHeaders.EndpointUrl, requestUri);
-        return this;
-    }
-
-    /// <summary>
-    /// Retrieves the name of the GraphQL operation from the headers.
-    /// </summary>
-    /// <returns>
-    /// A string representing the operation name if it exists in the headers; otherwise, an empty string.
-    /// </returns>
-    public string GetOperationName()
-    {
-        var operation = GetHeader(GraphQLMessageHeaders.OperationName);
-
-        return operation?.ToString()!;
-    }
-
-
-    /// <summary>
-    /// Retrieves the operation type of the current GraphQL message.
-    /// </summary>
-    /// <returns>
-    /// The operation type of the message as a <see cref="GraphQLOperationType"/>.
-    /// Returns <see cref="GraphQLOperationType.QUERY"/> if the operation type is not explicitly set in the message headers.
-    /// </returns>
-    public GraphQLOperationType GetOperationType()
-    {
-        var operation = GetHeader(GraphQLMessageHeaders.OperationType);
-
-        return operation == null
-            ? GraphQLOperationType.QUERY
-            : Enum.Parse<GraphQLOperationType>(operation.ToString() ?? "Query", ignoreCase: true);
-    }
-
-
-    /// Sets the HTTP request content type header.
-    /// <param name="contentType">The content type header value to use</param>
-    /// <return>The altered HttpMessage</return>
-    public GraphQLMessage ContentType(string contentType)
-    {
-        SetHeader("Content-Type", contentType);
-        return this;
-    }
-
-    /// Sets the HTTP accepted content type header for the response.
-    /// <param name="accept">The accept header value to set.</param>
-    /// <return>The altered HttpMessage.</return>
-    public GraphQLMessage Accept(string accept)
-    {
-        SetHeader("Accept", accept);
-        return this;
-    }
 
     /// <summary>
     ///     Gets or sets additional HTTP headers for the GraphQL request.
@@ -241,6 +115,135 @@ public class GraphQLMessage : DefaultMessage
     ///     Gets or sets the subscription options for GraphQL subscriptions.
     /// </summary>
     public GraphQLSubscriptionOptions? SubscriptionOptions { get; set; }
+
+    /// Sets a new header name-value pair for the HTTP message.
+    /// <param name="headerName">The name of the header.</param>
+    /// <param name="headerValue">The value of the header.</param>
+    /// <return>The altered HttpMessage instance.</return>
+    public GraphQLMessage Header(string headerName, object headerValue)
+    {
+        return (GraphQLMessage)base.SetHeader(headerName, headerValue);
+    }
+
+    /// <summary>
+    ///     Configures whether to use WebSocket for the GraphQL message.
+    /// </summary>
+    /// <param name="useWebSocket">A boolean indicating whether to enable WebSocket. Defaults to true.</param>
+    /// <returns>The current instance of the <see cref="GraphQLMessage" /> with the updated configuration.</returns>
+    public GraphQLMessage UseWebSocket(bool useWebSocket = true)
+    {
+        SetHeader(GraphQLMessageHeaders.UseWebSocket, useWebSocket.ToString());
+        return this;
+    }
+
+    /// <summary>
+    ///     Sets the type of the GraphQL operation for the message and updates the corresponding header.
+    /// </summary>
+    /// <param name="method">
+    ///     The <see cref="GraphQLOperationType" /> representing the type of GraphQL operation,
+    ///     such as QUERY, MUTATION, or SUBSCRIPTION.
+    /// </param>
+    /// <returns>
+    ///     The current instance of the <see cref="GraphQLMessage" /> for method chaining.
+    /// </returns>
+    public GraphQLMessage SetOperationType(GraphQLOperationType method)
+    {
+        SetHeader(GraphQLMessageHeaders.OperationType, method.ToString());
+        return this;
+    }
+
+    /// <summary>
+    ///     Sets the HTTP response status code header.
+    /// </summary>
+    /// <param name="statusCode">The status code header values it to respond with.</param>
+    /// <returns>The modified <see cref="GraphQLMessage" /> instance.</returns>
+    public virtual GraphQLMessage Status(HttpStatusCode statusCode)
+    {
+        SetHeader(GraphQLMessageHeaders.StatusCode, (int)statusCode);
+        var status = (HttpStatusCode)(int)statusCode;
+        if (Enum.IsDefined(typeof(HttpStatusCode), (int)statusCode))
+        {
+            SetHeader(GraphQLMessageHeaders.ReasonPhrase, status.ToString());
+        }
+
+        return this;
+    }
+
+    /// <summary>
+    ///     Sets the operation name for the GraphQL message.
+    /// </summary>
+    /// <param name="operation">
+    ///     The name of the operation to be executed in the GraphQL query.
+    /// </param>
+    /// <returns>
+    ///     The updated <see cref="GraphQLMessage" /> instance with the specified operation name set.
+    /// </returns>
+    public GraphQLMessage SetOperationName(string operation)
+    {
+        SetHeader(GraphQLMessageHeaders.OperationName, operation);
+        return this;
+    }
+
+    /// Sets the HTTP request URI header values. This method is used to configure
+    /// the URI associated with the HTTP request by setting the appropriate headers.
+    /// <param name="requestUri">The URI string to be set as the request URI header.</param>
+    /// <returns>The modified instance of HttpMessage with the updated URI headers.</returns>
+    public GraphQLMessage Uri(string requestUri)
+    {
+        SetHeader(IEndpointUriResolver.EndpointUriHeaderName, requestUri);
+        SetHeader(GraphQLMessageHeaders.EndpointUrl, requestUri);
+        return this;
+    }
+
+    /// <summary>
+    ///     Retrieves the name of the GraphQL operation from the headers.
+    /// </summary>
+    /// <returns>
+    ///     A string representing the operation name if it exists in the headers; otherwise, an empty string.
+    /// </returns>
+    public string GetOperationName()
+    {
+        var operation = GetHeader(GraphQLMessageHeaders.OperationName);
+
+        return operation?.ToString()!;
+    }
+
+
+    /// <summary>
+    ///     Retrieves the operation type of the current GraphQL message.
+    /// </summary>
+    /// <returns>
+    ///     The operation type of the message as a <see cref="GraphQLOperationType" />.
+    ///     Returns <see cref="GraphQLOperationType.QUERY" /> if the operation type is not explicitly set in the message
+    ///     headers.
+    /// </returns>
+    public GraphQLOperationType GetOperationType()
+    {
+        var operation = GetHeader(GraphQLMessageHeaders.OperationType);
+
+        return operation == null
+            ? GraphQLOperationType.QUERY
+            : Enum.Parse<GraphQLOperationType>(operation.ToString() ?? "Query", true);
+    }
+
+
+    /// Sets the HTTP request content type header.
+    /// <param name="contentType">The content type header value to use</param>
+    /// <return>The altered HttpMessage</return>
+    public GraphQLMessage ContentType(string contentType)
+    {
+        SetHeader("Content-Type", contentType);
+        return this;
+    }
+
+    /// Sets the HTTP accepted content type header for the response.
+    /// <param name="accept">The accept header value to set.</param>
+    /// <return>The altered HttpMessage.</return>
+    public GraphQLMessage Accept(string accept)
+    {
+        SetHeader("Accept", accept);
+        return this;
+    }
 
     /// <summary>
     ///     Adds a cookie to the GraphQL request.
@@ -406,16 +409,16 @@ public class GraphQLMessage : DefaultMessage
     }
 
     /// <summary>
-    /// Sets an extension in the GraphQLMessage by adding or updating the key-value pair in the extensions dictionary.
+    ///     Sets an extension in the GraphQLMessage by adding or updating the key-value pair in the extensions dictionary.
     /// </summary>
     /// <param name="name">
-    /// The name of the extension to be added or updated.
+    ///     The name of the extension to be added or updated.
     /// </param>
     /// <param name="value">
-    /// The value of the extension associated with the specified name.
+    ///     The value of the extension associated with the specified name.
     /// </param>
     /// <returns>
-    /// The current instance of the GraphQLMessage with the updated extensions.
+    ///     The current instance of the GraphQLMessage with the updated extensions.
     /// </returns>
     public GraphQLMessage SetExtension(string name, object? value)
     {
@@ -449,13 +452,13 @@ public class GraphQLMessage : DefaultMessage
     }
 
     /// <summary>
-    /// Retrieves the value of a specified extension by its name.
+    ///     Retrieves the value of a specified extension by its name.
     /// </summary>
     /// <param name="name">
-    /// The name of the extension to retrieve.
+    ///     The name of the extension to retrieve.
     /// </param>
     /// <returns>
-    /// The value of the extension if it exists, or null if the specified extension is not found.
+    ///     The value of the extension if it exists, or null if the specified extension is not found.
     /// </returns>
     public object? GetExtension(string name)
     {

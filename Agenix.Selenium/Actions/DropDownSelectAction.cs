@@ -153,7 +153,8 @@ public class DropDownSelectAction : FindElementAction
     /// </returns>
     private static bool IsInternetExplorer(SeleniumBrowser browser)
     {
-        return browser.EndpointConfiguration.BrowserType.Contains("internet", StringComparison.CurrentCultureIgnoreCase) ||
+        return browser.EndpointConfiguration.BrowserType.Contains("internet",
+                   StringComparison.CurrentCultureIgnoreCase) ||
                browser.EndpointConfiguration.BrowserType.Contains("ie", StringComparison.CurrentCultureIgnoreCase);
     }
 

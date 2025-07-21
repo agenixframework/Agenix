@@ -41,9 +41,9 @@ public class HttpEndpointConfiguration : AbstractPollableEndpointConfiguration
     private System.Net.Http.HttpClient? _httpClient;
 
     /// <summary>
-    /// Represents the configuration for an HTTP endpoint.
-    /// This configuration is used to define various settings required for HTTP-based interactions,
-    /// such as request handling and adding client-specific configurations.
+    ///     Represents the configuration for an HTTP endpoint.
+    ///     This configuration is used to define various settings required for HTTP-based interactions,
+    ///     such as request handling and adding client-specific configurations.
     /// </summary>
     public HttpEndpointConfiguration()
     {

@@ -56,7 +56,7 @@ public class StopBrowserAction : AbstractSeleniumAction
         Logger.LogInformation("Stopping browser of type {BrowserType}",
             browser.EndpointConfiguration.BrowserType);
 
-        browser.Stop();
+        browser.Dispose();
 
         context.GetVariables().Remove(SeleniumHeaders.SeleniumBrowser);
     }

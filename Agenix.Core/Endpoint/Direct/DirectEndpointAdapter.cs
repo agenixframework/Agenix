@@ -24,42 +24,40 @@
 
 #endregion
 
-using Agenix.Api.Context;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
 using Agenix.Api.Message;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Endpoint.Direct;
 
-using Microsoft.Extensions.Logging;
-
 /// <summary>
-/// Endpoint adapter forwards incoming requests to message queue and waits synchronously for response
-/// on reply queue. Provides simple endpoint for clients to connect to message queue in order to provide proper
-/// response message.
+///     Endpoint adapter forwards incoming requests to message queue and waits synchronously for response
+///     on reply queue. Provides simple endpoint for clients to connect to message queue in order to provide proper
+///     response message.
 /// </summary>
 public class DirectEndpointAdapter : AbstractEndpointAdapter
 {
     /// <summary>
-    /// Endpoint handling incoming requests
-    /// </summary>
-    private readonly DirectSyncEndpoint _endpoint;
-
-    private readonly DirectSyncProducer _producer;
-
-    /// <summary>
-    /// Endpoint configuration
-    /// </summary>
-    private readonly DirectSyncEndpointConfiguration _endpointConfiguration;
-
-    /// <summary>
-    /// Logger
+    ///     Logger
     /// </summary>
     private static readonly ILogger Logger = LogManager.GetLogger(typeof(DirectEndpointAdapter));
 
     /// <summary>
-    /// Constructor using endpoint.
+    ///     Endpoint handling incoming requests
+    /// </summary>
+    private readonly DirectSyncEndpoint _endpoint;
+
+    /// <summary>
+    ///     Endpoint configuration
+    /// </summary>
+    private readonly DirectSyncEndpointConfiguration _endpointConfiguration;
+
+    private readonly DirectSyncProducer _producer;
+
+    /// <summary>
+    ///     Constructor using endpoint.
     /// </summary>
     /// <param name="endpoint">The direct sync endpoint.</param>
     public DirectEndpointAdapter(DirectSyncEndpoint endpoint) : base(Logger)
@@ -72,7 +70,7 @@ public class DirectEndpointAdapter : AbstractEndpointAdapter
     }
 
     /// <summary>
-    /// Constructor using endpoint configuration.
+    ///     Constructor using endpoint configuration.
     /// </summary>
     /// <param name="endpointConfiguration">The endpoint configuration.</param>
     public DirectEndpointAdapter(DirectSyncEndpointConfiguration endpointConfiguration) : base(Logger)
@@ -85,7 +83,7 @@ public class DirectEndpointAdapter : AbstractEndpointAdapter
     }
 
     /// <summary>
-    /// Handles the incoming request message internally.
+    ///     Handles the incoming request message internally.
     /// </summary>
     /// <param name="request">The request message.</param>
     /// <returns>The reply message.</returns>
@@ -121,7 +119,7 @@ public class DirectEndpointAdapter : AbstractEndpointAdapter
     }
 
     /// <summary>
-    /// Gets the direct endpoint.
+    ///     Gets the direct endpoint.
     /// </summary>
     /// <returns>The direct endpoint.</returns>
     public override IEndpoint GetEndpoint()
@@ -130,7 +128,7 @@ public class DirectEndpointAdapter : AbstractEndpointAdapter
     }
 
     /// <summary>
-    /// Gets the endpoint configuration.
+    ///     Gets the endpoint configuration.
     /// </summary>
     /// <returns>The direct sync endpoint configuration.</returns>
     public override IEndpointConfiguration GetEndpointConfiguration()

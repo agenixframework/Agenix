@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,6 +21,7 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using Agenix.Api.Exceptions;
@@ -50,8 +52,8 @@ public class JavaScriptActionTest : AbstractNUnitSetUp
     public void TestExecute()
     {
         _webDriver.As<IJavaScriptExecutor>()
-                 .Setup(x => x.ExecuteScript("return window._selenide_jsErrors"))
-                 .Returns(new List<object>());
+            .Setup(x => x.ExecuteScript("return window._selenide_jsErrors"))
+            .Returns(new List<object>());
 
         var action = new JavaScriptAction.Builder()
             .WithBrowser(_seleniumBrowser)
@@ -70,8 +72,8 @@ public class JavaScriptActionTest : AbstractNUnitSetUp
     public void TestExecuteVariableSupport()
     {
         _webDriver.As<IJavaScriptExecutor>()
-                 .Setup(x => x.ExecuteScript("return window._selenide_jsErrors"))
-                 .Returns(new List<object>());
+            .Setup(x => x.ExecuteScript("return window._selenide_jsErrors"))
+            .Returns(new List<object>());
 
         Context.SetVariable("text", "Hello");
 
@@ -92,8 +94,8 @@ public class JavaScriptActionTest : AbstractNUnitSetUp
     public void TestExecuteWithErrorValidation()
     {
         _webDriver.As<IJavaScriptExecutor>()
-                 .Setup(x => x.ExecuteScript("return window._selenide_jsErrors"))
-                 .Returns(new List<string> { "This went totally wrong!" });
+            .Setup(x => x.ExecuteScript("return window._selenide_jsErrors"))
+            .Returns(new List<string> { "This went totally wrong!" });
 
         var action = new JavaScriptAction.Builder()
             .WithBrowser(_seleniumBrowser)
@@ -113,8 +115,8 @@ public class JavaScriptActionTest : AbstractNUnitSetUp
     public void TestExecuteWithErrorValidationFailed()
     {
         _webDriver.As<IJavaScriptExecutor>()
-                 .Setup(x => x.ExecuteScript("return window._selenide_jsErrors"))
-                 .Returns(new List<string>());
+            .Setup(x => x.ExecuteScript("return window._selenide_jsErrors"))
+            .Returns(new List<string>());
 
         var action = new JavaScriptAction.Builder()
             .WithBrowser(_seleniumBrowser)

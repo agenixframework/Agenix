@@ -49,10 +49,12 @@ public static class BrowserUtils
             const string pattern1 = @"(.*)(timestamp=)(.*)([&#].*)";
             const string pattern2 = @"(.*)(timestamp=)(.*)$";
 
-            var result = Regex.Replace(url, pattern1, $"$1$2{unique}$4", RegexOptions.None, TimeSpan.FromMilliseconds(100));
+            var result = Regex.Replace(url, pattern1, $"$1$2{unique}$4", RegexOptions.None,
+                TimeSpan.FromMilliseconds(100));
             if (result == url) // The first pattern didn't match, try the second
             {
-                result = Regex.Replace(url, pattern2, $"$1$2{unique}", RegexOptions.None, TimeSpan.FromMilliseconds(100));
+                result = Regex.Replace(url, pattern2, $"$1$2{unique}", RegexOptions.None,
+                    TimeSpan.FromMilliseconds(100));
             }
 
             return result;
