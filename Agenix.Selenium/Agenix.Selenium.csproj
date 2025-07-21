@@ -14,27 +14,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj"/>
+    <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Selenium.Support" Version="4.33.0"/>
-    <PackageReference Include="Selenium.WebDriver" Version="4.33.0"/>
-    <PackageReference Include="SeleniumExtras.WaitHelpers" Version="1.0.2"/>
+    <PackageReference Include="Selenium.Support" Version="4.34.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.34.0" />
+    <PackageReference Include="SeleniumExtras.WaitHelpers" Version="1.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Config\"/>
-    <Folder Include="Endpoint\Builder\"/>
+    <Folder Include="Config\" />
+    <Folder Include="Endpoint\Builder\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Extension\agenix\endpoint\builder\selenium"/>
-    <EmbeddedResource Include="Extension\agenix\endpoint\builder\selenium"/>
-    <None Remove="Extension\agenix\endpoint\component\selenium"/>
-    <EmbeddedResource Include="Extension\agenix\endpoint\component\selenium"/>
-    <None Remove="Extension\agenix\endpoint\parser\selenium"/>
-    <EmbeddedResource Include="Extension\agenix\endpoint\parser\selenium"/>
+    <None Remove="Extension\agenix\endpoint\builder\selenium" />
+    <EmbeddedResource Include="Extension\agenix\endpoint\builder\selenium" />
+    <None Remove="Extension\agenix\endpoint\component\selenium" />
+    <EmbeddedResource Include="Extension\agenix\endpoint\component\selenium" />
+    <None Remove="Extension\agenix\endpoint\parser\selenium" />
+    <EmbeddedResource Include="Extension\agenix\endpoint\parser\selenium" />
   </ItemGroup>
 
 

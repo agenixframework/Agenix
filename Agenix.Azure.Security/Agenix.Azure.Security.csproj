@@ -16,14 +16,14 @@
 
   <ItemGroup>
     <!-- JWT token parsing -->
-    <PackageReference Include="Azure.Identity" Version="1.14.1"/>
-    <PackageReference Include="Azure.Security.KeyVault.Secrets"/>
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.1"/>
-    <PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.8.0"/>
+    <PackageReference Include="Azure.Identity" Version="1.14.2" />
+    <PackageReference Include="Azure.Security.KeyVault.Secrets" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.12.1" />
+    <PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.8.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj"/>
+    <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj" />
   </ItemGroup>
 
 </Project>

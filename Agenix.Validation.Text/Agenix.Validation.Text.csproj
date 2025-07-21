@@ -16,21 +16,21 @@
 
   <!-- Add to each affected .csproj file -->
   <ItemGroup>
-    <PackageReference Include="System.Formats.Asn1" Version="9.0.6"/>
-    <PackageReference Include="System.Text.Json" Version="9.0.6"/>
+    <PackageReference Include="System.Formats.Asn1" Version="9.0.7" />
+    <PackageReference Include="System.Text.Json" Version="9.0.7" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Agenix.Api\Agenix.Api.csproj"/>
+    <ProjectReference Include="..\Agenix.Api\Agenix.Api.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Extension\agenix\message\validator\binary_base64"/>
-    <EmbeddedResource Include="Extension\agenix\message\validator\binary_base64"/>
-    <None Remove="Extension\agenix\message\validator\gzip_base64"/>
-    <EmbeddedResource Include="Extension\agenix\message\validator\gzip_base64"/>
-    <None Remove="Extension\agenix\message\validator\plaintext"/>
-    <EmbeddedResource Include="Extension\agenix\message\validator\plaintext"/>
+    <None Remove="Extension\agenix\message\validator\binary_base64" />
+    <EmbeddedResource Include="Extension\agenix\message\validator\binary_base64" />
+    <None Remove="Extension\agenix\message\validator\gzip_base64" />
+    <EmbeddedResource Include="Extension\agenix\message\validator\gzip_base64" />
+    <None Remove="Extension\agenix\message\validator\plaintext" />
+    <EmbeddedResource Include="Extension\agenix\message\validator\plaintext" />
   </ItemGroup>
 
 </Project>
