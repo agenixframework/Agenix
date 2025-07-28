@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -48,6 +48,20 @@ public class Instrumented
         return new InstrumentedBuilder<T>(typeof(T));
     }
 
+    /// <summary>
+    ///     Creates an instrumented builder for the specified type, allowing
+    ///     dynamic instantiation and configuration of its objects using the provided type.
+    /// </summary>
+    /// <param name="type">
+    ///     The type to be used for dynamic instantiation and configuration of objects.
+    /// </param>
+    /// <typeparam name="T">
+    ///     The generic type parameter representing the type of object to instantiate and configure.
+    /// </typeparam>
+    /// <returns>
+    ///     An instance of <see cref="Instrumented.InstrumentedBuilder{T}" /> to facilitate the creation
+    ///     and configuration of objects of the specified type.
+    /// </returns>
     public static InstrumentedBuilder<T> InstanceOf<T>(Type type)
     {
         return new InstrumentedBuilder<T>(type);
@@ -61,6 +75,12 @@ public class Instrumented
     /// <typeparam name="T">The type of the object this builder is designed to instantiate.</typeparam>
     public class InstrumentedBuilder<T>(Type instanceType, object[] constructorParameters)
     {
+        /// <summary>
+        ///     Provides functionality to dynamically create and configure instances of a specified type.
+        ///     Enables customization of how objects are instantiated through constructors and parameters.
+        ///     Commonly used for scenarios requiring dynamic object creation or configuration.
+        /// </summary>
+        /// <typeparam name="T">The type of objects that will be instantiated using the builder.</typeparam>
         public InstrumentedBuilder(Type instanceType)
             : this(instanceType, [])
         {

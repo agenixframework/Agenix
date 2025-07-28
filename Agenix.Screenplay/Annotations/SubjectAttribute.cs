@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -41,10 +41,24 @@ namespace Agenix.Screenplay.Annotations;
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
 public class SubjectAttribute : Attribute
 {
+    /// <summary>
+    ///     Represents a custom attribute used to annotate classes or methods with a specific subject or description.
+    /// </summary>
+    /// <remarks>
+    ///     This attribute is primarily utilized to associate a descriptive string value with a class or method.
+    ///     It can provide contextual information, improving readability, organization, or categorization inside the codebase.
+    /// </remarks>
     public SubjectAttribute(string value = "")
     {
         Value = value;
     }
 
+    /// <summary>
+    ///     Gets the string value assigned to the subject attribute.
+    /// </summary>
+    /// <remarks>
+    ///     This property represents the subject provided when applying the <c>SubjectAttribute</c> to a class or method.
+    ///     It is intended to store a descriptive string that offers context or categorization for the annotated element.
+    /// </remarks>
     public string Value { get; }
 }

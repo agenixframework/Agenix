@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Dsl\Endpoint\GraphQL\"/>
+    <Folder Include="Dsl\Endpoint\Http\"/>
+    <Folder Include="Dsl\Endpoint\Playwright\"/>
+    <Folder Include="Dsl\Endpoint\Selenium\"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Agenix.GraphQL\Agenix.GraphQL.csproj"/>
+    <ProjectReference Include="..\Agenix.Http\Agenix.Http.csproj"/>
+    <ProjectReference Include="..\Agenix.Playwright\Agenix.Playwright.csproj"/>
+    <ProjectReference Include="..\Agenix.Selenium\Agenix.Selenium.csproj"/>
+  </ItemGroup>
+
+</Project>

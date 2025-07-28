@@ -8,7 +8,7 @@ on:
       - 'docs/**'
       - '.assets/**'
   pull_request:
-    branches: [ master, develop ]
+    branches: [ "*" ]
     paths-ignore:
       - '**.md'
       - 'docs/**'
@@ -58,6 +58,7 @@ jobs:
             echo "⚠️ Code formatting issues detected!"
             echo "💡 Run 'dotnet format' locally to fix formatting"
             echo "🟡 This is a warning, not blocking the pipeline"
+
 
   # ===== SECURITY SCAN (Parallel) =====
   security-scan:
@@ -170,7 +171,6 @@ jobs:
               --verbosity normal \
               --logger "trx;LogFileName=test-results-$project_name-${{ matrix.artifact-name }}.trx" \
               --logger "console;verbosity=detailed" \
-              --collect:"XPlat Code Coverage" \
               --results-directory ./TestResults \
               --settings .runsettings || overall_result=1
 

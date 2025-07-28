@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -37,10 +37,26 @@ namespace Agenix.Screenplay.Annotations;
 /// </remarks>
 public class AnonymousTask : AnonymousPerformable, ITask
 {
+    /// <summary>
+    ///     Represents an anonymous task that can be performed by an actor within a screenplay-style testing framework.
+    /// </summary>
+    /// <remarks>
+    ///     Extends <see cref="AnonymousPerformable" /> and implements <see cref="ITask" /> to provide a custom, chainable task
+    ///     definition with support for adding steps and configuring custom field values.
+    /// </remarks>
     public AnonymousTask()
     {
     }
 
+    /// <summary>
+    ///     Represents an anonymous task that can be performed by an actor
+    ///     within a screenplay testing framework.
+    /// </summary>
+    /// <remarks>
+    ///     An <see cref="AnonymousTask" /> extends <see cref="AnonymousPerformable" />
+    ///     and implements <see cref="ITask" />, enabling the definition of custom,
+    ///     chainable performable tasks with field customization capabilities.
+    /// </remarks>
     public AnonymousTask(string title, List<IPerformable> steps)
         : base(title, steps)
     {

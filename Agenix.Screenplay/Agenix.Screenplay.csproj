@@ -15,6 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="13.0.0"/>
     <PackageReference Include="NUnit" Version="4.3.2"/>
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.6"/>
     <PackageReference Include="System.Formats.Asn1" Version="9.0.6"/>
@@ -23,6 +24,19 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Agenix.Api\Agenix.Api.csproj"/>
+    <ProjectReference Include="..\Agenix.Validation.NHamcrest\Agenix.Validation.NHamcrest.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Conditions\"/>
+    <Folder Include="Events\"/>
+    <Folder Include="Handlers\"/>
+    <Folder Include="Parallel\"/>
+    <Folder Include="Questions\Waits\"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageVersion Update="MediatR" Version="13.0.0"/>
   </ItemGroup>
 
 </Project>

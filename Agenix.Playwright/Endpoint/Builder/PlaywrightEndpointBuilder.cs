@@ -45,7 +45,7 @@ public sealed class PlaywrightEndpoints : AbstractEndpointBuilder<PlaywrightBrow
     ///     Static entry method for Playwright endpoints
     /// </summary>
     /// <returns>A new PlaywrightEndpoints instance</returns>
-    public static PlaywrightEndpoints Selenium()
+    public static PlaywrightEndpoints Playwright()
     {
         return new PlaywrightEndpoints();
     }
@@ -56,6 +56,6 @@ public sealed class PlaywrightEndpoints : AbstractEndpointBuilder<PlaywrightBrow
     /// <returns>The PlaywrightBrowserBuilder instance</returns>
     public PlaywrightBrowserBuilder Browser()
     {
-        return _builder;
+        return Builder;
     }
 }

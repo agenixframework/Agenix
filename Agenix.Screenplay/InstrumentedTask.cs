@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -26,11 +26,29 @@
 
 using System.Reflection;
 using Agenix.Screenplay.Exceptions;
+using static System.Reflection.BindingFlags;
 
 namespace Agenix.Screenplay;
 
-public class InstrumentedTask
+/// <summary>
+///     Represents a task that can be optionally instrumented to provide additional
+///     functionality during its execution within a Screenplay Pattern.
+/// </summary>
+/// <remarks>
+///     This class provides helper methods to determine whether a task needs instrumentation,
+///     and to create an instrumented copy of the task if necessary.
+/// </remarks>
+public static class InstrumentedTask
 {
+    /// <summary>
+    ///     Creates an instrumented copy of the specified task if instrumentation is required and supported.
+    /// </summary>
+    /// <typeparam name="T">The type of the task, which implements the IPerformable interface.</typeparam>
+    /// <param name="task">The task to be potentially instrumented.</param>
+    /// <returns>
+    ///     The original task if it is already instrumented or instrumentation is not required;
+    ///     otherwise, a new instrumented copy of the task.
+    /// </returns>
     public static T Of<T>(T task) where T : IPerformable
     {
         if (IsInstrumented(task) || !ShouldInstrument(task))
@@ -60,7 +78,7 @@ public class InstrumentedTask
         var allConstructors = new List<ConstructorInfo>();
 
         allConstructors.AddRange(taskClass.GetConstructors());
-        allConstructors.AddRange(taskClass.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance));
+        allConstructors.AddRange(taskClass.GetConstructors(NonPublic | Instance));
 
         return allConstructors;
     }
@@ -86,13 +104,11 @@ public class InstrumentedTask
 
     private static bool IsInstrumented(IPerformable task)
     {
-        try
-        {
-            return task.GetType().Name.Contains("ByteBuddy");
-        }
-        catch (NullReferenceException)
+        if (task == null)
         {
             throw new TaskInstantiationException("Your Task class must have a public constructor.");
         }
+
+        return task.GetType().Name.Contains("ByteBuddy");
     }
 }

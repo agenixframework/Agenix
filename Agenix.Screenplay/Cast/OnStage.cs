@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -35,7 +35,7 @@ namespace Agenix.Screenplay.Cast;
 ///     Actors can be referred to by name (which must be unique for a given actor) or a pronoun.
 ///     The default pronouns are "he","she","they" and "it", and they are used interchangeably - any pronoun will always
 ///     refer to the last named actor who performed some action.
-///     Pronouns can be configured using the screenplay.pronouns configuration setting, e.g.,
+///     Pronouns can be configured using the screenplay. Pronouns configuration setting, e.g.,
 ///     screenplay.pronouns = il,elle
 ///     The current stage is kept as an AsyncLocal object, so if you have multiple threads in the same Screenplay test,
 ///     you need to propagate the stage to each new thread using the SetTheStage() method.
@@ -62,14 +62,6 @@ public static class OnStage
     }
 
     /// <summary>
-    ///     Check whether the stage has already been set.
-    /// </summary>
-    public static bool TheStageIsSet()
-    {
-        return Stage.Value != null;
-    }
-
-    /// <summary>
     ///     Set the stage to a specific stage object.
     ///     This is rarely needed but sometimes comes in handy when running tasks in parallel.
     /// </summary>
@@ -80,8 +72,16 @@ public static class OnStage
     }
 
     /// <summary>
+    ///     Check whether the stage has already been set.
+    /// </summary>
+    public static bool TheStageIsSet()
+    {
+        return Stage.Value != null;
+    }
+
+    /// <summary>
     ///     Returns an actor with a given name, creating a new actor if the actor is not already on stage.
-    ///     If a pronoun is used (e.g "she creates a new account") then the current actor in the spotlight will be used.
+    ///     If a pronoun is used (e.g. "she creates a new account") then the current actor in the spotlight will be used.
     /// </summary>
     public static Actor TheActorCalled(string requiredActor)
     {

@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -39,6 +39,11 @@ public class TheMemory : IQuestion<bool>
         _memoryKey = memoryKey;
     }
 
+    /// <summary>
+    ///     Determines whether the specified memory key is present in the actor's memory.
+    /// </summary>
+    /// <param name="actor">The actor attempting to recall the memory associated with the specified key.</param>
+    /// <returns>True if the memory is present; otherwise, false.</returns>
     public bool AnsweredBy(Actor actor)
     {
         return actor.Recall<dynamic>(_memoryKey) != null;
@@ -59,6 +64,10 @@ public class TheMemory : IQuestion<bool>
     /// </summary>
     public class TheMemoryQuestionBuilder(string memoryKey)
     {
+        /// <summary>
+        ///     Creates a memory question to check the presence of the specified memory key.
+        /// </summary>
+        /// <returns>An instance of <see cref="TheMemory" /> configured with the specified memory key.</returns>
         public TheMemory IsPresent()
         {
             return new TheMemory(memoryKey);

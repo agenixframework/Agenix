@@ -56,6 +56,6 @@ public sealed class SeleniumEndpoints : AbstractEndpointBuilder<SeleniumBrowserB
     /// <returns>The SeleniumBrowserBuilder instance</returns>
     public SeleniumBrowserBuilder Browser()
     {
-        return _builder;
+        return Builder;
     }
 }

@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -34,15 +34,62 @@ namespace Agenix.Screenplay;
 /// </summary>
 public abstract class RememberThat : IPerformable
 {
+    /// <summary>
+    ///     Executes the specified performance logic for the given actor.
+    ///     This method is typically overridden in derived classes to define
+    ///     specific tasks or interactions that an actor can perform.
+    /// </summary>
+    /// <typeparam name="T">
+    ///     The type of the actor who will execute the performance logic.
+    ///     Usually, this corresponds to a class inheriting from <see cref="Actor" />.
+    /// </typeparam>
+    /// <param name="actor">
+    ///     The instance of the actor that will perform the action. The actor
+    ///     provides the necessary context to execute the defined performance logic.
+    /// </param>
     public abstract void PerformAs<T>(T actor) where T : Actor;
 
+    /// <summary>
+    ///     Creates a <see cref="RememberThat.MemoryBuilder" /> using the specified memory key.
+    ///     This method serves as the starting point for associating a memory key with either
+    ///     a static value or a question evaluation in the screenplay testing framework.
+    /// </summary>
+    /// <param name="memoryKey">
+    ///     The key used to identify the memory association. This value acts as an identifier
+    ///     for the stored data or question result within the screenplay interaction.
+    /// </param>
+    /// <returns>
+    ///     A <see cref="RememberThat.MemoryBuilder" /> instance initialized with the given memory key.
+    ///     The returned builder allows fluent configuration of memory associations.
+    /// </returns>
     public static MemoryBuilder TheValueOf(string memoryKey)
     {
         return new MemoryBuilder(memoryKey);
     }
 
+    /// <summary>
+    ///     Represents an action to store a specific value associated with a memory key in the context of a screenplay-style
+    ///     interaction.
+    ///     Enables an actor to retain particular information by associating it with a predefined key, supporting assertions
+    ///     and
+    ///     interactivity within the framework.
+    /// </summary>
     public class WithValue(string memoryKey, object value) : RememberThat
     {
+        /// <summary>
+        ///     Executes the specified performance logic for the given actor.
+        ///     This method is responsible for enabling the actor to recall or store
+        ///     a memory value based on the context defined in the derived classes.
+        /// </summary>
+        /// <typeparam name="T">
+        ///     The type of the actor who will execute the performance logic.
+        ///     Typically, this corresponds to a class capable of interacting with
+        ///     the screenplay framework, such as an instance implementing memory management.
+        /// </typeparam>
+        /// <param name="actor">
+        ///     The actor instance that carries out the defined memory-related actions.
+        ///     The actor provides the necessary context and methods to store or retrieve memory.
+        /// </param>
         public override void PerformAs<T>(T actor)
         {
             actor.Remember(memoryKey, value);
@@ -56,6 +103,21 @@ public abstract class RememberThat : IPerformable
     /// </summary>
     public class WithQuestion(string memoryKey, IQuestion<dynamic> question) : RememberThat
     {
+        /// <summary>
+        ///     Executes the performance logic defined by the derived class
+        ///     using the provided actor as context.
+        ///     This method enables the actor to perform specific tasks or interactions
+        ///     associated with the screenplay framework.
+        /// </summary>
+        /// <typeparam name="T">
+        ///     The type of the actor executing the performance logic.
+        ///     This is typically a class that represents an actor in the screenplay pattern.
+        /// </typeparam>
+        /// <param name="actor">
+        ///     The actor instance that provides the context and capability
+        ///     for performing the defined logic. The actor interacts with
+        ///     the screenplay environment during execution.
+        /// </param>
         public override void PerformAs<T>(T actor)
         {
             actor.Remember(memoryKey, question.AnsweredBy(actor));
