@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Endpoint\Builder\"/>
     <Folder Include="Extension\agenix\action\"/>
     <Folder Include="Interceptor\"/>
     <Folder Include="Message\"/>

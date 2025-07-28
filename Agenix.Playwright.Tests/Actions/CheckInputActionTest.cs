@@ -35,14 +35,14 @@ public class CheckInputActionTest : AbstractPlaywrightActionTestBase
     protected override void CustomizeSetup()
     {
         // Setup default checkbox interaction
-        SetupLocatorForCheckboxInteraction(false);
+        SetupLocatorForCheckboxInteraction();
     }
 
     [Test]
     public void TestExecuteCheck()
     {
         // Arrange: Element is unchecked
-        SetupLocatorForCheckboxInteraction(false);
+        SetupLocatorForCheckboxInteraction();
 
         var action = new CheckInputAction.Builder()
             .Check()
@@ -101,7 +101,7 @@ public class CheckInputActionTest : AbstractPlaywrightActionTestBase
     [Test]
     public void TestExecuteWithTimeout()
     {
-        SetupLocatorForCheckboxInteraction(false);
+        SetupLocatorForCheckboxInteraction();
 
         var action = new CheckInputAction.Builder()
             .Check()
@@ -119,7 +119,7 @@ public class CheckInputActionTest : AbstractPlaywrightActionTestBase
     [Test]
     public void TestExecuteWithForce()
     {
-        SetupLocatorForCheckboxInteraction(false);
+        SetupLocatorForCheckboxInteraction();
 
         var action = new CheckInputAction.Builder()
             .Check()

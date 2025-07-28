@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -32,17 +32,35 @@ namespace Agenix.Screenplay;
 /// <summary>
 ///     Represents a question within the screenplay pattern that can define how an actor retrieves information.
 /// </summary>
-/// <typeparam name="ANSWER">The type of answer that the question provides.</typeparam>
-public interface IQuestion<ANSWER>
+/// <typeparam name="TAnswer">The type of answer that the question provides.</typeparam>
+public interface IQuestion<TAnswer>
 {
+    /// <summary>
+    ///     Represents the subject of a question, providing a descriptive label or identifier.
+    /// </summary>
+    /// <remarks>
+    ///     This property is useful for describing the content or purpose of a question,
+    ///     allowing it to be identified or referenced in a meaningful way.
+    /// </remarks>
     string Subject => string.Empty;
+
+    /// <summary>
+    ///     Creates a question using the specified function to define how an actor retrieves information.
+    /// </summary>
+    /// <param name="function">A function that takes an actor and returns a value of the specified type.</param>
+    /// <typeparam name="T">The type of answer that the created question provides.</typeparam>
+    /// <returns>An instance of a question based on the provided function.</returns>
+    public static IQuestion<T> Create<T>(Func<Actor, T> function)
+    {
+        return new LambdaQuestion<T>(function);
+    }
 
     /// <summary>
     ///     Provides the answer to the question for the given actor.
     /// </summary>
     /// <param name="actor">The actor who will respond to the question.</param>
     /// <returns>The answer to the question as determined by the actor.</returns>
-    ANSWER AnsweredBy(Actor actor);
+    TAnswer AnsweredBy(Actor actor);
 
     /// <summary>
     ///     Creates a QuestionBuilder instance with the specified subject.
@@ -141,7 +159,7 @@ public interface IQuestion<ANSWER>
     IQuestion<DateTime> AsDate()
     {
         return About(Subject).AnsweredBy(actor =>
-            DateTime.Parse(AnsweredBy(actor).ToString()));
+            DateTime.Parse(AnsweredBy(actor).ToString(), CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -176,7 +194,7 @@ public interface IQuestion<ANSWER>
     /// <typeparam name="T">The target type of the transformation</typeparam>
     /// <param name="transformer">The function to transform the answer</param>
     /// <returns>A new question with the transformed answer type</returns>
-    IQuestion<T> Map<T>(Func<ANSWER, T> transformer)
+    IQuestion<T> Map<T>(Func<TAnswer, T> transformer)
     {
         return About(Subject).AnsweredBy(actor => transformer(AnsweredBy(actor)));
     }
@@ -199,7 +217,7 @@ public interface IQuestion<ANSWER>
     /// </summary>
     /// <param name="description">The description to use as the subject</param>
     /// <returns>A new question with the same behavior but different description</returns>
-    IQuestion<ANSWER> DescribedAs(string description)
+    IQuestion<TAnswer> DescribedAs(string description)
     {
         return About(description).AnsweredBy(AnsweredBy);
     }
@@ -210,7 +228,7 @@ public interface IQuestion<ANSWER>
     /// <returns>A new question that converts its answer to the specified type</returns>
     IQuestion<T> As<T>()
     {
-        return QuestionExtensions.As<ANSWER, T>(this);
+        return QuestionExtensions.As<TAnswer, T>(this);
     }
 
     /// <summary>
@@ -221,7 +239,7 @@ public interface IQuestion<ANSWER>
     /// <returns>An IQuestion that resolves to a list of elements of the specified type.</returns>
     IQuestion<List<T>> AsListOf<T>(Type type)
     {
-        return new ListConvertingQuestion<ANSWER, T>(this, type);
+        return new ListConvertingQuestion<TAnswer, T>(this, type);
     }
 
     /// <summary>
@@ -232,7 +250,17 @@ public interface IQuestion<ANSWER>
     /// <returns>A question that produces a collection of the specified target type when answered by an actor.</returns>
     IQuestion<ICollection<T>> AsCollectionOf<T>(Type type)
     {
-        return new CollectionConvertingQuestion<ANSWER, T>(this, type);
+        return new CollectionConvertingQuestion<TAnswer, T>(this, type);
+    }
+
+    private sealed class LambdaQuestion<T>(Func<Actor, T> function) : IQuestion<T>
+    {
+        private readonly Func<Actor, T> _function = function ?? throw new ArgumentNullException(nameof(function));
+
+        public T AnsweredBy(Actor actor)
+        {
+            return _function(actor);
+        }
     }
 
     /// <summary>
@@ -245,7 +273,8 @@ public interface IQuestion<ANSWER>
             return new TypeConvertingQuestion<TSource, TTarget>(question);
         }
 
-        private class TypeConvertingQuestion<TSource, TTarget>(IQuestion<TSource> sourceQuestion) : IQuestion<TTarget>
+        private sealed class TypeConvertingQuestion<TSource, TTarget>(IQuestion<TSource> sourceQuestion)
+            : IQuestion<TTarget>
         {
             public TTarget AnsweredBy(Actor actor)
             {
@@ -286,7 +315,9 @@ public interface IQuestion<ANSWER>
     /// </summary>
     /// <typeparam name="TSource">The type of the source question's answer.</typeparam>
     /// <typeparam name="TTarget">The target type into which each element in the source collection is converted.</typeparam>
-    private class CollectionConvertingQuestion<TSource, TTarget>(IQuestion<TSource> sourceQuestion, Type targetType)
+    private sealed class CollectionConvertingQuestion<TSource, TTarget>(
+        IQuestion<TSource> sourceQuestion,
+        Type targetType)
         : IQuestion<ICollection<TTarget>>
     {
         public ICollection<TTarget> AnsweredBy(Actor actor)

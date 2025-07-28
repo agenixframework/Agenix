@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -35,7 +35,7 @@ namespace Agenix.Screenplay.Utils;
 /// </summary>
 public class NameConverter
 {
-    private static readonly string[] Abbreviations = { "CSV", "XML", "JSON" };
+    private static readonly string[] Abbreviations = ["CSV", "XML", "JSON"];
 
     private NameConverter()
     {
@@ -49,15 +49,9 @@ public class NameConverter
     /// <returns>A string with specific abbreviations restored to their uppercase form.</returns>
     private static string RestoreAbbreviations(string sentence)
     {
-        var processing = sentence;
-        foreach (var abbreviation in Abbreviations)
-        {
-            processing = processing.Replace(
-                CultureInfo.CurrentCulture.TextInfo.ToTitleCase(abbreviation.ToLower()),
-                abbreviation);
-        }
-
-        return processing;
+        return Abbreviations.Aggregate(sentence,
+            (current, abbreviation) =>
+                current.Replace(CultureInfo.CurrentCulture.TextInfo.ToTitleCase(abbreviation.ToLower()), abbreviation));
     }
 
     /// <summary>

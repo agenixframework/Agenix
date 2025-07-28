@@ -174,14 +174,14 @@ cd Agenix.ATF
 
 ### 🌐 Protocol & Communication Modules
 
-| Module                    | Description                                              | Key Features                                                                                                 |
-|---------------------------|----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| **Agenix.Http**           | HTTP client testing capabilities and utilities           | • HTTP request/response handling<br>• REST API testing<br>• HTTP validation                                  |
-| **Agenix.GraphQL**        | GraphQL client testing capabilities and utilities        | • GraphQL query/mutation handling<br>• GraphQL server integration<br>• Response validation                   |
-| **Agenix.Sql**            | Database testing and SQL execution utilities             | • Database connectivity<br>• SQL query execution<br>• Data validation<br>• Transaction management            |
-| **Agenix.Selenium**       | Web browser automation and UI testing utilities          | • Web browser control<br>• Element interaction<br>• Page navigation<br>• UI test automation                  |
-| **Agenix.Playwright**     | Modern web browser automation and testing framework      | • Cross-browser automation<br>• Fast and reliable testing<br>• Auto-wait mechanisms<br>• Network interception|
-| **Agenix.Azure.Security** | Azure authentication and Key Vault integration utilities | • Azure AD authentication<br>• Key Vault secret management<br>• OAuth token handling<br>• Credential caching |
+| Module                    | Description                                              | Key Features                                                                                                  |
+|---------------------------|----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Agenix.Http**           | HTTP client testing capabilities and utilities           | • HTTP request/response handling<br>• REST API testing<br>• HTTP validation                                   |
+| **Agenix.GraphQL**        | GraphQL client testing capabilities and utilities        | • GraphQL query/mutation handling<br>• GraphQL server integration<br>• Response validation                    |
+| **Agenix.Sql**            | Database testing and SQL execution utilities             | • Database connectivity<br>• SQL query execution<br>• Data validation<br>• Transaction management             |
+| **Agenix.Selenium**       | Web browser automation and UI testing utilities          | • Web browser control<br>• Element interaction<br>• Page navigation<br>• UI test automation                   |
+| **Agenix.Playwright**     | Modern web browser automation and testing framework      | • Cross-browser automation<br>• Fast and reliable testing<br>• Auto-wait mechanisms<br>• Network interception |
+| **Agenix.Azure.Security** | Azure authentication and Key Vault integration utilities | • Azure AD authentication<br>• Key Vault secret management<br>• OAuth token handling<br>• Credential caching  |
 
 ### 🎭 Testing Pattern Implementations
 

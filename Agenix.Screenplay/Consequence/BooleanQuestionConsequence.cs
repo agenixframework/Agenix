@@ -7,24 +7,25 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
 using Agenix.Api.Util;
+using Agenix.Screenplay.Events;
 using NUnit.Framework;
 
 namespace Agenix.Screenplay.Consequence;
@@ -38,11 +39,20 @@ public class BooleanQuestionConsequence<T> : BaseConsequence<T>
     private readonly IQuestion<bool> _question;
     private readonly string _subject;
 
+    /// <summary>
+    ///     Represents a consequence derived from a boolean question within the Screenplay pattern.
+    /// </summary>
+    /// <typeparam name="T">The type associated with the consequence, representing the context or target entity.</typeparam>
     public BooleanQuestionConsequence(IQuestion<bool> actual)
         : this(null, actual)
     {
     }
 
+    /// <summary>
+    ///     Represents a consequence based on a boolean question, deriving from a base consequence
+    ///     and integrating the Screenplay pattern to evaluate actions or assertions.
+    /// </summary>
+    /// <typeparam name="T">The type associated with the consequence, representing the context or target entity.</typeparam>
     public BooleanQuestionConsequence(string subjectText, IQuestion<bool> actual)
     {
         _question = actual;
@@ -52,8 +62,15 @@ public class BooleanQuestionConsequence<T> : BaseConsequence<T>
         SubjectText = Optional<string>.Of(subjectText);
     }
 
+    /// <summary>
+    ///     Evaluates the consequence for the given actor, verifying the boolean condition
+    ///     and throwing appropriate errors if the condition is not met.
+    /// </summary>
+    /// <param name="actor">The actor for whom the consequence is being evaluated.</param>
     public override void EvaluateFor(Actor actor)
     {
+        actor.EventBus!.Publish(new ActorAsksQuestion(_question.Subject, actor.Name));
+
         try
         {
             PerformSetupActionsAs(actor);
@@ -83,6 +100,11 @@ public class BooleanQuestionConsequence<T> : BaseConsequence<T>
         }
     }
 
+    /// <summary>
+    ///     Returns a string representation of the BooleanQuestionConsequence including
+    ///     the subject text or a default template if the subject text is not defined.
+    /// </summary>
+    /// <returns>A string representation of the consequence with relevant details.</returns>
     public override string ToString()
     {
         var template = Explanation.OrElse("Then {0}");
