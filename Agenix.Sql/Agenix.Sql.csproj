@@ -15,13 +15,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Spring.Data" Version="3.0.2"/>
+    <PackageReference Include="Spring.Data" Version="3.0.3"/>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Agenix.Core\Agenix.Core.csproj"/>
-    <PackageReference Include="System.Formats.Asn1" Version="9.0.6"/>
-    <PackageReference Include="System.Text.Json" Version="9.0.6"/>
+    <PackageReference Include="System.Formats.Asn1" Version="9.0.7"/>
+    <PackageReference Include="System.Text.Json" Version="9.0.7"/>
     <PackageReference Include="System.Net.Http" Version="4.3.4"/>
     <PackageReference Include="System.Security.Cryptography.X509Certificates" Version="4.3.2"/>
   </ItemGroup>

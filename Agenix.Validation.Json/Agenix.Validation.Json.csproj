@@ -21,8 +21,8 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
     <PackageReference Include="Newtonsoft.Json.Schema" Version="4.0.1"/>
-    <PackageReference Include="System.Formats.Asn1" Version="9.0.6"/>
-    <PackageReference Include="System.Text.Json" Version="9.0.6"/>
+    <PackageReference Include="System.Formats.Asn1" Version="9.0.7"/>
+    <PackageReference Include="System.Text.Json" Version="9.0.7"/>
   </ItemGroup>
 
   <ItemGroup>
