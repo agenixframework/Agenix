@@ -95,4 +95,12 @@ public class Stage
     {
         return _actorInTheSpotlight != null;
     }
+
+    /// <summary>
+    /// Gets the list of actors currently present on the stage.
+    /// </summary>
+    /// <value>
+    /// A read-only list of <see cref="Actor"/> instances representing the performers currently active in the screenplay test.
+    /// </value>
+    public IReadOnlyList<Actor> Actors => _cast.GetActors();
 }

@@ -1044,7 +1044,7 @@ public class PlaywrightBrowser : AbstractEndpoint, IProducer
         }
     }
 
-    private static async Task CleanupResources(string contextId, IBrowserContext context,
+    private async Task CleanupResources(string contextId, IBrowserContext context,
         List<(string pageId, IPage page)> pages)
     {
         try
@@ -1054,6 +1054,20 @@ public class PlaywrightBrowser : AbstractEndpoint, IProducer
             {
                 try
                 {
+                    // Auto-save storage state if enabled and path is configured
+                    if (_endpointConfiguration.AutoSaveStorageState &&
+                        !string.IsNullOrEmpty(_endpointConfiguration.StorageStatePath))
+                    {
+                        Log.LogDebug("Auto-saving storage state to: {StorageStatePath}", _endpointConfiguration.StorageStatePath);
+
+                        await context.StorageStateAsync(new BrowserContextStorageStateOptions
+                        {
+                            Path = _endpointConfiguration.StorageStatePath
+                        });
+
+                        Log.LogInformation("Storage state automatically saved to: {StorageStatePath}", _endpointConfiguration.StorageStatePath);
+                    }
+
                     await p.page.CloseAsync();
                 }
                 catch (Exception ex)
@@ -1205,6 +1219,18 @@ public class PlaywrightBrowser : AbstractEndpoint, IProducer
             {
                 contextOptions.RecordVideoSize = _endpointConfiguration.VideoSize;
             }
+        }
+
+        // Set storage state path (most common - file-based)
+        if (!string.IsNullOrEmpty(_endpointConfiguration.StorageStatePath))
+        {
+            contextOptions.StorageStatePath = _endpointConfiguration.StorageStatePath;
+        }
+
+        // Set raw storage state content (alternative approach)
+        if (!string.IsNullOrEmpty(_endpointConfiguration.StorageState))
+        {
+            contextOptions.StorageState = _endpointConfiguration.StorageState;
         }
     }
 
