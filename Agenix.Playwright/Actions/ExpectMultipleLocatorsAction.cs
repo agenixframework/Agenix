@@ -152,7 +152,7 @@ public class ExpectMultipleLocatorsAction : AbstractPlaywrightAction
             {
                 Logger.LogDebug("Executing locator action {Index}/{Total}: {ActionName}", i + 1, _locatorActions.Count,
                     action.GetType().Name);
-                await Task.Run(() => action.Execute(context), cancellationToken);
+                await action.ExecuteAsync(context, cancellationToken);
                 Logger.LogDebug("Locator action {Index}/{Total} completed successfully", i + 1, _locatorActions.Count);
             }
             catch (Exception ex)
@@ -180,7 +180,7 @@ public class ExpectMultipleLocatorsAction : AbstractPlaywrightAction
             {
                 Logger.LogDebug("Starting parallel execution of locator action {Index}: {ActionName}", index,
                     action.GetType().Name);
-                await Task.Run(() => action.Execute(context), cancellationToken);
+                await action.ExecuteAsync(context, cancellationToken);
                 Logger.LogDebug("Parallel locator action {Index} completed successfully", index);
                 return (Index: index, Success: true, Exception: null);
             }
@@ -198,11 +198,17 @@ public class ExpectMultipleLocatorsAction : AbstractPlaywrightAction
         {
             if (_continueOnFailure)
             {
-                failures.Add(exception!);
+                if (exception != null)
+                {
+                    failures.Add(exception);
+                }
             }
             else
             {
-                throw exception!;
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
         }
     }
@@ -216,7 +222,7 @@ public class ExpectMultipleLocatorsAction : AbstractPlaywrightAction
             var action = _locatorActions[i];
             Logger.LogDebug("Executing fail-fast locator action {Index}/{Total}: {ActionName}", i + 1,
                 _locatorActions.Count, action.GetType().Name);
-            await Task.Run(() => action.Execute(context), cancellationToken);
+            await action.ExecuteAsync(context, cancellationToken);
             Logger.LogDebug("Fail-fast locator action {Index}/{Total} completed successfully", i + 1,
                 _locatorActions.Count);
         }

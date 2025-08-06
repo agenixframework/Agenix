@@ -27,7 +27,7 @@ public class WaitUntilActionTest : AbstractNUnitSetUp
     private readonly Mock<IWebElement> _element = new();
 
     [Test]
-    public void TestWaitForHidden()
+    public async Task TestWaitForHidden()
     {
         _webDriver.Setup(x => x.FindElement(It.IsAny<By>())).Returns(_element.Object);
         _element.Setup(x => x.Displayed).Returns(false);
@@ -38,7 +38,7 @@ public class WaitUntilActionTest : AbstractNUnitSetUp
             .Condition("hidden")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _element.Verify(x => x.Displayed, Times.AtLeastOnce);
     }
@@ -56,11 +56,11 @@ public class WaitUntilActionTest : AbstractNUnitSetUp
             .Timeout(1000L)
             .Build();
 
-        Assert.Throws<AgenixSystemException>(() => action.Execute(Context));
+        Assert.ThrowsAsync<AgenixSystemException>(async () => await action.ExecuteAsync(Context));
     }
 
     [Test]
-    public void TestWaitForVisible()
+    public async Task TestWaitForVisible()
     {
         _webDriver.Setup(x => x.FindElement(It.IsAny<By>())).Returns(_element.Object);
         _element.Setup(x => x.Displayed).Returns(true);
@@ -71,7 +71,7 @@ public class WaitUntilActionTest : AbstractNUnitSetUp
             .Condition("visible")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _element.Verify(x => x.Displayed, Times.AtLeastOnce);
     }
@@ -89,7 +89,7 @@ public class WaitUntilActionTest : AbstractNUnitSetUp
             .Timeout(1000L)
             .Build();
 
-        Assert.Throws<AgenixSystemException>(() => action.Execute(Context));
+        Assert.ThrowsAsync<AgenixSystemException>(async () => await action.ExecuteAsync(Context));
     }
 
     [Test]
@@ -104,6 +104,6 @@ public class WaitUntilActionTest : AbstractNUnitSetUp
             .Condition("unknown")
             .Build();
 
-        Assert.Throws<AgenixSystemException>(() => action.Execute(Context));
+        Assert.ThrowsAsync<AgenixSystemException>(async () => await action.ExecuteAsync(Context));
     }
 }

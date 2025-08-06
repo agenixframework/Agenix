@@ -89,7 +89,7 @@ public interface IVariableExtractor : IMessageProcessor
     /// <param name="extractor">The type of IVariableExtractor to look up, such as "jsonPath".</param>
     /// <typeparam name="TB">The builder type for the IVariableExtractor implementation.</typeparam>
     /// <returns>An optional builder for the specified IVariableExtractor type.</returns>
-    public static new Optional<TB> Lookup<TB>(string extractor)
+    static new Optional<TB> Lookup<TB>(string extractor)
         where TB : IBuilder
     {
         var cacheKey = $"{typeof(TB).FullName}:{extractor}";
@@ -119,7 +119,7 @@ public interface IVariableExtractor : IMessageProcessor
     /// </summary>
     /// <typeparam name="T">The type of the IVariableExtractor implementation being built.</typeparam>
     /// <typeparam name="TB">The type of the builder itself, implementing IMessageProcessor.IBuilder.</typeparam>
-    public new interface IBuilder<out T, TB> : IMessageProcessor.IBuilder<T, TB>, IWithExpressions<TB>, IBuilder
+    new interface IBuilder<out T, TB> : IMessageProcessor.IBuilder<T, TB>, IWithExpressions<TB>, IBuilder
         where T : IVariableExtractor
         where TB : IBuilder
     {

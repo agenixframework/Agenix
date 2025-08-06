@@ -24,6 +24,7 @@
 
 #endregion
 
+using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Core;
 using Agenix.Screenplay.Exceptions;
@@ -40,7 +41,7 @@ public class UseTheGherkinTestActionRunner : AbilityWithDefaultDescription, IRef
     ///     Initializes a new instance of IGherkinTestActionRunner with the specified test case runner.
     /// </summary>
     /// <param name="testCaseRunner">The IGherkinTestActionRunner to use.</param>
-    public UseTheGherkinTestActionRunner(IGherkinTestActionRunner testCaseRunner)
+    public UseTheGherkinTestActionRunner(IGherkinAsyncTestActionRunner testCaseRunner)
     {
         TestCaseRunner = testCaseRunner ?? throw new ArgumentNullException(nameof(testCaseRunner));
     }
@@ -62,7 +63,7 @@ public class UseTheGherkinTestActionRunner : AbilityWithDefaultDescription, IRef
     /// <summary>
     ///     Gets the IGherkinTestActionRunner instance.
     /// </summary>
-    public IGherkinTestActionRunner TestCaseRunner { get; }
+    public IGherkinAsyncTestActionRunner TestCaseRunner { get; }
 
     /// <summary>
     ///     Returns this ability as the specified type for the given actor.
@@ -108,7 +109,7 @@ public class UseTheGherkinTestActionRunner : AbilityWithDefaultDescription, IRef
     /// </summary>
     /// <param name="testCaseRunner">The IGherkinTestActionRunner to use.</param>
     /// <returns>A new UseTheGherkinTestActionRunner ability.</returns>
-    public static UseTheGherkinTestActionRunner WithRunner(IGherkinTestActionRunner testCaseRunner)
+    public static UseTheGherkinTestActionRunner WithRunner(IGherkinAsyncTestActionRunner testCaseRunner)
     {
         return new UseTheGherkinTestActionRunner(testCaseRunner);
     }

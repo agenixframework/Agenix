@@ -24,26 +24,26 @@
 
 #endregion
 
+using Agenix.Validation.NHamcrest.Validation.Matcher;
 using NHamcrest;
-using static Agenix.Screenplay.GivenWhenThen;
 
 namespace Agenix.Screenplay.Questions.Waits;
 
 /// <summary>
 ///     A wait action that waits for a question to match a specified matcher within a timeout period.
 /// </summary>
-/// <typeparam name="T">The type of answer returned by the question.</typeparam>
-public class WaitOnQuestion<T> : WaitWithTimeout
+/// <typeparam name="TQ">The type of answer returned by the question.</typeparam>
+public class WaitOnQuestion<TQ> : WaitWithTimeout
 {
-    private readonly IMatcher<T> _matcher;
-    private readonly IQuestion<T> _question;
+    private readonly IMatcher<TQ> _matcher;
+    private readonly IQuestion<TQ> _question;
 
     /// <summary>
     ///     Initializes a new instance of the WaitOnQuestion class.
     /// </summary>
     /// <param name="question">The question to ask repeatedly until the matcher condition is met.</param>
     /// <param name="matcher">The matcher that defines the expected condition.</param>
-    public WaitOnQuestion(IQuestion<T> question, IMatcher<T> matcher)
+    public WaitOnQuestion(IQuestion<TQ> question, IMatcher<TQ> matcher)
     {
         _question = question;
         _matcher = matcher;
@@ -52,13 +52,38 @@ public class WaitOnQuestion<T> : WaitWithTimeout
     }
 
     /// <summary>
-    ///     Performs the wait operation for the specified actor.
+    ///     Performs the wait operation asynchronously for the specified actor.
+    ///     Polls the question periodically until it matches the provided matcher or the timeout elapses.
     /// </summary>
-    /// <typeparam name="TActor">The type of actor performing this action.</typeparam>
-    /// <param name="actor">The actor performing this wait action.</param>
-    public override void PerformAs<TActor>(TActor actor)
+    /// <typeparam name="T">The type of actor performing this action.</typeparam>
+    /// <param name="actor">The actor performing this wait operation.</param>
+    /// <param name="cancellationToken">The cancellation token to observe while waiting.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
+    public override async Task PerformAsAsync<T>(T actor, CancellationToken cancellationToken = default)
     {
-        actor.Should(Eventually(SeeThat(_question, _matcher))
-            .WaitingForNoLongerThan((int)Timeout.TotalMilliseconds).Milliseconds());
+        var endTime = DateTime.UtcNow.Add(Timeout);
+        var pollInterval = TimeSpan.FromMilliseconds(100);
+
+        TQ lastAnswer = default!;
+
+        while (DateTime.UtcNow < endTime)
+        {
+            if (cancellationToken.IsCancellationRequested)
+            {
+                await Task.FromCanceled(cancellationToken);
+            }
+
+            lastAnswer = await _question.AnsweredBy(actor);
+            if (_matcher.Matches(lastAnswer))
+            {
+                return; // Condition met
+            }
+
+            await Task.Delay(pollInterval, cancellationToken);
+        }
+
+        // Timeout reached: perform a final assertion to produce an informative failure message
+        lastAnswer = await _question.AnsweredBy(actor);
+        MatcherAssert.AssertThat(lastAnswer, _matcher);
     }
 }

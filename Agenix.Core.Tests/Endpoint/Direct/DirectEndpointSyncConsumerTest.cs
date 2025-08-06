@@ -7,24 +7,25 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Message;
 using Agenix.Api.Spi;
@@ -56,7 +57,7 @@ public class DirectEndpointSyncConsumerTest
     }
 
     [Test]
-    public void TestReceiveMessageWithReplyQueue()
+    public async Task TestReceiveMessageWithReplyQueue()
     {
         var endpoint = new DirectSyncEndpoint();
         endpoint.EndpointConfiguration.SetQueue(_queueMock.Object);
@@ -65,17 +66,17 @@ public class DirectEndpointSyncConsumerTest
 
         var message = new DefaultMessage("<TestResponse>Hello World!</TestResponse>", headers);
 
-        _queueMock.Setup(q => q.Receive(5000L)).Returns(message);
+        _queueMock.Setup(q => q.Receive(5000L)).ReturnsAsync(message);
 
         var channelSyncConsumer = (DirectSyncConsumer)endpoint.CreateConsumer();
-        var receivedMessage = channelSyncConsumer.Receive(_context);
+        var receivedMessage = await channelSyncConsumer.Receive(_context);
 
         ClassicAssert.AreEqual(message.Payload, receivedMessage.Payload);
         ClassicAssert.AreEqual(message.GetHeader(MessageHeaders.Id), receivedMessage.GetHeader(MessageHeaders.Id));
         ClassicAssert.AreEqual(message.GetHeader(DirectMessageHeaders.ReplyQueue),
             receivedMessage.GetHeader(DirectMessageHeaders.ReplyQueue));
 
-        var savedReplyQueue = channelSyncConsumer.CorrelationManager.Find(
+        var savedReplyQueue = await channelSyncConsumer.CorrelationManager.Find(
             endpoint.EndpointConfiguration.Correlator.GetCorrelationKey(receivedMessage),
             endpoint.EndpointConfiguration.Timeout);
 
@@ -84,7 +85,7 @@ public class DirectEndpointSyncConsumerTest
     }
 
     [Test]
-    public void TestReceiveMessageQueueNameResolver()
+    public async Task TestReceiveMessageQueueNameResolver()
     {
         var endpoint = new DirectSyncEndpoint();
         endpoint.EndpointConfiguration.SetQueueName("testQueue");
@@ -100,17 +101,17 @@ public class DirectEndpointSyncConsumerTest
         Mock.Get(_resolverMock.Object).Reset();
 
         _resolverMock.Setup(r => r.Resolve<IMessageQueue>("testQueue")).Returns(_queueMock.Object);
-        _queueMock.Setup(q => q.Receive(5000L)).Returns(message);
+        _queueMock.Setup(q => q.Receive(5000L)).ReturnsAsync(message);
 
         var channelSyncConsumer = (DirectSyncConsumer)endpoint.CreateConsumer();
-        var receivedMessage = channelSyncConsumer.Receive(_context);
+        var receivedMessage = await channelSyncConsumer.Receive(_context);
 
         ClassicAssert.AreEqual(receivedMessage.Payload, message.Payload);
         ClassicAssert.AreEqual(receivedMessage.GetHeader(MessageHeaders.Id), message.Id);
         ClassicAssert.AreEqual(receivedMessage.GetHeader(DirectMessageHeaders.ReplyQueue),
             message.GetHeader(DirectMessageHeaders.ReplyQueue));
 
-        var savedReplyQueue = channelSyncConsumer.CorrelationManager.Find(
+        var savedReplyQueue = await channelSyncConsumer.CorrelationManager.Find(
             endpoint.EndpointConfiguration.Correlator.GetCorrelationKey(receivedMessage),
             endpoint.EndpointConfiguration.Timeout);
 
@@ -119,7 +120,7 @@ public class DirectEndpointSyncConsumerTest
     }
 
     [Test]
-    public void TestReceiveMessageWithReplyQueueName()
+    public async Task TestReceiveMessageWithReplyQueueName()
     {
         var endpoint = new DirectSyncEndpoint();
         endpoint.EndpointConfiguration.SetQueue(_queueMock.Object);
@@ -134,17 +135,17 @@ public class DirectEndpointSyncConsumerTest
         Mock.Get(_replyQueueMock.Object).Reset();
         Mock.Get(_resolverMock.Object).Reset();
 
-        _queueMock.Setup(q => q.Receive(5000L)).Returns(message);
+        _queueMock.Setup(q => q.Receive(5000L)).ReturnsAsync(message);
         _resolverMock.Setup(r => r.Resolve<IMessageQueue>("replyQueue")).Returns(_replyQueueMock.Object);
 
         var channelSyncConsumer = (DirectSyncConsumer)endpoint.CreateConsumer();
-        var receivedMessage = channelSyncConsumer.Receive(_context);
+        var receivedMessage = await channelSyncConsumer.Receive(_context);
 
         ClassicAssert.AreEqual(receivedMessage.Payload, message.Payload);
         ClassicAssert.AreEqual(receivedMessage.GetHeader(MessageHeaders.Id), message.Id);
         ClassicAssert.AreEqual(receivedMessage.GetHeader(DirectMessageHeaders.ReplyQueue), "replyQueue");
 
-        var savedReplyQueue = channelSyncConsumer.CorrelationManager.Find(
+        var savedReplyQueue = await channelSyncConsumer.CorrelationManager.Find(
             endpoint.EndpointConfiguration.Correlator.GetCorrelationKey(receivedMessage),
             endpoint.EndpointConfiguration.Timeout);
 
@@ -153,7 +154,7 @@ public class DirectEndpointSyncConsumerTest
     }
 
     [Test]
-    public void TestReceiveMessageWithCustomTimeout()
+    public async Task TestReceiveMessageWithCustomTimeout()
     {
         var endpoint = new DirectSyncEndpoint();
         endpoint.EndpointConfiguration.SetQueue(_queueMock.Object);
@@ -166,15 +167,15 @@ public class DirectEndpointSyncConsumerTest
         Mock.Get(_queueMock.Object).Reset();
         Mock.Get(_replyQueueMock.Object).Reset();
 
-        _queueMock.Setup(q => q.Receive(10000L)).Returns(message);
+        _queueMock.Setup(q => q.Receive(10000L)).ReturnsAsync(message);
 
         var channelSyncConsumer = (DirectSyncConsumer)endpoint.CreateConsumer();
-        var receivedMessage = channelSyncConsumer.Receive(_context);
+        var receivedMessage = await channelSyncConsumer.Receive(_context);
 
         ClassicAssert.AreEqual(receivedMessage.Payload, message.Payload);
         ClassicAssert.AreEqual(receivedMessage.GetHeader(MessageHeaders.Id), message.Id);
 
-        var savedReplyQueue = channelSyncConsumer.CorrelationManager.Find(
+        var savedReplyQueue = await channelSyncConsumer.CorrelationManager.Find(
             endpoint.EndpointConfiguration.Correlator.GetCorrelationKey(receivedMessage),
             endpoint.EndpointConfiguration.Timeout);
 
@@ -183,7 +184,7 @@ public class DirectEndpointSyncConsumerTest
     }
 
     [Test]
-    public void TestReceiveMessageWithReplyMessageCorrelator()
+    public async Task TestReceiveMessageWithReplyMessageCorrelator()
     {
         var endpoint = new DirectSyncEndpoint();
         endpoint.EndpointConfiguration.SetQueue(_queueMock.Object);
@@ -199,29 +200,30 @@ public class DirectEndpointSyncConsumerTest
         Mock.Get(_replyQueueMock.Object).Reset();
         Mock.Get(_messageCorrelatorMock.Object).Reset();
 
-        _queueMock.Setup(q => q.Receive(500L)).Returns(message);
+        _queueMock.Setup(q => q.Receive(500L)).ReturnsAsync(message);
         _messageCorrelatorMock.Setup(mc => mc.GetCorrelationKey(It.IsAny<IMessage>()))
             .Returns(MessageHeaders.Id + " = '123456789'");
         _messageCorrelatorMock.Setup(mc => mc.GetCorrelationKeyName(It.IsAny<string>())).Returns("correlationKeyName");
 
         var channelSyncConsumer = (DirectSyncConsumer)endpoint.CreateConsumer();
-        var receivedMessage = channelSyncConsumer.Receive(_context);
+        var receivedMessage = await channelSyncConsumer.Receive(_context);
 
         ClassicAssert.AreEqual(receivedMessage.Payload, message.Payload);
         ClassicAssert.AreEqual(receivedMessage.GetHeader(MessageHeaders.Id), message.Id);
 
-        ClassicAssert.IsNull(channelSyncConsumer.CorrelationManager.Find("", endpoint.EndpointConfiguration.Timeout));
-        ClassicAssert.IsNull(channelSyncConsumer.CorrelationManager.Find(MessageHeaders.Id + " = 'totally_wrong'",
+        ClassicAssert.IsNull(
+            await channelSyncConsumer.CorrelationManager.Find("", endpoint.EndpointConfiguration.Timeout));
+        ClassicAssert.IsNull(await channelSyncConsumer.CorrelationManager.Find(MessageHeaders.Id + " = 'totally_wrong'",
             endpoint.EndpointConfiguration.Timeout));
 
-        var savedReplyQueue = channelSyncConsumer.CorrelationManager.Find(MessageHeaders.Id + " = '123456789'",
+        var savedReplyQueue = await channelSyncConsumer.CorrelationManager.Find(MessageHeaders.Id + " = '123456789'",
             endpoint.EndpointConfiguration.Timeout);
         ClassicAssert.IsNotNull(savedReplyQueue);
         ClassicAssert.AreEqual(savedReplyQueue, _replyQueueMock.Object);
     }
 
     [Test]
-    public void TestReceiveNoMessage()
+    public async Task TestReceiveNoMessage()
     {
         var endpoint = new DirectSyncEndpoint();
         endpoint.EndpointConfiguration.SetQueue(_queueMock.Object);
@@ -229,12 +231,12 @@ public class DirectEndpointSyncConsumerTest
         Mock.Get(_queueMock.Object).Reset();
         Mock.Get(_replyQueueMock.Object).Reset();
 
-        _queueMock.Setup(q => q.Receive(5000L)).Returns((IMessage)null);
+        _queueMock.Setup(q => q.Receive(5000L)).ReturnsAsync((IMessage)null);
 
         try
         {
             var channelSyncConsumer = (DirectSyncConsumer)endpoint.CreateConsumer();
-            channelSyncConsumer.Receive(_context);
+            await channelSyncConsumer.Receive(_context);
         }
         catch (ActionTimeoutException e)
         {
@@ -247,7 +249,7 @@ public class DirectEndpointSyncConsumerTest
     }
 
     [Test]
-    public void TestReceiveMessageNoReplyQueue()
+    public async Task TestReceiveMessageNoReplyQueue()
     {
         var endpoint = new DirectSyncEndpoint();
         endpoint.EndpointConfiguration.SetQueue(_queueMock.Object);
@@ -260,20 +262,21 @@ public class DirectEndpointSyncConsumerTest
         Mock.Get(_queueMock.Object).Reset();
         Mock.Get(_replyQueueMock.Object).Reset();
 
-        _queueMock.Setup(q => q.Receive(500L)).Returns(message);
+        _queueMock.Setup(q => q.Receive(500L)).ReturnsAsync(message);
 
         var channelSyncConsumer = (DirectSyncConsumer)endpoint.CreateConsumer();
-        var receivedMessage = channelSyncConsumer.Receive(_context);
+        var receivedMessage = await channelSyncConsumer.Receive(_context);
 
         ClassicAssert.AreEqual(receivedMessage.Payload, message.Payload);
         ClassicAssert.AreEqual(receivedMessage.GetHeader(MessageHeaders.Id), message.Id);
 
-        var savedReplyQueue = channelSyncConsumer.CorrelationManager.Find("", endpoint.EndpointConfiguration.Timeout);
+        var savedReplyQueue =
+            await channelSyncConsumer.CorrelationManager.Find("", endpoint.EndpointConfiguration.Timeout);
         ClassicAssert.IsNull(savedReplyQueue);
     }
 
     [Test]
-    public void TestSendReplyMessage()
+    public async Task TestSendReplyMessage()
     {
         var endpoint = new DirectSyncEndpoint();
 
@@ -284,13 +287,13 @@ public class DirectEndpointSyncConsumerTest
         var channelSyncConsumer = (DirectSyncConsumer)endpoint.CreateConsumer();
         channelSyncConsumer.SaveReplyMessageQueue(
             new DefaultMessage("").SetHeader(DirectMessageHeaders.ReplyQueue, _replyQueueMock.Object), _context);
-        channelSyncConsumer.Send(message, _context);
+        await channelSyncConsumer.Send(message, _context);
 
         _replyQueueMock.Verify(rq => rq.Send(It.IsAny<IMessage>()), Times.Once);
     }
 
     [Test]
-    public void TestSendReplyMessageWithReplyMessageCorrelator()
+    public async Task TestSendReplyMessageWithReplyMessageCorrelator()
     {
         var endpoint = new DirectSyncEndpoint();
 
@@ -309,17 +312,22 @@ public class DirectEndpointSyncConsumerTest
 
         Mock.Get(_replyQueueMock.Object).Reset();
 
-        _replyQueueMock.Setup(rq => rq.Send(It.IsAny<IMessage>()))
-            .Callback<IMessage>(msg => { ClassicAssert.AreEqual(message.Payload, msg.Payload); });
+        _replyQueueMock
+            .Setup(rq => rq.Send(It.IsAny<IMessage>()))
+            .Callback<IMessage>(msg =>
+            {
+                ClassicAssert.AreEqual(message.Payload, msg.Payload);
+            })
+            .Returns(Task.CompletedTask);
 
         channelSyncConsumer.SaveReplyMessageQueue(request, _context);
-        channelSyncConsumer.Send(message, _context);
+        await channelSyncConsumer.Send(message, _context);
 
-        _replyQueueMock.Verify(rq => rq.Send(It.IsAny<IMessage>()), Times.Once);
+        _replyQueueMock.Verify(rq => rq.Send(It.IsAny<IMessage>()), Times.Once());
     }
 
     [Test]
-    public void TestSendReplyMessageWithMissingCorrelatorKey()
+    public async Task TestSendReplyMessageWithMissingCorrelatorKey()
     {
         var endpoint = new DirectSyncEndpoint();
 
@@ -331,7 +339,7 @@ public class DirectEndpointSyncConsumerTest
         try
         {
             var channelSyncConsumer = (DirectSyncConsumer)endpoint.CreateConsumer();
-            channelSyncConsumer.Send(message, _context);
+            await channelSyncConsumer.Send(message, _context);
         }
         catch (AgenixSystemException e)
         {
@@ -343,7 +351,7 @@ public class DirectEndpointSyncConsumerTest
     }
 
     [Test]
-    public void TestNoCorrelationKeyFound()
+    public async Task TestNoCorrelationKeyFound()
     {
         var endpoint = new DirectSyncEndpoint();
 
@@ -362,7 +370,7 @@ public class DirectEndpointSyncConsumerTest
         try
         {
             var channelSyncConsumer = (DirectSyncConsumer)endpoint.CreateConsumer();
-            channelSyncConsumer.Send(message, _context);
+            await channelSyncConsumer.Send(message, _context);
         }
         catch (AgenixSystemException e)
         {
@@ -376,8 +384,7 @@ public class DirectEndpointSyncConsumerTest
     [Test]
     public void TestNoReplyDestinationFound()
     {
-        var endpoint = new DirectSyncEndpoint();
-        endpoint.EndpointConfiguration.Timeout = 1000L;
+        var endpoint = new DirectSyncEndpoint { EndpointConfiguration = { Timeout = 1000L } };
 
         var correlator = new DefaultMessageCorrelator();
         endpoint.EndpointConfiguration.Correlator = correlator;
@@ -390,10 +397,10 @@ public class DirectEndpointSyncConsumerTest
         var headers = new Dictionary<string, object>();
         var message = new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>", headers);
 
-        var ex = Assert.Throws<AgenixSystemException>(() =>
+        var ex = Assert.ThrowsAsync<AgenixSystemException>(async () =>
         {
             var channelSyncConsumer = (DirectSyncConsumer)endpoint.CreateConsumer();
-            channelSyncConsumer.Send(message, _context);
+            await channelSyncConsumer.Send(message, _context);
         });
 
         StringAssert.IsMatch("Failed to find reply channel for message correlation key: 123456789", ex.Message);
@@ -405,7 +412,10 @@ public class DirectEndpointSyncConsumerTest
         var endpoint = new DirectSyncEndpoint();
         var channelSyncConsumer = (DirectSyncConsumer)endpoint.CreateConsumer();
 
-        var ex = Assert.Throws<AgenixSystemException>(() => { channelSyncConsumer.Send(null, _context); });
+        var ex = Assert.ThrowsAsync<AgenixSystemException>(async () =>
+        {
+            await channelSyncConsumer.Send(null, _context);
+        });
 
         StringAssert.IsMatch("Cannot send empty message", ex.Message);
     }
@@ -418,15 +428,15 @@ public class DirectEndpointSyncConsumerTest
 
         var message = new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>");
 
-        replyQueue.Setup(rq => rq.Send(It.IsAny<IMessage>())).Throws(new AgenixSystemException("Internal error!"));
+        replyQueue.Setup(rq => rq.Send(It.IsAny<IMessage>())).ThrowsAsync(new AgenixSystemException("Internal error!"));
 
-        var ex = Assert.Throws<AgenixSystemException>(() =>
+        var ex = Assert.ThrowsAsync<AgenixSystemException>(async () =>
         {
             var channelSyncConsumer = (DirectSyncConsumer)endpoint.CreateConsumer();
             channelSyncConsumer.SaveReplyMessageQueue(
                 new DefaultMessage("").SetHeader(DirectMessageHeaders.ReplyQueue, replyQueue.Object),
                 _context);
-            channelSyncConsumer.Send(message, _context);
+            await channelSyncConsumer.Send(message, _context);
         });
 
         ClassicAssert.AreEqual(typeof(AgenixSystemException), ex.GetType());

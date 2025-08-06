@@ -72,7 +72,7 @@ public class PlaywrightBrowserConfiguration : AbstractEndpointConfiguration
     /// <summary>
     ///     Viewport settings
     /// </summary>
-    public ViewportSize? Viewport { get; set; } = ViewportSize.NoViewport;
+    public ViewportSize? Viewport { get; set; } = new() { Width = 1280, Height = 780 };
 
     /// <summary>
     ///     Default timeout for page operations in milliseconds
@@ -203,6 +203,16 @@ public class PlaywrightBrowserConfiguration : AbstractEndpointConfiguration
     ///     Browser launch options
     /// </summary>
     public BrowserTypeLaunchOptions? LaunchOptions { get; set; }
+
+    /// <summary>
+    ///     WebSocket endpoint to connect to an existing browser via Playwright ConnectAsync
+    /// </summary>
+    public string? ConnectWsEndpoint { get; set; }
+
+    /// <summary>
+    ///     Options for BrowserType.ConnectAsync
+    /// </summary>
+    public BrowserTypeConnectOptions? ConnectOptions { get; set; }
 
     /// <summary>
     ///     Page event handlers

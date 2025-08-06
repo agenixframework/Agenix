@@ -92,13 +92,15 @@ public class StoreFileAction : AbstractSeleniumAction
     /// </summary>
     /// <param name="browser">The Selenium browser instance</param>
     /// <param name="context">The test context</param>
-    protected override void Execute(SeleniumBrowser browser, TestContext context)
+    protected override Task Execute(SeleniumBrowser browser, TestContext context)
     {
         var resolvedFilePath = context.ReplaceDynamicContentInString(_filePath);
         Logger.LogDebug("Storing file: {FilePath}", resolvedFilePath);
 
         var storedPath = browser.StoreFile(resolvedFilePath);
         Logger.LogInformation("File stored successfully at: {StoredPath}", storedPath);
+
+        return Task.CompletedTask;
     }
 
     /// <summary>

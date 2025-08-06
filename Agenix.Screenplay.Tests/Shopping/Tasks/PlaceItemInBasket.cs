@@ -9,9 +9,9 @@ namespace Agenix.Screenplay.Tests.Shopping.Tasks;
 public class PlaceInBasket : IPerformable
 {
     [Step("And {0} has placed the item in her shopping basket")]
-    public void PerformAs<T>(T actor) where T : Actor
+    public Task PerformAsAsync<T>(T actor, CancellationToken cancellationToken = default) where T : Actor
     {
-        // Implementation here
+        return Task.CompletedTask;
     }
 
     public static PlaceInBasket PlacedTheItemInHerBasket()

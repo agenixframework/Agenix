@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -53,7 +53,7 @@ public class ValidationTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestValidateXmlTree()
+    public async Task TestValidateXmlTree()
     {
         // Arrange
         _endpoint.Reset();
@@ -73,7 +73,7 @@ public class ValidationTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root>" +
@@ -90,7 +90,7 @@ public class ValidationTest : AbstractNUnitSetUp
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         // Assert - Validation should pass for matching XML structure
         Assert.That(receiveAction, Is.Not.Null);
@@ -98,7 +98,7 @@ public class ValidationTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestValidateXmlTreeWithAttributes()
+    public async Task TestValidateXmlTreeWithAttributes()
     {
         // Arrange
         _endpoint.Reset();
@@ -123,7 +123,7 @@ public class ValidationTest : AbstractNUnitSetUp
                                          "</order>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<order id='12345' status='pending'>" +
@@ -145,7 +145,7 @@ public class ValidationTest : AbstractNUnitSetUp
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         // Assert - XML with complex attributes should validate correctly
         Assert.That(receiveAction, Is.Not.Null);
@@ -153,7 +153,7 @@ public class ValidationTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestValidateXmlTreeWithNamespaces()
+    public async Task TestValidateXmlTreeWithNamespaces()
     {
         // Arrange
         _endpoint.Reset();
@@ -181,7 +181,7 @@ public class ValidationTest : AbstractNUnitSetUp
                                          "</soap:Envelope>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<?xml version='1.0' encoding='UTF-8'?>" +
@@ -206,7 +206,7 @@ public class ValidationTest : AbstractNUnitSetUp
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         // Assert - XML with namespaces should validate correctly
         Assert.That(receiveAction, Is.Not.Null);
@@ -214,7 +214,7 @@ public class ValidationTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestValidateXmlTreeWithMixedContent()
+    public async Task TestValidateXmlTreeWithMixedContent()
     {
         // Arrange
         _endpoint.Reset();
@@ -238,7 +238,7 @@ public class ValidationTest : AbstractNUnitSetUp
                                          "</document>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<document>" +
@@ -259,7 +259,7 @@ public class ValidationTest : AbstractNUnitSetUp
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         // Assert - XML with mixed content should validate correctly
         Assert.That(receiveAction, Is.Not.Null);
@@ -267,7 +267,7 @@ public class ValidationTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestValidateXmlTreeWithCData()
+    public async Task TestValidateXmlTreeWithCData()
     {
         // Arrange
         _endpoint.Reset();
@@ -298,7 +298,7 @@ public class ValidationTest : AbstractNUnitSetUp
                                          "</response>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<response>" +
@@ -326,7 +326,7 @@ public class ValidationTest : AbstractNUnitSetUp
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         // Assert - XML with CDATA sections should validate correctly
         Assert.That(receiveAction, Is.Not.Null);
@@ -334,7 +334,7 @@ public class ValidationTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestValidateXmlTreeWithEmptyElements()
+    public async Task TestValidateXmlTreeWithEmptyElements()
     {
         // Arrange
         _endpoint.Reset();
@@ -363,7 +363,7 @@ public class ValidationTest : AbstractNUnitSetUp
                                          "</configuration>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<configuration>" +
@@ -389,7 +389,7 @@ public class ValidationTest : AbstractNUnitSetUp
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         // Assert - XML with empty elements should validate correctly
         Assert.That(receiveAction, Is.Not.Null);
@@ -397,7 +397,7 @@ public class ValidationTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestValidateXmlTreeWithSpecialCharacters()
+    public async Task TestValidateXmlTreeWithSpecialCharacters()
     {
         // Arrange
         _endpoint.Reset();
@@ -423,7 +423,7 @@ public class ValidationTest : AbstractNUnitSetUp
                                          "</message>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<?xml version='1.0' encoding='UTF-8'?>" +
@@ -446,7 +446,7 @@ public class ValidationTest : AbstractNUnitSetUp
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         // Assert - XML with special characters should validate correctly
         Assert.That(receiveAction, Is.Not.Null);
@@ -454,7 +454,7 @@ public class ValidationTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestValidateXmlTreeWithNestedStructure()
+    public async Task TestValidateXmlTreeWithNestedStructure()
     {
         // Arrange
         _endpoint.Reset();
@@ -511,7 +511,7 @@ public class ValidationTest : AbstractNUnitSetUp
                                          "</company>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<company>" +
@@ -565,7 +565,7 @@ public class ValidationTest : AbstractNUnitSetUp
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         // Assert - Deeply nested XML structure should validate correctly
         Assert.That(receiveAction, Is.Not.Null);
@@ -573,7 +573,7 @@ public class ValidationTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestValidateXmlTreeWithComments()
+    public async Task TestValidateXmlTreeWithComments()
     {
         // Arrange
         _endpoint.Reset();
@@ -611,7 +611,7 @@ public class ValidationTest : AbstractNUnitSetUp
                                          "</config>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<?xml version='1.0' encoding='UTF-8'?>" +
@@ -646,7 +646,7 @@ public class ValidationTest : AbstractNUnitSetUp
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         // Assert - XML with comments should validate correctly
         Assert.That(receiveAction, Is.Not.Null);
@@ -654,7 +654,7 @@ public class ValidationTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestValidateXmlTreeWithProcessingInstructions()
+    public async Task TestValidateXmlTreeWithProcessingInstructions()
     {
         // Arrange
         _endpoint.Reset();
@@ -683,7 +683,7 @@ public class ValidationTest : AbstractNUnitSetUp
                                          "</document>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<?xml version='1.0' encoding='UTF-8'?>" +
@@ -709,7 +709,7 @@ public class ValidationTest : AbstractNUnitSetUp
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         // Assert - XML with processing instructions should validate correctly
         Assert.That(receiveAction, Is.Not.Null);
@@ -717,7 +717,7 @@ public class ValidationTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestValidateXmlTreeWithVariableContent()
+    public async Task TestValidateXmlTreeWithVariableContent()
     {
         // Arrange
         _endpoint.Reset();
@@ -744,7 +744,7 @@ public class ValidationTest : AbstractNUnitSetUp
                                          "</order>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<order>" +
@@ -761,7 +761,7 @@ public class ValidationTest : AbstractNUnitSetUp
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         // Assert - XML with variable substitution should validate correctly
         Assert.That(receiveAction, Is.Not.Null);
@@ -769,7 +769,7 @@ public class ValidationTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestValidateXmlTreeDifferentAttributeOrder()
+    public async Task TestValidateXmlTreeDifferentAttributeOrder()
     {
         // Arrange
         _endpoint.Reset();
@@ -789,7 +789,7 @@ public class ValidationTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root>" +
@@ -806,7 +806,7 @@ public class ValidationTest : AbstractNUnitSetUp
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         // Assert - XML validation should succeed despite different attribute order
         Assert.That(receiveAction, Is.Not.Null);
@@ -834,7 +834,7 @@ public class ValidationTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root>" +
@@ -850,7 +850,7 @@ public class ValidationTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Expecting ValidationException due to missing sub-elementC
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<ValidationException>()
                 .With.Message
                 .Contains("Number of child elements not equal for element 'element', expected '2' but was '3'"));
@@ -880,7 +880,7 @@ public class ValidationTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root>" +
@@ -898,7 +898,7 @@ public class ValidationTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Expecting ValidationException due to additional sub-elementD in control message
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<ValidationException>()
                 .With.Message
                 .Contains("Number of child elements not equal for element 'element', expected '4' but was '3'"));
@@ -928,7 +928,7 @@ public class ValidationTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root>" +
@@ -945,7 +945,7 @@ public class ValidationTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Expecting ValidationException due to missing attribute='A' in control message
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.That(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<ValidationException>()
                 .With.Message.Contains("attribute"));
 
@@ -974,7 +974,7 @@ public class ValidationTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root>" +
@@ -991,7 +991,7 @@ public class ValidationTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Expecting ValidationException due to additional attribute-additional='additional' in control message
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<ValidationException>()
                 .With.Message
                 .Contains("Number of attributes not equal for element 'sub-elementA', expected '2' but was '1'"));
@@ -1021,7 +1021,7 @@ public class ValidationTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root>" +
@@ -1038,7 +1038,7 @@ public class ValidationTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Expecting ValidationException due to wrong attribute name 'attribute-wrong' instead of 'attribute'
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<ValidationException>()
                 .With.Message.Contains("attribute"));
 
@@ -1067,7 +1067,7 @@ public class ValidationTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root>" +
@@ -1084,7 +1084,7 @@ public class ValidationTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Expecting ValidationException due to wrong element name 'sub-element-wrong' instead of 'sub-elementA'
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<ValidationException>()
                 .With.Message.Contains("sub-element"));
 
@@ -1113,7 +1113,7 @@ public class ValidationTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root>" +
@@ -1130,7 +1130,7 @@ public class ValidationTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Expecting ValidationException due to wrong node value 'wrong-value' instead of 'text-value'
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<ValidationException>()
                 .With.Message.Contains("text"));
 
@@ -1159,7 +1159,7 @@ public class ValidationTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root>" +
@@ -1176,7 +1176,7 @@ public class ValidationTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Expecting ValidationException due to wrong attribute value 'wrong-value' instead of 'A'
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<ValidationException>()
                 .With.Message.Contains("attribute"));
 

@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -51,6 +51,13 @@ public class DefaultLogModifier : LogMessageModifierBase
     private bool maskXml = true;
     private Regex xmlPattern;
 
+    /// <summary>
+    ///     Masks sensitive parts of the input string based on predefined rules.
+    ///     This method applies masking to data formats such as XML, JSON, and form-urlencoded strings,
+    ///     replacing values of sensitive keys with a predefined mask value.
+    /// </summary>
+    /// <param name="source">The input string to be masked. Must be non-null and non-empty for masking to be applied.</param>
+    /// <returns>The masked string if masking was successful; otherwise, the original input string.</returns>
     public override string Mask(string source)
     {
         if (!AgenixSettings.IsLogModifierEnabled() || source == null || source.Length == 0)

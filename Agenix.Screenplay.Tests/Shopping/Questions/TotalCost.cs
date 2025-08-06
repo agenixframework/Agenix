@@ -2,9 +2,9 @@ namespace Agenix.Screenplay.Tests.Shopping.Questions;
 
 public class TotalCost(int total) : IQuestion<int>
 {
-    public int AnsweredBy(Actor actor)
+    public Task<int> AnsweredBy(Actor actor)
     {
-        return total;
+        return Task.FromResult(total);
     }
 
     public static TotalCost TheTotalCost()

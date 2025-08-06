@@ -45,16 +45,16 @@ public class OAuthTokenClientTests
             TokenEndpoint = "https://auth.example.com/token",
             ClientId = "test-client",
             ClientSecret = "test-secret",
-            Scopes = new List<string> { "read", "write" }
+            Scopes = ["read", "write"]
         };
     }
 
     [TearDown]
     public void TearDown()
     {
-        _tokenClient?.Dispose();
-        _httpClient?.Dispose();
-        _testHttpHandler?.Dispose();
+        _tokenClient.Dispose();
+        _httpClient.Dispose();
+        _testHttpHandler.Dispose();
     }
 
     private OAuthTokenClient _tokenClient;
@@ -164,14 +164,13 @@ public class OAuthTokenClientTests
 
 
     [Test]
-    public async Task GetTokenAsync_InvalidConfiguration_ThrowsInvalidOperationException()
+    public void GetTokenAsync_InvalidConfiguration_ThrowsInvalidOperationException()
     {
         // Arrange
         var invalidConfig = new OAuthClientConfiguration(); // Missing required fields
 
         // Act & Assert
-        Assert.ThrowsAsync<InvalidOperationException>(() =>
-            _tokenClient.GetTokenAsync(invalidConfig));
+        Assert.ThrowsAsync<InvalidOperationException>(() => _tokenClient.GetTokenAsync(invalidConfig));
     }
 
     [Test]
@@ -515,25 +514,23 @@ public class OAuthTokenClientTests
     }
 
     [Test]
-    public async Task GetTokenAsync_AfterDispose_ThrowsObjectDisposedException()
+    public void GetTokenAsync_AfterDispose_ThrowsObjectDisposedException()
     {
         // Arrange
         _tokenClient.Dispose();
 
         // Act & Assert
-        Assert.ThrowsAsync<ObjectDisposedException>(() =>
-            _tokenClient.GetTokenAsync(_configuration));
+        Assert.ThrowsAsync<ObjectDisposedException>(() => _tokenClient.GetTokenAsync(_configuration));
     }
 
     [Test]
-    public async Task AcquireTokenAsync_AfterDispose_ThrowsObjectDisposedException()
+    public void AcquireTokenAsync_AfterDispose_ThrowsObjectDisposedException()
     {
         // Arrange
         _tokenClient.Dispose();
 
         // Act & Assert
-        Assert.ThrowsAsync<ObjectDisposedException>(() =>
-            _tokenClient.AcquireTokenAsync(_configuration));
+        Assert.ThrowsAsync<ObjectDisposedException>(() => _tokenClient.AcquireTokenAsync(_configuration));
     }
 
     private string CreateTestJwtToken(DateTime? expiration = null)

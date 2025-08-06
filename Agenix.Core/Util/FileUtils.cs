@@ -34,6 +34,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Xml;
 using Agenix.Api;
 using Agenix.Api.Context;
@@ -279,6 +280,18 @@ public static class FileUtils
     public static IResource GetFileResource(string resourceName, TestContext context)
     {
         return GetFileResource(context.ReplaceDynamicContentInString(resourceName));
+    }
+
+    /// <summary>
+    ///     Asynchronously retrieves a file resource based on the specified resource name, resolving any dynamic content using
+    ///     the provided context.
+    /// </summary>
+    /// <param name="resourceName">The name of the resource to be retrieved.</param>
+    /// <param name="context">The context used to resolve dynamic content within the resource name.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the retrieved file resource.</returns>
+    public static async Task<IResource> GetFileResourceAsync(string resourceName, TestContext context)
+    {
+        return await Task.Run(() => GetFileResource(context.ReplaceDynamicContentInString(resourceName)));
     }
 
     /// <summary>

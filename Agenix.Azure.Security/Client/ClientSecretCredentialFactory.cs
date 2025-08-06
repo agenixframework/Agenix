@@ -110,16 +110,6 @@ public static class ClientSecretCredentialFactory
     }
 
     /// <summary>
-    ///     Get a ClientSecretCredential instance synchronously
-    /// </summary>
-    /// <param name="configuration">Azure AD configuration</param>
-    /// <returns>ClientSecretCredential instance</returns>
-    public static ClientSecretCredential GetCredential(AzureAdConfiguration configuration)
-    {
-        return GetCredentialAsync(configuration).GetAwaiter().GetResult();
-    }
-
-    /// <summary>
     ///     Get a ClientSecretCredential with individual parameters
     /// </summary>
     /// <param name="tenantId">Azure AD tenant identifier</param>
@@ -127,7 +117,8 @@ public static class ClientSecretCredentialFactory
     /// <param name="clientSecret">Azure AD application secret</param>
     /// <param name="authority">Optional authority URL</param>
     /// <returns>ClientSecretCredential instance</returns>
-    public static ClientSecretCredential GetCredential(string tenantId, string clientId, string clientSecret,
+    public static async Task<ClientSecretCredential> GetCredential(string tenantId, string clientId,
+        string clientSecret,
         string? authority = null)
     {
         var configuration = new AzureAdConfiguration
@@ -138,7 +129,7 @@ public static class ClientSecretCredentialFactory
             Authority = authority
         };
 
-        return GetCredential(configuration);
+        return await GetCredentialAsync(configuration);
     }
 
     /// <summary>
@@ -303,15 +294,7 @@ public static class ClientSecretCredentialFactory
     }
 
     /// <summary>
-    ///     Clear the credential cache synchronously
-    /// </summary>
-    public static void ClearCache()
-    {
-        ClearCacheAsync().GetAwaiter().GetResult();
-    }
-
-    /// <summary>
-    ///     Remove a specific credential from cache
+    ///     Remove a specific credential from a cache
     /// </summary>
     /// <param name="configuration">Configuration of the credential to remove</param>
     /// <returns>True if the credential was found and removed, false otherwise</returns>
@@ -335,15 +318,5 @@ public static class ClientSecretCredentialFactory
         {
             FactoryLock.Release();
         }
-    }
-
-    /// <summary>
-    ///     Remove a specific credential from cache synchronously
-    /// </summary>
-    /// <param name="configuration">Configuration of the credential to remove</param>
-    /// <returns>True if the credential was found and removed, false otherwise</returns>
-    public static bool RemoveCredential(AzureAdConfiguration configuration)
-    {
-        return RemoveCredentialAsync(configuration).GetAwaiter().GetResult();
     }
 }

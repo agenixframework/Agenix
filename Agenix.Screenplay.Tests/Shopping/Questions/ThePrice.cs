@@ -4,7 +4,9 @@ public abstract class ThePrice
 {
     public static IQuestion<int> Total()
     {
-        return IQuestion<int>.About("the total price").AnsweredBy(_ => 100);
+        return IQuestion<int>
+            .About("the total price")
+            .AnsweredBy(_ => Task.FromResult(100)).GetAwaiter().GetResult(); // or: async _ => 100
     }
 
     public static IQuestion<int> Vat()
@@ -14,16 +16,7 @@ public abstract class ThePrice
 
     public static IQuestion<int> Vat(bool throwError)
     {
-        return IQuestion<int>.Create(_ =>
-            {
-                if (throwError)
-                {
-                    throw new SystemException("Oh crap!");
-                }
-
-                return 20;
-            }
-        );
+        return IQuestion<int>.Create(_ => throwError ? throw new SystemException("Oh crap!") : 20);
     }
 
     public static IQuestion<int> TotalWithVat()

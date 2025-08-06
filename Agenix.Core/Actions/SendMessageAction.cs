@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Agenix.Api.Common;
 using Agenix.Api.Context;
@@ -46,7 +47,7 @@ namespace Agenix.Core.Actions;
 ///     capable of the message transport implementation. So the action is independent of the message transport
 ///     configuration.
 /// </summary>
-public class SendMessageAction : AbstractTestAction, ICompletable
+public class SendMessageAction : AbstractTestActionAsync, ICompletable
 {
     /// <summary>
     ///     Logger.
@@ -58,6 +59,10 @@ public class SendMessageAction : AbstractTestAction, ICompletable
     /// </summary>
     private TaskCompletionSource<TestContext> _finished;
 
+    /// <summary>
+    ///     Represents an action for sending messages within the testing framework.
+    /// </summary>
+    /// <param name="builder">The builder used to configure properties for the send message action.</param>
     public SendMessageAction(Builder builder) : base(builder.GetName() ?? "send", builder.GetDescription() ?? "")
     {
         ForkMode = builder.ForkMode;
@@ -73,6 +78,10 @@ public class SendMessageAction : AbstractTestAction, ICompletable
         DataDictionary = builder.GetMessageBuilderSupport().DataDictionary;
     }
 
+    /// <summary>
+    ///     Provides access to the data dictionary associated with the action, enabling custom processing of messages and
+    ///     context during execution.
+    /// </summary>
     public IDataDictionary DataDictionary { get; set; }
 
     /// <summary>
@@ -196,27 +205,27 @@ public class SendMessageAction : AbstractTestAction, ICompletable
     /// </summary>
     /// <param name="context">The test context containing relevant information and processors.</param>
     /// <returns>True if the action is disabled, otherwise false.</returns>
-    public override bool IsDisabled(TestContext context)
+    public bool IsDisabled(TestContext context)
     {
-        var messageEndpoint = GetOrCreateEndpoint(context);
-
-        return base.IsDisabled(context);
+        GetOrCreateEndpoint(context);
+        return true;
     }
 
     /// <summary>
     ///     Executes the message sending action with the provided test context.
     /// </summary>
     /// <param name="context">The test context containing relevant information and processors.</param>
-    public override void DoExecute(TestContext context)
+    /// <param name="cancellationToken"></param>
+    public override async Task DoExecute(TestContext context, CancellationToken cancellationToken = default)
     {
         var message = CreateMessage(context, MessageType);
         _finished = new TaskCompletionSource<TestContext>();
 
-        _finished.Task.ContinueWith(task =>
+        _ = _finished.Task.ContinueWith(task =>
         {
             if (task is { IsFaulted: true, Exception: not null })
             {
-                Log.LogWarning("Failure in forked send action: {}", task.Exception.Message);
+                Log.LogWarning("Failure in forked send action: {TaskExceptionMessage}", task.Exception.Message);
             }
             else
             {
@@ -225,7 +234,7 @@ public class SendMessageAction : AbstractTestAction, ICompletable
                     Log.LogWarning(ctxEx, ctxEx.Message);
                 }
             }
-        });
+        }, cancellationToken);
 
         // Extract variables from before sending message so we can save dynamic message ids
         foreach (var variableExtractor in VariableExtractors)
@@ -244,7 +253,7 @@ public class SendMessageAction : AbstractTestAction, ICompletable
         {
             Log.LogDebug("Forking message sending action ...");
 
-            Task.Run(() =>
+            await Task.Run(() =>
             {
                 try
                 {
@@ -266,14 +275,14 @@ public class SendMessageAction : AbstractTestAction, ICompletable
                 {
                     _finished.SetResult(context);
                 }
-            });
+            }, cancellationToken);
         }
         else
         {
             try
             {
                 ValidateMessage(message, context);
-                messageEndpoint.CreateProducer().Send(message, context);
+                await messageEndpoint.CreateProducer().Send(message, context);
             }
             finally
             {
@@ -297,16 +306,11 @@ public class SendMessageAction : AbstractTestAction, ICompletable
     /// <summary>
     ///     Builder for constructing and sending message actions.
     /// </summary>
-    /// <typeparam name="T">Type of the action being built.</typeparam>
-    /// <typeparam name="TM">Builder support type for message construction.</typeparam>
-    /// <typeparam name="TB">Builder type for the specific send message action.</typeparam>
     public class Builder : SendMessageActionBuilder<SendMessageAction, SendMessageActionBuilderSupport, Builder>
     {
         /// <summary>
         ///     Sends a message action to the specified endpoint.
         /// </summary>
-        /// <param name="context">The test context containing relevant information for the action.</param>
-        /// <param name="messageType">The type of the message to be sent.</param>
         /// <returns>A builder for constructing the message and sending it.</returns>
         public static Builder Send()
         {
@@ -316,8 +320,6 @@ public class SendMessageAction : AbstractTestAction, ICompletable
         /// <summary>
         ///     Sends a message action to the specified endpoint.
         /// </summary>
-        /// <param name="context">The test context containing relevant information for the action.</param>
-        /// <param name="messageType">The type of the message to be sent.</param>
         /// <returns>A builder for constructing the message and sending it.</returns>
         public static Builder Send(IEndpoint messageEndpoint)
         {
@@ -329,8 +331,6 @@ public class SendMessageAction : AbstractTestAction, ICompletable
         /// <summary>
         ///     Sends a message action to the specified endpoint.
         /// </summary>
-        /// <param name="context">The test context containing relevant information for the action.</param>
-        /// <param name="messageType">The type of the message to be sent.</param>
         /// <returns>A builder for constructing the message and sending it.</returns>
         public static Builder Send(string messageEndpointUri)
         {
@@ -347,7 +347,7 @@ public class SendMessageAction : AbstractTestAction, ICompletable
         {
             if (messageBuilderSupport == null)
             {
-                messageBuilderSupport = new SendMessageActionBuilderSupport(self);
+                messageBuilderSupport = new SendMessageActionBuilderSupport(Self);
             }
 
             return base.GetMessageBuilderSupport();
@@ -381,6 +381,9 @@ public class SendMessageAction : AbstractTestAction, ICompletable
         where TM : SendMessageBuilderSupport<T, TB, TM>
         where TB : SendMessageActionBuilder<T, TM, TB>
     {
+        /// <summary>
+        ///     Indicates whether the operation should fork into a new thread or process.
+        /// </summary>
         protected internal bool ForkMode;
 
         /// <summary>
@@ -391,7 +394,7 @@ public class SendMessageAction : AbstractTestAction, ICompletable
         public TB Fork(bool forkMode)
         {
             ForkMode = forkMode;
-            return self;
+            return Self;
         }
 
 
@@ -406,13 +409,10 @@ public class SendMessageAction : AbstractTestAction, ICompletable
                 messageBuilderSupport = GetMessageBuilderSupport();
             }
 
-            if (referenceResolver != null)
+            if (referenceResolver != null && messageBuilderSupport.DataDictionaryName != null)
             {
-                if (messageBuilderSupport.DataDictionaryName != null)
-                {
-                    messageBuilderSupport.Dictionary(
-                        referenceResolver.Resolve<IDataDictionary>(messageBuilderSupport.DataDictionaryName));
-                }
+                messageBuilderSupport.Dictionary(
+                    referenceResolver.Resolve<IDataDictionary>(messageBuilderSupport.DataDictionaryName));
             }
 
             return DoBuild();

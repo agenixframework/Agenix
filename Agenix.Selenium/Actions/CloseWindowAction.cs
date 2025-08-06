@@ -66,7 +66,7 @@ public class CloseWindowAction : AbstractSeleniumAction
     ///     Thrown if the window handle associated with the specified window is not found in the context,
     ///     or if the handle is not found in the current Selenium browser session.
     /// </exception>
-    protected override void Execute(SeleniumBrowser browser, TestContext context)
+    protected override Task Execute(SeleniumBrowser browser, TestContext context)
     {
         if (!context.GetVariables().ContainsKey(_windowName))
         {
@@ -122,6 +122,8 @@ public class CloseWindowAction : AbstractSeleniumAction
                 context.SetVariable(SeleniumHeaders.SeleniumActiveWindow, activeWindow);
             }
         }
+
+        return Task.CompletedTask;
     }
 
     /// <summary>

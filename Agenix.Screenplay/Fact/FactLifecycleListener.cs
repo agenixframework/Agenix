@@ -34,7 +34,7 @@ namespace Agenix.Screenplay.Fact;
 ///     <see cref="IFact" />.
 ///     Implements the <see cref="ITestListener" /> interface to respond to various test lifecycle stages.
 /// </summary>
-public class FactLifecycleListener : ITestListener
+public class FactLifecycleListener : IAsyncTestListener
 {
     private readonly Actor _actor;
     private readonly IFact _fact;
@@ -54,9 +54,10 @@ public class FactLifecycleListener : ITestListener
     ///     required before the test runs. Part of the <see cref="ITestListener" /> process.
     /// </summary>
     /// <param name="test">The <see cref="ITestCase" /> instance representing the test that is starting.</param>
-    public void OnTestStart(ITestCase test)
+    public Task OnTestStart(IAsyncTestCase test)
     {
         // Not required
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -64,9 +65,9 @@ public class FactLifecycleListener : ITestListener
     ///     Implements the <see cref="ITestListener" /> interface to handle the completion of a test lifecycle.
     /// </summary>
     /// <param name="test">The test case that has finished execution.</param>
-    public void OnTestFinish(ITestCase test)
+    public async Task OnTestFinish(IAsyncTestCase test)
     {
-        _fact.Teardown(_actor);
+        await _fact.Teardown(_actor);
     }
 
     /// <summary>
@@ -74,9 +75,10 @@ public class FactLifecycleListener : ITestListener
     ///     Allows for handling or logging of test success events during the test lifecycle.
     /// </summary>
     /// <param name="test">The test case that has successfully completed.</param>
-    public void OnTestSuccess(ITestCase test)
+    public Task OnTestSuccess(IAsyncTestCase test)
     {
         // Not required
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -85,9 +87,10 @@ public class FactLifecycleListener : ITestListener
     /// </summary>
     /// <param name="test">The test case that has encountered a failure.</param>
     /// <param name="cause">The exception detailing the cause of the test case failure.</param>
-    public void OnTestFailure(ITestCase test, Exception cause)
+    public Task OnTestFailure(IAsyncTestCase test, Exception cause)
     {
         // Not Required
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -95,8 +98,9 @@ public class FactLifecycleListener : ITestListener
     ///     This occurs if a test cannot be executed due to certain preconditions not being met or other reasons.
     /// </summary>
     /// <param name="test">The test case that was skipped.</param>
-    public void OnTestSkipped(ITestCase test)
+    public Task OnTestSkipped(IAsyncTestCase test)
     {
         // Not Required
+        return Task.CompletedTask;
     }
 }

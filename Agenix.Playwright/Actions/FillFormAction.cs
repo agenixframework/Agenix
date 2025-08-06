@@ -180,10 +180,13 @@ public class FillFormAction : AbstractPlaywrightAction
                 clickActionBuilder.WithTimeout(_timeout.Value);
             }
 
-            ConfigureFieldBuilder(ref clickActionBuilder, _submitButtonConfig!);
+            if (_submitButtonConfig != null)
+            {
+                ConfigureFieldBuilder(ref clickActionBuilder, _submitButtonConfig);
+            }
 
             var clickAction = clickActionBuilder.WithBrowser(browser).Build();
-            await Task.Run(() => clickAction.Execute(context));
+            await clickAction.ExecuteAsync(context);
 
             Logger.LogInformation("Form submitted successfully");
         }
@@ -226,13 +229,25 @@ public class FillFormAction : AbstractPlaywrightAction
                 await HandleCheckboxOrRadio(fieldConfig, processedValue, browser, context);
                 break;
             case FormFieldType.FILE:
-                await HandleFileInput(fieldConfig, processedValue, context);
+                if (processedValue != null)
+                {
+                    await HandleFileInput(fieldConfig, processedValue, context);
+                }
+
                 break;
             case FormFieldType.SELECT:
-                await HandleSelect(fieldConfig, processedValue, browser, context);
+                if (processedValue != null)
+                {
+                    await HandleSelect(fieldConfig, processedValue, browser, context);
+                }
+
                 break;
             case FormFieldType.TEXT:
-                await HandleTextInput(fieldConfig, processedValue, browser, context);
+                if (processedValue != null)
+                {
+                    await HandleTextInput(fieldConfig, processedValue, browser, context);
+                }
+
                 break;
         }
     }
@@ -247,27 +262,32 @@ public class FillFormAction : AbstractPlaywrightAction
     {
         try
         {
-            var page = browser.GetCurrentPage()!;
-            var locator = CreateLocatorFromConfig(page, fieldConfig);
-            var element = locator.First;
-
-            var inputType = await element.GetAttributeAsync("type");
-            var tagName = await element.EvaluateAsync<string>("el => el.tagName.toLowerCase()");
-
-            return (inputType?.ToLower(), tagName.ToLower()) switch
+            var page = browser.GetCurrentPage();
+            if (page != null)
             {
-                ("checkbox", _) => FormFieldType.CHECKBOX,
-                ("radio", _) => FormFieldType.RADIO,
-                ("file", _) => FormFieldType.FILE,
-                (_, "select") => FormFieldType.SELECT,
-                _ => FormFieldType.TEXT
-            };
+                var locator = CreateLocatorFromConfig(page, fieldConfig);
+                var element = locator.First;
+
+                var inputType = await element.GetAttributeAsync("type");
+                var tagName = await element.EvaluateAsync<string>("el => el.tagName.toLowerCase()");
+
+                return (inputType?.ToLower(), tagName.ToLower()) switch
+                {
+                    ("checkbox", _) => FormFieldType.CHECKBOX,
+                    ("radio", _) => FormFieldType.RADIO,
+                    ("file", _) => FormFieldType.FILE,
+                    (_, "select") => FormFieldType.SELECT,
+                    _ => FormFieldType.TEXT
+                };
+            }
         }
         catch (Exception ex)
         {
             Logger.LogWarning(ex, "Failed to determine field type, defaulting to Text");
             return FormFieldType.TEXT;
         }
+
+        return FormFieldType.AUTO;
     }
 
     /// <summary>
@@ -384,7 +404,7 @@ public class FillFormAction : AbstractPlaywrightAction
 
         var checkAction = builder.WithBrowser(browser).Build();
 
-        await Task.Run(() => checkAction.Execute(context));
+        await checkAction.ExecuteAsync(context);
     }
 
     /// <summary>
@@ -412,7 +432,7 @@ public class FillFormAction : AbstractPlaywrightAction
 
         var setInputAction = builder.WithBrowser(browser).Build();
 
-        await Task.Run(() => setInputAction.Execute(context));
+        await setInputAction.ExecuteAsync(context);
     }
 
     /// <summary>
@@ -452,7 +472,7 @@ public class FillFormAction : AbstractPlaywrightAction
         }
 
         var setInputFilesAction = builder.Build();
-        await Task.Run(() => setInputFilesAction.Execute(context));
+        await setInputFilesAction.ExecuteAsync(context);
     }
 
     /// <summary>
@@ -499,7 +519,7 @@ public class FillFormAction : AbstractPlaywrightAction
         }
 
         var dropdownAction = builder.WithBrowser(browser).Build();
-        await Task.Run(() => dropdownAction.Execute(context));
+        await dropdownAction.ExecuteAsync(context);
     }
 
     /// <summary>
@@ -516,7 +536,7 @@ public class FillFormAction : AbstractPlaywrightAction
         ///     required to correctly configure the field input. Ensure the value corresponds
         ///     to the expected format of the target form field.
         /// </remarks>
-        public object Value { get; set; } = null!;
+        public object? Value { get; set; }
 
         /// <summary>
         ///     Gets or sets the type of the form field to be processed. This determines the behavior

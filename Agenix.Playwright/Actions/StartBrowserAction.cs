@@ -101,14 +101,15 @@ public class StartBrowserAction : AbstractPlaywrightAction
     ///     StartBrowserAction creates contexts, so it shouldn't try to resolve them beforehand.
     /// </summary>
     /// <param name="context">The test context</param>
-    public override void DoExecute(TestContext context)
+    /// <param name="cancellationToken"></param>
+    public override async Task DoExecute(TestContext context, CancellationToken cancellationToken = default)
     {
         // Use the Browser property from the base class instead of ResolveBrowser
         var browserToUse = Browser;
 
         // Skip context resolution for start action - we're creating them
         // Just execute the browser startup directly
-        Execute(browserToUse, context).GetAwaiter().GetResult();
+        await Execute(browserToUse, context);
     }
 
 

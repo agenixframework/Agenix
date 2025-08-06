@@ -33,11 +33,8 @@ using Agenix.Api.Context;
 using Agenix.Api.IO;
 using Agenix.Core;
 using Agenix.Core.Util;
+using Agenix.Sql.Ado;
 using Agenix.Sql.Util;
-using Spring.Data.Common;
-using Spring.Data.Core;
-using Spring.Transaction;
-using Spring.Transaction.Support;
 
 #endregion
 
@@ -51,7 +48,7 @@ namespace Agenix.Sql.Actions;
 ///     SQL statements within a specified transaction context. It requires a subclass to
 ///     implement the execution logic through the DoExecute method.
 /// </remarks>
-public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITestAction, INamed, IDescribed
+public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, IAsyncTestAction, INamed, IAsyncDescribed
 {
     /**
      * SQL file resource path
@@ -63,9 +60,9 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
      */
     protected readonly List<string> statements;
 
-    protected readonly string? transactionIsolationLevel;
+    protected readonly bool transactionEnabled;
 
-    protected readonly IPlatformTransactionManager? transactionManager;
+    protected readonly string? transactionIsolationLevel;
     protected readonly string? transactionTimeout;
 
     /**
@@ -84,7 +81,7 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
         AdoTemplate? adoTemplate,
         string? sqlResourcePath,
         string transactionIsolationLevel,
-        IPlatformTransactionManager? transactionManager,
+        bool transactionEnabled,
         string transactionTimeout,
         List<string> statements)
     {
@@ -102,7 +99,7 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
 
         this.sqlResourcePath = sqlResourcePath;
         this.transactionIsolationLevel = transactionIsolationLevel;
-        this.transactionManager = transactionManager;
+        this.transactionEnabled = transactionEnabled;
         this.transactionTimeout = transactionTimeout;
         this.statements = statements;
     }
@@ -116,10 +113,8 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
     /// /
     public List<string> Statements => statements;
 
-    /// Provides access to the transaction manager used for managing database transactions
-    /// within the context of executing database-related test actions.
-    /// /
-    public IPlatformTransactionManager? TransactionManager => transactionManager;
+    /// Indicates whether this action should use an ADO.NET transaction during execution.
+    public bool TransactionEnabled => transactionEnabled;
 
     public string? TransactionIsolationLevel => transactionIsolationLevel;
 
@@ -130,7 +125,7 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
     /// </summary>
     /// <param name="newDescription">The new description to set for the action.</param>
     /// <returns>The updated instance of the action with the new description.</returns>
-    public ITestAction SetDescription(string newDescription)
+    public IAsyncTestAction SetDescription(string newDescription)
     {
         description = newDescription;
         return this;
@@ -146,6 +141,17 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
     }
 
     /// <summary>
+    ///     Retrieves the name of the current test action instance.
+    /// </summary>
+    /// <returns>The name of the current instance.</returns>
+    public string Name => name;
+
+    public async Task ExecuteAsync(TestContext context, CancellationToken cancellationToken = default)
+    {
+        await DoExecute(context, cancellationToken);
+    }
+
+    /// <summary>
     ///     Sets the name for the current instance.
     /// </summary>
     /// <param name="newName">The new name to be assigned.</param>
@@ -153,21 +159,6 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
     {
         name = newName;
     }
-
-    /// <summary>
-    ///     Do basic logging and delegate execution to subclass.
-    /// </summary>
-    /// <param name="context">The test context</param>
-    public void Execute(TestContext context)
-    {
-        DoExecute(context);
-    }
-
-    /// <summary>
-    ///     Retrieves the name of the current test action instance.
-    /// </summary>
-    /// <returns>The name of the current instance.</returns>
-    public string Name => name;
 
 
     /// Reads SQL statements from an external file resource. The file can contain multiple
@@ -193,17 +184,20 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
     }
 
     /// <summary>
-    ///     Subclasses may add custom execution logic here.
+    ///     Executes the database-related test action. Subclasses must override this method
+    ///     to implement specific execution logic.
     /// </summary>
-    /// <param name="context"></param>
-    public abstract void DoExecute(TestContext context);
+    /// <param name="context">The test context that provides state and additional execution information.</param>
+    /// <param name="cancellationToken">An optional token to monitor for cancellation requests.</param>
+    /// <returns>A Task representing the asynchronous execution of the test action.</returns>
+    public abstract Task DoExecute(TestContext context, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     Action Builder.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="S"></typeparam>
-    public abstract class AbstractDatabaseBuilder<T, S> : AbstractTestActionBuilder<T, S>
+    public abstract class AbstractDatabaseBuilder<T, S> : AbstractAsyncTestActionBuilder<T, S>
         where T : AbstractDatabaseConnectingTestAction
         where S : AbstractDatabaseBuilder<T, S>
     {
@@ -211,9 +205,9 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
         internal AdoTemplate? adoTemplate;
         internal IDbProvider? dbProvider;
         internal string? sqlResourcePath;
+        internal bool transactionEnabled;
         internal string transactionIsolationLevel = IsolationLevel.ReadCommitted.ToString();
-        internal IPlatformTransactionManager? transactionManager;
-        internal string transactionTimeout = DefaultTransactionDefinition.TIMEOUT_DEFAULT.ToString();
+        internal string transactionTimeout = (-1).ToString();
 
         /// Sets the database provider for the test action builder.
         /// <param name="newDbProvider">The database provider instance to be set.</param>
@@ -221,7 +215,7 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
         public S DbProvider(IDbProvider newDbProvider)
         {
             dbProvider = newDbProvider;
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -232,18 +226,18 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
         public S AdoTemplate(AdoTemplate newAdoTemplate)
         {
             adoTemplate = newAdoTemplate;
-            return self;
+            return Self;
         }
 
         /// <summary>
-        ///     Sets the platform transaction manager for managing transactions in the test action builder.
+        ///     Enables or disables wrapping statements in a single ADO.NET transaction.
         /// </summary>
-        /// <param name="newTransactionManager">The IPlatformTransactionManager instance to be set.</param>
-        /// <returns>The builder instance with the transaction manager updated.</returns>
-        public S TransactionManager(IPlatformTransactionManager newTransactionManager)
+        /// <param name="enabled">True to enable a transaction; false to execute without a transaction.</param>
+        /// <returns>The builder instance.</returns>
+        public S UseTransaction(bool enabled)
         {
-            transactionManager = newTransactionManager;
-            return self;
+            transactionEnabled = enabled;
+            return Self;
         }
 
         /// Sets the transaction timeout value for the test action builder.
@@ -252,7 +246,7 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
         public S TransactionTimeout(int timeout)
         {
             transactionTimeout = timeout.ToString();
-            return self;
+            return Self;
         }
 
         /// Sets the transaction isolation level for the test action builder.
@@ -261,7 +255,7 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
         public S TransactionIsolationLevel(string newIsolationLevel)
         {
             transactionIsolationLevel = newIsolationLevel;
-            return self;
+            return Self;
         }
 
         /// Adds an SQL statement to the list of statements to be executed as part of the database test action.
@@ -270,7 +264,7 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
         public S Statement(string sql)
         {
             statements.Add(sql);
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -281,7 +275,7 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
         public S Statements(List<string> newStatements)
         {
             statements.AddRange(newStatements);
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -292,7 +286,7 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
         public S SqlResource(IResource newSqlResource)
         {
             Statements(SqlUtils.CreateStatementsFromFileResource(newSqlResource));
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -303,7 +297,7 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, ITes
         public S SqlResource(string resourceName)
         {
             sqlResourcePath = resourceName;
-            return self;
+            return Self;
         }
     }
 }

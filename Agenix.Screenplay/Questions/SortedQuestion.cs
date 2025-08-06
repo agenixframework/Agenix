@@ -48,14 +48,14 @@ public class SortedQuestion<T>(IQuestion<IList<T>> listQuestion, IComparer<T> co
     ///     Provides an answer to the question by returning a sorted list of items based on the specified comparer.
     /// </summary>
     /// <param name="actor">
-    ///     The actor who asks the question and interacts with the system to retrieve the answer.
+    ///     The actor who asks and interacts with the system to retrieve the answer.
     /// </param>
     /// <returns>
     ///     A sorted list of items of type <typeparamref name="T" />.
     /// </returns>
-    public IList<T> AnsweredBy(Actor actor)
+    public async Task<IList<T>> AnsweredBy(Actor actor)
     {
-        var sortedItems = new List<T>(listQuestion.AnsweredBy(actor));
+        var sortedItems = new List<T>(await listQuestion.AnsweredBy(actor));
         sortedItems.Sort(comparer);
         return sortedItems;
     }

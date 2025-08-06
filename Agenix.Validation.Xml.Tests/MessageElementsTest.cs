@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -76,7 +76,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
                                          + "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -96,7 +96,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
             .Build();
 
         // Assert that no exception is thrown
-        Assert.DoesNotThrow(() => receiveAction.Execute(Context));
+        Assert.DoesNotThrowAsync(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -121,7 +121,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
                                          + "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -141,7 +141,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
             .Build();
 
         // Assert that no exception is thrown
-        Assert.DoesNotThrow(() => receiveAction.Execute(Context));
+        Assert.DoesNotThrowAsync(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -166,7 +166,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
                                          + "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -187,7 +187,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
             .Build();
 
         // Assert that no exception is thrown
-        Assert.DoesNotThrow(() => receiveAction.Execute(Context));
+        Assert.DoesNotThrowAsync(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -212,7 +212,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
                                          + "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -232,7 +232,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
             .Build();
 
         // Assert that ValidationException is thrown
-        Assert.Throws<ValidationException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<ValidationException>(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -257,7 +257,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
                                          + "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -277,7 +277,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
             .Build();
 
         // Assert that no exception is thrown
-        Assert.DoesNotThrow(() => receiveAction.Execute(Context));
+        Assert.DoesNotThrowAsync(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -302,7 +302,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
                                          + "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -322,7 +322,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
             .Build();
 
         // Assert that AgenixSystemException is thrown
-        Assert.Throws<AgenixSystemException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<AgenixSystemException>(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -347,7 +347,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
                                          + "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -367,7 +367,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
             .Build();
 
         // Assert that ValidationException is thrown
-        Assert.Throws<ValidationException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<ValidationException>(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -392,7 +392,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
                                          + "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -412,7 +412,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
             .Build();
 
         // Assert that ValidationException is thrown
-        Assert.Throws<ValidationException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<ValidationException>(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -437,7 +437,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
                                          + "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -457,7 +457,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
             .Build();
 
         // Assert that AgenixSystemException is thrown
-        Assert.Throws<AgenixSystemException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<AgenixSystemException>(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -482,7 +482,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
                                          + "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -512,7 +512,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
             .Build();
 
         // Assert that no exception is thrown
-        Assert.DoesNotThrow(() => receiveAction.Execute(Context));
+        Assert.DoesNotThrowAsync(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -537,7 +537,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
                                          + "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -566,7 +566,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
             .Build();
 
         // Assert that no exception is thrown
-        Assert.DoesNotThrow(() => receiveAction.Execute(Context));
+        Assert.DoesNotThrowAsync(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -591,7 +591,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
                                          + "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -632,7 +632,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
             .Build();
 
         // Assert that no exception is thrown
-        Assert.DoesNotThrow(() => receiveAction.Execute(Context));
+        Assert.DoesNotThrowAsync(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -657,7 +657,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
                                          + "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -687,7 +687,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
             .Build();
 
         // Assert that no exception is thrown
-        Assert.DoesNotThrow(() => receiveAction.Execute(Context));
+        Assert.DoesNotThrowAsync(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -712,7 +712,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
                                          + "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -742,7 +742,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
             .Build();
 
         // Assert that AgenixSystemException is thrown
-        Assert.Throws<AgenixSystemException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<AgenixSystemException>(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -767,7 +767,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
                                          + "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -797,7 +797,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
             .Build();
 
         // Assert that AgenixSystemException is thrown
-        Assert.Throws<AgenixSystemException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<AgenixSystemException>(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -822,7 +822,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
                                          + "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -852,11 +852,11 @@ public class MessageElementsTest : AbstractNUnitSetUp
             .Build();
 
         // Assert that AgenixSystemException is thrown
-        Assert.Throws<AgenixSystemException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<AgenixSystemException>(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
-    public void TestExtractMessageElements()
+    public async Task TestExtractMessageElements()
     {
         // Reset mocks
         _endpoint.Reset();
@@ -877,7 +877,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
                                          + "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root>"
@@ -904,7 +904,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
             .Process(variableExtractor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariables().ContainsKey("valueA"), Is.True);
         Assert.That(Context.GetVariables()["valueA"], Is.EqualTo("text-value"));
@@ -913,7 +913,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExtractMessageAttributes()
+    public async Task TestExtractMessageAttributes()
     {
         // Reset mocks
         _endpoint.Reset();
@@ -934,7 +934,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
                                          + "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root>"
@@ -961,7 +961,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
             .Process(variableExtractor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariables().ContainsKey("valueA"), Is.True);
         Assert.That(Context.GetVariables()["valueA"], Is.EqualTo("A"));
@@ -991,7 +991,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
                                          + "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root>"
@@ -1018,7 +1018,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
             .Process(variableExtractor)
             .Build();
 
-        Assert.Throws<AgenixSystemException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<AgenixSystemException>(() => receiveAction.ExecuteAsync(Context));
 
         Assert.That(Context.GetVariables().ContainsKey("valueA"), Is.False);
         Assert.That(Context.GetVariables().ContainsKey("valueB"), Is.False);
@@ -1046,7 +1046,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
                                          + "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root>"
@@ -1072,7 +1072,7 @@ public class MessageElementsTest : AbstractNUnitSetUp
             .Process(variableExtractor)
             .Build();
 
-        Assert.Throws<AgenixSystemException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<AgenixSystemException>(() => receiveAction.ExecuteAsync(Context));
 
         Assert.That(Context.GetVariables().ContainsKey("attributeA"), Is.False);
     }

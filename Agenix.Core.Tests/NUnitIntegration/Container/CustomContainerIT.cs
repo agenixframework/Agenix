@@ -7,25 +7,27 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Threading;
+using System.Threading.Tasks;
+using Agenix.Api;
 using Agenix.Api.Annotations;
-using Agenix.Api.Container;
 using Agenix.Core.Container;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
@@ -39,13 +41,13 @@ namespace Agenix.Core.Tests.NUnitIntegration.Container;
 public class CustomContainerIT
 {
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
-    [AgenixResource] private IGherkinTestActionRunner _gherkin;
+    [AgenixResource] private IGherkinAsyncTestActionRunner _gherkin;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
 
     [Test]
-    public void ShouldExecuteReverseContainer()
+    public async Task ShouldExecuteReverseContainer()
     {
-        _gherkin.When(Reverse().Actions(
+        await _gherkin.When(Reverse().Actions(
             Echo("${text}"),
             Echo("Does it work"),
             CreateVariable("text", "Hello Agenix!")
@@ -56,9 +58,9 @@ public class CustomContainerIT
     ///     Creates and initializes a new instance of a container in which actions can be executed in reverse order.
     /// </summary>
     /// <returns>A builder object for the ReverseActionContainer, allowing for further configuration and execution of actions.</returns>
-    private AbstractTestContainerBuilder<ReverseActionContainer, dynamic> Reverse()
+    private AbstractAsyncTestContainerBuilder<ReverseActionContainer, dynamic> Reverse()
     {
-        return CustomTestContainerBuilder<ITestActionContainer>.Container(new ReverseActionContainer());
+        return CustomTestContainerBuilder<ReverseActionContainer>.Container(new ReverseActionContainer());
     }
 
     /// <summary>
@@ -70,17 +72,17 @@ public class CustomContainerIT
     ///     last action
     ///     added is executed first and the first action added is executed last.
     /// </remarks>
-    public class ReverseActionContainer : AbstractActionContainer
+    public class ReverseActionContainer : AbstractAsyncActionContainer
     {
         /// <summary>
         ///     Executes the list of actions in reverse order, where the last added action is executed first.
         /// </summary>
         /// <param name="context">The context in which the actions are to be executed, providing necessary runtime information.</param>
-        public override void DoExecute(TestContext context)
+        public override async Task DoExecute(TestContext context, CancellationToken cancellationToken = default)
         {
             for (var i = GetActions().Count; i > 0; i--)
             {
-                ExecuteAction(GetActions()[i - 1], context);
+                await ExecuteAction(GetActions()[i - 1], context);
             }
         }
     }

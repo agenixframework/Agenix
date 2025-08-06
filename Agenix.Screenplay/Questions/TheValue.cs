@@ -57,8 +57,8 @@ public static class TheValue
 
 internal class SimpleQuestion<TAnswer>(Func<Actor, TAnswer> answerFunction) : IQuestion<TAnswer>
 {
-    public TAnswer AnsweredBy(Actor actor)
+    public Task<TAnswer> AnsweredBy(Actor actor)
     {
-        return answerFunction(actor);
+        return Task.FromResult(answerFunction(actor));
     }
 }

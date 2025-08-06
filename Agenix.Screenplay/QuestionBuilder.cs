@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -34,7 +34,7 @@ namespace Agenix.Screenplay;
 /// <typeparam name="T">The type of answer returned by the question.</typeparam>
 /// <param name="actor">The actor who will answer the question.</param>
 /// <returns>The answer to the question.</returns>
-public delegate T QuestionAnswerProvider<T>(Actor actor);
+public delegate Task<T> QuestionAnswerProvider<T>(Actor actor);
 
 /// <summary>
 ///     Builder class for constructing questions with a specific subject in a Screenplay pattern.
@@ -42,7 +42,7 @@ public delegate T QuestionAnswerProvider<T>(Actor actor);
 public class QuestionBuilder(string subject)
 {
     /// <summary>
-    ///     Associates a subject to a question and returns a new question instance with the defined subject.
+    ///     Associates a subject with a question and returns a new question instance with the defined subject.
     /// </summary>
     /// <typeparam name="T">The type of the answer returned by the question.</typeparam>
     /// <param name="questionToAsk">The question to be associated with the subject.</param>
@@ -58,9 +58,9 @@ public class QuestionBuilder(string subject)
     /// <typeparam name="T">The type of the answer returned by the question.</typeparam>
     /// <param name="answerProvider">A delegate function that provides the answer when given an actor.</param>
     /// <returns>A new question instance with the defined subject.</returns>
-    public IQuestion<T> AnsweredBy<T>(QuestionAnswerProvider<T> answerProvider)
+    public Task<IQuestion<T>> AnsweredBy<T>(QuestionAnswerProvider<T> answerProvider)
     {
-        return new DelegateQuestion<T>(answerProvider, subject);
+        return Task.FromResult<IQuestion<T>>(new DelegateQuestion<T>(answerProvider, subject));
     }
 
     /// <summary>
@@ -76,7 +76,7 @@ public class QuestionBuilder(string subject)
         /// </summary>
         /// <param name="answerProvider">The delegate function that provides the answer.</param>
         /// <param name="subject">The subject of the question.</param>
-        public DelegateQuestion(QuestionAnswerProvider<T> answerProvider, string subject)
+        public DelegateQuestion(QuestionAnswerProvider<T> answerProvider, string? subject)
         {
             _answerProvider = answerProvider ?? throw new ArgumentNullException(nameof(answerProvider));
             Subject = subject ?? string.Empty;
@@ -87,7 +87,7 @@ public class QuestionBuilder(string subject)
         /// </summary>
         /// <param name="actor">The actor who will answer the question.</param>
         /// <returns>The answer to the question.</returns>
-        public T AnsweredBy(Actor actor)
+        public Task<T> AnsweredBy(Actor actor)
         {
             return _answerProvider(actor);
         }

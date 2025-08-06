@@ -57,6 +57,8 @@ public class TestResults
         }
     }
 
+    /// Retrieves the total count of test results marked as successful.
+    /// <return>The count of successful test results.</return>
     public int GetSuccess()
     {
         return _results.Count(r => r.IsSuccess());
@@ -122,7 +124,7 @@ public class TestResults
     public TimeSpan GetTotalDuration()
     {
         return TimeSpan.FromMilliseconds(_results
-            .Where(r => r.Duration != null)
+            .Where(r => r?.Duration != null)
             .Sum(r => r.Duration.TotalMilliseconds));
     }
 }

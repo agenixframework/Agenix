@@ -3,10 +3,12 @@ namespace Agenix.Screenplay.Tests.Shopping.Tasks;
 public class Checkout(int waitTimeInSeconds)
 {
     private volatile string _nextCustomer = "Bob";
+    private Timer? _timer;
+
 
     public static Checkout FastCheckout()
     {
-        var checkout = new Checkout(2);
+        var checkout = new Checkout(1);
         checkout.StartTimer();
         return checkout;
     }
@@ -29,7 +31,7 @@ public class Checkout(int waitTimeInSeconds)
         {
             try
             {
-                await Task.Delay(waitTimeInSeconds * 1000);
+                await Task.Delay(waitTimeInSeconds * 1000).ConfigureAwait(false);
                 Run();
             }
             catch (TaskCanceledException)

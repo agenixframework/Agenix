@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -56,19 +56,19 @@ public class UseVariablesIT
     [AgenixEndpoint(Name = "hello.endpoint")]
     private IEndpoint helloEndpoint;
 
-    [AgenixResource] protected ITestCaseRunner runner;
+    [AgenixResource] protected IAsyncTestCaseRunner runner;
 
     [Test]
-    public void UseVariablesTest()
+    public async Task UseVariablesTest()
     {
         // Define test variables with random values
-        runner.Given(CreateVariables()
+        await runner.Given(CreateVariables()
             .Variable("correlationId", "agenix:randomNumber(10)")
             .Variable("messageId", "agenix:randomNumber(10)")
         );
 
         // Send asynchronous hello request: Agenix -> HelloService
-        runner.When(Send("hello.endpoint")
+        await runner.When(Send("hello.endpoint")
             .Message()
             .Type(MessageType.XML)
             .Body("""
@@ -84,7 +84,7 @@ public class UseVariablesIT
         );
 
         // Receive message and extract values into new variables
-        runner.Then(Receive("hello.endpoint")
+        await runner.Then(Receive("hello.endpoint")
             .Message()
             .Type(MessageType.XML)
             .Validate(PathExpression().Xpath("//HelloRequest/CorrelationId", "${correlationId}").Build())
@@ -98,10 +98,10 @@ public class UseVariablesIT
         );
 
         // Echo the extracted operation variable
-        runner.Then(Echo("${operation}"));
+        await runner.Then(Echo("${operation}"));
 
         // Trace all variables to see their current values
-        runner.Then(TraceVariables()
+        await runner.Then(TraceVariables()
             .Variable("id")
             .Variable("correlationId")
             .Variable("operation")

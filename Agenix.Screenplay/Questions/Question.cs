@@ -37,8 +37,8 @@ public class Question<TAnswer>(Func<Actor, TAnswer> answeredBy) : IQuestion<TAns
     /// </summary>
     /// <param name="actor">The actor who will answer the question.</param>
     /// <returns>The answer to the question as provided by the actor.</returns>
-    public TAnswer AnsweredBy(Actor actor)
+    public Task<TAnswer> AnsweredBy(Actor actor)
     {
-        return answeredBy(actor);
+        return Task.FromResult(answeredBy(actor));
     }
 }

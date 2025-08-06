@@ -53,7 +53,7 @@ public class FindElementActionTest : AbstractNUnitSetUp
 
     [Test]
     [TestCaseSource(nameof(FindByProvider))]
-    public void TestExecuteFindBy(string property, string value, By by)
+    public async Task TestExecuteFindBy(string property, string value, By by)
     {
         _webDriver.Setup(x => x.FindElement(It.IsAny<By>()))
             .Returns<By>(select =>
@@ -68,7 +68,7 @@ public class FindElementActionTest : AbstractNUnitSetUp
             .Element(property, value)
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariableObject("button"), Is.EqualTo(_element.Object));
     }
@@ -88,7 +88,7 @@ public class FindElementActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExecuteFindByVariableSupport()
+    public async Task TestExecuteFindByVariableSupport()
     {
         _webDriver.Setup(x => x.FindElement(It.IsAny<By>()))
             .Returns<By>(select =>
@@ -105,13 +105,13 @@ public class FindElementActionTest : AbstractNUnitSetUp
             .Element("id", "${myId}")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariableObject("button"), Is.EqualTo(_element.Object));
     }
 
     [Test]
-    public void TestExecuteFindByValidation()
+    public async Task TestExecuteFindByValidation()
     {
         _element.Setup(x => x.Text).Returns("Click Me!");
         _element.Setup(x => x.GetAttribute("type")).Returns("submit");
@@ -134,7 +134,7 @@ public class FindElementActionTest : AbstractNUnitSetUp
             .SetStyle("color", "red")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariableObject("button"), Is.EqualTo(_element.Object));
     }
@@ -168,7 +168,8 @@ public class FindElementActionTest : AbstractNUnitSetUp
             .SetEnabled(enabled)
             .Build();
 
-        var ex = Assert.Throws<ValidationException>(() => action.Execute(Context));
+        var ex = Assert.ThrowsAsync<ValidationException>(() => action.ExecuteAsync(Context));
+        Assert.That(ex, Is.Not.Null);
         Assert.That(ex.Message, Does.EndWith(errorMsg));
     }
 
@@ -198,7 +199,7 @@ public class FindElementActionTest : AbstractNUnitSetUp
             .Element("id", "myButton")
             .Build();
 
-        var ex = Assert.Throws<AgenixSystemException>(() => action.Execute(Context));
+        var ex = Assert.ThrowsAsync<AgenixSystemException>(() => action.ExecuteAsync(Context));
         Assert.That(ex.Message, Does.Match("Failed to find element 'By.Id: myButton' on page"));
     }
 
@@ -210,7 +211,8 @@ public class FindElementActionTest : AbstractNUnitSetUp
             .Element("unsupported", "wrong")
             .Build();
 
-        var ex = Assert.Throws<AgenixSystemException>(() => action.Execute(Context));
+        var ex = Assert.ThrowsAsync<AgenixSystemException>(() => action.ExecuteAsync(Context));
+        Assert.That(ex, Is.Not.Null);
         Assert.That(ex.Message, Does.Match("Unknown selector type: unsupported"));
     }
 }

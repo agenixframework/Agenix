@@ -44,7 +44,7 @@ public interface ITask : IPerformable
     /// </summary>
     /// <param name="title">The title of the task, used for clarity and identification.</param>
     /// <returns>A TaskBuilder instance to further define the task steps.</returns>
-    public static TaskBuilder Called(string title)
+    static TaskBuilder Called(string title)
     {
         return new TaskBuilder(title);
     }
@@ -55,7 +55,7 @@ public interface ITask : IPerformable
     /// <param name="steps">An array of steps implementing the IPerformable interface that define the task.</param>
     /// <typeparam name="T">The type of the steps, which must implement the IPerformable interface.</typeparam>
     /// <returns>An instance of AnonymousTask representing the composed task.</returns>
-    public static AnonymousTask Where<T>(params T[] steps) where T : IPerformable
+    static AnonymousTask Where<T>(params T[] steps) where T : IPerformable
     {
         return Instrumented.InstanceOf<AnonymousTask>()
             .WithProperties(HumanReadableTaskName.ForCurrentMethod(), steps.ToList());
@@ -64,7 +64,7 @@ public interface ITask : IPerformable
     /// <summary>
     ///     Create a new Performable Task made up of a list of Performances.
     /// </summary>
-    public static AnonymousTask Where<T>(string title, params T[] steps) where T : IPerformable
+    static AnonymousTask Where<T>(string title, params T[] steps) where T : IPerformable
     {
         return Instrumented.InstanceOf<AnonymousTask>()
             .WithProperties(title, steps.ToList());
@@ -75,7 +75,7 @@ public interface ITask : IPerformable
     /// </summary>
     /// <param name="performableOperation">The action to be performed by the actor.</param>
     /// <returns>An instance of <see cref="AnonymousPerformableFunction" /> that encapsulates the operation.</returns>
-    public static AnonymousPerformableFunction Where(Action<Actor> performableOperation)
+    static AnonymousPerformableFunction Where(Action<Actor> performableOperation)
     {
         return Instrumented.InstanceOf<AnonymousPerformableFunction>()
             .WithProperties(HumanReadableTaskName.ForCurrentMethod(), performableOperation);
@@ -87,7 +87,7 @@ public interface ITask : IPerformable
     /// <param name="title">The title or description of the performable function.</param>
     /// <param name="performableOperation">The action to be performed by the actor.</param>
     /// <returns>An anonymous performable function configured with the given title and action.</returns>
-    public static AnonymousPerformableFunction Where(string title, Action<Actor> performableOperation)
+    static AnonymousPerformableFunction Where(string title, Action<Actor> performableOperation)
     {
         return Instrumented.InstanceOf<AnonymousPerformableFunction>()
             .WithProperties(title, performableOperation);
@@ -98,7 +98,7 @@ public interface ITask : IPerformable
     /// </summary>
     /// <param name="performableOperation">The action to be executed as part of the task.</param>
     /// <returns>An instance of <see cref="AnonymousPerformableRunnable" /> configured with the provided action.</returns>
-    public static AnonymousPerformableRunnable ThatPerforms(Action performableOperation)
+    static AnonymousPerformableRunnable ThatPerforms(Action performableOperation)
     {
         return Instrumented.InstanceOf<AnonymousPerformableRunnable>()
             .WithProperties(HumanReadableTaskName.ForCurrentMethod(), performableOperation);
@@ -110,7 +110,7 @@ public interface ITask : IPerformable
     /// <param name="title">The title describing the anonymous performable runnable.</param>
     /// <param name="performableOperation">The operation to be performed as part of this performable.</param>
     /// <returns>An instance of AnonymousPerformableRunnable configured with the specified title and performable operation.</returns>
-    public static AnonymousPerformableRunnable ThatPerforms(string title, Action performableOperation)
+    static AnonymousPerformableRunnable ThatPerforms(string title, Action performableOperation)
     {
         return Instrumented.InstanceOf<AnonymousPerformableRunnable>()
             .WithProperties(title, performableOperation);

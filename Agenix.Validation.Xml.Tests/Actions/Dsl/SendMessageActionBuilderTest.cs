@@ -26,7 +26,6 @@
 
 using System.Collections.Concurrent;
 using Agenix.Api.Endpoint;
-using Agenix.Api.IO;
 using Agenix.Api.Message;
 using Agenix.Api.Messaging;
 using Agenix.Api.Report;
@@ -53,7 +52,6 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
     private readonly Mock<IEndpoint> _messageEndpoint = new();
     private readonly Mock<IProducer> _messageProducer = new();
     private readonly Mock<IReferenceResolver> _referenceResolver = new();
-    private readonly Mock<IResource> _resource = new();
 
     [SetUp]
     public void SetUp()
@@ -64,20 +62,20 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestSendBuilderWithPayloadModel()
+    public async Task TestSendBuilderWithPayloadModel()
     {
         // Setup mocks
         _messageEndpoint.Setup(x => x.CreateProducer()).Returns(_messageProducer.Object);
 
         _messageProducer.Setup(x => x.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, ctx) =>
+            .Callback<IMessage, TestContext>((message, _) =>
             {
                 Assert.That(message.GetPayload<string>(),
                     Is.EqualTo("<TestRequest><Message>Hello Agenix!</Message></TestRequest>"));
             });
 
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
-        _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
+        _referenceResolver.Setup(x => x.Resolve<AsyncTestActionListeners>()).Returns(new AsyncTestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
             .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
@@ -94,7 +92,7 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
         Context.SetReferenceResolver(_referenceResolver.Object);
         var runner = new DefaultTestCaseRunner(Context);
 
-        runner.Run(SendMessageAction.Builder.Send(_messageEndpoint.Object)
+        await runner.Run(SendMessageAction.Builder.Send(_messageEndpoint.Object)
             .Message()
             .Type(MessageType.XML)
             .Body(new MarshallingPayloadBuilder(new TestRequest("Hello Agenix!"))));
@@ -115,20 +113,20 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestSendBuilderWithPayloadModelExplicitMarshaller()
+    public async Task TestSendBuilderWithPayloadModelExplicitMarshaller()
     {
         // Setup mocks
         _messageEndpoint.Setup(x => x.CreateProducer()).Returns(_messageProducer.Object);
 
         _messageProducer.Setup(x => x.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, ctx) =>
+            .Callback<IMessage, TestContext>((message, _) =>
             {
                 Assert.That(message.GetPayload<string>(),
                     Is.EqualTo("<TestRequest><Message>Hello Agenix!</Message></TestRequest>"));
             });
 
         var runner = new DefaultTestCaseRunner(Context);
-        runner.Run(SendMessageAction.Builder.Send(_messageEndpoint.Object)
+        await runner.Run(SendMessageAction.Builder.Send(_messageEndpoint.Object)
             .Message()
             .Body(new MarshallingPayloadBuilder(new TestRequest("Hello Agenix!"), _marshaller)));
 
@@ -148,20 +146,20 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestSendBuilderWithPayloadModelExplicitMarshallerName()
+    public async Task TestSendBuilderWithPayloadModelExplicitMarshallerName()
     {
         // Setup mocks
         _messageEndpoint.Setup(x => x.CreateProducer()).Returns(_messageProducer.Object);
 
         _messageProducer.Setup(x => x.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, ctx) =>
+            .Callback<IMessage, TestContext>((message, _) =>
             {
                 Assert.That(message.GetPayload<string>(),
                     Is.EqualTo("<TestRequest><Message>Hello Agenix!</Message></TestRequest>"));
             });
 
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
-        _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
+        _referenceResolver.Setup(x => x.Resolve<AsyncTestActionListeners>()).Returns(new AsyncTestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
             .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
@@ -171,7 +169,7 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
 
         Context.SetReferenceResolver(_referenceResolver.Object);
         var runner = new DefaultTestCaseRunner(Context);
-        runner.Run(SendMessageAction.Builder.Send(_messageEndpoint.Object)
+        await runner.Run(SendMessageAction.Builder.Send(_messageEndpoint.Object)
             .Message()
             .Body(new MarshallingPayloadBuilder(new TestRequest("Hello Agenix!"), "myMarshaller")));
 
@@ -191,20 +189,20 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestSendBuilderExtractFromPayload()
+    public async Task TestSendBuilderExtractFromPayload()
     {
         // Setup mocks
         _messageEndpoint.Setup(x => x.CreateProducer()).Returns(_messageProducer.Object);
 
         _messageProducer.Setup(x => x.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, ctx) =>
+            .Callback<IMessage, TestContext>((message, _) =>
             {
                 Assert.That(message.GetPayload<string>(),
                     Is.EqualTo("<TestRequest><Message lang=\"ENG\">Hello World!</Message></TestRequest>"));
             });
 
         var runner = new DefaultTestCaseRunner(Context);
-        runner.Run(SendMessageAction.Builder.Send(_messageEndpoint.Object)
+        await runner.Run(SendMessageAction.Builder.Send(_messageEndpoint.Object)
             .Message()
             .Body("<TestRequest><Message lang=\"ENG\">Hello World!</Message></TestRequest>")
             .Extract(XpathSupport.Xpath()

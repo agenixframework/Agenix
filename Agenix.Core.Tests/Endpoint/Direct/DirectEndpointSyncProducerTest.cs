@@ -7,24 +7,25 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Message;
 using Agenix.Api.Spi;
@@ -54,7 +55,7 @@ public class DirectEndpointSyncProducerTest
     }
 
     [Test]
-    public void TestSendMessage()
+    public async Task TestSendMessage()
     {
         var endpoint = new DirectSyncEndpoint();
         endpoint.EndpointConfiguration.SetQueue(_queueMock.Object);
@@ -73,11 +74,11 @@ public class DirectEndpointSyncProducerTest
         });
 
         var producer = endpoint.CreateProducer();
-        producer.Send(message, _context);
+        await producer.Send(message, _context);
     }
 
     [Test]
-    public void TestSendMessageCustomReplyQueue()
+    public async Task TestSendMessageCustomReplyQueue()
     {
         var endpoint = new DirectSyncEndpoint();
         endpoint.EndpointConfiguration.SetQueue(_queueMock.Object);
@@ -98,7 +99,7 @@ public class DirectEndpointSyncProducerTest
         });
 
         var producer = endpoint.CreateProducer();
-        producer.Send(message, _context);
+        await producer.Send(message, _context);
     }
 
     [Test]
@@ -130,7 +131,7 @@ public class DirectEndpointSyncProducerTest
     }
 
     [Test]
-    public void TestSendMessageWithReplyHandler()
+    public async Task TestSendMessageWithReplyHandler()
     {
         var endpoint = new DirectSyncEndpoint();
         endpoint.EndpointConfiguration.SetQueue(_queueMock.Object);
@@ -149,17 +150,18 @@ public class DirectEndpointSyncProducerTest
         });
 
         var producer = (DirectSyncProducer)endpoint.CreateProducer();
-        producer.Send(message, _context);
+        await producer.Send(message, _context);
 
         var correlationKey = endpoint.EndpointConfiguration.Correlator.GetCorrelationKey(message);
-        var replyMessage = producer.CorrelationManager.Find(correlationKey, endpoint.EndpointConfiguration.Timeout);
+        var replyMessage =
+            await producer.CorrelationManager.Find(correlationKey, endpoint.EndpointConfiguration.Timeout);
 
         ClassicAssert.AreEqual(replyMessage.Payload, responseMessage.Payload);
         ClassicAssert.AreEqual(replyMessage.GetHeader(MessageHeaders.Id), responseMessage.Id);
     }
 
     [Test]
-    public void TestSendMessageWithCustomReplyTimeout()
+    public async Task TestSendMessageWithCustomReplyTimeout()
     {
         var endpoint = new DirectSyncEndpoint();
         endpoint.EndpointConfiguration.SetQueue(_queueMock.Object);
@@ -180,17 +182,18 @@ public class DirectEndpointSyncProducerTest
         });
 
         var producer = (DirectSyncProducer)endpoint.CreateProducer();
-        producer.Send(message, _context);
+        await producer.Send(message, _context);
 
         var correlationKey = endpoint.EndpointConfiguration.Correlator.GetCorrelationKey(message);
-        var replyMessage = producer.CorrelationManager.Find(correlationKey, endpoint.EndpointConfiguration.Timeout);
+        var replyMessage =
+            await producer.CorrelationManager.Find(correlationKey, endpoint.EndpointConfiguration.Timeout);
 
         ClassicAssert.AreEqual(replyMessage.Payload, responseMessage.Payload);
         ClassicAssert.AreEqual(replyMessage.GetHeader(MessageHeaders.Id), responseMessage.Id);
     }
 
     [Test]
-    public void TestSendMessageWithReplyMessageCorrelator()
+    public async Task TestSendMessageWithReplyMessageCorrelator()
     {
         var endpoint = new DirectSyncEndpoint();
         endpoint.EndpointConfiguration.SetQueue(_queueMock.Object);
@@ -215,9 +218,9 @@ public class DirectEndpointSyncProducerTest
         _messageCorrelatorMock.Setup(c => c.GetCorrelationKeyName(It.IsAny<string>())).Returns("correlationKeyName");
 
         var producer = (DirectSyncProducer)endpoint.CreateProducer();
-        producer.Send(message, _context);
+        await producer.Send(message, _context);
 
-        var replyMessage = producer.CorrelationManager.Find(MessageHeaders.Id + " = '123456789'",
+        var replyMessage = await producer.CorrelationManager.Find(MessageHeaders.Id + " = '123456789'",
             endpoint.EndpointConfiguration.Timeout);
 
         ClassicAssert.AreEqual(replyMessage.Payload, responseMessage.Payload);
@@ -225,7 +228,7 @@ public class DirectEndpointSyncProducerTest
     }
 
     [Test]
-    public void TestSendMessageNoResponse()
+    public async Task TestSendMessageNoResponse()
     {
         var endpoint = new DirectSyncEndpoint();
         endpoint.EndpointConfiguration.SetQueue(_queueMock.Object);
@@ -241,7 +244,7 @@ public class DirectEndpointSyncProducerTest
 
         try
         {
-            endpoint.CreateProducer().Send(message, _context);
+            await endpoint.CreateProducer().Send(message, _context);
         }
         catch (AgenixSystemException e)
         {
@@ -254,7 +257,7 @@ public class DirectEndpointSyncProducerTest
     }
 
     [Test]
-    public void TestOnReplyMessage()
+    public async Task TestOnReplyMessage()
     {
         var endpoint = new DirectSyncEndpoint();
         var message = new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>");
@@ -265,13 +268,13 @@ public class DirectEndpointSyncProducerTest
         producer.CorrelationManager.SaveCorrelationKey(correlationKeyName, producer.ToString(), _context);
         producer.CorrelationManager.Store(producer.ToString(), message);
 
-        var receivedMessage = producer.Receive(_context);
+        var receivedMessage = await producer.Receive(_context);
 
         ClassicAssert.AreEqual(receivedMessage.Payload, message.Payload);
     }
 
     [Test]
-    public void TestOnReplyMessageWithCorrelatorKey()
+    public async Task TestOnReplyMessageWithCorrelatorKey()
     {
         var endpoint = new DirectSyncEndpoint();
 
@@ -283,7 +286,7 @@ public class DirectEndpointSyncProducerTest
 
         producer.CorrelationManager.Store(correlationKey, message);
 
-        var receivedMessage = producer.Receive(correlationKey, _context);
+        var receivedMessage = await producer.Receive(correlationKey, _context);
 
         ClassicAssert.AreEqual(receivedMessage.Payload, message.Payload);
     }

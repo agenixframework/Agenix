@@ -11,7 +11,7 @@ namespace Agenix.Playwright.Tests.Integration;
 [NonParallelizable]
 public class TracingActionIT
 {
-    [AgenixResource] private ITestCaseRunner _gherkin;
+    [AgenixResource] private IAsyncTestCaseRunner _gherkin;
 
     [AgenixEndpoint(Name = "tracing-browser")]
     [PlaywrightBrowserConfig(
@@ -22,7 +22,7 @@ public class TracingActionIT
     private PlaywrightBrowser browser;
 
     [SetUp]
-    public void BeforeTestMethod()
+    public async Task BeforeTestMethod()
     {
         # region Set Environment Variables
 
@@ -31,20 +31,20 @@ public class TracingActionIT
 
         # endregion
 
-        _gherkin.Given(PlaywrightSupport.Playwright().Start(browser));
+        await _gherkin.Given(PlaywrightSupport.Playwright().Start(browser));
     }
 
     [TearDown]
-    public void AfterTestMethod()
+    public async Task AfterTestMethod()
     {
-        _gherkin.Then(PlaywrightSupport.Playwright().Stop(browser));
+        await _gherkin.Then(PlaywrightSupport.Playwright().Stop(browser));
     }
 
     [Test]
-    public void TracingStartAndStopTest()
+    public async Task TracingStartAndStopTest()
     {
         // Start tracing at the beginning of the test
-        _gherkin.Given(PlaywrightSupport.Playwright().Tracing()
+        await _gherkin.Given(PlaywrightSupport.Playwright().Tracing()
             .Start()
             .WithName("Test_Login_Page")
             .WithTitle("Login Page Test Trace")
@@ -54,9 +54,9 @@ public class TracingActionIT
             .Description("Start tracing for login page test"));
 
         // Stop tracing and save the trace file
-        Assert.DoesNotThrow(() =>
+        Assert.DoesNotThrowAsync(async () =>
         {
-            _gherkin.Then(PlaywrightSupport.Playwright().Tracing()
+            await _gherkin.Then(PlaywrightSupport.Playwright().Tracing()
                 .Stop("traces/Test_Login_Page.zip")
                 .Description("Stop tracing and save trace file"));
         });

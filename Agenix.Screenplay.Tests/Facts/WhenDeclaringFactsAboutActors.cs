@@ -39,34 +39,34 @@ public class WhenDeclaringFactsAboutActors
     private static readonly List<string> ExistingSavingsAccounts = [];
 
     [Test]
-    public void Facts_Let_Us_Prepare_An_Actor_For_A_Scenario()
+    public async Task Facts_Let_Us_Prepare_An_Actor_For_A_Scenario()
     {
         // Arrange
         var tim = Actor.Named("Tim");
 
         // Act
-        tim.Has(AnAccount.Numbered("123456"));
+        await tim.Has(AnAccount.Numbered("123456"));
 
         // Assert
         Assert.That(KnownAccounts, Does.Contain("123456"));
     }
 
     [Test]
-    public void Facts_Let_Us_Setup_And_Teardown_Test_Data()
+    public async Task Facts_Let_Us_Setup_And_Teardown_Test_Data()
     {
         // Arrange
         var tim = Actor.Named("Tim");
 
         // Act
-        tim.Has(ASavingsAccount.Numbered("Savings-123456"));
+        await tim.Has(ASavingsAccount.Numbered("Savings-123456"));
 
-        AgenixInstanceManager.GetOrDefault().AgenixContext.TestListeners.OnTestFinish(new DefaultTestCase());
+        await AgenixInstanceManager.GetOrDefault().AgenixContext.TestListeners.OnTestFinish(new DefaultTestCase());
 
         // Assert
         Assert.That(KnownAccounts, Does.Contain("Savings-123456"));
         Assert.That(ExistingSavingsAccounts, Does.Not.Contain("Savings-123456"));
 
-        tim.WrapUp();
+        await tim.WrapUp();
     }
 
     [Test]
@@ -76,14 +76,16 @@ public class WhenDeclaringFactsAboutActors
         var tim = Actor.Named("Tim");
 
         // Act & Assert
-        Assert.Throws<TestCompromisedException>(() => tim.Has(AnAccount.ThatIsIllegal()));
+        Assert.ThrowsAsync<TestCompromisedException>(() => tim.Has(AnAccount.ThatIsIllegal()));
     }
 
     public class AnAccount(string accountNumber) : IFact
     {
-        public void Setup(Actor actor)
+        public Task Setup(Actor actor)
         {
             KnownAccounts.Add(accountNumber);
+
+            return Task.CompletedTask;
         }
 
         public static IFact Numbered(string accountNumber)
@@ -104,7 +106,7 @@ public class WhenDeclaringFactsAboutActors
 
     private class IllegalAccount : IFact
     {
-        public void Setup(Actor actor)
+        public Task Setup(Actor actor)
         {
             throw new TestCompromisedException("Illegal account");
         }
@@ -115,17 +117,20 @@ public class WhenDeclaringFactsAboutActors
         }
     }
 
-    public class ASavingsAccount(string accountNumber) : IFact
+    private class ASavingsAccount(string accountNumber) : IFact
     {
-        public void Setup(Actor actor)
+        public Task Setup(Actor actor)
         {
             KnownAccounts.Add(accountNumber);
             ExistingSavingsAccounts.Add(accountNumber);
+
+            return Task.CompletedTask;
         }
 
-        public void Teardown(Actor actor)
+        public Task Teardown(Actor actor)
         {
             ExistingSavingsAccounts.Remove(accountNumber);
+            return Task.CompletedTask;
         }
 
         public static IFact Numbered(string accountNumber)

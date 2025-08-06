@@ -174,10 +174,15 @@ public class WhenRecruitingACast
     }
 
 
+    /// <summary>
+    ///     Represents the ability of an actor to perform the role of Hamlet in a screenplay context.
+    ///     This class also ensures cleanup of resources or state when the curtain is drawn.
+    /// </summary>
     public class PerformHamlet : IAbility, IHasTeardown
     {
-        public void TearDown()
+        public Task TearDown()
         {
+            return Task.CompletedTask;
         }
     }
 }

@@ -73,7 +73,7 @@ public static class Check
     {
         var condition = IQuestion<bool>.Create(actor =>
         {
-            var actual = question.AnsweredBy(actor);
+            var actual = question.AnsweredBy(actor).GetAwaiter().GetResult();
             return matcher.Matches(actual);
         });
 

@@ -174,17 +174,6 @@ public class MultiVaultSecretClient
     }
 
     /// <summary>
-    ///     Get secret value synchronously
-    /// </summary>
-    /// <param name="secretName">Name of the secret</param>
-    /// <param name="useCache">Whether to use cached results</param>
-    /// <returns>Secret value and the vault URI where it was found</returns>
-    public SecretResult GetSecret(string secretName, bool useCache = true)
-    {
-        return GetSecretAsync(secretName, useCache).GetAwaiter().GetResult();
-    }
-
-    /// <summary>
     ///     Search strategy: Return first found secret (fastest)
     /// </summary>
     private async Task<SecretResult> SearchFirstFoundAsync(string secretName, CancellationToken cancellationToken)

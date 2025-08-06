@@ -22,42 +22,42 @@ public class DanaGoesShoppingQuicklySample
     private readonly Actor _dana = Actor.Named("Dana");
 
     [Test]
-    public void ShouldBeAbleToPurchaseSomeItemsWithDelivery()
+    public async Task ShouldBeAbleToPurchaseSomeItemsWithDelivery()
     {
-        GivenThat(_dana).Has(Purchased().AnApple().ThatCosts(10).Dollars(),
+        await GivenThat(_dana).Has(Purchased().AnApple().ThatCosts(10).Dollars(),
             AndPurchased().APear().ThatCosts(5).Dollars());
 
-        When(_dana).AttemptsTo(HaveItemsDelivered.Now());
+        await When(_dana).AttemptsTo(HaveItemsDelivered.Now());
 
-        Then(_dana).Should(SeeThat(TheCorrectTotalCost(), EqualTo(15)),
+        await Then(_dana).Should(SeeThat(TheCorrectTotalCost(), EqualTo(15)),
             SeeThat("The total cost including delivery", TheTotalCostIncludingDelivery(), GreaterThanOrEqualTo(20)));
 
-        Then(_dana).Should(SeeThat(TheThankYouMessage(), EqualTo("Thank you!")));
+        await Then(_dana).Should(SeeThat(TheThankYouMessage(), EqualTo("Thank you!")));
     }
 
     [Test]
-    public void ShouldBeAbleToPurchaseSomeItems()
+    public async Task ShouldBeAbleToPurchaseSomeItems()
     {
-        GivenThat(_dana).Has(Purchased().AnApple().ThatCosts(10).Dollars(),
+        await GivenThat(_dana).Has(Purchased().AnApple().ThatCosts(10).Dollars(),
             Purchased().APear().ThatCosts(5).Dollars());
 
-        Assert.DoesNotThrow(() => When(_dana).AttemptsTo(HaveItemsDelivered.Now()));
+        Assert.DoesNotThrowAsync(() => When(_dana).AttemptsTo(HaveItemsDelivered.Now()));
     }
 
     // Expected to fail
     [Test]
-    public void ShouldBeAbleToPurchaseAnItemForFree()
+    public async Task ShouldBeAbleToPurchaseAnItemForFree()
     {
         Assert.Throws<AssertionException>(() => GivenThat(_dana).AttemptsTo(Purchase().AnApple().ThatCosts(0).Dollars(),
             Purchase().APear().ThatCosts(5).Dollars()));
-        Then(_dana).Should(SeeThat(TheTotalCost(), EqualTo(14)));
+        await Then(_dana).Should(SeeThat(TheTotalCost(), EqualTo(14)));
     }
 
     // Expected to fail with an error
     [Test]
     public void ShouldBeAbleToPurchaseAnItemWithANegativeAmount()
     {
-        Assert.Throws<ArgumentException>(() => GivenThat(_dana).AttemptsTo(
+        Assert.ThrowsAsync<ArgumentException>(() => GivenThat(_dana).AttemptsTo(
             Purchase().AnApple().ThatCosts(-10).Dollars(), // Will fail with an error
             Purchase().APear().ThatCosts(5).Dollars())); // Should be skipped
     }

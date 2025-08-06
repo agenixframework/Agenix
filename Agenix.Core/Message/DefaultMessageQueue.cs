@@ -7,31 +7,36 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
 using System.Collections.Concurrent;
-using System.Threading;
+using System.Threading.Tasks;
 using Agenix.Api.Log;
 using Agenix.Api.Message;
 using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Message;
 
+/// <summary>
+///     Represents the default implementation of a message queue. Provides functionality
+///     to send, receive, purge messages, and manage queue state. Implements the
+///     <see cref="IMessageQueue" /> interface.
+/// </summary>
 public class DefaultMessageQueue(string name) : IMessageQueue
 {
     /// <summary>
@@ -58,15 +63,16 @@ public class DefaultMessageQueue(string name) : IMessageQueue
 
     /// Sends a new message to the queue.
     /// @param message the message to be sent to the queue.
-    public void Send(IMessage message)
+    public Task Send(IMessage message)
     {
         _queue.Add(message);
+        return Task.CompletedTask;
     }
 
     /// Receives a message from the queue that satisfies the given selector.
     /// @param selector the criteria used to select the message.
     /// @return the selected message that meets the criteria, or null if no message matches.
-    public IMessage Receive(MessageSelector selector)
+    public Task<IMessage> Receive(MessageSelector selector)
     {
         var array = _queue.ToArray();
         foreach (var o in array)
@@ -74,21 +80,21 @@ public class DefaultMessageQueue(string name) : IMessageQueue
             var message = o;
             if (selector.Invoke(message) && _queue.TryTake(out message))
             {
-                return message;
+                return Task.FromResult(message);
             }
         }
 
-        return null;
+        return Task.FromResult<IMessage>(null);
     }
 
     /// Receives a message from the queue that matches the given selector within the specified timeout period.
     /// @param selector the selector to filter messages in the queue.
     /// @param timeout the time in milliseconds to wait for a matching message before giving up.
     /// @return the message that matches the selector, or null if no matching message is found within the timeout period.
-    public IMessage Receive(MessageSelector selector, long timeout)
+    public async Task<IMessage> Receive(MessageSelector selector, long timeout)
     {
         var timeLeft = timeout;
-        var message = Receive(selector);
+        var message = await Receive(selector);
 
         while (message == null && timeLeft > 0)
         {
@@ -96,20 +102,20 @@ public class DefaultMessageQueue(string name) : IMessageQueue
 
             if (RetryLog.IsEnabled(LogLevel.Debug))
             {
-                RetryLog.LogDebug("No message received with message selector - retrying in " +
-                                  (timeLeft > 0 ? _pollingInterval : _pollingInterval + timeLeft) + "ms");
+                RetryLog.LogDebug("No message received with message selector - retrying in {TimeLeft} ms",
+                    timeLeft > 0 ? _pollingInterval : _pollingInterval + timeLeft);
             }
 
             try
             {
-                Thread.Sleep((int)(timeLeft > 0 ? _pollingInterval : _pollingInterval + timeLeft));
+                await Task.Delay((int)(timeLeft > 0 ? _pollingInterval : _pollingInterval + timeLeft));
             }
-            catch (ThreadInterruptedException e)
+            catch (TaskCanceledException e)
             {
-                RetryLog.LogWarning(e, "Thread interrupted while waiting for retry");
+                RetryLog.LogWarning(e, "Task was canceled while waiting for retry");
             }
 
-            message = Receive(selector);
+            message = await Receive(selector);
         }
 
         return message;
@@ -117,7 +123,7 @@ public class DefaultMessageQueue(string name) : IMessageQueue
 
     /// Removes messages from the queue that match the given selector criteria.
     /// @param selector the criteria used to purge messages from the queue.
-    public void Purge(IMessageSelector selector)
+    public Task Purge(IMessageSelector selector)
     {
         var array = _queue.ToArray();
         foreach (var o in array)
@@ -132,14 +138,16 @@ public class DefaultMessageQueue(string name) : IMessageQueue
             {
                 if (Log.IsEnabled(LogLevel.Debug))
                 {
-                    Log.LogDebug($"Purged message '{message.Id}' from in memory queue");
+                    Log.LogDebug("Purged message '{MessageId}' from in memory queue", message.Id);
                 }
             }
             else
             {
-                Log.LogWarning($"Failed to purge message '{message.Id}' from in memory queue");
+                Log.LogWarning("Failed to purge message '{MessageId}' from in memory queue", message?.Id);
             }
         }
+
+        return Task.CompletedTask;
     }
 
     /// Gets the polling interval.
@@ -174,6 +182,8 @@ public class DefaultMessageQueue(string name) : IMessageQueue
         _loggingEnabled = loggingEnabled;
     }
 
+    /// Returns a string that represents the current instance.
+    /// @return the name of the message queue.
     public override string ToString()
     {
         return name;

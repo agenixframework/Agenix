@@ -7,23 +7,24 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Threading.Tasks;
 using Agenix.Api;
 using Agenix.Api.Annotations;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
@@ -44,31 +45,31 @@ public class EchoActionNUnitIT
 
     [AgenixResource]
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
-    private IGherkinTestActionRunner gherkin;
+    private IGherkinAsyncTestActionRunner gherkin;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
     [AgenixResource]
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
-    private ITestActionRunner runner;
+    private IAsyncTestActionRunner runner;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
 
     [Test]
-    public void EchoTest()
+    public async Task EchoTest()
     {
-        runner.Run(CreateVariable("time", "agenix:CurrentDate()"));
+        await runner.Run(CreateVariable("time", "agenix:CurrentDate()"));
 
-        runner.Run(Echo("Hello Agenix!"));
+        await runner.Run(Echo("Hello Agenix!"));
 
-        runner.Run(Echo("CurrentTime is: ${time}"));
+        Assert.DoesNotThrowAsync(() => runner.Run(Echo("CurrentTime is: ${time}")));
     }
 
     [Test]
-    public void EchoGherkinTest()
+    public async Task EchoGherkinTest()
     {
-        gherkin.Given(CreateVariable("time", "agenix:CurrentDate()"));
+        await gherkin.Given(CreateVariable("time", "agenix:CurrentDate()"));
 
-        gherkin.When(Echo("Hello Agenix!"));
+        await gherkin.When(Echo("Hello Agenix!"));
 
-        gherkin.Then(Echo("CurrentTime is: ${time}"));
+        Assert.DoesNotThrowAsync(() => runner.Run(Echo("CurrentTime is: ${time}")));
     }
 
     [Test]
@@ -76,6 +77,6 @@ public class EchoActionNUnitIT
     {
         context.SetVariable("message", "Injection worked!");
 
-        gherkin.Given(Echo("${message}"));
+        Assert.DoesNotThrowAsync(() => gherkin.Given(Echo("${message}")));
     }
 }

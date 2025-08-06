@@ -49,7 +49,7 @@ public class JavaScriptActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExecute()
+    public async Task TestExecute()
     {
         _webDriver.As<IJavaScriptExecutor>()
             .Setup(x => x.ExecuteScript("return window._selenide_jsErrors"))
@@ -60,7 +60,7 @@ public class JavaScriptActionTest : AbstractNUnitSetUp
             .SetScript("alert('Hello')")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariableObject(SeleniumHeaders.SeleniumJsErrors), Is.Not.Null);
         Assert.That(((List<string>)Context.GetVariableObject(SeleniumHeaders.SeleniumJsErrors)).Count, Is.EqualTo(0));
@@ -69,7 +69,7 @@ public class JavaScriptActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExecuteVariableSupport()
+    public async Task TestExecuteVariableSupport()
     {
         _webDriver.As<IJavaScriptExecutor>()
             .Setup(x => x.ExecuteScript("return window._selenide_jsErrors"))
@@ -82,7 +82,7 @@ public class JavaScriptActionTest : AbstractNUnitSetUp
             .SetScript("alert('${text}')")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariableObject(SeleniumHeaders.SeleniumJsErrors), Is.Not.Null);
         Assert.That(((List<string>)Context.GetVariableObject(SeleniumHeaders.SeleniumJsErrors)).Count, Is.EqualTo(0));
@@ -91,7 +91,7 @@ public class JavaScriptActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExecuteWithErrorValidation()
+    public async Task TestExecuteWithErrorValidation()
     {
         _webDriver.As<IJavaScriptExecutor>()
             .Setup(x => x.ExecuteScript("return window._selenide_jsErrors"))
@@ -103,7 +103,7 @@ public class JavaScriptActionTest : AbstractNUnitSetUp
             .AddExpectedError("This went totally wrong!")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariableObject(SeleniumHeaders.SeleniumJsErrors), Is.Not.Null);
         Assert.That(((List<string>)Context.GetVariableObject(SeleniumHeaders.SeleniumJsErrors)).Count, Is.EqualTo(1));
@@ -124,6 +124,6 @@ public class JavaScriptActionTest : AbstractNUnitSetUp
             .SetExpectedErrors("This went totally wrong!")
             .Build();
 
-        Assert.Throws<ValidationException>(() => action.Execute(Context));
+        Assert.ThrowsAsync<ValidationException>(() => action.ExecuteAsync(Context));
     }
 }

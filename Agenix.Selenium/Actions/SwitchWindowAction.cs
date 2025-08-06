@@ -67,7 +67,7 @@ public class SwitchWindowAction : AbstractSeleniumAction
     /// </summary>
     /// <param name="browser">The Selenium browser instance</param>
     /// <param name="context">The test context</param>
-    protected override void Execute(SeleniumBrowser browser, TestContext context)
+    protected override Task Execute(SeleniumBrowser browser, TestContext context)
     {
         if (!context.GetVariables().ContainsKey(_windowName))
         {
@@ -97,6 +97,8 @@ public class SwitchWindowAction : AbstractSeleniumAction
         {
             Logger.LogInformation("Skip switch window action as window is already focused");
         }
+
+        return Task.CompletedTask;
     }
 
     /// <summary>

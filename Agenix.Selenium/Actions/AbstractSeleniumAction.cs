@@ -39,7 +39,7 @@ namespace Agenix.Selenium.Actions;
 ///     Abstract base class for all Selenium actions.
 ///     Provides common functionality for executing Selenium browser commands and managing browser instances.
 /// </summary>
-public abstract class AbstractSeleniumAction : AbstractTestAction, ISeleniumAction
+public abstract class AbstractSeleniumAction : AbstractTestActionAsync, ISeleniumAction
 {
     /// <summary>
     ///     Logger.
@@ -84,7 +84,8 @@ public abstract class AbstractSeleniumAction : AbstractTestAction, ISeleniumActi
     ///     Executes the Selenium action within the provided test context
     /// </summary>
     /// <param name="context">The test context</param>
-    public override void DoExecute(TestContext context)
+    /// <param name="cancellationToken"></param>
+    public override async Task DoExecute(TestContext context, CancellationToken cancellationToken = default)
     {
         if (Logger.IsEnabled(LogLevel.Debug))
         {
@@ -106,7 +107,7 @@ public abstract class AbstractSeleniumAction : AbstractTestAction, ISeleniumActi
             }
         }
 
-        Execute(browserToUse, context);
+        await Execute(browserToUse, context);
 
         Logger.LogInformation("Selenium browser command execution successful: '{ActionName}'", Name);
     }
@@ -116,14 +117,14 @@ public abstract class AbstractSeleniumAction : AbstractTestAction, ISeleniumActi
     /// </summary>
     /// <param name="browser">The Selenium browser instance to use</param>
     /// <param name="context">The test context</param>
-    protected abstract void Execute(SeleniumBrowser browser, TestContext context);
+    protected abstract Task Execute(SeleniumBrowser browser, TestContext context);
 
     /// <summary>
     ///     Interface for building Selenium-based test actions.
     ///     Provides methods for configuring and describing Selenium actions,
     ///     including setting custom browsers and retrieving metadata such as names and descriptions.
     /// </summary>
-    public interface ISeleniumActionBuilder<out T> : ITestActionBuilder<T> where T : ISeleniumAction
+    public interface ISeleniumActionBuilder<out T> : IAsyncTestActionBuilder<T> where T : ISeleniumAction
     {
         /// <summary>
         ///     Gets the browser instance to use for the action
@@ -156,7 +157,7 @@ public abstract class AbstractSeleniumAction : AbstractTestAction, ISeleniumActi
     /// </summary>
     /// <typeparam name="T">The type of Selenium action being built</typeparam>
     /// <typeparam name="TB">The type of builder (for fluent interface)</typeparam>
-    public abstract class Builder<T, TB> : AbstractTestActionBuilder<T, TB>, ISeleniumActionBuilder<T>
+    public abstract class Builder<T, TB> : AbstractAsyncTestActionBuilder<T, TB>, ISeleniumActionBuilder<T>
         where T : ISeleniumAction
         where TB : Builder<T, TB>
     {
@@ -187,7 +188,7 @@ public abstract class AbstractSeleniumAction : AbstractTestAction, ISeleniumActi
         public virtual TB WithBrowser(SeleniumBrowser seleniumBrowser)
         {
             Browser = seleniumBrowser;
-            return self;
+            return Self;
         }
     }
 }

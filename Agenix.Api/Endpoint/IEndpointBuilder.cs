@@ -116,7 +116,7 @@ public interface IEndpointBuilder<out T> where T : IEndpoint
     ///     Retrieves a dictionary of endpoint builders, with endpoint names as keys and endpoint builders as values.
     /// </summary>
     /// <returns>A dictionary containing mappings of endpoint names to their corresponding builders.</returns>
-    public static ConcurrentDictionary<string, IEndpointBuilder<T>> Lookup()
+    static ConcurrentDictionary<string, IEndpointBuilder<T>> Lookup()
     {
         return BuildersCache.Value;
     }
@@ -128,7 +128,7 @@ public interface IEndpointBuilder<out T> where T : IEndpoint
     ///     A dictionary containing the endpoint builder names as keys and their respective
     ///     <see cref="IEndpointBuilder{T}" /> implementations as values.
     /// </returns>
-    public static Optional<IEndpointBuilder<T>> Lookup(string builder)
+    static Optional<IEndpointBuilder<T>> Lookup(string builder)
     {
         try
         {
@@ -169,7 +169,7 @@ public interface IEndpointBuilder<out T> where T : IEndpoint
     ///     An instance of <see cref="IEndpoint" /> with properties set according to the given annotation and reference
     ///     resolver.
     /// </returns>
-    public T Build(AgenixEndpointAttribute endpointAnnotation, IReferenceResolver referenceResolver)
+    T Build(AgenixEndpointAttribute endpointAnnotation, IReferenceResolver referenceResolver)
     {
         var nameSetter = ReflectionHelper.FindMethod(GetType(), "Name", typeof(string));
         if (nameSetter != null)

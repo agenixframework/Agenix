@@ -55,9 +55,9 @@ public class ConsequenceGroup<T> : BaseConsequence<T>
     ///     by performing associated setup actions and responding to the provided question.
     /// </summary>
     /// <param name="actor">The actor who will evaluate and answer the question involved in this consequence group.</param>
-    public override void EvaluateFor(Actor actor)
+    public override async Task EvaluateFor(Actor actor)
     {
-        PerformSetupActionsAs(actor);
+        await PerformSetupActionsAs(actor);
         _questionGroup.AnsweredBy(actor);
     }
 

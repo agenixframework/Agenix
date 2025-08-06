@@ -83,8 +83,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "catalog", "catalog", "{AD6D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agenix.Endpoint.Catalog", "Agenix.Endpoint.Catalog\Agenix.Endpoint.Catalog.csproj", "{607A9448-6F61-4FA3-B94A-FBDA3A2F0C79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agenix.Screenplay.Playwright", "Agenix.Screenplay.Playwright\Agenix.Screenplay.Playwright.csproj", "{25217F9B-0280-48E3-B111-A6B88559A132}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -219,10 +217,6 @@ Global
 		{607A9448-6F61-4FA3-B94A-FBDA3A2F0C79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{607A9448-6F61-4FA3-B94A-FBDA3A2F0C79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{607A9448-6F61-4FA3-B94A-FBDA3A2F0C79}.Release|Any CPU.Build.0 = Release|Any CPU
-		{25217F9B-0280-48E3-B111-A6B88559A132}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{25217F9B-0280-48E3-B111-A6B88559A132}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{25217F9B-0280-48E3-B111-A6B88559A132}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{25217F9B-0280-48E3-B111-A6B88559A132}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -269,6 +263,5 @@ Global
 		{DD681EA8-3478-4732-9BD0-4B94FDDF946A} = {DE327CB4-D2EF-4983-8F05-77883FCAF1B0}
 		{AD6D0BB7-245D-43EF-B882-26F21FA63150} = {0E29A730-DE81-47F1-A734-CA7FC815E343}
 		{607A9448-6F61-4FA3-B94A-FBDA3A2F0C79} = {AD6D0BB7-245D-43EF-B882-26F21FA63150}
-		{25217F9B-0280-48E3-B111-A6B88559A132} = {A5BEDDC2-4665-4B8B-A657-589FAD674DE5}
 	EndGlobalSection
 EndGlobal

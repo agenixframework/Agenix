@@ -52,7 +52,7 @@ public class ClickActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExecute()
+    public async Task TestExecute()
     {
         _webDriver.Setup(x => x.FindElement(It.IsAny<By>()))
             .Returns<By>(by =>
@@ -67,7 +67,7 @@ public class ClickActionTest : AbstractNUnitSetUp
             .Element("id", "myButton")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _element.Verify(x => x.Click(), Times.Once);
     }
@@ -82,7 +82,8 @@ public class ClickActionTest : AbstractNUnitSetUp
             .Element("id", "myButton")
             .Build();
 
-        var ex = Assert.Throws<AgenixSystemException>(() => action.Execute(Context));
+        var ex = Assert.ThrowsAsync<AgenixSystemException>(async () => await action.ExecuteAsync(Context));
+        Assert.That(ex, Is.Not.Null);
         Assert.That(ex.Message, Does.Match("Failed to find element 'By.Id: myButton' on page"));
     }
 }

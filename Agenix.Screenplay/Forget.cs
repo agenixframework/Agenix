@@ -43,9 +43,16 @@ public class Forget : Interaction
     /// </summary>
     /// <typeparam name="T">The type of the actor performing the interaction, constrained to <see cref="Actor" />.</typeparam>
     /// <param name="actor">The actor performing the interaction.</param>
-    public void PerformAs<T>(T actor) where T : Actor
+    /// <param name="cancellationToken">The cancellation token to observe while waiting for the task to complete.</param>
+    /// <returns>A task that represents the asynchronous operation of forgetting the value.</returns>
+    public async Task PerformAsAsync<T>(T actor, CancellationToken cancellationToken = default) where T : Actor
     {
-        actor.Forget(_memoryKey);
+        if (cancellationToken.IsCancellationRequested)
+        {
+            await Task.FromCanceled(cancellationToken);
+        }
+
+        await actor.Forget(_memoryKey);
     }
 
     /// <summary>

@@ -66,7 +66,7 @@ public class OpenWindowAction : AbstractSeleniumAction
     /// <param name="context">The TestContext that provides runtime information and manages test variables.</param>
     /// <exception cref="AgenixSystemException">Thrown when the WebDriver does not support JavaScript execution.</exception>
     /// <exception cref="AgenixSystemException">Thrown when a new window fails to open, and no new window handle is detected.</exception>
-    protected override void Execute(SeleniumBrowser browser, TestContext context)
+    protected override Task Execute(SeleniumBrowser browser, TestContext context)
     {
         // Get current window handles before opening a new window
         var windowHandles = browser.WebDriver.WindowHandles.ToHashSet();
@@ -105,6 +105,8 @@ public class OpenWindowAction : AbstractSeleniumAction
         {
             throw new AgenixSystemException("Failed to open new window - no new window handle detected");
         }
+
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -120,7 +122,7 @@ public class OpenWindowAction : AbstractSeleniumAction
         public Builder SetWindow(string name)
         {
             WindowName = name;
-            return self;
+            return Self;
         }
 
         /// <summary>

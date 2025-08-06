@@ -37,9 +37,9 @@ public class ReverseQuestion<T>(IQuestion<IList<T>> listQuestion) : IQuestion<IL
     /// </summary>
     /// <param name="actor">The actor who provides the answer to the question.</param>
     /// <returns>A reversed list of items answered by the actor.</returns>
-    public IList<T> AnsweredBy(Actor actor)
+    public async Task<IList<T>> AnsweredBy(Actor actor)
     {
-        var list = new List<T>(listQuestion.AnsweredBy(actor));
+        var list = new List<T>(await listQuestion.AnsweredBy(actor));
         list.Reverse();
         return list;
     }

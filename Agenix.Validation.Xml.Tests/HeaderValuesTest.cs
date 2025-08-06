@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -46,7 +46,7 @@ public class HeaderValuesTest : AbstractNUnitSetUp
     private readonly Mock<IEndpointConfiguration> _endpointConfiguration = new();
 
     [Test]
-    public void TestValidateHeaderValues()
+    public async Task TestValidateHeaderValues()
     {
         _endpoint.Reset();
         _consumer.Reset();
@@ -71,7 +71,7 @@ public class HeaderValuesTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -93,11 +93,11 @@ public class HeaderValuesTest : AbstractNUnitSetUp
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestValidateHeaderValuesComplete()
+    public async Task TestValidateHeaderValuesComplete()
     {
         _endpoint.Reset();
         _consumer.Reset();
@@ -122,7 +122,7 @@ public class HeaderValuesTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -148,7 +148,7 @@ public class HeaderValuesTest : AbstractNUnitSetUp
             .Validate(new HeaderValidationContext.Builder().Build())
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
@@ -177,7 +177,7 @@ public class HeaderValuesTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -199,7 +199,7 @@ public class HeaderValuesTest : AbstractNUnitSetUp
             .Message(controlMessageBuilder)
             .Build();
 
-        Assert.Throws<ValidationException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<ValidationException>(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -228,7 +228,7 @@ public class HeaderValuesTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -250,11 +250,11 @@ public class HeaderValuesTest : AbstractNUnitSetUp
             .Message(controlMessageBuilder)
             .Build();
 
-        Assert.Throws<ValidationException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<ValidationException>(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
-    public void TestValidateEmptyHeaderValues()
+    public async Task TestValidateEmptyHeaderValues()
     {
         _endpoint.Reset();
         _consumer.Reset();
@@ -279,7 +279,7 @@ public class HeaderValuesTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -304,7 +304,7 @@ public class HeaderValuesTest : AbstractNUnitSetUp
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
@@ -333,7 +333,7 @@ public class HeaderValuesTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -358,11 +358,11 @@ public class HeaderValuesTest : AbstractNUnitSetUp
             .Message(controlMessageBuilder)
             .Build();
 
-        Assert.Throws<ValidationException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<ValidationException>(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
-    public void TestExtractHeaderValues()
+    public async Task TestExtractHeaderValues()
     {
         _endpoint.Reset();
         _consumer.Reset();
@@ -387,7 +387,7 @@ public class HeaderValuesTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -415,7 +415,7 @@ public class HeaderValuesTest : AbstractNUnitSetUp
             .Process(variableExtractor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariables().ContainsKey("valueA"), Is.True);
         Assert.That(Context.GetVariables()["valueA"], Is.EqualTo("A"));

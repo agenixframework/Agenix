@@ -11,7 +11,7 @@ public class NextPersonToBeServedQuestion : IQuestion<string>
         _checkout = checkout;
     }
 
-    public string AnsweredBy(Actor actor)
+    public Task<string> AnsweredBy(Actor actor)
     {
         if (_checkout == null)
         {
@@ -19,7 +19,7 @@ public class NextPersonToBeServedQuestion : IQuestion<string>
             throw new InvalidOperationException("No checkout specified. Use By(checkout) to specify which checkout.");
         }
 
-        return _checkout.NextCustomer();
+        return Task.FromResult(_checkout.NextCustomer());
     }
 
     public string Subject => "{0} asks for the next person to be served";

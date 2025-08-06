@@ -42,8 +42,8 @@ public class Eats : IPerformable
     }
 
     [Step("{0} eats the given fruit")]
-    public void PerformAs<T>(T actor) where T : Actor
+    public async Task PerformAsAsync<T>(T actor, CancellationToken cancellationToken = default) where T : Actor
     {
-        actor.AttemptsTo(nestedTask);
+        await actor.AttemptsTo(nestedTask);
     }
 }

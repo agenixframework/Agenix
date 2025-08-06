@@ -7,24 +7,26 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
@@ -63,7 +65,7 @@ public class RepeatOnErrorUntilTrue(RepeatOnErrorUntilTrue.Builder builder) : Ab
     /// The retry process continues until the condition is satisfied. If all retries fail, the last encountered
     /// exception has been thrown.
     /// <param name="context">The execution context in which actions are performed and conditions are evaluated.</param>
-    protected override void ExecuteIteration(TestContext context)
+    protected override async Task ExecuteIteration(TestContext context)
     {
         AgenixSystemException exception = null;
 
@@ -72,17 +74,18 @@ public class RepeatOnErrorUntilTrue(RepeatOnErrorUntilTrue.Builder builder) : Ab
             try
             {
                 exception = null;
-                ExecuteActions(context);
+                await ExecuteActions(context);
                 break;
             }
             catch (AgenixSystemException e)
             {
                 exception = e;
 
-                Log.LogInformation(
-                    $"Caught exception of type {e.GetType().Name} '{e.Message}' - performing retry #{index}");
+                Log.LogInformation(e,
+                    "Caught exception of type {TypeName} '{Message}' - performing retry #{Index}",
+                    e.GetType().Name, e.Message, index);
 
-                DoAutoSleep();
+                await DoAutoSleep();
                 index++;
             }
         }
@@ -92,7 +95,7 @@ public class RepeatOnErrorUntilTrue(RepeatOnErrorUntilTrue.Builder builder) : Ab
             return;
         }
 
-        Log.LogInformation($"All retries failed - raising exception {exception.GetType().Name}");
+        Log.LogInformation("All retries failed - raising exception {ExceptionName}", exception.GetType().Name);
         throw exception;
     }
 
@@ -101,31 +104,39 @@ public class RepeatOnErrorUntilTrue(RepeatOnErrorUntilTrue.Builder builder) : Ab
     /// If the auto sleep duration is non-positive, no sleep action is performed.
     /// Handles and logs any ThreadInterruptedException that occurs during the sleep.
     /// /
-    private void DoAutoSleep()
+    private async Task DoAutoSleep(CancellationToken cancellationToken = default)
     {
         if (_autoSleep <= 0)
         {
             return;
         }
 
-        Log.LogInformation($"Sleeping {_autoSleep} milliseconds");
+        Log.LogInformation("Sleeping {AutoSleep} milliseconds", _autoSleep);
 
         try
         {
-            Thread.Sleep(_autoSleep);
+            await Task.Delay(_autoSleep, cancellationToken);
         }
-        catch (ThreadInterruptedException e)
+        catch (OperationCanceledException e)
         {
-            Log.LogError(e, "Error during doc generation");
+            Log.LogWarning(e, "Sleep operation was cancelled after {ElapsedTime} milliseconds", _autoSleep);
+            throw new AgenixSystemException("Sleep operation was cancelled", e);
+        }
+        catch (Exception e)
+        {
+            Log.LogError(e, "Error during sleep operation");
+            throw new AgenixSystemException("Error during sleep operation", e);
         }
 
-        Log.LogInformation("Returning after {I} milliseconds", _autoSleep);
+        Log.LogInformation("Returning after {AutoSleep} milliseconds", _autoSleep);
     }
 
     /// Builder class for constructing instances of RepeatOnErrorUntilTrue.
     /// /
     public class Builder : AbstractIteratingContainerBuilder<RepeatOnErrorUntilTrue, Builder>
     {
+        /// Configurable property representing the auto sleep duration in milliseconds
+        /// to pause between iterations in the RepeatOnErrorUntilTrue container.
         public int AutoSlp { get; private set; } = 1000;
 
         /// Fluent API action building entry method used in C# DSL.
@@ -165,6 +176,11 @@ public class RepeatOnErrorUntilTrue(RepeatOnErrorUntilTrue.Builder builder) : Ab
             return this;
         }
 
+        /// Constructs an instance of the RepeatOnErrorUntilTrue action container with the specified configuration.
+        /// This method finalizes the builder and creates a new action container instance utilizing the settings and actions
+        /// defined previously. Upon invocation, this method ensures that the created instance adheres to the defined
+        /// attributes of the builder, such as the name, description, conditions, and actions.
+        /// <returns>A new instance of RepeatOnErrorUntilTrue configured with the builder's parameters.</returns>
         protected override RepeatOnErrorUntilTrue DoBuild()
         {
             return new RepeatOnErrorUntilTrue(this);

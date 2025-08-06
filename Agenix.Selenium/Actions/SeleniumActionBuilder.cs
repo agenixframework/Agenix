@@ -36,7 +36,8 @@ namespace Agenix.Selenium.Actions;
 /// <summary>
 ///     Provides a fluent API for building Selenium-based test actions.
 /// </summary>
-public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelegatingTestActionBuilder<ISeleniumAction>
+public class
+    SeleniumActionBuilder : IAsyncTestActionBuilder<ISeleniumAction>.IDelegatingTestActionBuilder<ISeleniumAction>
 {
     private AbstractSeleniumAction.ISeleniumActionBuilder<ISeleniumAction>? _delegateBuilder;
 
@@ -63,7 +64,7 @@ public class SeleniumActionBuilder : ITestActionBuilder<ISeleniumAction>.IDelega
     ///     Gets the delegating test action builder representing the delegate functionality for creating or composing Selenium
     ///     actions.
     /// </summary>
-    public ITestActionBuilder<ISeleniumAction> Delegate { get; }
+    public IAsyncTestActionBuilder<ISeleniumAction> Delegate { get; }
 
     /// <summary>
     ///     Fluent API action building entry method used in C# DSL.

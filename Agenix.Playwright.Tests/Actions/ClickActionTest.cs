@@ -41,7 +41,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecute_BasicClick_ShouldClickElement()
+    public async Task TestExecute_BasicClick_ShouldClickElement()
     {
         // Arrange
         var action = new ClickAction.Builder()
@@ -50,14 +50,14 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         Locator.Verify(x => x.ClickAsync(It.IsAny<LocatorClickOptions>()), Times.Once);
     }
 
     [Test]
-    public void TestExecute_WithTimeout_ShouldClickWithTimeout()
+    public async Task TestExecute_WithTimeout_ShouldClickWithTimeout()
     {
         // Arrange
         MockSetup.ApplyDefaultSetup();
@@ -71,7 +71,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         Locator.Verify(x => x.ClickAsync(It.Is<LocatorClickOptions>(opts =>
@@ -79,7 +79,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecute_WithForce_ShouldClickWithForce()
+    public async Task TestExecute_WithForce_ShouldClickWithForce()
     {
         // Arrange
         var action = new ClickAction.Builder()
@@ -89,7 +89,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         Locator.Verify(x => x.ClickAsync(It.Is<LocatorClickOptions>(opts =>
@@ -97,7 +97,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecute_WithPosition_ShouldClickAtPosition()
+    public async Task TestExecute_WithPosition_ShouldClickAtPosition()
     {
         // Arrange
         var action = new ClickAction.Builder()
@@ -107,7 +107,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         Locator.Verify(x => x.ClickAsync(It.Is<LocatorClickOptions>(opts =>
@@ -117,7 +117,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecute_WithButton_ShouldClickWithSpecificButton()
+    public async Task TestExecute_WithButton_ShouldClickWithSpecificButton()
     {
         // Arrange
         var action = new ClickAction.Builder()
@@ -127,7 +127,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         Locator.Verify(x => x.ClickAsync(It.Is<LocatorClickOptions>(opts =>
@@ -135,7 +135,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecute_WithClickCount_ShouldClickMultipleTimes()
+    public async Task TestExecute_WithClickCount_ShouldClickMultipleTimes()
     {
         // Arrange
         var action = new ClickAction.Builder()
@@ -145,7 +145,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         Locator.Verify(x => x.ClickAsync(It.Is<LocatorClickOptions>(opts =>
@@ -153,7 +153,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecute_WithDelay_ShouldClickWithDelay()
+    public async Task TestExecute_WithDelay_ShouldClickWithDelay()
     {
         // Arrange
         var action = new ClickAction.Builder()
@@ -163,7 +163,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         Locator.Verify(x => x.ClickAsync(It.Is<LocatorClickOptions>(opts =>
@@ -171,7 +171,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecute_WithModifiers_ShouldClickWithModifiers()
+    public async Task TestExecute_WithModifiers_ShouldClickWithModifiers()
     {
         // Arrange
         var modifiers = new[] { KeyboardModifier.Control, KeyboardModifier.Shift };
@@ -182,7 +182,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         Locator.Verify(x => x.ClickAsync(It.Is<LocatorClickOptions>(opts =>
@@ -191,7 +191,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecute_WithTrial_ShouldClickWithTrial()
+    public async Task TestExecute_WithTrial_ShouldClickWithTrial()
     {
         // Arrange
         var action = new ClickAction.Builder()
@@ -201,7 +201,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         Locator.Verify(x => x.ClickAsync(It.Is<LocatorClickOptions>(opts =>
@@ -209,7 +209,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecute_WithAllOptions_ShouldClickWithAllOptions()
+    public async Task TestExecute_WithAllOptions_ShouldClickWithAllOptions()
     {
         // Arrange
         var modifiers = new[] { KeyboardModifier.Control };
@@ -227,7 +227,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         Locator.Verify(x => x.ClickAsync(It.Is<LocatorClickOptions>(opts =>
@@ -244,7 +244,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecute_WithCustomPageId_ShouldClickOnSpecificPage()
+    public async Task TestExecute_WithCustomPageId_ShouldClickOnSpecificPage()
     {
         // Arrange
         const string customPageId = "custom-page";
@@ -258,7 +258,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert - Based on the actual invocation log, verify what's really being called
         PlaywrightBrowser.Verify(x => x.SwitchToPage(customPageId), Times.Once);
@@ -267,7 +267,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecute_WithCustomContextId_ShouldClickOnSpecificContext()
+    public async Task TestExecute_WithCustomContextId_ShouldClickOnSpecificContext()
     {
         // Arrange
         const string customContextId = "custom-context";
@@ -281,7 +281,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         // Based on the invocation log, GetContext is not being called
@@ -305,15 +305,16 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act & Assert - Use Assert.Throws since Execute is synchronous
-        var exception = Assert.Throws<AgenixSystemException>(() => action.Execute(Context));
+        var exception = Assert.ThrowsAsync<AgenixSystemException>(() => action.ExecuteAsync(Context));
 
+        Assert.That(exception, Is.Not.Null);
         Assert.That(exception.Message, Is.EqualTo("Failed to locate element"));
         Assert.That(exception.InnerException.InnerException, Is.EqualTo(playwrightException));
     }
 
 
     [Test]
-    public void TestExecute_ElementNotEnabled_ShouldStillClick()
+    public async Task TestExecute_ElementNotEnabled_ShouldStillClick()
     {
         // Arrange - Playwright allows clicking disabled elements by default
         SetupLocatorForBasicInteraction(true, false);
@@ -324,7 +325,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act - This should not throw an exception, Playwright allows clicking disabled elements
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert - Click should still be attempted
         Locator.Verify(x => x.ClickAsync(It.IsAny<LocatorClickOptions>()), Times.Once);
@@ -344,9 +345,9 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act & Assert
-        var exception =
-            Assert.ThrowsAsync<AgenixSystemException>(async () => await Task.Run(() => action.Execute(Context)));
+        var exception = Assert.ThrowsAsync<AgenixSystemException>(() => action.ExecuteAsync(Context));
 
+        Assert.That(exception, Is.Not.Null);
         Assert.That(exception.InnerException.InnerException.Message, Is.EqualTo("Click failed"));
     }
 
@@ -365,7 +366,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => action.Execute(Context));
+        Assert.ThrowsAsync<ArgumentException>(() => action.ExecuteAsync(Context));
     }
 
     [Test]
@@ -381,7 +382,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
         Assert.That(action, Is.InstanceOf<ClickAction>());
 
         // But execution should fail
-        var exception = Assert.Throws<InvalidOperationException>(() => action.Execute(Context));
+        var exception = Assert.ThrowsAsync<InvalidOperationException>(() => action.ExecuteAsync(Context));
         Assert.That(exception.Message, Does.Contain("Playwright browser not configured"));
     }
 
@@ -440,7 +441,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecute_MultipleCalls_ShouldClickEachTime()
+    public async Task TestExecute_MultipleCalls_ShouldClickEachTime()
     {
         // Arrange
         var action = new ClickAction.Builder()
@@ -449,16 +450,16 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
-        action.Execute(Context);
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
+        await action.ExecuteAsync(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         Locator.Verify(x => x.ClickAsync(It.IsAny<LocatorClickOptions>()), Times.Exactly(3));
     }
 
     [Test]
-    public void TestExecute_WithDifferentSelectors_ShouldClickDifferentElements()
+    public async Task TestExecute_WithDifferentSelectors_ShouldClickDifferentElements()
     {
         // Arrange
         var locator1 = new Mock<ILocator>();
@@ -481,8 +482,8 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action1.Execute(Context);
-        action2.Execute(Context);
+        await action1.ExecuteAsync(Context);
+        await action2.ExecuteAsync(Context);
 
         // Assert
         locator1.Verify(x => x.ClickAsync(It.IsAny<LocatorClickOptions>()), Times.Once);
@@ -490,7 +491,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecute_WithComplexSelector_ShouldClickElement()
+    public async Task TestExecute_WithComplexSelector_ShouldClickElement()
     {
         // Arrange
         const string complexSelector = "button[data-testid='submit-btn']:nth-child(2)";
@@ -500,7 +501,7 @@ public class ClickActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         Page.Verify(x => x.Locator(complexSelector, It.IsAny<PageLocatorOptions>()), Times.Once);

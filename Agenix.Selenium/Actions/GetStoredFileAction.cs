@@ -58,11 +58,13 @@ public class GetStoredFileAction : AbstractSeleniumAction
     /// </summary>
     /// <param name="browser">The Selenium browser instance used to locate and retrieve the stored file.</param>
     /// <param name="context">The test context where the file path will be stored as a variable.</param>
-    protected override void Execute(SeleniumBrowser browser, TestContext context)
+    protected override Task Execute(SeleniumBrowser browser, TestContext context)
     {
         var resolvedFileName = context.ReplaceDynamicContentInString(_fileName);
         var filePath = browser.GetStoredFile(resolvedFileName);
         context.SetVariable(SeleniumHeaders.SeleniumDownloadFile, filePath);
+
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -78,7 +80,7 @@ public class GetStoredFileAction : AbstractSeleniumAction
         public Builder SetFileName(string fileName)
         {
             FileName = fileName;
-            return self;
+            return Self;
         }
 
         /// <summary>

@@ -73,12 +73,12 @@ public class HoverAction : FindElementAction
     ///     Performs the hover action on a specified web element, allowing hover effects such as tooltips or content display to
     ///     be triggered.
     /// </summary>
-    /// <param name="webElement">The web element on which the hover action is to be performed.</param>
+    /// <param name="element">The web element on which the hover action is to be performed.</param>
     /// <param name="browser">The Selenium browser instance controlling the WebDriver for interaction.</param>
     /// <param name="context">The test context providing additional data about the test environment and execution.</param>
-    protected override void Execute(IWebElement element, SeleniumBrowser browser, TestContext context)
+    protected override async Task Execute(IWebElement element, SeleniumBrowser browser, TestContext context)
     {
-        base.Execute(element, browser, context);
+        await base.Execute(element, browser, context);
 
         var actions = new OpenQA.Selenium.Interactions.Actions(browser.WebDriver);
         actions.MoveToElement(element).Perform();

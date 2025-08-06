@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -73,9 +73,9 @@ public class HttpCondition() : AbstractCondition("http-check")
     ///     True if the HTTP response code matches the expected value, otherwise false.
     /// </return>
     /// /
-    public override bool IsSatisfied(TestContext context)
+    public override async Task<bool> IsSatisfied(TestContext context)
     {
-        return GetHttpResponseCode(context) == InvokeUrl(context);
+        return GetHttpResponseCode(context) == await InvokeUrl(context);
     }
 
     /// Constructs a success message for the HTTP condition, indicating that the request
@@ -85,8 +85,8 @@ public class HttpCondition() : AbstractCondition("http-check")
     /// /
     public override string GetSuccessMessage(TestContext context)
     {
-        return string.Format("Http condition success - request url '{0}' did return expected status '{1}'",
-            GetUrl(context), GetHttpResponseCode(context));
+        return
+            $"Http condition success - request url '{GetUrl(context)}' did return expected status '{GetHttpResponseCode(context)}'";
     }
 
     /// Generates an error message if the HTTP condition check fails.
@@ -103,19 +103,19 @@ public class HttpCondition() : AbstractCondition("http-check")
     /// <param name="context">The context that provides configuration and settings for the HTTP request</param>
     /// <return>The HTTP response code indicating the result of the request</return>
     /// /
-    private int InvokeUrl(TestContext context)
+    private async Task<int> InvokeUrl(TestContext context)
     {
         var contextUrl = GetUrl(context);
         if (Log.IsEnabled(LogLevel.Debug))
         {
-            Log.LogDebug($"Probing Http request url '{contextUrl.ToString()}'");
+            Log.LogDebug("Probing Http request url '{ContextUrl}'", contextUrl.ToString());
         }
 
         var responseCode = -1;
 
         try
         {
-            responseCode = ExecuteHttpRequestAsync(contextUrl, context).GetAwaiter().GetResult();
+            responseCode = await ExecuteHttpRequestAsync(contextUrl, context);
         }
         catch (HttpRequestException e)
         {
@@ -126,12 +126,14 @@ public class HttpCondition() : AbstractCondition("http-check")
                 responseCode = (int)e.StatusCode.Value;
             }
 
-            Log.LogWarning($"Could not access Http url '{contextUrl.ToString()}' - {e.Message}");
+            Log.LogWarning(e, "Could not access Http url '{ContextUrl}' - {Message}, status code {ResponseCode}",
+                contextUrl.ToString(), e.Message, responseCode);
         }
-        catch (TaskCanceledException)
+        catch (TaskCanceledException e)
         {
             // Handle timeout
-            Log.LogWarning($"Request to '{contextUrl.ToString()}' timed out after {GetTimeout(context)}ms");
+            Log.LogWarning(e, "Request to '{ContextUrl}' timed out after {Timeout}ms", contextUrl.ToString(),
+                GetTimeout(context));
         }
 
         return responseCode;
@@ -194,6 +196,11 @@ public class HttpCondition() : AbstractCondition("http-check")
     }
 
 
+    /// Generates a string representation of the HttpCondition object.
+    /// The string includes key details such as the URL, timeout, HTTP response code, method, and condition name.
+    /// <return>
+    ///     A string representation of the HttpCondition object that provides human-readable details of its configuration.
+    /// </return>
     public override string ToString()
     {
         return "HttpCondition{" +

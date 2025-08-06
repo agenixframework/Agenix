@@ -49,15 +49,25 @@ public abstract class ConditionalPerformable : IPerformable
     }
 
     /// <summary>
-    ///     Executes the set of tasks associated with the evaluated result of the condition
-    ///     for the given actor. The tasks to perform depend on the true or false outcome
-    ///     of the evaluation for the specified actor.
+    ///     Executes the tasks associated with the evaluated condition for the specified actor.
+    ///     Depending on the outcome (true or false) of the condition, the appropriate set of tasks
+    ///     will be executed asynchronously.
     /// </summary>
     /// <typeparam name="T">The type of actor performing the tasks; must inherit from the Actor class.</typeparam>
-    /// <param name="actor">The actor for whom the condition is evaluated, and who performs the corresponding tasks.</param>
-    public void PerformAs<T>(T actor) where T : Actor
+    /// <param name="actor">The actor for whom the condition is evaluated and who will perform the corresponding tasks.</param>
+    /// <param name="cancellationToken">
+    ///     An optional token that can be used to signal cancellation of the operation.
+    ///     When the token is triggered, any ongoing task execution will be canceled.
+    /// </param>
+    /// <returns>A task that represents the asynchronous operation of executing the tasks for the given actor.</returns>
+    public async Task PerformAsAsync<T>(T actor, CancellationToken cancellationToken = default) where T : Actor
     {
-        actor.AttemptsTo(_outcomeToPerform[EvaluatedConditionFor(actor)]);
+        if (cancellationToken.IsCancellationRequested)
+        {
+            await Task.FromCanceled(cancellationToken);
+        }
+
+        await actor.AttemptsTo(_outcomeToPerform[EvaluatedConditionFor(actor)]);
     }
 
     /// <summary>

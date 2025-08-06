@@ -21,93 +21,93 @@ public class DanaGoesShoppingSample
     private readonly Actor _dana = Actor.Named("Dana");
 
     [Test]
-    public void ShouldBeAbleToPurchaseSomeItemsWithDelivery()
+    public async Task ShouldBeAbleToPurchaseSomeItemsWithDelivery()
     {
-        GivenThat(_dana).Has(Purchased().AnApple().ThatCosts(10).Dollars(),
+        await GivenThat(_dana).Has(Purchased().AnApple().ThatCosts(10).Dollars(),
             AndPurchased().APear().ThatCosts(5).Dollars());
 
-        When(_dana).AttemptsTo(HaveItemsDelivered.Now());
+        await When(_dana).AttemptsTo(HaveItemsDelivered.Now());
 
-        Then(_dana).Should(SeeThat(TheCorrectTotalCost(), EqualTo(15)),
+        await Then(_dana).Should(SeeThat(TheCorrectTotalCost(), EqualTo(15)),
             SeeThat(TheTotalCostIncludingDelivery(), GreaterThanOrEqualTo(20)));
-        Then(_dana).Should(SeeThat(TheThankYouMessage(), EqualTo("Thank you!")));
+        await Then(_dana).Should(SeeThat(TheThankYouMessage(), EqualTo("Thank you!")));
     }
 
     [Test]
-    public void ShouldBeAbleToPurchaseSomeItemsWithDeliveryUsingPredicates()
+    public async Task ShouldBeAbleToPurchaseSomeItemsWithDeliveryUsingPredicates()
     {
-        GivenThat(_dana).Has(Purchased().AnApple().ThatCosts(10).Dollars(),
+        await GivenThat(_dana).Has(Purchased().AnApple().ThatCosts(10).Dollars(),
             AndPurchased().APear().ThatCosts(5).Dollars());
 
-        When(_dana).AttemptsTo(HaveItemsDelivered.Now());
+        await When(_dana).AttemptsTo(HaveItemsDelivered.Now());
 
-        Then(_dana).Should(SeeThat("Total cost", TheCorrectTotalCost(),
+        await Then(_dana).Should(SeeThat("Total cost", TheCorrectTotalCost(),
             ReturnsAValueThat<int>("is equal to 15", value => value == 15)));
     }
 
     [Test]
-    public void ShouldBeAbleToPurchaseSomeItemsWithDeliveryAndCustomErrors()
+    public async Task ShouldBeAbleToPurchaseSomeItemsWithDeliveryAndCustomErrors()
     {
-        GivenThat(_dana).Has(Purchased().AnApple().ThatCosts(10).Dollars(),
+        await GivenThat(_dana).Has(Purchased().AnApple().ThatCosts(10).Dollars(),
             AndPurchased().APear().ThatCosts(5).Dollars());
 
-        When(_dana).AttemptsTo(HaveItemsDelivered.Now());
+        await When(_dana).AttemptsTo(HaveItemsDelivered.Now());
 
-        Then(_dana).Should(SeeThat(TheTotalCostIncludingDelivery(), GreaterThanOrEqualTo(20)));
-        Assert.Throws<AgenixSystemException>(() =>
+        await Then(_dana).Should(SeeThat(TheTotalCostIncludingDelivery(), GreaterThanOrEqualTo(20)));
+        Assert.ThrowsAsync<AgenixSystemException>(() =>
             Then(_dana).Should(SeeThat(TheThankYouMessage(), EqualTo("You're welcome"))));
     }
 
     [Test]
-    public void ShouldBeAbleToPurchaseSomeItemsWithDeliveryAndCustomErrorsByQuestion()
+    public async Task ShouldBeAbleToPurchaseSomeItemsWithDeliveryAndCustomErrorsByQuestion()
     {
-        GivenThat(_dana).Has(Purchased().AnApple().ThatCosts(10).Dollars(),
+        await GivenThat(_dana).Has(Purchased().AnApple().ThatCosts(10).Dollars(),
             AndPurchased().APear().ThatCosts(5).Dollars());
 
-        When(_dana).AttemptsTo(HaveItemsDelivered.Now());
+        await When(_dana).AttemptsTo(HaveItemsDelivered.Now());
 
-        Then(_dana).Should(SeeThat(TheTotalCostIncludingDelivery(), GreaterThanOrEqualTo(20)));
-        Assert.Throws<PeopleAreSoImpoliteException>(() => Then(_dana).Should(
+        await Then(_dana).Should(SeeThat(TheTotalCostIncludingDelivery(), GreaterThanOrEqualTo(20)));
+        Assert.ThrowsAsync<PeopleAreSoImpoliteException>(() => Then(_dana).Should(
             SeeThat(TheThankYouMessage(), EqualTo("You're welcome"))
                 .OrComplainWith(typeof(PeopleAreSoImpoliteException))));
     }
 
     [Test]
-    public void ShouldBeAbleToPurchaseSomeItemsWithDeliveryAndCustomErrorsByQuestionWithACustomMessage()
+    public async Task ShouldBeAbleToPurchaseSomeItemsWithDeliveryAndCustomErrorsByQuestionWithACustomMessage()
     {
-        GivenThat(_dana).Has(Purchased().AnApple().ThatCosts(10).Dollars(),
+        await GivenThat(_dana).Has(Purchased().AnApple().ThatCosts(10).Dollars(),
             AndPurchased().APear().ThatCosts(5).Dollars());
 
-        When(_dana).AttemptsTo(HaveItemsDelivered.Now());
+        await When(_dana).AttemptsTo(HaveItemsDelivered.Now());
 
-        Then(_dana).Should(SeeThat(TheTotalCostIncludingDelivery(), GreaterThanOrEqualTo(20)));
+        await Then(_dana).Should(SeeThat(TheTotalCostIncludingDelivery(), GreaterThanOrEqualTo(20)));
 
-        Assert.Throws<PeopleAreSoImpoliteException>(() => Then(_dana).Should(
+        Assert.ThrowsAsync<PeopleAreSoImpoliteException>(() => Then(_dana).Should(
             SeeThat(TheThankYouMessage(), EqualTo("You're welcome"))
                 .OrComplainWith(typeof(PeopleAreSoImpoliteException), "You should say something nice")));
     }
 
 
     [Test]
-    public void ShouldBeAbleToAskForNiceThings()
+    public async Task ShouldBeAbleToAskForNiceThings()
     {
-        var totalCost = _dana.AsksFor(TheTotalCost());
+        var totalCost = await _dana.AsksFor(TheTotalCost());
         Assert.That(totalCost, Is.EqualTo(14));
     }
 
     [Test]
-    public void ShouldBeAbleToRememberAnswersToQuestions()
+    public async Task ShouldBeAbleToRememberAnswersToQuestions()
     {
-        _dana.Remember("Total Cost", TheTotalCost());
-        var totalCost = _dana.Recall<int>("Total Cost");
+        await _dana.Remember("Total Cost", TheTotalCost());
+        var totalCost = await _dana.Recall<int>("Total Cost");
         Assert.That(totalCost, Is.EqualTo(14));
     }
 
     [Test]
-    public void ShouldBeAbleToRememberValues()
+    public async Task ShouldBeAbleToRememberValues()
     {
-        _dana.Remember("Total Cost", 14);
-        Assert.That(_dana.Recall<int>("Total Cost"), Is.EqualTo(14));
+        await _dana.Remember("Total Cost", 14);
+        Assert.That(await _dana.Recall<int>("Total Cost"), Is.EqualTo(14));
 
         var colorSet = new List<string> { "red", "green", "blue" };
         Assert.That(colorSet, Is.All.AnyOf
@@ -115,9 +115,9 @@ public class DanaGoesShoppingSample
     }
 
     [Test]
-    public void ShouldBeAbleToPurchaseSomeItems()
+    public async Task ShouldBeAbleToPurchaseSomeItems()
     {
-        GivenThat(_dana).Has(Purchased().AnApple().ThatCosts(10).Dollars(),
+        await GivenThat(_dana).Has(Purchased().AnApple().ThatCosts(10).Dollars(),
             Purchased().APear().ThatCosts(5).Dollars());
 
         Assert.DoesNotThrow(() => When(_dana).AttemptsTo(HaveItemsDelivered.Now()));
@@ -125,26 +125,26 @@ public class DanaGoesShoppingSample
 
 
     [Test]
-    public void ShouldBeAbleToWaitInCheckoutLine()
+    public async Task ShouldBeAbleToWaitInCheckoutLine()
     {
         var fastCheckout = Checkout.FastCheckout();
 
-        GivenThat(_dana).AttemptsTo(JoinTheCheckoutQueue().Of(fastCheckout));
+        await GivenThat(_dana).AttemptsTo(JoinTheCheckoutQueue().Of(fastCheckout));
 
-        Then(_dana).Should(Eventually(SeeThat(
+        await Then(_dana).Should(Eventually(SeeThat(
                 By(fastCheckout), EqualTo("Dana")
             )).WaitingForNoLongerThan(3).Seconds()
             .OrComplainWith(typeof(ThisTakesTooLongException)));
     }
 
     [Test]
-    public void ShouldPatientlyWaitInCheckoutLine()
+    public async Task ShouldPatientlyWaitInCheckoutLine()
     {
         var slowCheckout = Checkout.SlowCheckout();
 
-        GivenThat(_dana).AttemptsTo(JoinTheCheckoutQueue().Of(slowCheckout));
+        await GivenThat(_dana).AttemptsTo(JoinTheCheckoutQueue().Of(slowCheckout));
 
-        Then(_dana).Should(Eventually(SeeThat(
+        await Then(_dana).Should(Eventually(SeeThat(
                 By(slowCheckout), EqualTo("Dana")
             )).WaitingForNoLongerThan(10).Seconds()
             .OrComplainWith(typeof(ThisTakesTooLongException)));
@@ -155,7 +155,7 @@ public class DanaGoesShoppingSample
     {
         var slowCheckout = Checkout.SlowCheckout();
 
-        Assert.DoesNotThrow(() => GivenThat(_dana).AttemptsTo(
+        Assert.DoesNotThrowAsync(() => GivenThat(_dana).AttemptsTo(
             JoinTheCheckoutQueue().Of(slowCheckout),
             Wait.Until(By(slowCheckout), EqualTo("Dana"))
                 .ForNoMoreThan(10).Seconds(),
@@ -164,13 +164,13 @@ public class DanaGoesShoppingSample
     }
 
     [Test]
-    public void ShouldImpatientlyWaitInCheckoutLine()
+    public async Task ShouldImpatientlyWaitInCheckoutLine()
     {
         var fastCheckout = Checkout.FastCheckout();
 
-        GivenThat(_dana).AttemptsTo(JoinTheCheckoutQueue().Of(fastCheckout));
+        await GivenThat(_dana).AttemptsTo(JoinTheCheckoutQueue().Of(fastCheckout));
 
-        Assert.Throws<ThisTakesTooLongException>(() =>
+        Assert.ThrowsAsync<ThisTakesTooLongException>(() =>
             Then(_dana).Should(Eventually(SeeThat(
                     By(fastCheckout), EqualTo("Dana")
                 )).WaitingForNoLongerThan(1).Seconds()

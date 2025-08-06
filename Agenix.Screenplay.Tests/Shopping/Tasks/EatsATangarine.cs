@@ -5,10 +5,11 @@ namespace Agenix.Screenplay.Tests.Shopping.Tasks;
 public class EatsATangerine(string size) : IPerformable
 {
     [Step("{0} eats a #size pear")]
-    public void PerformAs<T>(T actor) where T : Actor
+    public Task PerformAsAsync<T>(T actor, CancellationToken cancellationToken = default) where T : Actor
     {
         // Implementation here
         Console.WriteLine($"{actor.Name} eats a {size} tangerine");
+        return Task.CompletedTask;
     }
 
     public static EatsATangerine OfSize(string size)

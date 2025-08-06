@@ -27,7 +27,6 @@
 using Agenix.Api.Common;
 using Agenix.Api.Context;
 using Agenix.Api.Message;
-using Agenix.Core;
 
 namespace Agenix.Api.Variable.Dictionary;
 

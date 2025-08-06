@@ -39,7 +39,7 @@ public class CheckInputActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecuteCheck()
+    public async Task TestExecuteCheck()
     {
         // Arrange: Element is unchecked
         SetupLocatorForCheckboxInteraction();
@@ -51,7 +51,7 @@ public class CheckInputActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         Locator.Verify(x => x.CheckAsync(It.IsAny<LocatorCheckOptions>()), Times.Once);
@@ -59,7 +59,7 @@ public class CheckInputActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecuteUncheck()
+    public async Task TestExecuteUncheck()
     {
         // Arrange: Element is checked
         SetupLocatorForCheckboxInteraction(true);
@@ -71,7 +71,7 @@ public class CheckInputActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         Locator.Verify(x => x.UncheckAsync(It.IsAny<LocatorUncheckOptions>()), Times.Once);
@@ -79,7 +79,7 @@ public class CheckInputActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecuteAlreadyChecked()
+    public async Task TestExecuteAlreadyChecked()
     {
         // Arrange: Element is already checked
         SetupLocatorForCheckboxInteraction(true);
@@ -91,7 +91,7 @@ public class CheckInputActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert: Should call CheckAsync since the action always performs the operation
         Locator.Verify(x => x.CheckAsync(It.IsAny<LocatorCheckOptions>()), Times.Once);
@@ -99,7 +99,7 @@ public class CheckInputActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecuteWithTimeout()
+    public async Task TestExecuteWithTimeout()
     {
         SetupLocatorForCheckboxInteraction();
 
@@ -110,14 +110,14 @@ public class CheckInputActionTest : AbstractPlaywrightActionTestBase
             .WithTagName("input[name='checkbox']")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Locator.Verify(x => x.CheckAsync(It.Is<LocatorCheckOptions>(opts =>
             opts.Timeout >= 5000 && opts.Timeout <= 5000)), Times.Once);
     }
 
     [Test]
-    public void TestExecuteWithForce()
+    public async Task TestExecuteWithForce()
     {
         SetupLocatorForCheckboxInteraction();
 
@@ -128,7 +128,7 @@ public class CheckInputActionTest : AbstractPlaywrightActionTestBase
             .WithBrowser(PlaywrightBrowser.Object)
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Locator.Verify(x => x.CheckAsync(It.Is<LocatorCheckOptions>(opts => opts.Force == true)), Times.Once);
     }

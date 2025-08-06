@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -39,7 +39,7 @@ public interface ICondition
     /// Tests the condition and returns true if it is satisfied.
     /// <param name="context">The test context in which the condition is evaluated.</param>
     /// <return>True if the condition is satisfied; otherwise, false.</return>
-    bool IsSatisfied(TestContext context);
+    Task<bool> IsSatisfied(TestContext context);
 
     /// Constructs a success message for the current condition.
     /// <param name="context">The test context used to evaluate the condition.</param>

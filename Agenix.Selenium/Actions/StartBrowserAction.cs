@@ -63,7 +63,7 @@ public class StartBrowserAction : AbstractSeleniumAction
     /// </summary>
     /// <param name="browser">The Selenium browser instance</param>
     /// <param name="context">The test context</param>
-    protected override void Execute(SeleniumBrowser browser, TestContext context)
+    protected override async Task Execute(SeleniumBrowser browser, TestContext context)
     {
         if (!_allowAlreadyStarted && browser.IsStarted)
         {
@@ -88,7 +88,7 @@ public class StartBrowserAction : AbstractSeleniumAction
                 .WithBrowser(browser)
                 .SetPage(Browser.EndpointConfiguration.StartPageUrl)
                 .Build();
-            openStartPage.Execute(context);
+            await openStartPage.ExecuteAsync(context);
         }
 
         context.SetVariable(SeleniumHeaders.SeleniumBrowser, browser.Name);

@@ -37,7 +37,9 @@ public class JsonSerializerHeaderDataBuilderTest : AbstractNUnitSetUp
 {
     private readonly JsonSerializer _mapper = new();
     private readonly TestRequest _request = new("Hello Agenix!");
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     private Mock<IReferenceResolver> _mockReferenceResolver;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
     [SetUp]
     public void SetUp()

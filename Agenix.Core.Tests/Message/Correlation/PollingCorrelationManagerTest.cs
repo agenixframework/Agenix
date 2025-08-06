@@ -7,23 +7,24 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Threading.Tasks;
 using Agenix.Api.Message.Correlation;
 using Agenix.Core.Endpoint.Direct;
 using Agenix.Core.Message.Correlation;
@@ -44,7 +45,7 @@ public class PollingCorrelationManagerTest
     }
 
     [Test]
-    public void TestFind()
+    public async Task TestFind()
     {
         var pollableEndpointConfiguration = new DirectSyncEndpointConfiguration
         {
@@ -55,15 +56,15 @@ public class PollingCorrelationManagerTest
         var correlationManager = new PollingCorrelationManager<string>(pollableEndpointConfiguration, "Try again");
 
         // Testing find method with empty key
-        ClassicAssert.IsNull(correlationManager.Find(""));
+        ClassicAssert.IsNull(await correlationManager.Find(""));
 
         // Storing and finding objects in correlation manager
         correlationManager.Store("foo", "bar");
-        ClassicAssert.IsNull(correlationManager.Find("bar"));
-        ClassicAssert.AreEqual("bar", correlationManager.Find("foo"));
+        ClassicAssert.IsNull(await correlationManager.Find("bar"));
+        ClassicAssert.AreEqual("bar", await correlationManager.Find("foo"));
 
         // 2nd invocation with same correlation key
-        ClassicAssert.IsNull(correlationManager.Find("foo"));
+        ClassicAssert.IsNull(await correlationManager.Find("foo"));
 
         // Storing multiple items and retrieving them in different order
         foreach (var key in new[] { "1", "2", "3", "4", "5" })
@@ -73,13 +74,13 @@ public class PollingCorrelationManagerTest
 
         foreach (var key in new[] { "1", "5", "3", "2", "4" })
         {
-            ClassicAssert.AreEqual("value" + key, correlationManager.Find(key));
-            ClassicAssert.IsNull(correlationManager.Find(key));
+            ClassicAssert.AreEqual("value" + key, await correlationManager.Find(key));
+            ClassicAssert.IsNull(await correlationManager.Find(key));
         }
     }
 
     [Test]
-    public void TestFindWithRetry()
+    public async Task TestFindWithRetry()
     {
         var pollableEndpointConfiguration = new DirectSyncEndpointConfiguration
         {
@@ -97,11 +98,11 @@ public class PollingCorrelationManagerTest
             .Returns((string)null)
             .Returns("bar");
 
-        ClassicAssert.AreEqual("bar", correlationManager.Find("foo"));
+        ClassicAssert.AreEqual("bar", await correlationManager.Find("foo"));
     }
 
     [Test]
-    public void TestNotFindWithRetry()
+    public async Task TestNotFindWithRetry()
     {
         var pollableEndpointConfiguration = new DirectSyncEndpointConfiguration
         {
@@ -116,6 +117,6 @@ public class PollingCorrelationManagerTest
 
         _mockObjectStore.Setup(store => store.Remove("foo")).Returns((string)null);
 
-        ClassicAssert.IsNull(correlationManager.Find("foo"));
+        ClassicAssert.IsNull(await correlationManager.Find("foo"));
     }
 }

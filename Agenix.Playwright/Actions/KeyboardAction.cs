@@ -177,7 +177,8 @@ public class KeyboardAction : AbstractPlaywrightAction
             options.Delay = _delay;
         }
 
-        await page.Keyboard.TypeAsync(resolvedText, options);
+        await page.Keyboard.TypeAsync(resolvedText ??
+                                      throw new InvalidOperationException("The text is null"), options);
         Logger.LogDebug("Typed text: {Text}", resolvedText);
     }
 
@@ -199,7 +200,8 @@ public class KeyboardAction : AbstractPlaywrightAction
             options.Delay = _delay;
         }
 
-        await page.Keyboard.PressAsync(resolvedKey, options);
+        await page.Keyboard.PressAsync(resolvedKey ?? throw new InvalidOperationException("The key for press is null"),
+            options);
         Logger.LogDebug("Pressed key: {Key}", resolvedKey);
     }
 
@@ -214,7 +216,7 @@ public class KeyboardAction : AbstractPlaywrightAction
         }
 
         var resolvedKey = context.ReplaceDynamicContentInString(_key);
-        await page.Keyboard.DownAsync(resolvedKey);
+        await page.Keyboard.DownAsync(resolvedKey ?? throw new InvalidOperationException("The key for down is null"));
         Logger.LogDebug("Key down: {Key}", resolvedKey);
     }
 
@@ -229,7 +231,7 @@ public class KeyboardAction : AbstractPlaywrightAction
         }
 
         var resolvedKey = context.ReplaceDynamicContentInString(_key);
-        await page.Keyboard.UpAsync(resolvedKey);
+        await page.Keyboard.UpAsync(resolvedKey ?? throw new InvalidOperationException("The key is null"));
         Logger.LogDebug("Key up: {Key}", resolvedKey);
     }
 
@@ -244,13 +246,14 @@ public class KeyboardAction : AbstractPlaywrightAction
         }
 
         var resolvedText = context.ReplaceDynamicContentInString(_text);
-        await page.Keyboard.InsertTextAsync(resolvedText);
+        await page.Keyboard.InsertTextAsync(resolvedText ?? throw new InvalidOperationException("The Text is null"));
         Logger.LogDebug("Inserted text: {Text}", resolvedText);
     }
 
     /// <summary>
     ///     Executes a key combination by pressing keys down in sequence and releasing them in reverse order.
     /// </summary>
+    /// <exception cref="InvalidOperationException"></exception>
     private async Task ExecuteCombination(IPage page, TestContext context)
     {
         if (_keys == null || _keys.Count == 0)
@@ -265,7 +268,7 @@ public class KeyboardAction : AbstractPlaywrightAction
             // Press all keys down in order
             foreach (var key in resolvedKeys)
             {
-                await page.Keyboard.DownAsync(key);
+                await page.Keyboard.DownAsync(key ?? throw new InvalidOperationException("The key is null"));
                 Logger.LogDebug("Key down: {Key}", key);
             }
 
@@ -280,7 +283,7 @@ public class KeyboardAction : AbstractPlaywrightAction
             // Release all keys in reverse order
             for (var i = resolvedKeys.Count - 1; i >= 0; i--)
             {
-                await page.Keyboard.UpAsync(resolvedKeys[i]);
+                await page.Keyboard.UpAsync(resolvedKeys[i] ?? string.Empty);
                 Logger.LogDebug("Key up: {Key}", resolvedKeys[i]);
             }
         }

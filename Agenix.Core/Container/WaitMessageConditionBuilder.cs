@@ -41,6 +41,6 @@ public class WaitMessageConditionBuilder(Wait.Builder<MessageCondition> builder)
     public WaitMessageConditionBuilder Name(string messageName)
     {
         GetCondition().SetMessageName(messageName);
-        return self;
+        return Self;
     }
 }

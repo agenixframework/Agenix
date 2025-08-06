@@ -7,77 +7,85 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using Agenix.Api;
 using Agenix.Api.Exceptions;
 using Agenix.Core.Actions;
-using Agenix.Core.Container;
 using Moq;
 using NUnit.Framework;
-using ITestAction = Agenix.Api.ITestAction;
+using static Agenix.Core.Container.Parallel;
 
 namespace Agenix.Core.Tests.Container;
 
 public class ParallelTest : AbstractNUnitSetUp
 {
-    private readonly Mock<ITestAction> _actionMock = new();
+    private readonly Mock<IAsyncTestAction> _actionMock = new();
 
     [Test]
-    public void TestSingleAction()
+    public async Task TestSingleAction()
     {
-        var parallelAction = new Parallel.Builder().Build();
+        var parallelAction = new Builder().Build();
 
         _actionMock.Reset();
+        _actionMock
+            .Setup(a => a.ExecuteAsync(Context, It.IsAny<CancellationToken>()))
+            .Returns(Task.CompletedTask);
 
-        var actionList = new List<ITestAction> { _actionMock.Object };
+        var actionList = new List<IAsyncTestAction> { _actionMock.Object };
 
         parallelAction.SetActions(actionList);
-        parallelAction.Execute(Context);
+        await parallelAction.DoExecute(Context);
 
-        _actionMock.Verify(action => action.Execute(Context), Times.Once);
+        _actionMock.Verify(action => action.ExecuteAsync(Context, It.IsAny<CancellationToken>()), Times.Once);
     }
 
     [Test]
-    public void TestParallelMultipleActions()
+    public async Task TestParallelMultipleActions()
     {
-        var parallelAction = new Parallel.Builder().Build();
+        var parallelAction = new Builder().Build();
 
         _actionMock.Reset();
+        _actionMock
+            .Setup(a => a.ExecuteAsync(Context, It.IsAny<CancellationToken>()))
+            .Returns(Task.CompletedTask);
 
-        var actionList = new List<ITestAction>
+        var actionList = new List<IAsyncTestAction>
         {
             new EchoAction.Builder().Build(), _actionMock.Object, new EchoAction.Builder().Build()
         };
 
         parallelAction.SetActions(actionList);
 
-        parallelAction.Execute(Context);
+        await parallelAction.DoExecute(Context);
 
-        _actionMock.Verify(action => action.Execute(Context), Times.Once);
+        _actionMock.Verify(action => action.ExecuteAsync(Context, It.IsAny<CancellationToken>()), Times.Once);
     }
 
     [Test]
     public void TestParallelActions()
     {
-        var parallelAction = new Parallel.Builder().Build();
+        var parallelAction = new Builder().Build();
 
-        var actionList = new List<ITestAction>
+        var actionList = new List<IAsyncTestAction>
         {
             new EchoAction.Builder().Build(), new EchoAction.Builder().Build(), new EchoAction.Builder().Build()
         };
@@ -89,59 +97,62 @@ public class ParallelTest : AbstractNUnitSetUp
 
         parallelAction.SetActions(actionList);
 
-        parallelAction.Execute(Context);
+        Assert.That(async () => await parallelAction.DoExecute(Context), Throws.Nothing);
     }
 
     [Test]
     public void TestOneActionThatIsFailing()
     {
-        var parallelAction = new Parallel.Builder().Build();
+        var parallelAction = new Builder().Build();
 
-        var actionList = new List<ITestAction> { new FailAction.Builder().Build() };
+        var actionList = new List<IAsyncTestAction> { new FailAction.Builder().Build() };
 
         parallelAction.SetActions(actionList);
 
-        Assert.Throws<AgenixSystemException>(() => parallelAction.Execute(Context));
+        Assert.ThrowsAsync<AgenixSystemException>(async () => await parallelAction.DoExecute(Context));
     }
 
     [Test]
     public void TestOnlyActionFailingActions()
     {
-        var parallelAction = new Parallel.Builder().Build();
+        var parallelAction = new Builder().Build();
 
-        var actionList = new List<ITestAction>
+        var actionList = new List<IAsyncTestAction>
         {
             new FailAction.Builder().Build(), new FailAction.Builder().Build(), new FailAction.Builder().Build()
         };
 
         parallelAction.SetActions(actionList);
 
-        Assert.Throws<ParallelContainerException>(() => parallelAction.Execute(Context));
+        Assert.ThrowsAsync<ParallelContainerException>(async () => await parallelAction.DoExecute(Context));
     }
 
     [Test]
     public void TestSingleFailingAction()
     {
-        var parallelAction = new Parallel.Builder().Build();
+        var parallelAction = new Builder().Build();
 
-        var actionList = new List<ITestAction>
+        var actionList = new List<IAsyncTestAction>
         {
             new EchoAction.Builder().Build(), new FailAction.Builder().Build(), new EchoAction.Builder().Build()
         };
 
         parallelAction.SetActions(actionList);
 
-        Assert.Throws<AgenixSystemException>(() => parallelAction.Execute(Context));
+        Assert.ThrowsAsync<AgenixSystemException>(async () => await parallelAction.DoExecute(Context));
     }
 
     [Test]
     public void TestSomeFailingActions()
     {
-        var parallelAction = new Parallel.Builder().Build();
+        var parallelAction = new Builder().Build();
 
-        _actionMock.Reset(); // Equivalent to resetting the mock in Java
+        _actionMock.Reset();
+        _actionMock
+            .Setup(a => a.ExecuteAsync(Context, It.IsAny<CancellationToken>()))
+            .Returns(Task.CompletedTask);
 
-        var actionList = new List<ITestAction>
+        var actionList = new List<IAsyncTestAction>
         {
             new EchoAction.Builder().Build(),
             new FailAction.Builder().Build(),
@@ -151,8 +162,8 @@ public class ParallelTest : AbstractNUnitSetUp
 
         parallelAction.SetActions(actionList);
 
-        Assert.Throws<ParallelContainerException>(() => parallelAction.Execute(Context));
+        Assert.ThrowsAsync<ParallelContainerException>(async () => await parallelAction.DoExecute(Context));
 
-        _actionMock.Verify(action => action.Execute(Context), Times.Once);
+        _actionMock.Verify(action => action.ExecuteAsync(Context, It.IsAny<CancellationToken>()), Times.Once);
     }
 }

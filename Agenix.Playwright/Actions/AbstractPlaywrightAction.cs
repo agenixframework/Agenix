@@ -12,7 +12,7 @@ namespace Agenix.Playwright.Actions;
 ///     Abstract base class for all Playwright actions.
 ///     Provides common functionality for executing Playwright browser commands and managing browser instances.
 /// </summary>
-public abstract class AbstractPlaywrightAction : AbstractTestAction, IPlaywrightAction
+public abstract class AbstractPlaywrightAction : AbstractTestActionAsync, IPlaywrightAction
 {
     /// <summary>
     ///     Logger.
@@ -98,7 +98,8 @@ public abstract class AbstractPlaywrightAction : AbstractTestAction, IPlaywright
     ///     Executes the Playwright action within the provided test context
     /// </summary>
     /// <param name="context">The test context</param>
-    public override void DoExecute(TestContext context)
+    /// <param name="cancellationToken"></param>
+    public override async Task DoExecute(TestContext context, CancellationToken cancellationToken = default)
     {
         if (Logger.IsEnabled(LogLevel.Debug))
         {
@@ -131,7 +132,7 @@ public abstract class AbstractPlaywrightAction : AbstractTestAction, IPlaywright
         browserToUse.SwitchToContext(resolvedContext);
         browserToUse.SwitchToPage(resolvedPage);
 
-        Execute(browserToUse, context).GetAwaiter().GetResult();
+        await Execute(browserToUse, context);
 
         Logger.LogInformation("Playwright browser command execution successful: '{ActionName}'", Name);
     }
@@ -237,7 +238,7 @@ public abstract class AbstractPlaywrightAction : AbstractTestAction, IPlaywright
     /// <summary>
     ///     Interface for Playwright action builders
     /// </summary>
-    public interface IPlaywrightActionBuilder<out T> : ITestActionBuilder<T> where T : IPlaywrightAction
+    public interface IPlaywrightActionBuilder<out T> : IAsyncTestActionBuilder<T> where T : IPlaywrightAction
     {
         /// <summary>
         ///     Gets the Playwright browser instance
@@ -317,7 +318,7 @@ public abstract class AbstractPlaywrightAction : AbstractTestAction, IPlaywright
     /// <summary>
     ///     Abstract base builder class for Playwright actions
     /// </summary>
-    public abstract class Builder<T, TB> : AbstractTestActionBuilder<T, TB>, IPlaywrightActionBuilder<T>
+    public abstract class Builder<T, TB> : AbstractAsyncTestActionBuilder<T, TB>, IPlaywrightActionBuilder<T>
         where T : IPlaywrightAction
         where TB : Builder<T, TB>
     {
@@ -437,7 +438,7 @@ public abstract class AbstractPlaywrightAction : AbstractTestAction, IPlaywright
         public virtual TB WithBrowser(PlaywrightBrowser playwrightBrowser)
         {
             Browser = playwrightBrowser;
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -448,7 +449,7 @@ public abstract class AbstractPlaywrightAction : AbstractTestAction, IPlaywright
         public override TB Name(string name)
         {
             base.Name(name);
-            return self;
+            return Self;
         }
     }
 }

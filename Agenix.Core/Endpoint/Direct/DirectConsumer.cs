@@ -7,23 +7,25 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System;
+using System.Threading.Tasks;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
@@ -52,7 +54,7 @@ public class DirectConsumer(string name, DirectEndpointConfiguration endpointCon
     /// <param name="timeout">The timeout period in milliseconds to wait for a message.</param>
     /// <returns>The received message.</returns>
     /// <exception cref="MessageTimeoutException">Thrown when a message is not received within the specified timeout period.</exception>
-    public override IMessage Receive(string selector, TestContext context, long timeout)
+    public override async Task<IMessage> Receive(string selector, TestContext context, long timeout)
     {
         var destinationQueue = GetDestinationQueue(context);
 
@@ -62,7 +64,7 @@ public class DirectConsumer(string name, DirectEndpointConfiguration endpointCon
 
         if (Log.IsEnabled(LogLevel.Debug))
         {
-            Log.LogDebug($"Receiving message from queue: '{destinationQueueName}'");
+            Log.LogDebug("Receiving message from queue: '{DestinationQueueName}'", destinationQueueName);
         }
 
         IMessage message;
@@ -72,12 +74,12 @@ public class DirectConsumer(string name, DirectEndpointConfiguration endpointCon
             MessageSelector messageSelector = msg => delegatingMessageSelector.Accept(msg);
 
             message = timeout <= 0
-                ? destinationQueue.Receive(messageSelector)
-                : destinationQueue.Receive(messageSelector, timeout);
+                ? await destinationQueue.Receive(messageSelector)
+                : await destinationQueue.Receive(messageSelector, timeout);
         }
         else
         {
-            message = timeout <= 0 ? destinationQueue.Receive() : destinationQueue.Receive(timeout);
+            message = timeout <= 0 ? await destinationQueue.Receive() : await destinationQueue.Receive(timeout);
         }
 
         if (message == null)
@@ -85,7 +87,7 @@ public class DirectConsumer(string name, DirectEndpointConfiguration endpointCon
             throw new MessageTimeoutException(timeout, destinationQueueName);
         }
 
-        Log.LogInformation($"Received message from queue: '{destinationQueueName}'");
+        Log.LogInformation("Received message from queue: '{DestinationQueueName}'", destinationQueueName);
         return message;
     }
 
@@ -147,12 +149,14 @@ public class DirectConsumer(string name, DirectEndpointConfiguration endpointCon
     /// <exception cref="AgenixSystemException">Thrown when the reference resolver is missing in the context.</exception>
     protected IMessageQueue ResolveQueueName(string queueName, TestContext context)
     {
-        if (context.ReferenceResolver != null)
+        ArgumentNullException.ThrowIfNull(context);
+
+        if (context.ReferenceResolver == null)
         {
-            return context.ReferenceResolver.Resolve<IMessageQueue>(queueName);
+            throw new AgenixSystemException(
+                "Unable to resolve message queue - missing proper reference resolver in context");
         }
 
-        throw new AgenixSystemException(
-            "Unable to resolve message queue - missing proper reference resolver in context");
+        return context.ReferenceResolver.Resolve<IMessageQueue>(queueName);
     }
 }

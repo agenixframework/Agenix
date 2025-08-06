@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -45,7 +45,7 @@ public class ReceiveHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
     private readonly Mock<HttpClient> _httpClient = new();
 
     [Test]
-    public void TestHttpRequestProperties()
+    public async Task TestHttpRequestProperties()
     {
         Mock.Get(_httpClient.Object).Reset();
         Mock.Get(_configuration.Object).Reset();
@@ -53,7 +53,7 @@ public class ReceiveHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
         Mock.Get(_configuration.Object).Setup(x => x.Timeout).Returns(100L);
         _httpClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
         _httpClient.Setup(m => m.CreateConsumer()).Returns(_httpClient.Object);
-        Mock.Get(_httpClient.Object).Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).Returns(
+        Mock.Get(_httpClient.Object).Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).ReturnsAsync(
             new HttpMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
                 .Method(HttpMethod.Get)
                 .Path("/test/foo")
@@ -62,7 +62,7 @@ public class ReceiveHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
                 .QueryParam("param2", "value2"));
 
         var builder = new DefaultTestCaseRunner(Context);
-        builder.Run(HttpActionBuilder.Http().Client(_httpClient.Object)
+        await builder.Run(HttpActionBuilder.Http().Client(_httpClient.Object)
             .Receive()
             .Response()
             .Message()

@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -40,8 +40,8 @@ using Agenix.Core.Validation.Builder;
 
 namespace Agenix.Core.Message.Builder;
 
-public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, IReferenceResolverAware
-    where T : ITestAction
+public abstract class MessageBuilderSupport<T, TB, TS> : IAsyncTestActionBuilder<T>, IReferenceResolverAware
+    where T : IAsyncTestAction
     where TB : MessageActionBuilder<T, TS, TB>
     where TS : MessageBuilderSupport<T, TB, TS>
 {
@@ -95,16 +95,6 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     /// </remarks>
     public string DataDictionaryName => dataDictionaryName;
 
-    /// <summary>
-    ///     Sets the reference resolver for the message builder support, ensuring that any needed references can be resolved at
-    ///     runtime.
-    /// </summary>
-    /// <param name="referenceResolver">The reference resolver to be set.</param>
-    public void SetReferenceResolver(IReferenceResolver referenceResolver)
-    {
-        _delegate.SetReferenceResolver(referenceResolver);
-    }
-
 
     /// <summary>
     ///     Completes the building process and constructs the final test action.
@@ -113,6 +103,16 @@ public abstract class MessageBuilderSupport<T, TB, TS> : ITestActionBuilder<T>, 
     public T Build()
     {
         return _delegate.Build();
+    }
+
+    /// <summary>
+    ///     Sets the reference resolver for the message builder support, ensuring that any needed references can be resolved at
+    ///     runtime.
+    /// </summary>
+    /// <param name="referenceResolver">The reference resolver to be set.</param>
+    public void SetReferenceResolver(IReferenceResolver referenceResolver)
+    {
+        _delegate.SetReferenceResolver(referenceResolver);
     }
 
     /// <summary>

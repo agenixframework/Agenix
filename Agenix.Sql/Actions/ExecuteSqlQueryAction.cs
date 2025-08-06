@@ -7,41 +7,42 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Collections;
 using System.Data;
+using System.Data.Common;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
 using Agenix.Api.Validation.Matcher;
+using Agenix.Sql.Ado;
+using Agenix.Sql.Ado.Exceptions;
 using Microsoft.Extensions.Logging;
-using Spring.Dao;
-using Spring.Data;
-using Spring.Data.Common;
-using Spring.Transaction.Support;
 
 namespace Agenix.Sql.Actions;
 
 /// <summary>
 ///     Action executes SQL queries and offers result set validation. The class enables you to query data result sets from
-///     a database. Validation will happen on column basis inside the result set.
+///     a database. Validation will happen on a column basis inside the result set.
 /// </summary>
 /// <param name="builder"></param>
 public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
@@ -50,22 +51,22 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
         builder.adoTemplate,
         builder.sqlResourcePath,
         builder.transactionIsolationLevel,
-        builder.transactionManager,
+        builder.transactionEnabled,
         builder.transactionTimeout,
         builder.statements)
 {
+    /// NULL value representation in SQL.
+    private const string NullValue = "NULL";
+
     /// Logger for ExecuteSQLQueryAction.
     /// /
     private static readonly ILogger Log = LogManager.GetLogger(typeof(ExecuteSqlQueryAction));
 
-    /// NULL value representation in SQL.
-    private static readonly string NullValue = "NULL";
-
     /// Dictionary containing the expected values for each database column. Keys represent the column names and values are lists of expected data for those columns.
-    protected readonly Dictionary<string, List<string>> _controlResultSet = builder._controlResultSet;
+    protected readonly Dictionary<string, List<string>> _controlResultSet = builder.ControlResultSetMap;
 
     /// Map of test variables to be created from database values, where keys represent the column names and values represent the variable names to which the database values will be assigned.
-    private readonly Dictionary<string, string> _extractVariables = builder._extractVariables;
+    private readonly Dictionary<string, string> _extractVariables = builder.ExtractVariablesMap;
 
     /// Dictionary containing the expected values for each database column. Keys represent the column names and values are lists of expected data for those columns.
     public Dictionary<string, List<string>> ControlResultSet => _controlResultSet;
@@ -73,8 +74,53 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
     /// Map of test variables to be created from database values, where keys represent the column names and values represent the variable names to which the database values will be assigned.
     public Dictionary<string, string> ExtractVariables => _extractVariables;
 
-    protected void ExecuteStatements(List<string> newStatements, List<Dictionary<string, object>> allResultRows,
-        Dictionary<string, List<string>> columnValuesMap, TestContext context)
+    /// <summary>
+    ///     Executes a collection of SQL statements asynchronously, processes the results, and updates the specified
+    ///     column values map and test context.
+    /// </summary>
+    /// <param name="newStatements">
+    ///     A list of SQL statements to execute. Each statement may include dynamic content that is replaced
+    ///     using the provided test context.
+    /// </param>
+    /// <param name="allResultRows">
+    ///     A list to store the result rows retrieved from the executed SQL statements. Each result row is represented
+    ///     as a dictionary mapping column names to their respective values.
+    /// </param>
+    /// <param name="columnValuesMap">
+    ///     A dictionary where keys are column names and values are lists of string representations of retrieved column
+    ///     values from the query results. This map is updated as queries are executed.
+    /// </param>
+    /// <param name="context">
+    ///     The <c>TestContext</c> instance used to replace dynamic content in SQL statements and to store contextual
+    ///     state necessary during execution.
+    /// </param>
+    /// <param name="connection">
+    ///     An optional database connection to use during query execution. If null, a new connection is managed
+    ///     internally by the method.
+    /// </param>
+    /// <param name="transaction">
+    ///     An optional database transaction to use if transaction management is required. If null, no transaction is applied.
+    /// </param>
+    /// <param name="commandTimeoutSeconds">
+    ///     An optional timeout period, in seconds, for each SQL command execution. If null, the default timeout is used.
+    /// </param>
+    /// <param name="cancellationToken">
+    ///     A token to monitor for cancellation requests during the execution process.
+    /// </param>
+    /// <returns>
+    ///     A task that represents the asynchronous operation of executing the SQL statements. The results are processed
+    ///     and stored in the provided <paramref name="allResultRows" /> and <paramref name="columnValuesMap" />.
+    /// </returns>
+    /// <exception cref="AgenixSystemException">
+    ///     Thrown if no <c>AdoTemplate</c> is configured for query execution.
+    /// </exception>
+    [SuppressMessage("SonarAnalyzer.CSharp", "S107",
+        Justification = "API stability: signature kept for backward compatibility")]
+    protected async Task ExecuteStatementsAsync(List<string> newStatements,
+        List<Dictionary<string, object>> allResultRows,
+        Dictionary<string, List<string>> columnValuesMap, TestContext context,
+        DbConnection? connection = null, DbTransaction? transaction = null, int? commandTimeoutSeconds = null,
+        CancellationToken cancellationToken = default)
     {
         if (AdoTemplate == null)
         {
@@ -89,16 +135,57 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
                 ? statement.Trim()[..(statement.Trim().Length - 1)]
                 : statement.Trim());
 
-            Log.LogDebug($"Executing SQL query: {toExecute}");
+            Log.LogDebug("Executing SQL query: {toExecute}", toExecute);
 
-            var results = AdoTemplate.QueryWithRowMapper(CommandType.Text, toExecute, new DictionaryRowMapper())
-                .Cast<Dictionary<string, object>>().ToList();
+            List<Dictionary<string, object>> results;
+            if (connection == null && transaction == null && commandTimeoutSeconds == null)
+            {
+                var list = AdoTemplate.QueryWithRowMapperAsync(CommandType.Text, toExecute, new DictionaryRowMapper());
+                var enumerable = ToDictionaryResults(list);
+                results = enumerable.ToList();
+            }
+            else
+            {
+                var list = await AdoTemplate.QueryWithRowMapperAsync(CommandType.Text, toExecute,
+                    new DictionaryRowMapper(),
+                    connection, transaction, commandTimeoutSeconds, cancellationToken).ConfigureAwait(false);
+                var enumerable = ToDictionaryResults(list);
+                results = enumerable.ToList();
+            }
 
             Log.LogDebug("SQL query execution successful");
 
             allResultRows.AddRange(results);
             FillColumnValuesMap(results, columnValuesMap);
         }
+    }
+
+    private static List<Dictionary<string, object>> ToDictionaryResults(IList? list)
+    {
+        // Handle null result lists defensively to avoid NullReferenceException
+        if (list == null)
+        {
+            return [];
+        }
+
+        var results = new List<Dictionary<string, object>>(list.Count);
+        foreach (var item in list)
+        {
+            switch (item)
+            {
+                case null:
+                    throw new DataAccessException(
+                        "Row-mapper returned a null row. Expected a non-null Dictionary<string, object>.");
+                case Dictionary<string, object> dict:
+                    results.Add(dict);
+                    break;
+                default:
+                    throw new DataAccessException(
+                        $"Unexpected row-mapper result type: {item.GetType().FullName}. Expected {typeof(Dictionary<string, object>).FullName}.");
+            }
+        }
+
+        return results;
     }
 
     /// <summary>
@@ -119,16 +206,15 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
     /// </exception>
     private void FillContextVariables(Dictionary<string, List<string>> columnValuesMap, TestContext context)
     {
-        foreach (var variableEntry in _extractVariables)
+        foreach (var (columnName, value) in _extractVariables)
         {
-            var columnName = variableEntry.Key;
             if (columnValuesMap.ContainsKey(columnName.ToLower()))
             {
-                context.SetVariable(variableEntry.Value, ConstructVariableValue(columnValuesMap[columnName.ToLower()]));
+                context.SetVariable(value, ConstructVariableValue(columnValuesMap[columnName.ToLower()]));
             }
             else if (columnValuesMap.ContainsKey(columnName.ToUpper()))
             {
-                context.SetVariable(variableEntry.Value, ConstructVariableValue(columnValuesMap[columnName.ToUpper()]));
+                context.SetVariable(value, ConstructVariableValue(columnValuesMap[columnName.ToUpper()]));
             }
             else
             {
@@ -151,30 +237,30 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
     ///     of the corresponding column values for all rows as values. If a column value is a byte array, it is converted to a
     ///     Base64 string.
     /// </param>
-    private void FillColumnValuesMap(List<Dictionary<string, object>> results,
+    private static void FillColumnValuesMap(List<Dictionary<string, object>> results,
         Dictionary<string, List<string>> columnValuesMap)
     {
         foreach (var row in results)
-            foreach (var column in row)
+            foreach (var (columnName, dataValue) in row)
             {
-                var columnName = column.Key;
-                string columnValue;
+                string? columnValue;
 
-                if (!columnValuesMap.ContainsKey(columnName))
+                if (!columnValuesMap.TryGetValue(columnName, out var value))
                 {
-                    columnValuesMap[columnName] = [];
+                    value = [];
+                    columnValuesMap[columnName] = value;
                 }
 
-                if (column.Value is byte[] byteArray)
+                if (dataValue is byte[] byteArray)
                 {
                     columnValue = Convert.ToBase64String(byteArray);
                 }
                 else
                 {
-                    columnValue = (column.Value == null ? null : column.Value.ToString())!;
+                    columnValue = dataValue == null ? null : dataValue.ToString();
                 }
 
-                columnValuesMap[columnName].Add(columnValue);
+                value.Add(columnValue);
             }
     }
 
@@ -190,7 +276,7 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
     ///     A concatenated string with semicolon-separated values from the row, substituting any null values with the
     ///     string "NULL". If the list is null or empty, returns an empty string.
     /// </returns>
-    private string ConstructVariableValue(List<string> rowValues)
+    private static string ConstructVariableValue(List<string> rowValues)
     {
         if (rowValues == null || rowValues.Count == 0)
         {
@@ -228,20 +314,14 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
     ///     A dictionary containing column names and their associated list of values from the
     ///     executed SQL result set.
     /// </param>
-    /// <param name="allResultRows">
-    ///     A list of dictionaries representing all rows and their column data returned from the SQL
-    ///     query execution.
-    /// </param>
     /// <param name="context">
     ///     The test execution context providing essential information and utilities for performing
     ///     validation within the environment.
     /// </param>
-    private void PerformValidation(Dictionary<string, List<string>> columnValuesMap,
-        List<Dictionary<string, object>> allResultRows,
-        TestContext context)
+    private void PerformValidation(Dictionary<string, List<string>> columnValuesMap, TestContext context)
     {
         // Now apply control set validation if specified
-        if (!_controlResultSet.Any())
+        if (_controlResultSet.Count == 0)
         {
             return;
         }
@@ -313,7 +393,7 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
     /// </summary>
     /// <param name="statement"></param>
     /// <exception cref="AgenixSystemException"></exception>
-    protected void ValidateSqlStatement(string statement)
+    private static void ValidateSqlStatement(string statement)
     {
         var trimmedStatement = statement.ToLower().Trim();
         if (!(trimmedStatement.StartsWith("select") || trimmedStatement.StartsWith("with")))
@@ -337,12 +417,13 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
     ///     Thrown if the validation fails due to a mismatch between the control and result
     ///     values.
     /// </exception>
-    protected void ValidateSingleValue(string columnName, string controlValue, string? resultValue, TestContext context)
+    protected static void ValidateSingleValue(string columnName, string controlValue, string? resultValue,
+        TestContext context)
     {
-        // Check if value is ignored
+        // Check if the value is ignored
         if (controlValue.Equals(AgenixSettings.IgnorePlaceholder))
         {
-            Log.LogDebug($"Ignoring column value '{columnName} (resultValue)'");
+            Log.LogDebug("Ignoring column value '{columnName} {resultValue}'", columnName, resultValue);
             return;
         }
 
@@ -360,13 +441,15 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
                     $"Validation failed for column: '{columnName}' found value: NULL expected value: {controlValue}");
             }
 
-            Log.LogDebug($"Validating database value for column: '{columnName}' value as expected: NULL - value OK");
+            Log.LogDebug("Validating database value for column: '{columnName}' value as expected: NULL - value OK",
+                columnName);
             return;
         }
 
         if (resultValue.Equals(controlValue))
         {
-            Log.LogDebug($"Validation successful for column: '{columnName}' expected value: {controlValue} - value OK");
+            Log.LogDebug("Validation successful for column: '{columnName}' expected value: {controlValue} - value OK",
+                columnName, controlValue);
         }
         else
         {
@@ -381,64 +464,54 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
     /// </summary>
     /// <param name="controlValue">The control value to check against the representation of SQL NULL value.</param>
     /// <returns>True if the control value is considered NULL; otherwise, false.</returns>
-    private bool IsAgenixNullValue(string controlValue)
+    private static bool IsAgenixNullValue(string controlValue)
     {
         return controlValue.Equals(NullValue, StringComparison.OrdinalIgnoreCase) || string.IsNullOrEmpty(controlValue);
     }
 
     /// <summary>
-    ///     Executes the SQL statements defined for the test action within the given context. This method determines the source
-    ///     of SQL statements,
-    ///     executes them, performs necessary validations on the result set, and populates the test context with any resulting
-    ///     variables.
+    ///     Executes the configured SQL statements within the provided test context, processes the results,
+    ///     and handles potential errors occurring during execution. This method determines the appropriate SQL
+    ///     statements to use, executes them, and populates the test context with any resulting variables as needed.
     /// </summary>
-    /// <param name="context">The test context providing data and configuration needed to execute the SQL statements.</param>
+    /// <param name="context">
+    ///     The test context providing data and configuration required for the execution of the SQL statements.
+    ///     This includes dynamic variables and any associated test-specific information.
+    /// </param>
+    /// <param name="cancellationToken">
+    ///     An optional token that can be used to cancel the execution of the SQL statements if necessary.
+    /// </param>
+    /// <returns>
+    ///     A task that represents the asynchronous execution of the SQL statements. The context may be updated
+    ///     with results from the executed queries.
+    /// </returns>
     /// <exception cref="DataAccessException">
-    ///     Thrown when there is a failure in executing any SQL statement due to data access
-    ///     issues.
+    ///     Thrown when there is an issue accessing the data source during the execution of any SQL statement.
     /// </exception>
     /// <exception cref="AgenixSystemException">
-    ///     Thrown when a <see cref="DataAccessException" /> occurs, encapsulating it for
-    ///     higher-level handling.
+    ///     Thrown when a data access issue occurs and needs to be encapsulated for higher-level exception handling.
     /// </exception>
-    public override void DoExecute(TestContext context)
+    public override async Task DoExecute(TestContext context, CancellationToken cancellationToken = default)
     {
-        List<string> statementsToUse;
-        statementsToUse = statements.Count == 0 ? CreateStatementsFromFileResource(context) : statements;
+        var statementsToUse = GetStatementsToUse(context);
 
         try
         {
-            // For control result set validation
             var columnValuesMap = new Dictionary<string, List<string>>();
-            // For script validation
             var allResultRows = new List<Dictionary<string, object>>();
 
-            if (TransactionManager != null)
+            if (TransactionEnabled)
             {
-                Log.LogDebug($"Using transaction manager: {TransactionManager.GetType().Name}");
-
-                var transactionTemplate = new TransactionTemplate(TransactionManager)
-                {
-                    TransactionTimeout = int.Parse(context.ReplaceDynamicContentInString(TransactionTimeout)),
-                    TransactionIsolationLevel = (IsolationLevel)Enum.Parse(typeof(IsolationLevel),
-                        context.ReplaceDynamicContentInString(TransactionIsolationLevel))
-                };
-
-                transactionTemplate.Execute(status =>
-                {
-                    ExecuteStatements(statementsToUse, allResultRows, columnValuesMap, context);
-                    return null;
-                });
+                await ExecuteWithTransactionAsync(statementsToUse, columnValuesMap, allResultRows, context,
+                    cancellationToken).ConfigureAwait(false);
             }
             else
             {
-                ExecuteStatements(statementsToUse, allResultRows, columnValuesMap, context);
+                await ExecuteWithoutTransactionAsync(statementsToUse, columnValuesMap, allResultRows, context,
+                    cancellationToken).ConfigureAwait(false);
             }
 
-            // Perform validation
-            PerformValidation(columnValuesMap, allResultRows, context);
-
-            // Fill context variables
+            PerformValidation(columnValuesMap, context);
             FillContextVariables(columnValuesMap, context);
         }
         catch (DataAccessException e)
@@ -448,12 +521,107 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
         }
     }
 
+    private List<string> GetStatementsToUse(TestContext context)
+    {
+        return statements.Count == 0 ? CreateStatementsFromFileResource(context) : statements;
+    }
+
+    private async Task ExecuteWithTransactionAsync(
+        List<string> statementsToUse,
+        Dictionary<string, List<string>> columnValuesMap,
+        List<Dictionary<string, object>> allResultRows,
+        TestContext context,
+        CancellationToken cancellationToken)
+    {
+        var provider = AdoTemplate?.DbProvider ?? DbProvider;
+        if (provider == null)
+        {
+            await ExecuteStatementsAsync(statementsToUse, allResultRows, columnValuesMap, context, null, null, null,
+                    cancellationToken)
+                .ConfigureAwait(false);
+            return;
+        }
+
+        await using var connection = provider.CreateConnection();
+        if (connection.State != ConnectionState.Open)
+        {
+            await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
+        }
+
+        var isolation = ParseIsolationLevel(context);
+        await using var transaction =
+            await connection.BeginTransactionAsync(isolation, cancellationToken).ConfigureAwait(false);
+        var cmdTimeout = ParseCommandTimeout(context);
+
+        try
+        {
+            await ExecuteStatementsAsync(statementsToUse, allResultRows, columnValuesMap, context, connection,
+                    transaction, cmdTimeout, cancellationToken)
+                .ConfigureAwait(false);
+            await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+        }
+        catch
+        {
+            try
+            {
+                await transaction.RollbackAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch
+            {
+                // intentionally ignored
+            }
+
+            throw;
+        }
+    }
+
+    private async Task ExecuteWithoutTransactionAsync(
+        List<string> statementsToUse,
+        Dictionary<string, List<string>> columnValuesMap,
+        List<Dictionary<string, object>> allResultRows,
+        TestContext context,
+        CancellationToken cancellationToken)
+    {
+        await ExecuteStatementsAsync(statementsToUse, allResultRows, columnValuesMap, context, null, null, null,
+                cancellationToken)
+            .ConfigureAwait(false);
+    }
+
+    private IsolationLevel ParseIsolationLevel(TestContext context)
+    {
+        var isoText = context.ReplaceDynamicContentInString(TransactionIsolationLevel);
+        return (IsolationLevel)Enum.Parse(typeof(IsolationLevel), isoText);
+    }
+
+    private int? ParseCommandTimeout(TestContext context)
+    {
+        var timeoutText = context.ReplaceDynamicContentInString(TransactionTimeout);
+        return int.TryParse(timeoutText, out var timeout) ? timeout : null;
+    }
+
+
     /// <summary>
     ///     Implements IRowMapper to map rows from a data reader to a dictionary, where each key-value pair represents a column
     ///     name and the corresponding value from the data reader.
     /// </summary>
     public class DictionaryRowMapper : IRowMapper
     {
+        /// <summary>
+        ///     Maps a row of data from the provided <c>IDataReader</c> to a dictionary
+        ///     where the keys are column names and the values are the corresponding
+        ///     row values.
+        /// </summary>
+        /// <param name="dataReader">
+        ///     The <c>IDataReader</c> instance containing the row data to map.
+        ///     This reader must be positioned at the correct row to be mapped.
+        /// </param>
+        /// <param name="rowNum">
+        ///     The zero-based row number indicating the current row within the result set.
+        /// </param>
+        /// <returns>
+        ///     A dictionary where the keys are column names from the data reader, and the
+        ///     values are the corresponding values of the current row.
+        /// </returns>
         public object MapRow(IDataReader dataReader, int rowNum)
         {
             var result = new Dictionary<string, object>();
@@ -472,8 +640,8 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
     /// </summary>
     public class Builder : AbstractDatabaseBuilder<ExecuteSqlQueryAction, Builder>
     {
-        internal readonly Dictionary<string, List<string>> _controlResultSet = new();
-        internal readonly Dictionary<string, string> _extractVariables = new();
+        internal readonly Dictionary<string, List<string>> ControlResultSetMap = new();
+        internal readonly Dictionary<string, string> ExtractVariablesMap = new();
 
         /// <summary>
         ///     Creates and returns a new instance of the ExecuteSQLQueryAction.Builder class.
@@ -503,7 +671,7 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
         /// <returns>An instance of the builder for method chaining.</returns>
         public Builder Validate(string column, params string[] values)
         {
-            _controlResultSet[column] = values.ToList();
+            ControlResultSetMap[column] = values.ToList();
             return this;
         }
 
@@ -516,10 +684,18 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
         /// <returns></returns>
         public Builder Extract(string columnName, string variableName)
         {
-            _extractVariables[columnName] = variableName;
+            ExtractVariablesMap[columnName] = variableName;
             return this;
         }
 
+        /// <summary>
+        ///     Creates and returns an instance of <c>ExecuteSqlQueryAction</c> using the
+        ///     current configuration of the builder.
+        /// </summary>
+        /// <returns>
+        ///     An instance of <c>ExecuteSqlQueryAction</c> configured with the settings
+        ///     specified in the builder.
+        /// </returns>
         public override ExecuteSqlQueryAction Build()
         {
             return new ExecuteSqlQueryAction(this);

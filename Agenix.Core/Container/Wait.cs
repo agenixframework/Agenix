@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -43,17 +43,26 @@ namespace Agenix.Core.Container;
 /// </summary>
 /// <param name="builder"></param>
 public class Wait(Wait.Builder<ICondition> builder)
-    : AbstractTestAction(builder.GetName() ?? "wait", builder.GetDescription())
+    : AbstractTestActionAsync(builder.GetName() ?? "wait", builder.GetDescription())
 {
     /// <summary>
     ///     Logger.
     /// </summary>
     private static readonly ILogger Log = LogManager.GetLogger(typeof(Wait));
 
+    /// <summary>
+    ///     The time duration to wait, specified as a string, usually in milliseconds.
+    /// </summary>
     public string Time { get; } = builder.time;
 
+    /// <summary>
+    ///     Represents the condition that must be evaluated and satisfied during test execution.
+    /// </summary>
     public ICondition Condition { get; } = builder.condition;
 
+    /// <summary>
+    ///     Specifies the interval, in milliseconds, to wait between condition evaluations.
+    /// </summary>
     public string Interval { get; } = builder.interval;
 
     /// Executes the waiting process for a specified condition within the test context.
@@ -61,9 +70,9 @@ public class Wait(Wait.Builder<ICondition> builder)
     ///     The test context containing dynamic configurations and conditions to be evaluated during
     ///     execution.
     /// </param>
-    public override void DoExecute(TestContext context)
+    /// <param name="cancellationToken"></param>
+    public override async Task DoExecute(TestContext context, CancellationToken cancellationToken = default)
     {
-        bool? conditionSatisfied = null;
         var timeLeft = GetWaitTimeMs(context);
         var intervalMs = GetIntervalMs(context);
 
@@ -72,28 +81,32 @@ public class Wait(Wait.Builder<ICondition> builder)
             intervalMs = timeLeft;
         }
 
-        var callable = async () => await Task.FromResult(Condition.IsSatisfied(context));
+        var startTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+        var endTime = startTime + timeLeft;
 
-        while (timeLeft > 0)
+        while (DateTimeOffset.Now.ToUnixTimeMilliseconds() < endTime && !cancellationToken.IsCancellationRequested)
         {
-            timeLeft -= intervalMs;
-
             if (Log.IsEnabled(LogLevel.Debug))
             {
-                Log.LogDebug($"Waiting for condition {Condition.GetName()}");
+                Log.LogDebug("Waiting for condition {ConditionName}", Condition.GetName());
             }
 
-            var task = Task.Run(callable);
             var checkStartTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
+            bool? conditionSatisfied;
             try
             {
-                conditionSatisfied = task.Wait(TimeSpan.FromMilliseconds(intervalMs)) && task.Result;
+                // Direct async call - no need for Task.Run
+                conditionSatisfied = await Condition.IsSatisfied(context);
             }
-            catch (AggregateException e) when (e.InnerException is TimeoutException ||
-                                               e.InnerException is AggregateException)
+            catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
             {
-                Log.LogWarning($"Condition check interrupted with '{e.InnerException.GetType().Name}'");
+                throw; // Re-throw cancellation
+            }
+            catch (Exception e)
+            {
+                Log.LogWarning(e, "Condition check failed with '{TypeName}': {Message}", e.GetType().Name, e.Message);
+                conditionSatisfied = false;
             }
 
             if (conditionSatisfied == true)
@@ -102,24 +115,28 @@ public class Wait(Wait.Builder<ICondition> builder)
                 return;
             }
 
-            var sleepTime = intervalMs - (DateTimeOffset.Now.ToUnixTimeMilliseconds() - checkStartTime);
+            // Calculate remaining time for this cycle
+            var checkDuration = DateTimeOffset.Now.ToUnixTimeMilliseconds() - checkStartTime;
+            var sleepTime = intervalMs - checkDuration;
 
             if (sleepTime > 0)
             {
                 try
                 {
-                    Thread.Sleep(Convert.ToInt32(sleepTime));
+                    await Task.Delay(TimeSpan.FromMilliseconds(sleepTime), cancellationToken);
                 }
-                catch (ThreadInterruptedException e)
+                catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
                 {
-                    Log.LogWarning(e, "Interrupted during wait!");
+                    throw; // Re-throw cancellation
                 }
             }
         }
 
+        // Check if we exited due to cancellation
+        cancellationToken.ThrowIfCancellationRequested();
+
         throw new AgenixSystemException(Condition.GetErrorMessage(context));
     }
-
 
     private long GetWaitTimeMs(TestContext context)
     {
@@ -131,36 +148,53 @@ public class Wait(Wait.Builder<ICondition> builder)
         return long.Parse(context.ReplaceDynamicContentInString(Interval));
     }
 
-    public class Builder<C> : AbstractTestActionBuilder<Wait, Builder<C>>,
-        ITestActionBuilder<Wait>.IDelegatingTestActionBuilder<Wait> where C : ICondition
+    /// <summary>
+    ///     Provides a builder mechanism for constructing a <see cref="Wait" /> instance.
+    /// </summary>
+    /// <typeparam name="TC">Specifies the type of condition associated with the builder.</typeparam>
+    public class Builder<TC> : AbstractAsyncTestActionBuilder<Wait, Builder<TC>>,
+        IAsyncTestActionBuilder<Wait>.IDelegatingTestActionBuilder<Wait> where TC : ICondition
     {
-        internal C condition;
+        internal TC condition;
 
-        protected ITestActionBuilder<ITestAction> dlg;
+        protected IAsyncTestActionBuilder<IAsyncTestAction> dlg;
         internal string interval = "1000";
         internal string time = "5000";
 
-        public C GetCondition => condition;
+        /// <summary>
+        ///     Retrieves the condition associated with the Wait builder.
+        /// </summary>
+        /// <returns>
+        ///     The condition of type <see cref="ICondition" />.
+        /// </returns>
+        public TC GetCondition => condition;
 
+        /// Builds and returns an instance of the `Wait` action configured with the specified parameters.
+        /// <returns>
+        ///     An instance of the `Wait` action derived from the builder's current configuration.
+        /// </returns>
         public override Wait Build()
         {
             return new Wait(new Builder<ICondition> { condition = condition, interval = interval, time = time });
         }
 
-        public ITestActionBuilder<Wait> Delegate { get; }
+        /// <summary>
+        ///     Represents a delegated asynchronous test action builder.
+        /// </summary>
+        public IAsyncTestActionBuilder<Wait> Delegate { get; }
 
         /// Fluent API action building entry method used in C# DSL.
         /// <return>A builder for creating Wait actions with specified conditions.</return>
         /// /
-        public static Builder<B> WaitFor<B>() where B : ICondition
+        public static Builder<TB> WaitFor<TB>() where TB : ICondition
         {
-            return new Builder<B>();
+            return new Builder<TB>();
         }
 
         /// Sets the condition for the wait action.
         /// <param name="cnd">The condition to be applied to the wait action. It must implement the ICondition interface.</param>
         /// <returns>The builder instance for chaining further configurations on the wait action.</returns>
-        public Builder<C> Condition(C cnd)
+        public Builder<TC> Condition(TC cnd)
         {
             condition = cnd;
             dlg = this;
@@ -173,7 +207,7 @@ public class Wait(Wait.Builder<ICondition> builder)
         ///     WaitConditionBuilder.
         /// </param>
         /// <returns>The instance of the condition builder for further configuration and chaining.</returns>
-        public T Condition<T>(T conditionBuilder) where T : WaitConditionBuilder<C, T>
+        public T Condition<T>(T conditionBuilder) where T : WaitConditionBuilder<TC, T>
         {
             condition = conditionBuilder.GetCondition();
             dlg = conditionBuilder;
@@ -234,7 +268,7 @@ public class Wait(Wait.Builder<ICondition> builder)
         /// <return>
         ///     Returns the current instance of the builder to support method chaining.
         /// </return>
-        public Builder<C> Interval(long newInterval)
+        public Builder<TC> Interval(long newInterval)
         {
             return Interval(newInterval.ToString());
         }
@@ -247,7 +281,7 @@ public class Wait(Wait.Builder<ICondition> builder)
         /// <return>
         ///     Returns the current instance of the builder to support method chaining.
         /// </return>
-        public Builder<C> Interval(string newInterval)
+        public Builder<TC> Interval(string newInterval)
         {
             interval = newInterval;
             return this;
@@ -260,7 +294,7 @@ public class Wait(Wait.Builder<ICondition> builder)
         /// <return>
         ///     Returns the builder instance for method chaining.
         /// </return>
-        public Builder<C> Milliseconds(long milliseconds)
+        public Builder<TC> Milliseconds(long milliseconds)
         {
             return Milliseconds(milliseconds.ToString());
         }
@@ -272,7 +306,7 @@ public class Wait(Wait.Builder<ICondition> builder)
         /// <return>
         ///     The current builder instance with the updated wait time setting.
         /// </return>
-        public Builder<C> Milliseconds(string milliseconds)
+        public Builder<TC> Milliseconds(string milliseconds)
         {
             time = milliseconds;
             return this;
@@ -285,7 +319,7 @@ public class Wait(Wait.Builder<ICondition> builder)
         /// <return>
         ///     Returns the updated builder instance for fluent interface chaining.
         /// </return>
-        public Builder<C> Seconds(double seconds)
+        public Builder<TC> Seconds(double seconds)
         {
             Milliseconds(Convert.ToInt64(seconds * 1000));
             return this;
@@ -300,50 +334,50 @@ public class Wait(Wait.Builder<ICondition> builder)
         ///     Returns the current builder instance with updated time settings, enabling method chaining of additional builder
         ///     configurations.
         /// </return>
-        public Builder<C> Time(TimeSpan duration)
+        public Builder<TC> Time(TimeSpan duration)
         {
             Milliseconds(Convert.ToInt64(duration.TotalMilliseconds));
             return this;
         }
 
-        private class MessageConditionBuilder<MCB> : Builder<MCB> where MCB : MessageCondition
+        private sealed class MessageConditionBuilder<TMcb> : Builder<TMcb> where TMcb : MessageCondition
         {
             public override WaitMessageConditionBuilder Message()
             {
-                condition = (MCB)new MessageCondition();
+                condition = (TMcb)new MessageCondition();
                 var builder = new WaitMessageConditionBuilder((Builder<MessageCondition>)(object)this);
                 dlg = builder;
                 return builder;
             }
         }
 
-        private class ActionConditionBuilder<ACB> : Builder<ACB> where ACB : ActionCondition
+        private sealed class ActionConditionBuilder<TAcb> : Builder<TAcb> where TAcb : ActionCondition
         {
             public override WaitActionConditionBuilder Execution()
             {
-                condition = (ACB)new ActionCondition();
+                condition = (TAcb)new ActionCondition();
                 var builder = new WaitActionConditionBuilder((Builder<ActionCondition>)(object)this);
                 dlg = builder;
                 return builder;
             }
         }
 
-        private class HttpConditionBuilder<HCB> : Builder<HCB> where HCB : HttpCondition
+        private sealed class HttpConditionBuilder<THcb> : Builder<THcb> where THcb : HttpCondition
         {
             public override WaitHttpConditionBuilder Http()
             {
-                condition = (HCB)new HttpCondition();
+                condition = (THcb)new HttpCondition();
                 var builder = new WaitHttpConditionBuilder((Builder<HttpCondition>)(object)this);
                 dlg = builder;
                 return builder;
             }
         }
 
-        private class FileConditionBuilder<FCB> : Builder<FCB> where FCB : FileCondition
+        private sealed class FileConditionBuilder<TFcb> : Builder<TFcb> where TFcb : FileCondition
         {
             public override WaitFileConditionBuilder File()
             {
-                condition = (FCB)new FileCondition();
+                condition = (TFcb)new FileCondition();
                 var builder = new WaitFileConditionBuilder((Builder<FileCondition>)(object)this);
                 dlg = builder;
                 return builder;

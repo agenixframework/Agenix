@@ -161,9 +161,12 @@ public class FrameLocatorAction : AbstractPlaywrightAction
             }
 
             var frameSelector = context.ReplaceDynamicContentInString(_frameSelector);
-            var frameLocator = page.FrameLocator(frameSelector);
+            if (frameSelector != null)
+            {
+                var frameLocator = page.FrameLocator(frameSelector);
 
-            await Task.Run(() => ExecuteOperation(frameLocator, context));
+                await Task.Run(() => ExecuteOperation(frameLocator, context));
+            }
 
             Logger.LogInformation("Frame locator action completed successfully");
         }
@@ -207,10 +210,15 @@ public class FrameLocatorAction : AbstractPlaywrightAction
         }
 
         var selector = context.ReplaceDynamicContentInString(_selector);
-        var locator = frameLocator.Locator(selector);
+        if (selector != null)
+        {
+            var locator = frameLocator.Locator(selector);
 
-        Logger.LogDebug("Created locator with selector: {Selector}", selector);
-        return locator;
+            Logger.LogDebug("Created locator with selector: {Selector}", selector);
+            return locator;
+        }
+
+        throw new InvalidOperationException("Selector must be specified for Locator operation");
     }
 
     /// <summary>
@@ -249,6 +257,11 @@ public class FrameLocatorAction : AbstractPlaywrightAction
 
         var text = context.ReplaceDynamicContentInString(_text);
         var options = new FrameLocatorGetByTextOptions { Exact = _exact };
+        if (text == null)
+        {
+            throw new InvalidOperationException("Text must be specified for GetByText operation");
+        }
+
         var locator = frameLocator.GetByText(text, options);
 
         Logger.LogDebug("Created GetByText locator with text: {Text}, exact: {Exact}", text, _exact);
@@ -267,10 +280,15 @@ public class FrameLocatorAction : AbstractPlaywrightAction
 
         var label = context.ReplaceDynamicContentInString(_label);
         var options = new FrameLocatorGetByLabelOptions { Exact = _exact };
-        var locator = frameLocator.GetByLabel(label, options);
+        if (label != null)
+        {
+            var locator = frameLocator.GetByLabel(label, options);
 
-        Logger.LogDebug("Created GetByLabel locator with label: {Label}, exact: {Exact}", label, _exact);
-        return locator;
+            Logger.LogDebug("Created GetByLabel locator with label: {Label}, exact: {Exact}", label, _exact);
+            return locator;
+        }
+
+        throw new InvalidOperationException("Label must be specified for GetByLabel operation");
     }
 
     /// <summary>
@@ -285,11 +303,17 @@ public class FrameLocatorAction : AbstractPlaywrightAction
 
         var placeholder = context.ReplaceDynamicContentInString(_placeholder);
         var options = new FrameLocatorGetByPlaceholderOptions { Exact = _exact };
-        var locator = frameLocator.GetByPlaceholder(placeholder, options);
+        if (placeholder != null)
+        {
+            var locator = frameLocator.GetByPlaceholder(placeholder, options);
 
-        Logger.LogDebug("Created GetByPlaceholder locator with placeholder: {Placeholder}, exact: {Exact}", placeholder,
-            _exact);
-        return locator;
+            Logger.LogDebug("Created GetByPlaceholder locator with placeholder: {Placeholder}, exact: {Exact}",
+                placeholder,
+                _exact);
+            return locator;
+        }
+
+        throw new InvalidOperationException("Placeholder must be specified for GetByPlaceholder operation");
     }
 
     /// <summary>
@@ -304,10 +328,15 @@ public class FrameLocatorAction : AbstractPlaywrightAction
 
         var title = context.ReplaceDynamicContentInString(_title);
         var options = new FrameLocatorGetByTitleOptions { Exact = _exact };
-        var locator = frameLocator.GetByTitle(title, options);
+        if (title != null)
+        {
+            var locator = frameLocator.GetByTitle(title, options);
 
-        Logger.LogDebug("Created GetByTitle locator with title: {Title}, exact: {Exact}", title, _exact);
-        return locator;
+            Logger.LogDebug("Created GetByTitle locator with title: {Title}, exact: {Exact}", title, _exact);
+            return locator;
+        }
+
+        throw new InvalidOperationException("Title must be specified for GetByTitle operation");
     }
 
     /// <summary>
@@ -322,10 +351,15 @@ public class FrameLocatorAction : AbstractPlaywrightAction
 
         var altText = context.ReplaceDynamicContentInString(_altText);
         var options = new FrameLocatorGetByAltTextOptions { Exact = _exact };
-        var locator = frameLocator.GetByAltText(altText, options);
+        if (altText != null)
+        {
+            var locator = frameLocator.GetByAltText(altText, options);
 
-        Logger.LogDebug("Created GetByAltText locator with alt text: {AltText}, exact: {Exact}", altText, _exact);
-        return locator;
+            Logger.LogDebug("Created GetByAltText locator with alt text: {AltText}, exact: {Exact}", altText, _exact);
+            return locator;
+        }
+
+        throw new InvalidOperationException("Alt text must be specified for GetByAltText operation");
     }
 
     /// <summary>
@@ -339,10 +373,15 @@ public class FrameLocatorAction : AbstractPlaywrightAction
         }
 
         var testId = context.ReplaceDynamicContentInString(_testId);
-        var locator = frameLocator.GetByTestId(testId);
+        if (testId != null)
+        {
+            var locator = frameLocator.GetByTestId(testId);
 
-        Logger.LogDebug("Created GetByTestId locator with test ID: {TestId}", testId);
-        return locator;
+            Logger.LogDebug("Created GetByTestId locator with test ID: {TestId}", testId);
+            return locator;
+        }
+
+        throw new InvalidOperationException("Test ID must be specified for GetByTestId operation");
     }
 
     /// <summary>
@@ -356,10 +395,15 @@ public class FrameLocatorAction : AbstractPlaywrightAction
         }
 
         var selector = context.ReplaceDynamicContentInString(_selector);
-        var locator = frameLocator.Locator(selector).First;
+        if (selector != null)
+        {
+            var locator = frameLocator.Locator(selector).First;
 
-        Logger.LogDebug("Created First locator with selector: {Selector}", selector);
-        return locator;
+            Logger.LogDebug("Created First locator with selector: {Selector}", selector);
+            return locator;
+        }
+
+        throw new InvalidOperationException("Selector must be specified for First operation");
     }
 
     /// <summary>
@@ -373,10 +417,15 @@ public class FrameLocatorAction : AbstractPlaywrightAction
         }
 
         var selector = context.ReplaceDynamicContentInString(_selector);
-        var locator = frameLocator.Locator(selector).Last;
+        if (selector != null)
+        {
+            var locator = frameLocator.Locator(selector).Last;
 
-        Logger.LogDebug("Created Last locator with selector: {Selector}", selector);
-        return locator;
+            Logger.LogDebug("Created Last locator with selector: {Selector}", selector);
+            return locator;
+        }
+
+        throw new InvalidOperationException("Selector must be specified for Last operation");
     }
 
     /// <summary>
@@ -395,10 +444,15 @@ public class FrameLocatorAction : AbstractPlaywrightAction
         }
 
         var selector = context.ReplaceDynamicContentInString(_selector);
-        var locator = frameLocator.Locator(selector).Nth(_index.Value);
+        if (selector != null)
+        {
+            var locator = frameLocator.Locator(selector).Nth(_index.Value);
 
-        Logger.LogDebug("Created Nth locator with selector: {Selector}, index: {Index}", selector, _index);
-        return locator;
+            Logger.LogDebug("Created Nth locator with selector: {Selector}, index: {Index}", selector, _index);
+            return locator;
+        }
+
+        throw new InvalidOperationException("Selector must be specified for Nth operation");
     }
 
     /// <summary>

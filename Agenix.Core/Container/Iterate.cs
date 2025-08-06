@@ -7,23 +7,24 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Threading.Tasks;
 using Agenix.Api.Context;
 
 namespace Agenix.Core.Container;
@@ -51,11 +52,11 @@ public class Iterate : AbstractIteratingActionContainer
     /// Each iteration increments an index variable used within the nested test actions.
     /// @param context The context containing variables and configuration for the test actions.
     /// /
-    protected override void ExecuteIteration(TestContext context)
+    protected override async Task ExecuteIteration(TestContext context)
     {
         while (CheckCondition(context))
         {
-            ExecuteActions(context);
+            await ExecuteActions(context);
 
             index += _step;
         }
@@ -69,13 +70,21 @@ public class Iterate : AbstractIteratingActionContainer
         return _step;
     }
 
+
     /// A builder class for constructing Iterate action instances in a fluent manner.
     /// This class provides methods to configure specific properties of the Iterate action, such as the step size for each iteration.
     /// The typical flow involves configuring the desired settings through method chaining and then building the action.
     /// /
     public class Builder : AbstractIteratingContainerBuilder<Iterate, Builder>
     {
-        public int _step = 1;
+        internal int _step;
+
+        /// <summary>
+        /// </summary>
+        public Builder()
+        {
+            _step = 1;
+        }
 
         /// Constructs a new instance of the Iterate action container.
         /// @param builder The builder used to configure this action container.

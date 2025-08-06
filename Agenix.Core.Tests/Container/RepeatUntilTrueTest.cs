@@ -7,34 +7,35 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
 using System.Collections.Generic;
+using System.Threading;
 using Agenix.Core.Container;
 using Moq;
 using NUnit.Framework;
-using ITestAction = Agenix.Api.ITestAction;
+using IAsyncTestAction = Agenix.Api.IAsyncTestAction;
 
 namespace Agenix.Core.Tests.Container;
 
 public class RepeatUntilTrueTest : AbstractNUnitSetUp
 {
-    private readonly ITestAction _action = new Mock<ITestAction>().Object;
+    private readonly IAsyncTestAction _action = new Mock<IAsyncTestAction>().Object;
 
     public static IEnumerable<TestCaseData> TestCases
     {
@@ -57,12 +58,12 @@ public class RepeatUntilTrueTest : AbstractNUnitSetUp
             .Actions(_action)
             .Build();
 
-        iterate.Execute(Context);
+        iterate.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable("${i}"), Is.Not.Null);
         Assert.That(Context.GetVariable("${i}"), Is.EqualTo("4"));
 
-        Mock.Get(_action).Verify(x => x.Execute(Context), Times.Exactly(4));
+        Mock.Get(_action).Verify(x => x.ExecuteAsync(Context, It.IsAny<CancellationToken>()), Times.Exactly(4));
     }
 
     [Test]
@@ -76,12 +77,12 @@ public class RepeatUntilTrueTest : AbstractNUnitSetUp
             .Actions(_action)
             .Build();
 
-        iterate.Execute(Context);
+        iterate.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable("${i}"), Is.Not.Null);
         Assert.That(Context.GetVariable("${i}"), Is.EqualTo("1"));
 
-        Mock.Get(_action).Verify(x => x.Execute(Context), Times.Exactly(1));
+        Mock.Get(_action).Verify(x => x.ExecuteAsync(Context, It.IsAny<CancellationToken>()), Times.Exactly(1));
     }
 
     [Test]
@@ -95,11 +96,11 @@ public class RepeatUntilTrueTest : AbstractNUnitSetUp
             .Actions(_action)
             .Build();
 
-        iterate.Execute(Context);
+        iterate.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable("${i}"), Is.Not.Null);
         Assert.That(Context.GetVariable("${i}"), Is.EqualTo("4"));
 
-        Mock.Get(_action).Verify(x => x.Execute(Context), Times.Exactly(4));
+        Mock.Get(_action).Verify(x => x.ExecuteAsync(Context, It.IsAny<CancellationToken>()), Times.Exactly(4));
     }
 }

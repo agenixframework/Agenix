@@ -65,7 +65,7 @@ public class NavigateAction : AbstractSeleniumAction
     /// </summary>
     /// <param name="browser">The Selenium browser instance used for performing the navigation action.</param>
     /// <param name="context">The testing context providing additional configuration or state for the action.</param>
-    protected override void Execute(SeleniumBrowser browser, TestContext context)
+    protected override Task Execute(SeleniumBrowser browser, TestContext context)
     {
         switch (_page?.ToLowerInvariant())
         {
@@ -85,6 +85,8 @@ public class NavigateAction : AbstractSeleniumAction
                 NavigateToUrl(browser, context);
                 break;
         }
+
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -230,7 +232,7 @@ public class NavigateAction : AbstractSeleniumAction
         public Builder SetPage(string page)
         {
             Page = page;
-            return self;
+            return Self;
         }
 
         /// <summary>

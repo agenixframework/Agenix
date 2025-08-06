@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -39,17 +39,17 @@ using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.GraphQL.Tests.Actions.Dsl;
 
-public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
+public class ReceiveGraphQlMessageTestActionBuilderTest : AbstractNUnitSetUp
 {
     private readonly Mock<GraphQLEndpointConfiguration> _configuration = new();
     private readonly Mock<ISelectiveConsumer> _consumer = new();
-    private readonly Mock<GraphQLClient> _graphQLClient = new();
+    private readonly Mock<GraphQLClient> _graphQlClient = new();
 
     [Test]
-    public void TestGraphQLRequestProperties()
+    public async Task TestGraphQlRequestProperties()
     {
         // Reset mocks properly
-        _graphQLClient.Reset();
+        _graphQlClient.Reset();
         _configuration.Reset();
         _consumer.Reset();
 
@@ -57,8 +57,8 @@ public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
         _configuration.Setup(x => x.Timeout).Returns(100L);
 
         // Setup GraphQL client mock
-        _graphQLClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
-        _graphQLClient.Setup(m => m.CreateConsumer()).Returns(_graphQLClient.Object);
+        _graphQlClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
+        _graphQlClient.Setup(m => m.CreateConsumer()).Returns(_graphQlClient.Object);
 
         // Create the expected GraphQLMessage with method chaining outside mock setup
         var expectedMessage = new GraphQLMessage("""{"data":{"user":{"id":"123","name":"John Doe"}}}""")
@@ -67,11 +67,11 @@ public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
             .SetVariable("var", """{"id":"123"}""");
 
         // Setup the Receive method directly on the mock
-        _graphQLClient.Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(expectedMessage);
+        _graphQlClient.Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
+            .ReturnsAsync(expectedMessage);
 
         var builder = new DefaultTestCaseRunner(Context);
-        builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQLClient.Object)
+        await builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQlClient.Object)
             .Receive()
             .Response()
             .Message()
@@ -96,18 +96,18 @@ public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestGraphQLMessageObjectOverride()
+    public async Task TestGraphQlMessageObjectOverride()
     {
         // Reset mocks
-        _graphQLClient.Reset();
+        _graphQlClient.Reset();
         _configuration.Reset();
 
         // Setup configuration mock
         _configuration.Setup(x => x.Timeout).Returns(100L);
 
         // Setup GraphQL client mock
-        _graphQLClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
-        _graphQLClient.Setup(m => m.CreateConsumer()).Returns(_graphQLClient.Object);
+        _graphQlClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
+        _graphQlClient.Setup(m => m.CreateConsumer()).Returns(_graphQlClient.Object);
 
         // Create the expected GraphQLMessage with overridden properties
         var expectedMessage = new GraphQLMessage("""{"data":{"user":{"id":"456","name":"Jane Smith"}}}""")
@@ -117,11 +117,11 @@ public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
             .SetVariable("userName", "Jane Smith");
 
         // Setup the Receive method on the mock
-        _graphQLClient.Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(expectedMessage);
+        _graphQlClient.Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
+            .ReturnsAsync(expectedMessage);
 
         var builder = new DefaultTestCaseRunner(Context);
-        builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQLClient.Object)
+        await builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQlClient.Object)
             .Receive()
             .Response()
             .Message()
@@ -145,7 +145,7 @@ public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
             Is.EqualTo("""{"data":{"user":{"id":"456","name":"Jane Smith"}}}"""));
 
         // Verify the message object overrides
-        var receivedMessage = (GraphQLMessage)_graphQLClient.Object.Receive(Context, 100L);
+        var receivedMessage = (GraphQLMessage)await _graphQlClient.Object.Receive(Context, 100L);
         Assert.That(receivedMessage.GetOperationType(), Is.EqualTo(GraphQLOperationType.MUTATION));
         Assert.That(receivedMessage.GetOperationName(), Is.EqualTo("UpdateUser"));
         Assert.That(receivedMessage.GetVariable("userId"), Is.EqualTo("456"));
@@ -153,18 +153,18 @@ public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestGraphQLResponseProperties()
+    public async Task TestGraphQlResponseProperties()
     {
         // Reset mocks
-        _graphQLClient.Reset();
+        _graphQlClient.Reset();
         _configuration.Reset();
 
         // Setup configuration mock
         _configuration.Setup(x => x.Timeout).Returns(200L);
 
         // Setup GraphQL client mock
-        _graphQLClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
-        _graphQLClient.Setup(m => m.CreateConsumer()).Returns(_graphQLClient.Object);
+        _graphQlClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
+        _graphQlClient.Setup(m => m.CreateConsumer()).Returns(_graphQlClient.Object);
 
         // Create the expected GraphQL response message with comprehensive data
         var expectedResponseMessage = new GraphQLMessage("""
@@ -190,11 +190,11 @@ public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
             .SetExtension("requestId", "req-12345");
 
         // Setup the Receive method on the mock
-        _graphQLClient.Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(expectedResponseMessage);
+        _graphQlClient.Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
+            .ReturnsAsync(expectedResponseMessage);
 
         var builder = new DefaultTestCaseRunner(Context);
-        builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQLClient.Object)
+        await builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQlClient.Object)
             .Receive()
             .Response()
             .Message()
@@ -239,7 +239,7 @@ public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
         Assert.That(builtPayload, Does.Contain("\"email\": \"alice.johnson@example.com\""));
 
         // Verify GraphQL-specific response properties
-        var receivedMessage = (GraphQLMessage)_graphQLClient.Object.Receive(Context, 200L);
+        var receivedMessage = (GraphQLMessage)await _graphQlClient.Object.Receive(Context, 200L);
         Assert.That(receivedMessage.GetOperationType(), Is.EqualTo(GraphQLOperationType.QUERY));
         Assert.That(receivedMessage.GetOperationName(), Is.EqualTo("GetUserProfile"));
         Assert.That(receivedMessage.GetVariable("id"), Is.EqualTo("789"));
@@ -252,14 +252,14 @@ public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestGraphQLResponseWithErrors()
+    public async Task TestGraphQlResponseWithErrors()
     {
-        _graphQLClient.Reset();
+        _graphQlClient.Reset();
         _configuration.Reset();
 
         _configuration.Setup(x => x.Timeout).Returns(100L);
-        _graphQLClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
-        _graphQLClient.Setup(m => m.CreateConsumer()).Returns(_graphQLClient.Object);
+        _graphQlClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
+        _graphQlClient.Setup(m => m.CreateConsumer()).Returns(_graphQlClient.Object);
 
         var errorMessage = new GraphQLMessage("""
                                                                                                     {
@@ -274,11 +274,11 @@ public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
                                                                                                     }
                                               """);
 
-        _graphQLClient.Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(errorMessage);
+        _graphQlClient.Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
+            .ReturnsAsync(errorMessage);
 
         var builder = new DefaultTestCaseRunner(Context);
-        builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQLClient.Object)
+        await builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQlClient.Object)
             .Receive()
             .Response()
             .Message()
@@ -309,14 +309,14 @@ public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestGraphQLMutationResponse()
+    public async Task TestGraphQlMutationResponse()
     {
-        _graphQLClient.Reset();
+        _graphQlClient.Reset();
         _configuration.Reset();
 
         _configuration.Setup(x => x.Timeout).Returns(100L);
-        _graphQLClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
-        _graphQLClient.Setup(m => m.CreateConsumer()).Returns(_graphQLClient.Object);
+        _graphQlClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
+        _graphQlClient.Setup(m => m.CreateConsumer()).Returns(_graphQlClient.Object);
 
         var mutationResponse = new GraphQLMessage("""
                                                                                                             {
@@ -332,11 +332,11 @@ public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
             .SetOperationType(GraphQLOperationType.MUTATION)
             .SetOperationName("CreateUser");
 
-        _graphQLClient.Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(mutationResponse);
+        _graphQlClient.Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
+            .ReturnsAsync(mutationResponse);
 
         var builder = new DefaultTestCaseRunner(Context);
-        builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQLClient.Object)
+        await builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQlClient.Object)
             .Receive()
             .Response()
             .Message()
@@ -355,22 +355,22 @@ public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
         );
 
         var test = builder.GetTestCase();
-        var action = (ReceiveMessageAction)test.GetActions()[0];
-        var receivedMessage = (GraphQLMessage)_graphQLClient.Object.Receive(Context, 100L);
+        _ = (ReceiveMessageAction)test.GetActions()[0];
+        var receivedMessage = (GraphQLMessage)await _graphQlClient.Object.Receive(Context, 100L);
 
         Assert.That(receivedMessage.GetOperationType(), Is.EqualTo(GraphQLOperationType.MUTATION));
         Assert.That(receivedMessage.GetOperationName(), Is.EqualTo("CreateUser"));
     }
 
     [Test]
-    public void TestGraphQLSubscriptionResponse()
+    public async Task TestGraphQlSubscriptionResponse()
     {
-        _graphQLClient.Reset();
+        _graphQlClient.Reset();
         _configuration.Reset();
 
         _configuration.Setup(x => x.Timeout).Returns(100L);
-        _graphQLClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
-        _graphQLClient.Setup(m => m.CreateConsumer()).Returns(_graphQLClient.Object);
+        _graphQlClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
+        _graphQlClient.Setup(m => m.CreateConsumer()).Returns(_graphQlClient.Object);
 
         var subscriptionResponse = new GraphQLMessage("""
                                                                                                                     {
@@ -386,11 +386,11 @@ public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
             .SetOperationType(GraphQLOperationType.SUBSCRIPTION)
             .SetOperationName("OnUserUpdated");
 
-        _graphQLClient.Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(subscriptionResponse);
+        _graphQlClient.Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
+            .ReturnsAsync(subscriptionResponse);
 
         var builder = new DefaultTestCaseRunner(Context);
-        builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQLClient.Object)
+        await builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQlClient.Object)
             .Receive()
             .Response()
             .Message()
@@ -409,22 +409,22 @@ public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
         );
 
         var test = builder.GetTestCase();
-        var action = (ReceiveMessageAction)test.GetActions()[0];
-        var receivedMessage = (GraphQLMessage)_graphQLClient.Object.Receive(Context, 100L);
+        _ = (ReceiveMessageAction)test.GetActions()[0];
+        var receivedMessage = (GraphQLMessage)await _graphQlClient.Object.Receive(Context, 100L);
 
         Assert.That(receivedMessage.GetOperationType(), Is.EqualTo(GraphQLOperationType.SUBSCRIPTION));
         Assert.That(receivedMessage.GetOperationName(), Is.EqualTo("OnUserUpdated"));
     }
 
     [Test]
-    public void TestGraphQLResponseWithExtensions()
+    public async Task TestGraphQlResponseWithExtensions()
     {
-        _graphQLClient.Reset();
+        _graphQlClient.Reset();
         _configuration.Reset();
 
         _configuration.Setup(x => x.Timeout).Returns(100L);
-        _graphQLClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
-        _graphQLClient.Setup(m => m.CreateConsumer()).Returns(_graphQLClient.Object);
+        _graphQlClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
+        _graphQlClient.Setup(m => m.CreateConsumer()).Returns(_graphQlClient.Object);
 
         var responseWithExtensions = new GraphQLMessage("""
                                                                 {
@@ -448,11 +448,11 @@ public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
                                                                 }
                                                         """);
 
-        _graphQLClient.Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(responseWithExtensions);
+        _graphQlClient.Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
+            .ReturnsAsync(responseWithExtensions);
 
         var builder = new DefaultTestCaseRunner(Context);
-        builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQLClient.Object)
+        await builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQlClient.Object)
             .Receive()
             .Response()
             .Message()
@@ -491,22 +491,22 @@ public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestGraphQLEmptyResponse()
+    public async Task TestGraphQlEmptyResponse()
     {
-        _graphQLClient.Reset();
+        _graphQlClient.Reset();
         _configuration.Reset();
 
         _configuration.Setup(x => x.Timeout).Returns(100L);
-        _graphQLClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
-        _graphQLClient.Setup(m => m.CreateConsumer()).Returns(_graphQLClient.Object);
+        _graphQlClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
+        _graphQlClient.Setup(m => m.CreateConsumer()).Returns(_graphQlClient.Object);
 
         var emptyMessage = new GraphQLMessage("""{"data": null}""");
 
-        _graphQLClient.Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(emptyMessage);
+        _graphQlClient.Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
+            .ReturnsAsync(emptyMessage);
 
         var builder = new DefaultTestCaseRunner(Context);
-        builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQLClient.Object)
+        await builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQlClient.Object)
             .Receive()
             .Response()
             .Message()
@@ -526,22 +526,22 @@ public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestGraphQLResponseWithCustomTimeout()
+    public async Task TestGraphQlResponseWithCustomTimeout()
     {
-        _graphQLClient.Reset();
+        _graphQlClient.Reset();
         _configuration.Reset();
 
         _configuration.Setup(x => x.Timeout).Returns(5000L);
-        _graphQLClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
-        _graphQLClient.Setup(m => m.CreateConsumer()).Returns(_graphQLClient.Object);
+        _graphQlClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
+        _graphQlClient.Setup(m => m.CreateConsumer()).Returns(_graphQlClient.Object);
 
         var message = new GraphQLMessage("""{"data": {"user": {"id": "timeout-test"}}}""");
 
-        _graphQLClient.Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+        _graphQlClient.Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
+            .ReturnsAsync(message);
 
         var builder = new DefaultTestCaseRunner(Context);
-        builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQLClient.Object)
+        await builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQlClient.Object)
             .Receive()
             .Response()
             .Timeout(6000L)
@@ -551,21 +551,21 @@ public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
         );
 
         var test = builder.GetTestCase();
-        var action = (ReceiveMessageAction)test.GetActions()[0];
+        _ = (ReceiveMessageAction)test.GetActions()[0];
 
         // Verify timeout is properly configured
-        _graphQLClient.Verify(x => x.Receive(It.IsAny<TestContext>(), 6000L), Times.Once);
+        _graphQlClient.Verify(x => x.Receive(It.IsAny<TestContext>(), 6000L), Times.Once);
     }
 
     [Test]
-    public void TestGraphQLComplexNestedResponse()
+    public async Task TestGraphQlComplexNestedResponse()
     {
-        _graphQLClient.Reset();
+        _graphQlClient.Reset();
         _configuration.Reset();
 
         _configuration.Setup(x => x.Timeout).Returns(100L);
-        _graphQLClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
-        _graphQLClient.Setup(m => m.CreateConsumer()).Returns(_graphQLClient.Object);
+        _graphQlClient.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
+        _graphQlClient.Setup(m => m.CreateConsumer()).Returns(_graphQlClient.Object);
 
         var complexResponse = new GraphQLMessage("""
                                                          {
@@ -590,11 +590,11 @@ public class ReceiveGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
                                                          }
                                                  """);
 
-        _graphQLClient.Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(complexResponse);
+        _graphQlClient.Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
+            .ReturnsAsync(complexResponse);
 
         var builder = new DefaultTestCaseRunner(Context);
-        builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQLClient.Object)
+        await builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQlClient.Object)
             .Receive()
             .Response()
             .Message()

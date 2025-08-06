@@ -13,14 +13,14 @@ public class WhenActorsRememberThingsUsingTestContext
     [AgenixResource] private TestContext _testContext;
 
     [Test]
-    public void AnActorCanRememberInformation()
+    public async Task AnActorCanRememberInformation()
     {
         var actor = Actor.Named("Archie");
         actor.WhoCan(new UseTheAgenixTestContext(_testContext));
 
-        actor.Remember("TOTAL_COST", 100);
+        await actor.Remember("TOTAL_COST", 100);
 
-        var totalCost = actor.Recall<int>("TOTAL_COST");
+        var totalCost = await actor.Recall<int>("TOTAL_COST");
 
         Assert.That(totalCost, Is.EqualTo(100));
     }
@@ -31,41 +31,41 @@ public class WhenActorsRememberThingsUsingTestContext
     }
 
     [Test]
-    public void AnActorCanRememberTheAnswerToAQuestion()
+    public async Task AnActorCanRememberTheAnswerToAQuestion()
     {
         var actor = Actor.Named("Archie");
         actor.WhoCan(new UseTheAgenixTestContext(_testContext));
 
-        actor.Remember("TOTAL_COST", TotalCost());
+        await actor.Remember("TOTAL_COST", TotalCost());
 
-        var totalCost = actor.Recall<int>("TOTAL_COST");
+        var totalCost = await actor.Recall<int>("TOTAL_COST");
 
         Assert.That(totalCost, Is.EqualTo(100));
     }
 
     [Test]
-    public void AnActorCanForgetWhatTheyKnow()
+    public async Task AnActorCanForgetWhatTheyKnow()
     {
         var actor = Actor.Named("Archie");
         actor.WhoCan(new UseTheAgenixTestContext(_testContext));
 
-        actor.Remember("TOTAL_COST", TotalCost());
+        await actor.Remember("TOTAL_COST", TotalCost());
 
-        actor.Forget("TOTAL_COST");
+        await actor.Forget("TOTAL_COST");
 
-        var totalCost = actor.Recall<int?>("TOTAL_COST");
+        var totalCost = await actor.Recall<int?>("TOTAL_COST");
 
         Assert.That(totalCost, Is.Null);
     }
 
     [Test]
-    public void AnActorCanRecallEverythingTheyKnow()
+    public async Task AnActorCanRecallEverythingTheyKnow()
     {
         var actor = Actor.Named("Archie");
         actor.WhoCan(new UseTheAgenixTestContext(_testContext));
 
-        actor.Remember("COLOR", "Red");
-        actor.Remember("FLAVOUR", "Vanilla");
+        await actor.Remember("COLOR", "Red");
+        await actor.Remember("FLAVOUR", "Vanilla");
 
         var memory = actor.RecallAll();
 

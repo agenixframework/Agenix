@@ -44,10 +44,10 @@ namespace Agenix.GraphQL.Tests.Actions.Dsl;
 ///     Tests the construction and execution of GraphQL send actions with various configurations.
 /// </summary>
 [TestFixture]
-public class SendGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
+public class SendGraphQlMessageTestActionBuilderTest : AbstractNUnitSetUp
 {
     // Change these to be actual mock objects, not Mock<T> wrappers
-    private readonly GraphQLClient _graphQLClient = Mock.Of<GraphQLClient>();
+    private readonly GraphQLClient _graphQlClient = Mock.Of<GraphQLClient>();
     private readonly IProducer _messageProducer = Mock.Of<IProducer>();
 
     /// <summary>
@@ -55,24 +55,24 @@ public class SendGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
     ///     Verifies that both synchronous and asynchronous (fork) GraphQL operations are properly handled.
     /// </summary>
     [Test]
-    public void TestForkQuery()
+    public async Task TestForkQuery()
     {
         // Use Mock.Get() pattern like the HTTP test
-        Mock.Get(_graphQLClient).Reset();
+        Mock.Get(_graphQlClient).Reset();
         Mock.Get(_messageProducer).Reset();
 
-        Mock.Get(_graphQLClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
+        Mock.Get(_graphQlClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
         var resetEvent = new ManualResetEventSlim(false);
         // Set up the mock to signal when Send is called
         Mock.Get(_messageProducer)
             .Setup(m => m.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((msg, ctx) => resetEvent.Set());
+            .Callback<IMessage, TestContext>((_, _) => resetEvent.Set());
 
 
         var builder = new DefaultTestCaseRunner(Context);
 
-        // Act - Send a GraphQL query without fork mode
-        builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQLClient)
+        // Act - Send a GraphQL query without a fork mode
+        await builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQlClient)
             .Send()
             .Query()
             .Message(new DefaultMessage("""
@@ -104,7 +104,7 @@ public class SendGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
         // Assert - Verify first action
         var queryAction = (SendMessageAction)test.GetActions()[0];
         Assert.That(queryAction.Name, Is.EqualTo("graphql:send-request"));
-        Assert.That(queryAction.Endpoint, Is.EqualTo(_graphQLClient));
+        Assert.That(queryAction.Endpoint, Is.EqualTo(_graphQlClient));
 
         var queryMessageBuilder = (GraphQLMessageBuilder)queryAction.MessageBuilder;
         Assert.That(queryMessageBuilder.GetMessage().GetPayload<string>(), Does.Contain("GetUser"));
@@ -120,25 +120,25 @@ public class SendGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestForkMutation()
+    public async Task TestForkMutation()
     {
         // Use Mock.Get() pattern like the HTTP test
-        Mock.Get(_graphQLClient).Reset();
+        Mock.Get(_graphQlClient).Reset();
         Mock.Get(_messageProducer).Reset();
         var resetEvent = new ManualResetEventSlim(false);
 
-        Mock.Get(_graphQLClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
+        Mock.Get(_graphQlClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
 
         // Set up the mock to signal when Send is called
         Mock.Get(_messageProducer)
             .Setup(m => m.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((msg, ctx) => resetEvent.Set());
+            .Callback<IMessage, TestContext>((_, _) => resetEvent.Set());
 
 
         var builder = new DefaultTestCaseRunner(Context);
 
         // Act - Send a GraphQL mutation with fork mode enabled
-        builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQLClient)
+        await builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQlClient)
             .Send()
             .Mutation()
             .Message(new DefaultMessage("""
@@ -153,7 +153,7 @@ public class SendGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
             .Type(MessageType.JSON)
             .Fork(true));
 
-        // Rest of your test remains the same
+        // The rest of your test remains the same
         var test = builder.GetTestCase();
         Assert.That(test.GetActionCount(), Is.EqualTo(1));
         Assert.That(test.GetActions()[0].GetType(), Is.EqualTo(typeof(SendMessageAction)));
@@ -162,7 +162,7 @@ public class SendGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
         // Assert - Verify second action (Mutation with fork)
         var mutationAction = (SendMessageAction)test.GetActions()[0];
         Assert.That(mutationAction.Name, Is.EqualTo("graphql:send-request"));
-        Assert.That(mutationAction.Endpoint, Is.EqualTo(_graphQLClient));
+        Assert.That(mutationAction.Endpoint, Is.EqualTo(_graphQlClient));
 
         var mutationMessageBuilder = (GraphQLMessageBuilder)mutationAction.MessageBuilder;
         Assert.That(mutationMessageBuilder.GetMessage().GetPayload<string>(), Does.Contain("CreateUser"));
@@ -190,18 +190,18 @@ public class SendGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
     ///     Verifies that subscription operations are properly configured for asynchronous execution.
     /// </summary>
     [Test]
-    public void TestSubscription()
+    public async Task TestSubscription()
     {
         // Arrange
-        Mock.Get(_graphQLClient).Reset();
+        Mock.Get(_graphQlClient).Reset();
         Mock.Get(_messageProducer).Reset();
 
-        Mock.Get(_graphQLClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
+        Mock.Get(_graphQlClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
 
         var builder = new DefaultTestCaseRunner(Context);
 
         // Act - Send a GraphQL subscription
-        builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQLClient)
+        await builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQlClient)
             .Send()
             .Subscription()
             .Message(new DefaultMessage("""
@@ -242,18 +242,18 @@ public class SendGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
     ///     Verifies that authentication information is properly included in GraphQL requests.
     /// </summary>
     [Test]
-    public void TestWithAuthentication()
+    public async Task TestWithAuthentication()
     {
         // Arrange
-        Mock.Get(_graphQLClient).Reset();
+        Mock.Get(_graphQlClient).Reset();
         Mock.Get(_messageProducer).Reset();
 
-        Mock.Get(_graphQLClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
+        Mock.Get(_graphQlClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
 
         var builder = new DefaultTestCaseRunner(Context);
 
         // Act - Send GraphQL query with authentication
-        builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQLClient)
+        await builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQlClient)
             .Send()
             .Query()
             .Message(new DefaultMessage("""
@@ -284,18 +284,18 @@ public class SendGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
     ///     Verifies that advanced GraphQL features like correlation and retry policies work correctly.
     /// </summary>
     [Test]
-    public void TestWithCorrelationAndRetry()
+    public async Task TestWithCorrelationAndRetry()
     {
         // Arrange
-        Mock.Get(_graphQLClient).Reset();
+        Mock.Get(_graphQlClient).Reset();
         Mock.Get(_messageProducer).Reset();
 
-        Mock.Get(_graphQLClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
+        Mock.Get(_graphQlClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
 
         var builder = new DefaultTestCaseRunner(Context);
 
         // Act - Send GraphQL query with correlation and retry settings
-        builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQLClient)
+        await builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQlClient)
             .Send()
             .Query()
             .Message(new DefaultMessage("""
@@ -328,18 +328,18 @@ public class SendGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
     ///     Verifies that complex GraphQL operations with nested data structures are handled correctly.
     /// </summary>
     [Test]
-    public void TestComplexGraphQLOperation()
+    public async Task TestComplexGraphQlOperation()
     {
         // Arrange
-        Mock.Get(_graphQLClient).Reset();
+        Mock.Get(_graphQlClient).Reset();
         Mock.Get(_messageProducer).Reset();
 
-        Mock.Get(_graphQLClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
+        Mock.Get(_graphQlClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
 
         var builder = new DefaultTestCaseRunner(Context);
 
-        // Act - Send complex GraphQL query with nested selections
-        builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQLClient)
+        // Act - Send a complex GraphQL query with nested selections
+        await builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQlClient)
             .Send()
             .Query()
             .Message(new DefaultMessage("""
@@ -394,21 +394,21 @@ public class SendGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestMessageObjectOverride()
+    public async Task TestMessageObjectOverride()
     {
-        Mock.Get(_graphQLClient).Reset();
+        Mock.Get(_graphQlClient).Reset();
         Mock.Get(_messageProducer).Reset();
 
-        Mock.Get(_graphQLClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
+        Mock.Get(_graphQlClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
         Mock.Get(_messageProducer).Setup(m => m.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) =>
+            .Callback<IMessage, TestContext>((message, _) =>
             {
                 Assert.That(message.GetPayload<string>(), Is.EqualTo("{ user { name email } }"));
             });
 
         var builder = new DefaultTestCaseRunner(Context);
 
-        builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQLClient)
+        await builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQlClient)
             .Send()
             .Query()
             .Message(new GraphQLMessage("{ user { name email } }")
@@ -427,30 +427,30 @@ public class SendGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
 
         var messageBuilder = (GraphQLMessageBuilder)action.MessageBuilder;
 
-        var graphQLMessage = messageBuilder.GetMessage();
-        Assert.That(graphQLMessage.GetPayload<string>(), Is.EqualTo("{ user { name email } }"));
+        var graphQlMessage = messageBuilder.GetMessage();
+        Assert.That(graphQlMessage.GetPayload<string>(), Is.EqualTo("{ user { name email } }"));
         Assert.That(messageBuilder.BuildMessageHeaders(Context).Count, Is.EqualTo(5));
         Assert.That(messageBuilder.BuildMessageHeaders(Context)[GraphQLMessageHeaders.OperationName],
             Is.EqualTo("getUserInfo"));
         Assert.That(messageBuilder.BuildMessageHeaders(Context)["additional"], Is.EqualTo("additionalValue"));
         Assert.That(messageBuilder.BuildMessageHeaders(Context)["Content-Type"],
             Is.EqualTo(MediaTypeNames.Application.Json));
-        Assert.That(graphQLMessage.GetVariable("userId"), Is.EqualTo("123"));
-        Assert.That(graphQLMessage.GetVariable("globalVar"), Is.EqualTo("globalValue"));
-        Assert.That(graphQLMessage.GetExtension("ext1"), Is.EqualTo("123"));
-        Assert.That(graphQLMessage.GetExtension("ext2"), Is.EqualTo("456"));
+        Assert.That(graphQlMessage.GetVariable("userId"), Is.EqualTo("123"));
+        Assert.That(graphQlMessage.GetVariable("globalVar"), Is.EqualTo("globalValue"));
+        Assert.That(graphQlMessage.GetExtension("ext1"), Is.EqualTo("123"));
+        Assert.That(graphQlMessage.GetExtension("ext2"), Is.EqualTo("456"));
     }
 
     [Test]
-    public void TestMessageBodyOverride()
+    public async Task TestMessageBodyOverride()
     {
-        Mock.Get(_graphQLClient).Reset();
+        Mock.Get(_graphQlClient).Reset();
         Mock.Get(_messageProducer).Reset();
 
-        Mock.Get(_graphQLClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
+        Mock.Get(_graphQlClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
 
         Mock.Get(_messageProducer).Setup(m => m.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) =>
+            .Callback<IMessage, TestContext>((message, _) =>
             {
                 Assert.That(message.GetPayload<string>(), Is.EqualTo("{ user { name email } }"));
                 Assert.That(message.GetHeader(GraphQLMessageHeaders.OperationType), Is.EqualTo("QUERY"));
@@ -458,7 +458,7 @@ public class SendGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
 
         var builder = new DefaultTestCaseRunner(Context);
 
-        builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQLClient)
+        await builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQlClient)
             .Send()
             .Query()
             .Message()
@@ -474,15 +474,15 @@ public class SendGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestMessageQueryOverride()
+    public async Task TestMessageQueryOverride()
     {
-        Mock.Get(_graphQLClient).Reset();
+        Mock.Get(_graphQlClient).Reset();
         Mock.Get(_messageProducer).Reset();
 
-        Mock.Get(_graphQLClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
+        Mock.Get(_graphQlClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
 
         Mock.Get(_messageProducer).Setup(m => m.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) =>
+            .Callback<IMessage, TestContext>((message, _) =>
             {
                 Assert.That(message.GetPayload<string>(), Is.EqualTo("{ user { name email } }"));
                 Assert.That(message.GetHeader(GraphQLMessageHeaders.OperationType), Is.EqualTo("QUERY"));
@@ -490,7 +490,7 @@ public class SendGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
 
         var builder = new DefaultTestCaseRunner(Context);
 
-        builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQLClient)
+        await builder.Run(GraphQLActionBuilder.GraphQL().Client(_graphQlClient)
             .Send()
             .Query("{ user { name email } }"));
 
@@ -504,15 +504,15 @@ public class SendGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestGraphQLRequestUriAndPath()
+    public async Task TestGraphQlRequestUriAndPath()
     {
-        Mock.Get(_graphQLClient).Reset();
+        Mock.Get(_graphQlClient).Reset();
         Mock.Get(_messageProducer).Reset();
 
-        Mock.Get(_graphQLClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
+        Mock.Get(_graphQlClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
 
         Mock.Get(_messageProducer).Setup(m => m.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) =>
+            .Callback<IMessage, TestContext>((message, _) =>
             {
                 Assert.That(message.GetPayload<string>(),
                     Is.EqualTo("{ user(id: \"123\") { name email } }"));
@@ -522,8 +522,8 @@ public class SendGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
 
         var builder = new DefaultTestCaseRunner(Context);
 
-        builder.Run(GraphQLActionBuilder.GraphQL()
-            .Client(_graphQLClient)
+        await builder.Run(GraphQLActionBuilder.GraphQL()
+            .Client(_graphQlClient)
             .Send()
             .Query("{ user(id: \"123\") { name email } }")
             .Uri("http://localhost:8080/graphql"));
@@ -535,7 +535,7 @@ public class SendGraphQLMessageTestActionBuilderTest : AbstractNUnitSetUp
 
         var action = (SendMessageAction)test.GetActions()[0];
         Assert.That(action.Name, Is.EqualTo("graphql:send-request"));
-        Assert.That(action.Endpoint, Is.EqualTo(_graphQLClient));
+        Assert.That(action.Endpoint, Is.EqualTo(_graphQlClient));
         Assert.That(action.MessageBuilder.GetType(), Is.EqualTo(typeof(GraphQLMessageBuilder)));
 
         var messageBuilder = (GraphQLMessageBuilder)action.MessageBuilder;

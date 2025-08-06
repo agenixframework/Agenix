@@ -114,7 +114,7 @@ public static class SecretClientFactory
     /// <returns>SecretClient instance</returns>
     public static SecretClient GetClient(KeyVaultConfiguration configuration)
     {
-        return GetClientAsync(configuration).GetAwaiter().GetResult();
+        return GetClientAsync(configuration).ConfigureAwait(false).GetAwaiter().GetResult();
     }
 
     /// <summary>
@@ -126,7 +126,8 @@ public static class SecretClientFactory
     /// <param name="clientSecret">Azure AD application secret</param>
     /// <param name="authority">Optional authority URL</param>
     /// <returns>SecretClient instance</returns>
-    public static SecretClient GetClient(string vaultUri, string tenantId, string clientId, string clientSecret,
+    public static async Task<SecretClient> GetClient(string vaultUri, string tenantId, string clientId,
+        string clientSecret,
         string? authority = null)
     {
         var configuration = new KeyVaultConfiguration
@@ -138,7 +139,7 @@ public static class SecretClientFactory
             Authority = authority
         };
 
-        return GetClient(configuration);
+        return await GetClientAsync(configuration);
     }
 
     /// <summary>
@@ -367,14 +368,6 @@ public static class SecretClientFactory
     }
 
     /// <summary>
-    ///     Clear the client cache synchronously
-    /// </summary>
-    public static void ClearCache()
-    {
-        ClearCacheAsync().GetAwaiter().GetResult();
-    }
-
-    /// <summary>
     ///     Remove a specific client from cache
     /// </summary>
     /// <param name="configuration">Configuration of the client to remove</param>
@@ -399,15 +392,5 @@ public static class SecretClientFactory
         {
             FactoryLock.Release();
         }
-    }
-
-    /// <summary>
-    ///     Remove a specific client from cache synchronously
-    /// </summary>
-    /// <param name="configuration">Configuration of the client to remove</param>
-    /// <returns>True if the client was found and removed, false otherwise</returns>
-    public static bool RemoveClient(KeyVaultConfiguration configuration)
-    {
-        return RemoveClientAsync(configuration).GetAwaiter().GetResult();
     }
 }

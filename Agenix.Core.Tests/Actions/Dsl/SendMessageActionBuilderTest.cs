@@ -25,8 +25,8 @@
 #endregion
 
 using System.Collections.Concurrent;
+using System.Threading.Tasks;
 using Agenix.Api.Endpoint;
-using Agenix.Api.IO;
 using Agenix.Api.Message;
 using Agenix.Api.Messaging;
 using Agenix.Api.Report;
@@ -40,7 +40,6 @@ using Agenix.Core.Message.Builder;
 using Agenix.Core.Validation.Builder;
 using Moq;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 using static Agenix.Core.Actions.SendMessageAction.Builder;
 using TestContext = Agenix.Api.Context.TestContext;
 
@@ -48,174 +47,172 @@ namespace Agenix.Core.Tests.Actions.Dsl;
 
 public class SendMessageActionBuilderTest : AbstractNUnitSetUp
 {
+    private readonly IEndpoint _messageEndpoint = new Mock<IEndpoint>().Object;
+    private readonly IProducer _messageProducer = new Mock<IProducer>().Object;
     private readonly Mock<IReferenceResolver> _referenceResolver = new();
-    private readonly IEndpoint messageEndpoint = new Mock<IEndpoint>().Object;
-    private readonly IProducer messageProducer = new Mock<IProducer>().Object;
-    private readonly IResource resource = new Mock<IResource>().Object;
 
-    private readonly IMessageValidator<IValidationContext> validator =
+    private readonly IMessageValidator<IValidationContext> _validator =
         new Mock<IMessageValidator<IValidationContext>>().Object;
 
     protected override TestContextFactory CreateTestContextFactory()
     {
-        Mock.Get(validator)
+        Mock.Get(_validator)
             .Setup(v => v.SupportsMessageType(It.IsAny<string>(), It.IsAny<IMessage>()))
             .Returns(true);
 
         var factory = base.CreateTestContextFactory();
-        factory.MessageValidatorRegistry.AddMessageValidator("validator", validator);
+        factory.MessageValidatorRegistry.AddMessageValidator("validator", _validator);
 
         return factory;
     }
 
     [Test]
-    public void TestSendBuilderWithMessageInstance()
+    public async Task TestSendBuilderWithMessageInstance()
     {
-        Mock.Get(messageEndpoint).Reset();
-        Mock.Get(messageProducer).Reset();
+        Mock.Get(_messageEndpoint).Reset();
+        Mock.Get(_messageProducer).Reset();
 
-        Mock.Get(messageEndpoint).Setup(e => e.CreateProducer()).Returns(messageProducer);
-        Mock.Get(messageProducer).Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback((IMessage message, TestContext context) =>
+        Mock.Get(_messageEndpoint).Setup(e => e.CreateProducer()).Returns(_messageProducer);
+        Mock.Get(_messageProducer).Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
+            .Callback((IMessage message, TestContext _) =>
             {
-                ClassicAssert.AreEqual("Foo", message.GetPayload<string>());
-                ClassicAssert.NotNull(message.GetHeader("operation"));
-                ClassicAssert.AreEqual("foo", message.GetHeader("operation"));
+                Assert.That(message.GetPayload<string>(), Is.EqualTo("Foo"));
+                Assert.That(message.GetHeader("operation"), Is.Not.Null);
+                Assert.That(message.GetHeader("operation"), Is.EqualTo("foo"));
             });
 
         var runner = new DefaultTestCaseRunner(Context);
-        runner.Run(Send(messageEndpoint)
+        await runner.Run(Send(_messageEndpoint)
             .Message(new DefaultMessage("Foo").SetHeader("operation", "foo"))
             .Header("additional", "additionalValue"));
 
         var test = runner.GetTestCase();
-        ClassicAssert.AreEqual(1, test.GetActionCount());
-        ClassicAssert.AreEqual(typeof(SendMessageAction), test.GetActions()[0].GetType());
+        Assert.That(test.GetActionCount(), Is.EqualTo(1));
+        Assert.That(test.GetActions()[0], Is.TypeOf<SendMessageAction>());
 
         var action = (SendMessageAction)test.GetActions()[0];
-        ClassicAssert.AreEqual("send", action.Name);
-        ClassicAssert.AreEqual(messageEndpoint, action.Endpoint);
-        ClassicAssert.AreEqual(typeof(StaticMessageBuilder), action.MessageBuilder.GetType());
+        Assert.That(action.Name, Is.EqualTo("send"));
+        Assert.That(action.Endpoint, Is.SameAs(_messageEndpoint));
+        Assert.That(action.MessageBuilder, Is.TypeOf<StaticMessageBuilder>());
 
         var messageBuilder = (StaticMessageBuilder)action.MessageBuilder;
-        ClassicAssert.AreEqual("Foo", messageBuilder.BuildMessagePayload(Context, action.MessageType));
-        ClassicAssert.AreEqual("foo", messageBuilder.BuildMessageHeaders(Context)["operation"]);
-        ClassicAssert.AreEqual("additionalValue", messageBuilder.BuildMessageHeaders(Context)["additional"]);
+        Assert.That(messageBuilder.BuildMessagePayload(Context, action.MessageType), Is.EqualTo("Foo"));
+        Assert.That(messageBuilder.BuildMessageHeaders(Context)["operation"], Is.EqualTo("foo"));
+        Assert.That(messageBuilder.BuildMessageHeaders(Context)["additional"], Is.EqualTo("additionalValue"));
     }
 
     [Test]
-    public void TestSendBuilderWithObjectMessageInstance()
+    public async Task TestSendBuilderWithObjectMessageInstance()
     {
-        Mock.Get(messageEndpoint).Reset();
-        Mock.Get(messageProducer).Reset();
+        Mock.Get(_messageEndpoint).Reset();
+        Mock.Get(_messageProducer).Reset();
 
-        Mock.Get(messageEndpoint).Setup(e => e.CreateProducer()).Returns(messageProducer);
+        Mock.Get(_messageEndpoint).Setup(e => e.CreateProducer()).Returns(_messageProducer);
 
-        Mock.Get(messageProducer)
+        Mock.Get(_messageProducer)
             .Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback((IMessage message, TestContext context) =>
+            .Callback((IMessage message, TestContext _) =>
             {
-                ClassicAssert.AreEqual(10, message.GetPayload<int>());
-                ClassicAssert.NotNull(message.GetHeader("operation"));
-                ClassicAssert.AreEqual("foo", message.GetHeader("operation"));
+                Assert.That(message.GetPayload<int>(), Is.EqualTo(10));
+                Assert.That(message.GetHeader("operation"), Is.Not.Null);
+                Assert.That(message.GetHeader("operation"), Is.EqualTo("foo"));
             });
 
         var message = new DefaultMessage(10).SetHeader("operation", "foo");
         var runner = new DefaultTestCaseRunner(Context);
-        runner.Run(Send(messageEndpoint).Message(message));
+        await runner.Run(Send(_messageEndpoint).Message(message));
 
         var test = runner.GetTestCase();
-        ClassicAssert.AreEqual(1, test.GetActionCount());
-        ClassicAssert.AreEqual(typeof(SendMessageAction), test.GetActions()[0].GetType());
+        Assert.That(test.GetActionCount(), Is.EqualTo(1));
+        Assert.That(test.GetActions()[0], Is.TypeOf<SendMessageAction>());
 
         var action = (SendMessageAction)test.GetActions()[0];
-        ClassicAssert.AreEqual("send", action.Name);
-        ClassicAssert.AreEqual(messageEndpoint, action.Endpoint);
-        ClassicAssert.AreEqual(typeof(StaticMessageBuilder), action.MessageBuilder.GetType());
+        Assert.That(action.Name, Is.EqualTo("send"));
+        Assert.That(action.Endpoint, Is.SameAs(_messageEndpoint));
+        Assert.That(action.MessageBuilder, Is.TypeOf<StaticMessageBuilder>());
 
         var messageBuilder = (StaticMessageBuilder)action.MessageBuilder;
-        ClassicAssert.AreEqual(message.Payload, messageBuilder.BuildMessagePayload(Context, action.MessageType));
-        ClassicAssert.AreEqual(1, messageBuilder.BuildMessageHeaders(Context).Count);
-        ClassicAssert.AreEqual("foo", messageBuilder.BuildMessageHeaders(Context)["operation"]);
-        ClassicAssert.AreEqual(message.GetHeader(MessageHeaders.Id),
-            messageBuilder.GetMessage().GetHeader(MessageHeaders.Id));
-        ClassicAssert.AreEqual("foo", messageBuilder.GetMessage().GetHeader("operation"));
+        Assert.That(messageBuilder.BuildMessagePayload(Context, action.MessageType), Is.EqualTo(message.Payload));
+        Assert.That(messageBuilder.BuildMessageHeaders(Context).Count, Is.EqualTo(1));
+        Assert.That(messageBuilder.BuildMessageHeaders(Context)["operation"], Is.EqualTo("foo"));
+        Assert.That(messageBuilder.GetMessage().GetHeader(MessageHeaders.Id),
+            Is.EqualTo(message.GetHeader(MessageHeaders.Id)));
+        Assert.That(messageBuilder.GetMessage().GetHeader("operation"), Is.EqualTo("foo"));
 
-        var constructed = messageBuilder.Build(new TestContext(), MessageType.PLAINTEXT.ToString());
-        ClassicAssert.AreEqual(message.GetHeaders().Count + 1, constructed.GetHeaders().Count);
-        ClassicAssert.AreEqual("foo", constructed.GetHeader("operation"));
-        ClassicAssert.AreNotEqual(message.GetHeader(MessageHeaders.Id), constructed.GetHeader(MessageHeaders.Id));
+        var constructed = messageBuilder.Build(new TestContext(), nameof(MessageType.PLAINTEXT));
+        Assert.That(constructed.GetHeaders().Count, Is.EqualTo(message.GetHeaders().Count + 1));
+        Assert.That(constructed.GetHeader("operation"), Is.EqualTo("foo"));
+        Assert.That(constructed.GetHeader(MessageHeaders.Id),
+            Is.Not.EqualTo(message.GetHeader(MessageHeaders.Id)));
     }
 
     [Test]
-    public void TestSendBuilderWithObjectMessageInstanceAdditionalHeader()
+    public async Task TestSendBuilderWithObjectMessageInstanceAdditionalHeader()
     {
-        Mock.Get(messageEndpoint).Reset();
-        Mock.Get(messageProducer).Reset();
+        Mock.Get(_messageEndpoint).Reset();
+        Mock.Get(_messageProducer).Reset();
 
-        Mock.Get(messageEndpoint).Setup(e => e.CreateProducer()).Returns(messageProducer);
+        Mock.Get(_messageEndpoint).Setup(e => e.CreateProducer()).Returns(_messageProducer);
 
-        Mock.Get(messageProducer)
+        Mock.Get(_messageProducer)
             .Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback((IMessage message, TestContext context) =>
+            .Callback((IMessage message, TestContext _) =>
             {
-                ClassicAssert.AreEqual(10, message.GetPayload<int>());
-                ClassicAssert.NotNull(message.GetHeader("operation"));
-                ClassicAssert.AreEqual("foo", message.GetHeader("operation"));
-                ClassicAssert.NotNull(message.GetHeader("additional"));
-                ClassicAssert.AreEqual("new", message.GetHeader("additional"));
+                Assert.That(message.GetPayload<int>(), Is.EqualTo(10));
+                Assert.That(message.GetHeader("operation"), Is.Not.Null);
+                Assert.That(message.GetHeader("operation"), Is.EqualTo("foo"));
+                Assert.That(message.GetHeader("additional"), Is.Not.Null);
+                Assert.That(message.GetHeader("additional"), Is.EqualTo("new"));
             });
 
         var message = new DefaultMessage(10).SetHeader("operation", "foo");
         var runner = new DefaultTestCaseRunner(Context);
 
-        runner.Run(Send(messageEndpoint)
+        await runner.Run(Send(_messageEndpoint)
             .Message(message)
             .Header("additional", "new"));
 
         var test = runner.GetTestCase();
-        ClassicAssert.AreEqual(1, test.GetActionCount());
-        ClassicAssert.AreEqual(typeof(SendMessageAction), test.GetActions()[0].GetType());
+        Assert.That(test.GetActionCount(), Is.EqualTo(1));
+        Assert.That(test.GetActions()[0], Is.TypeOf<SendMessageAction>());
 
         var action = (SendMessageAction)test.GetActions()[0];
-        ClassicAssert.AreEqual("send", action.Name);
-        ClassicAssert.AreEqual(messageEndpoint, action.Endpoint);
-        ClassicAssert.AreEqual(typeof(StaticMessageBuilder), action.MessageBuilder.GetType());
+        Assert.That(action.Name, Is.EqualTo("send"));
+        Assert.That(action.Endpoint, Is.SameAs(_messageEndpoint));
+        Assert.That(action.MessageBuilder, Is.TypeOf<StaticMessageBuilder>());
 
         var messageBuilder = (StaticMessageBuilder)action.MessageBuilder;
-        ClassicAssert.AreEqual(message.Payload, messageBuilder.BuildMessagePayload(Context, action.MessageType));
-        ClassicAssert.AreEqual(2, messageBuilder.BuildMessageHeaders(Context).Count);
-        ClassicAssert.AreEqual("new", messageBuilder.BuildMessageHeaders(Context)["additional"]);
-        ClassicAssert.AreEqual("foo", messageBuilder.BuildMessageHeaders(Context)["operation"]);
-        ClassicAssert.AreEqual(message.GetHeader(MessageHeaders.Id),
-            messageBuilder.GetMessage().GetHeader(MessageHeaders.Id));
-        ClassicAssert.AreEqual("foo", messageBuilder.GetMessage().GetHeader("operation"));
+        Assert.That(messageBuilder.BuildMessagePayload(Context, action.MessageType), Is.EqualTo(message.Payload));
+        Assert.That(messageBuilder.BuildMessageHeaders(Context).Count, Is.EqualTo(2));
+        Assert.That(messageBuilder.BuildMessageHeaders(Context)["additional"], Is.EqualTo("new"));
+        Assert.That(messageBuilder.BuildMessageHeaders(Context)["operation"], Is.EqualTo("foo"));
+        Assert.That(messageBuilder.GetMessage().GetHeader(MessageHeaders.Id),
+            Is.EqualTo(message.GetHeader(MessageHeaders.Id)));
+        Assert.That(messageBuilder.GetMessage().GetHeader("operation"), Is.EqualTo("foo"));
 
-        var constructed = messageBuilder.Build(new TestContext(), MessageType.PLAINTEXT.ToString());
-        ClassicAssert.AreEqual(message.GetHeaders().Count + 2, constructed.GetHeaders().Count);
-        ClassicAssert.AreEqual("foo", constructed.GetHeader("operation"));
-        ClassicAssert.AreEqual("new", constructed.GetHeader("additional"));
+        var constructed = messageBuilder.Build(new TestContext(), nameof(MessageType.PLAINTEXT));
+        Assert.That(constructed.GetHeaders().Count, Is.EqualTo(message.GetHeaders().Count + 2));
+        Assert.That(constructed.GetHeader("operation"), Is.EqualTo("foo"));
+        Assert.That(constructed.GetHeader("additional"), Is.EqualTo("new"));
     }
 
     [Test]
-    public void TestSendBuilderWithPayloadBuilder()
+    public async Task TestSendBuilderWithPayloadBuilder()
     {
-        MessagePayloadBuilder payloadBuilder = context => "<TestRequest><Message>Hello Agenix!</Message></TestRequest>";
+        Mock.Get(_messageEndpoint).Reset();
+        Mock.Get(_messageProducer).Reset();
 
-        Mock.Get(messageEndpoint).Reset();
-        Mock.Get(messageProducer).Reset();
-
-        Mock.Get(messageEndpoint).Setup(e => e.CreateProducer()).Returns(messageProducer);
-        Mock.Get(messageProducer)
+        Mock.Get(_messageEndpoint).Setup(e => e.CreateProducer()).Returns(_messageProducer);
+        Mock.Get(_messageProducer)
             .Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback((IMessage message, TestContext context) =>
+            .Callback((IMessage message, TestContext _) =>
             {
-                ClassicAssert.AreEqual(message.GetPayload<string>(),
-                    "<TestRequest><Message>Hello Agenix!</Message></TestRequest>");
+                Assert.That(message.GetPayload<string>(),
+                    Is.EqualTo("<TestRequest><Message>Hello Agenix!</Message></TestRequest>"));
             });
 
         _referenceResolver.Setup(r => r.Resolve<TestContext>()).Returns(Context);
-        _referenceResolver.Setup(r => r.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
+        _referenceResolver.Setup(r => r.Resolve<AsyncTestActionListeners>()).Returns(new AsyncTestActionListeners());
         _referenceResolver.Setup(r => r.ResolveAll<SequenceBeforeTest>())
             .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(r => r.ResolveAll<SequenceAfterTest>())
@@ -225,58 +222,64 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
 
         var runner = new DefaultTestCaseRunner(Context);
 
-        runner.Run(Send(messageEndpoint)
+        await runner.Run(Send(_messageEndpoint)
             .Message()
-            .Body(payloadBuilder));
+            .Body(PayloadBuilder));
 
         var test = runner.GetTestCase();
-        ClassicAssert.AreEqual(1, test.GetActionCount());
-        ClassicAssert.AreEqual(typeof(SendMessageAction), test.GetActions()[0].GetType());
+        Assert.That(test.GetActionCount(), Is.EqualTo(1));
+        Assert.That(test.GetActions()[0], Is.TypeOf<SendMessageAction>());
 
         var action = (SendMessageAction)test.GetActions()[0];
-        ClassicAssert.AreEqual("send", action.Name);
-        ClassicAssert.AreEqual(messageEndpoint, action.Endpoint);
-        ClassicAssert.AreEqual(action.MessageBuilder.GetType(), typeof(DefaultMessageBuilder));
+        Assert.That(action.Name, Is.EqualTo("send"));
+        Assert.That(action.Endpoint, Is.SameAs(_messageEndpoint));
+        Assert.That(action.MessageBuilder, Is.TypeOf<DefaultMessageBuilder>());
 
         var messageBuilder = (DefaultMessageBuilder)action.MessageBuilder;
-        ClassicAssert.AreEqual(messageBuilder.BuildMessagePayload(Context, action.MessageType),
-            "<TestRequest><Message>Hello Agenix!</Message></TestRequest>");
-        ClassicAssert.AreEqual(messageBuilder.BuildMessageHeaders(Context).Count, 0L);
+        Assert.That(messageBuilder.BuildMessagePayload(Context, action.MessageType),
+            Is.EqualTo("<TestRequest><Message>Hello Agenix!</Message></TestRequest>"));
+        Assert.That(messageBuilder.BuildMessageHeaders(Context).Count, Is.EqualTo(0));
+        return;
+
+        object PayloadBuilder(TestContext _)
+        {
+            return "<TestRequest><Message>Hello Agenix!</Message></TestRequest>";
+        }
     }
 
     [Test]
-    public void TestSendBuilderWithPayloadData()
+    public async Task TestSendBuilderWithPayloadData()
     {
-        Mock.Get(messageEndpoint).Reset();
-        Mock.Get(messageProducer).Reset();
+        Mock.Get(_messageEndpoint).Reset();
+        Mock.Get(_messageProducer).Reset();
 
-        Mock.Get(messageEndpoint).Setup(e => e.CreateProducer()).Returns(messageProducer);
-        Mock.Get(messageProducer)
+        Mock.Get(_messageEndpoint).Setup(e => e.CreateProducer()).Returns(_messageProducer);
+        Mock.Get(_messageProducer)
             .Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback((IMessage message, TestContext context) =>
+            .Callback((IMessage message, TestContext _) =>
             {
-                ClassicAssert.AreEqual(message.GetPayload<string>(),
-                    "<TestRequest><Message>Hello Agenix!</Message></TestRequest>");
+                Assert.That(message.GetPayload<string>(),
+                    Is.EqualTo("<TestRequest><Message>Hello Agenix!</Message></TestRequest>"));
             });
         var runner = new DefaultTestCaseRunner(Context);
 
-        runner.Run(Send(messageEndpoint)
+        await runner.Run(Send(_messageEndpoint)
             .Message()
             .Body("<TestRequest><Message>Hello Agenix!</Message></TestRequest>"));
 
         var test = runner.GetTestCase();
-        ClassicAssert.AreEqual(1, test.GetActionCount());
-        ClassicAssert.AreEqual(typeof(SendMessageAction), test.GetActions()[0].GetType());
+        Assert.That(test.GetActionCount(), Is.EqualTo(1));
+        Assert.That(test.GetActions()[0], Is.TypeOf<SendMessageAction>());
 
         var action = (SendMessageAction)test.GetActions()[0];
-        ClassicAssert.AreEqual("send", action.Name);
-        ClassicAssert.AreEqual(messageEndpoint, action.Endpoint);
+        Assert.That(action.Name, Is.EqualTo("send"));
+        Assert.That(action.Endpoint, Is.SameAs(_messageEndpoint));
 
-        ClassicAssert.AreEqual(action.MessageBuilder.GetType(), typeof(DefaultMessageBuilder));
+        Assert.That(action.MessageBuilder, Is.TypeOf<DefaultMessageBuilder>());
 
         var messageBuilder = (DefaultMessageBuilder)action.MessageBuilder;
-        ClassicAssert.AreEqual(messageBuilder.BuildMessagePayload(Context, action.MessageType),
-            "<TestRequest><Message>Hello Agenix!</Message></TestRequest>");
-        ClassicAssert.AreEqual(messageBuilder.BuildMessageHeaders(Context).Count, 0L);
+        Assert.That(messageBuilder.BuildMessagePayload(Context, action.MessageType),
+            Is.EqualTo("<TestRequest><Message>Hello Agenix!</Message></TestRequest>"));
+        Assert.That(messageBuilder.BuildMessageHeaders(Context).Count, Is.EqualTo(0));
     }
 }

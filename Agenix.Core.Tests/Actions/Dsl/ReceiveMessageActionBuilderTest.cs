@@ -28,6 +28,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Message;
 using Agenix.Api.Messaging;
@@ -79,12 +80,12 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         // Assuming DefaultTextEqualsMessageValidator is a custom validator you need to mock or initialize appropriately
         var validator = new DefaultTextEqualsMessageValidator();
 
-        // Add validator to the context's message validator registry
+        // Add a validator to the context's message validator registry
         _context.MessageValidatorRegistry.AddMessageValidator("default", validator);
     }
 
     [Test]
-    public void TestReceiveEmpty()
+    public async Task TestReceiveEmpty()
     {
         // Reset is not directly available in Moq, ensuring no stale setup
         _messageEndpoint.Reset();
@@ -96,11 +97,11 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _messageEndpoint.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
         _configuration.Setup(c => c.Timeout).Returns(100L);
         _messageConsumer.Setup(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(new DefaultMessage(""));
+            .ReturnsAsync(new DefaultMessage(""));
 
         // Assuming DefaultTestCaseRunner is a custom runner in your project
         var runner = new DefaultTestCaseRunner(_context);
-        runner.Run(Receive(_messageEndpoint.Object));
+        await runner.Run(Receive(_messageEndpoint.Object));
 
         // Act
         var test = runner.GetTestCase();
@@ -119,7 +120,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveBuilder()
+    public async Task TestReceiveBuilder()
     {
         // Reset mocks to their default states
         _messageEndpoint.Reset();
@@ -131,11 +132,11 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _messageEndpoint.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
         _configuration.Setup(c => c.Timeout).Returns(100L);
         _messageConsumer.Setup(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(new DefaultMessage("Foo").SetHeader("operation", "foo"));
+            .ReturnsAsync(new DefaultMessage("Foo").SetHeader("operation", "foo"));
 
         // Create a test case runner
         var runner = new DefaultTestCaseRunner(_context);
-        runner.Run(new ReceiveMessageAction.Builder()
+        await runner.Run(new ReceiveMessageAction.Builder()
             .Endpoint(_messageEndpoint.Object)
             .Message(new DefaultMessage("Foo").SetHeader("operation", "foo"))
             .Type(MessageType.PLAINTEXT)
@@ -174,7 +175,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveBuilderWithPayloadBuilder()
+    public async Task TestReceiveBuilderWithPayloadBuilder()
     {
         // Reset mocks to their default states
         _referenceResolver.Reset();
@@ -187,11 +188,11 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _messageEndpoint.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
         _configuration.Setup(c => c.Timeout).Returns(100L);
         _messageConsumer.Setup(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(new DefaultMessage("<TestRequest><Message>Hello Agenix!</Message></TestRequest>")
+            .ReturnsAsync(new DefaultMessage("<TestRequest><Message>Hello Agenix!</Message></TestRequest>")
                 .SetHeader("operation", "foo"));
 
         _referenceResolver.Setup(r => r.Resolve<TestContext>()).Returns(_context);
-        _referenceResolver.Setup(r => r.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
+        _referenceResolver.Setup(r => r.Resolve<AsyncTestActionListeners>()).Returns(new AsyncTestActionListeners());
         _referenceResolver.Setup(r => r.ResolveAll<SequenceBeforeTest>())
             .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(r => r.ResolveAll<SequenceAfterTest>())
@@ -199,12 +200,12 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         _context.SetReferenceResolver(_referenceResolver.Object);
 
-        // Create test case runner
+        // Create a test case runner
         var runner = new DefaultTestCaseRunner(_context);
-        runner.Run(new ReceiveMessageAction.Builder()
+        await runner.Run(new ReceiveMessageAction.Builder()
             .Endpoint(_messageEndpoint.Object)
             .Message()
-            .Body(ctx => "<TestRequest><Message>Hello Agenix!</Message></TestRequest>")
+            .Body(_ => "<TestRequest><Message>Hello Agenix!</Message></TestRequest>")
             .Build());
 
         // Get the executed test case
@@ -240,7 +241,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveBuilderWithPayloadString()
+    public async Task TestReceiveBuilderWithPayloadString()
     {
         // Reset mocks to their default states
         _messageEndpoint.Reset();
@@ -252,12 +253,12 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _messageEndpoint.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
         _configuration.Setup(c => c.Timeout).Returns(100L);
         _messageConsumer.Setup(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
+            .ReturnsAsync(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
                 .SetHeader("operation", "foo"));
 
         // Create test case runner
         var runner = new DefaultTestCaseRunner(_context);
-        runner.Run(new ReceiveMessageAction.Builder()
+        await runner.Run(new ReceiveMessageAction.Builder()
             .Endpoint(_messageEndpoint.Object)
             .Message()
             .Body("<TestRequest><Message>Hello World!</Message></TestRequest>")
@@ -296,7 +297,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveBuilderWithPayloadResource()
+    public async Task TestReceiveBuilderWithPayloadResource()
     {
         // Reset mocks to their default states
         _resource.Reset();
@@ -309,7 +310,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _messageEndpoint.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
         _configuration.Setup(c => c.Timeout).Returns(100L);
         _messageConsumer.Setup(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
+            .ReturnsAsync(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
                 .SetHeader("operation", "foo"));
 
         _resource.Setup(r => r.Exists).Returns(true);
@@ -318,7 +319,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Create test case runner
         var runner = new DefaultTestCaseRunner(_context);
-        runner.Run(new ReceiveMessageAction.Builder()
+        await runner.Run(new ReceiveMessageAction.Builder()
             .Endpoint(_messageEndpoint.Object)
             .Message()
             .Body(_resource.Object)
@@ -357,7 +358,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveBuilderWithEndpointName()
+    public async Task TestReceiveBuilderWithEndpointName()
     {
         // Reset mocks to their default states
         _referenceResolver.Reset();
@@ -370,12 +371,12 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _messageEndpoint.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
         _configuration.Setup(c => c.Timeout).Returns(100L);
         _messageConsumer.Setup(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
+            .ReturnsAsync(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
                 .SetHeader("operation", "foo"));
 
         _referenceResolver.Setup(r => r.Resolve<TestContext>()).Returns(_context);
         _referenceResolver.Setup(r => r.Resolve<IEndpoint>("fooMessageEndpoint")).Returns(_messageEndpoint.Object);
-        _referenceResolver.Setup(r => r.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
+        _referenceResolver.Setup(r => r.Resolve<AsyncTestActionListeners>()).Returns(new AsyncTestActionListeners());
         _referenceResolver.Setup(r => r.ResolveAll<SequenceBeforeTest>())
             .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(r => r.ResolveAll<SequenceAfterTest>())
@@ -385,7 +386,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Create a test case runner
         var runner = new DefaultTestCaseRunner(_context);
-        runner.Run(Receive("fooMessageEndpoint")
+        await runner.Run(Receive("fooMessageEndpoint")
             .Message()
             .Body("<TestRequest><Message>Hello World!</Message></TestRequest>"));
 
@@ -410,7 +411,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveBuilderWithTimeout()
+    public async Task TestReceiveBuilderWithTimeout()
     {
         // Reset mocks to their default states
         _messageEndpoint.Reset();
@@ -420,12 +421,12 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         // Define mock behaviors
         _messageEndpoint.Setup(m => m.CreateConsumer()).Returns(_messageConsumer.Object);
         _messageConsumer.Setup(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
+            .ReturnsAsync(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
                 .SetHeader("operation", "foo"));
 
         // Create test case runner
         var runner = new DefaultTestCaseRunner(_context);
-        runner.Run(new ReceiveMessageAction.Builder()
+        await runner.Run(new ReceiveMessageAction.Builder()
             .Endpoint(_messageEndpoint.Object)
             .Message()
             .Body("<TestRequest><Message>Hello World!</Message></TestRequest>")
@@ -453,7 +454,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveBuilderWithHeaders()
+    public async Task TestReceiveBuilderWithHeaders()
     {
         // Reset mocks to their default states
         _messageEndpoint.Reset();
@@ -465,14 +466,14 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _messageEndpoint.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
         _configuration.Setup(c => c.Timeout).Returns(100L);
         _messageConsumer.Setup(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
+            .ReturnsAsync(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
                 .SetHeader("some", "value")
                 .SetHeader("operation", "sayHello")
                 .SetHeader("foo", "bar"));
 
         // Create the first test case runner
         var runner = new DefaultTestCaseRunner(_context);
-        runner.Run(new ReceiveMessageAction.Builder()
+        await runner.Run(new ReceiveMessageAction.Builder()
             .Endpoint(_messageEndpoint.Object)
             .Message()
             .Body("<TestRequest><Message>Hello World!</Message></TestRequest>")
@@ -482,7 +483,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
             .Build());
 
         // Create the second test case runner
-        runner.Run(new ReceiveMessageAction.Builder()
+        await runner.Run(new ReceiveMessageAction.Builder()
             .Endpoint(_messageEndpoint.Object)
             .Message()
             .Header("operation", "sayHello")
@@ -533,7 +534,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveBuilderWithHeaderData()
+    public async Task TestReceiveBuilderWithHeaderData()
     {
         // Reset mocks
         _messageEndpoint.Reset();
@@ -545,14 +546,14 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _messageEndpoint.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
         _configuration.Setup(c => c.Timeout).Returns(100L);
         _messageConsumer.Setup(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
+            .ReturnsAsync(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
                 .SetHeader("operation", "foo")
                 .AddHeaderData("<Header><Name>operation</Name><Value>foo</Value></Header>"));
 
         var runner = new DefaultTestCaseRunner(_context);
 
         // First test run
-        runner.Run(new ReceiveMessageAction.Builder()
+        await runner.Run(new ReceiveMessageAction.Builder()
             .Endpoint(_messageEndpoint.Object)
             .Message()
             .Body("<TestRequest><Message>Hello World!</Message></TestRequest>")
@@ -560,7 +561,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
             .Build());
 
         // Second test run
-        runner.Run(new ReceiveMessageAction.Builder()
+        await runner.Run(new ReceiveMessageAction.Builder()
             .Endpoint(_messageEndpoint.Object)
             .Message(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>"))
             .Header("<Header><Name>operation</Name><Value>foo</Value></Header>")
@@ -606,7 +607,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveBuilderWithMultipleHeaderData()
+    public async Task TestReceiveBuilderWithMultipleHeaderData()
     {
         // Reset mocks
         _messageEndpoint.Reset();
@@ -618,7 +619,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _messageEndpoint.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
         _configuration.Setup(c => c.Timeout).Returns(100L);
         _messageConsumer.Setup(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
+            .ReturnsAsync(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
                 .SetHeader("operation", "foo")
                 .AddHeaderData("<Header><Name>operation</Name><Value>foo1</Value></Header>")
                 .AddHeaderData("<Header><Name>operation</Name><Value>foo2</Value></Header>"));
@@ -626,7 +627,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         var runner = new DefaultTestCaseRunner(_context);
 
         // First test run
-        runner.Run(new ReceiveMessageAction.Builder()
+        await runner.Run(new ReceiveMessageAction.Builder()
             .Endpoint(_messageEndpoint.Object)
             .Message()
             .Body("<TestRequest><Message>Hello World!</Message></TestRequest>")
@@ -635,7 +636,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
             .Build());
 
         // Second test run
-        runner.Run(new ReceiveMessageAction.Builder()
+        await runner.Run(new ReceiveMessageAction.Builder()
             .Endpoint(_messageEndpoint.Object)
             .Message(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>"))
             .Header("<Header><Name>operation</Name><Value>foo1</Value></Header>")
@@ -673,7 +674,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         // Validate the properties of the second action
         ClassicAssert.AreEqual("receive", action.Name);
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
-        ClassicAssert.AreEqual(MessageType.XML.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.XML), action.MessageType);
         ClassicAssert.IsInstanceOf<StaticMessageBuilder>(action.MessageBuilder);
         ClassicAssert.AreEqual("<TestRequest><Message>Hello World!</Message></TestRequest>",
             ((StaticMessageBuilder)action.MessageBuilder).GetMessage().Payload);
@@ -686,7 +687,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveBuilderWithHeaderDataBuilder()
+    public async Task TestReceiveBuilderWithHeaderDataBuilder()
     {
         // Reset mocks
         _referenceResolver.Reset();
@@ -699,12 +700,12 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _messageEndpoint.Setup(m => m.EndpointConfiguration).Returns(_configuration.Object);
         _configuration.Setup(c => c.Timeout).Returns(100L);
         _messageConsumer.Setup(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(new DefaultMessage()
+            .ReturnsAsync(new DefaultMessage()
                 .AddHeaderData("<TestRequest><Message>Hello Agenix!</Message></TestRequest>")
                 .SetHeader("operation", "foo"));
 
         _referenceResolver.Setup(r => r.Resolve<TestContext>()).Returns(_context);
-        _referenceResolver.Setup(r => r.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
+        _referenceResolver.Setup(r => r.Resolve<AsyncTestActionListeners>()).Returns(new AsyncTestActionListeners());
         _referenceResolver.Setup(r => r.ResolveAll<SequenceBeforeTest>())
             .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(r => r.ResolveAll<SequenceAfterTest>())
@@ -713,7 +714,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _context.SetReferenceResolver(_referenceResolver.Object);
 
         var runner = new DefaultTestCaseRunner(_context);
-        runner.Run(new ReceiveMessageAction.Builder()
+        await runner.Run(new ReceiveMessageAction.Builder()
             .Endpoint(_messageEndpoint.Object)
             .Message()
             .Header(_ => "<TestRequest><Message>Hello Agenix!</Message></TestRequest>")
@@ -744,7 +745,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveBuilderWithHeaderResource()
+    public async Task TestReceiveBuilderWithHeaderResource()
     {
         // Reset mocks
         _resource.Reset();
@@ -758,10 +759,10 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _configuration.Setup(c => c.Timeout).Returns(100L);
 
         _messageConsumer.SetupSequence(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
+            .ReturnsAsync(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
                 .SetHeader("operation", "foo")
                 .AddHeaderData("<Header><Name>operation</Name><Value>foo</Value></Header>"))
-            .Returns(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
+            .ReturnsAsync(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
                 .SetHeader("operation", "bar")
                 .AddHeaderData("<Header><Name>operation</Name><Value>bar</Value></Header>"));
 
@@ -776,7 +777,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         var runner = new DefaultTestCaseRunner(_context);
 
         // First test run
-        runner.Run(new ReceiveMessageAction.Builder()
+        await runner.Run(new ReceiveMessageAction.Builder()
             .Endpoint(_messageEndpoint.Object)
             .Message()
             .Body("<TestRequest><Message>Hello World!</Message></TestRequest>")
@@ -784,7 +785,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
             .Build());
 
         // Second test run
-        runner.Run(new ReceiveMessageAction.Builder()
+        await runner.Run(new ReceiveMessageAction.Builder()
             .Endpoint(_messageEndpoint.Object)
             .Message(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>"))
             .Header(_resource.Object)
@@ -830,7 +831,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveBuilderWithMultipleHeaderResource()
+    public async Task TestReceiveBuilderWithMultipleHeaderResource()
     {
         // Reset mocks
         _resource.Reset();
@@ -844,7 +845,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _configuration.Setup(c => c.Timeout).Returns(100L);
 
         _messageConsumer.Setup(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
+            .ReturnsAsync(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
                 .SetHeader("operation", "foo")
                 .AddHeaderData("<Header><Name>operation</Name><Value>sayHello</Value></Header>")
                 .AddHeaderData("<Header><Name>operation</Name><Value>foo</Value></Header>")
@@ -860,7 +861,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         var runner = new DefaultTestCaseRunner(_context);
 
         // First test run
-        runner.Run(new ReceiveMessageAction.Builder()
+        await runner.Run(new ReceiveMessageAction.Builder()
             .Endpoint(_messageEndpoint.Object)
             .Message()
             .Body("<TestRequest><Message>Hello World!</Message></TestRequest>")
@@ -870,7 +871,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
             .Build());
 
         // Second test run
-        runner.Run(new ReceiveMessageAction.Builder()
+        await runner.Run(new ReceiveMessageAction.Builder()
             .Endpoint(_messageEndpoint.Object)
             .Message(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>"))
             .Header("<Header><Name>operation</Name><Value>sayHello</Value></Header>")
@@ -910,7 +911,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Validate the properties of the second action
         ClassicAssert.AreEqual("receive", action.Name);
-        ClassicAssert.AreEqual(MessageType.XML.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.XML), action.MessageType);
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
         ClassicAssert.IsInstanceOf<StaticMessageBuilder>(action.MessageBuilder);
         ClassicAssert.AreEqual("<TestRequest><Message>Hello World!</Message></TestRequest>",
@@ -926,7 +927,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveBuilderWithValidator()
+    public async Task TestReceiveBuilderWithValidator()
     {
         // Reset mocks
         _messageEndpoint.Reset();
@@ -939,13 +940,13 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _configuration.Setup(c => c.Timeout).Returns(100L);
 
         _messageConsumer.Setup(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(new DefaultMessage("TestMessage").SetHeader("operation", "sayHello"));
+            .ReturnsAsync(new DefaultMessage("TestMessage").SetHeader("operation", "sayHello"));
 
         var validator = new DefaultTextEqualsMessageValidator();
 
         var runner = new DefaultTestCaseRunner(_context);
 
-        runner.Run(new ReceiveMessageAction.Builder()
+        await runner.Run(new ReceiveMessageAction.Builder()
             .Endpoint(_messageEndpoint.Object)
             .Message()
             .Type(MessageType.PLAINTEXT)
@@ -967,7 +968,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         // Validate the properties of the action
         ClassicAssert.AreEqual("receive", action.Name);
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
-        ClassicAssert.AreEqual(MessageType.PLAINTEXT.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.PLAINTEXT), action.MessageType);
         ClassicAssert.AreEqual(1, action.Validators.Count);
         ClassicAssert.AreEqual(validator, action.Validators[0]);
 
@@ -979,7 +980,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveBuilderWithValidatorName()
+    public async Task TestReceiveBuilderWithValidatorName()
     {
         var validator = new DefaultTextEqualsMessageValidator();
 
@@ -995,11 +996,11 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _configuration.Setup(c => c.Timeout).Returns(100L);
 
         _messageConsumer.Setup(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(new DefaultMessage("TestMessage").SetHeader("operation", "sayHello"));
+            .ReturnsAsync(new DefaultMessage("TestMessage").SetHeader("operation", "sayHello"));
 
         _referenceResolver.Setup(r => r.Resolve<TestContext>()).Returns(_context);
         _referenceResolver.Setup(r => r.Resolve("plainTextValidator")).Returns(validator);
-        _referenceResolver.Setup(r => r.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
+        _referenceResolver.Setup(r => r.Resolve<AsyncTestActionListeners>()).Returns(new AsyncTestActionListeners());
         _referenceResolver.Setup(r => r.ResolveAll<SequenceBeforeTest>())
             .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(r => r.ResolveAll<SequenceAfterTest>())
@@ -1009,7 +1010,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         var runner = new DefaultTestCaseRunner(_context);
 
-        runner.Run(Receive(_messageEndpoint.Object)
+        await runner.Run(Receive(_messageEndpoint.Object)
             .Message()
             .Type(MessageType.PLAINTEXT)
             .Body("TestMessage")
@@ -1029,7 +1030,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         // Validate the properties of the action
         ClassicAssert.AreEqual("receive", action.Name);
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
-        ClassicAssert.AreEqual(MessageType.PLAINTEXT.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.PLAINTEXT), action.MessageType);
         ClassicAssert.AreEqual(1, action.Validators.Count);
         ClassicAssert.AreEqual(validator, action.Validators[0]);
 
@@ -1041,7 +1042,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveBuilderWithSelector()
+    public async Task TestReceiveBuilderWithSelector()
     {
         var selectiveConsumer = new Mock<ISelectiveConsumer>();
 
@@ -1057,14 +1058,14 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         selectiveConsumer.Setup(m => m.Receive(It.Is<string>(s => s == "operation = 'sayHello'"),
                 It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
+            .ReturnsAsync(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
                 .SetHeader("operation", "sayHello"));
 
         var messageSelector = new Dictionary<string, object> { { "operation", "sayHello" } };
 
         var runner = new DefaultTestCaseRunner(_context);
 
-        runner.Run(Receive(_messageEndpoint.Object)
+        await runner.Run(Receive(_messageEndpoint.Object)
             .Message()
             .Body("<TestRequest><Message>Hello World!</Message></TestRequest>")
             .Selector(messageSelector));
@@ -1089,7 +1090,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveBuilderWithSelectorExpression()
+    public async Task TestReceiveBuilderWithSelectorExpression()
     {
         var selectiveConsumer = new Mock<ISelectiveConsumer>();
 
@@ -1105,12 +1106,12 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         selectiveConsumer.Setup(m => m.Receive(It.Is<string>(s => s == "operation = 'sayHello'"),
                 It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
+            .ReturnsAsync(new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>")
                 .SetHeader("operation", "sayHello"));
 
         var runner = new DefaultTestCaseRunner(_context);
 
-        runner.Run(Receive(_messageEndpoint.Object)
+        await runner.Run(Receive(_messageEndpoint.Object)
             .Message()
             .Body("<TestRequest><Message>Hello World!</Message></TestRequest>")
             .Selector("operation = 'sayHello'")
@@ -1137,7 +1138,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveBuilderExtractor()
+    public async Task TestReceiveBuilderExtractor()
     {
         void Extractor(IMessage message, TestContext context)
         {
@@ -1160,10 +1161,10 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _configuration.Setup(c => c.Timeout).Returns(100L);
 
         _messageConsumer.Setup(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(received);
+            .ReturnsAsync(received);
 
         _referenceResolver.Setup(r => r.Resolve<TestContext>()).Returns(_context);
-        _referenceResolver.Setup(r => r.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
+        _referenceResolver.Setup(r => r.Resolve<AsyncTestActionListeners>()).Returns(new AsyncTestActionListeners());
         _referenceResolver.Setup(r => r.ResolveAll<SequenceBeforeTest>())
             .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(r => r.ResolveAll<SequenceAfterTest>())
@@ -1173,7 +1174,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         var runner = new DefaultTestCaseRunner(_context);
 
-        runner.Run(Receive(_messageEndpoint.Object)
+        await runner.Run(Receive(_messageEndpoint.Object)
             .Message()
             .Body("<TestRequest><Message lang=\"ENG\">Hello World!</Message></TestRequest>")
             .Process((VariableExtractor)Extractor));
@@ -1203,9 +1204,12 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveBuilderExtractFromHeader()
+    public async Task TestReceiveBuilderExtractFromHeader()
     {
-        VariableExtractor extractor = (message, context) => context.SetVariable("messageId", message.Id);
+        void Extractor(IMessage message, TestContext context)
+        {
+            context.SetVariable("messageId", message.Id);
+        }
 
         // Setup mock behaviors
         _messageEndpoint.Setup(m => m.CreateConsumer()).Returns(_messageConsumer.Object);
@@ -1216,19 +1220,19 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
             .SetHeader("operation", "sayHello")
             .SetHeader("requestId", "123456");
         _messageConsumer.Setup(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(received);
+            .ReturnsAsync(received);
 
         // Run test case
         var runner = new DefaultTestCaseRunner(_context);
 
-        runner.Run(Receive(_messageEndpoint.Object)
+        await runner.Run(Receive(_messageEndpoint.Object)
             .Message()
             .Body("<TestRequest><Message lang=\"ENG\">Hello World!</Message></TestRequest>")
             .Extract(MessageSupport.Message()
                 .Headers()
                 .Header("operation", "operationHeader")
                 .Header("requestId", "id"))
-            .Process(extractor));
+            .Process((VariableExtractor)Extractor));
 
         // Validate variable extraction
         ClassicAssert.IsNotNull(_context.GetVariable("operationHeader"));
@@ -1260,7 +1264,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveBuilderWithValidationProcessor()
+    public async Task TestReceiveBuilderWithValidationProcessor()
     {
         var callback = new Mock<AbstractValidationProcessor<dynamic>>();
 
@@ -1270,15 +1274,15 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
         _configuration.Setup(c => c.Timeout).Returns(100L);
 
         _messageConsumer.Setup(m => m.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(new DefaultMessage("TestMessage").SetHeader("operation", "sayHello"));
+            .ReturnsAsync(new DefaultMessage("TestMessage").SetHeader("operation", "sayHello"));
 
 
         callback.Setup(c => c.Validate(It.IsAny<IMessage>(), It.IsAny<TestContext>()));
 
-        // Run test case
+        // Run a test case
         var runner = new DefaultTestCaseRunner(_context);
 
-        runner.Run(Receive(_messageEndpoint.Object)
+        await runner.Run(Receive(_messageEndpoint.Object)
             .Message()
             .Type(MessageType.PLAINTEXT)
             .Body("TestMessage")
@@ -1292,7 +1296,7 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         var action = (ReceiveMessageAction)test.GetActions()[0];
         ClassicAssert.AreEqual("receive", action.Name);
-        ClassicAssert.AreEqual(MessageType.PLAINTEXT.ToString(), action.MessageType);
+        ClassicAssert.AreEqual(nameof(MessageType.PLAINTEXT), action.MessageType);
         ClassicAssert.AreEqual(_messageEndpoint.Object, action.Endpoint);
         ClassicAssert.AreEqual(callback.Object, action.Processor);
 

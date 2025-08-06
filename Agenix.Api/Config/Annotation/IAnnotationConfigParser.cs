@@ -116,7 +116,7 @@ public interface IAnnotationConfigParser<in TAttribute, out TEndpoint> : IAnnota
     ///     A dictionary where the key is the name of the annotation config parser
     ///     and the value is the corresponding IAnnotationConfigParser instance.
     /// </returns>
-    public static Dictionary<string, IAnnotationConfigParser> Lookup()
+    static Dictionary<string, IAnnotationConfigParser> Lookup()
     {
         return ParsersCache.Value;
     }
@@ -129,7 +129,7 @@ public interface IAnnotationConfigParser<in TAttribute, out TEndpoint> : IAnnota
     ///     An Optional containing the corresponding IAnnotationConfigParser instance if found, otherwise an empty
     ///     Optional.
     /// </returns>
-    public static Optional<IAnnotationConfigParser> Lookup(string parser)
+    static Optional<IAnnotationConfigParser> Lookup(string parser)
     {
         return IndividualLookupCache.Value.GetOrAdd(parser, key =>
         {

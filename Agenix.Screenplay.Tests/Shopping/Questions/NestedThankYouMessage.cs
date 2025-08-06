@@ -7,14 +7,14 @@ namespace Agenix.Screenplay.Tests.Shopping.Questions;
 
 public class NestedThankYouMessage : IQuestionDiagnostics, IQuestion<string>
 {
-    public string AnsweredBy(Actor actor)
+    public async Task<string> AnsweredBy(Actor actor)
     {
-        actor.Should(
+        await actor.Should(
             SeeThat(TheThankYouMessage(), EqualTo("You're welcome")),
             SeeThat(TheThankYouMessage(), EqualTo("No problem")),
             SeeThat(TheThankYouMessage(), EqualTo("Thank you!"))
         );
-        return TheThankYouMessage().AnsweredBy(actor);
+        return await TheThankYouMessage().AnsweredBy(actor);
     }
 
     public Type OnError()

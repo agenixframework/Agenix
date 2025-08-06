@@ -144,7 +144,7 @@ public class VideoAction : AbstractPlaywrightAction
         }
 
         var savePath = context.ReplaceDynamicContentInString(_path);
-        await video.SaveAsAsync(savePath);
+        await video.SaveAsAsync(savePath ?? throw new InvalidOperationException("The save path is null or empty"));
 
         // Store the path in context for potential use by other actions
         context.SetVariable(PlaywrightHeaders.PlaywrightVideoSavedPath, savePath);

@@ -38,7 +38,7 @@ namespace Agenix.GraphQL.Actions;
 ///     Supports initiating client GraphQL operations including queries, mutations, and subscriptions.
 ///     Extends behavior to resolve references dynamically during action construction.
 /// </summary>
-public class GraphQLClientActionBuilder : AbstractReferenceResolverAwareTestActionBuilder<ITestAction>
+public class GraphQLClientActionBuilder : AbstractReferenceResolverAwareTestActionBuilder<IAsyncTestAction>
 {
     /// Represents the target HTTP client that interacts with a defined endpoint.
     private readonly IEndpoint? _graphQLClient;
@@ -72,7 +72,7 @@ public class GraphQLClientActionBuilder : AbstractReferenceResolverAwareTestActi
     /// <returns>A builder for further configuration of the client receive action.</returns>
     public GraphQLClientReceiveActionBuilder Receive()
     {
-        return new GraphQLClientReceiveActionBuilder(_graphQLClient, _graphQLClientUri, referenceResolver, _delegate);
+        return new GraphQLClientReceiveActionBuilder(_graphQLClient, _graphQLClientUri, ReferenceResolver, _delegate);
     }
 
     /// <summary>
@@ -82,7 +82,7 @@ public class GraphQLClientActionBuilder : AbstractReferenceResolverAwareTestActi
     /// <returns>A builder for further configuration of the client send action.</returns>
     public GraphQLClientSendActionBuilder Send()
     {
-        return new GraphQLClientSendActionBuilder(_graphQLClient, _graphQLClientUri, referenceResolver, _delegate);
+        return new GraphQLClientSendActionBuilder(_graphQLClient, _graphQLClientUri, ReferenceResolver, _delegate);
     }
 
     /// <summary>
@@ -90,9 +90,9 @@ public class GraphQLClientActionBuilder : AbstractReferenceResolverAwareTestActi
     /// </summary>
     /// <param name="referenceResolver">The reference resolver instance to set.</param>
     /// <returns>This instance of GraphQLClientActionBuilder for method chaining.</returns>
-    public GraphQLClientActionBuilder WithReferenceResolver(IReferenceResolver referenceResolver)
+    public GraphQLClientActionBuilder WithReferenceResolver(IReferenceResolver? referenceResolver)
     {
-        this.referenceResolver = referenceResolver;
+        ReferenceResolver = referenceResolver;
         return this;
     }
 
@@ -101,7 +101,7 @@ public class GraphQLClientActionBuilder : AbstractReferenceResolverAwareTestActi
     ///     Ensures that the delegate action is not null and invokes its build process.
     /// </summary>
     /// <returns>A fully constructed instance of a test action.</returns>
-    public override ITestAction Build()
+    public override IAsyncTestAction Build()
     {
         ObjectHelper.AssertNotNull(_delegate, "Missing delegate action to build");
         return _delegate.Build();
@@ -117,7 +117,7 @@ public class GraphQLClientActionBuilder : AbstractReferenceResolverAwareTestActi
         IEndpoint? httpClient,
         string? httpClientUri,
         IReferenceResolver referenceResolver,
-        ITestActionBuilder<ITestAction> newDelegate)
+        IAsyncTestActionBuilder<IAsyncTestAction> newDelegate)
     {
         /// Configures the GraphQL response action builder for receiving a response from an GraphQL client or URI.
         /// If the provided GraphQL client endpoint is not null, it sets the endpoint for the action builder
@@ -154,7 +154,7 @@ public class GraphQLClientActionBuilder : AbstractReferenceResolverAwareTestActi
         IEndpoint? httpClient,
         string? httpClientUri,
         IReferenceResolver referenceResolver,
-        ITestActionBuilder<ITestAction> newDelegate)
+        IAsyncTestActionBuilder<IAsyncTestAction> newDelegate)
     {
         /// <summary>
         ///     Creates and configures a GraphQL client request action builder for executing a specified GraphQL operation.

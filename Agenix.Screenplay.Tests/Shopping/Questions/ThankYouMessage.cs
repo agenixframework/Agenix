@@ -4,9 +4,9 @@ namespace Agenix.Screenplay.Tests.Shopping.Questions;
 
 public class ThankYouMessage : IQuestionDiagnostics, IQuestion<string>
 {
-    public string AnsweredBy(Actor actor)
+    public Task<string> AnsweredBy(Actor actor)
     {
-        return "Thank you!";
+        return Task.FromResult("Thank you!");
     }
 
     public Type OnError()

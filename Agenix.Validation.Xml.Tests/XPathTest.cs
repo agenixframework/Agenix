@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -44,7 +44,7 @@ public class XPathTest : AbstractNUnitSetUp
     private readonly Mock<IEndpointConfiguration> _endpointConfiguration = new();
 
     [Test]
-    public void TestUsingXPath()
+    public async Task TestUsingXPath()
     {
         _endpoint.Reset();
         _consumer.Reset();
@@ -65,7 +65,7 @@ public class XPathTest : AbstractNUnitSetUp
                                          "</ns1:root>");
 
 
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).Returns(message);
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -91,14 +91,14 @@ public class XPathTest : AbstractNUnitSetUp
             .Validate(validationContext)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         // Optional: Add verification that the action was called correctly
         _consumer.Verify(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()), Times.Once);
     }
 
     [Test]
-    public void TestUsingXPathWithDefaultNamespace()
+    public async Task TestUsingXPathWithDefaultNamespace()
     {
         // Arrange
         _endpoint.Reset();
@@ -121,7 +121,7 @@ public class XPathTest : AbstractNUnitSetUp
             "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -149,14 +149,11 @@ public class XPathTest : AbstractNUnitSetUp
             .Build();
 
         // Assert
-        receiveAction.Execute(Context);
-
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestUsingXPathWithExplicitNamespace()
+    public async Task TestUsingXPathWithExplicitNamespace()
     {
         // Arrange
         _endpoint.Reset();
@@ -179,7 +176,7 @@ public class XPathTest : AbstractNUnitSetUp
             "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -202,14 +199,11 @@ public class XPathTest : AbstractNUnitSetUp
             .Build();
 
         // Assert
-        receiveAction.Execute(Context);
-
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestValidateMessageElementsUsingXPathWithResultTypes()
+    public async Task TestValidateMessageElementsUsingXPathWithResultTypes()
     {
         // Arrange
         _endpoint.Reset();
@@ -232,7 +226,7 @@ public class XPathTest : AbstractNUnitSetUp
             "</ns1:root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -271,14 +265,11 @@ public class XPathTest : AbstractNUnitSetUp
             .Build();
 
         // Assert
-        receiveAction.Execute(Context);
-
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestExtractMessageValuesUsingXPathWithExplicitNamespaceContext()
+    public async Task TestExtractMessageValuesUsingXPathWithExplicitNamespaceContext()
     {
         // Arrange
         _endpoint.Reset();
@@ -306,7 +297,7 @@ public class XPathTest : AbstractNUnitSetUp
             "</ns1:root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         // Map XPath expressions with explicit namespace prefixes to variable names
         var extractMessageElements = new Dictionary<string, object>
@@ -362,7 +353,7 @@ public class XPathTest : AbstractNUnitSetUp
             .Process(variableExtractor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         // Assert - Verify all extracted variables from default namespace elements
         Assert.That(Context.GetVariable("defaultNsElementA"), Is.Not.Null);
@@ -429,7 +420,7 @@ public class XPathTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExtractMessageValuesWithDynamicNamespaceMapping()
+    public async Task TestExtractMessageValuesWithDynamicNamespaceMapping()
     {
         // Arrange
         _endpoint.Reset();
@@ -453,7 +444,7 @@ public class XPathTest : AbstractNUnitSetUp
             "</ns1:root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var extractMessageElements = new Dictionary<string, object>
         {
@@ -487,7 +478,7 @@ public class XPathTest : AbstractNUnitSetUp
             .Process(variableExtractor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         // Assert
         Assert.That(Context.GetVariable("dynamicElement"), Is.Not.Null);
@@ -504,7 +495,7 @@ public class XPathTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExtractMessageValuesWithMixedNamespaceApproaches()
+    public async Task TestExtractMessageValuesWithMixedNamespaceApproaches()
     {
         // Arrange
         _endpoint.Reset();
@@ -524,7 +515,7 @@ public class XPathTest : AbstractNUnitSetUp
             "</ns1:root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         // Mix of explicit namespace prefixes and dot notation
         var extractMessageElements = new Dictionary<string, object>
@@ -561,7 +552,7 @@ public class XPathTest : AbstractNUnitSetUp
             .Process(variableExtractor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         // Assert
         Assert.That(Context.GetVariable("explicitNsValue"), Is.Not.Null);

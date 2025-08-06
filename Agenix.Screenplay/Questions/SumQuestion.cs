@@ -37,8 +37,9 @@ public class SumQuestion(IQuestion<ICollection<int>> listQuestion) : IQuestion<i
     /// </summary>
     /// <param name="actor">The actor who answers the question.</param>
     /// <returns>The sum of the integers in the collection.</returns>
-    public int AnsweredBy(Actor actor)
+    public async Task<int> AnsweredBy(Actor actor)
     {
-        return listQuestion.AnsweredBy(actor).Sum();
+        var list = await listQuestion.AnsweredBy(actor);
+        return list.Sum();
     }
 }

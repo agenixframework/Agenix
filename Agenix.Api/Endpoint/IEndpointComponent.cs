@@ -40,7 +40,7 @@ namespace Agenix.Api.Endpoint;
 /// </summary>
 public interface IEndpointComponent
 {
-    public static string EndpointName = "endpointName";
+    static string EndpointName = "endpointName";
 
     /// <summary>
     ///     Logger.
@@ -111,7 +111,7 @@ public interface IEndpointComponent
     ///     A dictionary where the key is a string representing the endpoint type and the value is an instance of
     ///     IEndpointComponent.
     /// </returns>
-    public static IDictionary<string, IEndpointComponent> Lookup()
+    static IDictionary<string, IEndpointComponent> Lookup()
     {
         return ComponentsCache.Value;
     }
@@ -127,7 +127,7 @@ public interface IEndpointComponent
     ///     An <see cref="Optional{T}" /> containing the <see cref="IEndpointComponent" /> instance if found, otherwise an
     ///     empty <see cref="Optional{T}" />.
     /// </returns>
-    public static Optional<IEndpointComponent> Lookup(string validator)
+    static Optional<IEndpointComponent> Lookup(string validator)
     {
         try
         {

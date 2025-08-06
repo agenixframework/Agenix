@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -26,39 +26,69 @@
 
 using Agenix.Api.Exceptions;
 using Agenix.Core;
+using Agenix.Core.Validation;
 using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Http.Tests;
 
-public class AbstractNUnitSetUp
+public abstract class AbstractNUnitSetUp
 {
-    protected readonly TestContextFactory TestContextFactory;
-    protected TestContext Context;
+    protected TestContext Context { get; private set; }
 
-    public AbstractNUnitSetUp()
-    {
-        // Initialize the TestContextFactory using the method
-        TestContextFactory = CreateTestContextFactory();
-    }
+    protected TestContextFactory TestContextFactory { get; private set; }
 
     [SetUp]
     public void Setup()
     {
+        // Create completely isolated instances for each test
+        TestContextFactory = CreateTestContextFactory();
         Context = CreateTestContext();
     }
 
     [TearDown]
     public void TearDown()
     {
-        Context.Clear();
+        try
+        {
+            Context?.Clear();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Warning: Error during context cleanup: {ex.Message}");
+        }
+        finally
+        {
+            // Dispose resources safely
+            if (Context is IDisposable disposableContext)
+            {
+                try { disposableContext.Dispose(); }
+                catch (Exception ex) { Console.WriteLine($"Warning: Error disposing context: {ex.Message}"); }
+            }
+
+            if (TestContextFactory is IDisposable disposableFactory)
+            {
+                try { disposableFactory.Dispose(); }
+                catch (Exception ex) { Console.WriteLine($"Warning: Error disposing factory: {ex.Message}"); }
+            }
+
+            Context = null;
+            TestContextFactory = null;
+        }
     }
 
     protected virtual TestContextFactory CreateTestContextFactory()
     {
-        return TestContextFactory.NewInstance();
+        var factory = TestContextFactory.NewInstance();
+        ConfigureMessageValidators(factory);
+        return factory;
     }
 
-    protected TestContext CreateTestContext()
+    protected virtual void ConfigureMessageValidators(TestContextFactory factory)
+    {
+        factory.MessageValidatorRegistry.AddMessageValidator("header", new DefaultMessageHeaderValidator());
+    }
+
+    protected virtual TestContext CreateTestContext()
     {
         try
         {

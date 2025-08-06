@@ -39,22 +39,42 @@ public class BindingInstanceProvider
     private readonly Dictionary<Type, object> _bindingInstances = new();
 
     // Count of cached bindings
+    /// Gets the number of cached binding instances currently managed by the provider.
+    /// This property represents the count of bindings that are stored in the internal cache.
+    /// Each binding in the cache is associated with its specific type.
     public int BindingCount => _bindingInstances.Count;
 
     // Directly access the ObjectContainer
+    /// Provides access to the object container used for managing dependencies and resolving instances.
+    /// This property holds the reference to the container that is utilized to retrieve instances of registered types.
+    /// It acts as a direct link to the underlying dependency injection system, allowing resolution of bindings dynamically.
     public IObjectContainer Container { get; private set; }
 
     // Set the object container reference
+    /// <summary>
+    ///     Sets the object container reference for resolving dependencies and managing object instances.
+    /// </summary>
+    /// <param name="objectContainer">The object container to be associated with the provider.</param>
     public void SetObjectContainer(IObjectContainer objectContainer)
     {
         Container = objectContainer;
     }
 
+    /// <summary>
+    ///     Registers a binding instance of the specified type.
+    /// </summary>
+    /// <param name="instance">The instance to be registered for the specified type.</param>
+    /// <typeparam name="T">The type of the binding instance to register.</typeparam>
     public void RegisterBinding<T>(T instance) where T : class
     {
         _bindingInstances[typeof(T)] = instance;
     }
 
+    /// <summary>
+    ///     Retrieves the binding instance of the specified type.
+    /// </summary>
+    /// <typeparam name="T">The type of the binding instance to retrieve.</typeparam>
+    /// <returns>The binding instance of the specified type if found, otherwise null.</returns>
     public T GetBinding<T>() where T : class
     {
         // First try our cache
@@ -81,12 +101,23 @@ public class BindingInstanceProvider
     }
 
     // Get all registered bindings from our dictionary
+    /// <summary>
+    ///     Retrieves all cached binding instances as a read-only dictionary, where the key represents the type and the value
+    ///     represents the instance.
+    /// </summary>
+    /// <returns>A read-only dictionary containing all registered binding instances.</returns>
     public IReadOnlyDictionary<Type, object> GetAllCachedBindings()
     {
         return _bindingInstances;
     }
 
     // Find all types with the [Binding] attribute and resolve them from the container
+    /// <summary>
+    ///     Retrieves all binding instances marked with the [Binding] attribute by scanning loaded assemblies
+    ///     and resolving them from the associated object container.
+    ///     Instances are also cached internally for future access.
+    /// </summary>
+    /// <returns>A collection of resolved binding instances from the object container.</returns>
     public IEnumerable<object> GetAllBindingInstances()
     {
         if (Container == null)
@@ -139,6 +170,10 @@ public class BindingInstanceProvider
     }
 
     // Get all binding types from all loaded assemblies
+    /// <summary>
+    ///     Retrieves all types from the loaded assemblies that are decorated with the [Binding] attribute.
+    /// </summary>
+    /// <returns>A collection of types that have the [Binding] attribute applied.</returns>
     public IEnumerable<Type> GetAllBindingTypes()
     {
         // Get all loaded assemblies
@@ -161,6 +196,14 @@ public class BindingInstanceProvider
     }
 
     // Get bindings from our cache by predicate
+    /// <summary>
+    ///     Retrieves binding instances that satisfy the specified predicate from the cached bindings.
+    /// </summary>
+    /// <param name="predicate">
+    ///     The predicate to evaluate. It takes a type and its corresponding object as input and returns a
+    ///     boolean indicating whether the binding satisfies the condition.
+    /// </param>
+    /// <returns>A collection of binding instances that satisfy the specified predicate.</returns>
     public IEnumerable<object> GetBindingsWhere(Func<Type, object, bool> predicate)
     {
         return _bindingInstances
@@ -169,6 +212,9 @@ public class BindingInstanceProvider
     }
 
     // Clear our binding cache
+    /// <summary>
+    ///     Clears all cached binding instances from the internal storage, removing all registered bindings.
+    /// </summary>
     public void ClearBindings()
     {
         _bindingInstances.Clear();

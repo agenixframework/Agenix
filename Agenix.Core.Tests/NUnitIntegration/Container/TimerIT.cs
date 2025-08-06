@@ -7,23 +7,25 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Threading.Tasks;
+using Agenix.Api;
 using Agenix.Api.Annotations;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
@@ -39,15 +41,15 @@ namespace Agenix.Core.Tests.NUnitIntegration.Container;
 public class TimerIT
 {
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
-    [AgenixResource] private IGherkinTestActionRunner _gherkin;
+    [AgenixResource] private IGherkinAsyncTestActionRunner _gherkin;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
 
     [Test]
-    public void TimerTest()
+    public async Task TimerTest()
     {
-        _gherkin.Given(DoFinally().Actions(StopTimer("forkedTimer")));
+        await _gherkin.Given(DoFinally().Actions(StopTimer("forkedTimer")));
 
-        _gherkin.When(Timer()
+        await _gherkin.When(Timer()
             .TimerId("forkedTimer")
             .Interval(100)
             .Fork(true)
@@ -57,7 +59,7 @@ public class TimerIT
                 Sleep().Milliseconds(50)
             ));
 
-        _gherkin.When(Timer()
+        await _gherkin.When(Timer()
             .RepeatCount(3)
             .Interval(100)
             .Delay(50)
@@ -66,7 +68,7 @@ public class TimerIT
                 Echo(
                     "I'm going to repeat this message 3 times before the next test actions are executed")
             ));
-        _gherkin.Then(Echo(
+        await _gherkin.Then(Echo(
             "Test almost complete. Make sure all timers running in the background are stopped"));
     }
 }

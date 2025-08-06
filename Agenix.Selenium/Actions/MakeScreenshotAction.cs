@@ -69,7 +69,7 @@ public class MakeScreenshotAction : AbstractSeleniumAction
     /// </summary>
     /// <param name="browser">The SeleniumBrowser instance used to perform the action.</param>
     /// <param name="context">The TestContext instance containing contextual data for the test.</param>
-    protected override void Execute(SeleniumBrowser browser, TestContext context)
+    protected override Task Execute(SeleniumBrowser browser, TestContext context)
     {
         ScreenshotPath = string.Empty;
 
@@ -89,7 +89,7 @@ public class MakeScreenshotAction : AbstractSeleniumAction
         else
         {
             Logger.LogWarning("Skip screenshot action because web driver is missing screenshot features");
-            return;
+            return Task.CompletedTask;
         }
 
         if (!string.IsNullOrEmpty(ScreenshotPath))
@@ -110,6 +110,8 @@ public class MakeScreenshotAction : AbstractSeleniumAction
                 browser.StoreFile(ScreenshotPath);
             }
         }
+
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -174,6 +176,9 @@ public class MakeScreenshotAction : AbstractSeleniumAction
     /// </summary>
     public class Builder : Builder<MakeScreenshotAction, Builder>
     {
+        /// <summary>
+        ///     Directory path where screenshots are saved.
+        /// </summary>
         public string OutputDir { get; private set; }
 
         /// <summary>
@@ -182,7 +187,7 @@ public class MakeScreenshotAction : AbstractSeleniumAction
         public Builder SetOutputDir(string outputDir)
         {
             OutputDir = outputDir;
-            return self;
+            return Self;
         }
 
         /// <summary>
