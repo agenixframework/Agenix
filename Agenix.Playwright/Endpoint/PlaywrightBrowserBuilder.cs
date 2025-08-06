@@ -499,6 +499,39 @@ public class PlaywrightBrowserBuilder : AbstractEndpointBuilder<PlaywrightBrowse
     }
 
     /// <summary>
+    /// Configures the browser to automatically save the storage state.
+    /// </summary>
+    /// <param name="autoSavePageSource">Indicates whether the storage state should be automatically saved.</param>
+    /// <returns>The current instance of <see cref="PlaywrightBrowserBuilder"/> for method chaining.</returns>
+    public PlaywrightBrowserBuilder AutoSaveStorageState(bool autoSavePageSource)
+    {
+        _endpoint.EndpointConfiguration.AutoSaveStorageState = autoSavePageSource;
+        return this;
+    }
+
+    /// <summary>
+    /// Sets the storage state for the Playwright browser instance.
+    /// </summary>
+    /// <param name="storageState">The storage state to be applied to the browser.</param>
+    /// <returns>The PlaywrightBrowserBuilder instance for method chaining.</returns>
+    public PlaywrightBrowserBuilder StorageState(string storageState)
+    {
+        _endpoint.EndpointConfiguration.StorageState = storageState;
+        return this;
+    }
+
+    /// <summary>
+    /// Sets the path to the storage state file.
+    /// </summary>
+    /// <param name="storageStatePath">The path to the storage state file.</param>
+    /// <returns>The current instance of <see cref="PlaywrightBrowserBuilder"/>.</returns>
+    public PlaywrightBrowserBuilder StorageStatePath(string storageStatePath)
+    {
+        _endpoint.EndpointConfiguration.StorageStatePath = storageStatePath;
+        return this;
+    }
+
+    /// <summary>
     ///     Convenience method to add a page event handler
     /// </summary>
     /// <param name="onRequest">Action to execute on page request</param>
