@@ -1003,7 +1003,7 @@ public class PlaywrightBrowser : AbstractEndpoint, IProducer
             // Atomically get all resources and clear collections
             var (pages, contexts, browser, playwright) = ExtractAllResources();
 
-            // Clean up everything in parallel where possible
+            // Clean everything up in parallel where possible
             await CleanupResources(pages, contexts, browser, playwright);
 
             Log.LogDebug("Playwright browser stopped successfully");
@@ -1090,7 +1090,7 @@ public class PlaywrightBrowser : AbstractEndpoint, IProducer
         }
     }
 
-    private static async Task CleanupResources(List<IPage> pages, List<IBrowserContext> contexts,
+    private async Task CleanupResources(List<IPage> pages, List<IBrowserContext> contexts,
         IBrowser? browser, IPlaywright? playwright)
     {
         // Close pages in parallel
@@ -1111,6 +1111,19 @@ public class PlaywrightBrowser : AbstractEndpoint, IProducer
         {
             try
             {
+                // Auto-save storage state if enabled and path is configured
+                if (_endpointConfiguration.AutoSaveStorageState &&
+                    !string.IsNullOrEmpty(_endpointConfiguration.StorageStatePath))
+                {
+                    Log.LogDebug("Auto-saving storage state to: {StorageStatePath}", _endpointConfiguration.StorageStatePath);
+
+                    await context.StorageStateAsync(new BrowserContextStorageStateOptions
+                    {
+                        Path = _endpointConfiguration.StorageStatePath
+                    });
+
+                    Log.LogInformation("Storage state automatically saved to: {StorageStatePath}", _endpointConfiguration.StorageStatePath);
+                }
                 await context.CloseAsync();
             }
             catch (Exception ex)
