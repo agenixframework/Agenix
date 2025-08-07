@@ -24,6 +24,9 @@
 
 #endregion
 
+using Agenix.Screenplay.Annotations;
+using JetBrains.Annotations;
+
 namespace Agenix.Screenplay;
 
 /// <summary>
@@ -33,15 +36,32 @@ namespace Agenix.Screenplay;
 ///     This class allows for the definition of actions or tasks via anonymous functions, providing flexibility in
 ///     describing custom behaviors for an actor.
 /// </remarks>
-public class AnonymousPerformableFunction(Action<Actor> actions) : IPerformable
+public class AnonymousPerformableFunction : IPerformable
 {
+    [UsedImplicitly] private readonly string _title;
+    private readonly Action<Actor> _actions;
+
+    /// <summary>
+    /// Represents an anonymous performable action or task to be executed by an actor in the screenplay pattern.
+    /// </summary>
+    /// <remarks>
+    /// This class allows for the definition of actions or tasks via anonymous functions,
+    /// providing flexibility in describing custom behaviors for an actor.
+    /// </remarks>
+    public AnonymousPerformableFunction(string title, Action<Actor> actions)
+    {
+        _title = title ?? throw new ArgumentNullException(nameof(title));
+        _actions = actions ?? throw new ArgumentNullException(nameof(actions));
+    }
+
     /// <summary>
     ///     Executes the specified actions or tasks as the provided actor.
     /// </summary>
     /// <typeparam name="T">The type of the actor performing the actions, which must extend from the Actor class.</typeparam>
     /// <param name="actor">The actor performing the actions defined for this performable function.</param>
+    [Step("!#_title")]
     public void PerformAs<T>(T actor) where T : Actor
     {
-        actions(actor);
+        _actions.Invoke(actor);
     }
 }

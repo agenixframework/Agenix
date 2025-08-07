@@ -93,6 +93,11 @@
     <PackageReference Include="MinVer" Version="5.0.0" PrivateAssets="All"/>
   </ItemGroup>
 
+  <!-- Add JetBrains.Annotations package reference -->
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2025.2.0" PrivateAssets="All"/>
+  </ItemGroup>
+
   <!-- Include LICENSE and README files in packages -->
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)LICENSE" Pack="true" PackagePath="LICENSE" Visible="false"/>

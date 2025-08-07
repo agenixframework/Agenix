@@ -234,6 +234,15 @@ public static class GivenWhenThen
             .Cast<IConsequence<T>>().ToArray();
     }
 
+    /// <summary>
+    /// Evaluates the result of a question against a given predicate, producing a consequence based on the evaluation outcome.
+    /// </summary>
+    /// <typeparam name="T">
+    /// The type of the value returned by the question.
+    /// </typeparam>
+    /// <param name="actual">The question that retrieves the actual value to be tested.</param>
+    /// <param name="expected">The predicate that defines the condition to evaluate against the actual value.</param>
+    /// <returns>A consequence that represents the outcome of evaluating the question's result with the specified predicate.</returns>
     public static IConsequence<T> SeeThat<T>(Question<T> actual, Func<T, bool> expected)
     {
         return new PredicateConsequence<T>(actual, expected);
@@ -277,7 +286,7 @@ public static class GivenWhenThen
     {
         var consequence = SeeThat(question, matcher);
         return ITask.Where("See if " + question + " " + matcher,
-            new AnonymousPerformableFunction(actor => consequence.EvaluateFor(actor)));
+            new AnonymousPerformableFunction("", actor => consequence.EvaluateFor(actor)));
     }
 
     /// <summary>
