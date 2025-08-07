@@ -24,6 +24,8 @@
 
 #endregion
 
+using System.Reflection;
+using Agenix.Api.TypeResolution;
 using Agenix.Api.Util;
 
 namespace Agenix.Screenplay;
@@ -95,8 +97,54 @@ public class Instrumented
         /// </returns>
         public T NewInstance()
         {
-            return (T)ObjectUtils.InstantiateType(ObjectUtils.GetZeroArgConstructorInfo(instanceType),
-                constructorParameters);
+            var type = new TypeResolver().Resolve(instanceType.FullName);
+            var bestConstructor = GetBestMatchingConstructor(type, constructorParameters);
+            return (T)ObjectUtils.InstantiateType(bestConstructor, constructorParameters);
+        }
+
+        /// <summary>
+        /// Identifies the most suitable constructor of a given type
+        /// that matches the provided set of parameters.
+        /// </summary>
+        /// <param name="type">
+        /// The type for which the constructor is to be identified.
+        /// </param>
+        /// <param name="parameters">
+        /// An array of parameters intended to match against the
+        /// constructor's parameter types.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ConstructorInfo" /> representing the constructor
+        /// that best matches the provided parameters. If no matching
+        /// constructor is found, the default zero-argument constructor
+        /// is returned.
+        /// </returns>
+        public static ConstructorInfo GetBestMatchingConstructor(Type type, params object[] parameters)
+        {
+            var constructors = type.GetConstructors();
+
+            foreach (var constructor in constructors)
+            {
+                var paramTypes = constructor.GetParameters().Select(p => p.ParameterType).ToArray();
+
+                if (paramTypes.Length == parameters.Length)
+                {
+                    var isMatch = true;
+                    for (var i = 0; i < parameters.Length; i++)
+                    {
+                        if (parameters[i] != null && !paramTypes[i].IsInstanceOfType(parameters[i]))
+                        {
+                            isMatch = false;
+                            break;
+                        }
+                    }
+
+                    if (isMatch)
+                        return constructor;
+                }
+            }
+
+            return ObjectUtils.GetZeroArgConstructorInfo(type);
         }
 
         /// <summary>
