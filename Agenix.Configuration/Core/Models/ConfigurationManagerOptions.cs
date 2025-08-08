@@ -39,7 +39,12 @@ public enum ConfigurationFormat
     /// <summary>
     ///     YAML configuration format
     /// </summary>
-    YAML
+    YAML,
+
+    /// <summary>
+    /// YML configuration format
+    /// </summary>
+    YML,
 }
 
 /// <summary>
@@ -65,7 +70,7 @@ public class ConfigurationOptions
     /// <summary>
     ///     Gets or sets whether environment file support is enabled (default: false).
     /// </summary>
-    public bool EnvironmentFileSupport { get; set; } = false;
+    public bool EnvironmentFileSupport { get; set; }
 
     /// <summary>
     ///     Gets or sets the directory where environment files are located (default: "./").
@@ -85,7 +90,7 @@ public class ConfigurationOptions
     /// <summary>
     ///     Gets or sets whether caching is enabled (default: false).
     /// </summary>
-    public bool CachingEnabled { get; set; } = false;
+    public bool CachingEnabled { get; set; }
 
     /// <summary>
     ///     Gets the file extension based on the configured format.
@@ -93,7 +98,8 @@ public class ConfigurationOptions
     public string FileExtension => Format switch
     {
         ConfigurationFormat.JSON => ".json",
-        ConfigurationFormat.YAML => ".yml",
+        ConfigurationFormat.YAML => ".yaml",
+        ConfigurationFormat.YML => ".yml",
         _ => ".json"
     };
 }
