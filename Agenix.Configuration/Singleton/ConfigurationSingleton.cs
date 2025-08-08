@@ -59,6 +59,13 @@ public sealed record ConfigurationSingleton<T> where T : class, new()
     }
 
     /// <summary>
+    /// Gets the singleton instance of the configuration manager for the specified type.
+    /// This property ensures lazy initialization and thread-safe access to the configuration manager,
+    /// which handles configuration-related operations such as loading, caching, and environment management.
+    /// </summary>
+    public static IConfigurationManager<T> Instance => LazyInstance.Value;
+
+    /// <summary>
     ///     Configures the settings for the configuration manager.
     ///     This method must be called before the configuration manager
     ///     is accessed; otherwise, an exception will be thrown.
