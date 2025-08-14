@@ -164,7 +164,7 @@ public class ConfigurationManager<T> : IConfigurationManager<T> where T : class,
 
             if (File.Exists(envConfigPath))
             {
-                AddConfigurationFile(configBuilder, envConfigPath, true);
+                AddConfigurationFile(configBuilder, envConfigPath, false);
                 _logger.LogDebug("Loaded environment configuration from: {envConfigPath} (Format: {_optionsFormat})",
                     envConfigPath, _options.Format);
             }
@@ -199,6 +199,7 @@ public class ConfigurationManager<T> : IConfigurationManager<T> where T : class,
                 builder.AddJsonFile(filePath, optional, false);
                 break;
             case ConfigurationFormat.YAML:
+            case ConfigurationFormat.YML:
                 builder.AddYamlFile(filePath, optional, false);
                 break;
             default:
