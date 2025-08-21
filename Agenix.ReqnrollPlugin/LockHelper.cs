@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -37,17 +37,25 @@ internal static class LockHelper
 
     private static readonly object GetLockLock = new();
 
+    /// <summary>
+    ///     Provides a thread-safe mechanism to retrieve or create a lock object
+    ///     associated with the given hash code. If a lock object already exists
+    ///     for the specified hash code, it is returned; otherwise, a new lock
+    ///     object is created and stored in the repository.
+    /// </summary>
+    /// <param name="hashCode">The hash code used to identify the lock object.</param>
+    /// <returns>A lock object associated with the specified hash code.</returns>
     public static object GetLock(int hashCode)
     {
         lock (GetLockLock)
         {
-            if (Repository.ContainsKey(hashCode))
+            if (Repository.TryGetValue(hashCode, out var @lock))
             {
-                return Repository[hashCode];
+                return @lock;
             }
 
             var lockObj = new object();
-            Repository.AddOrUpdate(hashCode, lockObj, (key, oldValue) => oldValue);
+            Repository.AddOrUpdate(hashCode, lockObj, (_, oldValue) => oldValue);
 
             return lockObj;
         }

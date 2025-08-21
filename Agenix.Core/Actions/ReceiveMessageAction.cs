@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -28,6 +28,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Endpoint;
@@ -57,13 +59,17 @@ namespace Agenix.Core.Actions;
 ///     that this action is independent of any message transport. The received message is validated using a
 ///     MessageValidator supporting expected control message payload and header templates.
 /// </summary>
-public class ReceiveMessageAction : AbstractTestAction
+public class ReceiveMessageAction : AbstractTestActionAsync
 {
     /// <summary>
     ///     Logger.
     /// </summary>
     private static readonly ILogger Log = LogManager.GetLogger(typeof(ReceiveMessageAction));
 
+    /// <summary>
+    ///     Represents an action for receiving a message, providing configuration and processing options for message reception
+    ///     and validation in a testing environment.
+    /// </summary>
     public ReceiveMessageAction(
         ReceiveMessageActionBuilder<ReceiveMessageAction, ReceiveMessageActionBuilderSupport, Builder> builder)
         : base(builder.GetName() ?? "receive", builder.GetDescription() ?? "")
@@ -94,6 +100,8 @@ public class ReceiveMessageAction : AbstractTestAction
     /// </summary>
     public Dictionary<string, object> MessageSelectors { get; }
 
+    /// <summary>
+    /// </summary>
     public IDataDictionary DataDictionary { get; }
 
     /// <summary>
@@ -165,17 +173,26 @@ public class ReceiveMessageAction : AbstractTestAction
     }
 
     /// <summary>
-    ///     Executes the main logic for this test action, including receiving a message and validating it.
+    ///     Executes the main logic of receiving and validating a message within a testing environment,
+    ///     ensuring the message meets the configured expectations and conditions.
     /// </summary>
     /// <param name="context">
-    ///     The current test execution context which provides the environment and necessary data for the operation.
+    ///     The current test execution context that provides necessary data and environment for the operation.
     /// </param>
-    public override void DoExecute(TestContext context)
+    /// <param name="cancellationToken">
+    ///     A token to monitor for cancellation requests during the asynchronous operation.
+    /// </param>
+    /// <returns>
+    ///     A task representing the asynchronous execution process of the action.
+    /// </returns>
+    public override async Task DoExecute(TestContext context, CancellationToken cancellationToken = default)
     {
         var selector = MessageSelectorBuilder.Build(Selector, MessageSelectors, context);
 
         // Receive a message either selected or plain with the message receiver
-        var receivedMessage = !string.IsNullOrEmpty(selector) ? ReceiveSelected(context, selector) : Receive(context);
+        var receivedMessage = !string.IsNullOrEmpty(selector)
+            ? await ReceiveSelected(context, selector)
+            : await Receive(context);
 
         if (receivedMessage == null)
         {
@@ -191,12 +208,12 @@ public class ReceiveMessageAction : AbstractTestAction
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    private IMessage Receive(TestContext context)
+    private async Task<IMessage> Receive(TestContext context)
     {
         var messageEndpoint = GetOrCreateEndpoint(context);
         var consumer = messageEndpoint.CreateConsumer();
 
-        return consumer.Receive(context,
+        return await consumer.Receive(context,
             ReceiveTimeout > 0 ? ReceiveTimeout : messageEndpoint.EndpointConfiguration.Timeout);
     }
 
@@ -206,7 +223,7 @@ public class ReceiveMessageAction : AbstractTestAction
     /// <param name="context">the test context</param>
     /// <param name="selectorString">the message selector string</param>
     /// <returns></returns>
-    private IMessage ReceiveSelected(TestContext context, string selectorString)
+    private async Task<IMessage> ReceiveSelected(TestContext context, string selectorString)
     {
         if (Log.IsEnabled(LogLevel.Debug))
         {
@@ -218,12 +235,13 @@ public class ReceiveMessageAction : AbstractTestAction
 
         if (consumer is ISelectiveConsumer selectiveConsumer)
         {
-            return selectiveConsumer.Receive(context.ReplaceDynamicContentInString(selectorString), context,
+            return await selectiveConsumer.Receive(
+                context.ReplaceDynamicContentInString(selectorString) ?? string.Empty, context,
                 ReceiveTimeout > 0 ? ReceiveTimeout : messageEndpoint.EndpointConfiguration.Timeout);
         }
 
         Log.LogWarning("Unable to receive selectively with consumer implementation: '{Type}'", consumer.GetType());
-        return Receive(context);
+        return await Receive(context);
     }
 
     /// <summary>
@@ -319,16 +337,14 @@ public class ReceiveMessageAction : AbstractTestAction
                 return;
             }
 
+            foreach (var validationContext in unknown)
             {
-                foreach (var validationContext in unknown)
-                {
-                    Log.LogWarning(
-                        "Found validation context that has not been processed: {S}", validationContext.GetType().Name);
-                }
-
-                throw new ValidationException(
-                    $"Incomplete message validation - total of {unknown.Count} validation context has not been processed");
+                Log.LogWarning(
+                    "Found validation context that has not been processed: {S}", validationContext.GetType().Name);
             }
+
+            throw new ValidationException(
+                $"Incomplete message validation - total of {unknown.Count} validation context has not been processed");
         }
     }
 
@@ -405,16 +421,6 @@ public class ReceiveMessageAction : AbstractTestAction
         return message;
     }
 
-    /// Determines whether the action is disabled based on the given test context.
-    /// <param name="context">The test context containing necessary configurations and factories.</param>
-    /// <return>True if the action is disabled; otherwise, false.</return>
-    public override bool IsDisabled(TestContext context)
-    {
-        var messageEndpoint = GetOrCreateEndpoint(context);
-
-        return base.IsDisabled(context);
-    }
-
     /// Retrieves the existing endpoint or creates a new one based on the endpoint URI.
     /// <param name="context">The test context containing necessary configurations and factories.</param>
     /// <return>The existing or newly created endpoint.</return>
@@ -434,6 +440,11 @@ public class ReceiveMessageAction : AbstractTestAction
         throw new AgenixSystemException("Neither endpoint nor endpoint uri is set properly!");
     }
 
+    /// <summary>
+    ///     Builder class for creating and configuring instances of ReceiveMessageAction.
+    ///     Provides fluent API methods to define the message receiving behavior and configure
+    ///     message endpoints or URIs.
+    /// </summary>
     public class Builder : ReceiveMessageActionBuilder<ReceiveMessageAction, ReceiveMessageActionBuilderSupport,
         Builder>
     {
@@ -470,7 +481,7 @@ public class ReceiveMessageAction : AbstractTestAction
         {
             if (messageBuilderSupport == null)
             {
-                messageBuilderSupport = new ReceiveMessageActionBuilderSupport(self);
+                messageBuilderSupport = new ReceiveMessageActionBuilderSupport(Self);
             }
 
             return base.GetMessageBuilderSupport();
@@ -571,19 +582,19 @@ public class ReceiveMessageAction : AbstractTestAction
         public TB Timeout(long receiveTimeout)
         {
             _receiveTimeout = receiveTimeout;
-            return self;
+            return Self;
         }
 
         /// <summary>
         ///     Adds a validation context to this message-receiving action.
         /// </summary>
         /// <param name="validationContext">The validation context to add.</param>
-        /// <typeparam name="B">The type of the validation context builder.</typeparam>
+        /// <typeparam name="TB">The type of the validation context builder.</typeparam>
         /// <returns>The current builder instance.</returns>
         public TB Validate(IValidationContext.IBuilder<IValidationContext, IBuilder> validationContext)
         {
             ValidationContexts.Add(validationContext);
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -623,24 +634,50 @@ public class ReceiveMessageAction : AbstractTestAction
         /// <summary>
         ///     Adds a validation context to this message-receiving action.
         /// </summary>
-        /// <typeparam name="TFB">The type of the validation context builder.</typeparam>
+        /// <typeparam name="TB">The type of the validation context builder.</typeparam>
         /// <param name="validationContexts">The list of validation contexts to be added.</param>
         /// <returns>The builder instance.</returns>
         public TB Validate(List<IValidationContext.IBuilder<IValidationContext, IBuilder>> validationContexts)
         {
             ValidationContexts.AddRange(validationContexts);
-            return self;
+            return Self;
         }
 
         /// <summary>
         ///     Adds one or more validation contexts to this message-receiving action.
         /// </summary>
-        /// <typeparam name="TFB">The type of the context builder.</typeparam>
+        /// <typeparam name="TB">The type of the context builder.</typeparam>
         /// <param name="validationContexts">The validation contexts to be added.</param>
         /// <returns>Updated message action builder.</returns>
         public TB Validate(params IValidationContext.IBuilder<IValidationContext, IBuilder>[] validationContexts)
         {
             return Validate(validationContexts.ToList());
+        }
+
+        /// <summary>
+        ///     Assigns the specified validation processor to the builder
+        ///     for executing validation logic during the message reception process.
+        /// </summary>
+        /// <param name="processor">
+        ///     An implementation of the <see cref="IValidationProcessor" /> used to validate incoming
+        ///     messages.
+        /// </param>
+        /// <returns>The builder instance with the assigned validation processor.</returns>
+        public TB Validate(IValidationProcessor processor)
+        {
+            _validationProcessor = processor;
+            return Self;
+        }
+
+        /// <summary>
+        ///     Configures validation for the current message processing action with the provided validation processor.
+        /// </summary>
+        /// <param name="processor">The validation processor to apply during message validation.</param>
+        /// <returns>The builder instance for method chaining.</returns>
+        public TB Validate(ValidationProcessor processor)
+        {
+            _validationProcessor = new DelegatingValidationProcessor(processor);
+            return Self;
         }
 
         /// <summary>
@@ -651,7 +688,7 @@ public class ReceiveMessageAction : AbstractTestAction
         public TB Selector(string messageSelector)
         {
             _messageSelector = messageSelector;
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -666,7 +703,7 @@ public class ReceiveMessageAction : AbstractTestAction
                 _messageSelectors[kvp.Key] = kvp.Value;
             }
 
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -677,7 +714,33 @@ public class ReceiveMessageAction : AbstractTestAction
         public TB Validator(IMessageValidator<IValidationContext> validator)
         {
             _validators.Add(validator);
-            return self;
+            return Self;
+        }
+
+        /// <summary>
+        ///     Adds a validator to the message receiving action.
+        /// </summary>
+        /// <param name="validatorName">The name of the validator to add.</param>
+        /// <returns>The builder instance for chaining further configurations.</returns>
+        public TB Validator(string validatorName)
+        {
+            _validatorNames.Add(validatorName);
+            return Self;
+        }
+
+        /// <summary>
+        ///     Adds header validators to the message receiving action.
+        /// </summary>
+        /// <param name="validators">An array of header validators to be added.</param>
+        /// <returns>The builder instance with the added validators.</returns>
+        public TB Validator(params IHeaderValidator[] validators)
+        {
+            foreach (var validator in validators)
+            {
+                GetHeaderValidationContext().AddHeaderValidator(validator);
+            }
+
+            return Self;
         }
 
         /// <summary>
@@ -692,18 +755,7 @@ public class ReceiveMessageAction : AbstractTestAction
                 Validator(validator);
             }
 
-            return self;
-        }
-
-        /// <summary>
-        ///     Adds a validator to the message receiving action.
-        /// </summary>
-        /// <param name="validatorName">The name of the validator to add.</param>
-        /// <returns>The builder instance for chaining further configurations.</returns>
-        public TB Validator(string validatorName)
-        {
-            _validatorNames.Add(validatorName);
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -724,24 +776,8 @@ public class ReceiveMessageAction : AbstractTestAction
         public TB Validators(List<IMessageValidator<IValidationContext>> validators)
         {
             _validators.AddRange(validators);
-            return self;
+            return Self;
         }
-
-        /// <summary>
-        ///     Adds header validators to the message receiving action.
-        /// </summary>
-        /// <param name="validators">An array of header validators to be added.</param>
-        /// <returns>The builder instance with the added validators.</returns>
-        public TB Validator(params IHeaderValidator[] validators)
-        {
-            foreach (var validator in validators)
-            {
-                GetHeaderValidationContext().AddHeaderValidator(validator);
-            }
-
-            return self;
-        }
-
 
         /// <summary>
         ///     Retrieves or creates the header validation context and adds it to the list of validation contexts.
@@ -772,18 +808,6 @@ public class ReceiveMessageAction : AbstractTestAction
                 .ToList();
         }
 
-        public TB Validate(IValidationProcessor processor)
-        {
-            _validationProcessor = processor;
-            return self;
-        }
-
-        public TB Validate(ValidationProcessor processor)
-        {
-            _validationProcessor = new DelegatingValidationProcessor(processor);
-            return self;
-        }
-
         /// <summary>
         ///     Processes the provided message processor and adds it to the appropriate list based on its type.
         /// </summary>
@@ -804,7 +828,7 @@ public class ReceiveMessageAction : AbstractTestAction
                     break;
             }
 
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -855,20 +879,18 @@ public class ReceiveMessageAction : AbstractTestAction
                 }
             }
 
-            if (validationContext == null && messageBuilderSupport != null)
+            if (validationContext == null && messageBuilderSupport != null && messageBuilderSupport.GetMessageBuilder()
+                    .GetType().IsDefined(typeof(MessagePayloadAttribute)))
             {
-                if (messageBuilderSupport.GetMessageBuilder().GetType().IsDefined(typeof(MessagePayloadAttribute)))
+                var type = messageBuilderSupport.GetMessageBuilder().GetType()
+                    .GetCustomAttribute<MessagePayloadAttribute>()!.Value;
+                validationContext = type switch
                 {
-                    var type = messageBuilderSupport.GetMessageBuilder().GetType()
-                        .GetCustomAttribute<MessagePayloadAttribute>()!.Value;
-                    validationContext = type switch
-                    {
-                        MsgType.XML or MsgType.XHTML => new XmlMessageValidationContext(),
-                        MsgType.JSON => new JsonMessageValidationContext(),
-                        MsgType.PLAINTEXT => new DefaultMessageValidationContext(),
-                        _ => validationContext
-                    };
-                }
+                    MsgType.XML or MsgType.XHTML => new XmlMessageValidationContext(),
+                    MsgType.JSON => new JsonMessageValidationContext(),
+                    MsgType.PLAINTEXT => new DefaultMessageValidationContext(),
+                    _ => validationContext
+                };
             }
 
             if (validationContext == null)
@@ -886,19 +908,12 @@ public class ReceiveMessageAction : AbstractTestAction
                 }
             }
 
-            if (validationContext == null && messageBuilderSupport != null)
+            if (validationContext == null && messageBuilderSupport != null &&
+                (messageBuilderSupport.GetMessageBuilder() is StaticMessageBuilder ||
+                 (messageBuilderSupport.GetMessageBuilder() is IWithPayloadBuilder payloadBuilder &&
+                  payloadBuilder.GetPayloadBuilder() != null)))
             {
-                if (messageBuilderSupport.GetMessageBuilder() is StaticMessageBuilder)
-                {
-                    validationContext = new DefaultMessageValidationContext();
-                }
-                else if (messageBuilderSupport.GetMessageBuilder() is IWithPayloadBuilder payloadBuilder)
-                {
-                    if (payloadBuilder.GetPayloadBuilder() != null)
-                    {
-                        validationContext = new DefaultMessageValidationContext();
-                    }
-                }
+                validationContext = new DefaultMessageValidationContext();
             }
 
             if (validationContext != null)

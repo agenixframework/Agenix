@@ -27,14 +27,13 @@ public class PurchaseItem(string purchasedItem, int cost, string currency) : IPe
 
     public string Currency { get; private set; } = currency;
 
-
     [Step("Given {0} has purchased #_purchasedItem for #_cost #_currency")]
-    public void PerformAs<T>(T actor) where T : Actor
+    public async Task PerformAsAsync<T>(T actor, CancellationToken cancellationToken = default) where T : Actor
     {
         Assert.That(_purchasedItem, Is.Not.Null);
         Assert.That(_currency, Is.Not.Null);
         Assert.That(_cost, Is.GreaterThan(0));
-        AndThat(actor).Has(PlacedTheItemInHerBasket());
+        await AndThat(actor).Has(PlacedTheItemInHerBasket());
 
         TheItemWasPurchased = true;
     }
@@ -69,12 +68,12 @@ public class PurchaseItem(string purchasedItem, int cost, string currency) : IPe
     public PurchaseItem ThatCosts(int newCost)
     {
         _cost = newCost;
-        if (_cost < 0)
+        if (_cost == 0)
         {
-            throw new ArgumentException("Cost cannot be negative");
+            throw new AssertionException("Cost must be greater than 0");
         }
 
-        return this;
+        return _cost < 0 ? throw new ArgumentException("Cost cannot be negative") : this;
     }
 
     public PurchaseItem Dollars()

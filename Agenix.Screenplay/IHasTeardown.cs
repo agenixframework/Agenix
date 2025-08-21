@@ -36,5 +36,5 @@ public interface IHasTeardown
     ///     This method is specifically invoked to release resources, reset states, or perform
     ///     any required finalization when an {@code Ability} implementing this interface is no longer needed.
     /// </summary>
-    void TearDown();
+    Task TearDown();
 }

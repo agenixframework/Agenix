@@ -67,13 +67,13 @@ public class BooleanQuestionConsequence<T> : BaseConsequence<T>
     ///     and throwing appropriate errors if the condition is not met.
     /// </summary>
     /// <param name="actor">The actor for whom the consequence is being evaluated.</param>
-    public override void EvaluateFor(Actor actor)
+    public override async Task EvaluateFor(Actor actor)
     {
-        actor.EventBus!.Publish(new ActorAsksQuestion(_question.Subject, actor.Name));
+        await actor.EventBus.Publish(new ActorAsksQuestion(_question.Subject, actor.Name));
 
         try
         {
-            PerformSetupActionsAs(actor);
+            await PerformSetupActionsAs(actor);
             Assert.That(_question.AnsweredBy(actor), Is.True, Reason());
         }
         catch (Exception actualError)
@@ -104,7 +104,7 @@ public class BooleanQuestionConsequence<T> : BaseConsequence<T>
     ///     Returns a string representation of the BooleanQuestionConsequence including
     ///     the subject text or a default template if the subject text is not defined.
     /// </summary>
-    /// <returns>A string representation of the consequence with relevant details.</returns>
+    /// <returns>A string representation of the consequence of relevant details.</returns>
     public override string ToString()
     {
         var template = Explanation.OrElse("Then {0}");

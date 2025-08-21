@@ -7,31 +7,33 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Threading.Tasks;
 using Agenix.Api.Context;
 
 namespace Agenix.Core.Container;
 
-// Typical implementation of repeat iteration loop. Nested test actions are executed until
-// aborting condition evaluates to true.
-// Index is incremented each iteration and stored as test variable accessible in the nested test actions
-// as normal variable. Index starts with 1 by default.
+/// <summary>
+///     Implements a repeat-until loop container that executes nested test actions iteratively until a specified
+///     condition evaluates to true. The loop maintains an index variable, which increments at each iteration
+///     and is accessible within the nested actions. The index starts at 1 by default.
+/// </summary>
 public class RepeatUntilTrue(RepeatUntilTrue.Builder builder) : AbstractIteratingActionContainer(
     builder.GetName() ?? "repeat",
     builder.GetDescription(),
@@ -48,11 +50,11 @@ public class RepeatUntilTrue(RepeatUntilTrue.Builder builder) : AbstractIteratin
     ///     Executes a single iteration of the repeat-until loop.
     /// </summary>
     /// <param name="context">The context in which the test is executed, allowing access to variables and functions.</param>
-    protected override void ExecuteIteration(TestContext context)
+    protected override async Task ExecuteIteration(TestContext context)
     {
         do
         {
-            ExecuteActions(context);
+            await ExecuteActions(context);
             index++;
         } while (!CheckCondition(context));
     }

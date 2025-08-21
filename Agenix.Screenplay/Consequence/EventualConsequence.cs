@@ -86,17 +86,21 @@ public class EventualConsequence<T> : BaseConsequence<T>
     ///     Evaluates the consequence for the specified actor, retrying until it passes or the timeout is reached.
     /// </summary>
     /// <param name="actor">The actor for whom the consequence is being evaluated.</param>
-    public override void EvaluateFor(Actor actor)
+    public override async Task EvaluateFor(Actor actor)
     {
+        // Reset any previous state in case this instance is reused
+        _caughtAssertionError = null;
+        _caughtRuntimeException = null;
+
         var stopwatch = Stopwatch.StartNew();
 
         do
         {
             try
             {
-                PerformSetupActionsAs(actor);
-                _consequenceThatMightTakeSomeTime.EvaluateFor(actor);
-                return;
+                await PerformSetupActionsAs(actor);
+                await _consequenceThatMightTakeSomeTime.EvaluateFor(actor);
+                return; // success
             }
             catch (AssertionException assertionError)
             {
@@ -104,19 +108,41 @@ public class EventualConsequence<T> : BaseConsequence<T>
                 {
                     _caughtAssertionError = assertionError;
                 }
+                // else: ignore and retry
             }
-            catch (Exception runtimeException)
+            catch (OperationCanceledException)
+            {
+                // Honor cancellation immediately
+                throw;
+            }
+            catch (Exception runtimeException) when (!IsFatal(runtimeException))
             {
                 if (!ShouldIgnoreException(runtimeException))
                 {
                     _caughtRuntimeException = runtimeException;
                 }
+                // else: ignore and retry
+            }
+            // Let fatal exceptions bubble out
+
+            // Time-aware delay
+            var remaining = _timeoutInMilliseconds - stopwatch.ElapsedMilliseconds;
+            if (remaining <= 0)
+            {
+                break;
             }
 
-            PauseBeforeNextAttempt();
+            var delay = (int)Math.Min(AShortPeriodBetweenTries, remaining);
+            await Task.Delay(delay);
         } while (stopwatch.ElapsedMilliseconds < _timeoutInMilliseconds);
 
         ThrowAnyCaughtErrors();
+    }
+
+    private static bool IsFatal(Exception ex)
+    {
+        // Only treat truly unrecoverable errors as fatal; assertion failures should be retried
+        return ex is OutOfMemoryException or StackOverflowException;
     }
 
     /// <summary>
@@ -126,15 +152,8 @@ public class EventualConsequence<T> : BaseConsequence<T>
     /// <returns>True if the exception should be ignored; otherwise, false.</returns>
     private bool ShouldIgnoreException(Exception exception)
     {
-        return _exceptionsToIgnore.Contains(exception.GetType());
-    }
-
-    /// <summary>
-    ///     Pauses execution for a short period before the next evaluation attempt.
-    /// </summary>
-    private static void PauseBeforeNextAttempt()
-    {
-        Thread.Sleep(AShortPeriodBetweenTries);
+        // Support inheritance (exact type or derived)
+        return _exceptionsToIgnore.Any(t => t.IsInstanceOfType(exception));
     }
 
     /// <summary>
@@ -204,9 +223,9 @@ public class EventualConsequence<T> : BaseConsequence<T>
     /// </summary>
     /// <param name="performable">The performable action to execute before evaluating the consequence.</param>
     /// <returns>A new EventualConsequence instance with the setup action.</returns>
-    public override IConsequence<T> WhenAttemptingTo(IPerformable performable)
+    public override async Task<IConsequence<T>> WhenAttemptingTo(IPerformable performable)
     {
-        return new EventualConsequence<T>(_consequenceThatMightTakeSomeTime.WhenAttemptingTo(performable),
+        return new EventualConsequence<T>(await _consequenceThatMightTakeSomeTime.WhenAttemptingTo(performable),
             _timeoutInMilliseconds);
     }
 
@@ -242,18 +261,18 @@ public class EventualConsequence<T> : BaseConsequence<T>
     ///     consequence.
     /// </param>
     /// <returns>A new EventualConsequence instance with the additional setup actions.</returns>
-    public override IConsequence<T> After(params IPerformable[] setupActions)
+    public override Task<IConsequence<T>> After(params IPerformable[] setupActions)
     {
         _setupActions.AddRange(setupActions);
-        return this;
+        return Task.FromResult<IConsequence<T>>(this);
     }
 
     /// <summary>
     ///     Performs the setup actions for the actor with exception handling.
     /// </summary>
     /// <param name="actor">The actor for whom to perform the setup actions.</param>
-    protected override void PerformSetupActionsAs(Actor actor)
+    protected override async Task PerformSetupActionsAs(Actor actor)
     {
-        actor.AttemptsTo(Actor.ErrorHandlingMode.IGNORE_EXCEPTIONS, _setupActions.ToArray());
+        await actor.AttemptsToAsync(Actor.ErrorHandlingMode.IGNORE_EXCEPTIONS, _setupActions.ToArray());
     }
 }

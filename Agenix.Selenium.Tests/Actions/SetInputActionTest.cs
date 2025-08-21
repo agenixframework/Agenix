@@ -27,7 +27,7 @@ public class SetInputActionTest : AbstractNUnitSetUp
     private readonly Mock<IWebElement> _element = new();
 
     [Test]
-    public void TestExecute()
+    public async Task TestExecute()
     {
         _webDriver.Setup(x => x.FindElement(It.IsAny<By>())).Returns(_element.Object);
 
@@ -37,14 +37,14 @@ public class SetInputActionTest : AbstractNUnitSetUp
             .SetValue("new_value")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _element.Verify(x => x.Clear(), Times.Once);
         _element.Verify(x => x.SendKeys("new_value"), Times.Once);
     }
 
     [Test]
-    public void TestExecuteOnSelect()
+    public async Task TestExecuteOnSelect()
     {
         var option = new Mock<IWebElement>();
 
@@ -63,7 +63,7 @@ public class SetInputActionTest : AbstractNUnitSetUp
             .SetValue("option")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         option.Verify(x => x.Click(), Times.Once);
     }

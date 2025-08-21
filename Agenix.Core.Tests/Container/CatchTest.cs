@@ -7,30 +7,33 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Threading;
+using System.Threading.Tasks;
+using Agenix.Api;
 using Agenix.Api.Exceptions;
 using Agenix.Core.Actions;
 using Agenix.Core.Container;
 using Moq;
 using NUnit.Framework;
 using static Agenix.Core.Container.Catch.Builder;
-using ITestAction = Agenix.Api.ITestAction;
+using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.Tests.Container;
 
@@ -52,7 +55,8 @@ public class CatchTest : AbstractNUnitSetUp
             .Actions(new FailAction.Builder())
             .Build();
 
-        catchAction.Execute(Context);
+        Assert.That(catchAction.Exception, Is.EqualTo(nameof(AgenixSystemException)));
+        Assert.That(async () => await catchAction.DoExecute(Context), Throws.Nothing);
     }
 
     [Test]
@@ -63,7 +67,8 @@ public class CatchTest : AbstractNUnitSetUp
             .Exception(typeof(AgenixSystemException))
             .Build();
 
-        catchAction.Execute(Context);
+        Assert.That(catchAction.Exception, Is.EqualTo(nameof(AgenixSystemException)));
+        Assert.That(async () => await catchAction.DoExecute(Context), Throws.Nothing);
     }
 
     [Test]
@@ -74,40 +79,44 @@ public class CatchTest : AbstractNUnitSetUp
             .Exception(typeof(AgenixSystemException))
             .Build();
 
-        catchAction.Execute(Context);
+        Assert.That(async () => await catchAction.DoExecute(Context), Throws.Nothing);
     }
 
     [Test]
-    public void TestCatchFirstActionFailing()
+    public async Task TestCatchFirstActionFailing()
     {
-        var actionMock = new Mock<ITestAction>();
+        var actionMock = new Mock<IAsyncTestAction>();
 
         actionMock.Reset();
+        actionMock.Setup(a => a.ExecuteAsync(It.IsAny<TestContext>(), CancellationToken.None))
+            .Returns(Task.CompletedTask);
 
         var catchAction = new Catch.Builder()
             .Actions(new FailAction.Builder().Build(), actionMock.Object)
             .Exception(typeof(AgenixSystemException))
             .Build();
 
-        catchAction.Execute(Context);
+        await catchAction.DoExecute(Context);
 
-        actionMock.Verify(action => action.Execute(Context), Times.Once);
+        actionMock.Verify(action => action.ExecuteAsync(Context, CancellationToken.None), Times.Once);
     }
 
     [Test]
-    public void TestCatchSomeActionFailing()
+    public async Task TestCatchSomeActionFailing()
     {
-        var actionMock = new Mock<ITestAction>();
+        var actionMock = new Mock<IAsyncTestAction>();
 
         actionMock.Reset();
+        actionMock.Setup(a => a.ExecuteAsync(It.IsAny<TestContext>(), CancellationToken.None))
+            .Returns(Task.CompletedTask);
 
         var catchAction = new Catch.Builder()
             .Actions(actionMock.Object, new FailAction.Builder().Build(), actionMock.Object)
             .Exception(typeof(AgenixSystemException))
             .Build();
 
-        catchAction.Execute(Context);
+        await catchAction.DoExecute(Context);
 
-        actionMock.Verify(action => action.Execute(Context), Times.Exactly(2));
+        actionMock.Verify(action => action.ExecuteAsync(Context, CancellationToken.None), Times.Exactly(2));
     }
 }

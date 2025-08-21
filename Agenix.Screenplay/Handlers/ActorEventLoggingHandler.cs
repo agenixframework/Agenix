@@ -123,18 +123,25 @@ public class ActorEventLoggingHandler :
         try
         {
             var performAsMethod =
-                // First check the actual type
+                // First check the actual type for async first, then sync
                 performable.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance)
+                    .FirstOrDefault(m => m.Name == "PerformAsAsync" && m.GetCustomAttribute<StepAttribute>() != null)
+                ?? performable.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance)
                     .FirstOrDefault(m => m.Name == "PerformAs" && m.GetCustomAttribute<StepAttribute>() != null);
 
             // If not found, check the base type
             if (performAsMethod == null)
             {
-                performAsMethod = performable.GetType().BaseType
-                    ?.GetMethods(BindingFlags.Public | BindingFlags.Instance)
-                    .FirstOrDefault(m => m.Name == "PerformAs" && m.GetCustomAttribute<StepAttribute>() != null);
+                var baseMethods = performable.GetType().BaseType
+                    ?.GetMethods(BindingFlags.Public | BindingFlags.Instance);
+                if (baseMethods != null)
+                {
+                    performAsMethod = baseMethods.FirstOrDefault(m =>
+                                          m.Name == "PerformAsAsync" && m.GetCustomAttribute<StepAttribute>() != null)
+                                      ?? baseMethods.FirstOrDefault(m =>
+                                          m.Name == "PerformAs" && m.GetCustomAttribute<StepAttribute>() != null);
+                }
             }
-
 
             if (performAsMethod != null)
             {

@@ -52,7 +52,7 @@ public class FillFormActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExecute()
+    public async Task TestExecute()
     {
         _webDriver.Setup(x => x.FindElement(It.IsAny<By>())).Returns(_element.Object);
 
@@ -62,7 +62,7 @@ public class FillFormActionTest : AbstractNUnitSetUp
             .Field("password", "secret")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _element.Verify(x => x.Clear(), Times.Exactly(2));
         _element.Verify(x => x.SendKeys("foo_user"), Times.Once);
@@ -70,7 +70,7 @@ public class FillFormActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExecuteWithSelect()
+    public async Task TestExecuteWithSelect()
     {
         var option = new Mock<IWebElement>();
 
@@ -86,13 +86,13 @@ public class FillFormActionTest : AbstractNUnitSetUp
             .Field("remember-me", "yes")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         option.Verify(x => x.Click(), Times.Once);
     }
 
     [Test]
-    public void TestExecuteWithJson()
+    public async Task TestExecuteWithJson()
     {
         _webDriver.Setup(x => x.FindElement(It.IsAny<By>())).Returns(_element.Object);
 
@@ -106,7 +106,7 @@ public class FillFormActionTest : AbstractNUnitSetUp
                       """)
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _element.Verify(x => x.Clear(), Times.Exactly(2));
         _element.Verify(x => x.SendKeys("foo_user"), Times.Once);
@@ -114,7 +114,7 @@ public class FillFormActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExecuteWithFormSubmit()
+    public async Task TestExecuteWithFormSubmit()
     {
         _webDriver.Setup(x => x.FindElement(It.IsAny<By>())).Returns(_element.Object);
 
@@ -125,7 +125,7 @@ public class FillFormActionTest : AbstractNUnitSetUp
             .Submit("save")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _element.Verify(x => x.Clear(), Times.Exactly(2));
         _element.Verify(x => x.SendKeys("foo_user"), Times.Once);

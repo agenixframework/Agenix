@@ -35,7 +35,7 @@ public interface IValidationContext
     ///     Indicates whether this validation context requires a validator.
     /// </summary>
     /// <returns>true if a validator is required; false otherwise.</returns>
-    public bool RequiresValidator => false;
+    bool RequiresValidator => false;
 
     /// <summary>
     ///     Retrieves the current validation status for this validation context.
@@ -54,7 +54,7 @@ public interface IValidationContext
     /// </summary>
     /// <typeparam name="T">The type of the context.</typeparam>
     /// <typeparam name="TB">The type of the builder.</typeparam>
-    public interface IBuilder<out T, TB> : IBuilder
+    interface IBuilder<out T, TB> : IBuilder
         where T : IValidationContext
         where TB : IBuilder
     {

@@ -59,12 +59,9 @@ public class InParallel
             throw new ArgumentException("At least one actor must be provided", nameof(actors));
         }
 
-        if (actors.Any(actor => actor == null))
-        {
-            throw new ArgumentException("All actors must be non-null", nameof(actors));
-        }
-
-        return new InParallel(actors);
+        return actors.Any(actor => actor == null)
+            ? throw new ArgumentException("All actors must be non-null", nameof(actors))
+            : new InParallel(actors);
     }
 
     /// <summary>
@@ -82,12 +79,9 @@ public class InParallel
             throw new ArgumentException("At least one actor must be provided", nameof(actors));
         }
 
-        if (actors.Any(actor => actor == null))
-        {
-            throw new ArgumentException("All actors must be non-null", nameof(actors));
-        }
-
-        return new InParallel(actors.ToArray());
+        return actors.Any(actor => actor == null)
+            ? throw new ArgumentException("All actors must be non-null", nameof(actors))
+            : new InParallel(actors.ToArray());
     }
 
     /// <summary>
@@ -187,11 +181,11 @@ public class InParallel
 
         // Create thread-safe actions for each actor
         var runnableTasks = _cast
-            .Select(actor => new Action(() =>
+            .Select(actor => new Action(void () =>
             {
-                // Each actor gets their own copy of the tasks array to avoid race conditions
+                // Each actor gets their own copy of the task array to avoid race conditions
                 var actorTasks = tasks.ToArray();
-                actor.AttemptsTo(actorTasks);
+                actor.AttemptsTo(actorTasks).GetAwaiter().GetResult();
             }))
             .ToArray();
 

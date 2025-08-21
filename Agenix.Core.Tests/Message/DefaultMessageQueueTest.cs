@@ -7,23 +7,24 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Threading.Tasks;
 using Agenix.Api.Message;
 using Agenix.Core.Message;
 using Agenix.Core.Message.Selector;
@@ -45,33 +46,33 @@ public class DefaultMessageQueueTest
     }
 
     [Test]
-    public void TestReceiveSelected()
+    public async Task TestReceiveSelected()
     {
         var queue = new DefaultMessageQueue("testQueue");
         queue.SetPollingInterval(100L);
 
-        queue.Send(new DefaultMessage("FooMessage").SetHeader("foo", "bar"));
+        await queue.Send(new DefaultMessage("FooMessage").SetHeader("foo", "bar"));
 
         var selector = new HeaderMatchingMessageSelector("foo", "bar", _context);
 
-        var receivedMessage = queue.Receive(message => selector.Accept(message), 1000L);
+        var receivedMessage = await queue.Receive(message => selector.Accept(message), 1000L);
 
         ClassicAssert.AreEqual(receivedMessage.GetPayload<string>(), "FooMessage");
         ClassicAssert.AreEqual(receivedMessage.GetHeaders()["foo"], "bar");
     }
 
     [Test]
-    public void TestWithRetry()
+    public async Task TestWithRetry()
     {
         var queue = new DefaultMessageQueue("testQueue");
         queue.SetPollingInterval(100L);
 
-        queue.Send(new DefaultMessage("FooMessage").SetHeader("foo", "bar"));
+        await queue.Send(new DefaultMessage("FooMessage").SetHeader("foo", "bar"));
 
         var retries = new AtomicLong();
         var selector = new CustomHeaderMatchingMessageSelectorGreaterThan7("foo", "bar", _context, retries);
 
-        var receivedMessage = queue.Receive(message => selector.Accept(message), 1000L);
+        var receivedMessage = await queue.Receive(message => selector.Accept(message), 1000L);
 
         ClassicAssert.AreEqual(receivedMessage.GetPayload<string>(), "FooMessage");
         ClassicAssert.AreEqual(receivedMessage.GetHeaders()["foo"], "bar");
@@ -79,34 +80,34 @@ public class DefaultMessageQueueTest
     }
 
     [Test]
-    public void TestRetryExceeded()
+    public async Task TestRetryExceeded()
     {
         var queue = new DefaultMessageQueue("testQueue");
         queue.SetPollingInterval(500L);
 
-        queue.Send(new DefaultMessage("FooMessage").SetHeader("foos", "bars"));
+        await queue.Send(new DefaultMessage("FooMessage").SetHeader("foos", "bars"));
 
         var retries = new AtomicLong();
         var selector = new CustomHeaderMatchingMessageSelector("foo", "bar", _context, retries);
 
-        var receivedMessage = queue.Receive(message => selector.Accept(message), 1000L);
+        var receivedMessage = await queue.Receive(message => selector.Accept(message), 1000L);
 
         ClassicAssert.IsNull(receivedMessage);
         ClassicAssert.AreEqual(retries.Get(), 3L);
     }
 
     [Test]
-    public void TestRetryExceededWithTimeoutRest()
+    public async Task TestRetryExceededWithTimeoutRest()
     {
         var queue = new DefaultMessageQueue("testQueue");
         queue.SetPollingInterval(400L);
 
-        queue.Send(new DefaultMessage("FooMessage").SetHeader("foos", "bars"));
+        await queue.Send(new DefaultMessage("FooMessage").SetHeader("foos", "bars"));
 
         var retries = new AtomicLong();
         var selector = new CustomHeaderMatchingMessageSelector("foo", "bar", _context, retries);
 
-        var receivedMessage = queue.Receive(message => selector.Accept(message), 1000L);
+        var receivedMessage = await queue.Receive(message => selector.Accept(message), 1000L);
 
         ClassicAssert.IsNull(receivedMessage);
         ClassicAssert.AreEqual(retries.Get(), 4L);

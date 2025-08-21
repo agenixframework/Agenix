@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -39,7 +39,7 @@ namespace Agenix.GraphQL.Actions;
 ///     AbstractReferenceResolverAwareTestActionBuilder, allowing seamless construction
 ///     and execution of GraphQL test actions with support for reference resolver injection.
 /// </remarks>
-public class GraphQLActionBuilder : AbstractReferenceResolverAwareTestActionBuilder<ITestAction>
+public class GraphQLActionBuilder : AbstractReferenceResolverAwareTestActionBuilder<IAsyncTestAction>
 {
     /// Static entrance method for the GraphQL fluent action builder.
     /// <return>Instance of the GraphQL action builder.</return>
@@ -56,7 +56,7 @@ public class GraphQLActionBuilder : AbstractReferenceResolverAwareTestActionBuil
     public GraphQLClientActionBuilder Client(GraphQLClient graphQlClient)
     {
         var clientActionBuilder = new GraphQLClientActionBuilder(graphQlClient)
-            .WithReferenceResolver(referenceResolver);
+            .WithReferenceResolver(ReferenceResolver);
         _delegate = clientActionBuilder;
         return clientActionBuilder;
     }
@@ -68,7 +68,7 @@ public class GraphQLActionBuilder : AbstractReferenceResolverAwareTestActionBuil
     public GraphQLClientActionBuilder Client(string graphQlClient)
     {
         var clientActionBuilder = new GraphQLClientActionBuilder(graphQlClient)
-            .WithReferenceResolver(referenceResolver);
+            .WithReferenceResolver(ReferenceResolver);
         _delegate = clientActionBuilder;
         return clientActionBuilder;
     }
@@ -78,13 +78,13 @@ public class GraphQLActionBuilder : AbstractReferenceResolverAwareTestActionBuil
     /// <return>This instance of GraphQLActionBuilder for method chaining.</return>
     public GraphQLActionBuilder WithReferenceResolver(IReferenceResolver referenceResolver)
     {
-        this.referenceResolver = referenceResolver;
+        ReferenceResolver = referenceResolver;
         return this;
     }
 
-    /// Builds and returns an ITestAction instance.
-    /// <return>The built ITestAction instance.</return>
-    public override ITestAction Build()
+    /// Builds and returns an IAsyncTestAction instance.
+    /// <return>The built IAsyncTestAction instance.</return>
+    public override IAsyncTestAction Build()
     {
         ObjectHelper.AssertNotNull(_delegate, "Missing delegate action to build");
         return _delegate.Build();

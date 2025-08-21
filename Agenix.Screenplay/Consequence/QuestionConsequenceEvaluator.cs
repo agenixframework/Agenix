@@ -83,17 +83,17 @@ public class QuestionConsequence<T> : BaseConsequence<T>
     /// <param name="actor">
     ///     The actor who answers the question being evaluated.
     /// </param>
-    public override void EvaluateFor(Actor actor)
+    public override async Task EvaluateFor(Actor actor)
     {
-        actor.EventBus!.Publish(new ActorAsksQuestion(question.Subject, actor.Name));
+        await actor.EventBus.Publish(new ActorAsksQuestion(question.Subject, actor.Name));
 
         try
         {
-            PerformSetupActionsAs(actor);
+            await PerformSetupActionsAs(actor);
 
             QuestionHints.AddHints(QuestionHints.FromAssertion(expected)).To(question);
 
-            MatcherAssert.AssertThat(question.AnsweredBy(actor), expected);
+            MatcherAssert.AssertThat(await question.AnsweredBy(actor), expected);
         }
         catch (Exception actualError)
         {

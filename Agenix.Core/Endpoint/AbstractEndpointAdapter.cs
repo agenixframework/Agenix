@@ -7,24 +7,25 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
 using System;
+using System.Threading.Tasks;
 using Agenix.Api.Context;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Log;
@@ -41,26 +42,21 @@ public abstract class AbstractEndpointAdapter : IEndpointAdapter
     /// <summary>
     ///     Logger
     /// </summary>
-    private readonly ILogger _logger = LogManager.GetLogger(typeof(AbstractEndpointAdapter));
-
-    /// <summary>
-    ///     Fallback adapter
-    /// </summary>
-    private IEndpointAdapter _fallbackEndpointAdapter;
+    private readonly ILogger _logger;
 
     /// <summary>
     ///     Endpoint adapter name
     /// </summary>
     private string _name;
 
-    private TestContextFactory? _testContextFactory;
+    private TestContextFactory _testContextFactory;
 
     /// <summary>
     ///     Initializes a new instance of the AbstractEndpointAdapter class.
     /// </summary>
     protected AbstractEndpointAdapter(ILogger logger)
     {
-        _logger = logger;
+        _logger = logger ?? LogManager.GetLogger(typeof(AbstractEndpointAdapter));
         _name = GetType().Name;
     }
 
@@ -74,29 +70,22 @@ public abstract class AbstractEndpointAdapter : IEndpointAdapter
     }
 
     /// <summary>
-    ///     Gets or sets the fallback endpoint adapter.
-    /// </summary>
-    public IEndpointAdapter? FallbackEndpointAdapter
-    {
-        get => _fallbackEndpointAdapter;
-        set => _fallbackEndpointAdapter = value;
-    }
-
-    /// <summary>
     ///     Gets or sets the test context factory.
     /// </summary>
-    public TestContextFactory? TestContextFactory
+    public TestContextFactory TestContextFactory
     {
         get
         {
-            if (_testContextFactory == null)
+            if (_testContextFactory != null)
             {
-                _logger.LogWarning("Could not identify proper test context factory from dependency injection - " +
-                                   "constructing own test context factory. This restricts test context capabilities to an " +
-                                   "absolute minimum! You could do better when enabling proper dependency injection for this server instance.");
-
-                _testContextFactory = TestContextFactory.NewInstance();
+                return _testContextFactory;
             }
+
+            _logger.LogWarning("Could not identify proper test context factory from dependency injection - " +
+                               "constructing own test context factory. This restricts test context capabilities to an " +
+                               "absolute minimum! You could do better when enabling proper dependency injection for this server instance.");
+
+            _testContextFactory = TestContextFactory.NewInstance();
 
             return _testContextFactory;
         }
@@ -106,26 +95,18 @@ public abstract class AbstractEndpointAdapter : IEndpointAdapter
     /// <summary>
     ///     Handles a request message and returns a proper response.
     /// </summary>
-    /// <param name="request">The request message.</param>
+    /// <param name="message">The request message.</param>
     /// <returns>The response message.</returns>
-    public virtual IMessage HandleMessage(IMessage request)
+    public virtual async Task<IMessage> HandleMessage(IMessage message)
     {
-        var replyMessage = HandleMessageInternal(request);
+        var replyMessage = await HandleMessageInternal(message);
 
-        if (replyMessage == null || replyMessage.Payload == null)
+        if (replyMessage?.Payload != null)
         {
-            if (_fallbackEndpointAdapter != null)
-            {
-                _logger.LogDebug("Did not receive reply message - " +
-                                 "delegating to fallback endpoint adapter");
-
-                replyMessage = _fallbackEndpointAdapter.HandleMessage(request);
-            }
-            else
-            {
-                _logger.LogDebug("Did not receive reply message - no response is simulated");
-            }
+            return replyMessage;
         }
+
+        _logger.LogDebug("Did not receive reply message - no response is simulated");
 
         return replyMessage;
     }
@@ -143,12 +124,12 @@ public abstract class AbstractEndpointAdapter : IEndpointAdapter
     public abstract IEndpointConfiguration GetEndpointConfiguration();
 
     /// <summary>
-    ///     Subclasses must implement this method in order to handle incoming request message. If
+    ///     Subclasses must implement this method to handle an incoming request message. If
     ///     this method does not return any response message fallback endpoint adapter is invoked for processing.
     /// </summary>
     /// <param name="message">The request message.</param>
     /// <returns>The response message.</returns>
-    protected abstract IMessage? HandleMessageInternal(IMessage message);
+    protected abstract Task<IMessage> HandleMessageInternal(IMessage message);
 
     /// <summary>
     ///     Gets new test context from factory.
@@ -156,6 +137,6 @@ public abstract class AbstractEndpointAdapter : IEndpointAdapter
     /// <returns>The test context.</returns>
     protected TestContext GetTestContext()
     {
-        return TestContextFactory!.GetObject();
+        return TestContextFactory.GetObject();
     }
 }

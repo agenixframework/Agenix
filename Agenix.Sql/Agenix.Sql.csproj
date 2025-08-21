@@ -15,7 +15,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Spring.Data" Version="3.0.2"/>
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.7"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Spring/Data/**"/>
   </ItemGroup>
 
   <ItemGroup>

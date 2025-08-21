@@ -16,7 +16,9 @@ namespace Agenix.Selenium.Tests.Actions;
 [TestFixture]
 public class SeleniumTestActionBuilderTest : AbstractNUnitSetUp
 {
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     private SeleniumBrowser _seleniumBrowser;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     private readonly Mock<SeleniumBrowserConfiguration> _seleniumBrowserConfiguration = new();
     private readonly Mock<IWebDriver> _webDriver = new();
     private readonly Mock<IReferenceResolver> _referenceResolver = new();
@@ -29,15 +31,14 @@ public class SeleniumTestActionBuilderTest : AbstractNUnitSetUp
     private readonly Mock<IAlert> _alert = new();
     private readonly Mock<INavigation> _navigation = new();
     private readonly Mock<ITargetLocator> _locator = new();
-    private readonly Mock<IOptions> _options = new();
     private readonly Mock<IOptions> _webDriverOptions = new();
     private readonly Mock<ICookieJar> _cookieJar = new();
 
     [Test]
-    public void TestSeleniumBuilder()
+    public async Task TestSeleniumBuilder()
     {
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
-        _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
+        _referenceResolver.Setup(x => x.Resolve<AsyncTestActionListeners>()).Returns(new AsyncTestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
             .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
@@ -126,10 +127,10 @@ public class SeleniumTestActionBuilderTest : AbstractNUnitSetUp
 
         var builder = new DefaultTestCaseRunner(Context);
 
-        builder.Run(SeleniumActionBuilder.Selenium().Start(_seleniumBrowser));
-        builder.Run(SeleniumActionBuilder.Selenium().Navigate("http://localhost:9090"));
-        builder.Run(SeleniumActionBuilder.Selenium().Find().Element(By.Id("header")));
-        builder.Run(SeleniumActionBuilder.Selenium().Find().Element("class-name", "${cssClass}")
+        await builder.Run(SeleniumActionBuilder.Selenium().Start(_seleniumBrowser));
+        await builder.Run(SeleniumActionBuilder.Selenium().Navigate("http://localhost:9090"));
+        await builder.Run(SeleniumActionBuilder.Selenium().Find().Element(By.Id("header")));
+        await builder.Run(SeleniumActionBuilder.Selenium().Find().Element("class-name", "${cssClass}")
             .SetTagName("button")
             .SetEnabled(false)
             .SetDisplayed(false)
@@ -137,20 +138,21 @@ public class SeleniumTestActionBuilderTest : AbstractNUnitSetUp
             .SetStyle("color", "red")
             .SetAttribute("type", "submit"));
 
-        builder.Run(SeleniumActionBuilder.Selenium().Click().Element(By.LinkText("Click Me!")));
-        builder.Run(SeleniumActionBuilder.Selenium().Hover().Element(By.LinkText("Hover Me!")));
-        builder.Run(SeleniumActionBuilder.Selenium().SetInput("Agenix").Element(By.Name("username")));
-        builder.Run(SeleniumActionBuilder.Selenium().CheckInput(false).Element(By.XPath("//input[@type='checkbox']")));
-        builder.Run(
+        await builder.Run(SeleniumActionBuilder.Selenium().Click().Element(By.LinkText("Click Me!")));
+        await builder.Run(SeleniumActionBuilder.Selenium().Hover().Element(By.LinkText("Hover Me!")));
+        await builder.Run(SeleniumActionBuilder.Selenium().SetInput("Agenix").Element(By.Name("username")));
+        await builder.Run(SeleniumActionBuilder.Selenium().CheckInput(false)
+            .Element(By.XPath("//input[@type='checkbox']")));
+        await builder.Run(
             SeleniumActionBuilder.Selenium().JavaScript("alert('Hello!')").SetExpectedErrors("This went wrong!"));
-        builder.Run(SeleniumActionBuilder.Selenium().Alert().SetText("Hello!").AcceptAlert());
-        builder.Run(SeleniumActionBuilder.Selenium().ClearCache());
-        builder.Run(SeleniumActionBuilder.Selenium().Store("download/file.txt"));
-        builder.Run(SeleniumActionBuilder.Selenium().Open().SetWindow("my_window"));
-        builder.Run(SeleniumActionBuilder.Selenium().Focus().Window("my_window"));
-        builder.Run(SeleniumActionBuilder.Selenium().Close().SetWindow("my_window"));
+        await builder.Run(SeleniumActionBuilder.Selenium().Alert().SetText("Hello!").AcceptAlert());
+        await builder.Run(SeleniumActionBuilder.Selenium().ClearCache());
+        await builder.Run(SeleniumActionBuilder.Selenium().Store("download/file.txt"));
+        await builder.Run(SeleniumActionBuilder.Selenium().Open().SetWindow("my_window"));
+        await builder.Run(SeleniumActionBuilder.Selenium().Focus().Window("my_window"));
+        await builder.Run(SeleniumActionBuilder.Selenium().Close().SetWindow("my_window"));
         //        builder.Run(SeleniumActionBuilder.Selenium().WaitUntil().Hidden().Element(By.Name("hiddenButton")));
-        builder.Run(SeleniumActionBuilder.Selenium().Stop(_seleniumBrowser));
+        await builder.Run(SeleniumActionBuilder.Selenium().Stop(_seleniumBrowser));
 
         var test = builder.GetTestCase();
         var actionIndex = 0;

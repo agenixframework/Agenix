@@ -15,23 +15,23 @@ public class WhenUsingConditionalPerformables
     private Apple _apple;
 
     [Test]
-    public void AConditionalWithABooleanExpression()
+    public async Task AConditionalWithABooleanExpression()
     {
         var eddie = Actor.Named("Eddie");
         var eatsTheApple = new EatsTheApple(_apple);
 
-        eddie.AttemptsTo(Check.Whether(true).AndIfSo(eatsTheApple));
+        await eddie.AttemptsTo(Check.Whether(true).AndIfSo(eatsTheApple));
 
         Assert.That(_apple.IsEaten(), Is.True);
     }
 
     [Test]
-    public void TaskShouldNotBeExecutedIfTheConditionIsNotTrue()
+    public async Task TaskShouldNotBeExecutedIfTheConditionIsNotTrue()
     {
         var eddie = Actor.Named("Eddie");
         var eatsTheApple = new EatsTheApple(_apple);
 
-        eddie.AttemptsTo(Check.Whether(false).AndIfSo(eatsTheApple));
+        await eddie.AttemptsTo(Check.Whether(false).AndIfSo(eatsTheApple));
 
         Assert.That(_apple.IsEaten(), Is.False);
     }

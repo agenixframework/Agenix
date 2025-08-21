@@ -24,7 +24,6 @@
 
 #endregion
 
-using Agenix.Screenplay.Annotations;
 using JetBrains.Annotations;
 
 namespace Agenix.Screenplay;
@@ -55,13 +54,19 @@ public class AnonymousPerformableFunction : IPerformable
     }
 
     /// <summary>
-    ///     Executes the specified actions or tasks as the provided actor.
+    ///     Executes the specified actions or tasks as the provided actor asynchronously.
     /// </summary>
     /// <typeparam name="T">The type of the actor performing the actions, which must extend from the Actor class.</typeparam>
-    /// <param name="actor">The actor performing the actions defined for this performable function.</param>
-    [Step("!#_title")]
-    public void PerformAs<T>(T actor) where T : Actor
+    /// <param name="actor">The actor executing the actions defined by this performable function.</param>
+    /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
+    /// <returns>A task that represents the asynchronous execution of the performable function.</returns>
+    public async Task PerformAsAsync<T>(T actor, CancellationToken cancellationToken = default) where T : Actor
     {
-        _actions.Invoke(actor);
+        if (cancellationToken.IsCancellationRequested)
+        {
+            await Task.FromCanceled(cancellationToken);
+        }
+
+        _actions(actor);
     }
 }

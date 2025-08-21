@@ -175,7 +175,10 @@ public class ExpectPageAction : AbstractPlaywrightAction
                     resolvedDynamicValue);
 
                 var assertion = IsNot ? pageAssertions.Not : pageAssertions;
-                await assertion.ToHaveTitleAsync(resolvedDynamicValue, options);
+                if (resolvedDynamicValue != null)
+                {
+                    await assertion.ToHaveTitleAsync(resolvedDynamicValue, options);
+                }
             }
             else
             {
@@ -218,7 +221,10 @@ public class ExpectPageAction : AbstractPlaywrightAction
                     resolvedDynamicValue);
 
                 var assertion = IsNot ? pageAssertions.Not : pageAssertions;
-                await assertion.ToHaveURLAsync(resolvedDynamicValue, options);
+                if (resolvedDynamicValue != null)
+                {
+                    await assertion.ToHaveURLAsync(resolvedDynamicValue, options);
+                }
             }
             else
             {

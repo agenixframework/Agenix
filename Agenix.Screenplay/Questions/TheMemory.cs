@@ -44,9 +44,10 @@ public class TheMemory : IQuestion<bool>
     /// </summary>
     /// <param name="actor">The actor attempting to recall the memory associated with the specified key.</param>
     /// <returns>True if the memory is present; otherwise, false.</returns>
-    public bool AnsweredBy(Actor actor)
+    public async Task<bool> AnsweredBy(Actor actor)
     {
-        return actor.Recall<dynamic>(_memoryKey) != null;
+        var value = await actor.Recall<dynamic>(_memoryKey);
+        return value is not null;
     }
 
     /// <summary>

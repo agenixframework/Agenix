@@ -7,24 +7,26 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Log;
@@ -35,7 +37,7 @@ namespace Agenix.Core.Actions;
 /// <summary>
 ///     Action creating new test variables during a test. Existing test variables are overwritten by new values.
 /// </summary>
-public class CreateVariablesAction : AbstractTestAction
+public class CreateVariablesAction : AbstractTestActionAsync
 {
     /// <summary>
     ///     Logger.
@@ -44,7 +46,7 @@ public class CreateVariablesAction : AbstractTestAction
 
     private CreateVariablesAction(Builder builder) : base("create-variables", builder)
     {
-        Variables = builder._variables;
+        Variables = builder.Variables;
     }
 
     /// <summary>
@@ -53,33 +55,36 @@ public class CreateVariablesAction : AbstractTestAction
     public IDictionary<string, string> Variables { get; }
 
     /// <summary>
-    ///     Executes the action to create and set variables in the given test context.
+    ///     Executes the action to create and set variables in the provided test context.
     /// </summary>
-    /// <param name="context">The test context in which to set the variables.</param>
-    public override void DoExecute(TestContext context)
+    /// <param name="context">The test context in which the variables will be set.</param>
+    /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
+    public override Task DoExecute(TestContext context, CancellationToken cancellationToken = default)
     {
         foreach (var entry in Variables)
         {
             var key = entry.Key;
             var value = entry.Value;
 
-
             //check if the value is variable or function (and resolve it if yes)
             value = context.ReplaceDynamicContentInString(value);
 
-            Log.LogInformation("Setting variable: " + key + " to value: " + value);
+            Log.LogInformation("Setting variable: {Key} to value: {Value}", key, value);
 
             context.SetVariable(key, value);
         }
+
+        return Task.CompletedTask;
     }
 
     /// <summary>
     ///     Builder class for creating instances of <see cref="CreateVariablesAction" />.
     ///     Provides methods for adding variables and their values to the action.
     /// </summary>
-    public sealed class Builder : AbstractTestActionBuilder<ITestAction, dynamic>
+    public sealed class Builder : AbstractAsyncTestActionBuilder<IAsyncTestAction, dynamic>
     {
-        internal readonly IDictionary<string, string> _variables = new Dictionary<string, string>();
+        internal readonly IDictionary<string, string> Variables = new Dictionary<string, string>();
 
         /// <summary>
         ///     Creates a new Builder with the specified variable and value.
@@ -111,10 +116,14 @@ public class CreateVariablesAction : AbstractTestAction
         /// <returns>A reference to the builder, for method chaining.</returns>
         public Builder Variable(string variableName, string value)
         {
-            _variables[variableName] = value;
+            Variables[variableName] = value;
             return this;
         }
 
+        /// <summary>
+        ///     Builds an instance of the <see cref="CreateVariablesAction" /> class based on the configured parameters.
+        /// </summary>
+        /// <returns>A new instance of the <see cref="CreateVariablesAction" /> class.</returns>
         public override CreateVariablesAction Build()
         {
             return new CreateVariablesAction(this);

@@ -24,6 +24,8 @@
 
 #endregion
 
+using System.Collections;
+
 namespace Agenix.Screenplay;
 
 /// <summary>
@@ -32,12 +34,22 @@ namespace Agenix.Screenplay;
 public class CountQuestion<T>(IQuestion<ICollection<T>> listQuestion) : IQuestion<int>
 {
     /// <summary>
-    /// Retrieves the count of elements in a collection by evaluating the provided question within the context of the given actor.
+    ///     Retrieves the count of elements in the collection resolved by the specified question.
     /// </summary>
-    /// <param name="actor">The actor performing the question, used to evaluate the context-specific answer.</param>
-    /// <returns>The count of elements retrieved from the collection provided by the question.</returns>
-    public int AnsweredBy(Actor actor)
+    /// <param name="actor">The actor interacting with the question.</param>
+    /// <returns>The count of elements in the collection resolved by the question. Returns 0 if the collection is null.</returns>
+    public async Task<int> AnsweredBy(Actor actor)
     {
-        return listQuestion.AnsweredBy(actor).Count;
+        var result = await listQuestion.AnsweredBy(actor).ConfigureAwait(false);
+
+        return result switch
+        {
+            null => 0,
+            // Fast paths for common collection shapes
+            ICollection nonGeneric => nonGeneric.Count,
+            ICollection<object> genericCollection => genericCollection.Count,
+            // Fallbacks for enumerable results
+            IEnumerable enumerable => enumerable.Cast<object>().Count()
+        };
     }
 }

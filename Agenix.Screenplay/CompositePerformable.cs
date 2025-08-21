@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -27,12 +27,10 @@
 namespace Agenix.Screenplay;
 
 /// <summary>
-///     Represents a composite of multiple tasks or actions that can be performed by an actor.
+///     Represents a composite action or task made up of multiple performable actions.
+///     This class allows grouping multiple <see cref="IPerformable" /> objects into a single task that can be performed by
+///     an actor.
 /// </summary>
-/// <remarks>
-///     A composite performable enables the combination of multiple actions or tasks into a single,
-///     cohesive unit that can be executed sequentially by an actor.
-/// </remarks>
 public class CompositePerformable : IPerformable
 {
     private readonly List<IPerformable> _todoList;
@@ -43,15 +41,25 @@ public class CompositePerformable : IPerformable
     }
 
     /// <summary>
-    ///     Performs all actions or tasks in the composite list using the provided actor.
+    ///     Executes all actions or tasks in the composite list using the specified actor.
     /// </summary>
     /// <typeparam name="T">The type of actor performing the actions.</typeparam>
-    /// <param name="actor">The actor that will execute each performable in the composite list.</param>
-    public void PerformAs<T>(T actor) where T : Actor
+    /// <param name="actor">The actor that will execute each performable action in the composite list.</param>
+    /// <param name="cancellationToken">
+    ///     A token to monitor for cancellation requests. If cancellation is requested before or during execution,
+    ///     the task will complete in a canceled state.
+    /// </param>
+    /// <returns>A task that represents the asynchronous operation of performing all actions in the list.</returns>
+    public async Task PerformAsAsync<T>(T actor, CancellationToken cancellationToken = default) where T : Actor
     {
+        if (cancellationToken.IsCancellationRequested)
+        {
+            await Task.FromCanceled(cancellationToken);
+        }
+
         foreach (var todo in _todoList)
         {
-            actor.AttemptsTo(todo);
+            await actor.AttemptsToAsync(todo);
         }
     }
 

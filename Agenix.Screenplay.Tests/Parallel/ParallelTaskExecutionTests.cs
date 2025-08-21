@@ -59,7 +59,7 @@ public class WhenRunningTasksInParallel
         });
     }
 
-    private IPerformable DoSomethingThatFails()
+    private static IPerformable DoSomethingThatFails()
     {
         return ITask.Where("{} fails test by purpose", _ =>
         {

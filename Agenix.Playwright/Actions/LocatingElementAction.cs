@@ -46,13 +46,58 @@ public class LocatingElementAction : AbstractPlaywrightAction
         ///     a hint or description of the expected input.
         /// </summary>
         PLACEHOLDER,
+
+        /// <summary>
+        ///     Represents a locator strategy that identifies elements based on their associated alternative text (alt text).
+        ///     Alt text is commonly used to describe the content or purpose of an element, primarily for accessibility purposes.
+        /// </summary>
         ALT_TEXT,
+
+        /// <summary>
+        ///     Represents a locator strategy that identifies elements based on their title attribute.
+        ///     The title attribute provides additional information about the element, often displayed as a tooltip on hover.
+        /// </summary>
         TITLE,
+
+        /// <summary>
+        ///     Represents a locator strategy used to identify elements based on a test-specific identifier.
+        ///     This strategy is typically employed in scenarios where elements are tagged with a unique identifier
+        ///     specifically for testing purposes, aiding in reliable element selection during automated testing.
+        /// </summary>
         TEST_ID,
+
+        /// <summary>
+        ///     Represents a locator strategy that identifies elements using CSS selectors.
+        ///     CSS selectors provide a powerful and flexible way to pinpoint elements based on
+        ///     attributes, hierarchy, and other styles applied in the DOM structure.
+        /// </summary>
         CSS,
+
+        /// <summary>
+        ///     Represents a locator strategy used to identify elements within the DOM
+        ///     based on XML Path Language (XPath) queries. XPath is a powerful syntax
+        ///     for navigating and locating elements in an XML or HTML document structure,
+        ///     enabling precise element selection through conditions, attributes, and hierarchy.
+        /// </summary>
         XPATH,
+
+        /// <summary>
+        ///     Represents a locator strategy that identifies elements based on their unique ID attribute.
+        ///     The ID is typically a unique identifier assigned to an element within the DOM, allowing for precise selection.
+        /// </summary>
         ID,
+
+        /// <summary>
+        ///     Represents a locator strategy that identifies elements based on their class name attribute.
+        ///     Class names are used to group elements in a structured manner, typically for styling and layout purposes.
+        /// </summary>
         CLASS_NAME,
+
+        /// <summary>
+        ///     Represents a locator strategy that identifies elements based on their "name" attribute value.
+        ///     The "name" attribute is commonly used in form controls and other elements, providing a means
+        ///     to programmatically target those elements for interaction or verification.
+        /// </summary>
         NAME,
 
         /// <summary>
@@ -61,7 +106,18 @@ public class LocatingElementAction : AbstractPlaywrightAction
         ///     'button'.
         /// </summary>
         TAG_NAME,
+
+        /// <summary>
+        ///     Represents a locator strategy that identifies hyperlink elements based on their exact visible text.
+        ///     This strategy is generally used to locate anchor elements by matching their displayed text, which helps
+        ///     to uniquely identify links on the page.
+        /// </summary>
         LINK_TEXT,
+
+        /// <summary>
+        ///     Represents a locator strategy that identifies elements by matching a subset of their visible link text.
+        ///     Useful for locating hyperlinks when only a portion of the link text is known or consistent.
+        /// </summary>
         PARTIAL_LINK_TEXT
     }
 
@@ -131,8 +187,9 @@ public class LocatingElementAction : AbstractPlaywrightAction
     /// <param name="locator">The located element</param>
     /// <param name="browser">The browser instance</param>
     /// <param name="context">The test context</param>
-    protected virtual async Task Execute(ILocator locator, PlaywrightBrowser browser, TestContext context)
+    protected virtual Task Execute(ILocator locator, PlaywrightBrowser browser, TestContext context)
     {
+        return Task.CompletedTask;
     }
 
     private static ILocator BuildChainedLocator(IPage page, List<LocatorDefinition> locators)
@@ -317,7 +374,7 @@ public class LocatingElementAction : AbstractPlaywrightAction
         ///     with elements on a web page. It provides additional parameters that refine the search
         ///     scope and behavior, enhancing precision and flexibility for element selection.
         /// </remarks>
-        public PageLocatorOptions? PageLocatorOptions { get; set; }
+        public PageLocatorOptions? PageLocatorOptions { get; }
     }
 
     /// <summary>
@@ -672,6 +729,10 @@ public class LocatingElementAction : AbstractPlaywrightAction
     /// </summary>
     public class Builder : Builder<LocatingElementAction, Builder>
     {
+        /// <summary>
+        ///     Builds an instance of the <see cref="LocatingElementAction" /> using the current configuration of the builder.
+        /// </summary>
+        /// <returns>An instance of <see cref="LocatingElementAction" />.</returns>
         public override LocatingElementAction Build()
         {
             return new LocatingElementAction(this);

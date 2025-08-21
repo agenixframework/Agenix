@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -71,7 +71,7 @@ public class NamespaceTest : AbstractNUnitSetUp
                                          "</ns1:root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<ns1:root xmlns:ns1='http://agenix'>" +
@@ -91,7 +91,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should complete successfully since both messages have matching namespaces
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
 
         // Verify consumer was called
         _consumer.Verify(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()), Times.Once);
@@ -116,7 +116,7 @@ public class NamespaceTest : AbstractNUnitSetUp
                                          "</ns1:root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<ns2:root xmlns:ns2='http://agenix'>" +
@@ -136,7 +136,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should complete successfully despite different namespace prefixes
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
 
         // Verify consumer was called
         _consumer.Verify(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()), Times.Once);
@@ -161,7 +161,7 @@ public class NamespaceTest : AbstractNUnitSetUp
                                          "</ns1:root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -182,7 +182,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should complete successfully despite additional namespace declaration
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
 
         // Verify consumer was called
         _consumer.Verify(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()), Times.Once);
@@ -207,7 +207,7 @@ public class NamespaceTest : AbstractNUnitSetUp
                                          "</ns1:root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<ns1:root xmlns:ns1='http://agenix'>" +
@@ -227,7 +227,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should complete successfully despite missing namespace declaration in control
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
 
         // Verify consumer was called
         _consumer.Verify(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()), Times.Once);
@@ -252,7 +252,7 @@ public class NamespaceTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root xmlns='http://agenix'>" +
@@ -272,7 +272,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should complete successfully with default namespace validation
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
 
         // Verify consumer was called
         _consumer.Verify(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()), Times.Once);
@@ -297,7 +297,7 @@ public class NamespaceTest : AbstractNUnitSetUp
                                          "</ns1:root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root xmlns='http://agenix'>" +
@@ -317,7 +317,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should complete successfully despite different namespace declaration approaches
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
 
         // Verify consumer was called
         _consumer.Verify(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()), Times.Once);
@@ -342,7 +342,7 @@ public class NamespaceTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<ns1:root xmlns:ns1='http://agenix'>" +
@@ -362,7 +362,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should complete successfully despite different namespace declaration approaches
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
 
         // Verify consumer was called
         _consumer.Verify(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()), Times.Once);
@@ -387,7 +387,7 @@ public class NamespaceTest : AbstractNUnitSetUp
                                          "</ns1:root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root>" +
@@ -407,7 +407,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should throw ValidationException due to namespace mismatch
-        Assert.That(() => receiveAction.Execute(Context), Throws.TypeOf<ValidationException>());
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.TypeOf<ValidationException>());
 
         // Verify consumer was called
         _consumer.Verify(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()), Times.Once);
@@ -432,7 +432,7 @@ public class NamespaceTest : AbstractNUnitSetUp
                                          "</ns1:root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<ns1:root xmlns:ns1='http://agenix/wrong'>" +
@@ -452,7 +452,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should throw ValidationException due to namespace URI mismatch
-        Assert.That(() => receiveAction.Execute(Context), Throws.TypeOf<ValidationException>());
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.TypeOf<ValidationException>());
 
         // Verify consumer was called
         _consumer.Verify(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()), Times.Once);
@@ -477,7 +477,7 @@ public class NamespaceTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root xmlns='http://agenix'>" +
@@ -500,7 +500,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should succeed as both messages use the same default namespace
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
 
         // Verify the action completed successfully
         _consumer.Verify(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()), Times.Once);
@@ -525,7 +525,7 @@ public class NamespaceTest : AbstractNUnitSetUp
                                          "</ns1:root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<ns1:root xmlns:ns1='http://agenix/ns1'>" +
@@ -548,7 +548,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should succeed as both messages use the same prefixed namespace
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
 
         // Verify the action completed successfully
         _consumer.Verify(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()), Times.Once);
@@ -573,7 +573,7 @@ public class NamespaceTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
 
         var controlMessageBuilder = new DefaultMessageBuilder();
@@ -602,7 +602,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should succeed as both messages declare the same mixed namespaces
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
 
         // Verify the action completed successfully
         _consumer.Verify(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()), Times.Once);
@@ -628,7 +628,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -657,7 +657,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should succeed as both messages declare the same multiple namespaces
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
 
         // Verify the action completed successfully
         _consumer.Verify(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()), Times.Once);
@@ -682,7 +682,7 @@ public class NamespaceTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root xmlns='http://agenix'>" +
@@ -708,7 +708,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should throw ValidationException due to namespace mismatch
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<ValidationException>()
                 .With.Message
                 .Contains(
@@ -737,7 +737,7 @@ public class NamespaceTest : AbstractNUnitSetUp
                                          "</ns1:root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<ns1:root xmlns:ns1='http://agenix/ns1'>" +
@@ -763,7 +763,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should throw ValidationException due to prefixed namespace mismatch
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<ValidationException>()
                 .With.Message
                 .Contains(
@@ -792,7 +792,7 @@ public class NamespaceTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -820,7 +820,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should throw ValidationException due to default namespace mismatch
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<ValidationException>()
                 .With.Message
                 .Contains(
@@ -850,7 +850,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -879,7 +879,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should throw ValidationException due to ns1 namespace mismatch
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<ValidationException>()
                 .With.Message
                 .Contains(
@@ -909,7 +909,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -938,7 +938,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should throw ValidationException due to wrong namespace prefix
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<ValidationException>()
                 .With.Message.Contains("namespace"));
 
@@ -966,7 +966,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             "</ns0:root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -995,7 +995,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should throw ValidationException due to default namespace expectation vs prefixed declaration
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<ValidationException>()
                 .With.Message.Contains("namespace"));
 
@@ -1023,7 +1023,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -1052,7 +1052,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should throw ValidationException due to prefixed namespace expectation vs default declaration
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<ValidationException>()
                 .With.Message.Contains("namespace"));
 
@@ -1080,7 +1080,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -1110,7 +1110,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should throw ValidationException due to missing namespace
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<ValidationException>()
                 .With.Message.Contains("namespace"));
 
@@ -1138,7 +1138,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -1168,7 +1168,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should throw ValidationException due to unexpected namespace
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<ValidationException>()
                 .With.Message.Contains("namespace"));
 
@@ -1197,7 +1197,7 @@ public class NamespaceTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -1221,7 +1221,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should pass validation
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
 
         // Verify the consumer was called
         _consumer.Verify(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()), Times.Once);
@@ -1248,7 +1248,7 @@ public class NamespaceTest : AbstractNUnitSetUp
                                          "</ns1:root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -1272,7 +1272,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should pass validation
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
 
         // Verify the consumer was called
         _consumer.Verify(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()), Times.Once);
@@ -1299,7 +1299,7 @@ public class NamespaceTest : AbstractNUnitSetUp
                                          "</ns1:root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -1324,7 +1324,7 @@ public class NamespaceTest : AbstractNUnitSetUp
             .Build();
 
         // Act & Assert - Should throw AgenixSystemException due to wrong namespace mapping
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<AgenixSystemException>());
 
         // Verify the consumer was called

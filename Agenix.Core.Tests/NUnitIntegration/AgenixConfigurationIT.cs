@@ -7,23 +7,24 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Threading.Tasks;
 using Agenix.Api;
 using Agenix.Api.Annotations;
 using Agenix.Api.Endpoint;
@@ -44,11 +45,11 @@ namespace Agenix.Core.Tests.NUnitIntegration;
 public class AgenixConfigurationIT
 {
     [Test]
-    public void ShouldLoadConfiguration()
+    public async Task ShouldLoadConfiguration()
     {
         ClassicAssert.IsNotNull(_foo);
 
-        _runner.Run(Send(_directEndpoint)
+        await _runner.Run(Send(_directEndpoint)
             .Name("Send-direct")
             .Description("Send a message to the direct endpoint")
             .Message()
@@ -56,7 +57,7 @@ public class AgenixConfigurationIT
             .Body("Hello!")
         );
 
-        _runner.Run(Receive(_directEndpoint)
+        await _runner.Run(Receive(_directEndpoint)
             .Name("Receive-direct")
             .Description("Receive a message from the direct endpoint")
             .Message()
@@ -64,25 +65,25 @@ public class AgenixConfigurationIT
             .Body("Hello!")
         );
 
-        _runner.Run(Send("DirectEndpoint")
+        await _runner.Run(Send("DirectEndpoint")
             .Message()
             .Type(MessageType.PLAINTEXT)
             .Body("Hi!")
         );
 
-        _runner.Run(Receive("DirectEndpoint")
+        await _runner.Run(Receive("DirectEndpoint")
             .Message()
             .Type(MessageType.PLAINTEXT)
             .Body("Hi!")
         );
 
-        _runner.Run(Send(_foo)
+        await _runner.Run(Send(_foo)
             .Message()
             .Type(MessageType.PLAINTEXT)
             .Body("Hello again!")
         );
 
-        _runner.Run(Receive(_foo)
+        await _runner.Run(Receive(_foo)
             .Message()
             .Type(MessageType.PLAINTEXT)
             .Body("Hello again!")
@@ -123,6 +124,6 @@ public class AgenixConfigurationIT
 
     [AgenixEndpoint(Name = "Foo")] private IEndpoint _foo;
 
-    [AgenixResource] private ITestActionRunner _runner;
+    [AgenixResource] private IAsyncTestActionRunner _runner;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
 }

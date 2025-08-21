@@ -129,7 +129,7 @@ public interface IHeaderValidator
     /// </summary>
     /// <param name="validator"></param>
     /// <returns></returns>
-    public static Optional<IHeaderValidator> Lookup(string validator)
+    static Optional<IHeaderValidator> Lookup(string validator)
     {
         try
         {

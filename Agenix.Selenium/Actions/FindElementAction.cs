@@ -97,7 +97,7 @@ public class FindElementAction : AbstractSeleniumAction
     /// <exception cref="AgenixSystemException">
     ///     Thrown when the specified element cannot be found on the page.
     /// </exception>
-    protected override void Execute(SeleniumBrowser browser, TestContext context)
+    protected override async Task Execute(SeleniumBrowser browser, TestContext context)
     {
         var findBy = CreateBy(context);
         var element = browser.WebDriver.FindElement(findBy);
@@ -108,18 +108,20 @@ public class FindElementAction : AbstractSeleniumAction
         }
 
         Validate(element, browser, context);
-        Execute(element, browser, context);
+        await Execute(element, browser, context);
     }
 
     /// <summary>
     ///     Subclasses may override this method to add element actions
     /// </summary>
-    protected virtual void Execute(IWebElement element, SeleniumBrowser browser, TestContext context)
+    protected virtual Task Execute(IWebElement element, SeleniumBrowser browser, TestContext context)
     {
         if (!string.IsNullOrWhiteSpace(element.TagName))
         {
             context.GetVariables()[element.TagName] = element;
         }
+
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -313,7 +315,7 @@ public class FindElementAction : AbstractSeleniumAction
         public TBuilder Element(By by)
         {
             By = by;
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -326,7 +328,7 @@ public class FindElementAction : AbstractSeleniumAction
         {
             Property = property;
             PropertyValue = propertyValue;
-            return self;
+            return Self;
         }
 
         /// <summary>

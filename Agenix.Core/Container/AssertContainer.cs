@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -26,6 +26,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
@@ -38,7 +40,8 @@ namespace Agenix.Core.Container;
 /// Represents an action container specifically designed to manage assertions
 /// within test contexts. This class handles the execution of test actions
 /// and validates expected exceptions during testing.
-public class AssertContainer(AssertContainer.Builder builder) : AbstractActionContainer(builder.GetName() ?? "assert",
+public class AssertContainer(AssertContainer.Builder builder) : AbstractAsyncActionContainer(
+    builder.GetName() ?? "assert",
     builder.GetDescription(), builder.GetActions())
 {
     /// Static logger instance for the AssertException class.
@@ -47,7 +50,7 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
 
     /// Represents a nested test action builder specifically for test actions.
     /// /
-    private readonly ITestActionBuilder<ITestAction> _action = builder._action;
+    private readonly IAsyncTestActionBuilder<IAsyncTestAction> _action = builder._action;
 
     /// Represents the exception type that is subject to assertion.
     private readonly Type _exception = builder._exception;
@@ -55,7 +58,18 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
     /// Stores a localized exception message for control purposes.
     private readonly string _message = builder._message;
 
-    public override void DoExecute(TestContext context)
+    /// <summary>
+    ///     Executes the assert container's action, validating the expected exception type and message.
+    /// </summary>
+    /// <param name="context">The test context in which the action is executed.</param>
+    /// <param name="cancellationToken">The cancellation token to monitor for cancellation requests.</param>
+    /// <returns />
+    /// A task representing the asynchronous operation.>
+    /// <exception cref="ValidationException">
+    ///     Thrown when the validation of the asserted exception type or message fails, or if
+    ///     no exception is raised when expected.
+    /// </exception>
+    public override async Task DoExecute(TestContext context, CancellationToken cancellationToken = default)
     {
         if (Log.IsEnabled(LogLevel.Debug))
         {
@@ -64,7 +78,7 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
 
         try
         {
-            ExecuteAction(_action.Build(), context);
+            await ExecuteAction(_action.Build(), context);
         }
         catch (Exception e)
         {
@@ -102,7 +116,7 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
     /// Gets the action.
     /// @return the action
     /// /
-    public ITestAction GetAction()
+    public IAsyncTestAction GetAction()
     {
         return _action.Build();
     }
@@ -126,14 +140,14 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
     /// </summary>
     /// <param name="index">The index of the test action to retrieve.</param>
     /// <returns>The test action associated with the specified index.</returns>
-    public override ITestAction GetTestAction(int index)
+    public override IAsyncTestAction GetTestAction(int index)
     {
         return GetAction();
     }
 
     /// Gets the list of actions.
     /// <returns>List of actions in the form of ITestAction objects.</returns>
-    public override List<ITestAction> GetActions()
+    public override List<IAsyncTestAction> GetActions()
     {
         return [GetAction()];
     }
@@ -144,7 +158,7 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
     /// /
     public class Builder : AbstractExceptionContainerBuilder<AssertContainer, Builder>
     {
-        internal ITestActionBuilder<ITestAction> _action;
+        internal IAsyncTestActionBuilder<IAsyncTestAction> _action;
         internal Type _exception = typeof(AgenixSystemException);
         internal string _message;
 
@@ -156,7 +170,10 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
             return new Builder();
         }
 
-        public override Builder Actions(params ITestActionBuilder<ITestAction>[] actions)
+        /// Sets the actions for the container.
+        /// <param name="actions">An array of actions to set for the container. Each action is of type IAsyncTestActionBuilder.</param>
+        /// <returns>An instance of the current builder with the specified actions set.</returns>
+        public override Builder Actions(params IAsyncTestActionBuilder<IAsyncTestAction>[] actions)
         {
             _action = actions[0];
             return base.Actions(actions[0]);
@@ -193,29 +210,31 @@ public class AssertContainer(AssertContainer.Builder builder) : AbstractActionCo
             return this;
         }
 
-        /// Sets the test action to execute during assert.
+        /// Sets the test action to execute during asserting.
         /// <param name="action">The test action to execute.</param>
         /// <return>A Builder instance for further configuring the assert action.</return>
-        public Builder Action(ITestAction action)
+        public Builder Action(IAsyncTestAction action)
         {
-            return Action(new FuncITestActionBuilder<ITestAction>(() => action));
+            return Action(new FuncIAsyncTestActionBuilder<IAsyncTestAction>(() => action));
         }
 
         /// Configures the action to be used within the AssertContainer.
         /// <param name="action">The delegate that defines the test action to configure.</param>
         /// <returns>The builder instance for chaining further configurations.</returns>
-        public Builder Action(TestAction action)
+        public Builder Action(TestActionAsync action)
         {
-            return Action(new DelegatingTestAction(action));
+            return Action(new DelegatingAsyncTestAction(action));
         }
 
         /// Fluent API action building entry method used in C# DSL.
         /// <returns>A Builder instance for configuring the assert action.</returns>
-        public Builder Action(ITestActionBuilder<ITestAction> builder)
+        public Builder Action(IAsyncTestActionBuilder<IAsyncTestAction> builder)
         {
             return Actions(builder);
         }
 
+        /// Builds and returns an instance of AssertContainer.
+        /// @return the built instance of AssertContainer
         protected override AssertContainer DoBuild()
         {
             return new AssertContainer(this);

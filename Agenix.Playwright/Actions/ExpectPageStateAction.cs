@@ -98,7 +98,7 @@ public class ExpectPageStateAction : AbstractPlaywrightAction
         // Execute locator expectations
         try
         {
-            await Task.Run(() => _locatorExpectations.Execute(context));
+            await _locatorExpectations.ExecuteAsync(context);
         }
         catch (Exception ex)
         {
@@ -174,7 +174,10 @@ public class ExpectPageStateAction : AbstractPlaywrightAction
             _pageExpectations.Add(async (page, context) =>
             {
                 var resolvedUrl = context.ReplaceDynamicContentInString(expectedUrl);
-                await Expect(page).ToHaveURLAsync(resolvedUrl);
+                if (resolvedUrl != null)
+                {
+                    await Expect(page).ToHaveURLAsync(resolvedUrl);
+                }
             });
             return this;
         }
@@ -189,7 +192,10 @@ public class ExpectPageStateAction : AbstractPlaywrightAction
             _pageExpectations.Add(async (page, context) =>
             {
                 var resolvedTitle = context.ReplaceDynamicContentInString(expectedTitle);
-                await Expect(page).ToHaveTitleAsync(resolvedTitle);
+                if (resolvedTitle != null)
+                {
+                    await Expect(page).ToHaveTitleAsync(resolvedTitle);
+                }
             });
             return this;
         }

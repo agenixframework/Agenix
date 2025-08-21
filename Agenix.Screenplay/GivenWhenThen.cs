@@ -151,7 +151,7 @@ public static class GivenWhenThen
     ///     The subject or description of the evaluation being performed, providing context for the assertion.
     /// </param>
     /// <param name="actual">
-    ///     The question whose answer is to be evaluated.
+    ///     The question of whose answer is to be evaluated.
     /// </param>
     /// <param name="expected">
     ///     A custom predicate that determines whether the evaluation is successful.
@@ -202,7 +202,7 @@ public static class GivenWhenThen
     ///     The type of the value being evaluated by the consequence.
     /// </typeparam>
     /// <param name="subject">The descriptive name or title of the consequence being evaluated.</param>
-    /// <param name="actual">The question whose boolean result will be evaluated.</param>
+    /// <param name="actual">The question of whose boolean result will be evaluated.</param>
     /// <returns>A consequence that can be evaluated in the context of the Screenplay pattern.</returns>
     public static IConsequence<T> SeeThat<T>(string subject, IQuestion<bool> actual)
     {
@@ -235,14 +235,15 @@ public static class GivenWhenThen
     }
 
     /// <summary>
-    /// Evaluates the result of a question against a given predicate, producing a consequence based on the evaluation outcome.
+    ///     Evaluates the outcome of a question against an expected condition, enabling verification of expected results within
+    ///     the Screenplay pattern.
     /// </summary>
     /// <typeparam name="T">
-    /// The type of the value returned by the question.
+    ///     The type of the value returned by the question, which forms the basis of the verification.
     /// </typeparam>
-    /// <param name="actual">The question that retrieves the actual value to be tested.</param>
-    /// <param name="expected">The predicate that defines the condition to evaluate against the actual value.</param>
-    /// <returns>A consequence that represents the outcome of evaluating the question's result with the specified predicate.</returns>
+    /// <param name="actual">The question that provides the actual value to be evaluated.</param>
+    /// <param name="expected">A function that defines the expected condition or predicate to be met by the actual value.</param>
+    /// <returns>An <see cref="IConsequence{T}" /> representing the verification or assertion of the expected condition.</returns>
     public static IConsequence<T> SeeThat<T>(Question<T> actual, Func<T, bool> expected)
     {
         return new PredicateConsequence<T>(actual, expected);

@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -37,23 +37,23 @@ namespace Agenix.Core;
 /// </summary>
 public class TestCaseRunnerFactory
 {
-    /**
-     * Test runner resource lookup path
-     */
+    /// Defines the resource lookup path used by the test runner to locate necessary resources.
+    /// /
     private const string ResourcePath = "Extension/agenix/test/runner";
 
-    /**
-     * The key for the default Agenix test case runner provider
-     */
+    /// Represents the default key used to resolve or identify the Agenix test case runner provider.
+    /// The system uses this value to look up the default implementation of test case runner providers.
 #pragma warning disable CS0414 // Field is assigned but its value is never used
-    private static readonly string Default = "default";
+    private const string Default = "default";
+
 #pragma warning restore CS0414 // Field is assigned but its value is never used
 
-    /**
-     * The key for a custom test case runner provider
-     */
+    /// <summary>
+    ///     Represents the key used to identify a custom test case runner provider.
+    /// </summary>
 #pragma warning disable CS0414 // Field is assigned but its value is never used
-    private static readonly string Custom = "custom";
+    private const string Custom = "custom";
+
 #pragma warning restore CS0414 // Field is assigned but its value is never used
 
     private static readonly TestCaseRunnerFactory Instance = new();
@@ -74,9 +74,9 @@ public class TestCaseRunnerFactory
     /// <returns>
     ///     An instance of ITestCaseRunnerProvider used for creating test case runners.
     /// </returns>
-    private ITestCaseRunnerProvider LookupDefault()
+    private IAsyncTestCaseRunnerProvider LookupDefault()
     {
-        return _typeResolver.Resolve<ITestCaseRunnerProvider>(Default);
+        return _typeResolver.Resolve<IAsyncTestCaseRunnerProvider>(Default);
     }
 
     /// <summary>
@@ -86,11 +86,11 @@ public class TestCaseRunnerFactory
     /// <returns>
     ///     An instance of ITestCaseRunnerProvider, either custom or default, used for creating test case runners.
     /// </returns>
-    private ITestCaseRunnerProvider LookupCustomOrDefault()
+    private IAsyncTestCaseRunnerProvider LookupCustomOrDefault()
     {
         try
         {
-            return _typeResolver.Resolve<ITestCaseRunnerProvider>(Custom);
+            return _typeResolver.Resolve<IAsyncTestCaseRunnerProvider>(Custom);
         }
         catch (Exception)
         {
@@ -105,7 +105,7 @@ public class TestCaseRunnerFactory
     /// <returns>
     ///     An ITestCaseRunner instance configured with the provided TestContext.
     /// </returns>
-    public static ITestCaseRunner CreateRunner(TestContext context)
+    public static IAsyncTestCaseRunner CreateRunner(TestContext context)
     {
         var testCaseRunnerProvider = Instance.LookupCustomOrDefault();
         return testCaseRunnerProvider.CreateTestCaseRunner(context);
@@ -117,7 +117,7 @@ public class TestCaseRunnerFactory
     /// <param name="testCase">The test case to be executed by the runner.</param>
     /// <param name="context">The context in which the test case will be executed.</param>
     /// <returns>An instance of ITestCaseRunner used to run the specified test case.</returns>
-    public static ITestCaseRunner CreateRunner(ITestCase testCase, TestContext context)
+    public static IAsyncTestCaseRunner CreateRunner(IAsyncTestCase testCase, TestContext context)
     {
         var testCaseRunnerProvider = Instance.LookupCustomOrDefault();
         return testCaseRunnerProvider.CreateTestCaseRunner(testCase, context);

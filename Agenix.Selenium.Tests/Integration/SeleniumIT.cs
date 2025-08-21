@@ -16,7 +16,7 @@ namespace Agenix.Selenium.Tests.Integration;
 [NUnitAgenixSupport]
 public class SeleniumIT
 {
-    [AgenixResource] private ITestCaseRunner _testCaseRunner;
+    [AgenixResource] private IAsyncTestCaseRunner _testCaseRunner;
 
     [BindToRegistry] private EventFiringWebDriver _webDriver = CreateChromeDriver(CreateChromeOptions());
 
@@ -108,54 +108,49 @@ public class SeleniumIT
         var eventDriver = new EventFiringWebDriver(baseDriver);
 
         // Navigation events
-        eventDriver.Navigating += (sender, e) =>
+        eventDriver.Navigating += (_, e) =>
         {
             Console.WriteLine($"[ACTION] Navigating to: {e.Url}");
         };
 
-        eventDriver.Navigated += (sender, e) =>
+        eventDriver.Navigated += (_, e) =>
         {
             Console.WriteLine($"[SUCCESS] Navigated to: {e.Url}");
         };
 
-        eventDriver.NavigatingBack += (sender, e) =>
+        eventDriver.NavigatingBack += (_, _) =>
         {
             Console.WriteLine("[ACTION] Navigating back");
         };
 
-        eventDriver.NavigatedBack += (sender, e) =>
+        eventDriver.NavigatedBack += (_, _) =>
         {
             Console.WriteLine("[SUCCESS] Navigated back");
         };
 
-        eventDriver.NavigatingForward += (sender, e) =>
+        eventDriver.NavigatingForward += (_, _) =>
         {
             Console.WriteLine("[ACTION] Navigating forward");
         };
 
-        eventDriver.NavigatedForward += (sender, e) =>
+        eventDriver.NavigatedForward += (_, _) =>
         {
             Console.WriteLine("[SUCCESS] Navigated forward");
         };
 
         // Element finding events
-        eventDriver.FindingElement += (sender, e) =>
+        eventDriver.FindingElement += (_, e) =>
         {
             Console.WriteLine($"[ACTION] Finding element: {e.FindMethod}");
         };
 
-        eventDriver.FindElementCompleted += (sender, e) =>
+        eventDriver.FindElementCompleted += (_, e) =>
         {
             try
             {
-                if (e.Element != null)
-                {
-                    Console.WriteLine($"[SUCCESS] Found element: {e.FindMethod} -> {SafeGetElementInfo(e.Element)}");
-                }
-                else
-                {
-                    Console.WriteLine($"[WARNING] Element not found: {e.FindMethod} -> <null element>");
-                }
+                Console.WriteLine(e.Element != null
+                    ? $"[SUCCESS] Found element: {e.FindMethod} -> {SafeGetElementInfo(e.Element)}"
+                    : $"[WARNING] Element not found: {e.FindMethod} -> <null element>");
             }
             catch (Exception ex)
             {
@@ -164,42 +159,42 @@ public class SeleniumIT
         };
 
         // Element clicking events
-        eventDriver.ElementClicking += (sender, e) =>
+        eventDriver.ElementClicking += (_, e) =>
         {
             Console.WriteLine($"[ACTION] Clicking element: {SafeGetElementInfo(e.Element)}");
         };
 
-        eventDriver.ElementClicked += (sender, e) =>
+        eventDriver.ElementClicked += (_, e) =>
         {
             Console.WriteLine($"[SUCCESS] Clicked element: {SafeGetElementInfo(e.Element)}");
         };
 
         // Element value changing events
-        eventDriver.ElementValueChanging += (sender, e) =>
+        eventDriver.ElementValueChanging += (_, e) =>
         {
             Console.WriteLine($"[ACTION] Changing value of {SafeGetElementInfo(e.Element)} to: '{e.Value}'");
         };
 
-        eventDriver.ElementValueChanged += (sender, e) =>
+        eventDriver.ElementValueChanged += (_, e) =>
         {
             Console.WriteLine($"[SUCCESS] Changed value of {SafeGetElementInfo(e.Element)} to: '{e.Value}'");
         };
 
         // Script execution events
-        eventDriver.ScriptExecuting += (sender, e) =>
+        eventDriver.ScriptExecuting += (_, e) =>
         {
             var script = e.Script.Length > 100 ? e.Script.Substring(0, 100) + "..." : e.Script;
             Console.WriteLine($"[ACTION] Executing script: {script}");
         };
 
-        eventDriver.ScriptExecuted += (sender, e) =>
+        eventDriver.ScriptExecuted += (_, e) =>
         {
             var script = e.Script.Length > 100 ? e.Script.Substring(0, 100) + "..." : e.Script;
             Console.WriteLine($"[SUCCESS] Executed script: {script}");
         };
 
         // Exception event
-        eventDriver.ExceptionThrown += (sender, e) =>
+        eventDriver.ExceptionThrown += (_, e) =>
         {
             Console.WriteLine(
                 $"[ERROR] Exception thrown: {e.ThrownException.GetType().Name}: {e.ThrownException.Message}");
@@ -208,7 +203,7 @@ public class SeleniumIT
         return eventDriver;
     }
 
-    private static string SafeGetElementInfo(IWebElement element)
+    private static string SafeGetElementInfo(IWebElement? element)
     {
         if (element == null)
         {
@@ -244,19 +239,19 @@ public class SeleniumIT
     [SuppressMessage("SonarQube", "S2699:Tests should include assertions",
         Justification =
             "Test uses fluent API assertion through _testCaseRunner.Then() which verifies element text contains expected value")]
-    public void Test_Login_Page()
+    public async Task Test_Login_Page()
     {
-        _testCaseRunner.Given(FinallySequence.Builder.DoFinally()
+        await _testCaseRunner.Given(FinallySequence.Builder.DoFinally()
             .Actions(SeleniumSupport.Selenium().Browser(browser).Stop()));
-        _testCaseRunner.Given(SeleniumSupport.Selenium().Start(browser));
+        await _testCaseRunner.Given(SeleniumSupport.Selenium().Start(browser));
 
-        _testCaseRunner.When(SeleniumSupport.Selenium().FillForm()
+        await _testCaseRunner.When(SeleniumSupport.Selenium().FillForm()
             .Field("username", "tomsmith")
             .Field("password", "SuperSecretPassword!")
             .Submit(By.CssSelector("button[type='submit'].radius"))
         );
 
-        _testCaseRunner.Then(SeleniumSupport.Selenium()
+        await _testCaseRunner.Then(SeleniumSupport.Selenium()
             .Find()
             .Element(By.Id("flash"))
             .SetText("@Contains(You logged into a secure area!)@"));

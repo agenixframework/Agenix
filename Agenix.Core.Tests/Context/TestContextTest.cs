@@ -7,24 +7,25 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Agenix.Api;
 using Agenix.Api.Container;
 using Agenix.Api.Exceptions;
@@ -50,7 +51,7 @@ public class TestContextTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestDefaultVariables()
+    public async Task TestDefaultVariables()
     {
         // Set up global variables
         _globalVariables.GetVariables().Add("defaultVar", "123");
@@ -64,7 +65,7 @@ public class TestContextTest : AbstractNUnitSetUp
 
         var testContext = TestContextFactory.GetObject();
         testContext.SetGlobalVariables(_globalVariables);
-        testCase.Execute(testContext);
+        await testCase.ExecuteAsync(testContext);
 
         // Verify variables in the first test context
         Assert.That(testContext.GetVariables()[AgenixSettings.TestNameVariable()], Is.EqualTo("MyTestCase"));
@@ -86,7 +87,7 @@ public class TestContextTest : AbstractNUnitSetUp
         // Create a new test context for the second test case
         testContext = TestContextFactory.GetObject();
         testContext.SetGlobalVariables(_globalVariables);
-        testCase2.Execute(testContext);
+        await testCase2.ExecuteAsync(testContext);
 
         // Verify variables in the second test context
         Assert.That(testContext.GetVariables()[AgenixSettings.TestNameVariable()], Is.EqualTo("MyTestCase2"));
@@ -100,7 +101,7 @@ public class TestContextTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestDefaultVariablesChange()
+    public async Task TestDefaultVariablesChange()
     {
         // Initialize global variables
         _globalVariables.GetVariables().Add("defaultVar", "123");
@@ -120,7 +121,7 @@ public class TestContextTest : AbstractNUnitSetUp
         testContext.SetGlobalVariables(_globalVariables);
 
         // Execute the test case
-        testCase.Execute(testContext);
+        await testCase.ExecuteAsync(testContext);
 
         // Verify that the variable was changed in the first test context
         Assert.That(testContext.GetVariables().ContainsKey("defaultVar"), Is.True);
@@ -133,7 +134,7 @@ public class TestContextTest : AbstractNUnitSetUp
         // Create a new test context for the second test
         testContext = TestContextFactory.GetObject();
         testContext.SetGlobalVariables(_globalVariables);
-        testCase2.Execute(testContext);
+        await testCase2.ExecuteAsync(testContext);
 
         // Verify that the global variable is restored to original value in second test context
         Assert.That(testContext.GetVariables().ContainsKey("defaultVar"), Is.True);
@@ -411,8 +412,8 @@ public class TestContextTest : AbstractNUnitSetUp
     public void TestAddVariablesFromArrays()
     {
         //GIVEN
-        string[] variableNames = { "variable1", "${variable2}" };
-        object[] variableValues = { "value1", "" };
+        string[] variableNames = ["variable1", "${variable2}"];
+        object[] variableValues = ["value1", ""];
 
         //WHEN
         Context.AddVariables(variableNames, variableValues);
@@ -426,8 +427,8 @@ public class TestContextTest : AbstractNUnitSetUp
     public void TestAddVariablesThrowsExceptionIfArraysHaveDifferentSize()
     {
         //GIVEN
-        string[] variableNames = { "variable1", "variable2" };
-        object[] variableValues = { "value1" };
+        string[] variableNames = ["variable1", "variable2"];
+        object[] variableValues = ["value1"];
 
         //WHEN + THEN
         Assert.That(() => Context.AddVariables(variableNames, variableValues),
@@ -440,9 +441,10 @@ public class TestContextTest : AbstractNUnitSetUp
         //GIVEN
         Context.GetVariables().Add("test", "123");
 
-        var testMap = new Dictionary<string, object>();
-        testMap.Add("plainText", "Hello TestFramework!");
-        testMap.Add("value", "${test}");
+        var testMap = new Dictionary<string, object>
+        {
+            { "plainText", "Hello TestFramework!" }, { "value", "${test}" }
+        };
 
         //WHEN
         testMap = Context.ResolveDynamicValuesInMap(testMap);
@@ -476,10 +478,7 @@ public class TestContextTest : AbstractNUnitSetUp
         //GIVEN
         Context.GetVariables().Add("test", "123");
 
-        var testList = new List<string>();
-        testList.Add("Hello TestFramework!");
-        testList.Add("${test}");
-        testList.Add("test");
+        var testList = new List<string> { "Hello TestFramework!", "${test}", "test" };
 
         //WHEN
         var replaceValues = Context.ResolveDynamicValuesInList(testList);
@@ -496,7 +495,7 @@ public class TestContextTest : AbstractNUnitSetUp
         //GIVEN
         Context.GetVariables().Add("test", "123");
 
-        string[] testArray = { "Hello TestFramework!", "${test}", "test" };
+        string[] testArray = ["Hello TestFramework!", "${test}", "test"];
 
         //WHEN
         var replaceValues = Context.ResolveDynamicValuesInArray(testArray);
@@ -521,18 +520,18 @@ public class TestContextTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void ShouldCallMessageListeners()
+    public async Task ShouldCallMessageListeners()
     {
         //GIVEN
-        var listeners = new Mock<MessageListeners>();
+        var listeners = new Mock<AsyncMessageListeners>();
         Context.MessageListeners = listeners.Object;
 
         var inbound = new DefaultMessage("INBOUND");
         var outbound = new DefaultMessage("OUTBOUND");
 
         //WHEN
-        Context.OnInboundMessage(inbound);
-        Context.OnOutboundMessage(outbound);
+        await Context.OnInboundMessage(inbound);
+        await Context.OnOutboundMessage(outbound);
 
         //THEN
         listeners.Verify(l => l.OnInboundMessage(It.Is<IMessage>(m => m == inbound), Context));
@@ -540,7 +539,7 @@ public class TestContextTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestRegisterAndStopTimers()
+    public async Task TestRegisterAndStopTimers()
     {
         //GIVEN
         const string timerId = "t1";
@@ -555,10 +554,10 @@ public class TestContextTest : AbstractNUnitSetUp
                 .With.Message.Contains("Timer already registered with this id"));
 
         //Verify timer operations
-        Assert.That(Context.StopTimer(timerId), Is.True);
-        Assert.That(Context.StopTimer("?????"), Is.False);
+        Assert.That(await Context.StopTimer(timerId), Is.True);
+        Assert.That(await Context.StopTimer("?????"), Is.False);
 
-        Context.StopTimers();
+        await Context.StopTimers();
 
         //Verify timer was stopped twice - once by StopTimer() and once by StopTimers()
         timer.Verify(t => t.StopTimer(), Times.Exactly(2));

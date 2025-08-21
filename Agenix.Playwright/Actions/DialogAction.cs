@@ -222,48 +222,12 @@ public class DialogAction : AbstractPlaywrightAction
     /// </summary>
     /// <param name="page">The page instance</param>
     /// <param name="context">The test context</param>
-    /// <summary>
-    ///     Handles getting text from a dialog.
-    /// </summary>
-    /// <param name="page">The page instance</param>
-    /// <param name="context">The test context</param>
     private async Task HandleGetTextDialog(IPage page, TestContext context)
     {
         Logger.LogDebug("Setting up dialog text capture");
 
-        var dialogText = string.Empty;
-        var dialogHandled = false;
+        string dialogText;
         var tcs = new TaskCompletionSource<string>();
-
-        void DialogHandler(object? sender, IDialog dialog)
-        {
-            Task.Run(async () =>
-            {
-                try
-                {
-                    dialogText = dialog.Message;
-                    Logger.LogDebug("Dialog text captured: {Text}", dialogText);
-
-                    // Dismiss the dialog after capturing text
-                    await dialog.DismissAsync();
-                    dialogHandled = true;
-
-                    // Store dialog text in context immediately after capturing
-                    if (!string.IsNullOrEmpty(dialogText))
-                    {
-                        context.SetVariable("DIALOG_TEXT", dialogText);
-                        Logger.LogDebug("Dialog text stored in context: {Text}", dialogText);
-                    }
-
-                    tcs.SetResult(dialogText);
-                }
-                catch (Exception ex)
-                {
-                    Logger.LogError(ex, "Error capturing dialog text");
-                    tcs.SetException(ex);
-                }
-            });
-        }
 
         page.Dialog += DialogHandler;
 
@@ -291,6 +255,38 @@ public class DialogAction : AbstractPlaywrightAction
         finally
         {
             page.Dialog -= DialogHandler;
+        }
+
+        return;
+
+        void DialogHandler(object? sender, IDialog dialog)
+        {
+            Task.Run(async () =>
+            {
+                try
+                {
+                    dialogText = dialog.Message;
+                    Logger.LogDebug("Dialog text captured: {Text}", dialogText);
+
+                    // Dismiss the dialog after capturing text
+                    await dialog.DismissAsync();
+                    _ = true;
+
+                    // Store dialog text in context immediately after capturing
+                    if (!string.IsNullOrEmpty(dialogText))
+                    {
+                        context.SetVariable("DIALOG_TEXT", dialogText);
+                        Logger.LogDebug("Dialog text stored in context: {Text}", dialogText);
+                    }
+
+                    tcs.SetResult(dialogText);
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogError(ex, "Error capturing dialog text");
+                    tcs.SetException(ex);
+                }
+            });
         }
     }
 

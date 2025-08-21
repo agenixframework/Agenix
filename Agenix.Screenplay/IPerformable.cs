@@ -38,14 +38,20 @@ namespace Agenix.Screenplay;
  * purchase().anApple().thatCosts(0).dollars()
  * --
  */
+
+/// <summary>
+///     Represents an action or task that can be performed by an actor within a screenplay-like pattern.
+/// </summary>
 public interface IPerformable
 {
     /// <summary>
-    ///     Performs the specified action or task using the provided actor.
+    ///     Asynchronously performs the specified action or task using the provided actor.
     /// </summary>
     /// <typeparam name="T">The type of actor performing the action.</typeparam>
     /// <param name="actor">The actor that will perform the action or task.</param>
-    void PerformAs<T>(T actor) where T : Actor;
+    /// <param name="cancellationToken">A token to observe while waiting for the task to complete.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
+    Task PerformAsAsync<T>(T actor, CancellationToken cancellationToken = default) where T : Actor;
 
     /// <summary>
     ///     Chains the current performable to another performable, creating a composite performable that will execute both in

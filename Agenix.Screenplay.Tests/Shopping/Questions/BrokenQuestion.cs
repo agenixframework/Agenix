@@ -9,9 +9,9 @@ public class BrokenQuestion : IQuestion<int>
         _assertionFailure = assertionFailure;
     }
 
-    public int AnsweredBy(Actor actor)
+    public async Task<int> AnsweredBy(Actor actor)
     {
-        actor.AttemptsTo(
+        await actor.AttemptsTo(
             ITask.Where("{0} attempts to do something that will throw an exception",
                 _ =>
                 {

@@ -46,7 +46,7 @@ public class GetStoredFileActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExecute()
+    public async Task TestExecute()
     {
         _seleniumBrowser.StoreFile("download/file.txt");
 
@@ -55,10 +55,10 @@ public class GetStoredFileActionTest : AbstractNUnitSetUp
             .SetFileName("file.txt")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable(SeleniumHeaders.SeleniumDownloadFile), Is.Not.Null);
-        var content = File.ReadAllText(Context.GetVariable(SeleniumHeaders.SeleniumDownloadFile));
+        var content = await File.ReadAllTextAsync(Context.GetVariable(SeleniumHeaders.SeleniumDownloadFile));
 
         Assert.That(content, Is.EqualTo(string.Empty));
     }
@@ -71,7 +71,8 @@ public class GetStoredFileActionTest : AbstractNUnitSetUp
             .SetFileName("unknown.txt")
             .Build();
 
-        var ex = Assert.Throws<AgenixSystemException>(() => action.Execute(Context));
+        var ex = Assert.ThrowsAsync<AgenixSystemException>(async () => await action.ExecuteAsync(Context));
+        Assert.That(ex, Is.Not.Null);
         Assert.That(ex.Message, Does.Match("Failed to retrieve file.*"));
     }
 }

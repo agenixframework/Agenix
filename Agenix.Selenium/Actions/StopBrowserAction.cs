@@ -51,7 +51,7 @@ public class StopBrowserAction : AbstractSeleniumAction
     /// </summary>
     /// <param name="browser">The Selenium browser instance</param>
     /// <param name="context">The test context</param>
-    protected override void Execute(SeleniumBrowser browser, TestContext context)
+    protected override Task Execute(SeleniumBrowser browser, TestContext context)
     {
         Logger.LogInformation("Stopping browser of type {BrowserType}",
             browser.EndpointConfiguration.BrowserType);
@@ -59,6 +59,8 @@ public class StopBrowserAction : AbstractSeleniumAction
         browser.Dispose();
 
         context.GetVariables().Remove(SeleniumHeaders.SeleniumBrowser);
+
+        return Task.CompletedTask;
     }
 
     /// <summary>

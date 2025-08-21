@@ -37,7 +37,7 @@ public interface IFileHelper
     /// </summary>
     /// <returns>A FileInfo object representing the created temporary file.</returns>
     /// <exception cref="AgenixSystemException">Thrown if there is an I/O error during temporary file creation.</exception>
-    public static FileInfo CreateTmpFile()
+    static FileInfo CreateTmpFile()
     {
         FileInfo tempFile;
         try

@@ -46,19 +46,48 @@ public class AnonymousPerformable : IPerformable, IHasCustomFieldValues
         _steps = steps;
     }
 
-    public IDictionary<string, object> CustomFieldValues =>
-        new Dictionary<string, object>(_fieldValues);
+    /// <summary>
+    ///     Gets the collection of custom field values associated with the instance.
+    ///     This property provides access to key-value pairs, where the key is the field name
+    ///     and the value is the corresponding data.
+    /// </summary>
+    public IDictionary<string, object> CustomFieldValues => new Dictionary<string, object>(_fieldValues);
 
-    public void PerformAs<T>(T actor) where T : Actor
+    /// <summary>
+    ///     Executes the series of performable tasks asynchronously for the given actor.
+    /// </summary>
+    /// <typeparam name="T">The type of the actor performing the tasks, which must derive from <see cref="Actor" />.</typeparam>
+    /// <param name="actor">The actor executing the tasks.</param>
+    /// <param name="cancellationToken">
+    ///     An optional token to observe while waiting for the task to complete. If cancellation is
+    ///     requested, the operation will be terminated.
+    /// </param>
+    /// <returns>A task representing the asynchronous operation.</returns>
+    public async Task PerformAsAsync<T>(T actor, CancellationToken cancellationToken = default) where T : Actor
     {
-        actor.AttemptsTo(_steps.ToArray());
+        if (cancellationToken.IsCancellationRequested)
+        {
+            await Task.FromCanceled(cancellationToken);
+        }
+
+        await actor.AttemptsToAsync(_steps.ToArray());
     }
 
+    /// <summary>
+    ///     Sets the value of a custom field identified by a specific name for this instance of
+    ///     <see cref="AnonymousPerformable" />.
+    /// </summary>
+    /// <param name="fieldName">The name of the field whose value is to be set.</param>
+    /// <param name="fieldValue">The value to assign to the field.</param>
     public void SetFieldValue(string fieldName, object fieldValue)
     {
         _fieldValues[fieldName] = fieldValue;
     }
 
+    /// <summary>
+    ///     Returns a string representation of the current <see cref="AnonymousPerformable" /> instance, typically the title.
+    /// </summary>
+    /// <returns>A string containing the title of this <see cref="AnonymousPerformable" />.</returns>
     public override string ToString()
     {
         return _title;

@@ -5,8 +5,8 @@ namespace Agenix.Screenplay.Tests.Shopping.Tasks;
 public class ChewsTheBanana : IPerformable
 {
     [Step("{0} chews the banana")]
-    public void PerformAs<T>(T actor) where T : Actor
+    public Task PerformAsAsync<T>(T actor, CancellationToken cancellationToken = default) where T : Actor
     {
-        // Implementation here
+        return Task.CompletedTask;
     }
 }

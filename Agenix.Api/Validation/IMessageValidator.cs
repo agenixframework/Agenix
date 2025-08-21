@@ -123,7 +123,7 @@ public interface IMessageValidator<T> where T : IValidationContext
     ///     corresponding
     ///     message validator instances implementing <see cref="IMessageValidator{T}" /> for <see cref="IValidationContext" />.
     /// </returns>
-    public static ConcurrentDictionary<string, IMessageValidator<IValidationContext>> Lookup()
+    static ConcurrentDictionary<string, IMessageValidator<IValidationContext>> Lookup()
     {
         return ValidatorsCache.Value;
     }
@@ -136,7 +136,7 @@ public interface IMessageValidator<T> where T : IValidationContext
     ///     An Optional containing the message validator if found, or an empty Optional if the validator name is not
     ///     recognized.
     /// </returns>
-    public static Optional<IMessageValidator<IValidationContext>> Lookup(string validator)
+    static Optional<IMessageValidator<IValidationContext>> Lookup(string validator)
     {
         try
         {

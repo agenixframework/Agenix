@@ -35,34 +35,35 @@ public class WhenInstrumentingTasksTests
     {
         IPerformable basicTask = new EatsAMango();
 
-        Actor.Named("Annie").AttemptsTo(basicTask);
+        Assert.DoesNotThrowAsync(() => Actor.Named("Annie").AttemptsTo(basicTask));
     }
 
     [Test]
     public void ForClassesWithoutDefaultConstructorUseExplicitlyInstrumentedClass()
     {
         // When
-        Actor.Named("Annie").AttemptsTo(EatsAPear.OfSize("large"));
+        Assert.DoesNotThrowAsync(() => Actor.Named("Annie").AttemptsTo(EatsAPear.OfSize("large")));
     }
 
     [Test]
     public void ANonInstrumentedClassWithABuilder()
     {
         // When
-        Actor.Named("Annie").AttemptsTo(EatsFruit.Loudly());
+        Assert.DoesNotThrowAsync(() => Actor.Named("Annie").AttemptsTo(EatsFruit.Loudly()));
     }
 
     [Test]
     public void ANestedTask()
     {
         // When
-        Actor.Named("Annie").AttemptsTo(new Eats(new EatsAMango()));
+        Assert.DoesNotThrowAsync(() => Actor.Named("Annie").AttemptsTo(new Eats(new EatsAMango())));
     }
 
     [Test]
     public void ATaskWithParameters()
     {
         // When
-        Actor.Named("Annie").AttemptsTo(EatsAWatermelon.Quietly(), EatsAWatermelon.Noisily());
+        Assert.DoesNotThrowAsync(() =>
+            Actor.Named("Annie").AttemptsTo(EatsAWatermelon.Quietly(), EatsAWatermelon.Noisily()));
     }
 }

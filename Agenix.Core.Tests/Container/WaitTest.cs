@@ -7,24 +7,25 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
 using System;
+using System.Threading.Tasks;
 using Agenix.Api.Condition;
 using Agenix.Api.Exceptions;
 using Agenix.Core.Container;
@@ -37,20 +38,20 @@ namespace Agenix.Core.Tests.Container;
 
 public class WaitTest
 {
-    private Mock<ICondition> conditionMock;
-    private Mock<TestContext> contextMock;
-    private long endTime;
-    private long startTime;
+    private Mock<ICondition> _conditionMock;
+    private Mock<TestContext> _contextMock;
+    private long _endTime;
+    private long _startTime;
 
     [SetUp]
     public void Setup()
     {
-        contextMock = new Mock<TestContext>();
-        conditionMock = new Mock<ICondition>();
+        _contextMock = new Mock<TestContext>();
+        _conditionMock = new Mock<ICondition>();
     }
 
     [Test]
-    public void ShouldSatisfyWaitConditionOnFirstAttempt()
+    public async Task ShouldSatisfyWaitConditionOnFirstAttempt()
     {
         var seconds = "10";
         var interval = "1000";
@@ -58,64 +59,64 @@ public class WaitTest
         // Assuming getWaitAction is a method/function that returns a Wait object
         var testling = GetWaitAction(seconds, interval);
 
-        contextMock.Reset();
-        conditionMock.Reset();
+        _contextMock.Reset();
+        _conditionMock.Reset();
         PrepareContextMock("10000", interval);
-        conditionMock.Setup(c => c.GetName()).Returns("check");
-        conditionMock.Setup(c => c.IsSatisfied(contextMock.Object)).Returns(true);
-        conditionMock.Setup(c => c.GetSuccessMessage(contextMock.Object)).Returns("Condition success!");
+        _conditionMock.Setup(c => c.GetName()).Returns("check");
+        _conditionMock.Setup(c => c.IsSatisfied(_contextMock.Object)).ReturnsAsync(true);
+        _conditionMock.Setup(c => c.GetSuccessMessage(_contextMock.Object)).Returns("Condition success!");
 
         StartTimer();
-        testling.Execute(contextMock.Object);
+        await testling.ExecuteAsync(_contextMock.Object);
         StopTimer();
 
         AssertConditionExecutedWithinSeconds("1");
     }
 
     [Test]
-    public void ShouldSatisfyWaitConditionOnLastAttempt()
+    public async Task ShouldSatisfyWaitConditionOnLastAttempt()
     {
-        var seconds = "4";
-        var interval = "1000";
+        const string seconds = "4";
+        const string interval = "1000";
 
         var testling = GetWaitAction(seconds, interval);
 
-        contextMock.Reset();
-        conditionMock.Reset();
+        _contextMock.Reset();
+        _conditionMock.Reset();
         PrepareContextMock("4000", interval);
 
-        conditionMock.SetupSequence(c => c.IsSatisfied(contextMock.Object))
-            .Returns(false)
-            .Returns(true);
+        _conditionMock.SetupSequence(c => c.IsSatisfied(_contextMock.Object))
+            .ReturnsAsync(false)
+            .ReturnsAsync(true);
 
-        conditionMock.Setup(c => c.GetName()).Returns("check");
-        conditionMock.Setup(c => c.GetSuccessMessage(contextMock.Object)).Returns("Condition success!");
+        _conditionMock.Setup(c => c.GetName()).Returns("check");
+        _conditionMock.Setup(c => c.GetSuccessMessage(_contextMock.Object)).Returns("Condition success!");
 
         StartTimer();
-        testling.Execute(contextMock.Object);
+        await testling.ExecuteAsync(_contextMock.Object);
         StopTimer();
 
         AssertConditionExecutedWithinSeconds(seconds);
     }
 
     [Test]
-    public void ShouldSatisfyWaitConditionWithBiggerIntervalThanTimeout()
+    public async Task ShouldSatisfyWaitConditionWithBiggerIntervalThanTimeout()
     {
-        var seconds = "1";
-        var interval = "10000";
+        const string seconds = "1";
+        const string interval = "10000";
 
         var testling = GetWaitAction(seconds, interval);
 
-        contextMock.Reset();
-        conditionMock.Reset();
+        _contextMock.Reset();
+        _conditionMock.Reset();
         PrepareContextMock("1000", interval);
 
-        conditionMock.Setup(c => c.GetName()).Returns("check");
-        conditionMock.Setup(c => c.IsSatisfied(contextMock.Object)).Returns(true);
-        conditionMock.Setup(c => c.GetSuccessMessage(contextMock.Object)).Returns("Condition success!");
+        _conditionMock.Setup(c => c.GetName()).Returns("check");
+        _conditionMock.Setup(c => c.IsSatisfied(_contextMock.Object)).ReturnsAsync(true);
+        _conditionMock.Setup(c => c.GetSuccessMessage(_contextMock.Object)).Returns("Condition success!");
 
         StartTimer();
-        testling.Execute(contextMock.Object);
+        await testling.ExecuteAsync(_contextMock.Object);
         StopTimer();
 
         AssertConditionExecutedWithinSeconds(seconds);
@@ -124,22 +125,22 @@ public class WaitTest
     [Test]
     public void ShouldNotSatisfyWaitCondition()
     {
-        var seconds = "3";
-        var interval = "1000";
+        const string seconds = "3";
+        const string interval = "1000";
 
         var testling = GetWaitAction(seconds, interval);
 
-        contextMock.Reset();
-        conditionMock.Reset();
+        _contextMock.Reset();
+        _conditionMock.Reset();
         PrepareContextMock("3000", interval);
 
-        conditionMock.Setup(c => c.GetName()).Returns("check");
-        conditionMock.Setup(c => c.IsSatisfied(contextMock.Object)).Returns(false);
-        conditionMock.Setup(c => c.GetErrorMessage(contextMock.Object)).Returns("Condition failed!");
+        _conditionMock.Setup(c => c.GetName()).Returns("check");
+        _conditionMock.Setup(c => c.IsSatisfied(_contextMock.Object)).ReturnsAsync(false);
+        _conditionMock.Setup(c => c.GetErrorMessage(_contextMock.Object)).Returns("Condition failed!");
 
         StartTimer();
 
-        var exception = Assert.Throws<AgenixSystemException>(() => testling.Execute(contextMock.Object));
+        var exception = Assert.ThrowsAsync<AgenixSystemException>(() => testling.ExecuteAsync(_contextMock.Object));
         ClassicAssert.NotNull(exception, "Expected CoreSystemException to be thrown");
 
         StopTimer();
@@ -150,22 +151,22 @@ public class WaitTest
     [Test]
     public void ShouldNotSatisfyWaitConditionWithBiggerIntervalThanTimeout()
     {
-        var seconds = "1";
-        var interval = "10000";
+        const string seconds = "1";
+        const string interval = "10000";
 
         var testling = GetWaitAction(seconds, interval);
 
-        contextMock.Reset();
-        conditionMock.Reset();
+        _contextMock.Reset();
+        _conditionMock.Reset();
         PrepareContextMock("1000", interval);
 
-        conditionMock.Setup(c => c.GetName()).Returns("check");
-        conditionMock.Setup(c => c.IsSatisfied(contextMock.Object)).Returns(false);
-        conditionMock.Setup(c => c.GetErrorMessage(contextMock.Object)).Returns("Condition failed!");
+        _conditionMock.Setup(c => c.GetName()).Returns("check");
+        _conditionMock.Setup(c => c.IsSatisfied(_contextMock.Object)).ReturnsAsync(false);
+        _conditionMock.Setup(c => c.GetErrorMessage(_contextMock.Object)).Returns("Condition failed!");
 
         StartTimer();
 
-        var exception = Assert.Throws<AgenixSystemException>(() => testling.Execute(contextMock.Object));
+        var exception = Assert.ThrowsAsync<AgenixSystemException>(() => testling.ExecuteAsync(_contextMock.Object));
         ClassicAssert.NotNull(exception, "Expected CoreSystemException to be thrown");
 
         StopTimer();
@@ -175,14 +176,14 @@ public class WaitTest
 
     private void PrepareContextMock(string waitTime, string interval)
     {
-        contextMock.Setup(c => c.ReplaceDynamicContentInString(waitTime, It.IsAny<bool>())).Returns(waitTime);
-        contextMock.Setup(c => c.ReplaceDynamicContentInString(interval, It.IsAny<bool>())).Returns(interval);
+        _contextMock.Setup(c => c.ReplaceDynamicContentInString(waitTime, It.IsAny<bool>())).Returns(waitTime);
+        _contextMock.Setup(c => c.ReplaceDynamicContentInString(interval, It.IsAny<bool>())).Returns(interval);
     }
 
     private Wait GetWaitAction(string waitTimeSeconds, string interval)
     {
         return new Wait.Builder<ICondition>()
-            .Condition(conditionMock.Object)
+            .Condition(_conditionMock.Object)
             .Interval(interval)
             .Seconds(long.Parse(waitTimeSeconds))
             .Build();
@@ -191,7 +192,7 @@ public class WaitTest
     private void AssertConditionExecutedWithinSeconds(string seconds)
     {
         const long tolerance = 500L;
-        var totalExecutionTime = endTime - startTime;
+        var totalExecutionTime = _endTime - _startTime;
         var permittedTime = int.Parse(seconds) * 1000L + tolerance;
 
         ClassicAssert.LessOrEqual(totalExecutionTime, permittedTime,
@@ -200,11 +201,11 @@ public class WaitTest
 
     private void StartTimer()
     {
-        startTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+        _startTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
     }
 
     private void StopTimer()
     {
-        endTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+        _endTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
     }
 }

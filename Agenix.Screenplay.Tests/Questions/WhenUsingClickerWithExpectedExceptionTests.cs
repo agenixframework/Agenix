@@ -14,9 +14,9 @@ public class WhenUsingQuestionsWithDelays
         var clicker = new Clicker();
 
         // Act & Assert
-        Assert.DoesNotThrow(() =>
+        Assert.DoesNotThrowAsync(async () =>
         {
-            jane.Should(
+            await jane.Should(
                 Eventually(SeeThat(TheClickerValueWithAnExpectedException.Of(clicker),
                         EqualTo(10)))
                     .IgnoringExceptions(typeof(InvalidOperationException))
@@ -43,15 +43,12 @@ public class WhenUsingQuestionsWithDelays
             _clicker = clicker;
         }
 
-        public int AnsweredBy(Actor actor)
+        public Task<int> AnsweredBy(Actor actor)
         {
             var click = _clicker.Click();
-            if (_clicker.Count < 10)
-            {
-                throw new InvalidOperationException("Ignore this: " + click);
-            }
-
-            return _clicker.Count;
+            return _clicker.Count < 10
+                ? throw new InvalidOperationException("Ignore this: " + click)
+                : Task.FromResult(_clicker.Count);
         }
 
         public static TheClickerValueWithAnExpectedException Of(Clicker clicker)

@@ -37,7 +37,7 @@ namespace Agenix.Playwright.Tests.Actions;
 public class CloseWindowActionTest : AbstractPlaywrightActionTestBase
 {
     [Test]
-    public void TestExecute_ShouldCloseCurrentPage()
+    public async Task TestExecute_ShouldCloseCurrentPage()
     {
         // Arrange
         MockSetup.ApplyDefaultSetup();
@@ -47,14 +47,14 @@ public class CloseWindowActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         Page.Verify(x => x.CloseAsync(It.IsAny<PageCloseOptions>()), Times.Once);
     }
 
     [Test]
-    public void TestExecute_WithSpecificPageId_ShouldCloseSpecificPage()
+    public async Task TestExecute_WithSpecificPageId_ShouldCloseSpecificPage()
     {
         // Arrange
         const string pageId = "specific-page";
@@ -66,7 +66,7 @@ public class CloseWindowActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         PlaywrightBrowser.Verify(x => x.SwitchToPage(pageId), Times.Once);
@@ -74,7 +74,7 @@ public class CloseWindowActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecute_WithSpecificContextId_ShouldClosePageInContext()
+    public async Task TestExecute_WithSpecificContextId_ShouldClosePageInContext()
     {
         // Arrange
         const string contextId = "specific-context";
@@ -86,7 +86,7 @@ public class CloseWindowActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         PlaywrightBrowser.Verify(x => x.SwitchToContext(contextId), Times.Once);
@@ -94,7 +94,7 @@ public class CloseWindowActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecute_WithRunBeforeClose_ShouldExecuteBeforeClosing()
+    public async Task TestExecute_WithRunBeforeClose_ShouldExecuteBeforeClosing()
     {
         // Arrange
         MockSetup.ApplyDefaultSetup();
@@ -105,14 +105,14 @@ public class CloseWindowActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         Page.Verify(x => x.CloseAsync(It.Is<PageCloseOptions>(opts => opts.RunBeforeUnload == true)), Times.Once);
     }
 
     [Test]
-    public void TestExecute_WithoutRunBeforeClose_ShouldNotExecuteBeforeClosing()
+    public async Task TestExecute_WithoutRunBeforeClose_ShouldNotExecuteBeforeClosing()
     {
         // Arrange
         MockSetup.ApplyDefaultSetup();
@@ -123,7 +123,7 @@ public class CloseWindowActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         Page.Verify(x => x.CloseAsync(It.Is<PageCloseOptions>(opts => opts.RunBeforeUnload == false)), Times.Once);

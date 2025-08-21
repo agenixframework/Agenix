@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -60,7 +60,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveMessageOverwriteMessageElementsJsonPath()
+    public async Task TestReceiveMessageOverwriteMessageElementsJsonPath()
     {
         // Setup control message builder with JSON payload template
         var controlMessageBuilder = new DefaultMessageBuilder();
@@ -91,7 +91,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
         // Mock consumer to return the control message
         _consumerMock
             .Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         // Create and execute receive action
         var receiveAction = new ReceiveMessageAction.Builder()
@@ -102,11 +102,11 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Process(processor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestReceiveMessageWithExtractVariablesFromMessageJsonPath()
+    public async Task TestReceiveMessageWithExtractVariablesFromMessageJsonPath()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         var validationContext = new JsonMessageValidationContext();
@@ -137,7 +137,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumerMock
             .Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpointMock.Object)
@@ -146,7 +146,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Validate(validationContext)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
 
         Assert.That(Context.GetVariable("messageVar"), Is.Not.Null);
@@ -191,7 +191,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumerMock
             .Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpointMock.Object)
@@ -201,7 +201,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Build();
 
         // Using Assert.That to verify no exceptions are thrown during execution
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
     }
 
     [Test]
@@ -229,7 +229,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumerMock
             .Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpointMock.Object)
@@ -239,7 +239,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Build();
 
         // Using Assert.That with Throws.TypeOf to verify an exception
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<ValidationException>());
     }
 
@@ -268,7 +268,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumerMock
             .Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpointMock.Object)
@@ -278,7 +278,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Build();
 
         // Using Assert.That with Throws.TypeOf to verify the specific exception
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<AgenixSystemException>());
     }
 
@@ -299,7 +299,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumerMock
             .Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpointMock.Object)
@@ -308,7 +308,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Build();
 
         // Using Assert.That to verify no exceptions are thrown during execution
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
     }
 
     [Test]
@@ -329,7 +329,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumerMock
             .Setup(x => x.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpointMock.Object)
@@ -338,7 +338,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Build();
 
         // Using Assert.That with Throws.Exception and Has.Message to verify both the exception type and message
-        Assert.That(() => receiveAction.Execute(Context),
+        Assert.That(() => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<ValidationException>()
                 .With.Message.EqualTo("Validation failed - expected message contents, but received empty message!"));
     }

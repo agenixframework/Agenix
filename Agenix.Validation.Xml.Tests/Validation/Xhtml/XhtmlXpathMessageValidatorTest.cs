@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -46,7 +46,7 @@ public class XhtmlXpathMessageValidatorTest : AbstractNUnitSetUp
     private readonly Mock<IEndpointConfiguration> _endpointConfiguration = new();
 
     [Test]
-    public void TestXhtmlXpathValidation()
+    public async Task TestXhtmlXpathValidation()
     {
         // Reset mocks
         _endpoint.Reset();
@@ -74,7 +74,7 @@ public class XhtmlXpathMessageValidatorTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         var validationContext = new XpathMessageValidationContext
@@ -112,7 +112,7 @@ public class XhtmlXpathMessageValidatorTest : AbstractNUnitSetUp
             .Type(MessageType.XHTML)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
@@ -141,14 +141,14 @@ public class XhtmlXpathMessageValidatorTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         var validationContext = new XpathMessageValidationContext
         {
             XpathExpressions =
             {
-                // Set up XPath expression that will fail validation
+                // Set up an XPath expression that will fail validation
                 ["//xh:h1"] = "Failed!"
             },
             Namespaces =
@@ -177,6 +177,6 @@ public class XhtmlXpathMessageValidatorTest : AbstractNUnitSetUp
             .Build();
 
         // Assert that ValidationException is thrown
-        Assert.Throws<ValidationException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<ValidationException>(() => receiveAction.ExecuteAsync(Context));
     }
 }

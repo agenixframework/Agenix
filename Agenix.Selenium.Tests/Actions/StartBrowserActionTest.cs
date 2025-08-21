@@ -30,7 +30,7 @@ public class StartBrowserActionTest : AbstractNUnitSetUp
     private readonly Mock<INavigation> _navigation = new();
 
     [Test]
-    public void TestStart()
+    public async Task TestStart()
     {
         _seleniumBrowser.Setup(x => x.IsStarted).Returns(false);
 
@@ -38,7 +38,7 @@ public class StartBrowserActionTest : AbstractNUnitSetUp
             .WithBrowser(_seleniumBrowser.Object)
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable(SeleniumHeaders.SeleniumBrowser), Is.EqualTo("ChromeBrowser"));
 
@@ -46,7 +46,7 @@ public class StartBrowserActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestStartWithStartPage()
+    public async Task TestStartWithStartPage()
     {
         _seleniumBrowser.Setup(x => x.IsStarted).Returns(false);
         _seleniumBrowserConfiguration.Setup(x => x.StartPageUrl).Returns("http://localhost:8080");
@@ -61,8 +61,7 @@ public class StartBrowserActionTest : AbstractNUnitSetUp
             .WithBrowser(_seleniumBrowser.Object)
             .Build();
 
-        action.Execute(Context);
-        ;
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable(SeleniumHeaders.SeleniumBrowser), Is.EqualTo("ChromeBrowser"));
 
@@ -71,7 +70,7 @@ public class StartBrowserActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestStartAlreadyStarted()
+    public async Task TestStartAlreadyStarted()
     {
         _seleniumBrowser.Setup(x => x.IsStarted).Returns(true);
 
@@ -79,7 +78,7 @@ public class StartBrowserActionTest : AbstractNUnitSetUp
             .WithBrowser(_seleniumBrowser.Object)
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable(SeleniumHeaders.SeleniumBrowser), Is.EqualTo("ChromeBrowser"));
 
@@ -88,7 +87,7 @@ public class StartBrowserActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestStartAlreadyStartedNotAllowed()
+    public async Task TestStartAlreadyStartedNotAllowed()
     {
         _seleniumBrowser.Setup(x => x.IsStarted).Returns(true);
 
@@ -97,7 +96,7 @@ public class StartBrowserActionTest : AbstractNUnitSetUp
             .AllowAlreadyStarted(false)
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable(SeleniumHeaders.SeleniumBrowser), Is.EqualTo("ChromeBrowser"));
 

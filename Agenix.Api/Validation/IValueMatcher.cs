@@ -152,7 +152,7 @@ public interface IValueMatcher
     /// </summary>
     /// <param name="validator">The name of the validator to lookup.</param>
     /// <returns>An Optional containing the validator if found, otherwise an empty Optional.</returns>
-    public static Optional<IValueMatcher> Lookup(string validator)
+    static Optional<IValueMatcher> Lookup(string validator)
     {
         return IndividualLookupCache.Value.GetOrAdd(validator, key =>
         {

@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -182,11 +182,8 @@ public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
     /// <returns>The builder instance for method chaining.</returns>
     public GraphQLClientBuilder CustomAuth(IDictionary<string, string> customHeaders)
     {
-        if (_endpoint.EndpointConfiguration.Authentication == null)
-        {
-            _endpoint.EndpointConfiguration.Authentication =
-                new GraphQLEndpointConfiguration.GraphQLAuthenticationConfiguration();
-        }
+        _endpoint.EndpointConfiguration.Authentication ??=
+            new GraphQLEndpointConfiguration.GraphQLAuthenticationConfiguration();
 
         foreach (var header in customHeaders)
         {
@@ -227,10 +224,16 @@ public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
     }
 
     /// <summary>
-    ///     Configures JSON serialization options for GraphQL requests and responses.
+    ///     Configures the JSON serialization options for GraphQL requests and responses.
+    ///     This allows customizing the serialization behavior using the provided
+    ///     NewtonsoftJsonSerializer instance.
     /// </summary>
-    /// <param name="indentJson">Whether to indent JSON output for readability.</param>
-    /// <returns>The builder instance for method chaining.</returns>
+    /// <param name="serializer">
+    ///     An instance of NewtonsoftJsonSerializer to apply specific JSON serialization settings.
+    /// </param>
+    /// <returns>
+    ///     The current instance of GraphQLClientBuilder to allow method chaining when configuring the client.
+    /// </returns>
     public GraphQLClientBuilder JsonSerializerOptions(NewtonsoftJsonSerializer serializer)
     {
         _endpoint.EndpointConfiguration.SerializerOptions = serializer;

@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -27,6 +27,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Validation.Matcher;
@@ -41,13 +43,13 @@ namespace Agenix.Core.Container;
 public abstract class AbstractIteratingActionContainer(
     string name,
     string description,
-    List<ITestActionBuilder<ITestAction>> actions,
+    List<IAsyncTestActionBuilder<IAsyncTestAction>> actions,
     string condition,
     IterationEvaluator.IteratingConditionExpression conditionExpression,
     string indexName,
     int index,
     int start)
-    : AbstractActionContainer(name, description, actions)
+    : AbstractAsyncActionContainer(name, description, actions)
 {
     /**
      * Boolean expression string
@@ -81,27 +83,29 @@ public abstract class AbstractIteratingActionContainer(
 
     /// Executes actions in a loop starting from a specified index.
     /// <param name="context">TestContext holding variable information.</param>
-    public override void DoExecute(TestContext context)
+    /// <param name="cancellationToken">Token used to propagate notifications that operations should be canceled.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
+    public override async Task DoExecute(TestContext context, CancellationToken cancellationToken = default)
     {
         index = start;
-        ExecuteIteration(context);
+        await ExecuteIteration(context);
     }
 
     /// Execute embedded actions in loop.
     /// @param context TestContext holding variable information.
     /// /
-    protected abstract void ExecuteIteration(TestContext context);
+    protected abstract Task ExecuteIteration(TestContext context);
 
     /// Executes the nested test actions.
     /// @param context The test context holding variable information for execution.
     /// /
-    protected void ExecuteActions(TestContext context)
+    protected async Task ExecuteActions(TestContext context)
     {
         context.SetVariable(indexName, index.ToString());
 
         foreach (var actionBuilder in actions)
         {
-            ExecuteAction(actionBuilder.Build(), context);
+            await ExecuteAction(actionBuilder.Build(), context);
         }
     }
 

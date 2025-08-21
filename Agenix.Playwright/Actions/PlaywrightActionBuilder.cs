@@ -36,7 +36,7 @@ namespace Agenix.Playwright.Actions;
 ///     methods for creating various Playwright automation actions with method chaining.
 /// </summary>
 public class
-    PlaywrightActionBuilder : ITestActionBuilder<IPlaywrightAction>.IDelegatingTestActionBuilder<IPlaywrightAction>
+    PlaywrightActionBuilder : IAsyncTestActionBuilder<IPlaywrightAction>.IDelegatingTestActionBuilder<IPlaywrightAction>
 {
     /// <summary>
     ///     Gets or sets the delegate test action builder.
@@ -65,7 +65,7 @@ public class
     ///     Gets the delegating test action builder representing the delegate functionality for creating or composing
     ///     playwright actions.
     /// </summary>
-    public ITestActionBuilder<IPlaywrightAction> Delegate { get; }
+    public IAsyncTestActionBuilder<IPlaywrightAction> Delegate { get; }
 
     /// <summary>
     ///     Creates a new instance of PlaywrightActionBuilder.

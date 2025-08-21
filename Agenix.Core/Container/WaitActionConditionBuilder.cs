@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -45,7 +45,7 @@ public class WaitActionConditionBuilder : WaitConditionBuilder<ActionCondition, 
     /// @param action The test action to be set.
     /// @return The updated WaitActionConditionBuilder with the specified test action set.
     /// /
-    public WaitActionConditionBuilder Action(ITestAction action)
+    public WaitActionConditionBuilder Action(IAsyncTestAction action)
     {
         GetCondition().SetAction(action);
         return this;
@@ -55,7 +55,7 @@ public class WaitActionConditionBuilder : WaitConditionBuilder<ActionCondition, 
     /// @param action The test action builder that will provide the test action to be set.
     /// @return The updated WaitActionConditionBuilder with the specified test action set.
     /// /
-    public WaitActionConditionBuilder Action(ITestActionBuilder<ITestAction> action)
+    public WaitActionConditionBuilder Action(IAsyncTestActionBuilder<IAsyncTestAction> action)
     {
         GetCondition().SetAction(action.Build());
         return this;

@@ -29,7 +29,7 @@ public class OpenWindowActionTest : AbstractNUnitSetUp
     private readonly Mock<ITargetLocator> _locator = new();
 
     [Test]
-    public void TestOpenWindow()
+    public async Task TestOpenWindow()
     {
         var windows = new ReadOnlyCollection<string>(new List<string> { "active_window", "new_window" });
         var initialWindows = new ReadOnlyCollection<string>(new List<string> { "active_window" });
@@ -49,7 +49,7 @@ public class OpenWindowActionTest : AbstractNUnitSetUp
             .SetWindow("myNewWindow")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable(SeleniumHeaders.SeleniumLastWindow), Is.EqualTo("active_window"));
         Assert.That(Context.GetVariable(SeleniumHeaders.SeleniumActiveWindow), Is.EqualTo("new_window"));
@@ -75,7 +75,8 @@ public class OpenWindowActionTest : AbstractNUnitSetUp
             .SetWindow("myNewWindow")
             .Build();
 
-        var ex = Assert.Throws<AgenixSystemException>(() => action.Execute(Context));
+        var ex = Assert.ThrowsAsync<AgenixSystemException>(async () => await action.ExecuteAsync(Context));
+        Assert.That(ex, Is.Not.Null);
         Assert.That(ex.Message, Does.Match("Failed to open new window"));
     }
 }

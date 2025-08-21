@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -66,7 +66,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         Context.GetVariables()["variable"] = "text-value";
 
@@ -88,7 +88,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
             .Build();
 
         // Assert - No exceptions should be thrown, validation should pass
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
     }
 
     [Test]
@@ -112,7 +112,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         Context.GetVariables()["variable"] = "text-value";
         Context.GetVariables()["text"] = "text";
@@ -136,7 +136,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
             .Build();
 
         // Assert - No exceptions should be thrown, validation should pass
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
     }
 
     [Test]
@@ -160,7 +160,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         Context.GetVariables()["expression"] = "//root/element/sub-elementA";
 
@@ -179,7 +179,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
             .Build();
 
         // Assert - No exceptions should be thrown, validation should pass
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
     }
 
     [Test]
@@ -203,7 +203,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         Context.GetVariables()["variable"] = "B";
 
@@ -226,7 +226,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
             .Build();
 
         // Assert - Function-based XPath expressions should resolve and validate correctly
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
     }
 
     [Test]
@@ -253,7 +253,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
             .SetHeader("header-valueC", "C");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root>" +
@@ -285,7 +285,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
             .Build();
 
         // Assert - Variables in header values should be resolved correctly
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
     }
 
     [Test]
@@ -312,7 +312,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
             .SetHeader("header-valueC", "C");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root>" +
@@ -342,7 +342,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
             .Build();
 
         // Assert - Function expressions in header values should be resolved correctly
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
     }
 
     [Test]
@@ -369,7 +369,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
             .SetHeader("header-valueC", "C");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root>" +
@@ -399,7 +399,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
             .Build();
 
         // Assert - Variables in header names should be resolved correctly
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
     }
 
     [Test]
@@ -426,7 +426,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
             .SetHeader("header-valueC", "C");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<root>" +
@@ -453,11 +453,11 @@ public class VariableSupportTest : AbstractNUnitSetUp
             .Build();
 
         // Assert - Functions in header names should be resolved correctly
-        Assert.That(() => receiveAction.Execute(Context), Throws.Nothing);
+        Assert.ThatAsync(() => receiveAction.ExecuteAsync(Context), Throws.Nothing);
     }
 
     [Test]
-    public void TestExtractMessageElementsVariablesSupport()
+    public async Task TestExtractMessageElementsVariablesSupport()
     {
         // Arrange
         _endpoint.Reset();
@@ -477,7 +477,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
                                          "</root>");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         Context.GetVariables()["variableA"] = "initial";
         Context.GetVariables()["variableB"] = "initial";
@@ -507,7 +507,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
             .Process(variableExtractor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         // Assert - Variables should be extracted from message elements
         Assert.That(Context.GetVariables().ContainsKey("variableA"), Is.True);
@@ -517,7 +517,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExtractHeaderValuesVariablesSupport()
+    public async Task TestExtractHeaderValuesVariablesSupport()
     {
         // Arrange
         _endpoint.Reset();
@@ -540,7 +540,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
             .SetHeader("header-valueC", "C");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         Context.GetVariables()["variableA"] = "initial";
         Context.GetVariables()["variableB"] = "initial";
@@ -570,7 +570,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
             .Process(variableExtractor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         // Assert - Variables should be extracted from message headers
         Assert.That(Context.GetVariables().ContainsKey("variableA"), Is.True);
@@ -580,7 +580,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExtractStandardMessageHeaders()
+    public async Task TestExtractStandardMessageHeaders()
     {
         // Arrange
         _endpoint.Reset();
@@ -593,7 +593,6 @@ public class VariableSupportTest : AbstractNUnitSetUp
 
         var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
         var correlationId = Guid.NewGuid().ToString();
-        var messageId = Guid.NewGuid().ToString();
 
         var message = new DefaultMessage("<payload>Standard headers test</payload>")
             .SetHeader("agenix_message_timestamp", timestamp)
@@ -602,7 +601,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
             .SetHeader("message_type", "REQUEST");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         Context.GetVariables()["extractedMessageId"] = "initial";
         Context.GetVariables()["extractedTimestamp"] = "initial";
@@ -632,7 +631,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
             .Process(variableExtractor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         // Assert - Standard message headers should be extracted
         Assert.That(Context.GetVariables()["extractedTimestamp"], Is.EqualTo(timestamp));
@@ -642,7 +641,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExtractCustomApplicationHeaders()
+    public async Task TestExtractCustomApplicationHeaders()
     {
         // Arrange
         _endpoint.Reset();
@@ -664,7 +663,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
             .SetHeader("x-request-timestamp", "2024-06-06T10:30:00Z");
 
         _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(message);
+            .ReturnsAsync(message);
 
         Context.GetVariables()["apiVersion"] = "initial";
         Context.GetVariables()["requestId"] = "initial";
@@ -702,7 +701,7 @@ public class VariableSupportTest : AbstractNUnitSetUp
             .Process(variableExtractor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         // Assert - Custom application headers should be extracted
         Assert.That(Context.GetVariables()["apiVersion"], Is.EqualTo("v2.1"));

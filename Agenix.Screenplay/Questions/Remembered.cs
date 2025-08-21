@@ -44,9 +44,9 @@ public class Remembered<T> : IQuestion<T>
     /// </summary>
     /// <param name="actor">The actor that recalls the remembered value.</param>
     /// <returns>Returns the value of type <typeparamref name="T" /> that was previously remembered by the actor.</returns>
-    public T AnsweredBy(Actor actor)
+    public async Task<T> AnsweredBy(Actor actor)
     {
-        return actor.Recall<T>(_key);
+        return await actor.Recall<T>(_key);
     }
 
     /// <summary>

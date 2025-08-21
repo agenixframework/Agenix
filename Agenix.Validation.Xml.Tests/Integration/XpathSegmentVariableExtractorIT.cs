@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -50,26 +50,26 @@ public class XpathSegmentVariableExtractorIT
     [AgenixEndpoint(Name = "hello.endpoint")]
     private IEndpoint helloEndpoint;
 
-    [AgenixResource] protected ITestCaseRunner runner;
+    [AgenixResource] protected IAsyncTestCaseRunner runner;
 
     [Test]
     [Description("Extract value from a xml stored as variable and send it with a different payload.")]
-    public void XpathSegmentVariableExtractorTest()
+    public async Task XpathSegmentVariableExtractorTest()
     {
         // Define variable containing XML data
-        runner.Given(CreateVariables()
+        await runner.Given(CreateVariables()
             .Variable("xmlVar", "<Person><Name>Peter</Name></Person>")
         );
 
         // Send a message using XPath extraction from a variable
-        runner.When(Send("hello.endpoint")
+        await runner.When(Send("hello.endpoint")
             .Message()
             .Type(MessageType.XML)
             .Body("<OtherPerson><Name>${xmlVar.xpath(//Person/Name)}</Name></OtherPerson>")
         );
 
         // Receive and validate the transformed message
-        runner.Then(Receive("hello.endpoint")
+        await runner.Then(Receive("hello.endpoint")
             .Message()
             .Type(MessageType.XML)
             .Body("<OtherPerson><Name>Peter</Name></OtherPerson>")

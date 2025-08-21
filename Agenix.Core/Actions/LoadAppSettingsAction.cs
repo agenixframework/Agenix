@@ -7,24 +7,26 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
@@ -35,26 +37,29 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Core.Actions;
 
 /// Action to load application settings from a specified file path.
-public class LoadAppSettingsAction(LoadAppSettingsAction.Builder builder) : AbstractTestAction("load", builder)
+public class LoadAppSettingsAction(LoadAppSettingsAction.Builder builder) : AbstractTestActionAsync("load", builder)
 {
     /// Logger for LoadAppSettingsAction.
     /// /
     private static readonly ILogger Log = LogManager.GetLogger(typeof(LoadAppSettingsAction));
 
     /// File resource path
-    private readonly string _filePath = builder._resourceName;
+    private readonly string _filePath = builder.ResourceName;
 
-    /// Executes the action defined by the LoadAppSettingsAction.
-    /// <param name="context">
-    ///     The context in which this action is executed, containing runtime state and variables to be modified.
-    /// </param>
-    public override void DoExecute(TestContext context)
+    /// <summary>
+    ///     Executes the core action to load application settings by reading a configuration file,
+    ///     resolving dynamic variables, and storing the settings in the test context.
+    /// </summary>
+    /// <param name="context">The context object that holds variables and manages dynamic content resolution.</param>
+    /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
+    /// <returns>An asynchronous task representing the operation.</returns>
+    public override async Task DoExecute(TestContext context, CancellationToken cancellationToken = default)
     {
-        var resource = FileUtils.GetFileResource(_filePath, context);
+        var resource = await FileUtils.GetFileResourceAsync(_filePath, context);
 
         if (Log.IsEnabled(LogLevel.Debug))
         {
-            Log.LogDebug("Reading config file => " + FileUtils.GetFileName(resource.Description));
+            Log.LogDebug("Reading config file =>{FileName}", FileUtils.GetFileName(resource.Description));
         }
 
         var settings = FileUtils.LoadAsSettings(resource);
@@ -96,9 +101,9 @@ public class LoadAppSettingsAction(LoadAppSettingsAction.Builder builder) : Abst
 
     /// Builder for creating and configuring LoadAppSettingsAction instances.
     /// /
-    public sealed class Builder : AbstractTestActionBuilder<ITestAction, dynamic>
+    public sealed class Builder : AbstractAsyncTestActionBuilder<IAsyncTestAction, dynamic>
     {
-        internal string _resourceName;
+        internal string ResourceName;
 
         /// Fluent API action building entry method used in C# DSL.
         /// @return
@@ -113,7 +118,7 @@ public class LoadAppSettingsAction(LoadAppSettingsAction.Builder builder) : Abst
         public static Builder Load(string resourceName)
         {
             var builder = new Builder();
-            builder.ResourceName(resourceName);
+            builder.WithResourceName(resourceName);
             return builder;
         }
 
@@ -125,12 +130,16 @@ public class LoadAppSettingsAction(LoadAppSettingsAction.Builder builder) : Abst
         /// <return>
         ///     The builder instance with the specified file path set, enabling further configuration or building of the action.
         /// </return>
-        public Builder ResourceName(string resourceName)
+        public Builder WithResourceName(string resourceName)
         {
-            _resourceName = resourceName;
+            ResourceName = resourceName;
             return this;
         }
 
+        /// Builds and returns an instance of LoadAppSettingsAction.
+        /// <returns>
+        ///     A new instance of LoadAppSettingsAction constructed with the current state of the Builder.
+        /// </returns>
         public override LoadAppSettingsAction Build()
         {
             return new LoadAppSettingsAction(this);

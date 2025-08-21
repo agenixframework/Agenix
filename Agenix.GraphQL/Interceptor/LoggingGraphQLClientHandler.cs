@@ -41,12 +41,13 @@ namespace Agenix.GraphQL.Interceptor;
 ///     It extends the DelegatingHandler, enabling modification or inspection of GraphQL requests and responses during HTTP
 ///     communication with enhanced GraphQL-specific formatting.
 /// </summary>
-public class LoggingGraphQLClientHandler(HttpMessageHandler innerHandler) : DelegatingHandler(innerHandler)
+public class LoggingGraphQlClientHandler(HttpMessageHandler innerHandler) : DelegatingHandler(innerHandler)
 {
     private static readonly string Newline = Environment.NewLine;
-    private static readonly ILogger Log = LogManager.GetLogger(typeof(LoggingGraphQLClientHandler));
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(LoggingGraphQlClientHandler));
     private readonly TestContextFactory _contextFactory = TestContextFactory.NewInstance();
-    private MessageListeners _messageListener = null!;
+    private readonly JsonSerializerOptions _jsonSerializerOptions = new() { WriteIndented = true };
+    private AsyncMessageListeners? _messageListener;
 
     /// <summary>
     ///     Sends an HTTP request asynchronously and processes both the GraphQL request and response by logging their contents
@@ -58,43 +59,44 @@ public class LoggingGraphQLClientHandler(HttpMessageHandler innerHandler) : Dele
     ///     A task representing the asynchronous operation, with an HttpResponseMessage result containing the GraphQL response
     ///     from the server.
     /// </returns>
-    protected override HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+        CancellationToken cancellationToken)
     {
         if (request.Content != null)
         {
-            var requestBody = request.Content.ReadAsStringAsync(cancellationToken).Result;
-            HandleGraphQLRequest(GetGraphQLRequestContent(request, requestBody));
+            var requestBody = await request.Content.ReadAsStringAsync(cancellationToken);
+            await HandleGraphQlRequest(await GetGraphQlRequestContent(request, requestBody));
         }
         else
         {
-            HandleGraphQLRequest(GetGraphQLRequestContent(request, string.Empty));
+            await HandleGraphQlRequest(await GetGraphQlRequestContent(request, string.Empty));
         }
 
         // Execute GraphQL request
-        var response = base.Send(request, cancellationToken);
+        var response = await base.SendAsync(request, cancellationToken);
 
-        HandleGraphQLResponse(GetGraphQLResponseContent(response));
+        await HandleGraphQlResponse(await GetGraphQlResponseContent(response));
 
         return response;
     }
 
     /// <summary>
     ///     Processes the GraphQL request by logging the message and notifying message listeners if any are registered.
-    ///     Provides enhanced formatting for GraphQL operations including query parsing and variable display.
+    ///     Provides enhanced formatting for GraphQL operations, including query parsing and variable display.
     /// </summary>
     /// <param name="request">The GraphQL request content as a formatted string.</param>
-    public void HandleGraphQLRequest(string request)
+    public async Task HandleGraphQlRequest(string request)
     {
         if (HasMessageListeners())
         {
             Log.LogDebug("Sending GraphQL request message");
-            _messageListener.OnOutboundMessage(new RawMessage(request), _contextFactory.GetObject());
+            await _messageListener!.OnOutboundMessage(new RawMessage(request), _contextFactory.GetObject());
         }
         else
         {
             if (Log.IsEnabled(LogLevel.Debug))
             {
-                Log.LogDebug("Sending GraphQL request message: {}", Newline + request);
+                Log.LogDebug("Sending GraphQL request message: {Request}", Newline + request);
             }
         }
     }
@@ -104,18 +106,18 @@ public class LoggingGraphQLClientHandler(HttpMessageHandler innerHandler) : Dele
     ///     Provides enhanced formatting for GraphQL responses including data, errors, and extensions.
     /// </summary>
     /// <param name="response">The GraphQL response content as a formatted string.</param>
-    public void HandleGraphQLResponse(string response)
+    public async Task HandleGraphQlResponse(string response)
     {
         if (HasMessageListeners())
         {
             Log.LogDebug("Received GraphQL response message");
-            _messageListener.OnInboundMessage(new RawMessage(response), _contextFactory.GetObject());
+            await _messageListener!.OnInboundMessage(new RawMessage(response), _contextFactory.GetObject());
         }
         else
         {
             if (Log.IsEnabled(LogLevel.Debug))
             {
-                Log.LogDebug("Received GraphQL response message: {}", Newline + response);
+                Log.LogDebug("Received GraphQL response message: {Response}", Newline + response);
             }
         }
     }
@@ -126,7 +128,7 @@ public class LoggingGraphQLClientHandler(HttpMessageHandler innerHandler) : Dele
     /// </summary>
     /// <param name="response">The HTTP response message containing the GraphQL response to be processed.</param>
     /// <returns>A formatted string containing the GraphQL response content with enhanced readability.</returns>
-    private string GetGraphQLResponseContent(HttpResponseMessage? response)
+    public async Task<string> GetGraphQlResponseContent(HttpResponseMessage? response)
     {
         if (response != null)
         {
@@ -149,8 +151,8 @@ public class LoggingGraphQLClientHandler(HttpMessageHandler innerHandler) : Dele
                 AppendHeadersCommon(response.Content.Headers, builder);
                 builder.Append(Newline);
 
-                var responseBody = response.Content.ReadAsStringAsync().Result;
-                builder.Append(FormatGraphQLResponseBody(responseBody));
+                var responseBody = await response.Content.ReadAsStringAsync();
+                builder.Append(await FormatGraphQlResponseBody(responseBody));
             }
 
             return builder.ToString();
@@ -166,7 +168,7 @@ public class LoggingGraphQLClientHandler(HttpMessageHandler innerHandler) : Dele
     /// <param name="request">The HTTP request message containing the GraphQL operation.</param>
     /// <param name="body">The request body containing the GraphQL query and variables.</param>
     /// <returns>A formatted string representation of the GraphQL request.</returns>
-    private string GetGraphQLRequestContent(HttpRequestMessage request, string body)
+    private async Task<string> GetGraphQlRequestContent(HttpRequestMessage request, string body)
     {
         var builder = new StringBuilder();
 
@@ -188,26 +190,42 @@ public class LoggingGraphQLClientHandler(HttpMessageHandler innerHandler) : Dele
         builder.Append(Newline);
 
         // GraphQL-specific body formatting
-        builder.Append(FormatGraphQLRequestBody(body));
+        builder.Append(await FormatGraphQlRequestBody(body));
 
         return builder.ToString();
     }
+
+    private static async Task<Stream> StringToStreamAsync(string text, Encoding? encoding = null,
+        CancellationToken ct = default)
+    {
+        encoding ??= Encoding.UTF8;
+        var ms = new MemoryStream();
+        await using (var writer = new StreamWriter(ms, encoding, 1024, true))
+        {
+            await writer.WriteAsync(text.AsMemory(), ct);
+            await writer.FlushAsync(ct);
+        }
+
+        ms.Position = 0;
+        return ms;
+    }
+
 
     /// <summary>
     ///     Formats the GraphQL request body with enhanced readability for queries, mutations, and subscriptions.
     /// </summary>
     /// <param name="body">The raw GraphQL request body JSON.</param>
     /// <returns>A formatted string representation of the GraphQL request body.</returns>
-    private string FormatGraphQLRequestBody(string body)
+    public async Task<string> FormatGraphQlRequestBody(string body)
     {
         if (string.IsNullOrWhiteSpace(body))
         {
-            return body;
+            return await Task.FromResult(body);
         }
 
         try
         {
-            var jsonDocument = JsonDocument.Parse(body);
+            var jsonDocument = await JsonDocument.ParseAsync(await StringToStreamAsync(body));
             var builder = new StringBuilder();
 
             builder.AppendLine("=== GraphQL Request ===");
@@ -220,15 +238,14 @@ public class LoggingGraphQLClientHandler(HttpMessageHandler innerHandler) : Dele
 
                 builder.AppendLine($"Operation Type: {operationType}");
                 builder.AppendLine("Query:");
-                builder.AppendLine(FormatGraphQLQuery(query));
+                builder.AppendLine(FormatGraphQlQuery(query));
             }
 
             // Extract and format variables
             if (jsonDocument.RootElement.TryGetProperty("variables", out var variablesElement))
             {
                 builder.AppendLine("Variables:");
-                builder.AppendLine(JsonSerializer.Serialize(variablesElement,
-                    new JsonSerializerOptions { WriteIndented = true }));
+                builder.AppendLine(JsonSerializer.Serialize(variablesElement, _jsonSerializerOptions));
             }
 
             // Extract operation name if present
@@ -255,7 +272,7 @@ public class LoggingGraphQLClientHandler(HttpMessageHandler innerHandler) : Dele
     /// </summary>
     /// <param name="body">The raw GraphQL response body JSON.</param>
     /// <returns>A formatted string representation of the GraphQL response body.</returns>
-    private string FormatGraphQLResponseBody(string body)
+    public async Task<string> FormatGraphQlResponseBody(string body)
     {
         if (string.IsNullOrWhiteSpace(body))
         {
@@ -264,7 +281,7 @@ public class LoggingGraphQLClientHandler(HttpMessageHandler innerHandler) : Dele
 
         try
         {
-            var jsonDocument = JsonDocument.Parse(body);
+            var jsonDocument = await JsonDocument.ParseAsync(await StringToStreamAsync(body));
             var builder = new StringBuilder();
 
             builder.AppendLine("=== GraphQL Response ===");
@@ -273,24 +290,21 @@ public class LoggingGraphQLClientHandler(HttpMessageHandler innerHandler) : Dele
             if (jsonDocument.RootElement.TryGetProperty("data", out var dataElement))
             {
                 builder.AppendLine("Data:");
-                builder.AppendLine(JsonSerializer.Serialize(dataElement,
-                    new JsonSerializerOptions { WriteIndented = true }));
+                builder.AppendLine(JsonSerializer.Serialize(dataElement, _jsonSerializerOptions));
             }
 
             // Format errors section
             if (jsonDocument.RootElement.TryGetProperty("errors", out var errorsElement))
             {
                 builder.AppendLine("Errors:");
-                builder.AppendLine(JsonSerializer.Serialize(errorsElement,
-                    new JsonSerializerOptions { WriteIndented = true }));
+                builder.AppendLine(JsonSerializer.Serialize(errorsElement, _jsonSerializerOptions));
             }
 
             // Format extensions section
             if (jsonDocument.RootElement.TryGetProperty("extensions", out var extensionsElement))
             {
                 builder.AppendLine("Extensions:");
-                builder.AppendLine(JsonSerializer.Serialize(extensionsElement,
-                    new JsonSerializerOptions { WriteIndented = true }));
+                builder.AppendLine(JsonSerializer.Serialize(extensionsElement, _jsonSerializerOptions));
             }
 
             return builder.ToString();
@@ -307,7 +321,7 @@ public class LoggingGraphQLClientHandler(HttpMessageHandler innerHandler) : Dele
     /// </summary>
     /// <param name="query">The GraphQL query string.</param>
     /// <returns>The detected operation type (Query, Mutation, Subscription, or Unknown).</returns>
-    private string DetectOperationType(string? query)
+    private static string DetectOperationType(string? query)
     {
         if (string.IsNullOrWhiteSpace(query))
         {
@@ -327,12 +341,7 @@ public class LoggingGraphQLClientHandler(HttpMessageHandler innerHandler) : Dele
             return "Mutation";
         }
 
-        if (trimmedQuery.StartsWith("subscription"))
-        {
-            return "Subscription";
-        }
-
-        return "Unknown";
+        return trimmedQuery.StartsWith("subscription") ? "Subscription" : "Unknown";
     }
 
     /// <summary>
@@ -340,7 +349,7 @@ public class LoggingGraphQLClientHandler(HttpMessageHandler innerHandler) : Dele
     /// </summary>
     /// <param name="query">The raw GraphQL query string.</param>
     /// <returns>A formatted GraphQL query string.</returns>
-    private string FormatGraphQLQuery(string? query)
+    private static string FormatGraphQlQuery(string? query)
     {
         if (string.IsNullOrWhiteSpace(query))
         {
@@ -386,7 +395,7 @@ public class LoggingGraphQLClientHandler(HttpMessageHandler innerHandler) : Dele
     ///     Sets the message listener for handling GraphQL request and response messages.
     /// </summary>
     /// <param name="messageListener">The message listener to be set.</param>
-    public void SetMessageListener(MessageListeners messageListener)
+    public void SetMessageListener(AsyncMessageListeners messageListener)
     {
         _messageListener = messageListener;
     }

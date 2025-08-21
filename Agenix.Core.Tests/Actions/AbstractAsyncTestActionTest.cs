@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -53,7 +53,7 @@ public class AbstractAsyncTestActionTest : AbstractNUnitSetUp
 
         var action = new CustomAsyncTestActionSuccess(result);
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         ClassicAssert.IsTrue(await TaskExtensions.TimeoutAfter(result.Task, TimeSpan.FromMilliseconds(1000)));
     }
@@ -68,7 +68,7 @@ public class AbstractAsyncTestActionTest : AbstractNUnitSetUp
         // Execute the action
         var exception = Assert.ThrowsAsync<AgenixSystemException>(async () =>
             {
-                action.Execute(Context);
+                await action.ExecuteAsync(Context);
                 await TaskExtensions.TimeoutAfter(result.Task, TimeSpan.FromMilliseconds(1000));
             },
             "Expected CoreSystemException with specific message.");
@@ -92,37 +92,41 @@ public class AbstractAsyncTestActionTest : AbstractNUnitSetUp
 
     private class CustomAsyncTestActionError(TaskCompletionSource<bool> result) : AbstractAsyncTestAction
     {
-        public override Task DoExecuteAsync(TestContext context)
+        public override async Task DoExecuteAsync(TestContext context)
         {
-            return Task.Run(() => throw new AgenixSystemException("Failed!"));
+            await Task.Run(() => throw new AgenixSystemException("Failed!"));
         }
 
-        public override void OnSuccess(TestContext context)
+        protected override Task OnSuccess(TestContext context)
         {
             result.SetResult(false);
+            return Task.CompletedTask;
         }
 
-        public override void OnError(TestContext context, Exception error)
+        protected override Task OnError(TestContext context, Exception error)
         {
             result.SetException(error);
+            return Task.CompletedTask;
         }
     }
 
     private class CustomAsyncTestActionSuccess(TaskCompletionSource<bool> result) : AbstractAsyncTestAction
     {
-        public override Task DoExecuteAsync(TestContext context)
+        public override async Task DoExecuteAsync(TestContext context)
         {
-            return Task.Run(() => { Log.LogInformation("Success!"); });
+            await Task.Run(() => { Log.LogInformation("Success!"); });
         }
 
-        public override void OnSuccess(TestContext context)
+        protected override Task OnSuccess(TestContext context)
         {
             result.SetResult(true);
+            return Task.CompletedTask;
         }
 
-        public override void OnError(TestContext context, Exception error)
+        protected override Task OnError(TestContext context, Exception error)
         {
             result.SetException(error);
+            return Task.CompletedTask;
         }
     }
 }

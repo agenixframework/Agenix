@@ -150,11 +150,22 @@ public class HttpClientRequestActionBuilder : SendMessageAction.SendMessageActio
     /// such as payload, method, URI, headers, and cookies.
     /// This class extends the capabilities of `SendMessageActionBuilderSupport`
     /// to include HTTP-specific configurations.
-    public class HttpMessageBuilderSupport(HttpMessage httpMessage, HttpClientRequestActionBuilder newDelegate)
-        : SendMessageBuilderSupport<SendMessageAction, HttpClientRequestActionBuilder, HttpMessageBuilderSupport>(
-            newDelegate)
+    public class HttpMessageBuilderSupport : SendMessageBuilderSupport<SendMessageAction, HttpClientRequestActionBuilder
+        , HttpMessageBuilderSupport>
     {
-        private readonly HttpMessage httpMessage = httpMessage;
+        private readonly HttpMessage httpMessage;
+
+        /// Provides support for building an HTTP message with configurable properties.
+        /// Enables configuration of HTTP-specific attributes such as payload, method, URI,
+        /// headers, cookies, and other HTTP elements.
+        /// This class enhances the functionality of `SendMessageBuilderSupport` to allow
+        /// detailed customization of HTTP messages for client-side request actions.
+        public HttpMessageBuilderSupport(HttpMessage httpMessage, HttpClientRequestActionBuilder newDelegate)
+            : base(newDelegate)
+        {
+            this.httpMessage = httpMessage;
+        }
+
 
         /// Adds a payload to the HTTP message being built.
         /// <param name="payload">The content to set as the payload of the HTTP message.</param>

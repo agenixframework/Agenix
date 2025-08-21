@@ -220,6 +220,16 @@ public class PlaywrightBrowserConfiguration : AbstractEndpointConfiguration
     public BrowserTypeLaunchOptions? LaunchOptions { get; set; }
 
     /// <summary>
+    ///     WebSocket endpoint to connect to an existing browser via Playwright ConnectAsync
+    /// </summary>
+    public string? ConnectWsEndpoint { get; set; }
+
+    /// <summary>
+    ///     Options for BrowserType.ConnectAsync
+    /// </summary>
+    public BrowserTypeConnectOptions? ConnectOptions { get; set; }
+
+    /// <summary>
     ///     Page event handlers
     /// </summary>
     public List<Action<IPage>> PageEventHandlers { get; set; } = [];

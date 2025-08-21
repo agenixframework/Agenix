@@ -59,7 +59,7 @@ public class HoverActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExecute()
+    public async Task TestExecute()
     {
         _webDriver.Setup(x => x.FindElement(It.IsAny<By>())).Returns(_element.Object);
 
@@ -68,7 +68,7 @@ public class HoverActionTest : AbstractNUnitSetUp
             .Element("id", "myButton")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Verify that FindElement was called with the correct By selector
         _webDriver.Verify(x => x.FindElement(By.Id("myButton")), Times.Once);
@@ -84,7 +84,8 @@ public class HoverActionTest : AbstractNUnitSetUp
             .Element("id", "myButton")
             .Build();
 
-        var ex = Assert.Throws<AgenixSystemException>(() => action.Execute(Context));
+        var ex = Assert.ThrowsAsync<AgenixSystemException>(async () => await action.ExecuteAsync(Context));
+        Assert.That(ex, Is.Not.Null);
         Assert.That(ex.Message, Does.Match("Failed to find element 'By.Id: myButton' on page"));
     }
 }

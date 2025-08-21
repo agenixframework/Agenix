@@ -213,10 +213,10 @@ public class PlaywrightBrowser : AbstractEndpoint, IProducer
     /// </summary>
     /// <param name="message">The message containing the payload to retrieve and execute an action.</param>
     /// <param name="context">The test context within which the Playwright action will execute.</param>
-    public void Send(IMessage message, TestContext context)
+    public async Task Send(IMessage message, TestContext context)
     {
         var action = message.GetPayload<IPlaywrightAction>();
-        action.Execute(context);
+        await action.ExecuteAsync(context);
 
         Log.LogInformation("Playwright action successfully executed");
     }
@@ -252,16 +252,29 @@ public class PlaywrightBrowser : AbstractEndpoint, IProducer
                 _ => throw new AgenixSystemException($"Unsupported browser type: {_endpointConfiguration.BrowserType}")
             };
 
-            // Create launch options
-            var launchOptions = _endpointConfiguration.LaunchOptions ?? new BrowserTypeLaunchOptions();
+            // Decide between connecting to an existing browser or launching a new one
+            IBrowser browser;
+            if (!string.IsNullOrWhiteSpace(_endpointConfiguration.ConnectWsEndpoint))
+            {
+                // Connect to an existing browser via WebSocket endpoint
+                var connectOptions = _endpointConfiguration.ConnectOptions ?? new BrowserTypeConnectOptions();
+                Log.LogDebug("Connecting to existing Playwright browser at {Endpoint}",
+                    _endpointConfiguration.ConnectWsEndpoint);
+                browser = await browserType.ConnectAsync(_endpointConfiguration.ConnectWsEndpoint, connectOptions);
+            }
+            else
+            {
+                // Create launch options
+                var launchOptions = _endpointConfiguration.LaunchOptions ?? new BrowserTypeLaunchOptions();
 
-            // Apply configuration to launch options
-            launchOptions.Headless = _endpointConfiguration.Headless;
-            launchOptions.Channel = _endpointConfiguration.Channel;
-            launchOptions.ExecutablePath = _endpointConfiguration.ExecutablePath;
+                // Apply configuration to launch options
+                launchOptions.Headless = _endpointConfiguration.Headless;
+                launchOptions.Channel = _endpointConfiguration.Channel;
+                launchOptions.ExecutablePath = _endpointConfiguration.ExecutablePath;
 
-            // Launch browser
-            var browser = await browserType.LaunchAsync(launchOptions);
+                // Launch browser
+                browser = await browserType.LaunchAsync(launchOptions);
+            }
 
             // Atomically assign the initialized objects
             lock (_startLock)

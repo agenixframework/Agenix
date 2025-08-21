@@ -7,23 +7,25 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Threading.Tasks;
+using Agenix.Api;
 using Agenix.Api.Annotations;
 using Agenix.Api.Log;
 using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
@@ -44,42 +46,58 @@ public class AsyncIT
 {
     private static readonly ILogger Log = LogManager.GetLogger(typeof(AsyncIT));
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
-    [AgenixResource] private IGherkinTestActionRunner _gherkin;
+    [AgenixResource] private IGherkinAsyncTestActionRunner _gherkin;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
 
     [Test]
-    public void AsyncContainer()
+    public async Task AsyncContainer()
     {
-        _gherkin.When(Async().Actions(
+        await _gherkin.When(Async().Actions(
             StopTime(),
             Sleep().Milliseconds(500),
             Echo("Hello Agenix!"),
             StopTime()
         ));
 
-        _gherkin.When(Async().Actions(
+        await _gherkin.When(Async().Actions(
             Echo("Hello Agenix!"),
-            Action(context => context.SetVariable("anonymous", "anonymous")),
+            Action(context =>
+            {
+                context.SetVariable("anonymous", "anonymous");
+                return Task.CompletedTask;
+            }),
             Sleep().Milliseconds(500),
-            Action(context => Log.LogInformation(context.GetVariable("anonymous")))
+            Action(context =>
+            {
+                Log.LogInformation(context.GetVariable("anonymous"));
+                return Task.CompletedTask;
+            })
         ));
 
-        _gherkin.When(Async().Actions(
+        await _gherkin.When(Async().Actions(
             StopTime(),
             Sleep().Milliseconds(200),
             Echo("Hello Agenix!"),
             StopTime()
         ));
 
-        _gherkin.When(Async().Actions(
+        await _gherkin.When(Async().Actions(
             Echo("Hello Agenix!"),
-            Action(context => context.SetVariable("anonymous", "anonymous")),
+            Action(context =>
+            {
+                context.SetVariable("anonymous", "anonymous");
+                return Task.CompletedTask;
+            }),
             Sleep().Milliseconds(200),
-            Action(context => Log.LogInformation(context.GetVariable("anonymous")))
+            Action(context =>
+            {
+                Log.LogInformation(context.GetVariable("anonymous"));
+                return Task.CompletedTask;
+            })
         ));
 
-        _gherkin.When(Sleep().Milliseconds(500));
+        await _gherkin.When(Sleep().Milliseconds(500));
 
-        _gherkin.When(TraceVariables("anonymous"));
+        await _gherkin.When(TraceVariables("anonymous"));
     }
 }

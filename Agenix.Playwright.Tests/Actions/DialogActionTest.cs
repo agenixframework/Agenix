@@ -33,7 +33,7 @@ public class DialogActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void Execute_AcceptDialog_ShouldSetupAndTeardownDialogHandler()
+    public async Task Execute_AcceptDialog_ShouldSetupAndTeardownDialogHandler()
     {
         // Arrange
         var action = new DialogAction.Builder()
@@ -46,7 +46,7 @@ public class DialogActionTest : AbstractPlaywrightActionTestBase
         _mockPage.SetupRemove(p => p.Dialog -= It.IsAny<EventHandler<IDialog>>());
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert - Verify event handler was registered and removed
         _mockPage.VerifyAdd(p => p.Dialog += It.IsAny<EventHandler<IDialog>>(), Times.Once);
@@ -54,7 +54,7 @@ public class DialogActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void Execute_AcceptDialog_DialogHandlerShouldAcceptDialog()
+    public async Task Execute_AcceptDialog_DialogHandlerShouldAcceptDialog()
     {
         // Arrange
         var action = new DialogAction.Builder()
@@ -72,7 +72,7 @@ public class DialogActionTest : AbstractPlaywrightActionTestBase
             .Callback<EventHandler<IDialog>>(handler => capturedHandler = handler);
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert handler was captured
         Assert.That(capturedHandler, Is.Not.Null, "Dialog handler should have been registered");
@@ -88,7 +88,7 @@ public class DialogActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void Execute_DismissDialog_DialogHandlerShouldDismissDialog()
+    public async Task Execute_DismissDialog_DialogHandlerShouldDismissDialog()
     {
         // Arrange
         var action = new DialogAction.Builder()
@@ -106,7 +106,7 @@ public class DialogActionTest : AbstractPlaywrightActionTestBase
             .Callback<EventHandler<IDialog>>(handler => capturedHandler = handler);
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert handler was captured
         Assert.That(capturedHandler, Is.Not.Null, "Dialog handler should have been registered");
@@ -184,7 +184,7 @@ public class DialogActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void Execute_SendKeysDialog_DialogHandlerShouldAcceptWithText()
+    public async Task Execute_SendKeysDialog_DialogHandlerShouldAcceptWithText()
     {
         // Arrange
         var action = new DialogAction.Builder()
@@ -202,7 +202,7 @@ public class DialogActionTest : AbstractPlaywrightActionTestBase
             .Callback<EventHandler<IDialog>>(handler => capturedHandler = handler);
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert handler was captured
         Assert.That(capturedHandler, Is.Not.Null, "Dialog handler should have been registered");
@@ -218,7 +218,7 @@ public class DialogActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void Execute_GetTextDialog_DialogHandlerShouldCaptureTextAndDismiss()
+    public async Task Execute_GetTextDialog_DialogHandlerShouldCaptureTextAndDismiss()
     {
         // Arrange
         var action = new DialogAction.Builder()
@@ -236,7 +236,7 @@ public class DialogActionTest : AbstractPlaywrightActionTestBase
             .Callback<EventHandler<IDialog>>(handler => capturedHandler = handler);
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert handler was captured
         Assert.That(capturedHandler, Is.Not.Null, "Dialog handler should have been registered");
@@ -264,7 +264,7 @@ public class DialogActionTest : AbstractPlaywrightActionTestBase
         PlaywrightBrowser.Setup(b => b.GetCurrentPage()).Returns((IPage)null);
 
         // Act & Assert
-        var exception = Assert.Throws<AgenixSystemException>(() => action.Execute(Context));
+        var exception = Assert.ThrowsAsync<AgenixSystemException>(() => action.ExecuteAsync(Context));
         Assert.That(exception.InnerException.Message, Is.EqualTo("No active page available"));
     }
 
@@ -280,7 +280,7 @@ public class DialogActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act & Assert
-        var exception = Assert.Throws<AgenixSystemException>(() => action.Execute(Context));
+        var exception = Assert.ThrowsAsync<AgenixSystemException>(() => action.ExecuteAsync(Context));
 
         Assert.That(exception.InnerException, Is.TypeOf<TimeoutException>());
         Assert.That(exception.InnerException.Message, Contains.Substring("Dialog did not appear within 100ms"));

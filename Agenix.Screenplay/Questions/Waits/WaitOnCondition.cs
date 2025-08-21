@@ -44,11 +44,16 @@ public class WaitOnCondition : WaitWithTimeout
     }
 
     /// <summary>
-    ///     Performs the wait operation for the specified actor.
+    ///     Executes the wait interaction asynchronously for the specified actor,
+    ///     monitoring the condition until the expected state is achieved or a timeout occurs.
     /// </summary>
-    /// <typeparam name="T">The type of actor performing this action.</typeparam>
-    /// <param name="actor">The actor performing this wait action.</param>
-    public override void PerformAs<T>(T actor)
+    /// <typeparam name="T">The type of the actor performing the interaction.</typeparam>
+    /// <param name="actor">The actor executing this wait interaction.</param>
+    /// <param name="cancellationToken">A token to observe while waiting for the operation to complete.</param>
+    /// <returns>
+    ///     A task that represents the asynchronous operation.</exception>
+    ///     <exception cref="TimeoutException">Thrown if the expected state is not reached within the specified timeout.</exception>
+    public override async Task PerformAsAsync<T>(T actor, CancellationToken cancellationToken = default)
     {
         var endTime = DateTime.UtcNow.Add(Timeout);
         var pollInterval = TimeSpan.FromMilliseconds(100); // Default polling interval
@@ -60,7 +65,7 @@ public class WaitOnCondition : WaitWithTimeout
                 return; // Condition met
             }
 
-            Thread.Sleep(pollInterval);
+            await Task.Delay(pollInterval, cancellationToken);
         }
 
         // If we get here, the timeout was exceeded

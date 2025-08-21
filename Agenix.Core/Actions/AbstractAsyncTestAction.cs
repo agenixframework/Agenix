@@ -25,6 +25,7 @@
 #endregion
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Agenix.Api.Common;
 using Agenix.Api.Context;
@@ -39,7 +40,7 @@ namespace Agenix.Core.Actions;
 ///     This class provides the basic structure for executing asynchronous operations
 ///     within a test and handles the completion logic.
 /// </summary>
-public abstract class AbstractAsyncTestAction : AbstractTestAction, ICompletable
+public abstract class AbstractAsyncTestAction : AbstractTestActionAsync, ICompletable
 {
     private static readonly ILogger Log = LogManager.GetLogger(typeof(AbstractAsyncTestAction));
     private Task _finished;
@@ -50,69 +51,58 @@ public abstract class AbstractAsyncTestAction : AbstractTestAction, ICompletable
     /// /
     public bool IsDone(TestContext context)
     {
-        return (_finished?.IsCompleted ?? IsDisabled(context)) || IsDisabled(context);
+        return _finished?.IsCompleted ?? false;
     }
 
     /// Executes the asynchronous test action within the provided test context.
     /// This method sets up a task for the action completion logic and executes the asynchronous operation.
     /// <param name="context">The test context which provides required execution details and tracks exceptions.</param>
-    public override void DoExecute(TestContext context)
+    /// <param name="cancellationToken"></param>
+    public override async Task DoExecute(TestContext context, CancellationToken cancellationToken = default)
     {
-        var tcs = new TaskCompletionSource<TestContext>();
-
-
-        // Set up completion logic
-        tcs.Task.ContinueWith(task =>
-        {
-            if (task.Exception != null)
-            {
-                OnError(context, task.Exception.GetBaseException());
-            }
-            else if (context.HasExceptions())
-            {
-                OnError(context, context.GetExceptions()[0]);
-            }
-            else
-            {
-                OnSuccess(context);
-            }
-        });
-
-        // Execute async action
-        _finished = Task.Run(async () =>
-        {
-            try
-            {
-                await DoExecuteAsync(context);
-            }
-            catch (Exception e)
-            {
-                Log.LogWarning(e, "Async test action execution raised error");
-                context.AddException(
-                    (AgenixSystemException)(e is AgenixSystemException ? e : new AgenixSystemException(e.Message)));
-            }
-            finally
-            {
-                tcs.SetResult(context);
-            }
-        });
+        _finished = ExecuteWithHandling(context);
+        await _finished;
     }
 
+    private async Task ExecuteWithHandling(TestContext context)
+    {
+        try
+        {
+            await DoExecuteAsync(context);
+            await OnSuccess(context);
+        }
+        catch (Exception e)
+        {
+            Log.LogWarning(e, "Async test action execution raised error");
+
+            var exception = e is AgenixSystemException ? e : new AgenixSystemException(e.Message, e);
+            context.AddException((AgenixSystemException)exception);
+            await OnError(context, exception);
+            throw new AgenixSystemException(exception.Message, exception);
+        }
+    }
+
+
+    /// Executes the asynchronous logic for the defined test action.
+    /// <param name="context">The test context providing the necessary execution details for the action.</param>
+    /// <return>A task that represents the asynchronous execution of the action.</return>
     public abstract Task DoExecuteAsync(TestContext context);
 
     /**
      * Optional validation step after async test action performed with success.
      * @param context
      */
-    public virtual void OnSuccess(TestContext context)
+    protected virtual async Task OnSuccess(TestContext context)
     {
+        await Task.CompletedTask;
     }
 
     /**
      * Optional validation step after async test action performed with success.
      * @param context
      */
-    public virtual void OnError(TestContext context, Exception error)
+    protected virtual async Task OnError(TestContext context, Exception error)
     {
+        await Task.CompletedTask;
     }
 }

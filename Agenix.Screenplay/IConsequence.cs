@@ -36,13 +36,13 @@ public interface IConsequence<T>
     ///     Evaluates the consequence for the specified actor within the context of a screenplay interaction.
     /// </summary>
     /// <param name="actor">The actor for whom the consequence will be evaluated.</param>
-    void EvaluateFor(Actor actor);
+    Task EvaluateFor(Actor actor);
 
     /// <summary>
     ///     Specifies an alternative complaint type to use when the consequence is evaluated to an error.
     /// </summary>
     /// <param name="complaintType">The type of complaint or exception to be used when the consequence fails.</param>
-    /// <returns>An updated consequence with the specified complaint type configured.</returns>
+    /// <returns>An updated consequence of the specified complaint type configured.</returns>
     IConsequence<T> OrComplainWith(Type complaintType);
 
     /// <summary>
@@ -64,7 +64,7 @@ public interface IConsequence<T>
     /// <returns>
     ///     The current instance of the consequence, enabling chaining of additional setup actions.
     /// </returns>
-    IConsequence<T> WhenAttemptingTo(IPerformable performable);
+    Task<IConsequence<T>> WhenAttemptingTo(IPerformable performable);
 
     /// <summary>
     ///     Provides a reason or explanation for the current consequence's evaluation.
@@ -76,5 +76,5 @@ public interface IConsequence<T>
     /// <summary>
     ///     Evaluate the consequence only after performing the specified tasks.
     /// </summary>
-    IConsequence<T> After(params IPerformable[] setupActions);
+    Task<IConsequence<T>> After(params IPerformable[] setupActions);
 }

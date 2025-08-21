@@ -7,14 +7,14 @@ namespace Agenix.Screenplay.Tests.Shopping.Questions;
 [Subject("the prices should be correctly displayed")]
 public class DisplayedPrices(int vat, bool throwError) : IQuestion<object>
 {
-    public object AnsweredBy(Actor actor)
+    public async Task<object> AnsweredBy(Actor actor)
     {
-        actor.Should(
+        await actor.Should(
             SeeThat("the total price", ThePrice.Total(), EqualTo(100)),
             SeeThat("the VAT", ThePrice.Vat(throwError), EqualTo(vat)),
             SeeThat("the price with VAT", ThePrice.TotalWithVat(), EqualTo(120))
         );
-        return null!;
+        return null;
     }
 
     public static DisplayedPrices ThePriceIsCorrectlyDisplayed()

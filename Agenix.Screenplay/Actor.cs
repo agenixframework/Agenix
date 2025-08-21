@@ -73,7 +73,7 @@ public class Actor : IPerformsTasks
 
     private static IMediator? _mediator;
     private readonly ConcurrentDictionary<Type, IAbility> _abilities = new();
-    private readonly ConcurrentBag<FactLifecycleListener> _factListeners = new();
+    private readonly ConcurrentBag<FactLifecycleListener> _factListeners = [];
     private readonly ConcurrentDictionary<string, object> _notepad = new();
     private string? _preferredPronoun;
 
@@ -91,7 +91,11 @@ public class Actor : IPerformsTasks
     ///     Provides access to the event bus used for mediating messages
     ///     and communication between various components or handlers.
     /// </summary>
-    public IMediator? EventBus => _mediator;
+    public IMediator EventBus =>
+        _mediator ??
+        throw new InvalidOperationException(
+            "Mediator is not initialized"); // NOSONAR: instance proxy kept for compatibility
+
 
     /// <summary>
     ///     Gets the name of the actor, which uniquely identifies them
@@ -117,11 +121,11 @@ public class Actor : IPerformsTasks
     /// <typeparam name="TAnswer">The type of the answer expected from the question.</typeparam>
     /// <param name="question">The question to be answered by the actor.</param>
     /// <returns>The answer provided by answering the specified question.</returns>
-    public TAnswer AsksFor<TAnswer>(IQuestion<TAnswer> question)
+    public async Task<TAnswer> AsksFor<TAnswer>(IQuestion<TAnswer> question)
     {
-        BeginPerformance();
-        var answer = question.AnsweredBy(this);
-        EndPerformance();
+        await BeginPerformance();
+        var answer = await question.AnsweredBy(this);
+        await EndPerformance();
 
         return answer;
     }
@@ -134,12 +138,12 @@ public class Actor : IPerformsTasks
     ///     interface.
     /// </typeparam>
     /// <param name="todos">The tasks to be performed by the actor.</param>
-    public void AttemptsTo<T>(params T[] todos) where T : IPerformable
+    public Task AttemptsTo<T>(params T[] todos) where T : IPerformable
     {
-        AttemptsTo(ErrorHandlingMode.THROW_EXCEPTION_ON_FAILURE, todos.Cast<IPerformable>().ToArray());
+        return AttemptsToAsync(ErrorHandlingMode.THROW_EXCEPTION_ON_FAILURE, todos.Cast<IPerformable>().ToArray());
     }
 
-    private IMediator InitializeMediator()
+    private static IMediator InitializeMediator()
     {
         IServiceCollection services = new ServiceCollection();
 
@@ -164,6 +168,7 @@ public class Actor : IPerformsTasks
         foreach (var item in _notepad)
         {
             otherActor._notepad.TryAdd(item.Key, item.Value);
+            UseTheAgenixTestContext.As(otherActor).TestContext.SetVariable(item.Key, item.Value);
         }
     }
 
@@ -272,40 +277,40 @@ public class Actor : IPerformsTasks
         // For now it's empty
     }
 
-    private void BeginPerformance()
+    private async Task BeginPerformance()
     {
-        EventBus!.Publish(new ActorBeginsPerformanceEvent(Name));
+        await EventBus.Publish(new ActorBeginsPerformanceEvent(Name));
     }
 
-    private void EndPerformance()
+    private async Task EndPerformance()
     {
-        EventBus!.Publish(new ActorEndsPerformanceEvent(Name));
+        await EventBus.Publish(new ActorEndsPerformanceEvent(Name));
     }
 
-    private void NotifyPerformanceOf<T>(T todo) where T : IPerformable
+    private async Task NotifyPerformanceOf<T>(T todo) where T : IPerformable
     {
-        EventBus!.Publish(new ActorPerforms(todo, Name));
+        await EventBus.Publish(new ActorPerforms(todo, Name));
     }
 
-    private void StartConsequenceCheck()
+    private async Task StartConsequenceCheck()
     {
-        BeginPerformance();
-        EventBus!.Publish(new ActorBeginsConsequenceCheckEvent(Name));
+        await BeginPerformance();
+        await EventBus.Publish(new ActorBeginsConsequenceCheckEvent(Name));
     }
 
-    private void EndConsequenceCheck()
+    private async Task EndConsequenceCheck()
     {
-        EventBus!.Publish(new ActorEndsConsequenceCheckEvent(Name));
-        EndPerformance();
+        await EventBus.Publish(new ActorEndsConsequenceCheckEvent(Name));
+        await EndPerformance();
     }
 
     /// <summary>
     ///     Indicates that the actor has certain tasks to perform.
     /// </summary>
     /// <param name="todos">The tasks to perform</param>
-    public void Has(params IPerformable[] todos)
+    public async Task Has(params IPerformable[] todos)
     {
-        AttemptsTo(todos);
+        await AttemptsTo(todos);
     }
 
     /// <summary>
@@ -339,11 +344,11 @@ public class Actor : IPerformsTasks
     ///     This approach ensures proper cleanup and monitoring of facts throughout their lifecycle within the test execution
     ///     context.
     /// </remarks>
-    public void Has(params IFact[] facts)
+    public async Task Has(params IFact[] facts)
     {
         foreach (var fact in facts)
         {
-            fact.Setup(this);
+            await fact.Setup(this);
             var listener = new FactLifecycleListener(this, fact);
             _factListeners.Add(listener);
 
@@ -386,9 +391,9 @@ public class Actor : IPerformsTasks
     ///     A tense-neutral synonym for AddFact() for use with Given() clauses
     /// </summary>
     /// <param name="todos">The tasks that the actor was able to perform</param>
-    public void WasAbleTo(params IPerformable[] todos)
+    public async Task WasAbleTo(params IPerformable[] todos)
     {
-        AttemptsTo(todos);
+        await AttemptsTo(todos);
     }
 
     /// <summary>
@@ -397,10 +402,10 @@ public class Actor : IPerformsTasks
     /// <typeparam name="TAnswer">The type of the answer to store</typeparam>
     /// <param name="key">The key under which to store the answer</param>
     /// <param name="question">The question to ask</param>
-    public void Remember<TAnswer>(string key, IQuestion<TAnswer> question)
+    public async Task Remember<TAnswer>(string key, IQuestion<TAnswer> question)
     {
-        BeginPerformance();
-        var answer = AsksFor(question);
+        await BeginPerformance();
+        var answer = await AsksFor(question);
 
         // Single ability lookup with a try-get pattern
         if (TryGetAbility<UseTheAgenixTestContext>(out var testContextAbility))
@@ -422,13 +427,13 @@ public class Actor : IPerformsTasks
             _notepad[key] = answer;
         }
 
-        EndPerformance();
+        await EndPerformance();
     }
 
     /// <summary>
     ///     Stores a value in the actor's notepad under the specified key.
     /// </summary>
-    public void Remember(string key, object value)
+    public async Task Remember(string key, object value)
     {
         if (TryGetAbility<UseTheAgenixTestContext>(out var testContextAbility))
         {
@@ -447,29 +452,26 @@ public class Actor : IPerformsTasks
         {
             _notepad[key] = value;
         }
+
+        await Task.CompletedTask;
     }
 
 
     /// <summary>
     ///     Retrieves a value from the actor's notepad by key.
     /// </summary>
-    public T? Recall<T>(string key)
+    public Task<T?> Recall<T>(string key)
     {
         // Single ability lookup
         if (TryGetAbility<UseTheAgenixTestContext>(out var testContextAbility))
         {
             var resolvedKey = testContextAbility.TestContext.ReplaceDynamicContentInString(key);
-            return testContextAbility.TestContext.GetVariables().ContainsKey(resolvedKey)
+            return Task.FromResult(testContextAbility.TestContext.GetVariables().ContainsKey(resolvedKey)
                 ? testContextAbility.TestContext.GetVariable<T>(resolvedKey)
-                : default;
+                : default);
         }
 
-        if (_notepad.TryGetValue(key, out var value))
-        {
-            return (T)value;
-        }
-
-        return default;
+        return _notepad.TryGetValue(key, out var value) ? Task.FromResult((T)value) : Task.FromResult<T?>(default);
     }
 
     /// <summary>
@@ -485,7 +487,7 @@ public class Actor : IPerformsTasks
     /// <summary>
     ///     Removes and returns a value from the actor's notepad by key.
     /// </summary>
-    public void Forget(string key)
+    public Task Forget(string key)
     {
         if (TryGetAbility<UseTheAgenixTestContext>(out var testContextAbility))
         {
@@ -495,22 +497,24 @@ public class Actor : IPerformsTasks
         {
             _notepad.TryRemove(key, out _);
         }
+
+        return Task.CompletedTask;
     }
 
     /// <summary>
     ///     Alternative syntax for recalling what the actor saw.
     /// </summary>
-    public T SawAsThe<T>(string key)
+    public async Task<T?> SawAsThe<T>(string key)
     {
-        return Recall<T>(key);
+        return await Recall<T>(key);
     }
 
     /// <summary>
     ///     Alternative syntax for recalling what the actor gave.
     /// </summary>
-    public T GaveAsThe<T>(string key)
+    public async Task<T?> GaveAsThe<T>(string key)
     {
-        return Recall<T>(key);
+        return await Recall<T>(key);
     }
 
     /// <summary>
@@ -537,22 +541,24 @@ public class Actor : IPerformsTasks
     /// <summary>
     ///     Performs cleanup operations by running teardowns.
     /// </summary>
-    public void WrapUp()
+    public async Task WrapUp()
     {
         foreach (var teardown in GetTeardowns())
         {
-            teardown.TearDown();
+            await teardown.TearDown();
         }
 
         _factListeners.Clear();
 
-        if (AgenixInstanceManager.HasInstance())
+        if (!AgenixInstanceManager.HasInstance())
         {
-            var count = AgenixInstanceManager.GetOrDefault().AgenixContext.TestListeners
-                .RemoveTestListenersOfType<FactLifecycleListener>();
-
-            Log.LogDebug("Removed {Count} FactLifecycleListeners from AgenixInstanceManager", count);
+            return;
         }
+
+        var count = AgenixInstanceManager.GetOrDefault().AgenixContext.TestListeners
+            .RemoveTestListenersOfType<FactLifecycleListener>();
+
+        Log.LogDebug("Removed {Count} FactLifecycleListeners from AgenixInstanceManager", count);
     }
 
     /// <summary>
@@ -565,25 +571,43 @@ public class Actor : IPerformsTasks
     }
 
     /// <summary>
-    ///     Directs the actor to perform a sequence of tasks with a specified error handling mode.
+    ///     Executes a series of asynchronous tasks as the actor, with specified error handling behavior.
     /// </summary>
-    /// <param name="mode">The error handling mode to use when performing the tasks.</param>
-    /// <param name="tasks">The array of tasks the actor will attempt to perform.</param>
-    public void AttemptsTo(ErrorHandlingMode mode, params IPerformable[] tasks)
+    /// <param name="mode">The error handling mode to apply when executing tasks.</param>
+    /// <param name="tasks">The list of asynchronous tasks to be performed by the actor.</param>
+    /// <returns>A task that represents the asynchronous operation of executing the specified tasks.</returns>
+    public async Task AttemptsToAsync(ErrorHandlingMode mode, params IPerformable[] tasks)
     {
-        BeginPerformance();
+        await BeginPerformance();
         foreach (var task in tasks)
         {
-            PerformTask(InstrumentedTask.Of(task));
+            await PerformTaskAsync(InstrumentedTask.Of(task));
         }
 
-        EndPerformance();
+        await EndPerformance();
     }
 
-    private void PerformTask<T>(T todo) where T : IPerformable
+    /// <summary>
+    ///     Executes the specified tasks asynchronously.
+    ///     This method allows an actor to perform a series of tasks while optionally applying error-handling mechanisms.
+    /// </summary>
+    /// <typeparam name="T">The type of the tasks to be executed, which must implement <see cref="IPerformable" />.</typeparam>
+    /// <param name="todos">An array of tasks for the actor to attempt to execute.</param>
+    /// <returns>A task representing the asynchronous operation of performing the specified tasks.</returns>
+    public async Task AttemptsToAsync<T>(params T[] todos) where T : IPerformable
     {
-        NotifyPerformanceOf(todo);
-        todo.PerformAs(this);
+        await AttemptsToAsync(ErrorHandlingMode.THROW_EXCEPTION_ON_FAILURE, todos.Cast<IPerformable>().ToArray());
+    }
+
+    /// <summary>
+    ///     Executes a specific task asynchronously by notifying its performance and performing it as the actor.
+    /// </summary>
+    /// <typeparam name="T">The type of the task to be performed, which must implement <see cref="IPerformable" />.</typeparam>
+    /// <returns>A task that represents the asynchronous execution of the performance.</returns>
+    private async Task PerformTaskAsync<T>(T todo) where T : IPerformable
+    {
+        await NotifyPerformanceOf(todo);
+        await todo.PerformAsAsync(this);
     }
 
     /// <summary>
@@ -592,27 +616,27 @@ public class Actor : IPerformsTasks
     /// </summary>
     /// <typeparam name="T">The type of context or subject being verified by the consequences.</typeparam>
     /// <param name="consequences">An array of consequences to be checked for compliance or validation.</param>
-    public void Should<T>(params IConsequence<T>[] consequences)
+    public async Task Should<T>(params IConsequence<T>[] consequences)
     {
         var errorTally = new ErrorTally<T>();
 
-        StartConsequenceCheck();
+        await StartConsequenceCheck();
 
         foreach (var consequence in consequences)
         {
-            Check(consequence, errorTally);
+            await Check(consequence, errorTally);
         }
 
-        EndConsequenceCheck();
+        await EndConsequenceCheck();
 
         errorTally.ReportAnyErrors();
     }
 
-    private void Check<T>(IConsequence<T> consequence, ErrorTally<T> errorTally)
+    private async Task Check<T>(IConsequence<T> consequence, ErrorTally<T> errorTally)
     {
         try
         {
-            consequence.EvaluateFor(this);
+            await consequence.EvaluateFor(this);
         }
         catch (Exception e)
         {

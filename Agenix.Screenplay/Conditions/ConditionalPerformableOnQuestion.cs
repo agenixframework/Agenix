@@ -56,6 +56,6 @@ public class ConditionalPerformableOnQuestion : ConditionalPerformable
     /// <returns>A boolean value indicating if the condition is satisfied for the actor.</returns>
     protected override bool EvaluatedConditionFor(Actor actor)
     {
-        return _condition.AnsweredBy(actor);
+        return _condition.AnsweredBy(actor).GetAwaiter().GetResult();
     }
 }

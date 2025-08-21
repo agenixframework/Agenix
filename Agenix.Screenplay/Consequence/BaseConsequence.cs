@@ -54,7 +54,7 @@ public abstract class BaseConsequence<T> : IConsequence<T>
     ///     or to trigger necessary actions based on the evaluation.
     /// </summary>
     /// <param name="actor">The actor in the Screenplay pattern who is performing or evaluating the consequence.</param>
-    public abstract void EvaluateFor(Actor actor);
+    public abstract Task EvaluateFor(Actor actor);
 
     /// <summary>
     ///     Specifies an alternative complaint type to use when the consequence is evaluated to an error.
@@ -62,7 +62,7 @@ public abstract class BaseConsequence<T> : IConsequence<T>
     /// </summary>
     /// <param name="complaintType">The type of complaint or exception to be used when the consequence fails.</param>
     /// <return>
-    ///     An updated consequence with the specified complaint type configured.
+    ///     An updated consequence of the specified complaint type configured.
     /// </return>
     public virtual IConsequence<T> OrComplainWith(Type complaintType)
     {
@@ -93,10 +93,10 @@ public abstract class BaseConsequence<T> : IConsequence<T>
     /// <return>
     ///     The current instance of the consequence, allowing method chaining.
     /// </return>
-    public virtual IConsequence<T> WhenAttemptingTo(IPerformable performable)
+    public virtual Task<IConsequence<T>> WhenAttemptingTo(IPerformable performable)
     {
         _setupActions.Add(performable);
-        return this;
+        return Task.FromResult<IConsequence<T>>(this);
     }
 
     /// <summary>
@@ -104,7 +104,7 @@ public abstract class BaseConsequence<T> : IConsequence<T>
     ///     This can be used to provide additional context or clarify the purpose of the evaluated consequence.
     /// </summary>
     /// <param name="explanation">A string representing the explanation for the consequence.</param>
-    /// <returns>The current instance of the consequence with the specified explanation applied.</returns>
+    /// <returns>The current instance of the consequence of the specified explanation applied.</returns>
     public virtual IConsequence<T> Because(string explanation)
     {
         Explanation = Optional<string>.Of(explanation);
@@ -119,10 +119,10 @@ public abstract class BaseConsequence<T> : IConsequence<T>
     ///     consequence.
     /// </param>
     /// <returns>The current instance of the consequence to allow method chaining.</returns>
-    public virtual IConsequence<T> After(params IPerformable[] setupActions)
+    public virtual Task<IConsequence<T>> After(params IPerformable[] setupActions)
     {
         _setupActions.AddRange(setupActions);
-        return this;
+        return Task.FromResult<IConsequence<T>>(this);
     }
 
     /// <summary>
@@ -141,7 +141,7 @@ public abstract class BaseConsequence<T> : IConsequence<T>
 
     /// <summary>
     ///     Evaluates whether the given exception is classified as an error exception.
-    ///     Error exceptions include system exceptions, out of memory exceptions, and stack overflow exceptions.
+    ///     Error exceptions include system exceptions, out-of-memory exceptions, and stack overflow exceptions.
     /// </summary>
     /// <param name="ex">The exception to classify as an error exception or not.</param>
     /// <return>
@@ -191,12 +191,7 @@ public abstract class BaseConsequence<T> : IConsequence<T>
     /// <returns>A string with appended recorded input values, or the original message if no input values exist.</returns>
     protected string AddRecordedInputValuesTo(string message)
     {
-        if (string.IsNullOrEmpty(InputValues()))
-        {
-            return message;
-        }
-
-        return $"{message} [{InputValues()}]";
+        return string.IsNullOrEmpty(InputValues()) ? message : $"{message} [{InputValues()}]";
     }
 
     /// <summary>
@@ -204,8 +199,8 @@ public abstract class BaseConsequence<T> : IConsequence<T>
     ///     This method ensures that any preparatory tasks for the consequence are carried out before its evaluation.
     /// </summary>
     /// <param name="actor">The actor in the Screenplay pattern who executes the setup actions.</param>
-    protected virtual void PerformSetupActionsAs(Actor actor)
+    protected virtual async Task PerformSetupActionsAs(Actor actor)
     {
-        actor.AttemptsTo(Actor.ErrorHandlingMode.IGNORE_EXCEPTIONS, _setupActions.ToArray());
+        await actor.AttemptsToAsync(Actor.ErrorHandlingMode.IGNORE_EXCEPTIONS, _setupActions.ToArray());
     }
 }

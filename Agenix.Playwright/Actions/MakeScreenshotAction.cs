@@ -187,7 +187,7 @@ public class MakeScreenshotAction : AbstractPlaywrightAction
     /// <returns>The full path where the screenshot was saved</returns>
     private async Task<string> SaveScreenshotToFile(byte[] screenshotBytes, TestContext context)
     {
-        string filePath;
+        string? filePath = null;
 
         if (!string.IsNullOrEmpty(_outputPath))
         {
@@ -205,7 +205,10 @@ public class MakeScreenshotAction : AbstractPlaywrightAction
                 ? $"screenshot_{DateTime.Now:yyyyMMdd_HHmmss}.png"
                 : context.ReplaceDynamicContentInString(_fileName);
 
-            filePath = Path.Combine(directory, fileName);
+            if (directory != null && fileName != null)
+            {
+                filePath = Path.Combine(directory, fileName);
+            }
         }
 
         // Ensure directory exists
@@ -217,7 +220,8 @@ public class MakeScreenshotAction : AbstractPlaywrightAction
         }
 
         // Save the screenshot
-        await File.WriteAllBytesAsync(filePath, screenshotBytes);
+        await File.WriteAllBytesAsync(filePath ?? throw new InvalidOperationException("The file path is null"),
+            screenshotBytes);
 
         return Path.GetFullPath(filePath);
     }

@@ -46,7 +46,7 @@ namespace Agenix.Api.Context;
 /// <summary>
 ///     The test context provides utility methods for replacing dynamic content(variables and functions) in string
 /// </summary>
-public class TestContext : ITestActionListenerAware, IReferenceResolverAware
+public class TestContext : IAsyncTestActionListenerAware, IReferenceResolverAware
 {
     /// <summary>
     ///     Logger.
@@ -61,27 +61,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <summary>
     ///     Local variables
     /// </summary>
-    protected readonly IDictionary<string, object> _variables;
-
-    /// <summary>
-    ///     List of actions to run after each test.
-    /// </summary>
-    private List<IAfterTest> _afterTest = [];
-
-    /// <summary>
-    ///     List of actions to run before each test.
-    /// </summary>
-    private List<IBeforeTest> _beforeTest = [];
-
-    /// <summary>
-    ///     Endpoint factory creates endpoint instances
-    /// </summary>
-    private IEndpointFactory _endpointFactory;
-
-    /// <summary>
-    ///     Function registry holding all available functions
-    /// </summary>
-    private FunctionRegistry _functionRegistry = new();
+    protected readonly IDictionary<string, object> Variables;
 
     /// <summary>
     ///     Set global variables.
@@ -89,55 +69,9 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     private GlobalVariables _globalVariables;
 
     /// <summary>
-    ///     Log modifier.
-    /// </summary>
-    private ILogModifier _logModifier;
-
-    /// <summary>
-    ///     List of message listeners to be informed on inbound and outbound message exchange
-    /// </summary>
-    private MessageListeners _messageListeners = new();
-
-    /// <summary>
-    ///     List of global message processors
-    /// </summary>
-    private MessageProcessors _messageProcessors = new();
-
-    /// <summary>
-    ///     Message store
-    /// </summary>
-    private IMessageStore _messageStore = new DefaultMessageStore();
-
-    /// <summary>
-    ///     Registered validation matchers
-    /// </summary>
-    private MessageValidatorRegistry _messageValidatorRegistry = new();
-
-    /// <summary>
     ///     POCO reference resolver.
     /// </summary>
     private IReferenceResolver _referenceResolver;
-
-    /// <summary>
-    ///     List of test action listeners to be informed on test action events.
-    /// </summary>
-    private TestActionListeners _testActionListeners = new();
-
-    /// <summary>
-    ///     List of test listeners to be informed on test events.
-    /// </summary>
-    private TestListeners _testListeners = new();
-
-    /// <summary>
-    ///     Type converter instance used for converting values between different types.
-    /// </summary>
-    private ITypeConverter _typeConverter = ITypeConverter.LookupDefault();
-
-    /// <summary>
-    ///     Registered validation matchers
-    /// </summary>
-    private ValidationMatcherRegistry _validationMatcherRegistry = new();
-
 
     /// <summary>
     ///     A collection of active timers used within the test context.
@@ -149,7 +83,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// </summary>
     public TestContext()
     {
-        _variables = new ConcurrentDictionary<string, object>();
+        Variables = new ConcurrentDictionary<string, object>();
     }
 
     /// <summary>
@@ -160,38 +94,22 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <summary>
     ///     Function registry holding all available functions
     /// </summary>
-    public FunctionRegistry FunctionRegistry
-    {
-        get => _functionRegistry;
-        set => _functionRegistry = value;
-    }
+    public FunctionRegistry FunctionRegistry { get; set; } = new();
 
     /// <summary>
     ///     Gets or sets the log modifier.
     /// </summary>
-    public ILogModifier LogModifier
-    {
-        get => _logModifier;
-        set => _logModifier = value;
-    }
+    public ILogModifier LogModifier { get; set; }
 
     /// <summary>
     ///     Gets or sets the validation matcher registry.
     /// </summary>
-    public ValidationMatcherRegistry ValidationMatcherRegistry
-    {
-        get => _validationMatcherRegistry;
-        set => _validationMatcherRegistry = value;
-    }
+    public ValidationMatcherRegistry ValidationMatcherRegistry { get; set; } = new();
 
     /// <summary>
     ///     Manages the collection of message processing strategies.
     /// </summary>
-    public MessageProcessors MessageProcessors
-    {
-        get => _messageProcessors;
-        set => _messageProcessors = value;
-    }
+    public MessageProcessors MessageProcessors { get; set; } = new();
 
     /// <summary>
     ///     Represents a builder for configuring and managing namespace contexts in XML structures.
@@ -201,89 +119,62 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <summary>
     ///     Factory for creating and managing endpoints.
     /// </summary>
-    public IEndpointFactory EndpointFactory
-    {
-        get => _endpointFactory;
-        set => _endpointFactory = value;
-    }
+    public IEndpointFactory EndpointFactory { get; set; }
 
     /// <summary>
     ///     Provides a registry for message validators.
     /// </summary>
-    public virtual MessageValidatorRegistry MessageValidatorRegistry
-    {
-        get => _messageValidatorRegistry;
-        set => _messageValidatorRegistry = value;
-    }
+    public virtual MessageValidatorRegistry MessageValidatorRegistry { get; set; } = new();
 
     /// <summary>
     ///     Gets or sets the message store.
     /// </summary>
-    public IMessageStore MessageStore
-    {
-        get => _messageStore;
-        set => _messageStore = value;
-    }
+    public IMessageStore MessageStore { get; set; } = new DefaultMessageStore();
 
     /// <summary>
     ///     Type converter.
     /// </summary>
-    public ITypeConverter TypeConverter
-    {
-        get => _typeConverter;
-        set => _typeConverter = value;
-    }
+    public ITypeConverter TypeConverter { get; set; } = ITypeConverter.LookupDefault();
 
     /// <summary>
     ///     Manages test event listeners and propagates test events to them.
     /// </summary>
-    public TestListeners TestListeners
-    {
-        get => _testListeners;
-        set => _testListeners = value;
-    }
+    public AsyncTestListeners TestListeners { get; set; } = new();
 
     /// <summary>
     ///     List of actions to be executed before each test.
     /// </summary>
-    public List<IBeforeTest> BeforeTest
-    {
-        get => _beforeTest;
-        set => _beforeTest = value;
-    }
+    public List<IBeforeTest> BeforeTest { get; set; } = [];
 
     /// <summary>
     ///     Gets or sets the collection of actions to be executed after the test.
     /// </summary>
-    public List<IAfterTest> AfterTest
-    {
-        get => _afterTest;
-        set => _afterTest = value;
-    }
+    public List<IAfterTest> AfterTest { get; set; } = [];
 
     /// <summary>
     ///     Manages and interacts with test action listeners.
     /// </summary>
-    public TestActionListeners TestActionListeners
-    {
-        get => _testActionListeners;
-        set => _testActionListeners = value;
-    }
+    public AsyncTestActionListeners TestActionListeners { get; set; } = new();
 
     /// <summary>
     ///     Manages the collection of message listeners.
     /// </summary>
-    public MessageListeners MessageListeners
-    {
-        get => _messageListeners;
-        set => _messageListeners = value;
-    }
+    public AsyncMessageListeners? MessageListeners { get; set; } = new();
 
     /// <summary>
     ///     Retrieves the current reference resolver instance.
     /// </summary>
     /// <returns>The current instance of IReferenceResolver.</returns>
-    public virtual IReferenceResolver? ReferenceResolver => _referenceResolver;
+    public virtual IReferenceResolver ReferenceResolver => _referenceResolver;
+
+    /// <summary>
+    ///     Adds a test action listener to the context.
+    /// </summary>
+    /// <param name="listener">The test action listener to be added.</param>
+    public void AddTestActionListener(IAsyncTestActionListener listener)
+    {
+        TestActionListeners.AddTestActionListener(listener);
+    }
 
     /// <summary>
     ///     Sets the reference resolver to be used by the TestContext.
@@ -294,15 +185,6 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
         _referenceResolver = referenceResolver;
     }
 
-    /// <summary>
-    ///     Adds a test action listener to the context.
-    /// </summary>
-    /// <param name="listener">The test action listener to be added.</param>
-    public void AddTestActionListener(ITestActionListener listener)
-    {
-        _testActionListeners.AddTestActionListener(listener);
-    }
-
 
     /// <summary>
     ///     Retrieves a list of message processors that match the specified message direction.
@@ -311,7 +193,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <returns>A list of message processors that are either unbound or match the specified direction.</returns>
     public List<IMessageProcessor> GetMessageProcessors(MessageDirection direction)
     {
-        return _messageProcessors.GetMessageProcessors().Where(processor =>
+        return MessageProcessors.GetMessageProcessors().Where(processor =>
             {
                 var processorDirection = MessageDirection.UNBOUND;
 
@@ -372,25 +254,25 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// </summary>
     /// <param name="timerId">The ID of the timer to be stopped.</param>
     /// <returns>True if the timer was successfully stopped; otherwise, false.</returns>
-    public bool StopTimer(string timerId)
+    public async Task<bool> StopTimer(string timerId)
     {
         if (!Timers.TryGetValue(timerId, out var timer))
         {
             return false;
         }
 
-        timer.StopTimer();
+        await timer.StopTimer();
         return true;
     }
 
     /// <summary>
     ///     Stops all active timers in the current context.
     /// </summary>
-    public void StopTimers()
+    public async Task StopTimers()
     {
         foreach (var timerId in Timers.Keys)
         {
-            StopTimer(timerId);
+            await StopTimer(timerId);
         }
     }
 
@@ -403,7 +285,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <returns>
     ///     True if the test result indicates success and there are no exceptions, otherwise false.
     /// </returns>
-    public bool IsSuccess(TestResult testResult)
+    public bool IsSuccess(TestResult? testResult)
     {
         return !HasExceptions() &&
                (testResult?.IsSuccess() ?? false);
@@ -415,18 +297,18 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <returns>boolean flag to mark existence</returns>
     public bool HasVariables()
     {
-        return _variables is { Count: > 0 };
+        return Variables is { Count: > 0 };
     }
 
     /// <summary>
-    ///     Clears variables & exceptions in this test context.
+    ///     Clears variables and exceptions in this test context.
     /// </summary>
     public void Clear()
     {
-        _variables.Clear();
+        Variables.Clear();
         foreach (var entry in _globalVariables.GetVariables())
         {
-            _variables[entry.Key] = entry.Value;
+            Variables[entry.Key] = entry.Value;
         }
 
         _exceptions.Clear();
@@ -438,16 +320,16 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <returns>The test variables for this test context.</returns>
     public IDictionary<string, object> GetVariables()
     {
-        return _variables;
+        return Variables;
     }
 
     /// <summary>
     ///     Informs message listeners that an inbound message was received.
     /// </summary>
     /// <param name="receivedMessage">The received inbound message.</param>
-    public virtual void OnInboundMessage(IMessage receivedMessage)
+    public virtual async Task OnInboundMessage(IMessage receivedMessage)
     {
-        LogMessage("Receive", receivedMessage, MessageDirection.INBOUND);
+        await LogMessage("Receive", receivedMessage, MessageDirection.INBOUND);
     }
 
     /// <summary>
@@ -456,9 +338,9 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <param name="message">
     ///     The outbound message that is about to be sent.
     /// </param>
-    public virtual void OnOutboundMessage(IMessage message)
+    public virtual async Task OnOutboundMessage(IMessage message)
     {
-        LogMessage("Send", message, MessageDirection.OUTBOUND);
+        await LogMessage("Send", message, MessageDirection.OUTBOUND);
     }
 
     /// <summary>
@@ -467,17 +349,17 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <param name="operation">The operation being logged.</param>
     /// <param name="message">The message to log.</param>
     /// <param name="direction">The direction of the message.</param>
-    private void LogMessage(string operation, IMessage message, MessageDirection direction)
+    private async Task LogMessage(string operation, IMessage message, MessageDirection direction)
     {
-        if (_messageListeners != null && !_messageListeners.IsEmpty())
+        if (MessageListeners != null && !MessageListeners.IsEmpty())
         {
             switch (direction)
             {
                 case MessageDirection.OUTBOUND:
-                    _messageListeners.OnOutboundMessage(message, this);
+                    await MessageListeners.OnOutboundMessage(message, this);
                     break;
                 case MessageDirection.INBOUND:
-                    _messageListeners.OnInboundMessage(message, this);
+                    await MessageListeners.OnInboundMessage(message, this);
                     break;
                 case MessageDirection.UNBOUND:
                     break;
@@ -487,7 +369,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
         }
         else if (Log.IsEnabled(LogLevel.Debug))
         {
-            Log.LogDebug("{Operation} message:\n{Empty}", operation, message?.ToString() ?? "");
+            Log.LogDebug("{Operation} message:\n{Empty}", operation, message.ToString() ?? "");
         }
     }
 
@@ -499,19 +381,20 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <param name="message">The error message to be logged.</param>
     /// <param name="cause">The exception that caused the error.</param>
     /// <returns>A CoreSystemException representing the error.</returns>
-    public AgenixSystemException HandleError(string testName, string packageName, string message, Exception cause)
+    public async Task<AgenixSystemException> HandleError(string testName, string packageName, string message,
+        Exception cause)
     {
         // Create an empty fake test case for logging purpose
-        ITestCase dummyTest = new EmptyTestCase(testName, packageName);
+        IAsyncTestCase dummyTest = new EmptyTestCase(testName, packageName);
 
         var exception = new AgenixSystemException(message, cause);
 
         // inform test listeners with failed test
         try
         {
-            _testListeners.OnTestStart(dummyTest);
-            _testListeners.OnTestFailure(dummyTest, exception);
-            _testListeners.OnTestFinish(dummyTest);
+            await TestListeners.OnTestStart(dummyTest);
+            await TestListeners.OnTestFailure(dummyTest, exception);
+            await TestListeners.OnTestFinish(dummyTest);
         }
         catch (Exception e)
         {
@@ -538,7 +421,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
                    AgenixSettings.VariableSuffix;
         }
 
-        return _variables.TryGetValue(variableName, out var o)
+        return Variables.TryGetValue(variableName, out var o)
             ? o
             : VariableExpressionIterator.GetLastExpressionValue(variableName, this,
                 SegmentVariableExtractorRegistry.SegmentValueExtractors);
@@ -561,11 +444,10 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="variableExpression"></param>
-    /// <param name="type"></param>
     /// <returns></returns>
     public T GetVariable<T>(string variableExpression)
     {
-        return _typeConverter.ConvertIfNecessary<T>(GetVariableObject(variableExpression), typeof(T));
+        return TypeConverter.ConvertIfNecessary<T>(GetVariableObject(variableExpression), typeof(T));
     }
 
     /// <summary>
@@ -575,7 +457,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// </summary>
     /// <param name="variableName">The name of the new variable</param>
     /// <param name="value">The new variable value</param>
-    public void SetVariable(string variableName, object value)
+    public void SetVariable(string variableName, object? value)
     {
         if (string.IsNullOrEmpty(variableName) || VariableUtils.CutOffVariablesPrefix(variableName).Length == 0)
         {
@@ -597,7 +479,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
                 VariableUtils.CutOffVariablesPrefix(variableName), value);
         }
 
-        _variables[VariableUtils.CutOffVariablesPrefix(variableName)] = value;
+        Variables[VariableUtils.CutOffVariablesPrefix(variableName)] = value;
     }
 
     /// <summary>
@@ -610,11 +492,13 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     public virtual string ReplaceDynamicContentInString(string? str, bool enableQuoting = false)
     {
         string? result = null;
-        if (str != null)
+        if (str == null)
         {
-            result = VariableUtils.ReplaceVariablesInString(str, this, enableQuoting);
-            result = FunctionUtils.ReplaceFunctionsInString(result, this, enableQuoting);
+            return result;
         }
+
+        result = VariableUtils.ReplaceVariablesInString(str, this, enableQuoting);
+        result = FunctionUtils.ReplaceFunctionsInString(result, this, enableQuoting);
 
         return result;
     }
@@ -631,7 +515,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
             return GetVariable(expression);
         }
 
-        return _functionRegistry.IsFunction(expression)
+        return FunctionRegistry.IsFunction(expression)
             ? FunctionUtils.ResolveFunction(expression, this)
             : expression;
     }
@@ -647,7 +531,9 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
         T adaptedValue;
         if (value is string strValue)
         {
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
             adaptedValue = (T)(object)ReplaceDynamicContentInString(strValue);
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
         }
         else
         {
@@ -715,14 +601,14 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     }
 
     /// <summary>
-    ///     Add several new variables to test context. Existing variables will be overwritten.
+    ///     Add several new variables to the test context. Existing variables will be overwritten.
     /// </summary>
     /// <param name="variablesToSet">The list of variables to set.</param>
     public void AddVariables(Dictionary<string, object> variablesToSet)
     {
         foreach (var (key, value) in variablesToSet)
         {
-            SetVariable(key, value ?? "");
+            SetVariable(key, value);
         }
     }
 
@@ -732,7 +618,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// <param name="variableNames">the variable names to set</param>
     /// <param name="variableValues">the variable values to set</param>
     /// <exception cref="AgenixSystemException"></exception>
-    public void AddVariables(string[] variableNames, object[] variableValues)
+    public void AddVariables(string[] variableNames, object?[] variableValues)
     {
         if (variableNames.Length != variableValues.Length)
         {
@@ -772,7 +658,7 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
         {
             var adaptedKey = ResolveDynamicContentIfRequired(entry.Key);
             var adaptedValue = ResolveDynamicContentIfRequired(entry.Value);
-            _variables.Add(adaptedKey, adaptedValue);
+            Variables.Add(adaptedKey, adaptedValue);
             builder.WithVariable(adaptedKey, adaptedValue);
         }
 
@@ -784,158 +670,328 @@ public class TestContext : ITestActionListenerAware, IReferenceResolverAware
     /// </summary>
     /// <param name="testName"></param>
     /// <param name="packageName"></param>
-    public sealed class EmptyTestCase(string testName, string packageName) : ITestCase
+    public sealed class EmptyTestCase(string testName, string packageName) : IAsyncTestCase
     {
-        public void Execute(TestContext context)
+        /// <summary>
+        ///     Executes the asynchronous operation for the test case within the specified context.
+        /// </summary>
+        /// <param name="context">The <see cref="TestContext" /> object providing the context for the test execution.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken" /> used to observe cancellation requests.</param>
+        /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
+        public Task ExecuteAsync(TestContext context, CancellationToken cancellationToken = default)
         {
             // do nothing
+            return Task.CompletedTask;
         }
 
-        public ITestActionContainer SetActions(List<ITestAction> actions)
+        /// <summary>
+        ///     Sets the list of actions to be executed within the test case.
+        /// </summary>
+        /// <param name="actions">A list of actions to be set for execution in the test case.</param>
+        /// <returns>An instance of <see cref="IAsyncTestActionContainer" /> representing the container of the configured actions.</returns>
+        public IAsyncTestActionContainer SetActions(List<IAsyncTestAction> actions)
         {
             return this;
         }
 
-        public List<ITestAction> GetActions()
+        /// <summary>
+        ///     Retrieves a list of asynchronous test actions associated with the test case.
+        /// </summary>
+        /// <returns>
+        ///     A list of <see cref="IAsyncTestAction" /> representing the asynchronous test actions.
+        /// </returns>
+        public List<IAsyncTestAction> GetActions()
         {
             return [];
         }
 
+        /// <summary>
+        /// </summary>
+        /// <returns></returns>
         public long GetActionCount()
         {
             return 0;
         }
 
-        public ITestActionContainer AddTestActions(params ITestAction[] action)
+        /// <summary>
+        ///     Adds one or more test actions to the container.
+        /// </summary>
+        /// <param name="action">An array of test actions to be added.</param>
+        /// <returns>The current instance of <c>IAsyncTestActionContainer</c> to allow method chaining.</returns>
+        public IAsyncTestActionContainer AddTestActions(params IAsyncTestAction[] action)
         {
             return this;
         }
 
-        public ITestActionContainer AddTestAction(ITestAction action)
+        /// <summary>
+        ///     Adds a test action to the container.
+        /// </summary>
+        /// <param name="action">The test action to be added.</param>
+        /// <returns>The current instance of <see cref="IAsyncTestActionContainer" /> after the action is added.</returns>
+        public IAsyncTestActionContainer AddTestAction(IAsyncTestAction action)
         {
             return this;
         }
 
-        public int GetActionIndex(ITestAction action)
+        /// <summary>
+        ///     Retrieves the index of the specified test action within the collection of test actions.
+        /// </summary>
+        /// <param name="action">The test action to locate in the collection.</param>
+        /// <returns>The zero-based index of the specified test action if found; otherwise, -1.</returns>
+        public int GetActionIndex(IAsyncTestAction action)
         {
             return 0;
         }
 
-        public void SetActiveAction(ITestAction action)
+        /// <summary>
+        ///     Sets the specified test action as the active action.
+        /// </summary>
+        /// <param name="action">The test action to be marked as active.</param>
+        public void SetActiveAction(IAsyncTestAction action)
         {
             // do nothing
         }
 
-        public void SetExecutedAction(ITestAction action)
+        /// <summary>
+        ///     Sets the action as executed in the test context.
+        /// </summary>
+        /// <param name="action">
+        ///     The action to mark as executed.
+        /// </param>
+        public void SetExecutedAction(IAsyncTestAction action)
         {
             // do nothing
         }
 
-        public ITestAction GetActiveAction()
+        /// <summary>
+        ///     Retrieves the currently active asynchronous test action.
+        /// </summary>
+        /// <returns>
+        ///     The active asynchronous test action, or null if no active action is set.
+        /// </returns>
+        public IAsyncTestAction GetActiveAction()
         {
+#pragma warning disable CS8603 // Possible null reference return.
             return null;
+#pragma warning restore CS8603 // Possible null reference return.
         }
 
-        public List<ITestAction> GetExecutedActions()
+        /// <summary>
+        ///     Retrieves a list of executed asynchronous test actions.
+        /// </summary>
+        /// <returns>
+        ///     A list of executed <see cref="IAsyncTestAction" /> objects.
+        /// </returns>
+        public List<IAsyncTestAction> GetExecutedActions()
         {
             return [];
         }
 
-        public ITestAction GetTestAction(int index)
+        /// <summary>
+        ///     Retrieves the test action located at the specified index.
+        /// </summary>
+        /// <param name="index">The zero-based index of the test action to retrieve.</param>
+        /// <returns>The test action at the specified index. If no action is found, returns null.</returns>
+        public IAsyncTestAction GetTestAction(int index)
         {
+#pragma warning disable CS8603 // Possible null reference return.
             return null;
+#pragma warning restore CS8603 // Possible null reference return.
         }
 
+        /// <summary>
+        ///     Sets the name for the current test case.
+        /// </summary>
+        /// <param name="name">The name to assign to the test case.</param>
         public void SetName(string name)
         {
             // do nothing
         }
 
-        public ITestAction SetDescription(string description)
+        /// <summary>
+        ///     Sets a description for the test action.
+        /// </summary>
+        /// <param name="description">The description to assign to the test action.</param>
+        /// <returns>
+        ///     The current instance of <see cref="IAsyncTestAction" /> to allow method chaining.
+        /// </returns>
+        public IAsyncTestAction SetDescription(string description)
         {
             return this;
         }
 
-        public void Start(TestContext context)
+        /// <summary>
+        ///     Executes the start operation for the given test context asynchronously.
+        /// </summary>
+        /// <param name="context">The <see cref="TestContext" /> instance that provides context for the operation.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        public Task Start(TestContext context)
         {
             // do nothing
+            return Task.CompletedTask;
         }
 
-        public void ExecuteAction(ITestAction action, TestContext context)
+        /// <summary>
+        ///     Executes a specified asynchronous test action within the given test context.
+        /// </summary>
+        /// <param name="action">The asynchronous test action to be executed.</param>
+        /// <param name="context">The test context in which the action will be executed.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        public Task ExecuteAction(IAsyncTestAction action, TestContext context)
         {
             // do nothing
+            return Task.CompletedTask;
         }
 
-        public void Finish(TestContext context)
+        /// <summary>
+        ///     Completes the test execution for the provided test context asynchronously.
+        /// </summary>
+        /// <param name="context">The test context to complete.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        public Task Finish(TestContext context)
         {
             // do nothing
+            return Task.CompletedTask;
         }
 
+        /// <summary>
+        ///     Provides metadata information about the test case.
+        /// </summary>
+        /// <returns>
+        ///     An instance of <see cref="TestCaseMetaInfo" /> representing the metadata of the test case.
+        /// </returns>
         public TestCaseMetaInfo GetMetaInfo()
         {
             return new TestCaseMetaInfo();
         }
 
+        /// <summary>
+        ///     Retrieves the type of the test class associated with this instance.
+        /// </summary>
+        /// <returns>The type of the test class.</returns>
         public Type GetTestClass()
         {
             return GetType();
         }
 
-        public void SetTestClass(Type type)
+        /// <summary>
+        ///     Assigns the specified type as the test class.
+        /// </summary>
+        /// <param name="type">The type to be set as the test class.</param>
+        public void SetTestClass(Type? type)
         {
             // do nothing
         }
 
+        /// <summary>
+        ///     Retrieves the namespace name associated with the test case.
+        /// </summary>
+        /// <returns>
+        ///     The namespace name as a string.
+        /// </returns>
         public string GetNamespaceName()
         {
             return packageName;
         }
 
+        /// <summary>
+        ///     Sets the namespace name for the test case.
+        /// </summary>
+        /// <param name="packageName">The namespace name to be set.</param>
+        // ReSharper disable once ParameterHidesPrimaryConstructorParameter
         public void SetNamespaceName(string packageName)
         {
             // do nothing
         }
 
+        /// <summary>
+        ///     Sets the test result for the test case.
+        /// </summary>
+        /// <param name="testResult">The test result to be associated with the test case.</param>
         public void SetTestResult(TestResult testResult)
         {
             // do nothing
         }
 
+        /// <summary>
+        ///     Retrieves the result of the test execution.
+        /// </summary>
+        /// <returns>The result of the test as a <see cref="TestResult" />.</returns>
         public TestResult GetTestResult()
         {
+#pragma warning disable CS8603 // Possible null reference return.
             return null;
+#pragma warning restore CS8603 // Possible null reference return.
         }
 
+        /// <summary>
+        ///     Indicates whether the test execution is incremental.
+        /// </summary>
+        /// <returns>
+        ///     A boolean value indicating if the test is executed incrementally.
+        /// </returns>
         public bool IsIncremental()
         {
             return true;
         }
 
+        /// <summary>
+        ///     Sets the incremental execution mode for the test case.
+        /// </summary>
+        /// <param name="incremental">
+        ///     A boolean value indicating whether the test case should be executed incrementally.
+        /// </param>
         public void SetIncremental(bool incremental)
         {
             // do nothing
         }
 
+        /// <summary>
+        /// </summary>
+        /// <returns></returns>
         public Dictionary<string, object> GetVariableDefinitions()
         {
             return new Dictionary<string, object>();
         }
 
-        public void AddFinalAction(ITestActionBuilder<ITestAction> builder)
+        /// <summary>
+        ///     Adds a final action to the current test case.
+        /// </summary>
+        /// <param name="builder">The builder used to create and configure the action to be added.</param>
+        public void AddFinalAction(IAsyncTestActionBuilder<IAsyncTestAction> builder)
         {
             // do nothing
         }
 
-        public List<ITestActionBuilder<ITestAction>> GetActionBuilders()
+        /// <summary>
+        ///     Retrieves a list of action builders capable of constructing asynchronous test actions.
+        /// </summary>
+        /// <returns>
+        ///     A list containing instances of <see cref="IAsyncTestActionBuilder{T}" />, where T is of type
+        ///     <see cref="IAsyncTestAction" />.
+        /// </returns>
+        public List<IAsyncTestActionBuilder<IAsyncTestAction>> GetActionBuilders()
         {
             return [];
         }
 
+        /// <summary>
+        ///     Marks the test case as failed by providing an exception that caused the failure.
+        /// </summary>
+        /// <param name="throwable">
+        ///     The exception representing the cause of the test failure.
+        /// </param>
         public void Fail(Exception throwable)
         {
             // do nothing
         }
 
+        /// <summary>
+        ///     Retrieves the name associated with the test case.
+        /// </summary>
+        /// <returns>
+        ///     The name of the test case as a string.
+        /// </returns>
         public string Name()
         {
             return testName;

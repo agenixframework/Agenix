@@ -78,7 +78,7 @@ public class AlertAction : AbstractSeleniumAction
     /// </summary>
     /// <param name="browser">The Selenium browser instance used to interact with the browser during execution.</param>
     /// <param name="context">The test context containing execution state and variables.</param>
-    protected override void Execute(SeleniumBrowser browser, TestContext context)
+    protected override Task Execute(SeleniumBrowser browser, TestContext context)
     {
         IAlert alert;
         try
@@ -128,6 +128,8 @@ public class AlertAction : AbstractSeleniumAction
         {
             alert.Dismiss();
         }
+
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -135,7 +137,15 @@ public class AlertAction : AbstractSeleniumAction
     /// </summary>
     public class Builder : Builder<AlertAction, Builder>
     {
+        /// <summary>
+        ///     Determines whether to accept or dismiss the alert dialog.
+        /// </summary>
         public bool Accept { get; private set; } = true;
+
+        /// <summary>
+        ///     Validates or matches the text of the current alert dialog. If no text validation is provided,
+        ///     no validation will be performed on the alert content.
+        /// </summary>
         public string Text { get; private set; }
 
         /// <summary>
@@ -144,7 +154,7 @@ public class AlertAction : AbstractSeleniumAction
         public Builder SetText(string text)
         {
             Text = text;
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -153,7 +163,7 @@ public class AlertAction : AbstractSeleniumAction
         public Builder AcceptAlert()
         {
             Accept = true;
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -162,9 +172,13 @@ public class AlertAction : AbstractSeleniumAction
         public Builder DismissAlert()
         {
             Accept = false;
-            return self;
+            return Self;
         }
 
+        /// <summary>
+        ///     Builds and returns an instance of the AlertAction object.
+        /// </summary>
+        /// <returns>An instance of the AlertAction object.</returns>
         public override AlertAction Build()
         {
             return new AlertAction(this);

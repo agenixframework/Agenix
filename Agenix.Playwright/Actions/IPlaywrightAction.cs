@@ -7,7 +7,7 @@ namespace Agenix.Playwright.Actions;
 ///     Represents a Playwright-related test action interface that extends
 ///     the <see cref="ITestAction" /> interface and provides browser automation capabilities.
 /// </summary>
-public interface IPlaywrightAction : ITestAction
+public interface IPlaywrightAction : IAsyncTestAction
 {
     /// <summary>
     ///     Gets the Playwright browser.

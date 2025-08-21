@@ -257,7 +257,9 @@ public class TracingAction : AbstractPlaywrightAction
         }
 
         var groupName = context.ReplaceDynamicContentInString(_name);
-        await browserContext.Tracing.GroupAsync(groupName);
+        await browserContext.Tracing.GroupAsync(groupName ??
+                                                throw new InvalidOperationException(
+                                                    "The group name cannot be null or empty"));
         Logger.LogDebug("Started tracing group: {GroupName}", groupName);
     }
 

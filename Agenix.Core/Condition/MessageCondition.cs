@@ -7,23 +7,24 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Threading.Tasks;
 using Agenix.Api.Context;
 
 namespace Agenix.Core.Condition;
@@ -43,9 +44,10 @@ public class MessageCondition : AbstractCondition
     /// <param name="context">The test context used for evaluating the condition.</param>
     /// <return>true if the condition is satisfied; otherwise, false.</return>
     /// /
-    public override bool IsSatisfied(TestContext context)
+    public override Task<bool> IsSatisfied(TestContext context)
     {
-        return context.MessageStore.GetMessage(context.ReplaceDynamicContentInString(_messageName)) != null;
+        var result = context.MessageStore.GetMessage(context.ReplaceDynamicContentInString(_messageName)) != null;
+        return Task.FromResult(result);
     }
 
     /// Constructs and returns a success message indicating that a specified message was found in the message store.
@@ -83,6 +85,8 @@ public class MessageCondition : AbstractCondition
         return _messageName;
     }
 
+    /// Returns a string that represents the current MessageCondition object, including its message name and condition name.
+    /// <return>A string representation of the MessageCondition object.</return>
     public override string ToString()
     {
         return "MessageCondition{" +

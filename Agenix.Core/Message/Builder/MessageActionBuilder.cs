@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -45,8 +45,8 @@ namespace Agenix.Core.Message.Builder;
 ///         @param
 ///         <TB>
 ///             the type of the message action builder.
-public abstract class MessageActionBuilder<T, TM, TB> : AbstractTestActionBuilder<T, TB>, IReferenceResolverAware
-    where T : ITestAction
+public abstract class MessageActionBuilder<T, TM, TB> : AbstractAsyncTestActionBuilder<T, TB>, IReferenceResolverAware
+    where T : IAsyncTestAction
     where TM : MessageBuilderSupport<T, TB, TM>
     where TB : MessageActionBuilder<T, TM, TB>
 {
@@ -182,7 +182,7 @@ public abstract class MessageActionBuilder<T, TM, TB> : AbstractTestActionBuilde
             messageProcessors.Add(processor);
         }
 
-        return self;
+        return Self;
     }
 
     /// <summary>
@@ -193,7 +193,7 @@ public abstract class MessageActionBuilder<T, TM, TB> : AbstractTestActionBuilde
     public TB WithReferenceResolver(IReferenceResolver referenceResolver)
     {
         this.referenceResolver = referenceResolver;
-        return self;
+        return Self;
     }
 
     /// <summary>
@@ -204,7 +204,7 @@ public abstract class MessageActionBuilder<T, TM, TB> : AbstractTestActionBuilde
     public TB Endpoint(IEndpoint messageEndpoint)
     {
         _endpoint = messageEndpoint;
-        return self;
+        return Self;
     }
 
     /// <summary>
@@ -215,7 +215,7 @@ public abstract class MessageActionBuilder<T, TM, TB> : AbstractTestActionBuilde
     public TB Endpoint(string messageEndpointUri)
     {
         _endpointUri = messageEndpointUri;
-        return self;
+        return Self;
     }
 
     /// <summary>

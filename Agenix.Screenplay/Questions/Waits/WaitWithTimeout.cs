@@ -39,11 +39,13 @@ public abstract class WaitWithTimeout : Interaction
     protected TimeSpan Timeout;
 
     /// <summary>
-    ///     Defines the interaction to be performed by the specified actor.
+    ///     Defines the interaction to be performed by the specified actor asynchronously.
     /// </summary>
     /// <param name="actor">The actor performing the interaction.</param>
-    /// <typeparam name="T">The type of the actor.</typeparam>
-    public abstract void PerformAs<T>(T actor) where T : Actor;
+    /// <param name="cancellationToken">An optional token to cancel the operation.</param>
+    /// <typeparam name="T">The type of the actor performing the interaction.</typeparam>
+    /// <returns>A task representing the asynchronous operation.</returns>
+    public abstract Task PerformAsAsync<T>(T actor, CancellationToken cancellationToken = default) where T : Actor;
 
     /// <summary>
     ///     Specifies the maximum timeout duration using a long value.

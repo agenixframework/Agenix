@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -36,6 +36,10 @@ using Reqnroll;
 
 namespace Agenix.ReqnrollPlugin;
 
+/// <summary>
+///     Represents the hooks for handling lifecycle events within the test framework
+///     integration provided by the Agenix Reqnroll plugin.
+/// </summary>
 [Binding]
 public class AgenixHooks
 {
@@ -69,10 +73,15 @@ public class AgenixHooks
         }
         catch (Exception exp)
         {
-            Log.LogError(exp.ToString());
+            Log.LogError(exp, exp.Message);
         }
     }
 
+    /// <summary>
+    ///     Executes the teardown logic required after a test run completes. This method finalizes the
+    ///     <see cref="Core.Agenix" /> instance, invokes cleanup events, and ensures proper disposal
+    ///     of the runtime test context and related resources.
+    /// </summary>
     [AfterTestRun(Order = 20000)]
     public static void AfterTestRun()
     {
@@ -85,7 +94,7 @@ public class AgenixHooks
 
                 if (!eventArg.Canceled)
                 {
-                    _agenix.AfterSuite(SuiteName);
+                    _agenix.AfterSuite(SuiteName).ConfigureAwait(false).GetAwaiter().GetResult();
                     _agenix.AgenixContext.Close();
                     AgenixInstanceManager.Reset();
 
@@ -94,7 +103,7 @@ public class AgenixHooks
                 }
                 else
                 {
-                    _agenix.AfterSuite(SuiteName);
+                    _agenix.AfterSuite(SuiteName).ConfigureAwait(false).GetAwaiter().GetResult();
                     _agenix.AgenixContext.Close();
                     AgenixInstanceManager.Reset();
                 }
@@ -102,10 +111,17 @@ public class AgenixHooks
         }
         catch (Exception exp)
         {
-            Log.LogError(exp.ToString());
+            Log.LogError(exp, exp.Message);
         }
     }
 
+    /// <summary>
+    ///     Executes the setup logic required before a scenario starts. This method prepares the necessary
+    ///     test context, initializes resources specific to the scenario, and triggers the associated lifecycle
+    ///     event for processing.
+    /// </summary>
+    /// <param name="featureContext">The context containing information about the feature being executed.</param>
+    /// <param name="scenarioContext">The context containing information about the scenario being executed.</param>
     [BeforeScenario(Order = -20000)]
     public void BeforeScenario(FeatureContext featureContext, ScenarioContext scenarioContext)
     {
@@ -142,10 +158,22 @@ public class AgenixHooks
         }
         catch (Exception exp)
         {
-            Log.LogError(exp.ToString());
+            Log.LogError(exp, exp.Message);
         }
     }
 
+    /// <summary>
+    ///     Executes the cleanup logic after a scenario completes. This method evaluates the scenario's execution status,
+    ///     marks the test case with appropriate results, and raises any relevant events for handling the scenario completion.
+    /// </summary>
+    /// <param name="featureContext">
+    ///     Provides the context of the feature within which the scenario was executed, enabling access to shared data and
+    ///     metadata.
+    /// </param>
+    /// <param name="scenarioContext">
+    ///     Provides the context of the scenario being executed, including execution status, test results, and shared
+    ///     scenario-specific data.
+    /// </param>
     [AfterScenario(Order = 20000)]
     public void AfterScenario(FeatureContext featureContext, ScenarioContext scenarioContext)
     {
@@ -174,11 +202,12 @@ public class AgenixHooks
                 {
                     var testErrorException = scenarioContext.TestError.GetType();
 
-                    if (testErrorException.FullName.Equals("NUnit.Framework.IgnoreException")
-                        || testErrorException.FullName.Equals("NUnit.Framework.InconclusiveException")
-                        || testErrorException.FullName.Equals(
-                            "Microsoft.VisualStudio.TestTools.UnitTesting.AssertInconclusiveException")
-                        || testErrorException.FullName.Equals("Xunit.SkipException"))
+                    if (testErrorException.FullName != null &&
+                        (testErrorException.FullName.Equals("NUnit.Framework.IgnoreException")
+                         || testErrorException.FullName.Equals("NUnit.Framework.InconclusiveException")
+                         || testErrorException.FullName.Equals(
+                             "Microsoft.VisualStudio.TestTools.UnitTesting.AssertInconclusiveException")
+                         || testErrorException.FullName.Equals("Xunit.SkipException")))
                     {
                         currentTestCaseRunner.GetTestCase().Fail(
                             new AgenixSystemException(GetScenarioStatusMessage(scenarioContext)));
@@ -194,13 +223,13 @@ public class AgenixHooks
 
                     AgenixAddIn.OnAfterScenarioFinished(null,
                         new TestCaseFinishedEventArgs(currentTestCaseRunner, featureContext, scenarioContext));
-                    AgenixAddIn.RemoveScenarioTestReporter(scenarioContext, currentTestCaseRunner);
+                    AgenixAddIn.RemoveScenarioTestReporter(scenarioContext, ref currentTestCaseRunner);
                 }
             }
         }
         catch (Exception exp)
         {
-            Log.LogError(exp.ToString());
+            Log.LogError(exp, exp.Message);
         }
     }
 
@@ -237,7 +266,7 @@ public class AgenixHooks
     private static Core.Agenix Initialize()
     {
         var args = new InitializingEventArgs(AgenixInstanceManager.GetOrDefault());
-        args.Agenix.BeforeSuite(SuiteName);
+        args.Agenix.BeforeSuite(SuiteName).ConfigureAwait(false).GetAwaiter().GetResult();
         AgenixAddIn.OnInitializing(typeof(AgenixHooks), args);
 
         return args.Agenix;

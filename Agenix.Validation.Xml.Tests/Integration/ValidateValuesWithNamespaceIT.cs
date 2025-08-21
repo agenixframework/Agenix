@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -49,18 +49,18 @@ public class ValidateValuesWithNamespaceIT
     [AgenixEndpoint(Name = "hello.endpoint")]
     private IEndpoint helloEndpoint;
 
-    [AgenixResource] protected ITestCaseRunner runner;
+    [AgenixResource] protected IAsyncTestCaseRunner runner;
 
     [Test]
-    public void ValidateValuesWithNamespaceTest()
+    public async Task ValidateValuesWithNamespaceTest()
     {
-        runner.Given(CreateVariables()
+        await runner.Given(CreateVariables()
             .Variable("correlationId", "agenix:randomNumber(10)")
             .Variable("messageId", "agenix:randomNumber(10)")
             .Variable("user", "Agenix")
         );
 
-        runner.When(Send("hello.endpoint")
+        await runner.When(Send("hello.endpoint")
             .Name("Send asynchronous hello request: Agenix -> HelloService")
             .Message()
             .Type(MessageType.XML)
@@ -74,7 +74,7 @@ public class ValidateValuesWithNamespaceIT
             .Header("CorrelationId", "${correlationId}")
         );
 
-        runner.Then(Receive("hello.endpoint")
+        await runner.Then(Receive("hello.endpoint")
             .Message()
             .Type(MessageType.XML)
             .Validate(XmlSupport.Xml()
@@ -87,7 +87,7 @@ public class ValidateValuesWithNamespaceIT
 
 
         // 3rd send/receive with default namespace prefix
-        runner.When(Send("hello.endpoint")
+        await runner.When(Send("hello.endpoint")
             .Name("Send asynchronous hello request: Agenix -> HelloService")
             .Message()
             .Type(MessageType.XML)
@@ -101,7 +101,7 @@ public class ValidateValuesWithNamespaceIT
             .Header("CorrelationId", "${correlationId}")
         );
 
-        runner.Then(Receive("hello.endpoint")
+        await runner.Then(Receive("hello.endpoint")
             .Message()
             .Type(MessageType.XML)
             .Validate(XmlSupport.Xml()
@@ -116,7 +116,7 @@ public class ValidateValuesWithNamespaceIT
 
 
         // 7th send/receive with extraction and C# assertion
-        runner.When(Send("hello.endpoint")
+        await runner.When(Send("hello.endpoint")
             .Name("Send asynchronous hello request: Agenix -> HelloService")
             .Message()
             .Type(MessageType.XML)
@@ -130,7 +130,7 @@ public class ValidateValuesWithNamespaceIT
             .Header("CorrelationId", "${correlationId}")
         );
 
-        runner.Then(Receive("hello.endpoint")
+        await runner.Then(Receive("hello.endpoint")
             .Message()
             .Type(MessageType.XML)
             .Validate(XmlSupport.Xml()
@@ -142,15 +142,16 @@ public class ValidateValuesWithNamespaceIT
             .Extract(XpathSupport.Xpath().Expression("//def:HelloRequest/def:Text", "extractedText"))
         );
 
-        runner.Then(DefaultTestActionBuilder.Action(ctx =>
+        await runner.Then(DefaultTestActionBuilder.Action(ctx =>
         {
             Assert.That(ctx.GetVariable("extractedText"),
                 Is.EqualTo(ctx.ReplaceDynamicContentInString("Hello ${user}")));
+            return Task.CompletedTask;
         }).Name("Check extracted text"));
 
-        runner.Given(Echo("Test: Validation matcher value extraction"));
+        await runner.Given(Echo("Test: Validation matcher value extraction"));
 
-        runner.When(Send("hello.endpoint")
+        await runner.When(Send("hello.endpoint")
             .Name("Send asynchronous hello request: Agenix -> HelloService")
             .Message()
             .Type(MessageType.XML)
@@ -164,7 +165,7 @@ public class ValidateValuesWithNamespaceIT
             .Header("CorrelationId", "${correlationId}")
         );
 
-        runner.Then(Receive("hello.endpoint")
+        await runner.Then(Receive("hello.endpoint")
             .Message()
             .Type(MessageType.XML)
             .Body("<HelloRequest xmlns=\"http://agenix.org/schemas/samples/HelloService.xsd\">\n" +
@@ -177,12 +178,13 @@ public class ValidateValuesWithNamespaceIT
             .Header("CorrelationId", "${correlationId}")
         );
 
-        runner.Then(DefaultTestActionBuilder.Action(ctx =>
+        await runner.Then(DefaultTestActionBuilder.Action(ctx =>
         {
             Assert.That(ctx.GetVariable("Operation"), Is.EqualTo("sayHello"));
             Assert.That(ctx.GetVariable("serviceName"), Is.EqualTo("Agenix"));
             Assert.That(ctx.GetVariable("extractedText"),
                 Is.EqualTo(ctx.ReplaceDynamicContentInString("Hello ${user}")));
+            return Task.CompletedTask;
         }).Name("Check extracted text"));
     }
 }

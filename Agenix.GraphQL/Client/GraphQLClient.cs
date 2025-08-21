@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -90,35 +90,35 @@ public class GraphQLClient : AbstractEndpoint, IProducer, IReplyConsumer
     /// </summary>
     /// <param name="message">The GraphQL message to send.</param>
     /// <param name="context">The test context.</param>
-    public void Send(IMessage message, TestContext context)
+    public async Task Send(IMessage message, TestContext context)
     {
         // Configure message listeners for logging handlers
         foreach (var interceptor in EndpointConfiguration.ClientHandlers
-                     .OfType<LoggingGraphQLClientHandler>()
+                     .OfType<LoggingGraphQlClientHandler>()
                      .Where(interceptor => !interceptor.HasMessageListeners()))
         {
             interceptor.SetMessageListener(context.MessageListeners);
         }
 
-        GraphQLMessage graphQLMessage;
+        GraphQLMessage graphQlMessage;
         if (message is GraphQLMessage gqlMsg)
         {
-            graphQLMessage = gqlMsg;
+            graphQlMessage = gqlMsg;
         }
         else
         {
-            graphQLMessage = new GraphQLMessage(message);
+            graphQlMessage = new GraphQLMessage(message);
         }
 
         var correlationKeyName = GetCorrelationKeyName();
-        var correlationKey = EndpointConfiguration.Correlator.GetCorrelationKey(graphQLMessage);
+        var correlationKey = EndpointConfiguration.Correlator.GetCorrelationKey(graphQlMessage);
         _correlationManager.SaveCorrelationKey(correlationKeyName, correlationKey, context);
 
-        var endpointUri = GetEndpointUri(graphQLMessage);
+        var endpointUri = GetEndpointUri(graphQlMessage);
         context.SetVariable(MessageHeaders.MessageReplyTo + "_" + correlationKeyName, endpointUri);
 
         Log.LogInformation("Sending GraphQL message to: '{EndpointUri}'", endpointUri);
-        Log.LogDebug("GraphQL message to send:\n{Payload}", graphQLMessage.GetPayload<string>());
+        Log.LogDebug("GraphQL message to send:\n{Payload}", graphQlMessage.GetPayload<string>());
 
         try
         {
@@ -126,23 +126,22 @@ public class GraphQLClient : AbstractEndpoint, IProducer, IReplyConsumer
             EndpointConfiguration.Validate();
 
             // Convert message to GraphQL request
-            var graphQLRequest = EndpointConfiguration.MessageConverter.ConvertOutbound(
-                graphQLMessage, EndpointConfiguration, context);
+            var graphQlRequest = EndpointConfiguration.MessageConverter.ConvertOutbound(
+                graphQlMessage, EndpointConfiguration, context);
 
             // Determine an operation type to decide an execution path
-            var operationType = DetermineOperationType(graphQLMessage.GetPayload<string>());
+            var operationType = DetermineOperationType(graphQlMessage.GetPayload<string>());
 
             if (operationType.Equals(nameof(GraphQLOperationType.SUBSCRIPTION),
                     StringComparison.InvariantCultureIgnoreCase))
             {
                 // Handle subscription - store first response and set up stream
-                HandleSubscriptionInSend(graphQLRequest, graphQLMessage, context, correlationKey);
+                HandleSubscriptionInSend(graphQlRequest, graphQlMessage, context, correlationKey);
             }
             else
             {
                 // Handle query/mutation - execute and store response
-                var response = ExecuteGraphQLRequestAsync(graphQLRequest, graphQLMessage, context).GetAwaiter()
-                    .GetResult();
+                var response = await ExecuteGraphQlRequestAsync(graphQlRequest, graphQlMessage);
                 var responseMessage =
                     EndpointConfiguration.MessageConverter.ConvertInbound(response, EndpointConfiguration, context);
 
@@ -163,9 +162,9 @@ public class GraphQLClient : AbstractEndpoint, IProducer, IReplyConsumer
     /// </summary>
     /// <param name="context">The test context providing additional information required for receiving the message.</param>
     /// <returns>Returns an <see cref="IMessage" /> instance that matches the correlation key.</returns>
-    public IMessage Receive(TestContext context)
+    public async Task<IMessage> Receive(TestContext context)
     {
-        return Receive(_correlationManager.GetCorrelationKey(GetCorrelationKeyName(), context), context);
+        return await Receive(await _correlationManager.GetCorrelationKey(GetCorrelationKeyName(), context), context);
     }
 
     /// <summary>
@@ -174,9 +173,10 @@ public class GraphQLClient : AbstractEndpoint, IProducer, IReplyConsumer
     /// <param name="context">The context in which the message is being received.</param>
     /// <param name="timeout">The time in milliseconds to wait for the message before timing out.</param>
     /// <returns>The received message, or null if the timeout expires before a message is received.</returns>
-    public virtual IMessage Receive(TestContext context, long timeout)
+    public virtual async Task<IMessage> Receive(TestContext context, long timeout)
     {
-        return Receive(_correlationManager.GetCorrelationKey(GetCorrelationKeyName(), context), context, timeout);
+        return await Receive(await _correlationManager.GetCorrelationKey(GetCorrelationKeyName(), context), context,
+            timeout);
     }
 
     /// <summary>
@@ -185,9 +185,9 @@ public class GraphQLClient : AbstractEndpoint, IProducer, IReplyConsumer
     /// <param name="selector">The correlation key used to identify the message.</param>
     /// <param name="context">The test context which may contain details for message correlation.</param>
     /// <returns>The received message as an <see cref="IMessage" />.</returns>
-    public IMessage Receive(string selector, TestContext context)
+    public async Task<IMessage> Receive(string selector, TestContext context)
     {
-        return Receive(selector, context, EndpointConfiguration.Timeout);
+        return await Receive(selector, context, EndpointConfiguration.Timeout);
     }
 
     /// <summary>
@@ -198,36 +198,31 @@ public class GraphQLClient : AbstractEndpoint, IProducer, IReplyConsumer
     /// <param name="timeout">The maximum amount of time to wait for a message before timing out.</param>
     /// <returns>The message that matches the selector criteria.</returns>
     /// <exception cref="MessageTimeoutException">Thrown when a message cannot be received within the specified timeout.</exception>
-    public IMessage Receive(string selector, TestContext context, long timeout)
+    public async Task<IMessage> Receive(string selector, TestContext context, long timeout)
     {
-        var message = _correlationManager.Find(selector, timeout);
+        var message = await _correlationManager.Find(selector, timeout);
 
         var endpointUri = context.GetVariables().ContainsKey(MessageHeaders.MessageReplyTo + "_" + selector)
             ? context.GetVariable(MessageHeaders.MessageReplyTo + "_" + selector)
             : Name;
 
-        if (message == null)
-        {
-            throw new MessageTimeoutException(timeout, endpointUri);
-        }
-
-        return message;
+        return message ?? throw new MessageTimeoutException(timeout, endpointUri);
     }
 
     /// <summary>
     ///     Handles subscription execution within the Send method to ensure responses are stored for Receive methods.
     /// </summary>
-    /// <param name="graphQLRequest">The GraphQL request.</param>
-    /// <param name="graphQLMessage">The original GraphQL message.</param>
+    /// <param name="graphQlRequest">The GraphQL request.</param>
+    /// <param name="graphQlMessage">The original GraphQL message.</param>
     /// <param name="context">The test context.</param>
     /// <param name="correlationKey">The correlation key for storing responses.</param>
-    private void HandleSubscriptionInSend(GraphQLRequest graphQLRequest, GraphQLMessage graphQLMessage,
+    private void HandleSubscriptionInSend(GraphQLRequest graphQlRequest, GraphQLMessage graphQlMessage,
         TestContext context, string correlationKey)
     {
         var subscriptionId = Guid.NewGuid().ToString();
 
         // Create subscription stream
-        var subscriptionStream = CreateSubscriptionStream(graphQLRequest, graphQLMessage, context, subscriptionId);
+        var subscriptionStream = CreateSubscriptionStream(graphQlRequest, graphQlMessage, subscriptionId);
 
         lock (_subscriptionLock)
         {
@@ -243,7 +238,7 @@ public class GraphQLClient : AbstractEndpoint, IProducer, IReplyConsumer
             .Subscribe(
                 responseMessage =>
                 {
-                    // Use unique correlation key for each response
+                    // Use a unique correlation key for each response
                     var sequenceKey = $"{correlationKey}_seq_{Interlocked.Increment(ref sequenceNumber)}";
                     _correlationManager.Store(sequenceKey, responseMessage);
 
@@ -300,10 +295,9 @@ public class GraphQLClient : AbstractEndpoint, IProducer, IReplyConsumer
     /// </summary>
     /// <param name="request">The GraphQL request to execute.</param>
     /// <param name="originalMessage">The original GraphQL message.</param>
-    /// <param name="context">The test context.</param>
     /// <returns>The GraphQL response.</returns>
-    private async Task<GraphQLResponse<object>> ExecuteGraphQLRequestAsync(
-        GraphQLRequest request, GraphQLMessage originalMessage, TestContext context)
+    private async Task<GraphQLResponse<object>> ExecuteGraphQlRequestAsync(GraphQLRequest request,
+        GraphQLMessage originalMessage)
     {
         var retryPolicy = EndpointConfiguration.RetryPolicy;
         var currentAttempt = 0;
@@ -323,7 +317,7 @@ public class GraphQLClient : AbstractEndpoint, IProducer, IReplyConsumer
                 var response = await EndpointConfiguration.GraphQLClient.SendQueryAsync<object>(request);
 
                 // Check for GraphQL errors that might warrant a retry
-                if (ShouldRetryOnGraphQLErrors(response, retryPolicy))
+                if (ShouldRetryOnGraphQLErrors(response))
                 {
                     throw new AgenixSystemException(
                         $"GraphQL errors: {string.Join(", ", response.Errors.Select(e => e.Message))}");
@@ -346,7 +340,7 @@ public class GraphQLClient : AbstractEndpoint, IProducer, IReplyConsumer
                     ? retryPolicy.RetryDelayMilliseconds * (int)Math.Pow(2, currentAttempt - 1)
                     : retryPolicy.RetryDelayMilliseconds;
 
-                Log.LogWarning(
+                Log.LogWarning(ex,
                     "GraphQL request failed (attempt {Attempt}/{MaxAttempts}), retrying in {Delay}ms: {Error}",
                     currentAttempt, retryPolicy.MaxRetries + 1, delay, ex.Message);
 
@@ -367,7 +361,7 @@ public class GraphQLClient : AbstractEndpoint, IProducer, IReplyConsumer
     /// <param name="subscriptionId">The subscription identifier.</param>
     /// <returns>Observable stream of GraphQL responses.</returns>
     private IObservable<GraphQLResponse<object>> CreateSubscriptionStream(
-        GraphQLRequest request, GraphQLMessage originalMessage, TestContext context, string subscriptionId)
+        GraphQLRequest request, GraphQLMessage originalMessage, string subscriptionId)
     {
         if (!EndpointConfiguration.UseWebSocketForSubscriptions)
         {
@@ -386,11 +380,11 @@ public class GraphQLClient : AbstractEndpoint, IProducer, IReplyConsumer
     /// <summary>
     ///     Retrieves the endpoint URI for the given GraphQL message, using the configured endpoint URI resolver if available.
     /// </summary>
-    /// <param name="graphQLMessage">The GraphQL message for which the endpoint URI needs to be determined.</param>
+    /// <param name="graphQlMessage">The GraphQL message for which the endpoint URI needs to be determined.</param>
     /// <returns>The resolved endpoint URI if the resolver is available, otherwise the default endpoint URL.</returns>
-    private string? GetEndpointUri(GraphQLMessage graphQLMessage)
+    private string? GetEndpointUri(GraphQLMessage graphQlMessage)
     {
-        return EndpointConfiguration.EndpointUriResolver?.ResolveEndpointUri(graphQLMessage,
+        return EndpointConfiguration.EndpointUriResolver?.ResolveEndpointUri(graphQlMessage,
             EndpointConfiguration.EndpointUrl);
     }
 
@@ -407,10 +401,8 @@ public class GraphQLClient : AbstractEndpoint, IProducer, IReplyConsumer
     ///     Determines if a retry should be attempted based on GraphQL errors.
     /// </summary>
     /// <param name="response">The GraphQL response.</param>
-    /// <param name="retryPolicy">The retry policy configuration.</param>
     /// <returns>True if retry should be attempted.</returns>
-    private static bool ShouldRetryOnGraphQLErrors(GraphQLResponse<object> response,
-        GraphQLEndpointConfiguration.GraphQLRetryPolicy retryPolicy)
+    private static bool ShouldRetryOnGraphQLErrors(GraphQLResponse<object> response)
     {
         if (response.Errors == null || response.Errors.Length == 0)
         {
@@ -436,8 +428,8 @@ public class GraphQLClient : AbstractEndpoint, IProducer, IReplyConsumer
         return exception is HttpRequestException ||
                exception is TaskCanceledException ||
                exception is TimeoutException ||
-               (exception is GraphQLHttpRequestException graphQLEx &&
-                retryPolicy.RetryableStatusCodes.Contains((int)graphQLEx.StatusCode));
+               (exception is GraphQLHttpRequestException graphQlEx &&
+                retryPolicy.RetryableStatusCodes.Contains((int)graphQlEx.StatusCode));
     }
 
     /// <summary>

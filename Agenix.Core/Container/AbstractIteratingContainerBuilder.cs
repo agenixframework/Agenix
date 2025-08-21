@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -28,8 +28,19 @@ using Agenix.Api.Container;
 
 namespace Agenix.Core.Container;
 
-public abstract class AbstractIteratingContainerBuilder<T, TS> : AbstractTestContainerBuilder<T, TS>
-    where T : ITestActionContainer
+/// <summary>
+///     AbstractIteratingContainerBuilder serves as a base class for building iterating containers.
+///     It provides mechanisms to define iteration conditions, index names, and starting points for iteration
+///     as well as methods to retrieve those values and construct the container.
+/// </summary>
+/// <typeparam name="T">The type of the container being built, constrained to implementations of IAsyncTestActionContainer.</typeparam>
+/// <typeparam name="TS">The builder type, typically the derived type implementing the functionality.</typeparam>
+/// <remarks>
+///     This abstract class extends AbstractAsyncTestContainerBuilder and provides additional functionality
+///     specifically related to iterating containers, such as condition evaluation and indexing.
+/// </remarks>
+public abstract class AbstractIteratingContainerBuilder<T, TS> : AbstractAsyncTestContainerBuilder<T, TS>
+    where T : IAsyncTestActionContainer
     where TS : class
 {
     protected string condition;

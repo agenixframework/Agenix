@@ -23,7 +23,7 @@ public class MakeScreenshotActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExecute()
+    public async Task TestExecute()
     {
         // Create actual screenshot data (minimal PNG header)
         var screenshotData = new byte[]
@@ -43,7 +43,7 @@ public class MakeScreenshotActionTest : AbstractNUnitSetUp
             .WithBrowser(_seleniumBrowser)
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable(SeleniumHeaders.SeleniumScreenshot),
             Does.Match(@"Test_screenshot_\d{8}_\d{6}_\d{3}\.png"));
@@ -61,7 +61,7 @@ public class MakeScreenshotActionTest : AbstractNUnitSetUp
 
 
     [Test]
-    public void TestExecuteOutputDir()
+    public async Task TestExecuteOutputDir()
     {
         // Create actual screenshot data and save it to a temp file
         var testImageData = new byte[]
@@ -83,7 +83,7 @@ public class MakeScreenshotActionTest : AbstractNUnitSetUp
             .SetOutputDir("target")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Check that a file was created in the target directory with the expected pattern
         var targetDir = new DirectoryInfo("target");

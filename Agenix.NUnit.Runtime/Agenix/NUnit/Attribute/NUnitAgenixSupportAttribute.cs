@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -42,7 +42,7 @@ namespace Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
     AllowMultiple = true)]
 public class NUnitAgenixSupportAttribute : System.Attribute, ITestAction
 {
-    [ThreadStatic] private static ITestCaseRunner? _delegate;
+    [ThreadStatic] private static IAsyncTestCaseRunner? _delegate;
 
     /// Executes actions before the test execution begins.
     /// <param name="test">
@@ -55,7 +55,8 @@ public class NUnitAgenixSupportAttribute : System.Attribute, ITestAction
         {
             AgenixInstanceManager.Reset();
             AgenixInstanceManager.GetOrDefault().AgenixContext.ParseConfiguration(test.Fixture);
-            AgenixInstanceManager.GetOrDefault().BeforeSuite(test.Name);
+            AgenixInstanceManager.GetOrDefault().BeforeSuite(test.Name).ConfigureAwait(false).GetAwaiter().GetResult();
+
             return;
         }
 
@@ -75,22 +76,35 @@ public class NUnitAgenixSupportAttribute : System.Attribute, ITestAction
     {
         if (test.IsSuite)
         {
-            AgenixInstanceManager.GetOrDefault().AfterSuite(test.Name);
+            AgenixInstanceManager.GetOrDefault().AfterSuite(test.Name).ConfigureAwait(false).GetAwaiter().GetResult();
+
             return;
         }
 
         _delegate?.Stop();
     }
 
+    /// Gets the targets to which the attribute will be applied.
+    /// This property defines the specific contexts within NUnit tests
+    /// where the custom actions provided by the attribute will be executed.
+    /// It includes both individual tests and test suites.
+    /// The returned value is a combination of the flags:
+    /// - ActionTargets.Test: Refers to individual test cases.
+    /// - ActionTargets.Suite: Refers to test suites.
     public ActionTargets Targets => ActionTargets.Test | ActionTargets.Suite;
 
-    /// Creates an instance of a test runner for executing test cases with the provided details.
-    /// <param name="testName">The name of the test case to be executed.</param>
-    /// <param name="packageName">The package name associated with the test class.</param>
-    /// <param name="testClass">The type of the test class containing the test case.</param>
-    /// <param name="context">The test context providing necessary configurations and state.</param>
-    /// <return>An instance of ITestCaseRunner configured with the specified test case details.</return>
-    private static ITestCaseRunner CreateTestRunner(ITest test,
+    /// Creates an instance of a test runner for executing a test case with the specified test and context details.
+    /// <param name="test">
+    ///     The test instance to be executed, containing metadata such as name, fixture, and properties.
+    /// </param>
+    /// <param name="context">
+    ///     The test context instance, providing configuration details and runtime state specific to the execution
+    ///     environment.
+    /// </param>
+    /// <returns>
+    ///     An instance of ITestCaseRunner configured to execute the specified test case.
+    /// </returns>
+    private static IAsyncTestCaseRunner CreateTestRunner(ITest test,
         TestContext context)
     {
         var testCaseRunner = TestCaseRunnerFactory.CreateRunner(new DefaultTestCase(), context);

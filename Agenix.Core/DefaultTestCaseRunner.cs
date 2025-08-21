@@ -25,6 +25,7 @@
 #endregion
 
 using System;
+using System.Threading.Tasks;
 using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Spi;
@@ -37,12 +38,12 @@ namespace Agenix.Core;
 ///     Default implementation of the ITestCaseRunner interface, providing methods
 ///     to manage and execute test cases.
 /// </summary>
-public class DefaultTestCaseRunner : ITestCaseRunner
+public class DefaultTestCaseRunner : IAsyncTestCaseRunner
 {
-    /**
-     * The test case
-     */
-    private ITestCase _testCase;
+    /// Represents the instance of the test case being executed or managed
+    /// by the DefaultAsyncTestCaseRunner.
+    /// /
+    private IAsyncTestCase _testCase;
 
     /// Default implementation of the ITestCaseRunner interface, providing methods to manage and execute test cases.
     /// /
@@ -52,7 +53,7 @@ public class DefaultTestCaseRunner : ITestCaseRunner
 
     /// Class responsible for running test cases with a specified context.
     /// /
-    public DefaultTestCaseRunner(ITestCase testCase, TestContext context)
+    public DefaultTestCaseRunner(IAsyncTestCase testCase, TestContext context)
     {
         _testCase = testCase;
         Context = context;
@@ -60,16 +61,16 @@ public class DefaultTestCaseRunner : ITestCaseRunner
         _testCase.SetIncremental(true);
     }
 
-    /**
-     * The test context
-     */
+    /// The test execution context, encapsulating shared state, configuration,
+    /// and utility methods for managing test variables and dynamic content resolution.
+    /// /
     public TestContext Context { get; }
 
     /// Retrieves the test case associated with this test case runner.
     /// <returns>
     ///     The current instance of ITestCase associated with this runner.
     /// </returns>
-    public ITestCase GetTestCase()
+    public IAsyncTestCase GetTestCase()
     {
         return _testCase;
     }
@@ -159,33 +160,34 @@ public class DefaultTestCaseRunner : ITestCaseRunner
     /// <param name="action">The test action to be executed.</param>
     /// <typeparam name="T">Type of the test action, which implements ITestAction.</typeparam>
     /// <return>Returns the executed test action of type T.</return>
-    public T Run<T>(T action) where T : ITestAction
+    public async Task<T> Run<T>(T action) where T : IAsyncTestAction
     {
-        var builder = new FuncITestActionBuilder<T>(() => action);
-        return Run(builder);
+        var builder = new FuncIAsyncTestActionBuilder<T>(() => action);
+        return await Run(builder);
     }
 
     /// Executes the provided test action and handles the required operations before and after the execution.
     /// <typeparam name="T">The type of action that implements the ITestAction interface.</typeparam>
     /// <param name="action">A function that returns an action to be executed.</param>
     /// <returns>The executed action of type T.</returns>
-    public T Run<T>(Func<T> action) where T : ITestAction
+    public async Task<T> Run<T>(Func<T> action) where T : IAsyncTestAction
     {
-        return Run(action.Invoke());
+        return await Run(action.Invoke());
     }
 
     /// Runs a provided test action builder and manages the execution lifecycle.
     /// <param name="builder">The builder responsible for creating the test action.</param>
     /// <typeparam name="T">The type of test action being run.</typeparam>
     /// <returns>The test action that was executed.</returns>
-    public T Run<T>(ITestActionBuilder<T> builder) where T : ITestAction
+    public async Task<T> Run<T>(IAsyncTestActionBuilder<T> builder) where T : IAsyncTestAction
     {
         switch (builder)
         {
+            // ReSharper disable once SuspiciousTypeConversion.Global
             case IReferenceResolverAware referenceResolverAwareBuilder:
                 referenceResolverAwareBuilder.SetReferenceResolver(Context.ReferenceResolver);
                 break;
-            case ApplyTestBehaviorAction.Builder applyTestBehaviorBuilder:
+            case ApplyAsyncTestBehaviorAction.Builder applyTestBehaviorBuilder:
                 applyTestBehaviorBuilder.On(this);
                 break;
         }
@@ -203,7 +205,7 @@ public class DefaultTestCaseRunner : ITestCaseRunner
 
                     return action;
                 }
-            case FuncITestActionBuilder<FinallySequence.Builder> finallySequenceBuilder:
+            case FuncIAsyncTestActionBuilder<FinallySequence.Builder> finallySequenceBuilder:
                 {
                     foreach (var finalAction in finallySequenceBuilder.Build().GetActions())
                     {
@@ -215,7 +217,7 @@ public class DefaultTestCaseRunner : ITestCaseRunner
         }
 
         _testCase.AddTestAction(action);
-        _testCase.ExecuteAction(action, Context);
+        await _testCase.ExecuteAction(action, Context);
         return action;
     }
 
@@ -223,39 +225,41 @@ public class DefaultTestCaseRunner : ITestCaseRunner
     /// Applies a specified test behavior to the test action framework, returning an action builder for further configuration.
     /// <param name="behavior">The behavior to apply to the test action.</param>
     /// <returns>An action builder configured with the specified behavior.</returns>
-    public ITestActionBuilder<ITestAction> ApplyBehavior(ITestBehavior behavior)
+    public Task<IAsyncTestActionBuilder<IAsyncTestAction>> ApplyBehavior(IAsyncTestBehavior behavior)
     {
-        return new ApplyTestBehaviorAction.Builder()
+        var builder = new ApplyAsyncTestBehaviorAction.Builder()
             .Behavior(behavior)
             .On(this);
+
+        return Task.FromResult<IAsyncTestActionBuilder<IAsyncTestAction>>(builder);
     }
 
     /// Applies a specified test behavior to the current test case.
     /// <param name="behavior">The test behavior to be applied.</param>
     /// <returns>A builder for creating an instance of ApplyTestBehaviorAction.</returns>
-    public ITestActionBuilder<ITestAction> ApplyBehavior(TestBehavior behavior)
+    public Task<IAsyncTestActionBuilder<IAsyncTestAction>> ApplyBehavior(AsyncTestBehavior behavior)
     {
-        return new ApplyTestBehaviorAction.Builder()
-            .Behavior(new DelegatingTestBehaviour(behavior))
-            .On(this);
+        return Task.FromResult<IAsyncTestActionBuilder<IAsyncTestAction>>(new ApplyAsyncTestBehaviorAction.Builder()
+            .Behavior(new DelegatingAsyncTestBehaviour(behavior))
+            .On(this));
     }
 
     /// Starts the execution of the test case within the current test context.
     /// This method initializes the required environment and triggers the start of the test case logic.
-    public void Start()
+    public async Task Start()
     {
-        _testCase.Start(Context);
+        await _testCase.Start(Context);
     }
 
     /// Stops the execution of the test case and triggers the Finish method on the test case instance to perform any necessary cleanup tasks using the provided test context.
-    public void Stop()
+    public async Task Stop()
     {
-        _testCase.Finish(Context);
+        await _testCase.Finish(Context);
     }
 
     /// Sets the test case to be used by the test runner.
     /// <param name="testCase">The test case to be used for executing test actions.</param>
-    public void SetTestCase(ITestCase testCase)
+    public void SetTestCase(IAsyncTestCase testCase)
     {
         _testCase = testCase;
         _testCase.SetIncremental(true);
@@ -265,12 +269,12 @@ public class DefaultTestCaseRunner : ITestCaseRunner
     ///     Provides methods to create instances of ITestCaseRunner, specifically DefaultTestCaseRunner,
     ///     with different configurations including test context and test case.
     /// </summary>
-    public class DefaultTestCaseRunnerProvider : ITestCaseRunnerProvider
+    public class DefaultTestCaseRunnerProvider : IAsyncTestCaseRunnerProvider
     {
         /// Creates a new instance of a test case runner with the given test context.
         /// <param name="context">The context for the test case runner which provides runtime information and dependencies.</param>
         /// <return>Returns an instance of ITestCaseRunner, specifically DefaultTestCaseRunner.</return>
-        public ITestCaseRunner CreateTestCaseRunner(TestContext context)
+        public IAsyncTestCaseRunner CreateTestCaseRunner(TestContext context)
         {
             return new DefaultTestCaseRunner(context);
         }
@@ -279,7 +283,7 @@ public class DefaultTestCaseRunner : ITestCaseRunner
         /// <param name="testCase">An implementation of the ITestCase interface representing the test case to be run.</param>
         /// <param name="context">A TestContext instance providing the execution context for the test case.</param>
         /// <returns>An instance of ITestCaseRunner configured with the specified test case and context.</returns>
-        public ITestCaseRunner CreateTestCaseRunner(ITestCase testCase, TestContext context)
+        public IAsyncTestCaseRunner CreateTestCaseRunner(IAsyncTestCase testCase, TestContext context)
         {
             return new DefaultTestCaseRunner(testCase, context);
         }

@@ -57,22 +57,22 @@ public class SetInputAction : FindElementAction
     /// <summary>
     ///     Executes the set input action on the found web element
     /// </summary>
-    protected override void Execute(IWebElement webElement, SeleniumBrowser browser, TestContext context)
+    protected override async Task Execute(IWebElement element, SeleniumBrowser browser, TestContext context)
     {
         // Call base implementation to set the element in context
-        base.Execute(webElement, browser, context);
+        await base.Execute(element, browser, context);
 
-        var tagName = webElement.TagName;
+        var tagName = element.TagName;
         if (!"select".Equals(tagName, StringComparison.OrdinalIgnoreCase))
         {
             // For regular input elements
-            webElement.Clear();
-            webElement.SendKeys(context.ReplaceDynamicContentInString(_value));
+            element.Clear();
+            element.SendKeys(context.ReplaceDynamicContentInString(_value));
         }
         else
         {
             // For select elements
-            var select = new SelectElement(webElement);
+            var select = new SelectElement(element);
             select.SelectByValue(context.ReplaceDynamicContentInString(_value));
         }
     }
@@ -120,6 +120,7 @@ public class SetInputAction : FindElementAction
             return this;
         }
 
+        /// <inheritdoc />
         public override SetInputAction Build()
         {
             return new SetInputAction(this);

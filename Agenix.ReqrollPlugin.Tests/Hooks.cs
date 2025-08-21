@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -37,11 +37,9 @@ namespace Agenix.Reqroll.Plugin.Tests;
 [Binding]
 public sealed class Hooks
 {
-    private static readonly ILogger Log = LogManager.GetLogger(typeof(Hooks));
-
     private readonly IUnitTestRuntimeProvider _unitTestRuntimeProvider;
 
-    [AgenixResource] private ITestCaseRunner _testCaseRunner;
+    [AgenixResource] private IAsyncTestCaseRunner _testCaseRunner;
 
     public Hooks(IUnitTestRuntimeProvider unitTestRuntimeProvider)
     {
@@ -79,7 +77,6 @@ public sealed class Hooks
     public static void AfterTestRun()
     {
         // all scenarios should not be affected (uncomment it to test)
-        //throw new Exception("AfterTestRun fail exception.");
     }
 
     [BeforeFeature("feature_should_fail_before")]
@@ -95,9 +92,9 @@ public sealed class Hooks
     }
 
     [BeforeScenario]
-    public void BeforeScenario()
+    public async Task BeforeScenario()
     {
-        _testCaseRunner.Run(EchoAction.Builder.Echo("Before scenario from hooks.")
+        await _testCaseRunner.Run(EchoAction.Builder.Echo("Before scenario from hooks.")
             .Name("Print the message action")
             .Description("Wise words from the wise man"));
     }
@@ -111,7 +108,6 @@ public sealed class Hooks
     [BeforeScenario("scenario_should_ignore_before_runtime")]
     public void BeforeScenarioShouldIgnore()
     {
-        //_unitTestRuntimeProvider.TestIgnore("This scenario should be ignored at runtime.");
         _unitTestRuntimeProvider.TestInconclusive("This scenario should be ignored at runtime.");
     }
 

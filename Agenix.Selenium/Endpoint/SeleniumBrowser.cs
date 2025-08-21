@@ -130,10 +130,10 @@ public class SeleniumBrowser : AbstractEndpoint, IProducer, IDisposable
     /// <param name="context">
     ///     The test context in which the action specified in the message payload will be executed.
     /// </param>
-    public void Send(IMessage message, TestContext context)
+    public async Task Send(IMessage message, TestContext context)
     {
         var action = message.GetPayload<ISeleniumAction>();
-        action.Execute(context);
+        await action.ExecuteAsync(context);
 
         Logger.LogInformation("Selenium action successfully executed");
     }
@@ -348,7 +348,7 @@ public class SeleniumBrowser : AbstractEndpoint, IProducer, IDisposable
     /// </summary>
     /// <param name="filename">Name of the file to retrieve</param>
     /// <returns>Full path to the stored file</returns>
-    public virtual string GetStoredFile(string filename)
+    public virtual string GetStoredFile(string? filename)
     {
         try
         {

@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -35,9 +35,9 @@ namespace Agenix.Core.Container;
 ///     with configurable conditions and intervals.
 /// </summary>
 /// <typeparam name="T">The type that implements the ICondition interface.</typeparam>
-/// <typeparam name="S">The specific type of the WaitConditionBuilder.</typeparam>
-public abstract class WaitConditionBuilder<T, S> : ITestActionBuilder<Wait>
-    where T : ICondition where S : WaitConditionBuilder<T, S>
+/// <typeparam name="TS">The specific type of the WaitConditionBuilder.</typeparam>
+public abstract class WaitConditionBuilder<T, TS> : IAsyncTestActionBuilder<Wait>
+    where T : ICondition where TS : WaitConditionBuilder<T, TS>
 {
     /**
      * Parent wait action builder
@@ -45,20 +45,25 @@ public abstract class WaitConditionBuilder<T, S> : ITestActionBuilder<Wait>
     private readonly Wait.Builder<T> _builder;
 
     /**
-     * Self reference
+     * Self-reference
      */
-    protected readonly S self;
+    protected readonly TS Self;
 
     /**
      * Default constructor using fields.
      * @param builder
      */
-    public WaitConditionBuilder(Wait.Builder<T> builder)
+    protected WaitConditionBuilder(Wait.Builder<T> builder)
     {
         _builder = builder;
-        self = (S)this;
+        Self = (TS)this;
     }
 
+    /// <summary>
+    ///     Builds and returns a new instance of the <see cref="Wait" /> class
+    ///     based on the current state of the builder configuration.
+    /// </summary>
+    /// <returns>A configured instance of the <see cref="Wait" /> class.</returns>
     public Wait Build()
     {
         return _builder.Build();
@@ -68,7 +73,7 @@ public abstract class WaitConditionBuilder<T, S> : ITestActionBuilder<Wait>
     /// @param interval The interval to use in milliseconds.
     /// @return The modified instance of the WaitConditionBuilder.
     /// /
-    public S Interval(long interval)
+    public TS Interval(long interval)
     {
         return Interval(interval.ToString());
     }
@@ -76,48 +81,48 @@ public abstract class WaitConditionBuilder<T, S> : ITestActionBuilder<Wait>
     /// Sets the interval for condition testing.
     /// <param name="interval">The interval value to be used for condition testing.</param>
     /// <return>The modified instance of the WaitConditionBuilder.</return>
-    public S Interval(string interval)
+    public TS Interval(string interval)
     {
         _builder.Interval(interval);
-        return self;
+        return Self;
     }
 
     /// Sets the interval in milliseconds between each test of the condition.
     /// <param name="milliseconds">The interval in milliseconds to use.</param>
     /// <return>The modified instance of the WaitConditionBuilder.</return>
-    public S Milliseconds(long milliseconds)
+    public TS Milliseconds(long milliseconds)
     {
         _builder.Milliseconds(milliseconds);
-        return self;
+        return Self;
     }
 
     /// Sets the interval in milliseconds between each test of the condition.
     /// <param name="milliseconds">The interval in milliseconds to use.</param>
     /// <return>The modified instance of the WaitConditionBuilder.</return>
-    public S Milliseconds(string milliseconds)
+    public TS Milliseconds(string milliseconds)
     {
         _builder.Milliseconds(milliseconds);
-        return self;
+        return Self;
     }
 
     /// Sets the duration in seconds for the wait condition.
     /// @param seconds The time in seconds to wait.
     /// @return The modified instance of the WaitConditionBuilder.
     /// /
-    public S Seconds(double seconds)
+    public TS Seconds(double seconds)
     {
         _builder.Seconds(seconds);
-        return self;
+        return Self;
     }
 
     /// Sets the duration for the wait condition.
     /// @param duration The timespan representing the duration to wait.
     /// @return The modified instance of the WaitConditionBuilder.
     /// /
-    public S Time(TimeSpan duration)
+    public TS Time(TimeSpan duration)
     {
         _builder.Time(duration);
-        return self;
+        return Self;
     }
 
     /// Retrieves the condition associated with this WaitConditionBuilder.

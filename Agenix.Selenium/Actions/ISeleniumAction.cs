@@ -32,7 +32,7 @@ namespace Agenix.Selenium.Actions;
 /// <summary>
 ///     Basic Selenium action interface that marks Selenium-related test actions.
 /// </summary>
-public interface ISeleniumAction : ITestAction
+public interface ISeleniumAction : IAsyncTestAction
 {
     /// <summary>
     ///     Gets the Selenium browser.

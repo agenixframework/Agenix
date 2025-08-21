@@ -99,14 +99,14 @@ public class PredicateConsequence<T> : BaseConsequence<T>
     /// <exception cref="Exception">
     ///     Thrown when other unexpected errors occur during the evaluation process.
     /// </exception>
-    public override void EvaluateFor(Actor actor)
+    public override async Task EvaluateFor(Actor actor)
     {
-        actor.EventBus!.Publish(new ActorAsksQuestion(Question.Subject, actor.Name));
+        await actor.EventBus.Publish(new ActorAsksQuestion(Question.Subject, actor.Name));
 
         try
         {
-            PerformSetupActionsAs(actor);
-            if (!Expected(Question.AnsweredBy(actor)))
+            await PerformSetupActionsAs(actor);
+            if (!Expected(await Question.AnsweredBy(actor)))
             {
                 throw new AgenixSystemException("predicate failed");
             }

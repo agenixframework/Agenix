@@ -38,10 +38,10 @@ public class ClearBrowserCacheActionTest : AbstractPlaywrightActionTestBase
 
     protected override void CustomizeSetup()
     {
-        // Setup CDP session for browser cache clearing
+        // Set up CDP session for browser cache clearing
         _cdpSession = new Mock<ICDPSession>();
 
-        // Setup the CDP session to return successfully
+        // Set up the CDP session to return successfully
         _cdpSession.Setup(x => x.SendAsync(It.IsAny<string>(), It.IsAny<Dictionary<string, object>?>()))
             .ReturnsAsync((JsonElement?)null);
 
@@ -66,7 +66,7 @@ public class ClearBrowserCacheActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecute_ShouldClearBrowserCache()
+    public async Task TestExecute_ShouldClearBrowserCache()
     {
         // Arrange
         var action = new ClearBrowserCacheAction.Builder()
@@ -74,7 +74,7 @@ public class ClearBrowserCacheActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         BrowserContext.Verify(x => x.NewCDPSessionAsync(It.IsAny<IPage>()), Times.Once);
@@ -96,7 +96,7 @@ public class ClearBrowserCacheActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => action.Execute(Context));
+        Assert.ThrowsAsync<ArgumentException>(() => action.ExecuteAsync(Context));
     }
 
     [Test]
@@ -113,7 +113,7 @@ public class ClearBrowserCacheActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => action.Execute(Context));
+        Assert.ThrowsAsync<ArgumentException>(() => action.ExecuteAsync(Context));
     }
 
     [Test]
@@ -192,7 +192,7 @@ public class ClearBrowserCacheActionTest : AbstractPlaywrightActionTestBase
     }
 
     [Test]
-    public void TestExecute_MultipleCalls_ShouldClearCacheEachTime()
+    public async Task TestExecute_MultipleCalls_ShouldClearCacheEachTime()
     {
         // Arrange
         var action = new ClearBrowserCacheAction.Builder()
@@ -200,9 +200,9 @@ public class ClearBrowserCacheActionTest : AbstractPlaywrightActionTestBase
             .Build();
 
         // Act
-        action.Execute(Context);
-        action.Execute(Context);
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
+        await action.ExecuteAsync(Context);
+        await action.ExecuteAsync(Context);
 
         // Assert
         BrowserContext.Verify(x => x.NewCDPSessionAsync(It.IsAny<IPage>()), Times.Exactly(3));

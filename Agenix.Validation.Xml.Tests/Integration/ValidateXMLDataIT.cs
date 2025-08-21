@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -47,19 +47,19 @@ public class ValidateXMLDataIT
     [AgenixEndpoint(Name = "hello.endpoint")]
     private IEndpoint helloEndpoint;
 
-    [AgenixResource] protected ITestCaseRunner runner;
+    [AgenixResource] protected IAsyncTestCaseRunner runner;
 
     [Test]
-    public void ValidateXMLData()
+    public async Task ValidateXMLData()
     {
-        runner.Given(CreateVariables()
+        await runner.Given(CreateVariables()
             .Variable("correlationId", "agenix:randomNumber(10)")
             .Variable("messageId", "agenix:randomNumber(10)")
             .Variable("user", "Christoph")
         );
 
-        // Test 1: Basic XML validation with ignore element
-        runner.When(Send("direct:hello")
+        // Test 1: Basic XML validation with an ignore element
+        await runner.When(Send("direct:hello")
             .Message()
             .Type(MessageType.XML)
             .Body("<HelloRequest xmlns=\"http://agenix.org/schemas/samples/HelloService.xsd\">" +
@@ -72,7 +72,7 @@ public class ValidateXMLDataIT
             .Header("CorrelationId", "${correlationId}")
         );
 
-        runner.Then(Receive("direct:hello")
+        await runner.Then(Receive("direct:hello")
             .Message()
             .Type(MessageType.XML)
             .Body("<HelloRequest xmlns=\"http://agenix.org/schemas/samples/HelloService.xsd\">" +
@@ -88,7 +88,7 @@ public class ValidateXMLDataIT
         );
 
         // Test 2: XML validation with namespace context and XPath ignore
-        runner.When(Send("direct:hello")
+        await runner.When(Send("direct:hello")
             .Message()
             .Type(MessageType.XML)
             .Body("<HelloRequest xmlns=\"http://agenix.org/schemas/samples/HelloService.xsd\">" +
@@ -101,7 +101,7 @@ public class ValidateXMLDataIT
             .Header("CorrelationId", "${correlationId}")
         );
 
-        runner.Then(Receive("direct:hello")
+        await runner.Then(Receive("direct:hello")
             .Message()
             .Type(MessageType.XML)
             .Body("<ns0:HelloRequest xmlns:ns0=\"http://agenix.org/schemas/samples/HelloService.xsd\">" +
