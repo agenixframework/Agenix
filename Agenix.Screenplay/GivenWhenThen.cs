@@ -287,7 +287,7 @@ public static class GivenWhenThen
     {
         var consequence = SeeThat(question, matcher);
         return ITask.Where("See if " + question + " " + matcher,
-            new AnonymousPerformableFunction(actor => consequence.EvaluateFor(actor)));
+            new AnonymousPerformableFunction("", actor => consequence.EvaluateFor(actor)));
     }
 
     /// <summary>

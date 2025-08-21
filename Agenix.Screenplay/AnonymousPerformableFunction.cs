@@ -24,6 +24,8 @@
 
 #endregion
 
+using JetBrains.Annotations;
+
 namespace Agenix.Screenplay;
 
 /// <summary>
@@ -33,8 +35,24 @@ namespace Agenix.Screenplay;
 ///     This class allows for the definition of actions or tasks via anonymous functions, providing flexibility in
 ///     describing custom behaviors for an actor.
 /// </remarks>
-public class AnonymousPerformableFunction(Action<Actor> actions) : IPerformable
+public class AnonymousPerformableFunction : IPerformable
 {
+    [UsedImplicitly] private readonly string _title;
+    private readonly Action<Actor> _actions;
+
+    /// <summary>
+    /// Represents an anonymous performable action or task to be executed by an actor in the screenplay pattern.
+    /// </summary>
+    /// <remarks>
+    /// This class allows for the definition of actions or tasks via anonymous functions,
+    /// providing flexibility in describing custom behaviors for an actor.
+    /// </remarks>
+    public AnonymousPerformableFunction(string title, Action<Actor> actions)
+    {
+        _title = title ?? throw new ArgumentNullException(nameof(title));
+        _actions = actions ?? throw new ArgumentNullException(nameof(actions));
+    }
+
     /// <summary>
     ///     Executes the specified actions or tasks as the provided actor asynchronously.
     /// </summary>
@@ -49,6 +67,6 @@ public class AnonymousPerformableFunction(Action<Actor> actions) : IPerformable
             await Task.FromCanceled(cancellationToken);
         }
 
-        actions(actor);
+        _actions(actor);
     }
 }

@@ -508,7 +508,6 @@ public class FillFormAction : AbstractPlaywrightAction
                 {
                     builder.SelectByValue(item);
                 }
-
                 break;
             case string singleValue:
                 builder.SelectByValue(singleValue);

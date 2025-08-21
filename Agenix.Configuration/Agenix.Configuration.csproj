@@ -25,13 +25,15 @@
     <Folder Include="Core\Providers\"/>
     <Folder Include="Extensions\Builders\"/>
     <Folder Include="Sample\Approach1\"/>
-    <Folder Include="Sample\Config\"/>
     <Folder Include="Sample\Models\"/>
     <Folder Include="Singleton\"/>
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Sample\Config\appsettings.json"/>
+    <EmbeddedResource Include="Sample\Config\appsettings.dev.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sample\Config\appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>

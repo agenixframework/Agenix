@@ -21,7 +21,7 @@ public class WhenRunningTasksInParallel
 
     private IPerformable DoSomething()
     {
-        return new AnonymousPerformableFunction(actor =>
+        return ITask.Where("{} does something", _ =>
         {
             _completedTasks.Add("Do something");
         });
@@ -29,7 +29,7 @@ public class WhenRunningTasksInParallel
 
     private IPerformable DoAnotherThing()
     {
-        return new AnonymousPerformableFunction(actor =>
+        return ITask.Where("{} does another thing", _ =>
         {
             _completedTasks.Add("Do another thing");
         });
@@ -37,7 +37,7 @@ public class WhenRunningTasksInParallel
 
     private IPerformable DoAThing()
     {
-        return new AnonymousPerformableFunction(actor =>
+        return ITask.Where("{} does a thing", _ =>
         {
             _completedTasks.Add("Do a thing");
         });
@@ -45,7 +45,7 @@ public class WhenRunningTasksInParallel
 
     private IPerformable DoYetAnotherThing()
     {
-        return new AnonymousPerformableFunction(actor =>
+        return ITask.Where("{} does yet another thing", _ =>
         {
             _completedTasks.Add("Do yet another thing");
         });
@@ -53,7 +53,7 @@ public class WhenRunningTasksInParallel
 
     private IPerformable DoSomethingElse()
     {
-        return new AnonymousPerformableFunction(actor =>
+        return ITask.Where("{} does something else", _ =>
         {
             _completedTasks.Add("Do something else");
         });
@@ -61,7 +61,7 @@ public class WhenRunningTasksInParallel
 
     private static IPerformable DoSomethingThatFails()
     {
-        return new AnonymousPerformableFunction(actor =>
+        return ITask.Where("{} fails test by purpose", _ =>
         {
             Assert.Fail("Fail by purpose");
         });
@@ -69,7 +69,7 @@ public class WhenRunningTasksInParallel
 
     private IPerformable DoSomethingWithSubTasks()
     {
-        return new AnonymousPerformableFunction(actor =>
+        return ITask.Where("{} executes 2 tasks", actor =>
         {
             actor.AttemptsTo(DoAThing(), DoYetAnotherThing());
         });
@@ -77,7 +77,7 @@ public class WhenRunningTasksInParallel
 
     private IPerformable DoSomethingSlowly()
     {
-        return new AnonymousPerformableFunction(actor =>
+        return ITask.Where("{} does something slowly", _ =>
         {
             try
             {
@@ -86,7 +86,7 @@ public class WhenRunningTasksInParallel
             }
             catch (ThreadInterruptedException)
             {
-                // Handle interruption if needed
+                // no code
             }
         });
     }

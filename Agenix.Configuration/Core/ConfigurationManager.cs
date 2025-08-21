@@ -164,7 +164,7 @@ public class ConfigurationManager<T> : IConfigurationManager<T> where T : class,
 
             if (File.Exists(envConfigPath))
             {
-                AddConfigurationFile(configBuilder, envConfigPath, true);
+                AddConfigurationFile(configBuilder, envConfigPath, false);
                 _logger.LogDebug("Loaded environment configuration from: {envConfigPath} (Format: {_optionsFormat})",
                     envConfigPath, _options.Format);
             }
@@ -177,14 +177,14 @@ public class ConfigurationManager<T> : IConfigurationManager<T> where T : class,
             configuration.Bind(configObject);
 
             _logger.LogInformation(
-                "Successfully loaded configuration for environment: {environment} (Format: {_optionsFormat})",
+                "Successfully loaded configuration for environment: {Environment} (Format: {_OptionsFormat})",
                 environment, _options.Format);
             return configObject;
         }
         catch (Exception ex)
         {
             _logger.LogError(ex,
-                "Failed to load configuration for environment: {environment} (Format: {_optionsFormat})",
+                "Failed to load configuration for environment: {Environment} (Format: {_OptionsFormat})",
                 environment, _options.Format);
             throw new InvalidOperationException(
                 $"Failed to load configuration for environment '{environment}' with format '{_options.Format}'", ex);
@@ -199,6 +199,7 @@ public class ConfigurationManager<T> : IConfigurationManager<T> where T : class,
                 builder.AddJsonFile(filePath, optional, false);
                 break;
             case ConfigurationFormat.YAML:
+            case ConfigurationFormat.YML:
                 builder.AddYamlFile(filePath, optional, false);
                 break;
             default:

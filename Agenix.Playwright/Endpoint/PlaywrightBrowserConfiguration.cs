@@ -72,7 +72,7 @@ public class PlaywrightBrowserConfiguration : AbstractEndpointConfiguration
     /// <summary>
     ///     Viewport settings
     /// </summary>
-    public ViewportSize? Viewport { get; set; } = new() { Width = 1280, Height = 780 };
+    public ViewportSize? Viewport { get; set; } = new() { Width = 1920, Height = 1080 };
 
     /// <summary>
     ///     Default timeout for page operations in milliseconds
@@ -88,6 +88,21 @@ public class PlaywrightBrowserConfiguration : AbstractEndpointConfiguration
     ///     Ignore HTTPS errors
     /// </summary>
     public bool IgnoreHttpsErrors { get; set; }
+
+    /// <summary>
+    /// Path to storage state file for context persistence
+    /// </summary>
+    public string? StorageStatePath { get; set; }
+
+    /// <summary>
+    /// Raw storage state JSON content
+    /// </summary>
+    public string? StorageState { get; set; }
+
+    /// <summary>
+    /// Automatically save storage state when context is disposed
+    /// </summary>
+    public bool AutoSaveStorageState { get; set; } = false;
 
     /// <summary>
     ///     Enable JavaScript
