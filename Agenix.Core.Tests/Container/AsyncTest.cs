@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -28,13 +28,12 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Agenix.Api;
 using Agenix.Api.Exceptions;
 using Agenix.Core.Container;
 using Agenix.Core.Util;
 using Moq;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
-using ITestAction = Agenix.Api.ITestAction;
 using TestContext = Agenix.Api.Context.TestContext;
 
 namespace Agenix.Core.Tests.Container;
@@ -52,77 +51,105 @@ namespace Agenix.Core.Tests.Container;
 [Platform(Exclude = "Linux", Reason = "Only runs on non-Linux platforms.")]
 public class AsyncTest : AbstractNUnitSetUp
 {
-    // Creating mocks for the TestAction class
-    private Mock<ITestAction> _action;
-    private Mock<ITestAction> _error;
-    private Mock<ITestAction> _success;
+    // Creating mocks for the async TestAction interface
+    private Mock<IAsyncTestAction> _action;
+    private Mock<IAsyncTestAction> _error;
+    private Mock<IAsyncTestAction> _success;
 
     // Setup is where we initialize our test setup, similar to the Java example's use of reset
     [SetUp]
     public void SetUp()
     {
-        _action = new Mock<ITestAction>();
-        _success = new Mock<ITestAction>();
-        _error = new Mock<ITestAction>();
+        _action = new Mock<IAsyncTestAction>();
+        _success = new Mock<IAsyncTestAction>();
+        _error = new Mock<IAsyncTestAction>();
     }
 
+    // C#
     [Test]
-    public async Task TestSingleActionAsync()
+    public void TestSingleAction_WithManualResetEventSlim()
     {
-        // Building the Async container
+        using var done = new ManualResetEventSlim(false);
+        var timeout = TimeSpan.FromSeconds(5);
+
+        // Ensure the success action signals completion
+        _success
+            .Setup(s => s.ExecuteAsync(Context, It.IsAny<CancellationToken>()))
+            .Callback(() => done.Set())
+            .Returns(Task.CompletedTask);
+
+        // Ensure the error action would also signal (so the test doesn't hang on failure)
+        _error
+            .Setup(e => e.ExecuteAsync(Context, It.IsAny<CancellationToken>()))
+            .Callback(() => done.Set())
+            .Returns(Task.CompletedTask);
+
+        // Optionally set up the main action; here it just completes immediately
+        _action
+            .Setup(a => a.ExecuteAsync(Context, It.IsAny<CancellationToken>()))
+            .Returns(Task.CompletedTask);
+
+        // Build and start the Async container (fire-and-forget)
         var container = new Async.Builder()
             .Actions(_action.Object)
             .SuccessAction(_success.Object)
             .ErrorAction(_error.Object)
             .Build();
 
-        // Execute the container
-        container.Execute(Context);
+        _ = container.ExecuteAsync(Context);
 
-        // Wait for the asynchronous operation to complete (Replace with appropriate wait logic if needed)
-        await WaitUtils.WaitForCompletion(container, Context);
+        // Wait for either success or error to complete (avoid hanging indefinitely)
+        if (!done.Wait(timeout))
+        {
+            Assert.Fail($"Timed out waiting for async container to complete within {timeout}.");
+        }
 
-        // Verify that the action was executed
-        _action.Verify(a => a.Execute(Context), Times.Once);
-
-        // Verify that the success action was executed
-        _success.Verify(s => s.Execute(Context), Times.Once);
-
-        // Verify that the error action was never executed
-        _error.Verify(e => e.Execute(Context), Times.Never);
+        // Verifications
+        _action.Verify(a => a.ExecuteAsync(Context, CancellationToken.None), Times.Once);
+        _success.Verify(s => s.ExecuteAsync(Context, CancellationToken.None), Times.Once);
+        _error.Verify(e => e.ExecuteAsync(Context, CancellationToken.None), Times.Never);
     }
 
     [Test]
-    public void TestMultipleActionsAsync()
+    public async Task TestMultipleActionsAsync()
     {
-        var action1 = new Mock<ITestAction>();
-        var action2 = new Mock<ITestAction>();
-        var action3 = new Mock<ITestAction>();
+        var action1 = new Mock<IAsyncTestAction>();
+        var action2 = new Mock<IAsyncTestAction>();
+        var action3 = new Mock<IAsyncTestAction>();
 
         using var resetEvent = new ManualResetEventSlim(false);
         var executedActions = 0;
 
         // Setup actions to signal completion
-        action1.Setup(a => a.Execute(It.IsAny<TestContext>()))
+        action1.Setup(a => a.ExecuteAsync(It.IsAny<TestContext>(), CancellationToken.None))
             .Callback(() =>
             {
                 if (Interlocked.Increment(ref executedActions) == 3)
+                {
                     resetEvent.Set();
-            });
+                }
+            })
+            .Returns(Task.CompletedTask);
 
-        action2.Setup(a => a.Execute(It.IsAny<TestContext>()))
+        action2.Setup(a => a.ExecuteAsync(It.IsAny<TestContext>(), CancellationToken.None))
             .Callback(() =>
             {
                 if (Interlocked.Increment(ref executedActions) == 3)
+                {
                     resetEvent.Set();
-            });
+                }
+            })
+            .Returns(Task.CompletedTask);
 
-        action3.Setup(a => a.Execute(It.IsAny<TestContext>()))
+        action3.Setup(a => a.ExecuteAsync(It.IsAny<TestContext>(), CancellationToken.None))
             .Callback(() =>
             {
                 if (Interlocked.Increment(ref executedActions) == 3)
+                {
                     resetEvent.Set();
-            });
+                }
+            })
+            .Returns(Task.CompletedTask);
 
         // Build the Async container
         var container = new Async.Builder()
@@ -131,53 +158,51 @@ public class AsyncTest : AbstractNUnitSetUp
             .Actions(action1.Object, action2.Object, action3.Object)
             .Build();
 
-        // Execute the container
-        container.Execute(Context);
+        // Kick off execution and await it
+        await container.DoExecute(Context);
 
-        // Wait for all actions to complete with timeout
+        // Wait for all actions to complete with timeout (defensive, though DoExecute awaited)
         Assert.That(resetEvent.Wait(TimeSpan.FromSeconds(5)), Is.True,
             "Async actions did not complete within the expected time");
 
         // Verify that each action was executed once
-        action1.Verify(a => a.Execute(Context), Times.Once);
-        action2.Verify(a => a.Execute(Context), Times.Once);
-        action3.Verify(a => a.Execute(Context), Times.Once);
+        action1.Verify(a => a.ExecuteAsync(Context, CancellationToken.None), Times.Once);
+        action2.Verify(a => a.ExecuteAsync(Context, CancellationToken.None), Times.Once);
+        action3.Verify(a => a.ExecuteAsync(Context, CancellationToken.None), Times.Once);
 
         // Verify the success action was executed
-        _success.Verify(s => s.Execute(Context), Times.Once);
+        _success.Verify(s => s.ExecuteAsync(Context, CancellationToken.None), Times.Once);
 
         // Verify that the error action was never executed
-        _error.Verify(e => e.Execute(Context), Times.Never);
+        _error.Verify(e => e.ExecuteAsync(Context, CancellationToken.None), Times.Never);
     }
 
     [Test]
     public async Task TestFailingActionAsync()
     {
-        var action1 = new Mock<ITestAction>();
-        var action2 = new Mock<ITestAction>();
-        var action3 = new Mock<ITestAction>();
-
-        // Define a faulty action.
-        var failAction = new Mock<ITestAction>();
-        failAction.Setup(f => f.Execute(Context))
-            .Throws(new AgenixSystemException("Generated error to interrupt test execution"));
+        var action1 = new Mock<IAsyncTestAction>();
+        var action2 = new Mock<IAsyncTestAction>();
+        var action3 = new Mock<IAsyncTestAction>();
 
         // Use ManualResetEventSlim for better synchronization
         var action1Executed = new ManualResetEventSlim(false);
         var failActionExecuted = new ManualResetEventSlim(false);
         var errorActionExecuted = new ManualResetEventSlim(false);
-        var containerCompleted = new ManualResetEventSlim(false);
+
+        // Define a faulty action.
+        var failAction = new Mock<IAsyncTestAction>();
+        failAction.Setup(f => f.ExecuteAsync(Context, CancellationToken.None))
+            .Callback(() => failActionExecuted.Set())
+            .ThrowsAsync(new AgenixSystemException("Generated error to interrupt test execution"));
 
         // Setup execution tracking
-        action1.Setup(a => a.Execute(Context))
-            .Callback(() => action1Executed.Set());
+        action1.Setup(a => a.ExecuteAsync(Context, CancellationToken.None))
+            .Callback(() => action1Executed.Set())
+            .Returns(Task.CompletedTask);
 
-        failAction.Setup(f => f.Execute(Context))
-            .Callback(() => failActionExecuted.Set())
-            .Throws(new AgenixSystemException("Generated error to interrupt test execution"));
-
-        _error.Setup(e => e.Execute(Context))
-            .Callback(() => errorActionExecuted.Set());
+        _error.Setup(e => e.ExecuteAsync(Context, CancellationToken.None))
+            .Callback(() => errorActionExecuted.Set())
+            .Returns(Task.CompletedTask);
 
         // Build the Async container including the failAction
         var container = new Async.Builder()
@@ -188,10 +213,10 @@ public class AsyncTest : AbstractNUnitSetUp
 
         try
         {
-            // Execute the container
-            container.Execute(Context);
+            // Execute and await the container
+            await container.DoExecute(Context);
 
-            // Wait for specific execution points with timeouts
+            // Wait for specific execution points with timeouts (defensive)
             Assert.That(action1Executed.Wait(TimeSpan.FromSeconds(5)), Is.True,
                 "Action1 should execute within timeout");
 
@@ -201,22 +226,19 @@ public class AsyncTest : AbstractNUnitSetUp
             Assert.That(errorActionExecuted.Wait(TimeSpan.FromSeconds(5)), Is.True,
                 "Error action should execute within timeout");
 
-            // Wait for the asynchronous operation to complete
-            await WaitUtils.WaitForCompletion(container, Context);
-
             // Check for exceptions in context
-            ClassicAssert.AreEqual(1, Context.GetExceptions().Count);
-            ClassicAssert.IsInstanceOf<AgenixSystemException>(Context.GetExceptions().First());
-            ClassicAssert.AreEqual("Generated error to interrupt test execution",
-                Context.GetExceptions().First().Message);
+            Assert.That(Context.GetExceptions().Count, Is.EqualTo(1));
+            Assert.That(Context.GetExceptions().First(), Is.InstanceOf<AgenixSystemException>());
+            Assert.That(Context.GetExceptions().First().Message,
+                Is.EqualTo("Generated error to interrupt test execution"));
 
             // Verify execution order and behavior
-            action1.Verify(a => a.Execute(Context), Times.Once);
-            action2.Verify(a => a.Execute(Context), Times.Never);
-            action3.Verify(a => a.Execute(Context), Times.Never);
+            action1.Verify(a => a.ExecuteAsync(Context, CancellationToken.None), Times.Once);
+            action2.Verify(a => a.ExecuteAsync(Context, CancellationToken.None), Times.Never);
+            action3.Verify(a => a.ExecuteAsync(Context, CancellationToken.None), Times.Never);
 
-            _error.Verify(e => e.Execute(Context), Times.Once);
-            _success.Verify(s => s.Execute(Context), Times.Never);
+            _error.Verify(e => e.ExecuteAsync(Context, CancellationToken.None), Times.Once);
+            _success.Verify(s => s.ExecuteAsync(Context, CancellationToken.None), Times.Never);
         }
         finally
         {
@@ -224,30 +246,30 @@ public class AsyncTest : AbstractNUnitSetUp
             action1Executed.Dispose();
             failActionExecuted.Dispose();
             errorActionExecuted.Dispose();
-            containerCompleted.Dispose();
         }
     }
 
     [Test]
-    public void TestWaitForFinishTimeout()
+    public async Task TestWaitForFinishTimeout()
     {
         var actionStarted = new ManualResetEventSlim(false);
         var actionCanComplete = new ManualResetEventSlim(false);
 
         // Setup the action with controlled timing
-        _action.Setup(a => a.Execute(Context))
+        _action.Setup(a => a.ExecuteAsync(Context, CancellationToken.None))
             .Callback(() =>
             {
                 actionStarted.Set(); // Signal that action has started
                 actionCanComplete.Wait(); // Wait for permission to complete
-            });
+            })
+            .Returns(Task.CompletedTask);
 
         var container = new Async.Builder()
             .Actions(_action.Object)
             .Build();
 
-        // Start the container execution
-        var executionTask = Task.Run(() => container.Execute(Context));
+        // Start execution but don't await yet to be able to assert timeout behavior
+        var executionTask = container.DoExecute(Context);
 
         // Wait for action to start
         Assert.That(actionStarted.Wait(TimeSpan.FromSeconds(1)), Is.True,
@@ -262,15 +284,16 @@ public class AsyncTest : AbstractNUnitSetUp
         // Clean up - allow action to complete
         actionCanComplete.Set();
 
-        // Wait for execution to finish to avoid resource leaks
-        Assert.That(executionTask.Wait(TimeSpan.FromSeconds(1)), Is.True);
+        // Ensure the container finishes
+        await executionTask;
     }
 
     [Test]
     public async Task TestWaitForFinishErrorAsync()
     {
         // Set up the action to throw an exception
-        _action.Setup(a => a.Execute(Context)).Throws(new AgenixSystemException("FAILED!"));
+        _action.Setup(a => a.ExecuteAsync(Context, CancellationToken.None))
+            .ThrowsAsync(new AgenixSystemException("FAILED!"));
 
         var container = new Async.Builder()
             .Actions(_action.Object)
@@ -278,18 +301,18 @@ public class AsyncTest : AbstractNUnitSetUp
 
         try
         {
-            container.DoExecute(Context);
+            await container.DoExecute(Context);
         }
         catch (AgenixSystemException)
         {
-            // Handle if immediate effects needed, such as logging, though typically the system would capture this.
+            // The container may surface startup errors immediately.
         }
 
         await WaitUtils.WaitForCompletion(container, Context, 2000);
 
         // Assert that the appropriate exception was tracked within the context
-        ClassicAssert.AreEqual(1, Context.GetExceptions().Count);
-        ClassicAssert.IsInstanceOf<AgenixSystemException>(Context.GetExceptions().First());
-        ClassicAssert.AreEqual("FAILED!", Context.GetExceptions().First().Message);
+        Assert.That(Context.GetExceptions().Count, Is.EqualTo(1));
+        Assert.That(Context.GetExceptions().First(), Is.InstanceOf<AgenixSystemException>());
+        Assert.That(Context.GetExceptions().First().Message, Is.EqualTo("FAILED!"));
     }
 }

@@ -59,9 +59,9 @@ public class CheckInputAction : FindElementAction
     /// <param name="element">The web element representing the checkbox input to interact with.</param>
     /// <param name="browser">The SeleniumBrowser instance managing the Selenium WebDriver session.</param>
     /// <param name="context">The TestContext providing the execution context for the action.</param>
-    protected override void Execute(IWebElement element, SeleniumBrowser browser, TestContext context)
+    protected override async Task Execute(IWebElement element, SeleniumBrowser browser, TestContext context)
     {
-        base.Execute(element, browser, context);
+        await base.Execute(element, browser, context);
 
         if ((element.Selected && !_checked) || (_checked && !element.Selected))
         {

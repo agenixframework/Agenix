@@ -30,7 +30,7 @@ using Agenix.Configuration.Core.Models;
 namespace Agenix.Configuration.Extensions.Builders;
 
 /// <summary>
-/// Builder implementation for creating configuration managers with fluent API.
+///     Builder implementation for creating configuration managers with fluent API.
 /// </summary>
 /// <typeparam name="T">The type of the configuration object</typeparam>
 public class ConfigurationBuilder<T> : IConfigurationBuilder<T> where T : class, new()

@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -52,8 +52,10 @@ public interface ICorrelationManager<T>
     /// </summary>
     /// <param name="correlationKeyName">The name of the correlation key variable.</param>
     /// <param name="context">The test context.</param>
+    /// <param name="cancellationToken"></param>
     /// <returns>The correlation key.</returns>
-    string GetCorrelationKey(string correlationKeyName, TestContext context);
+    Task<string> GetCorrelationKey(string correlationKeyName, TestContext context,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     Stores an object in the correlation storage using the given correlation key.
@@ -67,8 +69,9 @@ public interface ICorrelationManager<T>
     /// </summary>
     /// <param name="correlationKey">The correlation key.</param>
     /// <param name="timeout">The timeout period in milliseconds.</param>
+    /// <param name="cancellationToken"></param>
     /// <returns>The found object.</returns>
-    T Find(string correlationKey, long timeout);
+    Task<T> Find(string correlationKey, long timeout, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     Sets the object store implementation.

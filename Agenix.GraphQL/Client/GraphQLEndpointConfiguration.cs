@@ -42,7 +42,7 @@ public class GraphQLEndpointConfiguration : AbstractPollableEndpointConfiguratio
 
     public GraphQLEndpointConfiguration()
     {
-        ClientHandlers.Add(new LoggingGraphQLClientHandler(new HttpClientHandler()));
+        ClientHandlers.Add(new LoggingGraphQlClientHandler(new HttpClientHandler()));
     }
 
     /// <summary>

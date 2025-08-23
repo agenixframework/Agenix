@@ -85,7 +85,8 @@ public interface ISchemaValidator<in T> where T : ISchemaValidationContext
 
         try
         {
-            var resolvedSchemas = TypeResolver.Value.ResolveAll<ISchemaValidator<T>>("", ITypeResolver.DEFAULT_TYPE_PROPERTY, "name");
+            var resolvedSchemas =
+                TypeResolver.Value.ResolveAll<ISchemaValidator<T>>("", ITypeResolver.DEFAULT_TYPE_PROPERTY, "name");
 
             foreach (var kvp in resolvedSchemas)
             {
@@ -128,13 +129,14 @@ public interface ISchemaValidator<in T> where T : ISchemaValidationContext
     /// </summary>
     /// <param name="validator">The name of the validator to lookup.</param>
     /// <returns>An Optional containing the validator if found, otherwise an empty Optional.</returns>
-    public static Optional<ISchemaValidator<T>> Lookup(string validator)
+    static Optional<ISchemaValidator<T>> Lookup(string validator)
     {
         return IndividualLookupCache.Value.GetOrAdd(validator, key =>
         {
             try
             {
-                var instance = TypeResolver.Value.Resolve<ISchemaValidator<T>>(key, ITypeResolver.DEFAULT_TYPE_PROPERTY);
+                var instance =
+                    TypeResolver.Value.Resolve<ISchemaValidator<T>>(key, ITypeResolver.DEFAULT_TYPE_PROPERTY);
                 return Optional<ISchemaValidator<T>>.Of(instance);
             }
             catch (AgenixSystemException)

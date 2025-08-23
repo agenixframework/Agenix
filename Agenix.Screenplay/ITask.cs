@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -40,31 +40,31 @@ namespace Agenix.Screenplay;
 public interface ITask : IPerformable
 {
     /// <summary>
+    ///     Creates a TaskBuilder instance with the specified title to define a task.
+    /// </summary>
+    /// <param name="title">The title of the task, used for clarity and identification.</param>
+    /// <returns>A TaskBuilder instance to further define the task steps.</returns>
+    static TaskBuilder Called(string title)
+    {
+        return new TaskBuilder(title);
+    }
+
+    /// <summary>
     ///     Creates an anonymous task composed of an array of steps to be performed.
     /// </summary>
     /// <param name="steps">An array of steps implementing the IPerformable interface that define the task.</param>
     /// <typeparam name="T">The type of the steps, which must implement the IPerformable interface.</typeparam>
     /// <returns>An instance of AnonymousTask representing the composed task.</returns>
-    public static AnonymousTask Where<T>(params T[] steps) where T : IPerformable
+    static AnonymousTask Where<T>(params T[] steps) where T : IPerformable
     {
         return Instrumented.InstanceOf<AnonymousTask>()
             .WithProperties(HumanReadableTaskName.ForCurrentMethod(), steps.ToList());
     }
 
     /// <summary>
-    ///     Creates a TaskBuilder instance with the specified title to define a task.
+    ///     Create a new Performable Task made up of a list of Performances.
     /// </summary>
-    /// <param name="title">The title of the task, used for clarity and identification.</param>
-    /// <returns>A TaskBuilder instance to further define the task steps.</returns>
-    public static TaskBuilder Called(string title)
-    {
-        return new TaskBuilder(title);
-    }
-
-    /// <summary>
-    ///     Create a new Performable Task made up of a list of Performables.
-    /// </summary>
-    public static AnonymousTask Where<T>(string title, params T[] steps) where T : IPerformable
+    static AnonymousTask Where<T>(string title, params T[] steps) where T : IPerformable
     {
         return Instrumented.InstanceOf<AnonymousTask>()
             .WithProperties(title, steps.ToList());
@@ -73,13 +73,9 @@ public interface ITask : IPerformable
     /// <summary>
     ///     Creates an anonymous performable function from a given operation for an actor.
     /// </summary>
-    /// <typeparam name="T">
-    ///     The type that the operation will utilize during execution. Must implement
-    ///     <see cref="IPerformable" />.
-    /// </typeparam>
     /// <param name="performableOperation">The action to be performed by the actor.</param>
     /// <returns>An instance of <see cref="AnonymousPerformableFunction" /> that encapsulates the operation.</returns>
-    public static AnonymousPerformableFunction Where<T>(Action<Actor> performableOperation)
+    static AnonymousPerformableFunction Where(Action<Actor> performableOperation)
     {
         return Instrumented.InstanceOf<AnonymousPerformableFunction>()
             .WithProperties(HumanReadableTaskName.ForCurrentMethod(), performableOperation);
@@ -91,7 +87,7 @@ public interface ITask : IPerformable
     /// <param name="title">The title or description of the performable function.</param>
     /// <param name="performableOperation">The action to be performed by the actor.</param>
     /// <returns>An anonymous performable function configured with the given title and action.</returns>
-    public static AnonymousPerformableFunction Where<T>(string title, Action<Actor> performableOperation)
+    static AnonymousPerformableFunction Where(string title, Action<Actor> performableOperation)
     {
         return Instrumented.InstanceOf<AnonymousPerformableFunction>()
             .WithProperties(title, performableOperation);
@@ -101,9 +97,8 @@ public interface ITask : IPerformable
     ///     Creates an anonymous performable runnable task using the provided action delegate.
     /// </summary>
     /// <param name="performableOperation">The action to be executed as part of the task.</param>
-    /// <typeparam name="T">The type context for which the task will be performed.</typeparam>
     /// <returns>An instance of <see cref="AnonymousPerformableRunnable" /> configured with the provided action.</returns>
-    public static AnonymousPerformableRunnable ThatPerforms<T>(Action performableOperation)
+    static AnonymousPerformableRunnable ThatPerforms(Action performableOperation)
     {
         return Instrumented.InstanceOf<AnonymousPerformableRunnable>()
             .WithProperties(HumanReadableTaskName.ForCurrentMethod(), performableOperation);
@@ -115,7 +110,7 @@ public interface ITask : IPerformable
     /// <param name="title">The title describing the anonymous performable runnable.</param>
     /// <param name="performableOperation">The operation to be performed as part of this performable.</param>
     /// <returns>An instance of AnonymousPerformableRunnable configured with the specified title and performable operation.</returns>
-    public static AnonymousPerformableRunnable ThatPerforms<T>(string title, Action performableOperation)
+    static AnonymousPerformableRunnable ThatPerforms(string title, Action performableOperation)
     {
         return Instrumented.InstanceOf<AnonymousPerformableRunnable>()
             .WithProperties(title, performableOperation);

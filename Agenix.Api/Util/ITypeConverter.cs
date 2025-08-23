@@ -105,7 +105,7 @@ public interface ITypeConverter
     ///     instantiates those converters.
     /// </summary>
     /// <returns>A dictionary containing all available type converters.</returns>
-    public static ConcurrentDictionary<string, ITypeConverter> Lookup()
+    static ConcurrentDictionary<string, ITypeConverter> Lookup()
     {
         return ConvertersCache.Value;
     }
@@ -137,7 +137,7 @@ public interface ITypeConverter
     ///     If no converter implementation is given via resource path lookup the default implementation is returned.
     /// </summary>
     /// <returns>the type converter to use by default.</returns>
-    public static ITypeConverter LookupDefault()
+    static ITypeConverter LookupDefault()
     {
         return LookupDefault(DefaultTypeConverter.Instance);
     }
@@ -152,7 +152,7 @@ public interface ITypeConverter
     /// </summary>
     /// <param name="defaultTypeConverter">The fallback type converter to use if no suitable converter is found.</param>
     /// <returns>the type converter to use by default.</returns>
-    public static ITypeConverter LookupDefault(ITypeConverter defaultTypeConverter)
+    static ITypeConverter LookupDefault(ITypeConverter defaultTypeConverter)
     {
         var name = AgenixSettings.GetTypeConverter();
         var converters = Lookup();

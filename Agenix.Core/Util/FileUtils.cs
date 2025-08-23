@@ -34,6 +34,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Xml;
 using Agenix.Api;
 using Agenix.Api.Context;
@@ -48,13 +49,34 @@ namespace Agenix.Core.Util;
 
 /// <summary>
 ///     Utility class for performing common file operations such as reading from and writing to files,
-///     obtaining file extensions, and converting file content to byte arrays.
+///     getting file extensions, and converting file content to byte arrays.
 /// </summary>
-public class FileUtils
+public static class FileUtils
 {
-    public static readonly string FILE_EXTENSION_XML = ".xml";
-    public static readonly string FILE_EXTENSION_YAML = ".yaml";
+    /// <summary>
+    ///     Specifies the standard file extension for XML files.
+    ///     It is primarily used to identify XML formatted files in various file operations within the application.
+    /// </summary>
+    public const string FileExtensionXml = ".xml";
 
+    /// <summary>
+    ///     Represents the standard file extension for YAML files.
+    ///     Commonly used to identify YAML formatted files during file operations within the application.
+    /// </summary>
+    public static readonly string FileExtensionYaml = ".yaml";
+
+    /// <summary>
+    ///     Represents the file path charset parameter used for encoding or decoding file paths.
+    ///     This value is retrieved from application settings to ensure consistent handling
+    ///     of file paths across different environments and encodings.
+    /// </summary>
+    public static readonly string FilePathCharsetParameter = AgenixSettings.GetFilePathCharsetParameter();
+
+    /// <summary>
+    ///     Represents the logging mechanism within the FileUtils class, specifically for recording and managing log
+    ///     entries related to file operations and system interactions.
+    ///     Utilizes the logger provided by the LogManager to capture debug and error messages.
+    /// </summary>
     private static readonly ILogger Log = LogManager.GetLogger(typeof(FileUtils));
 
     /// <summary>
@@ -106,12 +128,13 @@ public class FileUtils
     {
         if (!resource.Exists)
         {
-            throw new Exception($"Failed to read resource {resource.Description} - does not exist");
+            throw new AgenixSystemException($"Failed to read resource {resource.Description} - does not exist");
         }
 
         if (Log.IsEnabled(LogLevel.Debug))
         {
-            Log.LogDebug($"Reading file resource: '{resource.Description}' (encoding is '{encoding.WebName}')");
+            Log.LogDebug("Reading file resource: '{ResourceDescription}' (encoding is '{EncodingWebName}')",
+                resource.Description, encoding.WebName);
         }
 
         return ReadToString(resource.InputStream, encoding);
@@ -171,28 +194,27 @@ public class FileUtils
     /// </summary>
     /// <param name="content">The content to be written to the file.</param>
     /// <param name="file">The path of the file where the content will be written.</param>
-    /// <param name="charset">The encoding to be used for writing the content to the file.</param>
     /// <exception cref="IOException">Thrown when there is an error during the file writing process.</exception>
-    public static void WriteToFile(Stream inputStream, FileInfo fileInfo)
+    public static void WriteToFile(Stream content, FileInfo file)
     {
         if (Log.IsEnabled(LogLevel.Debug))
         {
-            Log.LogDebug($"Writing file resource: '{fileInfo.Name}'");
+            Log.LogDebug("Writing file resource: '{FileInfoName}'", file.Name);
         }
 
-        if (fileInfo.Directory is { Exists: false })
+        if (file.Directory is { Exists: false })
         {
-            fileInfo.Directory.Create();
+            file.Directory.Create();
         }
 
         try
         {
-            using var outputFileStream = new FileStream(fileInfo.FullName, FileMode.Create, FileAccess.Write);
-            inputStream.CopyTo(outputFileStream);
+            using var outputFileStream = new FileStream(file.FullName, FileMode.Create, FileAccess.Write);
+            content.CopyTo(outputFileStream);
         }
         catch (IOException e)
         {
-            throw new Exception("Failed to write file", e);
+            throw new AgenixSystemException("Failed to write file", e);
         }
     }
 
@@ -215,7 +237,7 @@ public class FileUtils
     /// <param name="startDir">The starting directory for the search.</param>
     /// <param name="fileNamePatterns">A set of filename patterns to match against.</param>
     /// <returns>A list of files that match any of the provided filename patterns.</returns>
-    public static List<string> findFiles(string startDir, HashSet<string> fileNamePatterns)
+    public static List<string> FindFiles(string startDir, HashSet<string> fileNamePatterns)
     {
         var files = new List<string>();
 
@@ -258,6 +280,18 @@ public class FileUtils
     public static IResource GetFileResource(string resourceName, TestContext context)
     {
         return GetFileResource(context.ReplaceDynamicContentInString(resourceName));
+    }
+
+    /// <summary>
+    ///     Asynchronously retrieves a file resource based on the specified resource name, resolving any dynamic content using
+    ///     the provided context.
+    /// </summary>
+    /// <param name="resourceName">The name of the resource to be retrieved.</param>
+    /// <param name="context">The context used to resolve dynamic content within the resource name.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the retrieved file resource.</returns>
+    public static async Task<IResource> GetFileResourceAsync(string resourceName, TestContext context)
+    {
+        return await Task.Run(() => GetFileResource(context.ReplaceDynamicContentInString(resourceName)));
     }
 
     /// <summary>
@@ -315,30 +349,6 @@ public class FileUtils
     }
 
     /// <summary>
-    ///     Copies the content of the specified file to a byte array.
-    /// </summary>
-    /// <param name="file">The file from which to copy the content.</param>
-    /// <returns>A byte array representation of the content of the file.</returns>
-    /// <exception cref="InvalidOperationException">Thrown when the file content cannot be read.</exception>
-    public static byte[] CopyToByteArray(FileInfo file)
-    {
-        if (file == null)
-        {
-            return Array.Empty<byte>();
-        }
-
-        try
-        {
-            using var inStream = file.OpenRead();
-            return ReadAllBytes(inStream);
-        }
-        catch (IOException e)
-        {
-            throw new InvalidOperationException("Failed to read file content", e);
-        }
-    }
-
-    /// <summary>
     ///     Reads all bytes from the provided file stream.
     /// </summary>
     /// <param name="fileStream">The file stream from which to read bytes.</param>
@@ -387,6 +397,30 @@ public class FileUtils
     }
 
     /// <summary>
+    ///     Copies the content of the specified file to a byte array.
+    /// </summary>
+    /// <param name="file">The file from which to copy the content.</param>
+    /// <returns>A byte array representation of the content of the file.</returns>
+    /// <exception cref="InvalidOperationException">Thrown when the file content cannot be read.</exception>
+    public static byte[] CopyToByteArray(FileInfo file)
+    {
+        if (file == null)
+        {
+            return [];
+        }
+
+        try
+        {
+            using var inStream = file.OpenRead();
+            return ReadAllBytes(inStream);
+        }
+        catch (IOException e)
+        {
+            throw new InvalidOperationException("Failed to read file content", e);
+        }
+    }
+
+    /// <summary>
     ///     Reads the content of the provided input stream and converts it to a byte array.
     /// </summary>
     /// <param name="inputStream">The input stream from which to read the content.</param>
@@ -412,6 +446,12 @@ public class FileUtils
         }
     }
 
+    /// <summary>
+    ///     Creates a new instance of the <see cref="TestSource" /> class using the file extension,
+    ///     file name, and full file path from the provided source file.
+    /// </summary>
+    /// <param name="sourceFile">The file path of the source file used to generate the <see cref="TestSource" />.</param>
+    /// <returns>A new instance of <see cref="TestSource" /> containing details about the file.</returns>
     public static TestSource GetTestSource(string sourceFile)
     {
         var ext = GetFileExtension(sourceFile);
@@ -488,10 +528,10 @@ public class FileUtils
 
             if (string.IsNullOrEmpty(tempFilePath))
             {
-                throw new ArgumentException("Config path must not be null or empty", nameof(tempFilePath));
+                throw new ArgumentException("Config path must not be null or empty");
             }
 
-            if (tempFilePath.EndsWith(FILE_EXTENSION_XML, StringComparison.OrdinalIgnoreCase))
+            if (tempFilePath.EndsWith(FileExtensionXml, StringComparison.OrdinalIgnoreCase))
             {
                 LoadFromXml(settings, tempFilePath);
             }
@@ -517,12 +557,31 @@ public class FileUtils
                 {
                     // Log but don't throw error during cleanup
                     // Assuming Log is available in this class, based on the code snippet
-                    Log.LogWarning($"Failed to delete temporary configuration file: {tempFilePath}", ex);
+                    Log.LogWarning(ex, "Failed to delete temporary configuration file: {TempFilePath}", tempFilePath);
                 }
             }
         }
 
-
         return settings;
+    }
+
+    /// <summary>
+    ///     Extract charset information from a file path. If not set return default charset. Charset
+    ///     is read as a path parameter at the end of the file path.
+    /// </summary>
+    /// <param name="path">The file path that may contain a charset parameter</param>
+    /// <returns>The encoding specified in the path or the default encoding</returns>
+    public static Encoding GetCharset(string path)
+    {
+        if (path.Contains(FilePathCharsetParameter))
+        {
+            var charsetName =
+                path[
+                    (path.IndexOf(FilePathCharsetParameter, StringComparison.Ordinal) +
+                     FilePathCharsetParameter.Length)..];
+            return Encoding.GetEncoding(charsetName);
+        }
+
+        return GetDefaultCharset();
     }
 }

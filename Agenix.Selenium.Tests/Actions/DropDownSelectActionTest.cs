@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,6 +21,7 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using System.Collections.ObjectModel;
@@ -33,9 +35,11 @@ namespace Agenix.Selenium.Tests.Actions;
 
 public class DropDownSelectActionTest : AbstractNUnitSetUp
 {
-    private SeleniumBrowser _seleniumBrowser;
-    private readonly Mock<IWebDriver> _webDriver = new();
     private readonly Mock<IWebElement> _element = new();
+    private readonly Mock<IWebDriver> _webDriver = new();
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+    private SeleniumBrowser _seleniumBrowser;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
 
     [SetUp]
@@ -53,7 +57,7 @@ public class DropDownSelectActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExecuteSelect()
+    public async Task TestExecuteSelect()
     {
         var option = new Mock<IWebElement>();
 
@@ -70,13 +74,13 @@ public class DropDownSelectActionTest : AbstractNUnitSetUp
             .SetOption("select_me")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         option.Verify(x => x.Click(), Times.Once);
     }
 
     [Test]
-    public void TestExecuteMultiSelect()
+    public async Task TestExecuteMultiSelect()
     {
         var option = new Mock<IWebElement>();
 
@@ -94,7 +98,7 @@ public class DropDownSelectActionTest : AbstractNUnitSetUp
             .SetOptions("option1", "option2")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         option.Verify(x => x.Click(), Times.Exactly(2));
     }

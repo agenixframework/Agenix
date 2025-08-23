@@ -1,22 +1,15 @@
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Agenix.Api.Exceptions;
 using Agenix.Selenium.Actions;
 using Agenix.Selenium.Endpoint;
 using Moq;
-using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
 namespace Agenix.Selenium.Tests.Actions;
 
 [TestFixture]
 public class SwitchWindowActionTest : AbstractNUnitSetUp
 {
-    private SeleniumBrowser _seleniumBrowser;
-    private Mock<IWebDriver> _webDriver;
-    private Mock<ITargetLocator> _locator;
-
     [SetUp]
     public void SetupMethod()
     {
@@ -30,13 +23,14 @@ public class SwitchWindowActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestSwitchToActiveWindow()
+    public async Task TestSwitchToActiveWindow()
     {
         var windows = new ReadOnlyCollection<string>
         ([
-            "active_window",
-            "last_window",
-            "other_window"]
+                "active_window",
+                "last_window",
+                "other_window"
+            ]
         );
 
         _webDriver.Setup(x => x.WindowHandles).Returns(windows);
@@ -49,7 +43,7 @@ public class SwitchWindowActionTest : AbstractNUnitSetUp
             .WithBrowser(_seleniumBrowser)
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable(SeleniumHeaders.SeleniumLastWindow), Is.EqualTo("last_window"));
         Assert.That(Context.GetVariable(SeleniumHeaders.SeleniumActiveWindow), Is.EqualTo("active_window"));
@@ -58,12 +52,14 @@ public class SwitchWindowActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestSwitchWindow()
+    public async Task TestSwitchWindow()
     {
         var windows = new ReadOnlyCollection<string>
         (
-            ["active_window",
-            "other_window"]
+            [
+                "active_window",
+                "other_window"
+            ]
         );
 
         _webDriver.Setup(x => x.WindowHandles).Returns(windows);
@@ -77,7 +73,7 @@ public class SwitchWindowActionTest : AbstractNUnitSetUp
             .Window("myWindow")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable(SeleniumHeaders.SeleniumLastWindow), Is.EqualTo("active_window"));
         Assert.That(Context.GetVariable(SeleniumHeaders.SeleniumActiveWindow), Is.EqualTo("other_window"));
@@ -104,7 +100,14 @@ public class SwitchWindowActionTest : AbstractNUnitSetUp
             .Window("myWindow")
             .Build();
 
-        var ex = Assert.Throws<AgenixSystemException>(() => action.Execute(Context));
+        var ex = Assert.ThrowsAsync<AgenixSystemException>(async () => await action.ExecuteAsync(Context));
+        Assert.That(ex, Is.Not.Null);
         Assert.That(ex.Message, Does.Match("Failed to find window.*"));
     }
+
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+    private SeleniumBrowser _seleniumBrowser;
+    private Mock<IWebDriver> _webDriver;
+    private Mock<ITargetLocator> _locator;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 }

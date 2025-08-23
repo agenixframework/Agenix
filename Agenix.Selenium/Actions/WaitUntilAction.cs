@@ -78,7 +78,7 @@ public class WaitUntilAction : FindElementAction
     /// <param name="element">The web element to wait for</param>
     /// <param name="browser">The Selenium browser instance</param>
     /// <param name="context">The test context</param>
-    protected override void Execute(IWebElement element, SeleniumBrowser browser, TestContext context)
+    protected override Task Execute(IWebElement element, SeleniumBrowser browser, TestContext context)
     {
         var wait = new WebDriverWait(browser.WebDriver, TimeSpan.FromMilliseconds(_timeout));
 
@@ -105,6 +105,8 @@ public class WaitUntilAction : FindElementAction
             throw new AgenixSystemException(
                 $"Timeout waiting for element condition '{_condition}' after {_timeout}ms", ex);
         }
+
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -121,7 +123,7 @@ public class WaitUntilAction : FindElementAction
     /// <summary>
     ///     Builder for creating WaitUntilAction instances.
     /// </summary>
-    public class Builder : FindElementAction.Builder
+    public new class Builder : FindElementAction.Builder
     {
         internal long _timeout { get; private set; } = 5000L;
         internal string _condition { get; private set; }

@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -26,6 +26,7 @@
 
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using Agenix.Api.Context;
 using Agenix.Api.Log;
 using Agenix.Core.Util;
@@ -53,11 +54,11 @@ public class FileCondition() : AbstractCondition("file-check")
     /// Determines whether the file condition is satisfied by checking for the presence of the specified file.
     /// <param name="context">The test context providing necessary information for file path processing.</param>
     /// <return>True if the file exists and is not a directory; otherwise, false.</return>
-    public override bool IsSatisfied(TestContext context)
+    public override async Task<bool> IsSatisfied(TestContext context)
     {
         if (Log.IsEnabled(LogLevel.Debug))
         {
-            Log.LogDebug($"Checking file path '{(_file != null ? _file.FullName : _filePath)}'");
+            Log.LogDebug("Checking file path '{FilePath}'", _file != null ? _file.FullName : _filePath);
         }
 
         if (_file != null)
@@ -67,11 +68,12 @@ public class FileCondition() : AbstractCondition("file-check")
 
         try
         {
-            return FileUtils.GetFileResource(context.ReplaceDynamicContentInString(_filePath), context).Exists;
+            return (await FileUtils.GetFileResourceAsync(context.ReplaceDynamicContentInString(_filePath), context))
+                .Exists;
         }
         catch (Exception e)
         {
-            Log.LogWarning($"Failed to access file resource '{e.Message}'");
+            Log.LogWarning(e, "Failed to access file resource '{Message}'", e.Message);
             return false;
         }
     }
@@ -81,8 +83,8 @@ public class FileCondition() : AbstractCondition("file-check")
     /// <return>The success message confirming the existence of the file.</return>
     public override string GetSuccessMessage(TestContext context)
     {
-        return
-            $"File condition success - file '{(_file != null ? _file.FullName : context.ReplaceDynamicContentInString(_filePath))}' does exist";
+        return $"File condition success - file '{(_file != null ? _file.FullName
+            : context.ReplaceDynamicContentInString(_filePath))}' does exist";
     }
 
     /// Retrieves the error message when the file condition test fails.
@@ -90,8 +92,8 @@ public class FileCondition() : AbstractCondition("file-check")
     /// <return>The error message indicating the failure of the file condition.</return>
     public override string GetErrorMessage(TestContext context)
     {
-        return
-            $"Failed to check file condition - file '{(_file != null ? _file.FullName : context.ReplaceDynamicContentInString(_filePath))}' does not exist";
+        return $"Failed to check file condition - file '{(_file != null ? _file.FullName
+            : context.ReplaceDynamicContentInString(_filePath))}' does not exist";
     }
 
     /// Retrieves the file path that is being checked for existence.
@@ -126,6 +128,8 @@ public class FileCondition() : AbstractCondition("file-check")
         _file = file;
     }
 
+    /// Returns a string that represents the current state of the FileCondition object, including the file path, file information, and condition name.
+    /// <return>A string representation of the FileCondition object.</return>
     public override string ToString()
     {
         return $"FileCondition{{filePath='{_filePath}', file={_file}, name={GetName()}}}";

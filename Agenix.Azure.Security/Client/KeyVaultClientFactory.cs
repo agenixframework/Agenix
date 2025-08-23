@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,6 +21,7 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using Agenix.Azure.Security.Configuration;
@@ -27,12 +29,12 @@ using Agenix.Azure.Security.Configuration;
 namespace Agenix.Azure.Security.Client;
 
 /// <summary>
-/// Factory for creating Azure Key Vault SecretClient instances (simplified wrapper)
+///     Factory for creating Azure Key Vault SecretClient instances (simplified wrapper)
 /// </summary>
 public static class KeyVaultClientFactory
 {
     /// <summary>
-    /// Create KeyVaultSecretClient with basic authentication
+    ///     Create KeyVaultSecretClient with basic authentication
     /// </summary>
     public static KeyVaultSecretClient CreateClient(
         string vaultUri,
@@ -54,7 +56,7 @@ public static class KeyVaultClientFactory
     }
 
     /// <summary>
-    /// Create KeyVaultSecretClient with full configuration
+    ///     Create KeyVaultSecretClient with full configuration
     /// </summary>
     public static KeyVaultSecretClient CreateClient(KeyVaultConfiguration configuration)
     {
@@ -62,7 +64,7 @@ public static class KeyVaultClientFactory
     }
 
     /// <summary>
-    /// Create KeyVaultSecretClient with retry configuration
+    ///     Create KeyVaultSecretClient with retry configuration
     /// </summary>
     public static KeyVaultSecretClient CreateClientWithRetry(
         string vaultUri,

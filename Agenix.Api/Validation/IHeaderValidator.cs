@@ -51,6 +51,14 @@ public interface IHeaderValidator
         new(() => new ResourcePathTypeResolver(ResourcePath));
 
     /// <summary>
+    ///     Resolves all available validators from the resource path lookup.
+    ///     Scans assemblies for validator meta-information and instantiates those validators.
+    /// </summary>
+    /// <returns>A dictionary containing the registered header validators.</returns>
+    private static readonly Lazy<IDictionary<string, IHeaderValidator>> ValidatorsLazy =
+        new(LoadHeaderValidators);
+
+    /// <summary>
     ///     Represents the path used to identify and locate the resource associated with the HeaderValidator implementation.
     /// </summary>
     static string ResourcePath => "Extension/agenix/header/validator";
@@ -75,23 +83,16 @@ public interface IHeaderValidator
     bool Supports(string headerName, Type type);
 
     /// <summary>
-    ///     Resolves all available validators from the resource path lookup.
-    ///     Scans assemblies for validator meta-information and instantiates those validators.
-    /// </summary>
-    /// <returns>A dictionary containing the registered header validators.</returns>
-    private static readonly Lazy<IDictionary<string, IHeaderValidator>> ValidatorsLazy =
-        new(LoadHeaderValidators);
-
-    /// <summary>
-    /// Loads all available header validators by resolving them from the resource path.
-    /// Scans and instantiates header validator implementations using a type resolver and
-    /// organizes them within a dictionary.
+    ///     Loads all available header validators by resolving them from the resource path.
+    ///     Scans and instantiates header validator implementations using a type resolver and
+    ///     organizes them within a dictionary.
     /// </summary>
     /// <returns>A dictionary containing the mapping of header validator names to their corresponding instances.</returns>
     private static IDictionary<string, IHeaderValidator> LoadHeaderValidators()
     {
         var validators = new ConcurrentDictionary<string, IHeaderValidator>();
-        var resolvedValidators = TypeResolver.Value.ResolveAll<dynamic>(ResourcePath, ITypeResolver.DEFAULT_TYPE_PROPERTY, "name");
+        var resolvedValidators =
+            TypeResolver.Value.ResolveAll<dynamic>(ResourcePath, ITypeResolver.DEFAULT_TYPE_PROPERTY, "name");
 
         foreach (var kvp in resolvedValidators)
         {
@@ -110,10 +111,11 @@ public interface IHeaderValidator
     }
 
     /// <summary>
-    /// Retrieves a dictionary of registered header validators mapped by their respective validator names.
+    ///     Retrieves a dictionary of registered header validators mapped by their respective validator names.
     /// </summary>
     /// <returns>
-    /// A dictionary where keys are validator names, and values are the corresponding implementations of <see cref="IHeaderValidator"/>.
+    ///     A dictionary where keys are validator names, and values are the corresponding implementations of
+    ///     <see cref="IHeaderValidator" />.
     /// </returns>
     static IDictionary<string, IHeaderValidator> Lookup()
     {
@@ -127,7 +129,7 @@ public interface IHeaderValidator
     /// </summary>
     /// <param name="validator"></param>
     /// <returns></returns>
-    public static Optional<IHeaderValidator> Lookup(string validator)
+    static Optional<IHeaderValidator> Lookup(string validator)
     {
         try
         {

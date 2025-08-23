@@ -1,9 +1,7 @@
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Agenix.Selenium.Actions;
 using Agenix.Selenium.Endpoint;
 using Moq;
-using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace Agenix.Selenium.Tests.Actions;
@@ -11,10 +9,6 @@ namespace Agenix.Selenium.Tests.Actions;
 [TestFixture]
 public class SetInputActionTest : AbstractNUnitSetUp
 {
-    private SeleniumBrowser _seleniumBrowser = new();
-    private Mock<IWebDriver> _webDriver = new();
-    private Mock<IWebElement> _element = new();
-
     [SetUp]
     public void SetupMethod()
     {
@@ -28,8 +22,12 @@ public class SetInputActionTest : AbstractNUnitSetUp
         _element.Setup(x => x.TagName).Returns("input");
     }
 
+    private readonly SeleniumBrowser _seleniumBrowser = new();
+    private readonly Mock<IWebDriver> _webDriver = new();
+    private readonly Mock<IWebElement> _element = new();
+
     [Test]
-    public void TestExecute()
+    public async Task TestExecute()
     {
         _webDriver.Setup(x => x.FindElement(It.IsAny<By>())).Returns(_element.Object);
 
@@ -39,14 +37,14 @@ public class SetInputActionTest : AbstractNUnitSetUp
             .SetValue("new_value")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _element.Verify(x => x.Clear(), Times.Once);
         _element.Verify(x => x.SendKeys("new_value"), Times.Once);
     }
 
     [Test]
-    public void TestExecuteOnSelect()
+    public async Task TestExecuteOnSelect()
     {
         var option = new Mock<IWebElement>();
 
@@ -65,7 +63,7 @@ public class SetInputActionTest : AbstractNUnitSetUp
             .SetValue("option")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         option.Verify(x => x.Click(), Times.Once);
     }

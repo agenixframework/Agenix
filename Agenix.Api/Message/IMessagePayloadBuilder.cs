@@ -47,7 +47,7 @@ public interface IMessagePayloadBuilder
     /// </summary>
     /// <typeparam name="T">The type of the payload builder.</typeparam>
     /// <typeparam name="TB">The type of the builder itself.</typeparam>
-    public interface IBuilder<out T, TB>
+    interface IBuilder<out T, TB>
         where T : IMessagePayloadBuilder
         where TB : IBuilder<T, TB>
     {

@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -42,10 +42,6 @@ namespace Agenix.Validation.Xml.Tests;
 
 public class MessageElementsLegacyTest : AbstractNUnitSetUp
 {
-    private Mock<IConsumer> _consumer;
-    private Mock<IEndpoint> _endpoint;
-    private Mock<IEndpointConfiguration> _endpointConfiguration;
-
     [SetUp]
     public void SetUp()
     {
@@ -71,7 +67,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             "</root>"
         );
 
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).Returns(message);
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -89,7 +85,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             .Validate(validationContext)
             .Build();
 
-        Assert.DoesNotThrow(() => receiveAction.Execute(Context));
+        Assert.DoesNotThrowAsync(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -109,7 +105,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             "</root>"
         );
 
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).Returns(message);
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -127,7 +123,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             .Validate(validationContext)
             .Build();
 
-        Assert.DoesNotThrow(() => receiveAction.Execute(Context));
+        Assert.DoesNotThrowAsync(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -147,7 +143,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             "</root>"
         );
 
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).Returns(message);
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -165,7 +161,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             .Validate(validationContext)
             .Build();
 
-        Assert.DoesNotThrow(() => receiveAction.Execute(Context));
+        Assert.DoesNotThrowAsync(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -185,7 +181,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             "</root>"
         );
 
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).Returns(message);
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -203,7 +199,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             .Validate(validationContext)
             .Build();
 
-        Assert.Throws<AgenixSystemException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<AgenixSystemException>(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -223,7 +219,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             "</root>"
         );
 
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).Returns(message);
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -241,7 +237,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             .Validate(validationContext)
             .Build();
 
-        Assert.Throws<ValidationException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<ValidationException>(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -261,7 +257,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             "</root>"
         );
 
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).Returns(message);
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -279,7 +275,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             .Validate(validationContext)
             .Build();
 
-        Assert.Throws<ValidationException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<ValidationException>(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -299,7 +295,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             "</root>"
         );
 
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).Returns(message);
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).ReturnsAsync(message);
 
         var validateMessageElements = new Dictionary<string, object>
         {
@@ -317,11 +313,11 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             .Validate(validationContext)
             .Build();
 
-        Assert.Throws<AgenixSystemException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<AgenixSystemException>(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
-    public void TestSetMessageElements()
+    public async Task TestSetMessageElements()
     {
         _endpoint.Setup(e => e.CreateConsumer()).Returns(_consumer.Object);
         _endpoint.Setup(e => e.EndpointConfiguration).Returns(_endpointConfiguration.Object);
@@ -337,7 +333,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             "</root>"
         );
 
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).Returns(message);
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -366,11 +362,11 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             .Process(processor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestSetMessageElementsUsingEmptyString()
+    public async Task TestSetMessageElementsUsingEmptyString()
     {
         _endpoint.Setup(e => e.CreateConsumer()).Returns(_consumer.Object);
         _endpoint.Setup(e => e.EndpointConfiguration).Returns(_endpointConfiguration.Object);
@@ -386,7 +382,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             "</root>"
         );
 
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).Returns(message);
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -415,11 +411,11 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             .Process(processor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestSetMessageElementsAndValidate()
+    public async Task TestSetMessageElementsAndValidate()
     {
         _endpoint.Setup(e => e.CreateConsumer()).Returns(_consumer.Object);
         _endpoint.Setup(e => e.EndpointConfiguration).Returns(_endpointConfiguration.Object);
@@ -435,7 +431,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             "</root>"
         );
 
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).Returns(message);
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -474,11 +470,11 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             .Process(processor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestSetMessageElementAttributes()
+    public async Task TestSetMessageElementAttributes()
     {
         _endpoint.Setup(e => e.CreateConsumer()).Returns(_consumer.Object);
         _endpoint.Setup(e => e.EndpointConfiguration).Returns(_endpointConfiguration.Object);
@@ -494,7 +490,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             "</root>"
         );
 
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).Returns(message);
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -523,7 +519,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             .Process(processor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
@@ -543,7 +539,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             "</root>"
         );
 
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).Returns(message);
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -572,7 +568,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             .Process(processor)
             .Build();
 
-        Assert.Throws<AgenixSystemException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<AgenixSystemException>(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -592,7 +588,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             "</root>"
         );
 
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).Returns(message);
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -621,7 +617,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             .Process(processor)
             .Build();
 
-        Assert.Throws<AgenixSystemException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<AgenixSystemException>(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -641,7 +637,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             "</root>"
         );
 
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).Returns(message);
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -670,11 +666,11 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             .Process(processor)
             .Build();
 
-        Assert.Throws<AgenixSystemException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<AgenixSystemException>(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
-    public void TestExtractMessageElements()
+    public async Task TestExtractMessageElements()
     {
         _endpoint.Setup(e => e.CreateConsumer()).Returns(_consumer.Object);
         _endpoint.Setup(e => e.EndpointConfiguration).Returns(_endpointConfiguration.Object);
@@ -690,7 +686,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             "</root>"
         );
 
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).Returns(message);
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -718,7 +714,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             .Process(variableExtractor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariables().ContainsKey("valueA"), Is.True);
         Assert.That(Context.GetVariables()["valueA"], Is.EqualTo("text-value"));
@@ -727,7 +723,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExtractMessageAttributes()
+    public async Task TestExtractMessageAttributes()
     {
         _endpoint.Setup(e => e.CreateConsumer()).Returns(_consumer.Object);
         _endpoint.Setup(e => e.EndpointConfiguration).Returns(_endpointConfiguration.Object);
@@ -743,7 +739,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             "</root>"
         );
 
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).Returns(message);
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -772,7 +768,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             .Process(variableExtractor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariables().ContainsKey("valueA"), Is.True);
         Assert.That(Context.GetVariables()["valueA"], Is.EqualTo("A"));
@@ -797,7 +793,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             "</root>"
         );
 
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).Returns(message);
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -825,7 +821,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             .Process(variableExtractor)
             .Build();
 
-        Assert.Throws<AgenixSystemException>(() => receiveAction.Execute(Context));
+        Assert.ThrowsAsync<AgenixSystemException>(() => receiveAction.ExecuteAsync(Context));
     }
 
     [Test]
@@ -845,7 +841,7 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             "</root>"
         );
 
-        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).Returns(message);
+        _consumer.Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>())).ReturnsAsync(message);
 
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -873,9 +869,14 @@ public class MessageElementsLegacyTest : AbstractNUnitSetUp
             .Process(variableExtractor)
             .Build();
 
-        Assert.That(
-            () => receiveAction.Execute(Context),
+        Assert.ThatAsync(
+            () => receiveAction.ExecuteAsync(Context),
             Throws.TypeOf<AgenixSystemException>()
         );
     }
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+    private Mock<IConsumer> _consumer;
+    private Mock<IEndpoint> _endpoint;
+    private Mock<IEndpointConfiguration> _endpointConfiguration;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 }

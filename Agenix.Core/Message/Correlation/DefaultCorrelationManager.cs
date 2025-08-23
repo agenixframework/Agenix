@@ -7,25 +7,29 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
 using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
 using Agenix.Api.Message.Correlation;
 using Microsoft.Extensions.Logging;
@@ -39,7 +43,7 @@ namespace Agenix.Core.Message.Correlation;
 /// <typeparam name="T"></typeparam>
 public class DefaultCorrelationManager<T> : ICorrelationManager<T>
 {
-    private static readonly ILogger Log = LogManager.GetLogger("DefaultCorrelationManager");
+    private static readonly ILogger Log = LogManager.GetLogger(typeof(DefaultCorrelationManager<T>));
 
     private IObjectStore<T> _objectStore = new DefaultObjectStore<T>();
 
@@ -53,7 +57,7 @@ public class DefaultCorrelationManager<T> : ICorrelationManager<T>
     {
         if (Log.IsEnabled(LogLevel.Debug))
         {
-            Log.LogDebug($"Saving correlation key for '{correlationKeyName}'");
+            Log.LogDebug("Saving correlation key for '{CorrelationKeyName}'", correlationKeyName);
         }
 
         context.SetVariable(correlationKeyName, correlationKey);
@@ -64,21 +68,23 @@ public class DefaultCorrelationManager<T> : ICorrelationManager<T>
     /// </summary>
     /// <param name="correlationKeyName">The name of the correlation key to retrieve.</param>
     /// <param name="context">The context containing the correlation key.</param>
+    /// <param name="cancellationToken"></param>
     /// <returns>The correlation key associated with the specified name.</returns>
     /// <exception cref="Exception">Thrown if the correlation key could not be found in the context.</exception>
-    public virtual string GetCorrelationKey(string correlationKeyName, TestContext context)
+    public virtual Task<string> GetCorrelationKey(string correlationKeyName, TestContext context,
+        CancellationToken cancellationToken = default)
     {
         if (Log.IsEnabled(LogLevel.Debug))
         {
-            Log.LogDebug($"Get correlation key for '{correlationKeyName}'");
+            Log.LogDebug("Get correlation key for '{CorrelationKeyName}'", correlationKeyName);
         }
 
         if (context.GetVariables().ContainsKey(correlationKeyName))
         {
-            return context.GetVariable(correlationKeyName);
+            return Task.FromResult(context.GetVariable(correlationKeyName));
         }
 
-        throw new Exception($"Failed to get correlation key for '{correlationKeyName}'");
+        throw new AgenixSystemException($"Failed to get correlation key for '{correlationKeyName}'");
     }
 
     /// <summary>
@@ -88,15 +94,15 @@ public class DefaultCorrelationManager<T> : ICorrelationManager<T>
     /// <param name="obj">The object to be stored.</param>
     public void Store(string correlationKey, T obj)
     {
-        if (obj == null)
+        if (EqualityComparer<T>.Default.Equals(obj, default))
         {
-            Log.LogWarning($"Ignore correlated null object for '{correlationKey}'");
+            Log.LogWarning("Ignore correlated null object for '{CorrelationKey}'", correlationKey);
             return;
         }
 
         if (Log.IsEnabled(LogLevel.Debug))
         {
-            Log.LogDebug($"Saving correlated object for '{correlationKey}'");
+            Log.LogDebug("Saving correlated object for '{CorrelationKey}'", correlationKey);
         }
 
         _objectStore.Add(correlationKey, obj);
@@ -107,15 +113,16 @@ public class DefaultCorrelationManager<T> : ICorrelationManager<T>
     /// </summary>
     /// <param name="correlationKey">The correlation key associated with the object.</param>
     /// <param name="timeout">The maximum amount of time to wait for the object to be found, in milliseconds.</param>
+    /// <param name="cancellationToken"></param>
     /// <returns>The object associated with the specified correlation key, or the default value if not found.</returns>
-    public virtual T Find(string correlationKey, long timeout)
+    public virtual Task<T> Find(string correlationKey, long timeout, CancellationToken cancellationToken = default)
     {
         if (Log.IsEnabled(LogLevel.Debug))
         {
-            Log.LogDebug($"Finding correlated object for '{correlationKey}'");
+            Log.LogDebug("Finding correlated object for '{CorrelationKey}'", correlationKey);
         }
 
-        return _objectStore.Remove(correlationKey);
+        return Task.FromResult(_objectStore.Remove(correlationKey));
     }
 
     /// <summary>

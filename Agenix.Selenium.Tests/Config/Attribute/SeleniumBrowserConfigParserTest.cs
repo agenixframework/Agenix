@@ -17,6 +17,15 @@ namespace Agenix.Selenium.Tests.Config.Attribute;
 
 public class SeleniumBrowserConfigParserTest
 {
+    private static readonly string[] Names = ["eventListener"];
+
+    private readonly TestContext _context = Core.Agenix.NewInstance().AgenixContext.CreateTestContext();
+    private readonly Mock<Action<EventFiringWebDriver>> _eventHandler = new();
+    private readonly Mock<FirefoxProfile> _firefoxProfile = new();
+
+    private readonly Mock<IReferenceResolver> _referenceResolver = new();
+    private readonly Mock<IWebDriver> _webDriver = new();
+
     [SeleniumBrowserConfig]
     [AgenixEndpoint(Name = "browser1")]
     private SeleniumBrowser browser1;
@@ -44,14 +53,6 @@ public class SeleniumBrowserConfigParserTest
     [AgenixEndpoint]
     [SeleniumBrowserConfig(Type = "chrome")]
     private SeleniumBrowser browser4;
-
-    private readonly Mock<IReferenceResolver> _referenceResolver = new();
-    private readonly Mock<Action<EventFiringWebDriver>> _eventHandler = new();
-    private readonly Mock<IWebDriver> _webDriver = new();
-    private readonly Mock<FirefoxProfile> _firefoxProfile = new();
-
-    private readonly TestContext _context = Core.Agenix.NewInstance().AgenixContext.CreateTestContext();
-    private static readonly string[] Names = ["eventListener"];
 
     [SetUp]
     public void SetUp()
@@ -116,7 +117,8 @@ public class SeleniumBrowserConfigParserTest
         AgenixAnnotations.InjectEndpoints(this, _context);
 
         Assert.That(browser3, Is.Not.Null);
-        Assert.That(browser3.EndpointConfiguration.BrowserType, Is.EqualTo(BrowserType.INTERNET_EXPLORER.GetBrowserName()));
+        Assert.That(browser3.EndpointConfiguration.BrowserType,
+            Is.EqualTo(BrowserType.INTERNET_EXPLORER.GetBrowserName()));
         Assert.That(browser3.EndpointConfiguration.RemoteServerUrl, Is.EqualTo("http://localhost:9090/selenium"));
     }
 
@@ -147,5 +149,4 @@ public class SeleniumBrowserConfigParserTest
     {
         Assert.That(IAnnotationConfigParser<System.Attribute, IEndpoint>.Lookup("selenium.browser").IsPresent, Is.True);
     }
-
 }

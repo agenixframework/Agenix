@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -36,6 +36,13 @@ namespace Agenix.Core.Functions.Core;
 /// </summary>
 public class UpperCaseFunction : IFunction
 {
+    /// <summary>
+    ///     Executes the UpperCaseFunction, which converts the first argument in the parameter list to uppercase.
+    /// </summary>
+    /// <param name="parameterList">A list of strings where the first entry will be converted to uppercase.</param>
+    /// <param name="testContext">The current test context used during function execution.</param>
+    /// <returns>Returns the first string in the parameter list converted to uppercase.</returns>
+    /// <exception cref="InvalidFunctionUsageException">Thrown when the parameter list is null or empty.</exception>
     public string Execute(List<string> parameterList, TestContext testContext)
     {
         if (parameterList == null || parameterList.Count == 0)

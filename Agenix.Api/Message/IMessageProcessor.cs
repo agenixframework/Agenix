@@ -90,7 +90,7 @@ public interface IMessageProcessor : IMessageTransformer
     /// <typeparam name="T">The type of IMessageProcessor.</typeparam>
     /// <typeparam name="TB">The type of the builder for the IMessageProcessor.</typeparam>
     /// <returns>An instance of the message processor builder, or null if it fails to resolve.</returns>
-    public static Optional<IBuilder<T, TB>> Lookup<T, TB>(string processor)
+    static Optional<IBuilder<T, TB>> Lookup<T, TB>(string processor)
         where T : IMessageProcessor where TB : IBuilder<T, TB>
     {
         // Create a cache key that includes type information for generic safety

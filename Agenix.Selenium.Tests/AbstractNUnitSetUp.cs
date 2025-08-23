@@ -33,18 +33,16 @@ namespace Agenix.Selenium.Tests;
 
 public abstract class AbstractNUnitSetUp
 {
-    private TestContext _context;
-    private TestContextFactory _testContextFactory;
+    protected TestContext Context { get; private set; }
 
-    protected TestContext Context => _context;
-    protected TestContextFactory TestContextFactory => _testContextFactory;
+    protected TestContextFactory TestContextFactory { get; private set; }
 
     [SetUp]
     public void Setup()
     {
         // Create completely isolated instances for each test
-        _testContextFactory = CreateTestContextFactory();
-        _context = CreateTestContext();
+        TestContextFactory = CreateTestContextFactory();
+        Context = CreateTestContext();
     }
 
     [TearDown]
@@ -52,7 +50,7 @@ public abstract class AbstractNUnitSetUp
     {
         try
         {
-            _context?.Clear();
+            Context?.Clear();
         }
         catch (Exception ex)
         {
@@ -61,20 +59,20 @@ public abstract class AbstractNUnitSetUp
         finally
         {
             // Dispose resources safely
-            if (_context is IDisposable disposableContext)
+            if (Context is IDisposable disposableContext)
             {
                 try { disposableContext.Dispose(); }
                 catch (Exception ex) { Console.WriteLine($"Warning: Error disposing context: {ex.Message}"); }
             }
 
-            if (_testContextFactory is IDisposable disposableFactory)
+            if (TestContextFactory is IDisposable disposableFactory)
             {
                 try { disposableFactory.Dispose(); }
                 catch (Exception ex) { Console.WriteLine($"Warning: Error disposing factory: {ex.Message}"); }
             }
 
-            _context = null;
-            _testContextFactory = null;
+            Context = null;
+            TestContextFactory = null;
         }
     }
 
@@ -94,12 +92,11 @@ public abstract class AbstractNUnitSetUp
     {
         try
         {
-            return _testContextFactory.GetObject();
+            return TestContextFactory.GetObject();
         }
         catch (Exception e)
         {
             throw new AgenixSystemException("Failed to create test context", e);
         }
     }
-
 }

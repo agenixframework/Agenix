@@ -7,24 +7,26 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Endpoint;
@@ -40,13 +42,15 @@ namespace Agenix.Core.Actions;
 /// <summary>
 ///     Action expecting a timeout on a message destination, this means that no message should arrive at the destination.
 /// </summary>
-public class ReceiveTimeoutAction : AbstractTestAction
+public class ReceiveTimeoutAction : AbstractTestActionAsync
 {
     /// <summary>
     ///     Logger.
     /// </summary>
     private static readonly ILogger Log = LogManager.GetLogger(typeof(ReceiveTimeoutAction));
 
+    /// Represents an asynchronous action that expects a timeout where no messages
+    /// should arrive at the specified endpoint destination.
     public ReceiveTimeoutAction(Builder builder) : base("receive-timeout", builder)
     {
         Endpoint = builder.MessageEndpoint;
@@ -79,10 +83,11 @@ public class ReceiveTimeoutAction : AbstractTestAction
     /// </summary>
     public string MessageSelector { get; }
 
-    /// Executes the main operations based on the provided configuration and parameters.
-    /// @param configuration The configuration settings required for execution.
-    /// @param parameters A collection of parameters necessary for the operation.
-    public override void DoExecute(TestContext context)
+    /// Executes the action asynchronously, performing message reception with a timeout validation.
+    /// @param context The test context that provides execution resources and state.
+    /// @param cancellation The token to monitor for cancellation requests during execution.
+    /// @return A task representing the asynchronous operation.
+    public override async Task DoExecute(TestContext context, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -93,18 +98,18 @@ public class ReceiveTimeoutAction : AbstractTestAction
 
             if (!string.IsNullOrWhiteSpace(MessageSelector) && consumer is ISelectiveConsumer selectiveConsumer)
             {
-                receivedMessage = selectiveConsumer.Receive(selector, context, Timeout);
+                receivedMessage = await selectiveConsumer.Receive(selector, context, Timeout);
             }
             else
             {
-                receivedMessage = consumer.Receive(context, Timeout);
+                receivedMessage = await consumer.Receive(context, Timeout);
             }
 
             if (receivedMessage != null)
             {
                 if (Log.IsEnabled(LogLevel.Debug))
                 {
-                    Log.LogDebug("Received message:\n" + receivedMessage.Print(context));
+                    Log.LogDebug("Received message: {ReceiveMessagePrint}\n", receivedMessage.Print(context));
                 }
 
                 throw new AgenixSystemException("Message timeout validation failed! " +
@@ -113,8 +118,8 @@ public class ReceiveTimeoutAction : AbstractTestAction
         }
         catch (ActionTimeoutException e)
         {
-            Log.LogInformation("No messages received on destination. Message timeout validation OK!");
-            Log.LogInformation(e.Message);
+            Log.LogInformation(e, "No messages received on destination. Message timeout validation OK!");
+            Log.LogInformation(e, e.Message);
         }
     }
 
@@ -139,12 +144,33 @@ public class ReceiveTimeoutAction : AbstractTestAction
 
     /// The Builder class assists in the construction of ReceiveTimeoutAction instances using a fluent interface.
     /// /
-    public sealed class Builder : AbstractTestActionBuilder<ITestAction, dynamic>
+    public sealed class Builder : AbstractAsyncTestActionBuilder<IAsyncTestAction, dynamic>
     {
+        // ReSharper disable once InconsistentNaming
         internal long _timeout = 1000L;
+
+        /// <summary>
+        ///     Represents the endpoint used for messaging processes within the builder configuration.
+        ///     Provides an instance of <see cref="IEndpoint" /> that supports producing and consuming messages.
+        /// </summary>
         public IEndpoint MessageEndpoint { get; private set; }
+
+        /// <summary>
+        ///     Represents the URI of the endpoint associated with the action.
+        /// </summary>
         public string EndpointUri { get; private set; }
+
+        /// <summary>
+        ///     A dictionary that represents message selectors, where the keys are selector names
+        ///     and the values are corresponding selector values, used to configure message filtering.
+        /// </summary>
         public Dictionary<string, object> MessageSelectorDictionary { get; private set; } = new();
+
+        /// <summary>
+        ///     Defines a string-based criteria for selecting messages,
+        ///     typically used to filter and determine the specific message
+        ///     or messages of interest during execution.
+        /// </summary>
         public string MessageSelector { get; private set; }
 
 
@@ -239,6 +265,8 @@ public class ReceiveTimeoutAction : AbstractTestAction
             return this;
         }
 
+        /// Constructs and returns a new instance of ReceiveTimeoutAction.
+        /// <return>Returns a new instance of ReceiveTimeoutAction configured based on the builder setup.</return>
         public override ReceiveTimeoutAction Build()
         {
             return new ReceiveTimeoutAction(this);

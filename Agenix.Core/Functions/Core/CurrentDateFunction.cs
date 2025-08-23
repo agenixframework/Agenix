@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -26,40 +26,56 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
-using Agenix.Api.Functions;
-using static System.Console;
+using Agenix.Api.Log;
+using Microsoft.Extensions.Logging;
 
 namespace Agenix.Core.Functions.Core;
 
 /// <summary>
-///     Function returning the actual date as formatted string value. User specifies format string as argument.
-///     TODO: Function has also to support additional date offset in order to manipulate result date value. E.g.
-///     agenix:CurrentDate('yyyy-MM-dd', '+1y') -> current date + one year
+///     Function returning the actual date as a formatted string value. User specifies format string as an argument.
 /// </summary>
-public class CurrentDateFunction : IFunction
+public class CurrentDateFunction : DateOffSetParser
 {
-    public string Execute(List<string> parameterList, TestContext testContext)
+    /// <summary>
+    ///     Logger
+    /// </summary>
+    private static readonly ILogger Logger = LogManager.GetLogger<CurrentDateFunction>();
+
+    /// <summary>
+    ///     Executes the current date function
+    /// </summary>
+    /// <param name="parameterList">List of parameters</param>
+    /// <param name="testContext">Test context</param>
+    /// <returns>Formatted date string</returns>
+    /// <exception cref="AgenixSystemException">Thrown when date formatting fails</exception>
+    public override string Execute(List<string> parameterList, TestContext testContext)
     {
-        if (parameterList == null || parameterList.Count == 0)
+        var dateTime = DateTime.Now;
+
+        string result;
+
+        var dateFormat = parameterList is { Count: > 0 } && parameterList.Any(p => !string.IsNullOrWhiteSpace(p))
+            ? parameterList[0]
+            : DefaultDateFormat;
+
+        if (parameterList is { Count: > 1 })
         {
-            return GetDefaultCurrentDate();
+            ApplyDateOffset(ref dateTime, parameterList[1]);
         }
 
         try
         {
-            return parameterList[0].Equals("") ? GetDefaultCurrentDate() : DateTime.Now.ToString(parameterList[0]);
+            result = dateTime.ToString(dateFormat);
         }
         catch (Exception e)
         {
-            WriteLine("Error while formatting data value {0}", e);
+            Logger.LogError(e, "Error while formatting date value");
             throw new AgenixSystemException(e.Message);
         }
-    }
 
-    private static string GetDefaultCurrentDate()
-    {
-        return DateTime.Now.ToString("dd.MM.yyyy");
+        return result;
     }
 }

@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -35,6 +35,17 @@ namespace Agenix.ReqnrollPlugin.Extensions;
 /// </summary>
 public static class StepInfoExtensions
 {
+    /// <summary>
+    ///     Generates a formatted representation of the parameters associated with the step, either as a multiline text block
+    ///     or a markdown-formatted table, depending on the type of arguments present in the step information.
+    /// </summary>
+    /// <param name="stepInfo">
+    ///     The step information containing details about the step instance, including any multiline text or table arguments.
+    /// </param>
+    /// <returns>
+    ///     A string containing the formatted representation of the step's parameters, which may include a markdown-style
+    ///     representation of either a multiline string or a table.
+    /// </returns>
     public static string GetFormattedParameters(this StepInfo stepInfo)
     {
         var fullText = "";
@@ -49,7 +60,7 @@ public static class StepInfoExtensions
         {
             fullText = "| **" + string.Join("** | **", stepInfo.StepInstance.TableArgument.Header) + "** |";
             fullText += Environment.NewLine + "| " +
-                        string.Join(" | ", stepInfo.StepInstance.TableArgument.Header.Select(c => "---")) + " |";
+                        string.Join(" | ", stepInfo.StepInstance.TableArgument.Header.Select(_ => "---")) + " |";
 
             fullText = stepInfo.StepInstance.TableArgument.Rows.Aggregate(fullText,
                 (current, row) => current + Environment.NewLine + "| " + string.Join(" | ", row.Values) + " |");

@@ -24,7 +24,6 @@
 
 #endregion
 
-using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Validation.Matcher;
@@ -91,14 +90,14 @@ public class FindElementAction : AbstractSeleniumAction
     public By? By { get; }
 
     /// <summary>
-    /// Executes the find element action by locating the specified element on the page and processing it.
+    ///     Executes the find element action by locating the specified element on the page and processing it.
     /// </summary>
-    /// <param name="browser">The <see cref="SeleniumBrowser"/> instance used to interact with the web browser.</param>
-    /// <param name="context">The <see cref="TestContext"/> providing context-specific information for the test execution.</param>
+    /// <param name="browser">The <see cref="SeleniumBrowser" /> instance used to interact with the web browser.</param>
+    /// <param name="context">The <see cref="TestContext" /> providing context-specific information for the test execution.</param>
     /// <exception cref="AgenixSystemException">
-    /// Thrown when the specified element cannot be found on the page.
+    ///     Thrown when the specified element cannot be found on the page.
     /// </exception>
-    protected override void Execute(SeleniumBrowser browser, TestContext context)
+    protected override async Task Execute(SeleniumBrowser browser, TestContext context)
     {
         var findBy = CreateBy(context);
         var element = browser.WebDriver.FindElement(findBy);
@@ -109,18 +108,20 @@ public class FindElementAction : AbstractSeleniumAction
         }
 
         Validate(element, browser, context);
-        Execute(element, browser, context);
+        await Execute(element, browser, context);
     }
 
     /// <summary>
     ///     Subclasses may override this method to add element actions
     /// </summary>
-    protected virtual void Execute(IWebElement element, SeleniumBrowser browser, TestContext context)
+    protected virtual Task Execute(IWebElement element, SeleniumBrowser browser, TestContext context)
     {
         if (!string.IsNullOrWhiteSpace(element.TagName))
         {
             context.GetVariables()[element.TagName] = element;
         }
+
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -217,8 +218,7 @@ public class FindElementAction : AbstractSeleniumAction
     /// </summary>
     private static string ReplaceDynamicContent(string value, TestContext context)
     {
-        return string.IsNullOrEmpty(value) ? value :
-            context.ReplaceDynamicContentInString(str: value);
+        return string.IsNullOrEmpty(value) ? value : context.ReplaceDynamicContentInString(value);
     }
 
     /// <summary>
@@ -288,8 +288,8 @@ public class FindElementAction : AbstractSeleniumAction
         }
 
         /// <summary>
-        /// Constructs and returns a new instance of the FindElementAction class
-        /// using the configured properties in the builder.
+        ///     Constructs and returns a new instance of the FindElementAction class
+        ///     using the configured properties in the builder.
         /// </summary>
         /// <returns>Returns a newly created FindElementAction instance.</returns>
         public override FindElementAction Build()
@@ -301,7 +301,7 @@ public class FindElementAction : AbstractSeleniumAction
     /// <summary>
     ///     Abstract element-based action builder
     /// </summary>
-    public abstract class ElementActionBuilder<TAction, TBuilder> : AbstractSeleniumAction.Builder<TAction, TBuilder>
+    public abstract class ElementActionBuilder<TAction, TBuilder> : Builder<TAction, TBuilder>
         where TAction : ISeleniumAction
         where TBuilder : ElementActionBuilder<TAction, TBuilder>
     {
@@ -315,7 +315,7 @@ public class FindElementAction : AbstractSeleniumAction
         public TBuilder Element(By by)
         {
             By = by;
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -328,11 +328,11 @@ public class FindElementAction : AbstractSeleniumAction
         {
             Property = property;
             PropertyValue = propertyValue;
-            return self;
+            return Self;
         }
 
         /// <summary>
-        /// Builds and returns an instance of the specific action.
+        ///     Builds and returns an instance of the specific action.
         /// </summary>
         /// <returns>The constructed instance of the action.</returns>
         public abstract override TAction Build();

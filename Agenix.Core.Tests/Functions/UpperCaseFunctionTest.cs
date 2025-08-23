@@ -7,28 +7,26 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
-using System.Collections.Generic;
 using Agenix.Api.Exceptions;
 using Agenix.Core.Functions.Core;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Agenix.Core.Tests.Functions;
 
@@ -42,18 +40,18 @@ public class UpperCaseFunctionTest : AbstractNUnitSetUp
     [Test]
     public void TestUpperCaseFunction()
     {
-        ClassicAssert.AreEqual(_upperCaseFunction.Execute(new List<string> { "1000" }, Context), "1000");
-        ClassicAssert.AreEqual(_upperCaseFunction.Execute(new List<string> { "hallo TestFramework!" }, Context),
-            "HALLO TESTFRAMEWORK!");
-        ClassicAssert.AreEqual(_upperCaseFunction.Execute(new List<string> { "Today is: 09.02.2012" }, Context),
-            "TODAY IS: 09.02.2012");
+        Assert.That(_upperCaseFunction.Execute(["1000"], Context), Is.EqualTo("1000"));
+        Assert.That(_upperCaseFunction.Execute(["hallo TestFramework!"], Context),
+            Is.EqualTo("HALLO TESTFRAMEWORK!"));
+        Assert.That(_upperCaseFunction.Execute(["Today is: 09.02.2012"], Context),
+            Is.EqualTo("TODAY IS: 09.02.2012"));
     }
 
     [Test]
     public void TestNoParameters()
     {
         Assert.Throws<InvalidFunctionUsageException>(() =>
-            _upperCaseFunction.Execute(new List<string>(), Context)
+            _upperCaseFunction.Execute([], Context)
         );
     }
 }

@@ -7,23 +7,25 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Threading;
+using System.Threading.Tasks;
 using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
@@ -37,28 +39,29 @@ namespace Agenix.Core.Actions;
 ///     The FailAction class is designed to generate an error in tests, using a predefined or customized message.
 ///     This can be useful for testing error handling and response mechanisms.
 /// </remarks>
-public class FailAction(FailAction.Builder builder) : AbstractTestAction("fail", builder)
+public class FailAction(FailAction.Builder builder) : AbstractTestActionAsync("fail", builder)
 {
-    private readonly string _message = builder.message;
-
-    /// <summary>
-    ///     Executes the specified FailAction in the given TestContext.
-    /// </summary>
-    /// <param name="context">The TestContext in which the FailAction is executed.</param>
-    public override void DoExecute(TestContext context)
-    {
-        throw new AgenixSystemException(context.ReplaceDynamicContentInString(_message));
-    }
-
     /// <summary>
     ///     Retrieves the message associated with the FailAction.
     /// </summary>
     /// <returns>
     ///     A string representing the error message configured for the FailAction.
     /// </returns>
-    public string GetMessage()
+    public string Message { get; } = builder.Message;
+
+    /// <summary>
+    ///     Executes the FailAction, throwing an exception with a dynamically replaced message.
+    /// </summary>
+    /// <param name="context">The test context containing dynamic content to be replaced in the message.</param>
+    /// <param name="cancellationToken">An optional token to monitor for cancellation requests.</param>
+    /// <returns>A task representing the asynchronous operation execution.</returns>
+    /// <exception cref="AgenixSystemException">
+    ///     Thrown when the FailAction is executed, containing the dynamically replaced
+    ///     message.
+    /// </exception>
+    public override Task DoExecute(TestContext context, CancellationToken cancellationToken = default)
     {
-        return _message;
+        throw new AgenixSystemException(context.ReplaceDynamicContentInString(Message));
     }
 
     /// <summary>
@@ -68,16 +71,19 @@ public class FailAction(FailAction.Builder builder) : AbstractTestAction("fail",
     ///     This class allows for the configuration of a fail action, which is intended to interrupt test execution
     ///     with a generated error.
     /// </remarks>
-    public class Builder : AbstractTestActionBuilder<ITestAction, dynamic>
+    public class Builder : AbstractAsyncTestActionBuilder<IAsyncTestAction, dynamic>
     {
-        public string message = "Generated error to interrupt test execution";
+        /// <summary>
+        ///     Represents the message associated with an action, typically used to convey information
+        ///     or describe errors during the execution of the action.
+        /// </summary>
+        internal string Message = "Generated error to interrupt test execution";
 
         /// <summary>
-        ///     Represents an action that causes a failure in test execution.
+        ///     Configures and initializes a builder for constructing a fail action that interrupts test execution with an error.
         /// </summary>
-        /// <param name="builder">The builder used to configure the fail action.</param>
         /// <returns>
-        ///     An instance of the <see cref="FailAction" /> class configured by the provided builder.
+        ///     Returns a builder instance configured to create a fail action for test interruption.
         /// </returns>
         public static Builder Fail()
         {
@@ -85,38 +91,28 @@ public class FailAction(FailAction.Builder builder) : AbstractTestAction("fail",
         }
 
         /// <summary>
-        ///     Represents an action that causes a failure in test execution.
+        ///     Executes an action that forces a failure in the test sequence by throwing an exception.
         /// </summary>
-        /// <param name="builder">The builder used to configure the fail action.</param>
-        /// <returns>
-        ///     An instance of the <see cref="FailAction" /> class configured by the provided builder.
-        /// </returns>
-        /// <param name="context">The context in which the fail action is executed.</param>
-        /// <returns>
-        ///     No return value.
-        /// </returns>
-        /// <param name="message">The failure message to be retrieved.</param>
-        /// <returns>
-        ///     The failure message associated with the fail action.
-        /// </returns>
+        /// <param name="message">The failure message that describes the reason for the test failure.</param>
+        /// <returns>A configured instance of the FailAction builder.</returns>
+        /// <exception cref="AgenixSystemException">
+        ///     Thrown to indicate the failure as part of the test execution process, including
+        ///     the provided message.
+        /// </exception>
         public static Builder Fail(string message)
         {
-            var builder = new Builder { message = message };
+            var builder = new Builder { Message = message };
             return builder;
         }
 
         /// <summary>
-        ///     Represents a message with specific properties.
+        ///     Updates the message content for the builder.
         /// </summary>
-        /// <param name="message">The content of the message.</param>
-        /// <param name="sender">The sender of the message.</param>
-        /// <param name="timestamp">The time when the message was sent.</param>
-        /// <returns>
-        ///     A new instance of the <see cref="Message" /> class.
-        /// </returns>
-        public Builder Message(string message)
+        /// <param name="newMessage">The new content of the message to be set.</param>
+        /// <returns>A reference to the updated builder instance.</returns>
+        public Builder WithMessage(string newMessage)
         {
-            this.message = message;
+            Message = newMessage;
             return this;
         }
 

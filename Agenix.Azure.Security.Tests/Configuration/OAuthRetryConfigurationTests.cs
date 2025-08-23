@@ -28,13 +28,13 @@ namespace Agenix.Azure.Security.Tests.Configuration;
 [TestFixture]
 public class OAuthRetryConfigurationTests
 {
-    private OAuthRetryConfiguration _retryConfig;
-
     [SetUp]
     public void SetUp()
     {
         _retryConfig = new OAuthRetryConfiguration();
     }
+
+    private OAuthRetryConfiguration _retryConfig;
 
     [Test]
     public void Constructor_DefaultValues_AreSetCorrectly()
@@ -119,7 +119,7 @@ public class OAuthRetryConfigurationTests
 
         // Act
         var delays = new List<TimeSpan>();
-        for (int i = 0; i < 10; i++)
+        for (var i = 0; i < 10; i++)
         {
             delays.Add(_retryConfig.GetDelay(0));
         }
@@ -237,7 +237,7 @@ public class OAuthRetryConfigurationTests
 
         // Act - Run multiple times to test jitter range
         var delays = new List<double>();
-        for (int i = 0; i < 100; i++)
+        for (var i = 0; i < 100; i++)
         {
             var delay = _retryConfig.GetDelay(0);
             delays.Add(delay.TotalMilliseconds);

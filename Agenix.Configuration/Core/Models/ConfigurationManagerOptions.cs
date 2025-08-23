@@ -27,73 +27,79 @@
 namespace Agenix.Configuration.Core.Models;
 
 /// <summary>
-/// Supported configuration file formats.
+///     Supported configuration file formats.
 /// </summary>
 public enum ConfigurationFormat
 {
     /// <summary>
-    /// JSON configuration format
+    ///     JSON configuration format
     /// </summary>
     JSON,
 
     /// <summary>
-    /// YAML configuration format
+    ///     YAML configuration format
     /// </summary>
-    YAML
+    YAML,
+
+    /// <summary>
+    /// YML configuration format
+    /// </summary>
+    YML,
 }
 
 /// <summary>
-/// Configuration options for the Agenix Configuration Manager.
+///     Configuration options for the Agenix Configuration Manager.
 /// </summary>
 public class ConfigurationOptions
 {
     /// <summary>
-    /// Gets or sets the base name for configuration files (default: "appsettings").
+    ///     Gets or sets the base name for configuration files (default: "appsettings").
     /// </summary>
     public string ConfigurationName { get; set; } = "appsettings";
 
     /// <summary>
-    /// Gets or sets the directory where configuration files are located (default: "./").
+    ///     Gets or sets the directory where configuration files are located (default: "./").
     /// </summary>
     public string ConfigurationDirectory { get; set; } = "./";
 
     /// <summary>
-    /// Gets or sets the configuration file format (default: Json).
+    ///     Gets or sets the configuration file format (default: Json).
     /// </summary>
     public ConfigurationFormat Format { get; set; } = ConfigurationFormat.JSON;
 
     /// <summary>
-    /// Gets or sets whether environment file support is enabled (default: false).
+    ///     Gets or sets whether environment file support is enabled (default: false).
     /// </summary>
-    public bool EnvironmentFileSupport { get; set; } = false;
+    public bool EnvironmentFileSupport { get; set; }
 
     /// <summary>
-    /// Gets or sets the directory where environment files are located (default: "./").
+    ///     Gets or sets the directory where environment files are located (default: "./").
     /// </summary>
     public string EnvironmentFileDirectory { get; set; } = "./";
 
     /// <summary>
-    /// Gets or sets the name of the environment file (default: ".env").
+    ///     Gets or sets the name of the environment file (default: ".env").
     /// </summary>
     public string EnvironmentFileName { get; set; } = ".env";
 
     /// <summary>
-    /// Gets or sets the default environment name (default: "dev").
+    ///     Gets or sets the default environment name (default: "dev").
     /// </summary>
     public string DefaultEnvironment { get; set; } = "dev";
 
     /// <summary>
-    /// Gets or sets whether caching is enabled (default: false).
+    ///     Gets or sets whether caching is enabled (default: false).
     /// </summary>
-    public bool CachingEnabled { get; set; } = false;
+    public bool CachingEnabled { get; set; }
 
     /// <summary>
-    /// Gets the file extension based on the configured format.
+    ///     Gets the file extension based on the configured format.
     /// </summary>
     public string FileExtension => Format switch
     {
         ConfigurationFormat.JSON => ".json",
-        ConfigurationFormat.YAML => ".yml",
+        ConfigurationFormat.YAML => ".yaml",
+        ConfigurationFormat.YML => ".yml",
         _ => ".json"
     };
 }

@@ -9,10 +9,6 @@ namespace Agenix.Selenium.Tests.Actions;
 [TestFixture]
 public class NavigateActionTest : AbstractNUnitSetUp
 {
-    private SeleniumBrowser _seleniumBrowser;
-    private Mock<IWebDriver> _webDriver;
-    private Mock<INavigation> _navigation;
-
     [SetUp]
     public void SetupMethod()
     {
@@ -25,8 +21,12 @@ public class NavigateActionTest : AbstractNUnitSetUp
         _webDriver.Setup(x => x.Navigate()).Returns(_navigation.Object);
     }
 
+    private SeleniumBrowser _seleniumBrowser;
+    private Mock<IWebDriver> _webDriver;
+    private Mock<INavigation> _navigation;
+
     [Test]
-    public void TestNavigatePageUrl()
+    public async Task TestNavigatePageUrl()
     {
         _seleniumBrowser.EndpointConfiguration.BrowserType = BrowserType.CHROME.GetBrowserName();
 
@@ -41,13 +41,13 @@ public class NavigateActionTest : AbstractNUnitSetUp
             .SetPage("http://localhost:8080")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _navigation.Verify(x => x.GoToUrl(It.IsAny<Uri>()), Times.Once);
     }
 
     [Test]
-    public void TestNavigatePageUrlInternetExplorer()
+    public async Task TestNavigatePageUrlInternetExplorer()
     {
         _seleniumBrowser.EndpointConfiguration.BrowserType = BrowserType.INTERNET_EXPLORER.GetBrowserName();
 
@@ -62,13 +62,13 @@ public class NavigateActionTest : AbstractNUnitSetUp
             .SetPage("http://localhost:8080")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _navigation.Verify(x => x.GoToUrl(It.IsAny<string>()), Times.Once);
     }
 
     [Test]
-    public void TestNavigateRelativePageUrl()
+    public async Task TestNavigateRelativePageUrl()
     {
         _seleniumBrowser.EndpointConfiguration.BrowserType = BrowserType.INTERNET_EXPLORER.GetBrowserName();
         _seleniumBrowser.EndpointConfiguration.StartPageUrl = "http://localhost:8080";
@@ -78,46 +78,46 @@ public class NavigateActionTest : AbstractNUnitSetUp
             .SetPage("info")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _navigation.Verify(x => x.GoToUrl("http://localhost:8080/info"), Times.Once);
     }
 
     [Test]
-    public void TestExecuteBack()
+    public async Task TestExecuteBack()
     {
         var action = new NavigateAction.Builder()
             .WithBrowser(_seleniumBrowser)
             .SetPage("back")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _navigation.Verify(x => x.Back(), Times.Once);
     }
 
     [Test]
-    public void TestExecuteForward()
+    public async Task TestExecuteForward()
     {
         var action = new NavigateAction.Builder()
             .WithBrowser(_seleniumBrowser)
             .SetPage("forward")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _navigation.Verify(x => x.Forward(), Times.Once);
     }
 
     [Test]
-    public void TestExecuteRefresh()
+    public async Task TestExecuteRefresh()
     {
         var action = new NavigateAction.Builder()
             .WithBrowser(_seleniumBrowser)
             .SetPage("refresh")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _navigation.Verify(x => x.Refresh(), Times.Once);
     }

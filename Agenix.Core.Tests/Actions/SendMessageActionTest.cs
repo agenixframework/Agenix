@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -26,6 +26,7 @@
 
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 using Agenix.Api.Endpoint;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Message;
@@ -61,7 +62,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestSendMessageWithMessagePayloadData()
+    public async Task TestSendMessageWithMessagePayloadData()
     {
         var messageBuilder = new DefaultMessageBuilder();
         messageBuilder.SetPayloadBuilder(
@@ -78,7 +79,8 @@ public class SendMessageActionTest : AbstractNUnitSetUp
 
         _producerMock
             .Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) => ValidateMessageToSend(message, controlMessage));
+            .Callback<IMessage, TestContext>((message, _) => ValidateMessageToSend(message, controlMessage))
+            .Returns(Task.CompletedTask);
 
         // Build and execute SendMessageAction
         var sendAction = new SendMessageAction.Builder()
@@ -86,14 +88,14 @@ public class SendMessageActionTest : AbstractNUnitSetUp
             .Message(messageBuilder)
             .Build();
 
-        sendAction.Execute(Context);
+        await sendAction.ExecuteAsync(Context);
 
         // Verify interactions
         _producerMock.Verify(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()), Times.Once);
     }
 
     [Test]
-    public void TestSendMessageWithMessagePayloadResource()
+    public async Task TestSendMessageWithMessagePayloadResource()
     {
         var textPayloadResource =
             $"assembly://{Assembly.GetExecutingAssembly().GetName().Name}/{Assembly.GetExecutingAssembly().GetName().Name}.ResourcesTest.actions/test-request-payload.xml";
@@ -112,21 +114,20 @@ public class SendMessageActionTest : AbstractNUnitSetUp
 
         _producerMock
             .Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) => ValidateMessageToSend(message, controlMessage));
-
+            .Callback<IMessage, TestContext>((message, _) => ValidateMessageToSend(message, controlMessage));
 
         var sendAction = new SendMessageAction.Builder()
             .Endpoint(_endpointMock.Object)
             .Message(messageBuilder)
             .Build();
 
-        sendAction.Execute(Context);
+        await sendAction.ExecuteAsync(Context);
 
         _producerMock.Verify(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()), Times.Once);
     }
 
     [Test]
-    public void TestSendMessageWithMessagePayloadDataVariablesSupport()
+    public async Task TestSendMessageWithMessagePayloadDataVariablesSupport()
     {
         var messageBuilder = new DefaultMessageBuilder();
         messageBuilder.SetPayloadBuilder(
@@ -145,20 +146,20 @@ public class SendMessageActionTest : AbstractNUnitSetUp
 
         _producerMock
             .Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) => ValidateMessageToSend(message, controlMessage));
+            .Callback<IMessage, TestContext>((message, _) => ValidateMessageToSend(message, controlMessage));
 
         var sendAction = new SendMessageAction.Builder()
             .Endpoint(_endpointMock.Object)
             .Message(messageBuilder)
             .Build();
 
-        sendAction.Execute(Context);
+        await sendAction.ExecuteAsync(Context);
 
         _producerMock.Verify(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()), Times.Once);
     }
 
     [Test]
-    public void TestSendMessageWithMessagePayloadResourceVariablesSupport()
+    public async Task TestSendMessageWithMessagePayloadResourceVariablesSupport()
     {
         var textPayloadResource =
             $"assembly://{Assembly.GetExecutingAssembly().GetName().Name}/{Assembly.GetExecutingAssembly().GetName().Name}.ResourcesTest.actions/test-request-payload-with-variables.xml";
@@ -179,7 +180,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
 
         _producerMock
             .Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) => ValidateMessageToSend(message, controlMessage));
+            .Callback<IMessage, TestContext>((message, _) => ValidateMessageToSend(message, controlMessage));
 
 
         var sendAction = new SendMessageAction.Builder()
@@ -187,13 +188,13 @@ public class SendMessageActionTest : AbstractNUnitSetUp
             .Message(messageBuilder)
             .Build();
 
-        sendAction.Execute(Context);
+        await sendAction.ExecuteAsync(Context);
 
         _producerMock.Verify(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()), Times.Once);
     }
 
     [Test]
-    public void TestSendMessageWithMessagePayloadResourceFunctionsSupport()
+    public async Task TestSendMessageWithMessagePayloadResourceFunctionsSupport()
     {
         var textPayloadResource =
             $"assembly://{Assembly.GetExecutingAssembly().GetName().Name}/{Assembly.GetExecutingAssembly().GetName().Name}.ResourcesTest.actions/test-request-payload-with-functions.xml";
@@ -212,7 +213,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
 
         _producerMock
             .Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) => ValidateMessageToSend(message, controlMessage));
+            .Callback<IMessage, TestContext>((message, _) => ValidateMessageToSend(message, controlMessage));
 
 
         var sendAction = new SendMessageAction.Builder()
@@ -220,13 +221,13 @@ public class SendMessageActionTest : AbstractNUnitSetUp
             .Message(messageBuilder)
             .Build();
 
-        sendAction.Execute(Context);
+        await sendAction.ExecuteAsync(Context);
 
         _producerMock.Verify(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()), Times.Once);
     }
 
     [Test]
-    public void TestSendMessageOverwriteMessageElements()
+    public async Task TestSendMessageOverwriteMessageElements()
     {
         var messageBuilder = new DefaultMessageBuilder();
         messageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<TestRequest><Message>?</Message></TestRequest>"));
@@ -242,7 +243,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
 
         _producerMock
             .Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) => ValidateMessageToSend(message, controlMessage));
+            .Callback<IMessage, TestContext>((message, _) => ValidateMessageToSend(message, controlMessage));
 
         var sendAction = new SendMessageAction.Builder()
             .Endpoint(_endpointMock.Object)
@@ -250,13 +251,13 @@ public class SendMessageActionTest : AbstractNUnitSetUp
             .Process(new MessageProcessor())
             .Build();
 
-        sendAction.Execute(Context);
+        await sendAction.ExecuteAsync(Context);
 
         _producerMock.Verify(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()), Times.Once);
     }
 
     [Test]
-    public void TestSendMessageWithMessageHeaders()
+    public async Task TestSendMessageWithMessageHeaders()
     {
         var messageBuilder = new DefaultMessageBuilder();
         messageBuilder.SetPayloadBuilder(
@@ -278,20 +279,20 @@ public class SendMessageActionTest : AbstractNUnitSetUp
 
         _producerMock
             .Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) => ValidateMessageToSend(message, controlMessage));
+            .Callback<IMessage, TestContext>((message, _) => ValidateMessageToSend(message, controlMessage));
 
         var sendAction = new SendMessageAction.Builder()
             .Endpoint(_endpointMock.Object)
             .Message(messageBuilder)
             .Build();
 
-        sendAction.Execute(Context);
+        await sendAction.ExecuteAsync(Context);
 
         _producerMock.Verify(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()), Times.Once);
     }
 
     [Test]
-    public void TestSendMessageWithHeaderValuesVariableSupport()
+    public async Task TestSendMessageWithHeaderValuesVariableSupport()
     {
         var messageBuilder = new DefaultMessageBuilder();
         messageBuilder.SetPayloadBuilder(
@@ -315,14 +316,14 @@ public class SendMessageActionTest : AbstractNUnitSetUp
 
         _producerMock
             .Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) => ValidateMessageToSend(message, controlMessage));
+            .Callback<IMessage, TestContext>((message, _) => ValidateMessageToSend(message, controlMessage));
 
         var sendAction = new SendMessageAction.Builder()
             .Endpoint(_endpointMock.Object)
             .Message(messageBuilder)
             .Build();
 
-        sendAction.Execute(Context);
+        await sendAction.ExecuteAsync(Context);
 
         _producerMock.Verify(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()), Times.Once);
     }
@@ -346,7 +347,9 @@ public class SendMessageActionTest : AbstractNUnitSetUp
             .Message(messageBuilder)
             .Build();
 
-        Assert.Throws<AgenixSystemException>(() => sendAction.Execute(Context), "Unknown variable 'myText'");
+        var exception = Assert.ThrowsAsync<AgenixSystemException>(() => sendAction.ExecuteAsync(Context));
+        Assert.That(exception, Is.Not.Null);
+        Assert.That(exception.Message, Does.Contain("Unknown variable 'myText'"));
     }
 
     [Test]
@@ -371,12 +374,14 @@ public class SendMessageActionTest : AbstractNUnitSetUp
             .Message(messageBuilder)
             .Build();
 
-        var ex = Assert.Throws<AgenixSystemException>(() => sendAction.Execute(Context));
-        Assert.That(ex.InnerException.Message, Is.EqualTo("Unknown variable 'myOperation'"));
+        var exception = Assert.ThrowsAsync<AgenixSystemException>(() => sendAction.ExecuteAsync(Context));
+        Assert.That(exception, Is.Not.Null);
+        Assert.That(exception.InnerException, Is.Not.Null);
+        Assert.That(exception.InnerException.Message, Is.EqualTo("Unknown variable 'myOperation'"));
     }
 
     [Test]
-    public void TestSendMessageWithExtractHeaderValues()
+    public async Task TestSendMessageWithExtractHeaderValues()
     {
         var messageBuilder = new DefaultMessageBuilder();
         messageBuilder.SetPayloadBuilder(
@@ -406,7 +411,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
         _endpointMock.Setup(e => e.EndpointConfiguration).Returns(_endpointConfigurationMock.Object);
 
         _producerMock.Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) =>
+            .Callback<IMessage, TestContext>((message, _) =>
             {
                 ClassicAssert.AreEqual(controlMessage.GetPayload<string>(), message.GetPayload<string>());
                 ClassicAssert.AreEqual(controlMessage.GetHeaders()["Operation"], message.GetHeaders()["Operation"]);
@@ -418,14 +423,14 @@ public class SendMessageActionTest : AbstractNUnitSetUp
             .Message(messageBuilder)
             .Build();
 
-        sendAction.Execute(Context);
+        await sendAction.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable("myOperation"), Is.EqualTo("sayHello"));
         Assert.That(Context.GetVariable("correlationId"), Is.Not.Null);
     }
 
     [Test]
-    public void TestMissingMessagePayload()
+    public async Task TestMissingMessagePayload()
     {
         _endpointMock.Reset();
         _producerMock.Reset();
@@ -435,7 +440,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
         _endpointMock.Setup(e => e.EndpointConfiguration).Returns(_endpointConfigurationMock.Object);
 
         _producerMock.Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) =>
+            .Callback<IMessage, TestContext>((message, _) =>
             {
                 ClassicAssert.AreEqual("", message.GetPayload<string>());
             });
@@ -445,13 +450,13 @@ public class SendMessageActionTest : AbstractNUnitSetUp
             .Message(new DefaultMessageBuilder())
             .Build();
 
-        sendAction.Execute(Context);
+        await sendAction.ExecuteAsync(Context);
 
         _producerMock.Verify(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()), Times.Once);
     }
 
     [Test]
-    public void TestSendMessageWithUtf16Encoding()
+    public async Task TestSendMessageWithUtf16Encoding()
     {
         var messageBuilder = new DefaultMessageBuilder();
         messageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -469,7 +474,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
         _endpointMock.Setup(e => e.EndpointConfiguration).Returns(_endpointConfigurationMock.Object);
 
         _producerMock.Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) =>
+            .Callback<IMessage, TestContext>((message, _) =>
             {
                 ClassicAssert.AreEqual(controlMessage.GetPayload<string>(), message.GetPayload<string>());
             });
@@ -479,13 +484,13 @@ public class SendMessageActionTest : AbstractNUnitSetUp
             .Message(messageBuilder)
             .Build();
 
-        sendAction.Execute(Context);
+        await sendAction.ExecuteAsync(Context);
 
         _producerMock.Verify(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()), Times.Once);
     }
 
     [Test]
-    public void TestSendMessageWithIsoEncoding()
+    public async Task TestSendMessageWithIsoEncoding()
     {
         var messageBuilder = new DefaultMessageBuilder();
         messageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -503,7 +508,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
         _endpointMock.Setup(e => e.EndpointConfiguration).Returns(_endpointConfigurationMock.Object);
 
         _producerMock.Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) =>
+            .Callback<IMessage, TestContext>((message, _) =>
             {
                 ClassicAssert.AreEqual(controlMessage.GetPayload<string>(), message.GetPayload<string>());
             });
@@ -513,13 +518,13 @@ public class SendMessageActionTest : AbstractNUnitSetUp
             .Message(messageBuilder)
             .Build();
 
-        sendAction.Execute(Context);
+        await sendAction.ExecuteAsync(Context);
 
         _producerMock.Verify(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()), Times.Once);
     }
 
     [Test]
-    public void TestSendMessageWithMessagePayloadResourceIsoEncoding()
+    public async Task TestSendMessageWithMessagePayloadResourceIsoEncoding()
     {
         var textPayloadResource =
             $"assembly://{Assembly.GetExecutingAssembly().GetName().Name}/{Assembly.GetExecutingAssembly().GetName().Name}.ResourcesTest.actions/test-request-iso-encoding.xml";
@@ -538,7 +543,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
 
         _producerMock
             .Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) => ValidateMessageToSend(message, controlMessage));
+            .Callback<IMessage, TestContext>((message, _) => ValidateMessageToSend(message, controlMessage));
 
 
         var sendAction = new SendMessageAction.Builder()
@@ -546,7 +551,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
             .Message(messageBuilder)
             .Build();
 
-        sendAction.Execute(Context);
+        await sendAction.ExecuteAsync(Context);
 
         _producerMock.Verify(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()), Times.Once);
     }

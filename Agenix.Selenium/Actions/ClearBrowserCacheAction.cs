@@ -46,9 +46,10 @@ public class ClearBrowserCacheAction : AbstractSeleniumAction
     /// </summary>
     /// <param name="browser">The Selenium browser instance used for executing the action.</param>
     /// <param name="context">The testing context associated with the Selenium action.</param>
-    protected override void Execute(SeleniumBrowser browser, TestContext context)
+    protected override Task Execute(SeleniumBrowser browser, TestContext context)
     {
         browser.WebDriver.Manage().Cookies.DeleteAllCookies();
+        return Task.CompletedTask;
     }
 
     /// <summary>

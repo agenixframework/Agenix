@@ -39,20 +39,15 @@ using Is = NHamcrest.Is;
 using NUnitIs = NUnit.Framework.Is;
 using TestContext = Agenix.Api.Context.TestContext;
 
-
 namespace Agenix.Validation.Json.Tests.Json;
 
 public class JsonPathMessageValidatorTest : AbstractNUnitSetUp
 {
-    private static readonly string Payload = "{ \"root\": {"
-                                             + "\"element\": { \"attributeA\":\"attribute-value\",\"attributeB\":\"attribute-value\",\"sub-element\":\"text-value\" },"
-                                             + "\"text\": \"text-value\","
-                                             + "\"nullValue\": null,"
-                                             + "\"number\": 10,"
-                                             + "\"numbers\": [10, 20, 30, 40],"
-                                             + "\"person\": {\"name\": \"Penny\"},"
-                                             + "\"nerds\": [ {\"name\": \"Leonard\"}, {\"name\": \"Sheldon\"} ]"
-                                             + "}}";
+    private const string Payload = "{ \"root\": {" +
+                                   "\"element\": { \"attributeA\":\"attribute-value\",\"attributeB\":\"attribute-value\",\"sub-element\":\"text-value\" }," +
+                                   "\"text\": \"text-value\"," + "\"nullValue\": null," + "\"number\": 10," +
+                                   "\"numbers\": [10, 20, 30, 40]," + "\"person\": {\"name\": \"Penny\"}," +
+                                   "\"nerds\": [ {\"name\": \"Leonard\"}, {\"name\": \"Sheldon\"} ]" + "}}";
 
     private readonly IMessage _message = new DefaultMessage(Payload);
     private readonly JsonPathMessageValidator _validator = new();
@@ -349,16 +344,17 @@ public class JsonPathMessageValidatorTest : AbstractNUnitSetUp
 
     private sealed class NullValueMatcher : IValidationMatcher
     {
-        public void Validate(string fieldName, string value, List<string> controlParameters, TestContext context)
+        public void Validate(string fieldName, string value, List<string>? controlParameters, TestContext context)
         {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
             switch (controlParameters[0])
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
             {
                 case "NullValue()":
                     Assert.That(value, NUnitIs.Null.Or.Empty);
                     break;
                 case "NotNullValue()":
                     Assert.That(value, NUnitIs.Not.Null.Or.Empty);
-                    ;
                     break;
             }
         }

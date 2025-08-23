@@ -7,29 +7,31 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
-using System.Collections.Generic;
+using System;
+using System.Globalization;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Functions;
 using Agenix.Core.Functions.Core;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using static Agenix.Core.Functions.Core.Functions;
 
 namespace Agenix.Core.Tests.Functions;
 
@@ -135,17 +137,17 @@ public class FunctionUtilsTest : AbstractNUnitSetUp
     {
         ClassicAssert.AreEqual(
             FunctionUtils.ResolveFunction("agenix:Concat(agenix:CurrentDate('yyyy-mm-dd'))", Context),
-            new CurrentDateFunction().Execute(new List<string> { "yyyy-mm-dd" }, Context));
+            new CurrentDateFunction().Execute(["yyyy-mm-dd"], Context));
 
         ClassicAssert.AreEqual(
             FunctionUtils.ResolveFunction("agenix:Concat('Now is: ', agenix:CurrentDate('yyyy-mm-dd'))", Context),
-            "Now is: " + new CurrentDateFunction().Execute(new List<string> { "yyyy-mm-dd" }, Context));
+            "Now is: " + new CurrentDateFunction().Execute(["yyyy-mm-dd"], Context));
 
         ClassicAssert.AreEqual(
             FunctionUtils.ResolveFunction(
                 "agenix:Concat(agenix:CurrentDate('yyyy-mm-dd'),' ', agenix:Concat('Hello', ' Test Framework!'))",
                 Context),
-            new CurrentDateFunction().Execute(new List<string> { "yyyy-mm-dd" }, Context) + " Hello Test Framework!");
+            new CurrentDateFunction().Execute(["yyyy-mm-dd"], Context) + " Hello Test Framework!");
     }
 
     [Test]
@@ -158,38 +160,39 @@ public class FunctionUtilsTest : AbstractNUnitSetUp
             FunctionUtils.ResolveFunction(
                 "agenix:Concat(agenix:CurrentDate('${dateFormat}'),' ', agenix:Concat('${greeting}', ' TestFramework!'))",
                 Context),
-            new CurrentDateFunction().Execute(new List<string> { "yyyy-mm-dd" }, Context) + " Hello TestFramework!");
+            new CurrentDateFunction().Execute(["yyyy-mm-dd"], Context) + " Hello TestFramework!");
     }
 
     [Test]
-    public void TestCurrentDateFunction()
-
+    public void TestCurrentDate()
     {
-        // check the default date format 'dd.MM.yyyy'
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:CurrentDate()", Context),
-            new CurrentDateFunction().Execute(new List<string> { "dd.MM.yyyy" }, Context));
-
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:CurrentDate('MM/dd/yyyy')", Context),
-            new CurrentDateFunction().Execute(new List<string> { "MM/dd/yyyy" }, Context));
-
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:CurrentDate('MMMMM dd')", Context),
-            new CurrentDateFunction().Execute(new List<string> { "MMMMM dd" }, Context));
-
-        ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:CurrentDate('dddd, dd MMMMM yyyy')", Context),
-            new CurrentDateFunction().Execute(new List<string> { "dddd, dd MMMMM yyyy" }, Context));
+        var result = CurrentDate(Context);
+        // Test that the result can be parsed with the default format
+        Assert.That(() => DateTime.ParseExact(result, "dd.MM.yyyy", CultureInfo.InvariantCulture),
+            Throws.Nothing);
     }
+
+    [Test]
+    public void TestCurrentDateFormat()
+    {
+        var result = CurrentDate("yyyy-MM-dd'T'HH:mm:ss", Context);
+        // Test that the result can be parsed with the specified format
+        Assert.That(() => DateTime.ParseExact(result, "yyyy-MM-dd'T'HH:mm:ss", CultureInfo.InvariantCulture),
+            Throws.Nothing);
+    }
+
 
     [Test]
     public void TestEncodeBase64Function()
     {
         ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:EncodeBase64('foo')", Context),
-            new EncodeBase64Function().Execute(new List<string> { "foo" }, Context));
+            new EncodeBase64Function().Execute(["foo"], Context));
     }
 
     [Test]
     public void TestDecodeBase64Function()
     {
         ClassicAssert.AreEqual(FunctionUtils.ResolveFunction("agenix:DecodeBase64('Zm9v')", Context),
-            new DecodeBase64Function().Execute(new List<string> { "Zm9v" }, Context));
+            new DecodeBase64Function().Execute(["Zm9v"], Context));
     }
 }

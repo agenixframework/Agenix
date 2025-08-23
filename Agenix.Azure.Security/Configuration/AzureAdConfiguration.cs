@@ -31,82 +31,82 @@ using Azure.Core;
 namespace Agenix.Azure.Security.Configuration;
 
 /// <summary>
-/// Configuration for Azure AD client secret authentication
+///     Configuration for Azure AD client secret authentication
 /// </summary>
 public class AzureAdConfiguration
 {
     /// <summary>
-    /// Azure AD tenant identifier
+    ///     Azure AD tenant identifier
     /// </summary>
     public string TenantId { get; set; } = string.Empty;
 
     /// <summary>
-    /// Azure AD application (client) identifier
+    ///     Azure AD application (client) identifier
     /// </summary>
     public string ClientId { get; set; } = string.Empty;
 
     /// <summary>
-    /// Azure AD application secret
+    ///     Azure AD application secret
     /// </summary>
     public string ClientSecret { get; set; } = string.Empty;
 
     /// <summary>
-    /// Azure AD authority URL (optional, defaults to public cloud)
+    ///     Azure AD authority URL (optional, defaults to public cloud)
     /// </summary>
     public string? Authority { get; set; }
 
     /// <summary>
-    /// Default scopes to request when no specific scopes are provided
+    ///     Default scopes to request when no specific scopes are provided
     /// </summary>
     public List<string> DefaultScopes { get; set; } = new() { "https://graph.microsoft.com/.default" };
 
     /// <summary>
-    /// Maximum number of retry attempts
+    ///     Maximum number of retry attempts
     /// </summary>
     public int? MaxRetries { get; set; }
 
     /// <summary>
-    /// Delay between retry attempts
+    ///     Delay between retry attempts
     /// </summary>
     public TimeSpan? RetryDelay { get; set; }
 
     /// <summary>
-    /// Maximum delay between retry attempts
+    ///     Maximum delay between retry attempts
     /// </summary>
     public TimeSpan? MaxRetryDelay { get; set; }
 
     /// <summary>
-    /// Retry mode (Fixed or Exponential)
+    ///     Retry mode (Fixed or Exponential)
     /// </summary>
     public RetryMode? RetryMode { get; set; }
 
     /// <summary>
-    /// Enable logging for Azure SDK
+    ///     Enable logging for Azure SDK
     /// </summary>
     public bool? IsLoggingEnabled { get; set; }
 
     /// <summary>
-    /// Enable content logging for Azure SDK
+    ///     Enable content logging for Azure SDK
     /// </summary>
     public bool? IsLoggingContentEnabled { get; set; }
 
     /// <summary>
-    /// Enable telemetry for Azure SDK
+    ///     Enable telemetry for Azure SDK
     /// </summary>
     public bool? IsTelemetryEnabled { get; set; }
 
     /// <summary>
-    /// Application ID for telemetry
+    ///     Application ID for telemetry
     /// </summary>
     public string? ApplicationId { get; set; }
 
     /// <summary>
-    /// Additional client options for the credential
+    ///     Additional client options for the credential
     /// </summary>
     public Dictionary<string, object> AdditionalOptions { get; set; } = new();
 
     /// <summary>
-    /// Get cache key for this configuration
+    ///     Get cache key for this configuration
     /// </summary>
     public string GetCacheKey()
     {
@@ -115,7 +115,8 @@ public class AzureAdConfiguration
         // Include additional options in a cache key
         if (AdditionalOptions.Count > 0)
         {
-            var additionalOpts = string.Join(",", AdditionalOptions.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key}={kv.Value}"));
+            var additionalOpts = string.Join(",",
+                AdditionalOptions.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key}={kv.Value}"));
             key += $"|{additionalOpts}";
         }
 
@@ -125,45 +126,61 @@ public class AzureAdConfiguration
     }
 
     /// <summary>
-    /// Validate configuration
+    ///     Validate configuration
     /// </summary>
     public void Validate()
     {
         if (string.IsNullOrWhiteSpace(TenantId))
+        {
             throw new InvalidOperationException("TenantId is required");
+        }
 
         if (string.IsNullOrWhiteSpace(ClientId))
+        {
             throw new InvalidOperationException("ClientId is required");
+        }
 
         if (string.IsNullOrWhiteSpace(ClientSecret))
+        {
             throw new InvalidOperationException("ClientSecret is required");
+        }
 
         // Validate tenant ID format (GUID or domain)
         if (!Guid.TryParse(TenantId, out _) && !IsValidDomainName(TenantId))
+        {
             throw new InvalidOperationException("TenantId must be a valid GUID or domain name");
+        }
 
         // Validate client ID format (GUID)
         if (!Guid.TryParse(ClientId, out _))
+        {
             throw new InvalidOperationException("ClientId must be a valid GUID");
+        }
 
         // Validate authority URL if provided
         if (!string.IsNullOrWhiteSpace(Authority))
         {
             if (!Uri.TryCreate(Authority, UriKind.Absolute, out var uri))
+            {
                 throw new InvalidOperationException("Authority must be a valid absolute URL");
+            }
 
             if (uri.Scheme != "https")
+            {
                 throw new InvalidOperationException("Authority must use HTTPS scheme");
+            }
         }
     }
 
     /// <summary>
-    /// Check if a string is a valid domain name
+    ///     Check if a string is a valid domain name
     /// </summary>
     private static bool IsValidDomainName(string domain)
     {
         if (string.IsNullOrWhiteSpace(domain))
+        {
             return false;
+        }
 
         try
         {

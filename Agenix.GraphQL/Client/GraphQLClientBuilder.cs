@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -30,9 +30,9 @@ using GraphQL.Client.Serializer.Newtonsoft;
 namespace Agenix.GraphQL.Client;
 
 /// <summary>
-/// Builder for creating and configuring GraphQL client endpoints with fluent API.
-/// Provides methods to configure GraphQL-specific settings such as endpoint URLs,
-/// authentication, retry policies, and WebSocket support for subscriptions.
+///     Builder for creating and configuring GraphQL client endpoints with fluent API.
+///     Provides methods to configure GraphQL-specific settings such as endpoint URLs,
+///     authentication, retry policies, and WebSocket support for subscriptions.
 /// </summary>
 public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
 {
@@ -52,7 +52,7 @@ public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
     }
 
     /// <summary>
-    /// Sets the GraphQL endpoint URL for queries and mutations.
+    ///     Sets the GraphQL endpoint URL for queries and mutations.
     /// </summary>
     /// <param name="endpointUrl">The GraphQL endpoint URL.</param>
     /// <returns>The builder instance for method chaining.</returns>
@@ -63,8 +63,8 @@ public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
     }
 
     /// <summary>
-    /// Sets the WebSocket endpoint URL for GraphQL subscriptions.
-    /// If not specified, will be derived from the main endpoint URL.
+    ///     Sets the WebSocket endpoint URL for GraphQL subscriptions.
+    ///     If not specified, will be derived from the main endpoint URL.
     /// </summary>
     /// <param name="webSocketEndpointUrl">The WebSocket endpoint URL.</param>
     /// <returns>The builder instance for method chaining.</returns>
@@ -75,7 +75,7 @@ public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
     }
 
     /// <summary>
-    /// Configures whether to use WebSocket for GraphQL subscriptions.
+    ///     Configures whether to use WebSocket for GraphQL subscriptions.
     /// </summary>
     /// <param name="useWebSocket">True to use WebSocket for subscriptions, false otherwise.</param>
     /// <returns>The builder instance for method chaining.</returns>
@@ -86,7 +86,7 @@ public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
     }
 
     /// <summary>
-    /// Sets the content type for GraphQL requests.
+    ///     Sets the content type for GraphQL requests.
     /// </summary>
     /// <param name="contentType">The content type (default: application/json).</param>
     /// <returns>The builder instance for method chaining.</returns>
@@ -97,7 +97,7 @@ public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
     }
 
     /// <summary>
-    /// Sets the character encoding for GraphQL communications.
+    ///     Sets the character encoding for GraphQL communications.
     /// </summary>
     /// <param name="charset">The character encoding (default: UTF-8).</param>
     /// <returns>The builder instance for method chaining.</returns>
@@ -108,7 +108,7 @@ public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
     }
 
     /// <summary>
-    /// Configures whether cookies should be handled automatically.
+    ///     Configures whether cookies should be handled automatically.
     /// </summary>
     /// <param name="handleCookies">True to handle cookies automatically, false otherwise.</param>
     /// <returns>The builder instance for method chaining.</returns>
@@ -119,7 +119,7 @@ public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
     }
 
     /// <summary>
-    /// Adds a default header to be sent with every GraphQL request.
+    ///     Adds a default header to be sent with every GraphQL request.
     /// </summary>
     /// <param name="name">The header name.</param>
     /// <param name="value">The header value.</param>
@@ -131,7 +131,7 @@ public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
     }
 
     /// <summary>
-    /// Adds multiple default headers to be sent with every GraphQL request.
+    ///     Adds multiple default headers to be sent with every GraphQL request.
     /// </summary>
     /// <param name="headers">Dictionary of headers to add.</param>
     /// <returns>The builder instance for method chaining.</returns>
@@ -146,7 +146,7 @@ public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
     }
 
     /// <summary>
-    /// Configures Bearer token authentication for GraphQL requests.
+    ///     Configures Bearer token authentication for GraphQL requests.
     /// </summary>
     /// <param name="token">The Bearer token.</param>
     /// <returns>The builder instance for method chaining.</returns>
@@ -158,7 +158,7 @@ public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
     }
 
     /// <summary>
-    /// Configures Basic authentication for GraphQL requests.
+    ///     Configures Basic authentication for GraphQL requests.
     /// </summary>
     /// <param name="username">The username.</param>
     /// <param name="password">The password.</param>
@@ -176,17 +176,14 @@ public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
     }
 
     /// <summary>
-    /// Configures custom authentication headers for GraphQL requests.
+    ///     Configures custom authentication headers for GraphQL requests.
     /// </summary>
     /// <param name="customHeaders">Dictionary of custom authentication headers.</param>
     /// <returns>The builder instance for method chaining.</returns>
     public GraphQLClientBuilder CustomAuth(IDictionary<string, string> customHeaders)
     {
-        if (_endpoint.EndpointConfiguration.Authentication == null)
-        {
-            _endpoint.EndpointConfiguration.Authentication =
-                new GraphQLEndpointConfiguration.GraphQLAuthenticationConfiguration();
-        }
+        _endpoint.EndpointConfiguration.Authentication ??=
+            new GraphQLEndpointConfiguration.GraphQLAuthenticationConfiguration();
 
         foreach (var header in customHeaders)
         {
@@ -197,7 +194,7 @@ public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
     }
 
     /// <summary>
-    /// Configures retry policy for failed GraphQL requests.
+    ///     Configures retry policy for failed GraphQL requests.
     /// </summary>
     /// <param name="maxRetries">Maximum number of retry attempts.</param>
     /// <param name="retryDelayMilliseconds">Delay between retries in milliseconds.</param>
@@ -216,7 +213,7 @@ public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
     }
 
     /// <summary>
-    /// Configures custom HTTP status codes that should trigger a retry.
+    ///     Configures custom HTTP status codes that should trigger a retry.
     /// </summary>
     /// <param name="statusCodes">List of HTTP status codes that should trigger retries.</param>
     /// <returns>The builder instance for method chaining.</returns>
@@ -227,10 +224,16 @@ public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
     }
 
     /// <summary>
-    /// Configures JSON serialization options for GraphQL requests and responses.
+    ///     Configures the JSON serialization options for GraphQL requests and responses.
+    ///     This allows customizing the serialization behavior using the provided
+    ///     NewtonsoftJsonSerializer instance.
     /// </summary>
-    /// <param name="indentJson">Whether to indent JSON output for readability.</param>
-    /// <returns>The builder instance for method chaining.</returns>
+    /// <param name="serializer">
+    ///     An instance of NewtonsoftJsonSerializer to apply specific JSON serialization settings.
+    /// </param>
+    /// <returns>
+    ///     The current instance of GraphQLClientBuilder to allow method chaining when configuring the client.
+    /// </returns>
     public GraphQLClientBuilder JsonSerializerOptions(NewtonsoftJsonSerializer serializer)
     {
         _endpoint.EndpointConfiguration.SerializerOptions = serializer;
@@ -238,7 +241,7 @@ public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
     }
 
     /// <summary>
-    /// Adds a custom HTTP message handler to the GraphQL client pipeline.
+    ///     Adds a custom HTTP message handler to the GraphQL client pipeline.
     /// </summary>
     /// <param name="handler">The delegating handler to add.</param>
     /// <returns>The builder instance for method chaining.</returns>
@@ -249,7 +252,7 @@ public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
     }
 
     /// <summary>
-    /// Adds multiple custom HTTP message handlers to the GraphQL client pipeline.
+    ///     Adds multiple custom HTTP message handlers to the GraphQL client pipeline.
     /// </summary>
     /// <param name="handlers">The delegating handlers to add.</param>
     /// <returns>The builder instance for method chaining.</returns>
@@ -264,7 +267,7 @@ public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
     }
 
     /// <summary>
-    /// Sets the request timeout for GraphQL operations.
+    ///     Sets the request timeout for GraphQL operations.
     /// </summary>
     /// <param name="timeoutMilliseconds">The timeout in milliseconds.</param>
     /// <returns>The builder instance for method chaining.</returns>
@@ -275,7 +278,7 @@ public class GraphQLClientBuilder : AbstractEndpointBuilder<GraphQLClient>
     }
 
     /// <summary>
-    /// Builds and returns the configured GraphQL client instance.
+    ///     Builds and returns the configured GraphQL client instance.
     /// </summary>
     /// <returns>A configured GraphQL client.</returns>
     public override GraphQLClient Build()

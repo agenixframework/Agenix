@@ -30,7 +30,7 @@ namespace Agenix.Validation.NHamcrest.Validation.Matcher;
 
 /// <summary>
 ///     A wrapper class that adapts an <see cref="IMatcher{}" /> instance
-///     to become an <see cref="IMatcher{object}" /> by handling type casting internally.
+///     to become an <see cref="IMatcher{}" /> by handling type casting internally.
 /// </summary>
 /// <remarks>
 ///     This class is used to bridge the gap between matchers expecting string input

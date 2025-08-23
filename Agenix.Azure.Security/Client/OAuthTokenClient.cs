@@ -75,13 +75,13 @@ public class OAuthTokenClient : IDisposable
     }
 
     /// <summary>
-    /// Releases the resources used by the OAuthTokenClient instance, including managed
-    /// and optionally unmanaged resources. If the embedded HttpClient was created internally,
-    /// it will be disposed as well.
+    ///     Releases the resources used by the OAuthTokenClient instance, including managed
+    ///     and optionally unmanaged resources. If the embedded HttpClient was created internally,
+    ///     it will be disposed as well.
     /// </summary>
     /// <param name="disposing">
-    /// Indicates whether to release both managed and unmanaged resources.
-    /// If true, both types of resources are disposed.
+    ///     Indicates whether to release both managed and unmanaged resources.
+    ///     If true, both types of resources are disposed.
     /// </param>
     protected virtual void Dispose(bool disposing)
     {
@@ -483,27 +483,27 @@ public class OAuthTokenClient : IDisposable
 public class OAuthCacheStatistics
 {
     /// <summary>
-    /// Represents the total number of tokens currently tracked in the cache.
+    ///     Represents the total number of tokens currently tracked in the cache.
     /// </summary>
     public int TotalTokens { get; init; }
 
     /// <summary>
-    /// Represents the number of tokens in the cache that are currently valid and have not expired.
+    ///     Represents the number of tokens in the cache that are currently valid and have not expired.
     /// </summary>
     public int ValidTokens { get; init; }
 
     /// <summary>
-    /// Represents the number of expired tokens currently tracked in the cache.
+    ///     Represents the number of expired tokens currently tracked in the cache.
     /// </summary>
     public int ExpiredTokens { get; init; }
 
     /// <summary>
-    /// Represents the timestamp of the earliest cached token currently tracked in the cache.
+    ///     Represents the timestamp of the earliest cached token currently tracked in the cache.
     /// </summary>
     public DateTime? OldestToken { get; init; }
 
     /// <summary>
-    /// Represents the timestamp when the most recently cached token was added to the cache.
+    ///     Represents the timestamp when the most recently cached token was added to the cache.
     /// </summary>
     public DateTime? NewestToken { get; init; }
 

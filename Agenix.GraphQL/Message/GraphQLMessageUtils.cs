@@ -160,7 +160,7 @@ public static class GraphQLMessageUtils
     }
 
     /// <summary>
-    /// Copies the properties and headers from one GraphQLMessage instance to another.
+    ///     Copies the properties and headers from one GraphQLMessage instance to another.
     /// </summary>
     /// <param name="from">the source GraphQLMessage from which properties are to be copied</param>
     /// <param name="to">the target GraphQLMessage to which properties are to be copied</param>

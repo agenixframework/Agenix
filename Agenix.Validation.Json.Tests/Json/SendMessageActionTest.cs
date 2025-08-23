@@ -58,7 +58,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestSendMessageOverwriteMessageElementsJsonPath()
+    public async Task TestSendMessageOverwriteMessageElementsJsonPath()
     {
         // Setup message builder with placeholder
         var messageBuilder = new DefaultMessageBuilder();
@@ -87,7 +87,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
         // Set up verification of a sent message
         _producerMock
             .Setup(x => x.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) =>
+            .Callback<IMessage, TestContext>((message, _) =>
                 ValidateMessageToSend(message, controlMessage));
 
         // Create and execute the send action
@@ -98,11 +98,11 @@ public class SendMessageActionTest : AbstractNUnitSetUp
             .Process(processor)
             .Build();
 
-        sendAction.Execute(Context);
+        await sendAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestSendJsonMessageWithValidation()
+    public async Task TestSendJsonMessageWithValidation()
     {
         // Setup validation flag
         var validated = false;
@@ -117,7 +117,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
                 It.IsAny<TestContext>(),
                 It.IsAny<string>(),
                 It.IsAny<string>()))
-            .Callback<IMessage, TestContext, string, string>((message, context, schemaRepo, schema) =>
+            .Callback<IMessage, TestContext, string, string>((_, _, schemaRepo, schema) =>
             {
                 using (Assert.EnterMultipleScope())
                 {
@@ -139,7 +139,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
 
         referenceResolverSpy
             .Setup(x => x.ResolveAll<ISchemaValidator<ISchemaValidationContext>>())
-            .Returns(new ConcurrentDictionary<string, ISchemaValidator<ISchemaValidationContext>>()
+            .Returns(new ConcurrentDictionary<string, ISchemaValidator<ISchemaValidationContext>>
             {
                 ["jsonSchemaValidator"] = schemaValidator.Object
             });
@@ -169,7 +169,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
             .Type(MessageType.JSON)
             .Build();
 
-        sendAction.Execute(Context);
+        await sendAction.ExecuteAsync(Context);
 
         // Verify validation was performed
         Assert.That(validated, Is.True);

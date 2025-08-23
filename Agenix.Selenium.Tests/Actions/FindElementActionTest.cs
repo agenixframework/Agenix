@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,6 +21,7 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using Agenix.Api.Exceptions;
@@ -32,9 +34,9 @@ namespace Agenix.Selenium.Tests.Actions;
 
 public class FindElementActionTest : AbstractNUnitSetUp
 {
+    private readonly Mock<IWebElement> _element = new();
     private readonly SeleniumBrowser _seleniumBrowser = new();
     private readonly Mock<IWebDriver> _webDriver = new();
-    private readonly Mock<IWebElement> _element = new();
 
     [SetUp]
     public void SetupMethod()
@@ -51,7 +53,7 @@ public class FindElementActionTest : AbstractNUnitSetUp
 
     [Test]
     [TestCaseSource(nameof(FindByProvider))]
-    public void TestExecuteFindBy(string property, string value, By by)
+    public async Task TestExecuteFindBy(string property, string value, By by)
     {
         _webDriver.Setup(x => x.FindElement(It.IsAny<By>()))
             .Returns<By>(select =>
@@ -66,7 +68,7 @@ public class FindElementActionTest : AbstractNUnitSetUp
             .Element(property, value)
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariableObject("button"), Is.EqualTo(_element.Object));
     }
@@ -86,7 +88,7 @@ public class FindElementActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExecuteFindByVariableSupport()
+    public async Task TestExecuteFindByVariableSupport()
     {
         _webDriver.Setup(x => x.FindElement(It.IsAny<By>()))
             .Returns<By>(select =>
@@ -103,13 +105,13 @@ public class FindElementActionTest : AbstractNUnitSetUp
             .Element("id", "${myId}")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariableObject("button"), Is.EqualTo(_element.Object));
     }
 
     [Test]
-    public void TestExecuteFindByValidation()
+    public async Task TestExecuteFindByValidation()
     {
         _element.Setup(x => x.Text).Returns("Click Me!");
         _element.Setup(x => x.GetAttribute("type")).Returns("submit");
@@ -132,14 +134,15 @@ public class FindElementActionTest : AbstractNUnitSetUp
             .SetStyle("color", "red")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariableObject("button"), Is.EqualTo(_element.Object));
     }
 
     [Test]
     [TestCaseSource(nameof(ValidationErrorProvider))]
-    public void TestExecuteFindByValidationFailed(string tagName, string text, string attribute, string cssStyle, bool displayed, bool enabled, string errorMsg)
+    public void TestExecuteFindByValidationFailed(string tagName, string text, string attribute, string cssStyle,
+        bool displayed, bool enabled, string errorMsg)
     {
         _element.Setup(x => x.TagName).Returns("button");
         _element.Setup(x => x.Text).Returns("Click Me!");
@@ -165,7 +168,8 @@ public class FindElementActionTest : AbstractNUnitSetUp
             .SetEnabled(enabled)
             .Build();
 
-        var ex = Assert.Throws<ValidationException>(() => action.Execute(Context));
+        var ex = Assert.ThrowsAsync<ValidationException>(() => action.ExecuteAsync(Context));
+        Assert.That(ex, Is.Not.Null);
         Assert.That(ex.Message, Does.EndWith(errorMsg));
     }
 
@@ -175,7 +179,9 @@ public class FindElementActionTest : AbstractNUnitSetUp
         [
             ["input", "Click Me!", "submit", "red", true, true, "tag-name expected 'input', but was 'button'"],
             ["button", "Click!", "submit", "red", true, true, "text expected 'Click!', but was 'Click Me!'"],
-            ["button", "Click Me!", "cancel", "red", true, true, "attribute 'type' expected 'cancel', but was 'submit'"
+            [
+                "button", "Click Me!", "cancel", "red", true, true,
+                "attribute 'type' expected 'cancel', but was 'submit'"
             ],
             ["button", "Click Me!", "submit", "red", false, true, "'displayed' expected 'False', but was 'True'"],
             ["button", "Click Me!", "submit", "red", true, false, "'enabled' expected 'False', but was 'True'"],
@@ -193,7 +199,7 @@ public class FindElementActionTest : AbstractNUnitSetUp
             .Element("id", "myButton")
             .Build();
 
-        var ex = Assert.Throws<AgenixSystemException>(() => action.Execute(Context));
+        var ex = Assert.ThrowsAsync<AgenixSystemException>(() => action.ExecuteAsync(Context));
         Assert.That(ex.Message, Does.Match("Failed to find element 'By.Id: myButton' on page"));
     }
 
@@ -205,7 +211,8 @@ public class FindElementActionTest : AbstractNUnitSetUp
             .Element("unsupported", "wrong")
             .Build();
 
-        var ex = Assert.Throws<AgenixSystemException>(() => action.Execute(Context));
+        var ex = Assert.ThrowsAsync<AgenixSystemException>(() => action.ExecuteAsync(Context));
+        Assert.That(ex, Is.Not.Null);
         Assert.That(ex.Message, Does.Match("Unknown selector type: unsupported"));
     }
 }

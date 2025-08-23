@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,6 +21,7 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using System.Collections.ObjectModel;
@@ -33,9 +35,9 @@ namespace Agenix.Selenium.Tests.Actions;
 
 public class CloseWindowActionTest : AbstractNUnitSetUp
 {
+    private readonly Mock<ITargetLocator> _locator = new();
     private readonly SeleniumBrowser _seleniumBrowser = new();
     private readonly Mock<IWebDriver> _webDriver = new();
-    private readonly Mock<ITargetLocator> _locator = new();
 
     [SetUp]
     public void SetupMethod()
@@ -49,7 +51,7 @@ public class CloseWindowActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestCloseActiveWindow()
+    public async Task TestCloseActiveWindow()
     {
         var windows = new ReadOnlyCollection<string>(["active_window", "last_window"]);
 
@@ -63,7 +65,7 @@ public class CloseWindowActionTest : AbstractNUnitSetUp
             .WithBrowser(_seleniumBrowser)
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable(SeleniumHeaders.SeleniumLastWindow), Is.EqualTo("last_window"));
         Assert.That(Context.GetVariable(SeleniumHeaders.SeleniumActiveWindow), Is.EqualTo("last_window"));
@@ -73,7 +75,7 @@ public class CloseWindowActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestCloseActiveWindowReturnToDefault()
+    public async Task TestCloseActiveWindowReturnToDefault()
     {
         var windows = new ReadOnlyCollection<string>(["active_window", "main_window"]);
 
@@ -89,7 +91,7 @@ public class CloseWindowActionTest : AbstractNUnitSetUp
             .WithBrowser(_seleniumBrowser)
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariables().ContainsKey(SeleniumHeaders.SeleniumLastWindow), Is.False);
         Assert.That(Context.GetVariable(SeleniumHeaders.SeleniumActiveWindow), Is.EqualTo("main_window"));
@@ -99,7 +101,7 @@ public class CloseWindowActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestCloseOtherWindow()
+    public async Task TestCloseOtherWindow()
     {
         var windows = new ReadOnlyCollection<string>(["active_window", "last_window", "other_window"]);
 
@@ -115,7 +117,7 @@ public class CloseWindowActionTest : AbstractNUnitSetUp
             .SetWindow("myWindow")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable(SeleniumHeaders.SeleniumLastWindow), Is.EqualTo("last_window"));
         Assert.That(Context.GetVariable(SeleniumHeaders.SeleniumActiveWindow), Is.EqualTo("active_window"));
@@ -126,7 +128,7 @@ public class CloseWindowActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestCloseOtherWindowNoActiveWindow()
+    public async Task TestCloseOtherWindowNoActiveWindow()
     {
         var windows = new ReadOnlyCollection<string>(["active_window", "other_window"]);
 
@@ -140,7 +142,7 @@ public class CloseWindowActionTest : AbstractNUnitSetUp
             .SetWindow("myWindow")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariables().ContainsKey(SeleniumHeaders.SeleniumLastWindow), Is.False);
         Assert.That(Context.GetVariable(SeleniumHeaders.SeleniumActiveWindow), Is.EqualTo("active_window"));
@@ -158,7 +160,8 @@ public class CloseWindowActionTest : AbstractNUnitSetUp
             .SetWindow("myWindow")
             .Build();
 
-        var ex = Assert.Throws<AgenixSystemException>(() => action.Execute(Context));
+        var ex = Assert.ThrowsAsync<AgenixSystemException>(async () => await action.ExecuteAsync(Context));
+        Assert.That(ex, Is.Not.Null);
         Assert.That(ex.Message, Does.Match("Failed to find window handle.*"));
     }
 
@@ -179,7 +182,8 @@ public class CloseWindowActionTest : AbstractNUnitSetUp
             .SetWindow("myWindow")
             .Build();
 
-        var ex = Assert.Throws<AgenixSystemException>(() => action.Execute(Context));
+        var ex = Assert.ThrowsAsync<AgenixSystemException>(async () => await action.ExecuteAsync(Context));
+        Assert.That(ex, Is.Not.Null);
         Assert.That(ex.Message, Does.Match("Failed to find window.*"));
     }
 }

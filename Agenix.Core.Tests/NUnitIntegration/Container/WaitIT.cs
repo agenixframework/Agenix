@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 using Agenix.Api;
 using Agenix.Api.Annotations;
 using Agenix.Api.Condition;
@@ -38,7 +39,6 @@ using Agenix.NUnit.Runtime.Agenix.NUnit.Attribute;
 using NUnit.Framework;
 using static Agenix.Core.Actions.ReceiveMessageAction.Builder;
 using static Agenix.Core.Actions.SendMessageAction.Builder;
-using static Agenix.Core.Actions.SleepAction.Builder;
 using static Agenix.Core.Container.Parallel.Builder;
 using static Agenix.Core.Container.Sequence.Builder;
 using static Agenix.Core.Container.Wait.Builder<Agenix.Api.Condition.ICondition>;
@@ -51,7 +51,7 @@ public class WaitIT
     private const int ServerPort = 8000;
 
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
-    [AgenixResource] private IGherkinTestActionRunner _gherkin;
+    [AgenixResource] private IGherkinAsyncTestActionRunner _gherkin;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
     private HttpListener _server;
 
@@ -112,19 +112,19 @@ public class WaitIT
     }
 
     [Test]
-    public void WaitHttp()
+    public async Task WaitHttp()
     {
-        _gherkin.When(WaitFor<ICondition>()
+        await _gherkin.When(WaitFor<ICondition>()
             .Http()
             .Url($"http://localhost:{ServerPort}/test"));
     }
 
     [Test]
-    public void WaitMessage()
+    public async Task WaitMessage()
     {
         const string messageName = "myTestMessage";
 
-        _gherkin.When(Parallel().Actions(
+        await _gherkin.When(Parallel().Actions(
             Sequential().Actions(
                 WaitFor<ICondition>()
                     .Message()
@@ -148,7 +148,7 @@ public class WaitIT
 
 
     [Test]
-    public void WaitAction()
+    public async Task WaitAction()
     {
         var actionStarted = new ManualResetEventSlim(false);
         var actionCompleted = new ManualResetEventSlim(false);
@@ -163,9 +163,10 @@ public class WaitIT
             Thread.Sleep(250);
             sleepCompleted.Set();
             actionCompleted.Set();
+            return Task.CompletedTask;
         }).Name("ControlledSleepAction").Description("A controlled sleep action that can be used for timing tests");
 
-        _gherkin.When(WaitFor<ICondition>()
+        await _gherkin.When(WaitFor<ICondition>()
             .Execution()
             .Interval(400)
             .Milliseconds(2000)
@@ -187,21 +188,21 @@ public class WaitIT
     }
 
     [Test]
-    public void WaitForFileUsingResource()
+    public async Task WaitForFileUsingResource()
     {
         var file = IFileHelper.CreateTmpFile();
 
-        _gherkin.When(WaitFor<ICondition>()
+        await _gherkin.When(WaitFor<ICondition>()
             .File()
             .Resource(file));
     }
 
     [Test]
-    public void WaitForFileUsingPath()
+    public async Task WaitForFileUsingPath()
     {
         var file = IFileHelper.CreateTmpFile();
 
-        _gherkin.When(WaitFor<ICondition>()
+        await _gherkin.When(WaitFor<ICondition>()
             .File()
             .Path(new Uri(file.FullName).AbsolutePath));
     }

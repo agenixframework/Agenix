@@ -29,12 +29,11 @@ using System.Net.Sockets;
 using Agenix.GraphQL.Client;
 using Agenix.GraphQL.Message;
 using Agenix.GraphQL.Server;
-using HotChocolate.Resolvers;
 
 namespace Agenix.GraphQL.Tests.Server;
 
 [TestFixture]
-public class GraphQLServerTest : AbstractNUnitSetUp
+public class GraphQlServerTest : AbstractNUnitSetUp
 {
     [OneTimeSetUp]
     public void SetupServer()
@@ -43,10 +42,10 @@ public class GraphQLServerTest : AbstractNUnitSetUp
         var clientConfig = new GraphQLEndpointConfiguration { EndpointUrl = _uri, Timeout = 1000L };
 
         // Create GraphQL client
-        _graphQLClient = new GraphQLClient(clientConfig);
+        _graphQlClient = new GraphQLClient(clientConfig);
 
         // Setup and start server using new Hot Chocolate GraphQLServer
-        _graphQLServer = new GraphQLServer()
+        _graphQlServer = new GraphQLServer()
             .SetPort(_port)
             .SetHost("localhost")
             .SetContextPath("/")
@@ -55,12 +54,12 @@ public class GraphQLServerTest : AbstractNUnitSetUp
 
         // Add query resolvers using the new API
         // Add query resolvers using the new API - try simple string first
-        _graphQLServer.AddQueryResolver("test", (variables, context) =>
+        _graphQlServer.AddQueryResolver("test", (_, _) =>
             Task.FromResult<object>("Hello from Hot Chocolate GraphQL server!"));
 
         // Add a simple user resolver that returns a JSON string (this will be a scalar)
         // Return an anonymous object instead of JSON string
-        _graphQLServer.AddQueryResolver("user", (variables, context) =>
+        _graphQlServer.AddQueryResolver("user", (_, _) =>
         {
             // Return an object that GraphQL can serialize properly
             var user = new { id = "123", name = "User 123" };
@@ -68,8 +67,8 @@ public class GraphQLServerTest : AbstractNUnitSetUp
         });
 
 
-        _graphQLServer.Initialize();
-        _graphQLServer.Start();
+        _graphQlServer.Initialize();
+        _graphQlServer.Start();
 
         // Wait a bit for the server to start
         Thread.Sleep(2000);
@@ -78,7 +77,7 @@ public class GraphQLServerTest : AbstractNUnitSetUp
     [OneTimeTearDown]
     public void Shutdown()
     {
-        _graphQLServer?.Stop();
+        _graphQlServer.Stop();
 
         // Wait a bit for the server to fully shut down and release the port
         Thread.Sleep(500);
@@ -86,10 +85,10 @@ public class GraphQLServerTest : AbstractNUnitSetUp
 
     private readonly int _port = FindAvailableTcpPort(8080);
     private readonly string _uri;
-    private GraphQLClient _graphQLClient;
-    private GraphQLServer _graphQLServer;
+    private GraphQLClient _graphQlClient;
+    private GraphQLServer _graphQlServer;
 
-    public GraphQLServerTest()
+    public GraphQlServerTest()
     {
         _uri = $"http://localhost:{_port}/graphql";
     }
@@ -97,15 +96,15 @@ public class GraphQLServerTest : AbstractNUnitSetUp
     [Test]
     public void ShouldStartAndStopServer()
     {
-        Assert.That(_graphQLServer.IsRunning(), Is.True, "Server should be running");
+        Assert.That(_graphQlServer.IsRunning(), Is.True, "Server should be running");
     }
 
     [Test]
-    public void ShouldReceiveGraphQLResponse()
+    public async Task ShouldReceiveGraphQlResponse()
     {
         // Add debug logging before sending
         Console.WriteLine("=== Test Debug Info ===");
-        Console.WriteLine($"Server running: {_graphQLServer?.IsRunning()}");
+        Console.WriteLine($"Server running: {_graphQlServer.IsRunning()}");
         Console.WriteLine($"Server port: {_port}");
         Console.WriteLine($"GraphQL URI: {_uri}");
 
@@ -121,20 +120,20 @@ public class GraphQLServerTest : AbstractNUnitSetUp
             Console.WriteLine($"Server health check failed: {ex.Message}");
         }
 
-        // First send a query
+        // First, send a query
         var query = new GraphQLMessage("{ user }")
             .SetOperationType(GraphQLOperationType.QUERY);
 
         Console.WriteLine($"Sending query: {query.Payload}");
 
-        _graphQLClient.Send(query, Context);
+        await _graphQlClient.Send(query, Context);
         Console.WriteLine("Query sent successfully");
 
         // Add a longer wait to see if response arrives
         Thread.Sleep(1000);
 
         // Then receive the response
-        var response = _graphQLClient.Receive(Context, 10000L); // Increase timeout
+        var response = await _graphQlClient.Receive(Context, 10000L); // Increase timeout
 
         Console.WriteLine($"Response received: {response != null}");
         Console.WriteLine($"Response type: {response?.GetType()}");
@@ -159,15 +158,15 @@ public class GraphQLServerTest : AbstractNUnitSetUp
 
 
     [Test]
-    public void ShouldReceiveTestQueryResponse()
+    public async Task ShouldReceiveTestQueryResponse()
     {
         // Test with a simple string return
         var query = new GraphQLMessage("{ test }")
             .SetOperationType(GraphQLOperationType.QUERY);
 
-        _graphQLClient.Send(query, Context);
+        await _graphQlClient.Send(query, Context);
 
-        var response = _graphQLClient.Receive(Context, 5000L);
+        var response = await _graphQlClient.Receive(Context, 5000L);
 
         Assert.That(response, Is.Not.Null);
         Assert.That(response, Is.InstanceOf<GraphQLMessage>());
@@ -200,13 +199,13 @@ public class GraphQLServerTest : AbstractNUnitSetUp
             .SetMaxQueryDepth(10)
             .SetQueryComplexityLimit(500)
             .SetCorsEnabled(true)
-            .SetAllowedOrigins(new[] { "http://localhost:3000" });
+            .SetAllowedOrigins(["http://localhost:3000"]);
 
         Assert.That(testServer, Is.Not.Null);
     }
 
     [Test]
-    public void ShouldSupportIntrospectionQuery()
+    public async Task ShouldSupportIntrospectionQuery()
     {
         // Test GraphQL introspection query
         var introspectionQuery = new GraphQLMessage(@"
@@ -219,9 +218,9 @@ public class GraphQLServerTest : AbstractNUnitSetUp
             }")
             .SetOperationType(GraphQLOperationType.QUERY);
 
-        _graphQLClient.Send(introspectionQuery, Context);
+        await _graphQlClient.Send(introspectionQuery, Context);
 
-        var response = _graphQLClient.Receive(Context, 5000L);
+        var response = await _graphQlClient.Receive(Context, 5000L);
 
         Assert.That(response, Is.Not.Null);
         Assert.That(response, Is.InstanceOf<GraphQLMessage>());
@@ -237,10 +236,10 @@ public class GraphQLServerTest : AbstractNUnitSetUp
         var invalidQuery = new GraphQLMessage("{ invalidField { nonExistentField } }")
             .SetOperationType(GraphQLOperationType.QUERY);
 
-        Assert.DoesNotThrow(() =>
+        Assert.DoesNotThrowAsync(async () =>
         {
-            _graphQLClient.Send(invalidQuery, Context);
-            var response = _graphQLClient.Receive(Context, 5000L);
+            await _graphQlClient.Send(invalidQuery, Context);
+            var response = _graphQlClient.Receive(Context, 5000L);
 
             // Should receive an error response, not throw an exception
             Assert.That(response, Is.Not.Null);
@@ -248,7 +247,7 @@ public class GraphQLServerTest : AbstractNUnitSetUp
     }
 
     /// <summary>
-    /// Find available TCP port starting from the given port
+    ///     Find available TCP port starting from the given port
     /// </summary>
     private static int FindAvailableTcpPort(int startPort)
     {

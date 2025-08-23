@@ -7,24 +7,25 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
 using System;
+using System.Threading.Tasks;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
@@ -43,29 +44,33 @@ public class DirectProducer(string name, DirectEndpointConfiguration endpointCon
     /// </summary>
     private static readonly ILogger Log = LogManager.GetLogger(typeof(DirectProducer));
 
+    /// <summary>
+    ///     Gets the name of the producer, used to uniquely identify the instance
+    ///     and assist in operations such as message correlation and queue management.
+    /// </summary>
     public string Name => name;
 
     /// Sends a message to the destination queue defined in the endpoint configuration.
     /// <param name="message">The message to be sent.</param>
     /// <param name="context">The current test context.</param>
     /// <exception cref="AgenixSystemException">Thrown when the message fails to send to the destination queue.</exception>
-    public virtual void Send(IMessage message, TestContext context)
+    public virtual async Task Send(IMessage message, TestContext context)
     {
         var destinationQueueName = GetDestinationQueueName();
 
-        Log.LogDebug($"Sending message to queue: '{destinationQueueName}'");
-        Log.LogDebug($"Message to send is:\n{message.Print(context)}");
+        Log.LogDebug("Sending message to queue: '{DestinationQueueName}'", destinationQueueName);
+        Log.LogDebug("Message to send is:\n{MessagePrint}", message.Print(context));
 
         try
         {
-            GetDestinationQueue(context).Send(message);
+            await GetDestinationQueue(context).Send(message);
         }
         catch (Exception e)
         {
             throw new AgenixSystemException($"Failed to send message to queue: '{destinationQueueName}'", e);
         }
 
-        Log.LogInformation($"Message was sent to queue: '{destinationQueueName}'");
+        Log.LogInformation("Message was sent to queue: '{DestinationQueueName}'", destinationQueueName);
     }
 
     /// Retrieves the destination queue based on the endpoint configuration.
@@ -127,12 +132,14 @@ public class DirectProducer(string name, DirectEndpointConfiguration endpointCon
     /// <exception cref="AgenixSystemException">Thrown when the reference resolver is missing in the context.</exception>
     protected IMessageQueue ResolveQueueName(string queueName, TestContext context)
     {
-        if (context.ReferenceResolver != null)
+        ArgumentNullException.ThrowIfNull(context);
+
+        if (context.ReferenceResolver == null)
         {
-            return context.ReferenceResolver.Resolve<IMessageQueue>(queueName);
+            throw new AgenixSystemException(
+                "Unable to resolve message queue - missing proper reference resolver in context");
         }
 
-        throw new AgenixSystemException(
-            "Unable to resolve message queue - missing proper reference resolver in context");
+        return context.ReferenceResolver.Resolve<IMessageQueue>(queueName);
     }
 }

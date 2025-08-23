@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,6 +21,7 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using Agenix.Api.Exceptions;
@@ -47,18 +49,18 @@ public class JavaScriptActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExecute()
+    public async Task TestExecute()
     {
         _webDriver.As<IJavaScriptExecutor>()
-                 .Setup(x => x.ExecuteScript("return window._selenide_jsErrors"))
-                 .Returns(new List<object>());
+            .Setup(x => x.ExecuteScript("return window._selenide_jsErrors"))
+            .Returns(new List<object>());
 
         var action = new JavaScriptAction.Builder()
             .WithBrowser(_seleniumBrowser)
             .SetScript("alert('Hello')")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariableObject(SeleniumHeaders.SeleniumJsErrors), Is.Not.Null);
         Assert.That(((List<string>)Context.GetVariableObject(SeleniumHeaders.SeleniumJsErrors)).Count, Is.EqualTo(0));
@@ -67,11 +69,11 @@ public class JavaScriptActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExecuteVariableSupport()
+    public async Task TestExecuteVariableSupport()
     {
         _webDriver.As<IJavaScriptExecutor>()
-                 .Setup(x => x.ExecuteScript("return window._selenide_jsErrors"))
-                 .Returns(new List<object>());
+            .Setup(x => x.ExecuteScript("return window._selenide_jsErrors"))
+            .Returns(new List<object>());
 
         Context.SetVariable("text", "Hello");
 
@@ -80,7 +82,7 @@ public class JavaScriptActionTest : AbstractNUnitSetUp
             .SetScript("alert('${text}')")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariableObject(SeleniumHeaders.SeleniumJsErrors), Is.Not.Null);
         Assert.That(((List<string>)Context.GetVariableObject(SeleniumHeaders.SeleniumJsErrors)).Count, Is.EqualTo(0));
@@ -89,11 +91,11 @@ public class JavaScriptActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExecuteWithErrorValidation()
+    public async Task TestExecuteWithErrorValidation()
     {
         _webDriver.As<IJavaScriptExecutor>()
-                 .Setup(x => x.ExecuteScript("return window._selenide_jsErrors"))
-                 .Returns(new List<string> { "This went totally wrong!" });
+            .Setup(x => x.ExecuteScript("return window._selenide_jsErrors"))
+            .Returns(new List<string> { "This went totally wrong!" });
 
         var action = new JavaScriptAction.Builder()
             .WithBrowser(_seleniumBrowser)
@@ -101,7 +103,7 @@ public class JavaScriptActionTest : AbstractNUnitSetUp
             .AddExpectedError("This went totally wrong!")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariableObject(SeleniumHeaders.SeleniumJsErrors), Is.Not.Null);
         Assert.That(((List<string>)Context.GetVariableObject(SeleniumHeaders.SeleniumJsErrors)).Count, Is.EqualTo(1));
@@ -113,8 +115,8 @@ public class JavaScriptActionTest : AbstractNUnitSetUp
     public void TestExecuteWithErrorValidationFailed()
     {
         _webDriver.As<IJavaScriptExecutor>()
-                 .Setup(x => x.ExecuteScript("return window._selenide_jsErrors"))
-                 .Returns(new List<string>());
+            .Setup(x => x.ExecuteScript("return window._selenide_jsErrors"))
+            .Returns(new List<string>());
 
         var action = new JavaScriptAction.Builder()
             .WithBrowser(_seleniumBrowser)
@@ -122,6 +124,6 @@ public class JavaScriptActionTest : AbstractNUnitSetUp
             .SetExpectedErrors("This went totally wrong!")
             .Build();
 
-        Assert.Throws<ValidationException>(() => action.Execute(Context));
+        Assert.ThrowsAsync<ValidationException>(() => action.ExecuteAsync(Context));
     }
 }

@@ -34,8 +34,9 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Validation.Json.Variable.Dictionary.Json;
 
 /// <summary>
-/// JSON data dictionary implementation maps elements via JsonPath expressions. When an element is identified by some expression
-/// in the dictionary, the value is overwritten accordingly.
+///     JSON data dictionary implementation maps elements via JsonPath expressions. When an element is identified by some
+///     expression
+///     in the dictionary, the value is overwritten accordingly.
 /// </summary>
 public class JsonPathMappingDataDictionary : AbstractJsonDataDictionary
 {

@@ -57,8 +57,8 @@ public class HttpClient : AbstractEndpoint, IProducer, IReplyConsumer
 
 
     /// <summary>
-    /// Provides an HTTP client implementation for executing HTTP requests and receiving responses,
-    /// utilizing an endpoint configuration for defining HTTP client-specific behavior.
+    ///     Provides an HTTP client implementation for executing HTTP requests and receiving responses,
+    ///     utilizing an endpoint configuration for defining HTTP client-specific behavior.
     /// </summary>
     public HttpClient(HttpEndpointConfiguration endpointConfiguration)
         : base(endpointConfiguration)
@@ -82,18 +82,18 @@ public class HttpClient : AbstractEndpoint, IProducer, IReplyConsumer
         (HttpEndpointConfiguration)base.EndpointConfiguration;
 
     /// <summary>
-    /// Sends an HTTP message to the configured endpoint, applying any client handlers or interceptors
-    /// and preparing the message for dispatch. Correlation IDs and additional context are managed
-    /// and used to facilitate message tracking and communication.
+    ///     Sends an HTTP message to the configured endpoint, applying any client handlers or interceptors
+    ///     and preparing the message for dispatch. Correlation IDs and additional context are managed
+    ///     and used to facilitate message tracking and communication.
     /// </summary>
     /// <param name="message">
-    /// The message to be sent, which may contain headers, payload, and other metadata.
+    ///     The message to be sent, which may contain headers, payload, and other metadata.
     /// </param>
     /// <param name="context">
-    /// The context in which the HTTP operation is executed, providing variables, listeners,
-    /// and configuration settings necessary for processing the message.
+    ///     The context in which the HTTP operation is executed, providing variables, listeners,
+    ///     and configuration settings necessary for processing the message.
     /// </param>
-    public void Send(IMessage message, TestContext context)
+    public async Task Send(IMessage message, TestContext context)
     {
         foreach (var interceptor in EndpointConfiguration.ClientHandlers
                      .OfType<LoggingClientHandler>()
@@ -135,7 +135,7 @@ public class HttpClient : AbstractEndpoint, IProducer, IReplyConsumer
         {
             httpRequestMessage.RequestUri = new Uri(endpointUri!);
             httpRequestMessage.Method = method!;
-            var httpResponseMessage = EndpointConfiguration.HttpClient.Send(httpRequestMessage);
+            var httpResponseMessage = await EndpointConfiguration.HttpClient.SendAsync(httpRequestMessage);
 
             Log.LogDebug("HTTP message was sent to endpoint: '{EndpointUri}'", endpointUri);
             _correlationManager.Store(correlationKey,
@@ -153,9 +153,9 @@ public class HttpClient : AbstractEndpoint, IProducer, IReplyConsumer
     /// </summary>
     /// <param name="context">The test context providing additional information required for receiving the message.</param>
     /// <returns>Returns an <see cref="IMessage" /> instance that matches the correlation key.</returns>
-    public IMessage Receive(TestContext context)
+    public async Task<IMessage> Receive(TestContext context)
     {
-        return Receive(_correlationManager.GetCorrelationKey(GetCorrelationKeyName(), context), context);
+        return await Receive(await _correlationManager.GetCorrelationKey(GetCorrelationKeyName(), context), context);
     }
 
     /// <summary>
@@ -164,9 +164,10 @@ public class HttpClient : AbstractEndpoint, IProducer, IReplyConsumer
     /// <param name="context">The context in which the message is being received.</param>
     /// <param name="timeout">The time in milliseconds to wait for the message before timing out.</param>
     /// <returns>The received message, or null if the timeout expires before a message is received.</returns>
-    public virtual IMessage Receive(TestContext context, long timeout)
+    public virtual async Task<IMessage> Receive(TestContext context, long timeout)
     {
-        return Receive(_correlationManager.GetCorrelationKey(GetCorrelationKeyName(), context), context, timeout);
+        return await Receive(await _correlationManager.GetCorrelationKey(GetCorrelationKeyName(), context), context,
+            timeout);
     }
 
     /// <summary>
@@ -175,9 +176,9 @@ public class HttpClient : AbstractEndpoint, IProducer, IReplyConsumer
     /// <param name="selector">The correlation key used to identify the message.</param>
     /// <param name="context">The test context which may contain details for message correlation.</param>
     /// <returns>The received message as an <see cref="IMessage" />.</returns>
-    public IMessage Receive(string selector, TestContext context)
+    public async Task<IMessage> Receive(string selector, TestContext context)
     {
-        return Receive(selector, context, EndpointConfiguration.Timeout);
+        return await Receive(selector, context, EndpointConfiguration.Timeout);
     }
 
     /// <summary>
@@ -188,9 +189,9 @@ public class HttpClient : AbstractEndpoint, IProducer, IReplyConsumer
     /// <param name="timeout">The maximum amount of time to wait for a message before timing out.</param>
     /// <returns>The message that matches the selector criteria.</returns>
     /// <exception cref="MessageTimeoutException">Thrown when a message cannot be received within the specified timeout.</exception>
-    public IMessage Receive(string selector, TestContext context, long timeout)
+    public async Task<IMessage> Receive(string selector, TestContext context, long timeout)
     {
-        var message = _correlationManager.Find(selector, timeout);
+        var message = await _correlationManager.Find(selector, timeout);
 
         var endpointUri = context.GetVariables().ContainsKey(MessageHeaders.MessageReplyTo + "_" + selector)
             ? context.GetVariable(MessageHeaders.MessageReplyTo + "_" + selector)

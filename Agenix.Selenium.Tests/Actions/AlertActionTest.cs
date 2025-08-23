@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,26 +21,26 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using Agenix.Api.Exceptions;
 using Agenix.Selenium.Actions;
 using Agenix.Selenium.Endpoint;
-
-namespace Agenix.Selenium.Tests.Actions;
-
 using Moq;
 using OpenQA.Selenium;
 
+namespace Agenix.Selenium.Tests.Actions;
+
 /// <summary>
-/// @since 2.7
+///     @since 2.7
 /// </summary>
 public class AlertActionTest : AbstractNUnitSetUp
 {
+    private readonly Mock<IAlert> _alert = new();
+    private readonly Mock<ITargetLocator> _locator = new();
     private readonly SeleniumBrowser _seleniumBrowser = new();
     private readonly Mock<IWebDriver> _webDriver = new();
-    private readonly Mock<ITargetLocator> _locator = new();
-    private readonly Mock<IAlert> _alert = new();
 
 
     [SetUp]
@@ -49,14 +50,14 @@ public class AlertActionTest : AbstractNUnitSetUp
         _alert.Reset();
         _locator.Reset();
 
-        _seleniumBrowser.WebDriver = (_webDriver.Object);
+        _seleniumBrowser.WebDriver = _webDriver.Object;
 
         _webDriver.Setup(x => x.SwitchTo()).Returns(_locator.Object);
         _alert.Setup(x => x.Text).Returns("This is a warning!");
     }
 
     [Test]
-    public void TestExecuteAccept()
+    public async Task TestExecuteAccept()
     {
         _locator.Setup(x => x.Alert()).Returns(_alert.Object);
 
@@ -64,13 +65,13 @@ public class AlertActionTest : AbstractNUnitSetUp
             .WithBrowser(_seleniumBrowser)
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _alert.Verify(x => x.Accept(), Times.Once);
     }
 
     [Test]
-    public void TestExecuteDismiss()
+    public async Task TestExecuteDismiss()
     {
         var locatorMock = new Mock<ITargetLocator>();
         _webDriver.Setup(x => x.SwitchTo()).Returns(locatorMock.Object);
@@ -81,13 +82,13 @@ public class AlertActionTest : AbstractNUnitSetUp
             .DismissAlert()
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _alert.Verify(x => x.Dismiss(), Times.Once);
     }
 
     [Test]
-    public void TestExecuteTextValidation()
+    public async Task TestExecuteTextValidation()
     {
         _locator.Setup(x => x.Alert()).Returns(_alert.Object);
 
@@ -96,13 +97,13 @@ public class AlertActionTest : AbstractNUnitSetUp
             .SetText("This is a warning!")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _alert.Verify(x => x.Accept(), Times.Once);
     }
 
     [Test]
-    public void TestExecuteTextValidationVariableSupport()
+    public async Task TestExecuteTextValidationVariableSupport()
     {
         _locator.Setup(x => x.Alert()).Returns(_alert.Object);
 
@@ -113,13 +114,13 @@ public class AlertActionTest : AbstractNUnitSetUp
             .SetText("${alertText}")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _alert.Verify(x => x.Accept(), Times.Once);
     }
 
     [Test]
-    public void TestExecuteTextValidationMatcherSupport()
+    public async Task TestExecuteTextValidationMatcherSupport()
     {
         _locator.Setup(x => x.Alert()).Returns(_alert.Object);
 
@@ -128,7 +129,7 @@ public class AlertActionTest : AbstractNUnitSetUp
             .SetText("@StartsWith('This is')@")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _alert.Verify(x => x.Accept(), Times.Once);
     }
@@ -143,7 +144,8 @@ public class AlertActionTest : AbstractNUnitSetUp
             .SetText("This is not a warning!")
             .Build();
 
-        var ex = Assert.Throws<ValidationException>(() => action.Execute(Context));
+        var ex = Assert.ThrowsAsync<ValidationException>(async () => await action.ExecuteAsync(Context));
+        Assert.That(ex, Is.Not.Null);
         Assert.That(ex.Message, Does.Match("Failed to validate alert dialog text.*"));
 
         _alert.Verify(x => x.Accept(), Times.Never);
@@ -160,7 +162,8 @@ public class AlertActionTest : AbstractNUnitSetUp
             .WithBrowser(_seleniumBrowser)
             .Build();
 
-        var ex = Assert.Throws<AgenixSystemException>(() => action.Execute(Context));
+        var ex = Assert.ThrowsAsync<AgenixSystemException>(async () => await action.ExecuteAsync(Context));
+        Assert.That(ex, Is.Not.Null);
         Assert.That(ex.Message, Does.Match("Failed to access alert dialog - not found"));
     }
 }

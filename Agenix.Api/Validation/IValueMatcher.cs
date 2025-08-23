@@ -35,12 +35,12 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Api.Validation;
 
 /// <summary>
-/// Provides a mechanism for matching values based on specified validation rules and conditions.
+///     Provides a mechanism for matching values based on specified validation rules and conditions.
 /// </summary>
 /// <remarks>
-/// Implementations of the IValueMatcher interface are responsible for evaluating if a received value
-/// meets specific criteria defined by a control value and validating it within the context of a test.
-/// It also provides functionality to identify its compatibility with a given control type.
+///     Implementations of the IValueMatcher interface are responsible for evaluating if a received value
+///     meets specific criteria defined by a control value and validating it within the context of a test.
+///     It also provides functionality to identify its compatibility with a given control type.
 /// </remarks>
 public interface IValueMatcher
 {
@@ -52,11 +52,6 @@ public interface IValueMatcher
     ///     operational messages, aiding in identifying the state and behavior of value-matcher-related processes.
     /// </remarks>
     private static readonly ILogger Log = LogManager.GetLogger(typeof(IValueMatcher));
-
-    /// <summary>
-    ///     Represents the path used to identify and locate the resource associated with the ValueMatcher implementation.
-    /// </summary>
-    static string ResourcePath => "Extension/agenix/value/matcher";
 
     /// <summary>
     ///     Lazy-initialized type resolver for resolving resource paths and retrieving type-related information during runtime.
@@ -85,6 +80,11 @@ public interface IValueMatcher
     /// </summary>
     private static readonly Lazy<ConcurrentDictionary<string, Optional<IValueMatcher>>> IndividualLookupCache =
         new(() => new ConcurrentDictionary<string, Optional<IValueMatcher>>());
+
+    /// <summary>
+    ///     Represents the path used to identify and locate the resource associated with the ValueMatcher implementation.
+    /// </summary>
+    static string ResourcePath => "Extension/agenix/value/matcher";
 
     /// <summary>
     ///     Loads all available value matchers from the type resolver.
@@ -152,7 +152,7 @@ public interface IValueMatcher
     /// </summary>
     /// <param name="validator">The name of the validator to lookup.</param>
     /// <returns>An Optional containing the validator if found, otherwise an empty Optional.</returns>
-    public static Optional<IValueMatcher> Lookup(string validator)
+    static Optional<IValueMatcher> Lookup(string validator)
     {
         return IndividualLookupCache.Value.GetOrAdd(validator, key =>
         {

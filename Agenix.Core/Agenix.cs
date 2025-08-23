@@ -7,26 +7,28 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
 using System;
+using System.Threading.Tasks;
 using Agenix.Api;
 using Agenix.Api.Context;
+using Agenix.Api.Exceptions;
 using Agenix.Api.Report;
 
 namespace Agenix.Core;
@@ -35,7 +37,8 @@ namespace Agenix.Core;
 ///     Represents the core class within the Agenix framework, responsible for managing and providing access to the Agenix
 ///     context.
 /// </summary>
-public sealed class Agenix : ITestListenerAware, ITestSuiteListenerAware, ITestReporterAware, IMessageListenerAware
+public sealed class Agenix : IAsyncTestListenerAware, IAsyncTestSuiteListenerAware, IAsyncTestReporterAware,
+    IAsyncMessageListenerAware
 {
     /**
      * Constructor with given context that holds all basic Agenix components needed to run an Agenix project.
@@ -57,7 +60,7 @@ public sealed class Agenix : ITestListenerAware, ITestSuiteListenerAware, ITestR
 
     /// Adds a message listener to the current Agenix context, allowing it to respond to message events during processing.
     /// <param name="listener">The message listener to be added.</param>
-    public void AddMessageListener(IMessageListener listener)
+    public void AddMessageListener(IAsyncMessageListener listener)
     {
         AgenixContext.AddMessageListener(listener);
     }
@@ -65,7 +68,7 @@ public sealed class Agenix : ITestListenerAware, ITestSuiteListenerAware, ITestR
     /// Adds a test listener to the Agenix context to track and respond to test events.
     /// @param testListener The ITestListener instance that will be notified of test events.
     /// /
-    public void AddTestListener(ITestListener testListener)
+    public void AddTestListener(IAsyncTestListener testListener)
     {
         AgenixContext.AddTestListener(testListener);
     }
@@ -74,7 +77,7 @@ public sealed class Agenix : ITestListenerAware, ITestSuiteListenerAware, ITestR
     ///     Adds a test reporter to the Agenix context, allowing it to handle and generate reports for test results.
     /// </summary>
     /// <param name="testReporter">The test reporter to be added.</param>
-    public void AddTestReporter(ITestReporter testReporter)
+    public void AddTestReporter(IAsyncTestReporter testReporter)
     {
         AgenixContext.AddTestReporter(testReporter);
     }
@@ -85,7 +88,7 @@ public sealed class Agenix : ITestListenerAware, ITestSuiteListenerAware, ITestR
     /// <param name="suiteListener">
     ///     The listener that will be added to receive test suite lifecycle events.
     /// </param>
-    public void AddTestSuiteListener(ITestSuiteListener suiteListener)
+    public void AddTestSuiteListener(IAsyncTestSuiteListener suiteListener)
     {
         AgenixContext.AddTestSuiteListener(suiteListener);
     }
@@ -113,9 +116,9 @@ public sealed class Agenix : ITestListenerAware, ITestSuiteListenerAware, ITestR
     /// <param name="suiteName">The name of the test suite that is about to start.</param>
     /// <param name="testGroups">An optional list of test groups to be considered for execution before the suite begins.</param>
     /// <exception cref="Exception">Thrown if any of the before suite actions fail with errors.</exception>
-    public void BeforeSuite(string suiteName, params string[] testGroups)
+    public async Task BeforeSuite(string suiteName, params string[] testGroups)
     {
-        AgenixContext.SuiteListeners.OnStart();
+        await AgenixContext.SuiteListeners.OnStart();
 
         foreach (var sequenceBeforeSuite in AgenixContext.BeforeSuites)
         {
@@ -123,19 +126,19 @@ public sealed class Agenix : ITestListenerAware, ITestSuiteListenerAware, ITestR
             {
                 if (sequenceBeforeSuite.ShouldExecute(suiteName, testGroups))
                 {
-                    sequenceBeforeSuite.Execute(AgenixContext.CreateTestContext());
+                    await sequenceBeforeSuite.ExecuteAsync(AgenixContext.CreateTestContext());
                 }
             }
             catch (Exception e)
             {
-                AgenixContext.SuiteListeners.OnStartFailure(e);
-                AfterSuite(suiteName, testGroups);
+                await AgenixContext.SuiteListeners.OnStartFailure(e);
+                await AfterSuite(suiteName, testGroups);
 
-                throw new Exception("Before suite failed with errors", e);
+                throw new AgenixSystemException("Before suite failed with errors", e);
             }
         }
 
-        AgenixContext.SuiteListeners.OnStartSuccess();
+        await AgenixContext.SuiteListeners.OnStartSuccess();
     }
 
     /// <summary>
@@ -144,9 +147,9 @@ public sealed class Agenix : ITestListenerAware, ITestSuiteListenerAware, ITestR
     /// </summary>
     /// <param name="suiteName">The name of the test suite.</param>
     /// <param name="testGroups">The test groups associated with the test suite.</param>
-    public void AfterSuite(string suiteName, params string[] testGroups)
+    public async Task AfterSuite(string suiteName, params string[] testGroups)
     {
-        AgenixContext.SuiteListeners.OnFinish();
+        await AgenixContext.SuiteListeners.OnFinish();
 
         foreach (var sequenceAfterSuite in AgenixContext.AfterSuites)
         {
@@ -154,25 +157,25 @@ public sealed class Agenix : ITestListenerAware, ITestSuiteListenerAware, ITestR
             {
                 if (sequenceAfterSuite.ShouldExecute(suiteName, testGroups))
                 {
-                    sequenceAfterSuite.Execute(AgenixContext.CreateTestContext());
+                    await sequenceAfterSuite.ExecuteAsync(AgenixContext.CreateTestContext());
                 }
             }
             catch (Exception e)
             {
-                AgenixContext.SuiteListeners.OnFinishFailure(e);
-                throw new Exception("After suite failed with errors", e);
+                await AgenixContext.SuiteListeners.OnFinishFailure(e);
+                throw new AgenixSystemException("After suite failed with errors", e);
             }
         }
 
-        AgenixContext.SuiteListeners.OnFinishSuccess();
+        await AgenixContext.SuiteListeners.OnFinishSuccess();
     }
 
     /// Runs a test action, which can also be an entire test case, using the default test context.
     /// @param action The test action to be executed.
     /// /
-    public void Run(ITestAction action)
+    public async Task Run(IAsyncTestAction action)
     {
-        Run(action, AgenixContext.CreateTestContext());
+        await Run(action, AgenixContext.CreateTestContext());
     }
 
     /// <summary>
@@ -183,9 +186,9 @@ public sealed class Agenix : ITestListenerAware, ITestSuiteListenerAware, ITestR
     ///     The context in which the test action will operate, providing necessary dependencies and
     ///     utilities.
     /// </param>
-    public void Run(ITestAction action, TestContext testContext)
+    public static async Task Run(IAsyncTestAction action, TestContext testContext)
     {
-        action.Execute(testContext);
+        await action.ExecuteAsync(testContext);
     }
 
     /// <summary>

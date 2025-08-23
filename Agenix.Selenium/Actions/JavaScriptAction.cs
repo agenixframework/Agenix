@@ -85,7 +85,7 @@ public class JavaScriptAction : AbstractSeleniumAction
     /// </summary>
     /// <param name="browser">The Selenium browser object containing the WebDriver instance.</param>
     /// <param name="context">The test context used to resolve dynamic values for script execution.</param>
-    protected override void Execute(SeleniumBrowser browser, TestContext context)
+    protected override Task Execute(SeleniumBrowser browser, TestContext context)
     {
         try
         {
@@ -112,6 +112,8 @@ public class JavaScriptAction : AbstractSeleniumAction
         {
             throw new AgenixSystemException("Failed to execute JavaScript code", ex);
         }
+
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -144,10 +146,18 @@ public class JavaScriptAction : AbstractSeleniumAction
     /// <param name="actualErrors">A list of JavaScript errors encountered during script execution.</param>
     private void ValidateExpectedErrors(List<string> actualErrors)
     {
-        foreach (var expectedError in _expectedErrors.Where(expectedError => !actualErrors.Contains(expectedError)))
+        var missingErrors = _expectedErrors.Where(expectedError => !actualErrors.Contains(expectedError)).ToList();
+
+        if (missingErrors.Count <= 0)
         {
-            throw new ValidationException($"Missing JavaScript error: {expectedError}");
+            return;
         }
+
+        var errorMessage = missingErrors.Count == 1
+            ? $"Missing JavaScript error: {missingErrors[0]}"
+            : $"Missing JavaScript errors: {string.Join(", ", missingErrors)}";
+
+        throw new ValidationException(errorMessage);
     }
 
     /// <summary>
@@ -155,7 +165,11 @@ public class JavaScriptAction : AbstractSeleniumAction
     /// </summary>
     public class Builder : Builder<JavaScriptAction, Builder>
     {
+        /// <summary>
+        ///     JavaScript code to be executed within the context of the web page
+        /// </summary>
         public string Script { get; private set; }
+
         public List<object> Arguments { get; } = [];
         public List<string> ExpectedErrors { get; } = [];
 
@@ -165,7 +179,7 @@ public class JavaScriptAction : AbstractSeleniumAction
         public Builder SetScript(string script)
         {
             Script = script;
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -182,7 +196,7 @@ public class JavaScriptAction : AbstractSeleniumAction
         public Builder SetArguments(IEnumerable<object> args)
         {
             Arguments.AddRange(args);
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -191,7 +205,7 @@ public class JavaScriptAction : AbstractSeleniumAction
         public Builder AddArgument(object arg)
         {
             Arguments.Add(arg);
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -208,7 +222,7 @@ public class JavaScriptAction : AbstractSeleniumAction
         public Builder SetExpectedErrors(IEnumerable<string> errors)
         {
             ExpectedErrors.AddRange(errors);
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -217,7 +231,7 @@ public class JavaScriptAction : AbstractSeleniumAction
         public Builder AddExpectedError(string error)
         {
             ExpectedErrors.Add(error);
-            return self;
+            return Self;
         }
 
         /// <summary>

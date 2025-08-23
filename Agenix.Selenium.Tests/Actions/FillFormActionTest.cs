@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,6 +21,7 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using System.Collections.ObjectModel;
@@ -32,9 +34,9 @@ namespace Agenix.Selenium.Tests.Actions;
 
 public class FillFormActionTest : AbstractNUnitSetUp
 {
+    private readonly Mock<IWebElement> _element = new();
     private readonly SeleniumBrowser _seleniumBrowser = new();
     private readonly Mock<IWebDriver> _webDriver = new();
-    private readonly Mock<IWebElement> _element = new();
 
     [SetUp]
     public void SetupMethod()
@@ -50,7 +52,7 @@ public class FillFormActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExecute()
+    public async Task TestExecute()
     {
         _webDriver.Setup(x => x.FindElement(It.IsAny<By>())).Returns(_element.Object);
 
@@ -60,7 +62,7 @@ public class FillFormActionTest : AbstractNUnitSetUp
             .Field("password", "secret")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _element.Verify(x => x.Clear(), Times.Exactly(2));
         _element.Verify(x => x.SendKeys("foo_user"), Times.Once);
@@ -68,7 +70,7 @@ public class FillFormActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExecuteWithSelect()
+    public async Task TestExecuteWithSelect()
     {
         var option = new Mock<IWebElement>();
 
@@ -84,27 +86,27 @@ public class FillFormActionTest : AbstractNUnitSetUp
             .Field("remember-me", "yes")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         option.Verify(x => x.Click(), Times.Once);
     }
 
     [Test]
-    public void TestExecuteWithJson()
+    public async Task TestExecuteWithJson()
     {
         _webDriver.Setup(x => x.FindElement(It.IsAny<By>())).Returns(_element.Object);
 
         var action = new FillFormAction.Builder()
             .WithBrowser(_seleniumBrowser)
             .FromJson("""
-                {
-                    "username": "foo_user",
-                    "password": "secret"
-                }
-                """)
+                      {
+                          "username": "foo_user",
+                          "password": "secret"
+                      }
+                      """)
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _element.Verify(x => x.Clear(), Times.Exactly(2));
         _element.Verify(x => x.SendKeys("foo_user"), Times.Once);
@@ -112,7 +114,7 @@ public class FillFormActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestExecuteWithFormSubmit()
+    public async Task TestExecuteWithFormSubmit()
     {
         _webDriver.Setup(x => x.FindElement(It.IsAny<By>())).Returns(_element.Object);
 
@@ -123,7 +125,7 @@ public class FillFormActionTest : AbstractNUnitSetUp
             .Submit("save")
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         _element.Verify(x => x.Clear(), Times.Exactly(2));
         _element.Verify(x => x.SendKeys("foo_user"), Times.Once);

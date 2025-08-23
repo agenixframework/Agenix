@@ -2,7 +2,6 @@ using Agenix.Selenium.Actions;
 using Agenix.Selenium.Endpoint;
 using Agenix.Selenium.Util;
 using Moq;
-using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace Agenix.Selenium.Tests.Actions;
@@ -10,9 +9,6 @@ namespace Agenix.Selenium.Tests.Actions;
 [TestFixture]
 public class StopBrowserActionTest : AbstractNUnitSetUp
 {
-    private SeleniumBrowser _seleniumBrowser;
-    private Mock<IWebDriver> _webDriver;
-
     [SetUp]
     public void SetupMethod()
     {
@@ -23,8 +19,11 @@ public class StopBrowserActionTest : AbstractNUnitSetUp
         _seleniumBrowser.EndpointConfiguration.BrowserType = BrowserType.CHROME.GetBrowserName();
     }
 
+    private SeleniumBrowser _seleniumBrowser;
+    private Mock<IWebDriver> _webDriver;
+
     [Test]
-    public void TestStop()
+    public async Task TestStop()
     {
         Context.SetVariable(SeleniumHeaders.SeleniumBrowser, "ChromeBrowser");
 
@@ -32,7 +31,7 @@ public class StopBrowserActionTest : AbstractNUnitSetUp
             .WithBrowser(_seleniumBrowser)
             .Build();
 
-        action.Execute(Context);
+        await action.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariables().ContainsKey(SeleniumHeaders.SeleniumBrowser), Is.False);
         Assert.That(_seleniumBrowser.WebDriver, Is.Null);

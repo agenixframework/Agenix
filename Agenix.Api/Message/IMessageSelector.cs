@@ -24,7 +24,6 @@
 
 #endregion
 
-using System.Collections.Concurrent;
 using Agenix.Api.Context;
 using Agenix.Api.Log;
 using Agenix.Api.Spi;
@@ -95,7 +94,7 @@ public interface IMessageSelector
     ///     Provides a dictionary of message selector factories.
     /// </summary>
     /// <returns>A dictionary containing message selector factories keyed by a selector type.</returns>
-    public static IDictionary<string, IMessageSelectorFactory> Lookup()
+    static IDictionary<string, IMessageSelectorFactory> Lookup()
     {
         return FactoriesCache.Value;
     }

@@ -40,7 +40,7 @@ public interface IMessageValidationContext : IValidationContext, ISchemaValidati
     /// This abstract class is designed to be extended by concrete implementations
     /// and provides methods for configuring schema validation, schema repositories,
     /// and ignored message elements.
-    public abstract class Builder<T, S> : IBuilder<T, Builder<T, S>>,
+    abstract class Builder<T, S> : IBuilder<T, Builder<T, S>>,
         IBuilder<IValidationContext, IBuilder>,
         IBuilder<Builder<T, S>>,
         IBuilder

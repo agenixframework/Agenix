@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,6 +21,7 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using System.Security.Cryptography;
@@ -28,60 +30,58 @@ using System.Text;
 namespace Agenix.Azure.Security.Configuration;
 
 /// <summary>
-/// Configuration for OAuth 2.0 client credentials flow
+///     Configuration for OAuth 2.0 client credentials flow
 /// </summary>
 public class OAuthClientConfiguration
 {
     /// <summary>
-    /// OAuth token endpoint URL
+    ///     OAuth token endpoint URL
     /// </summary>
     public string TokenEndpoint { get; set; } = string.Empty;
 
     /// <summary>
-    /// OAuth client ID
+    ///     OAuth client ID
     /// </summary>
     public string ClientId { get; set; } = string.Empty;
 
     /// <summary>
-    /// OAuth client secret
+    ///     OAuth client secret
     /// </summary>
     public string ClientSecret { get; set; } = string.Empty;
 
     /// <summary>
-    /// OAuth scopes to request
+    ///     OAuth scopes to request
     /// </summary>
     public List<string> Scopes { get; set; } = new();
 
     /// <summary>
-    /// Additional parameters to include in token request
+    ///     Additional parameters to include in token request
     /// </summary>
     public Dictionary<string, string> AdditionalParameters { get; set; } = new();
 
     /// <summary>
-    /// Custom headers to include in token request
+    ///     Custom headers to include in token request
     /// </summary>
     public Dictionary<string, string> CustomHeaders { get; set; } = new();
 
     /// <summary>
-    /// Request timeout
+    ///     Request timeout
     /// </summary>
     public TimeSpan Timeout { get; set; } = TimeSpan.FromSeconds(30);
 
     /// <summary>
-    /// Retry configuration
+    ///     Retry configuration
     /// </summary>
     public OAuthRetryConfiguration RetryConfiguration { get; set; } = new();
 
     /// <summary>
-    /// Get form data for OAuth token request
+    ///     Get form data for OAuth token request
     /// </summary>
     public Dictionary<string, string> GetFormData()
     {
         var formData = new Dictionary<string, string>
         {
-            { "grant_type", "client_credentials" },
-            { "client_id", ClientId },
-            { "client_secret", ClientSecret }
+            { "grant_type", "client_credentials" }, { "client_id", ClientId }, { "client_secret", ClientSecret }
         };
 
         // Add scope if specified
@@ -100,7 +100,7 @@ public class OAuthClientConfiguration
     }
 
     /// <summary>
-    /// Get cache key for this configuration
+    ///     Get cache key for this configuration
     /// </summary>
     public string GetCacheKey()
     {
@@ -109,7 +109,8 @@ public class OAuthClientConfiguration
         // Include additional parameters in a cache key
         if (AdditionalParameters.Count > 0)
         {
-            var additionalParams = string.Join(",", AdditionalParameters.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key}={kv.Value}"));
+            var additionalParams = string.Join(",",
+                AdditionalParameters.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key}={kv.Value}"));
             key += $"|{additionalParams}";
         }
 
@@ -119,62 +120,74 @@ public class OAuthClientConfiguration
     }
 
     /// <summary>
-    /// Validate configuration
+    ///     Validate configuration
     /// </summary>
     public void Validate()
     {
         if (string.IsNullOrWhiteSpace(TokenEndpoint))
+        {
             throw new InvalidOperationException("TokenEndpoint is required");
+        }
 
         if (string.IsNullOrWhiteSpace(ClientId))
+        {
             throw new InvalidOperationException("ClientId is required");
+        }
 
         if (string.IsNullOrWhiteSpace(ClientSecret))
+        {
             throw new InvalidOperationException("ClientSecret is required");
+        }
 
         if (!Uri.TryCreate(TokenEndpoint, UriKind.Absolute, out var uri))
+        {
             throw new InvalidOperationException("TokenEndpoint must be a valid absolute URL");
+        }
 
         if (uri.Scheme != "https" && uri.Scheme != "http")
+        {
             throw new InvalidOperationException("TokenEndpoint must use HTTP or HTTPS scheme");
+        }
 
         if (Timeout <= TimeSpan.Zero)
+        {
             throw new InvalidOperationException("Timeout must be positive");
+        }
     }
 }
 
 /// <summary>
-/// Retry configuration for OAuth token requests
+///     Retry configuration for OAuth token requests
 /// </summary>
 public class OAuthRetryConfiguration
 {
     /// <summary>
-    /// Maximum number of retry attempts
+    ///     Maximum number of retry attempts
     /// </summary>
     public int MaxRetries { get; set; } = 3;
 
     /// <summary>
-    /// Initial delay between retries
+    ///     Initial delay between retries
     /// </summary>
     public TimeSpan InitialDelay { get; set; } = TimeSpan.FromSeconds(1);
 
     /// <summary>
-    /// Maximum delay between retries
+    ///     Maximum delay between retries
     /// </summary>
     public TimeSpan MaxDelay { get; set; } = TimeSpan.FromSeconds(30);
 
     /// <summary>
-    /// Delay multiplier for exponential backoff
+    ///     Delay multiplier for exponential backoff
     /// </summary>
     public double DelayMultiplier { get; set; } = 2.0;
 
     /// <summary>
-    /// Whether to add jitter to retry delays
+    ///     Whether to add jitter to retry delays
     /// </summary>
     public bool UseJitter { get; set; } = true;
 
     /// <summary>
-    /// Get retry delay with optional jitter
+    ///     Get retry delay with optional jitter
     /// </summary>
     public TimeSpan GetDelay(int attempt)
     {

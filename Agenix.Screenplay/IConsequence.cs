@@ -32,14 +32,49 @@ namespace Agenix.Screenplay;
 /// <typeparam name="T">The type of value associated with the consequence.</typeparam>
 public interface IConsequence<T>
 {
-    void EvaluateFor(Actor actor);
+    /// <summary>
+    ///     Evaluates the consequence for the specified actor within the context of a screenplay interaction.
+    /// </summary>
+    /// <param name="actor">The actor for whom the consequence will be evaluated.</param>
+    Task EvaluateFor(Actor actor);
+
+    /// <summary>
+    ///     Specifies an alternative complaint type to use when the consequence is evaluated to an error.
+    /// </summary>
+    /// <param name="complaintType">The type of complaint or exception to be used when the consequence fails.</param>
+    /// <returns>An updated consequence of the specified complaint type configured.</returns>
     IConsequence<T> OrComplainWith(Type complaintType);
+
+    /// <summary>
+    ///     Configures the consequence to trigger a complaint of the specified type and includes optional complaint details
+    ///     upon evaluation failure.
+    /// </summary>
+    /// <param name="complaintType">The type of complaint to be triggered, typically represented as an exception type.</param>
+    /// <param name="complaintDetails">An optional detailed message or additional information associated with the complaint.</param>
+    /// <return>
+    ///     The current consequence instance configured with the specified complaint type and details.
+    /// </return>
     IConsequence<T> OrComplainWith(Type complaintType, string complaintDetails);
-    IConsequence<T> WhenAttemptingTo(IPerformable performable);
+
+    /// <summary>
+    ///     Adds a specified performable action to the list of setup actions for the consequence.
+    ///     This action will be attempted during the evaluation of the consequence in the screenplay context.
+    /// </summary>
+    /// <param name="performable">The performable action to be attempted as part of the consequence.</param>
+    /// <returns>
+    ///     The current instance of the consequence, enabling chaining of additional setup actions.
+    /// </returns>
+    Task<IConsequence<T>> WhenAttemptingTo(IPerformable performable);
+
+    /// <summary>
+    ///     Provides a reason or explanation for the current consequence's evaluation.
+    /// </summary>
+    /// <param name="explanation">The explanation detailing the reasoning behind the consequence.</param>
+    /// <returns>The current consequence instance configured with the provided explanation.</returns>
     IConsequence<T> Because(string explanation);
 
     /// <summary>
     ///     Evaluate the consequence only after performing the specified tasks.
     /// </summary>
-    IConsequence<T> After(params IPerformable[] setupActions);
+    Task<IConsequence<T>> After(params IPerformable[] setupActions);
 }

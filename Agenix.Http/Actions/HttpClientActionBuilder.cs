@@ -35,7 +35,7 @@ namespace Agenix.Http.Actions;
 /// <summary>
 ///     Action executes http client operations such as sending requests and receiving responses.
 /// </summary>
-public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionBuilder<ITestAction>
+public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionBuilder<IAsyncTestAction>
 {
     /// Represents the target HTTP client that interacts with a defined endpoint.
     private readonly IEndpoint? _httpClient;
@@ -68,9 +68,9 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
     ///     The current instance of HttpClientActionBuilder with the updated reference resolver, allowing for further
     ///     configuration.
     /// </returns>
-    public HttpClientActionBuilder WithReferenceResolver(IReferenceResolver newReferenceResolver)
+    public HttpClientActionBuilder WithReferenceResolver(IReferenceResolver? newReferenceResolver)
     {
-        referenceResolver = newReferenceResolver;
+        ReferenceResolver = newReferenceResolver;
         return this;
     }
 
@@ -83,18 +83,21 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
     /// </returns>
     public HttpClientReceiveActionBuilder Receive()
     {
-        return new HttpClientReceiveActionBuilder(_httpClient, _httpClientUri, referenceResolver, _delegate);
+        return new HttpClientReceiveActionBuilder(_httpClient, _httpClientUri, ReferenceResolver, _delegate);
     }
 
+    /// Configures and initiates an action to send HTTP requests using the constructed HTTP client.
+    /// This method is used to build and execute HTTP requests with additional configurations as needed.
+    /// <returns>An instance of HttpClientSendActionBuilder that allows further configuration of the request.</returns>
     public HttpClientSendActionBuilder Send()
     {
-        return new HttpClientSendActionBuilder(_httpClient, _httpClientUri, referenceResolver, _delegate);
+        return new HttpClientSendActionBuilder(_httpClient, _httpClientUri, ReferenceResolver, _delegate);
     }
 
     /// Builds and returns an instance of an ITestAction.
     /// This method ensures the delegate action has been properly configured before creating the test action.
     /// <return>The built instance of an ITestAction.</return>
-    public override ITestAction Build()
+    public override IAsyncTestAction Build()
     {
         ObjectHelper.AssertNotNull(_delegate, "Missing delegate action to build");
         return _delegate.Build();
@@ -110,8 +113,8 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
     public sealed class HttpClientReceiveActionBuilder(
         IEndpoint? httpClient,
         string? httpClientUri,
-        IReferenceResolver referenceResolver,
-        ITestActionBuilder<ITestAction> newDelegate)
+        IReferenceResolver? referenceResolver,
+        IAsyncTestActionBuilder<IAsyncTestAction> newDelegate)
     {
         /// Configures the HTTP response action builder for receiving a response from an HTTP client or URI.
         /// If the provided HTTP client endpoint is not null, it sets the endpoint for the action builder
@@ -179,8 +182,8 @@ public class HttpClientActionBuilder : AbstractReferenceResolverAwareTestActionB
     public sealed class HttpClientSendActionBuilder(
         IEndpoint? httpClient,
         string? httpClientUri,
-        IReferenceResolver referenceResolver,
-        ITestActionBuilder<ITestAction> newDelegate)
+        IReferenceResolver? referenceResolver,
+        IAsyncTestActionBuilder<IAsyncTestAction> newDelegate)
     {
         /// Configures and initiates an HTTP request with the specified HTTP method and optional path.
         /// This method sets up the necessary configurations including the HTTP method, endpoint, resolver, and path

@@ -27,14 +27,14 @@
 namespace Agenix.Api.Server;
 
 /// <summary>
-/// C# equivalent of Java's Runnable interface
-/// Represents a task that can be executed by a thread
+///     C# equivalent of Java's Runnable interface
+///     Represents a task that can be executed by a thread
 /// </summary>
 public interface IRunnable
 {
     /// <summary>
-    /// When an object implementing interface IRunnable is used to create a thread,
-    /// starting the thread causes the object's Run method to be called in that separately executing thread.
+    ///     When an object implementing interface IRunnable is used to create a thread,
+    ///     starting the thread causes the object's Run method to be called in that separately executing thread.
     /// </summary>
     void Run();
 }

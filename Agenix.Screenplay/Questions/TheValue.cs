@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -43,28 +43,22 @@ public static class TheValue
     }
 
     /// <summary>
-    ///     Creates a question representing the given value.
+    ///     Creates a question representing the specified value with a defined subject.
     /// </summary>
-    /// <typeparam name="TAnswer">The type of the value this question will produce.</typeparam>
+    /// <typeparam name="TAnswer">The type of the value that the question will produce.</typeparam>
+    /// <param name="subject">The subject describing the value.</param>
     /// <param name="value">The value to represent as a question.</param>
-    /// <returns>An IQuestion instance containing the supplied value.</returns>
+    /// <returns>An IQuestion instance encapsulating the provided value and subject.</returns>
     public static IQuestion<TAnswer> Of<TAnswer>(string subject, TAnswer value)
     {
         return new QuestionWithDefinedSubject<TAnswer>(Of(value), subject);
     }
 }
 
-internal class SimpleQuestion<TAnswer> : IQuestion<TAnswer>
+internal class SimpleQuestion<TAnswer>(Func<Actor, TAnswer> answerFunction) : IQuestion<TAnswer>
 {
-    private readonly Func<Actor, TAnswer> _answerFunction;
-
-    public SimpleQuestion(Func<Actor, TAnswer> answerFunction)
+    public Task<TAnswer> AnsweredBy(Actor actor)
     {
-        _answerFunction = answerFunction;
-    }
-
-    public TAnswer AnsweredBy(Actor actor)
-    {
-        return _answerFunction(actor);
+        return Task.FromResult(answerFunction(actor));
     }
 }

@@ -48,7 +48,7 @@ public class WaitFileConditionBuilder : WaitConditionBuilder<FileCondition, Wait
     public WaitFileConditionBuilder Path(string filePath)
     {
         GetCondition().SetFilePath(filePath);
-        return self;
+        return Self;
     }
 
     /// Wait for a given file resource.
@@ -58,6 +58,6 @@ public class WaitFileConditionBuilder : WaitConditionBuilder<FileCondition, Wait
     public WaitFileConditionBuilder Resource(FileInfo file)
     {
         GetCondition().SetFile(file);
-        return self;
+        return Self;
     }
 }

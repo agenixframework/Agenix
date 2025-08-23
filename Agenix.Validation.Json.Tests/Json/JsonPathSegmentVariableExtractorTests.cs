@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -41,7 +41,7 @@ public class JsonPathSegmentVariableExtractorTests : AbstractNUnitSetUp
     [Test]
     public void TestExtractFromJson()
     {
-        var jsonPath = "$.name";
+        const string jsonPath = "$.name";
         var matcher = MatchSegmentExpressionMatcher(jsonPath);
 
         using (Assert.EnterMultipleScope())
@@ -54,9 +54,9 @@ public class JsonPathSegmentVariableExtractorTests : AbstractNUnitSetUp
     [Test]
     public void TestExtractFromNonJsonPathExpression()
     {
-        var json = "{\"name\": \"Peter\"}";
+        const string json = "{\"name\": \"Peter\"}";
 
-        var nonJsonPath = "name";
+        const string nonJsonPath = "name";
         var matcher = MatchSegmentExpressionMatcher(nonJsonPath);
 
         Assert.That(_unitUnderTest.CanExtract(Context, json, matcher), Is.False);
@@ -65,9 +65,9 @@ public class JsonPathSegmentVariableExtractorTests : AbstractNUnitSetUp
     [Test]
     public void TestExtractFromJsonExpressionFailure()
     {
-        var json = "{\"name\": \"Peter\"}";
+        const string json = "{\"name\": \"Peter\"}";
 
-        var invalidJsonPath = "$.$$$name";
+        const string invalidJsonPath = "$.$$$name";
         var matcher = MatchSegmentExpressionMatcher(invalidJsonPath);
 
         Assert.That(_unitUnderTest.CanExtract(Context, json, matcher), Is.True);

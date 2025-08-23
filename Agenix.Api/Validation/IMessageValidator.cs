@@ -59,6 +59,15 @@ public interface IMessageValidator<T> where T : IValidationContext
     private static readonly Lazy<ResourcePathTypeResolver> TypeResolver =
         new(() => new ResourcePathTypeResolver(ResourcePath));
 
+    /// <summary>
+    ///     Retrieves a dictionary of message validators mapped by string keys.
+    /// </summary>
+    /// <returns>
+    ///     A dictionary mapping string identifiers to corresponding IMessageValidator instances of type IValidationContext.
+    /// </returns>
+    private static readonly Lazy<ConcurrentDictionary<string, IMessageValidator<IValidationContext>>> ValidatorsCache =
+        new(LoadValidators);
+
 
     /// <summary>
     ///     Validates the received message against the control message using the provided context and a list of validation
@@ -80,26 +89,18 @@ public interface IMessageValidator<T> where T : IValidationContext
     bool SupportsMessageType(string messageType, IMessage message);
 
     /// <summary>
-    ///     Retrieves a dictionary of message validators mapped by string keys.
+    ///     Loads all available message validators of type <see cref="IMessageValidator{IValidationContext}" />
+    ///     from the type resolver and populates them in a concurrent dictionary for fast retrieval.
     /// </summary>
     /// <returns>
-    ///     A dictionary mapping string identifiers to corresponding IMessageValidator instances of type IValidationContext.
-    /// </returns>
-    private static readonly Lazy<ConcurrentDictionary<string, IMessageValidator<IValidationContext>>> ValidatorsCache =
-        new(LoadValidators);
-
-    /// <summary>
-    /// Loads all available message validators of type <see cref="IMessageValidator{IValidationContext}"/>
-    /// from the type resolver and populates them in a concurrent dictionary for fast retrieval.
-    /// </summary>
-    /// <returns>
-    /// A concurrent dictionary containing the loaded message validators, where the key is the validator name,
-    /// and the value is the corresponding <see cref="IMessageValidator{IValidationContext}"/> instance.
+    ///     A concurrent dictionary containing the loaded message validators, where the key is the validator name,
+    ///     and the value is the corresponding <see cref="IMessageValidator{IValidationContext}" /> instance.
     /// </returns>
     private static ConcurrentDictionary<string, IMessageValidator<IValidationContext>> LoadValidators()
     {
         var validators = new ConcurrentDictionary<string, IMessageValidator<IValidationContext>>(
-            TypeResolver.Value.ResolveAll<IMessageValidator<IValidationContext>>("", ITypeResolver.DEFAULT_TYPE_PROPERTY, null)
+            TypeResolver.Value.ResolveAll<IMessageValidator<IValidationContext>>("",
+                ITypeResolver.DEFAULT_TYPE_PROPERTY, null)
         );
 
         if (Log.IsEnabled(LogLevel.Debug))
@@ -114,13 +115,15 @@ public interface IMessageValidator<T> where T : IValidationContext
     }
 
     /// <summary>
-    /// Provides a lookup to retrieve a concurrent dictionary that maps validator keys to their corresponding message validators.
+    ///     Provides a lookup to retrieve a concurrent dictionary that maps validator keys to their corresponding message
+    ///     validators.
     /// </summary>
     /// <returns>
-    /// A concurrent dictionary where the keys are strings representing validator identifiers and the values are the corresponding
-    /// message validator instances implementing <see cref="IMessageValidator{T}"/> for <see cref="IValidationContext"/>.
+    ///     A concurrent dictionary where the keys are strings representing validator identifiers and the values are the
+    ///     corresponding
+    ///     message validator instances implementing <see cref="IMessageValidator{T}" /> for <see cref="IValidationContext" />.
     /// </returns>
-    public static ConcurrentDictionary<string, IMessageValidator<IValidationContext>> Lookup()
+    static ConcurrentDictionary<string, IMessageValidator<IValidationContext>> Lookup()
     {
         return ValidatorsCache.Value;
     }
@@ -133,7 +136,7 @@ public interface IMessageValidator<T> where T : IValidationContext
     ///     An Optional containing the message validator if found, or an empty Optional if the validator name is not
     ///     recognized.
     /// </returns>
-    public static Optional<IMessageValidator<IValidationContext>> Lookup(string validator)
+    static Optional<IMessageValidator<IValidationContext>> Lookup(string validator)
     {
         try
         {

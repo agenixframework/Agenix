@@ -38,28 +38,28 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Api.Util;
 
 /// <summary>
-/// Provides a default implementation of the <see cref="ITypeConverter"/> interface,
-/// allowing for type conversion operations and handling common scenarios related
-/// to encoding and normalization.
+///     Provides a default implementation of the <see cref="ITypeConverter" /> interface,
+///     allowing for type conversion operations and handling common scenarios related
+///     to encoding and normalization.
 /// </summary>
 public class DefaultTypeConverter(string encodingName) : ITypeConverter
 {
     private static readonly ILogger Log = LogManager.GetLogger(typeof(DefaultTypeConverter));
 
     /// <summary>
-    /// A static instance of the <see cref="DefaultTypeConverter"/> class,
-    /// initialized with the default file encoding defined by the application settings.
+    ///     A static instance of the <see cref="DefaultTypeConverter" /> class,
+    ///     initialized with the default file encoding defined by the application settings.
     /// </summary>
     /// <remarks>
-    /// This instance provides a global, shared type conversion utility for handling
-    /// various type transformations within the application context. The default
-    /// configuration ensures consistency across the application when converting between
-    /// types or handling encoded file operations.
+    ///     This instance provides a global, shared type conversion utility for handling
+    ///     various type transformations within the application context. The default
+    ///     configuration ensures consistency across the application when converting between
+    ///     types or handling encoded file operations.
     /// </remarks>
     public static readonly DefaultTypeConverter Instance = new(AgenixSettings.AgenixFileEncoding());
 
     /// <summary>
-    /// Converts the given object to the specified type if necessary.
+    ///     Converts the given object to the specified type if necessary.
     /// </summary>
     /// <param name="target">The object to be converted.</param>
     /// <param name="type">The target type to which the object should be converted.</param>

@@ -3,7 +3,7 @@ using Agenix.Selenium.Endpoint;
 namespace Agenix.Selenium.Actions.Dsl;
 
 /// <summary>
-/// Provides static support methods for initializing and working with Selenium-based test actions.
+///     Provides static support methods for initializing and working with Selenium-based test actions.
 /// </summary>
 public static class SeleniumSupport
 {
@@ -12,10 +12,10 @@ public static class SeleniumSupport
     private static volatile SeleniumBrowserBuilder? _seleniumBrowserBuilder;
 
     /// <summary>
-    /// Provides a fluent entry point to create and configure Selenium-based test actions.
+    ///     Provides a fluent entry point to create and configure Selenium-based test actions.
     /// </summary>
     /// <returns>
-    /// A singleton instance of <see cref="SeleniumActionBuilder"/> for building Selenium test actions.
+    ///     A singleton instance of <see cref="SeleniumActionBuilder" /> for building Selenium test actions.
     /// </returns>
     public static SeleniumActionBuilder Selenium()
     {
@@ -26,11 +26,12 @@ public static class SeleniumSupport
                 _seleniumActionBuilder ??= SeleniumActionBuilder.Selenium();
             }
         }
+
         return _seleniumActionBuilder;
     }
 
     /// <summary>
-    /// Creates a new Selenium browser configuration builder.
+    ///     Creates a new Selenium browser configuration builder.
     /// </summary>
     /// <returns>A singleton instance of SeleniumBrowserBuilder for configuring browsers.</returns>
     public static SeleniumBrowserBuilder Browser()
@@ -42,12 +43,13 @@ public static class SeleniumSupport
                 _seleniumBrowserBuilder ??= new SeleniumBrowserBuilder();
             }
         }
+
         return _seleniumBrowserBuilder;
     }
 
     /// <summary>
-    /// Resets the singleton instances, forcing them to be recreated on next access.
-    /// This is useful for testing scenarios or when you need fresh instances.
+    ///     Resets the singleton instances, forcing them to be recreated on next access.
+    ///     This is useful for testing scenarios or when you need fresh instances.
     /// </summary>
     public static void Reset()
     {
@@ -58,4 +60,3 @@ public static class SeleniumSupport
         }
     }
 }
-

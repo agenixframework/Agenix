@@ -7,33 +7,38 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
 using System.Data;
+using System.Data.Common;
+using System.Diagnostics.CodeAnalysis;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
+using Agenix.Sql.Ado;
 using Microsoft.Extensions.Logging;
-using Spring.Data.Common;
-using Spring.Transaction.Support;
 
 namespace Agenix.Sql.Actions;
 
+/// Represents an action for executing SQL statements during testing processes.
+/// The ExecuteSqlAction class provides mechanisms for running SQL queries or statements
+/// in a test context, leveraging the database provider and connections configured within the environment.
+/// It supports features like asynchronous execution and integration with transaction and command timeout options.
 public class ExecuteSqlAction : AbstractDatabaseConnectingTestAction
 {
     /// Logger for ExecuteSQLQueryAction.
@@ -53,25 +58,48 @@ public class ExecuteSqlAction : AbstractDatabaseConnectingTestAction
         builder.adoTemplate,
         builder.sqlResourcePath,
         builder.transactionIsolationLevel,
-        builder.transactionManager,
+        builder.transactionEnabled,
         builder.transactionTimeout,
         builder.statements)
     {
-        _ignoreErrors = builder._ignoreErrors;
-        _commandType = builder._commandType;
+        _ignoreErrors = builder.IgnoreErrorsFlag;
+        _commandType = builder.SqlCommandType;
     }
 
-    /// Executes a list of SQL statements within the provided test context.
+    /// Executes a list of SQL statements asynchronously within the provided test context.
     /// <param name="newStatements">A list of SQL statements to be executed.</param>
     /// <param name="context">
-    ///     The test context in which the statements will be executed. This context may contain dynamic
-    ///     content and configuration data required for execution.
+    ///     The test context in which the SQL statements will be executed. This context may include dynamic content and
+    ///     configuration data required for execution.
+    /// </param>
+    /// <param name="connection">
+    ///     An optional database connection to be used for executing the statements. If null, a new connection
+    ///     will be established.
+    /// </param>
+    /// <param name="transaction">
+    ///     An optional database transaction to be used for executing the statements. If null, the statements
+    ///     will be executed without an explicit transaction.
+    /// </param>
+    /// <param name="commandTimeoutSeconds">
+    ///     An optional timeout in seconds for the execution of SQL commands. If null, the default timeout
+    ///     will be used.
+    /// </param>
+    /// <param name="cancellationToken">
+    ///     A cancellation token that allows the operation to be cancelled.
     /// </param>
     /// <exception cref="AgenixSystemException">
-    ///     Thrown when there is no AdoTemplate configured, or when an error occurs during
-    ///     statement execution and errors are not set to be ignored.
+    ///     Thrown if no AdoTemplate is configured or if an error occurs during statement execution
+    ///     when errors are not set to be ignored.
     /// </exception>
-    protected void ExecuteStatements(List<string> newStatements, TestContext context)
+    /// <returns>A task representing the asynchronous operation of executing the statements.</returns>
+    [SuppressMessage(
+        "SonarAnalyzer.CSharp",
+        "S3776:Cognitive Complexity of methods should not be too high",
+        Justification =
+            "Complexity is acceptable here due to transactional orchestration; refactor would harm readability.")]
+    protected async Task ExecuteStatementsAsync(List<string> newStatements, TestContext context,
+        DbConnection? connection = null, DbTransaction? transaction = null, int? commandTimeoutSeconds = null,
+        CancellationToken cancellationToken = default)
     {
         if (AdoTemplate == null)
         {
@@ -88,10 +116,19 @@ public class ExecuteSqlAction : AbstractDatabaseConnectingTestAction
 
                 if (Log.IsEnabled(LogLevel.Debug))
                 {
-                    Log.LogDebug("Executing SQL statement: " + toExecute);
+                    Log.LogDebug("Executing SQL statement: {toExecute}", toExecute);
                 }
 
-                AdoTemplate.ExecuteNonQuery(_commandType, toExecute);
+                if (connection == null && transaction == null && commandTimeoutSeconds == null)
+                {
+                    await AdoTemplate.ExecuteNonQueryAsync(_commandType, toExecute, cancellationToken)
+                        .ConfigureAwait(false);
+                }
+                else
+                {
+                    await AdoTemplate.ExecuteNonQueryAsync(_commandType, toExecute, connection, transaction,
+                        commandTimeoutSeconds, cancellationToken).ConfigureAwait(false);
+                }
 
                 Log.LogInformation("SQL statement execution successful");
             }
@@ -99,7 +136,7 @@ public class ExecuteSqlAction : AbstractDatabaseConnectingTestAction
             {
                 if (_ignoreErrors)
                 {
-                    Log.LogError("Ignoring error while executing SQL statement: " + e.Message, e);
+                    Log.LogError(e, "Ignoring error while executing SQL statement: {Message}", e.Message);
                 }
                 else
                 {
@@ -109,40 +146,76 @@ public class ExecuteSqlAction : AbstractDatabaseConnectingTestAction
         }
     }
 
-    /// Executes a series of SQL statements within the given test context.
+    /// Executes a series of SQL statements within the provided test context.
     /// <param name="context">
-    ///     The test context that provides dynamic content and configuration settings necessary for executing
-    ///     SQL statements.
+    ///     The test context that contains dynamic content and configuration settings required for executing
+    ///     the SQL statements.
+    /// </param>
+    /// <param name="cancellationToken">
+    ///     A CancellationToken to monitor for cancellation requests and to allow the operation
+    ///     to be canceled if needed.
     /// </param>
     /// <exception cref="AgenixSystemException">
-    ///     Thrown if no transaction manager is configured and an error occurs during
-    ///     execution without being set to be ignored, or if there is an issue related to SQL statement processing.
+    ///     Thrown if a transaction manager is not configured and an error occurs during execution
+    ///     without being set to be ignored, or if an issue arises during the processing of SQL statements.
     /// </exception>
-    public override void DoExecute(TestContext context)
+    /// <returns>
+    ///     A task representing the asynchronous execution of SQL statements within the test context.
+    /// </returns>
+    [SuppressMessage(
+        "SonarAnalyzer.CSharp",
+        "S3776:Cognitive Complexity of methods should not be too high",
+        Justification =
+            "Complexity is acceptable here due to transactional orchestration; refactor would harm readability.")]
+    public override async Task DoExecute(TestContext context, CancellationToken cancellationToken = default)
     {
         var statementsToUse = statements.Count == 0 ? CreateStatementsFromFileResource(context) : statements;
 
-
-        if (TransactionManager != null)
+        if (TransactionEnabled)
         {
-            Log.LogDebug($"Using transaction manager: {TransactionManager.GetType().Name}");
-
-            var transactionTemplate = new TransactionTemplate(TransactionManager)
+            var provider = AdoTemplate?.DbProvider ?? DbProvider;
+            if (provider != null)
             {
-                TransactionTimeout = int.Parse(context.ReplaceDynamicContentInString(TransactionTimeout)),
-                TransactionIsolationLevel = (IsolationLevel)Enum.Parse(typeof(IsolationLevel),
-                    context.ReplaceDynamicContentInString(TransactionIsolationLevel))
-            };
+                await using var connection = provider.CreateConnection();
+                if (connection.State != ConnectionState.Open)
+                {
+                    await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
+                }
 
-            transactionTemplate.Execute(status =>
+                var iso = (IsolationLevel)Enum.Parse(typeof(IsolationLevel),
+                    context.ReplaceDynamicContentInString(TransactionIsolationLevel));
+                await using var transaction = await connection.BeginTransactionAsync(iso, cancellationToken);
+                int? cmdTimeout =
+                    int.TryParse(context.ReplaceDynamicContentInString(TransactionTimeout), out var timeout)
+                        ? timeout
+                        : null;
+                try
+                {
+                    await ExecuteStatementsAsync(statementsToUse, context, connection, transaction, cmdTimeout,
+                        cancellationToken).ConfigureAwait(false);
+                    await transaction.CommitAsync(cancellationToken);
+                }
+                catch
+                {
+                    try { await transaction.RollbackAsync(cancellationToken); }
+                    catch
+                    {
+                        /* ignore rollback exceptions */
+                    }
+
+                    throw;
+                }
+            }
+            else
             {
-                ExecuteStatements(statementsToUse, context);
-                return null;
-            });
+                await ExecuteStatementsAsync(statementsToUse, context, null, null, null, cancellationToken)
+                    .ConfigureAwait(false);
+            }
         }
         else
         {
-            ExecuteStatements(statementsToUse, context);
+            await ExecuteStatementsAsync(statementsToUse, context, null, null, null, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 
@@ -152,11 +225,11 @@ public class ExecuteSqlAction : AbstractDatabaseConnectingTestAction
     /// /
     public class Builder : AbstractDatabaseBuilder<ExecuteSqlAction, Builder>
     {
-        internal CommandType _commandType = System.Data.CommandType.Text;
-        internal bool _ignoreErrors;
+        internal bool IgnoreErrorsFlag;
+        internal CommandType SqlCommandType = System.Data.CommandType.Text;
 
         /// Creates a new builder instance configured with default settings.
-        /// <return>Returns a new builder instance with default configuration.</return>
+        /// <return>Returns a new builder instance with the default configuration.</return>
         public static Builder Sql()
         {
             return new Builder();
@@ -187,7 +260,7 @@ public class ExecuteSqlAction : AbstractDatabaseConnectingTestAction
         /// /
         public Builder IgnoreErrors(bool ignoreErrors)
         {
-            _ignoreErrors = ignoreErrors;
+            IgnoreErrorsFlag = ignoreErrors;
             return this;
         }
 
@@ -196,10 +269,12 @@ public class ExecuteSqlAction : AbstractDatabaseConnectingTestAction
         /// <return>Returns the builder instance with the specified command type applied.</return>
         public Builder CommandType(CommandType commandType)
         {
-            _commandType = commandType;
+            SqlCommandType = commandType;
             return this;
         }
 
+        /// Builds and returns an instance of the ExecuteSqlAction class.
+        /// <returns>An instance of ExecuteSqlAction initialized with the current configuration of the builder.</returns>
         public override ExecuteSqlAction Build()
         {
             return new ExecuteSqlAction(this);

@@ -66,6 +66,8 @@ public class SeleniumBrowser : AbstractEndpoint, IProducer, IDisposable
     /// </summary>
     private readonly string _temporaryStorage;
 
+    private bool _disposed;
+
 
     /// <summary>
     ///     Provides functionality for managing Selenium WebDriver instances
@@ -108,8 +110,6 @@ public class SeleniumBrowser : AbstractEndpoint, IProducer, IDisposable
     /// </summary>
     public virtual bool IsStarted => WebDriver != null;
 
-    private bool _disposed;
-
     /// <summary>
     ///     Disposes of the browser resources
     /// </summary>
@@ -120,15 +120,34 @@ public class SeleniumBrowser : AbstractEndpoint, IProducer, IDisposable
     }
 
     /// <summary>
-    /// Releases the resources used by the SeleniumBrowser instance.
-    /// This method is called to clean up both managed and unmanaged resources
-    /// held by the SeleniumBrowser class. Implements the <see cref="IDisposable"/> pattern.
+    ///     Sends a message using the specified messaging infrastructure and test context,
+    ///     enabling the execution of Selenium actions defined within the message payload.
+    /// </summary>
+    /// <param name="message">
+    ///     Represents the message to be sent. The message contains a payload of type
+    ///     <see cref="ISeleniumAction" /> which will be executed within the provided context.
+    /// </param>
+    /// <param name="context">
+    ///     The test context in which the action specified in the message payload will be executed.
+    /// </param>
+    public async Task Send(IMessage message, TestContext context)
+    {
+        var action = message.GetPayload<ISeleniumAction>();
+        await action.ExecuteAsync(context);
+
+        Logger.LogInformation("Selenium action successfully executed");
+    }
+
+    /// <summary>
+    ///     Releases the resources used by the SeleniumBrowser instance.
+    ///     This method is called to clean up both managed and unmanaged resources
+    ///     held by the SeleniumBrowser class. Implements the <see cref="IDisposable" /> pattern.
     /// </summary>
     /// <param name="disposing">
-    /// Indicates whether the method is being called explicitly (true)
-    /// or by the runtime garbage collector (false). When true, managed
-    /// resources as well as unmanaged resources are disposed; otherwise, only
-    /// unmanaged resources are released.
+    ///     Indicates whether the method is being called explicitly (true)
+    ///     or by the runtime garbage collector (false). When true, managed
+    ///     resources as well as unmanaged resources are disposed; otherwise, only
+    ///     unmanaged resources are released.
     /// </param>
     protected virtual void Dispose(bool disposing)
     {
@@ -163,26 +182,7 @@ public class SeleniumBrowser : AbstractEndpoint, IProducer, IDisposable
     }
 
     /// <summary>
-    ///     Sends a message using the specified messaging infrastructure and test context,
-    ///     enabling the execution of Selenium actions defined within the message payload.
-    /// </summary>
-    /// <param name="message">
-    ///     Represents the message to be sent. The message contains a payload of type
-    ///     <see cref="ISeleniumAction" /> which will be executed within the provided context.
-    /// </param>
-    /// <param name="context">
-    ///     The test context in which the action specified in the message payload will be executed.
-    /// </param>
-    public void Send(IMessage message, TestContext context)
-    {
-        var action = message.GetPayload<ISeleniumAction>();
-        action.Execute(context);
-
-        Logger.LogInformation("Selenium action successfully executed");
-    }
-
-    /// <summary>
-    ///     Starts the browser and creates local or remote web driver
+    ///     Starts the browser and creates a local or remote web driver
     /// </summary>
     public virtual void Start()
     {
@@ -252,13 +252,13 @@ public class SeleniumBrowser : AbstractEndpoint, IProducer, IDisposable
     }
 
     /// <summary>
-    /// Stores a file in the browser's temporary storage, making it available for further operations.
+    ///     Stores a file in the browser's temporary storage, making it available for further operations.
     /// </summary>
     /// <param name="filePath">
-    /// The file path to be stored. This path specifies the location of the file to be processed.
+    ///     The file path to be stored. This path specifies the location of the file to be processed.
     /// </param>
     /// <returns>
-    /// The storage path where the file has been successfully stored.
+    ///     The storage path where the file has been successfully stored.
     /// </returns>
     public string StoreFile(string filePath)
     {
@@ -324,7 +324,8 @@ public class SeleniumBrowser : AbstractEndpoint, IProducer, IDisposable
         }
         catch (UnauthorizedAccessException ex)
         {
-            throw new AgenixSystemException($"Access denied when storing resource file. Check directory permissions for: {_temporaryStorage}", ex);
+            throw new AgenixSystemException(
+                $"Access denied when storing resource file. Check directory permissions for: {_temporaryStorage}", ex);
         }
         catch (DirectoryNotFoundException ex)
         {
@@ -336,7 +337,8 @@ public class SeleniumBrowser : AbstractEndpoint, IProducer, IDisposable
         }
         catch (Exception ex)
         {
-            throw new AgenixSystemException($"Failed to store file from resource: {resource?.Uri?.ToString() ?? "unknown"}", ex);
+            throw new AgenixSystemException(
+                $"Failed to store file from resource: {resource?.Uri?.ToString() ?? "unknown"}", ex);
         }
     }
 
@@ -346,7 +348,7 @@ public class SeleniumBrowser : AbstractEndpoint, IProducer, IDisposable
     /// </summary>
     /// <param name="filename">Name of the file to retrieve</param>
     /// <returns>Full path to the stored file</returns>
-    public virtual string GetStoredFile(string filename)
+    public virtual string GetStoredFile(string? filename)
     {
         try
         {
@@ -476,7 +478,6 @@ public class SeleniumBrowser : AbstractEndpoint, IProducer, IDisposable
             throw new InvalidOperationException("Could not create temporary storage", e);
         }
     }
-
 
     /// <summary>
     ///     Creates and returns an instance of <see cref="IProducer" /> for managing

@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -41,8 +41,18 @@ namespace Agenix.ReqnrollPlugin;
 /// </summary>
 public class AgenixAddIn
 {
+    /// <summary>
+    ///     Represents a delegate for handling events that occur when a feature has finished executing.
+    ///     Provides the sender of the event and the associated event arguments.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The event data associated with the finished feature, containing details like the test case runner.</param>
     public delegate void FeatureFinishedHandler(object sender, TestCaseFinishedEventArgs e);
 
+    /// <summary>
+    ///     Represents the delegate for handling events when a feature starts execution,
+    ///     passing the sender information and event arguments containing test case details.
+    /// </summary>
     public delegate void FeatureStartedHandler(object sender, TestCaseStartedEventArgs e);
 
     /// <summary>
@@ -59,10 +69,27 @@ public class AgenixAddIn
     /// <param name="e">An instance of <see cref="RunFinishedEventArgs" /> containing run completion event data.</param>
     public delegate void RunFinishedHandler(object sender, RunFinishedEventArgs e);
 
+    /// <summary>
+    ///     Represents a delegate that is invoked when a test run starts, providing sender information and run-related event
+    ///     arguments.
+    /// </summary>
     public delegate void RunStartedHandler(object sender, RunStartedEventArgs e);
 
+    /// <summary>
+    ///     Represents a delegate for handling the completion of a scenario during test execution.
+    ///     Used to define methods invoked when a scenario is marked as finished,
+    ///     passing the sender and relevant test case information.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">An instance of <see cref="TestCaseFinishedEventArgs" /> containing data about the finished scenario.</param>
     public delegate void ScenarioFinishedHandler(object sender, TestCaseFinishedEventArgs e);
 
+    /// <summary>
+    ///     Represents a delegate that handles the event triggered when a scenario starts.
+    ///     Provides event arguments containing information about the initiated test case.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="TestCaseStartedEventArgs" /> containing details of the started scenario.</param>
     public delegate void ScenarioStartedHandler(object sender, TestCaseStartedEventArgs e);
 
     /// <summary>
@@ -70,13 +97,13 @@ public class AgenixAddIn
     /// </summary>
     private static readonly ILogger Log = LogManager.GetLogger(typeof(AgenixAddIn));
 
-    private static ConcurrentDictionary<FeatureInfo, ITestCaseRunner> FeatureTestCaseRunners { get; } =
+    private static ConcurrentDictionary<FeatureInfo, IAsyncTestCaseRunner> FeatureTestCaseRunners { get; } =
         new(new FeatureInfoEqualityComparer());
 
     private static ConcurrentDictionary<FeatureInfo, int> FeatureThreadCount { get; } =
         new(new FeatureInfoEqualityComparer());
 
-    private static ConcurrentDictionary<ScenarioInfo, ITestCaseRunner> ScenarioTestCaseRunners { get; } = new();
+    private static ConcurrentDictionary<ScenarioInfo, IAsyncTestCaseRunner> ScenarioTestCaseRunners { get; } = new();
 
     /// <summary>
     ///     Represents the shared context for managing test-related configurations,
@@ -84,7 +111,15 @@ public class AgenixAddIn
     /// </summary>
     public static TestContext TestContext { get; internal set; }
 
-    public static ITestCaseRunner GetFeatureCaseRunner(FeatureContext context)
+    /// <summary>
+    ///     Retrieves the asynchronous test case runner associated with the specified feature context.
+    /// </summary>
+    /// <param name="context">The feature context containing information about the current feature.</param>
+    /// <returns>
+    ///     The <see cref="IAsyncTestCaseRunner" /> instance associated with the feature context, or <c>null</c> if no
+    ///     runner is found.
+    /// </returns>
+    public static IAsyncTestCaseRunner GetFeatureCaseRunner(FeatureContext context)
     {
         if (context != null && FeatureTestCaseRunners.TryGetValue(context.FeatureInfo, out var reporter))
         {
@@ -99,7 +134,7 @@ public class AgenixAddIn
     /// </summary>
     /// <param name="context">The context containing information about the current feature.</param>
     /// <param name="testCaseRunner">An instance of <see cref="ITestCaseRunner" /> to be associated with the specified feature.</param>
-    internal static void SetFeatureTestCaseRunner(FeatureContext context, ITestCaseRunner testCaseRunner)
+    internal static void SetFeatureTestCaseRunner(FeatureContext context, IAsyncTestCaseRunner testCaseRunner)
     {
         FeatureTestCaseRunners[context.FeatureInfo] = testCaseRunner;
         FeatureThreadCount[context.FeatureInfo] = 1;
@@ -113,10 +148,10 @@ public class AgenixAddIn
     ///     An instance of <see cref="ITestCaseRunner" /> to be disassociated from the specified
     ///     feature.
     /// </param>
-    internal static void RemoveFeatureTestCaseRunner(FeatureContext context, ITestCaseRunner testCaseRunner)
+    internal static void RemoveFeatureTestCaseRunner(FeatureContext context, ref IAsyncTestCaseRunner testCaseRunner)
     {
         FeatureTestCaseRunners.TryRemove(context.FeatureInfo, out testCaseRunner);
-        FeatureThreadCount.TryRemove(context.FeatureInfo, out var count);
+        FeatureThreadCount.TryRemove(context.FeatureInfo, out _);
     }
 
     /// <summary>
@@ -150,7 +185,7 @@ public class AgenixAddIn
     ///     An instance of <see cref="ITestCaseRunner" /> associated with the specified scenario context, or null if no
     ///     runner is found.
     /// </returns>
-    public static ITestCaseRunner GetScenarioTestCaseRunner(ScenarioContext context)
+    public static IAsyncTestCaseRunner GetScenarioTestCaseRunner(ScenarioContext context)
     {
         if (context != null && ScenarioTestCaseRunners.TryGetValue(context.ScenarioInfo, out var runner))
         {
@@ -168,7 +203,7 @@ public class AgenixAddIn
     ///     An instance of <see cref="ITestCaseRunner" /> to be associated with the specified
     ///     scenario.
     /// </param>
-    internal static void SetScenarioTestReporter(ScenarioContext context, ITestCaseRunner testCaseRunner)
+    internal static void SetScenarioTestReporter(ScenarioContext context, IAsyncTestCaseRunner testCaseRunner)
     {
         ScenarioTestCaseRunners[context.ScenarioInfo] = testCaseRunner;
     }
@@ -182,7 +217,7 @@ public class AgenixAddIn
     ///     An instance of <see cref="ITestCaseRunner" /> previously associated with the specified
     ///     scenario.
     /// </param>
-    internal static void RemoveScenarioTestReporter(ScenarioContext context, ITestCaseRunner testCaseRunner)
+    internal static void RemoveScenarioTestReporter(ScenarioContext context, ref IAsyncTestCaseRunner testCaseRunner)
     {
         ScenarioTestCaseRunners.TryRemove(context.ScenarioInfo, out testCaseRunner);
     }
@@ -205,12 +240,19 @@ public class AgenixAddIn
         }
         catch (Exception exp)
         {
-            Log.LogError(
+            Log.LogError(exp,
                 "Exception occured in {OnInitializingName} event handler: {Exception}", nameof(OnInitializing), exp);
         }
     }
 
+    /// <summary>
+    ///     Event triggered before a test run starts.
+    /// </summary>
     public static event RunStartedHandler BeforeRunStarted;
+
+    /// <summary>
+    ///     Event that occurs after the test run has started.
+    /// </summary>
     public static event RunStartedHandler AfterRunStarted;
 
     /// <summary>
@@ -226,7 +268,7 @@ public class AgenixAddIn
         }
         catch (Exception exp)
         {
-            Log.LogError(
+            Log.LogError(exp,
                 "Exception occured in {OnBeforeRunStartedName} event handler: {Exception}", nameof(OnBeforeRunStarted),
                 exp);
         }
@@ -245,7 +287,7 @@ public class AgenixAddIn
         }
         catch (Exception exp)
         {
-            Log.LogError(
+            Log.LogError(exp,
                 "Exception occured in {OnAfterRunStartedName} event handler: {Exception}", nameof(OnAfterRunStarted),
                 exp);
         }
@@ -274,7 +316,7 @@ public class AgenixAddIn
         }
         catch (Exception exp)
         {
-            Log.LogError(
+            Log.LogError(exp,
                 "Exception occured in {OnBeforeRunFinishedName} event handler: {Exception}", nameof(OnBeforeRunFinished)
                 , exp);
         }
@@ -293,13 +335,20 @@ public class AgenixAddIn
         }
         catch (Exception exp)
         {
-            Log.LogError(
+            Log.LogError(exp,
                 "Exception occured in {OnAfterRunFinishedName} event handler: {Exception}", nameof(OnAfterRunFinished),
                 exp);
         }
     }
 
+    /// <summary>
+    ///     Represents an event that is triggered before a feature starts execution.
+    /// </summary>
     public static event FeatureStartedHandler BeforeFeatureStarted;
+
+    /// <summary>
+    ///     Event triggered after a feature has started execution.
+    /// </summary>
     public static event FeatureStartedHandler AfterFeatureStarted;
 
     /// <summary>
@@ -318,7 +367,7 @@ public class AgenixAddIn
         }
         catch (Exception exp)
         {
-            Log.LogError(
+            Log.LogError(exp,
                 "Exception occured in {OnBeforeFeatureStartedName} event handler: {Exception}", nameof(
                     OnBeforeFeatureStarted), exp);
         }
@@ -341,13 +390,20 @@ public class AgenixAddIn
         }
         catch (Exception exp)
         {
-            Log.LogError(
+            Log.LogError(exp,
                 "Exception occured in {OnAfterFeatureStartedName} event handler: {Exception}", nameof(
                     OnAfterFeatureStarted), exp);
         }
     }
 
+    /// <summary>
+    ///     Event triggered before a feature has finished execution.
+    /// </summary>
     public static event FeatureFinishedHandler BeforeFeatureFinished;
+
+    /// <summary>
+    ///     Event triggered after a feature has finished executing.
+    /// </summary>
     public static event FeatureFinishedHandler AfterFeatureFinished;
 
     /// <summary>
@@ -363,7 +419,7 @@ public class AgenixAddIn
         }
         catch (Exception exp)
         {
-            Log.LogError(
+            Log.LogError(exp,
                 "Exception occured in {OnBeforeFeatureFinishedName} event handler: {Exception}", nameof(
                     OnBeforeFeatureFinished), exp);
         }
@@ -385,13 +441,20 @@ public class AgenixAddIn
         }
         catch (Exception exp)
         {
-            Log.LogError(
+            Log.LogError(exp,
                 "Exception occured in {OnAfterFeatureFinishedName} event handler: {Exception}", nameof(
                     OnAfterFeatureFinished), exp);
         }
     }
 
+    /// <summary>
+    ///     Event triggered before a scenario starts.
+    /// </summary>
     public static event ScenarioStartedHandler BeforeScenarioStarted;
+
+    /// <summary>
+    ///     Event triggered after a scenario has started.
+    /// </summary>
     public static event ScenarioStartedHandler AfterScenarioStarted;
 
     /// <summary>
@@ -410,7 +473,7 @@ public class AgenixAddIn
         }
         catch (Exception exp)
         {
-            Log.LogError(
+            Log.LogError(exp,
                 "Exception occured in {OnBeforeScenarioStartedName} event handler: {Exception}", nameof(
                     OnBeforeScenarioStarted), exp);
         }
@@ -433,13 +496,20 @@ public class AgenixAddIn
         }
         catch (Exception exp)
         {
-            Log.LogError(
+            Log.LogError(exp,
                 "Exception occured in {OnAfterScenarioStartedName} event handler: {Exception}", nameof(
                     OnAfterScenarioStarted), exp);
         }
     }
 
+    /// <summary>
+    ///     Event triggered before a scenario's execution is finalized.
+    /// </summary>
     public static event ScenarioFinishedHandler BeforeScenarioFinished;
+
+    /// <summary>
+    ///     Event triggered after a scenario has finished executing.
+    /// </summary>
     public static event ScenarioFinishedHandler AfterScenarioFinished;
 
     /// <summary>
@@ -458,7 +528,7 @@ public class AgenixAddIn
         }
         catch (Exception exp)
         {
-            Log.LogError(
+            Log.LogError(exp,
                 "Exception occured in {OnBeforeScenarioFinishedName} event handler: {Exception}", nameof(
                     OnBeforeScenarioFinished), exp);
         }
@@ -481,7 +551,7 @@ public class AgenixAddIn
         }
         catch (Exception exp)
         {
-            Log.LogError(
+            Log.LogError(exp,
                 "Exception occured in {OnAfterScenarioFinishedName} event handler: {Exception}", nameof(
                     OnAfterScenarioFinished), exp);
         }

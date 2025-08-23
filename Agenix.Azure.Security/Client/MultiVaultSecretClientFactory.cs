@@ -285,59 +285,13 @@ public static class MultiVaultClientFactory
         return CreateClient(vaultUris, tenantId, clientId, clientSecret, strategy, authority);
     }
 
-
     /// <summary>
-    /// Options used for configuring the creation of a multi-vault secret client.
+    ///     Create MultiVaultSecretClient with custom retry configuration
     /// </summary>
-    public class MultiVaultClientOptions
-    {
-        /// <summary>
-        /// A collection of URIs representing the Azure Key Vault instances to be used in the multi-vault configuration.
-        /// </summary>
-        public string[] VaultUris { get; set; } = [];
-
-        /// <summary>
-        /// Gets or sets the tenant identifier associated with the Azure Active Directory.
-        /// </summary>
-        public string TenantId { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Identifier for the client application interacting with Azure Key Vault.
-        /// </summary>
-        public string ClientId { get; set; } = string.Empty;
-
-        /// <summary>
-        /// The client secret used for authentication with Azure Key Vault.
-        /// </summary>
-        public string ClientSecret { get; set; } = string.Empty;
-
-        /// <summary>
-        /// The maximum number of retry attempts for failed operations.
-        /// </summary>
-        public int MaxRetries { get; set; } = 3;
-
-        /// <summary>
-        /// The optional delay applied between retry attempts when accessing the vault.
-        /// </summary>
-        public TimeSpan? RetryDelay { get; set; }
-
-        /// <summary>
-        /// Defines the strategy to use when searching for secrets across multiple vaults.
-        /// </summary>
-        public SecretSearchStrategy Strategy { get; set; } = SecretSearchStrategy.FIRST_FOUND;
-
-        /// <summary>
-        /// Gets or sets the Azure Active Directory authority URL used for authentication.
-        /// This property specifies the endpoint that will be used to acquire tokens
-        /// during the authentication process.
-        /// </summary>
-        public string? Authority { get; set; }
-    }
-
-    /// <summary>
-    /// Create MultiVaultSecretClient with custom retry configuration
-    /// </summary>
-    /// <param name="options">Options containing configuration details such as vault URIs, tenant ID, client ID, client secret, retry settings, and authority</param>
+    /// <param name="options">
+    ///     Options containing configuration details such as vault URIs, tenant ID, client ID, client secret,
+    ///     retry settings, and authority
+    /// </param>
     /// <returns>Configured MultiVaultSecretClient</returns>
     public static MultiVaultSecretClient CreateWithRetry(MultiVaultClientOptions options)
     {
@@ -453,6 +407,55 @@ public static class MultiVaultClientFactory
             clientId,
             clientSecret
         );
+    }
+
+
+    /// <summary>
+    ///     Options used for configuring the creation of a multi-vault secret client.
+    /// </summary>
+    public class MultiVaultClientOptions
+    {
+        /// <summary>
+        ///     A collection of URIs representing the Azure Key Vault instances to be used in the multi-vault configuration.
+        /// </summary>
+        public string[] VaultUris { get; set; } = [];
+
+        /// <summary>
+        ///     Gets or sets the tenant identifier associated with the Azure Active Directory.
+        /// </summary>
+        public string TenantId { get; set; } = string.Empty;
+
+        /// <summary>
+        ///     Identifier for the client application interacting with Azure Key Vault.
+        /// </summary>
+        public string ClientId { get; set; } = string.Empty;
+
+        /// <summary>
+        ///     The client secret used for authentication with Azure Key Vault.
+        /// </summary>
+        public string ClientSecret { get; set; } = string.Empty;
+
+        /// <summary>
+        ///     The maximum number of retry attempts for failed operations.
+        /// </summary>
+        public int MaxRetries { get; set; } = 3;
+
+        /// <summary>
+        ///     The optional delay applied between retry attempts when accessing the vault.
+        /// </summary>
+        public TimeSpan? RetryDelay { get; set; }
+
+        /// <summary>
+        ///     Defines the strategy to use when searching for secrets across multiple vaults.
+        /// </summary>
+        public SecretSearchStrategy Strategy { get; set; } = SecretSearchStrategy.FIRST_FOUND;
+
+        /// <summary>
+        ///     Gets or sets the Azure Active Directory authority URL used for authentication.
+        ///     This property specifies the endpoint that will be used to acquire tokens
+        ///     during the authentication process.
+        /// </summary>
+        public string? Authority { get; set; }
     }
 }
 

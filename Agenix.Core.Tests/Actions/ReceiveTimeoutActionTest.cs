@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -32,7 +32,6 @@ using Agenix.Core.Actions;
 using Agenix.Core.Message;
 using Moq;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Agenix.Core.Tests.Actions;
 
@@ -61,14 +60,14 @@ public class ReceiveTimeoutActionTest : AbstractNUnitSetUp
         _endpoint.Setup(e => e.EndpointConfiguration).Returns(_endpointConfiguration.Object);
         _endpointConfiguration.Setup(ec => ec.Timeout).Returns(5000L);
 
-        _consumer.Setup(c => c.Receive(Context, 1000L)).Returns((IMessage)null);
+        _consumer.Setup(c => c.Receive(Context, 1000L)).ReturnsAsync((IMessage)null);
 
         var receiveTimeout = new ReceiveTimeoutAction.Builder()
             .Endpoint(_endpoint.Object)
             .Build();
 
         // Act
-        receiveTimeout.Execute(Context);
+        Assert.That(async () => await receiveTimeout.ExecuteAsync(Context), Throws.Nothing);
     }
 
     [Test]
@@ -79,7 +78,7 @@ public class ReceiveTimeoutActionTest : AbstractNUnitSetUp
         _endpoint.Setup(e => e.EndpointConfiguration).Returns(_endpointConfiguration.Object);
         _endpointConfiguration.Setup(ec => ec.Timeout).Returns(5000L);
 
-        _consumer.Setup(c => c.Receive(Context, 500L)).Returns((IMessage)null);
+        _consumer.Setup(c => c.Receive(Context, 500L)).ReturnsAsync((IMessage)null);
 
         var receiveTimeout = new ReceiveTimeoutAction.Builder()
             .Endpoint(_endpoint.Object)
@@ -87,7 +86,7 @@ public class ReceiveTimeoutActionTest : AbstractNUnitSetUp
             .Build();
 
         // Act
-        receiveTimeout.Execute(Context);
+        Assert.That(async () => await receiveTimeout.ExecuteAsync(Context), Throws.Nothing);
     }
 
     [Test]
@@ -99,17 +98,17 @@ public class ReceiveTimeoutActionTest : AbstractNUnitSetUp
         _endpoint.Setup(e => e.EndpointConfiguration).Returns(_endpointConfiguration.Object);
         _endpointConfiguration.Setup(ec => ec.Timeout).Returns(5000L);
 
-        _consumer.Setup(c => c.Receive(Context, 1000L)).Returns(message);
+        _consumer.Setup(c => c.Receive(Context, 1000L)).ReturnsAsync(message);
 
         var receiveTimeout = new ReceiveTimeoutAction.Builder()
             .Endpoint(_endpoint.Object)
             .Build();
 
         // Act & Assert
-        var ex = Assert.Throws<AgenixSystemException>(() => receiveTimeout.Execute(Context));
+        var ex = Assert.ThrowsAsync<AgenixSystemException>(() => receiveTimeout.ExecuteAsync(Context));
         Assert.That(ex, Is.Not.Null);
-        ClassicAssert.AreEqual(
-            "Message timeout validation failed! Received message while waiting for timeout on destination", ex.Message);
+        Assert.That("Message timeout validation failed! Received message while waiting for timeout on destination",
+            Is.EqualTo(ex.Message));
     }
 
     [Test]
@@ -120,7 +119,7 @@ public class ReceiveTimeoutActionTest : AbstractNUnitSetUp
         _endpoint.Setup(e => e.EndpointConfiguration).Returns(_endpointConfiguration.Object);
         _endpointConfiguration.Setup(ec => ec.Timeout).Returns(5000L);
 
-        _consumer.Setup(c => c.Receive("Operation = 'sayHello'", Context, 1000L)).Returns((IMessage)null);
+        _consumer.Setup(c => c.Receive("Operation = 'sayHello'", Context, 1000L)).ReturnsAsync((IMessage)null);
 
         var receiveTimeout = new ReceiveTimeoutAction.Builder()
             .Endpoint(_endpoint.Object)
@@ -128,7 +127,7 @@ public class ReceiveTimeoutActionTest : AbstractNUnitSetUp
             .Build();
 
         // Act
-        receiveTimeout.Execute(Context);
+        Assert.That(async () => await receiveTimeout.ExecuteAsync(Context), Throws.Nothing);
     }
 
     [Test]
@@ -141,7 +140,7 @@ public class ReceiveTimeoutActionTest : AbstractNUnitSetUp
         _endpoint.Setup(e => e.EndpointConfiguration).Returns(_endpointConfiguration.Object);
         _endpointConfiguration.Setup(ec => ec.Timeout).Returns(5000L);
 
-        _consumer.Setup(c => c.Receive("Operation = 'sayHello'", Context, 1000L)).Returns((IMessage)null);
+        _consumer.Setup(c => c.Receive("Operation = 'sayHello'", Context, 1000L)).ReturnsAsync((IMessage)null);
 
         var receiveTimeout = new ReceiveTimeoutAction.Builder()
             .Endpoint(_endpoint.Object)
@@ -149,6 +148,6 @@ public class ReceiveTimeoutActionTest : AbstractNUnitSetUp
             .Build();
 
         // Act
-        receiveTimeout.Execute(Context);
+        Assert.That(async () => await receiveTimeout.ExecuteAsync(Context), Throws.Nothing);
     }
 }

@@ -71,9 +71,9 @@ public class DropDownSelectAction : FindElementAction
     /// <param name="element">The web element representing the dropdown to be interacted with.</param>
     /// <param name="browser">The browser instance currently being used for testing.</param>
     /// <param name="context">The context object containing test-related data and utilities.</param>
-    protected override void Execute(IWebElement element, SeleniumBrowser browser, TestContext context)
+    protected override async Task Execute(IWebElement element, SeleniumBrowser browser, TestContext context)
     {
-        base.Execute(element, browser, context);
+        await base.Execute(element, browser, context);
 
         var dropdown = new SelectElement(element);
 
@@ -88,9 +88,8 @@ public class DropDownSelectAction : FindElementAction
             if (IsInternetExplorer(browser))
             {
                 // IE doesn't support multi-select with CTRL key properly
-                foreach (var option in _options)
+                foreach (var resolvedOption in _options.Select(option => context.ReplaceDynamicContentInString(option)))
                 {
-                    var resolvedOption = context.ReplaceDynamicContentInString(option);
                     dropdown.SelectByValue(resolvedOption);
                 }
             }
@@ -153,7 +152,8 @@ public class DropDownSelectAction : FindElementAction
     /// </returns>
     private static bool IsInternetExplorer(SeleniumBrowser browser)
     {
-        return browser.EndpointConfiguration.BrowserType.Contains("internet", StringComparison.CurrentCultureIgnoreCase) ||
+        return browser.EndpointConfiguration.BrowserType.Contains("internet",
+                   StringComparison.CurrentCultureIgnoreCase) ||
                browser.EndpointConfiguration.BrowserType.Contains("ie", StringComparison.CurrentCultureIgnoreCase);
     }
 

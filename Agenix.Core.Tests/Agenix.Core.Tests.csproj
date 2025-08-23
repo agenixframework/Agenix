@@ -17,10 +17,8 @@
     <PackageReference Include="Moq" Version="4.20.72"/>
     <PackageReference Include="Moq.AutoMock" Version="3.5.0"/>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1"/>
-    <PackageReference Include="System.Data.SQLite" Version="1.0.119"/>
     <PackageReference Include="System.Formats.Asn1" Version="9.0.6"/>
     <PackageReference Include="System.Text.Json" Version="9.0.6"/>
-    <PackageReference Include="System.Data.SqlClient" Version="4.9.0"/>
     <PackageReference Include="System.Net.Http" Version="4.3.4"/>
     <PackageReference Include="System.Security.Cryptography.X509Certificates" Version="4.3.2"/>
   </ItemGroup>
@@ -92,37 +90,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Remove="ResourcesTest\Sql\Actions\test-query.sql"/>
-    <EmbeddedResource Include="ResourcesTest\Sql\Actions\test-query.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <None Remove="ResourcesTest\Sql\Actions\test-sql-query-statements.sql"/>
-    <EmbeddedResource Include="ResourcesTest\Sql\Actions\test-sql-query-statements.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <None Remove="ResourcesTest\Sql\Actions\test-sql-statements.sql"/>
-    <EmbeddedResource Include="ResourcesTest\Sql\Actions\test-sql-statements.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <None Remove="ResourcesTest\Sql\Actions\test-sql-with-variables.sql"/>
-    <EmbeddedResource Include="ResourcesTest\Sql\Actions\test-sql-with-variables.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <None Remove="ResourcesTest\Sql\Actions\Dsl\query-script.sql"/>
-    <EmbeddedResource Include="ResourcesTest\Sql\Actions\Dsl\query-script.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <None Remove="ResourcesTest\Sql\Integration\Actions\query-script.sql"/>
-    <EmbeddedResource Include="ResourcesTest\Sql\Integration\Actions\query-script.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <None Remove="ResourcesTest\Sql\Integration\Actions\script.sql"/>
-    <EmbeddedResource Include="ResourcesTest\Sql\Integration\Actions\script.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <None Remove="ResourcesTest\Sql\Integration\Actions\create-tables.sql"/>
-    <EmbeddedResource Include="ResourcesTest\Sql\Integration\Actions\create-tables.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <None Remove="IO\TestResource.txt"/>
     <EmbeddedResource Include="IO\TestResource.txt"/>
     <None Remove="TestResource.txt"/>
@@ -153,4 +127,13 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Sql/Integration/**/*.cs"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Spring.Core" Version="3.0.2"/>
+  </ItemGroup>
+
 </Project>
+

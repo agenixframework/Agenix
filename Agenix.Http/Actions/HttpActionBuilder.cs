@@ -35,7 +35,7 @@ namespace Agenix.Http.Actions;
 /// Supports initiating client or server HTTP operations.
 /// Extends behavior to resolve references dynamically during action construction.
 /// /
-public class HttpActionBuilder : AbstractReferenceResolverAwareTestActionBuilder<ITestAction>
+public class HttpActionBuilder : AbstractReferenceResolverAwareTestActionBuilder<IAsyncTestAction>
 {
     /// Static entrance method for the HTTP fluent action builder.
     /// @return The HTTP action builder instance.
@@ -53,7 +53,7 @@ public class HttpActionBuilder : AbstractReferenceResolverAwareTestActionBuilder
     public HttpClientActionBuilder Client(HttpClient httpClient)
     {
         var clientActionBuilder = new HttpClientActionBuilder(httpClient)
-            .WithReferenceResolver(referenceResolver);
+            .WithReferenceResolver(ReferenceResolver);
         _delegate = clientActionBuilder;
         return clientActionBuilder;
     }
@@ -65,7 +65,7 @@ public class HttpActionBuilder : AbstractReferenceResolverAwareTestActionBuilder
     public HttpClientActionBuilder Client(string httpClient)
     {
         var clientActionBuilder = new HttpClientActionBuilder(httpClient)
-            .WithReferenceResolver(referenceResolver);
+            .WithReferenceResolver(ReferenceResolver);
         _delegate = clientActionBuilder;
         return clientActionBuilder;
     }
@@ -75,13 +75,13 @@ public class HttpActionBuilder : AbstractReferenceResolverAwareTestActionBuilder
     /// <return>This instance of HttpActionBuilder for method chaining.</return>
     public HttpActionBuilder WithReferenceResolver(IReferenceResolver referenceResolver)
     {
-        this.referenceResolver = referenceResolver;
+        ReferenceResolver = referenceResolver;
         return this;
     }
 
-    /// Builds and returns an implementation of the ITestAction interface.
-    /// <return>Instance of ITestAction created by the configured delegate.</return>
-    public override ITestAction Build()
+    /// Builds and returns an implementation of the IAsyncTestAction interface.
+    /// <return>Instance of IAsyncTestAction created by the configured delegate.</return>
+    public override IAsyncTestAction Build()
     {
         ObjectHelper.AssertNotNull(_delegate, "Missing delegate action to build");
         return _delegate.Build();

@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,67 +21,68 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 namespace Agenix.Azure.Security.Message;
 
 /// <summary>
-/// Result of OAuth token operation
+///     Result of OAuth token operation
 /// </summary>
 public class OAuthTokenResult
 {
     /// <summary>
-    /// Whether the operation was successful
+    ///     Whether the operation was successful
     /// </summary>
     public bool IsSuccess { get; init; }
 
     /// <summary>
-    /// Access token
+    ///     Access token
     /// </summary>
     public string? AccessToken { get; init; }
 
     /// <summary>
-    /// Token type
+    ///     Token type
     /// </summary>
     public string? TokenType { get; init; }
 
     /// <summary>
-    /// Token expiration time
+    ///     Token expiration time
     /// </summary>
     public DateTime? ExpiresAt { get; init; }
 
     /// <summary>
-    /// Granted scopes
+    ///     Granted scopes
     /// </summary>
     public List<string>? GrantedScopes { get; init; }
 
     /// <summary>
-    /// Error code
+    ///     Error code
     /// </summary>
     public string? Error { get; init; }
 
     /// <summary>
-    /// Error description
+    ///     Error description
     /// </summary>
     public string? ErrorDescription { get; init; }
 
     /// <summary>
-    /// Exception that occurred (if any)
+    ///     Exception that occurred (if any)
     /// </summary>
     public Exception? Exception { get; init; }
 
     /// <summary>
-    /// Additional data from the response
+    ///     Additional data from the response
     /// </summary>
     public Dictionary<string, object>? AdditionalData { get; init; }
 
     /// <summary>
-    /// Time when the result was created
+    ///     Time when the result was created
     /// </summary>
     public DateTime CreatedAt { get; init; } = DateTime.UtcNow;
 
     /// <summary>
-    /// Create successful result
+    ///     Create successful result
     /// </summary>
     public static OAuthTokenResult Success(OAuthTokenResponse response)
     {
@@ -96,7 +98,7 @@ public class OAuthTokenResult
     }
 
     /// <summary>
-    /// Create failed result
+    ///     Create failed result
     /// </summary>
     public static OAuthTokenResult Failed(string error, string? errorDescription = null, Exception? exception = null)
     {
@@ -110,7 +112,7 @@ public class OAuthTokenResult
     }
 
     /// <summary>
-    /// Create failed result from OAuth response
+    ///     Create failed result from OAuth response
     /// </summary>
     public static OAuthTokenResult Failed(OAuthTokenResponse response)
     {
@@ -124,42 +126,47 @@ public class OAuthTokenResult
     }
 
     /// <summary>
-    /// Get remaining token lifetime
+    ///     Get remaining token lifetime
     /// </summary>
     public TimeSpan? GetRemainingLifetime()
     {
         if (!IsSuccess || !ExpiresAt.HasValue)
+        {
             return null;
+        }
 
         var remaining = ExpiresAt.Value - DateTime.UtcNow;
         return remaining > TimeSpan.Zero ? remaining : TimeSpan.Zero;
     }
 
     /// <summary>
-    /// Check if token is expired or about to expire
+    ///     Check if token is expired or about to expire
     /// </summary>
     public bool IsExpired(TimeSpan? buffer = null)
     {
         if (!IsSuccess || !ExpiresAt.HasValue)
+        {
             return true;
+        }
 
         var bufferTime = buffer ?? TimeSpan.FromMinutes(5);
         return ExpiresAt.Value <= DateTime.UtcNow.Add(bufferTime);
     }
 
     /// <summary>
-    /// Returns a string that represents the current object, describing the status of the OAuth token operation.
+    ///     Returns a string that represents the current object, describing the status of the OAuth token operation.
     /// </summary>
     /// <returns>
-    /// A string indicating whether the token operation was successful, its expiration information, and granted scopes
-    /// when successful, or the error details if the operation failed.
+    ///     A string indicating whether the token operation was successful, its expiration information, and granted scopes
+    ///     when successful, or the error details if the operation failed.
     /// </returns>
     public override string ToString()
     {
         if (IsSuccess)
         {
             var remaining = GetRemainingLifetime();
-            return $"OAuth Success: Token expires in {remaining?.TotalMinutes:F1} minutes, scopes: {string.Join(", ", GrantedScopes ?? new List<string>())}";
+            return
+                $"OAuth Success: Token expires in {remaining?.TotalMinutes:F1} minutes, scopes: {string.Join(", ", GrantedScopes ?? new List<string>())}";
         }
 
         return $"OAuth Failed: {Error} - {ErrorDescription}";

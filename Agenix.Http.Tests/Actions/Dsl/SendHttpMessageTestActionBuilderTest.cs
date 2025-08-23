@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -48,7 +48,7 @@ public class SendHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
 
 
     [Test]
-    public void TestFork()
+    public async Task TestFork()
     {
         Mock.Get(_httpClient).Reset();
         Mock.Get(_messageProducer).Reset();
@@ -64,18 +64,20 @@ public class SendHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
             .Setup(m => m.Send(
                 It.Is<IMessage>(msg => msg.GetPayload<string>() == "Foo"),
                 It.IsAny<TestContext>()))
+            // ReSharper disable once AccessToDisposedClosure
             .Callback(() => firstMessageSent.Set());
 
         Mock.Get(_messageProducer)
             .Setup(m => m.Send(
                 It.Is<IMessage>(msg => msg.GetPayload<string>() == "Bar"),
                 It.IsAny<TestContext>()))
+            // ReSharper disable once AccessToDisposedClosure
             .Callback(() => secondMessageSent.Set());
 
         var builder = new DefaultTestCaseRunner(Context);
 
         // First action (non-forked)
-        builder.Run(HttpActionBuilder.Http().Client(_httpClient)
+        await builder.Run(HttpActionBuilder.Http().Client(_httpClient)
             .Send()
             .Get()
             .Message(new DefaultMessage("Foo").SetHeader("operation", "foo"))
@@ -83,7 +85,7 @@ public class SendHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
             .Header("additional", "additionalValue"));
 
         // Second action (forked)
-        builder.Run(HttpActionBuilder.Http().Client(_httpClient)
+        await builder.Run(HttpActionBuilder.Http().Client(_httpClient)
             .Send()
             .Post()
             .Message(new DefaultMessage("Bar").SetHeader("operation", "bar"))
@@ -118,7 +120,7 @@ public class SendHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
 
         ClassicAssert.AreEqual("Foo", messageBuilder.GetMessage().GetPayload<string>());
         ClassicAssert.AreEqual(4, messageBuilder.BuildMessageHeaders(Context).Count);
-        ClassicAssert.AreEqual(MessageType.PLAINTEXT.ToString(),
+        ClassicAssert.AreEqual(nameof(MessageType.PLAINTEXT),
             messageBuilder.BuildMessageHeaders(Context)[MessageHeaders.MessageType]);
         ClassicAssert.AreEqual(HttpMethod.Get.Method,
             messageBuilder.BuildMessageHeaders(Context)[HttpMessageHeaders.HttpRequestMethod]);
@@ -137,21 +139,21 @@ public class SendHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestMessageObjectOverride()
+    public async Task TestMessageObjectOverride()
     {
         Mock.Get(_httpClient).Reset();
         Mock.Get(_messageProducer).Reset();
 
         Mock.Get(_httpClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
         Mock.Get(_messageProducer).Setup(m => m.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) =>
+            .Callback<IMessage, TestContext>((message, _) =>
             {
                 ClassicAssert.AreEqual("Foo", message.GetPayload<string>());
             });
 
         var builder = new DefaultTestCaseRunner(Context);
 
-        builder.Run(HttpActionBuilder.Http().Client(_httpClient)
+        await builder.Run(HttpActionBuilder.Http().Client(_httpClient)
             .Send()
             .Get()
             .Message(new HttpMessage("Foo")
@@ -181,7 +183,7 @@ public class SendHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestHttpMethod()
+    public async Task TestHttpMethod()
     {
         Mock.Get(_httpClient).Reset();
         Mock.Get(_messageProducer).Reset();
@@ -189,7 +191,7 @@ public class SendHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
         Mock.Get(_httpClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
 
         Mock.Get(_messageProducer).Setup(m => m.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) =>
+            .Callback<IMessage, TestContext>((message, _) =>
             {
                 ClassicAssert.AreEqual("<TestRequest><Message>Hello World!</Message></TestRequest>",
                     message.GetPayload<string>());
@@ -198,7 +200,7 @@ public class SendHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
 
         var builder = new DefaultTestCaseRunner(Context);
 
-        builder.Run(HttpActionBuilder.Http().Client(_httpClient)
+        await builder.Run(HttpActionBuilder.Http().Client(_httpClient)
             .Send()
             .Get()
             .Message()
@@ -214,7 +216,7 @@ public class SendHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestHttpRequestUriAndPath()
+    public async Task TestHttpRequestUriAndPath()
     {
         Mock.Get(_httpClient).Reset();
         Mock.Get(_messageProducer).Reset();
@@ -222,7 +224,7 @@ public class SendHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
         Mock.Get(_httpClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
 
         Mock.Get(_messageProducer).Setup(m => m.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) =>
+            .Callback<IMessage, TestContext>((message, _) =>
             {
                 ClassicAssert.AreEqual("<TestRequest><Message>Hello World!</Message></TestRequest>",
                     message.GetPayload<string>());
@@ -233,7 +235,7 @@ public class SendHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
 
         var builder = new DefaultTestCaseRunner(Context);
 
-        builder.Run(HttpActionBuilder.Http().Client(_httpClient)
+        await builder.Run(HttpActionBuilder.Http().Client(_httpClient)
             .Send()
             .Get("/test")
             .Uri("http://localhost:8080/")
@@ -264,7 +266,7 @@ public class SendHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestHttpRequestUriAndQueryParams()
+    public async Task TestHttpRequestUriAndQueryParams()
     {
         Mock.Get(_httpClient).Reset();
         Mock.Get(_messageProducer).Reset();
@@ -272,7 +274,7 @@ public class SendHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
         Mock.Get(_httpClient).Setup(c => c.CreateProducer()).Returns(_messageProducer);
 
         Mock.Get(_messageProducer).Setup(m => m.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) =>
+            .Callback<IMessage, TestContext>((message, _) =>
             {
                 ClassicAssert.AreEqual("<TestRequest><Message>Hello World!</Message></TestRequest>",
                     message.GetPayload<string>());
@@ -284,7 +286,7 @@ public class SendHttpMessageTestActionBuilderTest : AbstractNUnitSetUp
 
         var builder = new DefaultTestCaseRunner(Context);
 
-        builder.Run(HttpActionBuilder.Http().Client(_httpClient)
+        await builder.Run(HttpActionBuilder.Http().Client(_httpClient)
             .Send()
             .Get()
             .Uri("http://localhost:8080/")

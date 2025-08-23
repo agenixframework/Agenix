@@ -72,7 +72,7 @@ public class FillFormAction : AbstractSeleniumAction
     /// </summary>
     /// <param name="browser">The Selenium browser instance used for form interaction.</param>
     /// <param name="context">The test execution context containing information about the current test state.</param>
-    protected override void Execute(SeleniumBrowser browser, TestContext context)
+    protected override async Task Execute(SeleniumBrowser browser, TestContext context)
     {
         foreach (var setInputAction in _formFields.Select(field => new SetInputAction.Builder()
                      .WithBrowser(browser)
@@ -80,7 +80,7 @@ public class FillFormAction : AbstractSeleniumAction
                      .Element(field.Key)
                      .Build()))
         {
-            setInputAction.Execute(context);
+            await setInputAction.ExecuteAsync(context);
         }
 
         if (_submitButton == null)
@@ -93,7 +93,7 @@ public class FillFormAction : AbstractSeleniumAction
             .Element(_submitButton)
             .Build();
 
-        clickAction.Execute(context);
+        await clickAction.ExecuteAsync(context);
     }
 
     /// <summary>
@@ -101,7 +101,12 @@ public class FillFormAction : AbstractSeleniumAction
     /// </summary>
     public class Builder : Builder<FillFormAction, Builder>
     {
+        /// <summary>
+        ///     Represents the key-value pairs of form fields where keys are selectors to locate the form elements
+        ///     and values are the input data to be filled.
+        /// </summary>
         public Dictionary<By, string> FormFields { get; } = new();
+
         public By SubmitButton { get; private set; }
 
         /// <summary>
@@ -110,7 +115,7 @@ public class FillFormAction : AbstractSeleniumAction
         public Builder Field(By by, string value)
         {
             FormFields[by] = value;
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -136,7 +141,7 @@ public class FillFormAction : AbstractSeleniumAction
         public Builder Submit()
         {
             SubmitButton = By.XPath("//input[@type='submit']");
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -153,7 +158,7 @@ public class FillFormAction : AbstractSeleniumAction
         public Builder Submit(By button)
         {
             SubmitButton = button;
-            return self;
+            return Self;
         }
 
         /// <summary>
@@ -166,14 +171,14 @@ public class FillFormAction : AbstractSeleniumAction
                 Field(field.Key, field.Value);
             }
 
-            return self;
+            return Self;
         }
 
         /// <summary>
-        /// Builds and returns an instance of <see cref="FillFormAction"/>.
+        ///     Builds and returns an instance of <see cref="FillFormAction" />.
         /// </summary>
         /// <returns>
-        /// A new instance of <see cref="FillFormAction"/> configured using the builder.
+        ///     A new instance of <see cref="FillFormAction" /> configured using the builder.
         /// </returns>
         public override FillFormAction Build()
         {

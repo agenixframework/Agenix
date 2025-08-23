@@ -32,12 +32,12 @@ using Agenix.Http.Message;
 namespace Agenix.Http.Client;
 
 /// <summary>
-/// Provides a builder for configuring and initializing an HTTP client endpoint.
+///     Provides a builder for configuring and initializing an HTTP client endpoint.
 /// </summary>
 /// <remarks>
-/// This builder is used to set up necessary configurations, such as request URL,
-/// HTTP method, message converters, and other options for the HttpClient
-/// before building the endpoint instance.
+///     This builder is used to set up necessary configurations, such as request URL,
+///     HTTP method, message converters, and other options for the HttpClient
+///     before building the endpoint instance.
 /// </remarks>
 public class HttpClientBuilder : AbstractEndpointBuilder<HttpClient>
 {
@@ -253,6 +253,7 @@ public class HttpClientBuilder : AbstractEndpointBuilder<HttpClient>
         {
             _endpoint.EndpointConfiguration.ClientHandlers.Add(handler);
         }
+
         return this;
     }
 }

@@ -1,4 +1,5 @@
 #region License
+
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements. See the NOTICE file
 // distributed with this work for additional information
@@ -20,6 +21,7 @@
 //
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
+
 #endregion
 
 using Agenix.Api.Log;
@@ -29,37 +31,37 @@ using Microsoft.Extensions.Logging;
 namespace Agenix.Azure.Security.Client;
 
 /// <summary>
-/// Client for retrieving secrets from multiple Azure Key Vaults
+///     Client for retrieving secrets from multiple Azure Key Vaults
 /// </summary>
 public class MultiVaultSecretClient
 {
     /// <summary>
-    /// Logger instance
+    ///     Logger instance
     /// </summary>
     private static readonly ILogger Log = LogManager.GetLogger(typeof(MultiVaultSecretClient));
 
     /// <summary>
-    /// List of Key Vault clients to search
-    /// </summary>
-    private readonly List<KeyVaultSecretClient> _vaultClients;
-
-    /// <summary>
-    /// Search strategy for finding secrets
-    /// </summary>
-    private readonly SecretSearchStrategy _searchStrategy;
-
-    /// <summary>
-    /// Cache for found secrets to avoid repeated searches
-    /// </summary>
-    private readonly Dictionary<string, (string Value, string VaultUri)> _secretCache;
-
-    /// <summary>
-    /// Lock for thread-safe cache operations
+    ///     Lock for thread-safe cache operations
     /// </summary>
     private readonly SemaphoreSlim _cacheLock = new(1, 1);
 
     /// <summary>
-    /// Initialize MultiVaultSecretClient
+    ///     Search strategy for finding secrets
+    /// </summary>
+    private readonly SecretSearchStrategy _searchStrategy;
+
+    /// <summary>
+    ///     Cache for found secrets to avoid repeated searches
+    /// </summary>
+    private readonly Dictionary<string, (string Value, string VaultUri)> _secretCache;
+
+    /// <summary>
+    ///     List of Key Vault clients to search
+    /// </summary>
+    private readonly List<KeyVaultSecretClient> _vaultClients;
+
+    /// <summary>
+    ///     Initialize MultiVaultSecretClient
     /// </summary>
     /// <param name="vaultConfigurations">List of Key Vault configurations</param>
     /// <param name="searchStrategy">Strategy for searching across vaults</param>
@@ -71,7 +73,9 @@ public class MultiVaultSecretClient
 
         var configs = vaultConfigurations.ToList();
         if (configs.Count == 0)
+        {
             throw new ArgumentException("At least one vault configuration is required", nameof(vaultConfigurations));
+        }
 
         _vaultClients = configs.Select(config => new KeyVaultSecretClient(config)).ToList();
         _searchStrategy = searchStrategy;
@@ -82,7 +86,7 @@ public class MultiVaultSecretClient
     }
 
     /// <summary>
-    /// Initialize MultiVaultSecretClient with existing clients
+    ///     Initialize MultiVaultSecretClient with existing clients
     /// </summary>
     /// <param name="vaultClients">List of Key Vault clients</param>
     /// <param name="searchStrategy">Strategy for searching across vaults</param>
@@ -94,26 +98,32 @@ public class MultiVaultSecretClient
 
         _vaultClients = vaultClients.ToList();
         if (_vaultClients.Count == 0)
+        {
             throw new ArgumentException("At least one vault client is required", nameof(vaultClients));
+        }
 
         _searchStrategy = searchStrategy;
         _secretCache = new Dictionary<string, (string, string)>();
 
-        Log.LogInformation("Initialized MultiVaultSecretClient with {VaultCount} vault clients using {Strategy} strategy",
+        Log.LogInformation(
+            "Initialized MultiVaultSecretClient with {VaultCount} vault clients using {Strategy} strategy",
             _vaultClients.Count, searchStrategy);
     }
 
     /// <summary>
-    /// Get secret value from any of the configured vaults
+    ///     Get secret value from any of the configured vaults
     /// </summary>
     /// <param name="secretName">Name of the secret</param>
     /// <param name="useCache">Whether to use cached results</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Secret value and the vault URI where it was found</returns>
-    public async Task<SecretResult> GetSecretAsync(string secretName, bool useCache = true, CancellationToken cancellationToken = default)
+    public async Task<SecretResult> GetSecretAsync(string secretName, bool useCache = true,
+        CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(secretName))
+        {
             throw new ArgumentException("Secret name cannot be null or empty", nameof(secretName));
+        }
 
         // Check cache first
         if (useCache)
@@ -164,18 +174,7 @@ public class MultiVaultSecretClient
     }
 
     /// <summary>
-    /// Get secret value synchronously
-    /// </summary>
-    /// <param name="secretName">Name of the secret</param>
-    /// <param name="useCache">Whether to use cached results</param>
-    /// <returns>Secret value and the vault URI where it was found</returns>
-    public SecretResult GetSecret(string secretName, bool useCache = true)
-    {
-        return GetSecretAsync(secretName, useCache).GetAwaiter().GetResult();
-    }
-
-    /// <summary>
-    /// Search strategy: Return first found secret (fastest)
+    ///     Search strategy: Return first found secret (fastest)
     /// </summary>
     private async Task<SecretResult> SearchFirstFoundAsync(string secretName, CancellationToken cancellationToken)
     {
@@ -203,7 +202,7 @@ public class MultiVaultSecretClient
     }
 
     /// <summary>
-    /// Search strategy: Search all vaults in parallel (fastest for multiple secrets)
+    ///     Search strategy: Search all vaults in parallel (fastest for multiple secrets)
     /// </summary>
     private async Task<SecretResult> SearchParallelAsync(string secretName, CancellationToken cancellationToken)
     {
@@ -222,6 +221,7 @@ public class MultiVaultSecretClient
                 Log.LogWarning(ex, "Error checking secret '{SecretName}' in vault '{VaultUri}'",
                     secretName, client.VaultUri);
             }
+
             return SecretResult.NotFound;
         });
 
@@ -241,7 +241,7 @@ public class MultiVaultSecretClient
     }
 
     /// <summary>
-    /// Search strategy: Search vaults sequentially with error handling
+    ///     Search strategy: Search vaults sequentially with error handling
     /// </summary>
     private async Task<SecretResult> SearchSequentialAsync(string secretName, CancellationToken cancellationToken)
     {
@@ -268,7 +268,8 @@ public class MultiVaultSecretClient
 
         if (errors.Count == _vaultClients.Count)
         {
-            var aggregateException = new AggregateException($"Failed to check secret '{secretName}' in all vaults", errors);
+            var aggregateException =
+                new AggregateException($"Failed to check secret '{secretName}' in all vaults", errors);
             Log.LogError(aggregateException, "All vault checks failed for secret '{SecretName}'", secretName);
             throw aggregateException;
         }
@@ -279,7 +280,7 @@ public class MultiVaultSecretClient
     }
 
     /// <summary>
-    /// Search strategy: Search in priority order (first vault has highest priority)
+    ///     Search strategy: Search in priority order (first vault has highest priority)
     /// </summary>
     private async Task<SecretResult> SearchPriorityOrderAsync(string secretName, CancellationToken cancellationToken)
     {
@@ -288,7 +289,7 @@ public class MultiVaultSecretClient
     }
 
     /// <summary>
-    /// Get multiple secrets at once
+    ///     Get multiple secrets at once
     /// </summary>
     /// <param name="secretNames">Names of secrets to retrieve</param>
     /// <param name="useCache">Whether to use cached results</param>
@@ -300,7 +301,9 @@ public class MultiVaultSecretClient
         CancellationToken cancellationToken = default)
     {
         if (secretNames == null)
+        {
             throw new ArgumentNullException(nameof(secretNames));
+        }
 
         var secretNamesList = secretNames.ToList();
         var results = new Dictionary<string, SecretResult>();
@@ -330,7 +333,7 @@ public class MultiVaultSecretClient
     }
 
     /// <summary>
-    /// Clear the secret cache
+    ///     Clear the secret cache
     /// </summary>
     public async Task ClearCacheAsync()
     {
@@ -347,7 +350,7 @@ public class MultiVaultSecretClient
     }
 
     /// <summary>
-    /// Get cache statistics
+    ///     Get cache statistics
     /// </summary>
     public async Task<(int CachedSecrets, string[] SecretNames)> GetCacheStatsAsync()
     {
@@ -363,23 +366,22 @@ public class MultiVaultSecretClient
     }
 
     /// <summary>
-    /// Get configured vault URIs
+    ///     Get configured vault URIs
     /// </summary>
-    public string[] GetVaultUris() => _vaultClients.Select(c => c.VaultUri).ToArray();
+    public string[] GetVaultUris()
+    {
+        return _vaultClients.Select(c => c.VaultUri).ToArray();
+    }
 }
 
 /// <summary>
-/// Result of a secret search operation
+///     Result of a secret search operation
 /// </summary>
 public class SecretResult
 {
-    public string Value { get; }
-    public string VaultUri { get; }
-    public bool Found { get; }
-    public bool FromCache { get; }
-
     /// <summary>
-    /// Represents the result of a secret retrieval operation, containing the secret value, the originating vault's URI, and metadata about the operation.
+    ///     Represents the result of a secret retrieval operation, containing the secret value, the originating vault's URI,
+    ///     and metadata about the operation.
     /// </summary>
     public SecretResult(string value, string vaultUri, bool fromCache)
     {
@@ -397,23 +399,30 @@ public class SecretResult
         FromCache = false;
     }
 
+    public string Value { get; }
+    public string VaultUri { get; }
+    public bool Found { get; }
+    public bool FromCache { get; }
+
     /// <summary>
-    /// Represents the result of a failed secret search operation, indicating that the secret was not found.
+    ///     Represents the result of a failed secret search operation, indicating that the secret was not found.
     /// </summary>
     public static SecretResult NotFound => new();
 
     /// <summary>
-    /// Returns a string representation of the secret retrieval result, indicating whether the secret was found,
-    /// the vault it originated from, and if it was retrieved from cache.
+    ///     Returns a string representation of the secret retrieval result, indicating whether the secret was found,
+    ///     the vault it originated from, and if it was retrieved from cache.
     /// </summary>
     /// <returns>
-    /// A string describing the secret retrieval result. If the secret was found, the string includes
-    /// the originating vault URI and cache information; otherwise, it indicates that the secret was not found.
+    ///     A string describing the secret retrieval result. If the secret was found, the string includes
+    ///     the originating vault URI and cache information; otherwise, it indicates that the secret was not found.
     /// </returns>
     public override string ToString()
     {
         if (!Found)
+        {
             return "Not found";
+        }
 
         var cacheIndicator = FromCache ? " (cached)" : "";
         return $"Found in {VaultUri}{cacheIndicator}";
@@ -421,27 +430,27 @@ public class SecretResult
 }
 
 /// <summary>
-/// Search strategies for finding secrets across multiple vaults
+///     Search strategies for finding secrets across multiple vaults
 /// </summary>
 public enum SecretSearchStrategy
 {
     /// <summary>
-    /// Return the first secret found (fastest for a single secret)
+    ///     Return the first secret found (fastest for a single secret)
     /// </summary>
     FIRST_FOUND,
 
     /// <summary>
-    /// Search all vaults in parallel (fastest for multiple secrets)
+    ///     Search all vaults in parallel (fastest for multiple secrets)
     /// </summary>
     PARALLEL,
 
     /// <summary>
-    /// Search vaults sequentially with detailed error handling
+    ///     Search vaults sequentially with detailed error handling
     /// </summary>
     SEQUENTIAL,
 
     /// <summary>
-    /// Search in priority order (first vault has the highest priority)
+    ///     Search in priority order (first vault has the highest priority)
     /// </summary>
     PRIORITY_ORDER
 }

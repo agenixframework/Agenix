@@ -77,16 +77,6 @@ public static class GraphQLMessageHeaders
     public const string QueryHash = GraphQLPrefix + "query_hash";
 
     /// <summary>
-    /// Indicates whether WebSocket should be used for subscriptions.
-    /// </summary>
-    public static readonly string UseWebSocket = GraphQLPrefix + "use_websocket";
-
-    /// <summary>
-    /// The retry attempt number for failed requests.
-    /// </summary>
-    public static readonly string RetryAttempt = GraphQLPrefix + "retry_attempt";
-
-    /// <summary>
     ///     Header containing the GraphQL subscription ID.
     /// </summary>
     public const string SubscriptionId = GraphQLPrefix + "subscription_id";
@@ -105,6 +95,16 @@ public static class GraphQLMessageHeaders
     ///     Header containing custom GraphQL extensions.
     /// </summary>
     public const string Extensions = GraphQLPrefix + "extensions";
+
+    /// <summary>
+    ///     Indicates whether WebSocket should be used for subscriptions.
+    /// </summary>
+    public static readonly string UseWebSocket = GraphQLPrefix + "use_websocket";
+
+    /// <summary>
+    ///     The retry attempt number for failed requests.
+    /// </summary>
+    public static readonly string RetryAttempt = GraphQLPrefix + "retry_attempt";
 
     /// <summary>
     ///     Indicates whether the response contains GraphQL errors.
@@ -147,7 +147,7 @@ public static class GraphQLMessageHeaders
     public static readonly string StatusText = GraphQLPrefix + "status_text";
 
     /// <summary>
-    /// The subscription connection ID for WebSocket subscriptions.
+    ///     The subscription connection ID for WebSocket subscriptions.
     /// </summary>
     public static readonly string SubscriptionConnectionId = GraphQLPrefix + "subscription_connection_id";
 }

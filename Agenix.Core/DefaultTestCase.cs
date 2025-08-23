@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -28,6 +28,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Exceptions;
@@ -42,7 +44,7 @@ namespace Agenix.Core;
 ///     Default implementation of a test case that includes actions and supports test grouping, test parameters, and
 ///     completes test results with duration.
 /// </summary>
-public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAware, ITestParameterAware
+public class DefaultTestCase : AbstractAsyncActionContainer, IAsyncTestCase, ITestGroupAware, ITestParameterAware
 {
     /// <summary>
     ///     Sets the test result to failed due to the provided exception and completes the test result with the duration.
@@ -56,38 +58,13 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     }
 
     /// <summary>
-    ///     Executes a sequence of actions defined to run after the test is completed.
-    ///     This method evaluates each action in the context's AfterTest list and executes them if they meet the criteria
-    ///     specified by the ShouldExecute method.
-    ///     Any exceptions encountered during the execution of these actions are logged as warnings.
-    /// </summary>
-    /// <param name="context">The context that provides information and actions related to the test that has been executed.</param>
-    public virtual void AfterTest(TestContext context)
-    {
-        foreach (var sequenceAfterTest in context.AfterTest)
-        {
-            try
-            {
-                if (sequenceAfterTest.ShouldExecute(Name, PackageName, Groups))
-                {
-                    sequenceAfterTest.Execute(context);
-                }
-            }
-            catch (Exception e)
-            {
-                Log.LogWarning(e, "After test failed with errors");
-            }
-        }
-    }
-
-    /// <summary>
     ///     Executes the provided test action within the given test context.
     ///     If the context contains exceptions, the first exception is thrown before any action execution.
     /// </summary>
     /// <param name="action">The test action to be executed.</param>
     /// <param name="context">The context in which the test action is executed, containing state and listener information.</param>
     /// <exception cref="TestCaseFailedException">Thrown when an exception occurs during the test action execution.</exception>
-    public new void ExecuteAction(ITestAction action, TestContext context)
+    public new async Task ExecuteAction(IAsyncTestAction action, TestContext context)
     {
         if (context.HasExceptions())
         {
@@ -100,21 +77,14 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
         {
             SetActiveAction(action);
 
-            if (!action.IsDisabled(context))
-            {
-                context.TestActionListeners.OnTestActionStart(this, action);
+            await context.TestActionListeners.OnTestActionStart(this, action);
 
-                action.Execute(context);
-                context.TestActionListeners.OnTestActionFinish(this, action);
-            }
-            else
-            {
-                context.TestActionListeners.OnTestActionSkipped(this, action);
-            }
+            await action.ExecuteAsync(context);
+            await context.TestActionListeners.OnTestActionFinish(this, action);
         }
         catch (Exception e)
         {
-            TestResult = GetTestResultInstanceProvider(context).CreateFailed(this, e);
+            TestResult = GetTestResultInstanceProvider().CreateFailed(this, e);
             throw new TestCaseFailedException(e);
         }
         finally
@@ -128,7 +98,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     ///     handles any exceptions that occurred, and completes the test result with the duration.
     /// </summary>
     /// <param name="context">The context of the test, containing necessary information for execution and results tracking.</param>
-    public void Finish(TestContext context)
+    public async Task Finish(TestContext context)
     {
         if (GetMetaInfo().GetStatus().Equals(TestCaseMetaInfo.Status.DISABLED))
         {
@@ -145,21 +115,21 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
                     var exception = context.GetExceptions()[0];
                     context.GetExceptions().RemoveAt(0);
                     contextException = exception;
-                    TestResult = GetTestResultInstanceProvider(context).CreateFailed(this, contextException);
+                    TestResult = GetTestResultInstanceProvider().CreateFailed(this, contextException);
                 }
                 else
                 {
-                    TestResult = GetTestResultInstanceProvider(context).CreateSuccess(this);
+                    TestResult = GetTestResultInstanceProvider().CreateSuccess(this);
                 }
             }
 
             if (context.IsSuccess(TestResult))
             {
-                WaitUtils.WaitForCompletion(this, context, Timeout).GetAwaiter().GetResult();
+                await WaitUtils.WaitForCompletion(this, context, Timeout);
             }
 
-            context.TestListeners.OnTestFinish(this);
-            ExecuteFinalActions(context);
+            await context.TestListeners.OnTestFinish(this);
+            await ExecuteFinalActions(context);
 
             if (contextException != null)
             {
@@ -172,7 +142,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
         }
         catch (Exception e)
         {
-            TestResult = GetTestResultInstanceProvider(context).CreateFailed(this, e);
+            TestResult = GetTestResultInstanceProvider().CreateFailed(this, e);
             throw new TestCaseFailedException(e);
         }
         finally
@@ -181,44 +151,17 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
             {
                 if (TestResult.IsSuccess())
                 {
-                    context.TestListeners.OnTestSuccess(this);
+                    await context.TestListeners.OnTestSuccess(this);
                 }
                 else
                 {
-                    context.TestListeners.OnTestFailure(this, TestResult.Cause);
+                    await context.TestListeners.OnTestFailure(this, TestResult.Cause);
                 }
             }
 
-            AfterTest(context);
+            await AfterTest(context);
 
             CompleteTestResultWithDuration();
-        }
-    }
-
-    /// <summary>
-    ///     Executes the sequence of actions defined to run before the test.
-    ///     This method initiates the timer and processes each action in the context's BeforeTest list,
-    ///     executing them if they meet the criteria specified by the ShouldExecute method.
-    ///     Any exceptions that occur during the execution of these actions are caught and wrapped in a CoreSystemException.
-    /// </summary>
-    /// <param name="context">The context containing information and actions pertinent to the test being executed.</param>
-    public virtual void BeforeTest(TestContext context)
-    {
-        RestartTimer();
-
-        foreach (var sequenceBeforeTest in context.BeforeTest)
-        {
-            try
-            {
-                if (sequenceBeforeTest.ShouldExecute(Name, PackageName, Groups))
-                {
-                    sequenceBeforeTest.Execute(context);
-                }
-            }
-            catch (Exception e)
-            {
-                throw new AgenixSystemException("Before test failed with errors", e);
-            }
         }
     }
 
@@ -230,9 +173,9 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     ///     and a TestCaseFailedException is thrown.
     /// </summary>
     /// <param name="context">The test context that holds information about the test case execution.</param>
-    public virtual void Start(TestContext context)
+    public virtual async Task Start(TestContext context)
     {
-        context.TestListeners.OnTestStart(this);
+        await context.TestListeners.OnTestStart(this);
 
         try
         {
@@ -243,11 +186,11 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
             InitializeTestVariables(VariableDefinitions, context);
             DebugVariables("Test", context);
 
-            BeforeTest(context);
+            await BeforeTest(context);
         }
         catch (Exception e)
         {
-            TestResult = GetTestResultInstanceProvider(context).CreateFailed(this, e);
+            TestResult = GetTestResultInstanceProvider().CreateFailed(this, e);
             throw new TestCaseFailedException(e);
         }
     }
@@ -286,6 +229,58 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     }
 
     /// <summary>
+    ///     Executes a sequence of actions defined to run after the test is completed.
+    ///     This method evaluates each action in the context's AfterTest list and executes them if they meet the criteria
+    ///     specified by the ShouldExecute method.
+    ///     Any exceptions encountered during the execution of these actions are logged as warnings.
+    /// </summary>
+    /// <param name="context">The context that provides information and actions related to the test that has been executed.</param>
+    protected virtual async Task AfterTest(TestContext context)
+    {
+        foreach (var sequenceAfterTest in context.AfterTest)
+        {
+            try
+            {
+                if (sequenceAfterTest.ShouldExecute(Name, PackageName, Groups))
+                {
+                    await sequenceAfterTest.ExecuteAsync(context);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.LogWarning(e, "After test failed with errors");
+            }
+        }
+    }
+
+    /// <summary>
+    ///     Executes the sequence of actions defined to run before the test.
+    ///     This method initiates the timer and processes each action in the context's BeforeTest list,
+    ///     executing them if they meet the criteria specified by the ShouldExecute method.
+    ///     Any exceptions that occur during the execution of these actions are caught and wrapped in a CoreSystemException.
+    /// </summary>
+    /// <param name="context">The context containing information and actions pertinent to the test being executed.</param>
+    protected virtual async Task BeforeTest(TestContext context)
+    {
+        RestartTimer();
+
+        foreach (var sequenceBeforeTest in context.BeforeTest)
+        {
+            try
+            {
+                if (sequenceBeforeTest.ShouldExecute(Name, PackageName, Groups))
+                {
+                    await sequenceBeforeTest.ExecuteAsync(context);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new AgenixSystemException("Before test failed with errors", e);
+            }
+        }
+    }
+
+    /// <summary>
     ///     Completes the test result by stopping the timer and updating the duration of the test.
     ///     This method gracefully stops the timer and sets the duration of the test result
     ///     based on the elapsed time measured by the timer.
@@ -294,7 +289,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     {
         GracefullyStopTimer();
 
-        TestResult?.WithDuration(TimeSpan.FromTicks(_timer.ElapsedTicks * (1000000000L / Stopwatch.Frequency)));
+        TestResult?.WithDuration(_timer.Elapsed);
     }
 
     /// <summary>
@@ -303,7 +298,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     ///     Also updates the test result if any exception occurred during the execution of the final actions.
     /// </summary>
     /// <param name="context">The test context containing information and services available for the test execution.</param>
-    private void ExecuteFinalActions(TestContext context)
+    private async Task ExecuteFinalActions(TestContext context)
     {
         if (_finalActions.Count != 0)
         {
@@ -312,16 +307,9 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
             /* walk through the finally-chain and execute the actions in there */
             foreach (var action in _finalActions.Select(actionBuilder => actionBuilder.Build()))
             {
-                if (!action.IsDisabled(context))
-                {
-                    context.TestActionListeners.OnTestActionStart(this, action);
-                    action.Execute(context);
-                    context.TestActionListeners.OnTestActionFinish(this, action);
-                }
-                else
-                {
-                    context.TestActionListeners.OnTestActionSkipped(this, action);
-                }
+                await context.TestActionListeners.OnTestActionStart(this, action);
+                await action.ExecuteAsync(context);
+                await context.TestActionListeners.OnTestActionFinish(this, action);
             }
         }
 
@@ -332,7 +320,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
 
         var exception = context.GetExceptions()[0];
         context.GetExceptions().RemoveAt(0);
-        TestResult = GetTestResultInstanceProvider(context).CreateFailed(this, exception);
+        TestResult = GetTestResultInstanceProvider().CreateFailed(this, exception);
         throw new TestCaseFailedException(exception);
     }
 
@@ -347,13 +335,10 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     {
         // Build up the global test variables in TestContext by
         // getting the names and the current values of all variables
-        foreach (var entry in variableDefinitions)
+        foreach (var (key, value) in variableDefinitions)
         {
-            var key = entry.Key;
-            var value = entry.Value;
-
             if (value is string stringValue)
-            // Check if value is a variable or function and resolve it accordingly
+            // Check if the value is a variable or function and resolve it accordingly
             {
                 context.SetVariable(key, context.ReplaceDynamicContentInString(stringValue));
             }
@@ -366,24 +351,26 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
 
     /// <summary>
     ///     Executes the test case actions within the provided TestContext.
-    ///     Handles the lifecycle of the test case, including starting and stopping timers,
-    ///     and creates the appropriate test result based on the execution outcome.
+    ///     Manages the lifecycle of the test case, including starting and stopping timers,
+    ///     and determines the test result based on the execution outcome.
     /// </summary>
-    /// <param name="context">The context in which the test case is executed.</param>
-    public override void DoExecute(TestContext context)
+    /// <param name="context">The TestContext in which the test case is executed.</param>
+    /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
+    /// <returns>A task that represents the asynchronous execution of the test case.</returns>
+    public override async Task DoExecute(TestContext context, CancellationToken cancellationToken = default)
     {
         if (!GetMetaInfo().GetStatus().Equals(TestCaseMetaInfo.Status.DISABLED))
         {
             try
             {
-                Start(context);
+                await Start(context);
 
-                foreach (var actionBuilder in actions)
+                foreach (var actionBuilder in Actions)
                 {
-                    ExecuteAction(actionBuilder.Build(), context);
+                    await ExecuteAction(actionBuilder.Build(), context);
                 }
 
-                TestResult = GetTestResultInstanceProvider(context).CreateSuccess(this);
+                TestResult = GetTestResultInstanceProvider().CreateSuccess(this);
             }
             catch (TestCaseFailedException)
             {
@@ -392,14 +379,14 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
             }
             catch (Exception e)
             {
-                TestResult = GetTestResultInstanceProvider(context).CreateFailed(this, e);
+                TestResult = GetTestResultInstanceProvider().CreateFailed(this, e);
                 throw new TestCaseFailedException(e);
             }
         }
         else
         {
-            TestResult = GetTestResultInstanceProvider(context).CreateSkipped(this);
-            context.TestListeners.OnTestSkipped(this);
+            TestResult = GetTestResultInstanceProvider().CreateSkipped(this);
+            await context.TestListeners.OnTestSkipped(this);
         }
     }
 
@@ -449,7 +436,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     ///     Retrieves the instance of the default ITestResultInstanceProvider.
     /// </summary>
     /// <returns>The default ITestResultInstanceProvider instance.</returns>
-    private ITestResultInstanceProvider GetTestResultInstanceProvider(TestContext context)
+    private IAsyncTestResultInstanceProvider GetTestResultInstanceProvider()
     {
         return _defaultTestResultInstanceProvider;
     }
@@ -483,14 +470,14 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     /// <summary>
     ///     Default implementation of TestResultInstanceProvider that provides simple TestResults without any parameters.
     /// </summary>
-    private class DefaultTestResultInstanceProvider : ITestResultInstanceProvider
+    private sealed class DefaultTestResultInstanceProvider : IAsyncTestResultInstanceProvider
     {
         /// <summary>
         ///     Creates and returns a TestResult instance representing a successful test case.
         /// </summary>
         /// <param name="testCase">The test case that has succeeded.</param>
         /// <returns>A TestResult instance indicating that the test case has succeeded.</returns>
-        public TestResult CreateSuccess(ITestCase testCase)
+        public TestResult CreateSuccess(IAsyncTestCase testCase)
         {
             return TestResult.Success(testCase.Name, testCase.GetType().Name);
         }
@@ -499,11 +486,11 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
         ///     Creates and returns a TestResult instance representing a failed test case.
         /// </summary>
         /// <param name="testCase">The test case that has failed.</param>
-        /// <param name="exception">The exception that caused the test case to fail.</param>
+        /// <param name="ex">The exception that caused the test case to fail.</param>
         /// <returns>A TestResult instance indicating that the test case has failed, along with the relevant exception.</returns>
-        public TestResult CreateFailed(ITestCase testCase, Exception exception)
+        public TestResult CreateFailed(IAsyncTestCase testCase, Exception ex)
         {
-            return TestResult.Failed(testCase.Name, testCase.GetType().Name, exception);
+            return TestResult.Failed(testCase.Name, testCase.GetType().Name, ex);
         }
 
         /// <summary>
@@ -511,7 +498,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
         /// </summary>
         /// <param name="testCase">The test case that has been skipped.</param>
         /// <returns>A TestResult instance indicating that the test case was skipped.</returns>
-        public TestResult CreateSkipped(ITestCase testCase)
+        public TestResult CreateSkipped(IAsyncTestCase testCase)
         {
             return TestResult.Skipped(testCase.Name, testCase.GetType().Name);
         }
@@ -521,16 +508,31 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
 
     private static readonly ILogger Log = LogManager.GetLogger(typeof(DefaultTestCase));
 
-    private readonly ITestResultInstanceProvider _defaultTestResultInstanceProvider =
+    private readonly IAsyncTestResultInstanceProvider _defaultTestResultInstanceProvider =
         new DefaultTestResultInstanceProvider();
 
-    private readonly List<ITestActionBuilder<ITestAction>> _finalActions = [];
+    private readonly List<IAsyncTestActionBuilder<IAsyncTestAction>> _finalActions = [];
     private Dictionary<string, object> VariableDefinitions { get; set; } = new();
     private readonly TestCaseMetaInfo _metaInfo = new();
     private readonly Dictionary<string, object> _parameters = new();
+
+    /// <summary>
+    ///     Gets or sets the timeout, in milliseconds, for completing asynchronous operations in the test case.
+    /// </summary>
+    /// <remarks>
+    ///     A value indicating the maximum allowed duration for the test case's asynchronous actions to execute.
+    ///     If the execution exceeds the specified timeout, the operation may be considered as failed or aborted.
+    ///     The default value is 10.000 milliseconds (10 seconds).
+    /// </remarks>
     public int Timeout { get; set; } = 10000;
+
     private readonly Stopwatch _timer = new();
 
+    /// <summary>
+    ///     Represents the default implementation of an asynchronous test case.
+    ///     Provides support for test actions, test grouping, test parameters, and completion of test results with duration
+    ///     tracking.
+    /// </summary>
     public DefaultTestCase()
     {
         TestClass = GetType();
@@ -541,32 +543,82 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
 
     #region Properties
 
+    /// <summary>
+    ///     Gets or sets the test groups associated with the current test case.
+    /// </summary>
+    /// <remarks>
+    ///     Test groups are used to categorize or organize test cases into logical groupings.
+    ///     These groups can be used to filter, execute, or analyze groups of test cases
+    ///     during the testing workflow. Each group is represented as a string identifier.
+    /// </remarks>
     public string[] Groups { get; set; }
 
+    /// <summary>
+    ///     Gets or sets a value indicating whether the test execution is incremental.
+    /// </summary>
+    /// <remarks>
+    ///     An incremental test execution allows processes or operations within the test case to build
+    ///     upon the results or state of previous operations instead of starting afresh. This property
+    ///     can influence the flow or behavior of the test case depending on whether incremental logic is required.
+    ///     The default value is <c>false</c>.
+    /// </remarks>
     public bool IsIncremental { get; set; }
 
+    /// <summary>
+    ///     Gets or sets the namespace or package name associated with the test case.
+    /// </summary>
+    /// <remarks>
+    ///     Represents the logical categorization or grouping for the test case.
+    ///     This is typically derived from the namespace of the test class and can be used for organizational or filtering
+    ///     purposes in test reporting and execution logic.
+    ///     The value may be set explicitly or inferred from the class definition.
+    /// </remarks>
     public string PackageName { get; set; }
 
+    /// <summary>
+    ///     Gets the collection of parameters associated with the test case.
+    /// </summary>
+    /// <remarks>
+    ///     The parameters are stored as key-value pairs, where the key is a string representing
+    ///     the parameter name, and the value is an object representing the parameter's value.
+    ///     These parameters can be used to configure or provide dynamic inputs to the test case during its execution.
+    /// </remarks>
     public IDictionary<string, object> Parameters => _parameters;
 
+    /// <summary>
+    ///     Gets or sets the type that represents the associated test class.
+    /// </summary>
+    /// <remarks>
+    ///     This property holds the <see cref="Type" /> information for the test class being executed.
+    ///     It allows resolving the metadata and reflection-based capabilities required during the
+    ///     lifecycle of the test case.
+    /// </remarks>
     public Type TestClass { get; set; }
 
+    /// <summary>
+    ///     Gets or sets the result of the test case execution.
+    /// </summary>
+    /// <remarks>
+    ///     This property represents the outcome of a test case, encapsulating details such as success or failure status,
+    ///     any associated exceptions, and additional metadata. It is determined during the execution or completion
+    ///     phases of the test and can be queried or updated as necessary.
+    /// </remarks>
     public TestResult TestResult { get; set; }
 
     /// <summary>
     ///     Retrieves a list of action builders associated with the current test case.
     /// </summary>
     /// <returns>A list of action builders that are used to build test actions.</returns>
-    public List<ITestActionBuilder<ITestAction>> GetActionBuilders()
+    public List<IAsyncTestActionBuilder<IAsyncTestAction>> GetActionBuilders()
     {
-        return actions;
+        return Actions;
     }
 
     /// <summary>
     ///     Retrieves the final actions for the test case by building them using their respective builders.
     /// </summary>
     /// <return>List of final actions for the test case.</return>
-    public List<ITestAction> GetFinalActions()
+    public List<IAsyncTestAction> GetFinalActions()
     {
         return _finalActions.Select(builder => builder.Build()).ToList();
     }
@@ -646,7 +698,7 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
         return TestResult;
     }
 
-    bool ITestCase.IsIncremental()
+    bool IAsyncTestCase.IsIncremental()
     {
         return IsIncremental;
     }
@@ -711,29 +763,29 @@ public class DefaultTestCase : AbstractActionContainer, ITestCase, ITestGroupAwa
     /// <summary>
     ///     Adds a final action to the list of final actions for the test case.
     /// </summary>
-    /// <param name="testAction">The action builder for the action to be added as a final action.</param>
-    public void AddFinalAction(ITestActionBuilder<ITestAction> testAction)
+    /// <param name="builder">The action builder for the action to be added as a final action.</param>
+    public void AddFinalAction(IAsyncTestActionBuilder<IAsyncTestAction> builder)
     {
-        _finalActions.Add(testAction);
+        _finalActions.Add(builder);
     }
 
     /// <summary>
     ///     Adds a specified test action to the list of final actions to be executed.
     ///     Final actions are typically run at the end of the test execution process.
     /// </summary>
-    /// <param name="testAction">The test action to be added to the final actions list.</param>
-    public void AddFinalAction(ITestAction testAction)
+    /// <param name="action">The test action to be added to the final actions list.</param>
+    public void AddFinalAction(IAsyncTestAction action)
     {
-        _finalActions.Add(new FuncITestActionBuilder<ITestAction>(() => testAction));
+        _finalActions.Add(new FuncIAsyncTestActionBuilder<IAsyncTestAction>(() => action));
     }
 
     /// <summary>
     ///     Retrieves the list of action builders associated with the test case.
     /// </summary>
     /// <returns>A list of action builders implementing the ITestActionBuilder interface.</returns>
-    List<ITestActionBuilder<ITestAction>> ITestCase.GetActionBuilders()
+    List<IAsyncTestActionBuilder<IAsyncTestAction>> IAsyncTestCase.GetActionBuilders()
     {
-        return actions;
+        return Actions;
     }
 
     #endregion

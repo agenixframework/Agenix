@@ -7,24 +7,26 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
 using System.Threading;
+using System.Threading.Tasks;
+using Agenix.Api;
 using Agenix.Api.Exceptions;
 using Agenix.Api.Log;
 using Agenix.Core.Actions;
@@ -32,7 +34,6 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
-using ITestAction = Agenix.Api.ITestAction;
 using Timer = Agenix.Core.Container.Timer;
 
 namespace Agenix.Core.Tests.Container;
@@ -47,16 +48,16 @@ public class TimerTest : AbstractNUnitSetUp
     /// </summary>
     private static readonly ILogger Log = LogManager.GetLogger(typeof(TimerTest));
 
-    private Mock<ITestAction> _action;
+    private Mock<IAsyncTestAction> _action;
 
     [SetUp]
     public void SetupMethod()
     {
-        _action = new Mock<ITestAction>();
+        _action = new Mock<IAsyncTestAction>();
     }
 
     [Test]
-    public void ShouldSuccessfullyRunTimerWithNestedAction()
+    public async Task ShouldSuccessfullyRunTimerWithNestedAction()
     {
         // Arrange - Reset mock before usage
         _action.Reset();
@@ -65,15 +66,15 @@ public class TimerTest : AbstractNUnitSetUp
 
 
         // Act - Execute the timer
-        timer.Execute(Context);
+        await timer.ExecuteAsync(Context);
 
         // Assert - Check the timer's execution and index
         AssertTimerIndex(DefaultRepeatCount, timer);
-        _action.Verify(a => a.Execute(Context), Times.Exactly(DefaultRepeatCount));
+        _action.Verify(a => a.ExecuteAsync(Context, CancellationToken.None), Times.Exactly(DefaultRepeatCount));
     }
 
     [Test]
-    public void ShouldSuccessfullyRunTimerWithNestedActionThatTakesLongerThanTimerInterval()
+    public async Task ShouldSuccessfullyRunTimerWithNestedActionThatTakesLongerThanTimerInterval()
     {
         // Arrange - Reset mock actions
         _action.Reset();
@@ -81,11 +82,11 @@ public class TimerTest : AbstractNUnitSetUp
         var timer = CreateDefaultTimerWithNestedAction(false, _action.Object, GetSleepAction());
 
         // Act - Execute the timer
-        timer.Execute(Context);
+        await timer.ExecuteAsync(Context);
 
         // Assert - Check timer index and action invocation count
         AssertTimerIndex(DefaultRepeatCount, timer);
-        _action.Verify(a => a.Execute(Context), Times.Exactly(DefaultRepeatCount));
+        _action.Verify(a => a.ExecuteAsync(Context, CancellationToken.None), Times.Exactly(DefaultRepeatCount));
     }
 
     [Test]
@@ -95,11 +96,11 @@ public class TimerTest : AbstractNUnitSetUp
         var timer = CreateDefaultTimerWithNestedActionThatFails(false);
 
         // Act & Assert - Verify exception is thrown
-        Assert.Throws<AgenixSystemException>(() => timer.Execute(Context));
+        Assert.ThrowsAsync<AgenixSystemException>(() => timer.ExecuteAsync(Context));
     }
 
     [Test]
-    public void ShouldSuccessfullyRunForkedTimerWithNestedAction()
+    public async Task ShouldSuccessfullyRunForkedTimerWithNestedAction()
     {
         // Arrange - Reset the mock
         _action.Reset();
@@ -107,32 +108,33 @@ public class TimerTest : AbstractNUnitSetUp
         var timer = CreateDefaultTimerWithNestedAction(true, _action.Object);
 
         // Act - Execute the timer
-        timer.Execute(Context);
+        await timer.ExecuteAsync(Context);
 
         AllowForkedTimerToComplete(DefaultInterval * DefaultRepeatCount);
 
         // Assert - Verify that the action executed the expected number of times
         AssertTimerIndex(DefaultRepeatCount, timer);
-        _action.Verify(a => a.Execute(Context), Times.Exactly(DefaultRepeatCount));
+        _action.Verify(a => a.ExecuteAsync(Context, CancellationToken.None), Times.Exactly(DefaultRepeatCount));
     }
 
     [Test]
-    public void ShouldCompleteSuccessfullyForForkedTimerWithNestedActionThatFails()
+    public async Task ShouldCompleteSuccessfullyForForkedTimerWithNestedActionThatFails()
     {
         // Arrange
         var timer = CreateDefaultTimerWithNestedActionThatFails(true);
 
         // Act - Execute the timer
-        timer.Execute(Context);
+        await timer.ExecuteAsync(Context);
 
         AllowForkedTimerToComplete(DefaultInterval);
 
         // Assert - Verify completion and exception handling
         AssertTimerIndex(1, timer);
-        ClassicAssert.IsNotNull(timer.TimerException);
+        Assert.That(timer.TimerException, Is.Not.Null);
     }
 
-    private Timer CreateTimerWithNestedAction(int repeatCount, long interval, bool forked, params ITestAction[] actions)
+    private static Timer CreateTimerWithNestedAction(int repeatCount, long interval, bool forked,
+        params IAsyncTestAction[] actions)
     {
         return new Timer.Builder()
             .Interval(interval)
@@ -142,12 +144,12 @@ public class TimerTest : AbstractNUnitSetUp
             .Build();
     }
 
-    private Timer CreateDefaultTimerWithNestedActionThatFails(bool forked)
+    private static Timer CreateDefaultTimerWithNestedActionThatFails(bool forked)
     {
         return CreateDefaultTimerWithNestedAction(forked, GetFailAction());
     }
 
-    private Timer CreateDefaultTimerWithNestedAction(bool forked, params ITestAction[] testActions)
+    private static Timer CreateDefaultTimerWithNestedAction(bool forked, params IAsyncTestAction[] testActions)
     {
         return CreateTimerWithNestedAction(DefaultRepeatCount, DefaultInterval, forked, testActions);
     }
@@ -158,9 +160,9 @@ public class TimerTest : AbstractNUnitSetUp
     /// <returns>
     ///     A FailAction instance representing a predefined failure action, designed to simulate an error condition in a test.
     /// </returns>
-    private FailAction GetFailAction()
+    private static FailAction GetFailAction()
     {
-        return new FailAction.Builder().Message("Something nasty happened").Build();
+        return new FailAction.Builder().WithMessage("Something nasty happened").Build();
     }
 
     /// <summary>
@@ -170,7 +172,7 @@ public class TimerTest : AbstractNUnitSetUp
     /// <returns>
     ///     A SleepAction instance that, when executed, causes the current thread to sleep for 200 milliseconds.
     /// </returns>
-    private SleepAction GetSleepAction()
+    private static SleepAction GetSleepAction()
     {
         return new SleepAction.Builder()
             .Milliseconds(200L)
@@ -184,7 +186,7 @@ public class TimerTest : AbstractNUnitSetUp
     ///     The duration in milliseconds for which the thread should pause, plus an additional 1000
     ///     milliseconds.
     /// </param>
-    private void AllowForkedTimerToComplete(long sleepTime)
+    private static void AllowForkedTimerToComplete(long sleepTime)
     {
         try
         {

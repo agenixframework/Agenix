@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -49,14 +49,14 @@ public class ValidateNamespacesIT
     [AgenixEndpoint(Name = "hello.endpoint")]
     private IEndpoint helloEndpoint;
 
-    [AgenixResource] protected ITestCaseRunner runner;
+    [AgenixResource] protected IAsyncTestCaseRunner runner;
 
     [Test]
-    public void ValidateNamespaces()
+    public async Task ValidateNamespaces()
     {
-        runner.Given(Echo("Test: Success with single namespace validation"));
+        await runner.Given(Echo("Test: Success with single namespace validation"));
 
-        runner.When(Send("direct:test")
+        await runner.When(Send("direct:test")
             .Message()
             .Type(MessageType.XML)
             .Body("<trq:TestRequest xmlns:trq=\"http://agenix.org/schemas/test\">" +
@@ -64,7 +64,7 @@ public class ValidateNamespacesIT
                   "</trq:TestRequest>")
         );
 
-        runner.Then(Receive("direct:test")
+        await runner.Then(Receive("direct:test")
             .Message()
             .Type(MessageType.XML)
             .Body("<trq:TestRequest xmlns:trq=\"http://agenix.org/schemas/test\">" +
@@ -76,9 +76,9 @@ public class ValidateNamespacesIT
             .Timeout(TimeSpan.FromSeconds(5).Seconds)
         );
 
-        runner.Given(Echo("Test: Success with multiple namespace validations"));
+        await runner.Given(Echo("Test: Success with multiple namespace validations"));
 
-        runner.When(Send("direct:test")
+        await runner.When(Send("direct:test")
             .Message()
             .Type(MessageType.XML)
             .Body(
@@ -87,7 +87,7 @@ public class ValidateNamespacesIT
                 "</trq:TestRequest>")
         );
 
-        runner.Then(Receive("direct:test")
+        await runner.Then(Receive("direct:test")
             .Message()
             .Type(MessageType.XML)
             .Body(
@@ -101,9 +101,9 @@ public class ValidateNamespacesIT
             .Timeout(TimeSpan.FromSeconds(5).Seconds)
         );
 
-        runner.Given(Echo("Test: Success with multiple nested namespace validations"));
+        await runner.Given(Echo("Test: Success with multiple nested namespace validations"));
 
-        runner.When(Send("direct:test")
+        await runner.When(Send("direct:test")
             .Message()
             .Type(MessageType.XML)
             .Body("<trq:TestRequest xmlns:trq=\"http://agenix.org/schemas/test\">" +
@@ -111,7 +111,7 @@ public class ValidateNamespacesIT
                   "</trq:TestRequest>")
         );
 
-        runner.Then(Receive("direct:test")
+        await runner.Then(Receive("direct:test")
             .Message()
             .Type(MessageType.XML)
             .Body("<trq:TestRequest xmlns:trq=\"http://agenix.org/schemas/test\">" +
@@ -124,9 +124,9 @@ public class ValidateNamespacesIT
             .Timeout(TimeSpan.FromSeconds(5).Seconds)
         );
 
-        runner.Given(Echo("Test: Failure because of missing namespace"));
+        await runner.Given(Echo("Test: Failure because of missing namespace"));
 
-        runner.When(Send("direct:test")
+        await runner.When(Send("direct:test")
             .Message()
             .Type(MessageType.XML)
             .Body("<trq:TestRequest xmlns:trq=\"http://agenix.org/schemas/test\">" +
@@ -134,7 +134,7 @@ public class ValidateNamespacesIT
                   "</trq:TestRequest>")
         );
 
-        runner.Then(Assert()
+        await runner.Then(Assert()
             .Exception(typeof(ValidationException))
             .When(Receive("direct:test")
                 .Message()
@@ -150,9 +150,9 @@ public class ValidateNamespacesIT
             )
         );
 
-        runner.Given(Echo("Test: Failure because of wrong namespace prefix"));
+        await runner.Given(Echo("Test: Failure because of wrong namespace prefix"));
 
-        runner.When(Send("direct:test")
+        await runner.When(Send("direct:test")
             .Message()
             .Type(MessageType.XML)
             .Body("<wrong:TestRequest xmlns:wrong=\"http://agenix.org/schemas/test\">" +
@@ -160,7 +160,7 @@ public class ValidateNamespacesIT
                   "</wrong:TestRequest>")
         );
 
-        runner.Then(Assert()
+        await runner.Then(Assert()
             .Exception(typeof(ValidationException))
             .When(Receive("direct:test")
                 .Message()
@@ -175,9 +175,9 @@ public class ValidateNamespacesIT
             )
         );
 
-        runner.Given(Echo("Test: Failure because of wrong namespace uri"));
+        await runner.Given(Echo("Test: Failure because of wrong namespace uri"));
 
-        runner.When(Send("direct:test")
+        await runner.When(Send("direct:test")
             .Message()
             .Type(MessageType.XML)
             .Body("<trq:TestRequest xmlns:trq=\"http://agenix.org/schemas/wrong\">" +
@@ -185,7 +185,7 @@ public class ValidateNamespacesIT
                   "</trq:TestRequest>")
         );
 
-        runner.Then(Assert()
+        await runner.Then(Assert()
             .Exception(typeof(ValidationException))
             .When(Receive("direct:test")
                 .Message()

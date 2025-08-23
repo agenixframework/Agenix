@@ -31,23 +31,23 @@ using Microsoft.Extensions.FileProviders;
 namespace Agenix.Configuration.Extensions;
 
 /// <summary>
-/// Extension methods for adding YAML configuration sources.
+///     Extension methods for adding YAML configuration sources.
 /// </summary>
 public static class YamlConfigurationExtensions
 {
     /// <summary>
-    /// Adds a YAML configuration source to the configuration builder.
+    ///     Adds a YAML configuration source to the configuration builder.
     /// </summary>
     /// <param name="builder">The configuration builder</param>
     /// <param name="path">Path to the YAML file</param>
     /// <returns>The configuration builder</returns>
     public static IConfigurationBuilder AddYamlFile(this IConfigurationBuilder builder, string path)
     {
-        return AddYamlFile(builder, provider: null, path: path, optional: false, reloadOnChange: false);
+        return AddYamlFile(builder, null, path, false, false);
     }
 
     /// <summary>
-    /// Adds a YAML configuration source to the configuration builder.
+    ///     Adds a YAML configuration source to the configuration builder.
     /// </summary>
     /// <param name="builder">The configuration builder</param>
     /// <param name="path">Path to the YAML file</param>
@@ -55,24 +55,25 @@ public static class YamlConfigurationExtensions
     /// <returns>The configuration builder</returns>
     public static IConfigurationBuilder AddYamlFile(this IConfigurationBuilder builder, string path, bool optional)
     {
-        return AddYamlFile(builder, provider: null, path: path, optional: optional, reloadOnChange: false);
+        return AddYamlFile(builder, null, path, optional, false);
     }
 
     /// <summary>
-    /// Adds a YAML configuration source to the configuration builder.
+    ///     Adds a YAML configuration source to the configuration builder.
     /// </summary>
     /// <param name="builder">The configuration builder</param>
     /// <param name="path">Path to the YAML file</param>
     /// <param name="optional">Whether the file is optional</param>
     /// <param name="reloadOnChange">Whether to reload when the file changes</param>
     /// <returns>The configuration builder</returns>
-    public static IConfigurationBuilder AddYamlFile(this IConfigurationBuilder builder, string path, bool optional, bool reloadOnChange)
+    public static IConfigurationBuilder AddYamlFile(this IConfigurationBuilder builder, string path, bool optional,
+        bool reloadOnChange)
     {
-        return AddYamlFile(builder, provider: null, path: path, optional: optional, reloadOnChange: reloadOnChange);
+        return AddYamlFile(builder, null, path, optional, reloadOnChange);
     }
 
     /// <summary>
-    /// Adds a YAML configuration source to the configuration builder.
+    ///     Adds a YAML configuration source to the configuration builder.
     /// </summary>
     /// <param name="builder">The configuration builder</param>
     /// <param name="provider">The file provider</param>
@@ -80,12 +81,18 @@ public static class YamlConfigurationExtensions
     /// <param name="optional">Whether the file is optional</param>
     /// <param name="reloadOnChange">Whether to reload when the file changes</param>
     /// <returns>The configuration builder</returns>
-    public static IConfigurationBuilder AddYamlFile(this IConfigurationBuilder builder, IFileProvider? provider, string path, bool optional, bool reloadOnChange)
+    public static IConfigurationBuilder AddYamlFile(this IConfigurationBuilder builder, IFileProvider? provider,
+        string path, bool optional, bool reloadOnChange)
     {
         if (builder == null)
+        {
             throw new ArgumentNullException(nameof(builder));
+        }
+
         if (string.IsNullOrEmpty(path))
+        {
             throw new ArgumentException("Path cannot be null or empty", nameof(path));
+        }
 
         return builder.AddYamlFile(source =>
         {
@@ -97,11 +104,14 @@ public static class YamlConfigurationExtensions
     }
 
     /// <summary>
-    /// Adds a YAML configuration source to the configuration builder.
+    ///     Adds a YAML configuration source to the configuration builder.
     /// </summary>
     /// <param name="builder">The configuration builder</param>
     /// <param name="configureSource">Action to configure the YAML source</param>
     /// <returns>The configuration builder</returns>
-    public static IConfigurationBuilder AddYamlFile(this IConfigurationBuilder builder, Action<YamlConfigurationSource> configureSource)
-        => builder.Add(configureSource);
+    public static IConfigurationBuilder AddYamlFile(this IConfigurationBuilder builder,
+        Action<YamlConfigurationSource> configureSource)
+    {
+        return builder.Add(configureSource);
+    }
 }

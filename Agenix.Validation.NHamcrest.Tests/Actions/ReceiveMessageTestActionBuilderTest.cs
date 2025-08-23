@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -54,7 +54,7 @@ public class ReceiveMessageTestActionBuilderTest : AbstractNUnitSetUp
     private readonly IEndpoint _messageEndpoint = Mock.Of<IEndpoint>();
 
     [Test]
-    public void TestReceiveBuilderWithJsonPathExpressions()
+    public async Task TestReceiveBuilderWithJsonPathExpressions()
     {
         Mock.Get(_messageEndpoint).Reset();
         Mock.Get(_messageConsumer).Reset();
@@ -63,7 +63,7 @@ public class ReceiveMessageTestActionBuilderTest : AbstractNUnitSetUp
         Mock.Get(_messageEndpoint).Setup(m => m.CreateConsumer()).Returns(_messageConsumer);
         Mock.Get(_messageEndpoint).Setup(m => m.EndpointConfiguration).Returns(_configuration);
         Mock.Get(_configuration).Setup(c => c.Timeout).Returns(100L);
-        Mock.Get(_messageConsumer).Setup(m => m.Receive(IsAny<TestContext>(), IsAny<long>())).Returns(
+        Mock.Get(_messageConsumer).Setup(m => m.Receive(IsAny<TestContext>(), IsAny<long>())).ReturnsAsync(
             new DefaultMessage(
                     "{\"text\":\"Hello World!\", \"person\":{\"name\":\"John\",\"surname\":\"Doe\",\"active\": true}, \"index\":5, \"id\":\"x123456789x\"}")
                 .SetHeader("operation", "sayHello"));
@@ -72,7 +72,7 @@ public class ReceiveMessageTestActionBuilderTest : AbstractNUnitSetUp
 
 
         var builder = new DefaultTestCaseRunner(Context);
-        builder.Run(Receive().Endpoint(_messageEndpoint)
+        await builder.Run(Receive().Endpoint(_messageEndpoint)
             .Message()
             .Type(MessageType.JSON)
             .Body(
@@ -89,15 +89,22 @@ public class ReceiveMessageTestActionBuilderTest : AbstractNUnitSetUp
         );
 
         var test = builder.GetTestCase();
-        Assert.That(test.GetActionCount(), NUnit.Framework.Is.EqualTo(1));
-        Assert.That(test.GetActions()[0].GetType(), NUnit.Framework.Is.EqualTo(typeof(ReceiveMessageAction)));
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(test.GetActionCount(), NUnit.Framework.Is.EqualTo(1));
+            Assert.That(test.GetActions()[0].GetType(), NUnit.Framework.Is.EqualTo(typeof(ReceiveMessageAction)));
+        }
 
         var action = (ReceiveMessageAction)test.GetActions()[0];
-        Assert.That(action.Name, NUnit.Framework.Is.EqualTo("receive"));
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(action.Name, NUnit.Framework.Is.EqualTo("receive"));
 
-        Assert.That(action.MessageType, NUnit.Framework.Is.EqualTo(nameof(MessageType.JSON)));
-        Assert.That(action.Endpoint, NUnit.Framework.Is.EqualTo(_messageEndpoint));
-        Assert.That(action.ValidationContexts.Count, NUnit.Framework.Is.EqualTo(3));
+            Assert.That(action.MessageType, NUnit.Framework.Is.EqualTo(nameof(MessageType.JSON)));
+            Assert.That(action.Endpoint, NUnit.Framework.Is.EqualTo(_messageEndpoint));
+            Assert.That(action.ValidationContexts.Count, NUnit.Framework.Is.EqualTo(3));
+        }
+
         ClassicAssert.IsTrue(action.ValidationContexts.Exists(c => c is HeaderValidationContext));
         ClassicAssert.IsTrue(action.ValidationContexts.Exists(c => c is JsonMessageValidationContext));
         ClassicAssert.IsTrue(action.ValidationContexts.Exists(c => c is JsonPathMessageValidationContext));
@@ -112,12 +119,15 @@ public class ReceiveMessageTestActionBuilderTest : AbstractNUnitSetUp
 
         ClassicAssert.IsTrue(action.MessageBuilder is DefaultMessageBuilder);
         Assert.That(validationContext.JsonPathExpressions.Count, NUnit.Framework.Is.EqualTo(5));
-        Assert.That(validationContext.JsonPathExpressions["$.person.name"], NUnit.Framework.Is.EqualTo("John"));
-        Assert.That(validationContext.JsonPathExpressions["$.person.active"], NUnit.Framework.Is.EqualTo(true));
-        Assert.That(validationContext.JsonPathExpressions["$.text"], NUnit.Framework.Is.EqualTo("Hello World!"));
-        Assert.That(validationContext.JsonPathExpressions["$.index"], NUnit.Framework.Is.EqualTo(5));
-        Assert.That(validationContext.JsonPathExpressions["$.id"].GetType(),
-            NUnit.Framework.Is.EqualTo(typeof(AnyOfMatcher<string>)));
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(validationContext.JsonPathExpressions["$.person.name"], NUnit.Framework.Is.EqualTo("John"));
+            Assert.That(validationContext.JsonPathExpressions["$.person.active"], NUnit.Framework.Is.EqualTo(true));
+            Assert.That(validationContext.JsonPathExpressions["$.text"], NUnit.Framework.Is.EqualTo("Hello World!"));
+            Assert.That(validationContext.JsonPathExpressions["$.index"], NUnit.Framework.Is.EqualTo(5));
+            Assert.That(validationContext.JsonPathExpressions["$.id"].GetType(),
+                NUnit.Framework.Is.EqualTo(typeof(AnyOfMatcher<string>)));
+        }
     }
 
     public class JsonPathValidator : DefaultMessageValidator

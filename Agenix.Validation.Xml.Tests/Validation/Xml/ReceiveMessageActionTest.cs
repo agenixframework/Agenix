@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -55,7 +55,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void TestReceiveMessageWithEndpointUri()
+    public async Task TestReceiveMessageWithEndpointUri()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(
@@ -63,18 +63,18 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         var controlMessage = new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>");
 
-        _mockQueue.Setup(q => q.Receive(15000)).Returns(controlMessage);
+        _mockQueue.Setup(q => q.Receive(15000)).ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint("direct:mockQueue?timeout=15000")
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestReceiveMessageWithVariableEndpointName()
+    public async Task TestReceiveMessageWithVariableEndpointName()
     {
         Context.SetVariable("varEndpoint", "direct:mockQueue");
 
@@ -84,18 +84,18 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         var controlMessage = new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>");
 
-        _mockQueue.Setup(q => q.Receive(5000)).Returns(controlMessage);
+        _mockQueue.Setup(q => q.Receive(5000)).ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint("${varEndpoint}")
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestReceiveMessageWithMessagePayloadData()
+    public async Task TestReceiveMessageWithMessagePayloadData()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(
@@ -115,18 +115,18 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestReceiveMessageWithMessagePayloadResource()
+    public async Task TestReceiveMessageWithMessagePayloadResource()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(
@@ -149,18 +149,18 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestReceiveMessageWithMessagePayloadDataVariablesSupport()
+    public async Task TestReceiveMessageWithMessagePayloadDataVariablesSupport()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(
@@ -182,18 +182,18 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestReceiveMessageWithMessagePayloadResourceVariablesSupport()
+    public async Task TestReceiveMessageWithMessagePayloadResourceVariablesSupport()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(
@@ -218,18 +218,18 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestReceiveMessageWithMessagePayloadResourceFunctionsSupport()
+    public async Task TestReceiveMessageWithMessagePayloadResourceFunctionsSupport()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(
@@ -252,18 +252,18 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestReceiveMessageOverwriteMessageElementsXPath()
+    public async Task TestReceiveMessageOverwriteMessageElementsXPath()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -291,7 +291,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
@@ -300,11 +300,11 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Process(processor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestReceiveMessageOverwriteMessageElementsDotNotation()
+    public async Task TestReceiveMessageOverwriteMessageElementsDotNotation()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -332,7 +332,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
@@ -341,11 +341,11 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Process(processor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestReceiveMessageOverwriteMessageElementsXPathWithNamespaces()
+    public async Task TestReceiveMessageOverwriteMessageElementsXPathWithNamespaces()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -374,7 +374,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var validationContext = new XmlMessageValidationContext.Builder()
             .SchemaValidation(false)
@@ -388,11 +388,11 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Process(processor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestReceiveMessageOverwriteMessageElementsXPathWithNestedNamespaces()
+    public async Task TestReceiveMessageOverwriteMessageElementsXPathWithNestedNamespaces()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -421,7 +421,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var validationContext = new XmlMessageValidationContext.Builder()
             .SchemaValidation(false)
@@ -435,11 +435,11 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Process(processor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestReceiveMessageOverwriteMessageElementsXPathWithDefaultNamespaces()
+    public async Task TestReceiveMessageOverwriteMessageElementsXPathWithDefaultNamespaces()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -471,7 +471,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var validationContext = new XmlMessageValidationContext.Builder()
             .SchemaValidation(false)
@@ -485,12 +485,12 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Process(processor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
 
     [Test]
-    public void TestReceiveMessageWithMessageHeaders()
+    public async Task TestReceiveMessageWithMessageHeaders()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -517,7 +517,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
@@ -525,12 +525,12 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Type(MessageType.XML)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
 
     [Test]
-    public void TestReceiveMessageWithMessageHeadersVariablesSupport()
+    public async Task TestReceiveMessageWithMessageHeadersVariablesSupport()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -559,7 +559,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
@@ -567,7 +567,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Type(MessageType.XML)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
@@ -598,7 +598,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
@@ -606,7 +606,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Type(MessageType.XML)
             .Build();
 
-        var exception = Assert.Throws<AgenixSystemException>(() => receiveAction.Execute(Context));
+        var exception = Assert.ThrowsAsync<AgenixSystemException>(() => receiveAction.ExecuteAsync(Context));
         Assert.That("Unknown variable 'myOperation'", Is.EqualTo(exception.InnerException.Message));
     }
 
@@ -631,19 +631,19 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
             .Message(controlMessageBuilder)
             .Build();
 
-        var exception = Assert.Throws<AgenixSystemException>(() => receiveAction.Execute(Context));
+        var exception = Assert.ThrowsAsync<AgenixSystemException>(() => receiveAction.ExecuteAsync(Context));
         Assert.That("Unknown variable 'myText'", Is.EqualTo(exception.Message));
     }
 
     [Test]
-    public void TestReceiveMessageWithExtractVariablesFromHeaders()
+    public async Task TestReceiveMessageWithExtractVariablesFromHeaders()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(
@@ -671,7 +671,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
@@ -679,14 +679,14 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Process(headerVariableExtractor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable("myOperation"), Is.Not.Null);
         Assert.That("sayHello", Is.EqualTo(Context.GetVariable("myOperation")));
     }
 
     [Test]
-    public void TestReceiveMessageWithValidateMessageElementsFromMessageXPath()
+    public async Task TestReceiveMessageWithValidateMessageElementsFromMessageXPath()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
 
@@ -709,7 +709,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
@@ -717,11 +717,11 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Validate(validationContext)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestReceiveMessageWithValidateMessageElementsXPathNamespaceSupport()
+    public async Task TestReceiveMessageWithValidateMessageElementsXPathNamespaceSupport()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
 
@@ -742,7 +742,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var validationContext = new XpathMessageValidationContext.Builder()
             .Expressions(messageElements)
@@ -755,11 +755,11 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Validate(validationContext)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestReceiveMessageWithValidateMessageElementsXPathNestedNamespaceSupport()
+    public async Task TestReceiveMessageWithValidateMessageElementsXPathNestedNamespaceSupport()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
 
@@ -780,7 +780,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var validationContext = new XpathMessageValidationContext.Builder()
             .Expressions(messageElements)
@@ -793,11 +793,11 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Validate(validationContext)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestReceiveMessageWithValidateMessageElementsXPathNamespaceBindings()
+    public async Task TestReceiveMessageWithValidateMessageElementsXPathNamespaceBindings()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
 
@@ -820,7 +820,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var validationContext = new XpathMessageValidationContext.Builder()
             .NamespaceContext(namespaces)
@@ -834,11 +834,11 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Validate(validationContext)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestReceiveMessageWithExtractVariablesFromMessageXPath()
+    public async Task TestReceiveMessageWithExtractVariablesFromMessageXPath()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(
@@ -864,7 +864,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
@@ -872,14 +872,14 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Process(variableExtractor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable("messageVar"), Is.Not.Null);
         Assert.That(Context.GetVariable("messageVar"), Is.EqualTo("Hello World!"));
     }
 
     [Test]
-    public void TestReceiveMessageWithExtractVariablesFromMessageXPathNodeList()
+    public async Task TestReceiveMessageWithExtractVariablesFromMessageXPathNodeList()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<TestRequest>" +
@@ -913,7 +913,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
@@ -921,14 +921,14 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Process(variableExtractor)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable("messageVar"), Is.Not.Null);
         Assert.That(Context.GetVariable("messageVar"), Is.EqualTo("Hello,ByeBye"));
     }
 
     [Test]
-    public void TestReceiveMessageWithExtractVariablesFromMessageXPathNamespaceSupport()
+    public async Task TestReceiveMessageWithExtractVariablesFromMessageXPathNamespaceSupport()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -959,7 +959,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var validationContext = new XmlMessageValidationContext.Builder()
             .SchemaValidation(false)
@@ -972,14 +972,14 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Validate(validationContext)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable("messageVar"), Is.Not.Null);
         Assert.That(Context.GetVariable("messageVar"), Is.EqualTo("Hello World!"));
     }
 
     [Test]
-    public void TestReceiveMessageWithExtractVariablesFromMessageXPathNestedNamespaceSupport()
+    public async Task TestReceiveMessageWithExtractVariablesFromMessageXPathNestedNamespaceSupport()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -1010,7 +1010,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var validationContext = new XmlMessageValidationContext.Builder()
             .SchemaValidation(false)
@@ -1023,14 +1023,14 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Validate(validationContext)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable("messageVar"), Is.Not.Null);
         Assert.That(Context.GetVariable("messageVar"), Is.EqualTo("Hello World!"));
     }
 
     [Test]
-    public void TestReceiveMessageWithExtractVariablesFromMessageXPathNamespaceBindings()
+    public async Task TestReceiveMessageWithExtractVariablesFromMessageXPathNamespaceBindings()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -1064,7 +1064,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var validationContext = new XmlMessageValidationContext.Builder()
             .SchemaValidation(false)
@@ -1077,14 +1077,14 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Validate(validationContext)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
 
         Assert.That(Context.GetVariable("messageVar"), Is.Not.Null);
         Assert.That(Context.GetVariable("messageVar"), Is.EqualTo("Hello World!"));
     }
 
     [Test]
-    public void TestReceiveMessageWithTimeout()
+    public async Task TestReceiveMessageWithTimeout()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(
@@ -1104,7 +1104,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(Context, 3000L))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
@@ -1112,11 +1112,11 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestReceiveSelectedWithMessageSelector()
+    public async Task TestReceiveSelectedWithMessageSelector()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(
@@ -1139,7 +1139,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(messageSelector, Context, 5000L))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
@@ -1147,17 +1147,17 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Selector(messageSelector)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestReceiveSelectedWithMessageSelectorAndTimeout()
+    public async Task TestReceiveSelectedWithMessageSelectorAndTimeout()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(
             new DefaultPayloadBuilder("<TestRequest><Message>Hello World!</Message></TestRequest>"));
 
-        var messageSelector = "Operation = 'sayHello'";
+        const string messageSelector = "Operation = 'sayHello'";
 
         var headers = new Dictionary<string, object> { { "Operation", "sayHello" } };
         var controlMessage = new DefaultMessage("<TestRequest><Message>Hello World!</Message></TestRequest>", headers);
@@ -1174,7 +1174,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(messageSelector, Context, 5000L))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
@@ -1183,11 +1183,11 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Selector(messageSelector)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestReceiveSelectedWithMessageSelectorMap()
+    public async Task TestReceiveSelectedWithMessageSelectorMap()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(
@@ -1210,7 +1210,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive("Operation = 'sayHello'", Context, 5000L))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
@@ -1218,11 +1218,11 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Selector(messageSelector)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestReceiveSelectedWithMessageSelectorMapAndTimeout()
+    public async Task TestReceiveSelectedWithMessageSelectorMapAndTimeout()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
         controlMessageBuilder.SetPayloadBuilder(
@@ -1245,7 +1245,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive("Operation = 'sayHello'", Context, 5000L))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
@@ -1254,7 +1254,7 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
             .Selector(messageSelector)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
@@ -1276,19 +1276,19 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns((IMessage)null!);
+            .ReturnsAsync((IMessage)null!);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
             .Message(controlMessageBuilder)
             .Build();
 
-        var exception = Assert.Throws<AgenixSystemException>(() => receiveAction.Execute(Context));
+        var exception = Assert.ThrowsAsync<AgenixSystemException>(() => receiveAction.ExecuteAsync(Context));
         Assert.That(exception.Message, Is.EqualTo("Failed to receive message - message is not available"));
     }
 
     [Test]
-    public void TestReceiveEmptyMessagePayloadAsExpected()
+    public async Task TestReceiveEmptyMessagePayloadAsExpected()
     {
         var controlMessageBuilder = new DefaultMessageBuilder();
 
@@ -1306,14 +1306,14 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
             .Message(controlMessageBuilder)
             .Build();
 
-        receiveAction.Execute(Context);
+        await receiveAction.ExecuteAsync(Context);
     }
 
     [Test]
@@ -1337,14 +1337,14 @@ public class ReceiveMessageActionTest : AbstractNUnitSetUp
 
         _consumer
             .Setup(c => c.Receive(It.IsAny<TestContext>(), It.IsAny<long>()))
-            .Returns(controlMessage);
+            .ReturnsAsync(controlMessage);
 
         var receiveAction = new ReceiveMessageAction.Builder()
             .Endpoint(_endpoint.Object)
             .Message(controlMessageBuilder)
             .Build();
 
-        var exception = Assert.Throws<ValidationException>(() => receiveAction.Execute(Context));
+        var exception = Assert.ThrowsAsync<ValidationException>(() => receiveAction.ExecuteAsync(Context));
         Assert.That(exception.Message, Is.EqualTo("Empty message validation failed - control message is not empty!"));
     }
 }

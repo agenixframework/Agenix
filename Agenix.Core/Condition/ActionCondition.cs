@@ -7,24 +7,25 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
 using System;
+using System.Threading.Tasks;
 using Agenix.Api;
 using Agenix.Api.Context;
 using Agenix.Api.Log;
@@ -53,13 +54,24 @@ public class ActionCondition : AbstractCondition
     /// <summary>
     ///     Represents the action to be executed within the condition.
     /// </summary>
-    private ITestAction _action;
+    private IAsyncTestAction _action;
 
     /// <summary>
     ///     Optional exception that is caught during the execution of an action.
     /// </summary>
     private Exception _caughtException;
 
+    /// Represents a condition that executes a specified test action to evaluate
+    /// whether the condition is satisfied.
+    /// This class extends functionality from
+    /// <c>AbstractCondition</c>
+    /// , and it operates
+    /// using an implementation of
+    /// <c>ITestAction</c>
+    /// . It provides methods for evaluating
+    /// the satisfaction of the condition based on the action, alongside retrieval
+    /// and management of success and error messages. Additionally, it supports handling
+    /// of caught exceptions during execution.
     public ActionCondition()
     {
     }
@@ -70,7 +82,7 @@ public class ActionCondition : AbstractCondition
     /// of a test action. It includes methods to manage the test action,
     /// evaluate satisfaction, and provide success or error messages.
     /// /
-    public ActionCondition(ITestAction action)
+    public ActionCondition(IAsyncTestAction action)
     {
         _action = action;
     }
@@ -83,7 +95,7 @@ public class ActionCondition : AbstractCondition
     ///     True if the test action executes successfully without exceptions, indicating the condition is satisfied;
     ///     otherwise, false.
     /// </returns>
-    public override bool IsSatisfied(TestContext context)
+    public override async Task<bool> IsSatisfied(TestContext context)
     {
         if (_action == null)
         {
@@ -92,13 +104,13 @@ public class ActionCondition : AbstractCondition
 
         try
         {
-            _action.Execute(context);
+            await _action.ExecuteAsync(context);
         }
         catch (Exception e)
         {
             _caughtException = e;
-            Log.LogWarning(
-                $"Nested action did not perform as expected - {$"{e.GetType().Name}: {e.Message}"}");
+            Log.LogWarning(e,
+                "Nested action did not perform as expected - '[{TypeName}: {Message}]'", e.GetType().Name, e.Message);
             return false;
         }
 
@@ -136,14 +148,14 @@ public class ActionCondition : AbstractCondition
 
     /// Retrieves the test action associated with this condition.
     /// <returns>The test action currently set in the condition.</returns>
-    public ITestAction GetAction()
+    public IAsyncTestAction GetAction()
     {
         return _action;
     }
 
     /// Sets the test action for this condition.
     /// <param name="action">The test action to be set.</param>
-    public void SetAction(ITestAction action)
+    public void SetAction(IAsyncTestAction action)
     {
         _action = action;
     }
@@ -166,6 +178,14 @@ public class ActionCondition : AbstractCondition
         _caughtException = caughtException;
     }
 
+    /// <summary>
+    ///     Provides a string representation of the <c>ActionCondition</c> instance, including
+    ///     details about the action, caught exception, and the name of the condition.
+    /// </summary>
+    /// <returns>
+    ///     A string containing the state of the <c>ActionCondition</c>, including its
+    ///     associated test action, any caught exception, and its name.
+    /// </returns>
     public override string ToString()
     {
         return $"ActionCondition{{action={_action}, caughtException={_caughtException}, name={GetName()}}}";

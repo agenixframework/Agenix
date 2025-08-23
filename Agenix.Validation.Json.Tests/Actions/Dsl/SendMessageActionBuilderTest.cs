@@ -90,7 +90,7 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
             });
 
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
-        _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
+        _referenceResolver.Setup(x => x.Resolve<AsyncTestActionListeners>()).Returns(new AsyncTestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
             .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
@@ -160,7 +160,7 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
             });
 
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
-        _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
+        _referenceResolver.Setup(x => x.Resolve<AsyncTestActionListeners>()).Returns(new AsyncTestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
             .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
@@ -269,7 +269,7 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
             });
 
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
-        _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
+        _referenceResolver.Setup(x => x.Resolve<AsyncTestActionListeners>()).Returns(new AsyncTestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
             .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
@@ -445,7 +445,7 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
                 new Dictionary<string, JsonSchemaRepository> { { "fooRepository", schemaRepository } }
             ));
 
-        _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
+        _referenceResolver.Setup(x => x.Resolve<AsyncTestActionListeners>()).Returns(new AsyncTestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
             .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
@@ -514,7 +514,7 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
             ));
 
 
-        _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
+        _referenceResolver.Setup(x => x.Resolve<AsyncTestActionListeners>()).Returns(new AsyncTestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
             .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())
@@ -575,7 +575,7 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
             });
 
         var runner = new DefaultTestCaseRunner(Context);
-        runner.Run(SendMessageAction.Builder.Send(_messageEndpoint.Object)
+        runner.Run(Send(_messageEndpoint.Object)
             .Message()
             .Type(MessageType.JSON)
             .Body("{ \"TestRequest\": { \"Message\": \"?\" }}")
@@ -622,7 +622,7 @@ public class SendMessageActionBuilderTest : AbstractNUnitSetUp
             });
 
         _referenceResolver.Setup(x => x.Resolve<TestContext>()).Returns(Context);
-        _referenceResolver.Setup(x => x.Resolve<TestActionListeners>()).Returns(new TestActionListeners());
+        _referenceResolver.Setup(x => x.Resolve<AsyncTestActionListeners>()).Returns(new AsyncTestActionListeners());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceBeforeTest>())
             .Returns(new ConcurrentDictionary<string, SequenceBeforeTest>());
         _referenceResolver.Setup(x => x.ResolveAll<SequenceAfterTest>())

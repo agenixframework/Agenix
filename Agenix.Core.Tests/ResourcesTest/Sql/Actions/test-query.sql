@@ -1,7 +1,0 @@
--- Test SQL query
-SELECT ORDERTYPE, STATUS
-FROM orders
-WHERE ID = 5;
-SELECT NAME, HEIGHT
-FROM customers
-WHERE ID = 1;

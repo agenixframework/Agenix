@@ -7,23 +7,24 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
+using System.Threading.Tasks;
 using Agenix.Api.Container;
 using Agenix.Core.Actions;
 using Moq;
@@ -34,7 +35,7 @@ namespace Agenix.Core.Tests.Actions;
 public class StopTimerActionTest : AbstractNUnitSetUp
 {
     [Test]
-    public void ShouldStopSpecificTimer()
+    public async Task ShouldStopSpecificTimer()
     {
         const string timerId = "timer#1";
 
@@ -47,13 +48,13 @@ public class StopTimerActionTest : AbstractNUnitSetUp
             .Build();
 
         Assert.That(stopTimer.TimerId, Is.EqualTo(timerId));
-        stopTimer.Execute(Context);
+        await stopTimer.ExecuteAsync(Context);
 
         mock.Verify(x => x.StopTimer(), Times.Once);
     }
 
     [Test]
-    public void ShouldStopAllTimers()
+    public async Task ShouldStopAllTimers()
     {
         const string timerId1 = "timer#1";
         const string timerId2 = "timer#2";
@@ -67,7 +68,7 @@ public class StopTimerActionTest : AbstractNUnitSetUp
         Context.RegisterTimer(timerId2, timer2);
 
         var stopTimer = new StopTimerAction.Builder().Build();
-        stopTimer.Execute(Context);
+        await stopTimer.ExecuteAsync(Context);
 
         mock1.Verify(x => x.StopTimer(), Times.Once);
         mock2.Verify(x => x.StopTimer(), Times.Once);
@@ -79,6 +80,7 @@ public class StopTimerActionTest : AbstractNUnitSetUp
         var stopTimer = new StopTimerAction.Builder()
             .Id("some-unknown-timer")
             .Build();
-        stopTimer.Execute(Context);
+
+        Assert.That(async () => await stopTimer.ExecuteAsync(Context), Throws.Nothing);
     }
 }

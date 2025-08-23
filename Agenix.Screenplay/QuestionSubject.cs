@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -86,12 +86,7 @@ public class QuestionSubject<T>(Type questionClass)
     private string? AnnotatedSubject()
     {
         var methodAnnotation = AnnotationOnMethodOf(questionClass);
-        if (methodAnnotation != null)
-        {
-            return methodAnnotation;
-        }
-
-        return AnnotatedSubjectFromClass(questionClass);
+        return methodAnnotation ?? AnnotatedSubjectFromClass(questionClass);
     }
 
     /// <summary>
@@ -99,27 +94,22 @@ public class QuestionSubject<T>(Type questionClass)
     ///     or its base types if applicable. If the class or its base types are decorated with a <c>SubjectAttribute</c>,
     ///     its value is processed to provide a subject annotation.
     /// </summary>
-    /// <param name="questionClass">
+    /// <param name="newQuestionClass">
     ///     The <c>Type</c> of the class to check for a <c>SubjectAttribute</c>.
     /// </param>
     /// <returns>
     ///     A string containing the processed subject annotation if a <c>SubjectAttribute</c> is found
     ///     on the specified class or its base types; otherwise, null.
     /// </returns>
-    private string? AnnotatedSubjectFromClass(Type questionClass)
+    private string? AnnotatedSubjectFromClass(Type newQuestionClass)
     {
         var subjectAttribute = questionClass.GetCustomAttribute<SubjectAttribute>();
         if (subjectAttribute != null)
         {
-            return AnnotationOnClass(questionClass);
+            return AnnotationOnClass(newQuestionClass);
         }
 
-        if (questionClass.BaseType != null)
-        {
-            return AnnotatedSubjectFromClass(questionClass.BaseType);
-        }
-
-        return null;
+        return newQuestionClass.BaseType != null ? AnnotatedSubjectFromClass(newQuestionClass.BaseType) : null;
     }
 
     /// <summary>
@@ -128,18 +118,18 @@ public class QuestionSubject<T>(Type questionClass)
     ///     If the "AnsweredBy" method is decorated with a <c>SubjectAttribute</c>, its value
     ///     is processed to inject field values from the current question context.
     /// </summary>
-    /// <param name="questionClass">
+    /// <param name="newQuestionClass">
     ///     The <c>Type</c> of the class containing the "AnsweredBy" method to check for the <c>SubjectAttribute</c>.
     /// </param>
     /// <returns>
     ///     A string containing the processed subject annotation with relevant field values injected,
     ///     or null if the "AnsweredBy" method does not have a <c>SubjectAttribute</c>.
     /// </returns>
-    private string? AnnotationOnMethodOf(Type questionClass)
+    private string? AnnotationOnMethodOf(Type newQuestionClass)
     {
         try
         {
-            var answeredBy = questionClass.GetMethod("AnsweredBy", [typeof(Actor)]);
+            var answeredBy = newQuestionClass.GetMethod("AnsweredBy", [typeof(Actor)]);
             var subjectAttribute = answeredBy?.GetCustomAttribute<SubjectAttribute>();
             if (subjectAttribute != null)
             {
@@ -160,16 +150,16 @@ public class QuestionSubject<T>(Type questionClass)
     ///     If the provided class has a <c>SubjectAttribute</c>, its value is processed
     ///     to inject field values from the current question context.
     /// </summary>
-    /// <param name="questionClass">
+    /// <param name="newQuestionClass">
     ///     The <c>Type</c> of the class to retrieve the subject annotation from.
     /// </param>
     /// <returns>
     ///     A string containing the processed subject annotation with any relevant field values injected,
     ///     or null if the class does not have a <c>SubjectAttribute</c>.
     /// </returns>
-    private string? AnnotationOnClass(Type questionClass)
+    private string? AnnotationOnClass(Type newQuestionClass)
     {
-        var subjectAttribute = questionClass.GetCustomAttribute<SubjectAttribute>();
+        var subjectAttribute = newQuestionClass.GetCustomAttribute<SubjectAttribute>();
         if (subjectAttribute == null)
         {
             return null;

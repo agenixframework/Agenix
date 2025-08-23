@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -47,9 +47,8 @@ public class SendMessageActionTest : AbstractNUnitSetUp
     private readonly Mock<IEndpointConfiguration> _endpointConfiguration = new();
     private readonly Mock<IProducer> _producer = new();
 
-
     [Test]
-    public void TestSendMessageOverwriteMessageElementsXPath()
+    public async Task TestSendMessageOverwriteMessageElementsXPath()
     {
         var messageBuilder = new DefaultMessageBuilder();
         messageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder(
@@ -76,7 +75,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
 
         _producer
             .Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) =>
+            .Callback<IMessage, TestContext>((message, _) =>
             {
                 ValidateMessageToSend(message, controlMessage);
             });
@@ -88,11 +87,11 @@ public class SendMessageActionTest : AbstractNUnitSetUp
             .Process(processor)
             .Build();
 
-        sendAction.Execute(Context);
+        await sendAction.ExecuteAsync(Context);
     }
 
     [Test]
-    public void TestSendMessageOverwriteMessageElementsDotNotation()
+    public async Task TestSendMessageOverwriteMessageElementsDotNotation()
     {
         var messageBuilder = new DefaultMessageBuilder();
         messageBuilder.SetPayloadBuilder(new DefaultPayloadBuilder("<TestRequest><Message>?</Message></TestRequest>"));
@@ -121,7 +120,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
 
         _producer
             .Setup(p => p.Send(It.IsAny<IMessage>(), It.IsAny<TestContext>()))
-            .Callback<IMessage, TestContext>((message, context) =>
+            .Callback<IMessage, TestContext>((message, _) =>
             {
                 ValidateMessageToSend(message, controlMessage);
             });
@@ -133,7 +132,7 @@ public class SendMessageActionTest : AbstractNUnitSetUp
             .Process(processor)
             .Build();
 
-        sendAction.Execute(Context);
+        await sendAction.ExecuteAsync(Context);
     }
 
     private void ValidateMessageToSend(IMessage toSend, IMessage controlMessage)

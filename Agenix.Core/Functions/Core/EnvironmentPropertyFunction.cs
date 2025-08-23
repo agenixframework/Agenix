@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -51,12 +51,12 @@ public class EnvironmentPropertyFunction : IFunction
     ///     A list of parameters where the first element is the environment property name and the
     ///     second element, if provided, is the default value.
     /// </param>
-    /// <param name="context">The test context in which the function is executed, providing necessary runtime information.</param>
+    /// <param name="testContext">The test context in which the function is executed, providing necessary runtime information.</param>
     /// <returns>
     ///     The resolved property value as a string, or the default value if the property is not found. Throws an
     ///     exception if neither is available.
     /// </returns>
-    public string Execute(List<string> parameterList, TestContext context)
+    public string Execute(List<string> parameterList, TestContext testContext)
     {
         if (parameterList == null || parameterList.Count == 0)
         {

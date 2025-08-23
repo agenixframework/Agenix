@@ -7,24 +7,25 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Agenix.Api;
@@ -196,26 +197,26 @@ public abstract class AgenixAnnotations
     }
 
     /// <summary>
-    ///     Injects an instance of <see cref="ITestCaseRunner" /> into the fields of a test class annotated with
+    ///     Injects an instance of <see cref="IAsyncTestCaseRunner" /> into the fields of a test class annotated with
     ///     <see cref="AgenixResourceAttribute" />.
     /// </summary>
     /// <param name="target">The target object where the test runner instance will be injected.</param>
-    /// <param name="runner">The instance of <see cref="ITestCaseRunner" /> to inject into the target fields.</param>
+    /// <param name="runner">The instance of <see cref="IAsyncTestCaseRunner" /> to inject into the target fields.</param>
     /// <exception cref="AgenixSystemException">Thrown when the injection into a target field cannot be completed.</exception>
-    public static void InjectTestRunner(object target, ITestCaseRunner runner)
+    public static void InjectTestRunner(object target, IAsyncTestCaseRunner runner)
     {
         var targetType = target.GetType();
 
         // Injecting fields with TestCaseRunner
         var fields = targetType.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
             .Where(field => Attribute.IsDefined(field, typeof(AgenixResourceAttribute)) &&
-                            typeof(ITestCaseRunner).IsAssignableFrom(field.FieldType));
+                            typeof(IAsyncTestCaseRunner).IsAssignableFrom(field.FieldType));
 
         foreach (var field in fields)
         {
             try
             {
-                Log.LogDebug($"Injecting test runner instance on test class field '{field.Name}'");
+                Log.LogDebug("Injecting test runner instance on test class field '{FieldName}'", field.Name);
                 field.SetValue(target, runner);
             }
             catch (Exception ex)
@@ -230,25 +231,25 @@ public abstract class AgenixAnnotations
     }
 
     /// <summary>
-    ///     Injects an instance of <see cref="ITestActionRunner" /> into the fields of a test class annotated with
+    ///     Injects an instance of <see cref="IAsyncTestCaseRunner" /> into the fields of a test class annotated with
     ///     <see cref="AgenixResourceAttribute" />.
     /// </summary>
     /// <param name="target">The target object where the test action runner instance will be injected.</param>
-    /// <param name="runner">The instance of <see cref="ITestActionRunner" /> to inject into the target fields.</param>
+    /// <param name="runner">The instance of <see cref="IAsyncTestCaseRunner" /> to inject into the target fields.</param>
     /// <exception cref="AgenixSystemException">Thrown when the injection into a target field cannot be completed.</exception>
-    public static void InjectTestActionRunner(object target, ITestActionRunner runner)
+    public static void InjectTestActionRunner(object target, IAsyncTestCaseRunner runner)
     {
         var targetType = target.GetType();
 
         var fields = targetType.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
             .Where(field => Attribute.IsDefined(field, typeof(AgenixResourceAttribute)) &&
-                            typeof(ITestActionRunner).IsAssignableFrom(field.FieldType));
+                            typeof(IAsyncTestActionRunner).IsAssignableFrom(field.FieldType));
 
         foreach (var field in fields)
         {
             try
             {
-                Log.LogDebug($"Injecting test action runner instance on test class field '{field.Name}'");
+                Log.LogDebug("Injecting test action runner instance on test class field '{FieldName}'", field.Name);
                 field.SetValue(target, runner);
             }
             catch (Exception ex)
@@ -260,25 +261,25 @@ public abstract class AgenixAnnotations
     }
 
     /// <summary>
-    ///     Injects an instance of <see cref="IGherkinTestActionRunner" /> into the fields of a test class annotated with
+    ///     Injects an instance of <see cref="IGherkinAsyncTestActionRunner" /> into the fields of a test class annotated with
     ///     <see cref="AgenixResourceAttribute" />.
     /// </summary>
     /// <param name="target">The target object where the Gherkin test action runner instance will be injected.</param>
-    /// <param name="runner">The instance of <see cref="IGherkinTestActionRunner" /> to inject into the target fields.</param>
+    /// <param name="runner">The instance of <see cref="IGherkinAsyncTestActionRunner" /> to inject into the target fields.</param>
     /// <exception cref="AgenixSystemException">Thrown when the injection into a target field cannot be completed.</exception>
-    public static void InjectGherkinTestActionRunner(object target, IGherkinTestActionRunner runner)
+    public static void InjectGherkinTestActionRunner(object target, IGherkinAsyncTestActionRunner runner)
     {
         var targetType = target.GetType();
 
         var fields = targetType.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
             .Where(field => Attribute.IsDefined(field, typeof(AgenixResourceAttribute)) &&
-                            typeof(IGherkinTestActionRunner).IsAssignableFrom(field.FieldType));
+                            typeof(IGherkinAsyncTestActionRunner).IsAssignableFrom(field.FieldType));
 
         foreach (var field in fields)
         {
             try
             {
-                Log.LogDebug($"Injecting test action runner instance on test class field '{field.Name}'");
+                Log.LogDebug("Injecting test action runner instance on test class field '{FieldName}'", field.Name);
                 field.SetValue(target, runner);
             }
             catch (Exception ex)
@@ -337,76 +338,92 @@ public abstract class AgenixAnnotations
     {
         var configType = configuration.GetType();
 
-        // Handle AgenixConfiguration attribute
+        ProcessAgenixConfigurationAttribute(configType, agenixContext);
+        ProcessMethodsWithBindToRegistry(configuration, configType, agenixContext);
+        ProcessFieldsWithBindToRegistry(configuration, configType, agenixContext);
+    }
 
-        if (configType
-                .GetCustomAttributes(typeof(AgenixConfigurationAttribute), true)
-                .FirstOrDefault() is AgenixConfigurationAttribute agenixConfigurationAttribute)
+    private static void ProcessAgenixConfigurationAttribute(Type configType, AgenixContext agenixContext)
+    {
+        var agenixConfigAttr = configType.GetCustomAttribute<AgenixConfigurationAttribute>();
+        if (agenixConfigAttr?.Classes != null)
         {
-            foreach (var type in agenixConfigurationAttribute.Classes)
+            foreach (var type in agenixConfigAttr.Classes)
             {
                 agenixContext.ParseConfiguration(type);
             }
         }
+    }
 
-        // Handle methods with BindToRegistry attribute
-        var methods = configType.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-            .Where(m => Attribute.IsDefined(m, typeof(BindToRegistryAttribute)));
+    private static void ProcessMethodsWithBindToRegistry(object configuration, Type configType,
+        AgenixContext agenixContext)
+    {
+        var methods = GetMembersWithAttribute<MethodInfo, BindToRegistryAttribute>(
+            configType.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance));
 
         foreach (var method in methods)
         {
             try
             {
-                var name = ReferenceRegistry.GetName(
-                    method.GetCustomAttribute<BindToRegistryAttribute>(),
-                    method.Name);
-
                 var component = method.Invoke(configuration, null);
-
-                if (component is INamed namedComponent)
-                {
-                    namedComponent.SetName(name);
-                }
-
-                agenixContext.AddComponent(name, component);
+                AddComponentToContext(component, method.GetCustomAttribute<BindToRegistryAttribute>(), method.Name,
+                    agenixContext);
             }
             catch (Exception ex) when (ex is TargetInvocationException or MethodAccessException)
             {
                 throw new AgenixSystemException("Failed to invoke configuration method", ex);
             }
         }
+    }
 
-        // Handle fields with BindToRegistry attribute
-        var fields = configType.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-            .Where(f => Attribute.IsDefined(f, typeof(BindToRegistryAttribute)));
+    private static void ProcessFieldsWithBindToRegistry(object configuration, Type configType,
+        AgenixContext agenixContext)
+    {
+        var fields = GetMembersWithAttribute<FieldInfo, BindToRegistryAttribute>(
+            configType.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance));
 
         foreach (var field in fields)
         {
             try
             {
-                if (field.DeclaringType != null &&
-                    (!field.IsPublic || field.IsInitOnly || !field.DeclaringType.IsPublic))
-                {
-                    field.SetValue(configuration, field.GetValue(configuration)); // Ensure field is accessible
-                }
-
-                var name = ReferenceRegistry.GetName(
-                    field.GetCustomAttribute<BindToRegistryAttribute>(),
-                    field.Name);
-
+                EnsureFieldAccessible(field, configuration);
                 var component = field.GetValue(configuration);
-
-                if (component is INamed namedComponent)
-                {
-                    namedComponent.SetName(name);
-                }
-
-                agenixContext.AddComponent(name, component);
+                AddComponentToContext(component, field.GetCustomAttribute<BindToRegistryAttribute>(), field.Name,
+                    agenixContext);
             }
             catch (FieldAccessException ex)
             {
                 throw new AgenixSystemException("Failed to access configuration field", ex);
             }
+        }
+    }
+
+    private static IEnumerable<T> GetMembersWithAttribute<T, TAttribute>(T[] members)
+        where T : MemberInfo
+        where TAttribute : Attribute
+    {
+        return members.Where(m => Attribute.IsDefined(m, typeof(TAttribute)));
+    }
+
+    private static void AddComponentToContext(object component, BindToRegistryAttribute attribute, string memberName,
+        AgenixContext agenixContext)
+    {
+        var name = ReferenceRegistry.GetName(attribute, memberName);
+
+        if (component is INamed namedComponent)
+        {
+            namedComponent.SetName(name);
+        }
+
+        agenixContext.AddComponent(name, component);
+    }
+
+    private static void EnsureFieldAccessible(FieldInfo field, object configuration)
+    {
+        if (field.DeclaringType != null &&
+            (!field.IsPublic || field.IsInitOnly || !field.DeclaringType.IsPublic))
+        {
+            field.SetValue(configuration, field.GetValue(configuration));
         }
     }
 }

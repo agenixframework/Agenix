@@ -295,21 +295,21 @@ public class GraphQLMessageBuilder : StaticMessageBuilder
     }
 
     /// <summary>
-    /// Constructs and returns a GraphQL message using the specified test execution context and message type.
-    /// This method extends the functionality of the base message building process by creating an GraphQL-specific message,
-    /// ensuring that additional configurations such as cookies and headers are handled appropriately.
+    ///     Constructs and returns a GraphQL message using the specified test execution context and message type.
+    ///     This method extends the functionality of the base message building process by creating an GraphQL-specific message,
+    ///     ensuring that additional configurations such as cookies and headers are handled appropriately.
     /// </summary>
     /// <param name="context">
-    /// The test execution context used to construct the message and manage its state within a test
-    /// scenario.
+    ///     The test execution context used to construct the message and manage its state within a test
+    ///     scenario.
     /// </param>
     /// <param name="messageType">
-    /// The type identifier for the message being constructed, influencing its structure and
-    /// behavior.
+    ///     The type identifier for the message being constructed, influencing its structure and
+    ///     behavior.
     /// </param>
     /// <returns>
-    /// An IMessage instance representing the newly constructed GraphQL message, complete with headers, cookies, and other
-    /// HTTP-specific attributes.
+    ///     An IMessage instance representing the newly constructed GraphQL message, complete with headers, cookies, and other
+    ///     HTTP-specific attributes.
     /// </returns>
     public override IMessage Build(TestContext context, string messageType)
     {
