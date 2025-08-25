@@ -497,11 +497,11 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Set up resource mock to return different content on consecutive calls
         _resource.Setup(x => x.Exists).Returns(true);
-        _resource.SetupSequence(x => x.InputStream)
-            .Returns(new MemoryStream(
-                Encoding.UTF8.GetBytes("<Header><Name>operation</Name><Value>foo</Value></Header>")))
-            .Returns(new MemoryStream(
-                Encoding.UTF8.GetBytes("<Header><Name>operation</Name><Value>bar</Value></Header>")));
+        _resource.SetupSequence(x => x.OpenStreamAsync(CancellationToken.None))
+            .ReturnsAsync(new MemoryStream(
+                "<Header><Name>operation</Name><Value>foo</Value></Header>"u8.ToArray()))
+            .ReturnsAsync(new MemoryStream(
+                "<Header><Name>operation</Name><Value>bar</Value></Header>"u8.ToArray()));
 
         // Act
         var runner = new DefaultTestCaseRunner(Context);
@@ -594,11 +594,11 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
 
         // Set up resource mock to return different content on consecutive calls
         _resource.Setup(x => x.Exists).Returns(true);
-        _resource.SetupSequence(x => x.InputStream)
-            .Returns(new MemoryStream("<Header><Name>operation</Name><Value>foo</Value></Header>"u8.ToArray()))
-            .Returns(new MemoryStream("<Header><Name>operation</Name><Value>bar</Value></Header>"u8.ToArray()))
-            .Returns(new MemoryStream("<Header><Name>operation</Name><Value>foo</Value></Header>"u8.ToArray()))
-            .Returns(new MemoryStream("<Header><Name>operation</Name><Value>bar</Value></Header>"u8.ToArray()));
+        _resource.SetupSequence(x => x.OpenStreamAsync(CancellationToken.None))
+            .ReturnsAsync(new MemoryStream("<Header><Name>operation</Name><Value>foo</Value></Header>"u8.ToArray()))
+            .ReturnsAsync(new MemoryStream("<Header><Name>operation</Name><Value>bar</Value></Header>"u8.ToArray()))
+            .ReturnsAsync(new MemoryStream("<Header><Name>operation</Name><Value>foo</Value></Header>"u8.ToArray()))
+            .ReturnsAsync(new MemoryStream("<Header><Name>operation</Name><Value>bar</Value></Header>"u8.ToArray()));
 
         // Act
         var runner = new DefaultTestCaseRunner(Context);

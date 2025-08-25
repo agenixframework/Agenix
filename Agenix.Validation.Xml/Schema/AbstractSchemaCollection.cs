@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -52,6 +52,15 @@ public abstract class AbstractSchemaCollection : SimpleXsdSchema, InitializingPh
     /// </summary>
     public List<IResource> SchemaResources => _schemaResources;
 
+    /// <summary>
+    /// Initializes the schema collection by loading the required XML Schema Definition (XSD) resources,
+    /// validating their presence, and configuring the schema for further use. Invokes any additional
+    /// setup processes via <c>AfterPropertiesSet</c>.
+    /// </summary>
+    /// <exception cref="AgenixSystemException">
+    /// Thrown when no target XSD schema resources are found or when the schema resource collection is empty,
+    /// indicating a missing or invalid configuration.
+    /// </exception>
     public void Initialize()
     {
         var targetXsd = LoadSchemaResources();
@@ -65,7 +74,7 @@ public abstract class AbstractSchemaCollection : SimpleXsdSchema, InitializingPh
             throw new AgenixSystemException("At least one schema xsd file resource is required");
         }
 
-        SetXsd(new ByteArrayResource(FileUtils.CopyToByteArray(targetXsd)));
+        SetXsd(new ByteArrayResource(FileUtils.CopyToByteArray(targetXsd).ConfigureAwait(false).GetAwaiter().GetResult()));
 
         AfterPropertiesSet();
     }

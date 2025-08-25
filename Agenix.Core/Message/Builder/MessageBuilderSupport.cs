@@ -226,7 +226,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : IAsyncTestActionBuilder
     {
         try
         {
-            Body(FileUtils.ReadToString(payloadResource, charset));
+            Body(FileUtils.ReadToString(payloadResource, charset).ConfigureAwait(false).GetAwaiter().GetResult());
         }
         catch (IOException e)
         {
@@ -297,7 +297,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : IAsyncTestActionBuilder
     /// </summary>
     /// <param name="resource">The resource from which the header data is read.</param>
     /// <param name="charset">The character encoding used to read the resource.</param>
-    /// <returns>The current instance of the message builder support for method chaining.</returns>
+    /// <returns>The current instance of the message builder supports for method chaining.</returns>
     /// <exception cref="AgenixSystemException">
     ///     Thrown if the message builder does not support adding header builders or if reading the resource fails.
     /// </exception>
@@ -308,7 +308,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : IAsyncTestActionBuilder
             if (_messageBuilder is IWithHeaderBuilder withHeaderBuilder)
             {
                 withHeaderBuilder.AddHeaderBuilder(
-                    new DefaultHeaderDataBuilder(FileUtils.ReadToString(resource, charset)));
+                    new DefaultHeaderDataBuilder(FileUtils.ReadToString(resource, charset).ConfigureAwait(false).GetAwaiter().GetResult()));
             }
             else
             {
@@ -427,8 +427,8 @@ public abstract class MessageBuilderSupport<T, TB, TS> : IAsyncTestActionBuilder
     /// </summary>
     /// <param name="builder">The message processor to use for processing the message.</param>
     /// <returns>A reference to this instance with the processing applied.</returns>
-    public TS Process<B>(IMessageProcessor.IBuilder<IMessageProcessor, B> builder)
-        where B : IMessageProcessor.IBuilder<IMessageProcessor, B>
+    public TS Process<TTb>(IMessageProcessor.IBuilder<IMessageProcessor, TTb> builder)
+        where TTb : IMessageProcessor.IBuilder<IMessageProcessor, TTb>
     {
         return Process(builder.Build());
     }
@@ -447,7 +447,7 @@ public abstract class MessageBuilderSupport<T, TB, TS> : IAsyncTestActionBuilder
     ///     Allows for embedding a variable extractor into the message processing pipeline.
     /// </summary>
     /// <param name="extractor">The variable extractor to be used.</param>
-    /// <returns>The current instance of the message builder support for chaining purposes.</returns>
+    /// <returns>The current instance of the message builder supports for chaining purposes.</returns>
     public TS Extract(IVariableExtractor extractor)
     {
         return Process(extractor);
@@ -469,8 +469,8 @@ public abstract class MessageBuilderSupport<T, TB, TS> : IAsyncTestActionBuilder
     /// </summary>
     /// <param name="builder">The variable extractor builder used to build the variable extractor.</param>
     /// <returns>The current instance of the message builder support.</returns>
-    public TS Extract<B>(IVariableExtractor.IBuilder<IVariableExtractor, B> builder)
-        where B : IVariableExtractor.IBuilder<IVariableExtractor, B>
+    public TS Extract<TE>(IVariableExtractor.IBuilder<IVariableExtractor, TE> builder)
+        where TE : IVariableExtractor.IBuilder<IVariableExtractor, TE>
     {
         return Extract(builder.Build());
     }

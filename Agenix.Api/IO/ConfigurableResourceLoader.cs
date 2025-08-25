@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -43,7 +43,7 @@ namespace Agenix.Api.IO;
 ///         corresponding .NET types that know how to handle those protocols.
 ///     </p>
 ///     <p>
-///         Basic protocol-to-resource type mappings are also defined by this class,
+///         This class also defines basic protocol-to-resource type mappings,
 ///         while others can be added either internally, by application contexts
 ///         extending this class, or externally, by the end user configuring the
 ///         context.
@@ -115,29 +115,29 @@ public class ConfigurableResourceLoader : IResourceLoader
 
     /// <summary>
     ///     Returns a <see cref="IResource" /> that has been
-    ///     mapped to the protocol of the supplied <paramref name="resourceName" />.
+    ///     mapped to the protocol of the supplied <paramref name="location" />.
     /// </summary>
-    /// <param name="resourceName">The name of the resource.</param>
+    /// <param name="location">The name of the resource.</param>
     /// <returns>
     ///     A new <see cref="IResource" /> instance for the
-    ///     supplied <paramref name="resourceName" />.
+    ///     supplied <paramref name="location" />.
     /// </returns>
     /// <exception cref="System.UriFormatException">
     ///     If a <see cref="IResource" /> <see cref="System.Type" />
-    ///     mapping does not exist for the supplied <paramref name="resourceName" />.
+    ///     mapping does not exist for the supplied <paramref name="location" />.
     /// </exception>
     /// <exception cref="System.Exception">
     ///     In the case of any errors arising from the instantiation of the
     ///     returned <see cref="IResource" /> instance.
     /// </exception>
     /// <seealso cref="ResourceHandlerRegistry.RegisterResourceHandler(string, Type)" />
-    public IResource GetResource(string resourceName)
+    public IResource GetResource(string location)
     {
-        var protocol = GetProtocol(resourceName);
+        var protocol = GetProtocol(location);
         if (protocol == null)
         {
             protocol = DefaultResourceProtocol;
-            resourceName = protocol + ProtocolSeparator + resourceName;
+            location = protocol + ProtocolSeparator + location;
         }
 
         var handler = ResourceHandlerRegistry.GetResourceHandler(protocol);
@@ -146,7 +146,7 @@ public class ConfigurableResourceLoader : IResourceLoader
             throw new UriFormatException("Resource handler for the '" + protocol + "' protocol is not defined.");
         }
 
-        return (IResource)handler.Invoke([resourceName]);
+        return (IResource)handler.Invoke([location]);
     }
 
     /// <summary>
@@ -177,7 +177,7 @@ public class ConfigurableResourceLoader : IResourceLoader
     ///     supplied <paramref name="resourceName" /> is unqualified (or
     ///     is itself <see langword="null" />).
     /// </returns>
-    internal static string GetProtocol(string resourceName)
+    internal static string? GetProtocol(string? resourceName)
     {
         if (resourceName == null)
         {

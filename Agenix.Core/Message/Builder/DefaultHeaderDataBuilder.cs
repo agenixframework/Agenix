@@ -7,24 +7,25 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
 #endregion
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Agenix.Api.Context;
 using Agenix.Api.Message;
 using Agenix.Api.Util;
@@ -53,15 +54,20 @@ public class DefaultHeaderDataBuilder : IMessageHeaderDataBuilder
     /// @param context The context used to replace dynamic content in the header data string.
     /// @return A string with dynamic content replaced, or an empty string if header data is null.
     /// /
-    public virtual string BuildHeaderData(TestContext context)
+    public virtual Task<string> BuildHeaderData(TestContext context)
     {
-        return HeaderData == null
+        return Task.FromResult(HeaderData == null
             ? ""
             : context.ReplaceDynamicContentInString(HeaderData is string
                 ? HeaderData.ToString()
-                : TypeConversionUtils.ConvertIfNecessary<string>(HeaderData, typeof(string)));
+                : TypeConversionUtils.ConvertIfNecessary<string>(HeaderData, typeof(string))));
     }
 
+    /// <summary>
+    /// Builds and returns a dictionary containing header data specific to the provided test context.
+    /// </summary>
+    /// <param name="context">The test context from which the header data is derived.</param>
+    /// <returns>A dictionary containing the constructed header data.</returns>
     public Dictionary<string, object> BuilderHeaders(TestContext context)
     {
         return new Dictionary<string, object>();

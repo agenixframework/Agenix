@@ -24,6 +24,7 @@ public class WhenRunningTasksInParallel
         return ITask.Where("{} does something", _ =>
         {
             _completedTasks.Add("Do something");
+            return Task.CompletedTask;
         });
     }
 
@@ -32,6 +33,7 @@ public class WhenRunningTasksInParallel
         return ITask.Where("{} does another thing", _ =>
         {
             _completedTasks.Add("Do another thing");
+            return Task.CompletedTask;
         });
     }
 
@@ -40,6 +42,7 @@ public class WhenRunningTasksInParallel
         return ITask.Where("{} does a thing", _ =>
         {
             _completedTasks.Add("Do a thing");
+            return Task.CompletedTask;
         });
     }
 
@@ -48,6 +51,7 @@ public class WhenRunningTasksInParallel
         return ITask.Where("{} does yet another thing", _ =>
         {
             _completedTasks.Add("Do yet another thing");
+            return Task.CompletedTask;
         });
     }
 
@@ -56,6 +60,7 @@ public class WhenRunningTasksInParallel
         return ITask.Where("{} does something else", _ =>
         {
             _completedTasks.Add("Do something else");
+            return Task.CompletedTask;
         });
     }
 
@@ -64,14 +69,15 @@ public class WhenRunningTasksInParallel
         return ITask.Where("{} fails test by purpose", _ =>
         {
             Assert.Fail("Fail by purpose");
+            return Task.CompletedTask;
         });
     }
 
     private IPerformable DoSomethingWithSubTasks()
     {
-        return ITask.Where("{} executes 2 tasks", actor =>
+        return ITask.Where("{} executes 2 tasks", async actor =>
         {
-            actor.AttemptsTo(DoAThing(), DoYetAnotherThing());
+            await actor.AttemptsTo(DoAThing(), DoYetAnotherThing());
         });
     }
 
@@ -88,6 +94,8 @@ public class WhenRunningTasksInParallel
             {
                 // no code
             }
+
+            return Task.CompletedTask;
         });
     }
 

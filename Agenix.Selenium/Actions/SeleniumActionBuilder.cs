@@ -408,7 +408,7 @@ public class
         try
         {
             var builder = new JavaScriptAction.Builder()
-                .SetScript(FileUtils.ReadToString(scriptResource, encoding))
+                .SetScript(FileUtils.ReadToString(scriptResource, encoding).ConfigureAwait(false).GetAwaiter().GetResult())
                 .WithBrowser(_seleniumBrowser);
             _delegateBuilder = builder;
             return builder;
@@ -420,7 +420,7 @@ public class
     }
 
     /// <summary>
-    ///     Open window.
+    ///     Open the window.
     /// </summary>
     public OpenWindowAction.Builder Open()
     {

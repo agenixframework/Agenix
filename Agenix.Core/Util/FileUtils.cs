@@ -75,7 +75,7 @@ public static class FileUtils
     /// <summary>
     ///     Represents the logging mechanism within the FileUtils class, specifically for recording and managing log
     ///     entries related to file operations and system interactions.
-    ///     Utilizes the logger provided by the LogManager to capture debug and error messages.
+    ///     Uses the logger provided by the LogManager to capture debug and error messages.
     /// </summary>
     private static readonly ILogger Log = LogManager.GetLogger(typeof(FileUtils));
 
@@ -85,9 +85,9 @@ public static class FileUtils
     /// <param name="resource">The resource from which to read the content.</param>
     /// <returns>A string representation of the content read from the resource.</returns>
     /// <exception cref="Exception">Thrown when the resource does not exist.</exception>
-    public static string ReadToString(IResource resource)
+    public static async Task<string> ReadToString(IResource resource)
     {
-        return ReadToString(resource, GetDefaultCharset());
+        return await ReadToString(resource, GetDefaultCharset());
     }
 
     /// <summary>
@@ -96,9 +96,9 @@ public static class FileUtils
     /// <param name="inputStream">The stream to be read.</param>
     /// <returns>A string representation of the content read from the input stream.</returns>
     /// <exception cref="InvalidOperationException">Thrown when the input stream is null.</exception>
-    public static string ReadToString(Stream inputStream)
+    public static async Task<string> ReadToString(Stream inputStream)
     {
-        return ReadToString(inputStream, GetDefaultCharset());
+        return await ReadToString(inputStream, GetDefaultCharset());
     }
 
     /// <summary>
@@ -109,12 +109,12 @@ public static class FileUtils
     /// <exception cref="ArgumentNullException">Thrown when the fileInfo parameter is null.</exception>
     /// <exception cref="FileNotFoundException">Thrown when the specified file cannot be found.</exception>
     /// <exception cref="IOException">Thrown when an I/O error occurs while opening the file.</exception>
-    public static string ReadToString(FileInfo fileInfo)
+    public static async Task<string> ReadToString(FileInfo fileInfo)
     {
         ArgumentNullException.ThrowIfNull(fileInfo);
 
-        using var fileStream = new FileStream(fileInfo.FullName, FileMode.Open, FileAccess.Read);
-        return ReadToString(fileStream, GetDefaultCharset());
+        await using var fileStream = new FileStream(fileInfo.FullName, FileMode.Open, FileAccess.Read);
+        return await ReadToString(fileStream, GetDefaultCharset());
     }
 
     /// <summary>
@@ -124,7 +124,7 @@ public static class FileUtils
     /// <param name="encoding">The encoding to use for converting the resource's byte content to a string.</param>
     /// <returns>A string representation of the content read from the resource.</returns>
     /// <exception cref="Exception">Thrown when the resource does not exist.</exception>
-    public static string ReadToString(IResource resource, Encoding encoding)
+    public static async Task<string> ReadToString(IResource resource, Encoding encoding)
     {
         if (!resource.Exists)
         {
@@ -137,7 +137,7 @@ public static class FileUtils
                 resource.Description, encoding.WebName);
         }
 
-        return ReadToString(resource.InputStream, encoding);
+        return await ReadToString(await resource.OpenStreamAsync(), encoding);
     }
 
     /// <summary>
@@ -147,7 +147,7 @@ public static class FileUtils
     /// <param name="encoding">The encoding to be used for converting the stream's byte content to a string.</param>
     /// <returns>A string representation of the content read from the input stream.</returns>
     /// <exception cref="InvalidOperationException">Thrown when the input stream is null.</exception>
-    public static string ReadToString(Stream inputStream, Encoding encoding)
+    public static async Task<string> ReadToString(Stream inputStream, Encoding encoding)
     {
         if (inputStream == null)
         {
@@ -155,7 +155,7 @@ public static class FileUtils
         }
 
         using var memoryStream = new MemoryStream();
-        inputStream.CopyTo(memoryStream);
+        await inputStream.CopyToAsync(memoryStream);
         return encoding.GetString(memoryStream.ToArray());
     }
 
@@ -166,7 +166,7 @@ public static class FileUtils
     /// <param name="file">The path of the file where the content will be written.</param>
     /// <param name="charset">The encoding to be used when writing the content to the file.</param>
     /// <exception cref="AgenixSystemException">Thrown when there is an error writing to the file.</exception>
-    public static void WriteToFile(string content, string file, Encoding charset)
+    public static async Task WriteToFile(string content, string file, Encoding charset)
     {
         Log.LogDebug("Writing file resource: {File} (encoding is {CharsetEncodingName})", file, charset.EncodingName);
 
@@ -181,7 +181,7 @@ public static class FileUtils
 
         try
         {
-            File.WriteAllText(file, content, charset);
+            await File.WriteAllTextAsync(file ?? throw new ArgumentNullException(nameof(file)), content, charset);
         }
         catch (IOException e)
         {
@@ -195,7 +195,7 @@ public static class FileUtils
     /// <param name="content">The content to be written to the file.</param>
     /// <param name="file">The path of the file where the content will be written.</param>
     /// <exception cref="IOException">Thrown when there is an error during the file writing process.</exception>
-    public static void WriteToFile(Stream content, FileInfo file)
+    public static async Task WriteToFile(Stream content, FileInfo file)
     {
         if (Log.IsEnabled(LogLevel.Debug))
         {
@@ -209,8 +209,8 @@ public static class FileUtils
 
         try
         {
-            using var outputFileStream = new FileStream(file.FullName, FileMode.Create, FileAccess.Write);
-            content.CopyTo(outputFileStream);
+            await using var outputFileStream = new FileStream(file.FullName, FileMode.Create, FileAccess.Write);
+            await content.CopyToAsync(outputFileStream);
         }
         catch (IOException e)
         {
@@ -223,11 +223,10 @@ public static class FileUtils
     /// </summary>
     /// <param name="content">The content to be written to the file.</param>
     /// <param name="file">The path of the file where the content will be written.</param>
-    /// <param name="charset">The encoding to be used when writing the content to the file.</param>
     /// <exception cref="AgenixSystemException">Thrown when there is an error writing to the file.</exception>
-    public static void WriteToFile(string content, string file)
+    public static async Task WriteToFile(string content, string file)
     {
-        WriteToFile(content, file, GetDefaultCharset());
+        await WriteToFile(content, file, GetDefaultCharset());
     }
 
     /// <summary>
@@ -277,9 +276,19 @@ public static class FileUtils
     /// <param name="context">The TestContext instance used to resolve dynamic content in the provided file path.</param>
     /// <returns>An instance of IResource that represents the resolved file resource.</returns>
     /// <exception cref="Exception">Thrown if the resource cannot be found, resolved, or accessed.</exception>
-    public static IResource GetFileResource(string resourceName, TestContext context)
+    public static async Task<IResource> GetFileResource(string resourceName, TestContext context)
     {
-        return GetFileResource(context.ReplaceDynamicContentInString(resourceName));
+        return await GetFileResourceAsync(context.ReplaceDynamicContentInString(resourceName), context);
+    }
+
+    /// <summary>
+    ///     Retrieves a file resource based on the provided resource name and context.
+    /// </summary>
+    /// <param name="resourceName">The name of the resource to be retrieved.</param>
+    /// <returns>An instance of <see cref="IResource" /> representing the requested resource.</returns>
+    public static IResource GetFileResource(string resourceName)
+    {
+        return new ConfigurableResourceLoader().GetResource(resourceName);
     }
 
     /// <summary>
@@ -291,18 +300,24 @@ public static class FileUtils
     /// <returns>A task that represents the asynchronous operation. The task result contains the retrieved file resource.</returns>
     public static async Task<IResource> GetFileResourceAsync(string resourceName, TestContext context)
     {
-        return await Task.Run(() => GetFileResource(context.ReplaceDynamicContentInString(resourceName)));
+        // First, replace the dynamic content - this is CPU-bound and can be done synchronously
+        var resolvedResourceName = context.ReplaceDynamicContentInString(resourceName);
+
+        // Then load the resource asynchronously
+        return await GetFileResourceInternalAsync(resolvedResourceName);
     }
 
     /// <summary>
-    ///     Retrieves a file resource based on the provided resource name and context.
+    ///     Internal implementation of asynchronous resource loading.
     /// </summary>
-    /// <param name="resourceName">The name of the resource to be retrieved.</param>
-    /// <param name="context">The context used to resolve and replace dynamic content in the resource name.</param>
-    /// <returns>An instance of <see cref="IResource" /> representing the requested resource.</returns>
-    public static IResource GetFileResource(string resourceName)
+    /// <param name="resourceName">The resolved name of the resource to be retrieved.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the retrieved file resource.</returns>
+    private static async Task<IResource> GetFileResourceInternalAsync(string resourceName)
     {
-        return new ConfigurableResourceLoader().GetResource(resourceName);
+        // If ConfigurableResourceLoader has an async method, use it directly.
+        // Otherwise, use ConfigureAwait(false) to avoid potential deadlocks when calling sync code
+        return await Task.Run(() => new ConfigurableResourceLoader().GetResource(resourceName))
+            .ConfigureAwait(false);
     }
 
     /// <summary>
@@ -354,7 +369,7 @@ public static class FileUtils
     /// <param name="fileStream">The file stream from which to read bytes.</param>
     /// <returns>A byte array containing the bytes read from the file stream.</returns>
     /// <exception cref="InvalidOperationException">Thrown when the file stream is null.</exception>
-    private static byte[] ReadAllBytes(FileStream fileStream)
+    private static async Task<byte[]> ReadAllBytes(FileStream fileStream)
     {
         if (fileStream == null)
         {
@@ -362,7 +377,7 @@ public static class FileUtils
         }
 
         using var memoryStream = new MemoryStream();
-        fileStream.CopyTo(memoryStream);
+        await fileStream.CopyToAsync(memoryStream);
         return memoryStream.ToArray();
     }
 
@@ -375,11 +390,11 @@ public static class FileUtils
     ///     Thrown if unable to access the input stream of the resource or if reading
     ///     the resource fails.
     /// </exception>
-    public static byte[] CopyToByteArray(IResource resource)
+    public static async Task<byte[]> CopyToByteArray(IResource resource)
     {
         try
         {
-            using var inStream = resource.InputStream;
+            await using var inStream = await resource.OpenStreamAsync();
             if (inStream == null)
             {
                 throw new InvalidOperationException(
@@ -387,7 +402,7 @@ public static class FileUtils
             }
 
             using var memoryStream = new MemoryStream();
-            inStream.CopyTo(memoryStream);
+            await inStream.CopyToAsync(memoryStream);
             return memoryStream.ToArray();
         }
         catch (IOException e)
@@ -402,7 +417,7 @@ public static class FileUtils
     /// <param name="file">The file from which to copy the content.</param>
     /// <returns>A byte array representation of the content of the file.</returns>
     /// <exception cref="InvalidOperationException">Thrown when the file content cannot be read.</exception>
-    public static byte[] CopyToByteArray(FileInfo file)
+    public static async Task<byte[]> CopyToByteArray(FileInfo file)
     {
         if (file == null)
         {
@@ -411,8 +426,8 @@ public static class FileUtils
 
         try
         {
-            using var inStream = file.OpenRead();
-            return ReadAllBytes(inStream);
+            await using var inStream = file.OpenRead();
+            return await ReadAllBytes(inStream);
         }
         catch (IOException e)
         {
@@ -427,15 +442,15 @@ public static class FileUtils
     /// <returns>A byte array containing the data read from the input stream.</returns>
     /// <exception cref="IOException">Thrown when an I/O error occurs.</exception>
     /// <exception cref="InvalidOperationException">Thrown when the input stream cannot be read.</exception>
-    public static byte[] CopyToByteArray(Stream inputStream)
+    public static async Task<byte[]> CopyToByteArray(Stream inputStream)
     {
         try
         {
-            using (inputStream) // Ensure the stream gets disposed
+            await using (inputStream) // Ensure the stream gets disposed
             {
                 using (var memoryStream = new MemoryStream())
                 {
-                    inputStream.CopyTo(memoryStream);
+                    await inputStream.CopyToAsync(memoryStream);
                     return memoryStream.ToArray();
                 }
             }
@@ -512,7 +527,7 @@ public static class FileUtils
     /// <returns>A NameValueCollection containing the configuration settings.</returns>
     /// <exception cref="ArgumentException">Thrown when the resource path is null or empty.</exception>
     /// <exception cref="InvalidOperationException">Thrown when an error occurs while loading the settings from the resource.</exception>
-    public static NameValueCollection LoadAsSettings(IResource resource)
+    public static async Task<NameValueCollection> LoadAsSettings(IResource resource)
     {
         var settings = new NameValueCollection();
         // Create a temporary file to hold the stream content
@@ -521,9 +536,10 @@ public static class FileUtils
         try
         {
             // Write the stream content to the temporary file
-            using (var fileStream = File.Create(tempFilePath))
+            await using (var fileStream = File.Create(tempFilePath))
             {
-                resource.InputStream.CopyTo(fileStream);
+                var stream = await resource.OpenStreamAsync();
+                await stream.CopyToAsync(fileStream);
             }
 
             if (string.IsNullOrEmpty(tempFilePath))

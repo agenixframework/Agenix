@@ -24,6 +24,13 @@
 
 #endregion
 
+#region Imports
+
+using System.Threading;
+using System.Threading.Tasks;
+
+#endregion
+
 namespace Agenix.Api.IO;
 
 /// <summary>
@@ -51,4 +58,18 @@ public interface IInputStreamSource
     ///     If the stream could not be opened.
     /// </exception>
     Stream InputStream { get; }
+
+    /// <summary>
+    ///     Asynchronously opens a stream for this resource.
+    /// </summary>
+    /// <param name="cancellationToken">A token to cancel the asynchronous operation.</param>
+    /// <returns>A task-like value that produces the opened stream.</returns>
+    /// <remarks>
+    ///     Default implementation returns a stream opened synchronously via <see cref="InputStream"/>.
+    ///     Implementations that can take advantage of true asynchronous I/O should provide their own implementation.
+    /// </remarks>
+    ValueTask<Stream> OpenStreamAsync(CancellationToken cancellationToken = default)
+    {
+        return new ValueTask<Stream>(InputStream);
+    }
 }

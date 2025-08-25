@@ -54,7 +54,7 @@ public class PlaywrightBrowser : AbstractEndpoint, IProducer
     /// <summary>
     ///     Collection of browser contexts with their IDs
     /// </summary>
-    private readonly ConcurrentDictionary<string, IBrowserContext> _contexts = new();
+    private readonly ConcurrentDictionary<string, IBrowserContext?> _contexts = new();
 
     /// <summary>
     ///     Configuration for this browser instance

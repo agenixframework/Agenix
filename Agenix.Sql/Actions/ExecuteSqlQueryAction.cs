@@ -493,7 +493,7 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
     /// </exception>
     public override async Task DoExecute(TestContext context, CancellationToken cancellationToken = default)
     {
-        var statementsToUse = GetStatementsToUse(context);
+        var statementsToUse = await GetStatementsToUse(context);
 
         try
         {
@@ -521,9 +521,9 @@ public class ExecuteSqlQueryAction(ExecuteSqlQueryAction.Builder builder)
         }
     }
 
-    private List<string> GetStatementsToUse(TestContext context)
+    private async Task<List<string>> GetStatementsToUse(TestContext context)
     {
-        return statements.Count == 0 ? CreateStatementsFromFileResource(context) : statements;
+        return statements.Count == 0 ? await CreateStatementsFromFileResource(context).ConfigureAwait(false) : statements;
     }
 
     private async Task ExecuteWithTransactionAsync(

@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -129,7 +129,7 @@ public class FileResourcePayloadBuilder : IMessagePayloadBuilder, IMessageTypeAw
         return _resourcePath == null
             ? ""
             : MessageTypeExtensions.IsBinary(_messageType)
-                ? FileUtils.GetFileResource(_resourcePath, context)
+                ? FileUtils.GetFileResource(_resourcePath, context).ConfigureAwait(false).GetAwaiter().GetResult()
                 : context.ReplaceDynamicContentInString(GetFileResourceContent(_resourcePath, context));
     }
 
@@ -141,7 +141,7 @@ public class FileResourcePayloadBuilder : IMessagePayloadBuilder, IMessageTypeAw
     /// <return>The content of the file resource as a string.</return>
     private string GetFileResourceContent(string path, TestContext context)
     {
-        var fileResource = FileUtils.GetFileResource(path, context);
+        var fileResource = FileUtils.GetFileResource(path, context).ConfigureAwait(false).GetAwaiter().GetResult();
         return GetFileResourceContent(fileResource, context);
     }
 
@@ -156,7 +156,7 @@ public class FileResourcePayloadBuilder : IMessagePayloadBuilder, IMessageTypeAw
         try
         {
             var charset = Encoding.GetEncoding(context.ResolveDynamicValue(_charsetName));
-            return FileUtils.ReadToString(fileResource, charset);
+            return FileUtils.ReadToString(fileResource, charset).ConfigureAwait(false).GetAwaiter().GetResult();
         }
         catch (IOException e)
         {

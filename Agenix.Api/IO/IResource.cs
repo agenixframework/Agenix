@@ -7,18 +7,18 @@
 // to you under the Apache License, Version 2.0 (the
 // "License"); you may not use this file except in compliance
 // with the License. You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing,
 // software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 // KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations
 // under the License.
-// 
+//
 // Copyright (c) 2025 Agenix
-// 
+//
 // This file has been modified from its original form.
 // Original work Copyright (C) 2006-2025 the original author or authors.
 
@@ -27,6 +27,8 @@
 #region Imports
 
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 #endregion
 
@@ -220,5 +222,32 @@ public interface IResource : IInputStreamSource
     TextReader GetReader(Encoding charset)
     {
         return new StreamReader(InputStream, charset);
+    }
+
+    /// <summary>
+    ///     Asynchronously returns a TextReader that reads from the underlying resource using UTF-8 encoding.
+    /// </summary>
+    /// <param name="cancellationToken">A token to cancel the asynchronous operation.</param>
+    /// <returns>A task that produces a TextReader.</returns>
+    Task<TextReader> GetReaderAsync(CancellationToken cancellationToken = default)
+    {
+        return GetReaderAsync(Encoding.GetEncoding(AgenixSettings.AgenixFileEncoding()), cancellationToken);
+    }
+
+    /// <summary>
+    ///     Asynchronously returns a TextReader to read from the underlying resource using the specified character encoding.
+    /// </summary>
+    /// <param name="charset">The character encoding to use when creating the reader.</param>
+    /// <param name="cancellationToken">A token to cancel the asynchronous operation.</param>
+    /// <returns>A task that produces a TextReader.</returns>
+    Task<TextReader> GetReaderAsync(Encoding charset, CancellationToken cancellationToken = default)
+    {
+        return GetReaderAsyncImpl(this, charset, cancellationToken);
+
+        static async Task<TextReader> GetReaderAsyncImpl(IInputStreamSource source, Encoding charset, CancellationToken ct)
+        {
+            var stream = await source.OpenStreamAsync(ct).ConfigureAwait(false);
+            return new StreamReader(stream, charset);
+        }
     }
 }

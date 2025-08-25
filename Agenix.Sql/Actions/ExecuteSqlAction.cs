@@ -169,7 +169,7 @@ public class ExecuteSqlAction : AbstractDatabaseConnectingTestAction
             "Complexity is acceptable here due to transactional orchestration; refactor would harm readability.")]
     public override async Task DoExecute(TestContext context, CancellationToken cancellationToken = default)
     {
-        var statementsToUse = statements.Count == 0 ? CreateStatementsFromFileResource(context) : statements;
+        var statementsToUse = statements.Count == 0 ? await CreateStatementsFromFileResource(context).ConfigureAwait(false) : statements;
 
         if (TransactionEnabled)
         {

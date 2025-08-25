@@ -86,7 +86,8 @@ public class ReadFileResourceFunction : IFunction
                     return Convert.ToBase64String(encoding.GetBytes(content));
                 }
 
-                var fileBytes = FileUtils.CopyToByteArray(FileUtils.GetFileResource(parameterList[0], testContext));
+                var fileBytes = FileUtils.CopyToByteArray(FileUtils.GetFileResource(parameterList[0],
+                    testContext).GetAwaiter().GetResult()).ConfigureAwait(false).GetAwaiter().GetResult();
                 return Convert.ToBase64String(fileBytes);
             }
 
@@ -109,7 +110,8 @@ public class ReadFileResourceFunction : IFunction
     private static string ReadFileContent(string filePath, TestContext context, bool replace)
     {
         var content =
-            FileUtils.ReadToString(FileUtils.GetFileResource(filePath, context), FileUtils.GetCharset(filePath));
+            FileUtils.ReadToString(FileUtils.GetFileResource(filePath, context).ConfigureAwait(false).GetAwaiter().GetResult(),
+                FileUtils.GetCharset(filePath)).ConfigureAwait(false).GetAwaiter().GetResult();
         return replace ? context.ReplaceDynamicContentInString(content) : content;
     }
 }
