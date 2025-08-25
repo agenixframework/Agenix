@@ -50,9 +50,9 @@ namespace Agenix.Sql.Actions;
 /// </remarks>
 public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, IAsyncTestAction, INamed, IAsyncDescribed
 {
-    /**
-     * SQL file resource path
-     */
+    /// <summary>
+    /// Represents the path to the SQL resource file used for executing database scripts.
+    /// </summary>
     protected readonly string? sqlResourcePath;
 
     /**
@@ -116,8 +116,14 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, IAsy
     /// Indicates whether this action should use an ADO.NET transaction during execution.
     public bool TransactionEnabled => transactionEnabled;
 
+    /// <summary>
+    /// Represents the transaction isolation level for database operations.
+    /// </summary>
     public string? TransactionIsolationLevel => transactionIsolationLevel;
 
+    /// <summary>
+    /// Specifies the timeout duration for a database transaction.
+    /// </summary>
     public string? TransactionTimeout => transactionTimeout;
 
     /// <summary>
@@ -146,6 +152,12 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, IAsy
     /// <returns>The name of the current instance.</returns>
     public string Name => name;
 
+    /// <summary>
+    /// Executes the action asynchronously within the provided test context.
+    /// </summary>
+    /// <param name="context">The test context in which the action will be executed.</param>
+    /// <param name="cancellationToken">An optional token to monitor for cancellation requests.</param>
+    /// <returns>A task that represents the asynchronous execution of the action.</returns>
     public async Task ExecuteAsync(TestContext context, CancellationToken cancellationToken = default)
     {
         await DoExecute(context, cancellationToken);
@@ -166,9 +178,9 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, IAsy
     /// @param context The current test context used for resource path processing.
     /// @return A list of SQL statements extracted from the file resource.
     /// /
-    protected List<string> CreateStatementsFromFileResource(TestContext context)
+    protected async Task<List<string>> CreateStatementsFromFileResource(TestContext context)
     {
-        return SqlUtils.CreateStatementsFromFileResource(FileUtils.GetFileResource(SqlResourcePath, context));
+        return await SqlUtils.CreateStatementsFromFileResource(await FileUtils.GetFileResourceAsync(SqlResourcePath, context));
     }
 
     /// Reads SQL statements from an external file resource. The file can contain multiple
@@ -176,11 +188,11 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, IAsy
     /// <param name="context">The current test context used for resource path processing.</param>
     /// <param name="lineDecorator">The decorator used for processing the last line of the SQL script.</param>
     /// <return>A list of SQL statements extracted from the file resource.</return>
-    protected List<string> CreateStatementsFromFileResource(TestContext context,
+    protected async Task<List<string>> CreateStatementsFromFileResource(TestContext context,
         SqlUtils.ILastScriptLineDecorator? lineDecorator)
     {
-        return SqlUtils.CreateStatementsFromFileResource(
-            FileUtils.GetFileResource(SqlResourcePath, context), lineDecorator);
+        return await SqlUtils.CreateStatementsFromFileResource(
+            await FileUtils.GetFileResourceAsync(SqlResourcePath, context), lineDecorator);
     }
 
     /// <summary>
@@ -206,7 +218,7 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, IAsy
         internal IDbProvider? dbProvider;
         internal string? sqlResourcePath;
         internal bool transactionEnabled;
-        internal string transactionIsolationLevel = IsolationLevel.ReadCommitted.ToString();
+        internal string transactionIsolationLevel = nameof(IsolationLevel.ReadCommitted);
         internal string transactionTimeout = (-1).ToString();
 
         /// Sets the database provider for the test action builder.
@@ -285,7 +297,7 @@ public abstract class AbstractDatabaseConnectingTestAction : AdoDaoSupport, IAsy
         /// <returns>The builder instance with the SQL statements updated.</returns>
         public S SqlResource(IResource newSqlResource)
         {
-            Statements(SqlUtils.CreateStatementsFromFileResource(newSqlResource));
+            Statements(SqlUtils.CreateStatementsFromFileResource(newSqlResource).ConfigureAwait(false).GetAwaiter().GetResult());
             return Self;
         }
 

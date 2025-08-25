@@ -49,7 +49,7 @@ public class JsonSerializerHeaderDataBuilderTest : AbstractNUnitSetUp
     }
 
     [Test]
-    public void ShouldBuildHeaderData()
+    public async Task ShouldBuildHeaderData()
     {
         // Arrange
         _mockReferenceResolver.Setup(resolver => resolver.ResolveAll<JsonSerializer>())
@@ -63,22 +63,22 @@ public class JsonSerializerHeaderDataBuilderTest : AbstractNUnitSetUp
         var builder = new JsonSerializerHeaderDataBuilder(_request);
 
         // Act
-        var result = builder.BuildHeaderData(Context);
+        var result = await builder.BuildHeaderData(Context);
 
         // Assert
         Assert.That(result, Is.EqualTo("{\"Message\":\"Hello Agenix!\"}"));
     }
 
     [Test]
-    public void ShouldBuildHeaderDataWithMapper()
+    public async Task ShouldBuildHeaderDataWithMapper()
     {
         var builder = new JsonSerializerHeaderDataBuilder(_request, _mapper);
 
-        Assert.That(builder.BuildHeaderData(Context), Is.EqualTo("{\"Message\":\"Hello Agenix!\"}"));
+        Assert.That(await builder.BuildHeaderData(Context), Is.EqualTo("{\"Message\":\"Hello Agenix!\"}"));
     }
 
     [Test]
-    public void ShouldBuildHeaderDataWithMapperName()
+    public async Task ShouldBuildHeaderDataWithMapperName()
     {
         // Arrange
         _mockReferenceResolver.Setup(resolver => resolver.IsResolvable("mapper")).Returns(true);
@@ -89,18 +89,18 @@ public class JsonSerializerHeaderDataBuilderTest : AbstractNUnitSetUp
         var builder = new JsonSerializerHeaderDataBuilder(_request, "mapper");
 
         // Act
-        var result = builder.BuildHeaderData(Context);
+        var result = await builder.BuildHeaderData(Context);
 
         // Assert
         Assert.That(result, Is.EqualTo("{\"Message\":\"Hello Agenix!\"}"));
     }
 
     [Test]
-    public void ShouldBuildHeaderDataWithVariableSupport()
+    public async Task ShouldBuildHeaderDataWithVariableSupport()
     {
         Context.SetVariable("message", "Hello Agenix!");
         var builder = new JsonSerializerHeaderDataBuilder(new TestRequest("${message}"), _mapper);
 
-        Assert.That(builder.BuildHeaderData(Context), Is.EqualTo("{\"Message\":\"Hello Agenix!\"}"));
+        Assert.That(await builder.BuildHeaderData(Context), Is.EqualTo("{\"Message\":\"Hello Agenix!\"}"));
     }
 }

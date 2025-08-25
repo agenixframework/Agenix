@@ -75,7 +75,7 @@ public interface ITask : IPerformable
     /// </summary>
     /// <param name="performableOperation">The action to be performed by the actor.</param>
     /// <returns>An instance of <see cref="AnonymousPerformableFunction" /> that encapsulates the operation.</returns>
-    static AnonymousPerformableFunction Where(Action<Actor> performableOperation)
+    static AnonymousPerformableFunction Where(Func<Actor, Task> performableOperation)
     {
         return Instrumented.InstanceOf<AnonymousPerformableFunction>()
             .WithProperties(HumanReadableTaskName.ForCurrentMethod(), performableOperation);
@@ -87,7 +87,7 @@ public interface ITask : IPerformable
     /// <param name="title">The title or description of the performable function.</param>
     /// <param name="performableOperation">The action to be performed by the actor.</param>
     /// <returns>An anonymous performable function configured with the given title and action.</returns>
-    static AnonymousPerformableFunction Where(string title, Action<Actor> performableOperation)
+    static AnonymousPerformableFunction Where(string title, Func<Actor, Task> performableOperation)
     {
         return Instrumented.InstanceOf<AnonymousPerformableFunction>()
             .WithProperties(title, performableOperation);
@@ -98,7 +98,7 @@ public interface ITask : IPerformable
     /// </summary>
     /// <param name="performableOperation">The action to be executed as part of the task.</param>
     /// <returns>An instance of <see cref="AnonymousPerformableRunnable" /> configured with the provided action.</returns>
-    static AnonymousPerformableRunnable ThatPerforms(Action performableOperation)
+    static AnonymousPerformableRunnable ThatPerforms(Func<Task> performableOperation)
     {
         return Instrumented.InstanceOf<AnonymousPerformableRunnable>()
             .WithProperties(HumanReadableTaskName.ForCurrentMethod(), performableOperation);
@@ -110,7 +110,7 @@ public interface ITask : IPerformable
     /// <param name="title">The title describing the anonymous performable runnable.</param>
     /// <param name="performableOperation">The operation to be performed as part of this performable.</param>
     /// <returns>An instance of AnonymousPerformableRunnable configured with the specified title and performable operation.</returns>
-    static AnonymousPerformableRunnable ThatPerforms(string title, Action performableOperation)
+    static AnonymousPerformableRunnable ThatPerforms(string title, Func<Task> performableOperation)
     {
         return Instrumented.InstanceOf<AnonymousPerformableRunnable>()
             .WithProperties(title, performableOperation);

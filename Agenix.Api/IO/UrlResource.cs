@@ -27,6 +27,8 @@
 #region Imports
 
 using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
 using Agenix.Api.Util;
 
 #endregion
@@ -128,6 +130,21 @@ public class UrlResource : AbstractResource
     /// </exception>
     /// <seealso cref="IInputStreamSource" />
     public override Stream InputStream => WebRequest.GetResponse().GetResponseStream();
+
+    /// <summary>
+    ///     Asynchronously opens a stream for this URL resource.
+    /// </summary>
+    /// <param name="cancellationToken">A token to cancel the asynchronous operation.</param>
+    /// <returns>A task-like value that produces the opened stream.</returns>
+    public async ValueTask<Stream> OpenStreamAsync(CancellationToken cancellationToken = default)
+    {
+        // WebRequest does not natively support CancellationToken; emulate with abort on cancellation.
+        await using (cancellationToken.Register(static state => ((WebRequest)state!).Abort(), WebRequest))
+        {
+            var response = await WebRequest.GetResponseAsync().ConfigureAwait(false);
+            return response.GetResponseStream();
+        }
+    }
 
     /// <summary>
     ///     Returns the <see cref="System.Uri" /> handle for this resource.

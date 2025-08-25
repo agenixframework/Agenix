@@ -24,49 +24,45 @@
 
 #endregion
 
-using JetBrains.Annotations;
-
 namespace Agenix.Screenplay;
 
 /// <summary>
-///     Represents an anonymous performable action or task to be executed by an actor in the screenplay pattern.
+///     Represents an anonymous, asynchronous performable function within the screenplay pattern.
 /// </summary>
-/// <remarks>
-///     This class allows for the definition of actions or tasks via anonymous functions, providing flexibility in
-///     describing custom behaviors for an actor.
-/// </remarks>
-public class AnonymousPerformableFunction : IPerformable
+public class AnonymousPerformableFunction : ITask
 {
-    [UsedImplicitly] private readonly string _title;
-    private readonly Action<Actor> _actions;
+    private readonly string _title;
+    private readonly Func<Actor, Task> _asyncOperation;
 
     /// <summary>
-    /// Represents an anonymous performable action or task to be executed by an actor in the screenplay pattern.
+    ///     Initializes a new instance of the <see cref="AnonymousPerformableFunction"/> class.
     /// </summary>
-    /// <remarks>
-    /// This class allows for the definition of actions or tasks via anonymous functions,
-    /// providing flexibility in describing custom behaviors for an actor.
-    /// </remarks>
-    public AnonymousPerformableFunction(string title, Action<Actor> actions)
+    /// <param name="title">The title or description of the operation.</param>
+    /// <param name="asyncOperation">The asynchronous operation to be performed by an actor.</param>
+    public AnonymousPerformableFunction(string title, Func<Actor, Task> asyncOperation)
     {
-        _title = title ?? throw new ArgumentNullException(nameof(title));
-        _actions = actions ?? throw new ArgumentNullException(nameof(actions));
+        _title = title;
+        _asyncOperation = asyncOperation;
     }
 
     /// <summary>
-    ///     Executes the specified actions or tasks as the provided actor asynchronously.
+    ///     Asynchronously performs the operation using the provided actor.
     /// </summary>
-    /// <typeparam name="T">The type of the actor performing the actions, which must extend from the Actor class.</typeparam>
-    /// <param name="actor">The actor executing the actions defined by this performable function.</param>
-    /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
-    /// <returns>A task that represents the asynchronous execution of the performable function.</returns>
+    /// <typeparam name="T">The type of actor performing the action.</typeparam>
+    /// <param name="actor">The actor that will perform the action.</param>
+    /// <param name="cancellationToken">A token to observe while waiting for the task to complete.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
     public async Task PerformAsAsync<T>(T actor, CancellationToken cancellationToken = default) where T : Actor
     {
-        if (cancellationToken.IsCancellationRequested)
-        {
-            await Task.FromCanceled(cancellationToken);
-        }
+        await _asyncOperation(actor);
+    }
 
-        _actions(actor);
+    /// <summary>
+    ///     Returns a string representation of this performable function.
+    /// </summary>
+    /// <returns>The title of this performable function.</returns>
+    public override string ToString()
+    {
+        return _title;
     }
 }

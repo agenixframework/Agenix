@@ -332,8 +332,8 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
                 .SetHeader("operation", "foo"));
 
         _resource.Setup(x => x.Exists).Returns(true);
-        _resource.Setup(x => x.InputStream)
-            .Returns(new MemoryStream("<TestRequest><Message>Hello World!</Message></TestRequest>"u8.ToArray()));
+        _resource.Setup(x => x.OpenStreamAsync(CancellationToken.None))
+            .ReturnsAsync(new MemoryStream("<TestRequest><Message>Hello World!</Message></TestRequest>"u8.ToArray()));
 
         var runner = new DefaultTestCaseRunner(Context);
         await runner.Run(ReceiveMessageAction.Builder.Receive(_messageEndpoint.Object)
@@ -782,9 +782,9 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
                 .AddHeaderData("<Header><Name>operation</Name><Value>bar</Value></Header>"));
 
         _resource.Setup(x => x.Exists).Returns(true);
-        _resource.SetupSequence(x => x.InputStream)
-            .Returns(new MemoryStream("<Header><Name>operation</Name><Value>foo</Value></Header>"u8.ToArray()))
-            .Returns(new MemoryStream("<Header><Name>operation</Name><Value>bar</Value></Header>"u8.ToArray()));
+        _resource.SetupSequence(x => x.OpenStreamAsync(CancellationToken.None))
+            .ReturnsAsync(new MemoryStream("<Header><Name>operation</Name><Value>foo</Value></Header>"u8.ToArray()))
+            .ReturnsAsync(new MemoryStream("<Header><Name>operation</Name><Value>bar</Value></Header>"u8.ToArray()));
 
         var runner = new DefaultTestCaseRunner(Context);
         await runner.Run(ReceiveMessageAction.Builder.Receive(_messageEndpoint.Object)
@@ -850,11 +850,11 @@ public class ReceiveMessageActionBuilderTest : AbstractNUnitSetUp
                 .AddHeaderData("<Header><Name>operation</Name><Value>bar</Value></Header>"));
 
         _resource.Setup(x => x.Exists).Returns(true);
-        _resource.SetupSequence(x => x.InputStream)
-            .Returns(new MemoryStream("<Header><Name>operation</Name><Value>foo</Value></Header>"u8.ToArray()))
-            .Returns(new MemoryStream("<Header><Name>operation</Name><Value>bar</Value></Header>"u8.ToArray()))
-            .Returns(new MemoryStream("<Header><Name>operation</Name><Value>foo</Value></Header>"u8.ToArray()))
-            .Returns(new MemoryStream("<Header><Name>operation</Name><Value>bar</Value></Header>"u8.ToArray()));
+        _resource.SetupSequence(x => x.OpenStreamAsync(CancellationToken.None))
+            .ReturnsAsync(new MemoryStream("<Header><Name>operation</Name><Value>foo</Value></Header>"u8.ToArray()))
+            .ReturnsAsync(new MemoryStream("<Header><Name>operation</Name><Value>bar</Value></Header>"u8.ToArray()))
+            .ReturnsAsync(new MemoryStream("<Header><Name>operation</Name><Value>foo</Value></Header>"u8.ToArray()))
+            .ReturnsAsync(new MemoryStream("<Header><Name>operation</Name><Value>bar</Value></Header>"u8.ToArray()));
 
         var runner = new DefaultTestCaseRunner(Context);
         await runner.Run(ReceiveMessageAction.Builder.Receive(_messageEndpoint.Object)

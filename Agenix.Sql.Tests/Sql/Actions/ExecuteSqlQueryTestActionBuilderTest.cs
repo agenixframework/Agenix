@@ -85,7 +85,7 @@ public class ExecuteSqlQueryTestActionBuilderTest : AbstractNUnitSetUp
         var filePath = "file://" + testDirectory + @"/ResourcesTest/Sql/Actions/Dsl/query-script.sql";
 
         await builder.Run(Query().AdoTemplate(_adoTemplate.Object)
-            .SqlResource(FileUtils.GetFileResource(filePath, Context))
+            .SqlResource(await FileUtils.GetFileResource(filePath, Context))
             .Validate("NAME", "Leonard")
             .Validate("CNT_EPISODES", "100000")
             .Extract("NAME", "actorName")

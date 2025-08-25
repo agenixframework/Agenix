@@ -62,7 +62,7 @@ public class LoadAppSettingsAction(LoadAppSettingsAction.Builder builder) : Abst
             Log.LogDebug("Reading config file =>{FileName}", FileUtils.GetFileName(resource.Description));
         }
 
-        var settings = FileUtils.LoadAsSettings(resource);
+        var settings = await FileUtils.LoadAsSettings(resource);
 
         var unresolved = new Dictionary<string, string>();
 

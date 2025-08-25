@@ -49,12 +49,12 @@ public abstract class SqlUtils
     /// <summary>
     ///     Constant representing the SQL comment delimiter.
     /// </summary>
-    private static readonly string SqlComment = "--";
+    private const string SqlComment = "--";
 
     /// <summary>
     ///     The default SQL statement ending character sequence used in SQL scripts.
     /// </summary>
-    private static readonly string StmtEnding = ";";
+    private const string StmtEnding = ";";
 
     /// Provides utility methods for processing SQL statements from external file resources.
     /// This class cannot be instantiated.
@@ -67,9 +67,9 @@ public abstract class SqlUtils
     /// multiple multi-line statements and comments.
     /// <param name="sqlResource">The SQL file resource containing the statements.</param>
     /// <returns>A list of SQL statements parsed from the file resource.</returns>
-    public static List<string> CreateStatementsFromFileResource(IResource sqlResource)
+    public static async Task<List<string>> CreateStatementsFromFileResource(IResource sqlResource)
     {
-        return CreateStatementsFromFileResource(sqlResource, null);
+        return await CreateStatementsFromFileResource(sqlResource, null);
     }
 
     /// Reads SQL statements from an external file resource. The file resource can contain
@@ -78,7 +78,7 @@ public abstract class SqlUtils
     /// <param name="sqlResource">The SQL file resource containing the statements.</param>
     /// <param name="lineDecorator">Optional line decorator for the last script lines, may be null.</param>
     /// <returns>A list of SQL statements parsed from the file resource.</returns>
-    public static List<string> CreateStatementsFromFileResource(IResource sqlResource,
+    public static async Task<List<string>> CreateStatementsFromFileResource(IResource sqlResource,
         ILastScriptLineDecorator? lineDecorator)
     {
         var stmts = new List<string>();
@@ -87,15 +87,15 @@ public abstract class SqlUtils
         {
             if (Log.IsEnabled(LogLevel.Debug))
             {
-                Log.LogDebug("Create statements from SQL file: " + sqlResource.File.FullName);
+                Log.LogDebug("Create statements from SQL file: {SQLFileName}", sqlResource.File.FullName);
             }
 
-            var inputStream = sqlResource.InputStream;
+            var inputStream = await sqlResource.OpenStreamAsync();
             var buffer = new StringBuilder();
 
 
             using var reader = new StreamReader(inputStream);
-            while (reader.ReadLine() is { } line)
+            while (await reader.ReadLineAsync() is { } line)
             {
                 if (line.Trim().StartsWith(SqlComment) || string.IsNullOrWhiteSpace(line.Trim()))
                 {
@@ -111,7 +111,7 @@ public abstract class SqlUtils
 
                     if (Log.IsEnabled(LogLevel.Debug))
                     {
-                        Log.LogDebug("Found statement: " + stmt);
+                        Log.LogDebug("Found statement: {Statement}", stmt);
                     }
 
                     stmts.Add(stmt);
@@ -135,7 +135,7 @@ public abstract class SqlUtils
 
     /// <summary>
     ///     Retrieves the SQL statement ending character sequence.
-    ///     If a line decorator is specified, it utilizes the character sequence provided by the decorator.
+    ///     If a line decorator is specified, it uses the character sequence provided by the decorator.
     ///     Otherwise, it returns the default sequence.
     /// </summary>
     /// <param name="lineDecorator">
@@ -162,7 +162,7 @@ public abstract class SqlUtils
 
         /// <summary>
         ///     Retrieves the SQL statement ending character sequence.
-        ///     If a line decorator is specified, it utilizes the character sequence provided by the decorator.
+        ///     If a line decorator is specified, it uses the character sequence provided by the decorator.
         ///     Otherwise, it returns the default sequence.
         /// </summary>
         /// An instance of
