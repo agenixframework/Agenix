@@ -455,6 +455,28 @@ public class PlaywrightBrowserBuilder : AbstractEndpointBuilder<PlaywrightBrowse
     }
 
     /// <summary>
+    ///     Sets the WebSocket endpoint to connect to an existing browser instance.
+    /// </summary>
+    /// <param name="wsEndpoint">WebSocket endpoint (e.g., ws://localhost:9222/devtools/browser/...)</param>
+    /// <returns>This builder instance for method chaining</returns>
+    public PlaywrightBrowserBuilder ConnectWsEndpoint(string wsEndpoint)
+    {
+        _endpoint.EndpointConfiguration.ConnectWsEndpoint = wsEndpoint;
+        return this;
+    }
+
+    /// <summary>
+    ///     Sets options for BrowserType.ConnectAsync when connecting to an existing browser.
+    /// </summary>
+    /// <param name="connectOptions">Connect options</param>
+    /// <returns>This builder instance for method chaining</returns>
+    public PlaywrightBrowserBuilder ConnectOptions(BrowserTypeConnectOptions connectOptions)
+    {
+        _endpoint.EndpointConfiguration.ConnectOptions = connectOptions;
+        return this;
+    }
+
+    /// <summary>
     ///     Sets page event handlers
     /// </summary>
     /// <param name="handlers">List of page event handler actions</param>
@@ -537,7 +559,7 @@ public class PlaywrightBrowserBuilder : AbstractEndpointBuilder<PlaywrightBrowse
     /// <param name="onRequest">Action to execute on page request</param>
     /// <param name="onResponse">Action to execute on page response</param>
     /// <param name="onPageError">Action to execute on page error</param>
-    /// <param name="onConsole">Action to execute on console message</param>
+    /// <param name="onConsole">Action to execute on a console message</param>
     /// <returns>This builder instance for method chaining</returns>
     public PlaywrightBrowserBuilder OnPageEvents(
         Action<IPage, IRequest>? onRequest = null,
