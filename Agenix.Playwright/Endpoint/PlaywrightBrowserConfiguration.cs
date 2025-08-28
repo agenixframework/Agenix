@@ -90,7 +90,7 @@ public class PlaywrightBrowserConfiguration : AbstractEndpointConfiguration
     public bool IgnoreHttpsErrors { get; set; }
 
     /// <summary>
-    /// Path to storage state file for context persistence
+    /// Path to a storage state file for context persistence
     /// </summary>
     public string? StorageStatePath { get; set; }
 
