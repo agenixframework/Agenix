@@ -15,11 +15,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="13.0.0"/>
-    <PackageReference Include="NUnit" Version="4.3.2"/>
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.6"/>
-    <PackageReference Include="System.Formats.Asn1" Version="9.0.6"/>
-    <PackageReference Include="System.Text.Json" Version="9.0.6"/>
+    <PackageReference Include="MediatR"/>
+    <PackageReference Include="NUnit"/>
+    <PackageReference Include="System.Configuration.ConfigurationManager"/>
+    <PackageReference Include="System.Formats.Asn1"/>
+    <PackageReference Include="System.Text.Json"/>
   </ItemGroup>
 
   <ItemGroup>
@@ -35,8 +35,5 @@
     <Folder Include="Questions\Waits\"/>
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageVersion Update="MediatR" Version="13.0.0"/>
-  </ItemGroup>
 
 </Project>

@@ -78,7 +78,8 @@ public class ExpectPageStateAction : AbstractPlaywrightAction
         {
             try
             {
-                await pageExpectation(browser.Page, context);
+                await pageExpectation(browser.GetCurrentPage() ??
+                                      throw new InvalidOperationException("The current page is not defined (null)"), context);
             }
             catch (Exception ex)
             {

@@ -54,7 +54,7 @@ public static class Check
     ///     An instance of <see cref="ConditionalPerformable" /> to execute tasks based on the evaluation of the provided
     ///     question.
     /// </returns>
-    public static ConditionalPerformable Whether(Question<bool> condition)
+    public static ConditionalPerformable Whether(IQuestion<bool> condition)
     {
         return new ConditionalPerformableOnQuestion(condition);
     }
@@ -69,7 +69,7 @@ public static class Check
     ///     An instance of <see cref="ConditionalPerformable" /> that evaluates the question's answer and performs
     ///     conditional tasks accordingly.
     /// </returns>
-    public static ConditionalPerformable Whether<T>(Question<T> question, IMatcher<T> matcher)
+    public static ConditionalPerformable Whether<T>(IQuestion<T> question, IMatcher<T> matcher)
     {
         var condition = IQuestion<bool>.Create(actor =>
         {
