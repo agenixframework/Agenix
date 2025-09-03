@@ -11,13 +11,13 @@
 
   <!-- Test packages -->
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1"/>
-    <PackageReference Include="coverlet.collector" Version="6.0.0"/>
-    <PackageReference Include="Moq" Version="4.20.72"/>
-    <PackageReference Include="log4net" Version="3.2.0"/>
-    <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="8.0.0"/>
-    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119"/>
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.6"/>
+    <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+    <PackageReference Include="coverlet.collector"/>
+    <PackageReference Include="Moq"/>
+    <PackageReference Include="log4net"/>
+    <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore"/>
+    <PackageReference Include="System.Data.SQLite.Core"/>
+    <PackageReference Include="Microsoft.Data.Sqlite"/>
   </ItemGroup>
 
   <ItemGroup>

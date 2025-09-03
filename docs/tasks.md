@@ -2,7 +2,7 @@
 
 Note: Each item is actionable and ordered to reduce risk and maximize foundational benefits first. Check off items as they are completed.
 
-1. [ ] Enable solution-wide nullable reference types and address warnings
+1. [x] Enable solution-wide nullable reference types and address warnings
    - Action: Turn on <Nullable>enable</Nullable> in Directory.Build.props (source projects) and fix resulting warnings in critical projects first (Core, Screenplay, Validation). 
    - Acceptance: No nullable warnings in CI for targeted projects; critical APIs annotated appropriately.
 
@@ -14,7 +14,7 @@ Note: Each item is actionable and ordered to reduce risk and maximize foundation
    - Action: For Release/CI builds, set TreatWarningsAsErrors=true (retain current local flexibility). 
    - Acceptance: CI fails on new warnings in Release or CI environment; developer local Debug unaffected.
 
-4. [ ] Centralize package versions in Directory.Packages.props (MPCM)
+4. [x] Centralize package versions in Directory.Packages.props (MPCM)
    - Action: Add Directory.Packages.props to pin package versions across solution; move scattered PackageVersion entries from Directory.Build.props into it.
    - Acceptance: All PackageReference items resolve from central versions; no duplicate version declarations remain.
 

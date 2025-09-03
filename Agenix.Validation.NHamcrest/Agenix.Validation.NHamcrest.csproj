@@ -19,9 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NHamcrest" Version="4.0.0"/>
-    <PackageReference Include="System.Formats.Asn1" Version="9.0.6"/>
-    <PackageReference Include="System.Text.Json" Version="9.0.6"/>
+    <PackageReference Include="NHamcrest" />
+    <PackageReference Include="System.Formats.Asn1" />
+    <PackageReference Include="System.Text.Json" />
   </ItemGroup>
 
   <ItemGroup>

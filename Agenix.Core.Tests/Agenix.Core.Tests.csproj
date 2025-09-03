@@ -11,16 +11,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FakeItEasy" Version="8.3.0"/>
-    <PackageReference Include="log4net" Version="3.2.0"/>
-    <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="8.0.0"/>
-    <PackageReference Include="Moq" Version="4.20.72"/>
-    <PackageReference Include="Moq.AutoMock" Version="3.5.0"/>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1"/>
-    <PackageReference Include="System.Formats.Asn1" Version="9.0.6"/>
-    <PackageReference Include="System.Text.Json" Version="9.0.6"/>
-    <PackageReference Include="System.Net.Http" Version="4.3.4"/>
-    <PackageReference Include="System.Security.Cryptography.X509Certificates" Version="4.3.2"/>
+    <PackageReference Include="FakeItEasy"/>
+    <PackageReference Include="log4net"/>
+    <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore"/>
+    <PackageReference Include="Moq"/>
+    <PackageReference Include="Moq.AutoMock"/>
+    <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+    <PackageReference Include="System.Formats.Asn1"/>
+    <PackageReference Include="System.Text.Json"/>
+    <PackageReference Include="System.Net.Http"/>
+    <PackageReference Include="System.Security.Cryptography.X509Certificates"/>
   </ItemGroup>
 
   <ItemGroup>
@@ -132,7 +132,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Spring.Core" Version="3.0.2"/>
+    <PackageReference Include="Spring.Core"/>
   </ItemGroup>
 
 </Project>
