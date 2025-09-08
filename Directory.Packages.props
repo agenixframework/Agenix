@@ -46,8 +46,8 @@
     <!-- GraphQL / HotChocolate -->
     <PackageVersion Include="GraphQL.Client" Version="6.1.0" />
     <PackageVersion Include="GraphQL.Client.Serializer.Newtonsoft" Version="6.1.0" />
-    <PackageVersion Include="HotChocolate.AspNetCore" Version="15.1.7" />
-    <PackageVersion Include="HotChocolate.Subscriptions.InMemory" Version="15.1.7" />
+    <PackageVersion Include="HotChocolate.AspNetCore" Version="15.1.10" />
+    <PackageVersion Include="HotChocolate.Subscriptions.InMemory" Version="15.1.10" />
 
     <!-- Playwright / Selenium -->
     <PackageVersion Include="Microsoft.Playwright" Version="1.53.0" />
