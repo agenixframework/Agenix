@@ -75,7 +75,7 @@
     <PackageVersion Include="YamlDotNet" Version="16.3.0" />
 
     <!-- Logging libs -->
-    <PackageVersion Include="log4net" Version="3.1.0" />
+    <PackageVersion Include="log4net" Version="3.2.0" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="8.0.0" />
 
     <!-- Mocking -->
