@@ -324,12 +324,7 @@ public class FillFormAction : AbstractPlaywrightAction
             return page.GetByText(fieldConfig.Text);
         }
 
-        if (!string.IsNullOrEmpty(fieldConfig.Role))
-        {
-            return page.GetByRole(Enum.Parse<AriaRole>(fieldConfig.Role, true));
-        }
-
-        throw new InvalidOperationException("No valid locator strategy found in field configuration");
+        return !string.IsNullOrEmpty(fieldConfig.Role) ? page.GetByRole(Enum.Parse<AriaRole>(fieldConfig.Role, true)) : throw new InvalidOperationException("No valid locator strategy found in field configuration");
     }
 
     /// <summary>

@@ -75,7 +75,7 @@ public class SetInputAction : LocatingElementAction
     private readonly bool _force;
     private readonly InputMethod _inputMethod;
 
-    private readonly string _text;
+    private string _text;
     private readonly int? _timeout;
 
     /// <summary>
@@ -106,6 +106,7 @@ public class SetInputAction : LocatingElementAction
     {
         try
         {
+            _text = context.ReplaceDynamicContentInString(_text);
             var displayText = _text.Length > 50 ? $"{_text[..50]}..." : _text;
             Logger.LogInformation("Executing set input action, method: {InputMethod}, text: {Text}",
                 _inputMethod, displayText);
