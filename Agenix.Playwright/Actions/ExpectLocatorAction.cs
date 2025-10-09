@@ -241,7 +241,7 @@ public class ExpectLocatorAction : LocatingElementAction
             }
         }
 
-        if (failures.Any())
+        if (failures.Count != 0)
         {
             var aggregateException = new AggregateException(
                 $"One or more expectations failed ({failures.Count} of {_expectations.Count})",
@@ -996,7 +996,7 @@ public class ExpectLocatorAction : LocatingElementAction
         /// <summary>
         ///     Sets the expectation to check the locator's text content using a regex pattern.
         /// </summary>
-        /// <param name="textRegex">The regex pattern to match against the text</param>
+        /// <param name="textRegex">The regex patterns to match against the text</param>
         /// <returns>The builder instance for method chaining</returns>
         public Builder ToHaveText(Regex textRegex)
         {
@@ -1032,7 +1032,7 @@ public class ExpectLocatorAction : LocatingElementAction
         /// <summary>
         ///     Sets the expectation to check if the locator contains text matching a regex pattern.
         /// </summary>
-        /// <param name="textRegex">The regex pattern to match against the text</param>
+        /// <param name="textRegex">The regex patterns to match against the text</param>
         /// <returns>The builder instance for method chaining</returns>
         public Builder ToContainText(Regex textRegex)
         {

@@ -168,7 +168,7 @@ public class LocatingElementAction : AbstractPlaywrightAction
             Logger.LogDebug("Locating element with {Count} locator(s)", _locators.Count);
 
             var page = browser.Page;
-            var locator = BuildChainedLocator(page, _locators);
+            var locator = BuildChainedLocator(page, _locators, context);
 
             // Execute the virtual method with the found locator
             await Execute(locator, browser, context);
@@ -192,27 +192,28 @@ public class LocatingElementAction : AbstractPlaywrightAction
         return Task.CompletedTask;
     }
 
-    private static ILocator BuildChainedLocator(IPage page, List<LocatorDefinition> locators)
+    private static ILocator BuildChainedLocator(IPage page, List<LocatorDefinition> locators, TestContext context)
     {
         if (locators.Count == 0)
         {
             throw new ArgumentException("At least one locator is required");
         }
 
-        var baseLocator = CreateLocator(page, locators[0]);
+        var baseLocator = CreateLocator(page, locators[0], context);
 
         // Chain additional locators using 'and' method
         for (var i = 1; i < locators.Count; i++)
         {
-            var nextLocator = CreateLocator(page, locators[i]);
+            var nextLocator = CreateLocator(page, locators[i], context);
             baseLocator = baseLocator.And(nextLocator);
         }
 
         return baseLocator;
     }
 
-    private static ILocator CreateLocator(IPage page, LocatorDefinition definition)
+    private static ILocator CreateLocator(IPage page, LocatorDefinition definition, TestContext context)
     {
+        definition.Value = context.ReplaceDynamicContentInString(definition.Value);
         return definition.Strategy switch
         {
             LocatorStrategy.ROLE => CreateRoleLocator(page, definition.Value, definition.Options),

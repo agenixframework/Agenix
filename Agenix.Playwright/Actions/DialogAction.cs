@@ -67,7 +67,7 @@ public class DialogAction : AbstractPlaywrightAction
 
     private static readonly ILogger Logger = LogManager.GetLogger(typeof(DialogAction));
 
-    private readonly string? _text;
+    private string? _text;
 
     /// <summary>
     ///     Provides a Playwright action for managing JavaScript dialogs, including alerts, confirms, and prompts.
@@ -138,7 +138,7 @@ public class DialogAction : AbstractPlaywrightAction
 
             // Set up a dialog handler for other actions
             var tcs = new TaskCompletionSource<bool>();
-
+            _text = context.ReplaceDynamicContentInString(_text);
             void DialogHandler(object? sender, IDialog dialog)
             {
                 Task.Run(async () =>

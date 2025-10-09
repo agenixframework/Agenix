@@ -17,7 +17,7 @@ public class NavigateAction : AbstractPlaywrightAction
     private static readonly ILogger Logger = LogManager.GetLogger(typeof(NavigateAction));
     private readonly PageGotoOptions? _options;
 
-    private readonly string _url;
+    private  string _url;
 
 
     /// <summary>
@@ -73,6 +73,7 @@ public class NavigateAction : AbstractPlaywrightAction
     {
         try
         {
+            _url = context.ReplaceDynamicContentInString(_url);
             Logger.LogDebug("Navigating to URL: {Url}", _url);
 
             // Use the browser's async NavigateToAsync method

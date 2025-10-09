@@ -65,7 +65,7 @@ public class DropdownSelectAction : LocatingElementAction
     private readonly bool _force;
 
     private readonly SelectionType _selectionType;
-    private readonly List<string> _selectionValues;
+    private List<string> _selectionValues;
     private readonly int? _timeout;
 
     /// <summary>
@@ -104,6 +104,7 @@ public class DropdownSelectAction : LocatingElementAction
     {
         try
         {
+            _selectionValues = context.ResolveDynamicValuesInList(_selectionValues);
             Logger.LogInformation("Executing dropdown select action, type: {SelectionType}, values: {Values}",
                 _selectionType, string.Join(", ", _selectionValues));
 

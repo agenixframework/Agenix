@@ -77,11 +77,11 @@ public class KeyboardAction : AbstractPlaywrightAction
 
     private static readonly ILogger Logger = LogManager.GetLogger(typeof(KeyboardAction));
     private readonly int _delay;
-    private readonly string? _key;
-    private readonly List<string> _keys;
+    private string? _key;
+    private List<string> _keys;
 
     private readonly KeyboardOperation _operation;
-    private readonly string? _text;
+    private string? _text;
 
     /// <summary>
     ///     Represents a Playwright action for performing keyboard operations using page.Keyboard API.
@@ -114,6 +114,9 @@ public class KeyboardAction : AbstractPlaywrightAction
         {
             Logger.LogInformation("Executing keyboard action: {Operation}", _operation);
 
+            _text = context.ReplaceDynamicContentInString(_text);
+            _key = context.ReplaceDynamicContentInString(_key);
+            _keys = context.ResolveDynamicValuesInList(_keys);
             var page = browser.GetCurrentPage();
             if (page == null)
             {

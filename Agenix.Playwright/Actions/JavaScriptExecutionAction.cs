@@ -44,7 +44,7 @@ public class JavaScriptAction : AbstractPlaywrightAction
     private readonly bool _checkForErrors;
     private readonly string? _resultVariableName;
 
-    private readonly string _script;
+    private string _script;
     private readonly bool _waitForFunction;
     private readonly PageWaitForFunctionOptions? _waitOptions;
 
@@ -79,6 +79,7 @@ public class JavaScriptAction : AbstractPlaywrightAction
     {
         try
         {
+            _script = context.ReplaceDynamicContentInString(_script);
             Logger.LogInformation("Executing JavaScript: {Script}",
                 _script.Length > 100 ? _script[..100] + "..." : _script);
 
