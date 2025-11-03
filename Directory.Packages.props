@@ -14,7 +14,7 @@
     <!-- SourceLink/Versioning/Annotations -->
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
     <PackageVersion Include="MinVer" Version="5.0.0" />
-    <PackageVersion Include="JetBrains.Annotations" Version="2025.2.0" />
+    <PackageVersion Include="JetBrains.Annotations" Version="2025.2.2" />
 
     <!-- Microsoft.Extensions -->
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="9.0.6" />
